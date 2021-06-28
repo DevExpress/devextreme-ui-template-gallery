@@ -1,0 +1,7 @@
+{
+  "items": [],
+  "baseTheme": "material.orange.light",
+  "assetsBasePath": "../../../node_modules/devextreme/dist/css/",
+  "outputColorScheme": "base",
+  "base": true
+}
