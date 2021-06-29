@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        theme: [ material.orange.light, generic.light ]
 
     steps:
     - name: Get sources
