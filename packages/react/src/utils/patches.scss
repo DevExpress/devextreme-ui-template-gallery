@@ -1,0 +1,22 @@
+@import "../themes/generated/variables.additional.scss";
+
+@mixin menu-pre-init-patch {
+    $menuMinSize: 60px;
+  
+    .dx-drawer-content {
+      padding-left: $menuMinSize;
+    }
+  
+    .dx-drawer-panel-content.dx-overlay::before {
+      content: "";
+      width: $menuMinSize;
+      height: 100%;
+      display: inline-block;
+      position: absolute;
+      background-color: $base-bg;
+    }
+  
+    .dx-overlay-content {
+      width: $menuMinSize !important;
+    }
+}
