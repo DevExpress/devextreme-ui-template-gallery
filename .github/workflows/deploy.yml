@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      CI: false
     strategy:
       matrix:
         theme: [ material.orange.light, generic.light ]
