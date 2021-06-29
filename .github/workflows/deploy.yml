@@ -35,6 +35,9 @@ jobs:
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
 
+    - name: Build theme
+      run: npm run build-themes
+
     - name: Build
       run: npm run build
 
