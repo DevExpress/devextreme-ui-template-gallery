@@ -1,14 +1,15 @@
 'use strict';
 
-const { copySync, mkdirSync } = require('fs-extra');
+const { copySync, mkdirSync, emptyDir } = require('fs-extra');
 const { join } = require('path');
-const { argv, exit, cwd } = require('process');
+const { cwd } = require('process');
 const packages = require('./packages');
 const commonDestination = 'devextreme-rwa-demos';
 
-const copy = (theme, mode = 'default') => {
+const copy = (mode = 'default') => {
+    emptyDir(join(cwd(), commonDestination));
     packages.forEach(packageName => {
-        const destination = join(cwd(), commonDestination, packageName, theme, mode);
+        const destination = join(cwd(), commonDestination, packageName, mode);
         const source = join(cwd(), 'packages', packageName, 'build');
 
         mkdirSync(destination, { recursive: true });
@@ -16,12 +17,6 @@ const copy = (theme, mode = 'default') => {
     });
 };
 
-const theme = argv[2];
-console.log(`Copy application - ${theme}`);
+console.log('Copy application');
 
-if(!theme) {
-    console.log('Usage copy-build.js <themename>');
-    exit(1);
-}
-
-copy(argv[2]);
+copy();
