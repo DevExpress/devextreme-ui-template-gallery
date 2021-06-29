@@ -32,8 +32,8 @@ jobs:
     - name: Run npm install
       run: npm install
 
-    - name: Install global packages
-      run: npm install -g @angular/cli devextreme-cli
+    - name: Run lerna
+      run: npx lerna bootstrap
 
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
