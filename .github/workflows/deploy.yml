@@ -12,7 +12,7 @@ jobs:
       CI: false
     strategy:
       matrix:
-        theme: [ material.orange.light, generic.light ]
+        theme: [ material.orange.light, material.orange.dark, generic.light, generic.dark ]
 
     steps:
     - name: Get sources
