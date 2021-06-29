@@ -34,14 +34,11 @@ jobs:
     - name: Run npm install
       run: npm install
 
-    - name: Run lerna
-      run: npx lerna bootstrap
-
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
 
-    - name: Build theme
-      run: npm run build-themes
+    - name: Run lerna
+      run: npx lerna bootstrap
 
     - name: Build
       run: npm run build
