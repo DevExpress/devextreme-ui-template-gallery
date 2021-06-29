@@ -32,6 +32,9 @@ jobs:
     - name: Run npm install
       run: npm install
 
+    - name: Install ng
+      run: npm install -g @angular/cli
+
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
 
