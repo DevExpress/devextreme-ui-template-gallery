@@ -52,7 +52,7 @@ jobs:
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
-        branch: gh-pages
-        folder: devextreme-rwa-demos
-        target-folder: ${{ matrix.theme }}
+        BRANCH: gh-pages
+        FOLDER: devextreme-rwa-demos
+        TARGET_FOLDER: ${{ matrix.theme }}
 
