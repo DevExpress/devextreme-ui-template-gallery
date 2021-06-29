@@ -4,9 +4,11 @@
   "scripts": {
     "build": "lerna run build",
     "build-themes": "lerna run build-themes",
-    "set-theme": "node utils/set-theme.js"
+    "set-theme": "node utils/set-theme.js",
+    "copy-build": "node utils/copy-build.js"
   },
   "devDependencies": {
+    "fs-extra": "^10.0.0",
     "lerna": "^4.0.0"
   }
 }

@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: "/devextreme-vue-template",
+  publicPath: "./",
   outputDir: "build",
   productionSourceMap: false
 };

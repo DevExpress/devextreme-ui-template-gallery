@@ -1,3 +1,3 @@
 export default {
-  title: 'React1'
+  title: 'React App'
 };

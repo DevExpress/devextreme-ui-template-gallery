@@ -3,11 +3,11 @@
 const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 const { argv, exit, cwd } = require('process');
+const packages = require('./packages');
 
-const packages = ['angular', 'vue', 'react'];
 const swatchModes = ['base', 'additional'];
 
-const setTheme = (theme) => {
+const changeThemesMeta = (theme) => {
     packages.forEach(packageName => {
         swatchModes.forEach(swatchMode => {
             const appPath = join(cwd(), 'packages', packageName)
@@ -32,4 +32,4 @@ if(!theme) {
     exit(1);
 }
 
-setTheme(argv[2]);
+changeThemesMeta(argv[2]);
