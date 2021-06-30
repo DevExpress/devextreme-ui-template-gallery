@@ -53,10 +53,10 @@ jobs:
       run: npm run copy-build -- ${{ matrix.mode }}
 
     - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-artifacts
-          path: devextreme-rwa-demos
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: devextreme-rwa-demos
 
   deploy:
     name: Deploy
