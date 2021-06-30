@@ -6,7 +6,8 @@ on:
       - 21_1
 
 jobs:
-  deploy:
+  build:
+    name: Build applications
     runs-on: ubuntu-latest
     env:
       CI: false
@@ -38,7 +39,7 @@ jobs:
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
 
-    - name: Set theme
+    - name: Set mode
       if: ${{ matrix.mode == 'embedded' }}
       run: npm run make-embedded-mode
 
@@ -51,7 +52,27 @@ jobs:
     - name: Copy apps
       run: npm run copy-build -- ${{ matrix.mode }}
 
-    - name: Deploy
+    - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: devextreme-rwa-demos
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get sources
+      uses: actions/checkout@v2
+
+    - name: Download build artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: build-artifacts
+
+    - name: Deploy in gh-pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         BRANCH: gh-pages
