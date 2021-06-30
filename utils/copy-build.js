@@ -19,4 +19,4 @@ const copy = (mode = 'default') => {
 
 console.log('Copy application');
 
-copy();
+copy(argv[2]);

@@ -5,7 +5,8 @@
     "build": "lerna run build",
     "build-themes": "lerna run build-themes",
     "set-theme": "node utils/set-theme.js",
-    "copy-build": "node utils/copy-build.js"
+    "copy-build": "node utils/copy-build.js",
+    "make-embedded-mode": "node utils/make-embedded-mode.js"
   },
   "devDependencies": {
     "fs-extra": "^10.0.0",

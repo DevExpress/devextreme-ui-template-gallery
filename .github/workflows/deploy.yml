@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         theme: [ material.orange.light, material.orange.dark, generic.light, generic.dark ]
+        mode: [ default, embedded ]
 
     steps:
     - name: Get sources
@@ -37,6 +38,10 @@ jobs:
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
 
+    - name: Set theme
+      if: ${{ matrix.mode == 'embedded' }}
+      run: npm run make-embedded-mode
+
     - name: Run lerna
       run: npx lerna bootstrap
 
@@ -44,7 +49,7 @@ jobs:
       run: npm run build
 
     - name: Copy apps
-      run: npm run copy-build
+      run: npm run copy-build -- ${{ matrix.mode }}
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@3.7.1
