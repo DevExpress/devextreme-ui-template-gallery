@@ -6,17 +6,18 @@ const { argv, cwd } = require('process');
 const packages = require('./packages');
 const commonDestination = 'devextreme-rwa-demos';
 
-const copy = (mode = 'default') => {
-    emptyDir(join(cwd(), commonDestination));
+const copy = (mode = 'default', theme) => {
+    
+    
     packages.forEach(packageName => {
-        const destination = join(cwd(), commonDestination, packageName, mode);
+        const destination = join(cwd(), commonDestination, theme, packageName, mode);
         const source = join(cwd(), 'packages', packageName, 'build');
 
-        mkdirSync(destination, { recursive: true });
+        emptyDir(destination);
         copySync(source, destination);
     });
 };
 
 console.log('Copy application');
 
-copy(argv[2]);
+copy(argv[2], argv[3]);

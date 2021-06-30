@@ -50,13 +50,13 @@ jobs:
       run: npm run build
 
     - name: Copy apps
-      run: npm run copy-build -- ${{ matrix.mode }}
+      run: npm run copy-build -- ${{ matrix.mode }} ${{ matrix.theme }}
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
         name: build-artifacts
-        path: devextreme-rwa-demos
+        path: devextreme-rwa-demos/
 
   deploy:
     name: Deploy
@@ -78,5 +78,5 @@ jobs:
       with:
         BRANCH: gh-pages
         FOLDER: devextreme-rwa-demos
-        TARGET_FOLDER: ${{ matrix.theme }}
+        TARGET_FOLDER: .
 
