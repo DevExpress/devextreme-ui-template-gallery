@@ -2,7 +2,7 @@
 
 const { copySync, mkdirSync, emptyDir } = require('fs-extra');
 const { join } = require('path');
-const { cwd } = require('process');
+const { argv, cwd } = require('process');
 const packages = require('./packages');
 const commonDestination = 'devextreme-rwa-demos';
 

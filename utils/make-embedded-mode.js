@@ -1,9 +1,8 @@
 'use strict';
 
-const { readFileSync, writeFileSync, read } = require('fs');
+const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
-const { argv, exit, cwd } = require('process');
-const packages = require('./packages');
+const { cwd } = require('process');
 
 const rootPath = join(cwd(), 'packages');
 
