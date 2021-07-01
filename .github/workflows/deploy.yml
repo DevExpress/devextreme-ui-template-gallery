@@ -58,9 +58,50 @@ jobs:
         name: build-artifacts
         path: devextreme-rwa-demos/
 
+  build-shell:
+    name: Build shell
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get sources
+      uses: actions/checkout@v2
+
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Restore npm cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Run npm install
+      run: npm install
+
+    - name: Run npm install for shell
+      run: npm install
+      working-directory: packages/shell
+
+    - name: Build Shell
+      run: npm run build-shell
+      working-directory: packages/shell
+
+    - name: Copy apps
+      run: npm run copy-shell
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: devextreme-rwa-demos/
+
   deploy:
     name: Deploy
-    needs: build
+    needs: [build, build-shell]
     runs-on: ubuntu-latest
 
     steps:
