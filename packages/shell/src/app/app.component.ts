@@ -18,9 +18,14 @@ export class AppComponent {
   themes = [
     'generic.light',
     'generic.dark',
+    'generic.softblue',
+    'generic.greenmist',
     'material.orange.light',
-    'material.orange.dark'
+    'material.orange.dark',
+    'material.blue.light',
+    'material.blue.dark.compact',
   ];
+
   theme = 'generic.light';
 
   approachSelectBoxOptions = {

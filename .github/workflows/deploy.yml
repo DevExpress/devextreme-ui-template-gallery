@@ -13,7 +13,7 @@ jobs:
       CI: false
     strategy:
       matrix:
-        theme: [ material.orange.light, material.orange.dark, generic.light, generic.dark ]
+        theme: [ material.orange.light, material.orange.dark, material.blue.light, material.blue.dark.compact, generic.light, generic.dark, generic.softblue, generic.greenmist ]
         mode: [ default, embedded ]
 
     steps:
