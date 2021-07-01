@@ -82,8 +82,8 @@
                   "minify": true,
                   "inlineCritical": false
                 },
-                  "fonts": true
-                }
+                "fonts": true
+              }
             },
             "development": {
               "buildOptimizer": false,
