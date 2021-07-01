@@ -6,6 +6,7 @@
     "build-themes": "lerna run build-themes",
     "set-theme": "node utils/set-theme.js",
     "copy-build": "node utils/copy-build.js",
+    "copy-shell": "node utils/copy-shell.js",
     "make-embedded-mode": "node utils/make-embedded-mode.js"
   },
   "devDependencies": {
