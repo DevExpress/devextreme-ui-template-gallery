@@ -1,0 +1,14 @@
+{
+  "name": "devextreme-rwa-demos-meta",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node utils/test.js"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "require-from-string": "^2.0.2"
+  }
+}
