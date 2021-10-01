@@ -16,8 +16,11 @@ jobs:
 
     - name: set-matrix
       run: |
-        JSON=$(cat ./packages/metadata/themes.json)
-        echo "::set-output name=matrix::${JSON//'%'/'%25'}"
+        themes_json=`cat ./packages/metadata/themes.json`
+        themes_json="${themes_json//'%'/'%25'}"
+        themes_json="${themes_json//$'\n'/'%0A'}"
+        themes_json="${themes_json//$'\r'/'%0D'}"
+        echo "::set-output name=matrix::$themes_json"
   build:
     needs: set-matrix
     name: Build applications
