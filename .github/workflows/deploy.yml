@@ -13,7 +13,7 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        JSON=$(cat ./packages/metadata/themes.json)
+        JSON=$(cat packages/metadata/themes.json)
         echo "::set-output name=matrix::${JSON//'%'/'%25'}"
   build:
     needs: set-matrix
