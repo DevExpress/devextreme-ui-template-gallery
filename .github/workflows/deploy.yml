@@ -6,14 +6,24 @@ on:
       - 21_1
 
 jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - id: set-matrix
+      run: |
+        JSON=$(cat ./packages/metadata/themes.json)
+        echo "::set-output name=matrix::${JSON//'%'/'%25'}"
   build:
+    needs: set-matrix
     name: Build applications
     runs-on: ubuntu-latest
     env:
       CI: false
     strategy:
       matrix:
-        theme: [ material.orange.light, material.orange.dark, material.blue.light, material.blue.dark.compact, generic.light, generic.dark, generic.softblue, generic.greenmist ]
+        theme: ${{fromJson(needs.set-matrix.outputs.matrix)}}
         mode: [ default, embedded ]
 
     steps:
