@@ -14,7 +14,8 @@ jobs:
     - name: Get sources
       uses: actions/checkout@v2
 
-    - name: set-matrix
+    - name: Set themes matrix
+      id: set-matrix
       run: |
         themes_json=`cat ./packages/metadata/themes.json`
         themes_json="${themes_json//$'\n'/''}"
