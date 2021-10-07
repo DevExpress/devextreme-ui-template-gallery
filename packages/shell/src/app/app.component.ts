@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import allThemes from './themes.json';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,16 +15,7 @@ export class AppComponent {
   approach = 'angular';
   views = ['home', 'profile', 'tasks'];
   view = 'home';
-  themes = [
-    'generic.light',
-    'generic.dark',
-    'generic.softblue',
-    'generic.greenmist',
-    'material.orange.light',
-    'material.orange.dark',
-    'material.blue.light',
-    'material.blue.dark.compact',
-  ];
+  themes = allThemes;
 
   theme = 'generic.light';
 
