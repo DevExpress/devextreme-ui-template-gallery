@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build-shell": "ng build --base-href=./",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "preinstall": "node ./copy-themes.js"
   },
   "private": true,
   "dependencies": {
