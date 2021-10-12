@@ -1,3 +1,3 @@
 export default {
-  title: "Vue"
+  title: "UI Templates Gallery"
 };

@@ -147,6 +147,7 @@ export default {
 .header-title .dx-item-content {
   padding: 0;
   margin: 0;
+  color: $base-accent;
 }
 
 .dx-theme-generic {

@@ -1,20 +1,12 @@
 export const navigation = [
   {
-    text: 'Home',
-    path: '/home',
-    icon: 'home'
-  },
-  {
-    text: 'Examples',
-    icon: 'folder',
+    text: 'CRM',
+    icon: 'user',
+    path: '',
     items: [
       {
-        text: 'Profile',
-        path: '/profile'
-      },
-      {
-        text: 'Tasks',
-        path: '/tasks'
+        text: 'Contact List',
+        path: '/crm-contact-list'
       }
     ]
   }

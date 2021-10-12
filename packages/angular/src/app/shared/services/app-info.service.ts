@@ -5,7 +5,7 @@ export class AppInfoService {
   constructor() {}
 
   public get title() {
-    return 'Angular';
+    return 'UI Templates Gallery';
   }
 
   public get currentYear() {
