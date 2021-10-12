@@ -1,31 +1,11 @@
 [
     {
-        "Name": "RWA Demos Section",
-        "Groups": [
+        "Name": "CRM",
+        "Demos": [
             {
-                "Name": "User Management",
-                "Demos": [
-                    {
-                        "Title": "User Profile",
-                        "Name": "profile",
-                        "DemoType": "Rwa"
-                    },
-                    {
-                        "Title": "User Tasks",
-                        "Name": "tasks",
-                        "DemoType": "Rwa"
-                    }
-                ]
-            },
-            {
-                "Name": "Simple page",
-                "Demos": [
-                    {
-                        "Title": "Home page",
-                        "Name": "home",
-                        "DemoType": "Rwa"
-                    }
-                ]
+                "Title": "Contact List",
+                "Name": "crm-contact-list",
+                "DemoType": "Rwa"
             }
         ]
     }
