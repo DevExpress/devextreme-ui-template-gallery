@@ -1,9 +1,7 @@
+import CrmContactList from './views/crm-contact-list';
 import auth from "./auth";
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import Home from "./views/home";
-import Profile from "./views/profile";
-import Tasks from "./views/tasks";
 import defaultLayout from "./layouts/side-nav-outer-toolbar";
 import simpleLayout from "./layouts/single-card";
 
@@ -13,33 +11,6 @@ function loadView(view) {
 
 const router = new createRouter({
   routes: [
-    {
-      path: "/home",
-      name: "home",
-      meta: {
-        requiresAuth: true,
-        layout: defaultLayout
-      },
-      component: Home
-    },
-    {
-      path: "/profile",
-      name: "profile",
-      meta: {
-        requiresAuth: true,
-        layout: defaultLayout
-      },
-      component: Profile
-    },
-    {
-      path: "/tasks",
-      name: "tasks",
-      meta: { 
-        requiresAuth: true,
-        layout: defaultLayout
-      },
-      component: Tasks
-    },
     {
       path: "/login-form",
       name: "login-form",
@@ -83,15 +54,24 @@ const router = new createRouter({
     },
     {
       path: "/",
-      redirect: "/home"
+      redirect: "/crm-contact-list"
     },
     {
       path: "/recovery",
-      redirect: "/home"
+      redirect: "/crm-contact-list"
     },
     {
       path: "/:pathMatch(.*)*",
-      redirect: "/home"
+      redirect: "/crm-contact-list"
+    },
+    {
+      path: "/crm-contact-list",
+      name: "crm-contact-list",
+      meta: {
+        requiresAuth: true,
+        layout: defaultLayout
+      },
+      component: CrmContactList
     }
   ],
   history: createWebHashHistory()

@@ -17,7 +17,7 @@ export default function() {
             component={component}
           />
         ))}
-        <Redirect to={'/home'} />
+        <Redirect to={'/crm-contact-list'} />
       </Switch>
       <Footer>
         Copyright © 2011-{new Date().getFullYear()} {appInfo.title} Inc.

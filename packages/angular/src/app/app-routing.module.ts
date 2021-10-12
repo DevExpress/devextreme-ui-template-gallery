@@ -2,25 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginFormComponent, ResetPasswordFormComponent, CreateAccountFormComponent, ChangePasswordFormComponent } from './shared/components';
 import { AuthGuardService } from './shared/services';
-import { HomeComponent } from './pages/home/home.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
+import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 
 const routes: Routes = [
   {
-    path: 'tasks',
-    component: TasksComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
+    path: 'crm-contact-list',
+    component: CrmContactListComponent,
     canActivate: [ AuthGuardService ]
   },
   {
@@ -45,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'crm-contact-list'
   }
 ];
 
@@ -53,6 +41,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { useHash: true }), DxDataGridModule, DxFormModule],
   providers: [AuthGuardService],
   exports: [RouterModule],
-  declarations: [HomeComponent, ProfileComponent, TasksComponent]
+  declarations: [CrmContactListComponent]
 })
 export class AppRoutingModule { }

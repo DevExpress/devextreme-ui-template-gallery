@@ -1,18 +1,10 @@
 import { withNavigationWatcher } from './contexts/navigation';
-import { HomePage, TasksPage, ProfilePage } from './pages';
+import { CrmContactListPage } from './pages';
 
 const routes = [
   {
-    path: '/tasks',
-    component: TasksPage
-  },
-  {
-    path: '/profile',
-    component: ProfilePage
-  },
-  {
-    path: '/home',
-    component: HomePage
+    path: '/crm-contact-list',
+    component: CrmContactListPage
   }
 ];
 

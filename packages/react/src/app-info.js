@@ -1,3 +1,3 @@
 export default {
-  title: 'React App'
+  title: 'UI Templates Gallery'
 };
