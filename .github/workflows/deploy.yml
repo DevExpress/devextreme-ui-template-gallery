@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - 21_1
+      - 21_2
 
 jobs:
   set-matrix:

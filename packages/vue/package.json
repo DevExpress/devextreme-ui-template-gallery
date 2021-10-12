@@ -14,8 +14,8 @@
     "vue": "^3.2.0",
     "sass": "^1.34.1",
     "vue-router": "^4.0.1",
-    "devextreme": "^21.1.4",
-    "devextreme-vue": "^21.1.4"
+    "devextreme": "21.2-next",
+    "devextreme-vue": "21.2-next"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -25,9 +25,9 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
-    "devextreme-cli": "1.2.17",
+    "devextreme-cli": "latest",
     "sass-loader": "^10",
-    "devextreme-themebuilder": "^21.1.4"
+    "devextreme-themebuilder": "21.2-next"
   },
   "eslintConfig": {
     "root": true,
