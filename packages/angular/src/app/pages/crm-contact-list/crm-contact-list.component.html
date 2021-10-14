@@ -1,4 +1,167 @@
-<h2 class="content-block">Crm Contact List</h2>
-<div class="content-block">
-    <div class="dx-card responsive-paddings">Put your content here</div>
+<div class="view-wrapper">
+    <dx-data-grid
+        [dataSource]="gridData"
+        (onRowClick)="rowClick($event)"
+        height="100%"
+    >
+        <dxo-search-panel
+            [visible]="true"
+            placeholder="Contact Search"
+        >
+        </dxo-search-panel>
+        <dxo-export
+            [enabled]="true"
+            [allowExportSelectedData]="true"
+        ></dxo-export>
+        <dxo-toolbar>
+            <dxi-item location="before">
+                <div class="grid-header">Contact List</div>
+            </dxi-item>
+            <dxi-item
+                location="after"
+                locateInMenu="auto"
+                widget="dxButton"
+                [options]="{ icon: 'plus', text: 'Add Contact', type: 'default', stylingMode: 'contained'}">
+            </dxi-item>
+            <dxi-item
+                location="after"
+                locateInMenu="auto"
+                showText="inMenu"
+                widget="dxButton"
+                [options]="{text: 'Refresh', icon: 'refresh'}">
+            </dxi-item>
+            <dxi-item location="after" locateInMenu="auto">
+                <div class="separator"></div>
+            </dxi-item>
+            <dxi-item name="exportButton"></dxi-item>
+            <dxi-item location="after" locateInMenu="auto">
+                <div class="separator"></div>
+            </dxi-item>
+            <dxi-item
+                location="after"
+                locateInMenu="auto"
+                showText="inMenu"
+                widget="dxButton"
+                [options]="{text: 'Remove', icon: 'trash'}">
+            </dxi-item>
+            <dxi-item name="searchPanel"></dxi-item>
+        </dxo-toolbar>
+        <dxo-selection
+            selectAllMode="allPages"
+            showCheckBoxesMode="always"
+            mode="multiple"
+        ></dxo-selection>
+        <dxi-column dataField="name" caption="Name"></dxi-column>
+        <dxi-column dataField="status" caption="Status" dataType="string" cellTemplate="statusTemplate">
+            <div *dxTemplate="let s of 'statusTemplate'">
+                {{console(s.data.status)}}
+                <span class="status status-{{s.data.status}}">{{statuses[s.data.status]}}</span>
+            </div>
+        </dxi-column>
+        <dxi-column dataField="id" caption="ID"></dxi-column>
+        <dxi-column dataField="Products" caption="Products" cellTemplate="productTemplate" [width]="400">
+            <div *dxTemplate="let p of 'productTemplate'" class="product-template">
+                <span *ngFor="let product of p.data.products">
+                    {{ products[product.productId] }}
+                    <span class="cloud cloud-{{product.productStatus}}">{{ productStatuses[product.productStatus] }}</span>
+                </span>
+            </div>
+        </dxi-column>
+        <dxi-column dataField="manager" caption="Manager"></dxi-column>
+        <dxi-column dataField="organization" caption="Organization"></dxi-column>
+    </dx-data-grid>
+
+    <div class="panel" [ngClass]="{ 'pin': isPanelPin, 'open': isPanelOpen }">
+        <div *ngIf="drawerData" class="data-wrapper">
+            <dx-toolbar>
+                <dxi-item location="before">
+                    <div *dxTemplate>
+                        <div class="contact-name">{{drawerData.name}}</div>
+                    </div>
+                </dxi-item>
+                <dxi-item location="before">
+                    <div *dxTemplate>
+                        <span class="status status-{{drawerData.status}}">{{statuses[drawerData.status]}}</span>
+                    </div>
+                </dxi-item>
+                <dxi-item
+                    location="after"
+                    widget="dxButton"
+                    [options]="{ icon: isPanelPin ? 'unpin' : 'pin', onClick: pinClick }"
+                >
+                </dxi-item>
+                <dxi-item
+                    location="after"
+                    widget="dxButton"
+                    [options]="{ icon: 'close', onClick: closePanel }"
+                >
+                </dxi-item>
+            </dx-toolbar>
+            <dx-scroll-view>
+                <div class="user-info">
+                    <div class="photo"></div>
+                    <div class="info">
+                        <div>{{drawerData.id}}</div>
+                        <div><i class="dx-icon-user"></i> <span>{{drawerData.manager}}</span></div>
+                        <div><i class="dx-icon-product"></i> <span>{{drawerData.organization}}</span></div>
+                        <div><i class="dx-icon-email"></i> <span>{{drawerData.email}}</span></div>
+                    </div>
+                </div>
+                <div>{{drawerData.address}}</div>
+                <dx-toolbar>
+                    <dxi-item
+                        location="before"
+                        widget="dxButton"
+                        [options]="{ icon: 'edit', stylingMode: 'outlined', text: 'Edit' }"
+                    >
+                    </dxi-item>
+                    <dxi-item
+                        location="center"
+                        widget="dxButton"
+                        [options]="{ stylingMode: 'text', text: 'Send email' }"
+                    >
+                    </dxi-item>
+                    <dxi-item
+                        location="after"
+                        widget="dxDropDownButton"
+                        [options]="{ text: 'Action' }"
+                    >
+                    </dxi-item>
+                </dx-toolbar>
+                <dx-accordion
+                    [multiple]="true"
+                    [collapsible]="true"
+                >
+                    <dxi-item title="Licenses">
+                        <div *dxTemplate="let i of 'item'">
+                            <div class="licenses">
+                                <div>
+                                    <div class="caption">Income</div>
+                                    <div class="value">$1,650,00</div>
+                                </div>
+                                <div>
+                                    <div class="caption">Licences</div>
+                                    <div class="value">1</div>
+                                </div>
+                                <div>
+                                    <div class="caption">Active Licences</div>
+                                    <div class="value">1</div>
+                                </div>
+                            </div>
+                        </div>
+                    </dxi-item>
+                    <dxi-item title="Opportunities">
+                        <div *dxTemplate="let i of 'item'">
+                            b
+                        </div>
+                    </dxi-item>
+                    <dxi-item title="Activities">
+                        <div *dxTemplate="let i of 'item'">
+                            c
+                        </div>
+                    </dxi-item>
+                </dx-accordion>
+            </dx-scroll-view>
+        </div>
+    </div>
 </div>

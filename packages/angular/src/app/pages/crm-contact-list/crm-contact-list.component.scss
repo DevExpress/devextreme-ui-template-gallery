@@ -1,0 +1,164 @@
+@import "../../../themes/generated/variables.base.scss";
+
+.separator {
+    height: 36px;
+    width: 1px;
+    background: $base-border-color;
+    ::ng-deep .dx-toolbar-menu-section & {
+        height: 1px;
+        width: auto;
+    }
+}
+
+.grid-header {
+    font-size: 22px;
+}
+
+.cloud {
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-right: 10px;
+
+    &.cloud-1 {
+        background-color: #E5ECEF;
+    }
+
+    &.cloud-2 {
+        background-color: #A4F297;
+    }
+}
+
+.status {
+    font-size: 12px;
+
+    &::before {
+        $diameter: 10px;
+        content: ' ';
+        width: $diameter;
+        height: $diameter;
+        border-radius: $diameter / 2;
+        margin-right: $diameter / 2;
+        display: inline-block;
+    }
+
+    &.status-1 {
+        color: #2D9CDB;
+        &::before {
+            background-color: #2D9CDB;
+        }
+    }
+
+    &.status-2 {
+        color: #2EB52C;
+        &::before {
+            background-color: #2EB52C;
+        }
+    }
+}
+
+.view-wrapper {
+    display: flex;
+    height: 100%;
+    position: relative;
+
+    .panel {
+        position: absolute;
+        right: -350px;
+        background: $base-bg;
+        transition: all 400ms;
+        width: 0;
+
+        &.open {
+            width: 350px;
+            right: 0;
+            box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        &.pin {
+            box-shadow: none;
+            transition: none;
+            border-left: 1px solid $base-border-color;
+            position: relative;
+        }
+
+        .data-wrapper {
+            width: 350px;
+            padding: 16px;
+            .contact-name {
+                font-size: 16px;
+                font-weight: bold;
+                margin-right: 8px;
+            }
+
+            .user-info {
+                margin-bottom: 20px;
+                display: flex;
+                .photo {
+                    width: 96px;
+                    height: 96px;
+                    margin-right: 20px;
+                    border-radius: 8px;
+                    background: gray; //TODO replace with image
+                }
+                .info {
+                    > div {
+                        display: flex;
+                        height: 20px;
+                        margin-bottom: 6px;
+                        > i {
+                            font-size: 20px;
+                            color: rgba(117, 117, 117, 0.87);
+                            margin-right: 8px;
+                        }
+                    }
+                }
+            }
+
+            ::ng-deep & {
+                .dx-accordion {
+                    margin: 0;
+                }
+                .dx-accordion-item {
+                    box-shadow: none;
+                    border-top: none;
+                    &.dx-accordion-item-opened {
+                        margin: 0;
+                    }
+                }
+                .dx-accordion-item-title {
+                    padding: 12px 0;
+                    background-color: transparent;
+                    .dx-accordion-item-title-caption {
+                        left: 0;
+                    }
+                }
+
+                .dx-accordion-item-body {
+                    padding: 0;
+
+                    .licenses {
+                        display: flex;
+                        justify-content: space-between;
+
+                        > div {
+                            display: flex;
+                            flex-direction: column;
+
+                            .caption {
+                                font-size: 12px;
+                                color: rgba(117, 117, 117, 0.87);
+                            }
+
+                            .value {
+                                color: $base-text-color;
+                                font-size: 22px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

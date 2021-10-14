@@ -1,8 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 import { LoginFormComponent, ResetPasswordFormComponent, CreateAccountFormComponent, ChangePasswordFormComponent } from './shared/components';
 import { AuthGuardService } from './shared/services';
-import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
+import {
+  DxDataGridModule,
+  DxFormModule,
+  DxDrawerModule,
+  DxButtonModule,
+  DxToolbarModule,
+  DxScrollViewModule,
+  DxAccordionModule,
+} from 'devextreme-angular';
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 
 const routes: Routes = [
@@ -38,7 +47,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true }), DxDataGridModule, DxFormModule],
+  imports: [
+    RouterModule.forRoot(routes, { useHash: true }),
+    BrowserModule,
+
+    DxDataGridModule,
+    DxFormModule,
+    DxDrawerModule,
+    DxButtonModule,
+    DxToolbarModule,
+    DxScrollViewModule,
+    DxAccordionModule,
+  ],
   providers: [AuthGuardService],
   exports: [RouterModule],
   declarations: [CrmContactListComponent]
