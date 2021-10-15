@@ -6,9 +6,7 @@
     "start": "ng serve",
     "build": "ng build --base-href=./",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "build-themes": "devextreme build",
-    "postinstall": "npm run build-themes"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
