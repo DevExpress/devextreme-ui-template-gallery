@@ -1,12 +1,18 @@
 [
     {
-        "Name": "CRM",
-        "Demos": [
+        "Name": "UI Templates",
+        "Groups": [
             {
-                "Title": "Contact List",
-                "Name": "crm-contact-list",
-                "DemoType": "Rwa"
+                "Name": "CRM",
+                "Demos": [
+                    {
+                        "Title": "Contact List",
+                        "Name": "crm-contact-list",
+                        "DemoType": "Rwa"
+                    }
+                ]
             }
         ]
     }
+    
 ]
