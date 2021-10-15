@@ -47,9 +47,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/devextreme/dist/css/dx.common.css",
-              "src/themes/generated/theme.base.css",
-              "src/themes/generated/theme.additional.css",
+              "node_modules/devextreme/scss/bundles/dx.material.blue.light.scss",
               "src/dx-styles.scss",
               "src/styles.scss"
             ],

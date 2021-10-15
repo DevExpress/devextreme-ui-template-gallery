@@ -1,4 +1,5 @@
-@import "../../../themes/generated/variables.base.scss";
+@use "../../../variables" as *;
+@use "sass:math";
 
 .separator {
     height: 36px;
@@ -37,8 +38,8 @@
         content: ' ';
         width: $diameter;
         height: $diameter;
-        border-radius: $diameter / 2;
-        margin-right: $diameter / 2;
+        border-radius: math.div($diameter, 2);
+        margin-right: math.div($diameter, 2);
         display: inline-block;
     }
 
