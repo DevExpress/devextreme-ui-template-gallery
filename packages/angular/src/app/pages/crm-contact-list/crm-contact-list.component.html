@@ -54,7 +54,6 @@
         <dxi-column dataField="name" caption="Name"></dxi-column>
         <dxi-column dataField="status" caption="Status" dataType="string" cellTemplate="statusTemplate">
             <div *dxTemplate="let s of 'statusTemplate'">
-                {{console(s.data.status)}}
                 <span class="status status-{{s.data.status}}">{{statuses[s.data.status]}}</span>
             </div>
         </dxi-column>
@@ -72,16 +71,16 @@
     </dx-data-grid>
 
     <div class="panel" [ngClass]="{ 'pin': isPanelPin, 'open': isPanelOpen }">
-        <div *ngIf="drawerData" class="data-wrapper">
+        <div *ngIf="panelData" class="data-wrapper">
             <dx-toolbar>
                 <dxi-item location="before">
                     <div *dxTemplate>
-                        <div class="contact-name">{{drawerData.name}}</div>
+                        <div class="contact-name">{{panelData.name}}</div>
                     </div>
                 </dxi-item>
                 <dxi-item location="before">
                     <div *dxTemplate>
-                        <span class="status status-{{drawerData.status}}">{{statuses[drawerData.status]}}</span>
+                        <span class="status status-{{panelData.status}}">{{statuses[panelData.status]}}</span>
                     </div>
                 </dxi-item>
                 <dxi-item
@@ -101,13 +100,13 @@
                 <div class="user-info">
                     <div class="photo"></div>
                     <div class="info">
-                        <div>{{drawerData.id}}</div>
-                        <div><i class="dx-icon-user"></i> <span>{{drawerData.manager}}</span></div>
-                        <div><i class="dx-icon-product"></i> <span>{{drawerData.organization}}</span></div>
-                        <div><i class="dx-icon-email"></i> <span>{{drawerData.email}}</span></div>
+                        <div>{{panelData.id}}</div>
+                        <div><i class="dx-icon-user"></i> <span>{{panelData.manager}}</span></div>
+                        <div><i class="dx-icon-product"></i> <span>{{panelData.organization}}</span></div>
+                        <div><i class="dx-icon-email"></i> <span>{{panelData.email}}</span></div>
                     </div>
                 </div>
-                <div>{{drawerData.address}}</div>
+                <div>{{panelData.address}}</div>
                 <dx-toolbar>
                     <dxi-item
                         location="before"
@@ -152,7 +151,11 @@
                     </dxi-item>
                     <dxi-item title="Opportunities">
                         <div *dxTemplate="let i of 'item'">
-                            b
+                            <span *ngFor="let product of panelData.products" class="oportunities">
+                                <span class="item">{{ products[product.productId] }} </span>
+                                <span class="cloud cloud-{{product.productStatus}}">{{ productStatuses[product.productStatus] }}</span>
+                                <br>
+                            </span>
                         </div>
                     </dxi-item>
                     <dxi-item title="Activities">

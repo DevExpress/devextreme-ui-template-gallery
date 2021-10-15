@@ -63,14 +63,14 @@ export class CrmContactListComponent implements OnInit {
     2: 'Trial sent'
   };
 
-  drawerData: any = this.gridData[0];
+  panelData: any = this.gridData[0];
 
   console(message: string) {
     console.log(message);
   }
 
   rowClick(e) {
-      this.drawerData = e.data;
+      this.panelData = e.data;
       this.isPanelOpen = true;
   }
 
