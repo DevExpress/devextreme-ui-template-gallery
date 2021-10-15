@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss">
-@import "../themes/generated/variables.base.scss";
+@use "../variables" as *;
 
 .footer {
   display: block;

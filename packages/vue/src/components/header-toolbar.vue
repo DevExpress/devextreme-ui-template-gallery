@@ -117,8 +117,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../themes/generated/variables.base.scss";
-@import "../dx-styles.scss";
+@use "../variables" as *;
 
 .header-component {
   flex: 0 0 auto;

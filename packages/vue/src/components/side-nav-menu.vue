@@ -108,8 +108,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../dx-styles.scss";
-@import "../themes/generated/variables.additional.scss";
+@use "../variables" as *;
 
 .side-navigation-menu {
   display: flex;
