@@ -18,5 +18,4 @@ devextreme-rwa-demos
 packages/angular/src/resize-listener.js
 packages/vue/src/resize-listener.js
 packages/react/src/resize-listener.js
-packages/**/src/themes/generated/*
 packages/shell/src/app/themes.json

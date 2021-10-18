@@ -1,0 +1,4 @@
+@use "../node_modules/devextreme/scss/widgets/material/colors" with ($color: "blue", $mode: "light");
+@forward "../node_modules/devextreme/scss/widgets/material/colors";
+
+$side-panel-min-width: 60px;

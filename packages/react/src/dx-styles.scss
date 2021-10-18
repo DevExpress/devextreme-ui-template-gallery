@@ -1,4 +1,4 @@
-@import "./themes/generated/variables.base.scss";
+@use "./variables" as *;
 
 .app {
   background-color: darken($base-bg, 5.00);
@@ -54,8 +54,6 @@
     min-height: 100%;
   }
 }
-
-$side-panel-min-width: 60px;
 
 html, body {
   margin: 0px;

@@ -1,4 +1,4 @@
-@import "../themes/generated/variables.additional.scss";
+@use "../variables" as *;
 
 @mixin menu-pre-init-patch {
     $menuMinSize: 60px;

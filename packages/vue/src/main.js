@@ -1,6 +1,5 @@
-import 'devextreme/dist/css/dx.common.css';
-import './themes/generated/theme.base.css';
-import './themes/generated/theme.additional.css';
+import 'devextreme/scss/bundles/dx.material.blue.light.scss';
+import './dx-styles.scss';
 import { createApp }  from "vue";
 import router from "./router";
 

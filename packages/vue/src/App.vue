@@ -76,6 +76,7 @@ export default {
 </script>
 
 <style lang="scss">
+@use "./variables" as *;
 html,
 body {
   margin: 0px;
@@ -92,7 +93,6 @@ body {
 }
 
 .app {
-  @import "./themes/generated/variables.base.scss";
   background-color: darken($base-bg, 5);
   display: flex;
   height: 100%;

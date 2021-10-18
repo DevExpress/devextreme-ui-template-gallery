@@ -1,5 +1,4 @@
-@import "../../../../themes/generated/variables.base.scss";
-@import "../../../../dx-styles.scss";
+@use "../../../../variables" as *;
 
 :host {
   flex: 0 0 auto;

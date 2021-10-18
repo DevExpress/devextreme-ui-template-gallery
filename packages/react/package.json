@@ -21,9 +21,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build-themes": "devextreme build",
-    "postinstall": "npm run build-themes"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

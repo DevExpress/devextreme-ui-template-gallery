@@ -5,26 +5,45 @@ const { join } = require('path');
 const { argv, exit, cwd } = require('process');
 const packages = require('./packages');
 
-const swatchModes = ['base', 'additional'];
+const filesForChange = {
+    'angular': 'angular.json',
+    'vue': 'src/main.js',
+    'react': 'src/App.js'
+};
+
+const variablesPath = 'src/variables.scss';
 
 const changeThemesMeta = (theme) => {
+    const baseTheme = theme.split('.')[0];
+    const bundleName = theme.replace('generic.', '');
+    const themeParts = bundleName.replace('material.', '').replace('.compact', '').split('.');
+    const color = themeParts[0];
+    const mode = themeParts[1];
+
     packages.forEach(packageName => {
-        swatchModes.forEach(swatchMode => {
-            const appPath = join(cwd(), 'packages', packageName)
-            const metaFilePath = join(appPath, 'src', 'themes', `metadata.${swatchMode}.json`);
-            const data = readFileSync(metaFilePath, 'utf8');
-            const metadata = JSON.parse(data);
+        const appPath = join(cwd(), 'packages', packageName);
+        const appVariablesPath = join(appPath, variablesPath);
+        const fileForChange = join(appPath, filesForChange[packageName]);
 
-            metadata.baseTheme = swatchMode === 'base' ?
-                theme :
-                theme.replace(/(generic|material\..*?)\.(.*?)(\.compact)?$/g, '$1.dark$3');
+        // main import
+        const contentForChange = readFileSync(fileForChange, 'utf8');
+        writeFileSync(fileForChange, contentForChange.replace('material.blue.light', bundleName));
 
-            writeFileSync(metaFilePath, `${JSON.stringify(metadata, null, '  ')}\n`, 'utf8');
-        });
+        // variables.scss
+        const variablesContentForChange = readFileSync(appVariablesPath, 'utf8');
+        let newVariablesContent = variablesContentForChange.replace('blue', color);
+        if(baseTheme === 'generic') {
+            newVariablesContent = newVariablesContent.replace(/material/g, baseTheme);
+            newVariablesContent = newVariablesContent.replace(', $mode: "light"', '');
+        } else {
+            newVariablesContent = newVariablesContent.replace('light', mode);
+        }
+        writeFileSync(appVariablesPath, newVariablesContent);
     });
 };
 
 const theme = argv[2];
+
 console.log(`Set theme ${theme}`);
 
 if(!theme) {
@@ -32,4 +51,4 @@ if(!theme) {
     exit(1);
 }
 
-changeThemesMeta(argv[2]);
+changeThemesMeta(theme);

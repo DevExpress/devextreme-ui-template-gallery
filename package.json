@@ -3,7 +3,6 @@
   "private": true,
   "scripts": {
     "build": "lerna run build",
-    "build-themes": "lerna run build-themes",
     "set-theme": "node utils/set-theme.js",
     "copy-build": "node utils/copy-build.js",
     "copy-shell": "node utils/copy-shell.js",
