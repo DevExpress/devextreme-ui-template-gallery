@@ -93,7 +93,7 @@ body {
 }
 
 .app {
-  background-color: darken($base-bg, 5);
+  background-color: $side-panel-background;
   display: flex;
   height: 100%;
   width: 100%;

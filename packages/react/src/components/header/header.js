@@ -6,7 +6,7 @@ import './header.scss';
 import { Template } from 'devextreme-react/core/template';
 
 export default ({ menuToggleEnabled, title, toggleMenu }) => (
-  <header className={'header-component'}>
+  <header className={'header-component layout-header'}>
     <Toolbar className={'header-toolbar'}>
       <Item
         visible={menuToggleEnabled}

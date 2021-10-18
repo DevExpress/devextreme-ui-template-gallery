@@ -167,6 +167,7 @@ export default {
 .layout-body {
   flex: 1;
   min-height: 0;
+  background-color: $base-bg;
 }
 
 .content {

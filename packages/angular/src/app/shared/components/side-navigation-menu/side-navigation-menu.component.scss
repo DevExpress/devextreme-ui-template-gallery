@@ -8,6 +8,7 @@
   width: 250px !important;
 
   .menu-container {
+    background-color: $side-panel-background;
     min-height: 100%;
     display: flex;
     flex: 1;
@@ -73,7 +74,7 @@
           }
 
           &:not(.dx-state-focused)>.dx-treeview-item.dx-state-hover {
-            background-color: lighten($base-bg, 4.00);
+            background-color: darken($base-bg, 4.00);
           }
         }
       }

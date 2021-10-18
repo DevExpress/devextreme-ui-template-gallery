@@ -121,6 +121,7 @@ export default {
     min-height: 100%;
     display: flex;
     flex: 1;
+    background-color: $side-panel-background;
 
     .dx-treeview {
       // ## Long text positioning
@@ -183,7 +184,7 @@ export default {
           }
 
           &:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
-            background-color: lighten($base-bg, 4);
+            background-color: darken($base-bg, 4);
           }
         }
       }

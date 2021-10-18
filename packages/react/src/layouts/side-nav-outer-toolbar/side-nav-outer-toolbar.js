@@ -60,7 +60,6 @@ export default function ({ title, children }) {
   return (
     <div className={'side-nav-outer-toolbar'}>
       <Header
-        className={'layout-header'}
         menuToggleEnabled
         toggleMenu={toggleMenu}
         title={title}
