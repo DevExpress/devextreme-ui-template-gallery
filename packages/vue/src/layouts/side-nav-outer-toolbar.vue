@@ -122,6 +122,7 @@ export default {
 </script>
 
 <style lang="scss">
+@use "../variables" as *;
 .side-nav-outer-toolbar {
   flex-direction: column;
   display: flex;
@@ -136,6 +137,7 @@ export default {
 .layout-body {
   flex: 1;
   min-height: 0;
+  background-color: $base-bg;
 }
 
 .content {
