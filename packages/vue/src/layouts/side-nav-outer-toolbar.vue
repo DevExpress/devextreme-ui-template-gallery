@@ -130,7 +130,7 @@ export default {
 }
 
 .layout-header {
-  z-index: 1501;
+  z-index: 1502;
 }
 
 .layout-body {
