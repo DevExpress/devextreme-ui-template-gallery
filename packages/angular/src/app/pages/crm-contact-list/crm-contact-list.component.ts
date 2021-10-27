@@ -14,13 +14,6 @@ export class CrmContactListComponent implements OnInit {
 
   isPanelOpen: boolean = false;
   isPanelPin: boolean = false;
-  panelCloseButtonOptions: any = {
-    icon: 'close',
-    onClick: this.closePanel.bind(this)
-  }
-
-  
-  
 
   gridData: any[] = [{
     name: 'Robert Reaga',
