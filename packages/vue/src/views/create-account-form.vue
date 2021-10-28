@@ -104,18 +104,18 @@ export default {
     });
 
     const onSubmit = async () => {
-    const { email, password } = formData;
-    loading.value = true;
+      const { email, password } = formData;
+      loading.value = true;
 
-    const result = await auth.createAccount(email, password);
-    loading.value = false;
+      const result = await auth.createAccount(email, password);
+      loading.value = false;
 
-    if (result.isOk) {
-      router.push("/login-form");
-    } else {
-      notify(result.message, 'error', 2000);
-    }
-  };
+      if (result.isOk) {
+        router.push("/login-form");
+      } else {
+        notify(result.message, 'error', 2000);
+      }
+    };
 
     function confirmPassword(e) {
       return e.value === formData.password;
