@@ -145,12 +145,12 @@ const CrmContactList = () => {
           showCheckBoxesMode="always"
           mode="multiple"
         />
-        <Column dataField="name" caption="Name" />
-        <Column dataField="status" caption="Status" dataType="string" cellRender={renderStatus} />
-        <Column dataField="id" caption="ID" />
-        <Column dataField="Products" caption="Products" width={400} cellRender={renderProducts} />
-        <Column dataField="manager" caption="Manager" />
-        <Column dataField="organization" caption="Organization" />
+        <Column dataField="name" caption="Name" hidingPriority={5} minWidth={150} />
+        <Column dataField="status" caption="Status" dataType="string" cellRender={renderStatus} hidingPriority={3} minWidth={100} />
+        <Column dataField="id" caption="ID" hidingPriority={1} />
+        <Column dataField="Products" caption="Products" hidingPriority={0} minWidth={400} cellRender={renderProducts} />
+        <Column dataField="manager" caption="Manager" hidingPriority={4} />
+        <Column dataField="organization" caption="Organization" hidingPriority={2} />
       </DataGrid>
 
       <div className={'panel ' + (isPanelPin ? 'pin ' : '') + (isPanelOpen ? 'open' : '')}>

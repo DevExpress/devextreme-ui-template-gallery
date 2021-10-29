@@ -51,14 +51,14 @@
             showCheckBoxesMode="always"
             mode="multiple"
         ></dxo-selection>
-        <dxi-column dataField="name" caption="Name"></dxi-column>
-        <dxi-column dataField="status" caption="Status" dataType="string" cellTemplate="statusTemplate">
+        <dxi-column dataField="name" caption="Name" [hidingPriority]="5" [minWidth]="150"></dxi-column>
+        <dxi-column dataField="status" caption="Status" dataType="string" cellTemplate="statusTemplate" [hidingPriority]="3" [minWidth]="100">
             <div *dxTemplate="let s of 'statusTemplate'">
                 <span class="status status-{{s.data.status}}">{{statuses[s.data.status]}}</span>
             </div>
         </dxi-column>
-        <dxi-column dataField="id" caption="ID"></dxi-column>
-        <dxi-column dataField="Products" caption="Products" cellTemplate="productTemplate" [width]="400">
+        <dxi-column dataField="id" caption="ID" [hidingPriority]="1"></dxi-column>
+        <dxi-column dataField="Products" caption="Products" cellTemplate="productTemplate" [minWidth]="400" [hidingPriority]="0">
             <div *dxTemplate="let p of 'productTemplate'" class="product-template">
                 <span *ngFor="let product of p.data.products">
                     {{ products[product.productId] }}
@@ -66,8 +66,8 @@
                 </span>
             </div>
         </dxi-column>
-        <dxi-column dataField="manager" caption="Manager"></dxi-column>
-        <dxi-column dataField="organization" caption="Organization"></dxi-column>
+        <dxi-column dataField="manager" caption="Manager" [hidingPriority]="4"></dxi-column>
+        <dxi-column dataField="organization" caption="Organization" [hidingPriority]="2"></dxi-column>
     </dx-data-grid>
 
     <div class="panel" [ngClass]="{ 'pin': isPanelPin, 'open': isPanelOpen }">

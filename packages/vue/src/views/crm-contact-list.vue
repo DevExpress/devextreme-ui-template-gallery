@@ -52,22 +52,25 @@
         show-check-boxes-mode="always"
         mode="multiple"
       ></dx-selection>
-      <dx-column data-field="name" caption="Name" />
+      <dx-column data-field="name" caption="Name" :hiding-priority="5" :min-width="150" />
       <dx-column
         data-field="status"
         caption="Status"
         data-type="string"
         cell-template="statusTemplate"
+         :hiding-priority="3"
+         :min-width="100"
       />
-      <dx-column data-field="id" caption="ID" />
+      <dx-column data-field="id" caption="ID" :hiding-priority="1" />
       <dx-column
         data-field="Products"
         caption="Products"
         cell-template="productTemplate"
-        :width="400"
+        :min-width="400"
+        :hiding-priority="0"
       />
-      <dx-column data-field="manager" caption="Manager" />
-      <dx-column data-field="organization" caption="Organization" />
+      <dx-column data-field="manager" caption="Manager" :hiding-priority="4" />
+      <dx-column data-field="organization" caption="Organization" :hiding-priority="2" />
       <template #statusTemplate="{ data }">
         <span>
           <span :class="'status status-' + data.data.status">{{
