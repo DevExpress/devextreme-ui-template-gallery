@@ -108,6 +108,7 @@
           <dx-item
             location="after"
             widget="dxButton"
+            :visible="isPinEnabled"
             :options="{ icon: isPanelPin ? 'unpin' : 'pin', onClick: pinClick }"
           >
           </dx-item>
@@ -203,6 +204,7 @@
 </template>
 
 <script>
+import {onMounted,onBeforeUnmount} from 'vue';
 import DxDataGrid, {
   DxColumn,
   DxSelection,
@@ -216,6 +218,7 @@ import DxScrollView from "devextreme-vue/scroll-view";
 import DxAccordion, {
   DxItem as DxAccordionItem,
 } from "devextreme-vue/accordion";
+import { sizes, subscribe, unsubscribe } from "../utils/media-query";
 
 export default {
   components: {
@@ -284,6 +287,7 @@ export default {
 
     let isPanelOpen = false;
     let isPanelPin = false;
+    let isPinEnabled = sizes()['screen-medium'] || sizes()['screen-large'];
 
     const rowClick = (e) => {
       this.panelData = e.data;
@@ -298,6 +302,20 @@ export default {
       this.isPanelPin = !this.isPanelPin;
     };
 
+    const screenSizeChanged = () => {
+      this.isPinEnabled = sizes()['screen-medium'] || sizes()['screen-large'];
+    };
+
+    onMounted(() => {
+      subscribe(screenSizeChanged);
+    });
+
+    onBeforeUnmount(() => {
+      unsubscribe(screenSizeChanged);
+    });
+
+
+
     return {
       gridData,
       rowClick,
@@ -309,6 +327,7 @@ export default {
       isPanelPin,
       closePanel,
       pinClick,
+      isPinEnabled,
     };
   },
 };

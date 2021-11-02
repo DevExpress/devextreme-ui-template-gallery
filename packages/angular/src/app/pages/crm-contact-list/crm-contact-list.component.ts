@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ScreenService } from '../../shared/services';
 
 @Component({
   //selector: 'app-crm-contact-list',
@@ -7,13 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrmContactListComponent implements OnInit {
 
-  constructor() {
+  constructor(private screen: ScreenService) {
     this.pinClick = this.pinClick.bind(this);
     this.closePanel = this.closePanel.bind(this);
+    this.calculatePin();
+    this.screen.changed.subscribe(this.calculatePin.bind(this));
   }
 
   isPanelOpen: boolean = false;
   isPanelPin: boolean = false;
+  isPinEnabled: boolean = false;
 
   gridData: any[] = [{
     name: 'Robert Reaga',
@@ -74,6 +78,13 @@ export class CrmContactListComponent implements OnInit {
   pinClick() {
     this.isPanelPin = !this.isPanelPin;
   };
+
+  calculatePin() {
+    this.isPinEnabled = this.screen.sizes['screen-large'] || this.screen.sizes['screen-medium'];
+    if(this.isPanelPin && !this.isPinEnabled) {
+      this.isPanelPin = false;
+    }
+  }
 
   ngOnInit(): void {
   }

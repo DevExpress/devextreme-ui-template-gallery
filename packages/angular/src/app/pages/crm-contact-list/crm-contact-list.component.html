@@ -86,6 +86,7 @@
                 <dxi-item
                     location="after"
                     widget="dxButton"
+                    [visible]="isPinEnabled"
                     [options]="{ icon: isPanelPin ? 'unpin' : 'pin', onClick: pinClick }"
                 >
                 </dxi-item>

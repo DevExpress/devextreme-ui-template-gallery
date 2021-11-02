@@ -10,6 +10,7 @@ import DataGrid, {
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import ScrollView from 'devextreme-react/scroll-view';
 import Accordion, { Item as AccordionItem } from 'devextreme-react/accordion';
+import { useScreenSize } from '../../utils/media-query';
 import './crm-contact-list.scss';
 
 const CrmContactList = () => {
@@ -57,6 +58,7 @@ const CrmContactList = () => {
   const [isPanelOpen, setPanelOpen] = useState(false);
   const [isPanelPin, setPanelPin] = useState(false);
   const [panelData, setPanelData] = useState(gridData[0]);
+  const { isMedium, isLarge } = useScreenSize();
 
   function console(message) {
     console.log(message);
@@ -166,6 +168,7 @@ const CrmContactList = () => {
               <Item
                 location="after"
                 widget="dxButton"
+                visible={isLarge || isMedium}
                 options={{ icon: isPanelPin ? 'unpin' : 'pin', onClick: pinClick }}
               ></Item>
               <Item
