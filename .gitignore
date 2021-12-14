@@ -19,3 +19,8 @@ packages/angular/src/resize-listener.js
 packages/vue/src/resize-listener.js
 packages/react/src/resize-listener.js
 packages/shell/src/app/themes.json
+packages/service/service/bin
+packages/service/service/obj
+packages/service/service/service.csproj.user
+packages/service/service/Properties/launchSettings.json
+packages/service/.vs
