@@ -22,4 +22,5 @@ packages/shell/src/app/themes.json
 packages/service/service/bin
 packages/service/service/obj
 packages/service/service/service.csproj.user
+packages/service/service/Properties/launchSettings.json
 packages/service/.vs
