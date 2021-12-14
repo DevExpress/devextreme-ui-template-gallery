@@ -21,4 +21,5 @@ packages/react/src/resize-listener.js
 packages/shell/src/app/themes.json
 packages/service/service/bin
 packages/service/service/obj
+packages/service/service/service.csproj.user
 packages/service/.vs
