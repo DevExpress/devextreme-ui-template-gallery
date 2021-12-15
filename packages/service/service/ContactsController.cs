@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ namespace service
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("ApplicationPolicy")]
     public class ContactsController : ControllerBase
     {
         private readonly RwaContext _context;
@@ -24,6 +26,12 @@ namespace service
         // GET: api/Contacts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Contact>>> GetContacts()
+        {
+            return await _context.Contacts.ToListAsync();
+        }
+
+        [HttpGet("cc")]
+        public async Task<ActionResult<IEnumerable<Contact>>> GetContacts1()
         {
             return await _context.Contacts.ToListAsync();
         }

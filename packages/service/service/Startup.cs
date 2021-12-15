@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 
@@ -21,7 +22,21 @@ namespace service {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
-            services.AddMvc();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("ApplicationPolicy",
+                    builder => {
+                        builder.WithOrigins("*");
+                    });
+            });
+
+            services
+                .AddMvc()
+                .AddJsonOptions(options => {
+                    options.JsonSerializerOptions
+                        .ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
+
             services.AddDbContext<RwaContext>(options =>
                 options.UseSqlServer(
                     String.Format(
@@ -37,6 +52,7 @@ namespace service {
             }
 
             app.UseRouting();
+            app.UseCors();
             app.UseEndpoints(endpoints => {
                 endpoints.MapDefaultControllerRoute();
             });

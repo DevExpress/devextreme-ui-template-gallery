@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ScreenService } from '../../shared/services';
+import { getContacts, getContact } from 'dx-rwa-data';
 
 @Component({
   //selector: 'app-crm-contact-list',
@@ -9,8 +10,13 @@ import { ScreenService } from '../../shared/services';
 export class CrmContactListComponent implements OnInit {
 
   constructor(private screen: ScreenService) {
+    getContacts().then((data) => {
+      this.gridData = data;
+      this.gridData[0];
+    });
     this.pinClick = this.pinClick.bind(this);
     this.closePanel = this.closePanel.bind(this);
+    this.customizePhoneCell = this.customizePhoneCell.bind(this);
     this.calculatePin();
     this.screen.changed.subscribe(this.calculatePin.bind(this));
   }
@@ -19,56 +25,20 @@ export class CrmContactListComponent implements OnInit {
   isPanelPin: boolean = false;
   isPinEnabled: boolean = false;
 
-  gridData: any[] = [{
-    name: 'Robert Reaga',
-    status: 1,
-    id: 120545,
-    products: [
-      { productId: 1, productStatus: 1 },
-      { productId: 2, productStatus: 2 }
-    ],
-    manager: 'Sarah Davix',
-    organization: 'SV Consult',
-    address: '69 Ruthven St #24, Boston, MA 02121, United States of America',
-    email: '1@2',
-  },{
-    name: 'Samuel Browick',
-    status: 2,
-    id: 120545,
-    products: [
-      { productId: 1, productStatus: 2 },
-      { productId: 2, productStatus: 1 }
-    ],
-    manager: 'Brett Johnson',
-    organization: 'SV Consult',
-    address: '69 Ruthven St #24, Boston, MA 02121, United States of America',
-    email: '2@2',
-  }];
+  gridData: Array<any>;
 
-  statuses: any = {
-    1: 'New',
-    2: 'Active',
-  };
-
-  products: any = {
-    1: 'CRM System',
-    2: 'Task Management',
-  };
-
-  productStatuses: any = {
-    1: 'Lead',
-    2: 'Trial sent'
-  };
-
-  panelData: any = this.gridData[0];
+  panelData: any;
 
   console(message: string) {
     console.log(message);
   }
 
   rowClick(e) {
-      this.panelData = e.data;
-      this.isPanelOpen = true;
+    getContact(e.data.id).then(data => {
+      this.panelData = data;
+    });
+
+    this.isPanelOpen = true;
   }
 
   closePanel() {
@@ -84,6 +54,14 @@ export class CrmContactListComponent implements OnInit {
     if(this.isPanelPin && !this.isPinEnabled) {
       this.isPanelPin = false;
     }
+  }
+
+  formatPhone(number: string | number): string {
+    return String(number).replace(/(\d{3})(\d{3})(\d{4})/,"+1($1)$2-$3");
+  }
+
+  customizePhoneCell(cellInfo): string {
+    return this.formatPhone(cellInfo.value);
   }
 
   ngOnInit(): void {

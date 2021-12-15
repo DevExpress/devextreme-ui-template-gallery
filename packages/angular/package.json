@@ -22,6 +22,7 @@
     "devextreme": "21.2-next",
     "devextreme-angular": "21.2-next",
     "devextreme-schematics": "^1.2.16",
+    "dx-rwa-data": "^1.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

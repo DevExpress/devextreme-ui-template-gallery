@@ -1,6 +1,11 @@
 @use "../../../variables" as *;
 @use "sass:math";
 
+:host {
+    display: flex;
+    flex-grow: 1;
+}
+
 .separator {
     height: 36px;
     width: 1px;
@@ -43,29 +48,37 @@
         display: inline-block;
     }
 
-    &.status-1 {
+    &.status-commission {
         color: #2D9CDB;
         &::before {
             background-color: #2D9CDB;
         }
     }
 
-    &.status-2 {
+    &.status-salaried {
         color: #2EB52C;
         &::before {
             background-color: #2EB52C;
+        }
+    }
+
+    &.status-terminated {
+        color: #DE8E8C;
+        &::before {
+            background-color: #DE8E8C;
         }
     }
 }
 
 .view-wrapper {
     display: flex;
-    height: 700px; //tmp
     position: relative;
     overflow: hidden;
 
     .panel {
         position: absolute;
+        height: 100%;
+        max-height: 700px;
         right: -350px;
         background: $base-bg;
         transition: all 400ms;
@@ -87,6 +100,7 @@
         .data-wrapper {
             width: 350px;
             padding: 16px;
+            height: 100%;
             .contact-name {
                 font-size: 16px;
                 font-weight: bold;
@@ -97,22 +111,68 @@
                 margin-bottom: 20px;
                 display: flex;
                 .photo {
-                    width: 96px;
-                    height: 96px;
+                    width: 124px;
+                    height: 124px;
                     margin-right: 20px;
                     border-radius: 8px;
-                    background: gray; //TODO replace with image
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    box-shadow: 0px 2px 8px 0px #00000014;
+                    border: 1px solid #E0E0E0;
                 }
-                .info {
-                    > div {
-                        display: flex;
-                        height: 20px;
-                        margin-bottom: 6px;
-                        > i {
-                            font-size: 20px;
-                            color: rgba(117, 117, 117, 0.87);
-                            margin-right: 8px;
-                        }
+            }
+
+            .title {
+                font-size: 12px;
+                color: #757575DE;
+            }
+
+            .value {
+                font-size: 16px;
+                color: #2D9CDB;
+                &.black {
+                    color: #000000DE;
+                }
+                .dx-icon {
+                    vertical-align: bottom;
+                    padding: 10px 12px 0 0;
+                }
+            }
+
+            .opportunities {
+                padding-bottom: 10px;
+            }
+
+            .activities-list {
+                ::ng-deep & .dx-list-item {
+                    margin: 10px 0;
+                    overflow: visible;
+                    background: transparent;
+                }
+
+                .dx-list-item-content {
+                    padding: 0;
+                    overflow: visible;
+                }
+
+                .activity {
+                    box-shadow: 0px 1px 4px 0px #00000026;
+                    border-left: 2px solid #2D9CDB;
+                    margin-right: 4px;
+                    padding: 8px 2px 8px 16px;
+
+                    display: grid;
+                    grid-template-columns: 1fr 0fr 0fr;
+                    align-items: center;
+
+                    .name {
+                        max-width: 150px;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+
+                    .date {
+                        padding: 0 10px;
                     }
                 }
             }
@@ -138,6 +198,7 @@
 
                 .dx-accordion-item-body {
                     padding: 0;
+                    margin-right: 2px;
 
                     .licenses {
                         display: flex;

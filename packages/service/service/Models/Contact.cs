@@ -36,7 +36,9 @@ namespace service.Models
         public string EmployeePersonalProfile { get; set; }
         public int? ProbationReason { get; set; }
         public byte[] SsmaTimeStamp { get; set; }
+        public int? CompanyId { get; set; }
 
+        public virtual Company Company { get; set; }
         public virtual ICollection<ActivitiesList> ActivitiesLists { get; set; }
         public virtual ICollection<MessagesList> MessagesLists { get; set; }
         public virtual ICollection<NotesList> NotesLists { get; set; }

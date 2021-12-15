@@ -18,6 +18,7 @@ namespace service.Models
 
         public virtual DbSet<ActivitiesList> ActivitiesLists { get; set; }
         public virtual DbSet<Activity> Activities { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
@@ -91,9 +92,18 @@ namespace service.Models
                     .HasColumnName("Activity");
             });
 
+            modelBuilder.Entity<Company>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name).HasMaxLength(255);
+            });
+
             modelBuilder.Entity<Contact>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CompanyId).HasColumnName("Company_Id");
 
                 entity.Property(e => e.EmployeeAddress)
                     .HasMaxLength(255)
@@ -168,6 +178,11 @@ namespace service.Models
                     .IsRowVersion()
                     .IsConcurrencyToken()
                     .HasColumnName("SSMA_TimeStamp");
+
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.Contacts)
+                    .HasForeignKey(d => d.CompanyId)
+                    .HasConstraintName("FK_Contacts_Companies");
             });
 
             modelBuilder.Entity<Manager>(entity =>
