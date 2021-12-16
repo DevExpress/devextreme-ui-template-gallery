@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using service.Models;
 
-namespace service
-{
+namespace service.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("ApplicationPolicy")]

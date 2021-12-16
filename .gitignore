@@ -12,6 +12,7 @@ jspm_packages/
 
 # Output of 'npm pack'
 *.tgz
+*.user
 
 build
 devextreme-rwa-demos
@@ -21,6 +22,4 @@ packages/react/src/resize-listener.js
 packages/shell/src/app/themes.json
 packages/service/service/bin
 packages/service/service/obj
-packages/service/service/service.csproj.user
-packages/service/service/Properties/launchSettings.json
 packages/service/.vs
