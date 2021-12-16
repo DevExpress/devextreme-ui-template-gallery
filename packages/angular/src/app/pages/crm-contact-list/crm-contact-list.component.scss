@@ -1,6 +1,9 @@
 @use "../../../variables" as *;
 @use "sass:math";
 
+$grid-height: calc(100vh - 160px);
+$side-panel-toolbar-height: 56px;
+
 :host {
     display: flex;
     flex-grow: 1;
@@ -49,9 +52,9 @@
     }
 
     &.status-commission {
-        color: #2D9CDB;
+        color: $base-accent;
         &::before {
-            background-color: #2D9CDB;
+            background-color: $base-accent;
         }
     }
 
@@ -72,13 +75,15 @@
 
 .view-wrapper {
     display: flex;
-    position: relative;
     overflow: hidden;
+
+    .grid {
+        height: $grid-height;
+    }
 
     .panel {
         position: absolute;
-        height: 100%;
-        max-height: 700px;
+        height: $grid-height;
         right: -350px;
         background: $base-bg;
         transition: all 400ms;
@@ -99,10 +104,14 @@
 
         .data-wrapper {
             width: 350px;
-            padding: 16px;
+            padding: 0 16px 16px;
             height: 100%;
+
+            .panel-scroll {
+                height: calc(100% - #{$side-panel-toolbar-height});
+            }
+
             .contact-name {
-                font-size: 16px;
                 font-weight: bold;
                 margin-right: 8px;
             }
@@ -129,7 +138,7 @@
 
             .value {
                 font-size: 16px;
-                color: #2D9CDB;
+                color: $base-accent;
                 &.black {
                     color: #000000DE;
                 }
@@ -157,7 +166,7 @@
 
                 .activity {
                     box-shadow: 0px 1px 4px 0px #00000026;
-                    border-left: 2px solid #2D9CDB;
+                    border-left: 2px solid $base-accent;
                     margin-right: 4px;
                     padding: 8px 2px 8px 16px;
 
@@ -199,34 +208,6 @@
                 .dx-accordion-item-body {
                     padding: 0;
                     margin-right: 2px;
-
-                    .licenses {
-                        display: flex;
-                        justify-content: space-between;
-
-                        > div {
-                            display: flex;
-                            flex-direction: column;
-
-                            .caption {
-                                font-size: 12px;
-                                color: rgba(117, 117, 117, 0.87);
-                            }
-
-                            .value {
-                                color: $base-accent;
-                                font-size: 22px;
-                            }
-                        }
-                    }
-
-                    .oportunities {
-                        .item {
-                            font-size: 14px;
-                            line-height: 30px;
-                            color: $base-accent;
-                        }
-                    }
                 }
             }
         }

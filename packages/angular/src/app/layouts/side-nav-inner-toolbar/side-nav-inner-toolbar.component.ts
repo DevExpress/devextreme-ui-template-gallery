@@ -70,7 +70,7 @@ export class SideNavInnerToolbarComponent implements OnInit {
   }
 
   navigationChanged(event: TreeViewItemClickEvent) {
-    const path = event.itemData.path;
+    const path = (event.itemData as any).path;
     const pointerEvent = event.event;
 
     if (path && this.menuOpened) {
