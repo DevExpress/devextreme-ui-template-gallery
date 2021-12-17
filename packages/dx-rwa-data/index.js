@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const baseUrl = 'https://localhost:5001/api/';
+const baseUrl = 'https://js.devexpress.com/Demos/RwaService/api/';
 
 export const getContacts = async () => {
     return (await axios.get(`${baseUrl}Users/Contacts`)).data;
