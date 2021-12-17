@@ -1,5 +1,5 @@
 <div class="view-wrapper">
-    <dx-data-grid [dataSource]="gridData" (onRowClick)="rowClick($event)" class="grid" >
+    <dx-data-grid [dataSource]="gridData" (onRowClick)="rowClick($event)" class="grid" noDataText="">
         <dxo-search-panel [visible]="true" placeholder="Contact Search">
         </dxo-search-panel>
         <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
@@ -41,7 +41,8 @@
     </dx-data-grid>
 
     <div class="panel" [ngClass]="{ 'pin': isPanelPin, 'open': isPanelOpen }">
-        <div *ngIf="panelData" class="data-wrapper">
+        <dx-load-panel [visible]="panelLoading" container=".panel"></dx-load-panel>
+        <div *ngIf="!panelLoading" class="data-wrapper">
             <dx-toolbar>
                 <dxi-item location="before">
                     <div *dxTemplate>
