@@ -12,7 +12,6 @@ export class CrmContactListComponent implements OnInit {
   constructor(private screen: ScreenService) {
     getContacts().then((data) => {
       this.gridData = data;
-      this.gridData[0];
     });
     this.pinClick = this.pinClick.bind(this);
     this.closePanel = this.closePanel.bind(this);
