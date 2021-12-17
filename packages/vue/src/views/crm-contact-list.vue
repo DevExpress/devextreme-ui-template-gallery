@@ -159,7 +159,7 @@
             </dx-item>
           </dx-toolbar>
           <dx-accordion :multiple="true" :collapsible="true">
-            <dx-item title="Licenses">
+            <dx-accordion-item title="Licenses">
               <div>
                 <div class="licenses">
                   <div>
@@ -176,8 +176,8 @@
                   </div>
                 </div>
               </div>
-            </dx-item>
-            <dx-item title="Opportunities">
+            </dx-accordion-item>
+            <dx-accordion-item title="Opportunities">
               <span
                 v-for="(product, i) in panelData.products"
                 v-bind:item="product"
@@ -192,7 +192,7 @@
                 }}</span>
                 <br />
               </span>
-            </dx-item>
+            </dx-accordion-item>
             <dx-item title="Activities">
               <div>c</div>
             </dx-item>
@@ -294,11 +294,11 @@ export default {
       this.isPanelOpen = true;
     };
 
-    const closePanel = (e) => {
+    const closePanel = () => {
       this.isPanelOpen = false;
     };
 
-    const pinClick = (e) => {
+    const pinClick = () => {
       this.isPanelPin = !this.isPanelPin;
     };
 
