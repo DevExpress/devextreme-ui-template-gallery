@@ -1,25 +1,52 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using service.Models;
+using System.Text.Json.Serialization;
 
-namespace service {
-    public class Program {
-        public static void Main(string[] args) {
-            CreateHostBuilder(args)
-                .Build()
-                .Run();
-        }
+var builder = WebApplication.CreateBuilder(args);
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => {
+// Add services to the container.
 
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddCors(options => {
+    options.AddPolicy("ApplicationPolicy",
+        builder => {
+            builder.WithOrigins("*");
+        });
+});
+
+builder.Services
+    .AddMvc()
+    .AddJsonOptions(options => {
+        options.JsonSerializerOptions
+            .ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
+
+builder.Services.AddDbContext<RwaContext>(options => {
+    options.UseSqlServer(
+        String.Format(
+            builder.Configuration["connectionString"],
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "db")
+        ));
+});
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment()) {
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+app.UseCors();
+
+//app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
