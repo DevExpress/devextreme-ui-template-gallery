@@ -41,79 +41,84 @@
     </dx-data-grid>
 
     <div class="panel" [ngClass]="{ 'pin': isPanelPin, 'open': isPanelOpen }">
-        <dx-load-panel [visible]="panelLoading" container=".panel"></dx-load-panel>
-        <div *ngIf="!panelLoading" class="data-wrapper">
-            <dx-toolbar>
-                <dxi-item location="before">
-                    <div *dxTemplate>
-                        <div class="contact-name value">{{panelData.name}}</div>
-                    </div>
-                </dxi-item>
-                <dxi-item location="before">
-                    <div *dxTemplate>
-                        <span
-                            class="status status-{{panelData.status | lowercase}}">{{panelData.status}}</span>
-                    </div>
-                </dxi-item>
-                <dxi-item location="after" widget="dxButton" [visible]="isPinEnabled"
-                    [options]="{ icon: isPanelPin ? 'unpin' : 'pin', onClick: pinClick }">
-                </dxi-item>
-                <dxi-item location="after" widget="dxButton" [options]="{ icon: 'close', onClick: closePanel }">
-                </dxi-item>
-            </dx-toolbar>
-            <dx-scroll-view class="panel-scroll">
-                <div class="user-info">
-                    <div class="photo"
-                        [style.backgroundImage]="'url(\'data:image/png;base64,' + panelData.image +'\')'"></div>
-                    <div class="info">
-                        <div class="title">Company</div>
-                        <div class="value">{{panelData.company}}</div>
-                        <div class="title">Position</div>
-                        <div class="value black">{{panelData.position}}</div>
-                        <div class="title">Assigned to</div>
-                        <div class="value">{{panelData.manager}}</div>
-                    </div>
-                </div>
-
-                <div class="value black">
-                    <div><i class="dx-icon dx-icon-tel"></i> <span>{{formatPhone(panelData.phone)}}</span></div>
-                    <div><i class="dx-icon dx-icon-email"></i> <span>{{panelData.email}}</span></div>
-                    <div><i class="dx-icon dx-icon-home"></i> <span>{{panelData.address}}</span></div>
-                </div>
-
+        <div class="data-wrapper">
+            <ng-template [ngIf]="!panelLoading" [ngIfElse]="loading">
                 <dx-toolbar>
-                    <dxi-item location="before" widget="dxButton"
-                        [options]="{ icon: 'edit', stylingMode: 'outlined', text: 'Edit' }">
-                    </dxi-item>
-                    <dxi-item location="after" widget="dxDropDownButton" [options]="{ text: 'Actions' }">
-                    </dxi-item>
-                </dx-toolbar>
-                <dx-accordion [multiple]="true" [collapsible]="true">
-                    <dxi-item title="Opportunities">
-                        <div *dxTemplate="let i of 'item'">
-                            <div *ngFor="let opportunity of panelData.opportunities" class="opportunities">
-                                <span class="value">{{ opportunity.name }} </span>
-                                <span class="value black">{{ opportunity.price | currency:'USD':'$':'1.0-0' }}</span>
-                                <br>
-                            </div>
+                    <dxi-item location="before">
+                        <div *dxTemplate>
+                            <div class="contact-name value">{{panelData.name}}</div>
                         </div>
                     </dxi-item>
-                    <dxi-item title="Activities">
-                        <dx-list [dataSource]="panelData.activities" [scrollingEnabled]="false" class="activities-list">
-                            <div *dxTemplate="let item of 'item'">
-                                <div class="activity">
-                                    <div class="value black name" >{{ item.name }}</div>
-                                    <div class="date">
-                                        <div class="title">{{ item.date | date: 'dd/MM/yyyy' }}</div>
-                                        <div class="title">{{ item.manager }}</div>
-                                    </div>
-                                    <dx-button icon="overflow"></dx-button>
+                    <dxi-item location="before">
+                        <div *dxTemplate>
+                            <span class="status status-{{panelData.status | lowercase}}">{{panelData.status}}</span>
+                        </div>
+                    </dxi-item>
+                    <dxi-item location="after" widget="dxButton" [visible]="isPinEnabled"
+                        [options]="{ icon: isPanelPin ? 'unpin' : 'pin', onClick: pinClick }">
+                    </dxi-item>
+                    <dxi-item location="after" widget="dxButton" [options]="{ icon: 'close', onClick: closePanel }">
+                    </dxi-item>
+                </dx-toolbar>
+                <dx-scroll-view class="panel-scroll">
+                    <div class="user-info">
+                        <div class="photo"
+                            [style.backgroundImage]="'url(\'data:image/png;base64,' + panelData.image +'\')'"></div>
+                        <div class="info">
+                            <div class="title">Company</div>
+                            <div class="value">{{panelData.company}}</div>
+                            <div class="title">Position</div>
+                            <div class="value black">{{panelData.position}}</div>
+                            <div class="title">Assigned to</div>
+                            <div class="value">{{panelData.manager}}</div>
+                        </div>
+                    </div>
+    
+                    <div class="value black">
+                        <div><i class="dx-icon dx-icon-tel"></i> <span>{{formatPhone(panelData.phone)}}</span></div>
+                        <div><i class="dx-icon dx-icon-email"></i> <span>{{panelData.email}}</span></div>
+                        <div><i class="dx-icon dx-icon-home"></i> <span>{{panelData.address}}</span></div>
+                    </div>
+    
+                    <dx-toolbar>
+                        <dxi-item location="before" widget="dxButton"
+                            [options]="{ icon: 'edit', stylingMode: 'outlined', text: 'Edit' }">
+                        </dxi-item>
+                        <dxi-item location="after" widget="dxDropDownButton" [options]="{ text: 'Actions' }">
+                        </dxi-item>
+                    </dx-toolbar>
+                    <dx-accordion [multiple]="true" [collapsible]="true">
+                        <dxi-item title="Opportunities">
+                            <div *dxTemplate="let i of 'item'">
+                                <div *ngFor="let opportunity of panelData.opportunities" class="opportunities">
+                                    <span class="value">{{ opportunity.name }} </span>
+                                    <span class="value black">{{ opportunity.price | currency:'USD':'$':'1.0-0' }}</span>
+                                    <br>
                                 </div>
                             </div>
-                        </dx-list>
-                    </dxi-item>
-                </dx-accordion>
-            </dx-scroll-view>
+                        </dxi-item>
+                        <dxi-item title="Activities">
+                            <dx-list [dataSource]="panelData.activities" [scrollingEnabled]="false" class="activities-list">
+                                <div *dxTemplate="let item of 'item'">
+                                    <div class="activity">
+                                        <div class="value black name">{{ item.name }}</div>
+                                        <div class="date">
+                                            <div class="title">{{ item.date | date: 'dd/MM/yyyy' }}</div>
+                                            <div class="title">{{ item.manager }}</div>
+                                        </div>
+                                        <dx-button icon="overflow"></dx-button>
+                                    </div>
+                                </div>
+                            </dx-list>
+                        </dxi-item>
+                    </dx-accordion>
+                </dx-scroll-view>
+            </ng-template>
+            <ng-template #loading>
+                <dx-load-panel [visible]="panelLoading" container=".panel"
+                    [position]="{of: '.panel', my: 'center', at: 'center'}"></dx-load-panel>
+            </ng-template>
+           
         </div>
     </div>
 </div>
