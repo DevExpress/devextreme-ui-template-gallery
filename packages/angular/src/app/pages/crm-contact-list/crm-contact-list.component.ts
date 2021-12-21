@@ -1,17 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ScreenService } from '../../shared/services';
 import { getContacts, getContact } from 'dx-rwa-data';
+import { DxDataGridComponent } from "devextreme-angular";
 
 @Component({
   //selector: 'app-crm-contact-list',
   templateUrl: './crm-contact-list.component.html',
   styleUrls: ['./crm-contact-list.component.scss']
 })
-export class CrmContactListComponent implements OnInit {
+export class CrmContactListComponent implements OnInit, AfterViewInit {
+
+  @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent
 
   constructor(private screen: ScreenService) {
+    
     getContacts().then((data) => {
       this.gridData = data;
+      this.dataGrid.instance.endCustomLoading();
     });
     this.pinClick = this.pinClick.bind(this);
     this.closePanel = this.closePanel.bind(this);
@@ -23,6 +28,7 @@ export class CrmContactListComponent implements OnInit {
   isPanelOpen: boolean = false;
   isPanelPin: boolean = false;
   isPinEnabled: boolean = false;
+  panelLoading: boolean = true;
 
   gridData: Array<any>;
 
@@ -33,8 +39,10 @@ export class CrmContactListComponent implements OnInit {
   }
 
   rowClick(e) {
+    this.panelLoading = true;
     getContact(e.data.id).then(data => {
       this.panelData = data;
+      this.panelLoading = false;
     });
 
     this.isPanelOpen = true;
@@ -64,6 +72,11 @@ export class CrmContactListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+  }
+
+  ngAfterViewInit() {
+    this.dataGrid.instance.beginCustomLoading('');
   }
 
 }
