@@ -60,9 +60,6 @@ jobs:
       if: ${{ matrix.mode == 'embedded' }}
       run: npm run make-embedded-mode
 
-    - name: Run lerna
-      run: npx lerna bootstrap
-
     - name: Build
       run: npm run build
 

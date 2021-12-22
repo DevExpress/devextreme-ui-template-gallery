@@ -58,8 +58,5 @@ jobs:
     - name: Run npm install
       run: npm install
 
-    - name: Run lerna
-      run: npx lerna bootstrap
-
     - name: Build
       run: npm run build
