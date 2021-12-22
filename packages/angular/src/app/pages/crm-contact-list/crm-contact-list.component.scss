@@ -19,24 +19,7 @@ $side-panel-toolbar-height: 56px;
     }
 }
 
-.grid-header {
-    font-size: 22px;
-}
 
-.cloud {
-    padding: 3px 8px;
-    border-radius: 10px;
-    font-size: 12px;
-    margin-right: 10px;
-
-    &.cloud-1 {
-        background-color: #E5ECEF;
-    }
-
-    &.cloud-2 {
-        background-color: #A4F297;
-    }
-}
 
 .status {
     font-size: 12px;
@@ -79,6 +62,27 @@ $side-panel-toolbar-height: 56px;
 
     .grid {
         height: $grid-height;
+
+        .name-template {
+            margin: -6px 0;
+
+            .position {
+                font-size: 12px;
+                color: #757575DE;
+
+            }
+        }
+
+        ::ng-deep & .dx-datagrid-header-panel {
+            padding-top: 20px;
+            padding-bottom: 10px;
+        }
+
+        .grid-header {
+            font-size: 22px;
+            font-weight: 500;
+            padding-right: 25px;
+        }
     }
 
     .panel {
@@ -146,6 +150,10 @@ $side-panel-toolbar-height: 56px;
                 }
             }
 
+            .panel-toolbar {
+                padding: 10px 3px 0 0;
+            }
+
             .opportunities {
                 padding-bottom: 10px;
             }
@@ -207,15 +215,6 @@ $side-panel-toolbar-height: 56px;
                     padding: 0;
                     margin-right: 2px;
                 }
-            }
-        }
-    }
-
-    ::ng-deep .dx-theme-generic & {
-        .dx-datagrid-header-panel {
-            .dx-toolbar {
-                margin: 0;
-                padding: 10px;
             }
         }
     }

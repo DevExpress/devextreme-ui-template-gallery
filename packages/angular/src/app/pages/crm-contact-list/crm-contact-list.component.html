@@ -7,6 +7,18 @@
             <dxi-item location="before">
                 <div class="grid-header">Contact List</div>
             </dxi-item>
+            <dxi-item location="before" locateInMenu="auto">
+                <dx-drop-down-button
+                    [items]="statuses"
+                    stylingMode="text"
+                    displayExpr="text"
+                    keyExpr="status"
+                    [width]="160"
+                    selectedItemKey=""
+                    [useSelectMode]="true"
+                    (onSelectionChanged)="filterStatus($event)"
+                ></dx-drop-down-button>
+            </dxi-item>
             <dxi-item location="after" locateInMenu="auto" widget="dxButton"
                 [options]="{ icon: 'plus', text: 'Add Contact', type: 'default', stylingMode: 'outlined'}">
             </dxi-item>
@@ -20,13 +32,19 @@
             <dxi-item location="after" locateInMenu="auto">
                 <div class="separator"></div>
             </dxi-item>
-            <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
-                [options]="{text: 'Remove', icon: 'trash'}">
-            </dxi-item>
+            <dxi-item name="columnChooserButton" locateInMenu="auto"></dxi-item>
             <dxi-item name="searchPanel" locateInMenu="auto"></dxi-item>
         </dxo-toolbar>
         <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
-        <dxi-column dataField="name" caption="Name" [hidingPriority]="5" [minWidth]="150"></dxi-column>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+        <dxo-sorting mode="multiple"></dxo-sorting>
+        <dxi-column dataField="name" caption="Name" sortOrder="asc" [hidingPriority]="5" [minWidth]="150" cellTemplate="nameTemplate">
+            <div *dxTemplate="let s of 'nameTemplate'" class="name-template">
+                <div>{{s.data.name}}</div>
+                <div class="position">{{s.data.position}}</div>
+            </div>
+        </dxi-column>
         <dxi-column dataField="company" caption="Company" [hidingPriority]="5" [minWidth]="150"></dxi-column>
         <dxi-column dataField="status" caption="Status" dataType="string" cellTemplate="statusTemplate"
             [hidingPriority]="3" [minWidth]="100">
@@ -80,11 +98,11 @@
                         <div><i class="dx-icon dx-icon-home"></i> <span>{{panelData.address}}</span></div>
                     </div>
     
-                    <dx-toolbar>
+                    <dx-toolbar class="panel-toolbar">
                         <dxi-item location="before" widget="dxButton"
-                            [options]="{ icon: 'edit', stylingMode: 'outlined', text: 'Edit' }">
+                            [options]="{ icon: 'edit', stylingMode: 'outlined', text: 'Edit', type: 'default' }">
                         </dxi-item>
-                        <dxi-item location="after" widget="dxDropDownButton" [options]="{ text: 'Actions' }">
+                        <dxi-item location="after" widget="dxDropDownButton" [options]="{ text: 'Actions', stylingMode: 'contained' }">
                         </dxi-item>
                     </dx-toolbar>
                     <dx-accordion [multiple]="true" [collapsible]="true">

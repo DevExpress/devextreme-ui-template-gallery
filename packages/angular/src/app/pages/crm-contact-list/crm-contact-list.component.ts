@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ScreenService } from '../../shared/services';
 import { getContacts, getContact } from 'dx-rwa-data';
 import { DxDataGridComponent } from "devextreme-angular";
+import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
 @Component({
   //selector: 'app-crm-contact-list',
@@ -16,6 +17,7 @@ export class CrmContactListComponent implements OnInit, AfterViewInit {
     
     getContacts().then((data) => {
       this.gridData = data;
+      this.setAvailableStatuses(data);
       this.dataGrid.instance.endCustomLoading();
     });
     this.pinClick = this.pinClick.bind(this);
@@ -29,6 +31,10 @@ export class CrmContactListComponent implements OnInit, AfterViewInit {
   isPanelPin: boolean = false;
   isPinEnabled: boolean = false;
   panelLoading: boolean = true;
+  statuses: Array<{text: string, status: string}> = [{
+    text: 'All Contacts',
+    status: ''
+  }];
 
   gridData: Array<any>;
 
@@ -36,6 +42,17 @@ export class CrmContactListComponent implements OnInit, AfterViewInit {
 
   console(message: string) {
     console.log(message);
+  }
+
+  setAvailableStatuses(data: Array<any>) {
+    const hash: any = {};
+    data.forEach(dataItem => {
+      const status: string = dataItem.status;
+      if(!hash[status]) {
+        hash[status] = true;
+        this.statuses.push({ text: status, status });
+      }
+    });
   }
 
   rowClick(e) {
@@ -69,6 +86,15 @@ export class CrmContactListComponent implements OnInit, AfterViewInit {
 
   customizePhoneCell(cellInfo): string {
     return this.formatPhone(cellInfo.value);
+  }
+
+  filterStatus(e: SelectionChangedEvent) {
+    const status = e.item.status;
+    if(status === '') {
+      this.dataGrid.instance.clearFilter();
+    } else {
+      this.dataGrid.instance.filter(['status', '=', status]);
+    }
   }
 
   ngOnInit(): void {
