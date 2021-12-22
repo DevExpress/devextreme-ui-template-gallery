@@ -13,6 +13,7 @@ import {
   DxAccordionModule,
   DxListModule,
   DxLoadPanelModule,
+  DxDropDownButtonModule,
 } from 'devextreme-angular';
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 
@@ -62,6 +63,7 @@ const routes: Routes = [
     DxAccordionModule,
     DxListModule,
     DxLoadPanelModule,
+    DxDropDownButtonModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
