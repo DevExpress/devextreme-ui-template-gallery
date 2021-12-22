@@ -19,9 +19,7 @@ $side-panel-toolbar-height: 56px;
     }
 }
 
-.grid-header {
-    font-size: 22px;
-}
+
 
 .status {
     font-size: 12px;
@@ -73,6 +71,17 @@ $side-panel-toolbar-height: 56px;
                 color: #757575DE;
 
             }
+        }
+
+        ::ng-deep & .dx-datagrid-header-panel {
+            padding-top: 20px;
+            padding-bottom: 10px;
+        }
+
+        .grid-header {
+            font-size: 22px;
+            font-weight: 500;
+            padding-right: 25px;
         }
     }
 
@@ -206,15 +215,6 @@ $side-panel-toolbar-height: 56px;
                     padding: 0;
                     margin-right: 2px;
                 }
-            }
-        }
-    }
-
-    ::ng-deep .dx-theme-generic & {
-        .dx-datagrid-header-panel {
-            .dx-toolbar {
-                margin: 0;
-                padding: 10px;
             }
         }
     }
