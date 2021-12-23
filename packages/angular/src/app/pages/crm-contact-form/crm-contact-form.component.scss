@@ -1,0 +1,25 @@
+@use "../../../variables" as *;
+@use "sass:math";
+
+//$grid-height: calc(100vh - 160px);
+//$side-panel-toolbar-height: 56px;
+
+:host {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px 16px 0 16px;
+}
+
+@include separator();
+
+@include status();
+
+.view-wrapper {
+    flex-direction: column;
+
+    .toolbar-header {
+        @include header();
+    }
+}
+

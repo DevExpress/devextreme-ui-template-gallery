@@ -9,56 +9,11 @@ $side-panel-toolbar-height: 56px;
     flex-grow: 1;
 }
 
-.separator {
-    height: 36px;
-    width: 1px;
-    background: $base-border-color;
-    ::ng-deep .dx-toolbar-menu-section & {
-        height: 1px;
-        width: auto;
-    }
-}
+@include separator();
 
-
-
-.status {
-    font-size: 12px;
-
-    &::before {
-        $diameter: 10px;
-        content: ' ';
-        width: $diameter;
-        height: $diameter;
-        border-radius: math.div($diameter, 2);
-        margin-right: math.div($diameter, 2);
-        display: inline-block;
-    }
-
-    &.status-commission {
-        color: $base-accent;
-        &::before {
-            background-color: $base-accent;
-        }
-    }
-
-    &.status-salaried {
-        color: #2EB52C;
-        &::before {
-            background-color: #2EB52C;
-        }
-    }
-
-    &.status-terminated {
-        color: #DE8E8C;
-        &::before {
-            background-color: #DE8E8C;
-        }
-    }
-}
+@include status();
 
 .view-wrapper {
-    display: flex;
-    overflow: hidden;
 
     .grid {
         height: $grid-height;
@@ -79,9 +34,7 @@ $side-panel-toolbar-height: 56px;
         }
 
         .grid-header {
-            font-size: 22px;
-            font-weight: 500;
-            padding-right: 25px;
+            @include header();
         }
     }
 
