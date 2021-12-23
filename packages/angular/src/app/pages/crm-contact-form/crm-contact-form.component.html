@@ -29,7 +29,91 @@
             </dxi-item>
         </dx-toolbar>
     
-        <div>123</div>
+        <div class="panels">
+            <div class="right">
+                <dx-toolbar>
+                    <dxi-item location="before">
+                        <div class="panels-header">Details</div>
+                    </dxi-item>
+                    <dxi-item location="after" widget="dxButton"
+                        [options]="{text: 'Edit', icon: 'edit', stylingMode: 'contained'}">
+                    </dxi-item>
+                </dx-toolbar>
+                <div class="user-info">
+                    <div class="photo"
+                        [style.backgroundImage]="'url(\'data:image/png;base64,' + viewData.image +'\')'"></div>
+                    <div>
+                        <div class="title">Status</div>
+                        <div class="value status status-{{viewData.status.toLowerCase()}}">{{viewData.status}}</div>
+                        <div class="title">First Name</div>
+                        <div class="value black">{{viewData.firstName}} TODO</div>
+                        <div class="title">Second Name</div>
+                        <div class="value black">{{viewData.secondName}} TODO</div>
+                    </div>
+                </div>
+                <div class="info">
+                    <div>
+                        <div class="title">Position</div>
+                        <div class="value black">{{viewData.position}}</div>
+                    </div>
+                    <div>
+                        <div class="title">Assigned to</div>
+                        <div class="value">{{viewData.manager}}</div>
+                    </div>
+                </div>
+                <div class="info last">
+                    <div>
+                        <div class="title">Company</div>
+                        <div class="value">{{viewData.company}}</div>
+                    </div>
+                </div>
+
+                <div class="panels-header">Contacts</div>
+
+                <div class="info">
+                    <div>
+                        <div class="title">Address</div>
+                        <div class="value black">{{viewData.address}}</div>
+                    </div>
+                </div>
+                <div class="info">
+                    <div>
+                        <div class="title">City</div>
+                        <div class="value black">{{viewData.city}} TODO</div>
+                    </div>
+                    <div class="narrow">
+                        <div class="title">State</div>
+                        <div class="value black">{{viewData.state}} TODO</div>
+                    </div>
+                    <div  class="narrow">
+                        <div class="title">Zip Code</div>
+                        <div class="value black">{{viewData.zipcode}} TODO</div>
+                    </div>
+                </div>
+                <div class="info last">
+                    <div>
+                        <div class="title">Phone</div>
+                        <div class="value black">{{formatPhone(viewData.phone)}}</div>
+                    </div>
+                    <div>
+                        <div class="title">Email</div>
+                        <div class="value black">{{viewData.email}}</div>
+                    </div>
+                </div>
+                <div class="info last">
+                    <div>
+                        <dx-button text="Call" icon="tel"></dx-button>
+                    </div>
+                    <div>
+                        <dx-button text="Send Email" icon="email"></dx-button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                TODO
+
+            </div>
+        </div>
     </ng-template>
     <ng-template #loading>
         <dx-load-panel [visible]="load"></dx-load-panel>

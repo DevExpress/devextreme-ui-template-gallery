@@ -18,7 +18,7 @@ $side-panel-background: darken($base-bg, 5.00);
 }
 
 @mixin  status {
-    .status {
+    .view-wrapper .status {
         font-size: 12px;
     
         &::before {
@@ -58,4 +58,42 @@ $side-panel-background: darken($base-bg, 5.00);
     font-size: 22px;
     font-weight: 500;
     padding-right: 25px;
+}
+
+@mixin user-info {
+    .user-info {
+        margin-bottom: 20px;
+        display: flex;
+        .photo {
+            width: 124px;
+            height: 124px;
+            margin-right: 20px;
+            border-radius: 8px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            box-shadow: 0px 2px 8px 0px #00000014;
+            border: 1px solid #E0E0E0;
+        }
+    }
+
+    .title {
+        font-size: 12px;
+        color: #757575DE;
+
+        &:not(:first-child) {
+            padding-top: 10px;
+        }
+    }
+
+    .value {
+        font-size: 16px;
+        color: $base-accent;
+        &.black {
+            color: #000000DE;
+        }
+        .dx-icon {
+            vertical-align: bottom;
+            padding: 10px 12px 0 0;
+        }
+    }
 }
