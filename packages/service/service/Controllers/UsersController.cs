@@ -22,7 +22,7 @@ namespace service.Controllers {
             _context = context;
         }
 
-        // GET: api/Contacts
+        // GET: api/Users/Contacts
         [HttpGet("Contacts")]
         public async Task<ActionResult<IEnumerable<dynamic>>> GetContacts()
         {
@@ -42,7 +42,7 @@ namespace service.Controllers {
                 .ToListAsync();
         }
 
-        // GET: api/Contacts
+        // GET: api/Users/Contacts/10
         [HttpGet("Contacts/{id}")]
         public async Task<ActionResult<dynamic>> GetContact(int id)
         {
@@ -50,10 +50,17 @@ namespace service.Controllers {
                 //.Include(_ => _.Company)
                 .Include(_ => _.ActivitiesLists)
                 .Include(_ => _.OpportunitiesLists)
+                .Include(_ => _.EmployeeState)
+                .Include(_ => _.TasksLists)
                 .AsSplitQuery()
                 .Select(s => new {
                     id = s.Id,
                     name = s.EmployeeFullName,
+                    firstName = s.EmployeeFirstName,
+                    lastName = s.EmployeeLastName,
+                    city = s.EmployeeCity,
+                    state = s.EmployeeState,
+                    zipCode = s.EmployeeZipcode,
                     status = s.EmployeeStatus,
                     company = s.Company.Name,
                     position = s.EmployeeTitle,
@@ -70,9 +77,32 @@ namespace service.Controllers {
                         name = o.Opportunity.Opportunity1,
                         price = o.ProductsOpportunitiesLists.Sum(p => p.Product.ProductCost),
                     }),
+                    tasks = s.TasksLists.Select(t => new {
+                        text = t.Task.Task1.TrimEnd(' '),
+                        date = t.Date,
+                        done = t.Done,
+                    }),
                     image = s.EmployeePicture,
                 })
                 .FirstOrDefaultAsync(_ => _.id == id);
+        }
+
+        // GET: api/Users/Statuses
+        [HttpGet("Statuses")]
+        public async Task<ActionResult<IEnumerable<dynamic>>> GetStatuses() {
+            return await _context.Contacts
+               .Select(s => new
+               {
+                   text = s.EmployeeStatus,
+                   status = s.EmployeeStatus,
+               }).Distinct().ToListAsync();
+        }
+
+        // GET: api/Users/States
+        [HttpGet("States")]
+        public async Task<ActionResult<IEnumerable<State>>> GetStates()
+        {
+            return await _context.States.ToListAsync();
         }
 
 

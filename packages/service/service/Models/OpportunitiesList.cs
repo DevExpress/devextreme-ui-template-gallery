@@ -16,9 +16,9 @@ namespace service.Models
         public int OpportunityId { get; set; }
         public int Active { get; set; }
 
-        public virtual Contact Contact { get; set; }
-        public virtual Manager Manager { get; set; }
-        public virtual Opportunity Opportunity { get; set; }
+        public virtual Contact Contact { get; set; } = null!;
+        public virtual Manager Manager { get; set; } = null!;
+        public virtual Opportunity Opportunity { get; set; } = null!;
         public virtual ICollection<ProductsOpportunitiesList> ProductsOpportunitiesLists { get; set; }
     }
 }

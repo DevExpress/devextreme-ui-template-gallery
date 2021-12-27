@@ -11,8 +11,8 @@ namespace service.Models
         public int ActivityId { get; set; }
         public DateTime Date { get; set; }
 
-        public virtual Activity Activity { get; set; }
-        public virtual Contact Contact { get; set; }
-        public virtual Manager Manager { get; set; }
+        public virtual Activity Activity { get; set; } = null!;
+        public virtual Contact Contact { get; set; } = null!;
+        public virtual Manager Manager { get; set; } = null!;
     }
 }

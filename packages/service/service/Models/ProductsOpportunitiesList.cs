@@ -9,7 +9,7 @@ namespace service.Models
         public int? ProductId { get; set; }
         public int? OpportunityListId { get; set; }
 
-        public virtual OpportunitiesList OpportunityList { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual OpportunitiesList? OpportunityList { get; set; }
+        public virtual Product? Product { get; set; }
     }
 }
