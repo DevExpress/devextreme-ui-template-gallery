@@ -9,13 +9,17 @@ import { getContacts, getContact } from 'dx-rwa-data';
 export class CrmContactFormComponent implements OnInit, AfterViewInit {
 
   constructor(private screen: ScreenService) {
+    this.toggleEdit = this.toggleEdit.bind(this);
+
     getContact(10).then((data) => {
       // TODO need the following additional fields
       // - firstName
       // - secondName
       // - city
       // - state
-      // - zipcode
+      // - zipCode
+
+      // statuses - need for selectbox in right form
       this.viewData = data;
       this.load = false;
     });
@@ -24,6 +28,11 @@ export class CrmContactFormComponent implements OnInit, AfterViewInit {
 
   viewData: any;
   load = true;
+  edit = false;
+
+  toggleEdit() {
+    this.edit = !this.edit;
+  }
 
   formatPhone(number: string | number): string {
     return String(number).replace(/(\d{3})(\d{3})(\d{4})/,"+1($1)$2-$3");

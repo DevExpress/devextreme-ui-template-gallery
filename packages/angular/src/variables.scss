@@ -30,6 +30,10 @@ $side-panel-background: darken($base-bg, 5.00);
             margin-right: math.div($diameter, 2);
             display: inline-block;
         }
+
+        &.input {
+            padding: 15px 16px 14px;
+        }
     
         &.status-commission {
             color: $base-accent;

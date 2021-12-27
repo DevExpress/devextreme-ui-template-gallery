@@ -28,6 +28,10 @@
         .photo {
             width: 184px;
             height: 184px;
+
+            &.form {
+                margin-right: -20px;
+            }
         }
 
         margin-bottom: 0;
@@ -67,6 +71,12 @@
 
             .title {
                 padding-top: 16px
+            }
+        }
+
+        .form {
+            ::ng-deep & .dx-field-item {
+                padding-bottom: 0;
             }
         }
     }

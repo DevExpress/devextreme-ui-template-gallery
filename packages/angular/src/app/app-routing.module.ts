@@ -14,6 +14,8 @@ import {
   DxListModule,
   DxLoadPanelModule,
   DxDropDownButtonModule,
+  DxSelectBoxModule,
+  DxTextBoxModule,
 } from 'devextreme-angular';
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactFormComponent } from './pages/crm-contact-form/crm-contact-form.component';
@@ -70,6 +72,8 @@ const routes: Routes = [
     DxListModule,
     DxLoadPanelModule,
     DxDropDownButtonModule,
+    DxSelectBoxModule,
+    DxTextBoxModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
