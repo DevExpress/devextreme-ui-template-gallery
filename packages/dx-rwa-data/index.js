@@ -1,7 +1,6 @@
 const axios = require('axios');
 
-// const baseUrl = 'https://js.devexpress.com/Demos/RwaService/api';
-const baseUrl = 'https://localhost:5001/api';
+const baseUrl = 'https://js.devexpress.com/Demos/RwaService/api';
 
 const getData = async (url) => (await axios.get(`${baseUrl}/${url}`)).data;
 
