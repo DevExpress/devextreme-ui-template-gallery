@@ -25,7 +25,7 @@
         </dx-toolbar>
 
         <div class="panels">
-            <div class="right">
+            <div class="left">
                 <dx-toolbar>
                     <dxi-item location="before">
                         <div class="panels-header">Details</div>
@@ -48,9 +48,9 @@
                             <div class="title">Status</div>
                             <div class="value status status-{{viewData.status.toLowerCase()}}">{{viewData.status}}</div>
                             <div class="title">First Name</div>
-                            <div class="value black">{{viewData.firstName}} TODO</div>
-                            <div class="title">Second Name</div>
-                            <div class="value black">{{viewData.secondName}} TODO</div>
+                            <div class="value black">{{viewData.firstName}}</div>
+                            <div class="title">Last Name</div>
+                            <div class="value black">{{viewData.lastName}}</div>
                         </div>
                     </div>
                     <div class="info">
@@ -81,15 +81,15 @@
                     <div class="info">
                         <div>
                             <div class="title">City</div>
-                            <div class="value black">{{viewData.city}} TODO</div>
+                            <div class="value black">{{viewData.city}}</div>
                         </div>
                         <div class="narrow">
                             <div class="title">State</div>
-                            <div class="value black">{{viewData.state}} TODO</div>
+                            <div class="value black">{{viewData.state.stateShort}}</div>
                         </div>
                         <div class="narrow">
                             <div class="title">Zip Code</div>
-                            <div class="value black">{{viewData.zipCode}} TODO</div>
+                            <div class="value black">{{viewData.zipCode}}</div>
                         </div>
                     </div>
                     <div class="info last">
@@ -125,24 +125,24 @@
                             <dxi-item itemType="group" [colSpan]="3">
                                 <dxi-item dataField="status">
                                     <div *dxTemplate>
-                                        <!--TODO normal items -->
                                         <dx-select-box
                                             [(value)]="viewData.status"
-                                            [items]="[viewData.status]"
+                                            [dataSource]="statuses"
+                                            valueExpr="status"
                                             fieldTemplate="field"
                                             [dropDownOptions]="{ container: '.view-wrapper' }"
                                         >
                                             <div *dxTemplate="let data of 'field'">
                                                 <div>
-                                                    <div class="value input status status-{{data | lowercase}}">{{data}}
+                                                    <div class="value input status status-{{data.status | lowercase}}">{{data.status}}
                                                     </div>
                                                     <dx-text-box [value]="data" [readOnly]="true" [visible]="false"
-                                                        [inputAttr]="{ class: 'status status-' + data.toLowerCase() }">
+                                                        [inputAttr]="{ class: 'status status-' + data.status | lowercase }">
                                                     </dx-text-box>
                                                 </div>
                                             </div>
                                             <div *dxTemplate="let data of 'item'">
-                                                <div class="value status status-{{data | lowercase}}">{{data}}
+                                                <div class="value status status-{{data.status | lowercase}}">{{data.status}}
                                                 </div>
                                             </div>
                                         </dx-select-box>
@@ -157,14 +157,14 @@
                             <dxi-item dataField="position"></dxi-item>
                             <!-- TODO manager, company - selectboxes -->
                             <dxi-item dataField="manager" [label]="{ text: 'Assigned to'}"></dxi-item>
-                            <dxi-item dataField="company"></dxi-item>
+                            <dxi-item dataField="company" [colSpan]="2"></dxi-item>
                         </dxi-item>
-                        <dxi-item dataField="company">
+                        <dxi-item>
                             <div class="panels-header">Contacts</div>
                         </dxi-item>
                         <dxi-item itemType="group" [colCount]="4">
                             <dxi-item dataField="city" [colSpan]="2"></dxi-item>
-                            <dxi-item dataField="state"></dxi-item>
+                            <dxi-item dataField="state.stateShort"></dxi-item>
                             <dxi-item dataField="zipCode"></dxi-item>
                             <dxi-item dataField="phone" [colSpan]="2"></dxi-item>
                             <dxi-item dataField="email" [colSpan]="2"></dxi-item>
@@ -174,7 +174,7 @@
 
             </div>
             <div>
-                TODO
+                TODO - right part
 
             </div>
         </div>

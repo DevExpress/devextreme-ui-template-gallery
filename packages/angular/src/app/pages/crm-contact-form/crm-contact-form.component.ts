@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ScreenService } from '../../shared/services';
-import { getContacts, getContact } from 'dx-rwa-data';
+import { getRawStatuses, getContact } from 'dx-rwa-data';
+import CustomStore from 'devextreme/data/custom_store';
 
 @Component({
   templateUrl: './crm-contact-form.component.html',
@@ -12,23 +13,20 @@ export class CrmContactFormComponent implements OnInit, AfterViewInit {
     this.toggleEdit = this.toggleEdit.bind(this);
 
     getContact(10).then((data) => {
-      // TODO need the following additional fields
-      // - firstName
-      // - secondName
-      // - city
-      // - state
-      // - zipCode
-
-      // statuses - need for selectbox in right form
       this.viewData = data;
       this.load = false;
     });
     
+    this.statuses = new CustomStore({
+      loadMode: 'raw',
+      load: getRawStatuses
+    });
   }
 
   viewData: any;
   load = true;
   edit = false;
+  statuses: CustomStore;
 
   toggleEdit() {
     this.edit = !this.edit;
