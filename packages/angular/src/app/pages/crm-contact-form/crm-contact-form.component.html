@@ -173,9 +173,45 @@
                 </ng-template>
 
             </div>
-            <div>
-                TODO - right part
-
+            <div class="right">
+                <div class="dx-card">
+                    <dx-tab-panel>
+                        <dxi-item title="Tasks">
+                            <div class="tab-content">
+                                <dx-data-grid [dataSource]="viewData.tasks">
+                                    <dxi-column
+                                        dataField="done"
+                                        cellTemplate="doneTemplate"
+                                        [width]="70"
+                                        alignment="left"
+                                        caption="Done"
+                                    >
+                                        <div *dxTemplate="let data of 'doneTemplate'">
+                                            <dx-check-box [value]="!!data.value"></dx-check-box>
+                                        </div>
+                                    </dxi-column>
+                                    <dxi-column dataField="text" caption="Name"></dxi-column>
+                                    <dxi-column dataField="date" dataType="date" [width]="100"></dxi-column>
+                                    <dxi-column caption="Assigned To" cellTemplate="assignTemplate" [width]="120">
+                                        <div *dxTemplate="let data of 'assignTemplate'">
+                                            {{viewData.manager}}
+                                        </div>
+                                    </dxi-column>
+                                    <dxi-column [width]="40" type="buttons">
+                                        <dxi-button
+                                            icon="overflow"
+                                            ></dxi-button>
+                                    </dxi-column>
+                                </dx-data-grid>
+                            </div>
+                        </dxi-item>
+                        <dxi-item title="Activities">
+                            <div class="tab-content">
+                                <app-activities [activities]="viewData.activities" [showBy]="true"></app-activities>
+                            </div>
+                        </dxi-item>
+                    </dx-tab-panel>
+                </div>
             </div>
         </div>
     </ng-template>

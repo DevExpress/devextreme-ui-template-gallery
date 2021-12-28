@@ -4,6 +4,8 @@
 //$grid-height: calc(100vh - 160px);
 //$side-panel-toolbar-height: 56px;
 
+$left-panel-width: 390px;
+
 :host {
     display: flex;
     flex-direction: column;
@@ -41,7 +43,43 @@
         display: flex;
         flex-wrap: wrap;
         .left {
-            flex-basis: 390px;
+            flex-basis: $left-panel-width;
+            margin-right: 20px;
+
+            .info {
+                display: flex;
+                flex-wrap: wrap;
+    
+                > div {
+                    flex-basis: 180px;
+    
+                    &:first-child {
+                        flex-basis: 204px;
+                    }
+    
+                    &.narrow {
+                        flex-basis: 80px;
+                    }
+                }
+    
+                &.last {
+                    margin-bottom: 30px;
+                }
+    
+                .title {
+                    padding-top: 16px
+                }
+            }
+        }
+
+        .right {
+            flex-grow: 1;
+            flex-basis: calc(100% - #{$left-panel-width} - 20px);
+            min-width: 360px;
+
+            .tab-content {
+                padding: 20px;
+            }
         }
 
         .panels-header {
@@ -49,30 +87,7 @@
             font-weight: 700;
         }
 
-        .info {
-            display: flex;
-            flex-wrap: wrap;
-
-            > div {
-                flex-basis: 180px;
-
-                &:first-child {
-                    flex-basis: 204px;
-                }
-
-                &.narrow {
-                    flex-basis: 80px;
-                }
-            }
-
-            &.last {
-                margin-bottom: 30px;
-            }
-
-            .title {
-                padding-top: 16px
-            }
-        }
+        
 
         .form {
             ::ng-deep & .dx-field-item {
