@@ -4,6 +4,8 @@ import { getRawStatuses, getContact } from 'dx-rwa-data';
 import CustomStore from 'devextreme/data/custom_store';
 import {
   DxButtonModule,
+  DxCheckBoxModule,
+  DxDataGridModule,
   DxFormModule,
   DxLoadPanelModule,
   DxSelectBoxModule,
@@ -61,6 +63,8 @@ export class CrmContactFormComponent implements OnInit {
     DxTextBoxModule,
     DxLoadPanelModule,
     DxTabPanelModule,
+    DxDataGridModule,
+    DxCheckBoxModule,
     ActivitiesModule,
 
     CommonModule

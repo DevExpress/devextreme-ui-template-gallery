@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, Input } from '@angular/core';
-import { DxListModule } from 'devextreme-angular';
+import { DxButtonModule, DxListModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-activities',
@@ -9,11 +9,12 @@ import { DxListModule } from 'devextreme-angular';
 })
 export class ActivitiesComponent {
   constructor() { }
-  @Input() activities: any;
+  @Input() activities: Array<{name: string, date: string, manager: string}>;
+  @Input() showBy: boolean = false;
 }
 
 @NgModule({
-  imports: [ DxListModule, CommonModule ],
+  imports: [ DxListModule, DxButtonModule, CommonModule ],
   declarations: [ ActivitiesComponent ],
   exports: [ ActivitiesComponent ]
 })

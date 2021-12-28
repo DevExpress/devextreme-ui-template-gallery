@@ -19,17 +19,27 @@
         padding: 8px 2px 8px 16px;
 
         display: grid;
-        grid-template-columns: 1fr 0fr 0fr;
+        grid-template-columns: 2fr 1fr 0fr;
         align-items: center;
 
         .name {
             max-width: 150px;
             text-overflow: ellipsis;
             overflow: hidden;
+            font-size: 16px;
         }
 
         .date {
             padding: 0 10px;
+            font-size: 12px;
+            color: #757575DE;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            &.by {
+                width: 170px;
+            }
         }
     }
 }

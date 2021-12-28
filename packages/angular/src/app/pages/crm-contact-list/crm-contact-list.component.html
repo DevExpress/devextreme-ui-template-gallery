@@ -118,20 +118,6 @@
                         <dxi-item title="Activities">
                             <app-activities [activities]="panelData.activities"></app-activities>
                         </dxi-item>
-                        <dxi-item title="Activities">
-                            <dx-list [dataSource]="panelData.activities" [scrollingEnabled]="false" class="activities-list">
-                                <div *dxTemplate="let item of 'item'">
-                                    <div class="activity">
-                                        <div class="value black name">{{ item.name }}</div>
-                                        <div class="date">
-                                            <div class="title">{{ item.date | date: 'dd/MM/yyyy' }}</div>
-                                            <div class="title">{{ item.manager }}</div>
-                                        </div>
-                                        <dx-button icon="overflow"></dx-button>
-                                    </div>
-                                </div>
-                            </dx-list>
-                        </dxi-item>
                     </dx-accordion>
                 </dx-scroll-view>
             </ng-template>
