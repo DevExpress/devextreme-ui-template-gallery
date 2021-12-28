@@ -11,7 +11,7 @@ namespace service.Models
         }
 
         public int Id { get; set; }
-        public string Note1 { get; set; }
+        public string? Note1 { get; set; }
 
         public virtual ICollection<NotesList> NotesLists { get; set; }
     }

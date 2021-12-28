@@ -11,8 +11,8 @@ namespace service.Models
         }
 
         public int Id { get; set; }
-        public string Message1 { get; set; }
-        public string Subject { get; set; }
+        public string? Message1 { get; set; }
+        public string? Subject { get; set; }
 
         public virtual ICollection<MessagesList> MessagesLists { get; set; }
     }

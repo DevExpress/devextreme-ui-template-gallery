@@ -11,7 +11,7 @@ namespace service.Models
         }
 
         public int Id { get; set; }
-        public string Activity1 { get; set; }
+        public string Activity1 { get; set; } = null!;
 
         public virtual ICollection<ActivitiesList> ActivitiesLists { get; set; }
     }

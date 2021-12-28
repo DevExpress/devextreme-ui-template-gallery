@@ -7,6 +7,10 @@ export const navigation = [
       {
         text: 'Contact List',
         path: '/crm-contact-list'
+      },
+      {
+        text: 'Contact Form',
+        path: '/crm-contact-form'
       }
     ]
   }

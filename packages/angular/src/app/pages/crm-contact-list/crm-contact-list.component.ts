@@ -1,25 +1,31 @@
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ScreenService } from '../../shared/services';
-import { getContacts, getContact } from 'dx-rwa-data';
+import { getContacts, getContact, getStatuses } from 'dx-rwa-data';
 import { DxDataGridComponent } from "devextreme-angular";
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import CustomStore from 'devextreme/data/custom_store';
 
 @Component({
   //selector: 'app-crm-contact-list',
   templateUrl: './crm-contact-list.component.html',
   styleUrls: ['./crm-contact-list.component.scss']
 })
-export class CrmContactListComponent implements OnInit, AfterViewInit {
+export class CrmContactListComponent implements OnInit {
 
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent
 
   constructor(private screen: ScreenService) {
-    
-    getContacts().then((data) => {
-      this.gridData = data;
-      this.setAvailableStatuses(data);
-      this.dataGrid.instance.endCustomLoading();
+
+    this.dataSource = new CustomStore({
+      key: 'id',
+      load: getContacts
     });
+
+    this.statuses = new CustomStore({
+      loadMode: 'raw',
+      load: getStatuses
+    });
+
     this.pinClick = this.pinClick.bind(this);
     this.closePanel = this.closePanel.bind(this);
     this.customizePhoneCell = this.customizePhoneCell.bind(this);
@@ -31,28 +37,15 @@ export class CrmContactListComponent implements OnInit, AfterViewInit {
   isPanelPin: boolean = false;
   isPinEnabled: boolean = false;
   panelLoading: boolean = true;
-  statuses: Array<{text: string, status: string}> = [{
-    text: 'All Contacts',
-    status: ''
-  }];
 
-  gridData: Array<any>;
+  dataSource: CustomStore;
+  statuses: CustomStore;
+
 
   panelData: any;
 
   console(message: string) {
     console.log(message);
-  }
-
-  setAvailableStatuses(data: Array<any>) {
-    const hash: any = {};
-    data.forEach(dataItem => {
-      const status: string = dataItem.status;
-      if(!hash[status]) {
-        hash[status] = true;
-        this.statuses.push({ text: status, status });
-      }
-    });
   }
 
   rowClick(e) {
@@ -99,10 +92,6 @@ export class CrmContactListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     
-  }
-
-  ngAfterViewInit() {
-    this.dataGrid.instance.beginCustomLoading('');
   }
 
 }

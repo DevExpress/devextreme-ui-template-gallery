@@ -11,8 +11,8 @@ namespace service.Models
         }
 
         public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDescription { get; set; }
+        public string? ProductName { get; set; }
+        public string? ProductDescription { get; set; }
         public decimal? ProductCost { get; set; }
         public decimal? ProductSalePrice { get; set; }
         public decimal? ProductRetailPrice { get; set; }

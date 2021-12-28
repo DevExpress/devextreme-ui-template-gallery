@@ -1,0 +1,84 @@
+@use "../../../variables" as *;
+@use "sass:math";
+
+//$grid-height: calc(100vh - 160px);
+//$side-panel-toolbar-height: 56px;
+
+:host {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px 16px 0 16px;
+}
+
+@include separator();
+
+@include status();
+
+.view-wrapper {
+    flex-direction: column;
+
+    .toolbar-header {
+        @include header();
+    }
+
+    @include user-info();
+
+    .user-info {
+        .photo {
+            width: 184px;
+            height: 184px;
+
+            &.form {
+                margin-right: -20px;
+            }
+        }
+
+        margin-bottom: 0;
+    }
+
+    .panels {
+        display: flex;
+        flex-wrap: wrap;
+        .left {
+            flex-basis: 390px;
+        }
+
+        .panels-header {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+
+            > div {
+                flex-basis: 180px;
+
+                &:first-child {
+                    flex-basis: 204px;
+                }
+
+                &.narrow {
+                    flex-basis: 80px;
+                }
+            }
+
+            &.last {
+                margin-bottom: 30px;
+            }
+
+            .title {
+                padding-top: 16px
+            }
+        }
+
+        .form {
+            ::ng-deep & .dx-field-item {
+                padding-bottom: 0;
+            }
+        }
+    }
+}
+

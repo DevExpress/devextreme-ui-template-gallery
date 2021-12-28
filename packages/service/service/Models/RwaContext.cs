@@ -16,29 +16,30 @@ namespace service.Models
         {
         }
 
-        public virtual DbSet<ActivitiesList> ActivitiesLists { get; set; }
-        public virtual DbSet<Activity> Activities { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Contact> Contacts { get; set; }
-        public virtual DbSet<Manager> Managers { get; set; }
-        public virtual DbSet<Message> Messages { get; set; }
-        public virtual DbSet<MessagesList> MessagesLists { get; set; }
-        public virtual DbSet<Note> Notes { get; set; }
-        public virtual DbSet<NotesList> NotesLists { get; set; }
-        public virtual DbSet<OpportunitiesList> OpportunitiesLists { get; set; }
-        public virtual DbSet<Opportunity> Opportunities { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductsOpportunitiesList> ProductsOpportunitiesLists { get; set; }
-        public virtual DbSet<Task> Tasks { get; set; }
-        public virtual DbSet<TasksList> TasksLists { get; set; }
+        public virtual DbSet<ActivitiesList> ActivitiesLists { get; set; } = null!;
+        public virtual DbSet<Activity> Activities { get; set; } = null!;
+        public virtual DbSet<Company> Companies { get; set; } = null!;
+        public virtual DbSet<Contact> Contacts { get; set; } = null!;
+        public virtual DbSet<Manager> Managers { get; set; } = null!;
+        public virtual DbSet<Message> Messages { get; set; } = null!;
+        public virtual DbSet<MessagesList> MessagesLists { get; set; } = null!;
+        public virtual DbSet<Note> Notes { get; set; } = null!;
+        public virtual DbSet<NotesList> NotesLists { get; set; } = null!;
+        public virtual DbSet<OpportunitiesList> OpportunitiesLists { get; set; } = null!;
+        public virtual DbSet<Opportunity> Opportunities { get; set; } = null!;
+        public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<ProductsOpportunitiesList> ProductsOpportunitiesLists { get; set; } = null!;
+        public virtual DbSet<State> States { get; set; } = null!;
+        public virtual DbSet<Task> Tasks { get; set; } = null!;
+        public virtual DbSet<TasksList> TasksLists { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            /*if (!optionsBuilder.IsConfigured)
+            if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=BABICH-AL-NB-10\\SQLEXPRESS;Database=Rwa;Trusted_Connection=True;");
-            }*/
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -87,7 +88,6 @@ namespace service.Models
                     .HasColumnName("id");
 
                 entity.Property(e => e.Activity1)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("Activity");
             });
@@ -174,7 +174,6 @@ namespace service.Models
                 entity.Property(e => e.ProbationReason).HasColumnName("Probation_Reason");
 
                 entity.Property(e => e.SsmaTimeStamp)
-                    .IsRequired()
                     .IsRowVersion()
                     .IsConcurrencyToken()
                     .HasColumnName("SSMA_TimeStamp");
@@ -183,6 +182,11 @@ namespace service.Models
                     .WithMany(p => p.Contacts)
                     .HasForeignKey(d => d.CompanyId)
                     .HasConstraintName("FK_Contacts_Companies");
+
+                entity.HasOne(d => d.EmployeeState)
+                    .WithMany(p => p.Contacts)
+                    .HasForeignKey(d => d.EmployeeStateId)
+                    .HasConstraintName("FK_Contacts_States");
             });
 
             modelBuilder.Entity<Manager>(entity =>
@@ -258,7 +262,6 @@ namespace service.Models
                 entity.Property(e => e.ProbationReason).HasColumnName("Probation_Reason");
 
                 entity.Property(e => e.SsmaTimeStamp)
-                    .IsRequired()
                     .IsRowVersion()
                     .IsConcurrencyToken()
                     .HasColumnName("SSMA_TimeStamp");
@@ -444,6 +447,30 @@ namespace service.Models
                     .WithMany(p => p.ProductsOpportunitiesLists)
                     .HasForeignKey(d => d.ProductId)
                     .HasConstraintName("FK_Products_Opportunities_List_Products");
+            });
+
+            modelBuilder.Entity<State>(entity =>
+            {
+                entity.HasKey(e => e.SateId);
+
+                entity.Property(e => e.SateId).HasColumnName("Sate_ID");
+
+                entity.Property(e => e.Flag24px).HasColumnName("Flag_24px");
+
+                entity.Property(e => e.Flag48px).HasColumnName("Flag_48px");
+
+                entity.Property(e => e.SsmaTimeStamp)
+                    .IsRowVersion()
+                    .IsConcurrencyToken()
+                    .HasColumnName("SSMA_TimeStamp");
+
+                entity.Property(e => e.StateLong)
+                    .HasMaxLength(255)
+                    .HasColumnName("State_Long");
+
+                entity.Property(e => e.StateShort)
+                    .HasMaxLength(2)
+                    .HasColumnName("State_Short");
             });
 
             modelBuilder.Entity<Task>(entity =>

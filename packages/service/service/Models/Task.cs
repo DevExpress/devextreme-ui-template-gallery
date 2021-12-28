@@ -11,7 +11,7 @@ namespace service.Models
         }
 
         public int Id { get; set; }
-        public string Task1 { get; set; }
+        public string? Task1 { get; set; }
 
         public virtual ICollection<TasksList> TasksLists { get; set; }
     }
