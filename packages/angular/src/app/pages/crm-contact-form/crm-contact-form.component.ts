@@ -1,13 +1,24 @@
-import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, NgModule } from '@angular/core';
 import { ScreenService } from '../../shared/services';
 import { getRawStatuses, getContact } from 'dx-rwa-data';
 import CustomStore from 'devextreme/data/custom_store';
+import {
+  DxButtonModule,
+  DxFormModule,
+  DxLoadPanelModule,
+  DxSelectBoxModule,
+  DxTabPanelModule,
+  DxTextBoxModule,
+  DxToolbarModule,
+} from 'devextreme-angular';
+import { ActivitiesModule } from 'src/app/shared/components/activities/activities.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   templateUrl: './crm-contact-form.component.html',
   styleUrls: ['./crm-contact-form.component.scss']
 })
-export class CrmContactFormComponent implements OnInit, AfterViewInit {
+export class CrmContactFormComponent implements OnInit {
 
   constructor(private screen: ScreenService) {
     this.toggleEdit = this.toggleEdit.bind(this);
@@ -39,10 +50,24 @@ export class CrmContactFormComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     
   }
-
-  ngAfterViewInit() {
-    
-  }
-
 }
+
+@NgModule({
+  imports: [
+    DxFormModule,
+    DxToolbarModule,
+    DxButtonModule,
+    DxSelectBoxModule,
+    DxTextBoxModule,
+    DxLoadPanelModule,
+    DxTabPanelModule,
+    ActivitiesModule,
+
+    CommonModule
+  ],
+  providers: [],
+  exports: [],
+  declarations: [CrmContactFormComponent]
+})
+export class CrmContactFormModule { }
 

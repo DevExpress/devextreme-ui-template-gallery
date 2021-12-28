@@ -1,9 +1,27 @@
-import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, NgModule } from '@angular/core';
 import { ScreenService } from '../../shared/services';
 import { getContacts, getContact, getStatuses } from 'dx-rwa-data';
-import { DxDataGridComponent } from "devextreme-angular";
+import {
+  DxDataGridModule,
+  DxFormModule,
+  DxDrawerModule,
+  DxButtonModule,
+  DxToolbarModule,
+  DxScrollViewModule,
+  DxAccordionModule,
+  DxListModule,
+  DxLoadPanelModule,
+  DxDropDownButtonModule,
+  DxSelectBoxModule,
+  DxTextBoxModule,
+  DxDataGridComponent,
+} from 'devextreme-angular';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import CustomStore from 'devextreme/data/custom_store';
+import { ActivitiesModule } from 'src/app/shared/components/activities/activities.component';
+import { CommonModule } from '@angular/common';
+
+
 
 @Component({
   //selector: 'app-crm-contact-list',
@@ -96,3 +114,29 @@ export class CrmContactListComponent implements OnInit {
 
 }
 
+
+
+@NgModule({
+  imports: [
+    DxDataGridModule,
+    DxFormModule,
+    DxDrawerModule,
+    DxButtonModule,
+    DxToolbarModule,
+    DxScrollViewModule,
+    DxAccordionModule,
+    DxListModule,
+    DxLoadPanelModule,
+    DxDropDownButtonModule,
+    DxSelectBoxModule,
+    DxTextBoxModule,
+
+    ActivitiesModule,
+
+    CommonModule
+  ],
+  providers: [],
+  exports: [],
+  declarations: [CrmContactListComponent]
+})
+export class CrmContactListModule { }

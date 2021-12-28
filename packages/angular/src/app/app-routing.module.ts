@@ -3,20 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { LoginFormComponent, ResetPasswordFormComponent, CreateAccountFormComponent, ChangePasswordFormComponent } from './shared/components';
 import { AuthGuardService } from './shared/services';
-import {
-  DxDataGridModule,
-  DxFormModule,
-  DxDrawerModule,
-  DxButtonModule,
-  DxToolbarModule,
-  DxScrollViewModule,
-  DxAccordionModule,
-  DxListModule,
-  DxLoadPanelModule,
-  DxDropDownButtonModule,
-  DxSelectBoxModule,
-  DxTextBoxModule,
-} from 'devextreme-angular';
+
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactFormComponent } from './pages/crm-contact-form/crm-contact-form.component';
 
@@ -61,22 +48,9 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { useHash: true }),
     BrowserModule,
-
-    DxDataGridModule,
-    DxFormModule,
-    DxDrawerModule,
-    DxButtonModule,
-    DxToolbarModule,
-    DxScrollViewModule,
-    DxAccordionModule,
-    DxListModule,
-    DxLoadPanelModule,
-    DxDropDownButtonModule,
-    DxSelectBoxModule,
-    DxTextBoxModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
-  declarations: [CrmContactListComponent, CrmContactFormComponent]
+  declarations: []
 })
 export class AppRoutingModule { }

@@ -116,6 +116,9 @@
                             </div>
                         </dxi-item>
                         <dxi-item title="Activities">
+                            <app-activities [activities]="panelData.activities"></app-activities>
+                        </dxi-item>
+                        <dxi-item title="Activities">
                             <dx-list [dataSource]="panelData.activities" [scrollingEnabled]="false" class="activities-list">
                                 <div *dxTemplate="let item of 'item'">
                                     <div class="activity">
