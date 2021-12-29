@@ -8,6 +8,7 @@ export const getContacts = async () => await getData('Users/Contacts');
 export const getContact = async (id) => await getData(`Users/Contacts/${id}`);
 export const getContactOpportunities = async (id) => await getData(`Users/Contacts/${id}/Opportunities`);
 export const getContactNotes = async (id) => await getData(`Users/Contacts/${id}/Notes`);
+export const getContactMessages = async (id) => await getData(`Users/Contacts/${id}/Messages`);
 export const getStatuses = async () => {
     const statuses = await getData('Users/Statuses');
 

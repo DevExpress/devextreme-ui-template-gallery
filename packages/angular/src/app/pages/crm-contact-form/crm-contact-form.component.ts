@@ -1,9 +1,8 @@
 import { Component, ViewChild, OnInit, AfterViewInit, NgModule } from '@angular/core';
 import { ScreenService } from '../../shared/services';
-import { getRawStatuses, getContact, getContactOpportunities, getContactNotes } from 'dx-rwa-data';
+import { getRawStatuses, getContact, getContactOpportunities, getContactNotes, getContactMessages } from 'dx-rwa-data';
 import CustomStore from 'devextreme/data/custom_store';
 import {
-  DxBoxModule,
   DxButtonModule,
   DxCheckBoxModule,
   DxDataGridModule,
@@ -44,6 +43,7 @@ export class CrmContactFormComponent implements OnInit {
     });
 
     this.notes = getContactNotes(this.userId);
+    this.messages = getContactMessages(this.userId);
   }
 
   userId = 12;
@@ -53,6 +53,7 @@ export class CrmContactFormComponent implements OnInit {
   statuses: CustomStore;
   opportunities: CustomStore;
   notes: Promise<Array<{text:string, date:string, manager:string}>>;
+  messages: Promise<Array<{text:string, subject:string, date:string, manager:string}>>;
 
   toggleEdit() {
     this.edit = !this.edit;
@@ -60,6 +61,14 @@ export class CrmContactFormComponent implements OnInit {
 
   formatPhone(number: string | number): string {
     return String(number).replace(/(\d{3})(\d{3})(\d{4})/,"+1($1)$2-$3");
+  }
+
+  getAvatarText(name: string) {
+    return name.split(' ').map(name => name[0]).join('');
+  }
+
+  setUserName(text: string) {
+    return text.replace('{username}', this.viewData.name);
   }
 
   ngOnInit(): void {

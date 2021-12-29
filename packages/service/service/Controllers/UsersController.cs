@@ -135,6 +135,22 @@ namespace service.Controllers {
                 .ToListAsync();
         }
 
+        // GET: api/Users/Contacts/10/Messages
+        [HttpGet("Contacts/{id}/Messages")]
+        public async Task<ActionResult<dynamic>> GetMessages(int id)
+        {
+            return await _context.MessagesLists
+                .Where(m => m.ContactId == id)
+                .Select(m => new
+                {
+                    text = m.Message.Message1,
+                    subject = m.Message.Subject,
+                    date = m.Date,
+                    manager = m.Manager.EmployeeFullName,
+                })
+                .ToListAsync();
+        }
+
         private bool ContactExists(int id)
         {
             return _context.Contacts.Any(e => e.Id == id);
