@@ -80,6 +80,11 @@ $left-panel-width: 390px;
             .tab-content {
                 padding: 20px;
 
+                &.colored {
+                    border-top: 1px solid #E0E0E0;
+                    background-color: #F5F5F5;
+                }
+
                 ::ng-deep & .dx-tile {
                     border: none;
                 }
@@ -109,6 +114,26 @@ $left-panel-width: 390px;
                         .owner-name {
                             color: #000000DE;
                         }
+                    }
+                }
+
+                .note {
+                    background-color: $base-bg;
+                    padding: 10px;
+                    margin-bottom: 10px;
+
+                    .note-title {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        color: #757575DE;
+                    }
+
+                    .note-text {
+                        font-size: 16px;
+                        text-align: justify;
                     }
                 }
             }

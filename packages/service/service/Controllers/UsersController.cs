@@ -117,10 +117,23 @@ namespace service.Controllers {
                     products = o.ProductsOpportunitiesLists.Count(),
                     total = o.ProductsOpportunitiesLists.Sum(p => p.Product.ProductCost)
                 })
-
                 .ToListAsync();
         }
 
+        // GET: api/Users/Contacts/10/Notes
+        [HttpGet("Contacts/{id}/Notes")]
+        public async Task<ActionResult<dynamic>> GetNotes(int id)
+        {
+            return await _context.NotesLists
+                .Where(n => n.ContactId == id)
+                .Select(n => new
+                {
+                    text = n.Note.Note1,
+                    date = n.Date,
+                    manager = n.Manager.EmployeeFullName,
+                })
+                .ToListAsync();
+        }
 
         private bool ContactExists(int id)
         {
