@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, AfterViewInit, NgModule } from '@angular/core';
 import { ScreenService } from '../../shared/services';
-import { getRawStatuses, getContact } from 'dx-rwa-data';
+import { getRawStatuses, getContact, getContactOpportunities } from 'dx-rwa-data';
 import CustomStore from 'devextreme/data/custom_store';
 import {
   DxButtonModule,
@@ -11,6 +11,7 @@ import {
   DxSelectBoxModule,
   DxTabPanelModule,
   DxTextBoxModule,
+  DxTileViewModule,
   DxToolbarModule,
 } from 'devextreme-angular';
 import { ActivitiesModule } from 'src/app/shared/components/activities/activities.component';
@@ -25,7 +26,7 @@ export class CrmContactFormComponent implements OnInit {
   constructor(private screen: ScreenService) {
     this.toggleEdit = this.toggleEdit.bind(this);
 
-    getContact(10).then((data) => {
+    getContact(this.userId).then((data) => {
       this.viewData = data;
       this.load = false;
     });
@@ -34,12 +35,19 @@ export class CrmContactFormComponent implements OnInit {
       loadMode: 'raw',
       load: getRawStatuses
     });
+
+    this.opportunities = new CustomStore({
+      loadMode: 'raw',
+      load: () => getContactOpportunities(this.userId)
+    });
   }
 
+  userId = 10;
   viewData: any;
   load = true;
   edit = false;
   statuses: CustomStore;
+  opportunities: CustomStore;
 
   toggleEdit() {
     this.edit = !this.edit;
@@ -65,6 +73,7 @@ export class CrmContactFormComponent implements OnInit {
     DxTabPanelModule,
     DxDataGridModule,
     DxCheckBoxModule,
+    DxTileViewModule,
     ActivitiesModule,
 
     CommonModule

@@ -210,6 +210,24 @@
                                 <app-activities [activities]="viewData.activities" [showBy]="true"></app-activities>
                             </div>
                         </dxi-item>
+                        <dxi-item title="Opportunities">
+                            <div class="tab-content">
+                                <dx-tile-view
+                                    [dataSource]="opportunities"
+                                    [itemMargin]="10"
+                                    [baseItemHeight]="110"
+                                    [baseItemWidth]="320"
+                                    direction="vertical"
+                                    itemTemplate="tile"
+                                    [activeStateEnabled]="false">
+                                    <div class="tile" *dxTemplate="let data of 'tile'">
+                                        <div class="name">{{data.name}}</div>
+                                        <div class="product-info">Products: {{data.products}}, total: <span class="total">{{data.total | currency}}</span></div>
+                                        <div class="owner">Owner: <span class="owner-name">{{data.manager}}</span></div>
+                                    </div>
+                                </dx-tile-view>
+                            </div>
+                        </dxi-item>
                     </dx-tab-panel>
                 </div>
             </div>

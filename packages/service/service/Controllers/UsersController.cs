@@ -105,6 +105,22 @@ namespace service.Controllers {
             return await _context.States.ToListAsync();
         }
 
+        // GET: api/Users/Contacts/10/Opportunities
+        [HttpGet("Contacts/{id}/Opportunities")]
+        public async Task<ActionResult<dynamic>> GetOpportunities(int id) {
+            return await _context.OpportunitiesLists
+                .Where(o => o.ContactId == id)              
+                .Select(o => new
+                {
+                    name = o.Opportunity.Opportunity1,
+                    manager = o.Manager.EmployeeFullName,
+                    products = o.ProductsOpportunitiesLists.Count(),
+                    total = o.ProductsOpportunitiesLists.Sum(p => p.Product.ProductCost)
+                })
+
+                .ToListAsync();
+        }
+
 
         private bool ContactExists(int id)
         {

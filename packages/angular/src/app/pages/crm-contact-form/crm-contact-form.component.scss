@@ -79,6 +79,38 @@ $left-panel-width: 390px;
 
             .tab-content {
                 padding: 20px;
+
+                ::ng-deep & .dx-tile {
+                    border: none;
+                }
+
+                .tile {
+                    border-radius: 4px;
+                    background: #F5F5F5;
+                    padding: 16px;
+
+                    .name {
+                        font-size: 16px;
+                        font-weight: 700;
+                        padding-bottom: 8px;
+                    }
+
+                    .product-info {
+                        font-size: 12px;
+                        padding-bottom: 16px;
+                        .total {
+                            font-size: 16px;
+                        }
+                    }
+
+                    .owner {
+                        color: rgba(117, 117, 117, 0.87);
+                        font-size: 14px;
+                        .owner-name {
+                            color: #000000DE;
+                        }
+                    }
+                }
             }
         }
 
@@ -86,8 +118,6 @@ $left-panel-width: 390px;
             font-size: 16px;
             font-weight: 700;
         }
-
-        
 
         .form {
             ::ng-deep & .dx-field-item {
