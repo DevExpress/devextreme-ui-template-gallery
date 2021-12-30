@@ -1,6 +1,6 @@
 <div class="view-wrapper">
     <ng-template [ngIf]="!load" [ngIfElse]="loading">
-        <dx-toolbar width="100%">
+        <dx-toolbar >
             <dxi-item location="before" widget="dxButton" [options]="{ icon: 'arrowleft' }">
             </dxi-item>
             <dxi-item location="before">
@@ -30,13 +30,13 @@
                     <dxi-item location="before">
                         <div class="panels-header">Details</div>
                     </dxi-item>
-                    <dxi-item location="after" [visible]='!edit' widget="dxButton"
+                    <dxi-item location="after" [visible]='!edit' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Edit', icon: 'edit', stylingMode: 'contained', onClick: toggleEdit}">
                     </dxi-item>
-                    <dxi-item location="after" [visible]='edit' widget="dxButton"
+                    <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Save', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
                     </dxi-item>
-                    <dxi-item location="after" [visible]='edit' widget="dxButton"
+                    <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Cancel', onClick: toggleEdit}">
                     </dxi-item>
                 </dx-toolbar>
@@ -112,7 +112,7 @@
                     </div>
                 </ng-template>
                 <ng-template #editingForm>
-                    <dx-form class="form" [formData]="viewData" labelMode="floating" colCount="auto"
+                    <dx-form class="form info last" [formData]="viewData" labelMode="floating" colCount="auto"
                         labelLocation="top">
                         <dxi-item itemType="group" [colCount]="2">
                             <dxi-item>
@@ -175,7 +175,7 @@
             </div>
             <div class="right">
                 <div class="dx-card">
-                    <dx-tab-panel>
+                    <dx-tab-panel [showNavButtons]="true">
                         <dxi-item title="Tasks">
                             <div class="tab-content">
                                 <dx-data-grid [dataSource]="viewData.tasks">
@@ -185,22 +185,18 @@
                                         [width]="70"
                                         alignment="left"
                                         caption="Done"
+                                        [hidingPriority]="2"
                                     >
                                         <div *dxTemplate="let data of 'doneTemplate'">
                                             <dx-check-box [value]="!!data.value"></dx-check-box>
                                         </div>
                                     </dxi-column>
-                                    <dxi-column dataField="text" caption="Name"></dxi-column>
-                                    <dxi-column dataField="date" dataType="date" [width]="100"></dxi-column>
-                                    <dxi-column caption="Assigned To" cellTemplate="assignTemplate" [width]="120">
+                                    <dxi-column dataField="text" caption="Name" [hidingPriority]="3"></dxi-column>
+                                    <dxi-column dataField="date" dataType="date" [width]="100" [hidingPriority]="1"></dxi-column>
+                                    <dxi-column caption="Assigned To" cellTemplate="assignTemplate" [width]="120" [hidingPriority]="0">
                                         <div *dxTemplate="let data of 'assignTemplate'">
                                             {{viewData.manager}}
                                         </div>
-                                    </dxi-column>
-                                    <dxi-column [width]="40" type="buttons">
-                                        <dxi-button
-                                            icon="overflow"
-                                            ></dxi-button>
                                     </dxi-column>
                                 </dx-data-grid>
                             </div>
