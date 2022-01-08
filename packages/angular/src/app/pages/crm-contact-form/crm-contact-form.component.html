@@ -1,6 +1,6 @@
 <div class="view-wrapper">
     <ng-template [ngIf]="!load" [ngIfElse]="loading">
-        <dx-toolbar width="100%">
+        <dx-toolbar >
             <dxi-item location="before" widget="dxButton" [options]="{ icon: 'arrowleft' }">
             </dxi-item>
             <dxi-item location="before">
@@ -30,13 +30,13 @@
                     <dxi-item location="before">
                         <div class="panels-header">Details</div>
                     </dxi-item>
-                    <dxi-item location="after" [visible]='!edit' widget="dxButton"
+                    <dxi-item location="after" [visible]='!edit' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Edit', icon: 'edit', stylingMode: 'contained', onClick: toggleEdit}">
                     </dxi-item>
-                    <dxi-item location="after" [visible]='edit' widget="dxButton"
+                    <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Save', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
                     </dxi-item>
-                    <dxi-item location="after" [visible]='edit' widget="dxButton"
+                    <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Cancel', onClick: toggleEdit}">
                     </dxi-item>
                 </dx-toolbar>
@@ -112,7 +112,7 @@
                     </div>
                 </ng-template>
                 <ng-template #editingForm>
-                    <dx-form class="form" [formData]="viewData" labelMode="floating" colCount="auto"
+                    <dx-form class="form info last" [formData]="viewData" labelMode="floating" colCount="auto"
                         labelLocation="top">
                         <dxi-item itemType="group" [colCount]="2">
                             <dxi-item>
@@ -175,7 +175,7 @@
             </div>
             <div class="right">
                 <div class="dx-card">
-                    <dx-tab-panel>
+                    <dx-tab-panel [showNavButtons]="true">
                         <dxi-item title="Tasks">
                             <div class="tab-content">
                                 <dx-data-grid [dataSource]="viewData.tasks">
@@ -185,22 +185,18 @@
                                         [width]="70"
                                         alignment="left"
                                         caption="Done"
+                                        [hidingPriority]="2"
                                     >
                                         <div *dxTemplate="let data of 'doneTemplate'">
                                             <dx-check-box [value]="!!data.value"></dx-check-box>
                                         </div>
                                     </dxi-column>
-                                    <dxi-column dataField="text" caption="Name"></dxi-column>
-                                    <dxi-column dataField="date" dataType="date" [width]="100"></dxi-column>
-                                    <dxi-column caption="Assigned To" cellTemplate="assignTemplate" [width]="120">
+                                    <dxi-column dataField="text" caption="Name" [hidingPriority]="3"></dxi-column>
+                                    <dxi-column dataField="date" dataType="date" [width]="100" [hidingPriority]="1"></dxi-column>
+                                    <dxi-column caption="Assigned To" cellTemplate="assignTemplate" [width]="120" [hidingPriority]="0">
                                         <div *dxTemplate="let data of 'assignTemplate'">
                                             {{viewData.manager}}
                                         </div>
-                                    </dxi-column>
-                                    <dxi-column [width]="40" type="buttons">
-                                        <dxi-button
-                                            icon="overflow"
-                                            ></dxi-button>
                                     </dxi-column>
                                 </dx-data-grid>
                             </div>
@@ -208,6 +204,84 @@
                         <dxi-item title="Activities">
                             <div class="tab-content">
                                 <app-activities [activities]="viewData.activities" [showBy]="true"></app-activities>
+                            </div>
+                        </dxi-item>
+                        <dxi-item title="Opportunities">
+                            <div class="tab-content">
+                                <dx-tile-view
+                                    [dataSource]="opportunities"
+                                    [itemMargin]="10"
+                                    [baseItemHeight]="110"
+                                    [baseItemWidth]="320"
+                                    direction="vertical"
+                                    itemTemplate="tile"
+                                    [activeStateEnabled]="false">
+                                    <div class="tile" *dxTemplate="let data of 'tile'">
+                                        <div class="name">{{data.name}}</div>
+                                        <div class="product-info">Products: {{data.products}}, total: <span class="total">{{data.total | currency}}</span></div>
+                                        <div class="owner">Owner: <span class="owner-name">{{data.manager}}</span></div>
+                                    </div>
+                                </dx-tile-view>
+                            </div>
+                        </dxi-item>
+                        <dxi-item title="Notes">
+                            <div class="tab-content">
+                                <dx-text-area label="New Note" stylingMode="outlined"></dx-text-area>
+                                <dx-toolbar>
+                                    <dxi-item location="after" widget="dxButton"
+                                        [options]="{text: 'Send', stylingMode: 'outlined', type: 'default'}">
+                                    </dxi-item>
+                                    <dxi-item location="after" widget="dxButton"
+                                        [options]="{text: 'Cancel'}">
+                                    </dxi-item>
+                                </dx-toolbar>
+                            </div>
+                            <div class="tab-content colored">
+                                <div class="note dx-card" *ngFor="let data of notes | async">
+                                    <div class="note-title">
+                                        <div>{{data.date | date: 'MM/dd/y'}} - {{data.manager}}</div>
+                                        <div>
+                                            <dx-button icon="overflow"></dx-button>
+                                        </div>
+                                    </div>
+                                    <div class="note-text">{{data.text}}</div>
+                                </div>
+                            </div>
+                        </dxi-item>
+                        <dxi-item title="Messages" [badge]="(messages | async)?.length">
+                            <div class="tab-content">
+                                <dx-text-area label="New Message" stylingMode="outlined"></dx-text-area>
+                                <dx-toolbar>
+                                    <dxi-item location="before" widget="dxButton"
+                                        [options]="{text: 'Attach File', stylingMode: 'outlined', icon: 'attach'}">
+                                    </dxi-item>
+                                    <dxi-item location="after" widget="dxButton"
+                                        [options]="{text: 'Send', stylingMode: 'outlined', type: 'default'}">
+                                    </dxi-item>
+                                    <dxi-item location="after" widget="dxButton"
+                                        [options]="{text: 'Cancel'}">
+                                    </dxi-item>
+                                </dx-toolbar>
+                            </div>
+                            <div class="tab-content colored">
+                                <div class="message-container" *ngFor="let data of messages | async">
+                                    <div class="avatar">
+                                        {{getAvatarText(data.manager)}}
+                                    </div>
+                                    <div class="message dx-card">
+                                        <div class="message-title">
+                                            <div class="left-title">
+                                                <div class="subject">{{data.subject}}</div>
+                                                <div>{{data.date | date: 'MM/dd/y'}} - {{data.manager}}</div>
+                                            </div>
+                                            <div>
+                                                <dx-button icon="overflow"></dx-button>
+                                            </div>
+                                        </div>
+                                        <div class="message-text">{{setUserName(data.text)}}</div>
+                                    </div>
+                                    
+                                </div>
                             </div>
                         </dxi-item>
                     </dx-tab-panel>

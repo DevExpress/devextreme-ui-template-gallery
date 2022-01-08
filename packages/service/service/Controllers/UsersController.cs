@@ -105,6 +105,51 @@ namespace service.Controllers {
             return await _context.States.ToListAsync();
         }
 
+        // GET: api/Users/Contacts/10/Opportunities
+        [HttpGet("Contacts/{id}/Opportunities")]
+        public async Task<ActionResult<dynamic>> GetOpportunities(int id) {
+            return await _context.OpportunitiesLists
+                .Where(o => o.ContactId == id)              
+                .Select(o => new
+                {
+                    name = o.Opportunity.Opportunity1,
+                    manager = o.Manager.EmployeeFullName,
+                    products = o.ProductsOpportunitiesLists.Count(),
+                    total = o.ProductsOpportunitiesLists.Sum(p => p.Product.ProductCost)
+                })
+                .ToListAsync();
+        }
+
+        // GET: api/Users/Contacts/10/Notes
+        [HttpGet("Contacts/{id}/Notes")]
+        public async Task<ActionResult<dynamic>> GetNotes(int id)
+        {
+            return await _context.NotesLists
+                .Where(n => n.ContactId == id)
+                .Select(n => new
+                {
+                    text = n.Note.Note1,
+                    date = n.Date,
+                    manager = n.Manager.EmployeeFullName,
+                })
+                .ToListAsync();
+        }
+
+        // GET: api/Users/Contacts/10/Messages
+        [HttpGet("Contacts/{id}/Messages")]
+        public async Task<ActionResult<dynamic>> GetMessages(int id)
+        {
+            return await _context.MessagesLists
+                .Where(m => m.ContactId == id)
+                .Select(m => new
+                {
+                    text = m.Message.Message1,
+                    subject = m.Message.Subject,
+                    date = m.Date,
+                    manager = m.Manager.EmployeeFullName,
+                })
+                .ToListAsync();
+        }
 
         private bool ContactExists(int id)
         {
