@@ -9,6 +9,11 @@
                         "Title": "Contact List",
                         "Name": "crm-contact-list",
                         "DemoType": "Rwa"
+                    },
+                    {
+                        "Title": "Contact Form",
+                        "Name": "crm-contact-form",
+                        "DemoType": "Rwa"
                     }
                 ]
             }
