@@ -1,5 +1,5 @@
 import { withNavigationWatcher } from './contexts/navigation';
-import { CrmContactListPage } from './pages';
+import { CrmContactListPage, CrmContactFormPage } from './pages';
 
 const routes = [
   {
