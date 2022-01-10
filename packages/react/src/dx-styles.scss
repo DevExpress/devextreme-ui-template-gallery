@@ -68,3 +68,20 @@ html, body {
 * {
   box-sizing: border-box;
 }
+
+.embedded {
+  .layout-header,
+  .dx-swatch-additional,
+  .with-footer .content-block,
+  .dx-drawer-shader {
+    display: none !important;
+  }
+  
+  .dx-drawer-content {
+    padding: initial !important;
+  }
+
+  .dx-drawer-panel-content {
+    width: initial !important;
+  }
+}
