@@ -56,3 +56,20 @@ html, body {
     min-height: 100%;
   }
 }
+
+.embedded {
+  .layout-header,
+  .dx-swatch-additional,
+  .with-footer .content-block,
+  .dx-drawer-shader {
+    display: none !important;
+  }
+  
+  .dx-drawer-content {
+    padding: initial !important;
+  }
+
+  .dx-drawer-panel-content {
+    width: initial !important;
+  }
+}
