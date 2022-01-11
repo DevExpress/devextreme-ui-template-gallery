@@ -1,12 +1,11 @@
 @use "../../../variables" as *;
 @use "sass:math";
 
-$grid-height: calc(100vh - 160px);
 $side-panel-toolbar-height: 56px;
 
 :host {
-    display: flex;
-    flex-grow: 1;
+    width: 100%;
+    position: relative;
 }
 
 @include separator();
@@ -14,10 +13,13 @@ $side-panel-toolbar-height: 56px;
 @include status();
 
 .view-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
     .grid {
-        height: $grid-height;
-
         .name-template {
             margin: -6px 0;
 
@@ -40,8 +42,9 @@ $side-panel-toolbar-height: 56px;
 
     .panel {
         position: absolute;
-        height: $grid-height;
         right: -350px;
+        top: 0;
+        bottom: 13px; // we have shadow
         background: $base-bg;
         transition: all 400ms;
 

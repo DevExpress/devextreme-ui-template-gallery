@@ -62,7 +62,8 @@
     padding: initial !important;
   }
 
-  .dx-drawer-panel-content {
+  .dx-drawer-panel-content,
+  .dx-drawer-panel-content .dx-overlay-content {
     width: initial !important;
   }
 }
