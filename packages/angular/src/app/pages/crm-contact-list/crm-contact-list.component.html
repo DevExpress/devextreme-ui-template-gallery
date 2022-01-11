@@ -1,5 +1,5 @@
 <div class="view-wrapper">
-    <dx-data-grid [dataSource]="dataSource" (onRowClick)="rowClick($event)" class="grid" noDataText="">
+    <dx-data-grid [dataSource]="dataSource" (onRowClick)="rowClick($event)" (onRowPrepared)="rowPrepared($event)" class="grid" noDataText="">
         <dxo-search-panel [visible]="true" placeholder="Contact Search">
         </dxo-search-panel>
         <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>

@@ -76,6 +76,10 @@ export class CrmContactListComponent implements OnInit {
     this.isPanelOpen = true;
   }
 
+  rowPrepared(e) {
+    e.rowElement.classList.add('clickable-row');
+  }
+
   closePanel() {
     this.isPanelOpen = false;
   }

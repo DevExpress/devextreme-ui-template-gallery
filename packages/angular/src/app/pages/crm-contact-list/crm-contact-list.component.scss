@@ -30,9 +30,15 @@ $side-panel-toolbar-height: 56px;
             }
         }
 
-        ::ng-deep & .dx-datagrid-header-panel {
-            padding-top: 20px;
-            padding-bottom: 10px;
+        ::ng-deep & {
+            .dx-datagrid-header-panel {
+                padding-top: 20px;
+                padding-bottom: 10px;
+            }
+
+            .clickable-row {
+                cursor: pointer;
+            }
         }
 
         .grid-header {
