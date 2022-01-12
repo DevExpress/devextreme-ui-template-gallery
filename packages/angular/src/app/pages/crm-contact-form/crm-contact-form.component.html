@@ -178,11 +178,11 @@
                     <dx-tab-panel [showNavButtons]="true">
                         <dxi-item title="Tasks">
                             <div class="tab-content">
-                                <dx-data-grid [dataSource]="viewData.tasks">
+                                <dx-data-grid [dataSource]="viewData.tasks" [columnAutoWidth]="true">
                                     <dxi-column
                                         dataField="done"
                                         cellTemplate="doneTemplate"
-                                        [width]="70"
+                                        [width]="80"
                                         alignment="left"
                                         caption="Done"
                                         [hidingPriority]="2"
@@ -192,8 +192,8 @@
                                         </div>
                                     </dxi-column>
                                     <dxi-column dataField="text" caption="Name" [hidingPriority]="3"></dxi-column>
-                                    <dxi-column dataField="date" dataType="date" [width]="100" [hidingPriority]="1"></dxi-column>
-                                    <dxi-column caption="Assigned To" cellTemplate="assignTemplate" [width]="120" [hidingPriority]="0">
+                                    <dxi-column dataField="date" dataType="date" [hidingPriority]="1"></dxi-column>
+                                    <dxi-column caption="Assigned To" cellTemplate="assignTemplate" [hidingPriority]="0">
                                         <div *dxTemplate="let data of 'assignTemplate'">
                                             {{viewData.manager}}
                                         </div>

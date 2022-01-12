@@ -47,10 +47,10 @@ $side-panel-toolbar-height: 56px;
     }
 
     .panel {
-        position: absolute;
+        position: fixed;
         right: -350px;
-        top: 0;
-        bottom: 13px; // we have shadow
+        top: $side-panel-toolbar-height;
+        bottom: 0;
         background: $base-bg;
         transition: all 400ms;
 
@@ -59,11 +59,16 @@ $side-panel-toolbar-height: 56px;
             box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.12);
         }
 
-        &.pin.open {
-            box-shadow: none;
+        &.pin {
+            top: 0;
+            position: absolute;
             transition: none;
+            box-shadow: none;
             border-left: 1px solid $base-border-color;
-            position: relative;
+
+            &.open {
+                position: relative;
+            }
         }
 
         .data-wrapper {
