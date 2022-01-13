@@ -70,5 +70,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: screenshots
-        path: ${{ github.workspace }}/packages/testing/artifacts/compared-screenshots/*
+        path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
         if-no-files-found: ignore
