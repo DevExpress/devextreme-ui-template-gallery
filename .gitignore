@@ -23,3 +23,4 @@ packages/shell/src/app/themes.json
 packages/service/service/bin
 packages/service/service/obj
 packages/service/.vs
+packages/testing/pids.json

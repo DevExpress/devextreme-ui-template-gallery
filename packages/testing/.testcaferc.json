@@ -1,0 +1,4 @@
+{
+    "browsers": ["chrome"],
+    "src": "./tests/**/*.test.js"
+}
