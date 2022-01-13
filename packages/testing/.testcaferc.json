@@ -1,5 +1,5 @@
 {
-    "browsers": ["chrome"],
+    "browsers": ["chrome:headless"],
     "src": "./tests/**/*.test.js",
     "screenshots": {
         "path": "./",
