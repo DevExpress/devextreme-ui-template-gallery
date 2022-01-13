@@ -7,7 +7,7 @@
   "scripts": {
     "start-apps": "node ./run-server.js",
     "stop-apps": "node ./kill-server.js",
-    "test": "testcafe"
+    "test": "npm run start-apps && testcafe"
   },
   "author": "",
   "license": "MIT",

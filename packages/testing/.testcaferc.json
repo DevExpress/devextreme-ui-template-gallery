@@ -1,4 +1,8 @@
 {
     "browsers": ["chrome"],
-    "src": "./tests/**/*.test.js"
+    "src": "./tests/**/*.test.js",
+    "screenshots": {
+        "path": "./",
+        "pathPattern": "${TEST}.png"
+    }
 }

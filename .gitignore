@@ -24,3 +24,5 @@ packages/service/service/bin
 packages/service/service/obj
 packages/service/.vs
 packages/testing/pids.json
+packages/testing/screenshots
+packages/testing/testing
