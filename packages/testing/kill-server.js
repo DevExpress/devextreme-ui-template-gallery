@@ -1,7 +1,7 @@
 import { pidsFileName } from './dirs.config.js';
 import { kill } from 'process';
 import { existsSync, readFileSync } from 'fs';
-import { removeSync } from 'fs-extra';
+import fse from 'fs-extra';
 
 const killServers = () => {
     if(!existsSync(pidsFileName)) return;
@@ -16,7 +16,7 @@ const killServers = () => {
         }
     });
 
-    removeSync(pidsFileName);
+    fse.removeSync(pidsFileName);
 };
 
 killServers();
