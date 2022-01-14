@@ -1,0 +1,20 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start-apps": "node ./run-server.js",
+    "stop-apps": "node ./kill-server.js",
+    "test": "npm run start-apps && testcafe"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "devextreme-screenshot-comparer": "^2.0.11",
+    "fs-extra": "^10.0.0",
+    "http-server": "^14.1.0",
+    "testcafe": "^1.18.1"
+  }
+}

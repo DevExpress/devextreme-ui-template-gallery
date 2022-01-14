@@ -1,0 +1,8 @@
+{
+    "browsers": ["chrome:headless"],
+    "src": "./tests/**/*.test.js",
+    "screenshots": {
+        "path": "./",
+        "pathPattern": "${TEST}.png"
+    }
+}

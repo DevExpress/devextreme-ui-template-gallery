@@ -54,6 +54,10 @@ $side-panel-toolbar-height: 56px;
         background: $base-bg;
         transition: all 400ms;
 
+        ::ng-deep .embedded.dx-viewport & {
+            top: 0;
+        }
+
         &.open {
             right: 0;
             box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.12);

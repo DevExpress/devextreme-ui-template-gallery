@@ -60,3 +60,15 @@ jobs:
 
     - name: Build
       run: npm run build
+
+    - name: Run tests
+      run: npm run test
+      working-directory: packages/testing
+
+    - name: Copy screenshots artifacts
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: screenshots
+        path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
+        if-no-files-found: ignore
