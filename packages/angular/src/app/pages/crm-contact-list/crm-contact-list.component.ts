@@ -88,6 +88,10 @@ export class CrmContactListComponent implements OnInit {
     this.isPanelPin = !this.isPanelPin;
   };
 
+  accordionTitleClick(e) {
+    e.event.stopPropagation();
+  }
+
   calculatePin() {
     this.isPinEnabled = this.screen.sizes['screen-large'] || this.screen.sizes['screen-medium'];
     if(this.isPanelPin && !this.isPinEnabled) {

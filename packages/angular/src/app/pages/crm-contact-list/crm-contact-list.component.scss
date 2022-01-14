@@ -1,7 +1,7 @@
 @use "../../../variables" as *;
 @use "sass:math";
 
-$side-panel-toolbar-height: 56px;
+$side-panel-toolbar-height: 76px;
 
 :host {
     width: 100%;
@@ -77,8 +77,16 @@ $side-panel-toolbar-height: 56px;
 
         .data-wrapper {
             width: 350px;
-            padding: 0 16px 16px;
+            padding-bottom: 16px;
             height: 100%;
+
+            .data-part {
+                padding: 0 16px;
+                &.border {
+                    padding-bottom: 5px;
+                    border-bottom: 1px solid $base-border-color;
+                }
+            }
 
             .panel-scroll {
                 height: calc(100% - #{$side-panel-toolbar-height});
@@ -99,7 +107,10 @@ $side-panel-toolbar-height: 56px;
                 padding-bottom: 10px;
             }
 
-            
+            .accordion-title {
+                vertical-align: middle;
+                padding-right: 10px;
+            }
 
             ::ng-deep & {
                 .dx-accordion {
@@ -113,7 +124,7 @@ $side-panel-toolbar-height: 56px;
                     }
                 }
                 .dx-accordion-item-title {
-                    padding: 12px 0;
+                    padding: 6px 0;
                     background-color: transparent;
                     .dx-accordion-item-title-caption {
                         left: 0;

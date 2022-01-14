@@ -1,9 +1,6 @@
 @use "../../../variables" as *;
 @use "sass:math";
 
-//$grid-height: calc(100vh - 160px);
-//$side-panel-toolbar-height: 56px;
-
 $left-panel-width: 390px;
 
 :host {
@@ -25,6 +22,7 @@ $left-panel-width: 390px;
 @mixin message-text {
     padding-top: 5px;
     font-size: 16px;
+    line-height: 24px;
 }
 
 @include separator();
@@ -78,10 +76,13 @@ $left-panel-width: 390px;
     
                 &.last {
                     margin-bottom: 30px;
+                    &.small {
+                        margin-bottom: 8px;
+                    }
                 }
     
                 .title {
-                    padding-top: 16px
+                    padding-top: 8px
                 }
             }
         }
@@ -99,14 +100,23 @@ $left-panel-width: 390px;
                     background-color: #F5F5F5;
                 }
 
-                ::ng-deep & .dx-tile {
-                    border: none;
+                .tiles-header {
+                    font-size: 16px;
+                    font-weight: 700;
+                    padding-bottom: 12px;
+                }
+
+                .add-tile {
+                    margin-bottom: 30px;
                 }
 
                 .tile {
                     border-radius: 4px;
                     background: #F5F5F5;
                     padding: 16px;
+                    width: 320px;
+                    margin: 0 10px 10px 0;
+                    display: inline-block;
 
                     .name {
                         font-size: 16px;
@@ -194,6 +204,7 @@ $left-panel-width: 390px;
         }
 
         .form {
+            margin-bottom: 30px;
             ::ng-deep & .dx-field-item {
                 padding-bottom: 0;
             }

@@ -19,6 +19,16 @@
     </dxi-item>
     <dxi-item
       location="after"
+      widget="dxTextBox"
+      cssClass="menu-button"
+      [options]="{
+        stylingMode: 'outlined',
+        mode: 'search',
+        placeholder: 'Search'
+      }">
+    </dxi-item>
+    <dxi-item
+      location="after"
       locateInMenu="auto"
       menuItemTemplate="menuItem">
       <div *dxTemplate="let data of 'item'">

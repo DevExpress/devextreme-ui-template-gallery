@@ -31,10 +31,10 @@
                         <div class="panels-header">Details</div>
                     </dxi-item>
                     <dxi-item location="after" [visible]='!edit' locateInMenu="after" widget="dxButton"
-                        [options]="{text: 'Edit', icon: 'edit', stylingMode: 'contained', onClick: toggleEdit}">
+                        [options]="{text: 'Edit', icon: 'edit', stylingMode: 'contained', type: 'default', onClick: toggleEdit}">
                     </dxi-item>
                     <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
-                        [options]="{text: 'Save', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
+                        [options]="{text: 'Save', stylingMode: 'contained', type: 'default', onClick: toggleEdit}">
                     </dxi-item>
                     <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Cancel', onClick: toggleEdit}">
@@ -92,7 +92,7 @@
                             <div class="value black">{{viewData.zipCode}}</div>
                         </div>
                     </div>
-                    <div class="info last">
+                    <div class="info last small">
                         <div>
                             <div class="title">Phone</div>
                             <div class="value black">{{formatPhone(viewData.phone)}}</div>
@@ -104,15 +104,15 @@
                     </div>
                     <div class="info last">
                         <div>
-                            <dx-button text="Call" icon="tel"></dx-button>
+                            <dx-button text="Call" icon="tel" type="default" type="default"></dx-button>
                         </div>
                         <div>
-                            <dx-button text="Send Email" icon="email"></dx-button>
+                            <dx-button text="Send Email" icon="email" type="default"></dx-button>
                         </div>
                     </div>
                 </ng-template>
                 <ng-template #editingForm>
-                    <dx-form class="form info last" [formData]="viewData" labelMode="floating" colCount="auto"
+                    <dx-form class="form last" [formData]="viewData" labelMode="floating" colCount="auto"
                         labelLocation="top">
                         <dxi-item itemType="group" [colCount]="2">
                             <dxi-item>
@@ -178,19 +178,8 @@
                     <dx-tab-panel [showNavButtons]="true">
                         <dxi-item title="Tasks">
                             <div class="tab-content">
-                                <dx-data-grid [dataSource]="viewData.tasks" [columnAutoWidth]="true">
-                                    <dxi-column
-                                        dataField="done"
-                                        cellTemplate="doneTemplate"
-                                        [width]="80"
-                                        alignment="left"
-                                        caption="Done"
-                                        [hidingPriority]="2"
-                                    >
-                                        <div *dxTemplate="let data of 'doneTemplate'">
-                                            <dx-check-box [value]="!!data.value"></dx-check-box>
-                                        </div>
-                                    </dxi-column>
+                                <dx-data-grid [dataSource]="viewData.tasks" [columnAutoWidth]="true" [selectionFilter]="['done', '=', true]">
+                                    <dxo-selection mode="multiple" [deferred]="true"></dxo-selection>
                                     <dxi-column dataField="text" caption="Name" [hidingPriority]="3"></dxi-column>
                                     <dxi-column dataField="date" dataType="date" [hidingPriority]="1"></dxi-column>
                                     <dxi-column caption="Assigned To" cellTemplate="assignTemplate" [hidingPriority]="0">
@@ -208,20 +197,21 @@
                         </dxi-item>
                         <dxi-item title="Opportunities">
                             <div class="tab-content">
-                                <dx-tile-view
-                                    [dataSource]="opportunities"
-                                    [itemMargin]="10"
-                                    [baseItemHeight]="110"
-                                    [baseItemWidth]="320"
-                                    direction="vertical"
-                                    itemTemplate="tile"
-                                    [activeStateEnabled]="false">
-                                    <div class="tile" *dxTemplate="let data of 'tile'">
+                                <div class="tiles">
+                                    <div class="tiles-header">Active</div>
+                                    <div class="tile" *ngFor="let data of activeOpportunities | async">
                                         <div class="name">{{data.name}}</div>
                                         <div class="product-info">Products: {{data.products}}, total: <span class="total">{{data.total | currency}}</span></div>
                                         <div class="owner">Owner: <span class="owner-name">{{data.manager}}</span></div>
                                     </div>
-                                </dx-tile-view>
+                                    <dx-button text="Add Opportunity" icon="add" width="320" height="60" stylingMode="outlined" type="default" class="add-tile"></dx-button>
+                                    <div class="tiles-header">Closed</div>
+                                    <div class="tile" *ngFor="let data of closedOpportunities | async">
+                                        <div class="name">{{data.name}}</div>
+                                        <div class="product-info">Products: {{data.products}}, total: <span class="total">{{data.total | currency}}</span></div>
+                                        <div class="owner">Owner: <span class="owner-name">{{data.manager}}</span></div>
+                                    </div>
+                                </div>
                             </div>
                         </dxi-item>
                         <dxi-item title="Notes">
@@ -253,7 +243,7 @@
                                 <dx-text-area label="New Message" stylingMode="outlined"></dx-text-area>
                                 <dx-toolbar>
                                     <dxi-item location="before" widget="dxButton"
-                                        [options]="{text: 'Attach File', stylingMode: 'outlined', icon: 'attach'}">
+                                        [options]="{text: 'Attach File', stylingMode: 'contained', type: 'default', icon: 'attach'}">
                                     </dxi-item>
                                     <dxi-item location="after" widget="dxButton"
                                         [options]="{text: 'Send', stylingMode: 'outlined', type: 'default'}">
