@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, AfterViewInit, NgModule } from '@angular/core';
 import { ScreenService } from '../../shared/services';
-import { getRawStatuses, getContact, getContactOpportunities, getContactNotes, getContactMessages } from 'dx-rwa-data';
+import { getRawStatuses, getContact, getActiveContactOpportunities, getClosedContactOpportunities, getContactNotes, getContactMessages } from 'dx-rwa-data';
 import CustomStore from 'devextreme/data/custom_store';
 import {
   DxButtonModule,
@@ -37,11 +37,8 @@ export class CrmContactFormComponent implements OnInit {
       load: getRawStatuses
     });
 
-    this.opportunities = new CustomStore({
-      loadMode: 'raw',
-      load: () => getContactOpportunities(this.userId)
-    });
-
+    this.activeOpportunities = getActiveContactOpportunities(this.userId);
+    this.closedOpportunities = getClosedContactOpportunities(this.userId);
     this.notes = getContactNotes(this.userId);
     this.messages = getContactMessages(this.userId);
   }
@@ -51,7 +48,8 @@ export class CrmContactFormComponent implements OnInit {
   load = true;
   edit = false;
   statuses: CustomStore;
-  opportunities: CustomStore;
+  activeOpportunities: Promise<Array<{name:string, products:string, manager:string, total:string}>>;
+  closedOpportunities: Promise<Array<{name:string, products:string, manager:string, total:string}>>;
   notes: Promise<Array<{text:string, date:string, manager:string}>>;
   messages: Promise<Array<{text:string, subject:string, date:string, manager:string}>>;
 

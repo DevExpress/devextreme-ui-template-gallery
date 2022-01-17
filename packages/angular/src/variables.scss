@@ -95,6 +95,9 @@ $side-panel-background: darken($base-bg, 5.00);
         &.black {
             color: #000000DE;
         }
+        &.small {
+            font-size: 12px;
+        }
         .dx-icon {
             vertical-align: bottom;
             padding: 10px 12px 0 0;
