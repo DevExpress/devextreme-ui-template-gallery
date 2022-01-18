@@ -24,8 +24,9 @@ import { CommonModule } from '@angular/common';
 })
 export class CrmContactFormComponent implements OnInit {
 
-  constructor(private screen: ScreenService) {
+  constructor() {
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.refresh = this.refresh.bind(this);
 
     getContact(this.userId).then((data) => {
       this.viewData = data;
@@ -67,6 +68,20 @@ export class CrmContactFormComponent implements OnInit {
 
   setUserName(text: string) {
     return text.replace('{username}', this.viewData.name);
+  }
+
+  getSizeQualifier(width) {
+    if (width < 500)  return "xs";
+    return "lg";
+  }
+
+  refresh() {
+    this.viewData = null;
+    this.load = true;
+    getContact(this.userId).then((data) => {
+      this.viewData = data;
+      this.load = false;
+    });
   }
 
   ngOnInit(): void {

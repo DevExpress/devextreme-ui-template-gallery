@@ -20,7 +20,7 @@
                 [options]="{text: 'Refresh', icon: 'copy'}">
             </dxi-item>
             <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
-                [options]="{text: 'Refresh', icon: 'refresh'}">
+                [options]="{text: 'Refresh', icon: 'refresh', onClick: refresh}">
             </dxi-item>
         </dx-toolbar>
 
@@ -84,13 +84,16 @@
                             <div class="value black">{{viewData.city}}</div>
                         </div>
                         <div class="narrow">
-                            <div class="title">State</div>
-                            <div class="value black">{{viewData.state.stateShort}}</div>
+                            <div>
+                                <div class="title">State</div>
+                                <div class="value black">{{viewData.state.stateShort}}</div>
+                            </div>
+                            <div>
+                                <div class="title">Zip Code</div>
+                                <div class="value black">{{viewData.zipCode}}</div>
+                            </div>
                         </div>
-                        <div class="narrow">
-                            <div class="title">Zip Code</div>
-                            <div class="value black">{{viewData.zipCode}}</div>
-                        </div>
+                        
                     </div>
                     <div class="info last small">
                         <div>
@@ -112,8 +115,9 @@
                     </div>
                 </ng-template>
                 <ng-template #editingForm>
-                    <dx-form class="form last" [formData]="viewData" labelMode="floating" colCount="auto"
-                        labelLocation="top">
+                    <dx-form class="form last" [formData]="viewData" labelMode="floating" [colCount]="1"
+                        labelLocation="top" [screenByWidth]="getSizeQualifier">
+                        
                         <dxi-item itemType="group" [colCount]="2">
                             <dxi-item>
                                 <div class="user-info">
