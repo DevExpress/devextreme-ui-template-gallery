@@ -1,7 +1,7 @@
 @use "../../../variables" as *;
 @use "sass:math";
 
-$left-panel-width: 390px;
+$left-panel-width: 400px;
 
 :host {
     display: flex;
@@ -54,13 +54,16 @@ $left-panel-width: 390px;
     .panels {
         display: flex;
         flex-wrap: wrap;
+        margin-right: -20px;
         .left {
             flex-basis: $left-panel-width;
-            margin-right: 20px;
+            flex-grow: 1;
+            padding-right: 20px;
 
             .info {
                 display: flex;
                 flex-wrap: wrap;
+                justify-content: space-between;
     
                 > div {
                     flex-basis: 180px;
@@ -70,7 +73,8 @@ $left-panel-width: 390px;
                     }
     
                     &.narrow {
-                        flex-basis: 80px;
+                        display: flex;
+                        justify-content: space-between;
                     }
                 }
     
@@ -91,6 +95,7 @@ $left-panel-width: 390px;
             flex-grow: 1;
             flex-basis: calc(100% - #{$left-panel-width} - 20px);
             min-width: 360px;
+            padding-right: 20px;
 
             .tab-content {
                 padding: 20px;

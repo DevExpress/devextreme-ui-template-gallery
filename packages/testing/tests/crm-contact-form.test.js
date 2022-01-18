@@ -16,7 +16,13 @@ packages.forEach(pkg => {
 
             await t.navigateTo(`http://localhost:${pkg.port}/#/crm-contact-form`);
             await setEmbeddedMode(embedded);
-            await t.expect(Selector('.toolbar-header').withText('Sammy Hill').count).eql(1);
+
+            if(embedded) {
+                await t.click('.dx-icon-refresh');
+            }
+
+            await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
+            await t.expect(Selector('.dx-datagrid .dx-checkbox-checked').exists).ok();
             await takeScreenshot(`crm-contact-form-${pkg.name}-embed=${embedded}-1`, 'body');
             await t.click(Selector('.dx-button[aria-label=Edit]'));
             await takeScreenshot(`crm-contact-form-${pkg.name}-embed=${embedded}-2`, 'body');
@@ -31,7 +37,13 @@ packages.forEach(pkg => {
 
             await t.navigateTo(`http://localhost:${pkg.port}/#/crm-contact-form`);
             await setEmbeddedMode(embedded);
-            await t.expect(Selector('.toolbar-header').withText('Sammy Hill').count).eql(1);
+
+            if(embedded) {
+                await t.click('.dx-icon-refresh');
+            }
+
+            await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
+            await t.expect(Selector('.dx-datagrid .dx-checkbox-checked').exists).ok();
 
             for(let i = 0; i < 5; i++) {
                 await t.click(Selector('.dx-tab').nth(i));
