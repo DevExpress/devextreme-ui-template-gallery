@@ -2,7 +2,7 @@ import { Selector, ClientFunction  } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import { packages } from '../config.js';
 
-fixture`Getting Started`;
+fixture`List`;
 
 const setEmbeddedMode = ClientFunction((embed) => {
     if(!embed) return;
