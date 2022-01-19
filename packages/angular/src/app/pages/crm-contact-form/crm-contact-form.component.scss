@@ -101,8 +101,8 @@ $left-panel-width: 400px;
                 padding: 20px;
 
                 &.colored {
-                    border-top: 1px solid #E0E0E0;
-                    background-color: #F5F5F5;
+                    border-top: 1px solid $base-border-color;
+                    background-color: $side-panel-background;
                 }
 
                 .tiles-header {
@@ -117,7 +117,7 @@ $left-panel-width: 400px;
 
                 .tile {
                     border-radius: 4px;
-                    background: #F5F5F5;
+                    background: $side-panel-background;
                     padding: 16px;
                     width: 320px;
                     margin: 0 10px 10px 0;
@@ -141,7 +141,7 @@ $left-panel-width: 400px;
                         color: rgba(117, 117, 117, 0.87);
                         font-size: 14px;
                         .owner-name {
-                            color: #000000DE;
+                            color: $base-text-color;
                         }
                     }
                 }
@@ -189,7 +189,7 @@ $left-panel-width: 400px;
                             @include message-title();
     
                             .subject {
-                                color: #000000DE;
+                                color: $base-text-color;
                                 font-weight: 700;
                                 font-size: 16px;
                             }
