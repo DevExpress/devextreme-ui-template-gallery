@@ -93,7 +93,7 @@ $side-panel-background: darken($base-bg, 5.00);
         font-size: 16px;
         color: $base-accent;
         &.black {
-            color: #000000DE;
+            color: $base-text-color;
         }
         &.small {
             font-size: 12px;
