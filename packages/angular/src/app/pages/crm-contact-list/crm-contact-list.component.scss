@@ -52,7 +52,7 @@ $side-panel-toolbar-height: 76px;
         top: $side-panel-toolbar-height;
         bottom: 0;
         background: $base-bg;
-        transition: all 400ms;
+        transition: right 400ms;
 
         ::ng-deep .embedded.dx-viewport & {
             top: 0;
