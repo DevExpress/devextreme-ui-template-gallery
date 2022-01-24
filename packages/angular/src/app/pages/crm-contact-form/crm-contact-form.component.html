@@ -7,7 +7,7 @@
                 <div class="toolbar-header">{{viewData.name}}</div>
             </dxi-item>
             <dxi-item location="after" locateInMenu="auto" widget="dxButton"
-                [options]="{ text: 'Terminate', type: 'default', stylingMode: 'outlined'}">
+                [options]="{ text: 'Terminate', type: 'default', stylingMode: 'contained'}">
             </dxi-item>
             <dxi-item location="after" locateInMenu="auto">
                 <dx-drop-down-button [items]="['Assign to Me', 'Archive']" stylingMode="text" [width]="120"
@@ -31,10 +31,10 @@
                         <div class="panels-header">Details</div>
                     </dxi-item>
                     <dxi-item location="after" [visible]='!edit' locateInMenu="after" widget="dxButton"
-                        [options]="{text: 'Edit', icon: 'edit', stylingMode: 'contained', type: 'default', onClick: toggleEdit}">
+                        [options]="{text: 'Edit', icon: 'edit', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
                     </dxi-item>
                     <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
-                        [options]="{text: 'Save', stylingMode: 'contained', type: 'default', onClick: toggleEdit}">
+                        [options]="{text: 'Save', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
                     </dxi-item>
                     <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Cancel', onClick: toggleEdit}">
@@ -107,10 +107,10 @@
                     </div>
                     <div class="info last">
                         <div>
-                            <dx-button text="Call" icon="tel" type="default" type="default"></dx-button>
+                            <dx-button text="Call" icon="tel" type="default" type="default" stylingMode="outlined"></dx-button>
                         </div>
                         <div>
-                            <dx-button text="Send Email" icon="email" type="default"></dx-button>
+                            <dx-button text="Send Email" icon="email" type="default" stylingMode="outlined"></dx-button>
                         </div>
                     </div>
                 </ng-template>
