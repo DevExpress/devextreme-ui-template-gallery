@@ -107,7 +107,11 @@
                             <dxi-item location="before" widget="dxButton"
                                 [options]="{ icon: 'edit', stylingMode: 'outlined', text: 'Edit', type: 'default' }">
                             </dxi-item>
-                            <dxi-item location="after" widget="dxDropDownButton" [options]="{ text: 'Actions', stylingMode: 'contained' }">
+                            <dxi-item location="after" widget="dxDropDownButton" [options]="{
+                                text: 'Actions',
+                                stylingMode: 'contained',
+                                items: [ 'Call', 'Send Fax', 'Send Email', 'Make a Meeting' ]
+                            }">
                             </dxi-item>
                         </dx-toolbar>
                     </div>
