@@ -38,6 +38,7 @@
         <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
         <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
         <dxo-sorting mode="multiple"></dxo-sorting>
         <dxi-column dataField="name" caption="Name" sortOrder="asc" [hidingPriority]="5" [minWidth]="150" cellTemplate="nameTemplate">
             <div *dxTemplate="let s of 'nameTemplate'" class="name-template">
