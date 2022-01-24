@@ -39,6 +39,7 @@ $left-panel-width: 400px;
     @include user-info();
 
     .user-info {
+        flex-wrap: wrap;
         .photo {
             width: 184px;
             height: 184px;
@@ -46,6 +47,10 @@ $left-panel-width: 400px;
             &.form {
                 margin-right: -20px;
             }
+        }
+
+        .text-info {
+            flex-basis: 180px;
         }
 
         margin-bottom: 0;

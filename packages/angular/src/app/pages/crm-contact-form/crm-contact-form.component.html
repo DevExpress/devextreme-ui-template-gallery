@@ -43,8 +43,9 @@
                 <ng-template [ngIf]="!edit" [ngIfElse]="editingForm">
                     <div class="user-info">
                         <div class="photo"
-                            [style.backgroundImage]="'url(\'data:image/png;base64,' + viewData.image +'\')'"></div>
-                        <div>
+                            [style.backgroundImage]="'url(\'data:image/png;base64,' + viewData.image +'\')'">
+                        </div>
+                        <div class="text-info">
                             <div class="title">Status</div>
                             <div class="value status status-{{viewData.status.toLowerCase()}}">{{viewData.status}}</div>
                             <div class="title">First Name</div>
