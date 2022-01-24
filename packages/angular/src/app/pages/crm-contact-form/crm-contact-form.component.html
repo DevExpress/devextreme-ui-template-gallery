@@ -99,18 +99,12 @@
                         <div>
                             <div class="title">Phone</div>
                             <div class="value black">{{formatPhone(viewData.phone)}}</div>
+                            <dx-button text="Call" icon="tel" type="default" type="default" stylingMode="outlined" class="button"></dx-button>
                         </div>
                         <div>
                             <div class="title">Email</div>
                             <div class="value black">{{viewData.email}}</div>
-                        </div>
-                    </div>
-                    <div class="info last">
-                        <div>
-                            <dx-button text="Call" icon="tel" type="default" type="default" stylingMode="outlined"></dx-button>
-                        </div>
-                        <div>
-                            <dx-button text="Send Email" icon="email" type="default" stylingMode="outlined"></dx-button>
+                            <dx-button text="Send Email" icon="email" type="default" stylingMode="outlined" class="button"></dx-button>
                         </div>
                     </div>
                 </ng-template>
