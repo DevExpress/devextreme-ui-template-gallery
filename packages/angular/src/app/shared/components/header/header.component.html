@@ -20,18 +20,19 @@
     <dxi-item
       location="after"
       widget="dxTextBox"
-      cssClass="menu-button"
       locateInMenu="auto"
       [options]="{
         stylingMode: 'outlined',
         mode: 'search',
-        placeholder: 'Search'
+        placeholder: 'Search',
+        width: 180
       }">
     </dxi-item>
     <dxi-item
       location="after"
       locateInMenu="auto"
-      menuItemTemplate="menuItem">
+      menuItemTemplate="menuItem"
+      class="user-picture">
       <div *dxTemplate="let data of 'item'">
         <dx-button
           class="user-button authorization"
