@@ -8,12 +8,14 @@
                     {
                         "Title": "Contact List",
                         "Name": "crm-contact-list",
-                        "DemoType": "Rwa"
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": ["Angular"]
                     },
                     {
                         "Title": "Contact Form",
                         "Name": "crm-contact-form",
-                        "DemoType": "Rwa"
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": ["Angular"]
                     }
                 ]
             }
