@@ -71,7 +71,7 @@ export class CrmContactFormComponent implements OnInit {
   }
 
   getSizeQualifier(width) {
-    if (width < 500)  return "xs";
+    if (width < 415) return "xs";
     return "lg";
   }
 

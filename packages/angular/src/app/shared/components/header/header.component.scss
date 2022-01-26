@@ -43,4 +43,8 @@
 header {
   padding: 10px 0;
   background-color: $base-bg;
+
+  .user-button.authorization {
+    margin-left: 10px;
+  }
 }

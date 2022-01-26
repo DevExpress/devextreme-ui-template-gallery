@@ -18,6 +18,20 @@
       white-space: nowrap;
       // ##
 
+      .dx-scrollable-content {
+        > .dx-treeview-node-container:first-child {
+          > .dx-treeview-node:first-child {
+            > .dx-treeview-item {
+              box-shadow: inset 0px 4px 8px rgb(0 0 0 / 5%);
+
+              .screen-large & {
+                box-shadow: none;
+              }
+            }
+          }
+        }
+      }
+
       // ## Icon width customization
       .dx-treeview-item {
         padding-left: 0;

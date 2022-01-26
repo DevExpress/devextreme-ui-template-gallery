@@ -17,7 +17,7 @@ packages.forEach(pkg => {
             await t.navigateTo(`http://localhost:${pkg.port}`);
             await setEmbeddedMode(embedded);
             await t.expect(Selector('body.dx-device-generic').count).eql(1);
-            await t.expect(Selector('tr.dx-data-row').count).eql(20);
+            await t.expect(Selector('tr.dx-data-row').count).eql(16);
             await takeScreenshot(`crm-contact-list-${pkg.name}-embed=${embedded}-1`, 'body');
             await t.click('tr.dx-data-row:first-child');
             await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
