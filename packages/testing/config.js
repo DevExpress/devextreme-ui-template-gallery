@@ -5,5 +5,5 @@ export const packages = [{
 
 export const screenModes = [
     [1280, 800],
-    //[400, 800]
+    [400, 800]
 ]
