@@ -40,9 +40,12 @@ $left-panel-width: 400px;
 
     .user-info {
         flex-wrap: wrap;
+        margin-top: -8px;
         .photo {
             width: 184px;
             height: 184px;
+            margin-bottom: 8px;
+            margin-top: 8px;
 
             &.form {
                 margin-right: -20px;
@@ -51,6 +54,7 @@ $left-panel-width: 400px;
 
         .text-info {
             flex-basis: 180px;
+            margin-top: 8px;
         }
 
         margin-bottom: 0;
@@ -86,7 +90,7 @@ $left-panel-width: 400px;
                 &.last {
                     margin-bottom: 30px;
                     &.small {
-                        margin-bottom: 8px;
+                        margin-bottom: 16px;
                     }
                 }
 
@@ -95,7 +99,7 @@ $left-panel-width: 400px;
                 }
     
                 .title {
-                    padding-top: 8px
+                    padding-top: 8px;
                 }
             }
         }
