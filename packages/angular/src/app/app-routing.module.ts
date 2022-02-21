@@ -6,6 +6,7 @@ import { AuthGuardService } from './shared/services';
 
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactFormComponent } from './pages/crm-contact-form/crm-contact-form.component';
+import { PlaningTaskListComponent } from './pages/planing-task-list/planing-task-list.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'crm-contact-form',
     component: CrmContactFormComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'planning-task-list',
+    component: PlaningTaskListComponent,
     canActivate: [ AuthGuardService ]
   },
   {

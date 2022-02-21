@@ -31,6 +31,7 @@ import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 import { CrmContactListModule } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactFormModule } from './pages/crm-contact-form/crm-contact-form.component';
+import { PlaningTaskListModule } from './pages/planing-task-list/planing-task-list.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { CrmContactFormModule } from './pages/crm-contact-form/crm-contact-form.
     //ActivitiesModule,
     CrmContactListModule,
     CrmContactFormModule,
+    PlaningTaskListModule,
     AppRoutingModule,
   ],
   providers: [AuthService, ScreenService, AppInfoService],

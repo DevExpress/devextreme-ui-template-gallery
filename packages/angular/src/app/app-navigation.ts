@@ -13,5 +13,16 @@ export const navigation = [
         path: '/crm-contact-form'
       }
     ]
+  },
+  {
+    text: 'Planning',
+    icon: 'event',
+    path: '',
+    items: [
+      {
+        text: 'Task List',
+        path: '/planning-task-list'
+      }
+    ]
   }
 ];
