@@ -41,16 +41,50 @@
   </dx-toolbar>
 
   <div class="task-list">
-    <ng-template [ngIf]="!load" [ngIfElse]="loading">
-      <p>Component</p>
-    </ng-template>
-    <ng-template #loading>
-      <dx-load-panel
-        [visible]="load"
-        container=".task-list"
-        [position]="{of: '.task-list', my: 'center', at: 'center'}"
-        ></dx-load-panel>
-    </ng-template>
+    <div class="grid">
+      <dx-data-grid [dataSource]="dataSource" keyExpr="id">
+        <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+        <dxo-sorting mode="multiple"></dxo-sorting>
+        <dxi-column dataField="name" caption="TASK"></dxi-column>
+        <dxi-column dataField="date" caption="Due Date"
+            [customizeText]="customizeDateText"></dxi-column>
+        <dxi-column dataField="owner" caption="Owner"
+            [hidingPriority]="3"></dxi-column>
+        <dxi-column dataField="priority" caption="Priority"
+            cellTemplate="cellPriorityTemplate"></dxi-column>
+        <dxi-column dataField="status" caption="Status"
+            cellTemplate="cellStatusTemplate" [minWidth]="120"></dxi-column>
+        <dxi-column dataField="estimated" caption="Estimated"
+            [hidingPriority]="1"></dxi-column>
+        <dxi-column dataField="consumed" caption="Consumed"
+            [customizeText]="customizeHyphetText" [hidingPriority]="2"></dxi-column>
+        <dxi-column dataField="progress" caption="%"
+            cellTemplate="cellProgressTemplate"></dxi-column>
+
+        <div *dxTemplate="let c of 'cellPriorityTemplate'">
+          <div class="cell-priority {{ c.data.priority.toLowerCase() }}">
+            <div class="separator"></div>
+            <span>{{ c.data.priority }}</span>
+          </div>
+        </div>
+
+        <div *dxTemplate="let c of 'cellStatusTemplate'">
+          <div class="cell-status ">
+            <span class="{{ getJoinClass(c.data.status.toLowerCase()) }}">{{ c.data.status }}</span>
+          </div>
+        </div>
+
+        <div *dxTemplate="let c of 'cellProgressTemplate'">
+          <dx-progress-bar
+            [min]="0"
+            [max]="100"
+            [value]="c.data.progress"
+            [class.complete]="c.data.progress == 100">
+          </dx-progress-bar>
+        </div>
+
+      </dx-data-grid>
+    </div>
   </div>
 </div>
-

@@ -32,8 +32,96 @@
   }
 
   .task-list {
-    position: relative;
-    width: 100%;
-    height: 400px;
+    .grid {
+      ::ng-deep {
+        .dx-progressbar-container {
+          height: 10px;
+        }
+
+        .complete .dx-progressbar-range {
+          background-color: #8EC797;
+        }
+
+        .dx-progressbar-status {
+          color: #757575;
+        }
+      }
+    }
+  }
+
+  .cell-priority {
+    display: flex;
+    align-items: center;
+
+    &.low {
+      color: #D3A268;
+
+      .separator {
+        background: #D3A268;
+      }
+    }
+
+    &.normal {
+      color: #6FBACA;
+
+      .separator {
+        background: #6FBACA;
+      }
+    }
+
+    &.hight {
+      color: #FF5722;
+
+      .separator {
+        background: #FF5722;
+      }
+    }
+
+    .separator {
+      width: 2px;
+      height: 18px;
+      margin-right: 6px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+  }
+
+  .cell-status {
+    span {
+      font-size: 12px;
+      border-radius: 10px;
+      padding: 2px 8px 3px;
+
+      &.open {
+        background: #D3EFFF;
+        color: #2D9CDB;
+      }
+  
+      &.in-progress {
+        background: #E2FBE6;
+        color: #37B261;
+      }
+  
+      &.waiting-for-data {
+        background: #FFF2CF;
+        color: #A98C27;
+      }
+  
+      &.canceled {
+        background: #F2F2F2;
+        color: #787878;
+      }
+  
+      &.done {
+        background: #8EC797;
+        color: white;
+      }
+    }
   }
 }

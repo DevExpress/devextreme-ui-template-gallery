@@ -1,20 +1,16 @@
-import { Component, ViewChild, OnInit, AfterViewInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
-  DxCheckBoxModule,
   DxDataGridModule,
   DxTabsModule,
-  DxFormModule,
-  DxLoadPanelModule,
-  DxSelectBoxModule,
   DxDropDownButtonModule,
-  DxTabPanelModule,
-  DxTextAreaModule,
   DxTextBoxModule,
-  DxTileViewModule,
   DxToolbarModule,
+  DxProgressBarModule,
 } from 'devextreme-angular';
+import ArrayStore from 'devextreme/data/array_store';
+import DataSource from 'devextreme/data/data_source';
 
 @Component({
   // selector: 'app-planing-task-list',
@@ -22,11 +18,64 @@ import {
   styleUrls: ['./planing-task-list.component.scss']
 })
 export class PlaningTaskListComponent implements OnInit {
+  data = [
+    {
+      id: 1,
+      name: 'Task Name',
+      date: new Date(Date.now()),
+      owner: 'First Last',
+      priority: 'Normal',
+      status: 'Open',
+      estimated: '0:00',
+      consumed: '-',
+      progress: 30
+    },
+    {
+      id: 2,
+      priority: 'Low',
+      status: 'In progress',
+      progress: 0
+    },
+    {
+      id: 3,
+      priority: 'Hight',
+      status: 'Waiting for data',
+      progress: 100
+    },
+    {
+      id: 4,
+      priority: 'Low',
+      status: 'Canceled',
+      progress: 25
+    },
+    {
+      id: 5,
+      priority: 'Normal',
+      status: 'Done',
+      progress: 5
+    }
+  ];
+  dataSource: DataSource;
 
   constructor() {
+    this.dataSource = new DataSource({
+      key: 'id',
+      store: new ArrayStore({
+        data: this.data,
+      })
+    });
   }
 
-  load = true;
+  getJoinClass = (value) => value.replace(/\ /g, '-');
+
+  customizeHyphetText = (cellInfo) => cellInfo.value ?? '-';
+
+  customizeDateText = (cellInfo) => {
+    if(!cellInfo.value) return this.customizeHyphetText(cellInfo);
+
+    const date: Date = new Date(cellInfo.value);
+    return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+  }
 
   ngOnInit(): void {
   }
@@ -35,18 +84,12 @@ export class PlaningTaskListComponent implements OnInit {
 @NgModule({
   imports: [
     DxButtonModule,
-    DxCheckBoxModule,
     DxDataGridModule,
     DxTabsModule,
-    DxFormModule,
-    DxLoadPanelModule,
-    DxSelectBoxModule,
     DxDropDownButtonModule,
-    DxTabPanelModule,
-    DxTextAreaModule,
     DxTextBoxModule,
-    DxTileViewModule,
     DxToolbarModule,
+    DxProgressBarModule,
 
     CommonModule
   ],
