@@ -10,7 +10,7 @@
   </dx-toolbar>
 
   <div class="task-list" [ngSwitch]="displayTaskComponent">
-    <div class="grid" *ngSwitchCase="'List'">
+    <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
       <dx-data-grid [dataSource]="dataSource" keyExpr="id">
         <dxo-search-panel [visible]="true" placeholder="Task Search">
         </dxo-search-panel>
@@ -80,11 +80,11 @@
 
       </dx-data-grid>
     </div>
-    <div class="kanban" *ngSwitchCase="'Kanban Board'">
+    <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
       <span>Kanban</span>
     </div>
-    <div class="gantt" *ngSwitchCase="'Gantt'">
-      <span>Kanban</span>
+    <div *ngSwitchCase="tabPanelItems[2].text" class="gantt">
+      <span>Gantt</span>
     </div>
   </div>
 </div>

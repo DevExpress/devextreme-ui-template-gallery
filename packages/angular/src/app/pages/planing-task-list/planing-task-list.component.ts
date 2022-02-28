@@ -93,7 +93,8 @@ export class PlaningTaskListComponent implements OnInit {
   }
 
   tabValueChange = (e) => {
-    this.displayTaskComponent = this.tabPanelItems[e.itemindex].text;
+    const { itemData } = e;
+    this.displayTaskComponent = itemData.text;
   }
 
   ngOnInit(): void {
