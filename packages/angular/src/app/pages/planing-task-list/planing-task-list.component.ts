@@ -8,6 +8,7 @@ import {
   DxTextBoxModule,
   DxToolbarModule,
   DxProgressBarModule,
+  DxTabsComponent
 } from 'devextreme-angular';
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
@@ -57,6 +58,20 @@ export class PlaningTaskListComponent implements OnInit {
   ];
   dataSource: DataSource;
 
+  tabPanelItems: DxTabsComponent['items'] = [
+    {
+      text: 'List'
+    },
+    {
+      text: 'Kanban Board'
+    },
+    {
+      text: 'Gantt'
+    }
+  ];
+
+  displayTaskComponent: string = this.tabPanelItems[0].text;
+
   constructor() {
     this.dataSource = new DataSource({
       key: 'id',
@@ -75,6 +90,10 @@ export class PlaningTaskListComponent implements OnInit {
 
     const date: Date = new Date(cellInfo.value);
     return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+  }
+
+  tabValueChange = (e) => {
+    this.displayTaskComponent = this.tabPanelItems[e.itemindex].text;
   }
 
   ngOnInit(): void {

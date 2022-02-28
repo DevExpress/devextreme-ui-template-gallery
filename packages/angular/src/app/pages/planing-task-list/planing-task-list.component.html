@@ -4,45 +4,39 @@
       <span class="toolbar-header">Task</span>
     </dxi-item>
     <dxi-item location="before">
-      <dx-tabs selectedIndex="0">
-        <dxi-item text="List"></dxi-item>
-        <dxi-item text="Kanban Board"></dxi-item>
-        <dxi-item text="Gantt"></dxi-item>
+      <dx-tabs selectedIndex="0" [items]="tabPanelItems" (onItemClick)="tabValueChange($event)">
       </dx-tabs>
-    </dxi-item>
-
-    <dxi-item location="after" locateInMenu="auto" widget="dxButton"
-      [options]="{ icon: 'plus', text: 'Add Task', type: 'default', stylingMode: 'contained' }">
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="auto">
-      <div class="separator"></div>
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="auto">
-      <dx-drop-down-button icon="export" stylingMode="text" [dropDownOptions]="{ width: 220 }">
-        <dxi-item icon="xlsxfile" text="Export all data"></dxi-item>
-        <dxi-item icon="exportselected" text="Export selected rows"></dxi-item>
-      </dx-drop-down-button>
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="auto">
-      <div class="separator"></div>
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
-      [options]="{text: 'Refresh', icon: 'refresh'}">
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="auto">
-      <div class="separator"></div>
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
-      [options]="{text: 'Overflow', icon: 'overflow'}">
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="auto">
-      <dx-text-box placeholder="Task Search" mode="search" [width]="180"></dx-text-box>
     </dxi-item>
   </dx-toolbar>
 
-  <div class="task-list">
-    <div class="grid">
+  <div class="task-list" [ngSwitch]="displayTaskComponent">
+    <div class="grid" *ngSwitchCase="'List'">
       <dx-data-grid [dataSource]="dataSource" keyExpr="id">
+        <dxo-search-panel [visible]="true" placeholder="Task Search">
+        </dxo-search-panel>
+        <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-toolbar>
+          <dxi-item location="after" locateInMenu="auto" widget="dxButton"
+            [options]="{ icon: 'plus', text: 'Add Task', type: 'default', stylingMode: 'contained' }">
+          </dxi-item>
+          <dxi-item location="after" locateInMenu="auto">
+            <div class="separator"></div>
+          </dxi-item>
+          <dxi-item name="exportButton"></dxi-item>
+          <dxi-item location="after" locateInMenu="auto">
+            <div class="separator"></div>
+          </dxi-item>
+          <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
+            [options]="{text: 'Refresh', icon: 'refresh'}">
+          </dxi-item>
+          <dxi-item location="after" locateInMenu="auto">
+            <div class="separator"></div>
+          </dxi-item>
+          <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
+            [options]="{text: 'Overflow', icon: 'overflow'}">
+          </dxi-item>
+          <dxi-item name="searchPanel" locateInMenu="auto"></dxi-item>
+        </dxo-toolbar>
         <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
         <dxo-scrolling mode="virtual"></dxo-scrolling>
         <dxo-sorting mode="multiple"></dxo-sorting>
@@ -85,6 +79,12 @@
         </div>
 
       </dx-data-grid>
+    </div>
+    <div class="kanban" *ngSwitchCase="'Kanban Board'">
+      <span>Kanban</span>
+    </div>
+    <div class="gantt" *ngSwitchCase="'Gantt'">
+      <span>Kanban</span>
     </div>
   </div>
 </div>
