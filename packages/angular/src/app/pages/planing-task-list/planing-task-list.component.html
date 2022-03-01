@@ -11,10 +11,13 @@
 
   <div class="task-list" [ngSwitch]="displayTaskComponent">
     <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
-      <dx-data-grid [dataSource]="dataSource" keyExpr="id">
-        <dxo-search-panel [visible]="true" placeholder="Task Search">
-        </dxo-search-panel>
+      <dx-data-grid [dataSource]="dataSource" keyExpr="id" (onRowPrepared)="onRowPreparedGrid($event)">
+        <dxo-search-panel [visible]="true" placeholder="Task Search"></dxo-search-panel>
         <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+        <dxo-sorting mode="multiple"></dxo-sorting>
+
         <dxo-toolbar>
           <dxi-item location="after" locateInMenu="auto" widget="dxButton"
             [options]="{ icon: 'plus', text: 'Add Task', type: 'default', stylingMode: 'contained' }">
@@ -37,45 +40,27 @@
           </dxi-item>
           <dxi-item name="searchPanel" locateInMenu="auto"></dxi-item>
         </dxo-toolbar>
-        <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
-        <dxo-scrolling mode="virtual"></dxo-scrolling>
-        <dxo-sorting mode="multiple"></dxo-sorting>
-        <dxi-column dataField="name" caption="TASK"></dxi-column>
-        <dxi-column dataField="date" caption="Due Date"
-            [customizeText]="customizeDateText"></dxi-column>
-        <dxi-column dataField="owner" caption="Owner"
-            [hidingPriority]="3"></dxi-column>
-        <dxi-column dataField="priority" caption="Priority"
-            cellTemplate="cellPriorityTemplate"></dxi-column>
+
+        <dxi-column dataField="name" caption="Subject"></dxi-column>
+        <dxi-column dataField="company" caption="Company"></dxi-column>
+        <dxi-column dataField="priority" caption="Priority" cellTemplate="cellPriorityTemplate"></dxi-column>
+        <dxi-column dataField="startDate" caption="Start Date" dataType="date"></dxi-column>
+        <dxi-column dataField="dueDate" caption="Due Date" dataType="date"></dxi-column>
+        <dxi-column dataField="owner" caption="Owner" [hidingPriority]="3"></dxi-column>
         <dxi-column dataField="status" caption="Status"
-            cellTemplate="cellStatusTemplate" [minWidth]="120"></dxi-column>
-        <dxi-column dataField="estimated" caption="Estimated"
-            [hidingPriority]="1"></dxi-column>
-        <dxi-column dataField="consumed" caption="Consumed"
-            [customizeText]="customizeHyphetText" [hidingPriority]="2"></dxi-column>
-        <dxi-column dataField="progress" caption="%"
-            cellTemplate="cellProgressTemplate"></dxi-column>
+          cellTemplate="cellStatusTemplate" [minWidth]="120"></dxi-column>
 
         <div *dxTemplate="let c of 'cellPriorityTemplate'">
-          <div class="cell-priority {{ c.data.priority.toLowerCase() }}">
+          <div class="cell-priority {{ c.data.priority }}">
             <div class="separator"></div>
             <span>{{ c.data.priority }}</span>
           </div>
         </div>
 
         <div *dxTemplate="let c of 'cellStatusTemplate'">
-          <div class="cell-status ">
-            <span class="{{ getJoinClass(c.data.status.toLowerCase()) }}">{{ c.data.status }}</span>
+          <div class="cell-status">
+            <span class="{{ spaceToUnderscore(c.data.status) }}">{{ c.data.status }}</span>
           </div>
-        </div>
-
-        <div *dxTemplate="let c of 'cellProgressTemplate'">
-          <dx-progress-bar
-            [min]="0"
-            [max]="100"
-            [value]="c.data.progress"
-            [class.complete]="c.data.progress == 100">
-          </dx-progress-bar>
         </div>
 
       </dx-data-grid>

@@ -8,10 +8,36 @@ import {
   DxTextBoxModule,
   DxToolbarModule,
   DxProgressBarModule,
+
   DxTabsComponent
 } from 'devextreme-angular';
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
+
+enum Priority {
+  Low = "Low",
+  Normal = "Normal",
+  Hight = "Hight",
+}
+
+enum Status {
+  Open = "Open",
+  Deferred = "Deferred",
+  Completed = "Completed",
+  InProgress = "In Progress",
+}
+
+type TaskType = {
+  id: number
+  name: string,
+  description: string,
+  company: string,
+  priority: Priority,
+  startDate: Date,
+  dueDate: Date,
+  owner: string,
+  status: Status
+}
 
 @Component({
   // selector: 'app-planing-task-list',
@@ -19,41 +45,50 @@ import DataSource from 'devextreme/data/data_source';
   styleUrls: ['./planing-task-list.component.scss']
 })
 export class PlaningTaskListComponent implements OnInit {
-  data = [
+  data: Array<TaskType> = [
     {
       id: 1,
       name: 'Task Name',
-      date: new Date(Date.now()),
+      description: 'Descr',
+      company: 'DevEx',
+      priority: Priority.Low,
+      startDate: new Date(),
+      dueDate: new Date,
       owner: 'First Last',
-      priority: 'Normal',
-      status: 'Open',
-      estimated: '0:00',
-      consumed: '-',
-      progress: 30
+      status: Status.Open,
     },
     {
       id: 2,
-      priority: 'Low',
-      status: 'In progress',
-      progress: 0
+      name: 'Task Name',
+      description: 'Descr',
+      company: 'DevEx',
+      priority: Priority.Normal,
+      startDate: new Date(),
+      dueDate: new Date,
+      owner: 'First Last',
+      status: Status.Deferred,
     },
     {
       id: 3,
-      priority: 'Hight',
-      status: 'Waiting for data',
-      progress: 100
+      name: 'Task Name',
+      description: 'Descr',
+      company: 'DevEx',
+      priority: Priority.Hight,
+      startDate: new Date(),
+      dueDate: new Date,
+      owner: 'First Last',
+      status: Status.Completed,
     },
     {
       id: 4,
-      priority: 'Low',
-      status: 'Canceled',
-      progress: 25
-    },
-    {
-      id: 5,
-      priority: 'Normal',
-      status: 'Done',
-      progress: 5
+      name: 'Task Name',
+      description: 'Descr',
+      company: 'DevEx',
+      priority: Priority.Low,
+      startDate: new Date(),
+      dueDate: new Date,
+      owner: 'First Last',
+      status: Status.InProgress,
     }
   ];
   dataSource: DataSource;
@@ -81,7 +116,7 @@ export class PlaningTaskListComponent implements OnInit {
     });
   }
 
-  getJoinClass = (value) => value.replace(/\ /g, '-');
+  spaceToUnderscore = (value) => value.replace(/\ /g, '-');
 
   customizeHyphetText = (cellInfo) => cellInfo.value ?? '-';
 
@@ -90,6 +125,17 @@ export class PlaningTaskListComponent implements OnInit {
 
     const date: Date = new Date(cellInfo.value);
     return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+  }
+
+  onRowPreparedGrid = (e) => {
+    const { rowType, data, rowElement }:
+      { rowType: string, data: TaskType, rowElement: HTMLElement  } = e;
+
+    if(rowType === 'header') return;
+
+    if(data.status === Status.Completed) {
+      rowElement.style.background = '#F5F5F5';
+    }
   }
 
   tabValueChange = (e) => {
