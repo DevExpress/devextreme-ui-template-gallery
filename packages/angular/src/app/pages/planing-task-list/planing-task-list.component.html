@@ -1,13 +1,5 @@
 <div class="view-wrapper">
-  <dx-toolbar>
-    <dxi-item location="before">
-      <span class="toolbar-header">Task</span>
-    </dxi-item>
-    <dxi-item location="before">
-      <dx-tabs selectedIndex="0" [items]="tabPanelItems" (onItemClick)="tabValueChange($event)">
-      </dx-tabs>
-    </dxi-item>
-  </dx-toolbar>
+
 
   <div class="task-list" [ngSwitch]="displayTaskComponent">
     <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
@@ -25,6 +17,14 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
 
         <dxo-toolbar>
+          <dxi-item location="before">
+            <span class="toolbar-header">Task</span>
+          </dxi-item>
+          <dxi-item location="before">
+            <dx-tabs selectedIndex="0" [items]="tabPanelItems" (onItemClick)="tabValueChange($event)">
+            </dx-tabs>
+          </dxi-item>
+
           <dxi-item #addButtonGrid name="addRowButton" location="after" locateInMenu="auto" showText="always" widget="dxButton"
             [options]="{ icon: 'plus', text: 'Add Task', type: 'default', stylingMode: 'contained' }">
           </dxi-item>
@@ -83,9 +83,27 @@
       </dx-data-grid>
     </div>
     <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
+      <dx-toolbar>
+        <dxi-item location="before">
+          <span class="toolbar-header">Task</span>
+        </dxi-item>
+        <dxi-item location="before">
+          <dx-tabs selectedIndex="1" [items]="tabPanelItems" (onItemClick)="tabValueChange($event)">
+          </dx-tabs>
+        </dxi-item>
+      </dx-toolbar>
       <span>Kanban</span>
     </div>
     <div *ngSwitchCase="tabPanelItems[2].text" class="gantt">
+      <dx-toolbar>
+        <dxi-item location="before">
+          <span class="toolbar-header">Task</span>
+        </dxi-item>
+        <dxi-item location="before">
+          <dx-tabs selectedIndex="2" [items]="tabPanelItems" (onItemClick)="tabValueChange($event)">
+          </dx-tabs>
+        </dxi-item>
+      </dx-toolbar>
       <span>Gantt</span>
     </div>
   </div>

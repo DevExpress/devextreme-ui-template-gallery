@@ -15,23 +15,25 @@
 .view-wrapper {
   flex-direction: column;
 
-  .dx-toolbar {
-    .toolbar-header {
-        @include header();
-    }
 
+
+  .task-list {
     ::ng-deep {
-      .dx-tabs .dx-tab {
-        background-color: $background-color;
+      .dx-toolbar {
+        .toolbar-header {
+            @include header();
+        }
 
-        &:nth-child(2) {
-          width: 150px;
+        .dx-tabs .dx-tab {
+          background-color: $background-color;
+
+          &:nth-child(2) {
+            width: 150px;
+          }
         }
       }
     }
-  }
 
-  .task-list {
     .grid {
       ::ng-deep {
         .dx-progressbar-container {
@@ -48,6 +50,14 @@
 
         .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-icon.dx-icon-plus {
           color: $background-color;
+        }
+      }
+    }
+
+    .kanban, .gantt {
+      ::ng-deep {
+        .dx-toolbar {
+          padding: 0 16px;
         }
       }
     }
