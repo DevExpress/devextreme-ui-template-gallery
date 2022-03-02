@@ -22,7 +22,7 @@
 
     ::ng-deep {
       .dx-tabs .dx-tab {
-        background-color: #fff;
+        background-color: $background-color;
 
         &:nth-child(2) {
           width: 150px;
@@ -44,6 +44,10 @@
 
         .dx-progressbar-status {
           color: #757575;
+        }
+
+        .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-icon.dx-icon-plus {
+          color: $background-color;
         }
       }
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -9,7 +9,8 @@ import {
   DxToolbarModule,
   DxProgressBarModule,
 
-  DxTabsComponent
+  DxTabsComponent,
+  DxDataGridComponent
 } from 'devextreme-angular';
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
@@ -45,6 +46,11 @@ type TaskType = {
   styleUrls: ['./planing-task-list.component.scss']
 })
 export class PlaningTaskListComponent implements OnInit {
+  @ViewChild('dataGridTasks', { static: false }) dataGrid: DxDataGridComponent;
+
+  priorityList = ['Low', 'Normal', 'Hight'];
+  statusList = ['Open', 'Deferred', 'Completed', 'In Progress'];
+
   data: Array<TaskType> = [
     {
       id: 1,
@@ -107,6 +113,8 @@ export class PlaningTaskListComponent implements OnInit {
 
   displayTaskComponent: string = this.tabPanelItems[0].text;
 
+  priorityValidationPattern = new RegExp(`${Priority.Low}|${Priority.Normal}|${Priority.Hight}`);
+
   constructor() {
     this.dataSource = new DataSource({
       key: 'id',
@@ -141,6 +149,23 @@ export class PlaningTaskListComponent implements OnInit {
   tabValueChange = (e) => {
     const { itemData } = e;
     this.displayTaskComponent = itemData.text;
+  }
+
+  refreshGrid = () => {
+    this.dataGrid.instance.refresh();
+  }
+
+  dueDateValid = (e) => {
+    const { startDate, dueDate, brokenRules } = e.newData;
+    if(startDate === undefined || dueDate === undefined) {
+      e.errorText = `Need set 'Start Date' and 'Due Date'`;
+      e.isValid = false;
+    } else if(dueDate <= startDate) {
+      e.errorText = `'Start Date' must be greater 'Due Date'`;
+      e.isValid = false;
+    } else if (brokenRules.length !== 0) {
+      e.errorText = 'All fields must be filled'
+    }
   }
 
   ngOnInit(): void {

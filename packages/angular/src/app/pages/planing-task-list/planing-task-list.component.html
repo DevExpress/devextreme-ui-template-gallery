@@ -11,44 +11,61 @@
 
   <div class="task-list" [ngSwitch]="displayTaskComponent">
     <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
-      <dx-data-grid [dataSource]="dataSource" keyExpr="id" (onRowPrepared)="onRowPreparedGrid($event)">
-        <dxo-search-panel [visible]="true" placeholder="Task Search"></dxo-search-panel>
+      <dx-data-grid #dataGridTasks [dataSource]="dataSource" keyExpr="id"
+        (onRowPrepared)="onRowPreparedGrid($event)"
+        (onRowValidating)="dueDateValid($event)"
+      >
+        <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
         <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
-        <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
+        <dxo-editing [allowAdding]="true"></dxo-editing>
         <dxo-scrolling mode="virtual"></dxo-scrolling>
+        <dxo-search-panel [visible]="true" placeholder="Task Search"></dxo-search-panel>
+        <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
         <dxo-sorting mode="multiple"></dxo-sorting>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
 
         <dxo-toolbar>
-          <dxi-item location="after" locateInMenu="auto" widget="dxButton"
+          <dxi-item #addButtonGrid name="addRowButton" location="after" locateInMenu="auto" showText="always" widget="dxButton"
             [options]="{ icon: 'plus', text: 'Add Task', type: 'default', stylingMode: 'contained' }">
           </dxi-item>
+          <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
+            [options]="{ text: 'Refresh', icon: 'refresh', onClick: refreshGrid }"></dxi-item>
+          <dxi-item name="columnChooserButton" locateInMenu="auto"></dxi-item>
           <dxi-item location="after" locateInMenu="auto">
             <div class="separator"></div>
           </dxi-item>
           <dxi-item name="exportButton"></dxi-item>
-          <dxi-item location="after" locateInMenu="auto">
-            <div class="separator"></div>
-          </dxi-item>
-          <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
-            [options]="{text: 'Refresh', icon: 'refresh'}">
-          </dxi-item>
-          <dxi-item location="after" locateInMenu="auto">
-            <div class="separator"></div>
-          </dxi-item>
-          <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
-            [options]="{text: 'Overflow', icon: 'overflow'}">
-          </dxi-item>
           <dxi-item name="searchPanel" locateInMenu="auto"></dxi-item>
+          <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
+            [options]="{ text: 'Overflow', icon: 'overflow' }">
+          </dxi-item>
         </dxo-toolbar>
 
-        <dxi-column dataField="name" caption="Subject"></dxi-column>
-        <dxi-column dataField="company" caption="Company"></dxi-column>
-        <dxi-column dataField="priority" caption="Priority" cellTemplate="cellPriorityTemplate"></dxi-column>
-        <dxi-column dataField="startDate" caption="Start Date" dataType="date"></dxi-column>
-        <dxi-column dataField="dueDate" caption="Due Date" dataType="date"></dxi-column>
-        <dxi-column dataField="owner" caption="Owner" [hidingPriority]="3"></dxi-column>
-        <dxi-column dataField="status" caption="Status"
-          cellTemplate="cellStatusTemplate" [minWidth]="120"></dxi-column>
+        <dxi-column dataField="name" caption="Subject" [hidingPriority]="7">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="company" caption="Company" [hidingPriority]="6">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="priority" caption="Priority" [hidingPriority]="4"
+          cellTemplate="cellPriorityTemplate">
+          <dxo-lookup [dataSource]="priorityList"></dxo-lookup>
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="startDate" caption="Start Date" dataType="date" [hidingPriority]="2">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="dueDate" caption="Due Date" dataType="date" [hidingPriority]="1">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="owner" caption="Owner" [hidingPriority]="5">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="status" caption="Status" [hidingPriority]="3"
+          cellTemplate="cellStatusTemplate" [minWidth]="120">
+          <dxo-lookup [dataSource]="statusList"></dxo-lookup>
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
 
         <div *dxTemplate="let c of 'cellPriorityTemplate'">
           <div class="cell-priority {{ c.data.priority }}">
