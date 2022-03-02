@@ -1,6 +1,4 @@
 <div class="view-wrapper">
-
-
   <div class="task-list" [ngSwitch]="displayTaskComponent">
     <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
       <dx-data-grid #dataGridTasks [dataSource]="dataSource" keyExpr="id"
