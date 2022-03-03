@@ -36,6 +36,10 @@
 
     .grid {
       ::ng-deep {
+        .dx-datagrid-header-panel {
+          padding-top: 0;
+        }
+
         .dx-progressbar-container {
           height: 10px;
         }
