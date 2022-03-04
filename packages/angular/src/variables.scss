@@ -1,11 +1,13 @@
 @use "../node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: "light");
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
 @use "sass:math";
+@use "sass:color";
 
 $side-panel-min-width: 60px;
 $side-panel-background: darken($base-bg, 5.00);
 $background-color: $base-bg;
 $accent-color: $base-accent;
+$background-gray-color: color.change($base-text-color, $alpha: 0.04);
 
 @mixin separator() {
     .separator {

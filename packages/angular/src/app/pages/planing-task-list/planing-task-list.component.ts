@@ -36,7 +36,7 @@ export class PlaningTaskListComponent implements OnInit {
       description: 'Descr',
       company: 'DevEx',
       priority: Priority.Low,
-      startDate: new Date(),
+      startDate: new Date(1),
       dueDate: new Date,
       owner: 'First Last',
       status: Status.Open,
@@ -47,7 +47,7 @@ export class PlaningTaskListComponent implements OnInit {
       description: 'Descr',
       company: 'DevEx',
       priority: Priority.Normal,
-      startDate: new Date(),
+      startDate: new Date(2),
       dueDate: new Date,
       owner: 'First Last',
       status: Status.Deferred,
@@ -58,7 +58,7 @@ export class PlaningTaskListComponent implements OnInit {
       description: 'Descr',
       company: 'DevEx',
       priority: Priority.Hight,
-      startDate: new Date(),
+      startDate: new Date(3),
       dueDate: new Date,
       owner: 'First Last',
       status: Status.Completed,
@@ -69,7 +69,7 @@ export class PlaningTaskListComponent implements OnInit {
       description: 'Descr',
       company: 'DevEx',
       priority: Priority.Low,
-      startDate: new Date(),
+      startDate: new Date(4),
       dueDate: new Date,
       owner: 'First Last',
       status: Status.InProgress,
@@ -80,7 +80,7 @@ export class PlaningTaskListComponent implements OnInit {
       description: 'Descr',
       company: 'DevEx',
       priority: Priority.Hight,
-      startDate: new Date(),
+      startDate: new Date(5),
       dueDate: new Date,
       owner: 'First Last',
       status: Status.Deferred,
@@ -140,10 +140,10 @@ export class PlaningTaskListComponent implements OnInit {
     if(rowType === 'header') return;
 
     if(data.status === Status.Completed) {
-      rowElement.style.background = '#F5F5F5';
+      rowElement.classList.add('completed');
     }
   }
-  
+
   tabValueChange = (e) => {
     const { itemData } = e;
     this.displayTaskComponent = itemData.text;
