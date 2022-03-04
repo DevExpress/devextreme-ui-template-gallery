@@ -5,6 +5,7 @@
 $side-panel-min-width: 60px;
 $side-panel-background: darken($base-bg, 5.00);
 $background-color: $base-bg;
+$accent-color: $base-accent;
 
 @mixin separator() {
     .separator {
