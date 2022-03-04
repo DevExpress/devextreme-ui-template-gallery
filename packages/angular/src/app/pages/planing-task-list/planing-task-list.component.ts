@@ -143,7 +143,7 @@ export class PlaningTaskListComponent implements OnInit {
       rowElement.style.background = '#F5F5F5';
     }
   }
-
+  
   tabValueChange = (e) => {
     const { itemData } = e;
     this.displayTaskComponent = itemData.text;
@@ -179,7 +179,6 @@ export class PlaningTaskListComponent implements OnInit {
     DxTextBoxModule,
     DxToolbarModule,
     DxProgressBarModule,
-
     PlanningKanbanModule,
 
     CommonModule
