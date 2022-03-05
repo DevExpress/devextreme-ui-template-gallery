@@ -16,6 +16,7 @@ import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 
 import { PlanningKanbanModule } from './../../components/planning-kanban/planning-kanban.component';
+import { PlaningGridModule } from './../../components/planning-grid/planning-grid.component';
 import { TaskType, Status, Priority } from './../../types/planing-task-list';
 
 @Component({
@@ -122,48 +123,9 @@ export class PlaningTaskListComponent implements OnInit {
     }
   }
 
-  spaceToUnderscore = (value) => value.replace(/\ /g, '-');
-
-  customizeHyphetText = (cellInfo) => cellInfo.value ?? '-';
-
-  customizeDateText = (cellInfo) => {
-    if(!cellInfo.value) return this.customizeHyphetText(cellInfo);
-
-    const date: Date = new Date(cellInfo.value);
-    return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
-  }
-
-  onRowPreparedGrid = (e) => {
-    const { rowType, data, rowElement }:
-      { rowType: string, data: TaskType, rowElement: HTMLElement  } = e;
-
-    if(rowType === 'header') return;
-
-    if(data.status === Status.Completed) {
-      rowElement.classList.add('completed');
-    }
-  }
-
   tabValueChange = (e) => {
     const { itemData } = e;
     this.displayTaskComponent = itemData.text;
-  }
-
-  refreshGrid = () => {
-    this.dataGrid.instance.refresh();
-  }
-
-  dueDateValid = (e) => {
-    const { startDate, dueDate, brokenRules } = e.newData;
-    if(startDate === undefined || dueDate === undefined) {
-      e.errorText = `Need set 'Start Date' and 'Due Date'`;
-      e.isValid = false;
-    } else if(dueDate <= startDate) {
-      e.errorText = `'Start Date' must be greater 'Due Date'`;
-      e.isValid = false;
-    } else if (brokenRules.length !== 0) {
-      e.errorText = 'All fields must be filled'
-    }
   }
 
   ngOnInit(): void {
@@ -179,7 +141,9 @@ export class PlaningTaskListComponent implements OnInit {
     DxTextBoxModule,
     DxToolbarModule,
     DxProgressBarModule,
+
     PlanningKanbanModule,
+    PlaningGridModule,
 
     CommonModule
   ],
