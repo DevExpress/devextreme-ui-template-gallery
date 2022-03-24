@@ -87,7 +87,8 @@
           </dx-tabs>
         </dxi-item>
       </dx-toolbar>
-      <span>Kanban</span>
+      <planning-kanban [dataSource]="dataSource">
+      </planning-kanban>
     </div>
     <div *ngSwitchCase="tabPanelItems[2].text" class="gantt">
       <dx-toolbar>

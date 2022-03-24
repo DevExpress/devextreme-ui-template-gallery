@@ -15,30 +15,8 @@ import {
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 
-enum Priority {
-  Low = "Low",
-  Normal = "Normal",
-  Hight = "Hight",
-}
-
-enum Status {
-  Open = "Open",
-  Deferred = "Deferred",
-  Completed = "Completed",
-  InProgress = "In Progress",
-}
-
-type TaskType = {
-  id: number
-  name: string,
-  description: string,
-  company: string,
-  priority: Priority,
-  startDate: Date,
-  dueDate: Date,
-  owner: string,
-  status: Status
-}
+import { PlanningKanbanModule } from './../../components/planning-kanban/planning-kanban.component';
+import { TaskType, Status, Priority } from './../../types/planing-task-list';
 
 @Component({
   // selector: 'app-planing-task-list',
@@ -48,8 +26,8 @@ type TaskType = {
 export class PlaningTaskListComponent implements OnInit {
   @ViewChild('dataGridTasks', { static: false }) dataGrid: DxDataGridComponent;
 
-  priorityList = ['Low', 'Normal', 'Hight'];
-  statusList = ['Open', 'Deferred', 'Completed', 'In Progress'];
+  priorityList: Array<Priority> = [];
+  statusList: Array<Status> = [];
 
   data: Array<TaskType> = [
     {
@@ -58,7 +36,7 @@ export class PlaningTaskListComponent implements OnInit {
       description: 'Descr',
       company: 'DevEx',
       priority: Priority.Low,
-      startDate: new Date(),
+      startDate: new Date(1),
       dueDate: new Date,
       owner: 'First Last',
       status: Status.Open,
@@ -69,7 +47,7 @@ export class PlaningTaskListComponent implements OnInit {
       description: 'Descr',
       company: 'DevEx',
       priority: Priority.Normal,
-      startDate: new Date(),
+      startDate: new Date(2),
       dueDate: new Date,
       owner: 'First Last',
       status: Status.Deferred,
@@ -80,7 +58,7 @@ export class PlaningTaskListComponent implements OnInit {
       description: 'Descr',
       company: 'DevEx',
       priority: Priority.Hight,
-      startDate: new Date(),
+      startDate: new Date(3),
       dueDate: new Date,
       owner: 'First Last',
       status: Status.Completed,
@@ -91,10 +69,21 @@ export class PlaningTaskListComponent implements OnInit {
       description: 'Descr',
       company: 'DevEx',
       priority: Priority.Low,
-      startDate: new Date(),
+      startDate: new Date(4),
       dueDate: new Date,
       owner: 'First Last',
       status: Status.InProgress,
+    },
+    {
+      id: 5,
+      name: 'Task Name',
+      description: 'Descr',
+      company: 'DevEx',
+      priority: Priority.Hight,
+      startDate: new Date(5),
+      dueDate: new Date,
+      owner: 'First Last',
+      status: Status.Deferred,
     }
   ];
   dataSource: DataSource;
@@ -119,9 +108,18 @@ export class PlaningTaskListComponent implements OnInit {
     this.dataSource = new DataSource({
       key: 'id',
       store: new ArrayStore({
+        key: 'id',
         data: this.data,
       })
     });
+
+    for(const status in Status) {
+      this.statusList.push(Status[status]);
+    }
+
+    for(const priority in Priority) {
+      this.priorityList.push(Priority[priority]);
+    }
   }
 
   spaceToUnderscore = (value) => value.replace(/\ /g, '-');
@@ -142,7 +140,7 @@ export class PlaningTaskListComponent implements OnInit {
     if(rowType === 'header') return;
 
     if(data.status === Status.Completed) {
-      rowElement.style.background = '#F5F5F5';
+      rowElement.classList.add('completed');
     }
   }
 
@@ -181,6 +179,7 @@ export class PlaningTaskListComponent implements OnInit {
     DxTextBoxModule,
     DxToolbarModule,
     DxProgressBarModule,
+    PlanningKanbanModule,
 
     CommonModule
   ],

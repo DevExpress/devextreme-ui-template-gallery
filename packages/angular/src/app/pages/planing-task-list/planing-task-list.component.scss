@@ -15,8 +15,6 @@
 .view-wrapper {
   flex-direction: column;
 
-
-
   .task-list {
     ::ng-deep {
       .dx-toolbar {
@@ -52,8 +50,13 @@
           color: #757575;
         }
 
-        .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-icon.dx-icon-plus {
-          color: $background-color;
+        .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-icon.dx-icon-plus,
+        .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-button-text {
+          color: #fff;
+        }
+
+        .dx-row.completed {
+          background: $background-gray-color;
         }
       }
     }
