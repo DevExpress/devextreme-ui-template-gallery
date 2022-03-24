@@ -1,19 +1,18 @@
-import { Component, OnInit, NgModule, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, NgModule, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
   DxDataGridModule,
   DxTabsModule,
   DxDropDownButtonModule,
-
-  DxTabsComponent,
-  DxDataGridComponent,
-  DxToolbarModule
+  DxToolbarModule,
+  DxDataGridComponent
 } from 'devextreme-angular';
-import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
-
-import { TaskType, Status, Priority } from './../../types/planing-task-list';
+import { priorityList } from 'src/app/shared/components/planning-task/priorety';
+import { statusList } from 'src/app/shared/components/planning-task/statuses';
+import { TaskType } from 'src/app/shared/components/planning-task/TaskType';
+import { tabPanelItems } from 'src/app/shared/components/planning-task/resource';
 
 @Component({
   selector: 'planning-grid',
@@ -25,31 +24,15 @@ export class PlanningGridComponent implements OnInit {
 
   @Input() dataSource: DataSource;
 
-  priorityList: Array<Priority> = [];
-  statusList: Array<Status> = [];
+  @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
 
-  tabPanelItems: DxTabsComponent['items'] = [
-    {
-      text: 'List'
-    },
-    {
-      text: 'Kanban Board'
-    },
-    {
-      text: 'Gantt'
-    }
-  ];
+  statusList = statusList;
+  priorityList = priorityList;
+  tabPanelItems = tabPanelItems;
 
   displayTaskComponent: string = this.tabPanelItems[0].text;
 
   constructor() {
-    for(const status in Status) {
-      this.statusList.push(Status[status]);
-    }
-
-    for(const priority in Priority) {
-      this.priorityList.push(Priority[priority]);
-    }
   }
 
   onRowPreparedGrid = (e) => {
@@ -58,7 +41,7 @@ export class PlanningGridComponent implements OnInit {
 
     if(rowType === 'header') return;
 
-    if(data.status === Status.Completed) {
+    if(data.status === 'Completed') {
       rowElement.classList.add('completed');
     }
   }
@@ -76,9 +59,8 @@ export class PlanningGridComponent implements OnInit {
     }
   }
 
-  tabValueChange = (e) => {
-    const { itemData } = e;
-    this.displayTaskComponent = itemData.text;
+  tabsItemClick = (e) => {
+    this.tabValueChanged.emit(e);
   }
 
   refreshGrid = () => {

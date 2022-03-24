@@ -1,7 +1,10 @@
 <div class="view-wrapper">
   <div class="task-list" [ngSwitch]="displayTaskComponent">
     <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
-      <planning-grid [dataSource]="dataSource"></planning-grid>
+      <planning-grid
+        [dataSource]="dataSource"
+        (tabValueChanged)="tabValueChange($event)"
+      ></planning-grid>
     </div>
     <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
       <dx-toolbar>

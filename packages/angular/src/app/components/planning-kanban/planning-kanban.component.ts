@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, NgModule, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxScrollViewModule,
@@ -6,8 +6,8 @@ import {
   DxButtonModule,
 } from 'devextreme-angular';
 import DataSource from 'devextreme/data/data_source';
-
-import { TaskType, Status, Priority } from './../../types/planing-task-list';
+import { Status, statusList } from 'src/app/shared/components/planning-task/statuses';
+import { TaskType } from 'src/app/shared/components/planning-task/TaskType';
 
 @Component({
   selector: 'planning-kanban',
@@ -22,12 +22,7 @@ export class PlanningKanbanComponent implements OnInit {
     tasks: Array<TaskType>
   }> = [];
 
-  statuses: Array<Status> = [];
-
   constructor() {
-    for(const status in Status) {
-      this.statuses.push(Status[status]);
-    }
   }
 
   onListReorder = (e) => {
@@ -53,10 +48,10 @@ export class PlanningKanbanComponent implements OnInit {
   ngOnInit() {
     this.dataSource.load();
 
-    for(const status in Status) {
+    for(const status of statusList) {
       this.kanbanDataSource.push({
-        status: Status[status],
-        tasks: this.getTaskByStatus(Status[status])
+        status: <Status>status,
+        tasks: this.getTaskByStatus(<Status>status)
       });
     }
   }

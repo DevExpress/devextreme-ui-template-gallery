@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
+import { Component, OnInit, NgModule, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -7,17 +7,16 @@ import {
   DxDropDownButtonModule,
   DxTextBoxModule,
   DxToolbarModule,
-  DxProgressBarModule,
-
-  DxTabsComponent,
-  DxDataGridComponent
+  DxProgressBarModule
 } from 'devextreme-angular';
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 
 import { PlanningKanbanModule } from './../../components/planning-kanban/planning-kanban.component';
 import { PlaningGridModule } from './../../components/planning-grid/planning-grid.component';
-import { TaskType, Status, Priority } from './../../types/planing-task-list';
+
+import { TaskType } from 'src/app/shared/components/planning-task/TaskType';
+import { tabPanelItems } from 'src/app/shared/components/planning-task/resource';
 
 @Component({
   // selector: 'app-planing-task-list',
@@ -25,85 +24,68 @@ import { TaskType, Status, Priority } from './../../types/planing-task-list';
   styleUrls: ['./planing-task-list.component.scss']
 })
 export class PlaningTaskListComponent implements OnInit {
-  @ViewChild('dataGridTasks', { static: false }) dataGrid: DxDataGridComponent;
-
-  priorityList: Array<Priority> = [];
-  statusList: Array<Status> = [];
-
   data: Array<TaskType> = [
     {
       id: 1,
       name: 'Task Name',
       description: 'Descr',
       company: 'DevEx',
-      priority: Priority.Low,
+      priority: 'Low',
       startDate: new Date(1),
       dueDate: new Date,
       owner: 'First Last',
-      status: Status.Open,
+      status: 'Open',
     },
     {
       id: 2,
       name: 'Task Name',
       description: 'Descr',
       company: 'DevEx',
-      priority: Priority.Normal,
+      priority: 'Normal',
       startDate: new Date(2),
       dueDate: new Date,
       owner: 'First Last',
-      status: Status.Deferred,
+      status: 'Deferred',
     },
     {
       id: 3,
       name: 'Task Name',
       description: 'Descr',
       company: 'DevEx',
-      priority: Priority.Hight,
+      priority: 'Hight',
       startDate: new Date(3),
       dueDate: new Date,
       owner: 'First Last',
-      status: Status.Completed,
+      status: 'Completed',
     },
     {
       id: 4,
       name: 'Task Name',
       description: 'Descr',
       company: 'DevEx',
-      priority: Priority.Low,
+      priority: 'Low',
       startDate: new Date(4),
       dueDate: new Date,
       owner: 'First Last',
-      status: Status.InProgress,
+      status: 'In Progress',
     },
     {
       id: 5,
       name: 'Task Name',
       description: 'Descr',
       company: 'DevEx',
-      priority: Priority.Hight,
+      priority: 'Hight',
       startDate: new Date(5),
       dueDate: new Date,
       owner: 'First Last',
-      status: Status.Deferred,
+      status: 'Deferred',
     }
   ];
   dataSource: DataSource;
 
-  tabPanelItems: DxTabsComponent['items'] = [
-    {
-      text: 'List'
-    },
-    {
-      text: 'Kanban Board'
-    },
-    {
-      text: 'Gantt'
-    }
-  ];
+  tabPanelItems = tabPanelItems;
 
-  displayTaskComponent: string = this.tabPanelItems[0].text;
-
-  priorityValidationPattern = new RegExp(`${Priority.Low}|${Priority.Normal}|${Priority.Hight}`);
+  displayTaskComponent = this.tabPanelItems[0].text;
 
   constructor() {
     this.dataSource = new DataSource({
@@ -113,19 +95,11 @@ export class PlaningTaskListComponent implements OnInit {
         data: this.data,
       })
     });
-
-    for(const status in Status) {
-      this.statusList.push(Status[status]);
-    }
-
-    for(const priority in Priority) {
-      this.priorityList.push(Priority[priority]);
-    }
   }
 
+  @Output()
   tabValueChange = (e) => {
-    const { itemData } = e;
-    this.displayTaskComponent = itemData.text;
+    this.displayTaskComponent = e.itemData.text;
   }
 
   ngOnInit(): void {
