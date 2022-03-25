@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, Output } from '@angular/core';
+import { Component, OnInit, NgModule, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -7,13 +7,12 @@ import {
   DxDropDownButtonModule,
   DxTextBoxModule,
   DxToolbarModule,
-  DxProgressBarModule
 } from 'devextreme-angular';
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 
 import { PlanningKanbanModule } from './../../components/planning-kanban/planning-kanban.component';
-import { PlaningGridModule } from './../../components/planning-grid/planning-grid.component';
+import { PlaningGridModule, PlanningGridComponent } from './../../components/planning-grid/planning-grid.component';
 
 import { TaskType } from 'src/app/shared/components/planning-task/TaskType';
 import { tabPanelItems } from 'src/app/shared/components/planning-task/resource';
@@ -24,6 +23,14 @@ import { tabPanelItems } from 'src/app/shared/components/planning-task/resource'
   styleUrls: ['./planing-task-list.component.scss']
 })
 export class PlaningTaskListComponent implements OnInit {
+  @ViewChild('planningDataGrid', { static: false }) dataGrid: PlanningGridComponent;
+
+  @Output()
+  tabValueChange = (e) => {
+    this.displayTaskComponent = e.itemData.text;
+    this.displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
+  }
+
   data: Array<TaskType> = [
     {
       id: 1,
@@ -86,6 +93,7 @@ export class PlaningTaskListComponent implements OnInit {
   tabPanelItems = tabPanelItems;
 
   displayTaskComponent = this.tabPanelItems[0].text;
+  displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
 
   constructor() {
     this.dataSource = new DataSource({
@@ -97,9 +105,17 @@ export class PlaningTaskListComponent implements OnInit {
     });
   }
 
-  @Output()
-  tabValueChange = (e) => {
-    this.displayTaskComponent = e.itemData.text;
+  addDataGridRow = () => this.dataGrid.addRow();
+
+  refreshDataGrid = () => this.dataGrid.refresh();
+
+  chooseColumnDataGrid = () => this.dataGrid.showColumnChooser();
+  
+  searchDataGrid = (e) => this.dataGrid.search(e.component.instance().option('text'));
+
+  exportDataGrid = (e) => {
+    const selectedRowsOnly = e.itemData.text.includes('selected');
+    this.dataGrid.onExporting(e, selectedRowsOnly);
   }
 
   ngOnInit(): void {
@@ -114,7 +130,6 @@ export class PlaningTaskListComponent implements OnInit {
     DxDropDownButtonModule,
     DxTextBoxModule,
     DxToolbarModule,
-    DxProgressBarModule,
 
     PlanningKanbanModule,
     PlaningGridModule,

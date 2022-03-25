@@ -12,32 +12,35 @@
 
 @include status();
 
-.view-wrapper {
-  flex-direction: column;
-
-  .task-list {
-    ::ng-deep {
-      .dx-toolbar {
-        .toolbar-header {
-            @include header();
-        }
-
-        .dx-tabs .dx-tab {
-          background-color: $background-color;
-
-          &:nth-child(2) {
-            width: 150px;
-          }
-        }
-      }
+::ng-deep {
+  .dx-toolbar {
+    .toolbar-header {
+        @include header();
     }
 
-    .kanban, .gantt {
-      ::ng-deep {
-        .dx-toolbar {
-          padding: 0 16px;
-        }
+    .dx-tabs .dx-tab {
+      background-color: $background-color;
+
+      &:nth-child(2) {
+        width: 150px;
       }
     }
   }
+  
+  .search-grid {
+    .dx-placeholder {
+      font-size: 14px;
+    }
+
+    .dx-texteditor.dx-editor-filled .dx-texteditor-input,
+    .dx-texteditor.dx-editor-outlined .dx-texteditor-input,
+    .dx-texteditor.dx-editor-filled .dx-placeholder::before,
+    .dx-texteditor.dx-editor-outlined .dx-placeholder::before {
+      padding-left: 0;
+    }
+  }
+}
+
+.view-wrapper {
+  flex-direction: column;
 }

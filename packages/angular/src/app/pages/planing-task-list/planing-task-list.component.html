@@ -1,34 +1,104 @@
 <div class="view-wrapper">
+  <dx-toolbar>
+    <dxi-item location="before">
+      <span class="toolbar-header">Task</span>
+    </dxi-item>
+    <dxi-item
+      location="before"
+      widget="dxTabs"
+      [options]="{
+        selectedIndex: 0,
+        items: tabPanelItems,
+        onItemClick: tabValueChange
+      }"
+    ></dxi-item>
+
+    <dxi-item
+      [visible]="displayGrid"
+      location="after"
+      widget="dxButton"
+      [options]="{
+        icon: 'plus',
+        text: 'Add Task',
+        type: 'default',
+        stylingMode: 'contained',
+        onClick: addDataGridRow
+      }"
+    ></dxi-item>
+    <dxi-item
+      [visible]="displayGrid"
+      location="after"
+      widget="dxButton"
+      [options]="{
+        icon: 'refresh',
+        onClick: refreshDataGrid
+      }"
+    ></dxi-item>
+    <dxi-item
+      [visible]="displayGrid"
+      location="after"
+      widget="dxButton"
+      [options]="{
+        icon: 'columnchooser',
+        onClick: chooseColumnDataGrid
+      }"
+    ></dxi-item>
+    <dxi-item
+      [visible]="displayGrid"
+      location="after"
+      locateInMenu="auto"
+    >
+      <div class="separator"></div>
+    </dxi-item>
+    <dxi-item
+      [visible]="displayGrid"
+      location="after"
+    >
+      <dx-drop-down-button
+        icon="export"
+        stylingMode="text"
+        [dropDownOptions]="{ width: 220 }"
+        (onItemClick)="exportDataGrid($event)"
+      >
+        <dxi-item icon="xlsxfile" text="Export all data"></dxi-item>
+        <dxi-item icon="exportselected" text="Export selected rows"></dxi-item>
+      </dx-drop-down-button>
+    </dxi-item>
+    <dxi-item
+      [visible]="displayGrid"
+      location="after"
+      [ngClass]="'search-grid'"
+    >
+      <dx-text-box
+        placeholder="Task Search"
+        [showClearButton]="true"
+        [width]="170"
+        [height]="48"
+        (onInput)="searchDataGrid($event)"
+      >
+        <dxi-button
+          name="search-grid"
+          location="before"
+          [options]="{ icon: 'search', stylingMode: 'text', disabled: true }"
+        ></dxi-button>
+        <dxi-button name="clear"></dxi-button>
+      </dx-text-box>
+    </dxi-item>
+  </dx-toolbar>
+
   <div class="task-list" [ngSwitch]="displayTaskComponent">
     <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
       <planning-grid
+        #planningDataGrid
         [dataSource]="dataSource"
         (tabValueChanged)="tabValueChange($event)"
       ></planning-grid>
     </div>
     <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
-      <dx-toolbar>
-        <dxi-item location="before">
-          <span class="toolbar-header">Task</span>
-        </dxi-item>
-        <dxi-item location="before">
-          <dx-tabs selectedIndex="1" [items]="tabPanelItems" (onItemClick)="tabValueChange($event)">
-          </dx-tabs>
-        </dxi-item>
-      </dx-toolbar>
       <planning-kanban [dataSource]="dataSource">
       </planning-kanban>
     </div>
     <div *ngSwitchCase="tabPanelItems[2].text" class="gantt">
-      <dx-toolbar>
-        <dxi-item location="before">
-          <span class="toolbar-header">Task</span>
-        </dxi-item>
-        <dxi-item location="before">
-          <dx-tabs selectedIndex="2" [items]="tabPanelItems" (onItemClick)="tabValueChange($event)">
-          </dx-tabs>
-        </dxi-item>
-      </dx-toolbar>
       <span>Gantt</span>
     </div>
   </div>

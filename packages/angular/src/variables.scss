@@ -8,6 +8,7 @@ $side-panel-background: darken($base-bg, 5.00);
 $background-color: $base-bg;
 $accent-color: $base-accent;
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
+$search-icon-color: lighten($base-text-color, 58%) !default;
 
 @mixin separator() {
     .separator {

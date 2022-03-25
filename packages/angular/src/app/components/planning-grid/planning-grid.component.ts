@@ -8,11 +8,13 @@ import {
   DxToolbarModule,
   DxDataGridComponent
 } from 'devextreme-angular';
+import { exportDataGrid } from 'devextreme/excel_exporter';
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver-es';
 import DataSource from 'devextreme/data/data_source';
 import { priorityList } from 'src/app/shared/components/planning-task/priorety';
 import { statusList } from 'src/app/shared/components/planning-task/statuses';
 import { TaskType } from 'src/app/shared/components/planning-task/TaskType';
-import { tabPanelItems } from 'src/app/shared/components/planning-task/resource';
 
 @Component({
   selector: 'planning-grid',
@@ -20,17 +22,39 @@ import { tabPanelItems } from 'src/app/shared/components/planning-task/resource'
   styleUrls: ['./planning-grid.component.scss']
 })
 export class PlanningGridComponent implements OnInit {
-  @ViewChild('dataGridTasks', { static: false }) dataGrid: DxDataGridComponent;
+  @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
 
   @Input() dataSource: DataSource;
 
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
 
+  @Output() addRow = () => this.component.instance.addRow();
+
+  @Output() refresh = () => this.component.instance.refresh();
+
+  @Output() showColumnChooser = () => this.component.instance.showColumnChooser();
+
+  @Output() search = (text: string) => this.component.instance.searchByText(text);
+
+  @Output() onExporting = (e, selectedRowsOnly: boolean) => {
+    const workbook = new Workbook();
+    const worksheet = workbook.addWorksheet('Employees');
+
+    exportDataGrid({
+      component: this.component.instance,
+      worksheet,
+      autoFilterEnabled: true,
+      selectedRowsOnly: selectedRowsOnly
+    }).then(() => {
+      workbook.xlsx.writeBuffer().then((buffer) => {
+        saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+      });
+    });
+    e.cancel = true;
+  }
+
   statusList = statusList;
   priorityList = priorityList;
-  tabPanelItems = tabPanelItems;
-
-  displayTaskComponent: string = this.tabPanelItems[0].text;
 
   constructor() {
   }
@@ -61,10 +85,6 @@ export class PlanningGridComponent implements OnInit {
 
   tabsItemClick = (e) => {
     this.tabValueChanged.emit(e);
-  }
-
-  refreshGrid = () => {
-    this.dataGrid.instance.refresh();
   }
 
   spaceToUnderscore = (value) => value.replace(/\ /g, '-');
