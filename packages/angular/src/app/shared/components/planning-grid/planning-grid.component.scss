@@ -10,6 +10,10 @@
   .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-button-text {
     color: #fff;
   }
+
+  .dx-row.completed {
+    background: $background-gray-color;
+  }
 }
 
 .cell-priority {
