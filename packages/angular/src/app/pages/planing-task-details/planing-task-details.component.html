@@ -1,0 +1,46 @@
+<div class="view-wrapper">
+  <dx-toolbar>
+    <dxi-item
+      location="before"
+      widget="dxButton"
+      [options]="{
+        icon: 'arrowleft'
+      }"
+    ></dxi-item>
+    <dxi-item
+    location="before"
+    >
+      <span class="toolbar-header">Call to clarify customer requirements</span>
+    </dxi-item>
+
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+    >
+      <dx-drop-down-button
+        text="ACTIONS"
+        stylingMode="contained"
+        [ngClass]="'actions'"
+        [items]="[
+          { text: 'Duplicate' },
+          { text: 'Close' },
+          { text: 'Delete' }
+        ]"
+      ></dx-drop-down-button>
+    </dxi-item>
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+    >
+      <dx-button
+        icon="attach"
+      ></dx-button>
+    </dxi-item>
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+    >
+      <div class="separator"></div>
+    </dxi-item>
+  </dx-toolbar>
+</div>

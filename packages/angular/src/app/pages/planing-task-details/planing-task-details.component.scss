@@ -1,0 +1,25 @@
+@use "../../../variables" as *;
+@use "sass:math";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+}
+
+@include separator();
+
+@include status();
+
+::ng-deep {
+  .dx-toolbar {
+    .toolbar-header {
+        @include header();
+    }
+  }
+}
+
+.view-wrapper {
+  flex-direction: column;
+}
