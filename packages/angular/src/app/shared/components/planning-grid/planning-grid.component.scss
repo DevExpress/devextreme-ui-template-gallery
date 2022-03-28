@@ -1,4 +1,4 @@
-@use "../../../variables" as *;
+@use "../../../../variables" as *;
 @use "sass:math";
 
 ::ng-deep {
@@ -6,25 +6,9 @@
     padding-top: 0;
   }
 
-  .dx-progressbar-container {
-    height: 10px;
-  }
-
-  .complete .dx-progressbar-range {
-    background-color: #8EC797;
-  }
-
-  .dx-progressbar-status {
-    color: #757575;
-  }
-
   .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-icon.dx-icon-plus,
   .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-button-text {
     color: #fff;
-  }
-
-  .dx-row.completed {
-    background: $background-gray-color;
   }
 }
 

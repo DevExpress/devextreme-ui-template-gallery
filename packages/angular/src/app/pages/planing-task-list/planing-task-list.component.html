@@ -1,10 +1,13 @@
 <div class="view-wrapper">
   <dx-toolbar>
-    <dxi-item location="before">
+    <dxi-item
+      location="before"
+    >
       <span class="toolbar-header">Task</span>
     </dxi-item>
     <dxi-item
       location="before"
+      locateInMenu="auto"
       widget="dxTabs"
       [options]="{
         selectedIndex: 0,
@@ -16,36 +19,41 @@
     <dxi-item
       [visible]="displayGrid"
       location="after"
-      widget="dxButton"
-      [options]="{
-        icon: 'plus',
-        text: 'Add Task',
-        type: 'default',
-        stylingMode: 'contained',
-        onClick: addDataGridRow
-      }"
-    ></dxi-item>
+      locateInMenu="auto"
+    >
+      <dx-button
+        [ngClass]="'add-grid-row'"
+        icon="plus"
+        text="Add Task"
+        type="default"
+        stylingMode="contained"
+        (onClick)="addDataGridRow()"
+      ></dx-button>
+    </dxi-item>
     <dxi-item
       [visible]="displayGrid"
       location="after"
-      widget="dxButton"
-      [options]="{
-        icon: 'refresh',
-        onClick: refreshDataGrid
-      }"
-    ></dxi-item>
+      locateInMenu="auto"
+    >
+      <dx-button
+        icon="refresh"
+        (onClick)="refreshDataGrid()"
+      ></dx-button>
+    </dxi-item>
     <dxi-item
       [visible]="displayGrid"
       location="after"
-      widget="dxButton"
-      [options]="{
-        icon: 'columnchooser',
-        onClick: chooseColumnDataGrid
-      }"
-    ></dxi-item>
+      locateInMenu="auto"
+    >
+      <dx-button
+        icon="columnchooser"
+        (onClick)="chooseColumnDataGrid()"
+      ></dx-button>
+    </dxi-item>
     <dxi-item
       [visible]="displayGrid"
       location="after"
+      locateInMenu="auto"
       locateInMenu="auto"
     >
       <div class="separator"></div>
@@ -53,6 +61,7 @@
     <dxi-item
       [visible]="displayGrid"
       location="after"
+      locateInMenu="auto"
     >
       <dx-drop-down-button
         icon="export"
@@ -67,6 +76,7 @@
     <dxi-item
       [visible]="displayGrid"
       location="after"
+      locateInMenu="auto"
       [ngClass]="'search-grid'"
     >
       <dx-text-box

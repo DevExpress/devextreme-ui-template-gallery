@@ -7,3 +7,5 @@ export * from './change-password-form/change-password-form.component';
 export * from './side-navigation-menu/side-navigation-menu.component';
 export * from './user-panel/user-panel.component';
 export * from './activities/activities.component';
+export * from './planning-grid/planning-grid.component';
+export * from './planning-kanban/planning-kanban.component';

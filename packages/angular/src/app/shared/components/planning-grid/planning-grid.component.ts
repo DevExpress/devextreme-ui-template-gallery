@@ -12,9 +12,9 @@ import { exportDataGrid } from 'devextreme/excel_exporter';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import DataSource from 'devextreme/data/data_source';
-import { priorityList } from 'src/app/shared/components/planning-task/priorety';
-import { statusList } from 'src/app/shared/components/planning-task/statuses';
-import { TaskType } from 'src/app/shared/components/planning-task/TaskType';
+import { priorityList } from 'src/app/shared/types/priorety';
+import { statusList } from 'src/app/shared/types/statuses';
+import { TaskType } from 'src/app/shared/types/TaskType';
 
 @Component({
   selector: 'planning-grid',

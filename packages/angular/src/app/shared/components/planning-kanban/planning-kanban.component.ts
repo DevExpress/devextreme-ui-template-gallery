@@ -6,8 +6,8 @@ import {
   DxButtonModule,
 } from 'devextreme-angular';
 import DataSource from 'devextreme/data/data_source';
-import { Status, statusList } from 'src/app/shared/components/planning-task/statuses';
-import { TaskType } from 'src/app/shared/components/planning-task/TaskType';
+import { Status, statusList } from 'src/app/shared/types/statuses';
+import { TaskType } from 'src/app/shared/types/TaskType';
 
 @Component({
   selector: 'planning-kanban',

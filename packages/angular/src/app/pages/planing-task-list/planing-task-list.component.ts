@@ -11,11 +11,14 @@ import {
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 
-import { PlanningKanbanModule } from './../../components/planning-kanban/planning-kanban.component';
-import { PlaningGridModule, PlanningGridComponent } from './../../components/planning-grid/planning-grid.component';
+import {
+  PlanningKanbanModule,
+  PlaningGridModule,
+  PlanningGridComponent,
+} from 'src/app/shared/components';
 
-import { TaskType } from 'src/app/shared/components/planning-task/TaskType';
-import { tabPanelItems } from 'src/app/shared/components/planning-task/resource';
+import { TaskType } from 'src/app/shared/types/TaskType';
+import { tabPanelItems } from 'src/app/shared/types/resource';
 
 @Component({
   // selector: 'app-planing-task-list',
