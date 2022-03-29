@@ -8,6 +8,10 @@ import {
   DxToolbarModule,
   DxDataGridComponent
 } from 'devextreme-angular';
+import {
+  TaskProirityModule,
+  TaskStatusModule,
+} from '../';
 import { exportDataGrid } from 'devextreme/excel_exporter';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
@@ -87,10 +91,7 @@ export class PlanningGridComponent implements OnInit {
     this.tabValueChanged.emit(e);
   }
 
-  spaceToUnderscore = (value) => value.replace(/\ /g, '-');
-
-  ngOnInit() {
-  }
+  ngOnInit() { }
 }
 
 @NgModule({
@@ -100,6 +101,9 @@ export class PlanningGridComponent implements OnInit {
     DxTabsModule,
     DxDropDownButtonModule,
     DxToolbarModule,
+
+    TaskProirityModule,
+    TaskStatusModule,
 
     CommonModule
   ],
