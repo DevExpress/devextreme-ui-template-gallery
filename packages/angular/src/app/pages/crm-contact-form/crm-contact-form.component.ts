@@ -15,7 +15,11 @@ import {
   DxTileViewModule,
   DxToolbarModule,
 } from 'devextreme-angular';
-import { ActivitiesModule } from 'src/app/shared/components/activities/activities.component';
+import {
+  ActivitiesModule,
+  NotesModule,
+  MessagesModule,
+} from 'src/app/shared/components'
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -62,14 +66,6 @@ export class CrmContactFormComponent implements OnInit {
     return String(number).replace(/(\d{3})(\d{3})(\d{4})/,"+1($1)$2-$3");
   }
 
-  getAvatarText(name: string) {
-    return name.split(' ').map(name => name[0]).join('');
-  }
-
-  setUserName(text: string) {
-    return text.replace('{username}', this.viewData.name);
-  }
-
   getSizeQualifier(width) {
     if (width < 415) return "xs";
     return "lg";
@@ -102,7 +98,10 @@ export class CrmContactFormComponent implements OnInit {
     DxDataGridModule,
     DxCheckBoxModule,
     DxTileViewModule,
+
     ActivitiesModule,
+    NotesModule,
+    MessagesModule,
 
     CommonModule
   ],

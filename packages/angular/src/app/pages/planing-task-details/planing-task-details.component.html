@@ -174,6 +174,22 @@
         </dx-form>
       </ng-template>
     </div>
-    <div class="right"></div>
+    <div class="right">
+      <div class="dx-card">
+        <dx-tab-panel [showNavButtons]="true">
+            <dxi-item title="Activities">
+                <div class="tab-content">
+                    <app-activities [activities]="activities" [showBy]="true"></app-activities>
+                </div>
+            </dxi-item>
+            <dxi-item title="Notes">
+              <app-notes [items]="notes"></app-notes>
+            </dxi-item>
+            <dxi-item title="Messages" [badge]="(messages | async)?.length">
+              <app-messages [userName]="task.owner" [items]="messages"></app-messages>
+            </dxi-item>
+        </dx-tab-panel>
+    </div>
+    </div>
   </div>
 </div>

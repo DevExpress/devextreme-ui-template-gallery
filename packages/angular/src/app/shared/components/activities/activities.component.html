@@ -2,10 +2,21 @@
     <div *dxTemplate="let item of 'item'">
         <div class="activity">
             <div class="name">{{ item.name }}</div>
-            <div class="date"  [ngClass]="{'by': showBy}">
-                <div class="title">{{ item.date | date: 'dd/MM/yyyy' }}</div>
-                <div *ngIf="showBy">by</div>
-                <div class="title">{{ item.manager }}</div>
+            <div class="date" [ngClass]="{ 'by': showBy }">
+                <div *ngIf="showBy; then withBy; else withOutBy"></div>
+                <ng-template #withBy>
+                    <div class="title">
+                        {{ item.date | date: 'dd/MM/yyyy' }} by {{ item.manager }}
+                    </div>
+                </ng-template>
+                <ng-template #withOutBy>
+                    <div class="title">
+                        {{ item.date | date: 'dd/MM/yyyy' }}
+                    </div>
+                    <div class="title">
+                        {{ item.manager }}
+                    </div>
+                </ng-template>
             </div>
             <dx-button icon="overflow"></dx-button>
         </div>

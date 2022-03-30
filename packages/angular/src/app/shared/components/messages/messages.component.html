@@ -1,0 +1,36 @@
+<div class="messages">
+    <div class="input-content">
+        <dx-text-area label="New Message" stylingMode="outlined"></dx-text-area>
+        <dx-toolbar>
+            <dxi-item location="before" widget="dxButton"
+                [options]="{text: 'Attach File', stylingMode: 'contained', type: 'default', icon: 'attach'}">
+            </dxi-item>
+            <dxi-item location="after" widget="dxButton"
+                [options]="{text: 'Send', stylingMode: 'outlined', type: 'default'}">
+            </dxi-item>
+            <dxi-item location="after" widget="dxButton"
+                [options]="{text: 'Cancel'}">
+            </dxi-item>
+        </dx-toolbar>
+    </div>
+    <div class="messages-content">
+        <div class="message-container" *ngFor="let data of items | async">
+            <div class="avatar">
+                {{getAvatarText(data.manager)}}
+            </div>
+            <div class="message dx-card">
+                <div class="message-title">
+                    <div class="left-title">
+                        <div class="subject">{{data.subject}}</div>
+                        <div>{{data.date | date: 'MM/dd/y'}} - {{data.manager}}</div>
+                    </div>
+                    <div>
+                        <dx-button icon="overflow"></dx-button>
+                    </div>
+                </div>
+                <div class="message-text">{{setUserName(data.text)}}</div>
+            </div>
+            
+        </div>
+    </div>
+</div>

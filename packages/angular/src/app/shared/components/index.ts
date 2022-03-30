@@ -7,6 +7,8 @@ export * from './change-password-form/change-password-form.component';
 export * from './side-navigation-menu/side-navigation-menu.component';
 export * from './user-panel/user-panel.component';
 export * from './activities/activities.component';
+export * from './notes/notes.component';
+export * from './messages/messages.component';
 export * from './task-priority/task-priority.component';
 export * from './task-status/task-status.component';
 export * from './planning-grid/planning-grid.component';
