@@ -8,7 +8,7 @@
       }"
     ></dxi-item>
     <dxi-item
-    location="before"
+      location="before"
     >
       <span class="toolbar-header">{{ task.name }}</span>
     </dxi-item>
@@ -93,13 +93,23 @@
                 <div class="value black">{{ parseDate(task.startDate) }}</div>
               </ng-template>
               <dx-drop-down-button
+                  #dropDownButtonStartDate
                   icon="event"
                   text="START DATE"
                   stylingMode="outlined"
+                  dropDownContentTemplate="dropDownContentTemplate"
+                  [dropDownOptions]="{ width: 'auto' }"
                   [showArrowIcon]="false"
                   [selectionMode]="false"
                   [visible]="isEmptyStartDate"
-              ></dx-drop-down-button>
+              >
+                <div *dxTemplate="let data of 'dropDownContentTemplate'">
+                  <dx-calendar
+                    name="Start Date"
+                    (onValueChanged)="changeDate($event)"
+                  ></dx-calendar>
+                </div>
+              </dx-drop-down-button>
           </div>
           <div>
               <div class="title">Due Date</div>
@@ -107,12 +117,22 @@
                 <div class="value black">{{ parseDate(task.dueDate) }}</div>
               </ng-template>
               <dx-drop-down-button
+                #dropDownButtonDueDate
                 icon="event"
                 text="DUE DATE"
                 stylingMode="outlined"
+                dropDownContentTemplate="dropDownContentTemplate"
+                [dropDownOptions]="{ width: 'auto' }"
                 [showArrowIcon]="false"
                 [visible]="isEmptyDueDate"
-              ></dx-drop-down-button>
+              >
+                <div *dxTemplate="let data of 'dropDownContentTemplate'">
+                  <dx-calendar
+                    name="Due Date"
+                    (onValueChanged)="changeDate($event)"
+                  ></dx-calendar>
+                </div>
+              </dx-drop-down-button>
           </div>
         </div>
         <div class="info last long">
@@ -178,9 +198,9 @@
       <div class="dx-card">
         <dx-tab-panel [showNavButtons]="true">
             <dxi-item title="Activities">
-                <div class="tab-content">
-                    <app-activities [activities]="activities" [showBy]="true"></app-activities>
-                </div>
+              <div class="tab-content">
+                <app-activities [activities]="activities" [showBy]="true"></app-activities>
+              </div>
             </dxi-item>
             <dxi-item title="Notes">
               <app-notes [items]="notes"></app-notes>
