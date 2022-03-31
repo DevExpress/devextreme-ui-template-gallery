@@ -42,50 +42,31 @@
   <div class="info">
     <div>
         <div class="title">Start Date</div>
-        <ng-template [ngIf]="!isEmptyStartDate">
+        <div *ngIf="isEmptyStartDate then setStartDate else getStartDate"></div>
+        <ng-template #setStartDate>
+          <app-task-form-date
+            name="Start"
+            text="START DATE"
+            (dateChanged)="dateChanged($event)"
+          ></app-task-form-date>
+        </ng-template>
+        <ng-template #getStartDate>
           <div class="value black">{{ parseDate(task.startDate) }}</div>
         </ng-template>
-        <dx-drop-down-button
-            #dropDownButtonStartDate
-            icon="event"
-            text="START DATE"
-            stylingMode="outlined"
-            dropDownContentTemplate="dropDownContentTemplate"
-            [dropDownOptions]="{ width: 'auto' }"
-            [showArrowIcon]="false"
-            [selectionMode]="false"
-            [visible]="isEmptyStartDate"
-        >
-          <div *dxTemplate="let data of 'dropDownContentTemplate'">
-            <dx-calendar
-              name="Start Date"
-              (onValueChanged)="changeDate($event)"
-            ></dx-calendar>
-          </div>
-        </dx-drop-down-button>
     </div>
     <div>
         <div class="title">Due Date</div>
-        <ng-template [ngIf]="!isEmptyDueDate">
+        <div *ngIf="isEmptyDueDate then setDueDate else getDueDate"></div>
+        <ng-template #setDueDate>
+          <app-task-form-date
+            name="Due"
+            text="DUE DATE"
+            (dateChanged)="dateChanged($event)"
+          ></app-task-form-date>
+        </ng-template>
+        <ng-template #getDueDate>
           <div class="value black">{{ parseDate(task.dueDate) }}</div>
         </ng-template>
-        <dx-drop-down-button
-          #dropDownButtonDueDate
-          icon="event"
-          text="DUE DATE"
-          stylingMode="outlined"
-          dropDownContentTemplate="dropDownContentTemplate"
-          [dropDownOptions]="{ width: 'auto' }"
-          [showArrowIcon]="false"
-          [visible]="isEmptyDueDate"
-        >
-          <div *dxTemplate="let data of 'dropDownContentTemplate'">
-            <dx-calendar
-              name="Due Date"
-              (onValueChanged)="changeDate($event)"
-            ></dx-calendar>
-          </div>
-        </dx-drop-down-button>
     </div>
   </div>
   <div class="info last long">
@@ -128,12 +109,22 @@
     <dxi-item
       dataField="startDate"
       editorType="dxDateBox"
-      [editorOptions]="{ onValueChanged: changeDate, name: 'Start Date' }"
+      [editorOptions]="{
+        name: 'Start Date',
+        onValueChanged: changeDate,
+        placeholder: 'MM/dd/y',
+        displayFormat: 'MM/dd/y'
+      }"
     ></dxi-item>
     <dxi-item
       dataField="dueDate"
       editorType="dxDateBox"
-      [editorOptions]="{ onValueChanged: changeDate, name: 'Due Date' }"
+      [editorOptions]="{
+        name: 'Due Date',
+        onValueChanged: changeDate,
+        placeholder: 'MM/dd/y',
+        displayFormat: 'MM/dd/y'
+      }"
     ></dxi-item>
     <dxi-item
       [colSpan]="2"

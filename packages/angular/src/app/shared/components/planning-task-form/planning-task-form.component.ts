@@ -1,16 +1,16 @@
-import { Component, OnInit, NgModule, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, NgModule, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxToolbarModule,
   DxFormModule,
   DxDropDownButtonModule,
   DxCalendarModule,
-
-  DxDropDownButtonComponent,
 } from 'devextreme-angular';
+import { ValueChangedEvent as DateBoxValueChangedEvent } from 'devextreme/ui/date_box';
 import {
   TaskProirityModule,
   TaskStatusModule,
+  TaskFromDateModule,
 } from '../';
 import { priorityList } from 'src/app/shared/types/priorety';
 import { statusList } from 'src/app/shared/types/statuses';
@@ -22,9 +22,6 @@ import { TaskType } from 'src/app/shared/types/TaskType';
   styleUrls: ['./planning-task-form.component.scss']
 })
 export class PlanningTaskFormComponent implements OnInit {
-  @ViewChild('dropDownButtonDueDate') dropDownButtonDueDate: DxDropDownButtonComponent;
-  @ViewChild('dropDownButtonStartDate') dropDownButtonStartDate: DxDropDownButtonComponent;
-
   @Input() task: TaskType;
 
   edit = false;
@@ -34,32 +31,33 @@ export class PlanningTaskFormComponent implements OnInit {
   isEmptyStartDate: boolean;
   isEmptyDueDate: boolean;
 
-  isEmpty = (value: any): boolean => value === undefined || value === null
+  isEmpty = (value: any): boolean => value === undefined || value === null;
 
-  parseDate = (date: Date) => `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+  parseDate = (date: Date) => `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
   toggleEdit() {
     this.edit = !this.edit;
   }
 
-  changeDate = (e) => {
+  dateChanged = (e: { date: Date, type: string }) => {
+    const { date, type } = e;
+
+    if(type === 'Start') {
+      this.task.startDate = e.date;
+      this.isEmptyStartDate = this.isEmpty(date);
+    } else  if(type === 'Due') {
+      this.task.dueDate = date;
+      this.isEmptyDueDate = this.isEmpty(date);
+    }
+  }
+
+  dateBoxValueChanged = (e: DateBoxValueChangedEvent) => {
     const { value, component } = e;
-    const dateName = component.option('name');
 
-    const closeDropDownButton = (component: DxDropDownButtonComponent) => {
-      if(this.isEmpty(component)) return;
-      component.instance.close();
-    }
-
-    if(dateName === 'Start Date') {
-      this.task.startDate = new Date(value);
-      this.isEmptyStartDate = this.isEmpty(value);
-      closeDropDownButton(this.dropDownButtonStartDate);
-    } else  if(dateName === 'Due Date') {
-      this.task.dueDate = new Date(value);
-      this.isEmptyDueDate = this.isEmpty(value);
-      closeDropDownButton(this.dropDownButtonDueDate);
-    }
+    this.dateChanged({
+      date: value,
+      type: component.option('name')
+    });
   }
   
   constructor() {
@@ -81,6 +79,7 @@ export class PlanningTaskFormComponent implements OnInit {
 
     TaskProirityModule,
     TaskStatusModule,
+    TaskFromDateModule,
 
     CommonModule
   ],

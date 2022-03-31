@@ -1,0 +1,41 @@
+.priority {
+  display: flex;
+  align-items: center;
+
+  &.priority-low {
+      color: #D3A268;
+
+      .separator {
+      background: #D3A268;
+      }
+  }
+
+  &.priority-normal {
+      color: #6FBACA;
+
+      .separator {
+      background: #6FBACA;
+      }
+  }
+
+  &.priority-hight {
+      color: #FF5722;
+
+      .separator {
+      background: #FF5722;
+      }
+  }
+
+  .separator {
+      width: 2px;
+      height: 18px;
+      margin-right: 6px;
+      border-radius: 2px;
+      display: inline-block;
+  }
+
+  span {
+      font-weight: 600;
+      font-size: 12px;
+  }
+}
