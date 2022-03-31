@@ -2,24 +2,19 @@ import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
-  DxToolbarModule,
   DxDropDownButtonModule,
-  DxFormModule,
+  DxToolbarModule,
   DxTabPanelModule,
   DxTextAreaModule,
-  DxCalendarModule,
-
-  DxDropDownButtonComponent,
 } from 'devextreme-angular';
 import {
   ActivitiesModule,
   NotesModule,
   MessagesModule,
+  PlanningTaskFormModule,
   TaskProirityModule,
   TaskStatusModule,
 } from 'src/app/shared/components';
-import { statusList } from 'src/app/shared/types/statuses';
-import { priorityList } from 'src/app/shared/types/priorety';
 import { TaskType } from 'src/app/shared/types/TaskType';
 
 @Component({
@@ -28,19 +23,6 @@ import { TaskType } from 'src/app/shared/types/TaskType';
   styleUrls: ['./planing-task-details.component.scss']
 })
 export class PlaningTaskDetailsComponent implements OnInit {
-  @ViewChild('dropDownButtonDueDate') dropDownButtonDueDate: DxDropDownButtonComponent;
-  @ViewChild('dropDownButtonStartDate') dropDownButtonStartDate: DxDropDownButtonComponent;
-
-  constructor() {
-    this.toggleEdit = this.toggleEdit.bind(this);
-  }
-
-  isEmpty = (value: any): boolean => value === undefined || value === null
-
-  edit = false;
-  statusList = statusList;
-  priorityList = priorityList;
-
   task: TaskType = {
     id: 0,
     name: 'Call to clarify customer requirements',
@@ -82,35 +64,8 @@ export class PlaningTaskDetailsComponent implements OnInit {
       text: 'Hello {username}, It\'s John. Yesterday we talked about audio equipment upgrade in your company. I have great news for you. We\'ve discussed your requirements and I can offer a 15% discount for your if you plan to order for more than $50000. If you\'d like to get a 3 year contract, then we are ready to offer a 20% discount for you.'
     }
   ];
-  
-  isEmptyStartDate = this.isEmpty(this.task.startDate);
-  isEmptyDueDate = this.isEmpty(this.task.dueDate);
 
-  changeDate = (e) => {
-    const { value, component } = e;
-    const dateName = component.option('name');
-
-    const closeDropDownButton = (component: DxDropDownButtonComponent) => {
-      if(this.isEmpty(component)) return;
-      component.instance.close();
-    }
-
-    if(dateName === 'Start Date') {
-      this.task.startDate = new Date(value);
-      this.isEmptyStartDate = this.isEmpty(value);
-      closeDropDownButton(this.dropDownButtonStartDate);
-    } else  if(dateName === 'Due Date') {
-      this.task.dueDate = new Date(value);
-      this.isEmptyDueDate = this.isEmpty(value);
-      closeDropDownButton(this.dropDownButtonDueDate);
-    }
-  }
-
-  toggleEdit() {
-    this.edit = !this.edit;
-  }
-  
-  parseDate = (date: Date) => `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+  constructor() { }
 
   ngOnInit(): void {
     this.notes = Promise.resolve(this.notes);
@@ -121,16 +76,15 @@ export class PlaningTaskDetailsComponent implements OnInit {
 @NgModule({
   imports: [
     DxButtonModule,
-    DxToolbarModule,
     DxDropDownButtonModule,
-    DxFormModule,
+    DxToolbarModule,
     DxTabPanelModule,
     DxTextAreaModule,
-    DxCalendarModule,
 
     ActivitiesModule,
     NotesModule,
     MessagesModule,
+    PlanningTaskFormModule,
     TaskProirityModule,
     TaskStatusModule,
 

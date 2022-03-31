@@ -10,24 +10,7 @@ $left-panel-width: 400px;
   padding: 20px 16px 0 16px;
 }
 
-@mixin message-title {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  font-size: 12px;
-  color: #757575DE;
-}
-
-@mixin message-text {
-  padding-top: 5px;
-  font-size: 16px;
-  line-height: 24px;
-}
-
 @include separator();
-
-@include status();
 
 ::ng-deep {
   .dx-toolbar {
@@ -48,8 +31,6 @@ $left-panel-width: 400px;
 .view-wrapper {
   flex-direction: column;
 
-  @include user-info();
-
   .panels {
     display: flex;
     flex-wrap: wrap;
@@ -59,49 +40,6 @@ $left-panel-width: 400px;
         flex-basis: $left-panel-width;
         flex-grow: 1;
         padding-right: 20px;
-
-        .info {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-
-            > div {
-                flex-basis: 180px;
-
-                &:first-child {
-                    flex-basis: 204px;
-                }
-
-                &.narrow {
-                    display: flex;
-                    justify-content: space-between;
-                }
-            }
-
-            &.last {
-                margin-bottom: 30px;
-
-                &.small {
-                    margin-bottom: 16px;
-                }
-
-                &.long {
-                    > div {
-                        &:first-child {
-                            flex-basis: auto;
-                        }
-                    }
-                }
-            }
-
-            .button {
-                margin-top: 8px;
-            }
-
-            .title {
-                padding-top: 8px;
-            }
-        }
     }
 
     .right {
@@ -158,61 +96,6 @@ $left-panel-width: 400px;
                     }
                 }
             }
-
-            .note {
-                background-color: $base-bg;
-                padding: 10px;
-                margin-bottom: 10px;
-
-                .note-title {
-                    @include message-title();
-                }
-
-                .note-text {
-                    @include message-text();
-                }
-            }
-
-            .message-container {
-                display: flex;
-                &:nth-child(odd) {
-                    flex-direction: row-reverse;
-                }
-
-                .avatar {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 16px;
-                    flex-shrink: 0;
-                    margin: 2px 5px;
-                    background: $base-accent;
-                    font-size: 12px;
-                    font-weight: 500;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: $base-bg;
-                }
-                .message {
-                    background-color: $base-bg;
-                    padding: 10px;
-                    margin-bottom: 10px;
-
-                    .message-title {
-                        @include message-title();
-
-                        .subject {
-                            color: $base-text-color;
-                            font-weight: 700;
-                            font-size: 16px;
-                        }
-                    }
-
-                    .message-text {
-                        @include message-text();
-                    }
-                }
-            }
         }
     }
   }
@@ -220,12 +103,5 @@ $left-panel-width: 400px;
   .panels-header {
     font-size: 16px;
     font-weight: 700;
-  }
-
-  .form {
-      margin-bottom: 30px;
-      ::ng-deep & .dx-field-item {
-          padding-bottom: 0;
-      }
   }
 }
