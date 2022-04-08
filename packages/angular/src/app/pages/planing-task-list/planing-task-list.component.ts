@@ -7,8 +7,9 @@ import {
   DxDropDownButtonModule,
   DxTextBoxModule,
   DxToolbarModule,
+  DxLoadPanelModule,
 } from 'devextreme-angular';
-import ArrayStore from 'devextreme/data/array_store';
+
 import DataSource from 'devextreme/data/data_source';
 
 import {
@@ -19,6 +20,8 @@ import {
 
 import { TaskType } from 'src/app/shared/types/TaskType';
 import { tabPanelItems } from 'src/app/shared/types/resource';
+import { getTasks } from 'dx-rwa-data';
+
 
 @Component({
   // selector: 'app-planing-task-list',
@@ -34,78 +37,21 @@ export class PlaningTaskListComponent implements OnInit {
     this.displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
   }
 
-  data: Array<TaskType> = [
-    {
-      id: 1,
-      name: 'Task Name',
-      description: 'Descr',
-      company: 'DevEx',
-      priority: 'Low',
-      startDate: new Date(1),
-      dueDate: new Date,
-      owner: 'First Last',
-      status: 'Open',
-    },
-    {
-      id: 2,
-      name: 'Task Name',
-      description: 'Descr',
-      company: 'DevEx',
-      priority: 'Normal',
-      startDate: new Date(2),
-      dueDate: new Date,
-      owner: 'First Last',
-      status: 'Deferred',
-    },
-    {
-      id: 3,
-      name: 'Task Name',
-      description: 'Descr',
-      company: 'DevEx',
-      priority: 'Hight',
-      startDate: new Date(3),
-      dueDate: new Date,
-      owner: 'First Last',
-      status: 'Completed',
-    },
-    {
-      id: 4,
-      name: 'Task Name',
-      description: 'Descr',
-      company: 'DevEx',
-      priority: 'Low',
-      startDate: new Date(4),
-      dueDate: new Date,
-      owner: 'First Last',
-      status: 'In Progress',
-    },
-    {
-      id: 5,
-      name: 'Task Name',
-      description: 'Descr',
-      company: 'DevEx',
-      priority: 'Hight',
-      startDate: new Date(5),
-      dueDate: new Date,
-      owner: 'First Last',
-      status: 'Deferred',
-    }
-  ];
-  dataSource: DataSource;
-
   tabPanelItems = tabPanelItems;
+
+  dataSource: any[];
 
   displayTaskComponent = this.tabPanelItems[0].text;
   displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
 
   constructor() {
-    this.dataSource = new DataSource({
-      key: 'id',
-      store: new ArrayStore({
-        key: 'id',
-        data: this.data,
-      })
+    this.refresh = this.refresh.bind(this);
+
+    getTasks().then((data) => {
+      this.dataSource = data;
+      this.load = false;
     });
+
   }
 
   addDataGridRow = () => this.dataGrid.addRow();
@@ -121,6 +67,17 @@ export class PlaningTaskListComponent implements OnInit {
     this.dataGrid.onExporting(e, selectedRowsOnly);
   }
 
+  load = true;
+
+  @Output()
+  refresh() {
+    this.load = true;
+    getTasks().then((data) => {
+      this.dataSource = data;
+      this.load = false;
+    });
+  }
+
   ngOnInit(): void {
   }
 }
@@ -133,6 +90,7 @@ export class PlaningTaskListComponent implements OnInit {
     DxDropDownButtonModule,
     DxTextBoxModule,
     DxToolbarModule,
+    DxLoadPanelModule,
 
     PlanningKanbanModule,
     PlaningGridModule,

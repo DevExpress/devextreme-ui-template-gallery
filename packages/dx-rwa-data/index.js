@@ -26,3 +26,6 @@ export const getRawStatuses = async () => await getData('Users/Statuses');
 export const getStates = async () => await getData('Users/States');
 export const getActiveContactOpportunities = async (id) => await getContactOpportunities(id, true);
 export const getClosedContactOpportunities = async (id) => await getContactOpportunities(id, false);
+
+export const getTasks = async () => await getData(`Employees/Tasks`);
+export const getTask = async (id) => await getData(`Employees/Tasks/${id}`);

@@ -79,8 +79,7 @@ namespace service.Controllers {
                     }),
                     tasks = s.TasksLists.Select(t => new {
                         text = t.Task.Task1.TrimEnd(' '),
-                        date = t.Date,
-                        done = t.Done,
+                        date = t.StartDate
                     }),
                     image = s.EmployeePicture,
                 })

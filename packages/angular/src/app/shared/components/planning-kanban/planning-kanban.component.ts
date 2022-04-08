@@ -15,11 +15,11 @@ import { TaskType } from 'src/app/shared/types/TaskType';
   styleUrls: ['./planning-kanban.component.scss']
 })
 export class PlanningKanbanComponent implements OnInit {
-  @Input() dataSource: DataSource;
+  @Input() dataSource: any[] = [];
 
   kanbanDataSource: Array<{
     status: Status,
-    tasks: Array<TaskType>
+    tasks: any[]
   }> = [];
 
   constructor() {
@@ -30,7 +30,7 @@ export class PlanningKanbanComponent implements OnInit {
     this.kanbanDataSource.splice(e.toIndex, 0, list);
   }
 
-  getTaskByStatus = (status: Status): Array<TaskType> => this.dataSource.items().filter(item => item.status === status);
+  getTaskByStatus = (status: Status) : Array<any> => this.dataSource.filter(item => item.status === status);
 
   getFormatDate = (date: Date) => `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
 
