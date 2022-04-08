@@ -6,7 +6,7 @@ import { AuthGuardService } from './shared/services';
 
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactFormComponent } from './pages/crm-contact-form/crm-contact-form.component';
-import { PlaningTaskListComponent } from './pages/planing-task-list/planing-task-list.component';
+import { PlaningTaskListComponent } from './pages/planning-task-list/planning-task-list.component';
 
 const routes: Routes = [
   {

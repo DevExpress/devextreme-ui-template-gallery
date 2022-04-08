@@ -15,13 +15,13 @@ import {
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
 
-import { PlanningKanbanModule } from './../../components/planning-kanban/planning-kanban.component';
-import { TaskType, Status, Priority } from './../../types/planing-task-list';
+import { PlanningKanbanModule } from '../../components/planning-kanban/planning-kanban.component';
+import { TaskType, Status, Priority } from '../../types/planning-task-list';
 
 @Component({
   // selector: 'app-planing-task-list',
-  templateUrl: './planing-task-list.component.html',
-  styleUrls: ['./planing-task-list.component.scss']
+  templateUrl: './planning-task-list.component.html',
+  styleUrls: ['./planning-task-list.component.scss']
 })
 export class PlaningTaskListComponent implements OnInit {
   @ViewChild('dataGridTasks', { static: false }) dataGrid: DxDataGridComponent;

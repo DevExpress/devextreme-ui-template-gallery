@@ -7,7 +7,7 @@ import {
 } from 'devextreme-angular';
 import DataSource from 'devextreme/data/data_source';
 
-import { TaskType, Status, Priority } from './../../types/planing-task-list';
+import { TaskType, Status, Priority } from '../../types/planning-task-list';
 
 @Component({
   selector: 'planning-kanban',
