@@ -25,8 +25,8 @@ import { getTasks } from 'dx-rwa-data';
 
 @Component({
   // selector: 'app-planing-task-list',
-  templateUrl: './planing-task-list.component.html',
-  styleUrls: ['./planing-task-list.component.scss']
+  templateUrl: './planning-task-list.component.html',
+  styleUrls: ['./planning-task-list.component.scss']
 })
 export class PlaningTaskListComponent implements OnInit {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: PlanningGridComponent;

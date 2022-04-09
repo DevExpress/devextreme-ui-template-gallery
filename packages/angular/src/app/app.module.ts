@@ -31,7 +31,7 @@ import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 import { CrmContactListModule } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactFormModule } from './pages/crm-contact-form/crm-contact-form.component';
-import { PlaningTaskListModule } from './pages/planing-task-list/planing-task-list.component';
+import { PlaningTaskListModule } from './pages/planning-task-list/planning-task-list.component';
 
 @NgModule({
   declarations: [
