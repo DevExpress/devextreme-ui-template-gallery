@@ -3,6 +3,7 @@
   [dataSource]="dataSource"
   (onRowPrepared)="onRowPreparedGrid($event)"
   (onRowValidating)="dueDateValid($event)"
+  [columnAutoWidth]="true"
 >
   <dxo-scrolling mode="virtual"></dxo-scrolling>
   <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>

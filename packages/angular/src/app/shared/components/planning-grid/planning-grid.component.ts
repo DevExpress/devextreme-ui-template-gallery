@@ -22,9 +22,8 @@ import { TaskType } from 'src/app/shared/types/TaskType';
   styleUrls: ['./planning-grid.component.scss']
 })
 export class PlanningGridComponent implements OnInit {
+  @Input() dataSource: any[];
   @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
-
-  @Input() dataSource: DataSource;
 
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
 
