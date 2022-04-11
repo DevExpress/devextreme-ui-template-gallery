@@ -1,0 +1,52 @@
+<dx-data-grid
+  #dataGrid
+  [dataSource]="dataSource"
+  (onRowPrepared)="onRowPreparedGrid($event)"
+  (onRowValidating)="dueDateValid($event)"
+  [columnAutoWidth]="true"
+>
+  <dxo-scrolling mode="virtual"></dxo-scrolling>
+  <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+  <dxi-column dataField="name" caption="Subject" [hidingPriority]="7">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="company" caption="Company" [hidingPriority]="6">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="priority" caption="Priority" [hidingPriority]="4"
+    cellTemplate="cellPriorityTemplate">
+    <dxo-lookup [dataSource]="priorityList"></dxo-lookup>
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="startDate" caption="Start Date" dataType="date" [hidingPriority]="2">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="dueDate" caption="Due Date" dataType="date" [hidingPriority]="1">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="owner" caption="Owner" [hidingPriority]="5">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="status" caption="Status" [hidingPriority]="3"
+    cellTemplate="cellStatusTemplate" [minWidth]="120">
+    <dxo-lookup [dataSource]="statusList"></dxo-lookup>
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+
+  <div *dxTemplate="let c of 'cellPriorityTemplate'">
+    <div class="cell-priority {{ c.data.priority }}">
+      <div class="separator"></div>
+      <span>{{ c.data.priority }}</span>
+    </div>
+  </div>
+
+  <div *dxTemplate="let c of 'cellStatusTemplate'">
+    <div class="cell-status">
+      <span class="{{ spaceToUnderscore(c.data.status) }}">{{ c.data.status }}</span>
+    </div>
+  </div>
+
+</dx-data-grid>

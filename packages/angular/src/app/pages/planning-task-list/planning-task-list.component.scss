@@ -12,128 +12,42 @@
 
 @include status();
 
+::ng-deep {
+  .dx-toolbar {
+    .toolbar-header {
+        @include header();
+    }
+
+    .dx-tabs .dx-tab {
+      background-color: $background-color;
+
+      &:nth-child(2) {
+        width: 150px;
+      }
+    }
+  }
+  
+  .search-grid {
+    .dx-placeholder {
+      font-size: 14px;
+    }
+
+    .dx-texteditor.dx-editor-filled .dx-texteditor-input,
+    .dx-texteditor.dx-editor-outlined .dx-texteditor-input,
+    .dx-texteditor.dx-editor-filled .dx-placeholder::before,
+    .dx-texteditor.dx-editor-outlined .dx-placeholder::before {
+      padding-left: 0;
+    }
+  }
+
+  .add-grid-row {
+    .dx-icon.dx-icon-plus,
+    .dx-button-text {
+      color: #fff;
+    }
+  }
+}
+
 .view-wrapper {
   flex-direction: column;
-
-  .task-list {
-    ::ng-deep {
-      .dx-toolbar {
-        .toolbar-header {
-            @include header();
-        }
-
-        .dx-tabs .dx-tab {
-          background-color: $background-color;
-
-          &:nth-child(2) {
-            width: 150px;
-          }
-        }
-      }
-    }
-
-    .grid {
-      ::ng-deep {
-        .dx-datagrid-header-panel {
-          padding-top: 0;
-        }
-
-        .dx-progressbar-container {
-          height: 10px;
-        }
-
-        .complete .dx-progressbar-range {
-          background-color: #8EC797;
-        }
-
-        .dx-progressbar-status {
-          color: #757575;
-        }
-
-        .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-icon.dx-icon-plus,
-        .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-button-text {
-          color: #fff;
-        }
-
-        .dx-row.completed {
-          background: $background-gray-color;
-        }
-      }
-    }
-
-    .kanban, .gantt {
-      ::ng-deep {
-        .dx-toolbar {
-          padding: 0 16px;
-        }
-      }
-    }
-  }
-
-  .cell-priority {
-    display: flex;
-    align-items: center;
-
-    &.Low {
-      color: #D3A268;
-
-      .separator {
-        background: #D3A268;
-      }
-    }
-
-    &.Normal {
-      color: #6FBACA;
-
-      .separator {
-        background: #6FBACA;
-      }
-    }
-
-    &.Hight {
-      color: #FF5722;
-
-      .separator {
-        background: #FF5722;
-      }
-    }
-
-    .separator {
-      width: 2px;
-      height: 18px;
-      margin-right: 6px;
-      border-radius: 2px;
-      display: inline-block;
-    }
-
-    span {
-      font-weight: 600;
-      font-size: 12px;
-    }
-
-  }
-
-  .cell-status {
-    span {
-      font-size: 12px;
-      border-radius: 10px;
-      padding: 2px 8px 3px;
-
-      &.Open {
-        color: #505ED9;
-      }
-
-      &.In-Progress {
-        color: #34AA95;
-      }
-
-      &.Deferred {
-        color: #969696;
-      }
-
-      &.Completed {
-        color: #2B9029;
-      }
-    }
-  }
 }

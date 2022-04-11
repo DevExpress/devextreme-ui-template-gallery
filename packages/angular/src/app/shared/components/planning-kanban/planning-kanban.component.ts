@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, NgModule, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxScrollViewModule,
@@ -6,8 +6,8 @@ import {
   DxButtonModule,
 } from 'devextreme-angular';
 import DataSource from 'devextreme/data/data_source';
-
-import { TaskType, Status, Priority } from '../../types/planning-task-list';
+import { Status, statusList } from 'src/app/shared/types/statuses';
+import { TaskType } from 'src/app/shared/types/TaskType';
 
 @Component({
   selector: 'planning-kanban',
@@ -15,19 +15,14 @@ import { TaskType, Status, Priority } from '../../types/planning-task-list';
   styleUrls: ['./planning-kanban.component.scss']
 })
 export class PlanningKanbanComponent implements OnInit {
-  @Input() dataSource: DataSource;
+  @Input() dataSource: any[] = [];
 
   kanbanDataSource: Array<{
     status: Status,
-    tasks: Array<TaskType>
+    tasks: any[]
   }> = [];
 
-  statuses: Array<Status> = [];
-
   constructor() {
-    for(const status in Status) {
-      this.statuses.push(Status[status]);
-    }
   }
 
   onListReorder = (e) => {
@@ -35,7 +30,7 @@ export class PlanningKanbanComponent implements OnInit {
     this.kanbanDataSource.splice(e.toIndex, 0, list);
   }
 
-  getTaskByStatus = (status: Status): Array<TaskType> => this.dataSource.items().filter(item => item.status === status);
+  getTaskByStatus = (status: Status) : Array<any> => this.dataSource.filter(item => item.status === status);
 
   getFormatDate = (date: Date) => `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
 
@@ -53,10 +48,10 @@ export class PlanningKanbanComponent implements OnInit {
   ngOnInit() {
     this.dataSource.load();
 
-    for(const status in Status) {
+    for(const status of statusList) {
       this.kanbanDataSource.push({
-        status: Status[status],
-        tasks: this.getTaskByStatus(Status[status])
+        status: <Status>status,
+        tasks: this.getTaskByStatus(<Status>status)
       });
     }
   }
