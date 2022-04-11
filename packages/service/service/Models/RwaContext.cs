@@ -60,6 +60,8 @@ namespace service.Models
 
                 entity.Property(e => e.ManagerId).HasColumnName("Manager_id");
 
+                entity.Property(e => e.TaskId).HasColumnName("Task_id");
+
                 entity.HasOne(d => d.Activity)
                     .WithMany(p => p.ActivitiesLists)
                     .HasForeignKey(d => d.ActivityId)
@@ -77,6 +79,12 @@ namespace service.Models
                     .HasForeignKey(d => d.ManagerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Activities_List_Managers");
+
+                entity.HasOne(d => d.Task)
+                    .WithMany(p => p.ActivitiesLists)
+                    .HasForeignKey(d => d.TaskId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Activities_List_Tasks");
             });
 
             modelBuilder.Entity<Activity>(entity =>
@@ -298,6 +306,8 @@ namespace service.Models
 
                 entity.Property(e => e.MessageId).HasColumnName("message_id");
 
+                entity.Property(e => e.TaskId).HasColumnName("task_id");
+
                 entity.HasOne(d => d.Contact)
                     .WithMany(p => p.MessagesLists)
                     .HasForeignKey(d => d.ContactId)
@@ -312,6 +322,11 @@ namespace service.Models
                     .WithMany(p => p.MessagesLists)
                     .HasForeignKey(d => d.MessageId)
                     .HasConstraintName("FK_Messages_List_Messages");
+
+                entity.HasOne(d => d.Task)
+                    .WithMany(p => p.MessagesLists)
+                    .HasForeignKey(d => d.TaskId)
+                    .HasConstraintName("FK_Messages_List_Tasks");
             });
 
             modelBuilder.Entity<Note>(entity =>
@@ -341,6 +356,8 @@ namespace service.Models
 
                 entity.Property(e => e.NoteId).HasColumnName("note_id");
 
+                entity.Property(e => e.TaskId).HasColumnName("task_id");
+
                 entity.HasOne(d => d.Contact)
                     .WithMany(p => p.NotesLists)
                     .HasForeignKey(d => d.ContactId)
@@ -355,6 +372,11 @@ namespace service.Models
                     .WithMany(p => p.NotesLists)
                     .HasForeignKey(d => d.NoteId)
                     .HasConstraintName("FK_Notes_List_Notes");
+
+                entity.HasOne(d => d.Task)
+                    .WithMany(p => p.NotesLists)
+                    .HasForeignKey(d => d.TaskId)
+                    .HasConstraintName("FK_Notes_List_Tasks");
             });
 
             modelBuilder.Entity<OpportunitiesList>(entity =>
@@ -495,11 +517,16 @@ namespace service.Models
 
                 entity.Property(e => e.ContactId).HasColumnName("contact_id");
 
-                entity.Property(e => e.Date)
+                entity.Property(e => e.StartDate)
                     .HasColumnType("datetime")
-                    .HasColumnName("date");
+                    .HasColumnName("start_date");
 
-                entity.Property(e => e.Done).HasColumnName("done");
+                entity.Property(e => e.DueDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("due_date");
+
+                entity.Property(e => e.Status).HasColumnName("status");
+                entity.Property(e => e.Priority).HasColumnName("priority");
 
                 entity.Property(e => e.ManagerId).HasColumnName("manager_id");
 

@@ -46,8 +46,6 @@ export class PlanningKanbanComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource.load();
-
     for(const status of statusList) {
       this.kanbanDataSource.push({
         status: <Status>status,

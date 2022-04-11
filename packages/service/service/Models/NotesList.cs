@@ -9,10 +9,12 @@ namespace service.Models
         public int? ContactId { get; set; }
         public int? ManagerId { get; set; }
         public int? NoteId { get; set; }
+        public int? TaskId { get; set; }
         public DateTime? Date { get; set; }
 
         public virtual Contact? Contact { get; set; }
         public virtual Manager? Manager { get; set; }
         public virtual Note? Note { get; set; }
+        public virtual Task? Task { get; set; }
     }
 }

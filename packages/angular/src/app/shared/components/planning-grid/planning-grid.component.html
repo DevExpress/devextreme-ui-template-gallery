@@ -37,16 +37,11 @@
   </dxi-column>
 
   <div *dxTemplate="let c of 'cellPriorityTemplate'">
-    <div class="cell-priority {{ c.data.priority }}">
-      <div class="separator"></div>
-      <span>{{ c.data.priority }}</span>
-    </div>
+    <task-priority [value]="c.data.priority"></task-priority>
   </div>
 
   <div *dxTemplate="let c of 'cellStatusTemplate'">
-    <div class="cell-status">
-      <span class="{{ spaceToUnderscore(c.data.status) }}">{{ c.data.status }}</span>
-    </div>
+    <task-status [value]="c.data.status"></task-status>
   </div>
 
 </dx-data-grid>

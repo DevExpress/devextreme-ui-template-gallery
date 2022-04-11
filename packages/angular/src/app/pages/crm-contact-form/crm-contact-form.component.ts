@@ -15,7 +15,11 @@ import {
   DxTileViewModule,
   DxToolbarModule,
 } from 'devextreme-angular';
-import { ActivitiesModule } from 'src/app/shared/components/activities/activities.component';
+import {
+  ActivitiesModule,
+  NotesModule,
+  MessagesModule,
+} from 'src/app/shared/components'
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -103,6 +107,8 @@ export class CrmContactFormComponent implements OnInit {
     DxCheckBoxModule,
     DxTileViewModule,
     ActivitiesModule,
+    NotesModule,
+    MessagesModule,
 
     CommonModule
   ],

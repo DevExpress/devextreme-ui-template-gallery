@@ -1,0 +1,107 @@
+@use "../../../variables" as *;
+@use "sass:math";
+
+$left-panel-width: 400px;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+}
+
+@include separator();
+
+::ng-deep {
+  .dx-toolbar {
+    .toolbar-header {
+        @include header();
+    }
+  }
+
+  .left .info .value {
+      span.status,
+      .priority span {
+          font-size: 16px;
+      }
+
+  }
+}
+
+.view-wrapper {
+  flex-direction: column;
+
+  .panels {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -20px;
+
+    .left {
+        flex-basis: $left-panel-width;
+        flex-grow: 1;
+        padding-right: 20px;
+    }
+
+    .right {
+        flex-grow: 1;
+        flex-basis: calc(100% - #{$left-panel-width} - 20px);
+        min-width: 360px;
+        padding-right: 20px;
+
+        .tab-content {
+            padding: 20px;
+
+            &.colored {
+                border-top: 1px solid $base-border-color;
+                background-color: $side-panel-background;
+            }
+
+            .tiles-header {
+                font-size: 16px;
+                font-weight: 700;
+                padding-bottom: 12px;
+            }
+
+            .add-tile {
+                margin-bottom: 30px;
+            }
+
+            .tile {
+                border-radius: 4px;
+                background: $side-panel-background;
+                padding: 16px;
+                width: 320px;
+                margin: 0 10px 10px 0;
+                display: inline-block;
+
+                .name {
+                    font-size: 16px;
+                    font-weight: 700;
+                    padding-bottom: 8px;
+                }
+
+                .product-info {
+                    font-size: 12px;
+                    padding-bottom: 16px;
+                    .total {
+                        font-size: 16px;
+                    }
+                }
+
+                .owner {
+                    color: rgba(117, 117, 117, 0.87);
+                    font-size: 14px;
+                    .owner-name {
+                        color: $base-text-color;
+                    }
+                }
+            }
+        }
+    }
+  }
+  
+  .panels-header {
+    font-size: 16px;
+    font-weight: 700;
+  }
+}

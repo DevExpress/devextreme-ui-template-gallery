@@ -14,6 +14,7 @@ jspm_packages/
 *.tgz
 *.user
 
+.DS_Store
 build
 devextreme-rwa-demos
 packages/angular/src/resize-listener.js
@@ -26,4 +27,3 @@ packages/service/.vs
 packages/testing/pids.json
 packages/testing/screenshots
 packages/testing/testing
-packages/.DS_Store

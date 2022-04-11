@@ -8,8 +8,10 @@ namespace service.Models
         public int Id { get; set; }
         public int? ContactId { get; set; }
         public int? ManagerId { get; set; }
-        public int? Done { get; set; }
-        public DateTime? Date { get; set; }
+        public string? Status { get; set; }
+        public string? Priority { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? DueDate { get; set; }
         public int? TaskId { get; set; }
 
         public virtual Contact? Contact { get; set; }

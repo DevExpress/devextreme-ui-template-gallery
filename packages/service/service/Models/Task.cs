@@ -14,5 +14,8 @@ namespace service.Models
         public string? Task1 { get; set; }
 
         public virtual ICollection<TasksList> TasksLists { get; set; }
+        public virtual ICollection<ActivitiesList> ActivitiesLists { get; set; }
+        public virtual ICollection<MessagesList> MessagesLists { get; set; }
+        public virtual ICollection<NotesList> NotesLists { get; set; }
     }
 }
