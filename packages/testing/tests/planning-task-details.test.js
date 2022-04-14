@@ -24,7 +24,6 @@ packages.forEach(pkg => {
                     if(screenMode[0] === 400) {
                         await t.click('.view-wrapper .dx-icon-overflow');
                     }
-                    await t.click('.dx-icon-refresh');
                 }
     
                 await t.expect(Selector('.toolbar-header').withText('Call to clarify customer requirements.').exists).ok();
