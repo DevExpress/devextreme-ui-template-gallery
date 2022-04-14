@@ -12,7 +12,7 @@ const setEmbeddedMode = ClientFunction((embed) => {
 packages.forEach(pkg => {
     [false, true].forEach(embedded => {
         screenModes.forEach(screenMode => {
-            test(`Crm contact list (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async t => {
+            test(`Planning task list (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async t => {
                 const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
                 await t.resizeWindow(...screenMode);
