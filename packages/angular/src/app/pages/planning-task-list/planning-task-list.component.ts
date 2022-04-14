@@ -9,19 +9,13 @@ import {
   DxToolbarModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
-
-import DataSource from 'devextreme/data/data_source';
-
 import {
   PlanningKanbanModule,
   PlaningGridModule,
   PlanningGridComponent,
 } from 'src/app/shared/components';
-
-import { TaskType } from 'src/app/shared/types/TaskType';
 import { tabPanelItems } from 'src/app/shared/types/resource';
 import { getTasks } from 'dx-rwa-data';
-
 
 @Component({
   // selector: 'app-planing-task-list',

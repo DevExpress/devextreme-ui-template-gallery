@@ -20,30 +20,6 @@
   display: flex;
   align-items: center;
 
-  &.Low {
-    color: #D3A268;
-
-    .separator {
-      background: #D3A268;
-    }
-  }
-
-  &.Normal {
-    color: #6FBACA;
-
-    .separator {
-      background: #6FBACA;
-    }
-  }
-
-  &.Hight {
-    color: #FF5722;
-
-    .separator {
-      background: #FF5722;
-    }
-  }
-
   .separator {
     width: 2px;
     height: 18px;

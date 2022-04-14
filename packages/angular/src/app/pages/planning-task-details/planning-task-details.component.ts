@@ -26,7 +26,6 @@ import { getTask } from 'dx-rwa-data';
 export class PlaningTaskDetailsComponent implements OnInit {
   task: any;
 
-
   taskId = 1;
   load = true;
 
@@ -48,7 +47,6 @@ export class PlaningTaskDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 }
 

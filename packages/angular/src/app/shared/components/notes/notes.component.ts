@@ -23,6 +23,7 @@ export class NotesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.items = Promise.resolve(this.items);
   }
 }
 

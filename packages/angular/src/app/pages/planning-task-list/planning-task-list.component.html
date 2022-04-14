@@ -101,7 +101,6 @@
       <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
         <planning-grid
           #planningDataGrid
-          [dataSource]="dataSource"
           (tabValueChanged)="tabValueChange($event)"
         ></planning-grid>
       </div>
@@ -109,9 +108,6 @@
         <planning-kanban [dataSource]="dataSource">
         </planning-kanban>
       </div>
-      <!-- <div *ngSwitchCase="tabPanelItems[2].text" class="gantt">
-        <span>Gantt</span>
-      </div> -->
     </div>
 </ng-template>
 <ng-template #loading>

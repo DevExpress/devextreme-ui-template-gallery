@@ -15,10 +15,11 @@ import {
 import { exportDataGrid } from 'devextreme/excel_exporter';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
-import DataSource from 'devextreme/data/data_source';
+import CustomStore from 'devextreme/data/custom_store';
 import { priorityList } from 'src/app/shared/types/priorety';
 import { statusList } from 'src/app/shared/types/statuses';
 import { TaskType } from 'src/app/shared/types/TaskType';
+import { getTasks } from 'dx-rwa-data';
 
 @Component({
   selector: 'planning-grid',
@@ -26,7 +27,6 @@ import { TaskType } from 'src/app/shared/types/TaskType';
   styleUrls: ['./planning-grid.component.scss']
 })
 export class PlanningGridComponent implements OnInit {
-  @Input() dataSource: any[];
   @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
 
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
@@ -59,7 +59,13 @@ export class PlanningGridComponent implements OnInit {
   statusList = statusList;
   priorityList = priorityList;
 
+  dataSource: CustomStore;
+
   constructor() {
+    this.dataSource = new CustomStore({
+      key: 'id',
+      load: getTasks
+    });
   }
 
   onRowPreparedGrid = (e) => {

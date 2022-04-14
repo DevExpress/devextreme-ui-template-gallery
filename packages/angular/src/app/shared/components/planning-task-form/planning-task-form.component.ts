@@ -33,8 +33,6 @@ export class PlanningTaskFormComponent implements OnInit {
 
   isEmpty = (value: any): boolean => value === undefined || value === null;
 
-  parseDate = (date: Date) => `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-
   toggleEdit() {
     this.edit = !this.edit;
   }

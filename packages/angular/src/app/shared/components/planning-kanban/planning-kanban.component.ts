@@ -5,9 +5,9 @@ import {
   DxSortableModule,
   DxButtonModule,
 } from 'devextreme-angular';
-import DataSource from 'devextreme/data/data_source';
+import CustomStore from 'devextreme/data/custom_store';
 import { Status, statusList } from 'src/app/shared/types/statuses';
-import { TaskType } from 'src/app/shared/types/TaskType';
+import { getTasks } from 'dx-rwa-data';
 
 @Component({
   selector: 'planning-kanban',
@@ -15,7 +15,7 @@ import { TaskType } from 'src/app/shared/types/TaskType';
   styleUrls: ['./planning-kanban.component.scss']
 })
 export class PlanningKanbanComponent implements OnInit {
-  @Input() dataSource: any[] = [];
+  dataSource: Array<any>;
 
   kanbanDataSource: Array<{
     status: Status,
@@ -32,8 +32,6 @@ export class PlanningKanbanComponent implements OnInit {
 
   getTaskByStatus = (status: Status) : Array<any> => this.dataSource.filter(item => item.status === status);
 
-  getFormatDate = (date: Date) => `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
-
   getFirstLetterName = (name: string) => name.split(' ').map(l => l[0]).join('');
 
   onTaskDragStart(e) {
@@ -46,12 +44,17 @@ export class PlanningKanbanComponent implements OnInit {
   }
 
   ngOnInit() {
-    for(const status of statusList) {
-      this.kanbanDataSource.push({
-        status: <Status>status,
-        tasks: this.getTaskByStatus(<Status>status)
-      });
-    }
+    getTasks().then(tasks => {
+      this.dataSource = tasks;
+      
+      for(const status of statusList) {
+        this.kanbanDataSource.push({
+          status: <Status>status,
+          tasks: this.getTaskByStatus(<Status>status)
+        });
+      }
+    })
+
   }
 }
 
