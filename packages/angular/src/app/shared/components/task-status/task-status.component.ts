@@ -1,5 +1,5 @@
 import { Component, Input, NgModule, OnInit } from '@angular/core';
-import { Status } from 'src/app/shared/types/statuses';
+import { Status } from 'src/app/shared/types/status';
 
 @Component({
   selector: 'task-status',

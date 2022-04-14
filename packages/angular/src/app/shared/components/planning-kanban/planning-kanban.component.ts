@@ -6,7 +6,7 @@ import {
   DxButtonModule,
 } from 'devextreme-angular';
 import CustomStore from 'devextreme/data/custom_store';
-import { Status, statusList } from 'src/app/shared/types/statuses';
+import { Status, statusList } from 'src/app/shared/types/status';
 import { getTasks } from 'dx-rwa-data';
 
 @Component({

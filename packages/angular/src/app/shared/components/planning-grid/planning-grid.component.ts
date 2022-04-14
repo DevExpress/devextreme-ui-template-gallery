@@ -16,9 +16,9 @@ import { exportDataGrid } from 'devextreme/excel_exporter';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import CustomStore from 'devextreme/data/custom_store';
-import { priorityList } from 'src/app/shared/types/priorety';
-import { statusList } from 'src/app/shared/types/statuses';
-import { TaskType } from 'src/app/shared/types/TaskType';
+import { priorityList } from 'src/app/shared/types/priority';
+import { statusList } from 'src/app/shared/types/status';
+import { TaskType } from 'src/app/shared/types/task';
 import { getTasks } from 'dx-rwa-data';
 
 @Component({

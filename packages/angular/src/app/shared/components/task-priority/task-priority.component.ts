@@ -1,5 +1,5 @@
 import { Component, Input, NgModule, OnInit } from '@angular/core';
-import { Priority } from 'src/app/shared/types/priorety';
+import { Priority } from 'src/app/shared/types/priority';
 
 @Component({
   selector: 'task-priority',

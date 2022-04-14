@@ -12,9 +12,9 @@ import {
   TaskStatusModule,
   TaskFromDateModule,
 } from '../';
-import { priorityList } from 'src/app/shared/types/priorety';
-import { statusList } from 'src/app/shared/types/statuses';
-import { TaskType } from 'src/app/shared/types/TaskType';
+import { priorityList } from 'src/app/shared/types/priority';
+import { statusList } from 'src/app/shared/types/status';
+import { TaskType } from 'src/app/shared/types/task';
 
 @Component({
   selector: 'app-planning-task-form',

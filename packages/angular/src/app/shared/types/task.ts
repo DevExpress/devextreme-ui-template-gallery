@@ -1,5 +1,5 @@
-import { Status } from './statuses';
-import { Priority } from './priorety';
+import { Status } from './status';
+import { Priority } from './priority';
 
 export type TaskType = {
   id: number
