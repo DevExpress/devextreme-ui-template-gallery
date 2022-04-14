@@ -23,7 +23,7 @@ import { getTask } from 'dx-rwa-data';
   templateUrl: './planning-task-details.component.html',
   styleUrls: ['./planning-task-details.component.scss']
 })
-export class PlaningTaskDetailsComponent implements OnInit {
+export class PlanningTaskDetailsComponent implements OnInit {
   task: any;
 
   taskId = 1;
@@ -70,6 +70,6 @@ export class PlaningTaskDetailsComponent implements OnInit {
   ],
   providers: [],
   exports: [],
-  declarations: [PlaningTaskDetailsComponent]
+  declarations: [PlanningTaskDetailsComponent]
 })
 export class PlaningTaskDetailsModel { }
