@@ -11,18 +11,18 @@ import {
 } from 'devextreme-angular';
 import {
   PlanningKanbanModule,
-  PlaningGridModule,
+  PlanningGridModule,
   PlanningGridComponent,
 } from 'src/app/shared/components';
 import { tabPanelItems } from 'src/app/shared/types/resource';
 import { getTasks } from 'dx-rwa-data';
 
 @Component({
-  // selector: 'app-planing-task-list',
+  // selector: 'app-planning-task-list',
   templateUrl: './planning-task-list.component.html',
   styleUrls: ['./planning-task-list.component.scss']
 })
-export class PlaningTaskListComponent implements OnInit {
+export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: PlanningGridComponent;
 
   @Output()
@@ -87,12 +87,12 @@ export class PlaningTaskListComponent implements OnInit {
     DxLoadPanelModule,
 
     PlanningKanbanModule,
-    PlaningGridModule,
+    PlanningGridModule,
 
     CommonModule
   ],
   providers: [],
   exports: [],
-  declarations: [PlaningTaskListComponent]
+  declarations: [PlanningTaskListComponent]
 })
-export class PlaningTaskListModule { }
+export class PlanningTaskListModule { }

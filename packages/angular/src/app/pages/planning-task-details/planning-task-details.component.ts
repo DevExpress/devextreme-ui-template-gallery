@@ -72,4 +72,4 @@ export class PlanningTaskDetailsComponent implements OnInit {
   exports: [],
   declarations: [PlanningTaskDetailsComponent]
 })
-export class PlaningTaskDetailsModel { }
+export class PlanningTaskDetailsModel { }

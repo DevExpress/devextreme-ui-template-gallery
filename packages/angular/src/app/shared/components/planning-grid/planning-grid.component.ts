@@ -118,4 +118,4 @@ export class PlanningGridComponent implements OnInit {
   exports: [PlanningGridComponent],
   declarations: [PlanningGridComponent]
 })
-export class PlaningGridModule { }
+export class PlanningGridModule { }
