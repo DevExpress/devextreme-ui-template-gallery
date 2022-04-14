@@ -45,7 +45,7 @@ packages.forEach(pkg => {
                 await t.navigateTo(`http://localhost:${pkg.port}/#/planning-task-details`);
                 await setEmbeddedMode(embedded);
     
-                await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
+                await t.expect(Selector('.toolbar-header').withText('Call to clarify customer requirements.').exists).ok();
                 await t.expect(Selector('.dx-datagrid .dx-checkbox-indeterminate').exists).ok();
     
                 for(let i = 0; i < 3; i++) {
