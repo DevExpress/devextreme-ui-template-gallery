@@ -28,7 +28,6 @@ packages.forEach(pkg => {
                 }
     
                 await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
-                await t.expect(Selector('.dx-datagrid .dx-checkbox-checked').exists).ok();
                 await takeScreenshot(`crm-contact-form-${pkg.name}-embed=${embedded}-1-${screenMode[0]}`, 'body');
                 await t.click(Selector('.dx-button[aria-label=Edit]'));
                 await takeScreenshot(`crm-contact-form-${pkg.name}-embed=${embedded}-2-${screenMode[0]}`, 'body');
@@ -52,7 +51,7 @@ packages.forEach(pkg => {
                 }
     
                 await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
-                await t.expect(Selector('.dx-datagrid .dx-checkbox-checked').exists).ok();
+                await t.expect(Selector('.dx-datagrid .dx-checkbox-indeterminate').exists).ok();
     
                 for(let i = 0; i < 5; i++) {
                     await t.click(Selector('.dx-tab').nth(i));
