@@ -45,10 +45,6 @@ packages.forEach(pkg => {
                 await t.navigateTo(`http://localhost:${pkg.port}/#/planning-task-details`);
                 await setEmbeddedMode(embedded);
     
-                if(embedded) {
-                    await t.click('.dx-icon-refresh');
-                }
-    
                 await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
                 await t.expect(Selector('.dx-datagrid .dx-checkbox-indeterminate').exists).ok();
     
