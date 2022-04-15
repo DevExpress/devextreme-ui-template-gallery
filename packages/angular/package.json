@@ -23,6 +23,8 @@
     "devextreme-angular": "21.2.4",
     "devextreme-schematics": "^1.2.16",
     "dx-rwa-data": "^1.0.0",
+    "exceljs": "^3.10.0",
+    "file-saver-es": "^2.0.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

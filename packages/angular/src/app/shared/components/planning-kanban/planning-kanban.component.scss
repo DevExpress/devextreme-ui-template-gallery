@@ -1,8 +1,8 @@
-@use "../../../variables" as *;
+@use "../../../../variables" as *;
 
 $low-priorety-color: #DFB32F;
 $normal-priorety-color: #6FBACA;
-$hight-priorety-color: #D9534F;
+$high-priorety-color: #D9534F;
 
 #kanban {
   white-space: nowrap;
@@ -79,13 +79,13 @@ $hight-priorety-color: #D9534F;
     }
   }
 
-  &.priority-hight {
+  &.priority-high {
     .card-priority {
-      background: $hight-priorety-color;
+      background: $high-priorety-color;
     }
 
     span.priority {
-      color: $hight-priorety-color;
+      color: $high-priorety-color;
     }
   }
 }

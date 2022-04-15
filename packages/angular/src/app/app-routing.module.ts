@@ -6,7 +6,8 @@ import { AuthGuardService } from './shared/services';
 
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactFormComponent } from './pages/crm-contact-form/crm-contact-form.component';
-import { PlaningTaskListComponent } from './pages/planning-task-list/planning-task-list.component';
+import { PlanningTaskListComponent } from './pages/planning-task-list/planning-task-list.component';
+import { PlanningTaskDetailsComponent } from './pages/planning-task-details/planning-task-details.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,12 @@ const routes: Routes = [
   },
   {
     path: 'planning-task-list',
-    component: PlaningTaskListComponent,
+    component: PlanningTaskListComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'planning-task-details',
+    component: PlanningTaskDetailsComponent,
     canActivate: [ AuthGuardService ]
   },
   {

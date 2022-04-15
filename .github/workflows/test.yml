@@ -47,6 +47,9 @@ jobs:
       with:
         node-version: '16'
 
+    - name: Set NPM version
+      run: npm i npm@7 -g
+
     - name: Restore npm cache
       uses: actions/cache@v2
       with:

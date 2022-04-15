@@ -12,7 +12,7 @@ const setEmbeddedMode = ClientFunction((embed) => {
 packages.forEach(pkg => {
     [false, true].forEach(embedded => {
         screenModes.forEach(screenMode => {
-            test(`Crm contact list (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async t => {
+            test(`Planning task list (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async t => {
                 const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
                 await t.resizeWindow(...screenMode);
@@ -23,8 +23,6 @@ packages.forEach(pkg => {
                 await takeScreenshot(`planning-task-list-${pkg.name}-embed=${embedded}-1-${screenMode[0]}`, 'body');
                 await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1))
                 await takeScreenshot(`planning-task-list-${pkg.name}-embed=${embedded}-2-${screenMode[0]}`, 'body');
-                await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2))
-                await takeScreenshot(`planning-task-list-${pkg.name}-embed=${embedded}-3-${screenMode[0]}`, 'body');
 
                 await t
                     .expect(compareResults.isValid())

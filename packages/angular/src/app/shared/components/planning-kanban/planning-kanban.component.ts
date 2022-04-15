@@ -1,13 +1,13 @@
-import { Component, OnInit, NgModule, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, NgModule, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxScrollViewModule,
   DxSortableModule,
   DxButtonModule,
 } from 'devextreme-angular';
-import DataSource from 'devextreme/data/data_source';
-
-import { TaskType, Status, Priority } from '../../types/planning-task-list';
+import CustomStore from 'devextreme/data/custom_store';
+import { Status, statusList } from 'src/app/shared/types/status';
+import { getTasks } from 'dx-rwa-data';
 
 @Component({
   selector: 'planning-kanban',
@@ -15,19 +15,14 @@ import { TaskType, Status, Priority } from '../../types/planning-task-list';
   styleUrls: ['./planning-kanban.component.scss']
 })
 export class PlanningKanbanComponent implements OnInit {
-  @Input() dataSource: DataSource;
+  dataSource: Array<any>;
 
   kanbanDataSource: Array<{
     status: Status,
-    tasks: Array<TaskType>
+    tasks: any[]
   }> = [];
 
-  statuses: Array<Status> = [];
-
   constructor() {
-    for(const status in Status) {
-      this.statuses.push(Status[status]);
-    }
   }
 
   onListReorder = (e) => {
@@ -35,9 +30,7 @@ export class PlanningKanbanComponent implements OnInit {
     this.kanbanDataSource.splice(e.toIndex, 0, list);
   }
 
-  getTaskByStatus = (status: Status): Array<TaskType> => this.dataSource.items().filter(item => item.status === status);
-
-  getFormatDate = (date: Date) => `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
+  getTaskByStatus = (status: Status) : Array<any> => this.dataSource.filter(item => item.status === status);
 
   getFirstLetterName = (name: string) => name.split(' ').map(l => l[0]).join('');
 
@@ -51,14 +44,17 @@ export class PlanningKanbanComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource.load();
+    getTasks().then(tasks => {
+      this.dataSource = tasks;
+      
+      for(const status of statusList) {
+        this.kanbanDataSource.push({
+          status: <Status>status,
+          tasks: this.getTaskByStatus(<Status>status)
+        });
+      }
+    })
 
-    for(const status in Status) {
-      this.kanbanDataSource.push({
-        status: Status[status],
-        tasks: this.getTaskByStatus(Status[status])
-      });
-    }
   }
 }
 

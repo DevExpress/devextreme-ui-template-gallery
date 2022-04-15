@@ -3,7 +3,7 @@
         <div class="activity">
             <div class="name">{{ item.name }}</div>
             <div class="date"  [ngClass]="{'by': showBy}">
-                <div class="title">{{ item.date | date: 'dd/MM/yyyy' }}</div>
+                <div class="title">{{ item.date | date: 'MM/dd/yyyy' }}</div>
                 <div *ngIf="showBy">by</div>
                 <div class="title">{{ item.manager }}</div>
             </div>

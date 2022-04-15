@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
+import { Component, OnInit, NgModule, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -7,163 +7,69 @@ import {
   DxDropDownButtonModule,
   DxTextBoxModule,
   DxToolbarModule,
-  DxProgressBarModule,
-
-  DxTabsComponent,
-  DxDataGridComponent
+  DxLoadPanelModule,
 } from 'devextreme-angular';
-import ArrayStore from 'devextreme/data/array_store';
-import DataSource from 'devextreme/data/data_source';
-
-import { PlanningKanbanModule } from '../../components/planning-kanban/planning-kanban.component';
-import { TaskType, Status, Priority } from '../../types/planning-task-list';
+import {
+  PlanningKanbanModule,
+  PlanningGridModule,
+  PlanningGridComponent,
+} from 'src/app/shared/components';
+import { tabPanelItems } from 'src/app/shared/types/resource';
+import { getTasks } from 'dx-rwa-data';
 
 @Component({
-  // selector: 'app-planing-task-list',
+  // selector: 'app-planning-task-list',
   templateUrl: './planning-task-list.component.html',
   styleUrls: ['./planning-task-list.component.scss']
 })
-export class PlaningTaskListComponent implements OnInit {
-  @ViewChild('dataGridTasks', { static: false }) dataGrid: DxDataGridComponent;
+export class PlanningTaskListComponent implements OnInit {
+  @ViewChild('planningDataGrid', { static: false }) dataGrid: PlanningGridComponent;
 
-  priorityList: Array<Priority> = [];
-  statusList: Array<Status> = [];
+  @Output()
+  tabValueChange = (e) => {
+    this.displayTaskComponent = e.itemData.text;
+    this.displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
+  }
 
-  data: Array<TaskType> = [
-    {
-      id: 1,
-      name: 'Task Name',
-      description: 'Descr',
-      company: 'DevEx',
-      priority: Priority.Low,
-      startDate: new Date(1),
-      dueDate: new Date,
-      owner: 'First Last',
-      status: Status.Open,
-    },
-    {
-      id: 2,
-      name: 'Task Name',
-      description: 'Descr',
-      company: 'DevEx',
-      priority: Priority.Normal,
-      startDate: new Date(2),
-      dueDate: new Date,
-      owner: 'First Last',
-      status: Status.Deferred,
-    },
-    {
-      id: 3,
-      name: 'Task Name',
-      description: 'Descr',
-      company: 'DevEx',
-      priority: Priority.Hight,
-      startDate: new Date(3),
-      dueDate: new Date,
-      owner: 'First Last',
-      status: Status.Completed,
-    },
-    {
-      id: 4,
-      name: 'Task Name',
-      description: 'Descr',
-      company: 'DevEx',
-      priority: Priority.Low,
-      startDate: new Date(4),
-      dueDate: new Date,
-      owner: 'First Last',
-      status: Status.InProgress,
-    },
-    {
-      id: 5,
-      name: 'Task Name',
-      description: 'Descr',
-      company: 'DevEx',
-      priority: Priority.Hight,
-      startDate: new Date(5),
-      dueDate: new Date,
-      owner: 'First Last',
-      status: Status.Deferred,
-    }
-  ];
-  dataSource: DataSource;
+  tabPanelItems = tabPanelItems;
 
-  tabPanelItems: DxTabsComponent['items'] = [
-    {
-      text: 'List'
-    },
-    {
-      text: 'Kanban Board'
-    },
-    {
-      text: 'Gantt'
-    }
-  ];
+  dataSource: any[];
 
-  displayTaskComponent: string = this.tabPanelItems[0].text;
-
-  priorityValidationPattern = new RegExp(`${Priority.Low}|${Priority.Normal}|${Priority.Hight}`);
+  displayTaskComponent = this.tabPanelItems[0].text;
+  displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
 
   constructor() {
-    this.dataSource = new DataSource({
-      key: 'id',
-      store: new ArrayStore({
-        key: 'id',
-        data: this.data,
-      })
+    this.refresh = this.refresh.bind(this);
+
+    getTasks().then((data) => {
+      this.dataSource = data;
+      this.load = false;
     });
 
-    for(const status in Status) {
-      this.statusList.push(Status[status]);
-    }
-
-    for(const priority in Priority) {
-      this.priorityList.push(Priority[priority]);
-    }
   }
 
-  spaceToUnderscore = (value) => value.replace(/\ /g, '-');
+  addDataGridRow = () => this.dataGrid.addRow();
 
-  customizeHyphetText = (cellInfo) => cellInfo.value ?? '-';
+  refreshDataGrid = () => this.dataGrid.refresh();
 
-  customizeDateText = (cellInfo) => {
-    if(!cellInfo.value) return this.customizeHyphetText(cellInfo);
+  chooseColumnDataGrid = () => this.dataGrid.showColumnChooser();
+  
+  searchDataGrid = (e) => this.dataGrid.search(e.component.instance().option('text'));
 
-    const date: Date = new Date(cellInfo.value);
-    return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+  exportDataGrid = (e) => {
+    const selectedRowsOnly = e.itemData.text.includes('selected');
+    this.dataGrid.onExporting(e, selectedRowsOnly);
   }
 
-  onRowPreparedGrid = (e) => {
-    const { rowType, data, rowElement }:
-      { rowType: string, data: TaskType, rowElement: HTMLElement  } = e;
+  load = true;
 
-    if(rowType === 'header') return;
-
-    if(data.status === Status.Completed) {
-      rowElement.classList.add('completed');
-    }
-  }
-
-  tabValueChange = (e) => {
-    const { itemData } = e;
-    this.displayTaskComponent = itemData.text;
-  }
-
-  refreshGrid = () => {
-    this.dataGrid.instance.refresh();
-  }
-
-  dueDateValid = (e) => {
-    const { startDate, dueDate, brokenRules } = e.newData;
-    if(startDate === undefined || dueDate === undefined) {
-      e.errorText = `Need set 'Start Date' and 'Due Date'`;
-      e.isValid = false;
-    } else if(dueDate <= startDate) {
-      e.errorText = `'Start Date' must be greater 'Due Date'`;
-      e.isValid = false;
-    } else if (brokenRules.length !== 0) {
-      e.errorText = 'All fields must be filled'
-    }
+  @Output()
+  refresh() {
+    this.load = true;
+    getTasks().then((data) => {
+      this.dataSource = data;
+      this.load = false;
+    });
   }
 
   ngOnInit(): void {
@@ -178,13 +84,15 @@ export class PlaningTaskListComponent implements OnInit {
     DxDropDownButtonModule,
     DxTextBoxModule,
     DxToolbarModule,
-    DxProgressBarModule,
+    DxLoadPanelModule,
+
     PlanningKanbanModule,
+    PlanningGridModule,
 
     CommonModule
   ],
   providers: [],
   exports: [],
-  declarations: [PlaningTaskListComponent]
+  declarations: [PlanningTaskListComponent]
 })
-export class PlaningTaskListModule { }
+export class PlanningTaskListModule { }
