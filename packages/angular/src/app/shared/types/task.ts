@@ -3,7 +3,7 @@ import { Priority } from './priority';
 
 export type TaskType = {
   id: number
-  name: string,
+  text: string,
   description: string,
   company: string,
   priority: Priority,

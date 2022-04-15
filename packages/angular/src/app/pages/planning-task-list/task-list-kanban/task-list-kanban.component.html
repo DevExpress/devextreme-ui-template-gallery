@@ -28,27 +28,19 @@
             (onReorder)="onTaskDrop($event)"
             (onAdd)="onTaskDrop($event)"
           >
-            <div
-              class="card dx-card dx-theme-text-color dx-theme-background-color"
-              *ngFor="let task of dataItem.tasks"
-            >
-              <div class="card-wrapper" [ngClass]="'priority-' + task.priority.toLowerCase()">
-                <div class="card-priority"></div>
-                <span class="edit dx-icon-edit"></span>
-                <div class="card-content">
-                  <div class="card-subject dx-theme-text-color">{{ task.text }}</div>
-                  <div class="card-data">
-                    <span class="priority">{{ task.priority }}</span>
-                    <span class="date dx-theme-text-color">{{ task.dueDate | date: 'MM/dd/yyyy' }}</span>
-                  </div>
-                  <div class="card-assignee">
-                    <span class="company dx-theme-text-color">{{ task.company }}</span>
-                    <div class="circle" [attr.data-letters]="getFirstLetterName(task.owner)"></div>
-                  </div>
-                </div>
+            <div *ngIf="!!dataItem.tasks.length then displayCards else displayEmptyCard"></div>
+            <ng-template #displayCards>
+              <div *ngFor="let task of dataItem.tasks">
+                <task-kanban-card
+                  [task]="task"
+                ></task-kanban-card>
               </div>
-            </div>
+            </ng-template>
+            <ng-template #displayEmptyCard>
+              <div class="empty-card"></div>
+            </ng-template>
           </dx-sortable>
+
           <div class="add-task">
             <dx-button
               icon="plus"

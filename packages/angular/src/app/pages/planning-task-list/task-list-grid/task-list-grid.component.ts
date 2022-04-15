@@ -11,7 +11,7 @@ import {
 import {
   TaskProirityModule,
   TaskStatusModule,
-} from '../';
+} from 'src/app/shared/components';
 import { exportDataGrid } from 'devextreme/excel_exporter';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
@@ -22,11 +22,11 @@ import { TaskType } from 'src/app/shared/types/task';
 import { getTasks } from 'dx-rwa-data';
 
 @Component({
-  selector: 'planning-grid',
-  templateUrl: './planning-grid.component.html',
-  styleUrls: ['./planning-grid.component.scss']
+  selector: 'task-list-grid',
+  templateUrl: './task-list-grid.component.html',
+  styleUrls: ['./task-list-grid.component.scss']
 })
-export class PlanningGridComponent implements OnInit {
+export class TaskListGridComponent implements OnInit {
   @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
 
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
@@ -115,7 +115,7 @@ export class PlanningGridComponent implements OnInit {
     CommonModule
   ],
   providers: [],
-  exports: [PlanningGridComponent],
-  declarations: [PlanningGridComponent]
+  exports: [TaskListGridComponent],
+  declarations: [TaskListGridComponent]
 })
-export class PlanningGridModule { }
+export class TaskListModule { }

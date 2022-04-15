@@ -99,14 +99,15 @@
   <ng-template [ngIf]="!load" [ngIfElse]="loading">
     <div class="task-list" [ngSwitch]="displayTaskComponent">
       <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
-        <planning-grid
+        <task-list-grid
           #planningDataGrid
           (tabValueChanged)="tabValueChange($event)"
-        ></planning-grid>
+        ></task-list-grid>
       </div>
       <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
-        <planning-kanban [dataSource]="dataSource">
-        </planning-kanban>
+        <task-list-kanban
+          [dataSource]="dataSource"
+        ></task-list-kanban>
       </div>
     </div>
 </ng-template>

@@ -11,7 +11,5 @@ export * from './notes/notes.component';
 export * from './messages/messages.component';
 export * from './task-priority/task-priority.component';
 export * from './task-status/task-status.component';
-export * from './planning-grid/planning-grid.component';
-export * from './planning-kanban/planning-kanban.component';
 export * from './task-form-date/task-form-date.component';
 export * from './planning-task-form/planning-task-form.component';

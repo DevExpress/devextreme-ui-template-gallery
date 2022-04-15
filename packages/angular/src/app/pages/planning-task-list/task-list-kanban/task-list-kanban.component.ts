@@ -1,50 +1,53 @@
-import { Component, OnInit, NgModule, Input } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxScrollViewModule,
   DxSortableModule,
   DxButtonModule,
 } from 'devextreme-angular';
-import CustomStore from 'devextreme/data/custom_store';
+import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable'
+import { TaskKanbanCardModule } from './task-kanban-card/task-kanban-card.component';
+import { TaskType } from 'src/app/shared/types/task';
 import { Status, statusList } from 'src/app/shared/types/status';
 import { getTasks } from 'dx-rwa-data';
 
 @Component({
-  selector: 'planning-kanban',
-  templateUrl: './planning-kanban.component.html',
-  styleUrls: ['./planning-kanban.component.scss']
+  selector: 'task-list-kanban',
+  templateUrl: './task-list-kanban.component.html',
+  styleUrls: ['./task-list-kanban.component.scss']
 })
-export class PlanningKanbanComponent implements OnInit {
-  dataSource: Array<any>;
+export class TaskListKanbanComponent implements OnInit {
+  dataSource: Array<TaskType>;
 
   kanbanDataSource: Array<{
     status: Status,
-    tasks: any[]
+    tasks: TaskType[]
   }> = [];
+
+  load: boolean = false;
 
   constructor() {
   }
 
-  onListReorder = (e) => {
+  onListReorder = (e: ReorderEvent) => {
     const list = this.kanbanDataSource.splice(e.fromIndex, 1)[0];
     this.kanbanDataSource.splice(e.toIndex, 0, list);
   }
 
-  getTaskByStatus = (status: Status) : Array<any> => this.dataSource.filter(item => item.status === status);
+  getTaskByStatus = (status: Status) : Array<TaskType> => this.dataSource.filter(item => item.status === status);
 
-  getFirstLetterName = (name: string) => name.split(' ').map(l => l[0]).join('');
-
-  onTaskDragStart(e) {
+  onTaskDragStart(e: DragStartEvent) {
     e.itemData = e.fromData[e.fromIndex];
   }
 
-  onTaskDrop(e) {
+  onTaskDrop(e: ReorderEvent | AddEvent) {
     e.fromData.splice(e.fromIndex, 1);
     e.toData.splice(e.toIndex, 0, e.itemData);
   }
 
   ngOnInit() {
     getTasks().then(tasks => {
+      this.load = true;
       this.dataSource = tasks;
       
       for(const status of statusList) {
@@ -54,7 +57,6 @@ export class PlanningKanbanComponent implements OnInit {
         });
       }
     })
-
   }
 }
 
@@ -64,10 +66,12 @@ export class PlanningKanbanComponent implements OnInit {
     DxSortableModule,
     DxButtonModule,
 
+    TaskKanbanCardModule,
+
     CommonModule
   ],
   providers: [],
-  exports: [PlanningKanbanComponent],
-  declarations: [PlanningKanbanComponent]
+  exports: [TaskListKanbanComponent],
+  declarations: [TaskListKanbanComponent]
 })
-export class PlanningKanbanModule { }
+export class TaskListKanbanModule { }

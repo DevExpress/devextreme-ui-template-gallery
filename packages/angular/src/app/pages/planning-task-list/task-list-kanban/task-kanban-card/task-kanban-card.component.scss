@@ -1,43 +1,17 @@
-@use "../../../../variables" as *;
+@use "../../../../../variables" as *;
 
 $low-priorety-color: #DFB32F;
 $normal-priorety-color: #6FBACA;
 $high-priorety-color: #D9534F;
 
-#kanban {
-  white-space: nowrap;
-}
-
-.list {
-  border-radius: 4px;
-  margin: 10px;
-  background-color: $background-gray-color;
-  display: inline-block;
-  vertical-align: top;
-  white-space: normal;
-}
-
-.list-title {
-  font-size: 16px;
-  padding: 10px;
-  margin-bottom: -10px;
-  font-weight: bold;
-  cursor: pointer;
-
-  display: flex;
-  justify-content: space-between;
-
-  span.more {
-    font-size: 24px;
+@mixin priority($priorety-color) {
+  .card-priority {
+    background: $priorety-color;
   }
-}
 
-.scrollable-list {
-  width: 260px;
-}
-
-.sortable-cards {
-  min-height: 380px;
+  span.priority {
+    color: $priorety-color;
+  }
 }
 
 .card {
@@ -60,33 +34,15 @@ $high-priorety-color: #D9534F;
   }
 
   &.priority-low {
-    .card-priority {
-      background: $low-priorety-color;
-    }
-
-    span.priority {
-      color: $low-priorety-color;
-    }
+    @include priority($low-priorety-color);
   }
 
   &.priority-normal {
-    .card-priority {
-      background: $normal-priorety-color;
-    }
-
-    span.priority {
-      color: $normal-priorety-color;
-    }
+    @include priority($normal-priorety-color);
   }
 
   &.priority-high {
-    .card-priority {
-      background: $high-priorety-color;
-    }
-
-    span.priority {
-      color: $high-priorety-color;
-    }
+    @include priority($high-priorety-color);
   }
 }
 
@@ -143,16 +99,4 @@ $high-priorety-color: #D9534F;
   bottom: 10px;
   left: 10px;
   width: 4px;
-}
-
-.add-task {
-  padding: 10px;
-}
-
-::ng-deep {
-  .add-task {
-    .dx-icon, .dx-button-text {
-      color: $accent-color;
-    }
-  }
 }

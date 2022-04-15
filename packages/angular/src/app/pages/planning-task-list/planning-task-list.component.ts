@@ -9,11 +9,9 @@ import {
   DxToolbarModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
-import {
-  PlanningKanbanModule,
-  PlanningGridModule,
-  PlanningGridComponent,
-} from 'src/app/shared/components';
+import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component'
+import { TaskListKanbanModule } from './task-list-kanban/task-list-kanban.component';
+
 import { tabPanelItems } from 'src/app/shared/types/resource';
 import { getTasks } from 'dx-rwa-data';
 
@@ -23,7 +21,7 @@ import { getTasks } from 'dx-rwa-data';
   styleUrls: ['./planning-task-list.component.scss']
 })
 export class PlanningTaskListComponent implements OnInit {
-  @ViewChild('planningDataGrid', { static: false }) dataGrid: PlanningGridComponent;
+  @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
 
   @Output()
   tabValueChange = (e) => {
@@ -86,8 +84,8 @@ export class PlanningTaskListComponent implements OnInit {
     DxToolbarModule,
     DxLoadPanelModule,
 
-    PlanningKanbanModule,
-    PlanningGridModule,
+    TaskListKanbanModule,
+    TaskListModule,
 
     CommonModule
   ],
