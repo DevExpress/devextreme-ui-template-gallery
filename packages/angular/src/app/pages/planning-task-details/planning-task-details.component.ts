@@ -1,68 +1,73 @@
-import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  DxButtonModule,
   DxDropDownButtonModule,
   DxToolbarModule,
   DxTabPanelModule,
-  DxTextAreaModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
+import { TaskFormModule } from './task-form/task-form.component';
 import {
   ActivitiesModule,
   NotesModule,
   MessagesModule,
-  PlanningTaskFormModule,
   TaskProirityModule,
   TaskStatusModule,
 } from 'src/app/shared/components';
-import { getTask } from 'dx-rwa-data';
+import { TaskType } from 'src/app/shared/types/task';
+import { RwaService } from 'src/app/shared/services'
+import { Subscription } from 'rxjs';
 
 @Component({
   // selector: 'app-planning-task-details',
   templateUrl: './planning-task-details.component.html',
-  styleUrls: ['./planning-task-details.component.scss']
+  styleUrls: ['./planning-task-details.component.scss'],
+  providers: [RwaService]
 })
 export class PlanningTaskDetailsComponent implements OnInit {
-  task: any;
+  dataSubscription: Subscription;
+  task: TaskType;
 
   taskId = 1;
-  load = true;
+  isLoading: boolean;
 
-  constructor() { 
+  loadData = () => {
+    const task$ = this.service.getTask(this.taskId);
+
+    this.isLoading = true;
+    this.dataSubscription = task$.subscribe((data) => {
+      this.task = data;
+
+      this.isLoading = false;
+    });
+  }
+
+  constructor(private service: RwaService) {
     this.refresh = this.refresh.bind(this);
-
-    getTask(this.taskId).then((data) => {
-      this.task = data;
-      this.load = false;
-    });
   }
 
-  refresh() {
-    this.load = true;
-    getTask(this.taskId).then((data) => {
-      this.task = data;
-      this.load = false;
-    });
-  }
+  refresh = () => this.loadData();
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  ngonDestroy(): void {
+    this.dataSubscription.unsubscribe();
   }
 }
 
 @NgModule({
   imports: [
-    DxButtonModule,
     DxDropDownButtonModule,
     DxToolbarModule,
     DxTabPanelModule,
-    DxTextAreaModule,
     DxLoadPanelModule,
 
     ActivitiesModule,
     NotesModule,
     MessagesModule,
-    PlanningTaskFormModule,
+    TaskFormModule,
     TaskProirityModule,
     TaskStatusModule,
 

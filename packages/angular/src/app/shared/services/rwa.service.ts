@@ -13,4 +13,8 @@ export class RwaService {
     public getTasks(): Observable<TaskType[]> {
         return this.http.get<TaskType[]>(`${API_URL}/Employees/Tasks`);
     }
+
+    public getTask(id: number): Observable<TaskType> {
+        return this.http.get<TaskType>(`${API_URL}/Employees/Tasks/${id}`);
+    }
 }

@@ -20,7 +20,7 @@ type Message = {
 export class MessagesComponent implements OnInit {
   @Input() userName: string;
 
-  @Input() items: Array<Message> | Promise<Array<Message>> ;
+  @Input() items: Message[];
 
   constructor() {
   }
@@ -34,9 +34,7 @@ export class MessagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.items = Promise.resolve(this.items);
   }
-
 }
 
 @NgModule({

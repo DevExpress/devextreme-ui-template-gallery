@@ -11,7 +11,7 @@
         </dx-toolbar>
     </div>
     <div class="notes-content">
-        <div class="note dx-card" *ngFor="let note of items | async">
+        <div class="note dx-card" *ngFor="let note of items">
             <div class="note-title">
                 <div>{{ note.date | date: 'MM/dd/y' }} - {{ note.manager }}</div>
                 <div>

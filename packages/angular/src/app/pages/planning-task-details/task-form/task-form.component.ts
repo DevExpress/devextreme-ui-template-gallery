@@ -11,17 +11,17 @@ import {
   TaskProirityModule,
   TaskStatusModule,
   TaskFromDateModule,
-} from '../';
+} from 'src/app/shared/components';
 import { priorityList } from 'src/app/shared/types/priority';
 import { statusList } from 'src/app/shared/types/status';
 import { TaskType } from 'src/app/shared/types/task';
 
 @Component({
-  selector: 'app-planning-task-form',
-  templateUrl: './planning-task-form.component.html',
-  styleUrls: ['./planning-task-form.component.scss']
+  selector: 'task-form',
+  templateUrl: './task-form.component.html',
+  styleUrls: ['./task-form.component.scss']
 })
-export class PlanningTaskFormComponent implements OnInit {
+export class TaskFormComponent implements OnInit {
   @Input() task: TaskType;
 
   edit = false;
@@ -82,7 +82,7 @@ export class PlanningTaskFormComponent implements OnInit {
     CommonModule
   ],
   providers: [],
-  exports: [PlanningTaskFormComponent],
-  declarations: [PlanningTaskFormComponent]
+  exports: [TaskFormComponent],
+  declarations: [TaskFormComponent]
 })
-export class PlanningTaskFormModule { }
+export class TaskFormModule { }

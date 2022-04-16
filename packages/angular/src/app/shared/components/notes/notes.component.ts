@@ -17,13 +17,12 @@ type Note = {
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
-  @Input() items: Array<Note> | Promise<Array<Note>> ;
+  @Input() items: Note[] ;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.items = Promise.resolve(this.items);
   }
 }
 

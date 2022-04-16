@@ -1,16 +1,12 @@
 <div class="view-wrapper">
-  <ng-template [ngIf]="!load" [ngIfElse]="loading">
+  <ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
   <dx-toolbar>
     <dxi-item
       location="before"
       widget="dxButton"
-      [options]="{
-        icon: 'arrowleft'
-      }"
+      [options]="{ icon: 'arrowleft' }"
     ></dxi-item>
-    <dxi-item
-      location="before"
-    >
+    <dxi-item location="before" >
       <span class="toolbar-header">{{ task.text }}</span>
     </dxi-item>
 
@@ -32,11 +28,15 @@
     <dxi-item
       location="after"
       locateInMenu="auto"
-    >
-      <dx-button
-        icon="attach"
-      ></dx-button>
-    </dxi-item>
+      widget="dxButton"
+      [options]="{ icon: 'attach' }"
+    ></dxi-item>
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+      widget="dxButton"
+      [options]="{ icon: 'refresh', onClick: refresh }"
+    ></dxi-item>
     <dxi-item
       location="after"
       locateInMenu="auto"
@@ -47,12 +47,12 @@
 
   <div class="panels">
     <div class="left">
-      <app-planning-task-form [task]="task"></app-planning-task-form>
+      <task-form [task]="task"></task-form>
     </div>
     
     <div class="right">
       <div class="dx-card">
-        <dx-tab-panel [showNavButtons]="true">
+        <dx-tab-panel [showNavButtons]="true" [deferRendering]="false">
             <dxi-item title="Activities">
               <div class="tab-content">
                 <app-activities [activities]="task.activities" [showBy]="true"></app-activities>
@@ -72,5 +72,8 @@
 </div>
 
 <ng-template #loading>
-  <dx-load-panel [visible]="load"></dx-load-panel>
+  <dx-load-panel
+    [position]="{ of: '.content' }"
+    [visible]="isLoading"
+  ></dx-load-panel>
 </ng-template>
