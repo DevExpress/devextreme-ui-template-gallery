@@ -10,9 +10,9 @@
       handle=".list-title"
       (onReorder)="onListReorder($event)"
     >
-      <div class="list" *ngFor="let dataItem of kanbanDataSource;">
+      <div class="list" *ngFor="let dataItem of kanbanDataSource; let i = index">
         <div class="list-title dx-theme-text-color">
-          <span>{{ dataItem.status }}</span>
+          <span>{{ dataItem.name }}</span>
           <span class="more dx-icon-more"></span>
         </div>
         <dx-scroll-view
@@ -20,27 +20,38 @@
           direction="vertical"
           showScrollbar="always"
         >
-          <dx-sortable
-            class="sortable-cards"
-            group="cardsGroup"
-            [data]="dataItem.tasks"
-            (onDragStart)="onTaskDragStart($event)"
-            (onReorder)="onTaskDrop($event)"
-            (onAdd)="onTaskDrop($event)"
-          >
-            <div *ngIf="!!dataItem.tasks.length then displayCards else displayEmptyCard"></div>
-            <ng-template #displayCards>
-              <div *ngFor="let task of dataItem.tasks">
-                <task-kanban-card
-                  [task]="task"
-                ></task-kanban-card>
-              </div>
-            </ng-template>
-            <ng-template #displayEmptyCard>
-              <div class="empty-card"></div>
-            </ng-template>
-          </dx-sortable>
-
+          <div *ngIf="isLoading then displayLoading else displayBoard"></div>
+          <ng-template #displayLoading>
+            <dx-load-panel
+              [position]="{ of: '.content' }"
+              [(visible)]="isLoading"
+              (onShowing)="onShowingLoader($event)"
+              (onShown)="onShownLoader($event)"
+            ></dx-load-panel>
+          </ng-template>
+          <ng-template #displayBoard>
+            <dx-sortable
+              class="sortable-cards"
+              group="cardsGroup"
+              [data]="dataItem.cards"
+              (onDragStart)="onTaskDragStart($event)"
+              (onReorder)="onTaskDrop($event)"
+              (onAdd)="onTaskDrop($event)"
+            >
+              <div *ngIf="!!dataItem.cards.length then displayCards else displayEmptyCard"></div>
+              <ng-template #displayCards>
+                <div *ngFor="let task of dataItem.cards">
+                  <task-kanban-card
+                    [task]="task"
+                  ></task-kanban-card>
+                </div>
+              </ng-template>
+              <ng-template #displayEmptyCard>
+                <div class="empty-card"></div>
+              </ng-template>
+            </dx-sortable>
+          </ng-template>
+          
           <div class="add-task">
             <dx-button
               icon="plus"

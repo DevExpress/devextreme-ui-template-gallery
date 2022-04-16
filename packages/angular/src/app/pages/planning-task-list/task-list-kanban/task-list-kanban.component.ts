@@ -4,37 +4,72 @@ import {
   DxScrollViewModule,
   DxSortableModule,
   DxButtonModule,
+  DxLoadIndicatorModule,
+  DxLoadPanelModule,
 } from 'devextreme-angular';
 import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable'
+import {
+  ShowingEvent as LoadPanelShowingEvent,
+  ShownEvent as LoadPanelShownEvent
+} from 'devextreme/ui/load_panel';
 import { TaskKanbanCardModule } from './task-kanban-card/task-kanban-card.component';
 import { TaskType } from 'src/app/shared/types/task';
 import { Status, statusList } from 'src/app/shared/types/status';
-import { getTasks } from 'dx-rwa-data';
+import { RwaService } from 'src/app/shared/services';
+import { Subscription } from 'rxjs';
+
+type Board = {
+  name: Status
+  cards: TaskType[]
+}
 
 @Component({
   selector: 'task-list-kanban',
   templateUrl: './task-list-kanban.component.html',
-  styleUrls: ['./task-list-kanban.component.scss']
+  styleUrls: ['./task-list-kanban.component.scss'],
+  providers: [RwaService]
 })
 export class TaskListKanbanComponent implements OnInit {
-  dataSource: Array<TaskType>;
+  dataSubscription: Subscription;
 
-  kanbanDataSource: Array<{
-    status: Status,
-    tasks: TaskType[]
-  }> = [];
+  isLoading: boolean;
+  kanbanDataSource: Board[] = [];
 
-  load: boolean = false;
+  fillOutBoard = (cards: TaskType[]): Board[] => {
+    const result: Board[] = [];
+    for(const status of statusList) {
+      const value = cards.filter((item) => item.status === status);
 
-  constructor() {
+      result.push(<Board>{ name: status, cards: value });
+    }
+
+    return result
+  }
+
+  constructor(private service: RwaService) {
+    this.isLoading = true;
+    this.kanbanDataSource = this.fillOutBoard([]);
+  }
+
+  ngOnInit() {
+    const tasks$ = this.service.getTasks();
+  
+    this.isLoading = true;
+    this.dataSubscription = tasks$.subscribe((data) => {
+      this.kanbanDataSource = this.fillOutBoard(data);
+      
+      this.isLoading = false;
+    });
+  }
+
+  ngOnDestroy() {
+    this.dataSubscription.unsubscribe();
   }
 
   onListReorder = (e: ReorderEvent) => {
     const list = this.kanbanDataSource.splice(e.fromIndex, 1)[0];
     this.kanbanDataSource.splice(e.toIndex, 0, list);
   }
-
-  getTaskByStatus = (status: Status) : Array<TaskType> => this.dataSource.filter(item => item.status === status);
 
   onTaskDragStart(e: DragStartEvent) {
     e.itemData = e.fromData[e.fromIndex];
@@ -45,18 +80,17 @@ export class TaskListKanbanComponent implements OnInit {
     e.toData.splice(e.toIndex, 0, e.itemData);
   }
 
-  ngOnInit() {
-    getTasks().then(tasks => {
-      this.load = true;
-      this.dataSource = tasks;
-      
-      for(const status of statusList) {
-        this.kanbanDataSource.push({
-          status: <Status>status,
-          tasks: this.getTaskByStatus(<Status>status)
-        });
-      }
-    })
+  isHasLoadPanel = false;
+  onShowingLoader = (e: LoadPanelShowingEvent) => {
+    if(this.isHasLoadPanel) {
+      e.cancel = true;
+    }
+
+    this.isHasLoadPanel = true;
+  }
+
+  onShownLoader = (e: LoadPanelShownEvent) => {
+    this.isHasLoadPanel = false;
   }
 }
 
@@ -65,6 +99,8 @@ export class TaskListKanbanComponent implements OnInit {
     DxScrollViewModule,
     DxSortableModule,
     DxButtonModule,
+    DxLoadIndicatorModule,
+    DxLoadPanelModule,
 
     TaskKanbanCardModule,
 

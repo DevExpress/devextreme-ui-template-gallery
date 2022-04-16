@@ -1,5 +1,6 @@
-import { Component, OnInit, NgModule, ViewChild, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, NgModule, ViewChild, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import {
   DxButtonModule,
   DxDataGridModule,
@@ -8,6 +9,8 @@ import {
   DxToolbarModule,
   DxDataGridComponent
 } from 'devextreme-angular';
+import { RowPreparedEvent, RowValidatingEvent, ExportingEvent } from 'devextreme/ui/data_grid'
+import { ItemClickEvent as TabsItemClickEvenet } from 'devextreme/ui/tabs';
 import {
   TaskProirityModule,
   TaskStatusModule,
@@ -15,16 +18,17 @@ import {
 import { exportDataGrid } from 'devextreme/excel_exporter';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
-import CustomStore from 'devextreme/data/custom_store';
 import { priorityList } from 'src/app/shared/types/priority';
 import { statusList } from 'src/app/shared/types/status';
 import { TaskType } from 'src/app/shared/types/task';
-import { getTasks } from 'dx-rwa-data';
+import { RwaService } from 'src/app/shared/services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'task-list-grid',
   templateUrl: './task-list-grid.component.html',
-  styleUrls: ['./task-list-grid.component.scss']
+  styleUrls: ['./task-list-grid.component.scss'],
+  providers: [RwaService]
 })
 export class TaskListGridComponent implements OnInit {
   @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
@@ -39,7 +43,7 @@ export class TaskListGridComponent implements OnInit {
 
   @Output() search = (text: string) => this.component.instance.searchByText(text);
 
-  @Output() onExporting = (e, selectedRowsOnly: boolean) => {
+  @Output() onExporting = (e: ExportingEvent, selectedRowsOnly: boolean) => {
     const workbook = new Workbook();
     const worksheet = workbook.addWorksheet('Employees');
 
@@ -59,18 +63,17 @@ export class TaskListGridComponent implements OnInit {
   statusList = statusList;
   priorityList = priorityList;
 
-  dataSource: CustomStore;
+  tasks$: Observable<TaskType[]>;
 
-  constructor() {
-    this.dataSource = new CustomStore({
-      key: 'id',
-      load: getTasks
-    });
+  constructor(private service: RwaService) {
+  }
+  
+  ngOnInit() {
+    this.tasks$ = this.service.getTasks();
   }
 
-  onRowPreparedGrid = (e) => {
-    const { rowType, data, rowElement }:
-      { rowType: string, data: TaskType, rowElement: HTMLElement  } = e;
+  onRowPreparedGrid = (e: RowPreparedEvent<TaskType, number>) => {
+    const { rowType, rowElement, data } = e;
 
     if(rowType === 'header') return;
 
@@ -79,8 +82,10 @@ export class TaskListGridComponent implements OnInit {
     }
   }
 
-  dueDateValid = (e) => {
-    const { startDate, dueDate, brokenRules } = e.newData;
+  onRowValidating = (e: RowValidatingEvent<TaskType, number>) => {
+    const { newData, brokenRules } = e;
+    const { startDate, dueDate } = newData;
+
     if(startDate === undefined || dueDate === undefined) {
       e.errorText = `Need set 'Start Date' and 'Due Date'`;
       e.isValid = false;
@@ -92,13 +97,10 @@ export class TaskListGridComponent implements OnInit {
     }
   }
 
-  tabsItemClick = (e) => {
+  spaceToUnderscore = (value: string) => value.replace(/\ /g, '-');
+  
+  tabsItemClick = (e: TabsItemClickEvenet) => {
     this.tabValueChanged.emit(e);
-  }
-
-  spaceToUnderscore = (value) => value.replace(/\ /g, '-');
-
-  ngOnInit() {
   }
 }
 
@@ -112,6 +114,7 @@ export class TaskListGridComponent implements OnInit {
     TaskProirityModule,
     TaskStatusModule,
 
+    HttpClientModule,
     CommonModule
   ],
   providers: [],

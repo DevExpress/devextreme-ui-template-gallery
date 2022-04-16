@@ -1,8 +1,8 @@
 <dx-data-grid
   #dataGrid
-  [dataSource]="dataSource"
+  [dataSource]="tasks$ | async"
   (onRowPrepared)="onRowPreparedGrid($event)"
-  (onRowValidating)="dueDateValid($event)"
+  (onRowValidating)="onRowValidating($event)"
   [columnAutoWidth]="true"
 >
   <dxo-scrolling mode="virtual"></dxo-scrolling>
