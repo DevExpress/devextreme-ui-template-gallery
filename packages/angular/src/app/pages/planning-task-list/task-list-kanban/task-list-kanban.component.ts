@@ -4,7 +4,6 @@ import {
   DxScrollViewModule,
   DxSortableModule,
   DxButtonModule,
-  DxLoadIndicatorModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
 import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable'
@@ -79,19 +78,6 @@ export class TaskListKanbanComponent implements OnInit {
     e.fromData.splice(e.fromIndex, 1);
     e.toData.splice(e.toIndex, 0, e.itemData);
   }
-
-  isHasLoadPanel = false;
-  onShowingLoader = (e: LoadPanelShowingEvent) => {
-    if(this.isHasLoadPanel) {
-      e.cancel = true;
-    }
-
-    this.isHasLoadPanel = true;
-  }
-
-  onShownLoader = (e: LoadPanelShownEvent) => {
-    this.isHasLoadPanel = false;
-  }
 }
 
 @NgModule({
@@ -99,7 +85,6 @@ export class TaskListKanbanComponent implements OnInit {
     DxScrollViewModule,
     DxSortableModule,
     DxButtonModule,
-    DxLoadIndicatorModule,
     DxLoadPanelModule,
 
     TaskKanbanCardModule,

@@ -1,35 +1,34 @@
-<div id="kanban">
-  <dx-scroll-view
-    class="scrollable-board"
-    direction="horizontal"
-    showScrollbar="always"
-  >
-    <dx-sortable
-      class="sortable-lists"
-      itemOrientation="horizontal"
-      handle=".list-title"
-      (onReorder)="onListReorder($event)"
+<div *ngIf="isLoading then displayLoading else displayBoard"></div>
+<ng-template #displayLoading>
+  <dx-load-panel
+    [position]="{ of: '.content' }"
+    [(visible)]="isLoading"
+  ></dx-load-panel>
+</ng-template>
+
+<ng-template #displayBoard>
+  <div id="kanban">
+    <dx-scroll-view
+      class="scrollable-board"
+      direction="horizontal"
+      showScrollbar="always"
     >
-      <div class="list" *ngFor="let dataItem of kanbanDataSource; let i = index">
-        <div class="list-title dx-theme-text-color">
-          <span>{{ dataItem.name }}</span>
-          <span class="more dx-icon-more"></span>
-        </div>
-        <dx-scroll-view
-          class="scrollable-list"
-          direction="vertical"
-          showScrollbar="always"
-        >
-          <div *ngIf="isLoading then displayLoading else displayBoard"></div>
-          <ng-template #displayLoading>
-            <dx-load-panel
-              [position]="{ of: '.content' }"
-              [(visible)]="isLoading"
-              (onShowing)="onShowingLoader($event)"
-              (onShown)="onShownLoader($event)"
-            ></dx-load-panel>
-          </ng-template>
-          <ng-template #displayBoard>
+      <dx-sortable
+        class="sortable-lists"
+        itemOrientation="horizontal"
+        handle=".list-title"
+        (onReorder)="onListReorder($event)"
+      >
+        <div class="list" *ngFor="let dataItem of kanbanDataSource; let i = index">
+          <div class="list-title dx-theme-text-color">
+            <span>{{ dataItem.name }}</span>
+            <span class="more dx-icon-more"></span>
+          </div>
+          <dx-scroll-view
+            class="scrollable-list"
+            direction="vertical"
+            showScrollbar="always"
+          >
             <dx-sortable
               class="sortable-cards"
               group="cardsGroup"
@@ -50,17 +49,17 @@
                 <div class="empty-card"></div>
               </ng-template>
             </dx-sortable>
-          </ng-template>
-          
-          <div class="add-task">
-            <dx-button
-              icon="plus"
-              text="Add Task"
-              stylingMode="text"
-            ></dx-button>
-          </div>
-        </dx-scroll-view>
-      </div>
-    </dx-sortable>
-  </dx-scroll-view>
-</div>
+            
+            <div class="add-task">
+              <dx-button
+                icon="plus"
+                text="Add Task"
+                stylingMode="text"
+              ></dx-button>
+            </div>
+          </dx-scroll-view>
+        </div>
+      </dx-sortable>
+    </dx-scroll-view>
+  </div>
+</ng-template>
