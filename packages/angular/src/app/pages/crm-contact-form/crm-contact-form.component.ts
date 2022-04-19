@@ -1,18 +1,15 @@
-import { Component, ViewChild, OnInit, AfterViewInit, NgModule } from '@angular/core';
-import { ScreenService } from '../../shared/services';
-import { getRawStatuses, getContact, getActiveContactOpportunities, getClosedContactOpportunities, getContactNotes, getContactMessages } from 'dx-rwa-data';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { getRawStatuses } from 'dx-rwa-data';
 import CustomStore from 'devextreme/data/custom_store';
 import {
   DxButtonModule,
-  DxCheckBoxModule,
   DxDataGridModule,
   DxFormModule,
   DxLoadPanelModule,
   DxSelectBoxModule,
   DxTabPanelModule,
-  DxTextAreaModule,
   DxTextBoxModule,
-  DxTileViewModule,
   DxToolbarModule,
 } from 'devextreme-angular';
 import {
@@ -20,46 +17,76 @@ import {
   NotesModule,
   MessagesModule,
 } from 'src/app/shared/components'
-import { CommonModule } from '@angular/common';
+import { RwaService } from 'src/app/shared/services'
+import { forkJoin } from 'rxjs';
+
+type Contact = {
+  name: string
+};
+
+type Opportunitie = {
+  name: string,
+  products: string,
+  manager: string,
+  total: string
+};
 
 @Component({
   templateUrl: './crm-contact-form.component.html',
-  styleUrls: ['./crm-contact-form.component.scss']
+  styleUrls: ['./crm-contact-form.component.scss'],
+  providers: [RwaService]
 })
 export class CrmContactFormComponent implements OnInit {
+  contactId = 12;
 
-  constructor() {
+  contact: Contact;
+  contactNotes;
+  contactMessages;
+  activeOpportunities: Opportunitie[];
+  closedOpportunities: Opportunitie[];
+
+  isLoading: boolean;
+  isEditing: boolean;
+  
+  loadData = () => {
+    this.isLoading = true;
+  
+    const observable = forkJoin({
+      contact: this.service.getContact(this.contactId),
+      contactNotes: this.service.getContactNotes(this.contactId),
+      contactMessages: this.service.getContactMessages(this.contactId),
+      activeOpportunities: this.service.getActiveContactOpportunities(this.contactId),
+      closedOpportunities: this.service.getClosedContactOpportunities(this.contactId)
+    });
+    
+    observable.subscribe((data) => {
+      Object.keys(data).forEach(key => this[key] = data[key]);
+  
+      this.isLoading = false;
+    });
+  }
+
+  constructor(private service: RwaService) {
+    this.isLoading = true;
+    this.isEditing = false;
+
     this.toggleEdit = this.toggleEdit.bind(this);
     this.refresh = this.refresh.bind(this);
-
-    getContact(this.userId).then((data) => {
-      this.viewData = data;
-      this.load = false;
-    });
     
     this.statuses = new CustomStore({
       loadMode: 'raw',
       load: getRawStatuses
     });
-
-    this.activeOpportunities = getActiveContactOpportunities(this.userId);
-    this.closedOpportunities = getClosedContactOpportunities(this.userId);
-    this.notes = getContactNotes(this.userId);
-    this.messages = getContactMessages(this.userId);
   }
 
-  userId = 12;
-  viewData: any;
-  load = true;
-  edit = false;
+  ngOnInit(): void {
+    this.loadData();
+  }
+
   statuses: CustomStore;
-  activeOpportunities: Promise<Array<{name:string, products:string, manager:string, total:string}>>;
-  closedOpportunities: Promise<Array<{name:string, products:string, manager:string, total:string}>>;
-  notes: Promise<Array<{text:string, date:string, manager:string}>>;
-  messages: Promise<Array<{text:string, subject:string, date:string, manager:string}>>;
 
   toggleEdit() {
-    this.edit = !this.edit;
+    this.isEditing = !this.isEditing;
   }
 
   formatPhone(number: string | number): string {
@@ -71,7 +98,7 @@ export class CrmContactFormComponent implements OnInit {
   }
 
   setUserName(text: string) {
-    return text.replace('{username}', this.viewData.name);
+    return text.replace('{username}', this.contact.name);
   }
 
   getSizeQualifier(width) {
@@ -80,16 +107,7 @@ export class CrmContactFormComponent implements OnInit {
   }
 
   refresh() {
-    this.viewData = null;
-    this.load = true;
-    getContact(this.userId).then((data) => {
-      this.viewData = data;
-      this.load = false;
-    });
-  }
-
-  ngOnInit(): void {
-    
+    this.loadData();
   }
 }
 
@@ -102,10 +120,8 @@ export class CrmContactFormComponent implements OnInit {
     DxTextBoxModule,
     DxLoadPanelModule,
     DxTabPanelModule,
-    DxTextAreaModule,
     DxDataGridModule,
-    DxCheckBoxModule,
-    DxTileViewModule,
+
     ActivitiesModule,
     NotesModule,
     MessagesModule,
@@ -117,4 +133,3 @@ export class CrmContactFormComponent implements OnInit {
   declarations: [CrmContactFormComponent]
 })
 export class CrmContactFormModule { }
-

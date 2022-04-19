@@ -1,10 +1,10 @@
 <div class="view-wrapper">
-    <ng-template [ngIf]="!load" [ngIfElse]="loading">
+    <ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
         <dx-toolbar >
             <dxi-item location="before" widget="dxButton" [options]="{ icon: 'arrowleft' }">
             </dxi-item>
             <dxi-item location="before">
-                <div class="toolbar-header">{{viewData.name}}</div>
+                <div class="toolbar-header">{{contact.name}}</div>
             </dxi-item>
             <dxi-item location="after" locateInMenu="auto" widget="dxButton"
                 [options]="{ text: 'Terminate', type: 'default', stylingMode: 'contained'}">
@@ -30,44 +30,44 @@
                     <dxi-item location="before">
                         <div class="panels-header">Details</div>
                     </dxi-item>
-                    <dxi-item location="after" [visible]='!edit' locateInMenu="after" widget="dxButton"
+                    <dxi-item location="after" [visible]='!isEditing' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Edit', icon: 'edit', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
                     </dxi-item>
-                    <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
+                    <dxi-item location="after" [visible]='isEditing' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Save', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
                     </dxi-item>
-                    <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
+                    <dxi-item location="after" [visible]='isEditing' locateInMenu="after" widget="dxButton"
                         [options]="{text: 'Cancel', onClick: toggleEdit}">
                     </dxi-item>
                 </dx-toolbar>
-                <ng-template [ngIf]="!edit" [ngIfElse]="editingForm">
+                <ng-template [ngIf]="!isEditing" [ngIfElse]="editingForm">
                     <div class="user-info">
                         <div class="photo"
-                            [style.backgroundImage]="'url(\'data:image/png;base64,' + viewData.image +'\')'">
+                            [style.backgroundImage]="'url(\'data:image/png;base64,' + contact.image +'\')'">
                         </div>
                         <div class="text-info">
                             <div class="title">Status</div>
-                            <div class="value status status-{{viewData.status.toLowerCase()}}">{{viewData.status}}</div>
+                            <div class="value status status-{{contact.status.toLowerCase()}}">{{contact.status}}</div>
                             <div class="title">First Name</div>
-                            <div class="value black">{{viewData.firstName}}</div>
+                            <div class="value black">{{contact.firstName}}</div>
                             <div class="title">Last Name</div>
-                            <div class="value black">{{viewData.lastName}}</div>
+                            <div class="value black">{{contact.lastName}}</div>
                         </div>
                     </div>
                     <div class="info">
                         <div>
                             <div class="title">Position</div>
-                            <div class="value black">{{viewData.position}}</div>
+                            <div class="value black">{{contact.position}}</div>
                         </div>
                         <div>
                             <div class="title">Assigned to</div>
-                            <div class="value">{{viewData.manager}}</div>
+                            <div class="value">{{contact.manager}}</div>
                         </div>
                     </div>
                     <div class="info last">
                         <div>
                             <div class="title">Company</div>
-                            <div class="value">{{viewData.company}}</div>
+                            <div class="value">{{contact.company}}</div>
                         </div>
                     </div>
 
@@ -76,22 +76,22 @@
                     <div class="info">
                         <div>
                             <div class="title">Address</div>
-                            <div class="value black">{{viewData.address}}</div>
+                            <div class="value black">{{contact.address}}</div>
                         </div>
                     </div>
                     <div class="info">
                         <div>
                             <div class="title">City</div>
-                            <div class="value black">{{viewData.city}}</div>
+                            <div class="value black">{{contact.city}}</div>
                         </div>
                         <div class="narrow">
                             <div>
                                 <div class="title">State</div>
-                                <div class="value black">{{viewData.state.stateShort}}</div>
+                                <div class="value black">{{contact.state.stateShort}}</div>
                             </div>
                             <div>
                                 <div class="title">Zip Code</div>
-                                <div class="value black">{{viewData.zipCode}}</div>
+                                <div class="value black">{{contact.zipCode}}</div>
                             </div>
                         </div>
                         
@@ -99,25 +99,25 @@
                     <div class="info last small">
                         <div>
                             <div class="title">Phone</div>
-                            <div class="value black">{{formatPhone(viewData.phone)}}</div>
+                            <div class="value black">{{formatPhone(contact.phone)}}</div>
                             <dx-button text="Call" icon="tel" type="default" type="default" stylingMode="outlined" class="button"></dx-button>
                         </div>
                         <div>
                             <div class="title">Email</div>
-                            <div class="value black">{{viewData.email}}</div>
+                            <div class="value black">{{contact.email}}</div>
                             <dx-button text="Send Email" icon="email" type="default" stylingMode="outlined" class="button"></dx-button>
                         </div>
                     </div>
                 </ng-template>
                 <ng-template #editingForm>
-                    <dx-form class="form last" [formData]="viewData" labelMode="floating" [colCount]="1"
+                    <dx-form class="form last" [formData]="contact" labelMode="floating" [colCount]="1"
                         labelLocation="top" [screenByWidth]="getSizeQualifier">
                         
                         <dxi-item itemType="group" [colCount]="2">
                             <dxi-item>
                                 <div class="user-info">
                                     <div class="photo form"
-                                        [style.backgroundImage]="'url(\'data:image/png;base64,' + viewData.image +'\')'">
+                                        [style.backgroundImage]="'url(\'data:image/png;base64,' + contact.image +'\')'">
                                     </div>
                                 </div>
                             </dxi-item>
@@ -125,7 +125,7 @@
                                 <dxi-item dataField="status">
                                     <div *dxTemplate>
                                         <dx-select-box
-                                            [(value)]="viewData.status"
+                                            [(value)]="contact.status"
                                             [dataSource]="statuses"
                                             valueExpr="status"
                                             fieldTemplate="field"
@@ -177,13 +177,13 @@
                     <dx-tab-panel [showNavButtons]="true">
                         <dxi-item title="Tasks">
                             <div class="tab-content">
-                                <dx-data-grid [dataSource]="viewData.tasks" [columnAutoWidth]="true" [selectionFilter]="['done', '=', true]">
+                                <dx-data-grid [dataSource]="contact.tasks" [columnAutoWidth]="true" [selectionFilter]="['done', '=', true]">
                                     <dxo-selection mode="multiple" [deferred]="true"></dxo-selection>
                                     <dxi-column dataField="text" caption="Name" [hidingPriority]="3"></dxi-column>
                                     <dxi-column dataField="date" dataType="date" [hidingPriority]="1"></dxi-column>
                                     <dxi-column caption="Assigned To" cellTemplate="assignTemplate" [hidingPriority]="0">
                                         <div *dxTemplate="let data of 'assignTemplate'">
-                                            {{viewData.manager}}
+                                            {{contact.manager}}
                                         </div>
                                     </dxi-column>
                                 </dx-data-grid>
@@ -191,14 +191,14 @@
                         </dxi-item>
                         <dxi-item title="Activities">
                             <div class="tab-content">
-                                <app-activities [activities]="viewData.activities" [showBy]="true"></app-activities>
+                                <app-activities [activities]="contact.activities" [showBy]="true"></app-activities>
                             </div>
                         </dxi-item>
                         <dxi-item title="Opportunities">
                             <div class="tab-content">
                                 <div class="tiles">
                                     <div class="tiles-header">Active</div>
-                                    <div class="tile" *ngFor="let data of activeOpportunities | async">
+                                    <div class="tile" *ngFor="let data of activeOpportunities">
                                         <div class="name">{{data.name}}</div>
                                         <div class="product-info">Products: {{data.products}}, total: <span class="total">{{data.total | currency}}</span></div>
                                         <div class="owner">Owner: <span class="owner-name">{{data.manager}}</span></div>
@@ -206,7 +206,7 @@
                                     <br>
                                     <dx-button text="Add Opportunity" icon="add" width="320" height="60" stylingMode="outlined" type="default" class="add-tile"></dx-button>
                                     <div class="tiles-header">Closed</div>
-                                    <div class="tile" *ngFor="let data of closedOpportunities | async">
+                                    <div class="tile" *ngFor="let data of closedOpportunities">
                                         <div class="name">{{data.name}}</div>
                                         <div class="product-info">Products: {{data.products}}, total: <span class="total">{{data.total | currency}}</span></div>
                                         <div class="owner">Owner: <span class="owner-name">{{data.manager}}</span></div>
@@ -215,10 +215,10 @@
                             </div>
                         </dxi-item>
                         <dxi-item title="Notes">
-                            <app-notes [items]="notes"></app-notes>
+                            <app-notes [items]="contactNotes"></app-notes>
                         </dxi-item>
-                        <dxi-item title="Messages" [badge]="(messages | async)?.length">
-                            <app-messages [userName]="viewData.name" [items]="messages"></app-messages>
+                        <dxi-item title="Messages" [badge]="contactMessages.length">
+                            <app-messages [userName]="contact.name" [items]="contactMessages"></app-messages>
                         </dxi-item>
                     </dx-tab-panel>
                 </div>
@@ -226,6 +226,6 @@
         </div>
     </ng-template>
     <ng-template #loading>
-        <dx-load-panel [visible]="load"></dx-load-panel>
+        <dx-load-panel [visible]="isLoading"></dx-load-panel>
     </ng-template>
 </div>
