@@ -1,17 +1,19 @@
-import { Component, EventEmitter, Input, NgModule, OnInit, Output, ViewChild } from '@angular/core';
+import {
+ Component, EventEmitter, Input, NgModule, OnInit, Output, ViewChild,
+} from '@angular/core';
 import {
   DxCalendarModule,
   DxDropDownButtonModule,
 
-  DxDropDownButtonComponent
+  DxDropDownButtonComponent,
 } from 'devextreme-angular';
-import { ValueChangedEvent } from 'devextreme/ui/calendar'
+import { ValueChangedEvent } from 'devextreme/ui/calendar';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-form-date',
   templateUrl: './task-form-date.component.html',
-  styleUrls: ['./task-form-date.component.scss']
+  styleUrls: ['./task-form-date.component.scss'],
 })
 export class TaskFromDateComponent implements OnInit {
   @ViewChild('dropDownButton') dropDownButtonComponent: DxDropDownButtonComponent;
@@ -24,16 +26,16 @@ export class TaskFromDateComponent implements OnInit {
 
   onValueChanged = (e: ValueChangedEvent) => {
     const { value, component } = e;
-    
+
     this.dateChanged.emit({
       date: value,
-      type: component.option('name')
+      type: component.option('name'),
     });
 
     this.dropDownButtonComponent.instance.close();
-  }
+  };
 
-  constructor () {
+  constructor() {
   }
 
   ngOnInit() {
@@ -45,10 +47,10 @@ export class TaskFromDateComponent implements OnInit {
     DxCalendarModule,
     DxDropDownButtonModule,
 
-    CommonModule
+    CommonModule,
   ],
-  providers: [ ],
-  exports: [ TaskFromDateComponent ],
-  declarations: [ TaskFromDateComponent ],
+  providers: [],
+  exports: [TaskFromDateComponent],
+  declarations: [TaskFromDateComponent],
 })
 export class TaskFromDateModule { }

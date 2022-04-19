@@ -5,17 +5,19 @@ import { DxButtonModule, DxListModule } from 'devextreme-angular';
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.scss']
+  styleUrls: ['./activities.component.scss'],
 })
 export class ActivitiesComponent {
   constructor() { }
-  @Input() activities: Array<{name: string, date: string, manager: string}>;
-  @Input() showBy: boolean = false;
+
+  @Input() activities: Array<{ name: string, date: string, manager: string }>;
+
+  @Input() showBy = false;
 }
 
 @NgModule({
-  imports: [ DxListModule, DxButtonModule, CommonModule ],
-  declarations: [ ActivitiesComponent ],
-  exports: [ ActivitiesComponent ]
+  imports: [DxListModule, DxButtonModule, CommonModule],
+  declarations: [ActivitiesComponent],
+  exports: [ActivitiesComponent],
 })
 export class ActivitiesModule { }

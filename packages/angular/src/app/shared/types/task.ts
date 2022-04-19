@@ -11,4 +11,4 @@ export type TaskType = {
   dueDate: Date,
   owner: string,
   status: Status
-}
+};

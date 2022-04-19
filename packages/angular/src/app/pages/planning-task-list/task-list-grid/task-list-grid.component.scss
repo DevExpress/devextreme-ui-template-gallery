@@ -32,7 +32,6 @@
     font-weight: 600;
     font-size: 12px;
   }
-
 }
 
 .cell-status {
@@ -42,11 +41,11 @@
     padding: 2px 8px 3px;
 
     &.Open {
-      color: #505ED9;
+      color: #505ed9;
     }
 
     &.In-Progress {
-      color: #34AA95;
+      color: #34aa95;
     }
 
     &.Deferred {
@@ -54,7 +53,7 @@
     }
 
     &.Completed {
-      color: #2B9029;
+      color: #2b9029;
     }
   }
 }

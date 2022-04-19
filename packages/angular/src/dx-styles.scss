@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0px;
   min-height: 100%;
   height: 100%;
@@ -45,8 +46,7 @@ html, body {
   border-left: 0;
 }
 
-.with-footer > .dx-scrollable-wrapper >
-.dx-scrollable-container > .dx-scrollable-content {
+.with-footer > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
   height: 100%;
 
   & > .dx-scrollview-content {
@@ -63,7 +63,7 @@ html, body {
   .dx-drawer-shader {
     display: none !important;
   }
-  
+
   .dx-drawer-content {
     padding: initial !important;
   }

@@ -1,11 +1,11 @@
 <dx-drop-down-button
-    #dropDownButton
-    icon="event"
-    [text]="text"
-    stylingMode="outlined"
-    dropDownContentTemplate="dropDownContentTemplate"
-    [dropDownOptions]="{ width: 'auto' }"
-    [showArrowIcon]="false"
+  #dropDownButton
+  icon="event"
+  [text]="text"
+  stylingMode="outlined"
+  dropDownContentTemplate="dropDownContentTemplate"
+  [dropDownOptions]="{ width: 'auto' }"
+  [showArrowIcon]="false"
 >
   <div *dxTemplate="let data of 'dropDownContentTemplate'">
     <dx-calendar

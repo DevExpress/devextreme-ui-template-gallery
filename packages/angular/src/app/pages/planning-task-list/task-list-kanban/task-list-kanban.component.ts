@@ -6,44 +6,45 @@ import {
   DxButtonModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
-import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable'
+import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable';
 import {
   ShowingEvent as LoadPanelShowingEvent,
-  ShownEvent as LoadPanelShownEvent
+  ShownEvent as LoadPanelShownEvent,
 } from 'devextreme/ui/load_panel';
-import { TaskKanbanCardModule } from './task-kanban-card/task-kanban-card.component';
 import { TaskType } from 'src/app/shared/types/task';
 import { Status, statusList } from 'src/app/shared/types/status';
 import { RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
+import { TaskKanbanCardModule } from './task-kanban-card/task-kanban-card.component';
 
 type Board = {
   name: Status
   cards: TaskType[]
-}
+};
 
 @Component({
   selector: 'task-list-kanban',
   templateUrl: './task-list-kanban.component.html',
   styleUrls: ['./task-list-kanban.component.scss'],
-  providers: [RwaService]
+  providers: [RwaService],
 })
 export class TaskListKanbanComponent implements OnInit {
   dataSubscription: Subscription;
 
   isLoading: boolean;
+
   kanbanDataSource: Board[] = [];
 
   fillOutBoard = (cards: TaskType[]): Board[] => {
     const result: Board[] = [];
-    for(const status of statusList) {
+    for (const status of statusList) {
       const value = cards.filter((item) => item.status === status);
 
       result.push(<Board>{ name: status, cards: value });
     }
 
-    return result
-  }
+    return result;
+  };
 
   constructor(private service: RwaService) {
     this.isLoading = true;
@@ -52,11 +53,11 @@ export class TaskListKanbanComponent implements OnInit {
 
   ngOnInit() {
     const tasks$ = this.service.getTasks();
-  
+
     this.isLoading = true;
     this.dataSubscription = tasks$.subscribe((data) => {
       this.kanbanDataSource = this.fillOutBoard(data);
-      
+
       this.isLoading = false;
     });
   }
@@ -68,7 +69,7 @@ export class TaskListKanbanComponent implements OnInit {
   onListReorder = (e: ReorderEvent) => {
     const list = this.kanbanDataSource.splice(e.fromIndex, 1)[0];
     this.kanbanDataSource.splice(e.toIndex, 0, list);
-  }
+  };
 
   onTaskDragStart(e: DragStartEvent) {
     e.itemData = e.fromData[e.fromIndex];
@@ -89,10 +90,10 @@ export class TaskListKanbanComponent implements OnInit {
 
     TaskKanbanCardModule,
 
-    CommonModule
+    CommonModule,
   ],
   providers: [],
   exports: [TaskListKanbanComponent],
-  declarations: [TaskListKanbanComponent]
+  declarations: [TaskListKanbanComponent],
 })
 export class TaskListKanbanModule { }

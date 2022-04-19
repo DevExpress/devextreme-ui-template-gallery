@@ -1,4 +1,6 @@
-import { Component, OnInit, NgModule, Output, ViewChild } from '@angular/core';
+import {
+ Component, OnInit, NgModule, Output, ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -9,16 +11,15 @@ import {
   DxToolbarModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
-import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component'
-import { TaskListKanbanModule } from './task-list-kanban/task-list-kanban.component';
-
 import { tabPanelItems } from 'src/app/shared/types/resource';
 import { getTasks } from 'dx-rwa-data';
+import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
+import { TaskListKanbanModule } from './task-list-kanban/task-list-kanban.component';
 
 @Component({
   // selector: 'app-planning-task-list',
   templateUrl: './planning-task-list.component.html',
-  styleUrls: ['./planning-task-list.component.scss']
+  styleUrls: ['./planning-task-list.component.scss'],
 })
 export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
@@ -27,13 +28,14 @@ export class PlanningTaskListComponent implements OnInit {
   tabValueChange = (e) => {
     this.displayTaskComponent = e.itemData.text;
     this.displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
-  }
+  };
 
   tabPanelItems = tabPanelItems;
 
   dataSource: any[];
 
   displayTaskComponent = this.tabPanelItems[0].text;
+
   displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
 
   constructor() {
@@ -43,7 +45,6 @@ export class PlanningTaskListComponent implements OnInit {
       this.dataSource = data;
       this.load = false;
     });
-
   }
 
   addDataGridRow = () => this.dataGrid.addRow();
@@ -51,13 +52,13 @@ export class PlanningTaskListComponent implements OnInit {
   refreshDataGrid = () => this.dataGrid.refresh();
 
   chooseColumnDataGrid = () => this.dataGrid.showColumnChooser();
-  
+
   searchDataGrid = (e) => this.dataGrid.search(e.component.instance().option('text'));
 
   exportDataGrid = (e) => {
     const selectedRowsOnly = e.itemData.text.includes('selected');
     this.dataGrid.onExporting(e, selectedRowsOnly);
-  }
+  };
 
   load = true;
 
@@ -87,10 +88,10 @@ export class PlanningTaskListComponent implements OnInit {
     TaskListKanbanModule,
     TaskListModule,
 
-    CommonModule
+    CommonModule,
   ],
   providers: [],
   exports: [],
-  declarations: [PlanningTaskListComponent]
+  declarations: [PlanningTaskListComponent],
 })
 export class PlanningTaskListModule { }

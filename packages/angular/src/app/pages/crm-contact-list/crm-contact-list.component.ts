@@ -1,5 +1,6 @@
-import { Component, ViewChild, OnInit, AfterViewInit, NgModule } from '@angular/core';
-import { ScreenService } from '../../shared/services';
+import {
+ Component, ViewChild, OnInit, AfterViewInit, NgModule,
+} from '@angular/core';
 import { getContacts, getContact, getStatuses } from 'dx-rwa-data';
 import {
   DxDataGridModule,
@@ -20,28 +21,25 @@ import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import CustomStore from 'devextreme/data/custom_store';
 import { ActivitiesModule } from 'src/app/shared/components/activities/activities.component';
 import { CommonModule } from '@angular/common';
-
-
+import { ScreenService } from '../../shared/services';
 
 @Component({
-  //selector: 'app-crm-contact-list',
+  // selector: 'app-crm-contact-list',
   templateUrl: './crm-contact-list.component.html',
-  styleUrls: ['./crm-contact-list.component.scss']
+  styleUrls: ['./crm-contact-list.component.scss'],
 })
 export class CrmContactListComponent implements OnInit {
-
-  @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent
+  @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
 
   constructor(private screen: ScreenService) {
-
     this.dataSource = new CustomStore({
       key: 'id',
-      load: getContacts
+      load: getContacts,
     });
 
     this.statuses = new CustomStore({
       loadMode: 'raw',
-      load: getStatuses
+      load: getStatuses,
     });
 
     this.pinClick = this.pinClick.bind(this);
@@ -51,14 +49,17 @@ export class CrmContactListComponent implements OnInit {
     this.screen.changed.subscribe(this.calculatePin.bind(this));
   }
 
-  isPanelOpen: boolean = false;
-  isPanelPin: boolean = false;
-  isPinEnabled: boolean = false;
-  panelLoading: boolean = true;
+  isPanelOpen = false;
+
+  isPanelPin = false;
+
+  isPinEnabled = false;
+
+  panelLoading = true;
 
   dataSource: CustomStore;
-  statuses: CustomStore;
 
+  statuses: CustomStore;
 
   panelData: any;
 
@@ -68,7 +69,7 @@ export class CrmContactListComponent implements OnInit {
 
   rowClick(e) {
     this.panelLoading = true;
-    getContact(e.data.id).then(data => {
+    getContact(e.data.id).then((data) => {
       this.panelData = data;
       this.panelLoading = false;
     });
@@ -86,7 +87,7 @@ export class CrmContactListComponent implements OnInit {
 
   pinClick() {
     this.isPanelPin = !this.isPanelPin;
-  };
+  }
 
   accordionTitleClick(e) {
     e.event.stopPropagation();
@@ -94,13 +95,13 @@ export class CrmContactListComponent implements OnInit {
 
   calculatePin() {
     this.isPinEnabled = this.screen.sizes['screen-large'] || this.screen.sizes['screen-medium'];
-    if(this.isPanelPin && !this.isPinEnabled) {
+    if (this.isPanelPin && !this.isPinEnabled) {
       this.isPanelPin = false;
     }
   }
 
   formatPhone(number: string | number): string {
-    return String(number).replace(/(\d{3})(\d{3})(\d{4})/,"+1($1)$2-$3");
+    return String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
   }
 
   customizePhoneCell(cellInfo): string {
@@ -109,7 +110,7 @@ export class CrmContactListComponent implements OnInit {
 
   filterStatus(e: SelectionChangedEvent) {
     const status = e.item.status;
-    if(status === '') {
+    if (status === '') {
       this.dataGrid.instance.clearFilter();
     } else {
       this.dataGrid.instance.filter(['status', '=', status]);
@@ -117,12 +118,9 @@ export class CrmContactListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
-
 }
-
-
 
 @NgModule({
   imports: [
@@ -141,10 +139,10 @@ export class CrmContactListComponent implements OnInit {
 
     ActivitiesModule,
 
-    CommonModule
+    CommonModule,
   ],
   providers: [],
   exports: [],
-  declarations: [CrmContactListComponent]
+  declarations: [CrmContactListComponent],
 })
 export class CrmContactListModule { }

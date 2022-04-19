@@ -16,8 +16,8 @@ import {
   ActivitiesModule,
   NotesModule,
   MessagesModule,
-} from 'src/app/shared/components'
-import { RwaService } from 'src/app/shared/services'
+} from 'src/app/shared/components';
+import { RwaService } from 'src/app/shared/services';
 import { forkJoin } from 'rxjs';
 
 type Contact = {
@@ -34,37 +34,42 @@ type Opportunitie = {
 @Component({
   templateUrl: './crm-contact-form.component.html',
   styleUrls: ['./crm-contact-form.component.scss'],
-  providers: [RwaService]
+  providers: [RwaService],
 })
 export class CrmContactFormComponent implements OnInit {
   contactId = 12;
 
   contact: Contact;
+
   contactNotes;
+
   contactMessages;
+
   activeOpportunities: Opportunitie[];
+
   closedOpportunities: Opportunitie[];
 
   isLoading: boolean;
+
   isEditing: boolean;
-  
+
   loadData = () => {
     this.isLoading = true;
-  
+
     const observable = forkJoin({
       contact: this.service.getContact(this.contactId),
       contactNotes: this.service.getContactNotes(this.contactId),
       contactMessages: this.service.getContactMessages(this.contactId),
       activeOpportunities: this.service.getActiveContactOpportunities(this.contactId),
-      closedOpportunities: this.service.getClosedContactOpportunities(this.contactId)
+      closedOpportunities: this.service.getClosedContactOpportunities(this.contactId),
     });
-    
+
     observable.subscribe((data) => {
-      Object.keys(data).forEach(key => this[key] = data[key]);
-  
+      Object.keys(data).forEach((key) => this[key] = data[key]);
+
       this.isLoading = false;
     });
-  }
+  };
 
   constructor(private service: RwaService) {
     this.isLoading = true;
@@ -72,10 +77,10 @@ export class CrmContactFormComponent implements OnInit {
 
     this.toggleEdit = this.toggleEdit.bind(this);
     this.refresh = this.refresh.bind(this);
-    
+
     this.statuses = new CustomStore({
       loadMode: 'raw',
-      load: getRawStatuses
+      load: getRawStatuses,
     });
   }
 
@@ -90,11 +95,11 @@ export class CrmContactFormComponent implements OnInit {
   }
 
   formatPhone(number: string | number): string {
-    return String(number).replace(/(\d{3})(\d{3})(\d{4})/,"+1($1)$2-$3");
+    return String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
   }
 
   getAvatarText(name: string) {
-    return name.split(' ').map(name => name[0]).join('');
+    return name.split(' ').map((name) => name[0]).join('');
   }
 
   setUserName(text: string) {
@@ -102,8 +107,8 @@ export class CrmContactFormComponent implements OnInit {
   }
 
   getSizeQualifier(width) {
-    if (width < 415) return "xs";
-    return "lg";
+    if (width < 415) return 'xs';
+    return 'lg';
   }
 
   refresh() {
@@ -126,10 +131,10 @@ export class CrmContactFormComponent implements OnInit {
     NotesModule,
     MessagesModule,
 
-    CommonModule
+    CommonModule,
   ],
   providers: [],
   exports: [],
-  declarations: [CrmContactFormComponent]
+  declarations: [CrmContactFormComponent],
 })
 export class CrmContactFormModule { }

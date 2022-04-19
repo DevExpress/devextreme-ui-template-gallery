@@ -1,14 +1,15 @@
-import { Component, NgModule, Output, Input, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import {
+ Component, NgModule, Output, Input, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnDestroy,
+} from '@angular/core';
 import { ItemClickEvent } from 'devextreme/ui/tree_view';
 import { DxTreeViewModule, DxTreeViewComponent } from 'devextreme-angular/ui/tree-view';
-import { navigation } from '../../../app-navigation';
-
 import * as events from 'devextreme/events';
+import { navigation } from '../../../app-navigation';
 
 @Component({
   selector: 'app-side-navigation-menu',
   templateUrl: './side-navigation-menu.component.html',
-  styleUrls: ['./side-navigation-menu.component.scss']
+  styleUrls: ['./side-navigation-menu.component.scss'],
 })
 export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   @ViewChild(DxTreeViewComponent, { static: true })
@@ -21,6 +22,7 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   openMenu = new EventEmitter<any>();
 
   private _selectedItem!: String;
+
   @Input()
   set selectedItem(value: String) {
     this._selectedItem = value;
@@ -32,13 +34,14 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   }
 
   private _items!: Record <string, unknown>[];
+
   get items() {
     if (!this._items) {
       this._items = navigation.map((item) => {
-        if(item.path && !(/^\//.test(item.path))){
+        if (item.path && !(/^\//.test(item.path))) {
           item.path = `/${item.path}`;
         }
-         return { ...item, expanded: !this._compactMode }
+         return { ...item, expanded: !this._compactMode };
         });
     }
 
@@ -46,10 +49,12 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   }
 
   private _compactMode = false;
+
   @Input()
   get compactMode() {
     return this._compactMode;
   }
+
   set compactMode(val) {
     this._compactMode = val;
 
@@ -82,8 +87,8 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
 }
 
 @NgModule({
-  imports: [ DxTreeViewModule ],
-  declarations: [ SideNavigationMenuComponent ],
-  exports: [ SideNavigationMenuComponent ]
+  imports: [DxTreeViewModule],
+  declarations: [SideNavigationMenuComponent],
+  exports: [SideNavigationMenuComponent],
 })
 export class SideNavigationMenuModule { }

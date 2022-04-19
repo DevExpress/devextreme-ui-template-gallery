@@ -1,8 +1,8 @@
 @use "../../../../../variables" as *;
 
-$low-priorety-color: #DFB32F;
-$normal-priorety-color: #6FBACA;
-$high-priorety-color: #D9534F;
+$low-priorety-color: #dfb32f;
+$normal-priorety-color: #6fbaca;
+$high-priorety-color: #d9534f;
 
 @mixin priority($priorety-color) {
   .card-priority {
@@ -80,16 +80,16 @@ $high-priorety-color: #D9534F;
 
   .circle {
     &[data-letters]:before {
-      content:attr(data-letters);
+      content: attr(data-letters);
       display: inline-block;
       width: 24px;
       height: 24px;
       line-height: 24px;
       text-align: center;
-      border-radius :50%;
+      border-radius: 50%;
       background: $accent-color;
       color: white;
-      }
+    }
   }
 }
 

@@ -1,8 +1,6 @@
 <div class="view-wrapper">
   <dx-toolbar>
-    <dxi-item
-      location="before"
-    >
+    <dxi-item location="before">
       <span class="toolbar-header">Task</span>
     </dxi-item>
     <dxi-item
@@ -16,11 +14,7 @@
       }"
     ></dxi-item>
 
-    <dxi-item
-      [visible]="displayGrid"
-      location="after"
-      locateInMenu="auto"
-    >
+    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
       <dx-button
         [ngClass]="'add-grid-row'"
         icon="plus"
@@ -30,21 +24,10 @@
         (onClick)="addDataGridRow()"
       ></dx-button>
     </dxi-item>
-    <dxi-item
-      [visible]="displayGrid"
-      location="after"
-      locateInMenu="auto"
-    >
-      <dx-button
-        icon="refresh"
-        (onClick)="refreshDataGrid()"
-      ></dx-button>
+    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
+      <dx-button icon="refresh" (onClick)="refreshDataGrid()"></dx-button>
     </dxi-item>
-    <dxi-item
-      [visible]="displayGrid"
-      location="after"
-      locateInMenu="auto"
-    >
+    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
       <dx-button
         icon="columnchooser"
         (onClick)="chooseColumnDataGrid()"
@@ -58,11 +41,7 @@
     >
       <div class="separator"></div>
     </dxi-item>
-    <dxi-item
-      [visible]="displayGrid"
-      location="after"
-      locateInMenu="auto"
-    >
+    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
       <dx-drop-down-button
         icon="export"
         stylingMode="text"
@@ -105,12 +84,11 @@
         ></task-list-grid>
       </div>
       <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
-        <task-list-kanban
-          [dataSource]="dataSource"
-        ></task-list-kanban>
+        <task-list-kanban [dataSource]="dataSource"></task-list-kanban>
       </div>
     </div>
-</ng-template>
-<ng-template #loading>
-  <dx-load-panel [visible]="load"></dx-load-panel>
-</ng-template>
+  </ng-template>
+  <ng-template #loading>
+    <dx-load-panel [visible]="load"></dx-load-panel>
+  </ng-template>
+</div>

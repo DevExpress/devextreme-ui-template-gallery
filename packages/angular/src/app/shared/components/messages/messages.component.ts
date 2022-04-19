@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, NgModule, OnInit } from '@angular/core';
+import {
+ Component, Input, NgModule, OnInit,
+} from '@angular/core';
 import {
   DxTextAreaModule,
   DxToolbarModule,
@@ -15,7 +17,7 @@ type Message = {
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.scss']
+  styleUrls: ['./messages.component.scss'],
 })
 export class MessagesComponent implements OnInit {
   @Input() userName: string;
@@ -26,7 +28,7 @@ export class MessagesComponent implements OnInit {
   }
 
   getAvatarText(name: string) {
-    return name.split(' ').map(name => name[0]).join('');
+    return name.split(' ').map((name) => name[0]).join('');
   }
 
   setUserName(text: string) {
@@ -38,13 +40,13 @@ export class MessagesComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [ 
+  imports: [
     DxTextAreaModule,
     DxToolbarModule,
 
-    CommonModule
+    CommonModule,
   ],
-  declarations: [ MessagesComponent ],
-  exports: [ MessagesComponent ]
+  declarations: [MessagesComponent],
+  exports: [MessagesComponent],
 })
 export class MessagesModule { }

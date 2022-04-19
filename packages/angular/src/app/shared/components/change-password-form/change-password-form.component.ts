@@ -7,20 +7,21 @@ import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import notify from 'devextreme/ui/notify';
 import { AuthService } from '../../services';
 
-
 @Component({
   selector: 'app-change-passsword-form',
-  templateUrl: './change-password-form.component.html'
+  templateUrl: './change-password-form.component.html',
 })
 export class ChangePasswordFormComponent implements OnInit {
   loading = false;
+
   formData: any = {};
-  recoveryCode: string = '';
+
+  recoveryCode = '';
 
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.recoveryCode = params.get('recoveryCode') || '';
     });
   }
@@ -40,18 +41,16 @@ export class ChangePasswordFormComponent implements OnInit {
     }
   }
 
-  confirmPassword = (e: ValidationCallbackData) => {
-    return e.value === this.formData.password;
-  }
+  confirmPassword = (e: ValidationCallbackData) => e.value === this.formData.password;
 }
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     DxFormModule,
-    DxLoadIndicatorModule
+    DxLoadIndicatorModule,
   ],
-  declarations: [ ChangePasswordFormComponent ],
-  exports: [ ChangePasswordFormComponent ]
+  declarations: [ChangePasswordFormComponent],
+  exports: [ChangePasswordFormComponent],
 })
 export class ChangePasswordFormModule { }

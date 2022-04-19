@@ -21,7 +21,7 @@ import { PlanningTaskDetailsModel } from './pages/planning-task-details/planning
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +42,6 @@ import { PlanningTaskDetailsModel } from './pages/planning-task-details/planning
     AppRoutingModule,
   ],
   providers: [AuthService, ScreenService, AppInfoService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

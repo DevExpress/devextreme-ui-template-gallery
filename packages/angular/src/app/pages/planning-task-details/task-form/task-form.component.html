@@ -1,101 +1,113 @@
 <dx-toolbar>
   <dxi-item location="before">
-      <div class="toolbar-header">Details</div>
+    <div class="toolbar-header">Details</div>
   </dxi-item>
-  <dxi-item location="after" [visible]='!edit' locateInMenu="after" widget="dxButton"
-      [options]="{text: 'Edit', icon: 'edit', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
+  <dxi-item
+    location="after"
+    [visible]="!edit"
+    locateInMenu="after"
+    widget="dxButton"
+    [options]="{
+      text: 'Edit',
+      icon: 'edit',
+      stylingMode: 'outlined',
+      type: 'default',
+      onClick: toggleEdit
+    }"
+  >
   </dxi-item>
-  <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
-      [options]="{text: 'Save', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
+  <dxi-item
+    location="after"
+    [visible]="edit"
+    locateInMenu="after"
+    widget="dxButton"
+    [options]="{
+      text: 'Save',
+      stylingMode: 'outlined',
+      type: 'default',
+      onClick: toggleEdit
+    }"
+  >
   </dxi-item>
-  <dxi-item location="after" [visible]='edit' locateInMenu="after" widget="dxButton"
-      [options]="{text: 'Cancel', onClick: toggleEdit}">
+  <dxi-item
+    location="after"
+    [visible]="edit"
+    locateInMenu="after"
+    widget="dxButton"
+    [options]="{ text: 'Cancel', onClick: toggleEdit }"
+  >
   </dxi-item>
 </dx-toolbar>
 
-<div *ngIf="edit then editingForm else form"></div>
+<div *ngIf="edit; then editingForm; else form"></div>
 <ng-template #form>
   <div class="info">
     <div>
-        <div class="title">Company</div>
-        <div class="value">{{ task.company }}</div>
+      <div class="title">Company</div>
+      <div class="value">{{ task.company }}</div>
     </div>
     <div>
-        <div class="title">Assigned to</div>
-        <div class="value">{{ task.owner }}</div>
-    </div>
-  </div>
-  <div class="info">
-    <div>
-        <div class="title">Priority</div>
-        <div class="value">
-          <task-priority [value]="task.priority"></task-priority>
-        </div>
-    </div>
-    <div>
-        <div class="title">Status</div>
-        <div class="value">
-          <task-status [value]="task.status"></task-status>
-        </div>
+      <div class="title">Assigned to</div>
+      <div class="value">{{ task.owner }}</div>
     </div>
   </div>
   <div class="info">
     <div>
-        <div class="title">Start Date</div>
-        <div *ngIf="isEmptyStartDate then setStartDate else getStartDate"></div>
-        <ng-template #setStartDate>
-          <app-task-form-date
-            name="Start"
-            text="START DATE"
-            (dateChanged)="dateChanged($event)"
-          ></app-task-form-date>
-        </ng-template>
-        <ng-template #getStartDate>
-          <div class="value black">{{ task.startDate | date: 'MM/dd/yyyy' }}</div>
-        </ng-template>
+      <div class="title">Priority</div>
+      <div class="value">
+        <task-priority [value]="task.priority"></task-priority>
+      </div>
     </div>
     <div>
-        <div class="title">Due Date</div>
-        <div *ngIf="isEmptyDueDate then setDueDate else getDueDate"></div>
-        <ng-template #setDueDate>
-          <app-task-form-date
-            name="Due"
-            text="DUE DATE"
-            (dateChanged)="dateChanged($event)"
-          ></app-task-form-date>
-        </ng-template>
-        <ng-template #getDueDate>
-          <div class="value black">{{ task.dueDate | date: 'MM/dd/yyyy' }}</div>
-        </ng-template>
+      <div class="title">Status</div>
+      <div class="value">
+        <task-status [value]="task.status"></task-status>
+      </div>
+    </div>
+  </div>
+  <div class="info">
+    <div>
+      <div class="title">Start Date</div>
+      <div *ngIf="isEmptyStartDate; then setStartDate; else getStartDate"></div>
+      <ng-template #setStartDate>
+        <app-task-form-date
+          name="Start"
+          text="START DATE"
+          (dateChanged)="dateChanged($event)"
+        ></app-task-form-date>
+      </ng-template>
+      <ng-template #getStartDate>
+        <div class="value black">{{ task.startDate | date: "MM/dd/yyyy" }}</div>
+      </ng-template>
+    </div>
+    <div>
+      <div class="title">Due Date</div>
+      <div *ngIf="isEmptyDueDate; then setDueDate; else getDueDate"></div>
+      <ng-template #setDueDate>
+        <app-task-form-date
+          name="Due"
+          text="DUE DATE"
+          (dateChanged)="dateChanged($event)"
+        ></app-task-form-date>
+      </ng-template>
+      <ng-template #getDueDate>
+        <div class="value black">{{ task.dueDate | date: "MM/dd/yyyy" }}</div>
+      </ng-template>
     </div>
   </div>
   <div class="info last long">
     <div>
-        <div class="title">Details</div>
-        <div class="value black">{{ task.description }}</div>
+      <div class="title">Details</div>
+      <div class="value black">{{ task.description }}</div>
     </div>
   </div>
 </ng-template>
 <ng-template #editingForm>
-  <dx-form
-    [colCount]="2"
-    [formData]="task"
-    labelMode="floating"
-  >
-    <dxi-item
-      [colSpan]="2"
-      dataField="name"
-      dataField="text"
-    ></dxi-item>
-    <dxi-item
-      dataField="company"
-    ></dxi-item>
-    <dxi-item
-      dataField="owner"
-    >
-      <dxo-label
-        text="Assigned to"
-      ></dxo-label>
+  <dx-form [colCount]="2" [formData]="task" labelMode="floating">
+    <dxi-item [colSpan]="2" dataField="name" dataField="text"></dxi-item>
+    <dxi-item dataField="company"></dxi-item>
+    <dxi-item dataField="owner">
+      <dxo-label text="Assigned to"></dxo-label>
     </dxi-item>
     <dxi-item
       dataField="priority"
@@ -127,14 +139,8 @@
         displayFormat: 'MM/dd/y'
       }"
     ></dxi-item>
-    <dxi-item
-      [colSpan]="2"
-      dataField="description"
-      editorType="dxTextArea"
-    >
-      <dxo-label
-        text="Details"
-      ></dxo-label>
+    <dxi-item [colSpan]="2" dataField="description" editorType="dxTextArea">
+      <dxo-label text="Details"></dxo-label>
     </dxi-item>
   </dx-form>
 </ng-template>

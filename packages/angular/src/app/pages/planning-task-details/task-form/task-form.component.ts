@@ -1,4 +1,6 @@
-import { Component, OnInit, NgModule, Input } from '@angular/core';
+import {
+ Component, OnInit, NgModule, Input,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxToolbarModule,
@@ -19,16 +21,19 @@ import { TaskType } from 'src/app/shared/types/task';
 @Component({
   selector: 'task-form',
   templateUrl: './task-form.component.html',
-  styleUrls: ['./task-form.component.scss']
+  styleUrls: ['./task-form.component.scss'],
 })
 export class TaskFormComponent implements OnInit {
   @Input() task: TaskType;
 
   edit = false;
+
   statusList = statusList;
+
   priorityList = priorityList;
 
   isEmptyStartDate: boolean;
+
   isEmptyDueDate: boolean;
 
   isEmpty = (value: any): boolean => value === undefined || value === null;
@@ -40,28 +45,28 @@ export class TaskFormComponent implements OnInit {
   dateChanged = (e: { date: Date, type: string }) => {
     const { date, type } = e;
 
-    if(type === 'Start') {
+    if (type === 'Start') {
       this.task.startDate = e.date;
       this.isEmptyStartDate = this.isEmpty(date);
-    } else  if(type === 'Due') {
+    } else if (type === 'Due') {
       this.task.dueDate = date;
       this.isEmptyDueDate = this.isEmpty(date);
     }
-  }
+  };
 
   dateBoxValueChanged = (e: DateBoxValueChangedEvent) => {
     const { value, component } = e;
 
     this.dateChanged({
       date: value,
-      type: component.option('name')
+      type: component.option('name'),
     });
-  }
-  
+  };
+
   constructor() {
     this.toggleEdit = this.toggleEdit.bind(this);
   }
-  
+
   ngOnInit() {
     this.isEmptyStartDate = this.isEmpty(this.task.startDate);
     this.isEmptyDueDate = this.isEmpty(this.task.dueDate);
@@ -79,10 +84,10 @@ export class TaskFormComponent implements OnInit {
     TaskStatusModule,
     TaskFromDateModule,
 
-    CommonModule
+    CommonModule,
   ],
   providers: [],
   exports: [TaskFormComponent],
-  declarations: [TaskFormComponent]
+  declarations: [TaskFormComponent],
 })
 export class TaskFormModule { }

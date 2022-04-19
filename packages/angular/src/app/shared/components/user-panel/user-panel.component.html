@@ -3,7 +3,7 @@
     <div class="image-container">
       <div class="user-image"></div>
     </div>
-    <div class="user-name">{{user?.name}}</div>
+    <div class="user-name">{{ user?.name }}</div>
   </div>
   <dx-context-menu
     *ngIf="menuMode === 'context'"
@@ -15,11 +15,13 @@
       my: 'top',
       at: 'bottom'
     }"
-    cssClass="user-menu">
+    cssClass="user-menu"
+  >
   </dx-context-menu>
   <dx-list
     *ngIf="menuMode === 'list'"
     class="dx-toolbar-menu-action"
-    [items]="menuItems">
+    [items]="menuItems"
+  >
   </dx-list>
 </div>

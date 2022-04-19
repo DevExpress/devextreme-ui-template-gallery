@@ -1,231 +1,375 @@
 <div class="view-wrapper">
-    <ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
-        <dx-toolbar >
-            <dxi-item location="before" widget="dxButton" [options]="{ icon: 'arrowleft' }">
-            </dxi-item>
-            <dxi-item location="before">
-                <div class="toolbar-header">{{contact.name}}</div>
-            </dxi-item>
-            <dxi-item location="after" locateInMenu="auto" widget="dxButton"
-                [options]="{ text: 'Terminate', type: 'default', stylingMode: 'contained'}">
-            </dxi-item>
-            <dxi-item location="after" locateInMenu="auto">
-                <dx-drop-down-button [items]="['Assign to Me', 'Archive']" stylingMode="text" [width]="120"
-                    text="Action"></dx-drop-down-button>
-            </dxi-item>
-            <dxi-item location="after" locateInMenu="auto">
-                <div class="separator"></div>
-            </dxi-item>
-            <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
-                [options]="{text: 'Copy', icon: 'copy'}">
-            </dxi-item>
-            <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
-                [options]="{text: 'Refresh', icon: 'refresh', onClick: refresh}">
-            </dxi-item>
+  <ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
+    <dx-toolbar>
+      <dxi-item
+        location="before"
+        widget="dxButton"
+        [options]="{ icon: 'arrowleft' }"
+      >
+      </dxi-item>
+      <dxi-item location="before">
+        <div class="toolbar-header">{{ contact.name }}</div>
+      </dxi-item>
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        widget="dxButton"
+        [options]="{
+          text: 'Terminate',
+          type: 'default',
+          stylingMode: 'contained'
+        }"
+      >
+      </dxi-item>
+      <dxi-item location="after" locateInMenu="auto">
+        <dx-drop-down-button
+          [items]="['Assign to Me', 'Archive']"
+          stylingMode="text"
+          [width]="120"
+          text="Action"
+        ></dx-drop-down-button>
+      </dxi-item>
+      <dxi-item location="after" locateInMenu="auto">
+        <div class="separator"></div>
+      </dxi-item>
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        showText="inMenu"
+        widget="dxButton"
+        [options]="{ text: 'Copy', icon: 'copy' }"
+      >
+      </dxi-item>
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        showText="inMenu"
+        widget="dxButton"
+        [options]="{ text: 'Refresh', icon: 'refresh', onClick: refresh }"
+      >
+      </dxi-item>
+    </dx-toolbar>
+
+    <div class="panels">
+      <div class="left">
+        <dx-toolbar>
+          <dxi-item location="before">
+            <div class="panels-header">Details</div>
+          </dxi-item>
+          <dxi-item
+            location="after"
+            [visible]="!isEditing"
+            locateInMenu="after"
+            widget="dxButton"
+            [options]="{
+              text: 'Edit',
+              icon: 'edit',
+              stylingMode: 'outlined',
+              type: 'default',
+              onClick: toggleEdit
+            }"
+          >
+          </dxi-item>
+          <dxi-item
+            location="after"
+            [visible]="isEditing"
+            locateInMenu="after"
+            widget="dxButton"
+            [options]="{
+              text: 'Save',
+              stylingMode: 'outlined',
+              type: 'default',
+              onClick: toggleEdit
+            }"
+          >
+          </dxi-item>
+          <dxi-item
+            location="after"
+            [visible]="isEditing"
+            locateInMenu="after"
+            widget="dxButton"
+            [options]="{ text: 'Cancel', onClick: toggleEdit }"
+          >
+          </dxi-item>
         </dx-toolbar>
-
-        <div class="panels">
-            <div class="left">
-                <dx-toolbar>
-                    <dxi-item location="before">
-                        <div class="panels-header">Details</div>
-                    </dxi-item>
-                    <dxi-item location="after" [visible]='!isEditing' locateInMenu="after" widget="dxButton"
-                        [options]="{text: 'Edit', icon: 'edit', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
-                    </dxi-item>
-                    <dxi-item location="after" [visible]='isEditing' locateInMenu="after" widget="dxButton"
-                        [options]="{text: 'Save', stylingMode: 'outlined', type: 'default', onClick: toggleEdit}">
-                    </dxi-item>
-                    <dxi-item location="after" [visible]='isEditing' locateInMenu="after" widget="dxButton"
-                        [options]="{text: 'Cancel', onClick: toggleEdit}">
-                    </dxi-item>
-                </dx-toolbar>
-                <ng-template [ngIf]="!isEditing" [ngIfElse]="editingForm">
-                    <div class="user-info">
-                        <div class="photo"
-                            [style.backgroundImage]="'url(\'data:image/png;base64,' + contact.image +'\')'">
-                        </div>
-                        <div class="text-info">
-                            <div class="title">Status</div>
-                            <div class="value status status-{{contact.status.toLowerCase()}}">{{contact.status}}</div>
-                            <div class="title">First Name</div>
-                            <div class="value black">{{contact.firstName}}</div>
-                            <div class="title">Last Name</div>
-                            <div class="value black">{{contact.lastName}}</div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div>
-                            <div class="title">Position</div>
-                            <div class="value black">{{contact.position}}</div>
-                        </div>
-                        <div>
-                            <div class="title">Assigned to</div>
-                            <div class="value">{{contact.manager}}</div>
-                        </div>
-                    </div>
-                    <div class="info last">
-                        <div>
-                            <div class="title">Company</div>
-                            <div class="value">{{contact.company}}</div>
-                        </div>
-                    </div>
-
-                    <div class="panels-header">Contacts</div>
-
-                    <div class="info">
-                        <div>
-                            <div class="title">Address</div>
-                            <div class="value black">{{contact.address}}</div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div>
-                            <div class="title">City</div>
-                            <div class="value black">{{contact.city}}</div>
-                        </div>
-                        <div class="narrow">
-                            <div>
-                                <div class="title">State</div>
-                                <div class="value black">{{contact.state.stateShort}}</div>
-                            </div>
-                            <div>
-                                <div class="title">Zip Code</div>
-                                <div class="value black">{{contact.zipCode}}</div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="info last small">
-                        <div>
-                            <div class="title">Phone</div>
-                            <div class="value black">{{formatPhone(contact.phone)}}</div>
-                            <dx-button text="Call" icon="tel" type="default" type="default" stylingMode="outlined" class="button"></dx-button>
-                        </div>
-                        <div>
-                            <div class="title">Email</div>
-                            <div class="value black">{{contact.email}}</div>
-                            <dx-button text="Send Email" icon="email" type="default" stylingMode="outlined" class="button"></dx-button>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template #editingForm>
-                    <dx-form class="form last" [formData]="contact" labelMode="floating" [colCount]="1"
-                        labelLocation="top" [screenByWidth]="getSizeQualifier">
-                        
-                        <dxi-item itemType="group" [colCount]="2">
-                            <dxi-item>
-                                <div class="user-info">
-                                    <div class="photo form"
-                                        [style.backgroundImage]="'url(\'data:image/png;base64,' + contact.image +'\')'">
-                                    </div>
-                                </div>
-                            </dxi-item>
-                            <dxi-item itemType="group" [colSpan]="3">
-                                <dxi-item dataField="status">
-                                    <div *dxTemplate>
-                                        <dx-select-box
-                                            [(value)]="contact.status"
-                                            [dataSource]="statuses"
-                                            valueExpr="status"
-                                            fieldTemplate="field"
-                                            [dropDownOptions]="{ container: '.view-wrapper' }"
-                                        >
-                                            <div *dxTemplate="let data of 'field'">
-                                                <div>
-                                                    <div class="value input status status-{{data.status | lowercase}}">{{data.status}}
-                                                    </div>
-                                                    <dx-text-box [value]="data" [readOnly]="true" [visible]="false"
-                                                        [inputAttr]="{ class: 'status status-' + data.status | lowercase }">
-                                                    </dx-text-box>
-                                                </div>
-                                            </div>
-                                            <div *dxTemplate="let data of 'item'">
-                                                <div class="value status status-{{data.status | lowercase}}">{{data.status}}
-                                                </div>
-                                            </div>
-                                        </dx-select-box>
-                                    </div>
-                                </dxi-item>
-                                <dxi-item dataField="firstName"></dxi-item>
-                                <dxi-item dataField="lastName"></dxi-item>
-
-                            </dxi-item>
-                        </dxi-item>
-                        <dxi-item itemType="group" [colCount]="2">
-                            <dxi-item dataField="position"></dxi-item>
-                            <!-- TODO manager, company - selectboxes -->
-                            <dxi-item dataField="manager" [label]="{ text: 'Assigned to'}"></dxi-item>
-                            <dxi-item dataField="company" [colSpan]="2"></dxi-item>
-                        </dxi-item>
-                        <dxi-item>
-                            <div class="panels-header">Contacts</div>
-                        </dxi-item>
-                        <dxi-item itemType="group" [colCount]="4">
-                            <dxi-item dataField="city" [colSpan]="2"></dxi-item>
-                            <dxi-item dataField="state.stateShort"></dxi-item>
-                            <dxi-item dataField="zipCode"></dxi-item>
-                            <dxi-item dataField="phone" [colSpan]="2"></dxi-item>
-                            <dxi-item dataField="email" [colSpan]="2"></dxi-item>
-                        </dxi-item>
-                    </dx-form>
-                </ng-template>
-
+        <ng-template [ngIf]="!isEditing" [ngIfElse]="editingForm">
+          <div class="user-info">
+            <div
+              class="photo"
+              [style.backgroundImage]="
+                'url(\'data:image/png;base64,' + contact.image + '\')'
+              "
+            >
             </div>
-            <div class="right">
-                <div class="dx-card">
-                    <dx-tab-panel [showNavButtons]="true">
-                        <dxi-item title="Tasks">
-                            <div class="tab-content">
-                                <dx-data-grid [dataSource]="contact.tasks" [columnAutoWidth]="true" [selectionFilter]="['done', '=', true]">
-                                    <dxo-selection mode="multiple" [deferred]="true"></dxo-selection>
-                                    <dxi-column dataField="text" caption="Name" [hidingPriority]="3"></dxi-column>
-                                    <dxi-column dataField="date" dataType="date" [hidingPriority]="1"></dxi-column>
-                                    <dxi-column caption="Assigned To" cellTemplate="assignTemplate" [hidingPriority]="0">
-                                        <div *dxTemplate="let data of 'assignTemplate'">
-                                            {{contact.manager}}
-                                        </div>
-                                    </dxi-column>
-                                </dx-data-grid>
-                            </div>
-                        </dxi-item>
-                        <dxi-item title="Activities">
-                            <div class="tab-content">
-                                <app-activities [activities]="contact.activities" [showBy]="true"></app-activities>
-                            </div>
-                        </dxi-item>
-                        <dxi-item title="Opportunities">
-                            <div class="tab-content">
-                                <div class="tiles">
-                                    <div class="tiles-header">Active</div>
-                                    <div class="tile" *ngFor="let data of activeOpportunities">
-                                        <div class="name">{{data.name}}</div>
-                                        <div class="product-info">Products: {{data.products}}, total: <span class="total">{{data.total | currency}}</span></div>
-                                        <div class="owner">Owner: <span class="owner-name">{{data.manager}}</span></div>
-                                    </div>
-                                    <br>
-                                    <dx-button text="Add Opportunity" icon="add" width="320" height="60" stylingMode="outlined" type="default" class="add-tile"></dx-button>
-                                    <div class="tiles-header">Closed</div>
-                                    <div class="tile" *ngFor="let data of closedOpportunities">
-                                        <div class="name">{{data.name}}</div>
-                                        <div class="product-info">Products: {{data.products}}, total: <span class="total">{{data.total | currency}}</span></div>
-                                        <div class="owner">Owner: <span class="owner-name">{{data.manager}}</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </dxi-item>
-                        <dxi-item title="Notes">
-                            <app-notes [items]="contactNotes"></app-notes>
-                        </dxi-item>
-                        <dxi-item title="Messages" [badge]="contactMessages.length">
-                            <app-messages [userName]="contact.name" [items]="contactMessages"></app-messages>
-                        </dxi-item>
-                    </dx-tab-panel>
+            <div class="text-info">
+              <div class="title">Status</div>
+              <div
+                class="value status status-{{ contact.status.toLowerCase() }}"
+                >{{ contact.status }}</div
+              >
+              <div class="title">First Name</div>
+              <div class="value black">{{ contact.firstName }}</div>
+              <div class="title">Last Name</div>
+              <div class="value black">{{ contact.lastName }}</div>
+            </div>
+          </div>
+          <div class="info">
+            <div>
+              <div class="title">Position</div>
+              <div class="value black">{{ contact.position }}</div>
+            </div>
+            <div>
+              <div class="title">Assigned to</div>
+              <div class="value">{{ contact.manager }}</div>
+            </div>
+          </div>
+          <div class="info last">
+            <div>
+              <div class="title">Company</div>
+              <div class="value">{{ contact.company }}</div>
+            </div>
+          </div>
+
+          <div class="panels-header">Contacts</div>
+
+          <div class="info">
+            <div>
+              <div class="title">Address</div>
+              <div class="value black">{{ contact.address }}</div>
+            </div>
+          </div>
+          <div class="info">
+            <div>
+              <div class="title">City</div>
+              <div class="value black">{{ contact.city }}</div>
+            </div>
+            <div class="narrow">
+              <div>
+                <div class="title">State</div>
+                <div class="value black">{{ contact.state.stateShort }}</div>
+              </div>
+              <div>
+                <div class="title">Zip Code</div>
+                <div class="value black">{{ contact.zipCode }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="info last small">
+            <div>
+              <div class="title">Phone</div>
+              <div class="value black">{{ formatPhone(contact.phone) }}</div>
+              <dx-button
+                text="Call"
+                icon="tel"
+                type="default"
+                type="default"
+                stylingMode="outlined"
+                class="button"
+              ></dx-button>
+            </div>
+            <div>
+              <div class="title">Email</div>
+              <div class="value black">{{ contact.email }}</div>
+              <dx-button
+                text="Send Email"
+                icon="email"
+                type="default"
+                stylingMode="outlined"
+                class="button"
+              ></dx-button>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #editingForm>
+          <dx-form
+            class="form last"
+            [formData]="contact"
+            labelMode="floating"
+            [colCount]="1"
+            labelLocation="top"
+            [screenByWidth]="getSizeQualifier"
+          >
+            <dxi-item itemType="group" [colCount]="2">
+              <dxi-item>
+                <div class="user-info">
+                  <div
+                    class="photo form"
+                    [style.backgroundImage]="
+                      'url(\'data:image/png;base64,' + contact.image + '\')'
+                    "
+                  >
+                  </div>
                 </div>
-            </div>
+              </dxi-item>
+              <dxi-item itemType="group" [colSpan]="3">
+                <dxi-item dataField="status">
+                  <div *dxTemplate>
+                    <dx-select-box
+                      [(value)]="contact.status"
+                      [dataSource]="statuses"
+                      valueExpr="status"
+                      fieldTemplate="field"
+                      [dropDownOptions]="{ container: '.view-wrapper' }"
+                    >
+                      <div *dxTemplate="let data of 'field'">
+                        <div>
+                          <div
+                            class="value input status status-{{
+                              data.status | lowercase
+                            }}"
+                            >{{ data.status }}
+                          </div>
+                          <dx-text-box
+                            [value]="data"
+                            [readOnly]="true"
+                            [visible]="false"
+                            [inputAttr]="{
+                              class: 'status status-' + data.status | lowercase
+                            }"
+                          >
+                          </dx-text-box>
+                        </div>
+                      </div>
+                      <div *dxTemplate="let data of 'item'">
+                        <div
+                          class="value status status-{{
+                            data.status | lowercase
+                          }}"
+                          >{{ data.status }}
+                        </div>
+                      </div>
+                    </dx-select-box>
+                  </div>
+                </dxi-item>
+                <dxi-item dataField="firstName"></dxi-item>
+                <dxi-item dataField="lastName"></dxi-item>
+              </dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" [colCount]="2">
+              <dxi-item dataField="position"></dxi-item>
+              <!-- TODO manager, company - selectboxes -->
+              <dxi-item
+                dataField="manager"
+                [label]="{ text: 'Assigned to' }"
+              ></dxi-item>
+              <dxi-item dataField="company" [colSpan]="2"></dxi-item>
+            </dxi-item>
+            <dxi-item>
+              <div class="panels-header">Contacts</div>
+            </dxi-item>
+            <dxi-item itemType="group" [colCount]="4">
+              <dxi-item dataField="city" [colSpan]="2"></dxi-item>
+              <dxi-item dataField="state.stateShort"></dxi-item>
+              <dxi-item dataField="zipCode"></dxi-item>
+              <dxi-item dataField="phone" [colSpan]="2"></dxi-item>
+              <dxi-item dataField="email" [colSpan]="2"></dxi-item>
+            </dxi-item>
+          </dx-form>
+        </ng-template>
+      </div>
+      <div class="right">
+        <div class="dx-card">
+          <dx-tab-panel [showNavButtons]="true">
+            <dxi-item title="Tasks">
+              <div class="tab-content">
+                <dx-data-grid
+                  [dataSource]="contact.tasks"
+                  [columnAutoWidth]="true"
+                  [selectionFilter]="['done', '=', true]"
+                >
+                  <dxo-selection
+                    mode="multiple"
+                    [deferred]="true"
+                  ></dxo-selection>
+                  <dxi-column
+                    dataField="text"
+                    caption="Name"
+                    [hidingPriority]="3"
+                  ></dxi-column>
+                  <dxi-column
+                    dataField="date"
+                    dataType="date"
+                    [hidingPriority]="1"
+                  ></dxi-column>
+                  <dxi-column
+                    caption="Assigned To"
+                    cellTemplate="assignTemplate"
+                    [hidingPriority]="0"
+                  >
+                    <div *dxTemplate="let data of 'assignTemplate'">
+                      {{ contact.manager }}
+                    </div>
+                  </dxi-column>
+                </dx-data-grid>
+              </div>
+            </dxi-item>
+            <dxi-item title="Activities">
+              <div class="tab-content">
+                <app-activities
+                  [activities]="contact.activities"
+                  [showBy]="true"
+                ></app-activities>
+              </div>
+            </dxi-item>
+            <dxi-item title="Opportunities">
+              <div class="tab-content">
+                <div class="tiles">
+                  <div class="tiles-header">Active</div>
+                  <div class="tile" *ngFor="let data of activeOpportunities">
+                    <div class="name">{{ data.name }}</div>
+                    <div class="product-info"
+                      >Products: {{ data.products }}, total:
+                      <span class="total">{{
+                        data.total | currency
+                      }}</span></div
+                    >
+                    <div class="owner"
+                      >Owner:
+                      <span class="owner-name">{{ data.manager }}</span></div
+                    >
+                  </div>
+                  <br />
+                  <dx-button
+                    text="Add Opportunity"
+                    icon="add"
+                    width="320"
+                    height="60"
+                    stylingMode="outlined"
+                    type="default"
+                    class="add-tile"
+                  ></dx-button>
+                  <div class="tiles-header">Closed</div>
+                  <div class="tile" *ngFor="let data of closedOpportunities">
+                    <div class="name">{{ data.name }}</div>
+                    <div class="product-info"
+                      >Products: {{ data.products }}, total:
+                      <span class="total">{{
+                        data.total | currency
+                      }}</span></div
+                    >
+                    <div class="owner"
+                      >Owner:
+                      <span class="owner-name">{{ data.manager }}</span></div
+                    >
+                  </div>
+                </div>
+              </div>
+            </dxi-item>
+            <dxi-item title="Notes">
+              <app-notes [items]="contactNotes"></app-notes>
+            </dxi-item>
+            <dxi-item title="Messages" [badge]="contactMessages.length">
+              <app-messages
+                [userName]="contact.name"
+                [items]="contactMessages"
+              ></app-messages>
+            </dxi-item>
+          </dx-tab-panel>
         </div>
-    </ng-template>
-    <ng-template #loading>
-        <dx-load-panel [visible]="isLoading"></dx-load-panel>
-    </ng-template>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #loading>
+    <dx-load-panel [visible]="isLoading"></dx-load-panel>
+  </ng-template>
 </div>

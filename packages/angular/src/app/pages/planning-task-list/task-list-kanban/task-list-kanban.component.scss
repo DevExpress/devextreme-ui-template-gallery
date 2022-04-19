@@ -47,7 +47,8 @@
 
 ::ng-deep {
   .add-task {
-    .dx-icon, .dx-button-text {
+    .dx-icon,
+    .dx-button-text {
       color: $accent-color;
     }
   }

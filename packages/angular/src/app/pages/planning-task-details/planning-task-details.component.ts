@@ -6,7 +6,6 @@ import {
   DxTabPanelModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
-import { TaskFormModule } from './task-form/task-form.component';
 import {
   ActivitiesModule,
   NotesModule,
@@ -15,20 +14,23 @@ import {
   TaskStatusModule,
 } from 'src/app/shared/components';
 import { TaskType } from 'src/app/shared/types/task';
-import { RwaService } from 'src/app/shared/services'
+import { RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
+import { TaskFormModule } from './task-form/task-form.component';
 
 @Component({
   // selector: 'app-planning-task-details',
   templateUrl: './planning-task-details.component.html',
   styleUrls: ['./planning-task-details.component.scss'],
-  providers: [RwaService]
+  providers: [RwaService],
 })
 export class PlanningTaskDetailsComponent implements OnInit {
   dataSubscription: Subscription;
+
   task: TaskType;
 
   taskId = 1;
+
   isLoading: boolean;
 
   loadData = () => {
@@ -40,7 +42,7 @@ export class PlanningTaskDetailsComponent implements OnInit {
 
       this.isLoading = false;
     });
-  }
+  };
 
   constructor(private service: RwaService) {
     this.refresh = this.refresh.bind(this);
@@ -71,10 +73,10 @@ export class PlanningTaskDetailsComponent implements OnInit {
     TaskProirityModule,
     TaskStatusModule,
 
-    CommonModule
+    CommonModule,
   ],
   providers: [],
   exports: [],
-  declarations: [PlanningTaskDetailsComponent]
+  declarations: [PlanningTaskDetailsComponent],
 })
 export class PlanningTaskDetailsModel { }

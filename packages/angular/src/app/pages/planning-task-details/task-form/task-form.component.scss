@@ -3,31 +3,31 @@
 @include user-info();
 
 .info {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
-    > div {
-        flex-basis: 180px;
+  > div {
+    flex-basis: 180px;
 
+    &:first-child {
+      flex-basis: 204px;
+    }
+  }
+
+  &.last {
+    margin-bottom: 30px;
+
+    &.long {
+      > div {
         &:first-child {
-            flex-basis: 204px;
+          flex-basis: auto;
         }
+      }
     }
+  }
 
-    &.last {
-        margin-bottom: 30px;
-
-        &.long {
-            > div {
-                &:first-child {
-                    flex-basis: auto;
-                }
-            }
-        }
-    }
-
-    .title {
-        padding-top: 8px;
-    }
+  .title {
+    padding-top: 8px;
+  }
 }

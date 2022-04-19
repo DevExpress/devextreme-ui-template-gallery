@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, NgModule, OnInit } from '@angular/core';
+import {
+ Component, Input, NgModule, OnInit,
+} from '@angular/core';
 import {
   DxTextAreaModule,
   DxToolbarModule,
@@ -14,7 +16,7 @@ type Note = {
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.scss']
+  styleUrls: ['./notes.component.scss'],
 })
 export class NotesComponent implements OnInit {
   @Input() items: Note[] ;
@@ -27,13 +29,13 @@ export class NotesComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [ 
+  imports: [
     DxTextAreaModule,
     DxToolbarModule,
 
-    CommonModule
+    CommonModule,
   ],
-  declarations: [ NotesComponent ],
-  exports: [ NotesComponent ]
+  declarations: [NotesComponent],
+  exports: [NotesComponent],
 })
 export class NotesModule { }

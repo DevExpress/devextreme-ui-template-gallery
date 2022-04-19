@@ -1,149 +1,258 @@
 <div class="view-wrapper">
-    <dx-data-grid [dataSource]="dataSource" (onRowClick)="rowClick($event)" (onRowPrepared)="rowPrepared($event)" class="grid" noDataText="">
-        <dxo-search-panel [visible]="true" placeholder="Contact Search">
-        </dxo-search-panel>
-        <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
-        <dxo-toolbar>
-            <dxi-item location="before">
-                <div class="grid-header">Contact List</div>
-            </dxi-item>
-            <dxi-item location="before" locateInMenu="auto">
-                <dx-drop-down-button
-                    [dataSource]="statuses"
-                    stylingMode="text"
-                    displayExpr="text"
-                    keyExpr="status"
-                    [width]="160"
-                    selectedItemKey=""
-                    [useSelectMode]="true"
-                    (onSelectionChanged)="filterStatus($event)"
-                ></dx-drop-down-button>
-            </dxi-item>
-            <dxi-item location="after" locateInMenu="auto" widget="dxButton"
-                [options]="{ icon: 'plus', text: 'Add Contact', type: 'default', stylingMode: 'contained'}">
-            </dxi-item>
-            <dxi-item location="after" locateInMenu="auto" showText="inMenu" widget="dxButton"
-                [options]="{text: 'Refresh', icon: 'refresh'}">
-            </dxi-item>
-            <dxi-item location="after" locateInMenu="auto">
-                <div class="separator"></div>
-            </dxi-item>
-            <dxi-item name="exportButton"></dxi-item>
-            <dxi-item location="after" locateInMenu="auto">
-                <div class="separator"></div>
-            </dxi-item>
-            <dxi-item name="columnChooserButton" locateInMenu="auto"></dxi-item>
-            <dxi-item name="searchPanel" locateInMenu="auto"></dxi-item>
-        </dxo-toolbar>
-        <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
-        <dxo-header-filter [visible]="true"></dxo-header-filter>
-        <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-        <dxo-scrolling mode="virtual"></dxo-scrolling>
-        <dxo-sorting mode="multiple"></dxo-sorting>
-        <dxi-column dataField="name" caption="Name" sortOrder="asc" [hidingPriority]="5" [minWidth]="150" cellTemplate="nameTemplate">
-            <div *dxTemplate="let s of 'nameTemplate'" class="name-template">
-                <div>{{s.data.name}}</div>
-                <div class="position">{{s.data.position}}</div>
-            </div>
-        </dxi-column>
-        <dxi-column dataField="company" caption="Company" [hidingPriority]="5" [minWidth]="150"></dxi-column>
-        <dxi-column dataField="status" caption="Status" dataType="string" cellTemplate="statusTemplate"
-            [hidingPriority]="3" [minWidth]="100">
-            <div *dxTemplate="let s of 'statusTemplate'">
-                <span class="status status-{{s.data.status.toLowerCase()}}">{{s.data.status}}</span>
-            </div>
-        </dxi-column>
-        <dxi-column dataField="assignedTo" caption="Assigned to" [hidingPriority]="4"></dxi-column>
-        <dxi-column dataField="phone" caption="Phone" [customizeText]="customizePhoneCell" [hidingPriority]="2">
-        </dxi-column>
-        <dxi-column dataField="email" caption="Email" [hidingPriority]="1"></dxi-column>
-    </dx-data-grid>
+  <dx-data-grid
+    [dataSource]="dataSource"
+    (onRowClick)="rowClick($event)"
+    (onRowPrepared)="rowPrepared($event)"
+    class="grid"
+    noDataText=""
+  >
+    <dxo-search-panel [visible]="true" placeholder="Contact Search">
+    </dxo-search-panel>
+    <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-toolbar>
+      <dxi-item location="before">
+        <div class="grid-header">Contact List</div>
+      </dxi-item>
+      <dxi-item location="before" locateInMenu="auto">
+        <dx-drop-down-button
+          [dataSource]="statuses"
+          stylingMode="text"
+          displayExpr="text"
+          keyExpr="status"
+          [width]="160"
+          selectedItemKey=""
+          [useSelectMode]="true"
+          (onSelectionChanged)="filterStatus($event)"
+        ></dx-drop-down-button>
+      </dxi-item>
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        widget="dxButton"
+        [options]="{
+          icon: 'plus',
+          text: 'Add Contact',
+          type: 'default',
+          stylingMode: 'contained'
+        }"
+      >
+      </dxi-item>
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        showText="inMenu"
+        widget="dxButton"
+        [options]="{ text: 'Refresh', icon: 'refresh' }"
+      >
+      </dxi-item>
+      <dxi-item location="after" locateInMenu="auto">
+        <div class="separator"></div>
+      </dxi-item>
+      <dxi-item name="exportButton"></dxi-item>
+      <dxi-item location="after" locateInMenu="auto">
+        <div class="separator"></div>
+      </dxi-item>
+      <dxi-item name="columnChooserButton" locateInMenu="auto"></dxi-item>
+      <dxi-item name="searchPanel" locateInMenu="auto"></dxi-item>
+    </dxo-toolbar>
+    <dxo-selection
+      selectAllMode="allPages"
+      showCheckBoxesMode="always"
+      mode="multiple"
+    ></dxo-selection>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    <dxo-scrolling mode="virtual"></dxo-scrolling>
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxi-column
+      dataField="name"
+      caption="Name"
+      sortOrder="asc"
+      [hidingPriority]="5"
+      [minWidth]="150"
+      cellTemplate="nameTemplate"
+    >
+      <div *dxTemplate="let s of 'nameTemplate'" class="name-template">
+        <div>{{ s.data.name }}</div>
+        <div class="position">{{ s.data.position }}</div>
+      </div>
+    </dxi-column>
+    <dxi-column
+      dataField="company"
+      caption="Company"
+      [hidingPriority]="5"
+      [minWidth]="150"
+    ></dxi-column>
+    <dxi-column
+      dataField="status"
+      caption="Status"
+      dataType="string"
+      cellTemplate="statusTemplate"
+      [hidingPriority]="3"
+      [minWidth]="100"
+    >
+      <div *dxTemplate="let s of 'statusTemplate'">
+        <span class="status status-{{ s.data.status.toLowerCase() }}">{{
+          s.data.status
+        }}</span>
+      </div>
+    </dxi-column>
+    <dxi-column
+      dataField="assignedTo"
+      caption="Assigned to"
+      [hidingPriority]="4"
+    ></dxi-column>
+    <dxi-column
+      dataField="phone"
+      caption="Phone"
+      [customizeText]="customizePhoneCell"
+      [hidingPriority]="2"
+    >
+    </dxi-column>
+    <dxi-column
+      dataField="email"
+      caption="Email"
+      [hidingPriority]="1"
+    ></dxi-column>
+  </dx-data-grid>
 
-    <div class="panel" [ngClass]="{ 'pin': isPanelPin, 'open': isPanelOpen }">
-        <div class="data-wrapper">
-            <ng-template [ngIf]="!panelLoading" [ngIfElse]="loading">
-                <div class="data-part">
-                    <dx-toolbar>
-                        <dxi-item location="before">
-                            <div *dxTemplate>
-                                <div class="contact-name value">{{panelData.name}}</div>
-                            </div>
-                        </dxi-item>
-                        <dxi-item location="before">
-                            <div *dxTemplate>
-                                <span class="status status-{{panelData.status | lowercase}}">{{panelData.status}}</span>
-                            </div>
-                        </dxi-item>
-                        <dxi-item location="after" widget="dxButton" [visible]="isPinEnabled"
-                            [options]="{ icon: isPanelPin ? 'unpin' : 'pin', onClick: pinClick }">
-                        </dxi-item>
-                        <dxi-item location="after" widget="dxButton" [options]="{ icon: 'close', onClick: closePanel }">
-                        </dxi-item>
-                    </dx-toolbar>
-                </div>
-                
-                
-                <dx-scroll-view class="panel-scroll">
-                    <div class="data-part border">
-                        <div class="user-info">
-                            <div class="photo"
-                                [style.backgroundImage]="'url(\'data:image/png;base64,' + panelData.image +'\')'"></div>
-                            <div>
-                                <div class="title">Company</div>
-                                <div class="value">{{panelData.company}}</div>
-                                <div class="title">Position</div>
-                                <div class="value black">{{panelData.position}}</div>
-                                <div class="title">Assigned to</div>
-                                <div class="value">{{panelData.manager}}</div>
-                            </div>
-                        </div>
-        
-                        <div class="value black">
-                            <div><i class="dx-icon dx-icon-tel"></i> <span>{{formatPhone(panelData.phone)}}</span></div>
-                            <div><i class="dx-icon dx-icon-email"></i> <span>{{panelData.email}}</span></div>
-                            <div><i class="dx-icon dx-icon-home"></i> <span>{{panelData.address}}</span></div>
-                        </div>
-        
-                        <dx-toolbar class="panel-toolbar">
-                            <dxi-item location="before" widget="dxButton"
-                                [options]="{ icon: 'edit', stylingMode: 'outlined', text: 'Edit', type: 'default' }">
-                            </dxi-item>
-                            <dxi-item location="after" widget="dxDropDownButton" [options]="{
-                                text: 'Actions',
-                                stylingMode: 'contained',
-                                items: [ 'Call', 'Send Fax', 'Send Email', 'Make a Meeting' ]
-                            }">
-                            </dxi-item>
-                        </dx-toolbar>
-                    </div>
-                    <div class="data-part">
-                        <dx-accordion [multiple]="true" [collapsible]="true">
-                            <div *dxTemplate="let t of 'title'">
-                                <span class="accordion-title">{{ t.title }}</span>
-                                <dx-button icon="add" type="default" stylingMode="text" (onClick)="accordionTitleClick($event)"></dx-button>
-                            </div>
-                            <dxi-item title="Opportunities">
-                                <div *dxTemplate="let i of 'item'">
-                                    <div *ngFor="let opportunity of panelData.opportunities" class="opportunities">
-                                        <span class="value">{{ opportunity.name }} </span>
-                                        <br>
-                                        <span class="value black small">{{ opportunity.price | currency:'USD':'$':'1.0-0' }}</span>
-                                        <br>
-                                    </div>
-                                </div>
-                            </dxi-item>
-                            <dxi-item title="Activities">
-                                <app-activities [activities]="panelData.activities"></app-activities>
-                            </dxi-item>
-                        </dx-accordion>
-                    </div>
-                </dx-scroll-view>
-            </ng-template>
-            <ng-template #loading>
-                <dx-load-panel [visible]="panelLoading" container=".panel"
-                    [position]="{of: '.panel', my: 'center', at: 'center'}"></dx-load-panel>
-            </ng-template>
-           
+  <div class="panel" [ngClass]="{ pin: isPanelPin, open: isPanelOpen }">
+    <div class="data-wrapper">
+      <ng-template [ngIf]="!panelLoading" [ngIfElse]="loading">
+        <div class="data-part">
+          <dx-toolbar>
+            <dxi-item location="before">
+              <div *dxTemplate>
+                <div class="contact-name value">{{ panelData.name }}</div>
+              </div>
+            </dxi-item>
+            <dxi-item location="before">
+              <div *dxTemplate>
+                <span
+                  class="status status-{{ panelData.status | lowercase }}"
+                  >{{ panelData.status }}</span
+                >
+              </div>
+            </dxi-item>
+            <dxi-item
+              location="after"
+              widget="dxButton"
+              [visible]="isPinEnabled"
+              [options]="{
+                icon: isPanelPin ? 'unpin' : 'pin',
+                onClick: pinClick
+              }"
+            >
+            </dxi-item>
+            <dxi-item
+              location="after"
+              widget="dxButton"
+              [options]="{ icon: 'close', onClick: closePanel }"
+            >
+            </dxi-item>
+          </dx-toolbar>
         </div>
+
+        <dx-scroll-view class="panel-scroll">
+          <div class="data-part border">
+            <div class="user-info">
+              <div
+                class="photo"
+                [style.backgroundImage]="
+                  'url(\'data:image/png;base64,' + panelData.image + '\')'
+                "
+              ></div>
+              <div>
+                <div class="title">Company</div>
+                <div class="value">{{ panelData.company }}</div>
+                <div class="title">Position</div>
+                <div class="value black">{{ panelData.position }}</div>
+                <div class="title">Assigned to</div>
+                <div class="value">{{ panelData.manager }}</div>
+              </div>
+            </div>
+
+            <div class="value black">
+              <div
+                ><i class="dx-icon dx-icon-tel"></i>
+                <span>{{ formatPhone(panelData.phone) }}</span></div
+              >
+              <div
+                ><i class="dx-icon dx-icon-email"></i>
+                <span>{{ panelData.email }}</span></div
+              >
+              <div
+                ><i class="dx-icon dx-icon-home"></i>
+                <span>{{ panelData.address }}</span></div
+              >
+            </div>
+
+            <dx-toolbar class="panel-toolbar">
+              <dxi-item
+                location="before"
+                widget="dxButton"
+                [options]="{
+                  icon: 'edit',
+                  stylingMode: 'outlined',
+                  text: 'Edit',
+                  type: 'default'
+                }"
+              >
+              </dxi-item>
+              <dxi-item
+                location="after"
+                widget="dxDropDownButton"
+                [options]="{
+                  text: 'Actions',
+                  stylingMode: 'contained',
+                  items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                }"
+              >
+              </dxi-item>
+            </dx-toolbar>
+          </div>
+          <div class="data-part">
+            <dx-accordion [multiple]="true" [collapsible]="true">
+              <div *dxTemplate="let t of 'title'">
+                <span class="accordion-title">{{ t.title }}</span>
+                <dx-button
+                  icon="add"
+                  type="default"
+                  stylingMode="text"
+                  (onClick)="accordionTitleClick($event)"
+                ></dx-button>
+              </div>
+              <dxi-item title="Opportunities">
+                <div *dxTemplate="let i of 'item'">
+                  <div
+                    *ngFor="let opportunity of panelData.opportunities"
+                    class="opportunities"
+                  >
+                    <span class="value">{{ opportunity.name }} </span>
+                    <br />
+                    <span class="value black small">{{
+                      opportunity.price | currency: "USD":"$":"1.0-0"
+                    }}</span>
+                    <br />
+                  </div>
+                </div>
+              </dxi-item>
+              <dxi-item title="Activities">
+                <app-activities
+                  [activities]="panelData.activities"
+                ></app-activities>
+              </dxi-item>
+            </dx-accordion>
+          </div>
+        </dx-scroll-view>
+      </ng-template>
+      <ng-template #loading>
+        <dx-load-panel
+          [visible]="panelLoading"
+          container=".panel"
+          [position]="{ of: '.panel', my: 'center', at: 'center' }"
+        ></dx-load-panel>
+      </ng-template>
     </div>
+  </div>
 </div>

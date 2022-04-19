@@ -15,7 +15,7 @@
 ::ng-deep {
   .dx-toolbar {
     .toolbar-header {
-        @include header();
+      @include header();
     }
 
     .dx-tabs .dx-tab {
@@ -26,7 +26,7 @@
       }
     }
   }
-  
+
   .search-grid {
     .dx-placeholder {
       font-size: 14px;

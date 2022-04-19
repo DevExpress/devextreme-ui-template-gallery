@@ -1,7 +1,7 @@
 export const priorityList = [
     'Low',
     'Normal',
-    'Hight'
+    'Hight',
 ] as const;
-  
+
 export type Priority = (typeof priorityList)[number];

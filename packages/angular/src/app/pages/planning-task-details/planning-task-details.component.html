@@ -1,61 +1,58 @@
 <div class="view-wrapper">
   <ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
-  <dx-toolbar>
-    <dxi-item
-      location="before"
-      widget="dxButton"
-      [options]="{ icon: 'arrowleft' }"
-    ></dxi-item>
-    <dxi-item location="before" >
-      <span class="toolbar-header">{{ task.text }}</span>
-    </dxi-item>
+    <dx-toolbar>
+      <dxi-item
+        location="before"
+        widget="dxButton"
+        [options]="{ icon: 'arrowleft' }"
+      ></dxi-item>
+      <dxi-item location="before">
+        <span class="toolbar-header">{{ task.text }}</span>
+      </dxi-item>
 
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-    >
-      <dx-drop-down-button
-        text="ACTIONS"
-        stylingMode="contained"
-        [ngClass]="'actions'"
-        [items]="[
-          { text: 'Duplicate' },
-          { text: 'Close' },
-          { text: 'Delete' }
-        ]"
-      ></dx-drop-down-button>
-    </dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      widget="dxButton"
-      [options]="{ icon: 'attach' }"
-    ></dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      widget="dxButton"
-      [options]="{ icon: 'refresh', onClick: refresh }"
-    ></dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-    >
-      <div class="separator"></div>
-    </dxi-item>
-  </dx-toolbar>
+      <dxi-item location="after" locateInMenu="auto">
+        <dx-drop-down-button
+          text="ACTIONS"
+          stylingMode="contained"
+          [ngClass]="'actions'"
+          [items]="[
+            { text: 'Duplicate' },
+            { text: 'Close' },
+            { text: 'Delete' }
+          ]"
+        ></dx-drop-down-button>
+      </dxi-item>
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        widget="dxButton"
+        [options]="{ icon: 'attach' }"
+      ></dxi-item>
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        widget="dxButton"
+        [options]="{ icon: 'refresh', onClick: refresh }"
+      ></dxi-item>
+      <dxi-item location="after" locateInMenu="auto">
+        <div class="separator"></div>
+      </dxi-item>
+    </dx-toolbar>
 
-  <div class="panels">
-    <div class="left">
-      <task-form [task]="task"></task-form>
-    </div>
-    
-    <div class="right">
-      <div class="dx-card">
-        <dx-tab-panel [showNavButtons]="true" [deferRendering]="false">
+    <div class="panels">
+      <div class="left">
+        <task-form [task]="task"></task-form>
+      </div>
+
+      <div class="right">
+        <div class="dx-card">
+          <dx-tab-panel [showNavButtons]="true" [deferRendering]="false">
             <dxi-item title="Activities">
               <div class="tab-content">
-                <app-activities [activities]="task.activities" [showBy]="true"></app-activities>
+                <app-activities
+                  [activities]="task.activities"
+                  [showBy]="true"
+                ></app-activities>
               </div>
             </dxi-item>
             <dxi-item title="Notes">
@@ -64,11 +61,11 @@
             <dxi-item title="Messages" [badge]="task.messages.length">
               <app-messages [items]="task.messages"></app-messages>
             </dxi-item>
-        </dx-tab-panel>
+          </dx-tab-panel>
+        </div>
+      </div>
     </div>
-    </div>
-  </div>
-</ng-template>
+  </ng-template>
 </div>
 
 <ng-template #loading>
