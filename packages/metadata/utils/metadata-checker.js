@@ -53,7 +53,7 @@ class MetadataCheker {
             approach,
             'src',
             approach === 'angular' ? 'app' : '',
-            `app-navigation.${approach === 'angular' ? 'ts' : 'tsx'}`
+            `app-navigation.ts`
         );
 
         return readFileSync(navigationModulePath)
