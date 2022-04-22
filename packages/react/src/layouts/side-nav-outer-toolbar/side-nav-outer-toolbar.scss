@@ -1,4 +1,5 @@
 @use "../../variables" as *;
+
 .side-nav-outer-toolbar {
   flex-direction: column;
   display: flex;
@@ -7,7 +8,7 @@
 }
 
 .layout-header {
-  z-index: 1502;
+  z-index: 1501;
 }
 
 .layout-body {
