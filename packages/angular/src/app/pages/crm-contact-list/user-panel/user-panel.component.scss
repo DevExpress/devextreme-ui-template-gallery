@@ -1,0 +1,114 @@
+@use "../../../../variables" as *;
+
+$side-panel-toolbar-height: 58px;
+
+.screen-medium {
+  .panel.open {
+    top: $side-panel-toolbar-height;
+  }
+}
+
+.screen-large ::ng-deep {
+  .panel.open {
+    top: 0;
+  }
+}
+
+.dx-drawer-overlap ::ng-deep {
+  .panel.opne {
+    top: $side-panel-toolbar-height;
+  }
+}
+
+.panel {
+  position: fixed;
+  right: -350px;
+  top: $side-panel-toolbar-height;
+  bottom: 0;
+  background: $base-bg;
+  transition: right 400ms;
+
+  ::ng-deep .embedded.dx-viewport & {
+    top: 0;
+  }
+
+  &.open {
+    right: 0;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  &.pin {
+    position: absolute;
+    transition: none;
+    box-shadow: none;
+    border-left: 1px solid $base-border-color;
+
+    &.open {
+      top: 0;
+      position: relative;
+    }
+  }
+
+  .data-wrapper {
+    width: 350px;
+    padding-bottom: 16px;
+    height: 100%;
+
+    .data-part {
+      padding: 0 16px;
+      &.border {
+        padding-bottom: 5px;
+        border-bottom: 1px solid $base-border-color;
+      }
+    }
+
+    .panel-scroll {
+      height: calc(100% - #{$side-panel-toolbar-height});
+    }
+
+    .contact-name {
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    @include user-info();
+
+    .panel-toolbar {
+      padding: 10px 3px 0 0;
+    }
+
+    .opportunities {
+      padding-bottom: 10px;
+    }
+
+    .accordion-title {
+      vertical-align: middle;
+      padding-right: 10px;
+    }
+
+    ::ng-deep & {
+      .dx-accordion {
+        margin: 0;
+      }
+      .dx-accordion-item {
+        box-shadow: none;
+        border: none;
+        &.dx-accordion-item-opened {
+          margin: 0;
+        }
+      }
+      .dx-accordion-item-title {
+        padding: 6px 0;
+        background-color: transparent;
+        .dx-accordion-item-title-caption {
+          left: 0;
+        }
+      }
+
+      .dx-accordion-item-body {
+        padding: 0;
+        margin-right: 2px;
+      }
+    }
+  }
+}

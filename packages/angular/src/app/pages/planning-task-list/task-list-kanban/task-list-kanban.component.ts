@@ -1,41 +1,46 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import {
+ Component, OnInit, NgModule, Input, SimpleChanges, ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  DxScrollViewModule,
-  DxSortableModule,
   DxButtonModule,
   DxLoadPanelModule,
+  DxScrollViewModule,
+  DxSortableModule,
+  DxToastModule,
 } from 'devextreme-angular';
 import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable';
-import {
-  ShowingEvent as LoadPanelShowingEvent,
-  ShownEvent as LoadPanelShownEvent,
-} from 'devextreme/ui/load_panel';
-import { TaskType } from 'src/app/shared/types/task';
+import { Task } from 'src/app/shared/types/task';
 import { Status, statusList } from 'src/app/shared/types/status';
-import { RwaService } from 'src/app/shared/services';
-import { Subscription } from 'rxjs';
+import { ToastComponent, ToastModule } from 'src/app/shared/components';
 import { TaskKanbanCardModule } from './task-kanban-card/task-kanban-card.component';
 
 type Board = {
   name: Status
-  cards: TaskType[]
+  cards: Task[]
 };
 
 @Component({
   selector: 'task-list-kanban',
   templateUrl: './task-list-kanban.component.html',
   styleUrls: ['./task-list-kanban.component.scss'],
-  providers: [RwaService],
 })
 export class TaskListKanbanComponent implements OnInit {
-  dataSubscription: Subscription;
+  @ViewChild('toast', { static: false }) toast: ToastComponent;
 
-  isLoading: boolean;
+  @Input() dataSource: Task[];
 
   kanbanDataSource: Board[] = [];
 
-  fillOutBoard = (cards: TaskType[]): Board[] => {
+  toastMessage: string;
+
+  isVisibleToast: boolean;
+
+  isLoading: boolean;
+
+  statuses = statusList;
+
+  fillOutBoard = (cards: Task[]): Board[] => {
     const result: Board[] = [];
     for (const status of statusList) {
       const value = cards.filter((item) => item.status === status);
@@ -46,25 +51,29 @@ export class TaskListKanbanComponent implements OnInit {
     return result;
   };
 
-  constructor(private service: RwaService) {
+  constructor() {
+    this.toastMessage = '';
+
     this.isLoading = true;
+    this.isVisibleToast = false;
+
     this.kanbanDataSource = this.fillOutBoard([]);
   }
 
   ngOnInit() {
-    const tasks$ = this.service.getTasks();
-
-    this.isLoading = true;
-    this.dataSubscription = tasks$.subscribe((data) => {
-      this.kanbanDataSource = this.fillOutBoard(data);
-
-      this.isLoading = false;
-    });
+    this.kanbanDataSource = this.fillOutBoard(this.dataSource);
   }
 
-  ngOnDestroy() {
-    this.dataSubscription.unsubscribe();
+  ngOnChanges(changes: SimpleChanges) {
+    this.isLoading = changes.dataSource.currentValue === undefined;
   }
+
+  getCardsByStatus = (status: Status): Task[] => {
+    const cards: Task[] = this.dataSource
+      .filter((task) => task.status === status);
+
+    return cards;
+  };
 
   onListReorder = (e: ReorderEvent) => {
     const list = this.kanbanDataSource.splice(e.fromIndex, 1)[0];
@@ -72,21 +81,34 @@ export class TaskListKanbanComponent implements OnInit {
   };
 
   onTaskDragStart(e: DragStartEvent) {
-    e.itemData = e.fromData[e.fromIndex];
+    const { fromData, fromIndex } = e;
+    e.itemData = fromData.cards[fromIndex];
   }
 
   onTaskDrop(e: ReorderEvent | AddEvent) {
-    e.fromData.splice(e.fromIndex, 1);
-    e.toData.splice(e.toIndex, 0, e.itemData);
+    const {
+      fromData, toData, fromIndex, toIndex, itemData,
+    } = e;
+
+    itemData.status = toData.name;
+
+    fromData.cards.splice(fromIndex, 1);
+    toData.cards.splice(toIndex, 0, itemData);
   }
+
+  notify = (text: string) => {
+    this.toast.notify(text);
+  };
 }
 
 @NgModule({
   imports: [
-    DxScrollViewModule,
-    DxSortableModule,
     DxButtonModule,
     DxLoadPanelModule,
+    DxScrollViewModule,
+    DxSortableModule,
+    DxToastModule,
+    ToastModule,
 
     TaskKanbanCardModule,
 

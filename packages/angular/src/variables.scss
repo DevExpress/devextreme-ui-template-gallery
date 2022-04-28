@@ -68,20 +68,25 @@ $background-gray-color: color.change($base-text-color, $alpha: 0.04);
   padding-right: 25px;
 }
 
+@mixin user-photo {
+  .photo {
+    width: 124px;
+    height: 124px;
+    margin-right: 20px;
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0px 2px 8px 0px #00000014;
+    border: 1px solid #e0e0e0;
+  }
+}
+
 @mixin user-info {
   .user-info {
     margin-bottom: 20px;
     display: flex;
-    .photo {
-      width: 124px;
-      height: 124px;
-      margin-right: 20px;
-      border-radius: 8px;
-      background-repeat: no-repeat;
-      background-size: cover;
-      box-shadow: 0px 2px 8px 0px #00000014;
-      border: 1px solid #e0e0e0;
-    }
+
+    @include user-photo();
   }
 
   .title {

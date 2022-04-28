@@ -1,33 +1,42 @@
 @use "../../../../variables" as *;
 
-@include user-info();
+#task-form {
+  min-height: 300px;
+}
 
 .info {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  position: relative;
+  padding-bottom: 30px;
 
-  > div {
-    flex-basis: 180px;
-
-    &:first-child {
-      flex-basis: 204px;
-    }
+  span {
+    position: absolute;
+    margin-top: 15px;
+    font-size: 16px;
   }
 
-  &.last {
-    margin-bottom: 30px;
+  task-priority,
+  task-status {
+    position: absolute;
+    margin-top: 20px;
 
-    &.long {
-      > div {
-        &:first-child {
-          flex-basis: auto;
-        }
+    ::ng-deep {
+      span {
+        font-size: 16px;
       }
     }
   }
+}
 
-  .title {
-    padding-top: 8px;
+.form-custom-list-prop {
+  task-priority,
+  task-status {
+    position: absolute;
+    padding: 25px 15px;
+
+    ::ng-deep {
+      span {
+        font-size: 14px;
+      }
+    }
   }
 }

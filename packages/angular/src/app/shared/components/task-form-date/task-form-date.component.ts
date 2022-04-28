@@ -15,10 +15,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './task-form-date.component.html',
   styleUrls: ['./task-form-date.component.scss'],
 })
-export class TaskFromDateComponent implements OnInit {
+export class TaskFormDateComponent implements OnInit {
   @ViewChild('dropDownButton') dropDownButtonComponent: DxDropDownButtonComponent;
 
-  @Input() name: string;
+  @Input() type: string;
 
   @Input() text: string;
 
@@ -29,7 +29,7 @@ export class TaskFromDateComponent implements OnInit {
 
     this.dateChanged.emit({
       date: value,
-      type: component.option('name'),
+      type: component.option('name').toLowerCase(),
     });
 
     this.dropDownButtonComponent.instance.close();
@@ -50,7 +50,7 @@ export class TaskFromDateComponent implements OnInit {
     CommonModule,
   ],
   providers: [],
-  exports: [TaskFromDateComponent],
-  declarations: [TaskFromDateComponent],
+  exports: [TaskFormDateComponent],
+  declarations: [TaskFormDateComponent],
 })
-export class TaskFromDateModule { }
+export class TaskFormDateModule { }

@@ -75,20 +75,16 @@
     </dxi-item>
   </dx-toolbar>
 
-  <ng-template [ngIf]="!load" [ngIfElse]="loading">
-    <div class="task-list" [ngSwitch]="displayTaskComponent">
-      <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
-        <task-list-grid
-          #planningDataGrid
-          (tabValueChanged)="tabValueChange($event)"
-        ></task-list-grid>
-      </div>
-      <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
-        <task-list-kanban [dataSource]="dataSource"></task-list-kanban>
-      </div>
+  <div class="task-list" [ngSwitch]="displayTaskComponent">
+    <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
+      <task-list-grid
+        #planningDataGrid
+        [dataSource]="tasks"
+        (tabValueChanged)="tabValueChange($event)"
+      ></task-list-grid>
     </div>
-  </ng-template>
-  <ng-template #loading>
-    <dx-load-panel [visible]="load"></dx-load-panel>
-  </ng-template>
+    <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
+      <task-list-kanban [dataSource]="tasks"></task-list-kanban>
+    </div>
+  </div>
 </div>

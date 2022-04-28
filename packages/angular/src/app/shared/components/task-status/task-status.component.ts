@@ -13,7 +13,7 @@ export class TaskStatusComponent implements OnInit {
 
   constructor() { }
 
-  spaceToUnderscore = (value: Status) => value.replace(/\ /g, '-');
+  spaceToUnderscore = (value: Status) => value.replace(/ /g, '-');
 
   ngOnInit() { }
 }

@@ -1,0 +1,63 @@
+<div id="card-opportunies">
+  <div
+    *ngIf="isLoading; then displayLoadPanel; else displayOpportunities"
+  ></div>
+
+  <ng-template #displayOpportunities>
+    <div class="opportunities-block">
+      <div class="dx-form-group-caption">Active</div>
+      <div class="opportunities-container">
+        <div class="opportunities" *ngFor="let data of active">
+          <ng-conteiner
+            [ngTemplateOutlet]="opportunity"
+            [ngTemplateOutletContext]="{ item: data }"
+          ></ng-conteiner>
+        </div>
+      </div>
+    </div>
+
+    <dx-button
+      text="Add Opportunity"
+      icon="add"
+      width="320"
+      height="60"
+      stylingMode="outlined"
+      type="default"
+      class="add-tile"
+      (onClick)="addOpportunity()"
+    ></dx-button>
+
+    <div class="opportunities-block">
+      <div class="dx-form-group-caption">Closed</div>
+      <div class="opportunities-container">
+        <div class="opportunities" *ngFor="let data of closed">
+          <ng-conteiner
+            [ngTemplateOutlet]="opportunity"
+            [ngTemplateOutletContext]="{ item: data }"
+          ></ng-conteiner>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #opportunity let-item="item">
+      <div class="name">{{ item.name }}</div>
+      <div class="product-info"
+        >Products: {{ item.products }}, total:
+        <span class="total">{{ item.total | currency }}</span>
+      </div>
+      <div class="owner">
+        Owner: <span class="owner-name">{{ item.manager }}</span>
+      </div>
+    </ng-template>
+  </ng-template>
+
+  <ng-template #displayLoadPanel>
+    <dx-load-panel
+      [visible]="isLoading"
+      container="#card-opportunies"
+      [position]="{ of: '#card-opportunies' }"
+    ></dx-load-panel>
+  </ng-template>
+</div>
+
+<dx-toast [message]="messageToast" [(visible)]="isVisibleToast"></dx-toast>

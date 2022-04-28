@@ -1,15 +1,16 @@
 import {
- Component, OnInit, NgModule, ViewChild, EventEmitter, Output,
+ Component, OnInit, NgModule, ViewChild, EventEmitter, Output, Input, SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {
   DxButtonModule,
-  DxDataGridModule,
-  DxTabsModule,
-  DxDropDownButtonModule,
-  DxToolbarModule,
   DxDataGridComponent,
+  DxDataGridModule,
+  DxDropDownButtonModule,
+  DxLoadPanelModule,
+  DxTabsModule,
+  DxToolbarModule,
 } from 'devextreme-angular';
 import { RowPreparedEvent, RowValidatingEvent, ExportingEvent } from 'devextreme/ui/data_grid';
 import { ItemClickEvent as TabsItemClickEvenet } from 'devextreme/ui/tabs';
@@ -22,18 +23,17 @@ import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { priorityList } from 'src/app/shared/types/priority';
 import { statusList } from 'src/app/shared/types/status';
-import { TaskType } from 'src/app/shared/types/task';
-import { RwaService } from 'src/app/shared/services';
-import { Observable } from 'rxjs';
+import { Task } from 'src/app/shared/types/task';
 
 @Component({
   selector: 'task-list-grid',
   templateUrl: './task-list-grid.component.html',
   styleUrls: ['./task-list-grid.component.scss'],
-  providers: [RwaService],
 })
 export class TaskListGridComponent implements OnInit {
   @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
+
+  @Input() dataSource: Task[];
 
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
 
@@ -62,20 +62,24 @@ export class TaskListGridComponent implements OnInit {
     e.cancel = true;
   };
 
+  isLoading: Boolean;
+
   statusList = statusList;
 
   priorityList = priorityList;
 
-  tasks$: Observable<TaskType[]>;
-
-  constructor(private service: RwaService) {
+  constructor() {
+    this.isLoading = true;
   }
 
   ngOnInit() {
-    this.tasks$ = this.service.getTasks();
   }
 
-  onRowPreparedGrid = (e: RowPreparedEvent<TaskType, number>) => {
+  ngOnChanges(changes: SimpleChanges) {
+    this.isLoading = changes.dataSource.currentValue === undefined;
+  }
+
+  onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
     const { rowType, rowElement, data } = e;
 
     if (rowType === 'header') return;
@@ -84,23 +88,6 @@ export class TaskListGridComponent implements OnInit {
       rowElement.classList.add('completed');
     }
   };
-
-  onRowValidating = (e: RowValidatingEvent<TaskType, number>) => {
-    const { newData, brokenRules } = e;
-    const { startDate, dueDate } = newData;
-
-    if (startDate === undefined || dueDate === undefined) {
-      e.errorText = 'Need set \'Start Date\' and \'Due Date\'';
-      e.isValid = false;
-    } else if (dueDate <= startDate) {
-      e.errorText = '\'Start Date\' must be greater \'Due Date\'';
-      e.isValid = false;
-    } else if (brokenRules.length !== 0) {
-      e.errorText = 'All fields must be filled';
-    }
-  };
-
-  spaceToUnderscore = (value: string) => value.replace(/\ /g, '-');
 
   tabsItemClick = (e: TabsItemClickEvenet) => {
     this.tabValueChanged.emit(e);
@@ -114,6 +101,8 @@ export class TaskListGridComponent implements OnInit {
     DxTabsModule,
     DxDropDownButtonModule,
     DxToolbarModule,
+    DxLoadPanelModule,
+
     TaskProirityModule,
     TaskStatusModule,
 

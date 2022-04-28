@@ -12,7 +12,9 @@ import {
   DxLoadPanelModule,
 } from 'devextreme-angular';
 import { tabPanelItems } from 'src/app/shared/types/resource';
-import { getTasks } from 'dx-rwa-data';
+import { Task } from 'src/app/shared/types/task';
+import { RwaService } from 'src/app/shared/services';
+import { Subscription } from 'rxjs';
 import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
 import { TaskListKanbanModule } from './task-list-kanban/task-list-kanban.component';
 
@@ -20,6 +22,7 @@ import { TaskListKanbanModule } from './task-list-kanban/task-list-kanban.compon
   // selector: 'app-planning-task-list',
   templateUrl: './planning-task-list.component.html',
   styleUrls: ['./planning-task-list.component.scss'],
+  providers: [RwaService],
 })
 export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
@@ -30,21 +33,35 @@ export class PlanningTaskListComponent implements OnInit {
     this.displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
   };
 
-  tabPanelItems = tabPanelItems;
+  @Output()
+  refresh() {
+    this.dataGrid.refresh();
+  }
 
-  dataSource: any[];
+  tasks: Task[];
+
+  tabPanelItems = tabPanelItems;
 
   displayTaskComponent = this.tabPanelItems[0].text;
 
   displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
 
-  constructor() {
-    this.refresh = this.refresh.bind(this);
+  dataSubscription: Subscription;
 
-    getTasks().then((data) => {
-      this.dataSource = data;
-      this.load = false;
+  constructor(private service: RwaService) {
+    this.refresh = this.refresh.bind(this);
+  }
+
+  ngOnInit(): void {
+    const task$ = this.service.getTasks();
+
+    this.dataSubscription = task$.subscribe((tasks) => {
+      this.tasks = tasks;
     });
+  }
+
+  ngOnDestroy() {
+    this.dataSubscription.unsubscribe();
   }
 
   addDataGridRow = () => this.dataGrid.addRow();
@@ -59,20 +76,6 @@ export class PlanningTaskListComponent implements OnInit {
     const selectedRowsOnly = e.itemData.text.includes('selected');
     this.dataGrid.onExporting(e, selectedRowsOnly);
   };
-
-  load = true;
-
-  @Output()
-  refresh() {
-    this.load = true;
-    getTasks().then((data) => {
-      this.dataSource = data;
-      this.load = false;
-    });
-  }
-
-  ngOnInit(): void {
-  }
 }
 
 @NgModule({

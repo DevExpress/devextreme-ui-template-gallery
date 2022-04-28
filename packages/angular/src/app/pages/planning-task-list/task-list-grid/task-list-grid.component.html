@@ -1,69 +1,80 @@
-<dx-data-grid
-  #dataGrid
-  [dataSource]="tasks$ | async"
-  (onRowPrepared)="onRowPreparedGrid($event)"
-  (onRowValidating)="onRowValidating($event)"
-  [columnAutoWidth]="true"
->
-  <dxo-scrolling mode="virtual"></dxo-scrolling>
-  <dxo-selection
-    selectAllMode="allPages"
-    showCheckBoxesMode="always"
-    mode="multiple"
-  ></dxo-selection>
-  <dxo-sorting mode="multiple"></dxo-sorting>
-  <dxo-header-filter [visible]="true"></dxo-header-filter>
+<div *ngIf="isLoading; then displayLoadPanel; else displayGrid"></div>
 
-  <dxi-column dataField="text" caption="Subject" [hidingPriority]="7">
-    <dxi-validation-rule type="required"></dxi-validation-rule>
-  </dxi-column>
-  <dxi-column dataField="company" caption="Company" [hidingPriority]="6">
-    <dxi-validation-rule type="required"></dxi-validation-rule>
-  </dxi-column>
-  <dxi-column
-    dataField="priority"
-    caption="Priority"
-    [hidingPriority]="4"
-    cellTemplate="cellPriorityTemplate"
+<ng-template #displayGrid>
+  <dx-data-grid
+    #dataGrid
+    [dataSource]="dataSource"
+    (onRowPrepared)="onRowPreparedGrid($event)"
+    [columnAutoWidth]="true"
   >
-    <dxo-lookup [dataSource]="priorityList"></dxo-lookup>
-    <dxi-validation-rule type="required"></dxi-validation-rule>
-  </dxi-column>
-  <dxi-column
-    dataField="startDate"
-    caption="Start Date"
-    dataType="date"
-    [hidingPriority]="2"
-  >
-    <dxi-validation-rule type="required"></dxi-validation-rule>
-  </dxi-column>
-  <dxi-column
-    dataField="dueDate"
-    caption="Due Date"
-    dataType="date"
-    [hidingPriority]="1"
-  >
-    <dxi-validation-rule type="required"></dxi-validation-rule>
-  </dxi-column>
-  <dxi-column dataField="owner" caption="Owner" [hidingPriority]="5">
-    <dxi-validation-rule type="required"></dxi-validation-rule>
-  </dxi-column>
-  <dxi-column
-    dataField="status"
-    caption="Status"
-    [hidingPriority]="3"
-    cellTemplate="cellStatusTemplate"
-    [minWidth]="120"
-  >
-    <dxo-lookup [dataSource]="statusList"></dxo-lookup>
-    <dxi-validation-rule type="required"></dxi-validation-rule>
-  </dxi-column>
+    <dxo-scrolling mode="virtual"></dxo-scrolling>
+    <dxo-selection
+      selectAllMode="allPages"
+      showCheckBoxesMode="always"
+      mode="multiple"
+    ></dxo-selection>
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
 
-  <div *dxTemplate="let c of 'cellPriorityTemplate'">
-    <task-priority [value]="c.data.priority"></task-priority>
-  </div>
+    <dxi-column dataField="text" caption="Subject" [hidingPriority]="7">
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="company" caption="Company" [hidingPriority]="6">
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column
+      dataField="priority"
+      caption="Priority"
+      [hidingPriority]="4"
+      cellTemplate="cellPriorityTemplate"
+    >
+      <dxo-lookup [dataSource]="priorityList"></dxo-lookup>
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column
+      dataField="startDate"
+      caption="Start Date"
+      dataType="date"
+      [hidingPriority]="2"
+    >
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column
+      dataField="dueDate"
+      caption="Due Date"
+      dataType="date"
+      [hidingPriority]="1"
+    >
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="owner" caption="Owner" [hidingPriority]="5">
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column
+      dataField="status"
+      caption="Status"
+      [hidingPriority]="3"
+      cellTemplate="cellStatusTemplate"
+      [minWidth]="120"
+    >
+      <dxo-lookup [dataSource]="statusList"></dxo-lookup>
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
 
-  <div *dxTemplate="let c of 'cellStatusTemplate'">
-    <task-status [value]="c.data.status"></task-status>
-  </div>
-</dx-data-grid>
+    <div *dxTemplate="let c of 'cellPriorityTemplate'">
+      <task-priority [value]="c.data.priority"></task-priority>
+    </div>
+
+    <div *dxTemplate="let c of 'cellStatusTemplate'">
+      <task-status [value]="c.data.status"></task-status>
+    </div>
+  </dx-data-grid>
+</ng-template>
+
+<ng-template #displayLoadPanel>
+  <dx-load-panel
+    [visible]="isLoading"
+    container=".content"
+    [position]="{ of: '.content' }"
+  ></dx-load-panel>
+</ng-template>

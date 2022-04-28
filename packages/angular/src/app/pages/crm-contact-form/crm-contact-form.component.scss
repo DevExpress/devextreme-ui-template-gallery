@@ -38,36 +38,14 @@ $left-panel-width: 400px;
 
   @include user-info();
 
-  .user-info {
-    flex-wrap: wrap;
-    margin-top: -8px;
-    .photo {
-      width: 184px;
-      height: 184px;
-      margin-bottom: 8px;
-      margin-top: 8px;
-
-      &.form {
-        margin-right: -20px;
-      }
-    }
-
-    .text-info {
-      flex-basis: 180px;
-      margin-top: 8px;
-    }
-
-    margin-bottom: 0;
-  }
-
   .panels {
     display: flex;
     flex-wrap: wrap;
-    margin-right: -20px;
+    justify-content: space-between;
+    gap: 20px;
+
     .left {
-      flex-basis: $left-panel-width;
-      flex-grow: 1;
-      padding-right: 20px;
+      flex: 38%;
 
       .info {
         display: flex;
@@ -105,10 +83,7 @@ $left-panel-width: 400px;
     }
 
     .right {
-      flex-grow: 1;
-      flex-basis: calc(100% - #{$left-panel-width} - 20px);
-      min-width: 360px;
-      padding-right: 20px;
+      flex: 60%;
 
       .tab-content {
         padding: 20px;
@@ -126,37 +101,6 @@ $left-panel-width: 400px;
 
         .add-tile {
           margin-bottom: 30px;
-        }
-
-        .tile {
-          border-radius: 4px;
-          background: $side-panel-background;
-          padding: 16px;
-          width: 320px;
-          margin: 0 10px 10px 0;
-          display: inline-block;
-
-          .name {
-            font-size: 16px;
-            font-weight: 700;
-            padding-bottom: 8px;
-          }
-
-          .product-info {
-            font-size: 12px;
-            padding-bottom: 16px;
-            .total {
-              font-size: 16px;
-            }
-          }
-
-          .owner {
-            color: rgba(117, 117, 117, 0.87);
-            font-size: 14px;
-            .owner-name {
-              color: $base-text-color;
-            }
-          }
         }
 
         .note {

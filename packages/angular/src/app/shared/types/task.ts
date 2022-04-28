@@ -1,7 +1,10 @@
 import { Status } from './status';
 import { Priority } from './priority';
+import { Activities } from './activities';
+import { Notes } from './notes';
+import { Messages } from './messages';
 
-export type TaskType = {
+export type Task = {
   id: number
   text: string,
   description: string,
@@ -10,5 +13,8 @@ export type TaskType = {
   startDate: Date,
   dueDate: Date,
   owner: string,
-  status: Status
+  status: Status,
+  activities: Activities,
+  notes: Notes,
+  messages: Messages,
 };

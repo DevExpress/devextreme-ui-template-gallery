@@ -1,6 +1,10 @@
 @use "../../../../variables" as *;
 @use "sass:math";
 
+#tasks-grid {
+  min-height: 300px;
+}
+
 ::ng-deep {
   .dx-datagrid-header-panel {
     padding-top: 0;

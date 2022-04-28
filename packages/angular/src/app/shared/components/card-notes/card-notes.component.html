@@ -1,21 +1,31 @@
 <div class="notes">
   <div class="input-content">
-    <dx-text-area label="New Note" stylingMode="outlined"></dx-text-area>
+    <dx-text-area
+      label="New Note"
+      stylingMode="outlined"
+      [(value)]="nodeText"
+    ></dx-text-area>
     <dx-toolbar>
       <dxi-item
         location="after"
         widget="dxButton"
-        [options]="{ text: 'Send', stylingMode: 'outlined', type: 'default' }"
+        [options]="{
+          text: 'Send',
+          stylingMode: 'outlined',
+          type: 'default',
+          onClick: send
+        }"
       >
       </dxi-item>
       <dxi-item
         location="after"
         widget="dxButton"
-        [options]="{ text: 'Cancel' }"
+        [options]="{ text: 'Cancel', onClick: defaultText }"
       >
       </dxi-item>
     </dx-toolbar>
   </div>
+
   <div class="notes-content">
     <div class="note dx-card" *ngFor="let note of items">
       <div class="note-title">

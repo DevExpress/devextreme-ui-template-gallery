@@ -7,19 +7,18 @@ import {
   DxLoadPanelModule,
 } from 'devextreme-angular';
 import {
-  ActivitiesModule,
-  NotesModule,
-  MessagesModule,
+  CardActivitiesModule,
+  CardNotesModule,
+  CardMessagesModule,
   TaskProirityModule,
   TaskStatusModule,
 } from 'src/app/shared/components';
-import { TaskType } from 'src/app/shared/types/task';
+import { Task } from 'src/app/shared/types/task';
 import { RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { TaskFormModule } from './task-form/task-form.component';
 
 @Component({
-  // selector: 'app-planning-task-details',
   templateUrl: './planning-task-details.component.html',
   styleUrls: ['./planning-task-details.component.scss'],
   providers: [RwaService],
@@ -27,20 +26,15 @@ import { TaskFormModule } from './task-form/task-form.component';
 export class PlanningTaskDetailsComponent implements OnInit {
   dataSubscription: Subscription;
 
-  task: TaskType;
+  task: Task;
 
   taskId = 1;
-
-  isLoading: boolean;
 
   loadData = () => {
     const task$ = this.service.getTask(this.taskId);
 
-    this.isLoading = true;
     this.dataSubscription = task$.subscribe((data) => {
       this.task = data;
-
-      this.isLoading = false;
     });
   };
 
@@ -66,9 +60,9 @@ export class PlanningTaskDetailsComponent implements OnInit {
     DxTabPanelModule,
     DxLoadPanelModule,
 
-    ActivitiesModule,
-    NotesModule,
-    MessagesModule,
+    CardActivitiesModule,
+    CardNotesModule,
+    CardMessagesModule,
     TaskFormModule,
     TaskProirityModule,
     TaskStatusModule,

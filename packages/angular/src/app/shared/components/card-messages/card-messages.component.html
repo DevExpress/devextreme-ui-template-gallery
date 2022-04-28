@@ -1,6 +1,15 @@
 <div class="messages">
   <div class="input-content">
-    <dx-text-area label="New Message" stylingMode="outlined"></dx-text-area>
+    <dx-text-box
+      label="Title"
+      stylingMode="outlined"
+      [(value)]="messageTitle"
+    ></dx-text-box>
+    <dx-text-area
+      label="New Message"
+      stylingMode="outlined"
+      [(value)]="messageText"
+    ></dx-text-area>
     <dx-toolbar>
       <dxi-item
         location="before"
@@ -16,13 +25,18 @@
       <dxi-item
         location="after"
         widget="dxButton"
-        [options]="{ text: 'Send', stylingMode: 'outlined', type: 'default' }"
+        [options]="{
+          text: 'Send',
+          stylingMode: 'outlined',
+          type: 'default',
+          onClick: send
+        }"
       >
       </dxi-item>
       <dxi-item
         location="after"
         widget="dxButton"
-        [options]="{ text: 'Cancel' }"
+        [options]="{ text: 'Cancel', onClick: defaultText }"
       >
       </dxi-item>
     </dx-toolbar>

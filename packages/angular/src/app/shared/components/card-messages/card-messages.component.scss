@@ -1,5 +1,11 @@
 @use "../../../../variables" as *;
 
+.input-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .input-content,
 .messages-content {
   padding: 20px;

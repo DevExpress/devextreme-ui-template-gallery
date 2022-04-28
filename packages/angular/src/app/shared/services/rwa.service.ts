@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TaskType } from 'src/app/shared/types/task';
+import { Task } from 'src/app/shared/types/task';
 
 const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
 
@@ -17,11 +17,11 @@ export class RwaService {
     public getContact = (id: number) =>
         this.http.get<any>(`${API_URL}/Users/Contacts/${id}`);
 
-    public getTasks = (): Observable<TaskType[]> =>
-        this.http.get<TaskType[]>(`${API_URL}/Employees/Tasks`);
+    public getTasks = (): Observable<Task[]> =>
+        this.http.get<Task[]>(`${API_URL}/Employees/Tasks`);
 
-    public getTask = (id: number): Observable<TaskType> =>
-        this.http.get<TaskType>(`${API_URL}/Employees/Tasks/${id}`);
+    public getTask = (id: number): Observable<Task> =>
+        this.http.get<Task>(`${API_URL}/Employees/Tasks/${id}`);
 
     public getContactNotes = (id: number) =>
         this.http.get(`${API_URL}/Users/Contacts/${id}/Notes`);
@@ -40,7 +40,6 @@ export class RwaService {
             .pipe(
                 map((data) => data.filter((_: any, index: number) => {
                     const isEven = index % 2 === 0;
-                    console.log(isActive ? isEven : !isEven);
                     return isActive ? isEven : !isEven;
                 })),
             );

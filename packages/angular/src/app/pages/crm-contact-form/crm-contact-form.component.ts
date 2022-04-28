@@ -6,23 +6,25 @@ import {
   DxButtonModule,
   DxDataGridModule,
   DxFormModule,
-  DxLoadPanelModule,
+  DxDropDownButtonModule,
   DxSelectBoxModule,
   DxTabPanelModule,
   DxTextBoxModule,
   DxToolbarModule,
 } from 'devextreme-angular';
 import {
-  ActivitiesModule,
-  NotesModule,
-  MessagesModule,
+  CardActivitiesModule,
+  CardNotesModule,
+  CardMessagesModule,
 } from 'src/app/shared/components';
 import { RwaService } from 'src/app/shared/services';
-import { forkJoin } from 'rxjs';
-
-type Contact = {
-  name: string
-};
+import { forkJoin, Observable, Subscription } from 'rxjs';
+import { Contact } from 'src/app/shared/types/contact';
+import { Messages } from 'src/app/shared/types/messages';
+import { Notes } from 'src/app/shared/types/notes';
+import { Activities } from 'src/app/shared/types/activities';
+import { ContactFormModule } from './contact-form/contact-form.component';
+import { ContactCardsModule } from './contact-cards/contact-cards.component';
 
 type Opportunitie = {
   name: string,
@@ -39,25 +41,27 @@ type Opportunitie = {
 export class CrmContactFormComponent implements OnInit {
   contactId = 12;
 
-  contact: Contact;
+  contact$: Observable<Contact>;
 
-  contactNotes;
+  activities$: Observable<Activities>;
 
-  contactMessages;
+  contactNotes: Notes;
+
+  contactMessages: Messages;
 
   activeOpportunities: Opportunitie[];
 
   closedOpportunities: Opportunitie[];
 
-  isLoading: boolean;
-
-  isEditing: boolean;
+  contactSubscription: Subscription;
 
   loadData = () => {
-    this.isLoading = true;
+    this.contact$ = this.service.getContact(this.contactId);
+    this.contactSubscription = this.contact$.subscribe((contact) => {
+      this.activities$ = new Observable((obs) => obs.next(contact.activities));
+    });
 
     const observable = forkJoin({
-      contact: this.service.getContact(this.contactId),
       contactNotes: this.service.getContactNotes(this.contactId),
       contactMessages: this.service.getContactMessages(this.contactId),
       activeOpportunities: this.service.getActiveContactOpportunities(this.contactId),
@@ -66,44 +70,30 @@ export class CrmContactFormComponent implements OnInit {
 
     observable.subscribe((data) => {
       Object.keys(data).forEach((key) => this[key] = data[key]);
-
-      this.isLoading = false;
     });
   };
 
   constructor(private service: RwaService) {
-    this.isLoading = true;
-    this.isEditing = false;
-
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.refresh = this.refresh.bind(this);
-
     this.statuses = new CustomStore({
       loadMode: 'raw',
       load: getRawStatuses,
     });
+
+    this.refresh = this.refresh.bind(this);
   }
 
   ngOnInit(): void {
     this.loadData();
   }
 
-  statuses: CustomStore;
-
-  toggleEdit() {
-    this.isEditing = !this.isEditing;
+  ngOnDestroy(): void {
+    this.contactSubscription.unsubscribe();
   }
+
+  statuses: CustomStore;
 
   formatPhone(number: string | number): string {
     return String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
-  }
-
-  getAvatarText(name: string) {
-    return name.split(' ').map((name) => name[0]).join('');
-  }
-
-  setUserName(text: string) {
-    return text.replace('{username}', this.contact.name);
   }
 
   getSizeQualifier(width) {
@@ -123,13 +113,16 @@ export class CrmContactFormComponent implements OnInit {
     DxButtonModule,
     DxSelectBoxModule,
     DxTextBoxModule,
-    DxLoadPanelModule,
+    DxDropDownButtonModule,
     DxTabPanelModule,
     DxDataGridModule,
 
-    ActivitiesModule,
-    NotesModule,
-    MessagesModule,
+    ContactFormModule,
+    ContactCardsModule,
+
+    CardActivitiesModule,
+    CardNotesModule,
+    CardMessagesModule,
 
     CommonModule,
   ],

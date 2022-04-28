@@ -1,0 +1,41 @@
+<div id="card-tasks">
+  <div *ngIf="isLoading; then displayLoadPanel; else displayGrid"></div>
+
+  <ng-template #displayGrid>
+    <dx-data-grid
+      #dataGrid
+      [dataSource]="tasks"
+      [columnAutoWidth]="true"
+      [selectionFilter]="['done', '=', true]"
+    >
+      <dxo-selection mode="multiple" [deferred]="true"></dxo-selection>
+      <dxi-column
+        dataField="text"
+        caption="Name"
+        [hidingPriority]="3"
+      ></dxi-column>
+      <dxi-column
+        dataField="date"
+        dataType="date"
+        [hidingPriority]="1"
+      ></dxi-column>
+      <dxi-column
+        caption="Assigned To"
+        cellTemplate="assignTemplate"
+        [hidingPriority]="0"
+      >
+        <div *dxTemplate="let data of 'assignTemplate'">
+          {{ manager }}
+        </div>
+      </dxi-column>
+    </dx-data-grid>
+  </ng-template>
+
+  <ng-template #displayLoadPanel>
+    <dx-load-panel
+      [visible]="isLoading"
+      container="#card-tasks"
+      [position]="{ of: '#card-tasks' }"
+    ></dx-load-panel>
+  </ng-template>
+</div>
