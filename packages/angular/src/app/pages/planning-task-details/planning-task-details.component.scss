@@ -33,19 +33,16 @@ $left-panel-width: 400px;
   .panels {
     display: flex;
     flex-wrap: wrap;
-    margin-right: -20px;
+    justify-content: space-between;
+    gap: 20px;
 
     .left {
-      flex-basis: $left-panel-width;
-      flex-grow: 1;
-      padding-right: 20px;
+      flex: 38%;
     }
 
     .right {
-      flex-grow: 1;
-      flex-basis: calc(100% - #{$left-panel-width} - 20px);
+      flex: 60%;
       min-width: 360px;
-      padding-right: 20px;
 
       .tab-content {
         padding: 20px;

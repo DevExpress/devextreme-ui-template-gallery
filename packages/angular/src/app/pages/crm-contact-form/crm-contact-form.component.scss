@@ -27,8 +27,6 @@ $left-panel-width: 400px;
 
 @include separator();
 
-@include status();
-
 .view-wrapper {
   flex-direction: column;
 

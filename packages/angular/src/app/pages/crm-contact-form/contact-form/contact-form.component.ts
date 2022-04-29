@@ -11,8 +11,12 @@ import {
   DxLoadPanelModule,
 } from 'devextreme-angular';
 import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
-import { ContactStatusModule } from 'src/app/shared/components';
 import { Observable, Subscription } from 'rxjs';
+import {
+  ContactStatusModule,
+  FormItemBlueModule,
+  FormItemPhotoModule,
+} from 'src/app/shared/components';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
 
 @Component({
@@ -27,23 +31,26 @@ export class ContactFormComponent implements OnInit {
 
   contactSubscription: Subscription;
 
-  statuses = contactStatusList;
-
-  isLoading: boolean;
+  statusList = contactStatusList.slice(1);
 
   isEditing: boolean;
+
+  isLoading: boolean;
 
   stylingMode: TextBoxProperties['stylingMode'];
 
   editorOptions: TextBoxProperties;
 
+  toggleEdit = () => {
+    this.isEditing = !this.isEditing;
+    this.setEditorMode(this.isEditing);
+  };
+
   constructor() {
     this.editorOptions = { };
 
-    this.isLoading = true;
     this.isEditing = false;
-
-    this.toggleEdit = this.toggleEdit.bind(this);
+    this.isLoading = true;
   }
 
   ngOnInit() {
@@ -65,11 +72,6 @@ export class ContactFormComponent implements OnInit {
       stylingMode: this.stylingMode,
     };
   };
-
-  toggleEdit = () => {
-    this.isEditing = !this.isEditing;
-    this.setEditorMode(this.isEditing);
-  };
 }
 
 @NgModule({
@@ -82,6 +84,8 @@ export class ContactFormComponent implements OnInit {
     DxLoadPanelModule,
 
     ContactStatusModule,
+    FormItemBlueModule,
+    FormItemPhotoModule,
 
     CommonModule,
   ],

@@ -1,5 +1,3 @@
-@use "../../../../variables" as *;
-
 #task-form {
   min-height: 300px;
 }
@@ -8,20 +6,14 @@
   position: relative;
   padding-bottom: 30px;
 
-  span {
-    position: absolute;
-    margin-top: 15px;
-    font-size: 16px;
-  }
-
   task-priority,
   task-status {
     position: absolute;
-    margin-top: 20px;
+    margin-top: 15px;
 
     ::ng-deep {
       span {
-        font-size: 16px;
+        font-size: 13px;
       }
     }
   }
@@ -31,11 +23,11 @@
   task-priority,
   task-status {
     position: absolute;
-    padding: 25px 15px;
+    padding: 15px 11px;
 
     ::ng-deep {
       span {
-        font-size: 14px;
+        font-size: 13px;
       }
     }
   }

@@ -15,7 +15,8 @@ import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   TaskProirityModule,
   TaskStatusModule,
-  TaskFormDateModule,
+  FormItemDateModule,
+  FormItemBlueModule,
 } from 'src/app/shared/components';
 import { priorityList } from 'src/app/shared/types/priority';
 import { statusList } from 'src/app/shared/types/status';
@@ -47,18 +48,16 @@ export class TaskFormComponent implements OnInit {
 
   isEmpty = (value: any): boolean => value === undefined || value === null;
 
-  toggleEdit() {
+  toggleEdit = () => {
     this.isEditing = !this.isEditing;
     this.setEditorMode(this.isEditing);
-  }
+  };
 
   constructor() {
     this.editorOptions = { };
 
     this.isEditing = false;
     this.isLoading = true;
-
-    this.toggleEdit = this.toggleEdit.bind(this);
   }
 
   ngOnInit() {
@@ -72,6 +71,8 @@ export class TaskFormComponent implements OnInit {
     this.isLoading = changes.task.currentValue === undefined;
 
     if (!this.isLoading) {
+      this.task.startDate = null;
+
       this.isEmptyStartDate = this.isEmpty(this.task?.startDate);
       this.isEmptyDueDate = this.isEmpty(this.task?.dueDate);
     }
@@ -84,16 +85,12 @@ export class TaskFormComponent implements OnInit {
     };
   };
 
-  dateChanged = (e: { date: Date, type: string }) => {
-    const { date, type } = e;
+  startDateChange = (date: Date) => {
+    this.isEmptyStartDate = this.isEmpty(date);
+  };
 
-    if (type === 'start') {
-      this.task.startDate = e.date;
-      this.isEmptyStartDate = this.isEmpty(date);
-    } else if (type === 'due') {
-      this.task.dueDate = date;
-      this.isEmptyDueDate = this.isEmpty(date);
-    }
+  dueDateChange = (date: Date) => {
+    this.isEmptyDueDate = this.isEmpty(date);
   };
 }
 
@@ -109,7 +106,8 @@ export class TaskFormComponent implements OnInit {
 
     TaskProirityModule,
     TaskStatusModule,
-    TaskFormDateModule,
+    FormItemDateModule,
+    FormItemBlueModule,
 
     CommonModule,
   ],

@@ -112,3 +112,12 @@ $side-panel-toolbar-height: 58px;
     }
   }
 }
+
+.icon-editor {
+  display: flex;
+  gap: 15px;
+
+  dx-text-box {
+    flex: 1;
+  }
+}

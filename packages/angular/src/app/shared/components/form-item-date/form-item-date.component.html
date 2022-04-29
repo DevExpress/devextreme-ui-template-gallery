@@ -1,15 +1,14 @@
 <dx-drop-down-button
   #dropDownButton
   icon="event"
-  [text]="text"
   stylingMode="outlined"
   dropDownContentTemplate="dropDownContentTemplate"
+  [text]="text"
   [dropDownOptions]="{ width: 'auto' }"
   [showArrowIcon]="false"
 >
   <div *dxTemplate="let data of 'dropDownContentTemplate'">
     <dx-calendar
-      [name]="type"
       (onValueChanged)="onValueChanged($event)"
     ></dx-calendar>
   </div>

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import {
   DxAccordionModule,
   DxButtonModule,
+  DxTextBoxModule,
   DxToolbarModule,
   DxLoadPanelModule,
   DxScrollViewModule,
@@ -14,6 +15,8 @@ import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   CardActivitiesModule,
   ContactStatusModule,
+  FormItemBlueModule,
+  FormItemPhotoModule,
 } from 'src/app/shared/components';
 import { ScreenService, RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
@@ -57,15 +60,13 @@ export class UserPanelComponent implements OnInit {
     this.isPin = false;
     this.isPinEnabled = false;
 
+    this.userSubscription = new Subscription();
+    
     this.pinClick = this.pinClick.bind(this);
     this.closePanel = this.closePanel.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.customizePhoneCell = this.customizePhoneCell.bind(this);
     this.screenSubscription = this.screen.changed.subscribe(this.calculatePin.bind(this));
-  }
-
-  console(message: string) {
-    console.log(message);
   }
 
   ngOnInit(): void {
@@ -137,6 +138,7 @@ export class UserPanelComponent implements OnInit {
   imports: [
     DxAccordionModule,
     DxButtonModule,
+    DxTextBoxModule,
     DxToolbarModule,
     DxLoadPanelModule,
     DxScrollViewModule,
@@ -144,6 +146,8 @@ export class UserPanelComponent implements OnInit {
 
     CardActivitiesModule,
     ContactStatusModule,
+    FormItemBlueModule,
+    FormItemPhotoModule,
 
     CommonModule,
   ],

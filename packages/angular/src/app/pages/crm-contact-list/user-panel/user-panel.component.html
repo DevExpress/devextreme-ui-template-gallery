@@ -33,28 +33,18 @@
           <dx-form
             [formData]="user"
             labelMode="floating"
-            [colCount]="1"
             [readOnly]="!isEditing"
           >
             <dxi-item itemType="group" [colCount]="2">
-              <dxi-item dataField="image">
-                <div *dxTemplate="let imageTemplate of 'item'">
-                  <div class="user-info">
-                    <div
-                      class="photo form"
-                      [style.backgroundImage]="
-                        'url(\'data:image/png;base64,' +
-                        imageTemplate.editorOptions.value +
-                        '\')'
-                      "
-                    ></div>
-                  </div>
-                </div>
-              </dxi-item>
+              <dxi-item
+                dataField="image"
+                template="photo"
+              ></dxi-item>
 
-              <dxi-item itemType="group" [colSpan]="3">
+              <dxi-item itemType="group">
                 <dxi-item
                   dataField="company"
+                  [template]="!isEditing ? 'blue' : null"
                   [editorOptions]="editorOptions"
                 ></dxi-item>
                 <dxi-item
@@ -63,9 +53,10 @@
                 ></dxi-item>
                 <dxi-item
                   dataField="manager"
-                  [label]="{ text: 'Assigned to' }"
+                  [template]="!isEditing ? 'blue' : null"
                   [editorOptions]="editorOptions"
                 >
+                  <dxo-label text="Assigned to"></dxo-label>
                 </dxi-item>
               </dxi-item>
             </dxi-item>
@@ -73,40 +64,63 @@
             <dxi-item itemType="group">
               <dxi-item
                 dataField="phone"
-                [editorOptions]="editorOptions"
+                template="editorByIcon"
+                [editorOptions]="{
+                  stylingMode: stylingMode,
+                  mask: '+1(000)000-0000',
+                  icon: 'tel'
+                }"
               ></dxi-item>
               <dxi-item
                 dataField="email"
-                [editorOptions]="editorOptions"
+                template="editorByIcon"
+                [editorOptions]="{
+                  stylingMode: stylingMode,
+                  icon: 'email'
+                }"
               ></dxi-item>
               <dxi-item
                 dataField="address"
-                [editorOptions]="editorOptions"
+                template="editorByIcon"
+                [editorOptions]="{
+                  stylingMode: stylingMode,
+                  icon: 'home'
+                }"
               ></dxi-item>
             </dxi-item>
+
+            <div *dxTemplate="let data of 'blue'">
+              <form-item-blue
+                [label]="data.editorOptions.label"
+                [value]="data.editorOptions.value"
+              ></form-item-blue>
+            </div>
+
+            <div *dxTemplate="let data of 'photo'">
+              <form-item-photo
+                [link]="data.editorOptions.value"
+              ></form-item-photo>
+            </div>
+
+            <div *dxTemplate="let data of 'editorByIcon'" class="icon-editor">
+              <i class="dx-icon dx-icon-{{data.editorOptions.icon}}"></i>
+              <dx-text-box
+                [(value)]="user[data.dataField]"
+                [stylingMode]="data.editorOptions.stylingMode"
+                [mask]="data.editorOptions.mask"
+                [readOnly]="!isEditing"
+              ></dx-text-box>
+            </div>
+
           </dx-form>
         </div>
 
         <div class="data-part border">
-          <div class="value black">
-            <div>
-              <i class="dx-icon dx-icon-tel"></i>
-              <span>{{ formatPhone(user.phone) }}</span>
-            </div>
-            <div>
-              <i class="dx-icon dx-icon-email"></i>
-              <span>{{ user.email }}</span>
-            </div>
-            <div>
-              <i class="dx-icon dx-icon-home"></i>
-              <span>{{ user.address }}</span>
-            </div>
-          </div>
-
           <dx-toolbar class="panel-toolbar">
             <dxi-item
               location="before"
               widget="dxButton"
+              [visible]="!isEditing"
               [options]="{
                 icon: 'edit',
                 stylingMode: 'outlined',
@@ -114,6 +128,25 @@
                 type: 'default',
                 onClick: toggleEdit
               }"
+            ></dxi-item>
+            <dxi-item
+              location="before"
+              [visible]="isEditing"
+              locateInMenu="before"
+              widget="dxButton"
+              [options]="{
+                text: 'Save',
+                stylingMode: 'outlined',
+                type: 'default',
+                onClick: toggleEdit
+              }"
+            ></dxi-item>
+            <dxi-item
+              location="before"
+              [visible]="isEditing"
+              locateInMenu="before"
+              widget="dxButton"
+              [options]="{ text: 'Cancel', onClick: toggleEdit }"
             ></dxi-item>
             <dxi-item
               location="after"
