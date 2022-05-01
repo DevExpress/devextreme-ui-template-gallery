@@ -1,7 +1,7 @@
 <div class="card dx-card dx-theme-text-color dx-theme-background-color">
   <div class="card-wrapper" class="priority-{{ task.priority | lowercase }}">
     <div class="card-priority"></div>
-    <dx-button icon="edit" (onClick)="displayToast()"></dx-button>
+    <dx-button icon="edit" (onClick)="notify()"></dx-button>
     <div class="card-content">
       <div class="card-subject dx-theme-text-color">{{ task.text }}</div>
       <div class="card-data">
@@ -20,5 +20,3 @@
     </div>
   </div>
 </div>
-
-<app-toast #toast></app-toast>

@@ -1,7 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { getRawStatuses } from 'dx-rwa-data';
-import CustomStore from 'devextreme/data/custom_store';
 import {
   DxButtonModule,
   DxDataGridModule,
@@ -74,11 +72,6 @@ export class CrmContactFormComponent implements OnInit {
   };
 
   constructor(private service: RwaService) {
-    this.statuses = new CustomStore({
-      loadMode: 'raw',
-      load: getRawStatuses,
-    });
-
     this.refresh = this.refresh.bind(this);
   }
 
@@ -89,8 +82,6 @@ export class CrmContactFormComponent implements OnInit {
   ngOnDestroy(): void {
     this.contactSubscription.unsubscribe();
   }
-
-  statuses: CustomStore;
 
   formatPhone(number: string | number): string {
     return String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');

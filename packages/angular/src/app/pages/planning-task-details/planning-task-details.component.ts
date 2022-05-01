@@ -1,10 +1,11 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  DxButtonModule,
   DxDropDownButtonModule,
-  DxToolbarModule,
-  DxTabPanelModule,
   DxLoadPanelModule,
+  DxTabPanelModule,
+  DxToolbarModule,
 } from 'devextreme-angular';
 import {
   CardActivitiesModule,
@@ -41,12 +42,12 @@ export class PlanningTaskDetailsComponent implements OnInit {
   constructor(private service: RwaService) {
     this.refresh = this.refresh.bind(this);
   }
-
-  refresh = () => this.loadData();
-
+    
   ngOnInit(): void {
     this.loadData();
   }
+
+  refresh = () => this.loadData();
 
   ngonDestroy(): void {
     this.dataSubscription.unsubscribe();
@@ -55,10 +56,11 @@ export class PlanningTaskDetailsComponent implements OnInit {
 
 @NgModule({
   imports: [
+    DxButtonModule,
     DxDropDownButtonModule,
-    DxToolbarModule,
-    DxTabPanelModule,
     DxLoadPanelModule,
+    DxTabPanelModule,
+    DxToolbarModule,
 
     CardActivitiesModule,
     CardNotesModule,

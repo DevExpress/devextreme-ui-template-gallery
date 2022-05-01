@@ -1,7 +1,6 @@
 import {
  Component, ViewChild, OnInit, NgModule,
 } from '@angular/core';
-import { getContacts } from 'dx-rwa-data';
 import {
   DxDataGridModule,
   DxFormModule,
@@ -25,12 +24,15 @@ import { contactStatusList, StatusContact } from 'src/app/shared/types/contact';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import CustomStore from 'devextreme/data/custom_store';
 import { CommonModule } from '@angular/common';
+import { RwaService } from 'src/app/shared/services';
 import { UserPanelModule } from './user-panel/user-panel.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   // selector: 'app-crm-contact-list',
   templateUrl: './crm-contact-list.component.html',
   styleUrls: ['./crm-contact-list.component.scss'],
+  providers: [RwaService],
 })
 export class CrmContactListComponent implements OnInit {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
@@ -43,7 +45,9 @@ export class CrmContactListComponent implements OnInit {
 
   dataSource: CustomStore;
 
-  constructor() {
+  dataSubscription: Subscription;
+
+  constructor(private service: RwaService) {
     this.isPanelOpen = false;
 
     this.rowClick = this.rowClick.bind(this);
@@ -51,10 +55,13 @@ export class CrmContactListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = new CustomStore({
-      key: 'id',
-      load: getContacts,
+    this.dataSubscription = this.service.getContacts().subscribe((data) => {
+      this.dataSource = data;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.dataSubscription.unsubscribe();
   }
 
   addRow = () => {

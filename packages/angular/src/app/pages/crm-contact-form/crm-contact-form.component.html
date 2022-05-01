@@ -1,48 +1,43 @@
 <div class="view-wrapper">
   <dx-toolbar>
-    <dxi-item
-      location="before"
-      widget="dxButton"
-      [options]="{ icon: 'arrowleft' }"
-    >
+    <dxi-item location="before">
+      <dx-button icon="arrowleft"></dx-button>
     </dxi-item>
     <dxi-item location="before">
       <div class="toolbar-header">{{ (contact$ | async)?.name }}</div>
     </dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      widget="dxButton"
-      [options]="{
-        text: 'Terminate',
-        type: 'default',
-        stylingMode: 'contained'
-      }"
-    ></dxi-item>
+    <dxi-item location="after" locateInMenu="auto">
+      <dx-button text="Terminate" type="default" stylingMode="contained"></dx-button>
+    </dxi-item>
     <dxi-item location="after" locateInMenu="auto">
       <dx-drop-down-button
-        [items]="['Assign to Me', 'Archive']"
+        text="Action"
         stylingMode="text"
         [width]="120"
-        text="Action"
+        [items]="['Assign to Me', 'Archive']"
       ></dx-drop-down-button>
     </dxi-item>
     <dxi-item location="after" locateInMenu="auto">
       <div class="separator"></div>
     </dxi-item>
-    <dxi-item
-      location="after"
+    <dxi-item location="after"
       locateInMenu="auto"
-      showText="inMenu"
       widget="dxButton"
-      [options]="{ text: 'Copy', icon: 'copy' }"
+      showText="inMenu"
+      [options]="{
+        text: 'Copy',
+        icon: 'copy'
+      }"
     ></dxi-item>
-    <dxi-item
-      location="after"
+    <dxi-item location="after"
       locateInMenu="auto"
-      showText="inMenu"
       widget="dxButton"
-      [options]="{ text: 'Refresh', icon: 'refresh', onClick: refresh }"
+      showText="inMenu"
+      [options]="{
+        text: 'Refresh',
+        icon: 'Refresh',
+        onClick: refresh
+      }"
     ></dxi-item>
   </dx-toolbar>
 

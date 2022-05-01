@@ -5,11 +5,11 @@ import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
   DxDataGridModule,
-  DxTabsModule,
   DxDropDownButtonModule,
+  DxLoadPanelModule,
+  DxTabsModule,
   DxTextBoxModule,
   DxToolbarModule,
-  DxLoadPanelModule,
 } from 'devextreme-angular';
 import { tabPanelItems } from 'src/app/shared/types/resource';
 import { Task } from 'src/app/shared/types/task';
@@ -82,11 +82,11 @@ export class PlanningTaskListComponent implements OnInit {
   imports: [
     DxButtonModule,
     DxDataGridModule,
-    DxTabsModule,
     DxDropDownButtonModule,
+    DxLoadPanelModule,
+    DxTabsModule,
     DxTextBoxModule,
     DxToolbarModule,
-    DxLoadPanelModule,
 
     TaskListKanbanModule,
     TaskListModule,

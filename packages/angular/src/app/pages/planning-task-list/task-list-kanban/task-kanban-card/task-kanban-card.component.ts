@@ -1,9 +1,9 @@
 import {
- Component, OnInit, Input, NgModule, ViewChild,
+ Component, OnInit, Input, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule, DxToastModule } from 'devextreme-angular';
-import { ToastComponent, ToastModule } from 'src/app/shared/components';
+import notify from 'devextreme/ui/notify';
 
 import { Task } from 'src/app/shared/types/task';
 
@@ -13,8 +13,6 @@ import { Task } from 'src/app/shared/types/task';
   styleUrls: ['./task-kanban-card.component.scss'],
 })
 export class TaskKanbanCardComponent implements OnInit {
-  @ViewChild('toast', { static: false }) toast: ToastComponent;
-
   @Input() task: Task;
 
   constructor() {
@@ -25,8 +23,8 @@ export class TaskKanbanCardComponent implements OnInit {
 
   getAvatarText = (name: string) => name.split(' ').map((name) => name[0]).join('');
 
-  displayToast = () => {
-    this.toast.notify(`Edit '${this.task.text}' card event`);
+  notify = () => {
+    notify(`Edit '${this.task.text}' card event`);
   };
 }
 
@@ -34,8 +32,6 @@ export class TaskKanbanCardComponent implements OnInit {
   imports: [
     DxButtonModule,
     DxToastModule,
-
-    ToastModule,
 
     CommonModule,
   ],

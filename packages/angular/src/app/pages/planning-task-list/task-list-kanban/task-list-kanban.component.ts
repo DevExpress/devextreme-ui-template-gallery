@@ -1,5 +1,5 @@
 import {
- Component, OnInit, NgModule, Input, SimpleChanges, ViewChild,
+ Component, OnInit, NgModule, Input, SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -9,10 +9,10 @@ import {
   DxSortableModule,
   DxToastModule,
 } from 'devextreme-angular';
+import notify from 'devextreme/ui/notify';
 import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable';
 import { Task } from 'src/app/shared/types/task';
 import { Status, statusList } from 'src/app/shared/types/status';
-import { ToastComponent, ToastModule } from 'src/app/shared/components';
 import { TaskKanbanCardModule } from './task-kanban-card/task-kanban-card.component';
 
 type Board = {
@@ -26,8 +26,6 @@ type Board = {
   styleUrls: ['./task-list-kanban.component.scss'],
 })
 export class TaskListKanbanComponent implements OnInit {
-  @ViewChild('toast', { static: false }) toast: ToastComponent;
-
   @Input() dataSource: Task[];
 
   kanbanDataSource: Board[] = [];
@@ -97,7 +95,7 @@ export class TaskListKanbanComponent implements OnInit {
   }
 
   notify = (text: string) => {
-    this.toast.notify(text);
+    notify(text);
   };
 }
 
@@ -108,7 +106,6 @@ export class TaskListKanbanComponent implements OnInit {
     DxScrollViewModule,
     DxSortableModule,
     DxToastModule,
-    ToastModule,
 
     TaskKanbanCardModule,
 

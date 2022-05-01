@@ -7,7 +7,6 @@ export * from './change-password-form/change-password-form.component';
 export * from './side-navigation-menu/side-navigation-menu.component';
 export * from './user-panel/user-panel.component';
 
-export * from './toast/toast.component';
 export * from './contact-status/contact-status.component';
 
 export * from './task-status/task-status.component';

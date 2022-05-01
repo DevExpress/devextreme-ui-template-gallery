@@ -3,76 +3,70 @@
     <dxi-item location="before">
       <span class="toolbar-header">Task</span>
     </dxi-item>
+    <dxi-item location="before">
+      <dx-tabs [selectedIndex]="0" [items]="tabPanelItems" (onItemClick)="tabValueChange($event)"></dx-tabs>
+    </dxi-item>
+
     <dxi-item
-      location="before"
+      [visible]="displayGrid"
+      location="after"
       locateInMenu="auto"
-      widget="dxTabs"
+      cssClass="add-grid-row"
+    >
+      <dx-button icon="plus" text="Add Task" type="default" stylingMode="contained" (onClick)="addDataGridRow()"></dx-button>
+    </dxi-item>
+
+    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
       [options]="{
-        selectedIndex: 0,
-        items: tabPanelItems,
-        onItemClick: tabValueChange
+        text: 'Refresh',
+        icon: 'refresh',
+        onClick: refreshDataGrid
+      }"
+    ></dxi-item>
+
+    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
+        text: 'Column Chooser',
+        icon: 'columnchooser',
+        onClick: chooseColumnDataGrid
       }"
     ></dxi-item>
 
     <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
-      <dx-button
-        [ngClass]="'add-grid-row'"
-        icon="plus"
-        text="Add Task"
-        type="default"
-        stylingMode="contained"
-        (onClick)="addDataGridRow()"
-      ></dx-button>
-    </dxi-item>
-    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
-      <dx-button icon="refresh" (onClick)="refreshDataGrid()"></dx-button>
-    </dxi-item>
-    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
-      <dx-button
-        icon="columnchooser"
-        (onClick)="chooseColumnDataGrid()"
-      ></dx-button>
-    </dxi-item>
-    <dxi-item
-      [visible]="displayGrid"
-      location="after"
-      locateInMenu="auto"
-      locateInMenu="auto"
-    >
       <div class="separator"></div>
     </dxi-item>
-    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
-      <dx-drop-down-button
-        icon="export"
-        stylingMode="text"
-        [dropDownOptions]="{ width: 220 }"
-        (onItemClick)="exportDataGrid($event)"
-      >
-        <dxi-item icon="xlsxfile" text="Export all data"></dxi-item>
-        <dxi-item icon="exportselected" text="Export selected rows"></dxi-item>
-      </dx-drop-down-button>
-    </dxi-item>
+
+    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto"
+      widget="dxDropDownButton" 
+      [options]="{
+        icon: 'export',
+        stylingMode: 'text',
+        onItemClick: exportDataGrid,
+        dropDownOptions: {
+          width: 220
+        },
+        items: [
+          { icon: 'xlsxfile', text: 'Export all data' },
+          { icon: 'exportselected', text: 'Export selected rows' }
+        ]
+      }"
+    ></dxi-item>
+
     <dxi-item
       [visible]="displayGrid"
       location="after"
       locateInMenu="auto"
-      [ngClass]="'search-grid'"
-    >
-      <dx-text-box
-        placeholder="Task Search"
-        [showClearButton]="true"
-        [width]="170"
-        [height]="48"
-        (onInput)="searchDataGrid($event)"
-      >
-        <dxi-button
-          name="search-grid"
-          location="before"
-          [options]="{ icon: 'search', stylingMode: 'text', disabled: true }"
-        ></dxi-button>
-        <dxi-button name="clear"></dxi-button>
-      </dx-text-box>
-    </dxi-item>
+      widget="dxTextBox"
+      [options]="{
+        placeholder: 'Task Search',
+        mode: 'search',
+        onInput: searchDataGrid
+      }"
+    ></dxi-item>
   </dx-toolbar>
 
   <div class="task-list" [ngSwitch]="displayTaskComponent">

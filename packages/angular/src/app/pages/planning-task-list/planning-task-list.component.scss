@@ -1,16 +1,14 @@
 @use "../../../variables" as *;
 @use "sass:math";
 
+@include separator();
+
 :host {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   padding: 20px 16px 0 16px;
 }
-
-@include separator();
-
-@include status();
 
 ::ng-deep {
   .dx-toolbar {
@@ -24,19 +22,6 @@
       &:nth-child(2) {
         width: 150px;
       }
-    }
-  }
-
-  .search-grid {
-    .dx-placeholder {
-      font-size: 14px;
-    }
-
-    .dx-texteditor.dx-editor-filled .dx-texteditor-input,
-    .dx-texteditor.dx-editor-outlined .dx-texteditor-input,
-    .dx-texteditor.dx-editor-filled .dx-placeholder::before,
-    .dx-texteditor.dx-editor-outlined .dx-placeholder::before {
-      padding-left: 0;
     }
   }
 

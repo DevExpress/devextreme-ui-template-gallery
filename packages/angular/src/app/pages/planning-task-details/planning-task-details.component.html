@@ -1,37 +1,36 @@
 <div class="view-wrapper">
   <dx-toolbar>
-    <dxi-item
-      location="before"
-      widget="dxButton"
-      [options]="{ icon: 'arrowleft' }"
-    ></dxi-item>
+    <dxi-item location="before">
+      <dx-button icon="arrowleft"></dx-button>
+    </dxi-item>
     <dxi-item location="before">
       <span class="toolbar-header">{{ task?.text }}</span>
     </dxi-item>
 
     <dxi-item location="after" locateInMenu="auto">
-      <dx-drop-down-button
-        text="ACTIONS"
-        stylingMode="contained"
-        [ngClass]="'actions'"
-        [items]="[{ text: 'Duplicate' }, { text: 'Close' }, { text: 'Delete' }]"
-      ></dx-drop-down-button>
+      <dx-drop-down-button text="ACTIONS" stylingMode="contained">
+        <dxi-item text="Duplicate"></dxi-item>
+        <dxi-item text="Close"></dxi-item>
+        <dxi-item text="Delete"></dxi-item>
+      </dx-drop-down-button>
     </dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
+    <dxi-item location="after" locateInMenu="auto"
       widget="dxButton"
-      [options]="{ icon: 'attach' }"
+      showText="inMenu"
+      [options]="{
+        text: 'Attach',
+        icon: 'attach'
+      }"
     ></dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
+    <dxi-item location="after" locateInMenu="auto"
       widget="dxButton"
-      [options]="{ icon: 'refresh', onClick: refresh }"
+      showText="inMenu"
+      [options]="{
+        text: 'Refresh',
+        icon: 'refresh',
+        onClick: refresh
+      }"
     ></dxi-item>
-    <dxi-item location="after" locateInMenu="auto">
-      <div class="separator"></div>
-    </dxi-item>
   </dx-toolbar>
 
   <div class="panels">
