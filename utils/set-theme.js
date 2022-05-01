@@ -16,9 +16,10 @@ const variablesPath = 'src/variables.scss';
 const changeThemesMeta = (theme) => {
     const baseTheme = theme.split('.')[0];
     const bundleName = theme.replace('generic.', '');
-    const themeParts = bundleName.replace('material.', '').replace('.compact', '').split('.');
+    const themeParts = bundleName.replace('material.', '').split('.');
     const color = themeParts[0];
     const mode = themeParts[1];
+    const isCompact = !!themeParts[2];
 
     packages.forEach(packageName => {
         const appPath = join(cwd(), 'packages', packageName);
@@ -27,7 +28,7 @@ const changeThemesMeta = (theme) => {
 
         // main import
         const contentForChange = readFileSync(fileForChange, 'utf8');
-        writeFileSync(fileForChange, contentForChange.replace('material.blue.light', bundleName));
+        writeFileSync(fileForChange, contentForChange.replace(/material\.blue\..+?(?=\.scss)/, bundleName));
 
         // variables.scss
         const variablesContentForChange = readFileSync(appVariablesPath, 'utf8');

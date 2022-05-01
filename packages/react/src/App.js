@@ -1,4 +1,4 @@
-import 'devextreme/scss/bundles/dx.material.blue.light.scss';
+import 'devextreme/scss/bundles/dx.material.blue.light.compact.scss';
 import React from 'react';
 import { HashRouter as Router } from 'react-router-dom';
 import './dx-styles.scss';

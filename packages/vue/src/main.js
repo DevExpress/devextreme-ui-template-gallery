@@ -1,4 +1,4 @@
-import 'devextreme/scss/bundles/dx.material.blue.light.scss';
+import 'devextreme/scss/bundles/dx.material.blue.light.compact.scss';
 import './dx-styles.scss';
 import { createApp }  from "vue";
 import router from "./router";
