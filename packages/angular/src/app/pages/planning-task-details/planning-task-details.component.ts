@@ -1,9 +1,8 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
   DxDropDownButtonModule,
-  DxLoadPanelModule,
   DxTabPanelModule,
   DxToolbarModule,
 } from 'devextreme-angular';
@@ -24,41 +23,37 @@ import { TaskFormModule } from './task-form/task-form.component';
   styleUrls: ['./planning-task-details.component.scss'],
   providers: [RwaService],
 })
-export class PlanningTaskDetailsComponent implements OnInit {
-  dataSubscription: Subscription;
-
+export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
   task: Task;
 
   taskId = 1;
 
-  loadData = () => {
-    const task$ = this.service.getTask(this.taskId);
+  dataSubscription: Subscription = new Subscription();
 
-    this.dataSubscription = task$.subscribe((data) => {
+  loadData = () => {
+    this.dataSubscription = this.service.getTask(this.taskId).subscribe((data) => {
       this.task = data;
     });
   };
 
   constructor(private service: RwaService) {
-    this.refresh = this.refresh.bind(this);
   }
-    
+
   ngOnInit(): void {
     this.loadData();
   }
-
-  refresh = () => this.loadData();
-
-  ngonDestroy(): void {
+  
+  ngOnDestroy(): void {
     this.dataSubscription.unsubscribe();
   }
+
+  refresh = () => this.loadData();
 }
 
 @NgModule({
   imports: [
     DxButtonModule,
     DxDropDownButtonModule,
-    DxLoadPanelModule,
     DxTabPanelModule,
     DxToolbarModule,
 

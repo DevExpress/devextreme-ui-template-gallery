@@ -1,22 +1,22 @@
 import {
- Component, OnInit, NgModule, Input,
+ Component, OnInit, NgModule, Input, OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  DxToolbarModule,
-  DxFormModule,
-  DxSelectBoxModule,
   DxButtonModule,
-  DxTextBoxModule,
+  DxFormModule,
   DxLoadPanelModule,
+  DxSelectBoxModule,
+  DxTextBoxModule,
+  DxToolbarModule,
 } from 'devextreme-angular';
 import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
-import { Observable, Subscription } from 'rxjs';
 import {
   ContactStatusModule,
   FormItemBlueModule,
   FormItemPhotoModule,
 } from 'src/app/shared/components';
+import { Observable, Subscription } from 'rxjs';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
 
 @Component({
@@ -24,33 +24,24 @@ import { Contact, contactStatusList } from 'src/app/shared/types/contact';
     templateUrl: './contact-form.component.html',
     styleUrls: ['./contact-form.component.scss'],
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormComponent implements OnInit, OnDestroy {
   @Input() contact: Observable<Contact>;
 
   contact$: Contact;
 
-  contactSubscription: Subscription;
-
   statusList = contactStatusList.slice(1);
 
-  isEditing: boolean;
+  isEditing: boolean = false;
 
-  isLoading: boolean;
+  isLoading: boolean = true;
 
-  stylingMode: TextBoxProperties['stylingMode'];
+  stylingMode: TextBoxProperties['stylingMode'] = 'underlined';
 
-  editorOptions: TextBoxProperties;
+  editorOptions: TextBoxProperties = { stylingMode: this.stylingMode };
 
-  toggleEdit = () => {
-    this.isEditing = !this.isEditing;
-    this.setEditorMode(this.isEditing);
-  };
+  contactSubscription: Subscription = new Subscription();  
 
   constructor() {
-    this.editorOptions = { };
-
-    this.isEditing = false;
-    this.isLoading = true;
   }
 
   ngOnInit() {
@@ -65,6 +56,11 @@ export class ContactFormComponent implements OnInit {
   ngOnDestroy() {
     this.contactSubscription.unsubscribe();
   }
+
+  toggleEdit = () => {
+    this.isEditing = !this.isEditing;
+    this.setEditorMode(this.isEditing);
+  };
 
   setEditorMode = (isEditing: boolean) => {
     this.stylingMode = isEditing ? 'filled' : 'underlined';

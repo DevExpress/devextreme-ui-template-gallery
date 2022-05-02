@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, NgModule } from '@angular/core';
+import { Component, Input, NgModule, OnInit } from '@angular/core';
 
 @Component({
   selector: 'form-item-photo',
@@ -27,15 +27,14 @@ import { Component, Input, NgModule } from '@angular/core';
   }
   `],
 })
-export class FormItemPhotoComponent {
+export class FormItemPhotoComponent implements OnInit {
   @Input() link: string;
 
-  @Input() size?: number;
+  @Input() size?: number = 124;
 
   imageUrl: string;
 
   constructor() {
-      this.size = 124;
   }
 
   ngOnInit() {

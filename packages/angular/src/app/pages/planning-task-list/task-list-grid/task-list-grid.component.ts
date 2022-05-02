@@ -1,5 +1,5 @@
 import {
- Component, OnInit, NgModule, ViewChild, EventEmitter, Output, Input, SimpleChanges,
+ Component, OnInit, NgModule, ViewChild, EventEmitter, Output, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,7 +12,7 @@ import {
   DxTabsModule,
   DxToolbarModule,
 } from 'devextreme-angular';
-import { RowPreparedEvent, RowValidatingEvent, ExportingEvent } from 'devextreme/ui/data_grid';
+import { RowPreparedEvent } from 'devextreme/ui/data_grid';
 import { ItemClickEvent as TabsItemClickEvenet } from 'devextreme/ui/tabs';
 import {
   TaskProirityModule,
@@ -29,8 +29,8 @@ import { Task } from 'src/app/shared/types/task';
   templateUrl: './task-list-grid.component.html',
   styleUrls: ['./task-list-grid.component.scss'],
 })
-export class TaskListGridComponent implements OnInit {
-  @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
+export class TaskListGridComponent implements OnInit, OnChanges {
+  @ViewChild(DxDataGridComponent, { static: false }) component: DxDataGridComponent;
 
   @Input() dataSource: Task[];
 
@@ -44,7 +44,7 @@ export class TaskListGridComponent implements OnInit {
 
   @Output() search = (text: string) => this.component.instance.searchByText(text);
 
-  @Output() onExporting = (e: ExportingEvent, selectedRowsOnly: boolean) => {
+  @Output() onExporting = (selectedRowsOnly: boolean) => {
     const workbook = new Workbook();
     const worksheet = workbook.addWorksheet('Employees');
 
@@ -58,17 +58,15 @@ export class TaskListGridComponent implements OnInit {
         saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
       });
     });
-    e.cancel = true;
   };
 
-  isLoading: Boolean;
+  isLoading: Boolean = true;
 
   statusList = taskStatusList;
 
   priorityList = taskPriorityList;
 
   constructor() {
-    this.isLoading = true;
   }
 
   ngOnInit() {

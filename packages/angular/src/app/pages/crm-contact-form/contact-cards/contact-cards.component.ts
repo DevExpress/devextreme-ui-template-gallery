@@ -17,6 +17,7 @@ import {
 import { Activities } from 'src/app/shared/types/activities';
 import { Messages } from 'src/app/shared/types/messages';
 import { Notes } from 'src/app/shared/types/notes';
+import { Opportunities } from 'src/app/shared/types/opportunities';
 
 @Component({
     selector: 'contact-cards',
@@ -24,13 +25,13 @@ import { Notes } from 'src/app/shared/types/notes';
     styleUrls: ['./contact-cards.component.scss'],
 })
 export class ContactCardsComponent implements OnInit {
-    @Input() tasks;
+    @Input() tasks: Task[];
 
     @Input() activities: Activities;
 
-    @Input() activeOpportunities;
+    @Input() activeOpportunities: Opportunities;
 
-    @Input() closedOpportunities;
+    @Input() closedOpportunities: Opportunities;
 
     @Input() notes: Notes;
 
@@ -42,9 +43,6 @@ export class ContactCardsComponent implements OnInit {
     }
 
     ngOnInit() {
-    }
-
-    ngOnDestroy() {
     }
 }
 

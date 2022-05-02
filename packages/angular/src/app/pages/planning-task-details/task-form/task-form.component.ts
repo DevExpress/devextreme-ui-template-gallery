@@ -1,10 +1,8 @@
 import {
- Component, OnInit, NgModule, Input, SimpleChanges,
+ Component, OnInit, NgModule, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  DxCalendarModule,
-  DxDropDownButtonModule,
   DxFormModule,
   DxLoadPanelModule,
   DxSelectBoxModule,
@@ -26,37 +24,26 @@ import { Task } from 'src/app/shared/types/task';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss'],
 })
-export class TaskFormComponent implements OnInit {
+export class TaskFormComponent implements OnInit, OnChanges {
   @Input() task: Task;
 
   statusList = taskStatusList;
 
   priorityList = taskPriorityList;
 
-  isEditing: boolean;
+  isEditing: boolean = false;
 
-  isLoading: boolean;
+  isLoading: boolean = true;
 
-  isEmptyStartDate: boolean;
+  isEmptyStartDate: boolean = true;
 
-  isEmptyDueDate: boolean;
+  isEmptyDueDate: boolean = true;
 
-  stylingMode: TextBoxProperties['stylingMode'];
+  stylingMode: TextBoxProperties['stylingMode'] = 'underlined';
 
-  editorOptions: TextBoxProperties;
-
-  isEmpty = (value: any): boolean => value === undefined || value === null;
-
-  toggleEdit = () => {
-    this.isEditing = !this.isEditing;
-    this.setEditorMode(this.isEditing);
-  };
+  editorOptions: TextBoxProperties = { stylingMode: this.stylingMode };
 
   constructor() {
-    this.editorOptions = { };
-
-    this.isEditing = false;
-    this.isLoading = true;
   }
 
   ngOnInit() {
@@ -77,6 +64,13 @@ export class TaskFormComponent implements OnInit {
     }
   }
 
+  isEmpty = (value: any): boolean => value === undefined || value === null;
+
+  toggleEdit = () => {
+    this.isEditing = !this.isEditing;
+    this.setEditorMode(this.isEditing);
+  };
+
   setEditorMode = (isEditing: boolean) => {
     this.stylingMode = isEditing ? 'filled' : 'underlined';
     this.editorOptions = {
@@ -95,8 +89,6 @@ export class TaskFormComponent implements OnInit {
 
 @NgModule({
   imports: [
-    DxCalendarModule,
-    DxDropDownButtonModule,
     DxFormModule,
     DxLoadPanelModule,
     DxSelectBoxModule,

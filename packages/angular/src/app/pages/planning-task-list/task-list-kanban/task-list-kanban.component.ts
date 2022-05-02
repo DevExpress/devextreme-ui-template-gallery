@@ -1,5 +1,5 @@
 import {
- Component, OnInit, NgModule, Input, SimpleChanges,
+ Component, OnInit, NgModule, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -7,7 +7,6 @@ import {
   DxLoadPanelModule,
   DxScrollViewModule,
   DxSortableModule,
-  DxToastModule,
 } from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
 import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable';
@@ -25,16 +24,12 @@ type Board = {
   templateUrl: './task-list-kanban.component.html',
   styleUrls: ['./task-list-kanban.component.scss'],
 })
-export class TaskListKanbanComponent implements OnInit {
+export class TaskListKanbanComponent implements OnInit, OnChanges {
   @Input() dataSource: Task[];
 
   kanbanDataSource: Board[] = [];
 
-  toastMessage: string;
-
-  isVisibleToast: boolean;
-
-  isLoading: boolean;
+  isLoading: boolean = true;
 
   statuses = taskStatusList;
 
@@ -50,11 +45,6 @@ export class TaskListKanbanComponent implements OnInit {
   };
 
   constructor() {
-    this.toastMessage = '';
-
-    this.isLoading = true;
-    this.isVisibleToast = false;
-
     this.kanbanDataSource = this.fillOutBoard([]);
   }
 
@@ -74,8 +64,9 @@ export class TaskListKanbanComponent implements OnInit {
   };
 
   onListReorder = (e: ReorderEvent) => {
-    const list = this.kanbanDataSource.splice(e.fromIndex, 1)[0];
-    this.kanbanDataSource.splice(e.toIndex, 0, list);
+    const { fromIndex, toIndex } = e;
+    const list = this.kanbanDataSource.splice(fromIndex, 1)[0];
+    this.kanbanDataSource.splice(toIndex, 0, list);
   };
 
   onTaskDragStart(e: DragStartEvent) {
@@ -105,7 +96,6 @@ export class TaskListKanbanComponent implements OnInit {
     DxLoadPanelModule,
     DxScrollViewModule,
     DxSortableModule,
-    DxToastModule,
 
     TaskKanbanCardModule,
 

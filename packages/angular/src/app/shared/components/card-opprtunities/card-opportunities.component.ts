@@ -1,5 +1,5 @@
 import {
-    Component, Input, NgModule, OnInit, SimpleChanges,
+    Component, Input, NgModule, OnChanges, OnInit, SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -14,20 +14,18 @@ import { Activities } from 'src/app/shared/types/activities';
     templateUrl: './card-opportunities.component.html',
     styleUrls: ['./card-opportunities.component.scss'],
 })
-export class CardOpportunitiesComponent implements OnInit {
+export class CardOpportunitiesComponent implements OnInit, OnChanges {
     @Input() active: Activities;
 
     @Input() closed: Activities;
 
-    messageToast: string;
+    messageToast: string = '';
 
-    isLoading: boolean;
+    isLoading: boolean = true;
 
-    isVisibleToast: boolean;
+    isVisibleToast: boolean = false;
 
     constructor() {
-        this.isLoading = true;
-        this.isVisibleToast = false;
     }
 
     ngOnInit() {

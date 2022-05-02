@@ -1,5 +1,5 @@
 import {
-    Component, Input, NgModule, OnInit, SimpleChanges, ViewChild,
+    Component, Input, NgModule, OnChanges, OnInit, SimpleChanges, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -13,17 +13,16 @@ import {
     templateUrl: './card-tasks.component.html',
     styleUrls: ['./card-tasks.component.scss'],
 })
-export class CardTasksComponent implements OnInit {
+export class CardTasksComponent implements OnInit, OnChanges {
     @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
 
     @Input() tasks;
 
     @Input() manager: string;
 
-    isLoading: boolean;
+    isLoading: boolean = true;
 
     constructor() {
-        this.isLoading = true;
     }
 
     ngOnInit() {

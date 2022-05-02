@@ -19,18 +19,20 @@ export class CardMessagesComponent implements OnInit {
 
   @Input() items: Messages;
 
-  messageTitle: string;
+  messageTitle: string = '';
 
-  messageText: string;
+  messageText: string = '';
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
 
   defaultText = () => {
     this.messageTitle = '';
     this.messageText = '';
   };
-
-  constructor() {
-    this.defaultText();
-  }
 
   getAvatarText(name: string) {
     return name.split(' ').map((name) => name[0]).join('');
@@ -55,10 +57,7 @@ export class CardMessagesComponent implements OnInit {
     this.items.push(newMessage);
 
     this.defaultText();
-  };
-
-  ngOnInit(): void {
-  }
+  }; 
 }
 
 @NgModule({

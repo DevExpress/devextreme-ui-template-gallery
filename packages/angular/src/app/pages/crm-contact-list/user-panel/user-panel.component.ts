@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Output, Input, SimpleChanges, EventEmitter,
+  Component, OnInit, OnChanges, OnDestroy, NgModule, Output, Input, SimpleChanges, EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -11,7 +11,8 @@ import {
   DxScrollViewModule,
   DxFormModule,
 } from 'devextreme-angular';
-import { Properties as TextBoxProperties } from 'devextreme/ui/text_box'; 
+import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
+import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   CardActivitiesModule,
   ContactStatusModule,
@@ -28,8 +29,8 @@ import { Contact } from 'src/app/shared/types/contact';
   styleUrls: ['./user-panel.component.scss'],
   providers: [RwaService],
 })
-export class UserPanelComponent implements OnInit {
-  @Input() isOpen!: boolean;
+export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() isOpen: boolean = false;
 
   @Input() userId: number;
 
@@ -37,34 +38,21 @@ export class UserPanelComponent implements OnInit {
 
   user: Contact;
 
-  isPin: boolean;
+  isLoading: boolean = true;
+  
+  isEditing: boolean = false;
 
-  isLoading: boolean;
+  isPin: boolean = false;
 
-  isPinEnabled: boolean;
+  isPinEnabled: boolean = false;
 
-  isEditing: boolean;
+  stylingMode: TextBoxProperties['stylingMode'] = 'underlined';
 
-  stylingMode: TextBoxProperties['stylingMode'];
+  editorOptions: TextBoxProperties = { stylingMode: this.stylingMode };
 
-  editorOptions: TextBoxProperties;
-
-  userPanelSubscriptions: Subscription[];
+  userPanelSubscriptions: Subscription[] = [];
 
   constructor(private screen: ScreenService, private service: RwaService) {
-    this.isLoading = true;
-    this.isEditing = false;
-
-    this.isPin = false;
-    this.isPinEnabled = false;
-
-    this.userPanelSubscriptions = [];
-    
-    this.pinClick = this.pinClick.bind(this);
-    this.closePanel = this.closePanel.bind(this);
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.customizePhoneCell = this.customizePhoneCell.bind(this);
-
     this.userPanelSubscriptions.push(this.screen.changed.subscribe(this.calculatePin.bind(this)));
   }
 
@@ -93,12 +81,12 @@ export class UserPanelComponent implements OnInit {
     }));
   };
 
-  closePanel() {
+  closePanel = () => {
     this.isOpen = false;
     this.isOpenChange.emit(this.isOpen);
   }
 
-  pinClick() {
+  pinClick = () => {
     this.isPin = !this.isPin;
   }
 
@@ -109,13 +97,7 @@ export class UserPanelComponent implements OnInit {
     }
   };
 
-  formatPhone = (number: string | number): string =>
-    String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
-
-  customizePhoneCell = (cellInfo): string =>
-    this.formatPhone(cellInfo.value);
-
-  accordionTitleClick = (e) => {
+  accordionTitleClick = (e: ButtonClickEvent) => {
     e.event.stopPropagation();
   };
 

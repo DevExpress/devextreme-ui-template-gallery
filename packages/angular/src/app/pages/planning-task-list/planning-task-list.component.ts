@@ -1,16 +1,17 @@
 import {
- Component, OnInit, NgModule, Output, ViewChild,
+ Component, OnInit, NgModule, Output, ViewChild, OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
   DxDataGridModule,
   DxDropDownButtonModule,
-  DxLoadPanelModule,
   DxTabsModule,
-  DxTextBoxModule,
   DxToolbarModule,
 } from 'devextreme-angular';
+import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
+import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
+import { ItemClickEvent as DropDownButtonItemClickEvent } from 'devextreme/ui/drop_down_button';
 import { tabPanelItems } from 'src/app/shared/types/resource';
 import { Task } from 'src/app/shared/types/task';
 import { RwaService } from 'src/app/shared/services';
@@ -19,24 +20,19 @@ import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-lis
 import { TaskListKanbanModule } from './task-list-kanban/task-list-kanban.component';
 
 @Component({
-  // selector: 'app-planning-task-list',
   templateUrl: './planning-task-list.component.html',
   styleUrls: ['./planning-task-list.component.scss'],
   providers: [RwaService],
 })
-export class PlanningTaskListComponent implements OnInit {
+export class PlanningTaskListComponent implements OnInit, OnDestroy {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
 
-  @Output()
-  tabValueChange = (e) => {
-    this.displayTaskComponent = e.itemData.text;
+  @Output() tabValueChange = (e: TabsItemClickEvent) => {
+    const { itemData } = e;
+
+    this.displayTaskComponent = itemData.text;
     this.displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
   };
-
-  @Output()
-  refresh() {
-    this.dataGrid.refresh();
-  }
 
   tasks: Task[];
 
@@ -46,16 +42,13 @@ export class PlanningTaskListComponent implements OnInit {
 
   displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
 
-  dataSubscription: Subscription;
+  dataSubscription: Subscription = new Subscription();
 
   constructor(private service: RwaService) {
-    this.refresh = this.refresh.bind(this);
   }
 
   ngOnInit(): void {
-    const task$ = this.service.getTasks();
-
-    this.dataSubscription = task$.subscribe((tasks) => {
+    this.dataSubscription = this.service.getTasks().subscribe((tasks) => {
       this.tasks = tasks;
     });
   }
@@ -70,12 +63,9 @@ export class PlanningTaskListComponent implements OnInit {
 
   chooseColumnDataGrid = () => this.dataGrid.showColumnChooser();
 
-  searchDataGrid = (e) => this.dataGrid.search(e.component.instance().option('text'));
+  searchDataGrid = (e: TextBoxInputEvent) => this.dataGrid.search(e.component.option('text'));
 
-  exportDataGrid = (e) => {
-    const selectedRowsOnly = e.itemData.text.includes('selected');
-    this.dataGrid.onExporting(e, selectedRowsOnly);
-  };
+  exportDataGrid = (e: DropDownButtonItemClickEvent) => this.dataGrid.onExporting(e.itemData.text.includes('selected'));
 }
 
 @NgModule({
@@ -83,9 +73,7 @@ export class PlanningTaskListComponent implements OnInit {
     DxButtonModule,
     DxDataGridModule,
     DxDropDownButtonModule,
-    DxLoadPanelModule,
     DxTabsModule,
-    DxTextBoxModule,
     DxToolbarModule,
 
     TaskListKanbanModule,

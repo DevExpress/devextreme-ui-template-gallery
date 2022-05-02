@@ -1,21 +1,11 @@
 import {
- Component, ViewChild, OnInit, NgModule,
+ Component, ViewChild, OnInit, NgModule, OnDestroy,
 } from '@angular/core';
 import {
   DxDataGridModule,
-  DxFormModule,
-  DxDrawerModule,
-  DxButtonModule,
-  DxToolbarModule,
-  DxScrollViewModule,
-  DxAccordionModule,
-  DxListModule,
-  DxLoadPanelModule,
-  DxDropDownButtonModule,
-  DxSelectBoxModule,
-  DxTextBoxModule,
   DxDataGridComponent,
 } from 'devextreme-angular';
+import { RowClickEvent, RowPreparedEvent, ColumnCustomizeTextArg } from 'devextreme/ui/data_grid';
 import {
   CardActivitiesModule,
   ContactStatusModule,
@@ -28,29 +18,24 @@ import { UserPanelModule } from './user-panel/user-panel.component';
 import { Subscription } from 'rxjs';
 
 @Component({
-  // selector: 'app-crm-contact-list',
   templateUrl: './crm-contact-list.component.html',
   styleUrls: ['./crm-contact-list.component.scss'],
   providers: [RwaService],
 })
-export class CrmContactListComponent implements OnInit {
+export class CrmContactListComponent implements OnInit, OnDestroy {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
 
   statuses = contactStatusList;
 
-  isPanelOpen: boolean;
+  isPanelOpen: boolean = false;
 
   userId: number;
 
   dataSource: Contact[];
 
-  dataSubscription: Subscription;
+  dataSubscription: Subscription = new Subscription();
 
   constructor(private service: RwaService) {
-    this.isPanelOpen = false;
-
-    this.rowClick = this.rowClick.bind(this);
-    this.customizePhoneCell = this.customizePhoneCell.bind(this);
   }
 
   ngOnInit(): void {
@@ -71,15 +56,17 @@ export class CrmContactListComponent implements OnInit {
     this.dataGrid.instance.refresh();
   };
 
-  rowClick(e) {
+  rowClick(e: RowClickEvent) {
     const { data } = e;
 
     this.userId = data.id;
     this.isPanelOpen = true;
   }
 
-  rowPrepared = (e) => {
-    e.rowElement.classList.add('clickable-row');
+  rowPrepared = (e: RowPreparedEvent) => {
+    const { rowElement } = e;
+
+    rowElement.classList.add('clickable-row');
   };
 
   filterByStatus = (e: SelectionChangedEvent) => {
@@ -94,25 +81,16 @@ export class CrmContactListComponent implements OnInit {
 
   formatPhone = (number: string | number): string => String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
 
-  customizePhoneCell(cellInfo): string {
-    return this.formatPhone(cellInfo.value);
+  customizePhoneCell = (cellInfo: ColumnCustomizeTextArg) => {
+    const { value } = cellInfo;
+
+    return this.formatPhone(value.toString());
   }
 }
 
 @NgModule({
   imports: [
     DxDataGridModule,
-    DxFormModule,
-    DxDrawerModule,
-    DxButtonModule,
-    DxToolbarModule,
-    DxScrollViewModule,
-    DxAccordionModule,
-    DxListModule,
-    DxLoadPanelModule,
-    DxDropDownButtonModule,
-    DxSelectBoxModule,
-    DxTextBoxModule,
 
     UserPanelModule,
 

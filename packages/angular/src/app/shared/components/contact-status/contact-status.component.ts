@@ -12,13 +12,13 @@ import { ContactStatus } from 'src/app/shared/types/contact';
 export class ContactStatusComponent implements OnInit {
   @Input() value: ContactStatus;
 
-  @Input() input?: boolean;
+  @Input() input?: boolean = false;
 
   constructor() {
-    this.input = !!this.input;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 }
 
 @NgModule({

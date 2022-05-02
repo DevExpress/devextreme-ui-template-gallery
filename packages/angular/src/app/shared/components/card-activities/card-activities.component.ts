@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, NgModule, Input, SimpleChanges,
+  Component, NgModule, Input, SimpleChanges, OnInit, OnChanges,
 } from '@angular/core';
 import { DxButtonModule, DxListModule, DxLoadPanelModule } from 'devextreme-angular';
 import { Activities } from 'src/app/shared/types/activities';
@@ -10,15 +10,14 @@ import { Activities } from 'src/app/shared/types/activities';
   templateUrl: './card-activities.component.html',
   styleUrls: ['./card-activities.component.scss'],
 })
-export class CardActivitiesComponent {
+export class CardActivitiesComponent implements OnInit, OnChanges {
   @Input() activities: Activities;
 
   @Input() showBy? = false;
 
-  isLoading: boolean;
+  isLoading: boolean = true;
 
   constructor() {
-    this.isLoading = true;
   }
 
   ngOnInit() {

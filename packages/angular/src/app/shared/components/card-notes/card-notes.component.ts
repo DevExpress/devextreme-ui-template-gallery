@@ -18,18 +18,17 @@ export class CardNotesComponent implements OnInit {
 
   @Input() items: Notes;
 
-  nodeText: string;
-
-  defaultText = () => {
-    this.nodeText = '';
-  };
+  nodeText: string = '';
 
   constructor() {
-    this.defaultText();
   }
 
   ngOnInit(): void {
   }
+
+  defaultText = () => {
+    this.nodeText = '';
+  };
 
   send = () => {
     if (this.nodeText === '') {
