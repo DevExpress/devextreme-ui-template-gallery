@@ -33,21 +33,9 @@
             (onReorder)="onTaskDrop($event)"
             (onAdd)="onTaskDrop($event)"
           >
-            <div
-              *ngIf="
-                !!board.cards.length;
-                then displayCards;
-                else displayEmptyCard
-              "
-            ></div>
-            <ng-template #displayCards>
-              <div *ngFor="let task of board.cards">
-                <task-kanban-card [task]="task"></task-kanban-card>
-              </div>
-            </ng-template>
-            <ng-template #displayEmptyCard>
-              <div class="empty-card"></div>
-            </ng-template>
+            <ng-container *ngFor="let task of board.cards">
+              <task-kanban-card class="dx-card" [task]="task"></task-kanban-card>
+            </ng-container>
           </dx-sortable>
 
           <div class="add-task">

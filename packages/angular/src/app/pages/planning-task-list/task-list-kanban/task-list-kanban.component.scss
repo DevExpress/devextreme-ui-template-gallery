@@ -34,11 +34,10 @@
 
 .sortable-cards {
   min-height: 380px;
-}
-
-.empty-card {
-  height: 10px;
-  pointer-events: none;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .add-task {
