@@ -126,6 +126,5 @@ $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 
 @mixin message-text {
   padding-top: 5px;
-  font-size: 16px;
   line-height: 24px;
 }
