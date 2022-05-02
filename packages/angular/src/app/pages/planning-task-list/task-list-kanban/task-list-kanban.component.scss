@@ -1,6 +1,6 @@
 @use "../../../../variables" as *;
 
-#kanban {
+:host {
   white-space: nowrap;
 }
 
@@ -23,7 +23,7 @@
   display: flex;
   justify-content: space-between;
 
-  dx-button {
+  .dx-button {
     background-color: rgba(0, 0, 0, 0);
   }
 }
@@ -46,6 +46,10 @@
 }
 
 ::ng-deep {
+  .dx-sortable {
+    display: block;
+  }
+
   .add-task {
     .dx-icon,
     .dx-button-text {
