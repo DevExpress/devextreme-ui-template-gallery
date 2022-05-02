@@ -4,22 +4,6 @@
   min-height: 300px;
 }
 
-.user-info {
-  @include user-photo();
-
-  .photo {
-    width: 184px;
-    height: 184px;
-    margin-bottom: 8px;
-    margin-top: 8px;
-    background-repeat: no-repeat;
-
-    &.form {
-      margin-right: -20px;
-    }
-  }
-}
-
 dx-form {
   contact-status {
     ::ng-deep {

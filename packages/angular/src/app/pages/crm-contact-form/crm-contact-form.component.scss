@@ -34,8 +34,6 @@ $left-panel-width: 400px;
     @include header();
   }
 
-  @include user-info();
-
   .panels {
     display: flex;
     flex-wrap: wrap;
