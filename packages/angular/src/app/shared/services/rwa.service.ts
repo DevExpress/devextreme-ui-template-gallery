@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, from } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Task } from 'src/app/shared/types/task';
+import { Contact } from 'src/app/shared/types/contact';
 
 const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
 
@@ -12,10 +13,10 @@ export class RwaService {
     }
 
     public getContacts = () =>
-        this.http.get<any>(`${API_URL}/Users/Contacts`);
+        this.http.get<Contact[]>(`${API_URL}/Users/Contacts`);
 
     public getContact = (id: number) =>
-        this.http.get<any>(`${API_URL}/Users/Contacts/${id}`);
+        this.http.get<Contact>(`${API_URL}/Users/Contacts/${id}`);
 
     public getTasks = (): Observable<Task[]> =>
         this.http.get<Task[]>(`${API_URL}/Employees/Tasks`);

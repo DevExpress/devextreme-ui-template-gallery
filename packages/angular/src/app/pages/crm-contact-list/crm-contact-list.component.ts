@@ -20,9 +20,8 @@ import {
   CardActivitiesModule,
   ContactStatusModule,
 } from 'src/app/shared/components';
-import { contactStatusList, StatusContact } from 'src/app/shared/types/contact';
+import { Contact, contactStatusList, StatusContact } from 'src/app/shared/types/contact';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
-import CustomStore from 'devextreme/data/custom_store';
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
 import { UserPanelModule } from './user-panel/user-panel.component';
@@ -43,7 +42,7 @@ export class CrmContactListComponent implements OnInit {
 
   userId: number;
 
-  dataSource: CustomStore;
+  dataSource: Contact[];
 
   dataSubscription: Subscription;
 

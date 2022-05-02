@@ -43,15 +43,13 @@ export class UserPanelComponent implements OnInit {
 
   isPinEnabled: boolean;
 
-  screenSubscription: Subscription;
-
-  userSubscription: Subscription;
-
   isEditing: boolean;
 
   stylingMode: TextBoxProperties['stylingMode'];
 
   editorOptions: TextBoxProperties;
+
+  userPanelSubscriptions: Subscription[];
 
   constructor(private screen: ScreenService, private service: RwaService) {
     this.isLoading = true;
@@ -60,13 +58,14 @@ export class UserPanelComponent implements OnInit {
     this.isPin = false;
     this.isPinEnabled = false;
 
-    this.userSubscription = new Subscription();
+    this.userPanelSubscriptions = [];
     
     this.pinClick = this.pinClick.bind(this);
     this.closePanel = this.closePanel.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.customizePhoneCell = this.customizePhoneCell.bind(this);
-    this.screenSubscription = this.screen.changed.subscribe(this.calculatePin.bind(this));
+
+    this.userPanelSubscriptions.push(this.screen.changed.subscribe(this.calculatePin.bind(this)));
   }
 
   ngOnInit(): void {
@@ -83,16 +82,15 @@ export class UserPanelComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.screenSubscription.unsubscribe();
-    this.userSubscription.unsubscribe();
+    this.userPanelSubscriptions.forEach(sub => sub.unsubscribe());
   }
 
   loadUserById = (id: number) => {
     this.isLoading = true;
-    this.userSubscription = this.service.getContact(id).subscribe((data) => {
+    this.userPanelSubscriptions.push(this.service.getContact(id).subscribe((data) => {
       this.user = data;
       this.isLoading = false;
-    });
+    }));
   };
 
   closePanel() {
