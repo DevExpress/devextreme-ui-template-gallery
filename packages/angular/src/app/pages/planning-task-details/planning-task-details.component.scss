@@ -30,12 +30,12 @@ $left-panel-width: 400px;
     gap: 20px;
 
     .left {
-      flex: 38%;
+      flex: 1 400px;
     }
 
     .right {
-      flex: 60%;
-      min-width: 360px;      
+      flex: 1 calc(100% - 400px - 20px);
+      min-width: 360px;
     }
   }
 
