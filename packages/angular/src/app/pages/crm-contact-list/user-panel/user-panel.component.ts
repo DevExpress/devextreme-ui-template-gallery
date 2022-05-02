@@ -11,7 +11,7 @@ import {
   DxScrollViewModule,
   DxFormModule,
 } from 'devextreme-angular';
-import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
+import { Properties as TextBoxProperties } from 'devextreme/ui/text_box'; 
 import {
   CardActivitiesModule,
   ContactStatusModule,

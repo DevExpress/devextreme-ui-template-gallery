@@ -7,7 +7,7 @@ export const contactStatusList = [
     'Terminated',
 ] as const;
 
-export type StatusContact = (typeof contactStatusList)[number];
+export type ContactStatus = (typeof contactStatusList)[number];
 
 type State = {
     stateShort: string;
@@ -17,7 +17,7 @@ export type Contact = {
     name: string,
     firstName: string,
     lastName: string,
-    status: StatusContact,
+    status: ContactStatus,
     position: string,
     manager: string,
     company: string,

@@ -1,7 +1,7 @@
 import {
  Component, Input, NgModule, OnInit,
 } from '@angular/core';
-import { Priority } from 'src/app/shared/types/priority';
+import { TaskPriority } from 'src/app/shared/types/task';
 
 @Component({
   selector: 'task-priority',
@@ -9,7 +9,7 @@ import { Priority } from 'src/app/shared/types/priority';
   styleUrls: ['./task-priority.component.scss'],
 })
 export class TaskProirityComponent implements OnInit {
-  @Input() value: Priority;
+  @Input() value: TaskPriority;
 
   constructor() { }
 

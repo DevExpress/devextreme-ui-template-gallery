@@ -2,7 +2,7 @@ import {
  Component, Input, NgModule, OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StatusContact } from 'src/app/shared/types/contact';
+import { ContactStatus } from 'src/app/shared/types/contact';
 
 @Component({
   selector: 'contact-status',
@@ -10,7 +10,7 @@ import { StatusContact } from 'src/app/shared/types/contact';
   styleUrls: ['./contact-status.component.scss'],
 })
 export class ContactStatusComponent implements OnInit {
-  @Input() value: StatusContact;
+  @Input() value: ContactStatus;
 
   @Input() input?: boolean;
 

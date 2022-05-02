@@ -12,11 +12,11 @@ import {
 import notify from 'devextreme/ui/notify';
 import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable';
 import { Task } from 'src/app/shared/types/task';
-import { Status, statusList } from 'src/app/shared/types/status';
+import { TaskStatus, taskStatusList } from 'src/app/shared/types/task';
 import { TaskKanbanCardModule } from './task-kanban-card/task-kanban-card.component';
 
 type Board = {
-  name: Status
+  name: TaskStatus
   cards: Task[]
 };
 
@@ -36,11 +36,11 @@ export class TaskListKanbanComponent implements OnInit {
 
   isLoading: boolean;
 
-  statuses = statusList;
+  statuses = taskStatusList;
 
   fillOutBoard = (cards: Task[]): Board[] => {
     const result: Board[] = [];
-    for (const status of statusList) {
+    for (const status of this.statuses) {
       const value = cards.filter((item) => item.status === status);
 
       result.push(<Board>{ name: status, cards: value });
@@ -66,7 +66,7 @@ export class TaskListKanbanComponent implements OnInit {
     this.isLoading = changes.dataSource.currentValue === undefined;
   }
 
-  getCardsByStatus = (status: Status): Task[] => {
+  getCardsByStatus = (status: TaskStatus): Task[] => {
     const cards: Task[] = this.dataSource
       .filter((task) => task.status === status);
 

@@ -1,7 +1,7 @@
 import {
  Component, Input, NgModule, OnInit,
 } from '@angular/core';
-import { Status } from 'src/app/shared/types/status';
+import { TaskStatus } from 'src/app/shared/types/task';
 
 @Component({
   selector: 'task-status',
@@ -9,11 +9,11 @@ import { Status } from 'src/app/shared/types/status';
   styleUrls: ['./task-status.component.scss'],
 })
 export class TaskStatusComponent implements OnInit {
-  @Input() value: Status;
+  @Input() value: TaskStatus;
 
   constructor() { }
 
-  spaceToUnderscore = (value: Status) => value.replace(/ /g, '-');
+  spaceToUnderscore = (value: TaskStatus) => value.replace(/ /g, '-');
 
   ngOnInit() { }
 }

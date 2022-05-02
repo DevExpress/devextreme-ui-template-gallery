@@ -20,7 +20,7 @@ import {
   CardActivitiesModule,
   ContactStatusModule,
 } from 'src/app/shared/components';
-import { Contact, contactStatusList, StatusContact } from 'src/app/shared/types/contact';
+import { Contact, contactStatusList, ContactStatus } from 'src/app/shared/types/contact';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
@@ -83,7 +83,7 @@ export class CrmContactListComponent implements OnInit {
   };
 
   filterByStatus = (e: SelectionChangedEvent) => {
-    const { item: status }: { item: StatusContact } = e;
+    const { item: status }: { item: ContactStatus } = e;
 
     if (status === 'All Contacts') {
       this.dataGrid.instance.clearFilter();

@@ -21,8 +21,7 @@ import {
 import { exportDataGrid } from 'devextreme/excel_exporter';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
-import { priorityList } from 'src/app/shared/types/priority';
-import { statusList } from 'src/app/shared/types/status';
+import { taskPriorityList, taskStatusList } from 'src/app/shared/types/task';
 import { Task } from 'src/app/shared/types/task';
 
 @Component({
@@ -64,9 +63,9 @@ export class TaskListGridComponent implements OnInit {
 
   isLoading: Boolean;
 
-  statusList = statusList;
+  statusList = taskStatusList;
 
-  priorityList = priorityList;
+  priorityList = taskPriorityList;
 
   constructor() {
     this.isLoading = true;
