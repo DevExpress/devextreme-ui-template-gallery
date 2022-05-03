@@ -29,7 +29,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   contact$: Contact;
 
-  statusList = contactStatusList.slice(1);
+  statusList = contactStatusList;
 
   isEditing = false;
 

@@ -29,7 +29,7 @@ export class TaskListKanbanComponent implements OnInit, OnChanges {
 
   kanbanDataSource: Board[] = [];
 
-  isLoading: boolean = true;
+  isLoading = true;
 
   statuses = taskStatusList;
 

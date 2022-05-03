@@ -36,7 +36,8 @@ import { TaskStatus } from 'src/app/shared/types/task';
 export class TaskStatusComponent {
   @Input() value: TaskStatus;
 
-  spaceToUnderscore = (value: TaskStatus) => value.replace(/ /g, '-');
+  spaceToUnderscore = (value: TaskStatus) =>
+    (value ? value.replace(/ /g, '-') : '');
 }
 
 @NgModule({

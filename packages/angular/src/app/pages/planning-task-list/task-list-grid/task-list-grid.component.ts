@@ -9,7 +9,8 @@ import {
   DxDataGridModule,
   DxDropDownButtonModule,
   DxLoadPanelModule,
-  DxTabsModule,
+  DxSelectBoxModule,
+  DxTextBoxModule,
   DxToolbarModule,
 } from 'devextreme-angular';
 import { RowPreparedEvent } from 'devextreme/ui/data_grid';
@@ -95,10 +96,11 @@ export class TaskListGridComponent implements OnInit, OnChanges {
   imports: [
     DxButtonModule,
     DxDataGridModule,
-    DxTabsModule,
     DxDropDownButtonModule,
-    DxToolbarModule,
     DxLoadPanelModule,
+    DxSelectBoxModule,
+    DxTextBoxModule,
+    DxToolbarModule,
 
     TaskProirityModule,
     TaskStatusModule,

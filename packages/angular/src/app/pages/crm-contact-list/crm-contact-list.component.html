@@ -30,8 +30,8 @@
           stylingMode="text"
           [width]="160"
           [useSelectMode]="true"
-          [items]="statuses"
-          [selectedItemKey]="statuses[0]"
+          [items]="filterStatusList"
+          [selectedItemKey]="filterStatusList[0]"
           (onSelectionChanged)="filterByStatus($event)"
         ></dx-drop-down-button>
       </dxi-item>
@@ -68,7 +68,7 @@
       sortOrder="asc"
       [hidingPriority]="5"
       [minWidth]="150"
-      cellTemplate="nameTemplate"
+      cellTemplate="name"
     ></dxi-column>
     <dxi-column
       dataField="company"
@@ -79,8 +79,8 @@
     <dxi-column
       dataField="status"
       caption="Status"
-      dataType="string"
-      cellTemplate="statusTemplate"
+      cellTemplate="cellStatus"
+      editCellTemplate="editCellStatus"
       [hidingPriority]="3"
       [minWidth]="100"
     ></dxi-column>
@@ -101,13 +101,32 @@
       [hidingPriority]="1"
     ></dxi-column>
 
-    <div *dxTemplate="let s of 'nameTemplate'" class="name-template">
-      <div>{{ s.data.name }}</div>
-      <div class="position">{{ s.data.position }}</div>
+    <div *dxTemplate="let cellInfo of 'name'" class="name-template">
+      <div>{{ cellInfo.data.name }}</div>
+      <div class="position">{{ cellInfo.data.position }}</div>
     </div>
 
-    <div *dxTemplate="let s of 'statusTemplate'">
-      <contact-status [value]="s.data.status"></contact-status>
+    <div *dxTemplate="let cellInfo of 'cellStatus'">
+      <contact-status [value]="cellInfo.data.status"></contact-status>
+    </div>
+
+    <div *dxTemplate="let cellInfo of 'editCellStatus'">
+      <dx-select-box
+        class="edit-cell"
+        [(value)]="cellInfo.value"
+        [items]="statusList"
+        (onValueChanged)="cellInfo.setValue($event.value)"
+        (onSelectionChanged)="cellInfo.component.updateDimensions()"
+        fieldTemplate="field"
+      >
+        <div *dxTemplate="let data of 'field'">
+          <contact-status [value]="cellInfo.value"></contact-status>
+          <dx-text-box [readOnly]="true"></dx-text-box>
+        </div>
+        <div *dxTemplate="let data of 'item'">
+          <contact-status [value]="data"></contact-status>
+        </div>
+      </dx-select-box>
     </div>
   </dx-data-grid>
 

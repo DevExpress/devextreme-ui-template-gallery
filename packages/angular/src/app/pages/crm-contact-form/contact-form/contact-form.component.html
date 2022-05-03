@@ -54,14 +54,14 @@
         ></dxi-item>
         <dxi-item
           dataField="manager"
-          [template]="!isEditing ? 'blue' : null"
+          template="blue-text"
           [editorOptions]="editorOptions"
         >
           <dxo-label text="Assigned to"></dxo-label>
         </dxi-item>
         <dxi-item
           dataField="company"
-          [template]="!isEditing ? 'blue' : null"
+          template="blue-text"
           [editorOptions]="editorOptions"
           [colSpan]="2"
         ></dxi-item>
@@ -100,11 +100,28 @@
         ></dxi-item>
       </dxi-item>
 
-      <div *dxTemplate="let data of 'blue'">
-        <form-item-blue
-          [label]="data.editorOptions.label"
-          [value]="data.editorOptions.value"
-        ></form-item-blue>
+      <!-- T1085831 -->
+      <div *dxTemplate="let data of 'blue-text'">
+        <div *ngIf="!isEditing then blue; else editing;"></div>
+        <ng-template #blue>
+          <form-item-blue
+            [label]="data.editorOptions.label"
+            [value]="data.editorOptions.value"
+          ></form-item-blue>
+        </ng-template>
+        <ng-template #editing>
+          <dx-text-box
+            [(value)]="contact$[data.dataField]"
+            [label]="data.editorOptions.label"
+          ></dx-text-box>
+        </ng-template>
+      </div>
+
+      <div *dxTemplate="let data of 'photo'">
+        <form-item-photo
+          [link]="data.editorOptions.value"
+          [size]="184"
+        ></form-item-photo>
       </div>
 
       <div *dxTemplate="let data of 'statusField'">
@@ -131,18 +148,10 @@
               <dx-text-box [readOnly]="true"></dx-text-box>
             </div>
           </div>
-
           <div *dxTemplate="let data of 'item'">
             <contact-status [value]="data"></contact-status>
           </div>
         </dx-select-box>
-      </div>
-
-      <div *dxTemplate="let data of 'photo'">
-        <form-item-photo
-          [link]="data.editorOptions.value"
-          [size]="184"
-        ></form-item-photo>
       </div>
     </dx-form>
   </ng-template>

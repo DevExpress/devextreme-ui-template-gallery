@@ -47,3 +47,13 @@ $side-panel-toolbar-height: 76px;
     display: inherit;
   }
 }
+
+.edit-cell {
+  position: relative;
+
+  contact-status {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 11px
+  }
+}

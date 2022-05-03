@@ -1,7 +1,6 @@
 import { Activities } from './activities';
 
 export const contactStatusList = [
-    'All Contacts',
     'Salaried',
     'Commission',
     'Terminated',

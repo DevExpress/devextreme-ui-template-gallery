@@ -6,6 +6,8 @@ import {
   DxDataGridModule,
   DxDataGridComponent,
   DxDropDownButtonModule,
+  DxSelectBoxModule,
+  DxTextBoxModule,
 } from 'devextreme-angular';
 import { RowClickEvent, RowPreparedEvent, ColumnCustomizeTextArg } from 'devextreme/ui/data_grid';
 import {
@@ -19,6 +21,8 @@ import { RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { UserPanelModule } from './user-panel/user-panel.component';
 
+type FilterContactStatus = ContactStatus | 'All Contacts';
+
 @Component({
   templateUrl: './crm-contact-list.component.html',
   styleUrls: ['./crm-contact-list.component.scss'],
@@ -27,7 +31,9 @@ import { UserPanelModule } from './user-panel/user-panel.component';
 export class CrmContactListComponent implements OnInit, OnDestroy {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
 
-  statuses = contactStatusList;
+  statusList = contactStatusList;
+
+  filterStatusList = ['All Contacts', ...contactStatusList];
 
   isPanelOpen = false;
 
@@ -72,7 +78,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
   };
 
   filterByStatus = (e: SelectionChangedEvent) => {
-    const { item: status }: { item: ContactStatus } = e;
+    const { item: status }: { item: FilterContactStatus } = e;
 
     if (status === 'All Contacts') {
       this.dataGrid.instance.clearFilter();
@@ -86,6 +92,10 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
   customizePhoneCell = (cellInfo: ColumnCustomizeTextArg) => {
     const { value } = cellInfo;
 
+    if (!value) {
+      return undefined;
+    }
+
     return this.formatPhone(value.toString());
   };
 }
@@ -95,6 +105,8 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     DxButtonModule,
     DxDataGridModule,
     DxDropDownButtonModule,
+    DxSelectBoxModule,
+    DxTextBoxModule,
 
     UserPanelModule,
 

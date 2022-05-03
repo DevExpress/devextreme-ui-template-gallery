@@ -36,7 +36,7 @@
               <dxi-item itemType="group">
                 <dxi-item
                   dataField="company"
-                  [template]="!isEditing ? 'blue' : null"
+                  template="blue-text"
                   [editorOptions]="editorOptions"
                 ></dxi-item>
                 <dxi-item
@@ -45,7 +45,7 @@
                 ></dxi-item>
                 <dxi-item
                   dataField="manager"
-                  [template]="!isEditing ? 'blue' : null"
+                  template="blue-text"
                   [editorOptions]="editorOptions"
                 >
                   <dxo-label text="Assigned to"></dxo-label>
@@ -81,11 +81,21 @@
               ></dxi-item>
             </dxi-item>
 
-            <div *dxTemplate="let data of 'blue'">
-              <form-item-blue
-                [label]="data.editorOptions.label"
-                [value]="data.editorOptions.value"
-              ></form-item-blue>
+            <!-- T1085831 -->
+            <div *dxTemplate="let data of 'blue-text'">
+              <div *ngIf="!isEditing then blue; else editing;"></div>
+              <ng-template #blue>
+                <form-item-blue
+                  [label]="data.editorOptions.label"
+                  [value]="data.editorOptions.value"
+                ></form-item-blue>
+              </ng-template>
+              <ng-template #editing>
+                <dx-text-box
+                  [(value)]="user[data.dataField]"
+                  [label]="data.editorOptions.label"
+                ></dx-text-box>
+              </ng-template>
             </div>
 
             <div *dxTemplate="let data of 'photo'">

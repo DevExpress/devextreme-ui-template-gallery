@@ -1,4 +1,6 @@
-import { Component, OnInit, NgModule, OnDestroy } from '@angular/core';
+import {
+ Component, OnInit, NgModule, OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
