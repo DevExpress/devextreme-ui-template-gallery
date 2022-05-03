@@ -68,7 +68,7 @@ export class TaskListGridComponent implements OnChanges {
   priorityList = taskPriorityList;
 
   ngOnChanges(changes: SimpleChanges) {
-    this.isLoading = changes.dataSource.currentValue === undefined;
+    this.isLoading = !changes.dataSource.currentValue;
   }
 
   onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {

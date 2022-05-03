@@ -26,8 +26,8 @@ export class CardOpportunitiesComponent implements OnChanges {
   isVisibleToast = false;
 
   ngOnChanges(changes: SimpleChanges) {
-    const isLoadActive = changes.active?.currentValue === undefined;
-    const isLoadClosed = changes.closed?.currentValue === undefined;
+    const isLoadActive = !changes.active?.currentValue;
+    const isLoadClosed = !changes.closed?.currentValue;
 
     this.isLoading = isLoadActive || isLoadClosed;
   }

@@ -47,22 +47,20 @@ export class TaskFormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.setEditorMode(this.isEditing);
 
-    this.isEmptyStartDate = this.isEmpty(this.task?.startDate);
-    this.isEmptyDueDate = this.isEmpty(this.task?.dueDate);
+    this.isEmptyStartDate = !this.task?.startDate;
+    this.isEmptyDueDate = !this.task?.dueDate;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.isLoading = changes.task.currentValue === undefined;
+    this.isLoading = !changes.task.currentValue;
 
     if (!this.isLoading) {
       this.task.dueDate = null;
 
-      this.isEmptyStartDate = this.isEmpty(this.task?.startDate);
-      this.isEmptyDueDate = this.isEmpty(this.task?.dueDate);
+      this.isEmptyStartDate = !this.task?.startDate;
+      this.isEmptyDueDate = !this.task?.dueDate;
     }
   }
-
-  isEmpty = (value: any): boolean => value === undefined || value === null;
 
   toggleEdit = () => {
     this.isEditing = !this.isEditing;
@@ -77,11 +75,11 @@ export class TaskFormComponent implements OnInit, OnChanges {
   };
 
   startDateChange = (date: Date) => {
-    this.isEmptyStartDate = this.isEmpty(date);
+    this.isEmptyStartDate = !date;
   };
 
   dueDateChange = (date: Date) => {
-    this.isEmptyDueDate = this.isEmpty(date);
+    this.isEmptyDueDate = !date;
   };
 }
 

@@ -22,7 +22,7 @@ export class CardActivitiesComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.isLoading = changes.activities.currentValue === undefined;
+    this.isLoading = !changes.activities.currentValue;
   }
 }
 

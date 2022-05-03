@@ -67,9 +67,9 @@ export class CrmContactFormComponent implements OnInit, OnDestroy {
     this.contactSubscription.unsubscribe();
   }
 
-  refresh() {
+  refresh = () => {
     this.loadData();
-  }
+  };
 
   formatPhone = (number: string | number) => String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
 
