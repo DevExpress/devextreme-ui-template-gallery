@@ -18,6 +18,7 @@ packages.forEach(pkg => {
                 await t.resizeWindow(...screenMode);
     
                 await t.navigateTo(`http://localhost:${pkg.port}/#/crm-contact-form`);
+                await t.wait(1000);
                 await setEmbeddedMode(embedded);
     
                 if(embedded) {
