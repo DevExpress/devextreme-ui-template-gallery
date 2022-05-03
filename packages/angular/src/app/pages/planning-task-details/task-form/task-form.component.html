@@ -1,40 +1,41 @@
 <div id="task-form">
+  <dx-toolbar>
+    <dxi-item
+      location="after"
+      locateInMenu="after"
+      [visible]="!isEditing"
+    >
+      <dx-button
+        text="Edit"
+        icon="edit"
+        stylingMode="outlined"
+        type="default"
+        (onClick)="toggleEdit()"
+      ></dx-button>
+    </dxi-item>
+    <dxi-item
+      location="after"
+      locateInMenu="after"
+      [visible]="isEditing"
+    >
+      <dx-button
+        text="Save"
+        stylingMode="outlined"
+        type="default"
+        (onClick)="toggleEdit()"
+      ></dx-button>
+    </dxi-item>
+    <dxi-item
+      location="after"
+      locateInMenu="after"
+      [visible]="isEditing"
+    >
+      <dx-button text="Cancel" (onClick)="toggleEdit()"></dx-button>
+    </dxi-item>
+  </dx-toolbar>
+  
   <div *ngIf="isLoading; then displayLoadPanel; else displayForm"></div>
   <ng-template #displayForm>
-    <dx-toolbar>
-      <dxi-item
-        location="after"
-        [visible]="!isEditing"
-        locateInMenu="after"
-        widget="dxButton"
-        [options]="{
-          text: 'Edit',
-          icon: 'edit',
-          stylingMode: 'outlined',
-          type: 'default',
-          onClick: toggleEdit
-        }"
-      ></dxi-item>
-      <dxi-item
-        location="after"
-        [visible]="isEditing"
-        locateInMenu="after"
-        widget="dxButton"
-        [options]="{
-          text: 'Save',
-          stylingMode: 'outlined',
-          type: 'default',
-          onClick: toggleEdit
-        }"
-      ></dxi-item>
-      <dxi-item
-        location="after"
-        [visible]="isEditing"
-        locateInMenu="after"
-        widget="dxButton"
-        [options]="{ text: 'Cancel', onClick: toggleEdit }"
-      ></dxi-item>
-    </dx-toolbar>
 
     <dx-form
       [formData]="task"
@@ -180,11 +181,11 @@
       </div>
 
       <div *dxTemplate="let data of 'dueDate'">
-        <app-task-form-date
+        <form-item-date
           text="Due Date"
           [(value)]="task.dueDate"
           (valueChange)="dueDateChange($event)"
-        ></app-task-form-date>
+        ></form-item-date>
       </div>
     </dx-form>
   </ng-template>

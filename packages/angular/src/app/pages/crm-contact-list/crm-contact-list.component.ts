@@ -2,8 +2,10 @@ import {
  Component, ViewChild, OnInit, NgModule, OnDestroy,
 } from '@angular/core';
 import {
+  DxButtonModule,
   DxDataGridModule,
   DxDataGridComponent,
+  DxDropDownButtonModule,
 } from 'devextreme-angular';
 import { RowClickEvent, RowPreparedEvent, ColumnCustomizeTextArg } from 'devextreme/ui/data_grid';
 import {
@@ -90,7 +92,9 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [
+    DxButtonModule,
     DxDataGridModule,
+    DxDropDownButtonModule,
 
     UserPanelModule,
 

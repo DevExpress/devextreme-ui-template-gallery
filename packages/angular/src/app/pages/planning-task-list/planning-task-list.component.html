@@ -40,21 +40,17 @@
       <div class="separator"></div>
     </dxi-item>
 
-    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto"
-      widget="dxDropDownButton" 
-      [options]="{
-        icon: 'export',
-        stylingMode: 'text',
-        onItemClick: exportDataGrid,
-        dropDownOptions: {
-          width: 220
-        },
-        items: [
-          { icon: 'xlsxfile', text: 'Export all data' },
-          { icon: 'exportselected', text: 'Export selected rows' }
-        ]
-      }"
-    ></dxi-item>
+    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
+      <dx-drop-down-button
+        icon="export"
+        stylingMode="text"
+        (onItemClick)="exportDataGrid($event)"
+        [dropDownOptions]="{ width: 220 }"
+      >
+        <dxi-item icon="xlsxfile" text="Export all data"></dxi-item>
+        <dxi-item icon="xlsxfile" text="Export selected rows"></dxi-item>
+      </dx-drop-down-button>
+    </dxi-item>
 
     <dxi-item
       [visible]="displayGrid"

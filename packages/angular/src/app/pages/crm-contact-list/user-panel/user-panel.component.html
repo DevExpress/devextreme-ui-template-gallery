@@ -11,20 +11,12 @@
           <dxi-item location="before">
             <contact-status [value]="user.status"></contact-status>
           </dxi-item>
-          <dxi-item
-            location="after"
-            widget="dxButton"
-            [visible]="isPinEnabled"
-            [options]="{
-              icon: isPin ? 'unpin' : 'pin',
-              onClick: pinClick
-            }"
-          ></dxi-item>
-          <dxi-item
-            location="after"
-            widget="dxButton"
-            [options]="{ icon: 'close', onClick: closePanel }"
-          ></dxi-item>
+          <dxi-item location="after" [visible]="isPinEnabled">
+            <dx-button [icon]="isPin ? 'unpin' : 'pin'" (onClick)="pinClick($event)"></dx-button>
+          </dxi-item>
+          <dxi-item location="after">
+            <dx-button icon="close" (onClick)="closePanel($event)"></dx-button>
+          </dxi-item>
         </dx-toolbar>
       </div>
 
@@ -117,37 +109,34 @@
 
         <div class="data-part border">
           <dx-toolbar class="panel-toolbar">
+            <dxi-item location="before" [visible]="!isEditing">
+              <dx-button
+                text="Edit"
+                icon="edit"
+                stylingMode="outlined"
+                type="default"
+                (onClick)="toggleEdit()"
+              ></dx-button>
+            </dxi-item>
             <dxi-item
               location="before"
-              widget="dxButton"
-              [visible]="!isEditing"
-              [options]="{
-                icon: 'edit',
-                stylingMode: 'outlined',
-                text: 'Edit',
-                type: 'default',
-                onClick: toggleEdit
-              }"
-            ></dxi-item>
-            <dxi-item
-              location="before"
-              [visible]="isEditing"
               locateInMenu="before"
-              widget="dxButton"
-              [options]="{
-                text: 'Save',
-                stylingMode: 'outlined',
-                type: 'default',
-                onClick: toggleEdit
-              }"
-            ></dxi-item>
+              [visible]="isEditing"
+            >
+              <dx-button
+                text="Save"
+                stylingMode="outlined"
+                type="default"
+                (onClick)="toggleEdit()"
+              ></dx-button>
+            </dxi-item>
             <dxi-item
               location="before"
-              [visible]="isEditing"
               locateInMenu="before"
-              widget="dxButton"
-              [options]="{ text: 'Cancel', onClick: toggleEdit }"
-            ></dxi-item>
+              [visible]="isEditing"
+            >
+              <dx-button text="Cancel" (onClick)="toggleEdit()"></dx-button>
+            </dxi-item>
             <dxi-item
               location="after"
               widget="dxDropDownButton"

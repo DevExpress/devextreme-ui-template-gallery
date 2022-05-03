@@ -25,31 +25,25 @@
       <dxi-item location="before">
         <div class="grid-header">Contact List</div>
       </dxi-item>
-      <dxi-item
-        location="before"
-        locateInMenu="auto"
-        widget="dxDropDownButton"
-        [options]="{
-          stylingMode: 'text',
-          items: statuses,
-          width: 160,
-          useSelectMode: true,
-          selectedItemKey: statuses[0],
-          onSelectionChanged: filterByStatus
-        }"
-      ></dxi-item>
-      <dxi-item
-        location="after"
-        locateInMenu="auto"
-        widget="dxButton"
-        [options]="{
-          icon: 'plus',
-          text: 'Add Contact',
-          type: 'default',
-          stylingMode: 'contained',
-          onClick: addRow
-        }"
-      ></dxi-item>
+      <dxi-item location="before" locateInMenu="auto">
+        <dx-drop-down-button
+          stylingMode="text"
+          [width]="160"
+          [useSelectMode]="true"
+          [items]="statuses"
+          [selectedItemKey]="statuses[0]"
+          (onSelectionChanged)="filterByStatus($event)"
+        ></dx-drop-down-button>
+      </dxi-item>
+      <dxi-item location="after" locateInMenu="auto">
+        <dx-button
+          text="Add Contact"
+          icon="plus"
+          type="default"
+          stylingMode="contained"
+          (onClick)="addRow()"
+        ></dx-button>
+      </dxi-item>
       <dxi-item
         location="after"
         locateInMenu="auto"

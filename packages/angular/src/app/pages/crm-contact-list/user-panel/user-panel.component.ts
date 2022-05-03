@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import {
   DxAccordionModule,
   DxButtonModule,
+  DxDropDownButtonModule,
   DxTextBoxModule,
   DxToolbarModule,
   DxLoadPanelModule,
@@ -118,6 +119,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
   imports: [
     DxAccordionModule,
     DxButtonModule,
+    DxDropDownButtonModule,
     DxTextBoxModule,
     DxToolbarModule,
     DxLoadPanelModule,

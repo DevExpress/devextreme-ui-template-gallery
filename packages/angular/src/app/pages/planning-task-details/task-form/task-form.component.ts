@@ -3,6 +3,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  DxButtonModule,
   DxFormModule,
   DxLoadPanelModule,
   DxSelectBoxModule,
@@ -57,7 +58,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
     this.isLoading = changes.task.currentValue === undefined;
 
     if (!this.isLoading) {
-      this.task.startDate = null;
+      this.task.dueDate = null;
 
       this.isEmptyStartDate = this.isEmpty(this.task?.startDate);
       this.isEmptyDueDate = this.isEmpty(this.task?.dueDate);
@@ -89,6 +90,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
 @NgModule({
   imports: [
+    DxButtonModule,
     DxFormModule,
     DxLoadPanelModule,
     DxSelectBoxModule,

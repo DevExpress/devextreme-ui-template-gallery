@@ -5,6 +5,10 @@
   min-height: 300px;
   position: relative;
   display: block;
+
+  &.load {
+    min-height: auto;
+  }
 }
 
 .activities-list {

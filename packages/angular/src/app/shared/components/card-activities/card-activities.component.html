@@ -1,4 +1,4 @@
-<div id="activities-list">
+<div id="activities-list" [ngClass]="!isLoading ? 'load' : null">
   <div *ngIf="isLoading; then displayLoadPanel; else displayActivities"></div>
 
   <ng-template #displayActivities>

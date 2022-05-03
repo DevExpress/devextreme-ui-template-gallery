@@ -4,36 +4,36 @@
     <dx-toolbar>
       <dxi-item
         location="after"
+        locateInMenu="after"
         [visible]="!isEditing"
-        locateInMenu="after"
-        widget="dxButton"
-        [options]="{
-          text: 'Edit',
-          icon: 'edit',
-          stylingMode: 'outlined',
-          type: 'default',
-          onClick: toggleEdit
-        }"
-      ></dxi-item>
+      >
+        <dx-button
+          text="Edit"
+          icon="edit"
+          stylingMode="outlined"
+          type="default"
+          (onClick)="toggleEdit()"
+        ></dx-button>
+      </dxi-item>
       <dxi-item
         location="after"
-        [visible]="isEditing"
         locateInMenu="after"
-        widget="dxButton"
-        [options]="{
-          text: 'Save',
-          stylingMode: 'outlined',
-          type: 'default',
-          onClick: toggleEdit
-        }"
-      ></dxi-item>
+        [visible]="isEditing"
+      >
+        <dx-button
+          text="Save"
+          stylingMode="outlined"
+          type="default"
+          (onClick)="toggleEdit()"
+        ></dx-button>
+      </dxi-item>
       <dxi-item
         location="after"
-        [visible]="isEditing"
         locateInMenu="after"
-        widget="dxButton"
-        [options]="{ text: 'Cancel', onClick: toggleEdit }"
-      ></dxi-item>
+        [visible]="isEditing"
+      >
+        <dx-button text="Cancel" (onClick)="toggleEdit()"></dx-button>
+      </dxi-item>
     </dx-toolbar>
 
     <dx-form
