@@ -36,9 +36,6 @@ export class FormItemPhotoComponent implements OnInit {
 
   imageUrl: string;
 
-  constructor() {
-  }
-
   ngOnInit() {
     this.imageUrl = `url('data:image/png;base64,${this.link}')`;
   }

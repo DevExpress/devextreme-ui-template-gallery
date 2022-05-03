@@ -24,7 +24,7 @@ import { Opportunities } from 'src/app/shared/types/opportunities';
   templateUrl: './contact-cards.component.html',
   styleUrls: ['./contact-cards.component.scss'],
 })
-export class ContactCardsComponent implements OnInit {
+export class ContactCardsComponent {
     @Input() tasks: Task[];
 
     @Input() activities: Activities;
@@ -38,12 +38,6 @@ export class ContactCardsComponent implements OnInit {
     @Input() messages: Messages;
 
     @Input() contactName: string;
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
 }
 
 @NgModule({

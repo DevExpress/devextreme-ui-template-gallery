@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, Input, NgModule,
+  Component, Input, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule, DxToastModule } from 'devextreme-angular';
@@ -12,14 +12,8 @@ import { Task } from 'src/app/shared/types/task';
   templateUrl: './task-kanban-card.component.html',
   styleUrls: ['./task-kanban-card.component.scss'],
 })
-export class TaskKanbanCardComponent implements OnInit {
+export class TaskKanbanCardComponent {
   @Input() task: Task;
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
   getAvatarText = (name: string) => name.split(' ').map((name) => name[0]).join('');
 

@@ -44,9 +44,6 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   editorOptions: TextBoxProperties = { stylingMode: this.stylingMode };
 
-  constructor() {
-  }
-
   ngOnInit() {
     this.setEditorMode(this.isEditing);
 

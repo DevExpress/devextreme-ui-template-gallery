@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, ViewChild, EventEmitter, Output, Input, SimpleChanges, OnChanges,
+  Component, NgModule, ViewChild, EventEmitter, Output, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,7 +30,7 @@ import { Task } from 'src/app/shared/types/task';
   templateUrl: './task-list-grid.component.html',
   styleUrls: ['./task-list-grid.component.scss'],
 })
-export class TaskListGridComponent implements OnInit, OnChanges {
+export class TaskListGridComponent implements OnChanges {
   @ViewChild(DxDataGridComponent, { static: false }) component: DxDataGridComponent;
 
   @Input() dataSource: Task[];
@@ -61,17 +61,11 @@ export class TaskListGridComponent implements OnInit, OnChanges {
     });
   };
 
-  isLoading: Boolean = true;
+  isLoading = true;
 
   statusList = taskStatusList;
 
   priorityList = taskPriorityList;
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.isLoading = changes.dataSource.currentValue === undefined;

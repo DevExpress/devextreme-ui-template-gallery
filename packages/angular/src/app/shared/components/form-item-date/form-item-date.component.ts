@@ -23,9 +23,6 @@ export class FormItemDateComponent {
 
   @Output() valueChange: EventEmitter<string | Date> = new EventEmitter();
 
-  constructor() {
-  }
-
   onValueChanged = (e: ValueChangedEvent) => {
     const { value } = e;
 

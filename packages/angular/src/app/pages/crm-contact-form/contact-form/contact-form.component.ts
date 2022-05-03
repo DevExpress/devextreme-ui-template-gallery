@@ -41,9 +41,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   contactSubscription: Subscription = new Subscription();
 
-  constructor() {
-  }
-
   ngOnInit() {
     this.setEditorMode(this.isEditing);
 
