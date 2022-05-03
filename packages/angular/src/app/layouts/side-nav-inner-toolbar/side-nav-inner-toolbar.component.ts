@@ -1,5 +1,5 @@
 import {
- Component, OnInit, NgModule, Input, ViewChild,
+  Component, OnInit, NgModule, Input, ViewChild,
 } from '@angular/core';
 import { ItemClickEvent as TreeViewItemClickEvent } from 'devextreme/ui/tree_view';
 import { ItemClickEvent as ToolbarItemClickEvent } from 'devextreme/ui/toolbar';

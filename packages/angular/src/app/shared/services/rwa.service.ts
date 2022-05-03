@@ -9,41 +9,41 @@ const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
 
 @Injectable()
 export class RwaService {
-    constructor(private http: HttpClient) {
-    }
+  constructor(private http: HttpClient) {
+  }
 
     public getContacts = () =>
-        this.http.get<Contact[]>(`${API_URL}/Users/Contacts`);
+      this.http.get<Contact[]>(`${API_URL}/Users/Contacts`);
 
     public getContact = (id: number) =>
-        this.http.get<Contact>(`${API_URL}/Users/Contacts/${id}`);
+      this.http.get<Contact>(`${API_URL}/Users/Contacts/${id}`);
 
     public getTasks = (): Observable<Task[]> =>
-        this.http.get<Task[]>(`${API_URL}/Employees/Tasks`);
+      this.http.get<Task[]>(`${API_URL}/Employees/Tasks`);
 
     public getTask = (id: number): Observable<Task> =>
-        this.http.get<Task>(`${API_URL}/Employees/Tasks/${id}`);
+      this.http.get<Task>(`${API_URL}/Employees/Tasks/${id}`);
 
     public getContactNotes = (id: number) =>
-        this.http.get(`${API_URL}/Users/Contacts/${id}/Notes`);
+      this.http.get(`${API_URL}/Users/Contacts/${id}/Notes`);
 
     public getContactMessages = (id: number) =>
-        this.http.get(`${API_URL}/Users/Contacts/${id}/Messages`);
+      this.http.get(`${API_URL}/Users/Contacts/${id}/Messages`);
 
     public getActiveContactOpportunities = (id: number) =>
-        this.getContactOpportunities(id, true);
+      this.getContactOpportunities(id, true);
 
     public getClosedContactOpportunities = (id: number) =>
-        this.getContactOpportunities(id, false);
+      this.getContactOpportunities(id, false);
 
     public getContactOpportunities = (id: number, isActive: boolean) => this.http
-            .get<any>(`${API_URL}/Users/Contacts/${id}/Opportunities`)
-            .pipe(
-                map((data) => data.filter((_: any, index: number) => {
-                    const isEven = index % 2 === 0;
-                    return isActive ? isEven : !isEven;
-                })),
-            );
+      .get<any>(`${API_URL}/Users/Contacts/${id}/Opportunities`)
+      .pipe(
+        map((data) => data.filter((_: any, index: number) => {
+          const isEven = index % 2 === 0;
+          return isActive ? isEven : !isEven;
+        })),
+      );
 }
 
 /*

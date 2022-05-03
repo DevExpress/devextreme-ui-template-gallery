@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
- Component, Input, NgModule,
+  Component, Input, NgModule,
 } from '@angular/core';
 import { TaskStatus } from 'src/app/shared/types/task';
 

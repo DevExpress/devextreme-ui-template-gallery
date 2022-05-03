@@ -1,5 +1,5 @@
 import {
- Component, OnInit, NgModule, OnDestroy,
+  Component, OnInit, NgModule, OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {

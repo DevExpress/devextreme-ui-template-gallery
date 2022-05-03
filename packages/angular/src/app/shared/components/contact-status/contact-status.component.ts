@@ -1,5 +1,5 @@
 import {
- Component, Input, NgModule,
+  Component, Input, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactStatus } from 'src/app/shared/types/contact';

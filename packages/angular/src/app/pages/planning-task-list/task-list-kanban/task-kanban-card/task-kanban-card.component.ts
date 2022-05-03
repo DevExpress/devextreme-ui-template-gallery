@@ -1,5 +1,5 @@
 import {
- Component, OnInit, Input, NgModule,
+  Component, OnInit, Input, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule, DxToastModule } from 'devextreme-angular';

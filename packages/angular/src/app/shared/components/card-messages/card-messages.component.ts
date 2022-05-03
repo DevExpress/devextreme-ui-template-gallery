@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
- Component, Input, NgModule, OnInit,
+  Component, Input, NgModule, OnInit,
 } from '@angular/core';
 import {
   DxTextAreaModule,
@@ -14,7 +14,7 @@ import { Message, Messages } from 'src/app/shared/types/messages';
   templateUrl: './card-messages.component.html',
   styleUrls: ['./card-messages.component.scss'],
 })
-export class CardMessagesComponent implements OnInit {
+export class CardMessagesComponent {
   @Input() user: string;
 
   @Input() items: Messages;
@@ -22,12 +22,6 @@ export class CardMessagesComponent implements OnInit {
   messageTitle = '';
 
   messageText = '';
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
   defaultText = () => {
     this.messageTitle = '';

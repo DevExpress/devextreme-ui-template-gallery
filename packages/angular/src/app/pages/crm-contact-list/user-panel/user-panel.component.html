@@ -1,8 +1,6 @@
 <div class="panel" [ngClass]="{ pin: isPin, open: isOpen }">
   <div class="data-wrapper">
-    <div *ngIf="isLoading; then displayLoadPanel; else displayForm"></div>
-
-    <ng-template #displayForm>
+    <ng-container *ngIf="!isLoading">
       <div class="data-part">
         <dx-toolbar>
           <dxi-item location="before">
@@ -192,15 +190,13 @@
           </dx-accordion>
         </div>
       </dx-scroll-view>
-    </ng-template>
+    </ng-container>
 
-    <ng-template #displayLoadPanel>
-      <dx-load-panel
-        [width]="300"
-        [visible]="isLoading"
-        container=".panel"
-        [position]="{ of: '.panel' }"
-      ></dx-load-panel>
-    </ng-template>
+    <dx-load-panel
+      [width]="300"
+      [visible]="isLoading"
+      container=".panel"
+      [position]="{ of: '.panel' }"
+    ></dx-load-panel>
   </div>
 </div>

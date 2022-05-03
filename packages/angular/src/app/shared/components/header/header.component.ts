@@ -1,5 +1,5 @@
 import {
- Component, NgModule, Input, Output, EventEmitter, OnInit,
+  Component, NgModule, Input, Output, EventEmitter, OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 

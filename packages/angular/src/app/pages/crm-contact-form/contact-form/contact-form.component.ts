@@ -1,5 +1,5 @@
 import {
- Component, OnInit, NgModule, Input, OnDestroy,
+  Component, OnInit, NgModule, Input, OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -20,9 +20,9 @@ import { Observable, Subscription } from 'rxjs';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
 
 @Component({
-    selector: 'contact-form',
-    templateUrl: './contact-form.component.html',
-    styleUrls: ['./contact-form.component.scss'],
+  selector: 'contact-form',
+  templateUrl: './contact-form.component.html',
+  styleUrls: ['./contact-form.component.scss'],
 })
 export class ContactFormComponent implements OnInit, OnDestroy {
   @Input() contact: Observable<Contact>;

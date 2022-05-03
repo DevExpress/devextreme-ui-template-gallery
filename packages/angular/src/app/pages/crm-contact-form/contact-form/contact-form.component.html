@@ -1,166 +1,162 @@
 <div id="contact-form">
-  <div *ngIf="isLoading; then displayLoadPanel; else displayForm"></div>
-  <ng-template #displayForm>
-    <dx-toolbar>
-      <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
-        <dx-button
-          text="Edit"
-          icon="edit"
-          stylingMode="outlined"
-          type="default"
-          (onClick)="toggleEdit()"
-        ></dx-button>
-      </dxi-item>
-      <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
-        <dx-button
-          text="Save"
-          stylingMode="outlined"
-          type="default"
-          (onClick)="toggleEdit()"
-        ></dx-button>
-      </dxi-item>
-      <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
-        <dx-button text="Cancel" (onClick)="toggleEdit()" stylingMode="text"></dx-button>
-      </dxi-item>
-    </dx-toolbar>
+  <dx-toolbar>
+    <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
+      <dx-button
+        text="Edit"
+        icon="edit"
+        stylingMode="outlined"
+        type="default"
+        (onClick)="toggleEdit()"
+      ></dx-button>
+    </dxi-item>
+    <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
+      <dx-button
+        text="Save"
+        stylingMode="outlined"
+        type="default"
+        (onClick)="toggleEdit()"
+      ></dx-button>
+    </dxi-item>
+    <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
+      <dx-button text="Cancel" (onClick)="toggleEdit()" stylingMode="text"></dx-button>
+    </dxi-item>
+  </dx-toolbar>
 
-    <dx-form
-      class="form last"
-      [formData]="contact$"
-      labelMode="floating"
-      [readOnly]="!isEditing"
-    >
-      <dxi-item itemType="group" [colCount]="2" caption="Details">
-        <dxi-item dataField="image" template="photo"></dxi-item>
-        <dxi-item itemType="group">
-          <dxi-item
-            dataField="status"
-            [template]="!isEditing ? 'statusField' : 'statusEditing'"
-            [editorOptions]="editorOptions"
-          >
-          </dxi-item>
-          <dxi-item
-            dataField="firstName"
-            [editorOptions]="editorOptions"
-          ></dxi-item>
-          <dxi-item
-            dataField="lastName"
-            [editorOptions]="editorOptions"
-          ></dxi-item>
-        </dxi-item>
+  <dx-form
+    *ngIf="!isLoading"
+    class="form last"
+    [formData]="contact$"
+    labelMode="floating"
+    [readOnly]="!isEditing"
+  >
+    <dxi-item itemType="group" [colCount]="2" caption="Details">
+      <dxi-item dataField="image" template="photo"></dxi-item>
+      <dxi-item itemType="group">
         <dxi-item
-          dataField="position"
-          [editorOptions]="editorOptions"
-        ></dxi-item>
-        <dxi-item
-          dataField="manager"
-          template="blue-text"
+          dataField="status"
+          [template]="!isEditing ? 'statusField' : 'statusEditing'"
           [editorOptions]="editorOptions"
         >
-          <dxo-label text="Assigned to"></dxo-label>
         </dxi-item>
         <dxi-item
-          dataField="company"
-          template="blue-text"
+          dataField="firstName"
           [editorOptions]="editorOptions"
-          [colSpan]="2"
+        ></dxi-item>
+        <dxi-item
+          dataField="lastName"
+          [editorOptions]="editorOptions"
         ></dxi-item>
       </dxi-item>
-
-      <dxi-item itemType="group" [colCount]="4" caption="Contacts">
-        <dxi-item
-          dataField="address"
-          [editorOptions]="editorOptions"
-          [colSpan]="4"
-        ></dxi-item>
-        <dxi-item
-          dataField="city"
-          [editorOptions]="editorOptions"
-          [colSpan]="2"
-        ></dxi-item>
-        <dxi-item dataField="state.stateShort" [editorOptions]="editorOptions">
-          <dxo-label text="State"></dxo-label>
-        </dxi-item>
-        <dxi-item
-          dataField="zipCode"
-          [editorOptions]="editorOptions"
-        ></dxi-item>
-        <dxi-item
-          dataField="phone"
-          [editorOptions]="{
-            stylingMode: stylingMode,
-            mask: '+1(000)000-0000'
-          }"
-          [colSpan]="2"
-        ></dxi-item>
-        <dxi-item
-          dataField="email"
-          [editorOptions]="editorOptions"
-          [colSpan]="2"
-        ></dxi-item>
+      <dxi-item
+        dataField="position"
+        [editorOptions]="editorOptions"
+      ></dxi-item>
+      <dxi-item
+        dataField="manager"
+        template="blue-text"
+        [editorOptions]="editorOptions"
+      >
+        <dxo-label text="Assigned to"></dxo-label>
       </dxi-item>
+      <dxi-item
+        dataField="company"
+        template="blue-text"
+        [editorOptions]="editorOptions"
+        [colSpan]="2"
+      ></dxi-item>
+    </dxi-item>
 
-      <!-- T1085831 -->
-      <div *dxTemplate="let data of 'blue-text'">
-        <div *ngIf="!isEditing then blue; else editing;"></div>
-        <ng-template #blue>
-          <form-item-blue
-            [label]="data.editorOptions.label"
-            [value]="data.editorOptions.value"
-          ></form-item-blue>
-        </ng-template>
-        <ng-template #editing>
-          <dx-text-box
-            [(value)]="contact$[data.dataField]"
-            [label]="data.editorOptions.label"
-          ></dx-text-box>
-        </ng-template>
-      </div>
+    <dxi-item itemType="group" [colCount]="4" caption="Contacts">
+      <dxi-item
+        dataField="address"
+        [editorOptions]="editorOptions"
+        [colSpan]="4"
+      ></dxi-item>
+      <dxi-item
+        dataField="city"
+        [editorOptions]="editorOptions"
+        [colSpan]="2"
+      ></dxi-item>
+      <dxi-item dataField="state.stateShort" [editorOptions]="editorOptions">
+        <dxo-label text="State"></dxo-label>
+      </dxi-item>
+      <dxi-item
+        dataField="zipCode"
+        [editorOptions]="editorOptions"
+      ></dxi-item>
+      <dxi-item
+        dataField="phone"
+        [editorOptions]="{
+          stylingMode: stylingMode,
+          mask: '+1(000)000-0000'
+        }"
+        [colSpan]="2"
+      ></dxi-item>
+      <dxi-item
+        dataField="email"
+        [editorOptions]="editorOptions"
+        [colSpan]="2"
+      ></dxi-item>
+    </dxi-item>
 
-      <div *dxTemplate="let data of 'photo'">
-        <form-item-photo
-          [link]="data.editorOptions.value"
-          [size]="184"
-        ></form-item-photo>
-      </div>
-
-      <div *dxTemplate="let data of 'statusField'">
-        <div class="info">
-          <label class="dx-texteditor-label">{{
-            data.editorOptions.label
-          }}</label>
-          <contact-status [value]="data.editorOptions.value"></contact-status>
-        </div>
-      </div>
-
-      <div *dxTemplate="let data of 'statusEditing'">
-        <dx-select-box
-          [(value)]="contact$.status"
-          [items]="statusList"
-          [stylingMode]="stylingMode"
+    <!-- T1085831 -->
+    <div *dxTemplate="let data of 'blue-text'">
+      <div *ngIf="!isEditing then blue; else editing;"></div>
+      <ng-template #blue>
+        <form-item-blue
           [label]="data.editorOptions.label"
-          [readOnly]="!isEditing"
-          fieldTemplate="field"
-        >
-          <div *dxTemplate="let data of 'field'">
-            <div class="form-custom-list-prop">
-              <contact-status [value]="contact$.status"></contact-status>
-              <dx-text-box [readOnly]="true"></dx-text-box>
-            </div>
-          </div>
-          <div *dxTemplate="let data of 'item'">
-            <contact-status [value]="data"></contact-status>
-          </div>
-        </dx-select-box>
-      </div>
-    </dx-form>
-  </ng-template>
+          [value]="data.editorOptions.value"
+        ></form-item-blue>
+      </ng-template>
+      <ng-template #editing>
+        <dx-text-box
+          [(value)]="contact$[data.dataField]"
+          [label]="data.editorOptions.label"
+        ></dx-text-box>
+      </ng-template>
+    </div>
 
-  <ng-template #displayLoadPanel>
-    <dx-load-panel
-      container="#contact-form"
-      [position]="{ of: '#contact-form' }"
-      [visible]="isLoading"
-    ></dx-load-panel>
-  </ng-template>
+    <div *dxTemplate="let data of 'photo'">
+      <form-item-photo
+        [link]="data.editorOptions.value"
+        [size]="184"
+      ></form-item-photo>
+    </div>
+
+    <div *dxTemplate="let data of 'statusField'">
+      <div class="info">
+        <label class="dx-texteditor-label">{{
+          data.editorOptions.label
+        }}</label>
+        <contact-status [value]="data.editorOptions.value"></contact-status>
+      </div>
+    </div>
+
+    <div *dxTemplate="let data of 'statusEditing'">
+      <dx-select-box
+        [(value)]="contact$.status"
+        [items]="statusList"
+        [stylingMode]="stylingMode"
+        [label]="data.editorOptions.label"
+        [readOnly]="!isEditing"
+        fieldTemplate="field"
+      >
+        <div *dxTemplate="let data of 'field'">
+          <div class="form-custom-list-prop">
+            <contact-status [value]="contact$.status"></contact-status>
+            <dx-text-box [readOnly]="true"></dx-text-box>
+          </div>
+        </div>
+        <div *dxTemplate="let data of 'item'">
+          <contact-status [value]="data"></contact-status>
+        </div>
+      </dx-select-box>
+    </div>
+  </dx-form>
+
+  <dx-load-panel
+    container="#contact-form"
+    [position]="{ of: '#contact-form' }"
+    [visible]="isLoading"
+  ></dx-load-panel>
 </div>

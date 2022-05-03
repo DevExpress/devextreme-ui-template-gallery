@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
- Component, Input, NgModule, OnInit,
+  Component, Input, NgModule, OnInit,
 } from '@angular/core';
 
 @Component({

@@ -1,5 +1,5 @@
 import {
- Component, OnInit, NgModule, Input, ViewChild,
+  Component, OnInit, NgModule, Input, ViewChild,
 } from '@angular/core';
 import { ItemClickEvent } from 'devextreme/ui/tree_view';
 import { DxDrawerModule } from 'devextreme-angular/ui/drawer';

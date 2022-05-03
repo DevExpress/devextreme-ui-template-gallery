@@ -1,9 +1,5 @@
 <div id="card-opportunies">
-  <div
-    *ngIf="isLoading; then displayLoadPanel; else displayOpportunities"
-  ></div>
-
-  <ng-template #displayOpportunities>
+  <ng-container *ngIf="!isLoading">
     <div class="opportunities-block">
       <div class="dx-form-group-caption">Active</div>
       <div class="opportunities-container">
@@ -49,15 +45,11 @@
         Owner: <span class="owner-name">{{ item.manager }}</span>
       </div>
     </ng-template>
-  </ng-template>
+  </ng-container>
 
-  <ng-template #displayLoadPanel>
-    <dx-load-panel
-      [visible]="isLoading"
-      container="#card-opportunies"
-      [position]="{ of: '#card-opportunies' }"
-    ></dx-load-panel>
-  </ng-template>
+  <dx-load-panel
+    [visible]="isLoading"
+    container="#card-opportunies"
+    [position]="{ of: '#card-opportunies' }"
+  ></dx-load-panel>
 </div>
-
-<dx-toast [message]="messageToast" [(visible)]="isVisibleToast"></dx-toast>

@@ -1,9 +1,9 @@
 import { Activities } from './activities';
 
 export const contactStatusList = [
-    'Salaried',
-    'Commission',
-    'Terminated',
+  'Salaried',
+  'Commission',
+  'Terminated',
 ] as const;
 
 export type ContactStatus = (typeof contactStatusList)[number];

@@ -1,41 +1,35 @@
 import {
-    Component, Input, NgModule, OnChanges, OnInit, SimpleChanges, ViewChild,
+  Component, Input, NgModule, OnChanges, OnInit, SimpleChanges, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-    DxDataGridComponent,
-    DxDataGridModule,
-    DxLoadPanelModule,
+  DxDataGridComponent,
+  DxDataGridModule,
+  DxLoadPanelModule,
 } from 'devextreme-angular';
 
 @Component({
-    selector: 'card-tasks',
-    templateUrl: './card-tasks.component.html',
-    styleUrls: ['./card-tasks.component.scss'],
+  selector: 'card-tasks',
+  templateUrl: './card-tasks.component.html',
+  styleUrls: ['./card-tasks.component.scss'],
 })
-export class CardTasksComponent implements OnInit, OnChanges {
-    @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
+export class CardTasksComponent implements OnChanges {
+  @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
 
-    @Input() tasks;
+  @Input() tasks;
 
-    @Input() manager: string;
+  @Input() manager: string;
 
-    isLoading = true;
+  isLoading = true;
 
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        this.isLoading = changes.tasks?.currentValue === null;
-    }
+  ngOnChanges(changes: SimpleChanges) {
+    this.isLoading = changes.tasks?.currentValue === null;
+  }
 }
 
 @NgModule({
-    imports: [DxDataGridModule, DxLoadPanelModule, CommonModule],
-    declarations: [CardTasksComponent],
-    exports: [CardTasksComponent],
+  imports: [DxDataGridModule, DxLoadPanelModule, CommonModule],
+  declarations: [CardTasksComponent],
+  exports: [CardTasksComponent],
 })
 export class CardTasksModule { }

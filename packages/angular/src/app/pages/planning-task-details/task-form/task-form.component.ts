@@ -1,5 +1,5 @@
 import {
- Component, OnInit, NgModule, Input, SimpleChanges, OnChanges,
+  Component, OnInit, NgModule, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {

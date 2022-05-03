@@ -17,9 +17,6 @@ export class CardActivitiesComponent implements OnInit, OnChanges {
 
   isLoading = true;
 
-  constructor() {
-  }
-
   ngOnInit() {
     this.isLoading = !this.activities;
   }

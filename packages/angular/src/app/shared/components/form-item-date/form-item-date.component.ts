@@ -1,5 +1,5 @@
 import {
- Component, EventEmitter, Input, NgModule, Output, ViewChild,
+  Component, EventEmitter, Input, NgModule, Output, ViewChild,
 } from '@angular/core';
 import {
   DxCalendarModule,

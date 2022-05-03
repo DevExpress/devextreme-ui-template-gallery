@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
- Component, Input, NgModule, OnInit,
+  Component, Input, NgModule, OnInit,
 } from '@angular/core';
 import {
   DxTextAreaModule,
@@ -13,18 +13,12 @@ import { Notes, Note } from 'src/app/shared/types/notes';
   templateUrl: './card-notes.component.html',
   styleUrls: ['./card-notes.component.scss'],
 })
-export class CardNotesComponent implements OnInit {
+export class CardNotesComponent {
   @Input() user: string;
 
   @Input() items: Notes;
 
   nodeText = '';
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
   defaultText = () => {
     this.nodeText = '';

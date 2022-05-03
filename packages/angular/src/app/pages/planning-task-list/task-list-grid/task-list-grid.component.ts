@@ -1,5 +1,5 @@
 import {
- Component, OnInit, NgModule, ViewChild, EventEmitter, Output, Input, SimpleChanges, OnChanges,
+  Component, OnInit, NgModule, ViewChild, EventEmitter, Output, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';

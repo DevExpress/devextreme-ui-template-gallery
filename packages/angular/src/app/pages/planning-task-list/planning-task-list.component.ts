@@ -1,5 +1,5 @@
 import {
- Component, OnInit, NgModule, Output, ViewChild, OnDestroy,
+  Component, OnInit, NgModule, Output, ViewChild, OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {

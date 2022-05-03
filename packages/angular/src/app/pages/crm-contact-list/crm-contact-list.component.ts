@@ -1,5 +1,5 @@
 import {
- Component, ViewChild, OnInit, NgModule, OnDestroy,
+  Component, ViewChild, OnInit, NgModule, OnDestroy,
 } from '@angular/core';
 import {
   DxButtonModule,
