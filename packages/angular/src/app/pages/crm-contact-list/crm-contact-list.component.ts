@@ -16,8 +16,8 @@ import { Contact, contactStatusList, ContactStatus } from 'src/app/shared/types/
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
-import { UserPanelModule } from './user-panel/user-panel.component';
 import { Subscription } from 'rxjs';
+import { UserPanelModule } from './user-panel/user-panel.component';
 
 @Component({
   templateUrl: './crm-contact-list.component.html',
@@ -29,7 +29,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
 
   statuses = contactStatusList;
 
-  isPanelOpen: boolean = false;
+  isPanelOpen = false;
 
   userId: number;
 
@@ -87,7 +87,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     const { value } = cellInfo;
 
     return this.formatPhone(value.toString());
-  }
+  };
 }
 
 @NgModule({

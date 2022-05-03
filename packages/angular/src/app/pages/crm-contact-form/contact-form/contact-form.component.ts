@@ -31,15 +31,15 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   statusList = contactStatusList.slice(1);
 
-  isEditing: boolean = false;
+  isEditing = false;
 
-  isLoading: boolean = true;
+  isLoading = true;
 
   stylingMode: TextBoxProperties['stylingMode'] = 'underlined';
 
   editorOptions: TextBoxProperties = { stylingMode: this.stylingMode };
 
-  contactSubscription: Subscription = new Subscription();  
+  contactSubscription: Subscription = new Subscription();
 
   constructor() {
   }

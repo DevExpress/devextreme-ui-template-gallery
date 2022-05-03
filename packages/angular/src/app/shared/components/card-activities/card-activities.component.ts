@@ -15,7 +15,7 @@ export class CardActivitiesComponent implements OnInit, OnChanges {
 
   @Input() showBy? = false;
 
-  isLoading: boolean = true;
+  isLoading = true;
 
   constructor() {
   }

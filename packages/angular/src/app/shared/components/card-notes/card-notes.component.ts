@@ -18,7 +18,7 @@ export class CardNotesComponent implements OnInit {
 
   @Input() items: Notes;
 
-  nodeText: string = '';
+  nodeText = '';
 
   constructor() {
   }

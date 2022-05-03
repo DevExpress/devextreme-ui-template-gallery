@@ -31,7 +31,7 @@ import { Contact } from 'src/app/shared/types/contact';
   providers: [RwaService],
 })
 export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() isOpen: boolean = false;
+  @Input() isOpen = false;
 
   @Input() userId: number;
 
@@ -39,13 +39,13 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   user: Contact;
 
-  isLoading: boolean = true;
-  
-  isEditing: boolean = false;
+  isLoading = true;
 
-  isPin: boolean = false;
+  isEditing = false;
 
-  isPinEnabled: boolean = false;
+  isPin = false;
+
+  isPinEnabled = false;
 
   stylingMode: TextBoxProperties['stylingMode'] = 'underlined';
 
@@ -71,7 +71,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.userPanelSubscriptions.forEach(sub => sub.unsubscribe());
+    this.userPanelSubscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   loadUserById = (id: number) => {
@@ -85,11 +85,11 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
   closePanel = () => {
     this.isOpen = false;
     this.isOpenChange.emit(this.isOpen);
-  }
+  };
 
   pinClick = () => {
     this.isPin = !this.isPin;
-  }
+  };
 
   calculatePin = () => {
     this.isPinEnabled = this.screen.sizes['screen-large'] || this.screen.sizes['screen-medium'];

@@ -42,7 +42,7 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadData();
   }
-  
+
   ngOnDestroy(): void {
     this.dataSubscription.unsubscribe();
   }

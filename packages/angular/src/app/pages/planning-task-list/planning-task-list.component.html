@@ -4,7 +4,11 @@
       <span class="toolbar-header">Task</span>
     </dxi-item>
     <dxi-item location="before">
-      <dx-tabs [selectedIndex]="0" [items]="tabPanelItems" (onItemClick)="tabValueChange($event)"></dx-tabs>
+      <dx-tabs
+        [selectedIndex]="0"
+        [items]="tabPanelItems"
+        (onItemClick)="tabValueChange($event)"
+      ></dx-tabs>
     </dxi-item>
 
     <dxi-item
@@ -13,10 +17,19 @@
       locateInMenu="auto"
       cssClass="add-grid-row"
     >
-      <dx-button icon="plus" text="Add Task" type="default" stylingMode="contained" (onClick)="addDataGridRow()"></dx-button>
+      <dx-button
+        icon="plus"
+        text="Add Task"
+        type="default"
+        stylingMode="contained"
+        (onClick)="addDataGridRow()"
+      ></dx-button>
     </dxi-item>
 
-    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto"
+    <dxi-item
+      [visible]="displayGrid"
+      location="after"
+      locateInMenu="auto"
       widget="dxButton"
       showText="inMenu"
       [options]="{
@@ -26,7 +39,10 @@
       }"
     ></dxi-item>
 
-    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto"
+    <dxi-item
+      [visible]="displayGrid"
+      location="after"
+      locateInMenu="auto"
       widget="dxButton"
       showText="inMenu"
       [options]="{

@@ -34,7 +34,10 @@
             (onAdd)="onTaskDrop($event)"
           >
             <ng-container *ngFor="let task of board.cards">
-              <task-kanban-card class="dx-card" [task]="task"></task-kanban-card>
+              <task-kanban-card
+                class="dx-card"
+                [task]="task"
+              ></task-kanban-card>
             </ng-container>
           </dx-sortable>
 

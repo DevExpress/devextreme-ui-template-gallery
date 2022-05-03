@@ -1,10 +1,6 @@
 <div id="task-form">
   <dx-toolbar>
-    <dxi-item
-      location="after"
-      locateInMenu="after"
-      [visible]="!isEditing"
-    >
+    <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
       <dx-button
         text="Edit"
         icon="edit"
@@ -13,11 +9,7 @@
         (onClick)="toggleEdit()"
       ></dx-button>
     </dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="after"
-      [visible]="isEditing"
-    >
+    <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
       <dx-button
         text="Save"
         stylingMode="outlined"
@@ -25,29 +17,20 @@
         (onClick)="toggleEdit()"
       ></dx-button>
     </dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="after"
-      [visible]="isEditing"
-    >
+    <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
       <dx-button text="Cancel" (onClick)="toggleEdit()"></dx-button>
     </dxi-item>
   </dx-toolbar>
-  
+
   <div *ngIf="isLoading; then displayLoadPanel; else displayForm"></div>
   <ng-template #displayForm>
-
-    <dx-form
-      [formData]="task"
-      labelMode="floating"
-      [readOnly]="!isEditing"
-    >
+    <dx-form [formData]="task" labelMode="floating" [readOnly]="!isEditing">
       <dxi-item
         dataField="name"
         dataField="text"
         [visible]="isEditing"
       ></dxi-item>
-      
+
       <dxi-item itemType="group" caption="Details" [colCount]="2">
         <dxi-item
           dataField="company"

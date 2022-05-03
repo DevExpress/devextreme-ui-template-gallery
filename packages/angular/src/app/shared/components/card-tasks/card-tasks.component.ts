@@ -20,7 +20,7 @@ export class CardTasksComponent implements OnInit, OnChanges {
 
     @Input() manager: string;
 
-    isLoading: boolean = true;
+    isLoading = true;
 
     constructor() {
     }

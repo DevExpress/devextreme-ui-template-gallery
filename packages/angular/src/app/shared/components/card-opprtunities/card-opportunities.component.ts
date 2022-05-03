@@ -19,11 +19,11 @@ export class CardOpportunitiesComponent implements OnInit, OnChanges {
 
     @Input() closed: Activities;
 
-    messageToast: string = '';
+    messageToast = '';
 
-    isLoading: boolean = true;
+    isLoading = true;
 
-    isVisibleToast: boolean = false;
+    isVisibleToast = false;
 
     constructor() {
     }

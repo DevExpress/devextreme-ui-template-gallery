@@ -2,11 +2,7 @@
   <div *ngIf="isLoading; then displayLoadPanel; else displayForm"></div>
   <ng-template #displayForm>
     <dx-toolbar>
-      <dxi-item
-        location="after"
-        locateInMenu="after"
-        [visible]="!isEditing"
-      >
+      <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
         <dx-button
           text="Edit"
           icon="edit"
@@ -15,11 +11,7 @@
           (onClick)="toggleEdit()"
         ></dx-button>
       </dxi-item>
-      <dxi-item
-        location="after"
-        locateInMenu="after"
-        [visible]="isEditing"
-      >
+      <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
         <dx-button
           text="Save"
           stylingMode="outlined"
@@ -27,11 +19,7 @@
           (onClick)="toggleEdit()"
         ></dx-button>
       </dxi-item>
-      <dxi-item
-        location="after"
-        locateInMenu="after"
-        [visible]="isEditing"
-      >
+      <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
         <dx-button text="Cancel" (onClick)="toggleEdit()"></dx-button>
       </dxi-item>
     </dx-toolbar>
@@ -43,10 +31,7 @@
       [readOnly]="!isEditing"
     >
       <dxi-item itemType="group" [colCount]="2" caption="Details">
-        <dxi-item
-          dataField="image"
-          template="photo"
-        ></dxi-item>
+        <dxi-item dataField="image" template="photo"></dxi-item>
         <dxi-item itemType="group">
           <dxi-item
             dataField="status"
@@ -81,7 +66,7 @@
           [colSpan]="2"
         ></dxi-item>
       </dxi-item>
-  
+
       <dxi-item itemType="group" [colCount]="4" caption="Contacts">
         <dxi-item
           dataField="address"
@@ -93,10 +78,7 @@
           [editorOptions]="editorOptions"
           [colSpan]="2"
         ></dxi-item>
-        <dxi-item
-          dataField="state.stateShort"
-          [editorOptions]="editorOptions"
-        >
+        <dxi-item dataField="state.stateShort" [editorOptions]="editorOptions">
           <dxo-label text="State"></dxo-label>
         </dxi-item>
         <dxi-item
@@ -117,14 +99,14 @@
           [colSpan]="2"
         ></dxi-item>
       </dxi-item>
-  
+
       <div *dxTemplate="let data of 'blue'">
         <form-item-blue
           [label]="data.editorOptions.label"
           [value]="data.editorOptions.value"
         ></form-item-blue>
       </div>
-  
+
       <div *dxTemplate="let data of 'statusField'">
         <div class="info">
           <label class="dx-texteditor-label">{{
@@ -133,7 +115,7 @@
           <contact-status [value]="data.editorOptions.value"></contact-status>
         </div>
       </div>
-  
+
       <div *dxTemplate="let data of 'statusEditing'">
         <dx-select-box
           [(value)]="contact$.status"
@@ -149,20 +131,19 @@
               <dx-text-box [readOnly]="true"></dx-text-box>
             </div>
           </div>
-  
+
           <div *dxTemplate="let data of 'item'">
             <contact-status [value]="data"></contact-status>
           </div>
         </dx-select-box>
       </div>
-  
+
       <div *dxTemplate="let data of 'photo'">
         <form-item-photo
           [link]="data.editorOptions.value"
           [size]="184"
         ></form-item-photo>
       </div>
-  
     </dx-form>
   </ng-template>
 

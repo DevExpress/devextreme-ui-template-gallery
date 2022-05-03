@@ -19,9 +19,9 @@ export class CardMessagesComponent implements OnInit {
 
   @Input() items: Messages;
 
-  messageTitle: string = '';
+  messageTitle = '';
 
-  messageText: string = '';
+  messageText = '';
 
   constructor() {
   }
@@ -57,7 +57,7 @@ export class CardMessagesComponent implements OnInit {
     this.items.push(newMessage);
 
     this.defaultText();
-  }; 
+  };
 }
 
 @NgModule({

@@ -1,5 +1,5 @@
 import {
- Component, Input, NgModule, OnInit,
+ Component, Input, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactStatus } from 'src/app/shared/types/contact';
@@ -9,15 +9,12 @@ import { ContactStatus } from 'src/app/shared/types/contact';
   templateUrl: './contact-status.component.html',
   styleUrls: ['./contact-status.component.scss'],
 })
-export class ContactStatusComponent implements OnInit {
+export class ContactStatusComponent {
   @Input() value: ContactStatus;
 
   @Input() input?: boolean = false;
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 }
 

@@ -32,13 +32,13 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   priorityList = taskPriorityList;
 
-  isEditing: boolean = false;
+  isEditing = false;
 
-  isLoading: boolean = true;
+  isLoading = true;
 
-  isEmptyStartDate: boolean = true;
+  isEmptyStartDate = true;
 
-  isEmptyDueDate: boolean = true;
+  isEmptyDueDate = true;
 
   stylingMode: TextBoxProperties['stylingMode'] = 'underlined';
 

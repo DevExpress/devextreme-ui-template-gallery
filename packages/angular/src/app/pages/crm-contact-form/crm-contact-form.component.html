@@ -7,7 +7,11 @@
       <div class="toolbar-header">{{ (contact$ | async)?.name }}</div>
     </dxi-item>
     <dxi-item location="after" locateInMenu="auto">
-      <dx-button text="Terminate" type="default" stylingMode="contained"></dx-button>
+      <dx-button
+        text="Terminate"
+        type="default"
+        stylingMode="contained"
+      ></dx-button>
     </dxi-item>
     <dxi-item location="after" locateInMenu="auto">
       <dx-drop-down-button
@@ -20,7 +24,8 @@
     <dxi-item location="after" locateInMenu="auto">
       <div class="separator"></div>
     </dxi-item>
-    <dxi-item location="after"
+    <dxi-item
+      location="after"
       locateInMenu="auto"
       widget="dxButton"
       showText="inMenu"
@@ -29,7 +34,8 @@
         icon: 'copy'
       }"
     ></dxi-item>
-    <dxi-item location="after"
+    <dxi-item
+      location="after"
       locateInMenu="auto"
       widget="dxButton"
       showText="inMenu"

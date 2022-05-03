@@ -12,7 +12,10 @@
             <contact-status [value]="user.status"></contact-status>
           </dxi-item>
           <dxi-item location="after" [visible]="isPinEnabled">
-            <dx-button [icon]="isPin ? 'unpin' : 'pin'" (onClick)="pinClick($event)"></dx-button>
+            <dx-button
+              [icon]="isPin ? 'unpin' : 'pin'"
+              (onClick)="pinClick($event)"
+            ></dx-button>
           </dxi-item>
           <dxi-item location="after">
             <dx-button icon="close" (onClick)="closePanel($event)"></dx-button>
@@ -28,10 +31,7 @@
             [readOnly]="!isEditing"
           >
             <dxi-item itemType="group" [colCount]="2">
-              <dxi-item
-                dataField="image"
-                template="photo"
-              ></dxi-item>
+              <dxi-item dataField="image" template="photo"></dxi-item>
 
               <dxi-item itemType="group">
                 <dxi-item
@@ -95,7 +95,7 @@
             </div>
 
             <div *dxTemplate="let data of 'editorByIcon'" class="icon-editor">
-              <i class="dx-icon dx-icon-{{data.editorOptions.icon}}"></i>
+              <i class="dx-icon dx-icon-{{ data.editorOptions.icon }}"></i>
               <dx-text-box
                 [(value)]="user[data.dataField]"
                 [stylingMode]="data.editorOptions.stylingMode"
@@ -103,7 +103,6 @@
                 [readOnly]="!isEditing"
               ></dx-text-box>
             </div>
-
           </dx-form>
         </div>
 

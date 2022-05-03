@@ -1,4 +1,6 @@
-import { Component, OnInit, NgModule, OnDestroy } from '@angular/core';
+import {
+ Component, OnInit, NgModule, OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -15,9 +17,9 @@ import { forkJoin, Observable, Subscription } from 'rxjs';
 import { Contact } from 'src/app/shared/types/contact';
 import { Messages } from 'src/app/shared/types/messages';
 import { Notes } from 'src/app/shared/types/notes';
+import { Opportunities } from 'src/app/shared/types/opportunities';
 import { ContactFormModule } from './contact-form/contact-form.component';
 import { ContactCardsModule } from './contact-cards/contact-cards.component';
-import { Opportunities } from 'src/app/shared/types/opportunities';
 
 @Component({
   templateUrl: './crm-contact-form.component.html',
@@ -71,7 +73,7 @@ export class CrmContactFormComponent implements OnInit, OnDestroy {
 
   formatPhone = (number: string | number) => String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
 
-  getSizeQualifier = (width: number) => width < 415 ? 'xs' : 'lg';
+  getSizeQualifier = (width: number) => (width < 415 ? 'xs' : 'lg');
 }
 
 @NgModule({
