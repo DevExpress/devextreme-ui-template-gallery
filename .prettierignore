@@ -1,0 +1,8 @@
+*.js
+*.mjs
+*.ts
+*.vue
+*.css
+*.md
+*.json
+.github
