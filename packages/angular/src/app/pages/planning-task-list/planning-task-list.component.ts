@@ -5,13 +5,11 @@ import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
   DxDataGridModule,
-  DxDropDownButtonModule,
   DxTabsModule,
   DxToolbarModule,
 } from 'devextreme-angular';
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
-import { ItemClickEvent as DropDownButtonItemClickEvent } from 'devextreme/ui/drop_down_button';
 import { tabPanelItems } from 'src/app/shared/types/resource';
 import { Task } from 'src/app/shared/types/task';
 import { RwaService } from 'src/app/shared/services';
@@ -65,14 +63,13 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
   searchDataGrid = (e: TextBoxInputEvent) => this.dataGrid.search(e.component.option('text'));
 
-  exportDataGrid = (e: DropDownButtonItemClickEvent) => this.dataGrid.onExporting(e.itemData.text.includes('selected'));
+  exportDataGrid = () => this.dataGrid.onExporting();
 }
 
 @NgModule({
   imports: [
     DxButtonModule,
     DxDataGridModule,
-    DxDropDownButtonModule,
     DxTabsModule,
     DxToolbarModule,
 

@@ -19,11 +19,11 @@ import {
   TaskProirityModule,
   TaskStatusModule,
 } from 'src/app/shared/components';
-import { exportDataGrid } from 'devextreme/excel_exporter';
-import { Workbook } from 'exceljs';
-import { saveAs } from 'file-saver-es';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
+import { jsPDF } from 'jspdf';
 import { taskPriorityList, taskStatusList } from 'src/app/shared/types/task';
 import { Task } from 'src/app/shared/types/task';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'task-list-grid',
@@ -45,19 +45,13 @@ export class TaskListGridComponent implements OnChanges {
 
   @Output() search = (text: string) => this.component.instance.searchByText(text);
 
-  @Output() onExporting = (selectedRowsOnly: boolean) => {
-    const workbook = new Workbook();
-    const worksheet = workbook.addWorksheet('Employees');
-
+  @Output() onExporting = () => {
+    const doc = new jsPDF();
     exportDataGrid({
+      jsPDFDocument: doc,
       component: this.component.instance,
-      worksheet,
-      autoFilterEnabled: true,
-      selectedRowsOnly,
     }).then(() => {
-      workbook.xlsx.writeBuffer().then((buffer) => {
-        saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
-      });
+      doc.save('Tasks.pdf');
     });
   };
 
