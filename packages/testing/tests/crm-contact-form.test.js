@@ -18,9 +18,12 @@ packages.forEach((pkg) => {
       test(`Crm contact form (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
+        await t.resizeWindow(...screenMode);
+
         await t.navigateTo(`http://localhost:${pkg.port}/#/crm-contact-form`);
 
-        await t.resizeWindow(...screenMode);
+        await t.resizeWindow(...screenMode.map((value) => value + 1));
+        await t.resizeWindow(...screenMode.map((value) => value - 1));
 
         await setEmbeddedMode(embedded);
 
