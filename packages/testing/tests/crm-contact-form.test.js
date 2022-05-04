@@ -23,7 +23,7 @@ packages.forEach((pkg) => {
         await t.navigateTo(`http://localhost:${pkg.port}/#/crm-contact-form`);
 
         await t.resizeWindow(...screenMode.map((value) => value + 1));
-        await t.resizeWindow(...screenMode.map((value) => value - 1));
+        await t.resizeWindow(...screenMode);
 
         await setEmbeddedMode(embedded);
 
