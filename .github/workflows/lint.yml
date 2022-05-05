@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PROJECT: [ angular, react, vue, js ]
+        PROJECT: [ angular, react, vue, js, html, css ]
 
     runs-on: ubuntu-latest
     name: Lint ${{ matrix.PROJECT }}

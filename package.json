@@ -13,7 +13,6 @@
     "lint-fix": "prettier --write . && eslint --fix . && stylelint **/*.{css,vue} --fix",
     "lint-css": "stylelint **/*.{css,vue}",
     "lint-css-fix": "stylelint --fix **/*.{css,vue}",
-    "lint": "npm-run-all -p -c lint-js lint-css lint-html",
     "lint-angular": "eslint packages/angular",
     "lint-react": "eslint packages/react",
     "lint-vue": "eslint packages/vue",
