@@ -86,15 +86,12 @@
       ></dxi-item>
       <dxi-item
         dataField="phone"
-        [editorOptions]="{
-          stylingMode: stylingMode,
-          mask: '+1(000)000-0000'
-        }"
+        template="phone"
         [colSpan]="2"
       ></dxi-item>
       <dxi-item
         dataField="email"
-        [editorOptions]="editorOptions"
+        template="email"
         [colSpan]="2"
       ></dxi-item>
     </dxi-item>
@@ -151,6 +148,41 @@
           <contact-status [value]="data"></contact-status>
         </div>
       </dx-select-box>
+    </div>
+
+    <div *dxTemplate="let data of 'phone'">
+      <form-item-with-button
+        [(value)]="contact$.phone"
+        [isEditing]="isEditing"
+        [textBoxOptions]="{
+          label: data.editorOptions.label,
+          stylingMode: stylingMode,
+          mask: '+1(000)000-0000'
+        }"
+        [buttonOptions]="{
+          text: 'Call',
+          icon: 'tel',
+          type: 'default',
+          stylingMode: 'outlined'
+        }"
+      ></form-item-with-button>
+    </div>
+
+    <div *dxTemplate="let data of 'email'">
+      <form-item-with-button
+        [(value)]="contact$.email"
+        [isEditing]="isEditing"
+        [textBoxOptions]="{
+          label: data.editorOptions.label,
+          stylingMode: stylingMode
+        }"
+        [buttonOptions]="{
+          text: 'Send Email',
+          icon: 'email',
+          type: 'default',
+          stylingMode: 'outlined'
+        }"
+      ></form-item-with-button>
     </div>
   </dx-form>
 
