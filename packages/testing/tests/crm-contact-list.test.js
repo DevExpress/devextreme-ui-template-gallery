@@ -21,10 +21,11 @@ packages.forEach(pkg => {
                 await setEmbeddedMode(embedded);
                 await t.expect(Selector('body.dx-device-generic').count).eql(1);
                 await t.expect(Selector('tr.dx-data-row').count).eql(16);
-                await takeScreenshot(`crm-contact-list-${pkg.name}-embed=${embedded}-1-${screenMode[0]}`, 'body');
+                await takeScreenshot(`crm-contact-list-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
+
                 await t.click('tr.dx-data-row:first-child');
                 await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
-                await takeScreenshot(`crm-contact-list-${pkg.name}-embed=${embedded}-2-${screenMode[0]}`, 'body');
+                await takeScreenshot(`crm-contact-list-form-${pkg.name}-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
 
                 await t
                     .expect(compareResults.isValid())

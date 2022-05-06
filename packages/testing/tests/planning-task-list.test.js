@@ -20,9 +20,9 @@ packages.forEach(pkg => {
                 await t.navigateTo(`http://localhost:${pkg.port}/#/planning-task-list`);
                 await setEmbeddedMode(embedded);
                 await t.expect(Selector('body.dx-device-generic').count).eql(1);
-                await takeScreenshot(`planning-task-list-${pkg.name}-embed=${embedded}-1-${screenMode[0]}`, 'body');
+                await takeScreenshot(`planning-task-grid-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
                 await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1))
-                await takeScreenshot(`planning-task-list-${pkg.name}-embed=${embedded}-2-${screenMode[0]}`, 'body');
+                await takeScreenshot(`planning-task-kanban-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
 
                 await t
                     .expect(compareResults.isValid())

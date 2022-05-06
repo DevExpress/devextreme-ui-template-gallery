@@ -22,9 +22,6 @@ packages.forEach((pkg) => {
 
         await t.navigateTo(`http://localhost:${pkg.port}/#/crm-contact-form`);
 
-        await t.resizeWindow(...screenMode.map((value) => value + 1));
-        await t.resizeWindow(...screenMode);
-
         await setEmbeddedMode(embedded);
 
         if (embedded) {
@@ -35,9 +32,31 @@ packages.forEach((pkg) => {
         }
 
         await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
-        await takeScreenshot(`crm-contact-form-${pkg.name}-embed=${embedded}-1-${screenMode[0]}`, 'body');
+        await takeScreenshot(`crm-contact-form-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
+
+        await t
+          .expect(compareResults.isValid())
+          .ok(compareResults.errorMessages());
+      });
+
+      test(`Crm contact form Form (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async(t) => {
+        const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+
+        await t.resizeWindow(...screenMode);
+
+        await t.navigateTo(`http://localhost:${pkg.port}/#/crm-contact-form`);
+
+        await setEmbeddedMode(embedded);
+
+        if (embedded) {
+          await t.click('.dx-icon-refresh');
+        }
+
+        const form = Selector('.dx-form');
+
+        await takeScreenshot(`crm-form-readonly-${pkg.name}-embed=${embedded}-${screenMode[0]}`, form);
         await t.click(Selector('.dx-button[aria-label=Edit]'));
-        await takeScreenshot(`crm-contact-form-${pkg.name}-embed=${embedded}-2-${screenMode[0]}`, 'body');
+        await takeScreenshot(`crm-form-edit-${pkg.name}-embed=${embedded}-${screenMode[0]}`, form);
 
         await t
           .expect(compareResults.isValid())
@@ -58,11 +77,17 @@ packages.forEach((pkg) => {
         }
 
         await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
-        await t.expect(Selector('.dx-datagrid .dx-checkbox-indeterminate').exists).ok();
 
-        for (let i = 0; i < 5; i += 1) {
-          await t.click(Selector('.dx-tab').nth(i));
-          await takeScreenshot(`crm-contact-form-tab-${i}-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
+        const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
+        const tabPanels = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel]');
+
+        const tabsCount = await tabs.count;
+        for(let indexTab = 0; indexTab < tabsCount; indexTab += 1) {
+            const tab = tabs.nth(indexTab);
+            const tabName = (await tab.innerText).toLowerCase();
+
+            await t.click(tab);
+            await takeScreenshot(`crm-form-tab-${tabName}-${pkg.name}-embed=${embedded}-${screenMode[0]}`, tabPanels.nth(indexTab));
         }
 
         await t
