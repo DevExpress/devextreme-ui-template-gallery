@@ -18,7 +18,11 @@ packages.forEach(pkg => {
                 await t.resizeWindow(...screenMode);
 
                 await t.navigateTo(`http://localhost:${pkg.port}/#/planning-task-list`);
+
                 await setEmbeddedMode(embedded);
+
+                await t.wait(5000);
+
                 await t.expect(Selector('body.dx-device-generic').count).eql(1);
                 await takeScreenshot(`planning-task-grid-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
                 await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1))

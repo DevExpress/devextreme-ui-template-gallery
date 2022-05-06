@@ -18,6 +18,7 @@ packages.forEach(pkg => {
         await t.resizeWindow(...screenMode);
 
         await t.navigateTo(`http://localhost:${pkg.port}/#/planning-task-details`);
+
         await setEmbeddedMode(embedded);
 
         if(embedded) {
@@ -25,6 +26,8 @@ packages.forEach(pkg => {
             await t.click('.view-wrapper .dx-icon-overflow');
           }
         }
+
+        await t.wait(5000);
 
         await t.expect(Selector('.toolbar-header').withText('Call to clarify customer requirements.').exists).ok();
         await takeScreenshot(`planning-task-details-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
@@ -47,6 +50,8 @@ packages.forEach(pkg => {
           await t.click('.dx-icon-refresh');
         }
 
+        await t.wait(5000);
+
         const form = Selector('.dx-form');
 
         await takeScreenshot(`planning-task-form-readonly-${pkg.name}-embed=${embedded}-${screenMode[0]}`, form);
@@ -65,7 +70,10 @@ packages.forEach(pkg => {
         await t.resizeWindow(...screenMode);
 
         await t.navigateTo(`http://localhost:${pkg.port}/#/planning-task-details`);
+
         await setEmbeddedMode(embedded);
+
+        await t.wait(5000);
 
         await t.expect(Selector('.toolbar-header').withText('Call to clarify customer requirements.').exists).ok();
 

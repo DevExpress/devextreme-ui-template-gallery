@@ -31,6 +31,8 @@ packages.forEach((pkg) => {
           await t.click('.dx-icon-refresh');
         }
 
+        await t.wait(5000);
+
         await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
         await takeScreenshot(`crm-contact-form-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
 
@@ -52,6 +54,8 @@ packages.forEach((pkg) => {
           await t.click('.dx-icon-refresh');
         }
 
+        await t.wait(5000);
+
         const form = Selector('.dx-form');
 
         await takeScreenshot(`crm-form-readonly-${pkg.name}-embed=${embedded}-${screenMode[0]}`, form);
@@ -70,11 +74,14 @@ packages.forEach((pkg) => {
         await t.resizeWindow(...screenMode);
 
         await t.navigateTo(`http://localhost:${pkg.port}/#/crm-contact-form`);
+
         await setEmbeddedMode(embedded);
 
         if (embedded) {
           await t.click('.dx-icon-refresh');
         }
+
+        await t.wait(5000);
 
         await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
 
