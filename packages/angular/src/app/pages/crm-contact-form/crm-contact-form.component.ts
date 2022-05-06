@@ -39,7 +39,9 @@ export class CrmContactFormComponent implements OnInit, OnDestroy {
 
   closedOpportunities: Opportunities;
 
-  contactSubscription: Subscription = new Subscription();
+  contactName: string;
+
+  subscriptions: Subscription[] = [];
 
   loadData = () => {
     this.contact$ = this.service.getContact(this.contactId);
@@ -51,9 +53,13 @@ export class CrmContactFormComponent implements OnInit, OnDestroy {
       closedOpportunities: this.service.getClosedContactOpportunities(this.contactId),
     });
 
-    this.contactSubscription = observable.subscribe((data) => {
+    this.subscriptions.push(this.contact$.subscribe((data) => {
+      this.contactName = data.name;
+    }));
+
+    this.subscriptions.push(observable.subscribe((data) => {
       Object.keys(data).forEach((key) => this[key] = data[key]);
-    });
+    }));
   };
 
   constructor(private service: RwaService) {
@@ -64,7 +70,7 @@ export class CrmContactFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.contactSubscription.unsubscribe();
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   refresh = () => {

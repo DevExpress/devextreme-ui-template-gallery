@@ -1,4 +1,4 @@
-@use "../../../variables" as *;
+@use "../../../variables.scss" as *;
 @use "sass:math";
 
 $left-panel-width: 400px;
@@ -10,13 +10,9 @@ $left-panel-width: 400px;
   padding: 20px 16px 0 16px;
 }
 
-@include separator();
-
-::ng-deep {
-  .dx-toolbar {
-    .toolbar-header {
-      @include header();
-    }
+.dx-toolbar ::ng-deep {
+  .dx-toolbar-label > div {
+    @include header();
   }
 }
 
@@ -37,10 +33,5 @@ $left-panel-width: 400px;
       flex: 1 calc(100% - 400px - 20px);
       min-width: 360px;
     }
-  }
-
-  .panels-header {
-    font-size: 16px;
-    font-weight: 700;
   }
 }

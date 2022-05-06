@@ -3,9 +3,10 @@
     <dxi-item location="before">
       <dx-button icon="arrowleft"></dx-button>
     </dxi-item>
-    <dxi-item location="before">
-      <span class="toolbar-header">{{ task?.text }}</span>
-    </dxi-item>
+    <dxi-item
+      location="before"
+      [text]="taskName"
+    ></dxi-item>
 
     <dxi-item location="after" locateInMenu="auto">
       <dx-drop-down-button text="ACTIONS" stylingMode="contained">

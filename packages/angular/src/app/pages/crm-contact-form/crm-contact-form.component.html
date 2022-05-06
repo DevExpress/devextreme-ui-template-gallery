@@ -3,9 +3,10 @@
     <dxi-item location="before">
       <dx-button icon="arrowleft"></dx-button>
     </dxi-item>
-    <dxi-item location="before">
-      <div class="toolbar-header">{{ (contact$ | async)?.name }}</div>
-    </dxi-item>
+    <dxi-item
+      location="before"
+      [text]="contactName"
+    ></dxi-item>
     <dxi-item location="after" locateInMenu="auto">
       <dx-button
         text="Terminate"

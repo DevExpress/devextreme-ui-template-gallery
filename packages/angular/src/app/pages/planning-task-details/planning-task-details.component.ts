@@ -30,11 +30,14 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
 
   taskId = 1;
 
+  taskName: string;
+
   dataSubscription: Subscription = new Subscription();
 
   loadData = () => {
     this.dataSubscription = this.service.getTask(this.taskId).subscribe((data) => {
       this.task = data;
+      this.taskName = data.text;
     });
   };
 
