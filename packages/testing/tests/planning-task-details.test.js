@@ -12,7 +12,7 @@ const toogleEmbeddedClass = ClientFunction((embed) => {
 const setEmbedded = async (t, embed, screenMode) => {
   await toogleEmbeddedClass(embed);
 
-  if (embedded) {
+  if (embed) {
     if (screenMode[0] === 400) {
       await t.click('.view-wrapper .dx-icon-overflow');
     }
