@@ -24,7 +24,7 @@ packages.forEach(pkg => {
                 await t.wait(5000);
 
                 await t.expect(Selector('body.dx-device-generic').count).eql(1);
-                await t.expect(Selector('tr.dx-data-row').count).eql(16);
+                await t.expect(Selector('tr.dx-data-row').count).eql(18);
                 await takeScreenshot(`crm-contact-list-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
 
                 await t.click('tr.dx-data-row:first-child');

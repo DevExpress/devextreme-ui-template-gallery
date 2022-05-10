@@ -24,16 +24,9 @@ packages.forEach((pkg) => {
 
         await setEmbeddedMode(embedded);
 
-        if (embedded) {
-          if (screenMode[0] === 400) {
-            await t.click('.view-wrapper .dx-icon-overflow');
-          }
-          await t.click('.dx-icon-refresh');
-        }
-
         await t.wait(5000);
 
-        await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
+        await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
         await takeScreenshot(`crm-contact-form-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
 
         await t
@@ -50,10 +43,6 @@ packages.forEach((pkg) => {
 
         await setEmbeddedMode(embedded);
 
-        if (embedded) {
-          await t.click('.dx-icon-refresh');
-        }
-
         await t.wait(5000);
 
         const form = Selector('.dx-form');
@@ -68,7 +57,6 @@ packages.forEach((pkg) => {
       });
 
       test(`Crm contact form tabpanel (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
-        if (screenMode[0] === 400) return;
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
         await t.resizeWindow(...screenMode);
@@ -77,13 +65,7 @@ packages.forEach((pkg) => {
 
         await setEmbeddedMode(embedded);
 
-        if (embedded) {
-          await t.click('.dx-icon-refresh');
-        }
-
         await t.wait(5000);
-
-        await t.expect(Selector('.toolbar-header').withText('Sammy Hill').exists).ok();
 
         const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
         const tabPanels = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel]');
