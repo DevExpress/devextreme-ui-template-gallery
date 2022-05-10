@@ -54,6 +54,7 @@ packages.forEach(pkg => {
       });
 
       test(`Planning task details tabpanel (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async t => {
+        if(screenMode[0] === 400) return;
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
         await t.resizeWindow(...screenMode);
