@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, Input, NgModule,
+  Component, Input, NgModule, OnInit,
 } from '@angular/core';
 import { TaskStatus } from 'src/app/shared/types/task';
 
 @Component({
   selector: 'task-status',
   template: `
-  <span class="status status-{{ spaceToUnderscore(value) | lowercase }}">
+  <span class="status status-{{ undescoreValue | lowercase }}">
     {{ value }}
   </span>
   `,
@@ -33,8 +33,14 @@ import { TaskStatus } from 'src/app/shared/types/task';
   }
   `],
 })
-export class TaskStatusComponent {
+export class TaskStatusComponent implements OnInit {
   @Input() value: TaskStatus;
+
+  undescoreValue = '';
+
+  ngOnInit() {
+    this.undescoreValue = this.spaceToUnderscore(this.value);
+  }
 
   spaceToUnderscore = (value: TaskStatus) =>
     (value ? value.replace(/ /g, '-') : '');
