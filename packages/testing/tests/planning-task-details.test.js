@@ -4,10 +4,22 @@ import { packages, screenModes } from '../config.js';
 
 fixture`Form`;
 
-const setEmbeddedMode = ClientFunction((embed) => {
-    if(!embed) return;
-    window.document.getElementsByTagName('body')[0].classList.add('embedded');
+const toogleEmbeddedClass = ClientFunction((embed) => {
+  if (!embed) return;
+  window.document.getElementsByTagName('body')[0].classList.add('embedded');
 });
+
+const setEmbedded = async (t, embed, screenMode) => {
+  await toogleEmbeddedClass(embed);
+
+  if (embedded) {
+    if (screenMode[0] === 400) {
+      await t.click('.view-wrapper .dx-icon-overflow');
+    }
+
+    await t.click('.dx-icon-refresh');
+  }
+}
 
 packages.forEach(pkg => {
   [false, true].forEach(embedded => {
@@ -19,7 +31,7 @@ packages.forEach(pkg => {
 
         await t.navigateTo(`http://localhost:${pkg.port}/#/planning-task-details`);
 
-        await setEmbeddedMode(embedded);
+        await setEmbedded(t, embedded, screenMode);
 
         await t.wait(5000);
 
@@ -38,7 +50,7 @@ packages.forEach(pkg => {
 
         await t.navigateTo(`http://localhost:${pkg.port}/#/planning-task-details`);
 
-        await setEmbeddedMode(embedded);
+        await setEmbedded(t, embedded, screenMode);
 
         await t.wait(5000);
 
@@ -61,7 +73,7 @@ packages.forEach(pkg => {
 
         await t.navigateTo(`http://localhost:${pkg.port}/#/planning-task-details`);
 
-        await setEmbeddedMode(embedded);
+        await setEmbedded(t, embedded, screenMode);
 
         await t.wait(5000);
 
