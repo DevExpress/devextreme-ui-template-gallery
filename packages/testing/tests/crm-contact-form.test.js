@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import { Selector, ClientFunction } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { packages, screenModes } from '../config.js';
+import { packages, screenModes, timeoutSecond } from '../config.js';
 
 fixture`Form`;
 
@@ -36,7 +36,7 @@ packages.forEach((pkg) => {
 
         await setEmbedded(t, embedded, screenMode);
 
-        await t.wait(5000);
+        await t.wait(timeoutSecond);
 
         await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
         await takeScreenshot(`crm-contact-form-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');
@@ -55,7 +55,7 @@ packages.forEach((pkg) => {
 
         await setEmbedded(t, embedded, screenMode);
 
-        await t.wait(5000);
+        await t.wait(timeoutSecond);
 
         const form = Selector('.dx-form');
 
@@ -78,7 +78,7 @@ packages.forEach((pkg) => {
 
         await setEmbedded(t, embedded, screenMode);
 
-        await t.wait(5000);
+        await t.wait(timeoutSecond);
 
         const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
         const tabPanels = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel]');

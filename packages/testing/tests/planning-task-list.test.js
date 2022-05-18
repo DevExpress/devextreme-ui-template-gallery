@@ -1,6 +1,6 @@
 import { Selector, ClientFunction  } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { packages, screenModes } from '../config.js';
+import { packages, screenModes, timeoutSecond } from '../config.js';
 
 fixture`Planning List`;
 
@@ -21,7 +21,7 @@ packages.forEach(pkg => {
 
                 await setEmbeddedMode(embedded);
 
-                await t.wait(5000);
+                await t.wait(timeoutSecond);
 
                 await t.expect(Selector('body.dx-device-generic').count).eql(1);
                 await takeScreenshot(`planning-task-grid-${pkg.name}-embed=${embedded}-${screenMode[0]}`, 'body');

@@ -1,6 +1,6 @@
 import { Selector, ClientFunction  } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { packages, screenModes } from '../config.js';
+import { packages, screenModes, timeoutSecond } from '../config.js';
 
 fixture`List`;
 
@@ -21,7 +21,7 @@ packages.forEach(pkg => {
 
                 await setEmbeddedMode(embedded);
 
-                await t.wait(5000);
+                await t.wait(timeoutSecond);
 
                 await t.expect(Selector('body.dx-device-generic').count).eql(1);
                 await t.expect(Selector('tr.dx-data-row').count).eql(embedded ? 18 : 16);
