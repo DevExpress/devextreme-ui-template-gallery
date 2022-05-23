@@ -34,10 +34,10 @@ To run these projects on your machine, clone this repository and follow the inst
 3. Navigate to [http://localhost:4200/](http://localhost:4200/). 
     The project in default mode includes a navigation menu at the left. To navigate between patterns in embedded mode, use the following links:
 
-    /crm-contact-form - CRM Contact Form
+    /crm-contact-form - CRM. Contact Form.
 
-    /crm-contact-list - CRM Contact List
+    /crm-contact-list - CRM. Contact List.
 
-    /planning-task-list - Planning task list
+    /planning-task-list - Planning. Task list.
 
-    /planning-task-details - Planning task details
+    /planning-task-details - Planning. Task details.
