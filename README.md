@@ -2,11 +2,7 @@
 
 Devextreme UI Template Gallery is a repository with a real-word application demo. This demo illustrates how to integrate various DevExtreme UI components into a web application. The projects in this repository includes the CRM and Project Management UI/UX patterns with source code for Angular.
 
-[note]
-
-Vue and React projects are under development.
-
-[/note]
+[note] Vue and React projects are under development.
 
 ![Devextreme UI Template Gallery](/images/ui-template-gallery.png)
 
