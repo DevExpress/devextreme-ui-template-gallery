@@ -1,6 +1,6 @@
 # Devextreme UI Template Gallery
 
-Devextreme UI Template Gallery is a repository with a real-word application demo. This demo illustrates how to integrate various DevExtreme UI components into a web application. The projects in this repository includes the CRM and Project Management UI/UX patterns with source code for Angular.
+Devextreme UI Template Gallery is a repository with a real-word application demo. This demo illustrates how to integrate various DevExtreme UI components into a web application. The projects in this repository include the CRM and Project Management UI/UX patterns with source code for Angular.
 
 > Vue and React projects are under development.
 
@@ -16,13 +16,13 @@ To run these projects on your machine, clone this repository and follow the inst
     npm i
     ```
 
-2. Run the following npm command to enbale the [embedded mode](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light/angular/embedded/) for the project. Skip this step to use the [default mode](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light/angular/default/) for the project.
+2. Run the following npm command to enable the [embedded mode](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light/angular/embedded/) for the project. Skip this step to use the [default mode](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light/angular/default/) for the project.
 
     ```
     npm run make-embedded-mode
     ```
 
-2. Move to the Angular folder and run the command to start the project:
+2. Move to the Angular folder and run the following command to start the project:
 
     ```
     cd packages/angular
