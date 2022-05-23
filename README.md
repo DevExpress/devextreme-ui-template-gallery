@@ -31,7 +31,7 @@ To run these projects on your machine, clone this repository and follow the inst
     npm run start
     ```
 
-3. Navigate to `http://localhost:4200/`. 
+3. Navigate to [http://localhost:4200/](http://localhost:4200/). 
     The project in default mode includes a navigation menu at the left. To navigate between patterns in embedded mode, use the following links:
 
     /crm-contact-form - CRM Contact Form
