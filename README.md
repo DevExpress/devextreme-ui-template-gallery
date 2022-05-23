@@ -32,7 +32,7 @@ To run these projects on your machine, clone this repository and follow the inst
 
 3. Navigate to [http://localhost:4200/](http://localhost:4200/). 
     
-    The project in default mode includes the navigation menu at the left. To navigate between the CRM and Planning patterns in embedded mode, use the following links:
+    The project shows the navigation menu on the left in default mode. To navigate between CRM and Planning patterns in embedded mode, use the following links:
 
     `/crm-contact-form` - CRM. Contact Form.
 
