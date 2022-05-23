@@ -4,7 +4,7 @@ Devextreme UI Template Gallery is a repository with a real-word application demo
 
 [note]Vue and React projects are under development.
 
-![Devextreme UI Template Gallery](~/images/ui-template-gallery.png)
+![Devextreme UI Template Gallery](/images/ui-template-gallery.png)
 
 ## Get Started
 
