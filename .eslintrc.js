@@ -56,6 +56,7 @@ module.exports = {
         'canada',
         'ceil',
         'checkbox',
+        'childs',
         'cityid',
         'cluster',
         'cnstl',
@@ -104,6 +105,7 @@ module.exports = {
         'fitted',
         'fg', // ExcelJS
         'formatter',
+        'fs',
         'func',
         'gantt',
         'gdp', // gross domestic product
@@ -182,6 +184,8 @@ module.exports = {
         'perc',
         'perf',
         'pdf',
+        'pid',
+        'pids',
         'pivotgrid',
         'png', // DataGrid CustomEditors for image format
         'popup',
@@ -225,9 +229,11 @@ module.exports = {
         'str',
         'stringify',
         'strikethrough',
+        'subdir',
         'submenu',
         'substr',
         'substring',
+        'subtree',
         'subvalue',
         'subvalues',
         'svg',
@@ -238,6 +244,7 @@ module.exports = {
         'theatre',
         'timestamp',
         'tmp',
+        'toogle',
         'tooltip',
         'tooltips',
         'transpile',
@@ -378,6 +385,16 @@ module.exports = {
         'packages/react/*.*',
         'packages/vue/*.*',
         'packages/shell/*.*',
+      ],
+      env: {
+        jquery: true,
+      },
+      globals: {
+        DevExpress: true,
+      },
+    },
+    {
+      files: [
         'utils/*.*',
       ],
       env: {
@@ -385,6 +402,10 @@ module.exports = {
       },
       globals: {
         DevExpress: true,
+      },
+      rules: {
+        'import/no-extraneous-dependencies': 0,
+        'no-console': 0,
       },
     },
     {

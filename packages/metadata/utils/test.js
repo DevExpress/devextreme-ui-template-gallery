@@ -1,6 +1,7 @@
-const { MetadataCheker } = require('./metadata-checker');
+const { MetadataChecker } = require('./metadata-checker');
 
-const checker = new MetadataCheker();
-if(!checker.checkMeta(require('../metaRwa.json'))) {
-    process.exit(1);
+const checker = new MetadataChecker();
+// eslint-disable-next-line global-require
+if (!checker.checkMeta(require('../metaRwa.json'))) {
+  process.exit(1);
 }

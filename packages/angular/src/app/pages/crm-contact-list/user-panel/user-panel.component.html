@@ -81,7 +81,7 @@
 
             <!-- T1085831 -->
             <div *dxTemplate="let data of 'blue-text'">
-              <div *ngIf="!isEditing then blue; else editing;"></div>
+              <div *ngIf="!isEditing; then blue; else editing"></div>
               <ng-template #blue>
                 <form-item-blue
                   [label]="data.editorOptions.label"
@@ -142,7 +142,11 @@
               locateInMenu="before"
               [visible]="isEditing"
             >
-              <dx-button text="Cancel" (onClick)="toggleEdit()" stylingMode="text"></dx-button>
+              <dx-button
+                text="Cancel"
+                (onClick)="toggleEdit()"
+                stylingMode="text"
+              ></dx-button>
             </dxi-item>
             <dxi-item
               location="after"

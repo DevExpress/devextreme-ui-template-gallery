@@ -18,7 +18,11 @@
       ></dx-button>
     </dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
-      <dx-button text="Cancel" (onClick)="toggleEdit()" stylingMode="text"></dx-button>
+      <dx-button
+        text="Cancel"
+        (onClick)="toggleEdit()"
+        stylingMode="text"
+      ></dx-button>
     </dxi-item>
   </dx-toolbar>
 
@@ -102,7 +106,7 @@
         <label class="dx-texteditor-label">{{
           data.editorOptions.label
         }}</label>
-          <task-priority [value]="task.priority"></task-priority>
+        <task-priority [value]="task.priority"></task-priority>
       </div>
     </div>
 
@@ -116,7 +120,7 @@
       >
         <div *dxTemplate="let data of 'field'">
           <div class="form-custom-list-prop">
-              <task-priority [value]="task.priority"></task-priority>
+            <task-priority [value]="task.priority"></task-priority>
             <dx-text-box [readOnly]="true"></dx-text-box>
           </div>
         </div>
@@ -132,7 +136,7 @@
         <label class="dx-texteditor-label">{{
           data.editorOptions.label
         }}</label>
-          <task-status [value]="task.status"></task-status>
+        <task-status [value]="task.status"></task-status>
       </div>
     </div>
 
@@ -147,7 +151,7 @@
       >
         <div *dxTemplate="let data of 'field'">
           <div class="form-custom-list-prop">
-              <task-status [value]="task.status"></task-status>
+            <task-status [value]="task.status"></task-status>
             <dx-text-box [readOnly]="true"></dx-text-box>
           </div>
         </div>

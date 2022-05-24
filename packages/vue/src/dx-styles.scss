@@ -35,8 +35,7 @@
   border-left: 0;
 }
 
-.with-footer > .dx-scrollable-wrapper >
-.dx-scrollable-container > .dx-scrollable-content {
+.with-footer > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
   height: 100%;
 
   & > .dx-scrollview-content {
@@ -57,7 +56,7 @@
   .dx-drawer-shader {
     display: none !important;
   }
-  
+
   .dx-drawer-content {
     padding: initial !important;
   }

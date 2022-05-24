@@ -1,8 +1,10 @@
+/* eslint-disable no-console */
 const { join } = require('path');
 const { existsSync, readFileSync } = require('fs');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const requireFromString = require('require-from-string');
 
-class MetadataCheker {
+class MetadataChecker {
   descriptionFileExists(viewName) {
     const descriptionLocation = join(__dirname, '..', 'descriptions');
     const descriptionFilePath = join(descriptionLocation, `${viewName}.md`);
@@ -66,6 +68,8 @@ class MetadataCheker {
       } else if (navItem.items && navItem.items.length > 0) {
         return this.isViewInNavigation(viewName, navItem.items);
       }
+
+      return false;
     });
   }
 
@@ -110,4 +114,4 @@ class MetadataCheker {
   }
 }
 
-module.exports.MetadataCheker = MetadataCheker;
+module.exports.MetadataChecker = MetadataChecker;

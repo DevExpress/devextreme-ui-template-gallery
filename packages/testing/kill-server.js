@@ -1,22 +1,24 @@
-import { pidsFileName } from './dirs.config.js';
 import { kill } from 'process';
 import { existsSync, readFileSync } from 'fs';
-import fse from 'fs-extra';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import fsExtra from 'fs-extra';
+import { pidsFileName } from './dirs.config.js';
 
 const killServers = () => {
-    if(!existsSync(pidsFileName)) return;
+  if (!existsSync(pidsFileName)) return;
 
-    const pids = JSON.parse(readFileSync(pidsFileName));
+  const pids = JSON.parse(readFileSync(pidsFileName));
 
-    pids.forEach(pid => {
-        try {
-            kill(pid);
-        } catch(e) {
-            console.log(`Unable to kill ${pid}. ${e}`);
-        }
-    });
+  pids.forEach((pid) => {
+    try {
+      kill(pid);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(`Unable to kill ${pid}. ${e}`);
+    }
+  });
 
-    fse.removeSync(pidsFileName);
+  fsExtra.removeSync(pidsFileName);
 };
 
 killServers();
