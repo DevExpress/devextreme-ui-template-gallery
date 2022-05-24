@@ -16,10 +16,9 @@ import { Router } from '@angular/router';
       width: 100%;
       height: 100%;
     }
-  `]
+  `],
 })
 export class UnauthenticatedContentComponent {
-
   constructor(private router: Router) { }
 
   get title() {
@@ -48,6 +47,6 @@ export class UnauthenticatedContentComponent {
     SingleCardModule,
   ],
   declarations: [UnauthenticatedContentComponent],
-  exports: [UnauthenticatedContentComponent]
+  exports: [UnauthenticatedContentComponent],
 })
 export class UnauthenticatedContentModule { }

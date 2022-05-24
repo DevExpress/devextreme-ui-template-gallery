@@ -1,150 +1,122 @@
-import { Component, ViewChild, OnInit, AfterViewInit, NgModule } from '@angular/core';
-import { ScreenService } from '../../shared/services';
-import { getContacts, getContact, getStatuses } from 'dx-rwa-data';
 import {
-  DxDataGridModule,
-  DxFormModule,
-  DxDrawerModule,
+  Component, ViewChild, OnInit, NgModule, OnDestroy,
+} from '@angular/core';
+import {
   DxButtonModule,
-  DxToolbarModule,
-  DxScrollViewModule,
-  DxAccordionModule,
-  DxListModule,
-  DxLoadPanelModule,
+  DxDataGridModule,
+  DxDataGridComponent,
   DxDropDownButtonModule,
   DxSelectBoxModule,
   DxTextBoxModule,
-  DxDataGridComponent,
 } from 'devextreme-angular';
+import { RowClickEvent, RowPreparedEvent, ColumnCustomizeTextArg } from 'devextreme/ui/data_grid';
+import {
+  CardActivitiesModule,
+  ContactStatusModule,
+} from 'src/app/shared/components';
+import { Contact, contactStatusList, ContactStatus } from 'src/app/shared/types/contact';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
-import CustomStore from 'devextreme/data/custom_store';
-import { ActivitiesModule } from 'src/app/shared/components/activities/activities.component';
 import { CommonModule } from '@angular/common';
+import { RwaService } from 'src/app/shared/services';
+import { Subscription } from 'rxjs';
+import { UserPanelModule } from './user-panel/user-panel.component';
 
-
+type FilterContactStatus = ContactStatus | 'All Contacts';
 
 @Component({
-  //selector: 'app-crm-contact-list',
   templateUrl: './crm-contact-list.component.html',
-  styleUrls: ['./crm-contact-list.component.scss']
+  styleUrls: ['./crm-contact-list.component.scss'],
+  providers: [RwaService],
 })
-export class CrmContactListComponent implements OnInit {
+export class CrmContactListComponent implements OnInit, OnDestroy {
+  @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
 
-  @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent
+  statusList = contactStatusList;
 
-  constructor(private screen: ScreenService) {
+  filterStatusList = ['All Contacts', ...contactStatusList];
 
-    this.dataSource = new CustomStore({
-      key: 'id',
-      load: getContacts
-    });
+  isPanelOpen = false;
 
-    this.statuses = new CustomStore({
-      loadMode: 'raw',
-      load: getStatuses
-    });
+  userId: number;
 
-    this.pinClick = this.pinClick.bind(this);
-    this.closePanel = this.closePanel.bind(this);
-    this.customizePhoneCell = this.customizePhoneCell.bind(this);
-    this.calculatePin();
-    this.screen.changed.subscribe(this.calculatePin.bind(this));
+  dataSource: Contact[];
+
+  dataSubscription: Subscription = new Subscription();
+
+  constructor(private service: RwaService) {
   }
 
-  isPanelOpen: boolean = false;
-  isPanelPin: boolean = false;
-  isPinEnabled: boolean = false;
-  panelLoading: boolean = true;
-
-  dataSource: CustomStore;
-  statuses: CustomStore;
-
-
-  panelData: any;
-
-  console(message: string) {
-    console.log(message);
+  ngOnInit(): void {
+    this.dataSubscription = this.service.getContacts().subscribe((data) => {
+      this.dataSource = data;
+    });
   }
 
-  rowClick(e) {
-    this.panelLoading = true;
-    getContact(e.data.id).then(data => {
-      this.panelData = data;
-      this.panelLoading = false;
-    });
+  ngOnDestroy(): void {
+    this.dataSubscription.unsubscribe();
+  }
 
+  addRow = () => {
+    this.dataGrid.instance.addRow();
+  };
+
+  refresh = () => {
+    this.dataGrid.instance.refresh();
+  };
+
+  rowClick(e: RowClickEvent) {
+    const { data } = e;
+
+    this.userId = data.id;
     this.isPanelOpen = true;
   }
 
-  rowPrepared(e) {
-    e.rowElement.classList.add('clickable-row');
-  }
+  rowPrepared = (e: RowPreparedEvent) => {
+    const { rowElement } = e;
 
-  closePanel() {
-    this.isPanelOpen = false;
-  }
-
-  pinClick() {
-    this.isPanelPin = !this.isPanelPin;
+    rowElement.classList.add('clickable-row');
   };
 
-  accordionTitleClick(e) {
-    e.event.stopPropagation();
-  }
+  filterByStatus = (e: SelectionChangedEvent) => {
+    const { item: status }: { item: FilterContactStatus } = e;
 
-  calculatePin() {
-    this.isPinEnabled = this.screen.sizes['screen-large'] || this.screen.sizes['screen-medium'];
-    if(this.isPanelPin && !this.isPinEnabled) {
-      this.isPanelPin = false;
-    }
-  }
-
-  formatPhone(number: string | number): string {
-    return String(number).replace(/(\d{3})(\d{3})(\d{4})/,"+1($1)$2-$3");
-  }
-
-  customizePhoneCell(cellInfo): string {
-    return this.formatPhone(cellInfo.value);
-  }
-
-  filterStatus(e: SelectionChangedEvent) {
-    const status = e.item.status;
-    if(status === '') {
+    if (status === 'All Contacts') {
       this.dataGrid.instance.clearFilter();
     } else {
       this.dataGrid.instance.filter(['status', '=', status]);
     }
-  }
+  };
 
-  ngOnInit(): void {
-    
-  }
+  formatPhone = (number: string | number): string => String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
 
+  customizePhoneCell = (cellInfo: ColumnCustomizeTextArg) => {
+    const { value } = cellInfo;
+
+    if (!value) {
+      return undefined;
+    }
+
+    return this.formatPhone(value.toString());
+  };
 }
-
-
 
 @NgModule({
   imports: [
-    DxDataGridModule,
-    DxFormModule,
-    DxDrawerModule,
     DxButtonModule,
-    DxToolbarModule,
-    DxScrollViewModule,
-    DxAccordionModule,
-    DxListModule,
-    DxLoadPanelModule,
+    DxDataGridModule,
     DxDropDownButtonModule,
     DxSelectBoxModule,
     DxTextBoxModule,
 
-    ActivitiesModule,
+    UserPanelModule,
 
-    CommonModule
+    CardActivitiesModule,
+    ContactStatusModule,
+
+    CommonModule,
   ],
   providers: [],
   exports: [],
-  declarations: [CrmContactListComponent]
+  declarations: [CrmContactListComponent],
 })
 export class CrmContactListModule { }

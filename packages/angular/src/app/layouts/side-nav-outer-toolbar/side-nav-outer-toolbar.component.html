@@ -1,8 +1,9 @@
 <app-header
   class="layout-header"
   [menuToggleEnabled]="true"
-  (menuToggle)="menuOpened = !menuOpened;"
-  [title]="title">
+  (menuToggle)="menuOpened = !menuOpened"
+  [title]="title"
+>
 </app-header>
 
 <dx-drawer
@@ -13,15 +14,16 @@
   [revealMode]="menuRevealMode"
   [minSize]="minMenuSize"
   [shading]="shaderEnabled"
-  [(opened)]="menuOpened">
-
+  [(opened)]="menuOpened"
+>
   <app-side-navigation-menu
     [compactMode]="!menuOpened"
     [selectedItem]="selectedRoute"
     class="dx-swatch-additional"
     *dxTemplate="let dataMenu of 'panel'"
     (selectedItemChanged)="navigationChanged($event)"
-    (openMenu)="navigationClick()">
+    (openMenu)="navigationClick()"
+  >
   </app-side-navigation-menu>
 
   <dx-scroll-view class="with-footer">

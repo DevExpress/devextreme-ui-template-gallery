@@ -1,0 +1,34 @@
+#task-form {
+  min-height: 300px;
+}
+
+.info {
+  position: relative;
+  padding-bottom: 30px;
+
+  task-priority,
+  task-status {
+    position: absolute;
+    margin-top: 15px;
+
+    ::ng-deep {
+      span {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+.form-custom-list-prop {
+  task-priority,
+  task-status {
+    position: absolute;
+    padding: 15px 11px;
+
+    ::ng-deep {
+      span {
+        font-size: 13px;
+      }
+    }
+  }
+}

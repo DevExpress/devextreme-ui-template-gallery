@@ -1,8 +1,8 @@
 export const tabPanelItems: Array<{ text: string }> = [
   {
-    text: 'List'
+    text: 'List',
   },
   {
-    text: 'Kanban Board'
-  }
+    text: 'Kanban Board',
+  },
 ];

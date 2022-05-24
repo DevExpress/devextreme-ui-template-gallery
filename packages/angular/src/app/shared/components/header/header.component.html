@@ -9,13 +9,15 @@
         icon: 'menu',
         stylingMode: 'text',
         onClick: toggleMenu
-      }">
+      }"
+    >
     </dxi-item>
     <dxi-item
       location="before"
       cssClass="header-title"
       *ngIf="title"
-      [text]="title">
+      [text]="title"
+    >
     </dxi-item>
     <dxi-item
       location="after"
@@ -26,27 +28,38 @@
         mode: 'search',
         placeholder: 'Search',
         width: 180
-      }">
+      }"
+    >
     </dxi-item>
     <dxi-item
       location="after"
       locateInMenu="auto"
       menuItemTemplate="menuItem"
-      class="user-picture">
+      class="user-picture"
+    >
       <div *dxTemplate="let data of 'item'">
         <dx-button
           class="user-button authorization"
           width="160px"
           height="100%"
-          stylingMode="text">
+          stylingMode="text"
+        >
           <div *dxTemplate="let data of 'content'">
-            <app-user-panel [user]="user" [menuItems]="userMenuItems" menuMode="context"></app-user-panel>
+            <app-user-panel
+              [user]="user"
+              [menuItems]="userMenuItems"
+              menuMode="context"
+            ></app-user-panel>
           </div>
         </dx-button>
       </div>
     </dxi-item>
     <div *dxTemplate="let data of 'menuItem'">
-      <app-user-panel [user]="user" [menuItems]="userMenuItems" menuMode="list"></app-user-panel>
+      <app-user-panel
+        [user]="user"
+        [menuItems]="userMenuItems"
+        menuMode="list"
+      ></app-user-panel>
     </div>
   </dx-toolbar>
 </header>

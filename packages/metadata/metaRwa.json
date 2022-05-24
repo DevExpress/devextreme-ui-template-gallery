@@ -17,6 +17,20 @@
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
+                ],
+                "Name": "Planning",
+                "Demos": [
+                    {
+                        "Title": "Task List",
+                        "Name": "planning-task-list",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": ["Angular"]
+                    },{
+                        "Title": "Task Details",
+                        "Name": "planning-task-details",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": ["Angular"]
+                    }
                 ]
             }
         ]

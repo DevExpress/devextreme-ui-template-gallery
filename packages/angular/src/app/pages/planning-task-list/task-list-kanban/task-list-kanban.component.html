@@ -1,0 +1,59 @@
+<dx-scroll-view
+  *ngIf="!isLoading"
+  class="scrollable-board"
+  direction="horizontal"
+  showScrollbar="always"
+>
+  <dx-sortable
+    class="sortable-lists"
+    itemOrientation="horizontal"
+    handle=".list-title"
+    (onReorder)="onListReorder($event)"
+  >
+    <div class="list" *ngFor="let board of kanbanDataSource">
+      <div class="list-title dx-theme-text-color">
+        <span>{{ board.name }}</span>
+        <dx-button
+          icon="more"
+          (onClick)="notify('Option board event')"
+        ></dx-button>
+      </div>
+      <dx-scroll-view
+        class="scrollable-list"
+        direction="vertical"
+        showScrollbar="always"
+      >
+        <dx-sortable
+          class="sortable-cards"
+          group="cardsGroup"
+          [data]="board"
+          (onDragStart)="onTaskDragStart($event)"
+          (onReorder)="onTaskDrop($event)"
+          (onAdd)="onTaskDrop($event)"
+        >
+          <ng-container *ngFor="let task of board.cards">
+            <task-kanban-card
+              class="dx-card"
+              [task]="task"
+            ></task-kanban-card>
+          </ng-container>
+        </dx-sortable>
+
+        <div class="add-task">
+          <dx-button
+            icon="plus"
+            text="Add Task"
+            stylingMode="text"
+            (onClick)="notify('Add task event')"
+          ></dx-button>
+        </div>
+      </dx-scroll-view>
+    </div>
+  </dx-sortable>
+</dx-scroll-view>
+
+<dx-load-panel
+  [(visible)]="isLoading"
+  container=".content"
+  [position]="{ of: '.content' }"
+></dx-load-panel>

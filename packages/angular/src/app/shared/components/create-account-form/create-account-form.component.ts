@@ -7,14 +7,14 @@ import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import notify from 'devextreme/ui/notify';
 import { AuthService } from '../../services';
 
-
 @Component({
   selector: 'app-create-account-form',
   templateUrl: './create-account-form.component.html',
-  styleUrls: ['./create-account-form.component.scss']
+  styleUrls: ['./create-account-form.component.scss'],
 })
 export class CreateAccountFormComponent {
   loading = false;
+
   formData: any = {};
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -34,18 +34,16 @@ export class CreateAccountFormComponent {
     }
   }
 
-  confirmPassword = (e: ValidationCallbackData) => {
-    return e.value === this.formData.password;
-  }
+  confirmPassword = (e: ValidationCallbackData) => e.value === this.formData.password;
 }
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     DxFormModule,
-    DxLoadIndicatorModule
+    DxLoadIndicatorModule,
   ],
-  declarations: [ CreateAccountFormComponent ],
-  exports: [ CreateAccountFormComponent ]
+  declarations: [CreateAccountFormComponent],
+  exports: [CreateAccountFormComponent],
 })
 export class CreateAccountFormModule { }
