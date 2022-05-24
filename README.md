@@ -17,9 +17,7 @@ Each UI Template includes a responsive layout with DevExtreme UI components popu
 
 ### Angular
 
-UI Template sources for Angular are located in the [packages/angular](packages/angular) folder.
-
-Navigate to the following folders to get code for each template:
+UI Template sources for Angular are located in the [packages/angular](packages/angular) folder. Navigate to the following folders to get code for each template:
 
 **CRM**
 
