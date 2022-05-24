@@ -1,0 +1,55 @@
+@use "../../../../variables.scss" as *;
+
+#activities-list {
+  padding: 10px;
+  min-height: 300px;
+  position: relative;
+  display: block;
+
+  &.load {
+    min-height: auto;
+  }
+}
+
+.activities-list {
+  ::ng-deep & .dx-list-item {
+    margin: 10px 0;
+    overflow: visible;
+    background: transparent;
+  }
+
+  .dx-list-item-content {
+    padding: 0;
+    overflow: visible;
+  }
+
+  .activity {
+    box-shadow: 0px 1px 4px 0px #00000026;
+    border-left: 2px solid $base-accent;
+    margin-right: 4px;
+    padding: 8px 2px 8px 16px;
+
+    display: grid;
+    grid-template-columns: 3fr 1fr 0fr;
+    align-items: center;
+
+    .name {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .date {
+      padding: 0 10px;
+      font-size: 12px;
+      color: #757575de;
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 5px;
+
+      &.by {
+        width: 170px;
+      }
+    }
+  }
+}

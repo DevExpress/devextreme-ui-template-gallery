@@ -1,0 +1,26 @@
+<div id="activities-list" [ngClass]="!isLoading ? 'load' : null">
+  <dx-list
+    *ngIf="!isLoading"
+    class="activities-list"
+    [items]="activities"
+    [scrollingEnabled]="false"
+  >
+    <div *dxTemplate="let item of 'item'">
+      <div class="activity">
+        <div class="name">{{ item.name }}</div>
+        <div class="date" [ngClass]="{ by: showBy }">
+          <span>{{ item.date | date: "MM/dd/yyyy" }}</span>
+          <span *ngIf="showBy">by</span>
+          <span>{{ item.manager }}</span>
+        </div>
+        <dx-button icon="overflow"></dx-button>
+      </div>
+    </div>
+  </dx-list>
+
+  <dx-load-panel
+    container="#activities-list"
+    [position]="{ of: '#activities-list' }"
+    [visible]="isLoading"
+  ></dx-load-panel>
+</div>

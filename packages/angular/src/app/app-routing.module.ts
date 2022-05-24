@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { LoginFormComponent, ResetPasswordFormComponent, CreateAccountFormComponent, ChangePasswordFormComponent } from './shared/components';
+import {
+  LoginFormComponent,
+  ResetPasswordFormComponent,
+  CreateAccountFormComponent,
+  ChangePasswordFormComponent,
+} from './shared/components';
 import { AuthGuardService } from './shared/services';
 
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
@@ -13,47 +18,47 @@ const routes: Routes = [
   {
     path: 'crm-contact-list',
     component: CrmContactListComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [AuthGuardService],
   },
   {
     path: 'crm-contact-form',
     component: CrmContactFormComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [AuthGuardService],
   },
   {
     path: 'planning-task-list',
     component: PlanningTaskListComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [AuthGuardService],
   },
   {
     path: 'planning-task-details',
     component: PlanningTaskDetailsComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [AuthGuardService],
   },
   {
     path: 'login-form',
     component: LoginFormComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [AuthGuardService],
   },
   {
     path: 'reset-password',
     component: ResetPasswordFormComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [AuthGuardService],
   },
   {
     path: 'create-account',
     component: CreateAccountFormComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [AuthGuardService],
   },
   {
     path: 'change-password/:recoveryCode',
     component: ChangePasswordFormComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [AuthGuardService],
   },
   {
     path: '**',
-    redirectTo: 'crm-contact-list'
-  }
+    redirectTo: 'crm-contact-list',
+  },
 ];
 
 @NgModule({
@@ -63,6 +68,6 @@ const routes: Routes = [
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
-  declarations: []
+  declarations: [],
 })
 export class AppRoutingModule { }

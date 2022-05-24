@@ -1,76 +1,68 @@
 <div class="view-wrapper">
-  <ng-template [ngIf]="!load" [ngIfElse]="loading">
   <dx-toolbar>
+    <dxi-item location="before">
+      <dx-button icon="arrowleft"></dx-button>
+    </dxi-item>
     <dxi-item
       location="before"
+      [text]="taskName"
+    ></dxi-item>
+
+    <dxi-item location="after" locateInMenu="auto">
+      <dx-drop-down-button text="ACTIONS" stylingMode="contained">
+        <dxi-item text="Duplicate"></dxi-item>
+        <dxi-item text="Close"></dxi-item>
+        <dxi-item text="Delete"></dxi-item>
+      </dx-drop-down-button>
+    </dxi-item>
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
       widget="dxButton"
+      showText="inMenu"
       [options]="{
-        icon: 'arrowleft'
+        text: 'Attach',
+        icon: 'attach'
       }"
     ></dxi-item>
     <dxi-item
-      location="before"
-    >
-      <span class="toolbar-header">{{ task.text }}</span>
-    </dxi-item>
-
-    <dxi-item
       location="after"
       locateInMenu="auto"
-    >
-      <dx-drop-down-button
-        text="ACTIONS"
-        stylingMode="contained"
-        [ngClass]="'actions'"
-        [items]="[
-          { text: 'Duplicate' },
-          { text: 'Close' },
-          { text: 'Delete' }
-        ]"
-      ></dx-drop-down-button>
-    </dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-    >
-      <dx-button
-        icon="attach"
-      ></dx-button>
-    </dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-    >
-      <div class="separator"></div>
-    </dxi-item>
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
+        text: 'Refresh',
+        icon: 'refresh',
+        onClick: refresh
+      }"
+    ></dxi-item>
   </dx-toolbar>
 
   <div class="panels">
     <div class="left">
-      <app-planning-task-form [task]="task"></app-planning-task-form>
+      <task-form [task]="task"></task-form>
     </div>
-    
+
     <div class="right">
       <div class="dx-card">
-        <dx-tab-panel [showNavButtons]="true">
-            <dxi-item title="Activities">
-              <div class="tab-content">
-                <app-activities [activities]="task.activities" [showBy]="true"></app-activities>
-              </div>
-            </dxi-item>
-            <dxi-item title="Notes">
-              <app-notes [items]="task.notes"></app-notes>
-            </dxi-item>
-            <dxi-item title="Messages" [badge]="task.messages.length">
-              <app-messages [items]="task.messages"></app-messages>
-            </dxi-item>
+        <dx-tab-panel [showNavButtons]="true" [deferRendering]="false">
+          <dxi-item title="Activities">
+            <card-activities
+              [activities]="task?.activities"
+              [showBy]="true"
+            ></card-activities>
+          </dxi-item>
+          <dxi-item title="Notes">
+            <card-notes [items]="task?.notes" [user]="task?.owner"></card-notes>
+          </dxi-item>
+          <dxi-item title="Messages" [badge]="task?.messages.length">
+            <card-messages
+              [items]="task?.messages"
+              [user]="task?.owner"
+            ></card-messages>
+          </dxi-item>
         </dx-tab-panel>
-    </div>
+      </div>
     </div>
   </div>
-</ng-template>
 </div>
-
-<ng-template #loading>
-  <dx-load-panel [visible]="load"></dx-load-panel>
-</ng-template>

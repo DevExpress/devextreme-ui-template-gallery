@@ -11,10 +11,11 @@ const notificationText = 'We\'ve sent a link to reset your password. Check your 
 @Component({
   selector: 'app-reset-password-form',
   templateUrl: './reset-password-form.component.html',
-  styleUrls: ['./reset-password-form.component.scss']
+  styleUrls: ['./reset-password-form.component.scss'],
 })
 export class ResetPasswordFormComponent {
   loading = false;
+
   formData: any = {};
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -40,9 +41,9 @@ export class ResetPasswordFormComponent {
     CommonModule,
     RouterModule,
     DxFormModule,
-    DxLoadIndicatorModule
+    DxLoadIndicatorModule,
   ],
   declarations: [ResetPasswordFormComponent],
-  exports: [ResetPasswordFormComponent]
+  exports: [ResetPasswordFormComponent],
 })
 export class ResetPasswordFormModule { }

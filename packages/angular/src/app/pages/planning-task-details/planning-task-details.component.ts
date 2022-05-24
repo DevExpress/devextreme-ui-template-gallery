@@ -1,75 +1,78 @@
-import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
+import {
+  Component, OnInit, NgModule, OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
   DxDropDownButtonModule,
-  DxToolbarModule,
   DxTabPanelModule,
-  DxTextAreaModule,
-  DxLoadPanelModule,
+  DxToolbarModule,
 } from 'devextreme-angular';
 import {
-  ActivitiesModule,
-  NotesModule,
-  MessagesModule,
-  PlanningTaskFormModule,
+  CardActivitiesModule,
+  CardNotesModule,
+  CardMessagesModule,
   TaskProirityModule,
   TaskStatusModule,
 } from 'src/app/shared/components';
-import { getTask } from 'dx-rwa-data';
+import { Task } from 'src/app/shared/types/task';
+import { RwaService } from 'src/app/shared/services';
+import { Subscription } from 'rxjs';
+import { TaskFormModule } from './task-form/task-form.component';
 
 @Component({
-  // selector: 'app-planning-task-details',
   templateUrl: './planning-task-details.component.html',
-  styleUrls: ['./planning-task-details.component.scss']
+  styleUrls: ['./planning-task-details.component.scss'],
+  providers: [RwaService],
 })
-export class PlanningTaskDetailsComponent implements OnInit {
-  task: any;
+export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
+  task: Task;
 
   taskId = 1;
-  load = true;
 
-  constructor() { 
-    this.refresh = this.refresh.bind(this);
+  taskName: string;
 
-    getTask(this.taskId).then((data) => {
+  dataSubscription: Subscription = new Subscription();
+
+  loadData = () => {
+    this.dataSubscription = this.service.getTask(this.taskId).subscribe((data) => {
       this.task = data;
-      this.load = false;
+      this.taskName = data.text;
     });
-  }
+  };
 
-  refresh() {
-    this.load = true;
-    getTask(this.taskId).then((data) => {
-      this.task = data;
-      this.load = false;
-    });
+  constructor(private service: RwaService) {
   }
 
   ngOnInit(): void {
+    this.loadData();
   }
+
+  ngOnDestroy(): void {
+    this.dataSubscription.unsubscribe();
+  }
+
+  refresh = () => this.loadData();
 }
 
 @NgModule({
   imports: [
     DxButtonModule,
     DxDropDownButtonModule,
-    DxToolbarModule,
     DxTabPanelModule,
-    DxTextAreaModule,
-    DxLoadPanelModule,
+    DxToolbarModule,
 
-    ActivitiesModule,
-    NotesModule,
-    MessagesModule,
-    PlanningTaskFormModule,
+    CardActivitiesModule,
+    CardNotesModule,
+    CardMessagesModule,
+    TaskFormModule,
     TaskProirityModule,
     TaskStatusModule,
 
-    CommonModule
+    CommonModule,
   ],
   providers: [],
   exports: [],
-  declarations: [PlanningTaskDetailsComponent]
+  declarations: [PlanningTaskDetailsComponent],
 })
 export class PlanningTaskDetailsModel { }

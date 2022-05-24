@@ -9,33 +9,19 @@ import {
   CreateAccountFormModule,
   ChangePasswordFormModule,
   LoginFormModule,
-  ActivitiesModule,
 } from './shared/components';
 
-// import {
-//   DxDataGridModule,
-//   DxFormModule,
-//   DxDrawerModule,
-//   DxButtonModule,
-//   DxToolbarModule,
-//   DxScrollViewModule,
-//   DxAccordionModule,
-//   DxListModule,
-//   DxLoadPanelModule,
-//   DxDropDownButtonModule,
-//   DxSelectBoxModule,
-//   DxTextBoxModule,
-// } from 'devextreme-angular';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 import { CrmContactListModule } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactFormModule } from './pages/crm-contact-form/crm-contact-form.component';
 import { PlanningTaskListModule } from './pages/planning-task-list/planning-task-list.component';
+import { PlanningTaskDetailsModel } from './pages/planning-task-details/planning-task-details.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,26 +35,13 @@ import { PlanningTaskListModule } from './pages/planning-task-list/planning-task
     LoginFormModule,
     UnauthenticatedContentModule,
 
-    // DxDataGridModule,
-    // DxFormModule,
-    // DxDrawerModule,
-    // DxButtonModule,
-    // DxToolbarModule,
-    // DxScrollViewModule,
-    // DxAccordionModule,
-    // DxListModule,
-    // DxLoadPanelModule,
-    // DxDropDownButtonModule,
-    // DxSelectBoxModule,
-    // DxTextBoxModule,
-
-    //ActivitiesModule,
     CrmContactListModule,
     CrmContactFormModule,
     PlanningTaskListModule,
+    PlanningTaskDetailsModel,
     AppRoutingModule,
   ],
   providers: [AuthService, ScreenService, AppInfoService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

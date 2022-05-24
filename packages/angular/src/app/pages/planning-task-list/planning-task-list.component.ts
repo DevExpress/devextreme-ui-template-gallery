@@ -1,51 +1,58 @@
-import { Component, OnInit, NgModule, Output, ViewChild } from '@angular/core';
+import {
+  Component, OnInit, NgModule, Output, ViewChild, OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
   DxDataGridModule,
   DxTabsModule,
-  DxDropDownButtonModule,
-  DxTextBoxModule,
   DxToolbarModule,
-  DxLoadPanelModule,
 } from 'devextreme-angular';
-import {
-  PlanningKanbanModule,
-  PlanningGridModule,
-  PlanningGridComponent,
-} from 'src/app/shared/components';
+import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
+import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
 import { tabPanelItems } from 'src/app/shared/types/resource';
-import { getTasks } from 'dx-rwa-data';
+import { Task } from 'src/app/shared/types/task';
+import { RwaService } from 'src/app/shared/services';
+import { Subscription } from 'rxjs';
+import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
+import { TaskListKanbanModule } from './task-list-kanban/task-list-kanban.component';
 
 @Component({
-  // selector: 'app-planning-task-list',
   templateUrl: './planning-task-list.component.html',
-  styleUrls: ['./planning-task-list.component.scss']
+  styleUrls: ['./planning-task-list.component.scss'],
+  providers: [RwaService],
 })
-export class PlanningTaskListComponent implements OnInit {
-  @ViewChild('planningDataGrid', { static: false }) dataGrid: PlanningGridComponent;
+export class PlanningTaskListComponent implements OnInit, OnDestroy {
+  @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
 
-  @Output()
-  tabValueChange = (e) => {
-    this.displayTaskComponent = e.itemData.text;
+  @Output() tabValueChange = (e: TabsItemClickEvent) => {
+    const { itemData } = e;
+
+    this.displayTaskComponent = itemData.text;
     this.displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
-  }
+  };
+
+  tasks: Task[];
 
   tabPanelItems = tabPanelItems;
 
-  dataSource: any[];
-
   displayTaskComponent = this.tabPanelItems[0].text;
+
   displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
 
-  constructor() {
-    this.refresh = this.refresh.bind(this);
+  dataSubscription: Subscription = new Subscription();
 
-    getTasks().then((data) => {
-      this.dataSource = data;
-      this.load = false;
+  constructor(private service: RwaService) {
+  }
+
+  ngOnInit(): void {
+    this.dataSubscription = this.service.getTasks().subscribe((tasks) => {
+      this.tasks = tasks;
     });
+  }
 
+  ngOnDestroy() {
+    this.dataSubscription.unsubscribe();
   }
 
   addDataGridRow = () => this.dataGrid.addRow();
@@ -53,27 +60,10 @@ export class PlanningTaskListComponent implements OnInit {
   refreshDataGrid = () => this.dataGrid.refresh();
 
   chooseColumnDataGrid = () => this.dataGrid.showColumnChooser();
-  
-  searchDataGrid = (e) => this.dataGrid.search(e.component.instance().option('text'));
 
-  exportDataGrid = (e) => {
-    const selectedRowsOnly = e.itemData.text.includes('selected');
-    this.dataGrid.onExporting(e, selectedRowsOnly);
-  }
+  searchDataGrid = (e: TextBoxInputEvent) => this.dataGrid.search(e.component.option('text'));
 
-  load = true;
-
-  @Output()
-  refresh() {
-    this.load = true;
-    getTasks().then((data) => {
-      this.dataSource = data;
-      this.load = false;
-    });
-  }
-
-  ngOnInit(): void {
-  }
+  exportDataGrid = () => this.dataGrid.onExporting();
 }
 
 @NgModule({
@@ -81,18 +71,15 @@ export class PlanningTaskListComponent implements OnInit {
     DxButtonModule,
     DxDataGridModule,
     DxTabsModule,
-    DxDropDownButtonModule,
-    DxTextBoxModule,
     DxToolbarModule,
-    DxLoadPanelModule,
 
-    PlanningKanbanModule,
-    PlanningGridModule,
+    TaskListKanbanModule,
+    TaskListModule,
 
-    CommonModule
+    CommonModule,
   ],
   providers: [],
   exports: [],
-  declarations: [PlanningTaskListComponent]
+  declarations: [PlanningTaskListComponent],
 })
 export class PlanningTaskListModule { }

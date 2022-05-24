@@ -1,28 +1,23 @@
 <div class="view-wrapper">
   <dx-toolbar>
-    <dxi-item
-      location="before"
-    >
+    <dxi-item location="before">
       <span class="toolbar-header">Task</span>
     </dxi-item>
-    <dxi-item
-      location="before"
-      locateInMenu="auto"
-      widget="dxTabs"
-      [options]="{
-        selectedIndex: 0,
-        items: tabPanelItems,
-        onItemClick: tabValueChange
-      }"
-    ></dxi-item>
+    <dxi-item location="before">
+      <dx-tabs
+        [selectedIndex]="0"
+        [items]="tabPanelItems"
+        (onItemClick)="tabValueChange($event)"
+      ></dx-tabs>
+    </dxi-item>
 
     <dxi-item
       [visible]="displayGrid"
       location="after"
       locateInMenu="auto"
+      cssClass="add-grid-row"
     >
       <dx-button
-        [ngClass]="'add-grid-row'"
         icon="plus"
         text="Add Task"
         type="default"
@@ -30,86 +25,73 @@
         (onClick)="addDataGridRow()"
       ></dx-button>
     </dxi-item>
+
     <dxi-item
       [visible]="displayGrid"
       location="after"
       locateInMenu="auto"
-    >
-      <dx-button
-        icon="refresh"
-        (onClick)="refreshDataGrid()"
-      ></dx-button>
-    </dxi-item>
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
+        text: 'Refresh',
+        icon: 'refresh',
+        onClick: refreshDataGrid
+      }"
+    ></dxi-item>
+
     <dxi-item
       [visible]="displayGrid"
       location="after"
       locateInMenu="auto"
-    >
-      <dx-button
-        icon="columnchooser"
-        (onClick)="chooseColumnDataGrid()"
-      ></dx-button>
-    </dxi-item>
-    <dxi-item
-      [visible]="displayGrid"
-      location="after"
-      locateInMenu="auto"
-      locateInMenu="auto"
-    >
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
+        text: 'Column Chooser',
+        icon: 'columnchooser',
+        onClick: chooseColumnDataGrid
+      }"
+    ></dxi-item>
+
+    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
       <div class="separator"></div>
     </dxi-item>
+
     <dxi-item
       [visible]="displayGrid"
       location="after"
       locateInMenu="auto"
-    >
-      <dx-drop-down-button
-        icon="export"
-        stylingMode="text"
-        [dropDownOptions]="{ width: 220 }"
-        (onItemClick)="exportDataGrid($event)"
-      >
-        <dxi-item icon="xlsxfile" text="Export all data"></dxi-item>
-        <dxi-item icon="exportselected" text="Export selected rows"></dxi-item>
-      </dx-drop-down-button>
-    </dxi-item>
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
+        text: 'Export to PDF',
+        icon: 'exportpdf',
+        onClick: exportDataGrid
+      }"
+    ></dxi-item>
+
     <dxi-item
       [visible]="displayGrid"
       location="after"
       locateInMenu="auto"
-      [ngClass]="'search-grid'"
-    >
-      <dx-text-box
-        placeholder="Task Search"
-        [showClearButton]="true"
-        [width]="170"
-        [height]="48"
-        (onInput)="searchDataGrid($event)"
-      >
-        <dxi-button
-          name="search-grid"
-          location="before"
-          [options]="{ icon: 'search', stylingMode: 'text', disabled: true }"
-        ></dxi-button>
-        <dxi-button name="clear"></dxi-button>
-      </dx-text-box>
-    </dxi-item>
+      widget="dxTextBox"
+      [options]="{
+        placeholder: 'Task Search',
+        mode: 'search',
+        onInput: searchDataGrid
+      }"
+    ></dxi-item>
   </dx-toolbar>
 
-  <ng-template [ngIf]="!load" [ngIfElse]="loading">
-    <div class="task-list" [ngSwitch]="displayTaskComponent">
-      <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
-        <planning-grid
-          #planningDataGrid
-          (tabValueChanged)="tabValueChange($event)"
-        ></planning-grid>
-      </div>
-      <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
-        <planning-kanban [dataSource]="dataSource">
-        </planning-kanban>
-      </div>
+  <div class="task-list" [ngSwitch]="displayTaskComponent">
+    <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
+      <task-list-grid
+        #planningDataGrid
+        [dataSource]="tasks"
+        (tabValueChanged)="tabValueChange($event)"
+      ></task-list-grid>
     </div>
-</ng-template>
-<ng-template #loading>
-  <dx-load-panel [visible]="load"></dx-load-panel>
-</ng-template>
+    <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
+      <task-list-kanban [dataSource]="tasks"></task-list-kanban>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,11 @@
 <ng-container *ngIf="isAuthenticated(); else unauthenticated">
-  <app-side-nav-outer-toolbar title="{{appInfo.title}}">
+  <app-side-nav-outer-toolbar title="{{ appInfo.title }}">
     <router-outlet></router-outlet>
     <app-footer>
-      Copyright © 2011-{{appInfo.currentYear}} {{appInfo.title}} Inc.
-      <br/>
-      All trademarks or registered trademarks are property of their respective owners.
+      Copyright © 2011-{{ appInfo.currentYear }} {{ appInfo.title }} Inc.
+      <br />
+      All trademarks or registered trademarks are property of their respective
+      owners.
     </app-footer>
   </app-side-nav-outer-toolbar>
 </ng-container>

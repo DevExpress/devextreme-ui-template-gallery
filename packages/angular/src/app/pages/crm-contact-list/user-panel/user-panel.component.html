@@ -1,0 +1,202 @@
+<div class="panel" [ngClass]="{ pin: isPin, open: isOpen }">
+  <div class="data-wrapper">
+    <ng-container *ngIf="!isLoading">
+      <div class="data-part">
+        <dx-toolbar>
+          <dxi-item location="before">
+            <span class="contact-name value">{{ user.name }}</span>
+          </dxi-item>
+          <dxi-item location="before">
+            <contact-status [value]="user.status"></contact-status>
+          </dxi-item>
+          <dxi-item location="after" [visible]="isPinEnabled">
+            <dx-button
+              [icon]="isPin ? 'unpin' : 'pin'"
+              (onClick)="pinClick($event)"
+            ></dx-button>
+          </dxi-item>
+          <dxi-item location="after">
+            <dx-button icon="close" (onClick)="closePanel($event)"></dx-button>
+          </dxi-item>
+        </dx-toolbar>
+      </div>
+
+      <dx-scroll-view class="panel-scroll">
+        <div class="data-part border">
+          <dx-form
+            [formData]="user"
+            labelMode="floating"
+            [readOnly]="!isEditing"
+          >
+            <dxi-item itemType="group" [colCount]="2">
+              <dxi-item dataField="image" template="photo"></dxi-item>
+
+              <dxi-item itemType="group">
+                <dxi-item
+                  dataField="company"
+                  template="blue-text"
+                  [editorOptions]="editorOptions"
+                ></dxi-item>
+                <dxi-item
+                  dataField="position"
+                  [editorOptions]="editorOptions"
+                ></dxi-item>
+                <dxi-item
+                  dataField="manager"
+                  template="blue-text"
+                  [editorOptions]="editorOptions"
+                >
+                  <dxo-label text="Assigned to"></dxo-label>
+                </dxi-item>
+              </dxi-item>
+            </dxi-item>
+
+            <dxi-item itemType="group">
+              <dxi-item
+                dataField="phone"
+                template="editorByIcon"
+                [editorOptions]="{
+                  stylingMode: stylingMode,
+                  mask: '+1(000)000-0000',
+                  icon: 'tel'
+                }"
+              ></dxi-item>
+              <dxi-item
+                dataField="email"
+                template="editorByIcon"
+                [editorOptions]="{
+                  stylingMode: stylingMode,
+                  icon: 'email'
+                }"
+              ></dxi-item>
+              <dxi-item
+                dataField="address"
+                template="editorByIcon"
+                [editorOptions]="{
+                  stylingMode: stylingMode,
+                  icon: 'home'
+                }"
+              ></dxi-item>
+            </dxi-item>
+
+            <!-- T1085831 -->
+            <div *dxTemplate="let data of 'blue-text'">
+              <div *ngIf="!isEditing then blue; else editing;"></div>
+              <ng-template #blue>
+                <form-item-blue
+                  [label]="data.editorOptions.label"
+                  [value]="data.editorOptions.value"
+                ></form-item-blue>
+              </ng-template>
+              <ng-template #editing>
+                <dx-text-box
+                  [(value)]="user[data.dataField]"
+                  [label]="data.editorOptions.label"
+                ></dx-text-box>
+              </ng-template>
+            </div>
+
+            <div *dxTemplate="let data of 'photo'">
+              <form-item-photo
+                [link]="data.editorOptions.value"
+              ></form-item-photo>
+            </div>
+
+            <div *dxTemplate="let data of 'editorByIcon'" class="icon-editor">
+              <i class="dx-icon dx-icon-{{ data.editorOptions.icon }}"></i>
+              <dx-text-box
+                [(value)]="user[data.dataField]"
+                [stylingMode]="data.editorOptions.stylingMode"
+                [mask]="data.editorOptions.mask"
+                [readOnly]="!isEditing"
+              ></dx-text-box>
+            </div>
+          </dx-form>
+        </div>
+
+        <div class="data-part border">
+          <dx-toolbar class="panel-toolbar">
+            <dxi-item location="before" [visible]="!isEditing">
+              <dx-button
+                text="Edit"
+                icon="edit"
+                stylingMode="outlined"
+                type="default"
+                (onClick)="toggleEdit()"
+              ></dx-button>
+            </dxi-item>
+            <dxi-item
+              location="before"
+              locateInMenu="before"
+              [visible]="isEditing"
+            >
+              <dx-button
+                text="Save"
+                stylingMode="outlined"
+                type="default"
+                (onClick)="toggleEdit()"
+              ></dx-button>
+            </dxi-item>
+            <dxi-item
+              location="before"
+              locateInMenu="before"
+              [visible]="isEditing"
+            >
+              <dx-button text="Cancel" (onClick)="toggleEdit()" stylingMode="text"></dx-button>
+            </dxi-item>
+            <dxi-item
+              location="after"
+              widget="dxDropDownButton"
+              [options]="{
+                text: 'Actions',
+                stylingMode: 'contained',
+                items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+              }"
+            ></dxi-item>
+          </dx-toolbar>
+        </div>
+
+        <div class="data-part">
+          <dx-accordion [multiple]="true" [collapsible]="true">
+            <div *dxTemplate="let t of 'title'">
+              <span class="accordion-title">{{ t.title }}</span>
+              <dx-button
+                icon="add"
+                type="default"
+                stylingMode="text"
+                (onClick)="accordionTitleClick($event)"
+              ></dx-button>
+            </div>
+
+            <dxi-item title="Opportunities">
+              <div *dxTemplate="let i of 'item'">
+                <div
+                  class="opportunities"
+                  *ngFor="let opportunity of user.opportunities"
+                >
+                  <span class="value">{{ opportunity.name }} </span>
+                  <br />
+                  <span class="value black small">{{
+                    opportunity.price | currency: "USD":"$":"1.0-0"
+                  }}</span>
+                  <br />
+                </div>
+              </div>
+            </dxi-item>
+
+            <dxi-item title="Activities">
+              <card-activities [activities]="user.activities"></card-activities>
+            </dxi-item>
+          </dx-accordion>
+        </div>
+      </dx-scroll-view>
+    </ng-container>
+
+    <dx-load-panel
+      [width]="300"
+      [visible]="isLoading"
+      container=".panel"
+      [position]="{ of: '.panel' }"
+    ></dx-load-panel>
+  </div>
+</div>

@@ -11,17 +11,19 @@ const defaultPath = '/';
 const defaultUser = {
   email: 'jheart@dx-email.com',
   name: 'John Heart',
-  avatarUrl: 'https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png'
+  avatarUrl: 'https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png',
 };
 
 @Injectable()
 export class AuthService {
   private _user: IUser | null = defaultUser;
+
   get loggedIn(): boolean {
     return !!this._user;
   }
 
   private _lastAuthenticatedPath: string = defaultPath;
+
   set lastAuthenticatedPath(value: string) {
     this._lastAuthenticatedPath = value;
   }
@@ -29,7 +31,6 @@ export class AuthService {
   constructor(private router: Router) { }
 
   async logIn(email: string, password: string) {
-
     try {
       // Send request
       console.log(email, password);
@@ -38,13 +39,12 @@ export class AuthService {
 
       return {
         isOk: true,
-        data: this._user
+        data: this._user,
       };
-    }
-    catch {
+    } catch {
       return {
         isOk: false,
-        message: "Authentication failed"
+        message: 'Authentication failed',
       };
     }
   }
@@ -55,13 +55,12 @@ export class AuthService {
 
       return {
         isOk: true,
-        data: this._user
+        data: this._user,
       };
-    }
-    catch {
+    } catch {
       return {
         isOk: false,
-        data: null
+        data: null,
       };
     }
   }
@@ -73,13 +72,12 @@ export class AuthService {
 
       this.router.navigate(['/create-account']);
       return {
-        isOk: true
+        isOk: true,
       };
-    }
-    catch {
+    } catch {
       return {
         isOk: false,
-        message: "Failed to create account"
+        message: 'Failed to create account',
       };
     }
   }
@@ -90,15 +88,14 @@ export class AuthService {
       console.log(email, recoveryCode);
 
       return {
-        isOk: true
+        isOk: true,
       };
-    }
-    catch {
+    } catch {
       return {
         isOk: false,
-        message: "Failed to change password"
-      }
-    };
+        message: 'Failed to change password',
+      };
+    }
   }
 
   async resetPassword(email: string) {
@@ -107,13 +104,12 @@ export class AuthService {
       console.log(email);
 
       return {
-        isOk: true
+        isOk: true,
       };
-    }
-    catch {
+    } catch {
       return {
         isOk: false,
-        message: "Failed to reset password"
+        message: 'Failed to reset password',
       };
     }
   }
@@ -134,7 +130,7 @@ export class AuthGuardService implements CanActivate {
       'login-form',
       'reset-password',
       'create-account',
-      'change-password/:recoveryCode'
+      'change-password/:recoveryCode',
     ].includes(route.routeConfig?.path || defaultPath);
 
     if (isLoggedIn && isAuthForm) {

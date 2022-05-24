@@ -1,120 +1,104 @@
-import { Component, ViewChild, OnInit, AfterViewInit, NgModule } from '@angular/core';
-import { ScreenService } from '../../shared/services';
-import { getRawStatuses, getContact, getActiveContactOpportunities, getClosedContactOpportunities, getContactNotes, getContactMessages } from 'dx-rwa-data';
-import CustomStore from 'devextreme/data/custom_store';
+import {
+  Component, OnInit, NgModule, OnDestroy,
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
-  DxCheckBoxModule,
-  DxDataGridModule,
-  DxFormModule,
-  DxLoadPanelModule,
-  DxSelectBoxModule,
-  DxTabPanelModule,
-  DxTextAreaModule,
-  DxTextBoxModule,
-  DxTileViewModule,
+  DxDropDownButtonModule,
   DxToolbarModule,
 } from 'devextreme-angular';
 import {
-  ActivitiesModule,
-  NotesModule,
-  MessagesModule,
-} from 'src/app/shared/components'
-import { CommonModule } from '@angular/common';
+  CardActivitiesModule,
+  CardNotesModule,
+  CardMessagesModule,
+} from 'src/app/shared/components';
+import { RwaService } from 'src/app/shared/services';
+import { forkJoin, Observable, Subscription } from 'rxjs';
+import { Contact } from 'src/app/shared/types/contact';
+import { Messages } from 'src/app/shared/types/messages';
+import { Notes } from 'src/app/shared/types/notes';
+import { Opportunities } from 'src/app/shared/types/opportunities';
+import { ContactFormModule } from './contact-form/contact-form.component';
+import { ContactCardsModule } from './contact-cards/contact-cards.component';
 
 @Component({
   templateUrl: './crm-contact-form.component.html',
-  styleUrls: ['./crm-contact-form.component.scss']
+  styleUrls: ['./crm-contact-form.component.scss'],
+  providers: [RwaService],
 })
-export class CrmContactFormComponent implements OnInit {
+export class CrmContactFormComponent implements OnInit, OnDestroy {
+  contactId = 12;
 
-  constructor() {
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.refresh = this.refresh.bind(this);
+  contactData$: Observable<Contact>;
 
-    getContact(this.userId).then((data) => {
-      this.viewData = data;
-      this.load = false;
+  contactNotes: Notes;
+
+  contactMessages: Messages;
+
+  activeOpportunities: Opportunities;
+
+  closedOpportunities: Opportunities;
+
+  contactName: string;
+
+  subscriptions: Subscription[] = [];
+
+  loadData = () => {
+    this.contactData$ = this.service.getContact(this.contactId);
+
+    const observable = forkJoin({
+      contactNotes: this.service.getContactNotes(this.contactId),
+      contactMessages: this.service.getContactMessages(this.contactId),
+      activeOpportunities: this.service.getActiveContactOpportunities(this.contactId),
+      closedOpportunities: this.service.getClosedContactOpportunities(this.contactId),
     });
-    
-    this.statuses = new CustomStore({
-      loadMode: 'raw',
-      load: getRawStatuses
-    });
 
-    this.activeOpportunities = getActiveContactOpportunities(this.userId);
-    this.closedOpportunities = getClosedContactOpportunities(this.userId);
-    this.notes = getContactNotes(this.userId);
-    this.messages = getContactMessages(this.userId);
-  }
+    this.subscriptions.push(this.contactData$.subscribe((data) => {
+      this.contactName = data.name;
+    }));
 
-  userId = 12;
-  viewData: any;
-  load = true;
-  edit = false;
-  statuses: CustomStore;
-  activeOpportunities: Promise<Array<{name:string, products:string, manager:string, total:string}>>;
-  closedOpportunities: Promise<Array<{name:string, products:string, manager:string, total:string}>>;
-  notes: Promise<Array<{text:string, date:string, manager:string}>>;
-  messages: Promise<Array<{text:string, subject:string, date:string, manager:string}>>;
+    this.subscriptions.push(observable.subscribe((data) => {
+      Object.keys(data).forEach((key) => this[key] = data[key]);
+    }));
+  };
 
-  toggleEdit() {
-    this.edit = !this.edit;
-  }
-
-  formatPhone(number: string | number): string {
-    return String(number).replace(/(\d{3})(\d{3})(\d{4})/,"+1($1)$2-$3");
-  }
-
-  getAvatarText(name: string) {
-    return name.split(' ').map(name => name[0]).join('');
-  }
-
-  setUserName(text: string) {
-    return text.replace('{username}', this.viewData.name);
-  }
-
-  getSizeQualifier(width) {
-    if (width < 415) return "xs";
-    return "lg";
-  }
-
-  refresh() {
-    this.viewData = null;
-    this.load = true;
-    getContact(this.userId).then((data) => {
-      this.viewData = data;
-      this.load = false;
-    });
+  constructor(private service: RwaService) {
   }
 
   ngOnInit(): void {
-    
+    this.loadData();
   }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
+  refresh = () => {
+    this.loadData();
+  };
+
+  formatPhone = (number: string | number) => String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
+
+  getSizeQualifier = (width: number) => (width < 415 ? 'xs' : 'lg');
 }
 
 @NgModule({
   imports: [
-    DxFormModule,
     DxToolbarModule,
     DxButtonModule,
-    DxSelectBoxModule,
-    DxTextBoxModule,
-    DxLoadPanelModule,
-    DxTabPanelModule,
-    DxTextAreaModule,
-    DxDataGridModule,
-    DxCheckBoxModule,
-    DxTileViewModule,
-    ActivitiesModule,
-    NotesModule,
-    MessagesModule,
+    DxDropDownButtonModule,
 
-    CommonModule
+    ContactFormModule,
+    ContactCardsModule,
+
+    CardActivitiesModule,
+    CardNotesModule,
+    CardMessagesModule,
+
+    CommonModule,
   ],
   providers: [],
   exports: [],
-  declarations: [CrmContactFormComponent]
+  declarations: [CrmContactFormComponent],
 })
 export class CrmContactFormModule { }
-

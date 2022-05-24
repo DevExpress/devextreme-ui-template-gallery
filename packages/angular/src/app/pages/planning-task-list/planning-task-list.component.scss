@@ -1,5 +1,7 @@
-@use "../../../variables" as *;
+@use "../../../variables.scss" as *;
 @use "sass:math";
+
+@include separator();
 
 :host {
   display: flex;
@@ -8,14 +10,10 @@
   padding: 20px 16px 0 16px;
 }
 
-@include separator();
-
-@include status();
-
 ::ng-deep {
   .dx-toolbar {
     .toolbar-header {
-        @include header();
+      @include header();
     }
 
     .dx-tabs .dx-tab {
@@ -24,19 +22,6 @@
       &:nth-child(2) {
         width: 150px;
       }
-    }
-  }
-  
-  .search-grid {
-    .dx-placeholder {
-      font-size: 14px;
-    }
-
-    .dx-texteditor.dx-editor-filled .dx-texteditor-input,
-    .dx-texteditor.dx-editor-outlined .dx-texteditor-input,
-    .dx-texteditor.dx-editor-filled .dx-placeholder::before,
-    .dx-texteditor.dx-editor-outlined .dx-placeholder::before {
-      padding-left: 0;
     }
   }
 

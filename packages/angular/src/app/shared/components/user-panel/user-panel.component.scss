@@ -1,4 +1,4 @@
-@use "../../../../variables" as *;
+@use "../../../../variables.scss" as *;
 
 .user-info {
   display: flex;
@@ -16,7 +16,7 @@
     width: 36px;
     margin: 0 4px;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 
     .user-image {
       width: 100%;
@@ -55,7 +55,7 @@
     margin-right: 16px;
   }
   .dx-menu-item .dx-menu-item-content {
-      padding: 3px 15px 4px;
+    padding: 3px 15px 4px;
   }
 }
 
