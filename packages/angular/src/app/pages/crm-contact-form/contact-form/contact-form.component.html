@@ -25,7 +25,7 @@
   <dx-form
     *ngIf="!isLoading"
     class="form last"
-    [formData]="contact$"
+    [formData]="contactData$"
     labelMode="floating"
     [readOnly]="!isEditing"
   >
@@ -107,7 +107,7 @@
       </ng-template>
       <ng-template #editing>
         <dx-text-box
-          [(value)]="contact$[data.dataField]"
+          [(value)]="contactData$[data.dataField]"
           [label]="data.editorOptions.label"
         ></dx-text-box>
       </ng-template>
@@ -131,7 +131,7 @@
 
     <div *dxTemplate="let data of 'statusEditing'">
       <dx-select-box
-        [(value)]="contact$.status"
+        [(value)]="contactData$.status"
         [items]="statusList"
         [stylingMode]="stylingMode"
         [label]="data.editorOptions.label"
@@ -140,7 +140,7 @@
       >
         <div *dxTemplate="let data of 'field'">
           <div class="form-custom-list-prop">
-            <contact-status [value]="contact$.status"></contact-status>
+            <contact-status [value]="contactData$.status"></contact-status>
             <dx-text-box [readOnly]="true"></dx-text-box>
           </div>
         </div>
@@ -152,7 +152,7 @@
 
     <div *dxTemplate="let data of 'phone'">
       <form-item-with-button
-        [(value)]="contact$.phone"
+        [(value)]="contactData$.phone"
         [isEditing]="isEditing"
         [textBoxOptions]="{
           label: data.editorOptions.label,
@@ -170,7 +170,7 @@
 
     <div *dxTemplate="let data of 'email'">
       <form-item-with-button
-        [(value)]="contact$.email"
+        [(value)]="contactData$.email"
         [isEditing]="isEditing"
         [textBoxOptions]="{
           label: data.editorOptions.label,

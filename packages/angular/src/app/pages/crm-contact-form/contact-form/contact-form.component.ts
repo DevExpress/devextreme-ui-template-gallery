@@ -26,9 +26,9 @@ import { Contact, contactStatusList } from 'src/app/shared/types/contact';
   styleUrls: ['./contact-form.component.scss'],
 })
 export class ContactFormComponent implements OnInit, OnDestroy {
-  @Input() contact: Observable<Contact>;
+  @Input() contactData: Observable<Contact>;
 
-  contact$: Contact;
+  contactData$: Contact;
 
   statusList = contactStatusList;
 
@@ -36,17 +36,17 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   isLoading = true;
 
-  stylingMode: TextBoxProperties['stylingMode'] = 'underlined';
+  stylingMode = 'underlined';
 
-  editorOptions: TextBoxProperties = { stylingMode: this.stylingMode };
+  editorOptions = { stylingMode: this.stylingMode };
 
   contactSubscription: Subscription = new Subscription();
 
   ngOnInit() {
     this.setEditorMode(this.isEditing);
 
-    this.contactSubscription = this.contact.subscribe((data) => {
-      this.contact$ = data;
+    this.contactSubscription = this.contactData.subscribe((data) => {
+      this.contactData$ = data;
       this.isLoading = false;
     });
   }

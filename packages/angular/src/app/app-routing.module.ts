@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import {
-  LoginFormComponent, ResetPasswordFormComponent, CreateAccountFormComponent, ChangePasswordFormComponent,
+  LoginFormComponent,
+  ResetPasswordFormComponent,
+  CreateAccountFormComponent,
+  ChangePasswordFormComponent,
 } from './shared/components';
 import { AuthGuardService } from './shared/services';
 

@@ -47,9 +47,9 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   isPinEnabled = false;
 
-  stylingMode: TextBoxProperties['stylingMode'] = 'underlined';
+  stylingMode = 'underlined';
 
-  editorOptions: TextBoxProperties = { stylingMode: this.stylingMode };
+  editorOptions = { stylingMode: this.stylingMode };
 
   userPanelSubscriptions: Subscription[] = [];
 

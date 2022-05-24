@@ -7,6 +7,7 @@ import {
   DxDataGridModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
+import { Task } from '../../types/task';
 
 @Component({
   selector: 'card-tasks',
@@ -16,7 +17,7 @@ import {
 export class CardTasksComponent implements OnChanges {
   @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
 
-  @Input() tasks;
+  @Input() tasks: Task[];
 
   @Input() manager: string;
 

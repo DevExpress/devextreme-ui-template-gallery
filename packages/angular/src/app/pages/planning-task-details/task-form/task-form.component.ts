@@ -40,9 +40,9 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   isEmptyDueDate = true;
 
-  stylingMode: TextBoxProperties['stylingMode'] = 'underlined';
+  stylingMode = 'underlined';
 
-  editorOptions: TextBoxProperties = { stylingMode: this.stylingMode };
+  editorOptions = { stylingMode: this.stylingMode };
 
   ngOnInit() {
     this.setEditorMode(this.isEditing);

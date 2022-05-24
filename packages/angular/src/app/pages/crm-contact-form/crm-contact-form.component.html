@@ -50,14 +50,14 @@
 
   <div class="panels">
     <div class="left">
-      <contact-form [contact]="contact$"></contact-form>
+      <contact-form [contactData]="contactData$"></contact-form>
     </div>
 
     <div class="right">
       <contact-cards
-        [contactName]="(contact$ | async)?.name"
-        [tasks]="(contact$ | async)?.tasks"
-        [activities]="(contact$ | async)?.activities"
+        [contactName]="(contactData$ | async)?.name"
+        [tasks]="(contactData$ | async)?.tasks"
+        [activities]="(contactData$ | async)?.activities"
         [activeOpportunities]="activeOpportunities"
         [closedOpportunities]="closedOpportunities"
         [notes]="contactNotes"

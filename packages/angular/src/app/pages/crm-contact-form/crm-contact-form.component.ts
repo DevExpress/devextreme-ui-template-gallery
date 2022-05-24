@@ -29,7 +29,7 @@ import { ContactCardsModule } from './contact-cards/contact-cards.component';
 export class CrmContactFormComponent implements OnInit, OnDestroy {
   contactId = 12;
 
-  contact$: Observable<Contact>;
+  contactData$: Observable<Contact>;
 
   contactNotes: Notes;
 
@@ -44,7 +44,7 @@ export class CrmContactFormComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   loadData = () => {
-    this.contact$ = this.service.getContact(this.contactId);
+    this.contactData$ = this.service.getContact(this.contactId);
 
     const observable = forkJoin({
       contactNotes: this.service.getContactNotes(this.contactId),
@@ -53,7 +53,7 @@ export class CrmContactFormComponent implements OnInit, OnDestroy {
       closedOpportunities: this.service.getClosedContactOpportunities(this.contactId),
     });
 
-    this.subscriptions.push(this.contact$.subscribe((data) => {
+    this.subscriptions.push(this.contactData$.subscribe((data) => {
       this.contactName = data.name;
     }));
 
