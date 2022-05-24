@@ -1,25 +1,44 @@
 # Devextreme UI Template Gallery
 
-Devextreme UI Template Gallery is a repository with a real-word application demo. This demo illustrates how to integrate various DevExtreme UI components into a web application. The projects in this repository include the CRM and Project Management UI/UX patterns with source code for Angular.
+This repository includes UI Templates for the CRM and Project Management UI/UX:
 
-> Vue and React projects are under development.
+* [CRM. Contact List](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light.compact/angular/default/#/crm-contact-list)
+* [CRM. Contact Form](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light.compact/angular/default/#/crm-contact-form)
+* [Planning. Task List](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light.compact/angular/default/#/planning-task-list)
+* [Planning. Task Details](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light.compact/angular/default/#/planning-task-details)
+
+Each UI Template includes a responsive layout with DevExtreme UI components populated with sample data entities. This data do not contain business logic. You can use these UI Templates to get started with your project.  
+
+> The repository is in preview mode. You can use only Angular version. Vue and React projects are still under development.
 
 ![Devextreme UI Template Gallery](/images/ui-template-gallery.png)
 
+## How It Organized
+
+UI Template sources for Angular are located in the [/packages/angular](.packages/angular) folder.
+
+Navigate to the following folders to get code for each template:
+
+**CRM**
+
+* [Contact List](.packages/angular/src/app/pages/crm-contact-list/) 
+* [Contact Form](.packages/angular/src/app/pages/crm-contact-form/)
+
+**Planning**
+
+* [Task List](.packages/angular/src/app/pages/planning-task-list/) 
+* [Task Details](.packages/angular/src/app/pages/planning-task-details/)
+
 ## Get Started
 
-To run these projects on your machine, clone this repository and follow the instructions below.
+### Angular
+
+To run these patterns on your machine, clone this repository and follow the instructions below.
 
 1. Run the npm command below to install packages to an Angular project and prepare the repository:  
 
     ```
     npm i
-    ```
-
-2. Run the following npm command to enable the [embedded mode](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light/angular/embedded/) for the project. Skip this step to use the [default mode](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light/angular/default/) for the project.
-
-    ```
-    npm run make-embedded-mode
     ```
 
 2. Move to the Angular folder and run the following command to start the project:
@@ -32,12 +51,6 @@ To run these projects on your machine, clone this repository and follow the inst
 
 3. Navigate to [http://localhost:4200/](http://localhost:4200/). 
     
-    The project shows the navigation menu on the left in default mode. To navigate between CRM and Planning patterns in embedded mode, use the following links:
+### React and Vue
 
-    `/crm-contact-form` - CRM. Contact Form.
-
-    `/crm-contact-list` - CRM. Contact List.
-
-    `/planning-task-list` - Planning. Task list.
-
-    `/planning-task-details` - Planning. Task details.
+DevExtreme UI Templates for React and Vue will be available soon. 
