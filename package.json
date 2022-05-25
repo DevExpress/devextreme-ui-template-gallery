@@ -10,9 +10,9 @@
     "postinstall": "lerna bootstrap",
     "lint-html": "prettier --write . && prettier --check .",
     "lint-js": "eslint .",
-    "lint-fix": "prettier --write . && eslint --fix . && stylelint **/*.{css,vue} --fix",
-    "lint-css": "stylelint **/*.{css,vue}",
-    "lint-css-fix": "stylelint --fix **/*.{css,vue}",
+    "lint-fix": "prettier --write . && eslint --fix . && stylelint **/*.{css,vue,scss} --fix",
+    "lint-css": "stylelint **/*.{css,vue,scss}",
+    "lint-css-fix": "stylelint --fix **/*.{css,vue,scss}",
     "lint-angular": "eslint packages/angular",
     "lint-utils": "eslint utils/",
     "lint-bundles": "npm-run-all -p lint-angular lint-react lint-vue",
@@ -43,6 +43,8 @@
     "eslint-plugin-vue": "^7.0.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
+    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-scss": "^4.1.0",
     "typescript": "^4.6.3",
     "prettier": "2.4.1"
   }
