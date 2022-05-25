@@ -9,7 +9,7 @@ This repository includes UI Templates for the CRM and Project Management UI/UX:
 
 Each UI Template includes a responsive layout with DevExtreme UI components populated with sample data entities. This data do not contain business logic. You can use these UI Templates to get started with your project.  
 
-> The repository is in preview mode. You can use only Angular version. Vue and React projects are still under development.
+> The repository is in preview mode. Angular version is available for use. Vue and React projects are still under development.
 
 ![Devextreme UI Template Gallery](/images/ui-template-gallery.png)
 
