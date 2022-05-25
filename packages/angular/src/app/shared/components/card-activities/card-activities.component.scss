@@ -53,3 +53,19 @@
     }
   }
 }
+
+@media only screen and (max-width: 400px) {
+  .activities-list {
+    .activity {
+      .date {
+        grid-row-start: 2;
+        padding: 0;
+      }
+
+      .dx-button {
+        position: absolute;
+        right: 15px;
+      }
+    }
+  }
+}
