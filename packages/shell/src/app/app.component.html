@@ -28,7 +28,7 @@
     theme: {{ theme }}<br />
     view: {{ view }}<br /><br />
     <a
-      href="https://devexpress.github.io/devextreme-rwa-demos/{{ theme }}/{{
+      href="https://devexpress.github.io/devextreme-ui-templates-gallery/{{ theme }}/{{
         approach
       }}/default/#/{{ view }}"
       target="_blank"
@@ -39,12 +39,12 @@
       <iframe
         [src]="
           sanitizer.bypassSecurityTrustResourceUrl(
-            'https://devexpress.github.io/devextreme-rwa-demos/' +
-              this.theme +
+            'https://devexpress.github.io/devextreme-ui-templates-gallery/' +
+              theme +
               '/' +
-              this.approach +
+              approach +
               '/embedded/#/' +
-              this.view
+              view
           )
         "
       ></iframe>

@@ -14,13 +14,9 @@
     "lint-css": "stylelint **/*.{css,vue}",
     "lint-css-fix": "stylelint --fix **/*.{css,vue}",
     "lint-angular": "eslint packages/angular",
-    "lint-react": "eslint packages/react",
-    "lint-vue": "eslint packages/vue",
     "lint-utils": "eslint utils/",
     "lint-bundles": "npm-run-all -p lint-angular lint-react lint-vue",
     "lint-angular-fix": "eslint --fix packages/angular",
-    "lint-react-fix": "eslint --fix packages/react",
-    "lint-vue-fix": "eslint --fix packages/vue",
     "lint-utils --fix": "eslint --fix utils"
   },
   "devDependencies": {
