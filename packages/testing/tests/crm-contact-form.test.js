@@ -22,7 +22,7 @@ const setEmbedded = async (t, embed, screenMode) => {
 
     await t.click('.dx-icon-refresh');
   }
-}
+};
 
 packages.forEach((pkg) => {
   [false, true].forEach((embedded) => {
@@ -46,7 +46,7 @@ packages.forEach((pkg) => {
           .ok(compareResults.errorMessages());
       });
 
-      test(`Crm contact form Form (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async(t) => {
+      test(`Crm contact form Form (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
         await t.resizeWindow(...screenMode);
@@ -69,7 +69,7 @@ packages.forEach((pkg) => {
       });
 
       test(`Crm contact form tabpanel (${pkg.name}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
-        if(screenMode[0] === 400) return;
+        if (screenMode[0] === 400) return;
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
         await t.resizeWindow(...screenMode);
@@ -84,12 +84,12 @@ packages.forEach((pkg) => {
         const tabPanels = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel]');
 
         const tabsCount = await tabs.count;
-        for(let indexTab = 0; indexTab < tabsCount; indexTab += 1) {
-            const tab = tabs.nth(indexTab);
-            const tabName = (await tab.innerText).toLowerCase();
+        for (let indexTab = 0; indexTab < tabsCount; indexTab += 1) {
+          const tab = tabs.nth(indexTab);
+          const tabName = (await tab.innerText).toLowerCase();
 
-            await t.click(tab);
-            await takeScreenshot(`crm-form-tab-${tabName}-${pkg.name}-embed=${embedded}-${screenMode[0]}`, tabPanels.nth(indexTab));
+          await t.click(tab);
+          await takeScreenshot(`crm-form-tab-${tabName}-${pkg.name}-embed=${embedded}-${screenMode[0]}`, tabPanels.nth(indexTab));
         }
 
         await t

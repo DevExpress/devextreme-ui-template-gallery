@@ -7,4 +7,5 @@ copyFile(
   (err) => {
     if (err) throw err;
     console.log('themes.json copied');
-});
+  },
+);

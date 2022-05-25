@@ -1,37 +1,56 @@
 <dx-toolbar>
-  <dxi-item widget="dxSelectBox" location="before" locateInMenu="auto" [options]="approachSelectBoxOptions"></dxi-item>
-  <dxi-item widget="dxSelectBox" location="after" locateInMenu="auto" [options]="themeSelectBoxOptions"></dxi-item>
+  <dxi-item
+    widget="dxSelectBox"
+    location="before"
+    locateInMenu="auto"
+    [options]="approachSelectBoxOptions"
+  ></dxi-item>
+  <dxi-item
+    widget="dxSelectBox"
+    location="after"
+    locateInMenu="auto"
+    [options]="themeSelectBoxOptions"
+  ></dxi-item>
 </dx-toolbar>
 
-<dx-drawer
-    template="template"
-    [opened]="true"
-    [closeOnOutsideClick]="false">
-    <div *dxTemplate="let data of 'template'" style="width: 200px">
-        <dx-list class="panel-list dx-theme-accent-as-background-color"
-            [dataSource]="views"
-            selectionMode="single"
-            (onSelectionChanged)="viewChanged($event)"
-            >
-        </dx-list>
+<dx-drawer template="template" [opened]="true" [closeOnOutsideClick]="false">
+  <div *dxTemplate="let data of 'template'" style="width: 200px">
+    <dx-list
+      class="panel-list dx-theme-accent-as-background-color"
+      [dataSource]="views"
+      selectionMode="single"
+      (onSelectionChanged)="viewChanged($event)"
+    >
+    </dx-list>
+  </div>
+  <div class="content">
+    approach: {{ approach }}<br />
+    theme: {{ theme }}<br />
+    view: {{ view }}<br /><br />
+    <a
+      href="https://devexpress.github.io/devextreme-rwa-demos/{{ theme }}/{{
+        approach
+      }}/default/#/{{ view }}"
+      target="_blank"
+    >
+      Open standalone app
+    </a>
+    <div class="frame">
+      <iframe
+        [src]="
+          sanitizer.bypassSecurityTrustResourceUrl(
+            'https://devexpress.github.io/devextreme-rwa-demos/' +
+              this.theme +
+              '/' +
+              this.approach +
+              '/embedded/#/' +
+              this.view
+          )
+        "
+      ></iframe>
     </div>
-    <div class="content">
-      approach: {{approach}}<br>
-      theme: {{theme}}<br>
-      view: {{view}}<br><br>
-      <a 
-        href="https://devexpress.github.io/devextreme-rwa-demos/{{theme}}/{{approach}}/default/#/{{view}}"
-        target="_blank">
-        Open standalone app
-      </a>
-      <div class="frame">
-        <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl('https://devexpress.github.io/devextreme-rwa-demos/' + this.theme + '/' + this.approach + '/embedded/#/' + this.view)"></iframe>
-      </div>
-    </div>
+  </div>
 </dx-drawer>
-
-
-
 
 <!-- NOT need now -->
 <router-outlet></router-outlet>

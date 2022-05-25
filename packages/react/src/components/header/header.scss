@@ -5,7 +5,7 @@
   z-index: 1;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
-  .dx-toolbar .dx-toolbar-item.menu-button>.dx-toolbar-item-content .dx-icon {
+  .dx-toolbar .dx-toolbar-item.menu-button > .dx-toolbar-item-content .dx-icon {
     color: $base-accent;
   }
 }
@@ -35,7 +35,7 @@
     padding: 10px 0;
   }
 
-  .user-button>.dx-button-content {
+  .user-button > .dx-button-content {
     padding: 3px;
   }
 }

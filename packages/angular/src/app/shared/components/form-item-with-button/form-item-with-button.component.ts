@@ -3,11 +3,11 @@ import {
   Component, EventEmitter, Input, NgModule, OnInit, Output,
 } from '@angular/core';
 import {
-    DxButtonModule,
-    DxTextBoxModule,
+  DxButtonModule,
+  DxTextBoxModule,
 } from 'devextreme-angular';
-import { Properties as DxTextBoxOptions } from 'devextreme/ui/text_box'
-import { Properties as DxButtonOptions } from 'devextreme/ui/button'
+import { Properties as DxTextBoxOptions } from 'devextreme/ui/text_box';
+import { Properties as DxButtonOptions } from 'devextreme/ui/button';
 
 @Component({
   selector: 'form-item-with-button',
@@ -29,7 +29,7 @@ export class FormItemWithButtonComponent implements OnInit {
 
   @Input() isEditing? = true;
 
-  ngOnInit() { 
+  ngOnInit() {
   }
 }
 
@@ -37,8 +37,8 @@ export class FormItemWithButtonComponent implements OnInit {
   imports: [
     DxButtonModule,
     DxTextBoxModule,
-    
-    CommonModule
+
+    CommonModule,
   ],
   declarations: [FormItemWithButtonComponent],
   exports: [FormItemWithButtonComponent],

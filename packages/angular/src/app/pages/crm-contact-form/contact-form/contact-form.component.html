@@ -18,7 +18,11 @@
       ></dx-button>
     </dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
-      <dx-button text="Cancel" (onClick)="toggleEdit()" stylingMode="text"></dx-button>
+      <dx-button
+        text="Cancel"
+        (onClick)="toggleEdit()"
+        stylingMode="text"
+      ></dx-button>
     </dxi-item>
   </dx-toolbar>
 
@@ -47,10 +51,7 @@
           [editorOptions]="editorOptions"
         ></dxi-item>
       </dxi-item>
-      <dxi-item
-        dataField="position"
-        [editorOptions]="editorOptions"
-      ></dxi-item>
+      <dxi-item dataField="position" [editorOptions]="editorOptions"></dxi-item>
       <dxi-item
         dataField="manager"
         template="blue-text"
@@ -80,25 +81,14 @@
       <dxi-item dataField="state.stateShort" [editorOptions]="editorOptions">
         <dxo-label text="State"></dxo-label>
       </dxi-item>
-      <dxi-item
-        dataField="zipCode"
-        [editorOptions]="editorOptions"
-      ></dxi-item>
-      <dxi-item
-        dataField="phone"
-        template="phone"
-        [colSpan]="2"
-      ></dxi-item>
-      <dxi-item
-        dataField="email"
-        template="email"
-        [colSpan]="2"
-      ></dxi-item>
+      <dxi-item dataField="zipCode" [editorOptions]="editorOptions"></dxi-item>
+      <dxi-item dataField="phone" template="phone" [colSpan]="2"></dxi-item>
+      <dxi-item dataField="email" template="email" [colSpan]="2"></dxi-item>
     </dxi-item>
 
     <!-- T1085831 -->
     <div *dxTemplate="let data of 'blue-text'">
-      <div *ngIf="!isEditing then blue; else editing;"></div>
+      <div *ngIf="!isEditing; then blue; else editing"></div>
       <ng-template #blue>
         <form-item-blue
           [label]="data.editorOptions.label"
