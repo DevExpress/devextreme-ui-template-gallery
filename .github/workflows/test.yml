@@ -40,14 +40,14 @@ jobs:
       fail-fast: false
       matrix:
         ARGS: [
-          { project: 'angular', page: 'crm-contact-form' }
-          { project: 'angular', page: 'crm-contact-list' }
-          { project: 'angular', page: 'planning-task-details' }
+          { project: 'angular', page: 'crm-contact-form' },
+          { project: 'angular', page: 'crm-contact-list' },
+          { project: 'angular', page: 'planning-task-details' },
           { project: 'angular', page: 'planning-task-list' }
         ]
     runs-on: ubuntu-latest
 
-    steps:
+    steps: 
     - name: Get sources
       uses: actions/checkout@v2
 
