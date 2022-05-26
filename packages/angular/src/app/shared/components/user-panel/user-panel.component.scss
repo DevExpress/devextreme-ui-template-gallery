@@ -39,6 +39,7 @@
     color: $base-text-color;
     margin-right: 16px;
   }
+
   .dx-rtl .dx-list-item .dx-icon {
     margin-right: 0;
     margin-left: 16px;
@@ -51,9 +52,11 @@
       margin-left: 16px;
     }
   }
+
   .dx-submenu .dx-menu-items-container .dx-icon {
     margin-right: 16px;
   }
+
   .dx-menu-item .dx-menu-item-content {
     padding: 3px 15px 4px;
   }

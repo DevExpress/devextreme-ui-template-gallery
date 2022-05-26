@@ -1,3 +1,4 @@
+/* stylelint-disable no-duplicate-selectors */
 @use "../../../../variables.scss" as *;
 
 :host {
@@ -14,15 +15,17 @@
     flex: 1;
 
     ::ng-deep .dx-treeview {
+
       // ## Long text positioning
       white-space: nowrap;
+
       // ##
 
       .dx-scrollable-content {
         > .dx-treeview-node-container:first-child {
           > .dx-treeview-node:first-child {
             > .dx-treeview-item {
-              box-shadow: inset 0px 4px 8px rgb(0 0 0 / 5%);
+              box-shadow: inset 0 4px 8px rgb(0, 0, 0, 0.05);
 
               .screen-large & {
                 box-shadow: none;
@@ -42,6 +45,7 @@
           margin: 0 !important;
         }
       }
+
       // ##
 
       // ## Arrow customization
@@ -58,6 +62,7 @@
         left: 10px;
         right: auto;
       }
+
       // ##
 
       // ## Item levels customization
@@ -72,6 +77,7 @@
           padding: 0 $side-panel-min-width;
         }
       }
+
       // ##
     }
 
@@ -99,6 +105,7 @@
         color: inherit;
       }
     }
+
     // ##
   }
 }

@@ -31,7 +31,7 @@ $high-priorety-color: #d9534f;
     position: absolute;
     right: 10px;
     font-size: 18px;
-    opacity: 87%;
+    opacity: 0.87;
   }
 
   &.priority-low {
@@ -60,7 +60,7 @@ $high-priorety-color: #d9534f;
     padding-left: 8px;
     font-size: 12px;
     line-height: 14px;
-    opacity: 87%;
+    opacity: 0.87;
   }
 }
 
@@ -80,7 +80,7 @@ $high-priorety-color: #d9534f;
   align-items: center;
 
   .circle {
-    &[data-letters]:before {
+    &[data-letters]::before {
       content: attr(data-letters);
       display: inline-block;
       width: 24px;

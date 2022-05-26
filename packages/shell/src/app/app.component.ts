@@ -12,17 +12,22 @@ export class AppComponent {
 
   title = 'shell';
 
-  approaches = ['angular', 'react', 'vue'];
+  approaches = ['angular'];
 
   approach = 'angular';
 
-  views = ['home', 'profile', 'tasks'];
+  views = [
+    'crm-contact-list',
+    'crm-contact-form',
+    'planning-task-list',
+    'planning-task-details',
+  ];
 
-  view = 'home';
+  view = 'crm-contact-list';
 
   themes = allThemes;
 
-  theme = 'generic.light';
+  theme = 'material.blue.light.compact';
 
   approachSelectBoxOptions = {
     items: this.approaches,
