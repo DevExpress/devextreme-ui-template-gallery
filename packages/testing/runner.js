@@ -44,5 +44,9 @@ createTestCafe('localhost', currentPackage.port)
   })
   .catch((failedCount) => {
     // testCafe.close();
+    console.log(failedCount);
+    if (failedCount.message) {
+      console.log(failedCount.message);
+    }
     exit(failedCount);
   });
