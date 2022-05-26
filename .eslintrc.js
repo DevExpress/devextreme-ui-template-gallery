@@ -363,6 +363,7 @@ module.exports = {
         '@typescript-eslint/no-useless-constructor': 0,
         '@typescript-eslint/explicit-module-boundary-types': 0, // was warn
         '@typescript-eslint/indent': 0,
+        'react/jsx-filename-extension': 0,
         'implicit-arrow-linebreak': 0,
         'import/no-duplicates': 0,
         'no-return-await': 0,
