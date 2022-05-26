@@ -42,13 +42,7 @@ createTestCafe('localhost', 1437, 1438)
       quarantineMode: args.quarantineMode === 'true',
     });
   })
-  .catch((failedCount) => {
-    console.log(failedCount);
-    if (failedCount.message) {
-      console.log(failedCount.message);
-    }
-    if (testCafe) {
-      testCafe.close();
-    }
+  .then((failedCount) => {
+    testCafe.close();
     exit(failedCount);
   });

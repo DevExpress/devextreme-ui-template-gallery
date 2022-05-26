@@ -36,7 +36,6 @@ const setEmbedded = async (t, embed, screenMode) => {
       await t.resizeWindow(...screenMode);
 
       await t.navigateTo(`${BASE_URL}/#/crm-contact-form`);
-      console.log(`${BASE_URL}/#/crm-contact-form`);
 
       await setEmbedded(t, embedded, screenMode);
 
