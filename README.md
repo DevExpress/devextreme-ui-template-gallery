@@ -1,15 +1,15 @@
 # Devextreme UI Template Gallery
 
-This repository includes UI Templates for the CRM and Project Management UI/UX:
+This repository includes responsive UI Templates for the most pupular UI/UX patterns in web LOB applications. Currently, this project is in the 'preview' stage and contains the following CRM and Project Management UI templates:
 
 * [CRM. Contact List](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light.compact/angular/default/#/crm-contact-list)
 * [CRM. Contact Form](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light.compact/angular/default/#/crm-contact-form)
 * [Planning. Task List](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light.compact/angular/default/#/planning-task-list)
 * [Planning. Task Details](https://devexpress.github.io/devextreme-ui-templates-gallery/material.blue.light.compact/angular/default/#/planning-task-details)
 
-Each UI Template includes a responsive layout with DevExtreme UI components populated with sample data entities. This data do not contain business logic. You can use these UI Templates to get started with your project.  
+The UI Templates have responsive layouts with DevExtreme UI components. Note that the components use sample data entities without any business logic. You can use these UI Templates in your project and adapt them to your specific business requirements.
 
-> The repository is in preview mode. Angular version is available for use. Vue and React projects are still under development.
+> The repository is in preview mode. Only Angular version is available for use. Vue and React projects are still under development.
 
 ![Devextreme UI Template Gallery](/images/ui-template-gallery.png)
 
@@ -33,7 +33,7 @@ UI Template sources for Angular are located in the [packages/angular](packages/a
 
 ### Angular
 
-To run these patterns on your machine, clone this repository and follow the instructions below.
+To run these UI templates on your machine, clone this repository and follow the instructions below.
 
 1. Run the npm command below to install packages to an Angular project and prepare the repository:  
 
