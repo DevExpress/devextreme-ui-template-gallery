@@ -3,6 +3,7 @@
     "src": "./tests/**/*.test.js",
     "screenshots": {
         "path": "./",
+        "takeOnFails": true,
         "pathPattern": "${TEST}.png"
     }
 }
