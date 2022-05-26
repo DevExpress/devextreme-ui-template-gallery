@@ -19,7 +19,7 @@ if (args.project === '' && args.page === '') {
 }
 
 let testCafe;
-createTestCafe('localhost', currentPackage.port)
+createTestCafe('localhost', 1437, 1438)
   .then((tc) => {
     testCafe = tc;
 

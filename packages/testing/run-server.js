@@ -30,7 +30,7 @@ const startProject = (pkg) => {
 
   childs.push(server);
   // eslint-disable-next-line no-console
-  console.log(`Start server: localhost${pkg.port}}`);
+  console.log(`Start server: localhost:${pkg.port}`);
 
   server.on('close', onClose);
 };
