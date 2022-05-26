@@ -45,7 +45,7 @@ jobs:
           { project: 'angular', page: 'planning-task-details' }
           { project: 'angular', page: 'planning-task-list' }
         ]
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Get sources
