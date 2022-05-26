@@ -34,7 +34,7 @@ jobs:
       run: npm run test
       working-directory: packages/metadata
 
-  testcafe:
+  test-build:
     name: ${{ matrix.ARGS.project }} / ${{ matrix.ARGS.page }}
     strategy:
       fail-fast: false
