@@ -1,6 +1,6 @@
 export const packages = [{
   name: 'angular',
-  port: 8080,
+  port: 1437,
 }];
 
 export const screenModes = [
