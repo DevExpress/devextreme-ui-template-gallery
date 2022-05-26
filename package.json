@@ -10,6 +10,7 @@
     "postinstall": "lerna bootstrap",
     "lint-html": "prettier --write . && prettier --check .",
     "lint-js": "eslint .",
+
     "lint-fix": "prettier --write . && eslint --fix . && stylelint **/*.{css,scss} --fix",
     "lint-css": "stylelint **/*.{css,scss}",
     "lint-css-fix": "stylelint --fix **/*.{css,scss}",

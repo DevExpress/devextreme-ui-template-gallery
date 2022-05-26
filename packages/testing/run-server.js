@@ -1,9 +1,14 @@
 import { join } from 'path';
 import { spawn } from 'child_process';
-import { exit } from 'process';
+import { argv, exit } from 'process';
 import { writeFileSync } from 'fs';
+import parseArgs from 'minimist';
 import { testingDirectory, pidsFileName } from './dirs.config.js';
 import { packages } from './config.js';
+
+const args = parseArgs(argv.slice(1), {
+  project: '',
+});
 
 const waitTimeout = 4000;
 const childs = [];
@@ -12,7 +17,9 @@ const onClose = (code) => {
   throw new Error(`webserver exited with code ${code}`);
 };
 
-packages.forEach((pkg) => {
+const getPackage = (packageName) => packages.find((p) => p.name === packageName);
+
+const startProject = (pkg) => {
   const appDirectory = join(testingDirectory, '..', pkg.name, 'build');
   const httpServerBin = join(testingDirectory, 'node_modules', 'http-server', 'bin', 'http-server');
 
@@ -22,9 +29,20 @@ packages.forEach((pkg) => {
   });
 
   childs.push(server);
+  // eslint-disable-next-line no-console
+  console.log(`Start server ${pkg.name}: localhost:${pkg.port}`);
 
   server.on('close', onClose);
-});
+};
+
+if (args.project) {
+  const currentPackage = getPackage(args.project);
+  startProject(currentPackage);
+} else {
+  packages.forEach((pkg) => {
+    startProject(pkg);
+  });
+}
 
 setTimeout(() => {
   const pids = [];

@@ -1,6 +1,8 @@
 name: Test
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
 
 jobs:
   test-meta:
@@ -32,11 +34,19 @@ jobs:
       run: npm run test
       working-directory: packages/metadata
 
-  test-build:
-    name: Test Build
+  testcafe:
+    name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }}
+    strategy:
+      fail-fast: false
+      matrix:
+        ARGS: [
+          { project: 'angular', page: 'crm-contact-form' },
+          { project: 'angular', page: 'crm-contact-list' },
+          { project: 'angular', page: 'planning-task-details' },
+          { project: 'angular', page: 'planning-task-list' }
+        ]
     runs-on: ubuntu-latest
-    env:
-      CI: false
+    timeout-minutes: 30
 
     steps:
     - name: Get sources
@@ -59,13 +69,21 @@ jobs:
           ${{ runner.os }}-node-
 
     - name: Run npm install
-      run: npm install
+      run: npm install --no-audit --no-fund
 
     - name: Build
       run: npm run build
+      working-directory: packages/${{ matrix.ARGS.project }}
+
+    - name: Start app
+      run: npm run start-apps -- --project ${{ matrix.ARGS.project }}
+      working-directory: packages/testing
 
     - name: Run tests
-      run: npm run test
+      run: |
+        all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true"
+        echo "$all_args"
+        npm run test-testcafe -- $all_args
       working-directory: packages/testing
 
     - name: Copy screenshots artifacts

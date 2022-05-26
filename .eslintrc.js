@@ -177,6 +177,7 @@ module.exports = {
         'onhashchange',
         'onreadystatechange',
         'orderby',
+        'package',
         'pageview',
         'pangaea',
         'param',
