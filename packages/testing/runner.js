@@ -43,6 +43,6 @@ createTestCafe('localhost', currentPackage.port)
     });
   })
   .catch((failedCount) => {
-    testCafe.close();
+    // testCafe.close();
     exit(failedCount);
   });
