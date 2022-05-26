@@ -34,8 +34,8 @@ jobs:
       run: npm run test
       working-directory: packages/metadata
 
-  test-build:
-    name: ${{ matrix.ARGS.project }} / ${{ matrix.ARGS.page }}
+  testcafe:
+    name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }}
     strategy:
       fail-fast: false
       matrix:
@@ -72,9 +72,10 @@ jobs:
 
     - name: Build
       run: npm run build
+      working-directory: packages/${{ matrix.ARGS.project }}
 
-    - name: Build ${{ matrix.ARGS.project }}
-      run: npm run start-apps
+    - name: Start app
+      run: npm run start-apps -- --project ${{ matrix.ARGS.project }}
       working-directory: packages/testing
 
     - name: Run tests
