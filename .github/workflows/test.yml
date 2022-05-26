@@ -47,7 +47,7 @@ jobs:
         ]
     runs-on: ubuntu-latest
 
-    steps: 
+    steps:
     - name: Get sources
       uses: actions/checkout@v2
 
