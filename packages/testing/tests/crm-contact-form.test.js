@@ -41,7 +41,7 @@ const setEmbedded = async (t, embed, screenMode) => {
 
       await t.wait(timeoutSecond);
 
-      await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
+      await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hillsadsasad').exists).ok();
       await takeScreenshot(`crm-contact-form-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
