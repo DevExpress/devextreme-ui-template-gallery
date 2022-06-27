@@ -25,7 +25,7 @@ const addResizeListener = () => {
 
     let targetFile = 'main.ts';
     if (pkg === 'react') {
-      targetFile = 'App.js';
+      targetFile = 'App.tsx';
     } else if (pkg === 'vue') {
       targetFile = 'main.js';
     }
