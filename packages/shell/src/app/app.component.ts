@@ -12,7 +12,7 @@ export class AppComponent {
 
   title = 'shell';
 
-  approaches = ['angular'];
+  approaches = ['angular', 'react'];
 
   approach = 'angular';
 
