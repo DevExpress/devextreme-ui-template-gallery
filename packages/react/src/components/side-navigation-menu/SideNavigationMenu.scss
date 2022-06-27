@@ -46,6 +46,7 @@
 
       // ## Item levels customization
       .dx-treeview-node {
+
         // ## Arrow customization
         padding: 0 0 !important;
 
@@ -90,10 +91,4 @@
 
     // ##
   }
-}
-
-.dx-drawer-overlap.pre-init-blink-fix {
-  @import "../../utils/patches.scss";
-
-  @include menu-pre-init-patch ();
 }

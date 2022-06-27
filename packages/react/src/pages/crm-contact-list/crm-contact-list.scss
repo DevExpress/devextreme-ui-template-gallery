@@ -28,15 +28,13 @@
       }
     }
 
-    & {
-      .dx-datagrid-header-panel {
-        padding-top: 20px;
-        padding-bottom: 10px;
-      }
+    .dx-datagrid-header-panel {
+      padding-top: 20px;
+      padding-bottom: 10px;
+    }
 
-      .clickable-row {
-        cursor: pointer;
-      }
+    .clickable-row {
+      cursor: pointer;
     }
 
     .grid-header {
