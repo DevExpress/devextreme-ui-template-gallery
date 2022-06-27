@@ -32,11 +32,6 @@
 
       // ##
 
-      // ## Arrow customization
-      .dx-treeview-node {
-        padding: 0 0 !important;
-      }
-
       .dx-treeview-toggle-item-visibility {
         right: 10px;
         left: auto;
@@ -51,6 +46,9 @@
 
       // ## Item levels customization
       .dx-treeview-node {
+        // ## Arrow customization
+        padding: 0 0 !important;
+
         &[aria-level='1'] {
           font-weight: bold;
           border-bottom: 1px solid $base-border-color;
