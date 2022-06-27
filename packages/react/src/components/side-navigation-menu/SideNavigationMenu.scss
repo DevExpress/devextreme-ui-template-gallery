@@ -61,11 +61,7 @@
         }
       }
 
-      // ##
-    }
-
-    // ## Selected & Focuced items customization
-    .dx-treeview {
+      // ## Selected & Focuced items customization
       .dx-treeview-node-container {
         .dx-treeview-node {
           &.dx-state-selected:not(.dx-state-focused) > .dx-treeview-item {
