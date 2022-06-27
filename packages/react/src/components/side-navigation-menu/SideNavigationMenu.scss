@@ -1,4 +1,5 @@
 @use "../../variables.scss" as *;
+
 @import "../../dx-styles.scss";
 
 .side-navigation-menu {
@@ -14,8 +15,10 @@
     flex: 1;
 
     .dx-treeview {
+
       // ## Long text positioning
       white-space: nowrap;
+
       // ##
 
       // ## Icon width customization
@@ -28,8 +31,9 @@
           margin: 0 !important;
         }
       }
+
       // ##
-      
+
       // ## Arrow customization
       .dx-treeview-node {
         padding: 0 0 !important;
@@ -44,6 +48,7 @@
         left: 10px;
         right: auto;
       }
+
       // ##
 
       // ## Item levels customization
@@ -52,12 +57,13 @@
           font-weight: bold;
           border-bottom: 1px solid $base-border-color;
         }
-  
+
         &[aria-level='2'] .dx-treeview-item-content {
           font-weight: normal;
           padding: 0 $side-panel-min-width;
         }
       }
+
       // ##
     }
 
@@ -65,7 +71,7 @@
     .dx-treeview {
       .dx-treeview-node-container {
         .dx-treeview-node {
-          &.dx-state-selected:not(.dx-state-focused)> .dx-treeview-item {
+          &.dx-state-selected:not(.dx-state-focused) > .dx-treeview-item {
             background: transparent;
           }
 
@@ -73,8 +79,8 @@
             color: $base-accent;
           }
 
-          &:not(.dx-state-focused)>.dx-treeview-item.dx-state-hover {
-            background-color: lighten($base-bg, 4.00);
+          &:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
+            background-color: lighten($base-bg, 4);
           }
         }
       }
@@ -85,11 +91,13 @@
         color: inherit;
       }
     }
+
     // ##
   }
 }
 
 .dx-drawer-overlap.pre-init-blink-fix {
   @import "../../utils/patches.scss";
-  @include menu-pre-init-patch;
+
+  @include menu-pre-init-patch ();
 }
