@@ -25,9 +25,7 @@ const addResizeListener = () => {
 
     let targetFile = 'main.ts';
     if (pkg === 'react') {
-      targetFile = 'index.tsx';
-    } else if (pkg === 'vue') {
-      targetFile = 'main.js';
+      targetFile = 'App.tsx';
     }
 
     const targetFilePath = join(srcPath, targetFile);
@@ -38,8 +36,7 @@ const addResizeListener = () => {
 
 const performReplacements = () => {
   performIndexReplacement(join(rootPath, 'angular', 'src'));
-  performIndexReplacement(join(rootPath, 'react', 'src'));
-  performIndexReplacement(join(rootPath, 'vue', 'public'));
+  performIndexReplacement(join(rootPath, 'react', 'public'));
 
   addResizeListener();
 };
