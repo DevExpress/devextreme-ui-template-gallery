@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PROJECT: [ angular, js, html, css ]
+        PROJECT: [ angular, react, js, html, css ]
 
     runs-on: ubuntu-latest
     name: Lint ${{ matrix.PROJECT }}
@@ -41,7 +41,7 @@ jobs:
           ${{ runner.os }}-node
 
     - name: Run npm install
-      run: npm install
+      run: npm install --legacy-peer-deps
 
     - name: Lint applications
       run: npm run lint-${{ matrix.PROJECT }}

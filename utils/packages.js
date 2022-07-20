@@ -1,1 +1,1 @@
-module.exports = ['angular'];
+module.exports = ['angular', 'react'];

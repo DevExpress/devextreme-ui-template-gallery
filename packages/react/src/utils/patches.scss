@@ -1,0 +1,22 @@
+@use "../variables.scss" as *;
+
+@mixin menu-pre-init-patch {
+  $menu-min-size: 60px;
+
+  .dx-drawer-content {
+    padding-left: $menu-min-size;
+  }
+
+  .dx-drawer-panel-content.dx-overlay::before {
+    content: "";
+    width: $menu-min-size;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    background-color: $base-bg;
+  }
+
+  .dx-overlay-content {
+    width: $menu-min-size !important;
+  }
+}

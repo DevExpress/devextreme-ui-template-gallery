@@ -1,0 +1,55 @@
+@use "../../variables.scss" as *;
+@use "sass:math";
+
+.view.crm-contact-list {
+  width: 100%;
+  display: contents;
+}
+
+@include separator();
+@include status();
+
+.view-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .grid {
+    height: 100%;
+
+    .name-template {
+      margin: -6px 0;
+
+      .position {
+        font-size: 12px;
+        color: #757575de;
+      }
+    }
+
+    .dx-datagrid-header-panel {
+      padding-top: 20px;
+      padding-bottom: 10px;
+    }
+
+    .clickable-row {
+      cursor: pointer;
+    }
+
+    .grid-header {
+      @include header();
+    }
+  }
+
+  .cell-info {
+    position: relative;
+
+    .status {
+      position: absolute;
+      margin-top: 10px;
+      margin-left: 11px;
+    }
+  }
+}
+

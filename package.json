@@ -10,19 +10,17 @@
     "postinstall": "lerna bootstrap",
     "lint-html": "prettier --write . && prettier --check .",
     "lint-js": "eslint .",
-
     "lint-fix": "prettier --write . && eslint --fix . && stylelint **/*.{css,scss} --fix",
     "lint-css": "stylelint **/*.{css,scss}",
     "lint-css-fix": "stylelint --fix **/*.{css,scss}",
     "lint-angular": "eslint packages/angular",
+    "lint-react": "eslint packages/react",
     "lint-utils": "eslint utils/",
     "lint-bundles": "npm-run-all -p lint-angular lint-react lint-vue",
     "lint-angular-fix": "eslint --fix packages/angular",
     "lint-utils --fix": "eslint --fix utils"
   },
   "devDependencies": {
-    "fs-extra": "^10.0.0",
-    "lerna": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^4.8.0",
     "@typescript-eslint/parser": "^4.8.0",
     "babel-eslint": "^10.1.0",
@@ -38,12 +36,16 @@
     "eslint-plugin-no-only-tests": "^2.6.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-perf": "^3.3.0",
     "eslint-plugin-spellcheck": "^0.0.17",
+    "fs-extra": "^10.0.0",
+    "lerna": "^4.0.0",
+    "prettier": "2.4.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-config-standard-scss": "^3.0.0",
     "stylelint-scss": "^4.1.0",
-    "typescript": "^4.6.3",
-    "prettier": "2.4.1"
+    "typescript": "^4.6.3"
   }
 }
