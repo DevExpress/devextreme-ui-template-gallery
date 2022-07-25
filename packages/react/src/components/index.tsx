@@ -5,3 +5,6 @@ export { default as ResetPasswordForm } from './reset-password-form/ResetPasswor
 export { default as CreateAccountForm } from './create-account-form/CreateAccountForm';
 export { default as ChangePasswordForm } from './change-password-form/ChangePasswordForm';
 export { default as SideNavigationMenu } from './side-navigation-menu/SideNavigationMenu';
+export { default as PlanningGrid } from './planning-grid/PlanningGrid';
+export { default as PlanningKanban } from './plannin-kanban/PlanningKanban';
+export { default as PlanningGantt } from './plannin-gantt/PlanningGantt';

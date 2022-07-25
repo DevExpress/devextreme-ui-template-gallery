@@ -1,0 +1,26 @@
+.list-title {
+    font-size: 16px;
+    padding: 10px;
+    padding-left: 30px;
+    margin-bottom: -10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.scrollable-list {
+    height: 400px;
+    width: 260px;
+}
+
+.sortable-cards {
+    min-height: 380px;
+}
+
+.list {
+    border-radius: 8px;
+    margin: 5px;
+    background-color: #f5f5f5;
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+  }
