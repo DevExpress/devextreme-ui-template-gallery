@@ -1,2 +1,31 @@
 @use "../../variables.scss" as *;
 @use "sass:math";
+
+@include separator();
+
+.dx-toolbar {
+    .toolbar-header {
+        @include header();
+    }
+
+    .dx-tabs .dx-tab {
+        background-color: $background-color;
+
+        &:nth-child(2) {
+        width: 150px;
+        }
+    }
+}
+
+.add-grid-row {
+    .dx-icon.dx-icon-plus,
+    .dx-button-text {
+        color: #fff;
+    }
+}
+
+.view-wrapper {
+  flex-direction: column;
+  padding: 20px 16px 0 16px;
+  flex-grow: 1;
+}

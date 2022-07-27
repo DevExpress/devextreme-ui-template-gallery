@@ -21,16 +21,16 @@
   width: 5px;
   border-radius: 2px;
   background: #86c285;
-}
+  
+  &.priority-low {
+    background: #dfb32f;
+  }
 
-.priority-Low {
-  background: #dfb32f;
-}
+  &.priority-normal {
+    background: #6fbaca;
+  }
 
-.priority-Normal {
-  background: #6fbaca;
-}
-
-.priority-High {
-  background: #d9534f;
+  &.priority-high {
+    background: #d9534f;
+  }
 }

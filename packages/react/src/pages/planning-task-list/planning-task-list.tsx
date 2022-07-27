@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
+import DataGrid from 'devextreme-react/data-grid';
 import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
 import { getTasks } from 'dx-rwa-data';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
 import './planning-task-list.scss';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 
 const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
 export default function PlanningTaskList() {
+  const gridRef = useRef<DataGrid>();
   const [ list, setList ] = useState(listsData[0]);
   const [ index, setIndex ] = useState(0);
   const [ itemVisibility, setItemVisibility ] = useState(true);
@@ -18,39 +23,63 @@ export default function PlanningTaskList() {
         .catch((error) => console.log(error));
     }, []);
   const Component = list === listsData[0] ? PlanningGrid : ( list === listsData[1] ? PlanningKanban : PlanningGantt);
-
-  const tabsOptions = {
-    dataSource: listsData,
-    selectedIndex: index,
-    onItemClick: (e) => {
-      setList(e.itemData);
-      setIndex(listsData.findIndex(d => d === e.itemData));
-      if(e.itemData === listsData[0]) {
-        setItemVisibility(true);
-      } else {
-        setItemVisibility(false);
-      }
+  const onTabClick = useCallback((e) => {
+    setList(e.itemData);
+    setIndex(listsData.findIndex(d => d === e.itemData));
+    if(e.itemData === listsData[0]) {
+      setItemVisibility(true);
+    } else {
+      setItemVisibility(false);
     }
-  }
+  }, []);
+  const addDataGridRow = useCallback(() => {
+    gridRef.current!.instance.addRow();
+  }, [gridRef]);
+  const refresh = useCallback(() => {
+    gridRef.current!.instance.refresh();
+  }, [gridRef]);
+  const showColumnChooser = useCallback(() => {
+    gridRef.current!.instance.showColumnChooser();
+  }, [gridRef]);
+  const exportToPDF = useCallback(() => {
+    const doc = new jsPDF();
+    exportDataGrid({
+      jsPDFDocument: doc,
+      component: gridRef.current!.instance,
+    }).then(() => {
+      doc.save('Tasks.pdf');
+    });
+  }, [gridRef]);
+  const search = useCallback((e) => {
+    gridRef.current!.instance.searchByText(e.component.option('text'))
+  }, [gridRef]);
   return (
-    <React.Fragment>
+    <div className="view-wrapper">
       <Toolbar>
         <Item location="before">
-          <span>List</span>
+          <span className="toolbar-header">List</span>
         </Item>
         <Item
           location='before'
           widget='dxTabs'
-          options={tabsOptions}
+          options={{
+            dataSource: listsData,
+            selectedIndex: index,
+            onItemClick: onTabClick,
+          }}
         />
         <Item
           visible={itemVisibility}
           location='after'
           widget='dxButton'
           locateInMenu="auto"
+          cssClass="add-grid-row"
           options={{
             icon:'plus',
-            text: 'ADD TASK'
+            text: 'ADD TASK',
+            type: "default",
+            stylingMode: "contained",
+            onClick: addDataGridRow,
           }}
         />
         <Item
@@ -61,7 +90,8 @@ export default function PlanningTaskList() {
           locateInMenu="auto"
           options={{
             icon: 'refresh',
-            text: 'Refresh'
+            text: 'Refresh',
+            onClick: refresh,
           }}
         />
         <Item
@@ -72,7 +102,8 @@ export default function PlanningTaskList() {
           locateInMenu="auto"
           options={{
             icon: 'columnchooser',
-            text: 'Column Chooser'
+            text: 'Column Chooser',
+            onClick: showColumnChooser
           }}
         />
         <Item
@@ -80,7 +111,7 @@ export default function PlanningTaskList() {
           location='after'
           locateInMenu="auto"
         >
-          <div></div>
+          <div className="separator"></div>
         </Item>
         <Item
           visible={itemVisibility}
@@ -90,7 +121,8 @@ export default function PlanningTaskList() {
           locateInMenu="auto"
           options={{
             icon: 'exportpdf',
-            text: 'Export To PDF'
+            text: 'Export To PDF',
+            onClick: exportToPDF
           }}
         />
         <Item
@@ -100,10 +132,11 @@ export default function PlanningTaskList() {
           locateInMenu="auto"
           options={{
             mode: 'search',
-            placeholder: 'Task Search'
+            placeholder: 'Task Search',
+            onInput: search
           }}
         />
       </Toolbar>
-      <Component dataSource={data} />
-    </React.Fragment>
+      <Component dataSource={data} forwardedRef={gridRef} />
+    </div>
 )};
