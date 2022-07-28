@@ -1,36 +1,97 @@
+@use "../../../variables.scss" as *;
+
+$low-priorety-color: #dfb32f;
+$normal-priorety-color: #6fbaca;
+$high-priorety-color: #d9534f;
+
+@mixin priority($priorety-color) {
+  .card-priority {
+    background: $priorety-color;
+  }
+
+  span.priority {
+    color: $priorety-color;
+  }
+}
 
 .card {
   position: relative;
-  background-color: white;
   box-sizing: border-box;
-  width: 230px;
-  padding: 10px 20px;
-  margin: 10px;
   cursor: pointer;
-}
-
-.card-title {
-  padding-bottom: 10px;
+  display: block;
 }
 
 .card-priority {
   position: absolute;
   top: 10px;
   bottom: 10px;
-  left: 5px;
-  width: 5px;
-  border-radius: 2px;
-  background: #86c285;
-  
+  left: 10px;
+  width: 4px;
+}
+
+.card-wrapper {
+  padding: 10px;
+
+  .edit-button {
+    position: absolute;
+    right: 10px;
+    font-size: 18px;
+    opacity: 0.87;
+  }
+
   &.priority-low {
-    background: #dfb32f;
+    @include priority($low-priorety-color);
   }
 
   &.priority-normal {
-    background: #6fbaca;
+    @include priority($normal-priorety-color);
   }
 
   &.priority-high {
-    background: #d9534f;
+    @include priority($high-priorety-color);
+  }
+}
+
+.card-content {
+  padding-left: 14px;
+
+  span.priority {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  span.date {
+    padding-left: 8px;
+    font-size: 12px;
+    line-height: 14px;
+    opacity: 0.87;
+  }
+}
+
+.card-subject {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  padding-right: 40px;
+}
+
+.card-assignee {
+  padding-top: 14px;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .circle {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 50%;
+    background: $accent-color;
+    color: white;
   }
 }

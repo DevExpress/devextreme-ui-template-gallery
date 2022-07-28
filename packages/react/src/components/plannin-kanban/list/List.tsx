@@ -1,27 +1,50 @@
 import React from 'react';
 import ScrollView from 'devextreme-react/scroll-view';
 import Sortable from 'devextreme-react/sortable';
+import Button from 'devextreme-react/button';
+import notify from 'devextreme/ui/notify';
 import Card from '../card/Card';
 import './List.scss';
 
+const onMoreBtnClick = () => {
+  notify('Option board event');
+}
+
+const onAddTaskBtnClick = () => {
+  notify('Add task event');
+}
+
 const List = ({ title, index, tasks, onTaskDragStart, onTaskDrop }) => {
-    return <div className="list">
-    <div className="list-title dx-theme-text-color">{title}</div>
-    <ScrollView
-      className="scrollable-list"
-      direction="vertical"
-      showScrollbar="always">
-      <Sortable
-        className="sortable-cards"
-        group="cardsGroup"
-        data={index}
-        onDragStart={onTaskDragStart}
-        onReorder={onTaskDrop}
-        onAdd={onTaskDrop}>
-        {tasks.map((task) => <Card key={task.id} task={task} />)}
-      </Sortable>
-    </ScrollView>
-  </div>;
+    return (
+      <div className="list">
+        <div className="list-title dx-theme-text-color">
+          <span>{title}</span>
+          <Button icon="more" onClick={onMoreBtnClick}></Button>
+        </div>
+        <ScrollView
+          className="scrollable-list"
+          direction="vertical"
+          showScrollbar="always">
+          <Sortable
+            className="sortable-cards"
+            group="cardsGroup"
+            data={index}
+            onDragStart={onTaskDragStart}
+            onReorder={onTaskDrop}
+            onAdd={onTaskDrop}>
+            {tasks.map((task) => <Card key={task.id} task={task} />)}
+          </Sortable>
+          <div className="add-task">
+            <Button
+              icon="plus"
+              text="Add Task"
+              stylingMode="text"
+              onClick={onAddTaskBtnClick}
+            />
+          </div>
+        </ScrollView>
+      </div>
+    );
 }
 
 export default List;

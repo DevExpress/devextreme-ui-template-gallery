@@ -40,7 +40,7 @@ const PlanningGrid = ({ dataSource, forwardedRef }) => {
         }
     }, []);
     return (
-        loading ? <LoadPanel visible /> :
+        loading ? <LoadPanel container=".content" visible position={{ of: '.content' }} /> :
         <DataGrid
             ref={forwardedRef}
             dataSource={dataSource}
