@@ -59,27 +59,29 @@ const PlanningKanban = ({ dataSource }) => {
 
     return (
       loading ? <LoadPanel container=".content" visible position={{ of: '.content' }} /> :
-      <ScrollView
-        className="scrollable-board"
-        direction="horizontal"
-        showScrollbar="always">
-        <Sortable
-          className="sortable-lists"
-          itemOrientation="horizontal"
-          handle=".list-title"
-          onReorder={onListReorder}>
-          {lists.map((tasks, listIndex) => {
-            const status = statuses[listIndex];
-            return <List
-              key={status}
-              title={status}
-              index={listIndex}
-              tasks={tasks}
-              onTaskDragStart={onTaskDragStart}
-              onTaskDrop={onTaskDrop} />
-          })}
-        </Sortable>
-      </ScrollView>
+      <div id="kanban">
+        <ScrollView
+          className="scrollable-board"
+          direction="horizontal"
+          showScrollbar="always">
+          <Sortable
+            className="sortable-lists"
+            itemOrientation="horizontal"
+            handle=".list-title"
+            onReorder={onListReorder}>
+            {lists.map((tasks, listIndex) => {
+              const status = statuses[listIndex];
+              return <List
+                key={status}
+                title={status}
+                index={listIndex}
+                tasks={tasks}
+                onTaskDragStart={onTaskDragStart}
+                onTaskDrop={onTaskDrop} />
+            })}
+          </Sortable>
+        </ScrollView>
+      </div>
     );
 };
 
