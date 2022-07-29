@@ -13,7 +13,7 @@ $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 
 @mixin separator() {
   .separator {
-    height: 36px;
+    height: 24px;
     width: 1px;
     background: $base-border-color;
 
