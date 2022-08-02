@@ -17,17 +17,6 @@
 .dx-row.completed {
     background: $background-gray-color;
 }
-  
-.edit-cell {
-    position: relative;
-
-    task-priority,
-    task-status {
-        position: absolute;
-        margin-top: 10px;
-        margin-left: 11px;
-    }
-}
 
 span.cell-status {
     font-size: 14px;
@@ -89,4 +78,15 @@ span.cell-status {
       font-weight: 600;
       font-size: 12px;
     }
+}
+
+.edit-cell {
+  position: relative;
+
+  .cell-priority,
+  .cell-status {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 11px;
+  }
 }

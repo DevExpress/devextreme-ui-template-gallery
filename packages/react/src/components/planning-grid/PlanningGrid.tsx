@@ -8,19 +8,63 @@ import DataGrid, {
     RequiredRule,
 } from 'devextreme-react/data-grid';
 import LoadPanel from 'devextreme-react/load-panel';
+import SelectBox from 'devextreme-react/select-box';
+import TextBox from 'devextreme-react/text-box';
 import './PlanningGrid.scss';
 
-const CellPriority = ({ text }) => {
-    return (
-        <div className={`cell-priority priority-${text.toLowerCase()}`}>
-            <div className="cell-separator"></div>
-            <span>{text}</span>
-        </div>
-    )
-};
+const priorityItems = ['Low', 'Normal', 'High'];
+const statusItems = ['Open', 'In Progress', 'Deferred', 'Completed'];
 
-const CellStatus = ({ text }) => {
-    return <span className={`cell-status status-${text.toLowerCase().replace(' ', '-')}`}>{text}</span>
+const CellPriority = ({ text }) => (
+    <div className={`cell-priority priority-${text.toLowerCase()}`}>
+        <div className="cell-separator"></div>
+        <span>{text}</span>
+    </div>
+);
+
+const CellStatus = ({ text }) => <span className={`cell-status status-${text.toLowerCase().replace(' ', '-')}`}>{text}</span>;
+
+const EditFieldPriority = (data) => (
+    <div>
+        {data && <CellPriority text={data}></CellPriority>}
+        <TextBox readOnly></TextBox>
+    </div>
+);
+
+const EditItemPriority = (data) => <CellPriority text={data}></CellPriority>;
+
+const EditFieldStatus = (data) => (
+    <div>
+        {data && <CellStatus text={data}></CellStatus>}
+        <TextBox readOnly></TextBox>
+    </div>
+);
+
+const EditItemStatus = (data) => <CellStatus text={data}></CellStatus>;
+
+const EditCellPriority = (props) => {
+    return (
+        <SelectBox
+            className="edit-cell"
+            items={priorityItems}
+            fieldRender={EditFieldPriority}
+            itemRender={EditItemPriority}
+            onValueChanged={(e) => props.setValue(e.value)}
+        >
+        </SelectBox>
+    )
+}
+const EditCellStatus = (props) => {
+    return (
+        <SelectBox
+            className="edit-cell"
+            items={statusItems}
+            fieldRender={EditFieldStatus}
+            itemRender={EditItemStatus}
+            onValueChanged={(e) => props.setValue(e.value)}
+        >
+        </SelectBox>
+    )
 }
 
 const PlanningGrid = ({ dataSource, forwardedRef }) => {
@@ -57,7 +101,7 @@ const PlanningGrid = ({ dataSource, forwardedRef }) => {
             <Column dataField='company' caption='Company' hidingPriority={6}>
                 <RequiredRule />
             </Column>
-            <Column dataField='priority' caption='Priority' cellRender={CellPriority} hidingPriority={4}>
+            <Column dataField='priority' caption='Priority' cellRender={CellPriority} editCellRender={EditCellPriority} hidingPriority={4}>
                 <RequiredRule />
             </Column>
             <Column dataField='startDate' caption='Start Date' dataType="date" hidingPriority={2}>
@@ -69,7 +113,7 @@ const PlanningGrid = ({ dataSource, forwardedRef }) => {
             <Column dataField='owner' caption='Owner' hidingPriority={5}>
                 <RequiredRule />
             </Column>
-            <Column dataField='status' caption='Status' minWidth="120" cellRender={CellStatus} hidingPriority={3}>
+            <Column dataField='status' caption='Status' minWidth="120" cellRender={CellStatus} editCellRender={EditCellStatus} hidingPriority={3}>
                 <RequiredRule />
             </Column>
         </DataGrid>

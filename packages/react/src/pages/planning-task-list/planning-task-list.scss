@@ -24,8 +24,9 @@
     }
 }
 
-.view-wrapper {
-  flex-direction: column;
-  padding: 20px 16px 0 16px;
-  flex-grow: 1;
+.view-wrapper-planner {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px 16px 0 16px;
 }
