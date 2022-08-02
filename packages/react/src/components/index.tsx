@@ -7,4 +7,3 @@ export { default as ChangePasswordForm } from './change-password-form/ChangePass
 export { default as SideNavigationMenu } from './side-navigation-menu/SideNavigationMenu';
 export { default as PlanningGrid } from './planning-grid/PlanningGrid';
 export { default as PlanningKanban } from './plannin-kanban/PlanningKanban';
-export { default as PlanningGantt } from './plannin-gantt/PlanningGantt';

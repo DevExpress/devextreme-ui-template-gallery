@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
-import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
+import { PlanningGrid, PlanningKanban } from '../../components';
 import { getTasks } from 'dx-rwa-data';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
 import './planning-task-list.scss';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 
-const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
+const listsData = ['LIST', 'KANBAN BOARD'];
 
 export default function PlanningTaskList() {
   const gridRef = useRef<DataGrid>();
@@ -22,7 +22,7 @@ export default function PlanningTaskList() {
         .then((data) => setData(data))
         .catch((error) => console.log(error));
     }, []);
-  const Component = list === listsData[0] ? PlanningGrid : ( list === listsData[1] ? PlanningKanban : PlanningGantt);
+  const Component = list === listsData[0] ? PlanningGrid : PlanningKanban;
   const onTabClick = useCallback((e) => {
     setList(e.itemData);
     setIndex(listsData.findIndex(d => d === e.itemData));
@@ -57,7 +57,7 @@ export default function PlanningTaskList() {
     <div className="view-wrapper">
       <Toolbar>
         <Item location="before">
-          <span className="toolbar-header">List</span>
+          <span className="toolbar-header">Task</span>
         </Item>
         <Item
           location='before'
