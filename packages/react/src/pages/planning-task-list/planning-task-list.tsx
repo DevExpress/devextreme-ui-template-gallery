@@ -54,7 +54,7 @@ export default function PlanningTaskList() {
     gridRef.current!.instance.searchByText(e.component.option('text'))
   }, [gridRef]);
   return (
-    <div className="view-wrapper-planner">
+    <div className="view-wrapper-list">
       <Toolbar>
         <Item location="before">
           <span className="toolbar-header">Task</span>
