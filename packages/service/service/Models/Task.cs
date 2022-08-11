@@ -12,6 +12,7 @@ namespace service.Models
 
         public int Id { get; set; }
         public string? Task1 { get; set; }
+        public int ParentId { get; set; }
 
         public virtual ICollection<TasksList> TasksLists { get; set; }
         public virtual ICollection<ActivitiesList> ActivitiesLists { get; set; }
