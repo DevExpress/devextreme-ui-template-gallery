@@ -1,0 +1,44 @@
+<dx-gantt *ngIf="!isLoading" taskListWidth="500" scaleType="weeks" height="700">
+  <dxo-tasks
+    [dataSource]="dataSource"
+    startExpr="startDate"
+    endExpr="dueDate"
+    titleExpr="text"
+  >
+  </dxo-tasks>
+
+  <dxi-column dataField="text" caption="Subject" [width]="300"></dxi-column>
+  <dxi-column
+    dataField="startDate"
+    caption="Start Date"
+    dataType="date"
+  ></dxi-column>
+  <dxi-column
+    dataField="dueDate"
+    caption="Due Date"
+    dataType="date"
+  ></dxi-column>
+
+  <dxo-toolbar>
+    <dxi-item name="undo"></dxi-item>
+    <dxi-item name="redo"></dxi-item>
+    <dxi-item name="separator"></dxi-item>
+    <dxi-item name="collapseAll"></dxi-item>
+    <dxi-item name="expandAll"></dxi-item>
+    <dxi-item name="separator"></dxi-item>
+    <dxi-item name="addTask"></dxi-item>
+    <dxi-item name="deleteTask"></dxi-item>
+    <dxi-item name="separator"></dxi-item>
+    <dxi-item name="zoomIn"></dxi-item>
+    <dxi-item name="zoomOut"></dxi-item>
+  </dxo-toolbar>
+
+  <dxo-validation [autoUpdateParentTasks]="true"></dxo-validation>
+  <dxo-editing [enabled]="true"></dxo-editing>
+</dx-gantt>
+
+<dx-load-panel
+  [visible]="isLoading"
+  container=".content"
+  [position]="{ of: '.content' }"
+></dx-load-panel>

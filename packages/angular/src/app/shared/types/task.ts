@@ -32,4 +32,6 @@ export type Task = {
   activities: Activities,
   notes: Notes,
   messages: Messages,
+  parentId: number,
+  progress: number,
 };

@@ -16,6 +16,7 @@ import { RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
 import { TaskListKanbanModule } from './task-list-kanban/task-list-kanban.component';
+import { TaskListGanttModule } from './task-list-gantt/task-list-gantt.component';
 
 @Component({
   templateUrl: './planning-task-list.component.html',
@@ -75,6 +76,7 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
     TaskListKanbanModule,
     TaskListModule,
+    TaskListGanttModule,
 
     CommonModule,
   ],
