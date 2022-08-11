@@ -31,6 +31,8 @@ const setEmbeddedMode = ClientFunction((embed) => {
       await takeScreenshot(`planning-task-grid-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
       await takeScreenshot(`planning-task-kanban-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
+      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
+      await takeScreenshot(`planning-task-gantt-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
         .expect(compareResults.isValid())
