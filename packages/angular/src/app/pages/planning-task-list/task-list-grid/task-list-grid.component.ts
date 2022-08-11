@@ -35,7 +35,7 @@ export class TaskListGridComponent implements OnChanges {
 
   @Input() dataSource: Task[];
 
-  tasks: Task[]; 
+  tasks: Task[];
 
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
 

@@ -25,7 +25,6 @@ export class TaskListGanttComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.isLoading = !changes.dataSource.currentValue;
   }
-  
 }
 
 @NgModule({
