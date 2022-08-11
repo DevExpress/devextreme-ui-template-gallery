@@ -73,7 +73,7 @@ namespace service.Controllers {
                          text = t.Task.Task1.TrimEnd(' '),
                          startDate = t.StartDate,
                          dueDate = t.DueDate,
-                         status = t.Status,                         
+                         status = t.Status,
                          priority = t.Priority,
                          owner = t.Contact.EmployeeFullName,
                          company = t.Contact.Company.Name,
