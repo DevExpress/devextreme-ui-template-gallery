@@ -73,11 +73,13 @@ namespace service.Controllers {
                          text = t.Task.Task1.TrimEnd(' '),
                          startDate = t.StartDate,
                          dueDate = t.DueDate,
-                         status = t.Status,
+                         status = t.Status,                         
                          priority = t.Priority,
                          owner = t.Contact.EmployeeFullName,
                          company = t.Contact.Company.Name,
-                         manager = t.Manager.EmployeeFullName
+                         manager = t.Manager.EmployeeFullName,
+                         progress = t.Progress,
+                         parentId = t.Task.ParentId,
                      })
                      .ToListAsync();
         }

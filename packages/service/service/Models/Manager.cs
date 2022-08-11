@@ -12,6 +12,8 @@ namespace service.Models
             NotesLists = new HashSet<NotesList>();
             OpportunitiesLists = new HashSet<OpportunitiesList>();
             TasksLists = new HashSet<TasksList>();
+            Orders = new HashSet<Order>();
+            ManagerStoreLocations = new HashSet<ManagerStoreLocations>();
         }
 
         public int Id { get; set; }
@@ -42,5 +44,7 @@ namespace service.Models
         public virtual ICollection<NotesList> NotesLists { get; set; }
         public virtual ICollection<OpportunitiesList> OpportunitiesLists { get; set; }
         public virtual ICollection<TasksList> TasksLists { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<ManagerStoreLocations> ManagerStoreLocations { get; set; }
     }
 }
