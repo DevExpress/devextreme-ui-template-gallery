@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import {
-  map, groupBy, mergeMap, toArray
+  map, groupBy, mergeMap, toArray,
 } from 'rxjs/operators';
 import { Task } from 'src/app/shared/types/task';
 import { Contact } from 'src/app/shared/types/contact';
@@ -71,7 +71,7 @@ export class RwaService {
               percentage,
             };
           }),
-          toArray()
+          toArray(),
         ).subscribe((data) => {
           dataByState = data;
         });
