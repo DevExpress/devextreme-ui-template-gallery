@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import {
+  map, groupBy, mergeMap, toArray,
+} from 'rxjs/operators';
 import { Task } from 'src/app/shared/types/task';
 import { Contact } from 'src/app/shared/types/contact';
 
@@ -44,4 +46,45 @@ export class RwaService {
         return isActive ? isEven : !isEven;
       })),
     );
+
+    public getSalesByStateAndCity = (startDate: string, endDate: string) => this.http
+      .get(`${API_URL}/Analytics/SalesByStateAndCity/${startDate}/${endDate}`);
+
+    public getSalesByState = (data) => {
+      let dataByState;
+      from(data)
+        .pipe(
+          groupBy((s: any) => s.stateName),
+          mergeMap((group) => group.pipe(toArray())),
+          map((val) => {
+            let total = 0;
+            let percentage = 0;
+            val.forEach((v) => {
+              total = total + v.total;
+              percentage = percentage + v.percentage;
+            });
+
+            return {
+              stateName: val[0].stateName,
+              stateCoords: val[0].stateCoords,
+              total,
+              percentage,
+            };
+          }),
+          toArray(),
+        ).subscribe((data) => {
+          dataByState = data;
+        });
+
+      return dataByState;
+    };
+
+    public getOpportunitiesByCategory = (startDate: string, endDate: string) => this.http
+      .get(`${API_URL}/Analytics/OpportunitiesByCategory/${startDate}/${endDate}`);
+
+    public getSalesByCategory = (startDate: string, endDate: string) => this.http
+      .get(`${API_URL}/Analytics/SalesByCategory/${startDate}/${endDate}`);
+
+    public getSales = (startDate: string, endDate: string) => this.http
+      .get<any>(`${API_URL}/Analytics/Sales/${startDate}/${endDate}`);
 }

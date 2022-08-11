@@ -13,6 +13,7 @@ namespace service.Models
         public DateTime? StartDate { get; set; }
         public DateTime? DueDate { get; set; }
         public int? TaskId { get; set; }
+        public int? Progress { get; set; }
 
         public virtual Contact? Contact { get; set; }
         public virtual Manager? Manager { get; set; }

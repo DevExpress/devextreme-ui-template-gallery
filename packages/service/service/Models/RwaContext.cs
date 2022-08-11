@@ -32,6 +32,11 @@ namespace service.Models
         public virtual DbSet<State> States { get; set; } = null!;
         public virtual DbSet<Task> Tasks { get; set; } = null!;
         public virtual DbSet<TasksList> TasksLists { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<OrdersList> OrdersLists { get; set; } = null!;
+        public virtual DbSet<Quote> Quotes { get; set; } = null!;
+        public virtual DbSet<QuotesList> QuotesLists { get; set; } = null!;
+        public virtual DbSet<ManagerStoreLocations> ManagerStoreLocations { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -427,17 +432,23 @@ namespace service.Models
 
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.Property(e => e.ProductId).HasColumnName("Product_ID");
+                entity.Property(e => e.ProductId)
+                    .HasColumnName("Product_ID");
 
                 entity.Property(e => e.ProductCost)
                     .HasColumnType("money")
                     .HasColumnName("Product_Cost");
 
-                entity.Property(e => e.ProductDescription).HasColumnName("Product_Description");
+                entity.Property(e => e.ProductDescription)
+                    .HasColumnName("Product_Description");
 
                 entity.Property(e => e.ProductName)
                     .HasMaxLength(50)
                     .HasColumnName("Product_Name");
+
+                entity.Property(e => e.ProductCategory)
+                    .HasMaxLength(50)
+                    .HasColumnName("Product_Category");
 
                 entity.Property(e => e.ProductRetailPrice)
                     .HasColumnType("money")
@@ -493,6 +504,10 @@ namespace service.Models
                 entity.Property(e => e.StateShort)
                     .HasMaxLength(2)
                     .HasColumnName("State_Short");
+
+                entity.Property(e => e.StateCoords)
+                    .HasMaxLength(255)
+                    .HasColumnName("State_Coords");
             });
 
             modelBuilder.Entity<Task>(entity =>
@@ -505,6 +520,9 @@ namespace service.Models
                     .HasMaxLength(50)
                     .HasColumnName("task")
                     .IsFixedLength();
+
+                entity.Property(e => e.ParentId)
+                    .HasColumnName("parent_id");
             });
 
             modelBuilder.Entity<TasksList>(entity =>
@@ -532,6 +550,8 @@ namespace service.Models
 
                 entity.Property(e => e.TaskId).HasColumnName("task_id");
 
+                entity.Property(e => e.Progress).HasColumnName("progress");
+
                 entity.HasOne(d => d.Contact)
                     .WithMany(p => p.TasksLists)
                     .HasForeignKey(d => d.ContactId)
@@ -546,6 +566,125 @@ namespace service.Models
                     .WithMany(p => p.TasksLists)
                     .HasForeignKey(d => d.TaskId)
                     .HasConstraintName("FK_Tasks_List_Tasks");
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.Property(e => e.OrderId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Order_ID");
+
+                entity.Property(e => e.OrderManagerLocationId)
+                    .HasMaxLength(50)
+                    .HasColumnName("Order_Manager_Location_ID")
+                    .IsFixedLength();
+
+                entity.Property(e => e.OrderManagerId)
+                    .HasColumnName("Order_Manager_ID");
+
+                entity.Property(e => e.OrderDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Order_Date");
+
+                entity.HasOne(d => d.Manager)
+                      .WithMany(p => p.Orders)
+                      .HasForeignKey(d => d.OrderManagerId)
+                      .HasConstraintName("FK_Order_Managers");
+            });
+
+            modelBuilder.Entity<OrdersList>(entity =>
+            {
+                entity.ToTable("Order_Items");
+
+                entity.Property(e => e.OrderItemId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Order_Item_ID");
+
+                entity.Property(e => e.OrderId)
+                    .HasColumnName("Order_ID");
+
+                entity.Property(e => e.OrderItemProductId)
+                    .HasColumnName("Order_Item_Product_ID");
+
+                entity.Property(e => e.OrderItemTotal)
+                    .HasColumnType("money")
+                    .HasColumnName("Order_Item_Total");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.OrdersLists)
+                    .HasForeignKey(d => d.OrderId)
+                    .HasConstraintName("FK_Order_Items_Orders");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.OrdersLists)
+                    .HasForeignKey(d => d.OrderItemProductId)
+                    .HasConstraintName("FK_Order_Items_Products");
+            });
+
+            modelBuilder.Entity<Quote>(entity =>
+            {
+                entity.Property(e => e.QuoteId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Quote_ID");
+
+                entity.Property(e => e.QuoteTotal)
+                    .HasColumnType("money")
+                    .HasColumnName("Quote_Total");
+
+                entity.Property(e => e.QuoteDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Quote_Date");
+
+                entity.Property(e => e.QuoteOpportunity)
+                    .HasColumnType("float")
+                    .HasColumnName("Quote_Opportunity");
+            });
+
+            modelBuilder.Entity<QuotesList>(entity =>
+            {
+                entity.ToTable("Quote_Items");
+
+                entity.Property(e => e.QuoteItemId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Quote_Item_ID");
+
+                entity.Property(e => e.QuoteId)
+                    .HasColumnName("Quote_ID");
+
+                entity.Property(e => e.QuoteItemProductId)
+                    .HasColumnName("Quote_Item_Product_ID");
+
+                entity.Property(e => e.QuoteItemTotal)
+                    .HasColumnType("money")
+                    .HasColumnName("Quote_Item_Total");
+
+                entity.HasOne(d => d.Quote)
+                    .WithMany(p => p.QuotesLists)
+                    .HasForeignKey(d => d.QuoteId)
+                    .HasConstraintName("FK_Quote_Items_Quotes");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.QuotesLists)
+                    .HasForeignKey(d => d.QuoteItemProductId)
+                    .HasConstraintName("FK_Quote_Items_Products");
+            });
+
+            modelBuilder.Entity<ManagerStoreLocations>(entity =>
+            {
+                entity.ToTable("Manager_Store_Locations");
+
+                entity.Property(e => e.ManagerStoreId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Manager_Store_ID");
+
+                entity.Property(e => e.ManagerId)
+                    .HasColumnName("Manager_ID");
+
+                entity.Property(e => e.ManagerStoreState)
+                    .HasColumnName("Manager_Store_State");
+
+                entity.Property(e => e.ManagerStoreCity)
+                    .HasColumnName("Manager_Store_City");
             });
 
             OnModelCreatingPartial(modelBuilder);
