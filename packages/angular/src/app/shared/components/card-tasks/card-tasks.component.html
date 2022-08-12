@@ -2,7 +2,7 @@
   <dx-data-grid
     *ngIf="!isLoading"
     #dataGrid
-    [dataSource]="tasks"
+    [dataSource]="currentTasks"
     [columnAutoWidth]="true"
     [selectionFilter]="['done', '=', true]"
   >
