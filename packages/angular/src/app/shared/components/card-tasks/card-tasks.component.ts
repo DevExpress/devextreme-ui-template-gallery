@@ -28,7 +28,7 @@ export class CardTasksComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.isLoading = !changes.tasks?.currentValue;
 
-    if(!this.isLoading) {
+    if (!this.isLoading) {
       this.currentTasks = changes.tasks.currentValue.filter((item) => !!item.status && !!item.priority);
     }
   }

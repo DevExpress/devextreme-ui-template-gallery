@@ -68,7 +68,7 @@ export class TaskListGridComponent implements OnChanges {
 
     this.isLoading = !currentData;
 
-    if(!this.isLoading) {
+    if (!this.isLoading) {
       this.tasks = currentData.filter((item) => !!item.status && !!item.priority);
     }
   }
