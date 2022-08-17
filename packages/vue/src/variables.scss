@@ -1,0 +1,24 @@
+@use "../node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: "light");
+@forward "../node_modules/devextreme/scss/widgets/material/colors";
+
+$side-panel-min-width: 60px;
+$side-panel-background: darken($base-bg, 5);
+
+@mixin separator() {
+  .separator {
+    height: 24px;
+    width: 1px;
+    background: $base-border-color;
+
+    .dx-toolbar-menu-section & {
+      height: 1px;
+      width: auto;
+    }
+  }
+}
+
+@mixin header {
+  font-size: 22px;
+  font-weight: 500;
+  padding-right: 25px;
+}
