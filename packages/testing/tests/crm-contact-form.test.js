@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector, ClientFunction, location } from 'testcafe';
+import { Selector, ClientFunction } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import { screenModes, timeoutSecond } from '../config.js';
 
