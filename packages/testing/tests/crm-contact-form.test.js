@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector, ClientFunction } from 'testcafe';
+import { Selector, ClientFunction, location } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import { screenModes, timeoutSecond } from '../config.js';
 
@@ -41,7 +41,7 @@ const setEmbedded = async (t, embed, screenMode) => {
 
       await t.wait(timeoutSecond);
 
-      await t.click(Selector('.dx-drawer-shader'));
+      await t.eval(() => location.reload(true));
       await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
       await takeScreenshot(`crm-contact-form-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
 
