@@ -2,7 +2,10 @@
 @use "sass:math";
 
 .dx-toolbar {
-    .dx-toolbar-label > div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    .toolbar-title {
       @include header();
     }
 }

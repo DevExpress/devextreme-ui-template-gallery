@@ -1,28 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './planning-task-details.scss';
 import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 import { TaskForm, CardActivities } from '../../components';
-import { getTasks } from 'dx-rwa-data';
+import { getTask } from 'dx-rwa-data';
 
-const refresh = () => {} //TODO
+interface Task { 
+  text: string;
+  activities: [];
+};
+const TASK_ID = 1;
 
 export default function PlanningTaskDetails() {
-  const [task, setTask] = useState({ text: undefined });
-  useEffect(() => {
-    getTasks()
-      .then((data) => setTask(data[0]))
+  const [task, setTask] = useState<Task>();
+  const loadData = useCallback(() => {
+    getTask(TASK_ID)
+      .then((data) => setTask(data))
       .catch((error) => console.log(error));
   }, []);
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+  const refresh = useCallback(() => loadData(), [loadData]);
   return (
     <div className="view-wrapper-details">
       <Toolbar>
         <ToolbarItem location='before'>
           <Button icon='arrowleft'></Button>
         </ToolbarItem>
-        <ToolbarItem location="before" text={task.text}></ToolbarItem>
+        <ToolbarItem location="before" text={task?.text} cssClass='toolbar-title'></ToolbarItem>
         <ToolbarItem location="after" locateInMenu="auto">
           <DropDownButton text="ACTIONS" stylingMode="contained">
             <DropDownItem text="Duplicate"></DropDownItem>
@@ -56,15 +64,13 @@ export default function PlanningTaskDetails() {
       </Toolbar>
       <div className="panels">
         <div className="left">
-          <TaskForm></TaskForm>
+          <TaskForm task={task}></TaskForm>
         </div>
         <div className="right">
           <div className="dx-card">
             <TabPanel showNavButtons deferRendering={false}>
               <TabPanelItem title="Activities">
-                {/* <CardActivities>
-
-                </CardActivities> */}
+                <CardActivities activities={task?.activities} />
               </TabPanelItem>
               <TabPanelItem title="Notes">
 
