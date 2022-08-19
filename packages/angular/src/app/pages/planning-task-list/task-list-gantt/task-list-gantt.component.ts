@@ -2,7 +2,7 @@ import {
   Component, NgModule, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DxGanttModule } from 'devextreme-angular/ui/gantt'
+import { DxGanttModule } from 'devextreme-angular/ui/gantt';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { Task } from 'src/app/shared/types/task';
 
