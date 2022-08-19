@@ -35,6 +35,8 @@ export class TaskListGridComponent implements OnChanges {
 
   @Input() dataSource: Task[];
 
+  tasks: Task[];
+
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
 
   @Output() addRow = () => this.component.instance.addRow();
@@ -62,7 +64,13 @@ export class TaskListGridComponent implements OnChanges {
   priorityList = taskPriorityList;
 
   ngOnChanges(changes: SimpleChanges) {
-    this.isLoading = !changes.dataSource.currentValue;
+    const currentData = changes.dataSource.currentValue;
+
+    this.isLoading = !currentData;
+
+    if (!this.isLoading) {
+      this.tasks = currentData.filter((item) => !!item.status && !!item.priority);
+    }
   }
 
   onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
