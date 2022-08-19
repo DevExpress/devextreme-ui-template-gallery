@@ -1,4 +1,4 @@
-<dx-gantt *ngIf="!isLoading" taskListWidth="500" scaleType="weeks" height="700">
+<dx-gantt *ngIf="!isLoading" [taskListWidth]="500" scaleType="weeks" [height]="700">
   <dxo-tasks
     [dataSource]="dataSource"
     startExpr="startDate"

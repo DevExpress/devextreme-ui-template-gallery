@@ -2,12 +2,8 @@ import {
   Component, NgModule, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import {
-  DxGanttModule,
-  DxLoadPanelModule,
-} from 'devextreme-angular';
+import { DxGanttModule } from 'devextreme-angular/ui/gantt'
+import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { Task } from 'src/app/shared/types/task';
 
 @Component({
@@ -20,8 +16,6 @@ export class TaskListGanttComponent implements OnChanges {
 
   isLoading = true;
 
-  dataSubscription: Subscription = new Subscription();
-
   ngOnChanges(changes: SimpleChanges) {
     this.isLoading = !changes.dataSource.currentValue;
   }
@@ -32,7 +26,6 @@ export class TaskListGanttComponent implements OnChanges {
     DxGanttModule,
     DxLoadPanelModule,
 
-    HttpClientModule,
     CommonModule,
   ],
   providers: [],
