@@ -17,7 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CrmContactListModule } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactFormModule } from './pages/crm-contact-form/crm-contact-form.component';
 import { PlanningTaskListModule } from './pages/planning-task-list/planning-task-list.component';
-import { PlanningTaskDetailsModel } from './pages/planning-task-details/planning-task-details.component';
+import { PlanningTaskDetailsModule } from './pages/planning-task-details/planning-task-details.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { PlanningTaskDetailsModel } from './pages/planning-task-details/planning
     CrmContactListModule,
     CrmContactFormModule,
     PlanningTaskListModule,
-    PlanningTaskDetailsModel,
+    PlanningTaskDetailsModule,
     AppRoutingModule,
   ],
   providers: [AuthService, ScreenService, AppInfoService],

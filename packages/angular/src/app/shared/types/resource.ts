@@ -5,4 +5,7 @@ export const tabPanelItems: Array<{ text: string }> = [
   {
     text: 'Kanban Board',
   },
+  {
+    text: 'Gantt',
+  },
 ];
