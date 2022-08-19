@@ -1,0 +1,102 @@
+@use "../../../../variables.scss" as *;
+
+:host {
+  flex: 1 calc(50% - 20px);
+
+  .card {
+    margin: 20px;
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: none;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+  
+    .dx-button {
+      position: absolute;
+      right: 16px;
+      left: auto;
+      top: 16px;
+    }
+  
+    .title {
+      color: $base-text-color;
+      line-height: 19px;
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+  
+    .content {
+      color: #757575;
+      font-size: 14px;
+      line-height: 17px;
+      height: 270px;
+  
+      &.sales-by-state-map {
+        height: 400px;
+      }
+    }
+  }
+
+  &.grey {
+    flex: 1 calc(25% - 20px);
+
+    .card {
+      background-color: #f5f5f5;
+      border: none;
+  
+      ::ng-deep .dx-button {
+        background-color: #f5f5f5 ;
+      }
+  
+      ::ng-deep .content {
+        height: auto;
+        white-space: nowrap;
+  
+        .total {
+          display: inline-block;
+          font-size: 26px;
+          font-weight: 700;
+          color: #000;
+        }
+  
+        ::ng-deep .percentage {
+          display: inline-block;
+          font-size: 16px;
+          font-weight: 400;
+          color: #000;
+          line-height: 24px;
+  
+          span {
+            display: inline-block;
+            vertical-align: text-bottom;
+          }
+  
+          .dx-icon-spindown {
+            font-size: 24px;
+            color: #ff5722;
+            display: inline-block;
+            margin-left: 27px;
+          }
+  
+          .dx-icon-spinup {
+            font-size: 24px;
+            color: #2eb52c;
+            display: inline-block;
+            margin-left: 27px;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .cards {
+  display: flex;
+  margin: 8px -20px;
+  justify-content: space-between;
+  justify-items: stretch;
+  flex-flow: row wrap;
+}

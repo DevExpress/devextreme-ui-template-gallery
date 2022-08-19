@@ -18,6 +18,9 @@ import { CrmContactListModule } from './pages/crm-contact-list/crm-contact-list.
 import { CrmContactFormModule } from './pages/crm-contact-form/crm-contact-form.component';
 import { PlanningTaskListModule } from './pages/planning-task-list/planning-task-list.component';
 import { PlanningTaskDetailsModule } from './pages/planning-task-details/planning-task-details.component';
+import { AnalyticsDashboardModule } from './pages/analytics-dashboard/analytics-dashboard.component';
+import { AnalyticsSalesReportModule } from './pages/analytics-sales-report/analytics-sales-report.component';
+import { AnalyticsGeographyModule } from './pages/analytics-geography/analytics-geography.component'
 
 @NgModule({
   declarations: [
@@ -39,6 +42,10 @@ import { PlanningTaskDetailsModule } from './pages/planning-task-details/plannin
     CrmContactFormModule,
     PlanningTaskListModule,
     PlanningTaskDetailsModule,
+    AnalyticsDashboardModule,
+    AnalyticsSalesReportModule,
+    AnalyticsGeographyModule,
+
     AppRoutingModule,
   ],
   providers: [AuthService, ScreenService, AppInfoService],

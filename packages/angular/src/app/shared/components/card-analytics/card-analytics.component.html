@@ -1,0 +1,12 @@
+<div class="card">
+  <dx-button icon="overflow"></dx-button>
+  <div class="title">{{ title }}</div>
+  <div class="content {{ contentClass }}">
+    <ng-content></ng-content>
+  </div>
+  <dx-load-panel
+    container="{{'.' + contentClass}}"
+    [position]="position"
+    [visible]="isLoading"
+  ></dx-load-panel> 
+</div>

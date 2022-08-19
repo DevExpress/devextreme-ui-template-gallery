@@ -1,0 +1,233 @@
+<div class="view-wrapper">
+  <dx-toolbar>
+    <dxi-item location="before">
+      <span class="toolbar-header">Dashboard</span>
+    </dxi-item>
+
+    <dxi-item location="before">
+      <dx-tabs
+        [selectedItemKeys]="[5]"
+        keyExpr="key"
+        [items]="analyticsPanelItems"
+        (onItemClick)="selectionChange($event)"
+      ></dx-tabs>
+    </dxi-item>
+
+    <dxi-item location="after" cssclass="add-card">
+      <dx-button
+        icon="plus"
+        text="Add Card"
+        type="default"
+        stylingMode="contained"
+      ></dx-button>
+    </dxi-item>
+
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
+        text: 'Refresh',
+        icon: 'refresh'
+      }"
+    ></dxi-item>
+
+    <dxi-item location="after" locateInMenu="auto">
+      <div class="separator"></div>
+    </dxi-item>
+
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
+        icon: 'export'
+      }"
+    ></dxi-item>
+  </dx-toolbar>
+
+  <div class="cards">
+    <card-analytics
+      class="grey"
+      title="Opportunities"
+      [showData]="getTotal(opportunities)"
+      contentClass="opportunities-total"
+    >
+      <div class="total">{{
+        getTotal(opportunities) | currency: "USD":"$":"1.0-0"
+      }}</div>
+      <div class="percentage">
+        <i class="dx-icon-spinup"></i>
+        <span>20.3%</span>
+      </div>
+    </card-analytics>
+    <card-analytics
+      class="grey"
+      title="Revenue Total"
+      [showData]="getTotal(sales)"
+      contentClass="revenue-total"
+    >
+      <div class="total">{{
+        getTotal(sales) | currency: "USD":"$":"1.0-0"
+      }}</div>
+      <div class="percentage">
+        <i class="dx-icon-spinup"></i>
+        <span>14.7%</span>
+      </div>
+    </card-analytics>
+    <card-analytics
+      class="grey"
+      title="Conversion"
+      [showData]="true"
+      contentClass="revenue-total"
+    >
+      <div class="total">16%</div>
+      <div class="percentage">
+        <i class="dx-icon-spindown"></i>
+        <span>2.3%</span>
+      </div>
+    </card-analytics>
+    <card-analytics
+      class="grey"
+      title="Leads"
+      [showData]="true"
+      contentClass="revenue-total"
+    >
+      <div class="total">51</div>
+      <div class="percentage">
+        <i class="dx-icon-spinup"></i>
+        <span>8.5%</span>
+      </div>
+    </card-analytics>
+  </div>
+
+  <div class="cards">
+    <!-- <div class="column"> -->
+      <card-analytics
+        title="Revenue"
+        contentClass="sales"
+        [showData]="!!sales"
+      >
+        <dx-chart [dataSource]="sales">
+          <dxi-series valueField="total"></dxi-series>
+          <dxo-common-series-settings argumentField="date" type="splinearea">
+            <dxo-border [visible]="true"></dxo-border>
+          </dxo-common-series-settings>
+          <dxo-argument-axis argumentType="datetime"> </dxo-argument-axis>
+          <dxo-legend [visible]="false"> </dxo-legend>
+          <dxo-size height="264"></dxo-size>
+        </dx-chart>
+      </card-analytics>
+    <!-- </div>
+    <div class="column"> -->
+      <card-analytics
+        title="Opportunities Snapshot (All Products)"
+        contentClass="opportunities"
+        [showData]="!!opportunities"
+      >
+        <dx-funnel
+          [dataSource]="opportunities"
+          argumentField="name"
+          valueField="value"
+        >
+          <dxo-label
+            [visible]="true"
+            position="inside"
+            backgroundColor="none"
+            [customizeText]="customizeOppText"
+          >
+            <dxo-format type="largeNumber" [precision]="1"> </dxo-format>
+          </dxo-label>
+
+          <dxo-legend [visible]="true">
+            <dxo-margin [top]="70"></dxo-margin>
+          </dxo-legend>
+
+          <dxo-size [height]="264"></dxo-size>
+        </dx-funnel>
+      </card-analytics>
+      <card-analytics
+        title="Revenue Analysis"
+        contentClass="sales-by-state"
+        [showData]="!!salesByState"
+      >
+        <dx-data-grid [dataSource]="salesByState" [height]="276">
+          <dxi-column caption="State" dataField="stateName"> </dxi-column>
+
+          <dxi-column
+            alignment="left"
+            caption="Sales"
+            dataField="total"
+            dataType="number"
+            format="currency"
+            sortOrder="desc"
+          >
+          </dxi-column>
+
+          <dxi-column
+            alignment="left"
+            caption="% Sold"
+            dataField="percentage"
+            name="percentN"
+            format="percent"
+          >
+          </dxi-column>
+
+          <dxi-column
+            alignment="left"
+            caption="Percentage"
+            dataField="percentage"
+            name="percentB"
+            cellTemplate="salesBullet"
+            [width]="300"
+          >
+          </dxi-column>
+
+          <div *dxTemplate="let cellInfo of 'salesBullet'">
+            <dx-bullet
+              [showTarget]="false"
+              [showZeroLevel]="false"
+              [value]="cellInfo.data.percentage * 100"
+              startScaleValue="0"
+              endScaleValue="100"
+            >
+              <dxo-tooltip enabled="false"></dxo-tooltip>
+              <dxo-size width="420" height="20"></dxo-size>
+            </dx-bullet>
+          </div>
+        </dx-data-grid>
+      </card-analytics>
+      <card-analytics
+        title="Revenue Snapshot (All Products)"
+        contentClass="sales-by-category"
+        [showData]="!!salesByCategory"
+      >
+          <dx-pie-chart
+            [dataSource]="salesByCategory"
+            type="doughnut"
+            diameter="0.8"
+            innerRadius="0.6"
+          >
+            <dxi-series argumentField="name" valueField="value">
+              <dxo-label
+                backgroundColor="none"
+                [radialOffset]="-20"
+                [visible]="true"
+                [customizeText]="customizeSaleText"
+              >
+                <dxo-font color="#757575" [size]="15"></dxo-font>
+              </dxo-label>
+            </dxi-series>
+
+            <dxo-legend>
+              <dxo-margin [top]="70"></dxo-margin>
+            </dxo-legend>
+
+            <dxo-size [height]="276"> </dxo-size>
+          </dx-pie-chart>
+      </card-analytics>
+    <!-- </div> -->
+  </div>
+</div>

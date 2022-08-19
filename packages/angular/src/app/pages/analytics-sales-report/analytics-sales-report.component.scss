@@ -1,0 +1,58 @@
+@use "../../../variables.scss" as *;
+@use "sass:math";
+
+@include separator();
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+}
+
+.view-wrapper {
+  flex-direction: column;
+}
+
+::ng-deep {
+  .dx-toolbar {
+    .toolbar-header {
+      @include header();
+    }
+  }
+
+  .add-card {
+    .dx-icon.dx-icon-plus,
+    .dx-button-text {
+      color: #fff;
+    }
+  }
+}
+
+.sales-range {
+  margin-top: 20px;
+}
+
+.sales-pie,
+.sales-bars {
+  display: inline-block;
+  height: 100%;
+}
+
+.sales-pie {
+  width: 400px;
+}
+
+.sales-bars {
+  width: calc(100% - 600px);
+}
+
+.cards {
+  display: flex;
+  margin: 8px -20px;
+  flex-direction: column;
+
+  &.wide {
+    flex: 1 calc(100% - 20px);
+  }
+}

@@ -1,0 +1,160 @@
+<div class="view-wrapper">
+  <dx-toolbar>
+    <dxi-item location="before">
+      <span class="toolbar-header">Sales Report</span>
+    </dxi-item>
+
+    <dxi-item location="before">
+      <dx-drop-down-button
+        stylingMode="text"
+        [width]="100"
+        displayExpr="text"
+        keyExpr="key"
+        [useSelectMode]="true"
+        [items]="analyticsPanelItems"
+        [selectedItemKey]="5"
+        (onSelectionChanged)="selectionChange($event)"
+      ></dx-drop-down-button>
+    </dxi-item>
+
+    <dxi-item location="after" cssClass="add-card">
+      <dx-button
+        icon="plus"
+        text="Add Card"
+        type="default"
+        stylingMode="contained"
+      ></dx-button>
+    </dxi-item>
+
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
+        text: 'Refresh',
+        icon: 'refresh'
+      }"
+    ></dxi-item>
+
+    <dxi-item location="after" locateInMenu="auto">
+      <div class="separator"></div>
+    </dxi-item>
+
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
+        icon: 'export'
+      }"
+    ></dxi-item>
+  </dx-toolbar>
+
+  <dx-range-selector [dataSource]="sales" class="sales-range">
+    <dxo-scale
+      minorTickInterval="day"
+      tickInterval="month"
+      valueType="datetime"
+    >
+      <dxo-minor-tick [visible]="false"></dxo-minor-tick>
+      <dxo-marker [visible]="false"></dxo-marker>
+    </dxo-scale>
+    <dxo-size [height]="90"></dxo-size>
+
+    <dxo-loading-indicator [show]="true"></dxo-loading-indicator>
+
+    <dxo-chart>
+      <dxi-series type="line" argumentField="date" valueField="total">
+      </dxi-series>
+    </dxo-chart>
+  </dx-range-selector>
+
+  <div class="cards wide">
+    <card-analytics
+      title="Product Sale by Range"
+      className="sales-by-category"
+      [showData]="!!salesByCategory"
+    >
+      <dx-pie-chart
+        class="sales-pie"
+        [dataSource]="salesByCategory"
+        type="doughnut"
+        diameter="0.8"
+        innerRadius="0.6"
+      >
+        <dxi-series argumentField="name" valueField="value">
+          <dxo-label
+            backgroundColor="none"
+            [radialOffset]="-20"
+            [visible]="true"
+            [customizeText]="customizeSaleText"
+          >
+            <dxo-font color="#757575" [size]="15"></dxo-font>
+          </dxo-label>
+        </dxi-series>
+
+        <dxo-legend>
+          <dxo-margin [top]="70"></dxo-margin>
+        </dxo-legend>
+
+        <dxo-size [height]="276"></dxo-size>
+
+        <dxo-legend [visible]="false"></dxo-legend>
+      </dx-pie-chart>
+
+      <dx-chart
+        class="sales-bars"
+        [dataSource]="salesByCategory"
+        [rotated]="true"
+      >
+        <dxo-common-axis-settings [visible]="false">
+          <dxo-tick [visible]="false"></dxo-tick>
+        </dxo-common-axis-settings>
+
+        <dxo-legend [visible]="false"></dxo-legend>
+
+        <dxo-common-series-settings
+          argumentField="name"
+          valueField="value"
+          type="bar"
+          [ignoreEmptyPoints]="true"
+        >
+        </dxo-common-series-settings>
+
+        <dxo-series-template nameField="name"> </dxo-series-template>
+
+        <dxo-value-axis>
+          <dxo-label>
+            <dxo-format type="largeNumber"></dxo-format>
+          </dxo-label>
+        </dxo-value-axis>
+      </dx-chart>
+   </card-analytics>
+
+    <card-analytics
+      title="Sales Perfomance"
+      className="sales"
+      [showData]="!!sales"
+    >
+      <dx-chart [dataSource]="sales">
+        <dxo-series-template nameField="category"> </dxo-series-template>
+
+        <dxo-common-series-settings argumentField="date" valueField="total">
+          <dxo-point [visible]="false"></dxo-point>
+        </dxo-common-series-settings>
+
+        <dxo-argument-axis
+          argumentType="datetime"
+          [valueMarginsEnabled]="false"
+        >
+        </dxo-argument-axis>
+
+        <dxo-legend [visible]="false"></dxo-legend>
+
+        <dxo-size [height]="276"></dxo-size>
+      </dx-chart>
+    </card-analytics>
+  </div>
+</div>
