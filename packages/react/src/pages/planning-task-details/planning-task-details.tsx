@@ -4,12 +4,15 @@ import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
-import { TaskForm, CardActivities } from '../../components';
+import { TaskForm, CardActivities, CardNotes, CardMessages } from '../../components';
 import { getTask } from 'dx-rwa-data';
 
 interface Task { 
   text: string;
   activities: [];
+  notes: [];
+  owner: string;
+  messages: string;
 };
 const TASK_ID = 1;
 
@@ -73,10 +76,10 @@ export default function PlanningTaskDetails() {
                 <CardActivities activities={task?.activities} />
               </TabPanelItem>
               <TabPanelItem title="Notes">
-
+                {task && <CardNotes items={task.notes} user={task.owner}></CardNotes>}
               </TabPanelItem>
               <TabPanelItem title="Messages">
-
+                {task && <CardMessages items={task?.messages} user={task?.owner}></CardMessages>}
               </TabPanelItem>
             </TabPanel>
           </div>

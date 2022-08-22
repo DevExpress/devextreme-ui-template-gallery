@@ -1,15 +1,13 @@
 import React from 'react';
 import notify from 'devextreme/ui/notify';
 import Button from 'devextreme-react/button';
+import { formatDate } from '../../../shared/utils';
+import Avatar from '../../avatar/Avatar';
 import './Card.scss';
 
 const onClick = (task) => () => {
   notify(`Edit '${task.text}' card event`);
 }
-
-const formatDate = (date) => {
-  return [('0' + (date.getMonth() + 1)).slice(-2), ('0' + date.getDate()).slice(-2), date.getFullYear()].join('/');
-};
 
 const Card = ({ task }) => {
   return (
@@ -21,11 +19,11 @@ const Card = ({ task }) => {
           <div className="card-subject dx-theme-text-color">{task.text}</div>
           <div className="card-data">
             <span className="priority">{task.priority}</span>
-            <span className="date dx-theme-text-color">{formatDate(new Date(task.dueDate))}</span>
+            <span className="date dx-theme-text-color">{formatDate(task.dueDate)}</span>
           </div>
           <div className="card-assignee">
             <span className="company dx-theme-text-color">{task.company}</span>
-            <div className="circle">{task.owner.split(' ').map((name) => name[0]).join('')}</div>
+            <Avatar owner={task.owner}></Avatar>
           </div>
         </div>
       </div>

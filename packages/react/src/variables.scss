@@ -119,3 +119,17 @@ $background-gray-color: color.change($base-text-color, $alpha: 0.04);
     }
   }
 }
+
+@mixin message-title {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #757575de;
+}
+
+@mixin message-text {
+  padding-top: 5px;
+  line-height: 21px;
+}

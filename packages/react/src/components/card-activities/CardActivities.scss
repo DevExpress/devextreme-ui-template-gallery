@@ -2,12 +2,12 @@
 
 .card-activities {
   padding: 10px;
-  min-height: 300px;
+  min-height: auto;
   position: relative;
   display: block;
 
   &.load {
-    min-height: auto;
+    min-height: 300px;
   }
 }
 

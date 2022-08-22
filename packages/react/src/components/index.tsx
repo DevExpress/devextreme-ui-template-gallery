@@ -9,3 +9,6 @@ export { default as PlanningGrid } from './planning-grid/PlanningGrid';
 export { default as PlanningKanban } from './plannin-kanban/PlanningKanban';
 export { default as TaskForm } from './task-form/TaskForm';
 export { default as CardActivities } from './card-activities/CardActivities';
+export { default as CardNotes } from './card-notes/CardNotes';
+export { default as CardMessages } from './card-messgaes/CardMessages';
+export { default as Avatar } from './avatar/Avatar';
