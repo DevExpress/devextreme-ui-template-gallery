@@ -19,7 +19,7 @@ export default function PlanningTaskList() {
 
   useEffect(() => {
       getTasks()
-        .then((data) => setData(data))
+        .then((data) => setData(data.filter(d => d.status && d.priority)))
         .catch((error) => console.log(error));
     }, []);
   const Component = list === listsData[0] ? PlanningGrid : PlanningKanban;
