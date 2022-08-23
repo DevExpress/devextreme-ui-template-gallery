@@ -20,8 +20,9 @@ import { forkJoin, Subscription } from 'rxjs';
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
 
 import { analyticsPanelItems } from 'src/app/shared/types/resource';
-import { Sales, SalesByState, SaleOrOpportunityByCategory, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/analytics';
-
+import {
+  Sales, SalesByState, SaleOrOpportunityByCategory, SalesOrOpportunitiesByCategory,
+} from 'src/app/shared/types/analytics';
 
 @Component({
   templateUrl: './analytics-dashboard.component.html',
@@ -29,7 +30,6 @@ import { Sales, SalesByState, SaleOrOpportunityByCategory, SalesOrOpportunitiesB
   providers: [RwaService],
 })
 export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
-
   analyticsPanelItems = analyticsPanelItems;
 
   salesByState: SalesByState;
@@ -47,16 +47,15 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
   }
 
   customizeOppText(arg: any) {
-    return '$' + arg.valueText;
+    return `$${arg.valueText}`;
   }
 
   customizeSaleText(arg: any) {
     return arg.percentText;
   }
 
-
   getTotal(data: any) {
-    if(!data) return 0;
+    if (!data) return 0;
 
     let total = 0;
 
@@ -66,9 +65,9 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 
     return total;
   }
- 
+
   constructor(private service: RwaService) {
-   };
+  }
 
   subscriptions: Subscription[] = [];
 
@@ -102,7 +101,7 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 @NgModule({
   imports: [
     DxButtonModule,
-    DxTabsModule, 
+    DxTabsModule,
     DxToolbarModule,
     DxDataGridModule,
     DxBulletModule,

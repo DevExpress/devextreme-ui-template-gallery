@@ -24,14 +24,12 @@ import { analyticsPanelItems } from 'src/app/shared/types/resource';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 import { SalesByState, SalesByStateAndCity } from 'src/app/shared/types/analytics';
 
-
 @Component({
   templateUrl: './analytics-geography.component.html',
   styleUrls: ['./analytics-geography.component.scss'],
   providers: [RwaService],
 })
 export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
-
   usaMap: any = mapsData.usa;
 
   analyticsPanelItems = analyticsPanelItems;
@@ -73,14 +71,14 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
 
     coords.split(', ').forEach((coord) => {
       resultCoords.push(parseFloat(coord));
-    })
+    });
 
     return resultCoords;
   }
 
   constructor(private service: RwaService) {
-   };
-  
+  }
+
   subscription: Subscription = new Subscription();
 
   loadData = (startDate: string, endDate: string) => {
@@ -100,8 +98,8 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
             value: item.total,
             tooltip: `<b>${item.stateName}</b>\n${item.total}K`,
           },
-        }))
-      }
+        })),
+      };
     });
   };
 
@@ -119,7 +117,7 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
 @NgModule({
   imports: [
     DxButtonModule,
-    DxTabsModule, 
+    DxTabsModule,
     DxToolbarModule,
     DxDataGridModule,
     DxBulletModule,

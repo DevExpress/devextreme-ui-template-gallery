@@ -20,7 +20,7 @@ import { PlanningTaskListModule } from './pages/planning-task-list/planning-task
 import { PlanningTaskDetailsModule } from './pages/planning-task-details/planning-task-details.component';
 import { AnalyticsDashboardModule } from './pages/analytics-dashboard/analytics-dashboard.component';
 import { AnalyticsSalesReportModule } from './pages/analytics-sales-report/analytics-sales-report.component';
-import { AnalyticsGeographyModule } from './pages/analytics-geography/analytics-geography.component'
+import { AnalyticsGeographyModule } from './pages/analytics-geography/analytics-geography.component';
 
 @NgModule({
   declarations: [

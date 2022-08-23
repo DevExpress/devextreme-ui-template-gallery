@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, NgModule, Input, SimpleChanges, OnChanges, OnInit
+  Component, NgModule, Input, SimpleChanges, OnChanges, OnInit,
 } from '@angular/core';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { PositionConfig } from 'devextreme/animation/position';
-import { DxButtonModule } from 'devextreme-angular/ui/button'
+import { DxButtonModule } from 'devextreme-angular/ui/button';
 
 @Component({
   selector: 'card-analytics',
@@ -12,7 +12,6 @@ import { DxButtonModule } from 'devextreme-angular/ui/button'
   styleUrls: ['./card-analytics.component.scss'],
 })
 export class CardAnalytticsComponent implements OnChanges, OnInit {
-
   @Input() title: string;
 
   @Input() contentClass: string;
@@ -28,7 +27,7 @@ export class CardAnalytticsComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    this.position = { of: '.' + this.contentClass }
+    this.position = { of: `.${this.contentClass}` };
   }
 }
 

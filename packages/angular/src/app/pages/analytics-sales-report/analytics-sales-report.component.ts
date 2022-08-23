@@ -21,7 +21,6 @@ import { analyticsPanelItems } from 'src/app/shared/types/resource';
 
 import { Sales, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/analytics';
 
-
 @Component({
   templateUrl: './analytics-sales-report.component.html',
   styleUrls: ['./analytics-sales-report.component.scss'],
@@ -43,9 +42,9 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
   customizeSaleText(arg: any) {
     return arg.percentText;
   }
- 
+
   constructor(private service: RwaService) {
-   };
+  }
 
   subscriptions: Subscription[] = [];
 
@@ -73,7 +72,7 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [
-    DxButtonModule, 
+    DxButtonModule,
     DxToolbarModule,
     DxPieChartModule,
     DxChartModule,
