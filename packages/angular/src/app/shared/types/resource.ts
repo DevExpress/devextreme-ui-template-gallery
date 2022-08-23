@@ -22,13 +22,13 @@ export const analyticsPanelItems: Array<{ text: string, value: string, key: numb
   }, {
     text: 'Month',
     value: '2020-10-01/2020-11-01',
-    key: 3
+    key: 3,
   }, {
     text: 'Year',
     value: '2020-01-01/2021-01-01',
-    key: 4
+    key: 4,
   }, {
     text: 'All',
     value: '2018-01-01/2022-01-01',
-    key: 5
-}]
+    key: 5,
+  }];
