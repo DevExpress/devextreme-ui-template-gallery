@@ -5,8 +5,8 @@
     <ng-content></ng-content>
   </div>
   <dx-load-panel
-    container="{{'.' + contentClass}}"
+    container="{{ '.' + contentClass }}"
     [position]="position"
     [visible]="isLoading"
-  ></dx-load-panel> 
+  ></dx-load-panel>
 </div>

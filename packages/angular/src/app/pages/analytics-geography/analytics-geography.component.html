@@ -84,46 +84,46 @@
   <div class="cards">
     <div class="column">
       <card-analytics
-          title="Revenue Analysis by States"
-          contentClass="sales-by-state-and-city"
-          [showData]="!!salesByStateAndCity"
-        >
-          <dx-data-grid [dataSource]="salesByStateAndCity" [height]="276">
-            <dxi-column caption="State" dataField="stateName"> </dxi-column>
+        title="Revenue Analysis by States"
+        contentClass="sales-by-state-and-city"
+        [showData]="!!salesByStateAndCity"
+      >
+        <dx-data-grid [dataSource]="salesByStateAndCity" [height]="276">
+          <dxi-column caption="State" dataField="stateName"> </dxi-column>
 
-            <dxi-column caption="City" dataField="city"> </dxi-column>
+          <dxi-column caption="City" dataField="city"> </dxi-column>
 
-            <dxi-column
-              alignment="left"
-              caption="Amount"
-              dataField="total"
-              dataType="number"
-              format="currency"
+          <dxi-column
+            alignment="left"
+            caption="Amount"
+            dataField="total"
+            dataType="number"
+            format="currency"
+          >
+          </dxi-column>
+
+          <dxi-column
+            alignment="left"
+            caption="Percentage"
+            dataField="percentage"
+            cellTemplate="salesBullet"
+            [width]="300"
+          >
+          </dxi-column>
+
+          <div *dxTemplate="let cellInfo of 'salesBullet'">
+            <dx-bullet
+              [showTarget]="false"
+              [showZeroLevel]="false"
+              [value]="cellInfo.data.percentage * 100"
+              startScaleValue="0"
+              endScaleValue="100"
             >
-            </dxi-column>
-
-            <dxi-column
-              alignment="left"
-              caption="Percentage"
-              dataField="percentage"
-              cellTemplate="salesBullet"
-              [width]="300"
-            >
-            </dxi-column>
-
-            <div *dxTemplate="let cellInfo of 'salesBullet'">
-              <dx-bullet
-                [showTarget]="false"
-                [showZeroLevel]="false"
-                [value]="cellInfo.data.percentage * 100"
-                startScaleValue="0"
-                endScaleValue="100"
-              >
-                <dxo-tooltip enabled="false"></dxo-tooltip>
-                <dxo-size width="420" height="20"></dxo-size>
-              </dx-bullet>
-            </div>
-          </dx-data-grid>
+              <dxo-tooltip enabled="false"></dxo-tooltip>
+              <dxo-size width="420" height="20"></dxo-size>
+            </dx-bullet>
+          </div>
+        </dx-data-grid>
       </card-analytics>
     </div>
     <div class="column">
@@ -132,29 +132,29 @@
         contentClass="sales-by-state"
         [showData]="!!salesByState"
       >
-          <dx-pie-chart
-            [dataSource]="salesByState"
-            type="doughnut"
-            diameter="0.8"
-            innerRadius="0.6"
-          >
-            <dxi-series argumentField="stateName" valueField="total">
-              <dxo-label
-                backgroundColor="none"
-                [radialOffset]="-20"
-                [visible]="true"
-                [customizeText]="customizeSaleText"
-              >
-                <dxo-font color="#757575" [size]="15"></dxo-font>
-              </dxo-label>
-            </dxi-series>
+        <dx-pie-chart
+          [dataSource]="salesByState"
+          type="doughnut"
+          diameter="0.8"
+          innerRadius="0.6"
+        >
+          <dxi-series argumentField="stateName" valueField="total">
+            <dxo-label
+              backgroundColor="none"
+              [radialOffset]="-20"
+              [visible]="true"
+              [customizeText]="customizeSaleText"
+            >
+              <dxo-font color="#757575" [size]="15"></dxo-font>
+            </dxo-label>
+          </dxi-series>
 
-            <dxo-legend>
-              <dxo-margin [top]="70"></dxo-margin>
-            </dxo-legend>
+          <dxo-legend>
+            <dxo-margin [top]="70"></dxo-margin>
+          </dxo-legend>
 
-            <dxo-size [height]="276"> </dxo-size>
-          </dx-pie-chart>
+          <dxo-size [height]="276"> </dxo-size>
+        </dx-pie-chart>
       </card-analytics>
     </div>
   </div>
