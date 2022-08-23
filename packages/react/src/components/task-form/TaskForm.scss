@@ -2,12 +2,6 @@
     min-height: 300px;
 }
 
-.dx-toolbar {
-    .toolbar-details-title {
-        font-weight: 700;
-    }
-}
-
 .info {
     position: relative;
     padding-bottom: 30px;
@@ -17,10 +11,13 @@
     .status-task {
         position: absolute;
         margin-top: 15px;
+
+        span {
+            font-size: 13px;
+        }
     }
 
-    span {
-        font-size: 16px;
-        font-weight: 400;
+    .default-label {
+        margin-top: 12px;
     }
 }

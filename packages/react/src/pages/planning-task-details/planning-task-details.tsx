@@ -5,23 +5,24 @@ import Button from 'devextreme-react/button';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 import { TaskForm, CardActivities, CardNotes, CardMessages } from '../../components';
+import { Task } from '../../shared/types/task';
 import { getTask } from 'dx-rwa-data';
 
-interface Task { 
-  text: string;
-  activities: [];
-  notes: [];
-  owner: string;
-  messages: string;
-};
 const TASK_ID = 1;
 
 export default function PlanningTaskDetails() {
   const [task, setTask] = useState<Task>();
+  const [countMessages, setCountMessages] = useState(0);
   const loadData = useCallback(() => {
     getTask(TASK_ID)
-      .then((data) => setTask(data))
+      .then((data) => {
+        setTask(data);
+        setCountMessages(data.messages.length);
+      })
       .catch((error) => console.log(error));
+  }, []);
+  const updateCountMessages = useCallback((count) => {
+    setCountMessages(count);
   }, []);
   useEffect(() => {
     loadData();
@@ -76,10 +77,10 @@ export default function PlanningTaskDetails() {
                 <CardActivities activities={task?.activities} />
               </TabPanelItem>
               <TabPanelItem title="Notes">
-                {task && <CardNotes items={task.notes} user={task.owner}></CardNotes>}
+                <CardNotes items={task?.notes} user={task?.owner}></CardNotes>
               </TabPanelItem>
-              <TabPanelItem title="Messages">
-                {task && <CardMessages items={task?.messages} user={task?.owner}></CardMessages>}
+              <TabPanelItem title="Messages" badge={countMessages}>
+                <CardMessages items={task?.messages} user={task?.owner} updateCountMessages={updateCountMessages}></CardMessages>
               </TabPanelItem>
             </TabPanel>
           </div>

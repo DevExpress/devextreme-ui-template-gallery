@@ -97,7 +97,6 @@ const TaskForm = ({ task }) => {
     return (
     <div className='task-form'>
         <Toolbar>
-            <Item location="before" text='Details' cssClass='toolbar-details-title'></Item>
             <Item location="after" locateInMenu="after" visible={!editing}>
                 <Button
                     text="Edit"
@@ -127,7 +126,7 @@ const TaskForm = ({ task }) => {
         <FormContext.Provider value={task}>
             <Form formData={task} labelMode="floating" readOnly={!editing}>
                 <SimpleItem dataField="text" visible={editing}></SimpleItem>
-                <GroupItem colCount={2}>
+                <GroupItem itemType="group" caption="Details" colCount={2}>
                     <SimpleItem dataField="company" render={editing ? undefined : CompanyField} editorOptions={editorOptions}></SimpleItem>
                     <SimpleItem dataField="owner" render={editing ? undefined : OwnerField} editorOptions={editorOptions}>
                         <Label text="Assigned to"></Label>

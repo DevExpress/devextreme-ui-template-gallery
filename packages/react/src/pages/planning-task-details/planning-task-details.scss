@@ -2,12 +2,9 @@
 @use "sass:math";
 
 .dx-toolbar {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    
-    .toolbar-title {
-      @include header();
-    }
+  .toolbar-title {
+    @include header();
+  }
 }
 
 .view-wrapper-details {

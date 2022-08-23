@@ -1,11 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import { formatDate } from '../../shared/utils';
+import { Notes, Note } from '../../shared/types/notes';
 import './CardNotes.scss';
 
-const Card = ({ note }) => {
+const Card = ({ note }: { note: Note }) => {
     return (
         <div className="note dx-card">
             <div className="note-title">
@@ -19,17 +20,20 @@ const Card = ({ note }) => {
     )
 };
 
-const CardNotes = ({ items, user }) => {
+const CardNotes = ({ items, user }: { items: Notes | undefined, user: string | undefined }) => {
     const [noteText, setNoteText] = useState('');
     const [data, setData] = useState(items);
     const onNoteTextChanged = useCallback((e) => {
         setNoteText(e.value);
     }, []);
+    useEffect(() => {
+        setData(items);
+    }, [items]);
     const send = () => {
-        if(noteText === '') {
+        if(noteText === '' || !data || !user) {
             return;
         }
-        setData([ ...data, { manager: user, date: new Date(), text: noteText }]);
+        setData(data.concat([{ manager: user, date: new Date(), text: noteText }]));
         setNoteText('');
     };
     const cancel = useCallback(() => {
