@@ -29,7 +29,7 @@ const setEmbeddedMode = ClientFunction((embed) => {
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-sales-report-all-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await t.click(Selector('.dx-dropdownbutton');
+      await t.click(Selector('.dx-dropdownbutton'));
       await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(1));
       await takeScreenshot(`analytics-sales-report-week-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(2));
