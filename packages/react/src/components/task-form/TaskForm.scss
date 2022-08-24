@@ -21,3 +21,15 @@
         margin-top: 12px;
     }
 }
+
+.form-custom-list-prop {
+    .priority-task,
+    .status-task {
+        position: absolute;
+        padding: 15px 11px;
+  
+        span {
+            font-size: 13px;
+        }
+    }
+  }

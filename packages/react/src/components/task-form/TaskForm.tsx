@@ -5,42 +5,74 @@ import Button from 'devextreme-react/button';
 import LoadPanel from 'devextreme-react/load-panel';
 import PriorityTask from '../priority-task/PriorityTask';
 import StatusTask from '../status-task/StatusTask';
+import SelectBox from 'devextreme-react/select-box';
+import TextBox from 'devextreme-react/text-box';
+import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants'; 
 import Form, { SimpleItem, GroupItem, Label } from 'devextreme-react/form';
 import { DropDownButton, Calendar } from 'devextreme-react';
 
-const editorOptions = { stylingMode: 'underlined' };
-const onStartDateChanged = () => {
+const EditComponent = ({ items, editComponent: Component, label, value, setValue }) => {
+    const EditField = useCallback((data) => (
+        <div className="form-custom-list-prop">
+            {data && <Component text={data}></Component>}
+            <TextBox readOnly></TextBox>
+        </div>
+    ), [Component]);
+    const EditItem = useCallback((data) => <Component text={data}></Component>, [Component]);
 
+    return <SelectBox
+        items={items}
+        fieldRender={EditField}
+        itemRender={EditItem}
+        label={label} 
+        value={value}
+        onValueChanged={(e) => setValue(e.value)}
+    >
+    </SelectBox>
 };
-const onDueDateChanged = () => {
 
+const EditStatus = ({ label, value, setValue }) => {
+    const updateValue = (value) => {
+        setValue({ status: value })
+    }
+    return <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} label={label} value={value} setValue={updateValue} />
+};
+const EditPriority = ({ label, value, setValue }) => {
+    const updateValue = (value) => {
+        setValue({ priority: value })
+    }
+    return <EditComponent items={PRIORITY_ITEMS} editComponent={PriorityTask} label={label} value={value} setValue={updateValue} />
 };
 
-const CompanyField = (data) => (
+const CompanyField = ({ editorOptions }) => (
     <FormContext.Consumer>
-        {value => 
+        {({ data }) => 
             <div className="info">
-                <label className="dx-texteditor-label">{data.editorOptions.label}</label>
-                <span className="default-label dx-theme-accent-as-text-color">{value.company}</span>
+                <label className="dx-texteditor-label">{editorOptions.label}</label>
+                <span className="default-label dx-theme-accent-as-text-color">{data.company}</span>
             </div>
         }
     </FormContext.Consumer>
 );
 
-const OwnerField = (data) => (
+const OwnerField = ({ editorOptions }) => (
     <FormContext.Consumer>
-        {value => 
+        {({ data }) =>
             <div className="info">
-                <label className="dx-texteditor-label">{data.editorOptions.label}</label>
-                <span className="default-label dx-theme-accent-as-text-color">{value.owner}</span>
+                <label className="dx-texteditor-label">{editorOptions.label}</label>
+                <span className="default-label dx-theme-accent-as-text-color">{data.owner}</span>
             </div>
         }
     </FormContext.Consumer>
 );
 
-const DropDownContentTemplate = () => {
-    return <Calendar />
-}
+const DropDownContentTemplate = () => (
+    <FormContext.Consumer>
+        {({ dueDateChange }) =>
+            <Calendar onValueChanged={dueDateChange} />
+        }
+    </FormContext.Consumer>
+)
 
 const DueDateTemplate = (data) => {
     return <DropDownButton
@@ -53,47 +85,72 @@ const DueDateTemplate = (data) => {
     ></DropDownButton>
 };
 
-const PriorityField = (data) => (
+const PriorityField = ({ editorOptions }) => (
     <FormContext.Consumer>
-        {value =>
+        {({ data }) =>
             <div className="info">
-                <label className="dx-texteditor-label">{data.editorOptions.label}</label>
-                <PriorityTask text={value.priority}></PriorityTask>
+                <label className="dx-texteditor-label">{editorOptions.label}</label>
+                <PriorityTask text={data.priority}></PriorityTask>
             </div>
         }
     </FormContext.Consumer>
 );
 
-const PriorityEditing = (data) => {
-    return <></>
-};
-
-const StatusEditing = () => {
-    return <></>
-};
-
-const StatusField = (data) => (
+const PriorityEditing = ({ editorOptions }) => (
     <FormContext.Consumer>
-        {value =>
+        {({ data, setValue }) =>
+            <EditPriority value={data.priority} label={editorOptions.label} setValue={setValue}></EditPriority>
+        }
+    </FormContext.Consumer>
+);
+
+const StatusEditing = ({ editorOptions }) => (
+    <FormContext.Consumer>
+        {({ data, setValue }) =>
+            <EditStatus value={data.status} label={editorOptions.label} setValue={setValue}></EditStatus>
+        }
+    </FormContext.Consumer>
+);
+
+const StatusField = ({ editorOptions }) => (
+    <FormContext.Consumer>
+        {({ data }) =>
             <div className="info">
-                <label className="dx-texteditor-label">{data.editorOptions.label}</label>
-                <StatusTask text={value.status}></StatusTask>
+                <label className="dx-texteditor-label">{editorOptions.label}</label>
+                <StatusTask text={data.status}></StatusTask>
             </div>
         }
     </FormContext.Consumer>
 );
 
-const FormContext = React.createContext({ priority: undefined, status: undefined, company: undefined, owner: undefined });
+const FormContext = React.createContext({ 
+    data: { priority: undefined, status: undefined, company: undefined, owner: undefined },
+    setValue: (obj: any) => {},
+    dueDateChange: (e: any) => {}
+});
 
 const TaskForm = ({ task }) => {
+    const [data, setData] = useState(task);
+    const [ isDueDate, setDueDate ] = useState(false);
     const [loading, setLoading] = useState(true);
     const [editing, setEditing ] = useState(false);
+    const editorOptions = { stylingMode: editing ? 'filled' : 'underlined' };
     useEffect(() => {
-        task && setLoading(false);
+        if(task) {
+            setLoading(false);
+            setData({ ...task, ...{ dueDate: null }});
+        }
     }, [task]);
     const toggleEditing = useCallback(() => {
         setEditing(!editing);
     }, [editing]);
+    const dueDateChange = (e) => {
+        setData({ ...task, ...{ dueDate: e.value }});
+        setDueDate(!!e.value);
+    };
+    const updateTask = (obj) => {
+        setData({ ...data, ...obj});
+    };
     return (
     <div className='task-form'>
         <Toolbar>
@@ -123,8 +180,8 @@ const TaskForm = ({ task }) => {
             </Item>
         </Toolbar>
         { loading ? <LoadPanel container=".task-form" visible position={{ of: '.task-form' }} /> :
-        <FormContext.Provider value={task}>
-            <Form formData={task} labelMode="floating" readOnly={!editing}>
+        <FormContext.Provider value={{ data: data, setValue: updateTask, dueDateChange: dueDateChange }}>
+            <Form formData={data} labelMode="floating" readOnly={!editing}>
                 <SimpleItem dataField="text" visible={editing}></SimpleItem>
                 <GroupItem itemType="group" caption="Details" colCount={2}>
                     <SimpleItem dataField="company" render={editing ? undefined : CompanyField} editorOptions={editorOptions}></SimpleItem>
@@ -132,7 +189,7 @@ const TaskForm = ({ task }) => {
                         <Label text="Assigned to"></Label>
                     </SimpleItem>
                     <SimpleItem dataField="priority" render={editing ? PriorityEditing : PriorityField}></SimpleItem>
-                    <SimpleItem dataField="status" render={editing ? StatusEditing : StatusField} editorOptions={editorOptions}></SimpleItem>
+                    <SimpleItem dataField="status" render={editing ? StatusEditing : StatusField}></SimpleItem>
                     <SimpleItem
                         dataField="startDate"
                         editorType="dxDateBox"
@@ -146,11 +203,12 @@ const TaskForm = ({ task }) => {
                     <SimpleItem
                         dataField="dueDate"
                         editorType="dxDateBox"
-                        render={DueDateTemplate}
+                        render={(editing || isDueDate) ? undefined : DueDateTemplate}
                         editorOptions={{
                             name: 'Due Date',
                             placeholder: 'MM/dd/y',
                             displayFormat: 'MM/dd/y',
+                            onValueChanged: dueDateChange,
                             ...editorOptions
                         }}
                     ></SimpleItem>
