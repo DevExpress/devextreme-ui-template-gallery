@@ -10,15 +10,16 @@ import TextBox from 'devextreme-react/text-box';
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants'; 
 import Form, { SimpleItem, GroupItem, Label } from 'devextreme-react/form';
 import { DropDownButton, Calendar } from 'devextreme-react';
+import { TaskPriority, TaskStatus, Task, IEdit, IEditComponent } from '../../shared/types/task';
 
-const EditComponent = ({ items, editComponent: Component, label, value, setValue }) => {
-    const EditField = useCallback((data) => (
+const EditComponent = ({ items, editComponent: Component, label, value, setValue }: IEditComponent) => {
+    const EditField = useCallback((data: string) => (
         <div className="form-custom-list-prop">
             {data && <Component text={data}></Component>}
             <TextBox readOnly></TextBox>
         </div>
     ), [Component]);
-    const EditItem = useCallback((data) => <Component text={data}></Component>, [Component]);
+    const EditItem = useCallback((data: string) => <Component text={data}></Component>, [Component]);
 
     return <SelectBox
         items={items}
@@ -31,13 +32,13 @@ const EditComponent = ({ items, editComponent: Component, label, value, setValue
     </SelectBox>
 };
 
-const EditStatus = ({ label, value, setValue }) => {
+const EditStatus = ({ label, value, setValue }: IEdit) => {
     const updateValue = (value) => {
         setValue({ status: value })
     }
     return <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} label={label} value={value} setValue={updateValue} />
 };
-const EditPriority = ({ label, value, setValue }) => {
+const EditPriority = ({ label, value, setValue }: IEdit) => {
     const updateValue = (value) => {
         setValue({ priority: value })
     }
@@ -74,11 +75,11 @@ const DropDownContentTemplate = () => (
     </FormContext.Consumer>
 )
 
-const DueDateTemplate = (data) => {
+const DueDateTemplate = ({ editorOptions }) => {
     return <DropDownButton
         icon="event"
         stylingMode="outlined"
-        text={data.editorOptions.label}
+        text={editorOptions.label}
         dropDownOptions={{ width: 'auto' }}
         dropDownContentRender={DropDownContentTemplate}
         showArrowIcon={false}
@@ -124,12 +125,12 @@ const StatusField = ({ editorOptions }) => (
 );
 
 const FormContext = React.createContext({ 
-    data: { priority: undefined, status: undefined, company: undefined, owner: undefined },
-    setValue: (obj: any) => {},
+    data: { priority: '', status: '', company: '', owner: '' },
+    setValue: (obj: { priority?: TaskPriority, status?: TaskStatus }) => {},
     dueDateChange: (e: any) => {}
 });
 
-const TaskForm = ({ task }) => {
+const TaskForm = ({ task }: { task: Task | undefined }) => {
     const [data, setData] = useState(task);
     const [ isDueDate, setDueDate ] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -145,7 +146,7 @@ const TaskForm = ({ task }) => {
         setEditing(!editing);
     }, [editing]);
     const dueDateChange = (e) => {
-        setData({ ...task, ...{ dueDate: e.value }});
+        setData({ ...task!, ...{ dueDate: e.value }});
         setDueDate(!!e.value);
     };
     const updateTask = (obj) => {
@@ -180,7 +181,7 @@ const TaskForm = ({ task }) => {
             </Item>
         </Toolbar>
         { loading ? <LoadPanel container=".task-form" visible position={{ of: '.task-form' }} /> :
-        <FormContext.Provider value={{ data: data, setValue: updateTask, dueDateChange: dueDateChange }}>
+        <FormContext.Provider value={{ data: data!, setValue: updateTask, dueDateChange: dueDateChange }}>
             <Form formData={data} labelMode="floating" readOnly={!editing}>
                 <SimpleItem dataField="text" visible={editing}></SimpleItem>
                 <GroupItem itemType="group" caption="Details" colCount={2}>

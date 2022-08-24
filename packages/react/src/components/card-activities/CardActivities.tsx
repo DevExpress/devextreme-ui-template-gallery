@@ -4,10 +4,10 @@ import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
 import { formatDate } from '../../shared/utils';
 import classNames from 'classnames';
-import { Activities } from '../../shared/types/activities';
+import { Activities, Activity } from '../../shared/types/activities';
 import './CardActivities.scss';
 
-const ListTemplate = (item) => {
+const ListTemplate = (item: Activity) => {
     return (
         <div className="activity">
             <div className="name">{item.name}</div>

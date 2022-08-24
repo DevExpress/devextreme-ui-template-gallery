@@ -8,7 +8,7 @@ import { formatDate } from '../../shared/utils';
 import { Message, Messages } from '../../shared/types/messages';
 import './CardMessages.scss';
 
-const getText = (text, user) => {
+const getText = (text: string, user: string) => {
     return text.replace('{username}', user);
 }
 
