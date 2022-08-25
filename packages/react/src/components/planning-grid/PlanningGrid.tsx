@@ -42,9 +42,11 @@ const EditPriority = ({ setValue }) => (
 );
 const PlanningGrid = ({ dataSource, forwardedRef }) => {
     const [loading, setLoading] = useState(true);
+    const [data, setData] = useState();
     useEffect(() => {
         if(dataSource.length !== 0) {
           setLoading(false);
+          setData(dataSource.filter(d => d.status && d.priority));
         }
       }, [dataSource]);
     const onRowPrepared = useCallback((e) => {
@@ -60,7 +62,7 @@ const PlanningGrid = ({ dataSource, forwardedRef }) => {
         loading ? <LoadPanel container=".content" visible position={{ of: '.content' }} /> :
         <DataGrid
             ref={forwardedRef}
-            dataSource={dataSource}
+            dataSource={data}
             columnAutoWidth
             onRowPrepared={onRowPrepared}
         >

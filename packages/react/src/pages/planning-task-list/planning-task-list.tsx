@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
-import { PlanningGrid, PlanningKanban } from '../../components';
+import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
 import { getTasks } from 'dx-rwa-data';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
 import './planning-task-list.scss';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 
-const listsData = ['LIST', 'KANBAN BOARD'];
+const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
 export default function PlanningTaskList() {
   const gridRef = useRef<DataGrid>();
@@ -19,10 +19,10 @@ export default function PlanningTaskList() {
 
   useEffect(() => {
       getTasks()
-        .then((data) => setData(data.filter(d => d.status && d.priority)))
+        .then((data) => setData(data))
         .catch((error) => console.log(error));
     }, []);
-  const Component = list === listsData[0] ? PlanningGrid : PlanningKanban;
+  const Component = list === listsData[0] ? PlanningGrid : (list === listsData[1] ? PlanningKanban : PlanningGantt);
   const onTabClick = useCallback((e) => {
     setList(e.itemData);
     setIndex(listsData.findIndex(d => d === e.itemData));

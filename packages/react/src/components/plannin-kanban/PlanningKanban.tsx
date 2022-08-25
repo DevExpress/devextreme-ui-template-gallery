@@ -2,10 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import ScrollView from 'devextreme-react/scroll-view';
 import Sortable from 'devextreme-react/sortable';
 import LoadPanel from 'devextreme-react/load-panel';
+import { STATUS_ITEMS } from '../../shared/constants';
 import List from './list/List';
 import './PlanningKanban.scss';
 
-const initialStatuses = ['Open', 'In Progress', 'Deferred', 'Completed'];
+const initialStatuses = STATUS_ITEMS;
 const reorder = (items, item, fromIndex, toIndex) => {
   let result = items;
   if (fromIndex >= 0) {
@@ -25,16 +26,16 @@ const PlanningKanban = ({ dataSource }) => {
   const [loading, setLoading] = useState(true);
   const [lists, setLists] = useState<any>([]);
   const [statuses, setStatuses] = useState(initialStatuses);
-    useEffect(() => {
-        if(dataSource.length !== 0) {
-          setLoading(false);
-        }
+  useEffect(() => {
+      if(dataSource.length !== 0) {
+        setLoading(false);
         const initialLists: any[] = [];
         initialStatuses.forEach((status) => {
           initialLists.push(dataSource.filter((task) => task.status === status));
-      });
-      setLists(initialLists);
-      }, [dataSource]);
+        });
+        setLists(initialLists);
+      }
+    }, [dataSource]);
     const onListReorder = useCallback((e) => {
       const { fromIndex, toIndex } = e;
       setLists(reorder(lists, lists[fromIndex], fromIndex, toIndex));
