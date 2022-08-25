@@ -1,4 +1,5 @@
 import 'devextreme/scss/bundles/dx.material.blue.light.compact.scss';
+import 'devexpress-gantt/dist/dx-gantt.css';
 import React from 'react';
 import { HashRouter as Router } from 'react-router-dom';
 import './dx-styles.scss';
