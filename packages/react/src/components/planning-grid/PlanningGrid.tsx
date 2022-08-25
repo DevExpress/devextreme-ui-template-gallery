@@ -12,10 +12,12 @@ import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
 import PriorityTask from '../priority-task/PriorityTask';
 import StatusTask from '../status-task/StatusTask';
-import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants'; 
+import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
+import { Task, PlanningProps } from '../../shared/types/task';
+import { GridEdit, GridEditComponent } from '../../shared/types/grid';
 import './PlanningGrid.scss';
 
-const EditComponent = ({ items, editComponent: Component, setValue }) => {
+const EditComponent = ({ items, editComponent: Component, setValue }: GridEditComponent) => {
     const EditField = (data) => (
         <div>
             {data && <Component text={data}></Component>}
@@ -34,15 +36,15 @@ const EditComponent = ({ items, editComponent: Component, setValue }) => {
     </SelectBox>
 };
 
-const EditStatus = ({ setValue }) => (
+const EditStatus = ({ setValue }: GridEdit) => (
     <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} setValue={setValue} />
 );
-const EditPriority = ({ setValue }) => (
+const EditPriority = ({ setValue }: GridEdit) => (
     <EditComponent items={PRIORITY_ITEMS} editComponent={PriorityTask} setValue={setValue} />
 );
-const PlanningGrid = ({ dataSource, forwardedRef }) => {
+const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState();
+    const [data, setData] = useState<Task[]>();
     useEffect(() => {
         if(dataSource.length !== 0) {
           setLoading(false);
@@ -61,7 +63,7 @@ const PlanningGrid = ({ dataSource, forwardedRef }) => {
     return (
         loading ? <LoadPanel container=".content" visible position={{ of: '.content' }} /> :
         <DataGrid
-            ref={forwardedRef}
+            ref={ref}
             dataSource={data}
             columnAutoWidth
             onRowPrepared={onRowPrepared}
@@ -76,7 +78,13 @@ const PlanningGrid = ({ dataSource, forwardedRef }) => {
             <Column dataField='company' caption='Company' hidingPriority={6}>
                 <RequiredRule />
             </Column>
-            <Column dataField='priority' caption='Priority' cellRender={PriorityTask} editCellRender={EditPriority} hidingPriority={4}>
+            <Column
+                dataField='priority'
+                caption='Priority'
+                cellRender={PriorityTask}
+                editCellRender={EditPriority}
+                hidingPriority={4}
+            >
                 <RequiredRule />
             </Column>
             <Column dataField='startDate' caption='Start Date' dataType="date" hidingPriority={2}>
@@ -88,11 +96,18 @@ const PlanningGrid = ({ dataSource, forwardedRef }) => {
             <Column dataField='owner' caption='Owner' hidingPriority={5}>
                 <RequiredRule />
             </Column>
-            <Column dataField='status' caption='Status' minWidth="120" cellRender={StatusTask} editCellRender={EditStatus} hidingPriority={3}>
+            <Column
+                dataField='status'
+                caption='Status'
+                minWidth="120"
+                cellRender={StatusTask}
+                editCellRender={EditStatus}
+                hidingPriority={3}
+            >
                 <RequiredRule />
             </Column>
         </DataGrid>
     )
-};
+});
 
 export default PlanningGrid;

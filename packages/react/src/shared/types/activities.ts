@@ -1,4 +1,4 @@
-export type Activity = {
+export interface Activity {
     name: string,
     date: string | Date,
     manager: string,

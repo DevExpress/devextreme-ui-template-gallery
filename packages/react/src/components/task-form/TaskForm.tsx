@@ -10,9 +10,10 @@ import TextBox from 'devextreme-react/text-box';
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants'; 
 import Form, { SimpleItem, GroupItem, Label } from 'devextreme-react/form';
 import { DropDownButton, Calendar } from 'devextreme-react';
-import { TaskPriority, TaskStatus, Task, IEdit, IEditComponent } from '../../shared/types/task';
+import { TaskPriority, TaskStatus } from '../../shared/types/task';
+import { FormEdit, FormEditComponent, FormTask } from '../../shared/types/form';
 
-const EditComponent = ({ items, editComponent: Component, label, value, setValue }: IEditComponent) => {
+const EditComponent = ({ items, editComponent: Component, label, value, setValue }: FormEditComponent) => {
     const EditField = useCallback((data: string) => (
         <div className="form-custom-list-prop">
             {data && <Component text={data}></Component>}
@@ -32,13 +33,13 @@ const EditComponent = ({ items, editComponent: Component, label, value, setValue
     </SelectBox>
 };
 
-const EditStatus = ({ label, value, setValue }: IEdit) => {
+const EditStatus = ({ label, value, setValue }: FormEdit) => {
     const updateValue = (value) => {
         setValue({ status: value })
     }
     return <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} label={label} value={value} setValue={updateValue} />
 };
-const EditPriority = ({ label, value, setValue }: IEdit) => {
+const EditPriority = ({ label, value, setValue }: FormEdit) => {
     const updateValue = (value) => {
         setValue({ priority: value })
     }
@@ -130,7 +131,7 @@ const FormContext = React.createContext({
     dueDateChange: (e: any) => {}
 });
 
-const TaskForm = ({ task }: { task: Task | undefined }) => {
+const TaskForm = ({ task }: { task: FormTask | undefined }) => {
     const [data, setData] = useState(task);
     const [ isDueDate, setDueDate ] = useState(false);
     const [loading, setLoading] = useState(true);

@@ -1,4 +1,3 @@
-import React from 'react';
 import { TaskProp } from '../../shared/types/task';
 import './PriorityTask.scss';
 

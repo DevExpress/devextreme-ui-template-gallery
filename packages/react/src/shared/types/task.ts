@@ -6,31 +6,30 @@ export type TaskPriority = 'Low' | 'Normal' | 'High';
   
 export type TaskStatus = 'Open' | 'In Progress' | 'Deferred' | 'Completed';
 
-export interface Task {
+export interface CommonTask {
     id: number
     text: string,
     description: string,
     company: string,
     priority: TaskPriority,
     startDate: Date,
-    dueDate: Date | null,
     owner: string,
     status: TaskStatus,
     activities: Activities,
     notes: Notes,
     messages: Messages,
+    parentId: number,
+    progress: number,
 };
 
-export type TaskProp = {
-    text: string
+export interface Task extends CommonTask {
+    dueDate: Date,
 }
 
-export interface IEdit {
-    label: string;
-    value: string;
-    setValue: (obj: { priority?: TaskPriority, status?: TaskStatus }) => void
-}
-export interface IEditComponent extends IEdit {
-    items: string[];
-    editComponent: React.ComponentType<TaskProp>;
-}
+export interface TaskProp {
+    text: string;
+};
+
+export interface PlanningProps {
+    dataSource: Task[]; 
+};

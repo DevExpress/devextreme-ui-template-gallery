@@ -4,7 +4,7 @@ import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import Avatar from '../avatar/Avatar';
-import { formatDate } from '../../shared/utils';
+import formatDate from '../../utils/format-date';
 import { Message, Messages } from '../../shared/types/messages';
 import './CardMessages.scss';
 

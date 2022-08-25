@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
+import dxTextBox from 'devextreme/ui/text_box';
 import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
 import { getTasks } from 'dx-rwa-data';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
@@ -11,7 +12,7 @@ import 'jspdf-autotable';
 const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
 export default function PlanningTaskList() {
-  const gridRef = useRef<DataGrid>();
+  const gridRef = useRef<DataGrid>(null);
   const [ list, setList ] = useState(listsData[0]);
   const [ index, setIndex ] = useState(0);
   const [ itemVisibility, setItemVisibility ] = useState(true);
@@ -23,7 +24,7 @@ export default function PlanningTaskList() {
         .catch((error) => console.log(error));
     }, []);
   const Component = list === listsData[0] ? PlanningGrid : (list === listsData[1] ? PlanningKanban : PlanningGantt);
-  const onTabClick = useCallback((e) => {
+  const onTabClick = useCallback((e: { itemData: string }) => {
     setList(e.itemData);
     setIndex(listsData.findIndex(d => d === e.itemData));
     if(e.itemData === listsData[0]) {
@@ -50,8 +51,8 @@ export default function PlanningTaskList() {
       doc.save('Tasks.pdf');
     });
   }, [gridRef]);
-  const search = useCallback((e) => {
-    gridRef.current!.instance.searchByText(e.component.option('text'))
+  const search = useCallback((e: { component: dxTextBox}) => {
+    gridRef.current!.instance.searchByText(e.component.option('text')!)
   }, [gridRef]);
   return (
     <div className="view-wrapper-list">
@@ -137,6 +138,6 @@ export default function PlanningTaskList() {
           }}
         />
       </Toolbar>
-      <Component dataSource={data} forwardedRef={gridRef} />
+      <Component dataSource={data} ref={gridRef} />
     </div>
 )};

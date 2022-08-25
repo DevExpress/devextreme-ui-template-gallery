@@ -3,7 +3,9 @@ import ScrollView from 'devextreme-react/scroll-view';
 import Sortable from 'devextreme-react/sortable';
 import Button from 'devextreme-react/button';
 import notify from 'devextreme/ui/notify';
+import { Task } from '../../../shared/types/task';
 import Card from '../card/Card';
+import { DragStartEvent, ReorderEvent } from 'devextreme/ui/sortable';
 import './List.scss';
 
 const onMoreBtnClick = () => {
@@ -14,7 +16,9 @@ const onAddTaskBtnClick = () => {
   notify('Add task event');
 }
 
-const List = ({ title, index, tasks, onTaskDragStart, onTaskDrop }) => {
+const List = ({ title, index, tasks, onTaskDragStart, onTaskDrop }:
+  { title: string, index: number, tasks: Task[], 
+    onTaskDragStart: (e: DragStartEvent) => void, onTaskDrop: (e: ReorderEvent) => void }) => {
     return (
       <div className="list">
         <div className="list-title dx-theme-text-color">

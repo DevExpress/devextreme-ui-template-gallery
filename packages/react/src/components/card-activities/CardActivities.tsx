@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LoadPanel from 'devextreme-react/load-panel';
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
-import { formatDate } from '../../shared/utils';
+import formatDate from '../../utils/format-date';
 import classNames from 'classnames';
 import { Activities, Activity } from '../../shared/types/activities';
 import './CardActivities.scss';
