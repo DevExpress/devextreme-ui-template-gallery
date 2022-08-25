@@ -46,11 +46,11 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     this.loadData(dates[0], dates[1]);
   }
 
-  customizeSaleText(arg: any) {
+  customizeSaleText(arg: { percentText: string }) {
     return arg.percentText;
   }
 
-  customizeLegendText(arg: any) {
+  customizeLegendText(arg: { index: number }) {
     return ['< 80000K', '80000K to 100000K', '100000K to 400000K', '> 400000K'][arg.index];
   }
 
@@ -86,9 +86,9 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
       this.salesByStateAndCity = data;
       this.salesByState = this.service.getSalesByState(data);
       this.salesByStateMarkers = {
-        type: 'FeatureCollection',
+        type: 'StateCollection',
         features: this.salesByState.map((item) => ({
-          type: 'Feature',
+          type: 'State',
           geometry: {
             type: 'Point',
             coordinates: this.createMapCoords(item.stateCoords),

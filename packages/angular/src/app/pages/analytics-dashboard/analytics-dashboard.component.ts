@@ -21,7 +21,7 @@ import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/ca
 
 import { analyticsPanelItems } from 'src/app/shared/types/resource';
 import {
-  Sales, SalesByState, SaleOrOpportunityByCategory, SalesOrOpportunitiesByCategory,
+  Sales, SalesByState, SalesOrOpportunitiesByCategory,
 } from 'src/app/shared/types/analytics';
 
 @Component({
@@ -46,24 +46,17 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
     this.loadData(dates[0], dates[1]);
   }
 
-  customizeOppText(arg: any) {
+  customizeOppText(arg: { valueText: string }) {
     return `$${arg.valueText}`;
   }
 
-  customizeSaleText(arg: any) {
+  customizeSaleText(arg: { percentText: string }) {
     return arg.percentText;
   }
 
-  getTotal(data: any) {
-    if (!data) return 0;
-
-    let total = 0;
-
-    data.forEach((item) => {
-      total += (item.value || item.total || 0);
-    });
-
-    return total;
+  getTotal(data: Array<any>) {
+    if (!data) return;
+    return data.reduce((total, item) => total + (item.value || item.total), 0);
   }
 
   constructor(private service: RwaService) {

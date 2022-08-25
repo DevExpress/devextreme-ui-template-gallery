@@ -39,7 +39,7 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
     this.loadData(dates[0], dates[1]);
   }
 
-  customizeSaleText(arg: any) {
+  customizeSaleText(arg: { percentText: string }) {
     return arg.percentText;
   }
 

@@ -81,8 +81,8 @@
         class="sales-pie"
         [dataSource]="salesByCategory"
         type="doughnut"
-        diameter="0.8"
-        innerRadius="0.6"
+        [diameter]="0.8"
+        [innerRadius]="0.6"
       >
         <dxi-series argumentField="name" valueField="value">
           <dxo-label
@@ -99,7 +99,7 @@
           <dxo-margin [top]="70"></dxo-margin>
         </dxo-legend>
 
-        <dxo-size [height]="276"></dxo-size>
+        <dxo-size [height]="270"></dxo-size>
 
         <dxo-legend [visible]="false"></dxo-legend>
       </dx-pie-chart>
@@ -153,7 +153,7 @@
 
         <dxo-legend [visible]="false"></dxo-legend>
 
-        <dxo-size [height]="276"></dxo-size>
+        <dxo-size [height]="270"></dxo-size>
       </dx-chart>
     </card-analytics>
   </div>
