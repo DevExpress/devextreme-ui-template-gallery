@@ -12,7 +12,7 @@ import { DxVectorMapModule } from 'devextreme-angular/ui/vector-map';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
-import { LegendItem } from 'devextreme/viz/vector_map';
+import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
 
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
@@ -58,7 +58,7 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     return items.reverse();
   }
 
-  customizeTooltip(arg: any) {
+  customizeTooltip(arg: MapLayerElement) {
     if (arg.layer.type === 'marker') {
       return {
         text: arg.attribute('tooltip'),
