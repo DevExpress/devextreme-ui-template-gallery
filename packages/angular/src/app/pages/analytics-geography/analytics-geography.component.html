@@ -95,9 +95,18 @@
         [showData]="!!salesByStateAndCity"
       >
         <dx-data-grid [dataSource]="salesByStateAndCity" [height]="270">
-          <dxi-column caption="State" dataField="stateName"> </dxi-column>
+          <dxi-column 
+            caption="State" 
+            dataField="stateName"
+            [hidingPriority]="2"
+          > 
+          </dxi-column>
 
-          <dxi-column caption="City" dataField="city"> </dxi-column>
+          <dxi-column 
+            caption="City" 
+            dataField="city"
+          > 
+          </dxi-column>
 
           <dxi-column
             alignment="left"
@@ -105,6 +114,7 @@
             dataField="total"
             dataType="number"
             format="currency"
+            [hidingPriority]="1"
           >
           </dxi-column>
 
@@ -113,7 +123,7 @@
             caption="Percentage"
             dataField="percentage"
             cellTemplate="salesBullet"
-            [width]="300"
+            [width]="200"
           >
           </dxi-column>
 
@@ -126,7 +136,7 @@
               [endScaleValue]="100"
             >
               <dxo-tooltip enabled="false"></dxo-tooltip>
-              <dxo-size [width]="420" [height]="20"></dxo-size>
+              <dxo-size [width]="200" [height]="20"></dxo-size>
             </dx-bullet>
           </div>
         </dx-data-grid>

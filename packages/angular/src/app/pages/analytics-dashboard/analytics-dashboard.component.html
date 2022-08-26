@@ -62,7 +62,7 @@
       contentClass="opportunities-total"
     >
       <div class="total">{{
-        getTotal(opportunities) | currency: "USD":"$":"1.0-0"
+        getTotal(opportunities) | currency: "USD":"$":"2.0"
       }}</div>
       <div class="percentage">
         <i class="dx-icon-spinup"></i>
@@ -76,7 +76,7 @@
       contentClass="revenue-total"
     >
       <div class="total">{{
-        getTotal(sales) | currency: "USD":"$":"1.0-0"
+        getTotal(sales) | currency: "USD":"$":"2.0"
       }}</div>
       <div class="percentage">
         <i class="dx-icon-spinup"></i>
@@ -153,7 +153,11 @@
       [showData]="!!salesByState"
     >
       <dx-data-grid [dataSource]="salesByState" [height]="270">
-        <dxi-column caption="State" dataField="stateName"> </dxi-column>
+        <dxi-column 
+          caption="State" 
+          dataField="stateName"
+        >
+        </dxi-column>
 
         <dxi-column
           alignment="left"
@@ -162,6 +166,7 @@
           dataType="number"
           format="currency"
           sortOrder="desc"
+          [hidingPriority]="2"
         >
         </dxi-column>
 
@@ -171,6 +176,7 @@
           dataField="percentage"
           name="percentN"
           format="percent"
+          [hidingPriority]="1"
         >
         </dxi-column>
 
@@ -180,7 +186,7 @@
           dataField="percentage"
           name="percentB"
           cellTemplate="salesBullet"
-          [width]="300"
+          [width]="200"
         >
         </dxi-column>
 
@@ -193,7 +199,7 @@
             [endScaleValue]="100"
           >
             <dxo-tooltip enabled="false"></dxo-tooltip>
-            <dxo-size [width]="420" [height]="20"></dxo-size>
+            <dxo-size [width]="200" [height]="20"></dxo-size>
           </dx-bullet>
         </div>
       </dx-data-grid>
