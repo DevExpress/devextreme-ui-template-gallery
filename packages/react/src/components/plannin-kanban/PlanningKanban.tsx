@@ -12,11 +12,11 @@ const initialStatuses = STATUS_ITEMS;
 const reorder = (items: any[], item: Object, fromIndex: number, toIndex: number) => {
   let result = items;
   if (fromIndex >= 0) {
-      result = [...result.slice(0, fromIndex), ...result.slice(fromIndex + 1)];
+    result = [...result.slice(0, fromIndex), ...result.slice(fromIndex + 1)];
   }
 
   if (toIndex >= 0) {
-      result = [...result.slice(0, toIndex), item, ...result.slice(toIndex)];
+    result = [...result.slice(0, toIndex), item, ...result.slice(toIndex)];
   }
 
   return result;
@@ -26,59 +26,56 @@ const PlanningKanban = ({ dataSource }: PlanningProps) => {
   const [lists, setLists] = useState<Task[][]>([]);
   const [statuses, setStatuses] = useState(initialStatuses);
   useEffect(() => {
-      if(dataSource.length !== 0) {
-        setLoading(false);
-        const initialLists: Task[][] = [];
-        initialStatuses.forEach((status) => {
-          initialLists.push(dataSource.filter((task) => task.status === status));
-        });
-        setLists(initialLists);
-      }
-    }, [dataSource]);
-    const onListReorder = useCallback(({ fromIndex, toIndex }: ReorderEvent) => {
+    if (dataSource.length !== 0) {
+      setLoading(false);
+      const initialLists: Task[][] = [];
+      initialStatuses.forEach((status) => {
+        initialLists.push(dataSource.filter((task) => task.status === status));
+      });
+      setLists(initialLists);
+    }
+  }, [dataSource]);
+  const onListReorder = useCallback(
+    ({ fromIndex, toIndex }: ReorderEvent) => {
       setLists(reorder(lists, lists[fromIndex], fromIndex, toIndex));
       setStatuses(reorder(statuses, statuses[fromIndex], fromIndex, toIndex));
-    }, [lists, statuses]);
+    },
+    [lists, statuses]
+  );
 
-    const onTaskDragStart = useCallback((e: DragStartEvent) => {
-        e.itemData = lists[e.fromData][e.fromIndex];
-    }, [lists]);
+  const onTaskDragStart = useCallback(
+    (e: DragStartEvent) => {
+      e.itemData = lists[e.fromData][e.fromIndex];
+    },
+    [lists]
+  );
 
-    const onTaskDrop = useCallback((e: ReorderEvent) => {
-        const updatedList = lists.slice();
-        e.itemData.status = statuses[e.toData];
-        updatedList[e.fromData] = reorder(updatedList[e.fromData], e.itemData, e.fromIndex, -1);
-        updatedList[e.toData] = reorder(updatedList[e.toData], e.itemData, -1, e.toIndex);
+  const onTaskDrop = useCallback(
+    (e: ReorderEvent) => {
+      const updatedList = lists.slice();
+      e.itemData.status = statuses[e.toData];
+      updatedList[e.fromData] = reorder(updatedList[e.fromData], e.itemData, e.fromIndex, -1);
+      updatedList[e.toData] = reorder(updatedList[e.toData], e.itemData, -1, e.toIndex);
 
-        setLists(updatedList);
-    }, [lists, statuses]);
+      setLists(updatedList);
+    },
+    [lists, statuses]
+  );
 
-    return (
-      loading ? <LoadPanel container=".content" visible position={{ of: '.content' }} /> :
-      <div id="kanban">
-        <ScrollView
-          className="scrollable-board"
-          direction="horizontal"
-          showScrollbar="always">
-          <Sortable
-            className="sortable-lists"
-            itemOrientation="horizontal"
-            handle=".list-title"
-            onReorder={onListReorder}>
-            {lists.map((tasks, listIndex) => {
-              const status = statuses[listIndex];
-              return <List
-                key={status}
-                title={status}
-                index={listIndex}
-                tasks={tasks}
-                onTaskDragStart={onTaskDragStart}
-                onTaskDrop={onTaskDrop} />
-            })}
-          </Sortable>
-        </ScrollView>
-      </div>
-    );
+  return loading ? (
+    <LoadPanel container='.content' visible position={{ of: '.content' }} />
+  ) : (
+    <div id='kanban'>
+      <ScrollView className='scrollable-board' direction='horizontal' showScrollbar='always'>
+        <Sortable className='sortable-lists' itemOrientation='horizontal' handle='.list-title' onReorder={onListReorder}>
+          {lists.map((tasks, listIndex) => {
+            const status = statuses[listIndex];
+            return <List key={status} title={status} index={listIndex} tasks={tasks} onTaskDragStart={onTaskDragStart} onTaskDrop={onTaskDrop} />;
+          })}
+        </Sortable>
+      </ScrollView>
+    </div>
+  );
 };
 
 export default PlanningKanban;

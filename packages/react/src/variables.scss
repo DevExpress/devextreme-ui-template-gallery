@@ -31,7 +31,7 @@ $background-gray-color: color.change($base-text-color, $alpha: 0.04);
     &::before {
       $diameter: 10px;
 
-      content: ' ';
+      content: " ";
       width: $diameter;
       height: $diameter;
       border-radius: math.div($diameter, 2);

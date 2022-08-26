@@ -13,21 +13,21 @@ const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
 export default function PlanningTaskList() {
   const gridRef = useRef<DataGrid>(null);
-  const [ list, setList ] = useState(listsData[0]);
-  const [ index, setIndex ] = useState(0);
-  const [ itemVisibility, setItemVisibility ] = useState(true);
+  const [list, setList] = useState(listsData[0]);
+  const [index, setIndex] = useState(0);
+  const [itemVisibility, setItemVisibility] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-      getTasks()
-        .then((data) => setData(data))
-        .catch((error) => console.log(error));
-    }, []);
-  const Component = list === listsData[0] ? PlanningGrid : (list === listsData[1] ? PlanningKanban : PlanningGantt);
+    getTasks()
+      .then((data) => setData(data))
+      .catch((error) => console.log(error));
+  }, []);
+  const Component = list === listsData[0] ? PlanningGrid : list === listsData[1] ? PlanningKanban : PlanningGantt;
   const onTabClick = useCallback((e: { itemData: string }) => {
     setList(e.itemData);
-    setIndex(listsData.findIndex(d => d === e.itemData));
-    if(e.itemData === listsData[0]) {
+    setIndex(listsData.findIndex((d) => d === e.itemData));
+    if (e.itemData === listsData[0]) {
       setItemVisibility(true);
     } else {
       setItemVisibility(false);
@@ -51,14 +51,17 @@ export default function PlanningTaskList() {
       doc.save('Tasks.pdf');
     });
   }, [gridRef]);
-  const search = useCallback((e: { component: dxTextBox}) => {
-    gridRef.current!.instance.searchByText(e.component.option('text')!)
-  }, [gridRef]);
+  const search = useCallback(
+    (e: { component: dxTextBox }) => {
+      gridRef.current!.instance.searchByText(e.component.option('text')!);
+    },
+    [gridRef]
+  );
   return (
-    <div className="view-wrapper-list">
+    <div className='view-wrapper-list'>
       <Toolbar>
-        <Item location="before">
-          <span className="toolbar-header">Task</span>
+        <Item location='before'>
+          <span className='toolbar-header'>Task</span>
         </Item>
         <Item
           location='before'
@@ -73,13 +76,13 @@ export default function PlanningTaskList() {
           visible={itemVisibility}
           location='after'
           widget='dxButton'
-          locateInMenu="auto"
-          cssClass="add-grid-row"
+          locateInMenu='auto'
+          cssClass='add-grid-row'
           options={{
-            icon:'plus',
+            icon: 'plus',
             text: 'ADD TASK',
-            type: "default",
-            stylingMode: "contained",
+            type: 'default',
+            stylingMode: 'contained',
             onClick: addDataGridRow,
           }}
         />
@@ -88,7 +91,7 @@ export default function PlanningTaskList() {
           location='after'
           widget='dxButton'
           showText='inMenu'
-          locateInMenu="auto"
+          locateInMenu='auto'
           options={{
             icon: 'refresh',
             text: 'Refresh',
@@ -99,45 +102,42 @@ export default function PlanningTaskList() {
           visible={itemVisibility}
           location='after'
           widget='dxButton'
-          showText="inMenu"
-          locateInMenu="auto"
+          showText='inMenu'
+          locateInMenu='auto'
           options={{
             icon: 'columnchooser',
             text: 'Column Chooser',
-            onClick: showColumnChooser
+            onClick: showColumnChooser,
           }}
         />
-        <Item
-          visible={itemVisibility}
-          location='after'
-          locateInMenu="auto"
-        >
-          <div className="separator"></div>
+        <Item visible={itemVisibility} location='after' locateInMenu='auto'>
+          <div className='separator'></div>
         </Item>
         <Item
           visible={itemVisibility}
           location='after'
           widget='dxButton'
-          showText="inMenu"
-          locateInMenu="auto"
+          showText='inMenu'
+          locateInMenu='auto'
           options={{
             icon: 'exportpdf',
             text: 'Export To PDF',
-            onClick: exportToPDF
+            onClick: exportToPDF,
           }}
         />
         <Item
           visible={itemVisibility}
           location='after'
           widget='dxTextBox'
-          locateInMenu="auto"
+          locateInMenu='auto'
           options={{
             mode: 'search',
             placeholder: 'Task Search',
-            onInput: search
+            onInput: search,
           }}
         />
       </Toolbar>
       <Component dataSource={data} ref={gridRef} />
     </div>
-)};
+  );
+}

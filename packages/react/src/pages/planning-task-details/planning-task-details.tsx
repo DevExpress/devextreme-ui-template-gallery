@@ -29,57 +29,55 @@ export default function PlanningTaskDetails() {
   }, [loadData]);
   const refresh = useCallback(() => loadData(), [loadData]);
   return (
-    <div className="view-wrapper-details">
+    <div className='view-wrapper-details'>
       <Toolbar>
         <ToolbarItem location='before'>
           <Button icon='arrowleft'></Button>
         </ToolbarItem>
-        <ToolbarItem location="before" text={task?.text} cssClass='toolbar-title'></ToolbarItem>
-        <ToolbarItem location="after" locateInMenu="auto">
-          <DropDownButton text="ACTIONS" stylingMode="contained">
-            <DropDownItem text="Duplicate"></DropDownItem>
-            <DropDownItem text="Close"></DropDownItem>
-            <DropDownItem text="Delete"></DropDownItem>
+        <ToolbarItem location='before' text={task?.text} cssClass='toolbar-title'></ToolbarItem>
+        <ToolbarItem location='after' locateInMenu='auto'>
+          <DropDownButton text='ACTIONS' stylingMode='contained'>
+            <DropDownItem text='Duplicate'></DropDownItem>
+            <DropDownItem text='Close'></DropDownItem>
+            <DropDownItem text='Delete'></DropDownItem>
           </DropDownButton>
         </ToolbarItem>
         <ToolbarItem
-          location="after"
-          locateInMenu="auto"
-          widget="dxButton"
-          showText="inMenu"
+          location='after'
+          locateInMenu='auto'
+          widget='dxButton'
+          showText='inMenu'
           options={{
             text: 'Attach',
-            icon: 'attach'
+            icon: 'attach',
           }}
-        >
-        </ToolbarItem>
+        ></ToolbarItem>
         <ToolbarItem
-          location="after"
-          locateInMenu="auto"
-          widget="dxButton"
-          showText="inMenu"
+          location='after'
+          locateInMenu='auto'
+          widget='dxButton'
+          showText='inMenu'
           options={{
             text: 'Refresh',
             icon: 'refresh',
-            onClick: refresh
+            onClick: refresh,
           }}
-        >
-        </ToolbarItem>
+        ></ToolbarItem>
       </Toolbar>
-      <div className="panels">
-        <div className="left">
+      <div className='panels'>
+        <div className='left'>
           <TaskForm task={task}></TaskForm>
         </div>
-        <div className="right">
-          <div className="dx-card">
+        <div className='right'>
+          <div className='dx-card'>
             <TabPanel showNavButtons deferRendering={false}>
-              <TabPanelItem title="Activities">
+              <TabPanelItem title='Activities'>
                 <CardActivities activities={task?.activities} />
               </TabPanelItem>
-              <TabPanelItem title="Notes">
+              <TabPanelItem title='Notes'>
                 <CardNotes items={task?.notes} user={task?.owner}></CardNotes>
               </TabPanelItem>
-              <TabPanelItem title="Messages" badge={countMessages}>
+              <TabPanelItem title='Messages' badge={countMessages}>
                 <CardMessages items={task?.messages} user={task?.owner} updateCountMessages={updateCountMessages}></CardMessages>
               </TabPanelItem>
             </TabPanel>
@@ -87,4 +85,5 @@ export default function PlanningTaskDetails() {
         </div>
       </div>
     </div>
-)}
+  );
+}
