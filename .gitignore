@@ -16,7 +16,7 @@ jspm_packages/
 
 .DS_Store
 build
-devextreme-rwa-demos
+devextreme-ui-template-gallery
 packages/angular/src/resize-listener.js
 packages/vue/src/resize-listener.js
 packages/react/src/resize-listener.js
