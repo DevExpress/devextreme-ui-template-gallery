@@ -4,7 +4,9 @@
       <span class="toolbar-header">Dashboard</span>
     </dxi-item>
 
-    <dxi-item location="before">
+    <dxi-item 
+      location="before"
+      locateInMenu="auto">
       <dx-tabs
         [selectedItemKeys]="[5]"
         keyExpr="key"
@@ -13,7 +15,11 @@
       ></dx-tabs>
     </dxi-item>
 
-    <dxi-item location="after" cssclass="add-card">
+    <dxi-item 
+      location="after" 
+      locateInMenu="auto"
+      cssclass="add-card"
+      >
       <dx-button
         icon="plus"
         text="Add Card"
