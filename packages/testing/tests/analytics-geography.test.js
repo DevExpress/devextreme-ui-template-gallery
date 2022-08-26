@@ -16,7 +16,7 @@ const toogleEmbeddedClass = ClientFunction((embed) => {
 
 const checkScreenMode = async (t, screenMode) => {
   if (screenMode[0] === 400) {
-    await t.click('.content .dx-toolbar .dx-tabs .dx-item .dx-icon-overflow');
+    await t.click('.view-wrapper .dx-icon-overflow');
   }
 };
 
@@ -38,13 +38,10 @@ const checkScreenMode = async (t, screenMode) => {
       await checkScreenMode(t, screenMode);
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(0));
       await takeScreenshot(`analytics-geography-week-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await checkScreenMode(t, screenMode);
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
       await takeScreenshot(`analytics-geography-2-weeks-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await checkScreenMode(t, screenMode);
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
       await takeScreenshot(`analytics-geography-month-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await checkScreenMode(t, screenMode);
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(3));
       await takeScreenshot(`analytics-geography-year-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
 
@@ -53,3 +50,4 @@ const checkScreenMode = async (t, screenMode) => {
         .ok(compareResults.errorMessages());
     });
   });
+});

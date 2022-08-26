@@ -16,7 +16,7 @@ const toogleEmbeddedClass = ClientFunction((embed) => {
 
 const checkScreenMode = async (t, screenMode) => {
   if (screenMode[0] === 400) {
-    await t.click('.content .dx-toolbar .dx-tabs .dx-item .dx-icon-overflow');
+    await t.click('.view-wrapper .dx-icon-overflow');
   }
 };
 [false, true].forEach((embedded) => {
@@ -37,13 +37,10 @@ const checkScreenMode = async (t, screenMode) => {
       await checkScreenMode(t, screenMode);
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(0));
       await takeScreenshot(`analytics-dashboard-week-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await checkScreenMode(t, screenMode);
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
       await takeScreenshot(`analytics-dashboard-2-weeks-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await checkScreenMode(t, screenMode);
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
       await takeScreenshot(`analytics-dashboard-month-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await checkScreenMode(t, screenMode);
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(3));
       await takeScreenshot(`analytics-dashboard-year-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
 
