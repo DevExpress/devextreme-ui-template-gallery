@@ -29,13 +29,13 @@ const setEmbeddedMode = ClientFunction((embed) => {
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-dashboard-all-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
+      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(0));
       await takeScreenshot(`analytics-dashboard-week-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
+      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
       await takeScreenshot(`analytics-dashboard-2-weeks-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(3));
+      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
       await takeScreenshot(`analytics-dashboard-month-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(4));
+      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(3));
       await takeScreenshot(`analytics-dashboard-year-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
