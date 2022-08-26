@@ -2,20 +2,20 @@
 @use "sass:math";
 
 #tasks-grid {
-    min-height: 300px;
+  min-height: 300px;
 }
-  
+
 .dx-datagrid-header-panel {
-    padding-top: 0;
+  padding-top: 0;
 }
 
 .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-icon.dx-icon-plus,
 .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-button-text {
-    color: #fff;
+  color: #fff;
 }
 
 .dx-row.completed {
-    background: $background-gray-color;
+  background: $background-gray-color;
 }
 
 .edit-cell {

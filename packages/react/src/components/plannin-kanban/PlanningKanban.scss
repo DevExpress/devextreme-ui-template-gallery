@@ -1,21 +1,21 @@
 .scrollable-list {
-    width: 260px;
+  width: 260px;
 }
 
 .list-title {
-    font-size: 16px;
-    padding: 10px;
-    margin-bottom: -10px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-  
-    .dx-button {
-      background-color: rgba(0, 0, 0, 0);
-    }
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: -10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+
+  .dx-button {
+    background-color: rgba(0, 0, 0, 0);
+  }
 }
 
 #kanban {
-    white-space: nowrap;
+  white-space: nowrap;
 }

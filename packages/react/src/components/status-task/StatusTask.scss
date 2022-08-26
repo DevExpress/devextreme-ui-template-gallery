@@ -1,19 +1,19 @@
 span.status-task {
-    font-size: 13px;
+  font-size: 13px;
 
-    &.status-open {
-        color: #505ed9;
-    }
+  &.status-open {
+    color: #505ed9;
+  }
 
-    &.status-in-progress {
-        color: #34aa95;
-    }
+  &.status-in-progress {
+    color: #34aa95;
+  }
 
-    &.status-deferred {
-        color: #969696;
-    }
+  &.status-deferred {
+    color: #969696;
+  }
 
-    &.status-completed {
-        color: #2b9029;
-    }
+  &.status-completed {
+    color: #2b9029;
+  }
 }
