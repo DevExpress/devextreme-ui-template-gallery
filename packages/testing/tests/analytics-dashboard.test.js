@@ -36,12 +36,16 @@ const checkScreenMode = async (t, screenMode) => {
       await takeScreenshot(`analytics-dashboard-all-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await checkScreenMode(t, screenMode);
       await t.click(Selector('.dx-tabs .dx-item').nth(0));
+      await t.wait(timeoutSecond);
       await takeScreenshot(`analytics-dashboard-week-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-tabs .dx-item').nth(1));
+      await t.wait(timeoutSecond);
       await takeScreenshot(`analytics-dashboard-2-weeks-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-tabs .dx-item').nth(2));
+      await t.wait(timeoutSecond);
       await takeScreenshot(`analytics-dashboard-month-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-tabs .dx-item').nth(3));
+      await t.wait(timeoutSecond);
       await takeScreenshot(`analytics-dashboard-year-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
