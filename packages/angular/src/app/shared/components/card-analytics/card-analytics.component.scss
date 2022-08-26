@@ -1,7 +1,7 @@
 @use "../../../../variables.scss" as *;
 
 :host {
-  flex: 1 calc(50% - 20px);
+  flex: 1 50%;
 
   .card {
     margin: 20px;
@@ -15,9 +15,9 @@
 
     .dx-button {
       position: absolute;
-      right: 16px;
+      right: 10px;
       left: auto;
-      top: 16px;
+      top: 10px;
     }
 
     .title {
@@ -41,11 +41,12 @@
   }
 
   &.grey {
-    flex: 1 calc(25% - 20px);
+    flex: 1 180px;
 
     .card {
       background-color: #f5f5f5;
       border: none;
+      height: 120px;
 
       ::ng-deep .dx-button {
         background-color: #f5f5f5;
@@ -53,13 +54,13 @@
 
       ::ng-deep .content {
         height: auto;
-        white-space: nowrap;
 
         .total {
           display: inline-block;
           font-size: 26px;
           font-weight: 700;
           color: #000;
+          margin-right: 27px;
         }
 
         ::ng-deep .percentage {
@@ -78,14 +79,12 @@
             font-size: 24px;
             color: #ff5722;
             display: inline-block;
-            margin-left: 27px;
           }
 
           .dx-icon-spinup {
             font-size: 24px;
             color: #2eb52c;
             display: inline-block;
-            margin-left: 27px;
           }
         }
       }
@@ -98,5 +97,17 @@
   margin: 8px -20px;
   justify-content: space-between;
   justify-items: stretch;
-  flex-flow: row wrap;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 400px) {
+  :host {
+    flex: 1 360px;
+
+    .card {
+      .content {
+        height: auto;
+      }
+    }
+  }
 }
