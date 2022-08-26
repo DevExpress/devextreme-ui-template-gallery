@@ -3,7 +3,9 @@ import { TaskProp } from '../../shared/types/task';
 import './StatusTask.scss';
 
 const StatusTask = ({ text }: TaskProp) => (
-    <span className={`status-task status-${text.toLowerCase().replace(' ', '-')}`}>{text}</span>
+    <div className={`status-task status-${text.toLowerCase().replace(' ', '-')}`}>
+        <span>{text}</span>
+    </div>
 );
 
 export default StatusTask;

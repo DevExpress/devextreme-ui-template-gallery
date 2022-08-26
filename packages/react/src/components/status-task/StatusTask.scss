@@ -1,6 +1,4 @@
-span.status-task {
-  font-size: 13px;
-
+.status-task {
   &.status-open {
     color: #505ed9;
   }
@@ -15,5 +13,9 @@ span.status-task {
 
   &.status-completed {
     color: #2b9029;
+  }
+
+  span {
+    font-size: 14px;
   }
 }
