@@ -73,9 +73,9 @@
           <div class="separator"></div>
         </dx-grid-toolbar-item>
 
-        <dx-grid-toolbar-item name="columnChooserButton"></dx-grid-toolbar-item>
+        <dx-grid-toolbar-item name="columnChooserButton" locateInMenu="auto"></dx-grid-toolbar-item>
 
-        <dx-grid-toolbar-item name="searchPanel"></dx-grid-toolbar-item>
+        <dx-grid-toolbar-item name="searchPanel" locateInMenu="auto"></dx-grid-toolbar-item>
       </dx-grid-toolbar>
 
       <!-- Columns -->

@@ -63,6 +63,24 @@
 
 #app {
   height: 100%;
- }
+}
 
 $side-panel-min-width: 60px;
+
+.embedded {
+  .layout-header,
+  .dx-swatch-additional,
+  .with-footer .content-block,
+  .dx-drawer-shader {
+    display: none !important;
+  }
+
+  .dx-drawer-content {
+    padding: initial !important;
+  }
+
+  .dx-drawer-panel-content,
+  .dx-drawer-panel-content .dx-overlay-content {
+    width: initial !important;
+  }
+}
