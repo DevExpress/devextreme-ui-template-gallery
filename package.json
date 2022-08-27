@@ -15,6 +15,7 @@
     "lint-css-fix": "stylelint --fix **/*.{css,scss}",
     "lint-angular": "eslint packages/angular",
     "lint-react": "eslint packages/react",
+    "lint-vue": "eslint packages/vue",
     "lint-utils": "eslint utils/",
     "lint-bundles": "npm-run-all -p lint-angular lint-react lint-vue",
     "lint-angular-fix": "eslint --fix packages/angular",
