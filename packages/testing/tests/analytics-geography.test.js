@@ -9,6 +9,8 @@ const BASE_URL = `http://localhost:${process.env.port}`;
 
 fixture`Analytics Geography`;
 
+const chartTimeout = timeoutSecond * 2;
+
 const toogleEmbeddedClass = ClientFunction((embed) => {
   if (!embed) return;
   window.document.getElementsByTagName('body')[0].classList.add('embedded');
@@ -31,22 +33,22 @@ const checkScreenMode = async (t, screenMode) => {
 
       await toogleEmbeddedClass(embedded);
 
-      await t.wait(timeoutSecond);
+      await t.wait(chartTimeout);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-geography-all-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await checkScreenMode(t, screenMode);
       await t.click(Selector('.dx-tabs .dx-item').nth(0));
-      await t.wait(timeoutSecond);
+      await t.wait(chartTimeout);
       await takeScreenshot(`analytics-geography-week-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-tabs .dx-item').nth(1));
-      await t.wait(timeoutSecond);
+      await t.wait(chartTimeout);
       await takeScreenshot(`analytics-geography-2-weeks-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-tabs .dx-item').nth(2));
-      await t.wait(timeoutSecond);
+      await t.wait(chartTimeout);
       await takeScreenshot(`analytics-geography-month-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-tabs .dx-item').nth(3));
-      await t.wait(timeoutSecond);
+      await t.wait(chartTimeout);
       await takeScreenshot(`analytics-geography-year-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t

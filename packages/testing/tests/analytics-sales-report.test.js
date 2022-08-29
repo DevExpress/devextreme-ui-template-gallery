@@ -9,6 +9,8 @@ const BASE_URL = `http://localhost:${process.env.port}`;
 
 fixture`Analytics Sales Report`;
 
+const chartTimeout = timeoutSecond * 2;
+
 const setEmbeddedMode = ClientFunction((embed) => {
   if (!embed) return;
   window.document.getElementsByTagName('body')[0].classList.add('embedded');
@@ -25,25 +27,25 @@ const setEmbeddedMode = ClientFunction((embed) => {
 
       await setEmbeddedMode(embedded);
 
-      await t.wait(timeoutSecond);
+      await t.wait(chartTimeout);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-sales-report-all-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-dropdownbutton'));
       await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
-      await t.wait(timeoutSecond);
+      await t.wait(chartTimeout);
       await takeScreenshot(`analytics-sales-report-week-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-dropdownbutton'));
       await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(1));
-      await t.wait(timeoutSecond);
+      await t.wait(chartTimeout);
       await takeScreenshot(`analytics-sales-report-2-weeks-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-dropdownbutton'));
       await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(2));
-      await t.wait(timeoutSecond);
+      await t.wait(chartTimeout);
       await takeScreenshot(`analytics-sales-report-month-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-dropdownbutton'));
       await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(3));
-      await t.wait(timeoutSecond);
+      await t.wait(chartTimeout);
       await takeScreenshot(`analytics-sales-report-year-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
