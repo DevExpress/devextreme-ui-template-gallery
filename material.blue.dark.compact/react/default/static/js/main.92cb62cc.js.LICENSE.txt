@@ -1,0 +1,162 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*!
+
+JSZip v3.10.0 - A JavaScript class for generating and reading zip files
+<http://stuartk.com/jszip>
+
+(c) 2009-2016 Stuart Knightley <stuart [at] stuartk.com>
+Dual licenced under the MIT license or GPLv3. See https://raw.github.com/Stuk/jszip/main/LICENSE.markdown.
+
+JSZip uses the library pako released under the MIT license :
+https://github.com/nodeca/pako/blob/main/LICENSE
+*/
+
+/*!
+ * DevExpress Diagram (dx-diagram.min)
+ * Version: 2.1.57
+ * Build date: Mon May 30 2022
+ * 
+ * Copyright (c) 2012 - 2022 Developer Express Inc. ALL RIGHTS RESERVED
+ * Read about DevExpress licensing here: https://www.devexpress.com/Support/EULAs
+ */
+
+/*!
+ * DevExpress Gantt (dx-gantt.min)
+ * Version: 4.0.26
+ * Build date: Thu May 26 2022
+ * 
+ * Copyright (c) 2012 - 2022 Developer Express Inc. ALL RIGHTS RESERVED
+ * Read about DevExpress licensing here: https://www.devexpress.com/Support/EULAs
+ */
+
+/*!
+ * DevExtreme-Quill Editor v.1.5.16
+ * https://js.devexpress.com/
+ * Copyright (c) 2020, Developer Express Inc.
+ * Copyright (c) 2017, Slab
+ * Copyright (c) 2014, Jason Chen
+ * Copyright (c) 2013, salesforce.com
+ */
+
+/*!
+ * devextreme-react
+ * Version: 21.2.8
+ * Build date: Tue Jun 07 2022
+ *
+ * Copyright (c) 2012 - 2022 Developer Express Inc. ALL RIGHTS RESERVED
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license. See the LICENSE file in the root of the project for details.
+ *
+ * https://github.com/DevExpress/devextreme-react
+ */
+
+/*!
+ * rrule.js - Library for working with recurrence rules for calendar dates.
+ * https://github.com/jakubroztocil/rrule
+ *
+ * Copyright 2010, Jakub Roztocil and Lars Schoning
+ * Licenced under the BSD licence.
+ * https://github.com/jakubroztocil/rrule/blob/master/LICENCE
+ *
+ * Based on:
+ * python-dateutil - Extensions to the standard Python datetime module.
+ * Copyright (c) 2003-2011 - Gustavo Niemeyer <gustavo@niemeyer.net>
+ * Copyright (c) 2012 - Tomi Pieviläinen <tomi.pievilainen@iki.fi>
+ * https://github.com/jakubroztocil/rrule/blob/master/LICENCE
+ *
+ */
+
+/*!
+* rrule.js - Library for working with recurrence rules for calendar dates.
+* https://github.com/jakubroztocil/rrule
+*
+* Copyright 2010, Jakub Roztocil and Lars Schoning
+* Licenced under the BSD licence.
+* https://github.com/jakubroztocil/rrule/blob/master/LICENCE
+*
+*/
+
+/*! *****************************************************************************
+    Copyright (c) Microsoft Corporation.
+    
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+    
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+
+/**
+ * @license React
+ * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * @license React
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * @license React
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * @license React
+ * scheduler.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * React Router DOM v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+/**
+ * React Router v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */

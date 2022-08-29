@@ -1,20 +1,30 @@
 {
   "files": {
-    "main.css": "./static/css/main.25052a4b.chunk.css",
-    "main.js": "./static/js/main.842c971a.chunk.js",
-    "runtime-main.js": "./static/js/runtime-main.f90f236a.js",
-    "static/css/2.a2a3e215.chunk.css": "./static/css/2.a2a3e215.chunk.css",
-    "static/js/2.a597cf60.chunk.js": "./static/js/2.a597cf60.chunk.js",
-    "static/js/3.1622786f.chunk.js": "./static/js/3.1622786f.chunk.js",
-    "index.html": "./index.html",
-    "static/js/2.a597cf60.chunk.js.LICENSE.txt": "./static/js/2.a597cf60.chunk.js.LICENSE.txt",
-    "static/media/dx.material.blue.dark.compact.scss": "./static/media/dxiconsmaterial.eaadb5a6.ttf"
+    "main.css": "/static/css/main.de2caa13.css",
+    "main.js": "/static/js/main.92cb62cc.js",
+    "static/js/787.b701888c.chunk.js": "/static/js/787.b701888c.chunk.js",
+    "static/media/Roboto-500.ttf": "/static/media/Roboto-500.0fcd45fbfc419c42c8b9.ttf",
+    "static/media/Roboto-400.ttf": "/static/media/Roboto-400.6bede58e856278b0f8f1.ttf",
+    "static/media/Roboto-700.ttf": "/static/media/Roboto-700.17451a4c1cd55e33ac57.ttf",
+    "static/media/Roboto-300.ttf": "/static/media/Roboto-300.ce61b8b68994802f2e55.ttf",
+    "static/media/Roboto-500.woff": "/static/media/Roboto-500.092c6130df8fd2199888.woff",
+    "static/media/Roboto-700.woff": "/static/media/Roboto-700.73288d91c325e82a5b92.woff",
+    "static/media/Roboto-400.woff": "/static/media/Roboto-400.e02e9d6ff5547f7e9962.woff",
+    "static/media/Roboto-300.woff": "/static/media/Roboto-300.d923dfafc0c5183b59aa.woff",
+    "static/media/Roboto-500.woff2": "/static/media/Roboto-500.1d3bced88509b0838984.woff2",
+    "static/media/Roboto-700.woff2": "/static/media/Roboto-700.92fbd4e93cf0a5dbebaa.woff2",
+    "static/media/Roboto-400.woff2": "/static/media/Roboto-400.64cfb66c866ea50cad47.woff2",
+    "static/media/Roboto-300.woff2": "/static/media/Roboto-300.c27d89ac77468ae18f28.woff2",
+    "static/media/dxiconsmaterial.ttf": "/static/media/dxiconsmaterial.eaadb5a61a6cd855a7f7.ttf",
+    "static/media/dxiconsmaterial.woff": "/static/media/dxiconsmaterial.32d328282b0b8b43e5d7.woff",
+    "static/media/dxiconsmaterial.woff2": "/static/media/dxiconsmaterial.bc5a06be4e18440c6f27.woff2",
+    "index.html": "/index.html",
+    "main.de2caa13.css.map": "/static/css/main.de2caa13.css.map",
+    "main.92cb62cc.js.map": "/static/js/main.92cb62cc.js.map",
+    "787.b701888c.chunk.js.map": "/static/js/787.b701888c.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.f90f236a.js",
-    "static/css/2.a2a3e215.chunk.css",
-    "static/js/2.a597cf60.chunk.js",
-    "static/css/main.25052a4b.chunk.css",
-    "static/js/main.842c971a.chunk.js"
+    "static/css/main.de2caa13.css",
+    "static/js/main.92cb62cc.js"
   ]
 }
