@@ -31,13 +31,13 @@ const CardNotes = ({ items, user }: { items: Notes | undefined; user: string | u
   useEffect(() => {
     setData(items);
   }, [items]);
-  const send = () => {
+  const send = useCallback(() => {
     if (noteText === '' || !data || !user) {
       return;
     }
-    setData(data.concat([{ manager: user, date: new Date(), text: noteText }]));
+    setData([...data, { manager: user, date: new Date(), text: noteText }]);
     setNoteText('');
-  };
+  }, [noteText, data, user]);
   const cancel = useCallback(() => {
     setNoteText('');
   }, []);

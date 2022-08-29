@@ -32,22 +32,22 @@ const Card = ({ data, user }: { data: Message; user: string }) => (
   </div>
 );
 
-const CardMessages = ({ items, user, updateCountMessages }: { items: Messages | undefined; user: string | undefined; updateCountMessages: any }) => {
+const CardMessages = ({ items, user, updateMessagesCount }: { items: Messages | undefined; user: string | undefined; updateMessagesCount: any }) => {
   const [messages, setMessages] = useState(items);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
   useEffect(() => {
     setMessages(items);
   }, [items]);
-  const send = () => {
+  const send = useCallback(() => {
     if ((message === '' && title === '') || !messages || !user) {
       return;
     }
-    setMessages(messages.concat([{ manager: user, date: new Date(), text: message, subject: title }]));
+    setMessages([...messages, { manager: user, date: new Date(), text: message, subject: title }]);
     setTitle('');
     setMessage('');
-    updateCountMessages(messages.length + 1);
-  };
+    updateMessagesCount(messages.length + 1);
+  }, [message, title, messages, user, updateMessagesCount]);
   const cancel = useCallback(() => {
     setTitle('');
     setMessage('');

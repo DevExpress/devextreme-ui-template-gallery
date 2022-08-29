@@ -12,17 +12,17 @@ const TASK_ID = 1;
 
 export default function PlanningTaskDetails() {
   const [task, setTask] = useState<Task>();
-  const [countMessages, setCountMessages] = useState(0);
+  const [messagesCount, setMessagesCount] = useState(0);
   const loadData = useCallback(() => {
     getTask(TASK_ID)
       .then((data) => {
         setTask(data);
-        setCountMessages(data.messages.length);
+        setMessagesCount(data.messages.length);
       })
       .catch((error) => console.log(error));
   }, []);
-  const updateCountMessages = useCallback((count) => {
-    setCountMessages(count);
+  const updateMessagesCount = useCallback((count) => {
+    setMessagesCount(count);
   }, []);
   useEffect(() => {
     loadData();
@@ -77,8 +77,8 @@ export default function PlanningTaskDetails() {
               <TabPanelItem title='Notes'>
                 <CardNotes items={task?.notes} user={task?.owner}></CardNotes>
               </TabPanelItem>
-              <TabPanelItem title='Messages' badge={countMessages}>
-                <CardMessages items={task?.messages} user={task?.owner} updateCountMessages={updateCountMessages}></CardMessages>
+              <TabPanelItem title='Messages' badge={messagesCount}>
+                <CardMessages items={task?.messages} user={task?.owner} updateMessagesCount={updateMessagesCount}></CardMessages>
               </TabPanelItem>
             </TabPanel>
           </div>
