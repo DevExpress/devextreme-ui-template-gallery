@@ -2,14 +2,12 @@
 /* eslint-disable no-undef */
 import { Selector, ClientFunction } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { screenModes, timeoutSecond } from '../config.js';
+import { screenModes, chartTimeout } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}`;
 
 fixture`Analytics Geography`;
-
-const chartTimeout = timeoutSecond * 2;
 
 const toogleEmbeddedClass = ClientFunction((embed) => {
   if (!embed) return;
