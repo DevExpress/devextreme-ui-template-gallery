@@ -1,5 +1,5 @@
 {
-  "name": "devextreme-rwa-demos",
+  "name": "devextreme-ui-template-gallery",
   "private": true,
   "scripts": {
     "build": "lerna run build",
