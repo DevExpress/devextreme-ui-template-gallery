@@ -25,7 +25,7 @@ const EditComponent = ({ items, editComponent: Component, label, value, setValue
   );
   const EditItem = useCallback((data: string) => <Component text={data}></Component>, [Component]);
 
-  return <SelectBox items={items} fieldRender={EditField} itemRender={EditItem} label={label} value={value} onValueChanged={(e) => setValue(e.value)}></SelectBox>;
+  return <SelectBox items={items} fieldRender={EditField} itemRender={EditItem} label={label} value={value} onValueChange={(value) => setValue(value)}></SelectBox>;
 };
 
 const EditStatus = ({ label, value, setValue }: FormEdit) => {
@@ -63,7 +63,7 @@ const OwnerField = ({ editorOptions }) => (
   </FormContext.Consumer>
 );
 
-const DropDownContentTemplate = () => <FormContext.Consumer>{({ dueDateChange }) => <Calendar onValueChanged={dueDateChange} />}</FormContext.Consumer>;
+const DropDownContentTemplate = () => <FormContext.Consumer>{({ dueDateChange }) => <Calendar onValueChange={dueDateChange} />}</FormContext.Consumer>;
 
 const DueDateTemplate = ({ editorOptions }) => {
   return (
@@ -111,7 +111,7 @@ const StatusField = ({ editorOptions }) => (
 const FormContext = React.createContext({
   data: { priority: '', status: '', company: '', owner: '' },
   setValue: (obj: { priority?: TaskPriority; status?: TaskStatus }) => {},
-  dueDateChange: (e: any) => {},
+  dueDateChange: (value: any) => {},
 });
 
 const TaskForm = ({ task }: { task: FormTask | undefined }) => {
@@ -129,9 +129,9 @@ const TaskForm = ({ task }: { task: FormTask | undefined }) => {
   const toggleEditing = useCallback(() => {
     setEditing(!editing);
   }, [editing]);
-  const dueDateChange = (e) => {
-    setData({ ...task!, ...{ dueDate: e.value } });
-    setDueDate(!!e.value);
+  const dueDateChange = (value) => {
+    setData({ ...task!, ...{ dueDate: value } });
+    setDueDate(!!value);
   };
   const updateTask = (obj) => {
     setData({ ...data, ...obj });
@@ -180,7 +180,7 @@ const TaskForm = ({ task }: { task: FormTask | undefined }) => {
                   name: 'Due Date',
                   placeholder: 'MM/dd/y',
                   displayFormat: 'MM/dd/y',
-                  onValueChanged: dueDateChange,
+                  onValueChange: dueDateChange,
                   ...editorOptions,
                 }}
               ></SimpleItem>

@@ -25,8 +25,8 @@ const Card = ({ note }: { note: Note }) => {
 const CardNotes = ({ items, user }: { items: Notes | undefined; user: string | undefined }) => {
   const [noteText, setNoteText] = useState('');
   const [data, setData] = useState(items);
-  const onNoteTextChanged = useCallback((e) => {
-    setNoteText(e.value);
+  const onNoteTextChanged = useCallback((value) => {
+    setNoteText(value);
   }, []);
   useEffect(() => {
     setData(items);
@@ -44,7 +44,7 @@ const CardNotes = ({ items, user }: { items: Notes | undefined; user: string | u
   return (
     <div className='notes'>
       <div className='input-content'>
-        <TextArea label='New Note' stylingMode='outlined' value={noteText} valueChangeEvent='keyup' onValueChanged={onNoteTextChanged}></TextArea>
+        <TextArea label='New Note' stylingMode='outlined' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged}></TextArea>
         <Toolbar>
           <Item
             location='after'

@@ -19,7 +19,7 @@ const EditComponent = ({ items, editComponent: Component, setValue }: GridEditCo
   );
   const EditItem = (data) => <Component text={data}></Component>;
 
-  return <SelectBox className='edit-cell' items={items} fieldRender={EditField} itemRender={EditItem} onValueChanged={(e) => setValue(e.value)}></SelectBox>;
+  return <SelectBox className='edit-cell' items={items} fieldRender={EditField} itemRender={EditItem} onValueChange={(value) => setValue(value)}></SelectBox>;
 };
 
 const EditStatus = ({ setValue }: GridEdit) => <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} setValue={setValue} />;

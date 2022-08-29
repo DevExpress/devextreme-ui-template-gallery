@@ -52,17 +52,17 @@ const CardMessages = ({ items, user, updateCountMessages }: { items: Messages | 
     setTitle('');
     setMessage('');
   }, []);
-  const onTitleChanged = useCallback((e) => {
-    setTitle(e.value);
+  const onTitleChanged = useCallback((value) => {
+    setTitle(value);
   }, []);
-  const onMessageChanged = useCallback((e) => {
-    setMessage(e.value);
+  const onMessageChanged = useCallback((value) => {
+    setMessage(value);
   }, []);
   return (
     <div className='messages'>
       <div className='input-content'>
-        <TextBox label='Title' stylingMode='outlined' value={title} valueChangeEvent='keyup' onValueChanged={onTitleChanged}></TextBox>
-        <TextArea label='New Message' stylingMode='outlined' value={message} valueChangeEvent='keyup' onValueChanged={onMessageChanged}></TextArea>
+        <TextBox label='Title' stylingMode='outlined' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged}></TextBox>
+        <TextArea label='New Message' stylingMode='outlined' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged}></TextArea>
         <Toolbar>
           <Item
             location='before'
