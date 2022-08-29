@@ -32,18 +32,6 @@ const setEmbeddedMode = ClientFunction((embed) => {
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-sales-report-all-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-dropdownbutton'));
-      await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
-      await t.wait(chartTimeout);
-      await takeScreenshot(`analytics-sales-report-week-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await t.click(Selector('.dx-dropdownbutton'));
-      await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(1));
-      await t.wait(chartTimeout);
-      await takeScreenshot(`analytics-sales-report-2-weeks-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await t.click(Selector('.dx-dropdownbutton'));
-      await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(2));
-      await t.wait(chartTimeout);
-      await takeScreenshot(`analytics-sales-report-month-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
-      await t.click(Selector('.dx-dropdownbutton'));
       await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(3));
       await t.wait(chartTimeout);
       await takeScreenshot(`analytics-sales-report-year-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
