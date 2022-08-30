@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/auth';
 import './UserPanel.scss';
 import type { UserPanelProps } from '../../types';
 
-export default function UserPanel({ menuMode }: UserPanelProps) {
+export const UserPanel = ({ menuMode }: UserPanelProps) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
 

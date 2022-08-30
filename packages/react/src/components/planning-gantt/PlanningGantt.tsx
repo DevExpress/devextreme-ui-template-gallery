@@ -4,7 +4,7 @@ import { PlanningProps } from '../../shared/types/task';
 import Gantt, { Tasks, Column, Toolbar, Item, Validation, Editing } from 'devextreme-react/gantt';
 import './PlanningGantt.scss';
 
-const PlanningGantt = ({ dataSource }: PlanningProps) => {
+export const PlanningGantt = ({ dataSource }: PlanningProps) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (dataSource.length !== 0) {
@@ -40,5 +40,3 @@ const PlanningGantt = ({ dataSource }: PlanningProps) => {
     </Gantt>
   );
 };
-
-export default PlanningGantt;

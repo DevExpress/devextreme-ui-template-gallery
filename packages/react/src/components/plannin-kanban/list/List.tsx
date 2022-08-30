@@ -4,7 +4,7 @@ import Sortable from 'devextreme-react/sortable';
 import Button from 'devextreme-react/button';
 import notify from 'devextreme/ui/notify';
 import { Task } from '../../../shared/types/task';
-import Card from '../card/Card';
+import { Card } from '../card/Card';
 import { DragStartEvent, ReorderEvent } from 'devextreme/ui/sortable';
 import './List.scss';
 
@@ -16,7 +16,7 @@ const onAddTaskBtnClick = () => {
   notify('Add task event');
 };
 
-const List = ({
+export const List = ({
   title,
   index,
   tasks,
@@ -48,5 +48,3 @@ const List = ({
     </div>
   );
 };
-
-export default List;

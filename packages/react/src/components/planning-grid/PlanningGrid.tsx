@@ -3,8 +3,8 @@ import DataGrid, { Column, Selection, Sorting, HeaderFilter, Scrolling, Required
 import LoadPanel from 'devextreme-react/load-panel';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
-import PriorityTask from '../priority-task/PriorityTask';
-import StatusTask from '../status-task/StatusTask';
+import { PriorityTask } from '../priority-task/PriorityTask';
+import { StatusTask } from '../status-task/StatusTask';
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import { Task, PlanningProps } from '../../shared/types/task';
 import { GridEdit, GridEditComponent } from '../../shared/types/grid';
@@ -24,7 +24,7 @@ const EditComponent = ({ items, editComponent: Component, setValue }: GridEditCo
 
 const EditStatus = ({ setValue }: GridEdit) => <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} setValue={setValue} />;
 const EditPriority = ({ setValue }: GridEdit) => <EditComponent items={PRIORITY_ITEMS} editComponent={PriorityTask} setValue={setValue} />;
-const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
+export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<Task[]>();
   useEffect(() => {
@@ -74,5 +74,3 @@ const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, 
     </DataGrid>
   );
 });
-
-export default PlanningGrid;

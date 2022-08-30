@@ -7,8 +7,8 @@ import LoadPanel from 'devextreme-react/load-panel';
 import { NavigationProvider } from './contexts/navigation';
 import { AuthProvider, useAuth } from './contexts/auth';
 import { useScreenSizeClass } from './utils/media-query';
-import Content from './Content';
-import UnauthenticatedContent from './UnauthenticatedContent';
+import { Content } from './Content';
+import { UnauthenticatedContent } from './UnauthenticatedContent';
 
 function App() {
   const { user, loading } = useAuth();
@@ -24,7 +24,7 @@ function App() {
   return <UnauthenticatedContent />;
 }
 
-export default function Root() {
+export const Root = () => {
   const screenSizeClass = useScreenSizeClass();
 
   return (

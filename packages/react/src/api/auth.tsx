@@ -1,4 +1,4 @@
-import defaultUser from '../utils/default-user';
+import { defaultUser } from '../utils/default-user';
 
 export async function signIn(email: string, password: string) {
   try {

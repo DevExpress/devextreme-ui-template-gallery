@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LoadPanel from 'devextreme-react/load-panel';
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
-import formatDate from '../../utils/format-date';
+import { formatDate } from '../../utils/format-date';
 import classNames from 'classnames';
 import { Activities, Activity } from '../../shared/types/activities';
 import './CardActivities.scss';
@@ -21,7 +21,7 @@ const ListTemplate = (item: Activity) => {
   );
 };
 
-const CardActivities = ({ activities }: { activities: Activities | undefined }) => {
+export const CardActivities = ({ activities }: { activities: Activities | undefined }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     activities && setLoading(false);
@@ -36,5 +36,3 @@ const CardActivities = ({ activities }: { activities: Activities | undefined }) 
     </div>
   );
 };
-
-export default CardActivities;

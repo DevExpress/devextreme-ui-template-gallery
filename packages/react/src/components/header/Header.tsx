@@ -2,12 +2,12 @@ import React from 'react';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import TextBox from 'devextreme-react/text-box';
 import Button from 'devextreme-react/button';
-import UserPanel from '../user-panel/UserPanel';
+import { UserPanel } from '../user-panel/UserPanel';
 import './Header.scss';
 import { Template } from 'devextreme-react/core/template';
 import type { HeaderProps } from '../../types';
 
-export default function Header({ menuToggleEnabled, title, toggleMenu }: HeaderProps) {
+export const Header = ({ menuToggleEnabled, title, toggleMenu }: HeaderProps) => {
   return (
     <header className={'header-component'}>
       <Toolbar className={'header-toolbar'}>

@@ -3,8 +3,8 @@ import './TaskForm.scss';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import LoadPanel from 'devextreme-react/load-panel';
-import PriorityTask from '../priority-task/PriorityTask';
-import StatusTask from '../status-task/StatusTask';
+import { PriorityTask } from '../priority-task/PriorityTask';
+import { StatusTask } from '../status-task/StatusTask';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
@@ -114,7 +114,7 @@ const FormContext = React.createContext({
   dueDateChange: (value: any) => {},
 });
 
-const TaskForm = ({ task }: { task: FormTask | undefined }) => {
+export const TaskForm = ({ task }: { task: FormTask | undefined }) => {
   const [data, setData] = useState(task);
   const [isDueDate, setDueDate] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -195,5 +195,3 @@ const TaskForm = ({ task }: { task: FormTask | undefined }) => {
     </div>
   );
 };
-
-export default TaskForm;

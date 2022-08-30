@@ -2,15 +2,15 @@ import './polyfills';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Root } from './App';
+import { reportWebVitals } from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   // <React.StrictMode> // T1094699
-    <App />
+    <Root />
   // </React.StrictMode>
 );
 

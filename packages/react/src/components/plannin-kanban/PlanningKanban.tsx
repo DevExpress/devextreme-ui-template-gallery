@@ -5,7 +5,7 @@ import LoadPanel from 'devextreme-react/load-panel';
 import { PlanningProps, Task } from '../../shared/types/task';
 import { STATUS_ITEMS } from '../../shared/constants';
 import { DragStartEvent, ReorderEvent } from 'devextreme/ui/sortable';
-import List from './list/List';
+import { List } from './list/List';
 import './PlanningKanban.scss';
 
 const initialStatuses = STATUS_ITEMS;
@@ -21,7 +21,7 @@ const reorder = (items: any[], item: Object, fromIndex: number, toIndex: number)
 
   return result;
 };
-const PlanningKanban = ({ dataSource }: PlanningProps) => {
+export const PlanningKanban = ({ dataSource }: PlanningProps) => {
   const [loading, setLoading] = useState(true);
   const [lists, setLists] = useState<Task[][]>([]);
   const [statuses, setStatuses] = useState(initialStatuses);
@@ -77,5 +77,3 @@ const PlanningKanban = ({ dataSource }: PlanningProps) => {
     </div>
   );
 };
-
-export default PlanningKanban;

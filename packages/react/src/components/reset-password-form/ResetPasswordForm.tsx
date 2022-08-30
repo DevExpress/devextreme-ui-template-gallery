@@ -15,7 +15,7 @@ import './ResetPasswordForm.scss';
 
 const notificationText = 'We\'ve sent a link to reset your password. Check your inbox.';
 
-export default function ResetPasswordForm() {
+export const ResetPasswordForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const formData = useRef({ email: '', password: '' });

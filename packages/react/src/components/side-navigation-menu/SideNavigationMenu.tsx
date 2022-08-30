@@ -8,7 +8,7 @@ import type { SideNavigationMenuProps } from '../../types';
 
 import * as events from 'devextreme/events';
 
-export default function SideNavigationMenu(props: React.PropsWithChildren<SideNavigationMenuProps>) {
+export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigationMenuProps>) => {
   const {
     children,
     selectedItemChanged,

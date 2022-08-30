@@ -3,8 +3,8 @@ import TextBox from 'devextreme-react/text-box';
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
-import Avatar from '../avatar/Avatar';
-import formatDate from '../../utils/format-date';
+import { Avatar } from '../avatar/Avatar';
+import { formatDate } from '../../utils/format-date';
 import { Message, Messages } from '../../shared/types/messages';
 import './CardMessages.scss';
 
@@ -32,7 +32,7 @@ const Card = ({ data, user }: { data: Message; user: string }) => (
   </div>
 );
 
-const CardMessages = ({ items, user, updateMessagesCount }: { items: Messages | undefined; user: string | undefined; updateMessagesCount: any }) => {
+export const CardMessages = ({ items, user, updateMessagesCount }: { items: Messages | undefined; user: string | undefined; updateMessagesCount: any }) => {
   const [messages, setMessages] = useState(items);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
@@ -95,5 +95,3 @@ const CardMessages = ({ items, user, updateMessagesCount }: { items: Messages | 
     </div>
   );
 };
-
-export default CardMessages;

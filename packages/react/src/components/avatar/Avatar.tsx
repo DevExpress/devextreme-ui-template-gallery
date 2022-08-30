@@ -1,6 +1,6 @@
 import './Avatar.scss';
 
-const Avatar = ({ owner }: { owner: string }) => (
+export const Avatar = ({ owner }: { owner: string }) => (
   <div className='circle'>
     {owner
       .split(' ')
@@ -8,5 +8,3 @@ const Avatar = ({ owner }: { owner: string }) => (
       .join('')}
   </div>
 );
-
-export default Avatar;

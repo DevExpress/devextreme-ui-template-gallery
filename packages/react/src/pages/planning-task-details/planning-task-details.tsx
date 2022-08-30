@@ -10,7 +10,7 @@ import { getTask } from 'dx-rwa-data';
 
 const TASK_ID = 1;
 
-export default function PlanningTaskDetails() {
+export const PlanningTaskDetails = () => {
   const [task, setTask] = useState<Task>();
   const [messagesCount, setMessagesCount] = useState(0);
   const loadData = useCallback(() => {

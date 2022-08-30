@@ -1,6 +1,4 @@
-const formatDate = (stringDate: string | Date) => {
+export const formatDate = (stringDate: string | Date) => {
   const date = new Date(stringDate);
   return [('0' + (date.getMonth() + 1)).slice(-2), ('0' + date.getDate()).slice(-2), date.getFullYear()].join('/');
 };
-
-export default formatDate;

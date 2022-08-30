@@ -27,7 +27,7 @@ import LoadPanel from 'devextreme-react/load-panel';
 
 type FilterContactStatus = ContactStatus | 'All Contacts';
 
-export default function CRMContactList() {
+export const CRMContactList = () => {
     let grid: any = null;
 
     const statusList = contactStatusList;

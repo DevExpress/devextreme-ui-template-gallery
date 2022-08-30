@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
-import formatDate from '../../utils/format-date';
+import { formatDate } from '../../utils/format-date';
 import { Notes, Note } from '../../shared/types/notes';
 import './CardNotes.scss';
 
@@ -22,7 +22,7 @@ const Card = ({ note }: { note: Note }) => {
   );
 };
 
-const CardNotes = ({ items, user }: { items: Notes | undefined; user: string | undefined }) => {
+export const CardNotes = ({ items, user }: { items: Notes | undefined; user: string | undefined }) => {
   const [noteText, setNoteText] = useState('');
   const [data, setData] = useState(items);
   const onNoteTextChanged = useCallback((value) => {
@@ -68,5 +68,3 @@ const CardNotes = ({ items, user }: { items: Notes | undefined; user: string | u
     </div>
   );
 };
-
-export default CardNotes;

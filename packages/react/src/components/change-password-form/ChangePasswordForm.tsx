@@ -12,7 +12,7 @@ import LoadIndicator from 'devextreme-react/load-indicator';
 import notify from 'devextreme/ui/notify';
 import { changePassword } from '../../api/auth';
 
-export default function ChangePasswordForm() {
+export const ChangePasswordForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const formData = useRef({ password: '' });

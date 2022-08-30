@@ -11,7 +11,7 @@ import 'jspdf-autotable';
 
 const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
-export default function PlanningTaskList() {
+export const PlanningTaskList = () => {
   const gridRef = useRef<DataGrid>(null);
   const [list, setList] = useState(listsData[0]);
   const [index, setIndex] = useState(0);

@@ -1,16 +1,16 @@
 import React from 'react';
 import notify from 'devextreme/ui/notify';
 import Button from 'devextreme-react/button';
-import formatDate from '../../../utils/format-date';
+import { formatDate } from '../../../utils/format-date';
 import { Task } from '../../../shared/types/task';
-import Avatar from '../../avatar/Avatar';
+import { Avatar } from '../../avatar/Avatar';
 import './Card.scss';
 
 const onClick = (task: Task) => () => {
   notify(`Edit '${task.text}' card event`);
 };
 
-const Card = ({ task }: { task: Task }) => {
+export const Card = ({ task }: { task: Task }) => {
   return (
     <div className='card dx-card dx-theme-text-color dx-theme-background-color'>
       <div className={`card-wrapper priority-${task.priority.toLowerCase()}`}>
@@ -31,5 +31,3 @@ const Card = ({ task }: { task: Task }) => {
     </div>
   );
 };
-
-export default Card;

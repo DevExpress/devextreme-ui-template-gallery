@@ -25,7 +25,7 @@ const routes = [
     }
 ];
 
-export default routes.map(route => {
+export const appRoutes = routes.map(route => {
     return {
         ...route,
         element: withNavigationWatcher(route.element, route.path)
