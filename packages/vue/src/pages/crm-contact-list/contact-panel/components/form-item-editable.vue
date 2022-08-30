@@ -14,24 +14,21 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { DxTextBox } from 'devextreme-vue/text-box';
-import FormItemBlue from '@/components/form-item-blue.vue'
+import FormItemBlue from '@/components/form-item-blue.vue';
 
-const props = withDefaults(
-    defineProps<{
+const props = withDefaults(defineProps<{
       data: any,
       dataField: string,
       isEditing: boolean,
       editorOptions: any,
       label?: string
     }>(), {
-      data: {},
-      dataField: '',
-      isEditing: false,
-      editorOptions: {},
-      label: ''
-    })
+  data: {},
+  dataField: '',
+  isEditing: false,
+  editorOptions: {},
+  label: '',
+});
 
-const title = computed(() => {
-  return props.label ? props.label : props.dataField.replace(/^./, a => a.toUpperCase())
-})
+const title = computed(() => (props.label ? props.label : props.dataField.replace(/^./, (a) => a.toUpperCase())));
 </script>

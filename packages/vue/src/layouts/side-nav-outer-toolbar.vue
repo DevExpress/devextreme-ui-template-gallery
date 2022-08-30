@@ -33,21 +33,20 @@
 </template>
 
 <script setup lang="ts">
-import DxDrawer from "devextreme-vue/drawer";
-import DxScrollView from "devextreme-vue/scroll-view";
+import DxDrawer from 'devextreme-vue/drawer';
+import DxScrollView from 'devextreme-vue/scroll-view';
 
-import HeaderToolbar from "../components/header-toolbar.vue";
-import SideNavMenu from "../components/side-nav-menu.vue";
-
-import { computed, ref, watch} from 'vue';
-import { useRoute } from 'vue-router'
-import DevExpress from "devextreme";
+import { computed, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import DevExpress from 'devextreme';
+import SideNavMenu from '../components/side-nav-menu.vue';
+import HeaderToolbar from '../components/header-toolbar.vue';
 import ToolbarItemClickEvent = DevExpress.ui.dxFileManager.ToolbarItemClickEvent;
 
 const props = defineProps({
   title: String,
   isXSmall: Boolean,
-  isLarge: Boolean
+  isLarge: Boolean,
 });
 
 const route = useRoute();
@@ -62,7 +61,8 @@ watch(
     if (!menuTemporaryOpened.value) {
       menuOpened.value = props.isLarge;
     }
-  });
+  },
+);
 
 watch(
   () => route.path,
@@ -72,7 +72,8 @@ watch(
       menuTemporaryOpened.value = false;
     }
     scrollViewRef.value?.instance?.scrollTo(0);
-  })
+  },
+);
 
 function toggleMenu(e: ToolbarItemClickEvent) {
   const pointerEvent = e.event;
@@ -94,12 +95,12 @@ const drawerOptions = computed(() => {
   const shaderEnabled = !props.isLarge;
 
   return {
-    menuMode: props.isLarge ? "shrink" : "overlap",
-    menuRevealMode: props.isXSmall ? "slide" : "expand",
+    menuMode: props.isLarge ? 'shrink' : 'overlap',
+    menuRevealMode: props.isXSmall ? 'slide' : 'expand',
     minMenuSize: props.isXSmall ? 0 : 60,
     maxMenuSize: props.isXSmall ? 250 : undefined,
     closeOnOutsideClick: shaderEnabled,
-    shaderEnabled
+    shaderEnabled,
   };
 });
 </script>

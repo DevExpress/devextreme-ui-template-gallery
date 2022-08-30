@@ -25,8 +25,8 @@
 </template>
 
 <script setup lang="ts">
-import DxContextMenu, { DxPosition } from "devextreme-vue/context-menu";
-import DxList from "devextreme-vue/list";
+import DxContextMenu, { DxPosition } from 'devextreme-vue/context-menu';
+import DxList from 'devextreme-vue/list';
 
 defineProps({
   menuMode: String,

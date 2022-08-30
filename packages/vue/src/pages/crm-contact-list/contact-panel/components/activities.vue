@@ -31,14 +31,13 @@ import DxList from 'devextreme-vue/list';
 import DxButton from 'devextreme-vue/button';
 import { formatDate } from '@/utils/formatters';
 
-
 const props = withDefaults(defineProps<{
   showBy?: boolean,
   items: Array<any>
 }>(), {
   showBy: false,
-  items: []
-})
+  items: [],
+});
 </script>
 
 <style lang="scss">
@@ -61,8 +60,6 @@ const props = withDefaults(defineProps<{
   &.load {
     min-height: auto;
   }
-
-
 
   .dx-list-item-content {
     padding: 0;

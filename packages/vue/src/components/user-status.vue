@@ -4,9 +4,9 @@
 </template>
 
 <script setup lang="ts">
-  const props = defineProps<{
+const props = defineProps<{
     status: string
-  }>()
+  }>();
 </script>
 
 <style lang="scss">

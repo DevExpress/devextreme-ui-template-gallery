@@ -11,21 +11,22 @@
 </template>
 
 <script setup lang="ts">
-import DxScrollView from "devextreme-vue/scroll-view";
-import {useRoute} from "vue-router";
-import {ref, watch} from "vue";
+import DxScrollView from 'devextreme-vue/scroll-view';
+import { useRoute } from 'vue-router';
+import { ref, watch } from 'vue';
 
 const route = useRoute();
 
 const title = ref(route.meta.title);
-const description = ref<string>("");
+const description = ref<string>('');
 
-watch(() => route.path,
-    () => {
-      title.value = route.meta.title;
-      description.value = route.meta.description as string;
-    }
-)
+watch(
+  () => route.path,
+  () => {
+    title.value = route.meta.title;
+    description.value = route.meta.description as string;
+  },
+);
 </script>
 
 <style lang="scss">

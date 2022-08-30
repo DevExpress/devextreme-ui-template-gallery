@@ -64,20 +64,20 @@
 </template>
 
 <script >
-import DxButton from "devextreme-vue/button";
-import DxToolbar, { DxItem } from "devextreme-vue/toolbar";
-import auth from "../auth";
+import DxButton from 'devextreme-vue/button';
+import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
 import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
+import auth from '../auth';
 
-import UserPanel from "./user-panel.vue";
+import UserPanel from './user-panel.vue';
 
 export default {
   props: {
     menuToggleEnabled: Boolean,
     title: String,
     toggleMenuFunc: Function,
-    logOutFunc: Function
+    logOutFunc: Function,
   },
   setup() {
     const router = useRouter();
@@ -85,46 +85,46 @@ export default {
 
     const user = ref({});
     auth.getUser().then((e) => {
-      user.value = e.data
+      user.value = e.data;
     });
 
     const userMenuItems = [{
-        text: "Profile",
-        icon: "user",
-        onClick: onProfileClick
-      },
-      {
-        text: "Logout",
-        icon: "runner",
-        onClick: onLogoutClick
+      text: 'Profile',
+      icon: 'user',
+      onClick: onProfileClick,
+    },
+    {
+      text: 'Logout',
+      icon: 'runner',
+      onClick: onLogoutClick,
     }];
 
     function onLogoutClick() {
       auth.logOut();
       router.push({
-        path: "/login-form",
-        query: { redirect: route.path }
+        path: '/login-form',
+        query: { redirect: route.path },
       });
     }
 
     function onProfileClick() {
-      /*router.push({
+      /* router.push({
         path: "/profile",
         query: { redirect: route.path }
-      });*/
+      }); */
     }
 
     return {
       user,
-      userMenuItems
+      userMenuItems,
     };
   },
   components: {
     DxButton,
     DxToolbar,
     DxItem,
-    UserPanel
-  }
+    UserPanel,
+  },
 };
 </script>
 
@@ -162,8 +162,6 @@ export default {
     }
   }
 }
-
-
 
 .header-title .dx-item-content {
   color: $base-accent;

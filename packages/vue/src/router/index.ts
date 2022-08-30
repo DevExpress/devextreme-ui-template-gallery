@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import defaultLayout from '../layouts/side-nav-outer-toolbar.vue';
 import CrmContactList from '@/pages/crm-contact-list/crm-contact-list.vue';
 import CrmContactForm from '@/pages/crm-contact-form/crm-contact-form.vue';
+import defaultLayout from '../layouts/side-nav-outer-toolbar.vue';
 
 const router = createRouter({
   history: createWebHashHistory(),

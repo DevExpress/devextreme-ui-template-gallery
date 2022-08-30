@@ -3,52 +3,62 @@
     <div class="view-wrapper">
       <dx-toolbar>
         <dx-toolbar-item location="before">
-          <dx-button icon="arrowleft"></dx-button>
+          <dx-button icon="arrowleft" />
         </dx-toolbar-item>
-        <dx-toolbar-item  location="before" :text="contactName"></dx-toolbar-item >
-        <dx-toolbar-item  location="after" locateInMenu="auto">
+        <dx-toolbar-item
+          location="before"
+          :text="contactName"
+        />
+        <dx-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+        >
           <dx-button
-              text="Terminate"
-              type="default"
-              stylingMode="contained"
-          ></dx-button>
-        </dx-toolbar-item >
-        <dx-toolbar-item  location="after" locateInMenu="auto"
-                          widget="dxDropDownButton"
-                          :options="{
-        text:'Action',
-      stylingMode:'text',
-      width:120,
-      items: ['Assign to Me', 'Archive']
-      }">
-
-        </dx-toolbar-item >
-        <dx-toolbar-item  location="after" locateInMenu="auto">
-          <div class="separator"></div>
+            text="Terminate"
+            type="default"
+            styling-mode="contained"
+          />
+        </dx-toolbar-item>
+        <dx-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+          widget="dxDropDownButton"
+          :options="{
+            text:'Action',
+            stylingMode:'text',
+            width:120,
+            items: ['Assign to Me', 'Archive']
+          }"
+        />
+        <dx-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+        >
+          <div class="separator" />
         </dx-toolbar-item>
 
         <dx-toolbar-item
-            location="after"
-            locateInMenu="auto"
-            widget="dxButton"
-            showText="inMenu"
-            :options="{
-        text: 'Copy',
-        icon: 'copy'
-      }"
-        ></dx-toolbar-item>
+          location="after"
+          locate-in-menu="auto"
+          widget="dxButton"
+          show-text="inMenu"
+          :options="{
+            text: 'Copy',
+            icon: 'copy'
+          }"
+        />
 
         <dx-toolbar-item
-            location="after"
-            locateInMenu="auto"
-            widget="dxButton"
-            showText="inMenu"
-            :options="{
-        text: 'Refresh',
-        icon: 'refresh',
-        onClick: refresh
-      }"
-        ></dx-toolbar-item>
+          location="after"
+          locate-in-menu="auto"
+          widget="dxButton"
+          show-text="inMenu"
+          :options="{
+            text: 'Refresh',
+            icon: 'refresh',
+            onClick: refresh
+          }"
+        />
       </dx-toolbar>
 
       <div class="panels">
@@ -77,14 +87,14 @@ import { ref } from 'vue';
 
 import DxButton from 'devextreme-vue/button';
 import {
-  DxToolbar ,
+  DxToolbar,
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
 
 const contactName = ref('');
 
 const refresh = () => {
- loadData();
+  loadData();
 };
 
 function loadData() {}

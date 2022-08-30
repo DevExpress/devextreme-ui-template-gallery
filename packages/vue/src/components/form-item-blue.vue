@@ -11,14 +11,14 @@
 </template>
 
 <script setup lang="ts">
-  const props = withDefaults(defineProps<
+const props = withDefaults(defineProps<
       {
         label: string,
         value: string,
       }>(), {
-    label: '',
-    value: '',
-  })
+  label: '',
+  value: '',
+});
 </script>
 
 <style scoped lang="scss">

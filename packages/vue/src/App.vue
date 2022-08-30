@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import AppFooter from "./components/app-footer.vue";
-import { sizes, subscribe, unsubscribe } from "./utils/media-query";
 import {
   getCurrentInstance,
   reactive,
   onMounted,
   onBeforeUnmount,
-  computed
-} from "vue";
+  computed,
+} from 'vue';
+import AppFooter from './components/app-footer.vue';
+import { sizes, subscribe, unsubscribe } from './utils/media-query';
 
 function getScreenSizeInfo(): ScreenSizeInfo {
   const screenSizes: {[key: string]: boolean} = sizes();
 
   return {
-    isXSmall: screenSizes["screen-x-small"],
-    isLarge: screenSizes["screen-large"],
-    cssClasses: Object.keys(screenSizes).filter((cl: string) => screenSizes[cl])
+    isXSmall: screenSizes['screen-x-small'],
+    isLarge: screenSizes['screen-large'],
+    cssClasses: Object.keys(screenSizes).filter((cl: string) => screenSizes[cl]),
   };
 }
 
 const vm = getCurrentInstance();
 
-const title = (vm?.proxy as any).$appInfo.title;
-const screen: {getScreenSizeInfo: ScreenSizeInfo} = reactive({ getScreenSizeInfo: {cssClasses: []} });
+const { title } = (vm?.proxy as any).$appInfo;
+const screen: {getScreenSizeInfo: ScreenSizeInfo} = reactive({ getScreenSizeInfo: { cssClasses: [] } });
 screen.getScreenSizeInfo = getScreenSizeInfo();
 
-function screenSizeChanged () {
+function screenSizeChanged() {
   screen.getScreenSizeInfo = getScreenSizeInfo();
 }
 
@@ -37,9 +37,7 @@ onBeforeUnmount(() => {
   unsubscribe(screenSizeChanged);
 });
 
-const cssClasses = computed(() => {
-  return ["app"].concat(screen.getScreenSizeInfo.cssClasses);
-});
+const cssClasses = computed(() => ['app'].concat(screen.getScreenSizeInfo.cssClasses));
 
 </script>
 
@@ -67,7 +65,6 @@ body {
   margin: 0;
   min-height: 100%;
   height: 100%;
-
 
 }
 

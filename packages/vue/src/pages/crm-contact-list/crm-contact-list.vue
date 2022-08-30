@@ -117,7 +117,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from 'vue';
+import { onMounted, ref } from 'vue';
 import DxDropDownButton from 'devextreme-vue/drop-down-button';
 import DxDataGrid, {
   DxColumn,
@@ -132,15 +132,15 @@ import DxDataGrid, {
   DxToolbar as DxGridToolbar,
   DxItem as DxGridToolbarItem,
   DxSearchPanel,
-} from "devextreme-vue/data-grid";
+} from 'devextreme-vue/data-grid';
 
-import ContactPanel from './contact-panel/contact-panel.vue';
+import { contactStatusList, Contact, ContactStatus } from '@/types/contact';
+import { RowClickEvent } from 'devextreme/ui/data_grid';
+import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import { formatPhone } from '@/utils/formatters';
+import UserStatus from '@/components/user-status.vue';
 import CrmContactService from './api/crm-contact-service';
-import {contactStatusList, Contact, ContactStatus} from '@/types/contact';
-import {RowClickEvent} from 'devextreme/ui/data_grid';
-import {SelectionChangedEvent} from 'devextreme/ui/drop_down_button';
-import {formatPhone} from '@/utils/formatters';
-import UserStatus from '@/components/user-status.vue'
+import ContactPanel from './contact-panel/contact-panel.vue';
 
 type FilterContactStatus = ContactStatus | 'All Contacts';
 
@@ -152,8 +152,8 @@ const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
 const filterStatusList = ['All Contacts', ...contactStatusList];
 
 onMounted(() => {
-  getContacts()
-} )
+  getContacts();
+});
 
 const getContacts = () => {
   gridData.value = [];
@@ -164,7 +164,7 @@ const getContacts = () => {
   }).catch((e: string) => {
     console.log(e);
   });
-}
+};
 
 const rowClick = (e: RowClickEvent) => {
   if (e.data.id) {
@@ -189,7 +189,7 @@ const filterByStatus = (e: SelectionChangedEvent) => {
 
 const refresh = () => {
   getContacts();
-}
+};
 
 const customizePhoneCell = (cellInfo: {value: any}) => {
   const { value } = cellInfo;
@@ -199,7 +199,7 @@ const customizePhoneCell = (cellInfo: {value: any}) => {
   }
 
   return formatPhone(value.toString());
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -250,6 +250,3 @@ const customizePhoneCell = (cellInfo: {value: any}) => {
   }
 }
 </style>
-
-
-

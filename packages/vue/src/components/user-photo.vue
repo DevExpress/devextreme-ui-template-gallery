@@ -16,8 +16,8 @@ const props = withDefaults(defineProps<{
   size?: number
 }>(), {
   size: 124,
-  link: ''
-})
+  link: '',
+});
 </script>
 
 <style scoped lang="scss">

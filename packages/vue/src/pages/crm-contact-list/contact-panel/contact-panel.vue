@@ -163,44 +163,46 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import {
+  onBeforeUnmount, onMounted, ref, watch,
+} from 'vue';
 
-import DxAccordion, { DxItem as DxAccordionItem,} from 'devextreme-vue/accordion';
+import DxAccordion, { DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
 import DxButton from 'devextreme-vue/button';
-import {DxForm,
+import {
+  DxForm,
   DxItem as DxFormItem,
   DxGroupItem as DxFormGroupItem,
-} from 'devextreme-vue/form'
+} from 'devextreme-vue/form';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 import DxScrollView from 'devextreme-vue/scroll-view';
-import {DxTextBox} from 'devextreme-vue/text-box';
+import { DxTextBox } from 'devextreme-vue/text-box';
 import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
 
-import {Contact} from '@/types/contact';
-import ContactPanelService from './api/contact-panel-service';
-import Activities from './components/activities.vue'
-import FormItemEditable from './components/form-item-editable.vue';
+import { Contact } from '@/types/contact';
 import UserPhoto from '@/components/user-photo.vue';
-import UserStatus from "@/components/user-status.vue";
-import {sizes, subscribe, unsubscribe} from '@/utils/media-query';
-import {formatPrice} from "@/utils/formatters";
+import UserStatus from '@/components/user-status.vue';
+import { sizes, subscribe, unsubscribe } from '@/utils/media-query';
+import { formatPrice } from '@/utils/formatters';
+import Activities from './components/activities.vue';
+import ContactPanelService from './api/contact-panel-service';
+import FormItemEditable from './components/form-item-editable.vue';
 
 const isEditing = ref(false);
 const isLoading = ref(false);
 const isPin = ref(false);
 const isPinEnabled = ref(true);
-const panelData = ref<Contact | null>(null)
+const panelData = ref<Contact | null>(null);
 const props = withDefaults(defineProps<{
   isPanelOpen: boolean,
   userId: number | null
-}>(), {isPanelOpen: false, userId: null});
+}>(), { isPanelOpen: false, userId: null });
 
-
-const editorOptions = ref({ stylingMode: 'underlined' })
+const editorOptions = ref({ stylingMode: 'underlined' });
 const toggleEdit = () => {
   isEditing.value = !isEditing.value;
-  editorOptions.value = {stylingMode: isEditing.value ? 'filled': 'underlined'}
-}
+  editorOptions.value = { stylingMode: isEditing.value ? 'filled' : 'underlined' };
+};
 
 const emit = defineEmits(['close']);
 
@@ -210,23 +212,23 @@ const underContactFields = [
     editorOptions: {
       stylingMode: editorOptions.value.stylingMode,
       mask: '+1(000)000-0000',
-      icon: 'tel'
-    }
-  } ,
+      icon: 'tel',
+    },
+  },
   {
     name: 'email',
     editorOptions: {
       stylingMode: editorOptions.value.stylingMode,
-      icon: 'email'
-    }
+      icon: 'email',
+    },
   },
   {
     name: 'address',
     editorOptions: {
       stylingMode: editorOptions.value.stylingMode,
-      icon: 'home'
-    }
-  }]
+      icon: 'home',
+    },
+  }];
 
 const screenSizeChanged = () => {
   isPinEnabled.value = sizes()['screen-medium'] || sizes()['screen-large'];
@@ -243,17 +245,19 @@ const getContact = (userId: number) => {
   }).catch((e: string) => {
     console.log(e);
   });
+};
+
+function accordionPlusClick(/* e : Event */) {
 }
 
-function accordionPlusClick(/*e : Event*/){
-}
-
-watch(() => props.userId,
-    (newUserId, _) => {
-      if (newUserId !== null) {
-        getContact(newUserId)
-      }
-});
+watch(
+  () => props.userId,
+  (newUserId, _) => {
+    if (newUserId !== null) {
+      getContact(newUserId);
+    }
+  },
+);
 
 onMounted(() => {
   subscribe(screenSizeChanged);
@@ -385,7 +389,6 @@ $side-panel-toolbar-height: 58px;
       margin-right: 2px;
     }
   }
-
 
 }
 

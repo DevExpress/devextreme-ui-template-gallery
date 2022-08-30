@@ -20,15 +20,15 @@
 </template>
 
 <script>
-import DxTreeView from "devextreme-vue/ui/tree-view";
+import DxTreeView from 'devextreme-vue/ui/tree-view';
 import { sizes } from '@/utils/media-query';
-import navigation from '../app-navigation';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import navigation from '../app-navigation';
 
 export default {
   props: {
-    compactMode: Boolean
+    compactMode: Boolean,
   },
   setup(props, context) {
     const route = useRoute();
@@ -36,16 +36,16 @@ export default {
 
     const isLargeScreen = sizes()['screen-large'];
     const items = navigation.map((item) => {
-      if(item.path && !(/^\//.test(item.path))){
+      if (item.path && !(/^\//.test(item.path))) {
         item.path = `/${item.path}`;
       }
-      return {...item, expanded: isLargeScreen}
+      return { ...item, expanded: isLargeScreen };
     });
 
     const treeViewRef = ref(null);
 
-    function forwardClick (...args) {
-      context.emit("click", args);
+    function forwardClick(...args) {
+      context.emit('click', args);
     }
 
     function handleItemClick(e) {
@@ -58,7 +58,7 @@ export default {
       pointerEvent.stopPropagation();
     }
 
-    function updateSelection () {
+    function updateSelection() {
       if (!treeViewRef.value || !treeViewRef.value.instance) {
         return;
       }
@@ -74,12 +74,11 @@ export default {
       }
     });
 
-
     watch(
       () => route.path,
       () => {
         updateSelection();
-      }
+      },
     );
 
     watch(
@@ -90,7 +89,7 @@ export default {
         } else {
           updateSelection();
         }
-      }
+      },
     );
 
     return {
@@ -98,12 +97,12 @@ export default {
       items,
       forwardClick,
       handleItemClick,
-      updateSelection
+      updateSelection,
     };
   },
   components: {
-    DxTreeView
-  }
+    DxTreeView,
+  },
 };
 </script>
 

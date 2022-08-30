@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TheWelcome from '@/components/app-footer.vue'
+import TheWelcome from '@/components/app-footer.vue';
 </script>
 
 <template>
