@@ -8,7 +8,6 @@ import { DragStartEvent, ReorderEvent } from 'devextreme/ui/sortable';
 import { List } from './list/List';
 import './PlanningKanban.scss';
 
-const initialStatuses = STATUS_ITEMS;
 const reorder = (items: any[], item: Object, fromIndex: number, toIndex: number) => {
   let result = items;
   if (fromIndex >= 0) {
@@ -24,12 +23,12 @@ const reorder = (items: any[], item: Object, fromIndex: number, toIndex: number)
 export const PlanningKanban = ({ dataSource }: PlanningProps) => {
   const [loading, setLoading] = useState(true);
   const [lists, setLists] = useState<Task[][]>([]);
-  const [statuses, setStatuses] = useState(initialStatuses);
+  const [statuses, setStatuses] = useState(STATUS_ITEMS);
   useEffect(() => {
     if (dataSource.length !== 0) {
       setLoading(false);
       const initialLists: Task[][] = [];
-      initialStatuses.forEach((status) => {
+      STATUS_ITEMS.forEach((status) => {
         initialLists.push(dataSource.filter((task) => task.status === status));
       });
       setLists(initialLists);
@@ -52,7 +51,7 @@ export const PlanningKanban = ({ dataSource }: PlanningProps) => {
 
   const onTaskDrop = useCallback(
     (e: ReorderEvent) => {
-      const updatedList = lists.slice();
+      const updatedList = [...lists];
       e.itemData.status = statuses[e.toData];
       updatedList[e.fromData] = reorder(updatedList[e.fromData], e.itemData, e.fromIndex, -1);
       updatedList[e.toData] = reorder(updatedList[e.toData], e.itemData, -1, e.toIndex);

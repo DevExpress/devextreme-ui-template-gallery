@@ -8,7 +8,7 @@
     "copy-shell": "node utils/copy-shell.js",
     "make-embedded-mode": "node utils/make-embedded-mode.js",
     "postinstall": "lerna bootstrap",
-    "lint-html": "prettier --check .",
+    "lint-html": "prettier --write . && prettier --check .",
     "lint-js": "eslint .",
     "lint-fix": "prettier --write . && eslint --fix . && stylelint **/*.{css,scss} --fix",
     "lint-css": "stylelint **/*.{css,scss}",

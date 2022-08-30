@@ -1,6 +1,6 @@
-import { Activities } from './activities';
-import { Messages } from './messages';
-import { Notes } from './notes';
+import { Activities } from './card-activities';
+import { Messages } from './card-messages';
+import { Notes } from './card-notes';
   
 export type TaskPriority = 'Low' | 'Normal' | 'High';
   
@@ -29,7 +29,6 @@ export interface Task extends CommonTask {
 export interface TaskProp {
     text: string;
 };
-
 export interface PlanningProps {
     dataSource: Task[]; 
 };

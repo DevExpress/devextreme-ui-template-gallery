@@ -1,4 +1,4 @@
-import { TaskPriority, TaskStatus, TaskProp, CommonTask } from './task';
+import { TaskPriority, TaskStatus, CommonTask,TaskProp } from './task';
 
 export interface FormEdit {
     label: string;

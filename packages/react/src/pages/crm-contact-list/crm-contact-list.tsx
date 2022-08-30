@@ -6,7 +6,7 @@ import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
 import { Button, DropDownButton, SelectBox, TextBox } from 'devextreme-react';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { getContacts } from 'dx-rwa-data';
-import { contactStatusList, ContactStatus } from '../../shared/types/contact';
+import { contactStatusList, ContactStatus } from '../../shared/types/crm-contact';
 import LoadPanel from 'devextreme-react/load-panel';
 
 type FilterContactStatus = ContactStatus | 'All Contacts';

@@ -11,19 +11,16 @@ import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import Form, { SimpleItem, GroupItem, Label } from 'devextreme-react/form';
 import { DropDownButton, Calendar } from 'devextreme-react';
 import { TaskPriority, TaskStatus } from '../../shared/types/task';
-import { FormEdit, FormEditComponent, FormTask } from '../../shared/types/form';
+import { FormEdit, FormEditComponent, FormTask } from '../../shared/types/task-form';
 
 const EditComponent = ({ items, editComponent: Component, label, value, setValue }: FormEditComponent) => {
-  const EditField = useCallback(
-    (data: string) => (
+  const EditField = (data: string) => (
       <div className='form-custom-list-prop'>
         {data && <Component text={data}></Component>}
         <TextBox readOnly></TextBox>
       </div>
-    ),
-    [Component]
   );
-  const EditItem = useCallback((data: string) => <Component text={data}></Component>, [Component]);
+  const EditItem = (data: string) => <Component text={data}></Component>;
 
   return <SelectBox items={items} fieldRender={EditField} itemRender={EditItem} label={label} value={value} onValueChange={(value) => setValue(value)}></SelectBox>;
 };

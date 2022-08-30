@@ -4,7 +4,7 @@ import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
 import { formatDate } from '../../utils/format-date';
 import classNames from 'classnames';
-import { Activities, Activity } from '../../shared/types/activities';
+import { Activities, Activity } from '../../shared/types/card-activities';
 import './CardActivities.scss';
 
 const ListTemplate = (item: Activity) => {

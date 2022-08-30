@@ -7,17 +7,17 @@ import { PriorityTask } from '../priority-task/PriorityTask';
 import { StatusTask } from '../status-task/StatusTask';
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import { Task, PlanningProps } from '../../shared/types/task';
-import { GridEdit, GridEditComponent } from '../../shared/types/grid';
+import { GridEdit, GridEditComponent } from '../../shared/types/planning-grid';
 import './PlanningGrid.scss';
 
 const EditComponent = ({ items, editComponent: Component, setValue }: GridEditComponent) => {
-  const EditField = (data) => (
+  const EditField = (data: string) => (
     <div>
       {data && <Component text={data}></Component>}
       <TextBox readOnly></TextBox>
     </div>
   );
-  const EditItem = (data) => <Component text={data}></Component>;
+  const EditItem = (data: string) => <Component text={data}></Component>;
 
   return <SelectBox className='edit-cell' items={items} fieldRender={EditField} itemRender={EditItem} onValueChange={(value) => setValue(value)}></SelectBox>;
 };
@@ -33,12 +33,8 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       setData(dataSource.filter((d) => d.status && d.priority));
     }
   }, [dataSource]);
-  const onRowPrepared = useCallback((e) => {
-    const { rowType, rowElement, data } = e;
-
-    if (rowType === 'header') return;
-
-    if (data.status === 'Completed') {
+  const onRowPrepared = useCallback(({ rowType, rowElement, data }) => {
+    if (rowType !== 'header' && data.status === 'Completed') {
       rowElement.classList.add('completed');
     }
   }, []);

@@ -3,7 +3,7 @@ import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import { formatDate } from '../../utils/format-date';
-import { Notes, Note } from '../../shared/types/notes';
+import { Notes, Note } from '../../shared/types/card-notes';
 import './CardNotes.scss';
 
 const Card = ({ note }: { note: Note }) => {

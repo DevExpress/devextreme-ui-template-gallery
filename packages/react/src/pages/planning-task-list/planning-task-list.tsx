@@ -35,7 +35,7 @@ export const PlanningTaskList = () => {
   }, []);
   const addDataGridRow = useCallback(() => {
     gridRef.current!.instance.addRow();
-  }, [gridRef]);
+  }, []);
   const refresh = useCallback(() => {
     gridRef.current!.instance.refresh();
   }, [gridRef]);

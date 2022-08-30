@@ -1,4 +1,4 @@
-import { Activities } from './activities';
+import { Activities } from './card-activities';
 
 export const contactStatusList = [
   'Salaried',
