@@ -7,7 +7,9 @@
   <dx-text-box v-if="props.isEditing"
                :value="props.data[props.dataField]"
                :label="title"
-               @value-changed="e => props.data[props.dataField] = e.value"
+               @value-changed="e => {
+                 /* eslint-disable-next-line vue/no-mutating-props */
+                 props.data[props.dataField] = e.value}"
   ></dx-text-box>
 </template>
 
@@ -17,16 +19,16 @@ import { DxTextBox } from 'devextreme-vue/text-box';
 import FormItemBlue from '@/components/form-item-blue.vue';
 
 const props = withDefaults(defineProps<{
-      data: any,
+      data: {[key:string]: unknown},
       dataField: string,
       isEditing: boolean,
-      editorOptions: any,
+      editorOptions: {[key:string]: unknown},
       label?: string
     }>(), {
-  data: {},
+  data: () => ({}),
   dataField: '',
   isEditing: false,
-  editorOptions: {},
+  editorOptions: () => ({}),
   label: '',
 });
 

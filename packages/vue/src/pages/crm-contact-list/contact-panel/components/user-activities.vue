@@ -33,10 +33,9 @@ import { formatDate } from '@/utils/formatters';
 
 const props = withDefaults(defineProps<{
   showBy?: boolean,
-  items: Array<any>
+  items: Array<{[key: string]: any}>
 }>(), {
   showBy: false,
-  items: [],
 });
 </script>
 

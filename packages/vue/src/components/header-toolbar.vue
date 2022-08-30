@@ -88,17 +88,6 @@ export default {
       user.value = e.data;
     });
 
-    const userMenuItems = [{
-      text: 'Profile',
-      icon: 'user',
-      onClick: onProfileClick,
-    },
-    {
-      text: 'Logout',
-      icon: 'runner',
-      onClick: onLogoutClick,
-    }];
-
     function onLogoutClick() {
       auth.logOut();
       router.push({
@@ -113,6 +102,17 @@ export default {
         query: { redirect: route.path }
       }); */
     }
+
+    const userMenuItems = [{
+      text: 'Profile',
+      icon: 'user',
+      onClick: onProfileClick,
+    },
+    {
+      text: 'Logout',
+      icon: 'runner',
+      onClick: onLogoutClick,
+    }];
 
     return {
       user,

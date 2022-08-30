@@ -93,11 +93,14 @@ import {
 
 const contactName = ref('');
 
+function loadData() {
+  console.log('--->');
+}
+
 const refresh = () => {
   loadData();
 };
 
-function loadData() {}
 </script>
 
 <style  lang="scss">

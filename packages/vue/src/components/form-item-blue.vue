@@ -3,8 +3,8 @@
     position: 'relative',
     display: 'flex'
   }">
-    <label class="dx-texteditor-label">
-      {{ props.label }}</label>
+    <div class="dx-texteditor-label">
+      {{ props.label }}</div>
     <span class="dx-theme-accent-as-text-color">{{ props.value }}</span>
   </div>
 

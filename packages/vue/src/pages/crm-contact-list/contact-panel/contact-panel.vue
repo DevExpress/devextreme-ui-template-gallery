@@ -78,7 +78,8 @@
               </dx-form-group-item>
 
               <dx-form-group-item>
-                <dx-form-item v-for="item in underContactFields"
+                <dx-form-item v-for="(item, index) in underContactFields"
+                              v-bind:key="index"
                               :dataField="item.name"
                               :editorOptions="item.editorOptions"
                 ><div class="icon-editor">
@@ -100,8 +101,18 @@
               <dx-item
                   location="before"
                   widget="dxButton"
-                  :options="isEditing ? { icon: false, stylingMode: 'outlined', text: 'Save', type: 'default', onClick: toggleEdit} :
-                  { icon: 'edit', stylingMode: 'outlined', text: 'Edit', type: 'default', onClick: toggleEdit}"
+                  :options="isEditing ? {
+                    icon: false,
+                  stylingMode: 'outlined',
+                   text: 'Save',
+                    type: 'default',
+                    onClick: toggleEdit} :
+                  { icon: 'edit',
+                  stylingMode: 'outlined',
+                   text: 'Edit',
+                   type: 'default',
+                    onClick: toggleEdit
+                  }"
               >
               </dx-item>
 
@@ -109,7 +120,10 @@
                   location="before"
                   :visible="isEditing"
                   widget="dxButton"
-                  :options="{ icon: false, stylingMode: 'text', text: 'Cancel',  onClick: toggleEdit}"
+                  :options="{ icon: false,
+                  stylingMode: 'text',
+                   text: 'Cancel',
+                     onClick: toggleEdit}"
               >
               </dx-item>
 
@@ -137,8 +151,8 @@
               </template>
 
               <dx-accordion-item title="Opportunities">
-                <div
-                    v-for="opportunity in panelData.opportunities"
+                <div v-for="(opportunity, i) in panelData.opportunities"
+                     v-bind:key="i"
                     class="opportunities"
                 >
                   <span class="value">{{ opportunity.name }} </span>
@@ -151,7 +165,7 @@
               </dx-accordion-item>
 
               <dx-item title="Activities">
-                <activities :items="panelData.activities"></activities>
+                <user-activities :items="panelData.activities"></user-activities>
               </dx-item>
             </dx-accordion>
           </div>
@@ -184,7 +198,7 @@ import UserPhoto from '@/components/user-photo.vue';
 import UserStatus from '@/components/user-status.vue';
 import { sizes, subscribe, unsubscribe } from '@/utils/media-query';
 import { formatPrice } from '@/utils/formatters';
-import Activities from './components/activities.vue';
+import UserActivities from './components/user-activities.vue';
 import ContactPanelService from './api/contact-panel-service';
 import FormItemEditable from './components/form-item-editable.vue';
 
@@ -247,6 +261,7 @@ const getContact = (userId: number) => {
   });
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 function accordionPlusClick(/* e : Event */) {
 }
 

@@ -94,8 +94,14 @@
           :min-width="100"
       />
       <dx-column data-field="assignedTo" caption="Assigned to" :hiding-priority="4" />
-      <dx-column data-field="phone" caption="Phone" :hiding-priority="2" :customizeText="customizePhoneCell" ><dx-required-rule/></dx-column>
-      <dx-column data-field="email" caption="Email" :hiding-priority="1" ><dx-required-rule/></dx-column>
+      <dx-column data-field="phone" caption="Phone"
+                 :hiding-priority="2"
+                 :customizeText="customizePhoneCell" >
+        <dx-required-rule/>
+      </dx-column>
+      <dx-column data-field="email" caption="Email" :hiding-priority="1" >
+        <dx-required-rule/>
+      </dx-column>
 
       <!-- Templates  -->
       <template #nameCellTemplate="{ data }">
@@ -112,7 +118,9 @@
     </dx-data-grid>
 
     <!--  Contact panel  -->
-    <contact-panel :user-id="panelData?.id" :is-panel-open="isPanelOpen" @close="isPanelOpen = false"></contact-panel>
+    <contact-panel :user-id="panelData?.id"
+                   :is-panel-open="isPanelOpen"
+                   @close="isPanelOpen = false"/>
   </div>
 </template>
 
@@ -145,26 +153,26 @@ import ContactPanel from './contact-panel/contact-panel.vue';
 type FilterContactStatus = ContactStatus | 'All Contacts';
 
 const gridData = ref<Contact[]>([]);
-const panelData = ref<Array<any> | null>(null);
+const panelData = ref<Array<Contact> | null>(null);
 const isPanelOpen = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
 
 const filterStatusList = ['All Contacts', ...contactStatusList];
 
-onMounted(() => {
-  getContacts();
-});
-
 const getContacts = () => {
   gridData.value = [];
   dataGrid.value?.instance.beginCustomLoading();
-  CrmContactService.getAll().then((response:any) => {
-    gridData.value = response.data;
-    dataGrid.value?.instance.endCustomLoading();
-  }).catch((e: string) => {
-    console.log(e);
+  CrmContactService.getAll().then((data) => {
+    if (data) {
+      gridData.value = data;
+      dataGrid.value?.instance.endCustomLoading();
+    }
   });
 };
+
+onMounted(() => {
+  getContacts();
+});
 
 const rowClick = (e: RowClickEvent) => {
   if (e.data.id) {

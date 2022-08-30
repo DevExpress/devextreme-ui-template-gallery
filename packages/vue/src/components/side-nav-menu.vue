@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="dx-swatch-additional side-navigation-menu"
+  <div class="dx-swatch-additional side-navigation-menu"
     @click="forwardClick"
   >
     <slot />
@@ -37,6 +36,7 @@ export default {
     const isLargeScreen = sizes()['screen-large'];
     const items = navigation.map((item) => {
       if (item.path && !(/^\//.test(item.path))) {
+        // eslint-disable-next-line no-param-reassign
         item.path = `/${item.path}`;
       }
       return { ...item, expanded: isLargeScreen };
@@ -176,8 +176,10 @@ export default {
       }
     }
     .dx-theme-generic .dx-treeview {
-      .dx-treeview-node-container .dx-treeview-node.dx-state-selected.dx-state-focused > .dx-treeview-item * {
-        color: inherit;
+      .dx-treeview-node-container {
+        .dx-treeview-node.dx-state-selected.dx-state-focused > .dx-treeview-item * {
+          color: inherit;
+        }
       }
     }
     // ##

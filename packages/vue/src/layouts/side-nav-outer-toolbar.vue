@@ -38,9 +38,11 @@ import DxScrollView from 'devextreme-vue/scroll-view';
 
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+// eslint-disable-next-line import/no-unresolved
 import DevExpress from 'devextreme';
 import SideNavMenu from '../components/side-nav-menu.vue';
 import HeaderToolbar from '../components/header-toolbar.vue';
+// eslint-disable-next-line no-undef
 import ToolbarItemClickEvent = DevExpress.ui.dxFileManager.ToolbarItemClickEvent;
 
 const props = defineProps({

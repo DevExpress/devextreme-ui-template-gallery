@@ -9,6 +9,8 @@ import {
 import AppFooter from './components/app-footer.vue';
 import { sizes, subscribe, unsubscribe } from './utils/media-query';
 
+interface ScreenSizeInfo {cssClasses: string[], isXSmall?: boolean, isLarge?: boolean}
+
 function getScreenSizeInfo(): ScreenSizeInfo {
   const screenSizes: {[key: string]: boolean} = sizes();
 
@@ -21,8 +23,11 @@ function getScreenSizeInfo(): ScreenSizeInfo {
 
 const vm = getCurrentInstance();
 
-const { title } = (vm?.proxy as any).$appInfo;
-const screen: {getScreenSizeInfo: ScreenSizeInfo} = reactive({ getScreenSizeInfo: { cssClasses: [] } });
+const { title } = (vm?.proxy as any as {$appInfo: {title: string}}).$appInfo;
+const screen: {getScreenSizeInfo: ScreenSizeInfo} = reactive({
+  getScreenSizeInfo: { cssClasses: [] },
+});
+
 screen.getScreenSizeInfo = getScreenSizeInfo();
 
 function screenSizeChanged() {
