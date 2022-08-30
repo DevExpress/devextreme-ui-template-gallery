@@ -112,7 +112,7 @@
     </dx-data-grid>
 
     <!--  Contact panel  -->
-    <contact-panel :userId="panelData?.id" :is-panel-open="isPanelOpen" @close="isPanelOpen = false"></contact-panel>
+    <contact-panel :user-id="panelData?.id" :is-panel-open="isPanelOpen" @close="isPanelOpen = false"></contact-panel>
   </div>
 </template>
 
@@ -167,7 +167,7 @@ const getContacts = () => {
 }
 
 const rowClick = (e: RowClickEvent) => {
-  if ( e.data.id ) {
+  if (e.data.id) {
     panelData.value = e.data;
     isPanelOpen.value = true;
   }

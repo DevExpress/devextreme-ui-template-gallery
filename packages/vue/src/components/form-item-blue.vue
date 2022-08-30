@@ -11,8 +11,6 @@
 </template>
 
 <script setup lang="ts">
-  import {watch} from "vue";
-
   const props = withDefaults(defineProps<
       {
         label: string,
@@ -21,9 +19,6 @@
     label: '',
     value: '',
   })
-
-  watch(() => props.label,
-      (newVal) => console.log('---props.test------->', newVal))
 </script>
 
 <style scoped lang="scss">

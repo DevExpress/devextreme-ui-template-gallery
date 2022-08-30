@@ -73,13 +73,13 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import { ref } from 'vue';
 
 import DxButton from 'devextreme-vue/button';
 import {
-DxToolbar ,
-    DxItem as DxToolbarItem,
-} from "devextreme-vue/toolbar";
+  DxToolbar ,
+  DxItem as DxToolbarItem,
+} from 'devextreme-vue/toolbar';
 
 const contactName = ref('');
 
@@ -87,15 +87,11 @@ const refresh = () => {
  loadData();
 };
 
-function loadData() {
-
-}
-
+function loadData() {}
 </script>
 
 <style  lang="scss">
 @use "@/variables" as *;
-
 @include separator();
 
 .contact-form-container {
@@ -130,6 +126,4 @@ function loadData() {
     }
   }
 }
-
-
 </style>

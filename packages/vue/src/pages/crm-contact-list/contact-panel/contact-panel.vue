@@ -41,7 +41,7 @@
             >
               <dx-form-group-item :colCount="2">
                 <dx-form-item dataField="image">
-                  <photo :link="panelData.image" ></photo>
+                  <user-photo :link="panelData.image" ></user-photo>
                 </dx-form-item>
 
                 <dx-form-group-item>
@@ -79,8 +79,8 @@
 
               <dx-form-group-item>
                 <dx-form-item v-for="item in underContactFields"
-                    :dataField="item.name"
-                    :editorOptions="item.editorOptions"
+                              :dataField="item.name"
+                              :editorOptions="item.editorOptions"
                 ><div class="icon-editor">
                   <i class="dx-icon" :class="'dx-icon-' + item.editorOptions?.icon"></i>
                   <dx-text-box
@@ -137,17 +137,17 @@
               </template>
 
               <dx-accordion-item title="Opportunities">
-              <div
-                  v-for="opportunity in panelData.opportunities"
-                  class="opportunities"
-              >
-                <span class="value">{{ opportunity.name }} </span>
+                <div
+                    v-for="opportunity in panelData.opportunities"
+                    class="opportunities"
+                >
+                  <span class="value">{{ opportunity.name }} </span>
                   <br />
                   <span class="value black small">{{
                       formatPrice(opportunity.price)
                     }}</span>
                   <br />
-              </div>
+                </div>
               </dx-accordion-item>
 
               <dx-item title="Activities">
@@ -163,24 +163,24 @@
 </template>
 
 <script setup lang="ts">
-import {onBeforeUnmount, onMounted, ref, watch} from 'vue';
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
-import DxAccordion, { DxItem as DxAccordionItem,} from "devextreme-vue/accordion";
+import DxAccordion, { DxItem as DxAccordionItem,} from 'devextreme-vue/accordion';
 import DxButton from 'devextreme-vue/button';
 import {DxForm,
   DxItem as DxFormItem,
   DxGroupItem as DxFormGroupItem,
-} from "devextreme-vue/form"
-import DxLoadPanel from "devextreme-vue/load-panel";
-import DxScrollView from "devextreme-vue/scroll-view";
-import {DxTextBox} from "devextreme-vue/text-box";
-import DxToolbar, { DxItem } from "devextreme-vue/toolbar";
+} from 'devextreme-vue/form'
+import DxLoadPanel from 'devextreme-vue/load-panel';
+import DxScrollView from 'devextreme-vue/scroll-view';
+import {DxTextBox} from 'devextreme-vue/text-box';
+import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
 
 import {Contact} from '@/types/contact';
 import ContactPanelService from './api/contact-panel-service';
 import Activities from './components/activities.vue'
 import FormItemEditable from './components/form-item-editable.vue';
-import Photo from '@/components/photo.vue';
+import UserPhoto from '@/components/user-photo.vue';
 import UserStatus from "@/components/user-status.vue";
 import {sizes, subscribe, unsubscribe} from '@/utils/media-query';
 import {formatPrice} from "@/utils/formatters";
@@ -190,7 +190,6 @@ const isLoading = ref(false);
 const isPin = ref(false);
 const isPinEnabled = ref(true);
 const panelData = ref<Contact | null>(null)
-
 const props = withDefaults(defineProps<{
   isPanelOpen: boolean,
   userId: number | null
@@ -250,11 +249,11 @@ function accordionPlusClick(/*e : Event*/){
 }
 
 watch(() => props.userId,
-    (newVal, _) => {
-      if (newVal !== null) {
-        getContact(newVal)
+    (newUserId, _) => {
+      if (newUserId !== null) {
+        getContact(newUserId)
       }
-    });
+});
 
 onMounted(() => {
   subscribe(screenSizeChanged);
@@ -296,7 +295,7 @@ $side-panel-toolbar-height: 58px;
   background: $base-bg;
   transition: right 400ms;
 
-   .embedded.dx-viewport & {
+  .embedded.dx-viewport & {
     top: 0;
   }
 

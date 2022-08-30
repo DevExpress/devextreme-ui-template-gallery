@@ -8,12 +8,9 @@
          class="photo dx-card"
     ></div>
   </div>
-
 </template>
 
 <script setup lang="ts">
-import {watch} from "vue";
-
 const props = withDefaults(defineProps<{
   link: string,
   size?: number
@@ -21,16 +18,6 @@ const props = withDefaults(defineProps<{
   size: 124,
   link: ''
 })
-
-watch(
-    () => props.link,
-    (newVal) => console.log('------link---->', newVal)
-)
-
-/*const styles = reactive({
-  color: 'red',
-  fontSize: '13px'
-})*/
 </script>
 
 <style scoped lang="scss">
@@ -45,5 +32,4 @@ watch(
     background-size: cover;
   }
 }
-
 </style>
