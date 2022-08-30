@@ -38,4 +38,4 @@ export const Root = () => {
       </AuthProvider>
     </Router>
   );
-}
+};

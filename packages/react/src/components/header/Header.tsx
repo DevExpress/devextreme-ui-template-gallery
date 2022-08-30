@@ -11,43 +11,15 @@ export const Header = ({ menuToggleEnabled, title, toggleMenu }: HeaderProps) =>
   return (
     <header className={'header-component'}>
       <Toolbar className={'header-toolbar'}>
-        <Item
-          visible={menuToggleEnabled}
-          location={'before'}
-          widget={'dxButton'}
-          cssClass={'menu-button'}
-        >
-          <Button icon="menu" stylingMode="text" onClick={toggleMenu} />
+        <Item visible={menuToggleEnabled} location={'before'} widget={'dxButton'} cssClass={'menu-button'}>
+          <Button icon='menu' stylingMode='text' onClick={toggleMenu} />
         </Item>
-        <Item
-          location={'before'}
-          cssClass={'header-title'}
-          text={title}
-          visible={!!title}
-        />
-        <Item
-          location={'after'}
-          locateInMenu={'auto'}
-        >
-          <TextBox
-            placeholder={'Search'}
-            width={180}
-            mode={'search'}
-            stylingMode={'outlined'}
-          >
-          </TextBox>
+        <Item location={'before'} cssClass={'header-title'} text={title} visible={!!title} />
+        <Item location={'after'} locateInMenu={'auto'}>
+          <TextBox placeholder={'Search'} width={180} mode={'search'} stylingMode={'outlined'}></TextBox>
         </Item>
-        <Item
-          location={'after'}
-          locateInMenu={'auto'}
-          menuItemTemplate={'userPanelTemplate'}
-        >
-          <Button
-            className={'user-button authorization'}
-            width={160}
-            height={'100%'}
-            stylingMode={'text'}
-          >
+        <Item location={'after'} locateInMenu={'auto'} menuItemTemplate={'userPanelTemplate'}>
+          <Button className={'user-button authorization'} width={160} height={'100%'} stylingMode={'text'}>
             <UserPanel menuMode={'context'} />
           </Button>
         </Item>
@@ -56,4 +28,5 @@ export const Header = ({ menuToggleEnabled, title, toggleMenu }: HeaderProps) =>
         </Template>
       </Toolbar>
     </header>
-)}
+  );
+};

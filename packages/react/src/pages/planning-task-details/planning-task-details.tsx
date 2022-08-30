@@ -86,4 +86,4 @@ export const PlanningTaskDetails = () => {
       </div>
     </div>
   );
-}
+};

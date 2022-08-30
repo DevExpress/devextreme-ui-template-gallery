@@ -140,4 +140,4 @@ export const PlanningTaskList = () => {
       <Component dataSource={data} ref={gridRef} />
     </div>
   );
-}
+};

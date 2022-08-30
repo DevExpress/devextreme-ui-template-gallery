@@ -1,3 +1,3 @@
 export const appInfo = {
-    title: 'UI Templates Gallery'
+  title: 'UI Templates Gallery',
 };

@@ -14,4 +14,5 @@ export const SingleCard = ({ title, description, children }: React.PropsWithChil
         {children}
       </div>
     </ScrollView>
-)}
+  );
+};
