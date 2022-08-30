@@ -13,6 +13,9 @@ import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-li
 import { CrmContactFormComponent } from './pages/crm-contact-form/crm-contact-form.component';
 import { PlanningTaskListComponent } from './pages/planning-task-list/planning-task-list.component';
 import { PlanningTaskDetailsComponent } from './pages/planning-task-details/planning-task-details.component';
+import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analytics-dashboard.component';
+import { AnalyticsSalesReportComponent } from './pages/analytics-sales-report/analytics-sales-report.component';
+import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
 
 const routes: Routes = [
   {
@@ -33,6 +36,21 @@ const routes: Routes = [
   {
     path: 'planning-task-details',
     component: PlanningTaskDetailsComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'analytics-dashboard',
+    component: AnalyticsDashboardComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'analytics-sales-report',
+    component: AnalyticsSalesReportComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'analytics-geography',
+    component: AnalyticsGeographyComponent,
     canActivate: [AuthGuardService],
   },
   {

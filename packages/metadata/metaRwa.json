@@ -31,6 +31,25 @@
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
+                ],
+                "Name": "Analytics",
+                "Demos": [
+                    {
+                        "Title": "Dashboard",
+                        "Name": "analytics-dashboard",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": ["Angular"]
+                    },{
+                        "Title": "Sales Report",
+                        "Name": "analytics-sales-report",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": ["Angular"]
+                    },{
+                        "Title": "Geography",
+                        "Name": "analytics-geography",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": ["Angular"]
+                    }
                 ]
             }
         ]
