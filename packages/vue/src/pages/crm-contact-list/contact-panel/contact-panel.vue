@@ -198,9 +198,9 @@ import UserPhoto from '@/components/user-photo.vue';
 import UserStatus from '@/components/user-status.vue';
 import { sizes, subscribe, unsubscribe } from '@/utils/media-query';
 import { formatPrice } from '@/utils/formatters';
+import FormItemEditable from '@/components/form-item-editable.vue';
 import UserActivities from './components/user-activities.vue';
-import ContactPanelService from './api/contact-panel-service';
-import FormItemEditable from './components/form-item-editable.vue';
+import ContactService from '../../api/contact-service';
 
 const isEditing = ref(false);
 const isLoading = ref(false);
@@ -253,7 +253,7 @@ const screenSizeChanged = () => {
 
 const getContact = (userId: number) => {
   isLoading.value = true;
-  ContactPanelService.getContact(userId).then((response:any) => {
+  ContactService.getContact(userId).then((response:any) => {
     isLoading.value = false;
     panelData.value = response.data;
   }).catch((e: string) => {

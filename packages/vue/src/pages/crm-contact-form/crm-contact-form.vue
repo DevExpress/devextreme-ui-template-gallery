@@ -62,9 +62,9 @@
       </dx-toolbar>
 
       <div class="panels">
-        <!--      <div class="left">
-                <contact-form [contactData]="contactData$"></contact-form>
-              </div>-->
+        <div class="left">
+          <contact-form :contact-data="contactData" :is-editing="false" :is-loading="isLoading"/>
+        </div>
 
         <div class="right">
           <!--        <contact-cards
@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 import DxButton from 'devextreme-vue/button';
 import {
@@ -91,19 +91,37 @@ import {
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
 
+import ContactService from '@/pages/api/contact-service';
+import ContactForm from './components/contact-form.vue';
+
+const contactId = 12;
+
 const contactName = ref('');
+const contactData = ref({});
+const isLoading = ref(false);
 
 function loadData() {
-  console.log('--->');
+  isLoading.value = true;
+  ContactService.getContact(contactId).then((response:any) => {
+    contactData.value = response.data;
+    contactName.value = response.data.name;
+    isLoading.value = false;
+  }).catch((e: string) => {
+    console.log(e);
+  });
 }
 
 const refresh = () => {
   loadData();
 };
 
+onMounted(() => {
+  loadData();
+});
+
 </script>
 
-<style  lang="scss">
+<style scoped lang="scss">
 @use "@/variables" as *;
 @include separator();
 
@@ -113,7 +131,7 @@ const refresh = () => {
   flex-grow: 1;
   padding: 20px 16px 0 16px;
 
-  .dx-toolbar {
+  &:deep(.dx-toolbar) {
     .dx-toolbar-label > div {
       @include header();
     }

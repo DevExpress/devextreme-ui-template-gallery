@@ -19,6 +19,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-underscore-dangle': 'off',
     'vuejs-accessibility/click-events-have-key-events': 'off',
+    'vuejs-accessibility/label-has-for': 'off',
     'class-methods-use-this': 'off',
     'vue/require-valid-default-prop': 'off',
 

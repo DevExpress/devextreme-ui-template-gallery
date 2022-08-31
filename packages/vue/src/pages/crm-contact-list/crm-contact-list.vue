@@ -250,11 +250,5 @@ const customizePhoneCell = (cellInfo: {value: any}) => {
 
 .edit-cell {
   position: relative;
-
-  contact-status {
-    position: absolute;
-    margin-top: 10px;
-    margin-left: 11px;
-  }
 }
 </style>
