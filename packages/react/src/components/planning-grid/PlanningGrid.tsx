@@ -55,7 +55,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       <Column dataField='priority' caption='Priority' cellRender={PriorityTask} editCellRender={EditPriority} hidingPriority={4}>
         <RequiredRule />
       </Column>
-      <Column dataField='startDate' caption='Start Date' dataType='date' hidingPriority={2}>
+      <Column dataField='startDate' caption='Start Date' dataType='date' sortOrder='desc' hidingPriority={2}>
         <RequiredRule />
       </Column>
       <Column dataField='dueDate' caption='Due Date' dataType='date' hidingPriority={1}>
