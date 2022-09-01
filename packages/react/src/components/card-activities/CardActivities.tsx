@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LoadPanel from 'devextreme-react/load-panel';
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
-import { formatDate } from '../../utils/format-date';
+import { formatDate } from "devextreme/localization";
 import classNames from 'classnames';
 import { Activities, Activity } from '../../shared/types/card-activities';
 import './CardActivities.scss';
@@ -12,7 +12,7 @@ const ListTemplate = (item: Activity) => {
     <div className='activity'>
       <div className='name'>{item.name}</div>
       <div className='date'>
-        <span>{formatDate(item.date)}</span>
+        <span>{formatDate(new Date(item.date), 'MM/dd/yyyy')}</span>
         <span>by</span>
         <span>{item.manager}</span>
       </div>

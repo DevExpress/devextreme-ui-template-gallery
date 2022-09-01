@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
-import { formatDate } from '../../utils/format-date';
+import { formatDate } from "devextreme/localization";
 import { Notes, Note } from '../../shared/types/card-notes';
 import './CardNotes.scss';
 
@@ -11,7 +11,7 @@ const Card = ({ note }: { note: Note }) => {
     <div className='note dx-card'>
       <div className='note-title'>
         <div>
-          {formatDate(note.date)} - {note.manager}
+          {formatDate(new Date(note.date), 'MM/dd/yyyy')} - {note.manager}
         </div>
         <div>
           <Button icon='overflow'></Button>

@@ -4,7 +4,7 @@ import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import { Avatar } from '../avatar/Avatar';
-import { formatDate } from '../../utils/format-date';
+import { formatDate } from "devextreme/localization";
 import { Message, Messages } from '../../shared/types/card-messages';
 import './CardMessages.scss';
 
@@ -20,7 +20,7 @@ const Card = ({ data, user }: { data: Message; user: string }) => (
         <div className='left-title'>
           <div className='subject'>{data.subject}</div>
           <div>
-            {formatDate(data.date)} - {data.manager}
+            {formatDate(new Date(data.date), 'MM/dd/yyyy')} - {data.manager}
           </div>
         </div>
         <div>
