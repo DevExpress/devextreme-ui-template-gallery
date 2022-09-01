@@ -23,7 +23,7 @@ module.exports = {
     'vue/require-v-for-key': 'off',
     'class-methods-use-this': 'off',
     'vue/require-valid-default-prop': 'off',
-
+    'linebreak-style': 0,
   },
   overrides: [
     {
