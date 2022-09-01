@@ -20,6 +20,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'vuejs-accessibility/click-events-have-key-events': 'off',
     'vuejs-accessibility/label-has-for': 'off',
+    'vue/require-v-for-key': 'off',
     'class-methods-use-this': 'off',
     'vue/require-valid-default-prop': 'off',
 

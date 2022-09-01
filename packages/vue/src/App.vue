@@ -23,7 +23,7 @@ function getScreenSizeInfo(): ScreenSizeInfo {
 
 const vm = getCurrentInstance();
 
-const { title } = (vm?.proxy as any as {$appInfo: {title: string}}).$appInfo;
+const { title } = (vm?.proxy as unknown as {$appInfo: {title: string}}).$appInfo;
 const screen: {getScreenSizeInfo: ScreenSizeInfo} = reactive({
   getScreenSizeInfo: { cssClasses: [] },
 });

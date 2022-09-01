@@ -208,9 +208,9 @@ const props = withDefaults(defineProps<{
 
 const isEditing = ref(false);
 const editorOptions = computed(() => ({ stylingMode: isEditing.value ? 'filled' : 'underlined' }));
-const contactData = ref<Contact | Record<string, any>>({});
+const contactData = ref<Contact | Record<string, unknown>>({});
 
-let contactDataSaved: Contact | Record<string, any>;
+let contactDataSaved: Contact | Record<string, unknown>;
 
 const onChangeStatusSelect = ({ value }: {[value: string]: ContactStatusType}) => {
   contactData.value.status = value;
@@ -218,14 +218,14 @@ const onChangeStatusSelect = ({ value }: {[value: string]: ContactStatusType}) =
 
 watch(
   () => props.isEditing,
-  (isEditingValue, _) => {
+  (isEditingValue) => {
     isEditing.value = isEditingValue;
   },
 );
 
 watch(
   () => props.contactData,
-  (contactDataNew: Contact | null, _) => {
+  (contactDataNew: Contact | null) => {
     if (contactDataNew != null) {
       contactDataSaved = structuredClone(contactDataNew);
       contactData.value = contactDataNew;
