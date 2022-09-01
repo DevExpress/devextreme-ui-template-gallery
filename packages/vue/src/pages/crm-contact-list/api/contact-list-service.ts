@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import http from '@/api/http';
 import { Contact } from '@/types/contact';
 
-class CrmContactService {
+class ContactListService {
   getAll() {
     return http.get<Contact[]>('/Users/Contacts').then(
       (response: AxiosResponse<Contact[]>) => response.data,
@@ -13,4 +13,4 @@ class CrmContactService {
   }
 }
 
-export default new CrmContactService();
+export default new ContactListService();

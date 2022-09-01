@@ -1,6 +1,6 @@
 <template>
   <div id="activities-list">
-    <dx-list
+    <dx-list v-if="!props.isLoading"
         class="activities-list"
         :items="props.items"
         :scrollingEnabled="false"
@@ -18,23 +18,30 @@
             </div>
             <dx-button icon="overflow"></dx-button>
           </div>
-
         </div>
       </template>
     </dx-list>
   </div>
-
+  <dx-load-panel
+    :visible="props.isLoading"
+    container="#activities-list"
+    :position="{ of: '#activities-list' }"
+  />
 </template>
 
 <script setup lang="ts">
 import DxList from 'devextreme-vue/list';
 import DxButton from 'devextreme-vue/button';
+import DxLoadPanel from 'devextreme-vue/load-panel';
 import { formatDate } from '@/utils/formatters';
+import type { Activity } from '@/types/activities';
 
 const props = withDefaults(defineProps<{
+  isLoading: boolean,
   showBy?: boolean,
-  items: Array<{[key: string]: any}>
+  items: Activity[]
 }>(), {
+  isLoading: true,
   showBy: false,
 });
 </script>

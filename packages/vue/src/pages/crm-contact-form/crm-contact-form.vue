@@ -7,36 +7,30 @@
         </dx-toolbar-item>
         <dx-toolbar-item
           location="before"
-          :text="contactName"
-        />
+          :text="contactName"/>
         <dx-toolbar-item
           location="after"
-          locate-in-menu="auto"
-        >
+          locate-in-menu="auto">
           <dx-button
             text="Terminate"
             type="default"
-            styling-mode="contained"
-          />
+            styling-mode="contained"/>
         </dx-toolbar-item>
         <dx-toolbar-item
           location="after"
           locate-in-menu="auto"
           widget="dxDropDownButton"
           :options="{
-            text:'Action',
+            text:'Actions',
             stylingMode:'text',
             width:120,
             items: ['Assign to Me', 'Archive']
-          }"
-        />
+          }"/>
         <dx-toolbar-item
           location="after"
-          locate-in-menu="auto"
-        >
+          locate-in-menu="auto">
           <div class="separator" />
         </dx-toolbar-item>
-
         <dx-toolbar-item
           location="after"
           locate-in-menu="auto"
@@ -45,9 +39,7 @@
           :options="{
             text: 'Copy',
             icon: 'copy'
-          }"
-        />
-
+          }"/>
         <dx-toolbar-item
           location="after"
           locate-in-menu="auto"
@@ -57,25 +49,23 @@
             text: 'Refresh',
             icon: 'refresh',
             onClick: refresh
-          }"
-        />
+          }"/>
       </dx-toolbar>
 
       <div class="panels">
         <div class="left">
-          <contact-form :contact-data="contactData" :is-editing="false" :is-loading="isLoading"/>
+          <contact-form :contact-data="contactData"
+                        :is-editing="false"
+                        :is-loading="isLoading  && !contactData?.name"/>
         </div>
 
         <div class="right">
-          <!--        <contact-cards
-                      [contactName]="(contactData$ | async)?.name"
-                      [tasks]="(contactData$ | async)?.tasks"
-                      [activities]="(contactData$ | async)?.activities"
-                      [activeOpportunities]="activeOpportunities"
-                      [closedOpportunities]="closedOpportunities"
-                      [notes]="contactNotes"
-                      [messages]="contactMessages"
-                  ></contact-cards>-->
+                  <contact-cards :is-loading="isLoading"
+                      :contact-name="contactData?.name"
+                      :contact-id="contactId"
+                      :tasks="contactData?.tasks"
+                      :activities="contactData?.activities"
+                  />
         </div>
       </div>
     </div>
@@ -83,7 +73,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, provide, ref } from 'vue';
+import * as Rx from 'rxjs';
 
 import DxButton from 'devextreme-vue/button';
 import {
@@ -92,17 +83,23 @@ import {
 } from 'devextreme-vue/toolbar';
 
 import ContactService from '@/pages/api/contact-service';
+import type { Contact } from '@/types/contact';
+
 import ContactForm from './components/contact-form.vue';
+import ContactCards from './components/contact-cards/contact-cards.vue';
 
 const contactId = 12;
 
 const contactName = ref('');
-const contactData = ref({});
+const contactData = ref<Contact | Record<string, unknown>>({});
 const isLoading = ref(false);
+const refreshNotifier = new Rx.Subject<void>();
+
+provide('refresh-notifier', refreshNotifier);
 
 function loadData() {
   isLoading.value = true;
-  ContactService.getContact(contactId).then((response:any) => {
+  ContactService.getContact(contactId).then((response) => {
     contactData.value = response.data;
     contactName.value = response.data.name;
     isLoading.value = false;
@@ -112,13 +109,13 @@ function loadData() {
 }
 
 const refresh = () => {
+  refreshNotifier.next();
   loadData();
 };
 
 onMounted(() => {
   loadData();
 });
-
 </script>
 
 <style scoped lang="scss">

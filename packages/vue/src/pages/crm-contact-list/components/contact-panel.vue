@@ -165,7 +165,7 @@
               </dx-accordion-item>
 
               <dx-item title="Activities">
-                <user-activities :items="panelData.activities"></user-activities>
+                <contact-activities :items="panelData.activities"/>
               </dx-item>
             </dx-accordion>
           </div>
@@ -199,7 +199,7 @@ import UserStatus from '@/components/user-status.vue';
 import { sizes, subscribe, unsubscribe } from '@/utils/media-query';
 import { formatPrice } from '@/utils/formatters';
 import FormItemEditable from '@/components/form-item-editable.vue';
-import UserActivities from './components/user-activities.vue';
+import ContactActivities from '@/components/contact-activities.vue';
 import ContactService from '../../api/contact-service';
 
 const isEditing = ref(false);
@@ -253,7 +253,7 @@ const screenSizeChanged = () => {
 
 const getContact = (userId: number) => {
   isLoading.value = true;
-  ContactService.getContact(userId).then((response:any) => {
+  ContactService.getContact(userId).then((response) => {
     isLoading.value = false;
     panelData.value = response.data;
   }).catch((e: string) => {
@@ -267,7 +267,7 @@ function accordionPlusClick(/* e : Event */) {
 
 watch(
   () => props.userId,
-  (newUserId, _) => {
+  (newUserId) => {
     if (newUserId !== null) {
       getContact(newUserId);
     }
@@ -283,7 +283,7 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use "@/variables" as *;
 
 $side-panel-toolbar-height: 58px;
@@ -291,12 +291,6 @@ $side-panel-toolbar-height: 58px;
 .screen-medium {
   .panel.open {
     top: $side-panel-toolbar-height;
-  }
-}
-
-.screen-large {
-  .panel.open {
-    top: 0;
   }
 }
 
@@ -335,7 +329,7 @@ $side-panel-toolbar-height: 58px;
     }
   }
 
-  .data-wrapper {
+  &:deep(.data-wrapper) {
     width: 350px;
     padding-bottom: 16px;
     height: 100%;
@@ -404,7 +398,6 @@ $side-panel-toolbar-height: 58px;
       margin-right: 2px;
     }
   }
-
 }
 
 .icon-editor {

@@ -13,8 +13,8 @@
       <dx-header-filter :visible="true"/>
       <dx-load-panel :enabled="true"/>
       <dx-selection
-          selectAllMode="allPages"
-          showCheckBoxesMode="always"
+          select-all-mode="allPages"
+          show-check-boxes-mode="always"
           mode="multiple"
       ></dx-selection>
       <dx-search-panel
@@ -147,8 +147,8 @@ import { RowClickEvent } from 'devextreme/ui/data_grid';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { formatPhone } from '@/utils/formatters';
 import UserStatus from '@/components/user-status.vue';
-import CrmContactService from './api/crm-contact-service';
-import ContactPanel from './contact-panel/contact-panel.vue';
+import ContactListService from './api/contact-list-service';
+import ContactPanel from './components/contact-panel.vue';
 
 type FilterContactStatus = ContactStatus | 'All Contacts';
 
@@ -162,7 +162,7 @@ const filterStatusList = ['All Contacts', ...contactStatusList];
 const getContacts = () => {
   gridData.value = [];
   dataGrid.value?.instance.beginCustomLoading();
-  CrmContactService.getAll().then((data) => {
+  ContactListService.getAll().then((data) => {
     if (data) {
       gridData.value = data;
       dataGrid.value?.instance.endCustomLoading();
@@ -199,7 +199,7 @@ const refresh = () => {
   getContacts();
 };
 
-const customizePhoneCell = (cellInfo: {value: any}) => {
+const customizePhoneCell = (cellInfo: {value: string}) => {
   const { value } = cellInfo;
 
   if (!value) {

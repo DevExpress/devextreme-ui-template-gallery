@@ -22,3 +22,17 @@ $side-panel-background: darken($base-bg, 5);
   font-weight: 500;
   padding-right: 25px;
 }
+
+@mixin message-title {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #757575de;
+}
+
+@mixin message-text {
+  padding-top: 5px;
+  line-height: 21px;
+}

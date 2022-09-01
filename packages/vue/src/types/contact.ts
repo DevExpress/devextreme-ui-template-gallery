@@ -1,4 +1,4 @@
-import type { Activities } from './activities';
+import type { Activity } from './activities';
 
 export const contactStatusList = [
   'Salaried',
@@ -25,5 +25,5 @@ export type Contact = {
     phone: string,
     email: string,
     image: string,
-    activities: Activities,
+    activities: Activity[],
 };
