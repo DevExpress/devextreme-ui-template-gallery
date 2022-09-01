@@ -6,13 +6,13 @@ export const navigation = [
     items: [
       {
         text: 'Contact List',
-        path: '/crm-contact-list'
+        path: '/crm-contact-list',
       },
       {
         text: 'Contact Form',
-        path: '/crm-contact-form'
-      }
-    ]
+        path: '/crm-contact-form',
+      },
+    ],
   },
   {
     text: 'Planning',
@@ -21,12 +21,12 @@ export const navigation = [
     items: [
       {
         text: 'Task List',
-        path: '/planning-task-list'
+        path: '/planning-task-list',
       },
       {
         text: 'Task Details',
-        path: '/planning-task-details'
-      }
-    ]
-  }
+        path: '/planning-task-details',
+      },
+    ],
+  },
 ];

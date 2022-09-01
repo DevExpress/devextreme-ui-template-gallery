@@ -1,0 +1,35 @@
+.task-form {
+  min-height: 300px;
+}
+
+.info {
+  position: relative;
+  padding-bottom: 30px;
+
+  .default-label,
+  .priority-task,
+  .status-task {
+    position: absolute;
+    margin-top: 15px;
+
+    span {
+      font-size: 13px;
+    }
+  }
+
+  .default-label {
+    margin-top: 12px;
+  }
+}
+
+.form-custom-list-prop {
+  .priority-task,
+  .status-task {
+    position: absolute;
+    padding: 15px 11px;
+
+    span {
+      font-size: 13px;
+    }
+  }
+}

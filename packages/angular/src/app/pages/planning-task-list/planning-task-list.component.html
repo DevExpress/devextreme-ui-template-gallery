@@ -6,7 +6,7 @@
     <dxi-item location="before">
       <dx-tabs
         [selectedIndex]="0"
-        [items]="tabPanelItems"
+        [items]="taskPanelItems"
         (onItemClick)="tabValueChange($event)"
       ></dx-tabs>
     </dxi-item>
@@ -83,15 +83,18 @@
   </dx-toolbar>
 
   <div class="task-list" [ngSwitch]="displayTaskComponent">
-    <div *ngSwitchCase="tabPanelItems[0].text" class="grid">
+    <div *ngSwitchCase="taskPanelItems[0].text" class="grid">
       <task-list-grid
         #planningDataGrid
         [dataSource]="tasks"
         (tabValueChanged)="tabValueChange($event)"
       ></task-list-grid>
     </div>
-    <div *ngSwitchCase="tabPanelItems[1].text" class="kanban">
+    <div *ngSwitchCase="taskPanelItems[1].text" class="kanban">
       <task-list-kanban [dataSource]="tasks"></task-list-kanban>
+    </div>
+    <div *ngSwitchCase="taskPanelItems[2].text" class="gantt">
+      <task-list-gantt [dataSource]="tasks"></task-list-gantt>
     </div>
   </div>
 </div>

@@ -75,4 +75,4 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
   exports: [],
   declarations: [PlanningTaskDetailsComponent],
 })
-export class PlanningTaskDetailsModel { }
+export class PlanningTaskDetailsModule { }

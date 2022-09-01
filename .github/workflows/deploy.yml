@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - 21_2
+      - master
 
 jobs:
   set-matrix:
@@ -73,7 +73,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: build-artifacts
-        path: devextreme-rwa-demos/
+        path: devextreme-ui-template-gallery/
 
   build-shell:
     name: Build shell
@@ -117,7 +117,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: build-artifacts
-        path: devextreme-rwa-demos/
+        path: devextreme-ui-template-gallery/
 
   deploy:
     name: Deploy
@@ -132,12 +132,12 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: build-artifacts
-        path: devextreme-rwa-demos
+        path: devextreme-ui-template-gallery
 
     - name: Deploy in gh-pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         BRANCH: gh-pages
-        FOLDER: devextreme-rwa-demos
+        FOLDER: devextreme-ui-template-gallery
         TARGET_FOLDER: .
 

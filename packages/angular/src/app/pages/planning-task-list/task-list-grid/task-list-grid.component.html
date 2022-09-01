@@ -1,6 +1,6 @@
 <dx-data-grid
   *ngIf="!isLoading"
-  [dataSource]="dataSource"
+  [dataSource]="tasks"
   (onRowPrepared)="onRowPreparedGrid($event)"
   [columnAutoWidth]="true"
 >
@@ -33,6 +33,7 @@
     dataField="startDate"
     caption="Start Date"
     dataType="date"
+    sortOrder="desc"
     [hidingPriority]="2"
   >
     <dxi-validation-rule type="required"></dxi-validation-rule>

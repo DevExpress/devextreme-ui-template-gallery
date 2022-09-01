@@ -3,7 +3,7 @@ import ScrollView from 'devextreme-react/scroll-view';
 import './single-card.scss';
 import type { SingleCardProps } from '../../types';
 
-export default function SingleCard({ title, description, children }: React.PropsWithChildren<SingleCardProps>) {
+export const SingleCard = ({ title, description, children }: React.PropsWithChildren<SingleCardProps>) => {
   return (
     <ScrollView height={'100%'} width={'100%'} className={'with-footer single-card'}>
       <div className={'dx-card content'}>
@@ -14,4 +14,5 @@ export default function SingleCard({ title, description, children }: React.Props
         {children}
       </div>
     </ScrollView>
-)}
+  );
+};

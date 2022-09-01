@@ -10,12 +10,13 @@ import {
 } from 'devextreme-angular';
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
-import { tabPanelItems } from 'src/app/shared/types/resource';
+import { taskPanelItems } from 'src/app/shared/types/resource';
 import { Task } from 'src/app/shared/types/task';
 import { RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
 import { TaskListKanbanModule } from './task-list-kanban/task-list-kanban.component';
+import { TaskListGanttModule } from './task-list-gantt/task-list-gantt.component';
 
 @Component({
   templateUrl: './planning-task-list.component.html',
@@ -29,16 +30,16 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
     const { itemData } = e;
 
     this.displayTaskComponent = itemData.text;
-    this.displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
+    this.displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
   };
 
   tasks: Task[];
 
-  tabPanelItems = tabPanelItems;
+  taskPanelItems = taskPanelItems;
 
-  displayTaskComponent = this.tabPanelItems[0].text;
+  displayTaskComponent = this.taskPanelItems[0].text;
 
-  displayGrid = this.displayTaskComponent === this.tabPanelItems[0].text;
+  displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
 
   dataSubscription: Subscription = new Subscription();
 
@@ -75,6 +76,7 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
     TaskListKanbanModule,
     TaskListModule,
+    TaskListGanttModule,
 
     CommonModule,
   ],

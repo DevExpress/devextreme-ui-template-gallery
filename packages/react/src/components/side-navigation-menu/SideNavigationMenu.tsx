@@ -8,20 +8,12 @@ import type { SideNavigationMenuProps } from '../../types';
 
 import * as events from 'devextreme/events';
 
-export default function SideNavigationMenu(props: React.PropsWithChildren<SideNavigationMenuProps>) {
-  const {
-    children,
-    selectedItemChanged,
-    openMenu,
-    compactMode,
-    onMenuReady
-  } = props;
+export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigationMenuProps>) => {
+  const { children, selectedItemChanged, openMenu, compactMode, onMenuReady } = props;
 
   const { isLarge } = useScreenSize();
-  function normalizePath () {
-    return navigation.map((item) => (
-      { ...item, expanded: isLarge, path: item.path && !(/^\//.test(item.path)) ? `/${item.path}` : item.path }
-    ))
+  function normalizePath() {
+    return navigation.map((item) => ({ ...item, expanded: isLarge, path: item.path && !/^\//.test(item.path) ? `/${item.path}` : item.path }));
   }
 
   const items = useMemo(
@@ -30,21 +22,26 @@ export default function SideNavigationMenu(props: React.PropsWithChildren<SideNa
     []
   );
 
-  const { navigationData: { currentPath } } = useNavigation();
+  const {
+    navigationData: { currentPath },
+  } = useNavigation();
 
   const treeViewRef = useRef<TreeView>(null);
   const wrapperRef = useRef();
-  const getWrapperRef = useCallback((element) => {
-    const prevElement = wrapperRef.current;
-    if (prevElement) {
-      events.off(prevElement, 'dxclick');
-    }
+  const getWrapperRef = useCallback(
+    (element) => {
+      const prevElement = wrapperRef.current;
+      if (prevElement) {
+        events.off(prevElement, 'dxclick');
+      }
 
-    wrapperRef.current = element;
-    events.on(element, 'dxclick', (e: React.PointerEvent) => {
-      openMenu(e);
-    });
-  }, [openMenu]);
+      wrapperRef.current = element;
+      events.on(element, 'dxclick', (e: React.PointerEvent) => {
+        openMenu(e);
+      });
+    },
+    [openMenu]
+  );
 
   useEffect(() => {
     const treeView = treeViewRef.current && treeViewRef.current.instance;
@@ -63,10 +60,7 @@ export default function SideNavigationMenu(props: React.PropsWithChildren<SideNa
   }, [currentPath, compactMode]);
 
   return (
-    <div
-      className={'dx-swatch-additional side-navigation-menu'}
-      ref={getWrapperRef}
-    >
+    <div className={'dx-swatch-additional side-navigation-menu'} ref={getWrapperRef}>
       {children}
       <div className={'menu-container'}>
         <TreeView
@@ -83,4 +77,4 @@ export default function SideNavigationMenu(props: React.PropsWithChildren<SideNa
       </div>
     </div>
   );
-}
+};

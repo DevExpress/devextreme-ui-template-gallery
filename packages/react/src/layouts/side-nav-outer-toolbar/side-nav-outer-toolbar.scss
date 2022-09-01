@@ -1,3 +1,5 @@
+@use "../../variables.scss" as *;
+
 .side-nav-outer-toolbar {
   flex-direction: column;
   display: flex;
@@ -9,7 +11,7 @@
   z-index: 1501;
 }
 
-.layout-body {
+.drawer {
   flex: 1;
   min-height: 0;
 }

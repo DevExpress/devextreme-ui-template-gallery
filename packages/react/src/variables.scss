@@ -13,7 +13,7 @@ $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 
 @mixin separator() {
   .separator {
-    height: 36px;
+    height: 24px;
     width: 1px;
     background: $base-border-color;
 
@@ -31,7 +31,7 @@ $background-gray-color: color.change($base-text-color, $alpha: 0.04);
     &::before {
       $diameter: 10px;
 
-      content: ' ';
+      content: " ";
       width: $diameter;
       height: $diameter;
       border-radius: math.div($diameter, 2);
@@ -118,4 +118,18 @@ $background-gray-color: color.change($base-text-color, $alpha: 0.04);
       padding: 10px 12px 0 0;
     }
   }
+}
+
+@mixin message-title {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #757575de;
+}
+
+@mixin message-text {
+  padding-top: 5px;
+  line-height: 21px;
 }

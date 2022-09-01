@@ -6,7 +6,7 @@ const packages = require('./packages');
 const filesForChange = {
   angular: 'angular.json',
   vue: 'src/main.js',
-  react: 'src/App.js',
+  react: 'src/App.tsx',
 };
 
 const variablesPath = 'src/variables.scss';

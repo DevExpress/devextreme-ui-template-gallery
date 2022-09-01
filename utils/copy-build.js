@@ -3,7 +3,7 @@ const { join } = require('path');
 const { argv, cwd } = require('process');
 const packages = require('./packages');
 
-const commonDestination = 'devextreme-rwa-demos';
+const commonDestination = 'devextreme-ui-template-gallery';
 
 const copyApplications = (mode = 'default', theme) => {
   packages.forEach((packageName) => {
