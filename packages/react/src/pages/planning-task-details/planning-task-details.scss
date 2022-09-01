@@ -1,2 +1,31 @@
 @use "../../variables.scss" as *;
 @use "sass:math";
+
+.dx-toolbar {
+  .toolbar-title {
+    @include header();
+  }
+}
+
+.view-wrapper-details {
+  flex-direction: column;
+  display: flex;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+
+  .panels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+
+    .left {
+      flex: 1 400px;
+    }
+
+    .right {
+      flex: 1 calc(100% - 400px - 20px);
+      min-width: 360px;
+    }
+  }
+}

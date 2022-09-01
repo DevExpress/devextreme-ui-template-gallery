@@ -50,12 +50,12 @@
         // ## Arrow customization
         padding: 0 0 !important;
 
-        &[aria-level='1'] {
+        &[aria-level="1"] {
           font-weight: bold;
           border-bottom: 1px solid $base-border-color;
         }
 
-        &[aria-level='2'] .dx-treeview-item-content {
+        &[aria-level="2"] .dx-treeview-item-content {
           font-weight: normal;
           padding: 0 $side-panel-min-width;
         }

@@ -10,5 +10,11 @@
         "options": {
             "printWidth": 80
         }
+    }, {
+        "files": ["packages/react/**/*.ts", "packages/react/**/*.tsx"],
+        "options": {
+          "singleQuote": true,
+          "jsxSingleQuote": true
+        }
     }]
 }

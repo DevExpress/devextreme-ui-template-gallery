@@ -30,13 +30,10 @@ function AuthProvider(props: React.PropsWithChildren<unknown>) {
     setUser(undefined);
   }, []);
 
-
-  return (
-    <AuthContext.Provider value={{ user, signIn, signOut, loading }} {...props} />
-  );
+  return <AuthContext.Provider value={{ user, signIn, signOut, loading }} {...props} />;
 }
 
 const AuthContext = createContext<AuthContextType>({ loading: false } as AuthContextType);
 const useAuth = () => useContext(AuthContext);
 
-export { AuthProvider, useAuth }
+export { AuthProvider, useAuth };

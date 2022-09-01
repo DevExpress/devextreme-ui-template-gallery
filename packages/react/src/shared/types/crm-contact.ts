@@ -1,4 +1,4 @@
-import { Activities } from './activities';
+import { Activities } from './card-activities';
 
 export const contactStatusList = [
   'Salaried',
@@ -8,11 +8,11 @@ export const contactStatusList = [
 
 export type ContactStatus = (typeof contactStatusList)[number];
 
-type State = {
+interface State {
     stateShort: string;
 };
 
-export type Contact = {
+export interface Contact {
     name: string,
     firstName: string,
     lastName: string,
