@@ -7,9 +7,9 @@ import './Header.scss';
 import { Template } from 'devextreme-react/core/template';
 import type { HeaderProps } from '../../types';
 
-export const Header = ({ menuToggleEnabled, title, toggleMenu }: HeaderProps) => {
+export const Header = ({ menuToggleEnabled, title, toggleMenu, className }: HeaderProps) => {
   return (
-    <header className={'header-component'}>
+    <header className={`header-component ${className}`}>
       <Toolbar className={'header-toolbar'}>
         <Item visible={menuToggleEnabled} location={'before'} widget={'dxButton'} cssClass={'menu-button'}>
           <Button icon='menu' stylingMode='text' onClick={toggleMenu} />
