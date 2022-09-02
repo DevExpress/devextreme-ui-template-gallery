@@ -26,12 +26,6 @@ fixture`List`;
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`crm-contact-list-embed=${embedded}-${screenMode[0]}`, 'body');
 
-      // TODO: integrated it for react
-      // await t.click('tr.dx-data-row:first-child');
-      // await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
-      // eslint-disable-next-line max-len
-      // await takeScreenshot(`crm-contact-list-form-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
-
       await t
         .expect(compareResults.isValid())
         .ok(compareResults.errorMessages());
