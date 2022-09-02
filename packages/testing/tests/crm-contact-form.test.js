@@ -1,8 +1,9 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector, ClientFunction } from 'testcafe';
+import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
+import { toogleEmbeddedClass } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
@@ -10,11 +11,6 @@ const BASE_URL = `http://localhost:${process.env.port}`;
 
 fixture`Form`
   .page(BASE_URL);
-
-const toogleEmbeddedClass = ClientFunction((embed) => {
-  if (!embed) return;
-  window.document.getElementsByTagName('body')[0].classList.add('embedded');
-});
 
 const setEmbedded = async (t, embed, screenMode) => {
   await toogleEmbeddedClass(embed);

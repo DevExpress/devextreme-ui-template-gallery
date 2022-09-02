@@ -1,18 +1,14 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector, ClientFunction } from 'testcafe';
+import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
+import { toogleEmbeddedClass } from './utils';
 import { screenModes, chartTimeout } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}`;
 
 fixture`Analytics Sales Report`;
-
-const setEmbeddedMode = ClientFunction((embed) => {
-  if (!embed) return;
-  window.document.getElementsByTagName('body')[0].classList.add('embedded');
-});
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
@@ -23,7 +19,7 @@ const setEmbeddedMode = ClientFunction((embed) => {
 
       await t.navigateTo(`${BASE_URL}/#/analytics-sales-report`);
 
-      await setEmbeddedMode(embedded);
+      await toogleEmbeddedClass(embedded);
 
       await t.wait(chartTimeout);
 

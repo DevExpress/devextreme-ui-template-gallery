@@ -1,18 +1,14 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector, ClientFunction } from 'testcafe';
+import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
+import { toogleEmbeddedClass } from './utils';
 import { screenModes, chartTimeout } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}`;
 
 fixture`Analytics Geography`;
-
-const toogleEmbeddedClass = ClientFunction((embed) => {
-  if (!embed) return;
-  window.document.getElementsByTagName('body')[0].classList.add('embedded');
-});
 
 const checkScreenMode = async (t, screenMode) => {
   if (screenMode[0] === 400) {
