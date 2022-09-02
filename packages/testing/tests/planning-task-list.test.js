@@ -28,11 +28,11 @@ const setEmbeddedMode = ClientFunction((embed) => {
       await t.wait(timeoutSecond);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`planning-task-grid-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`planning-task-grid-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
-      await takeScreenshot(`planning-task-kanban-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`planning-task-kanban-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
-      await takeScreenshot(`planning-task-gantt-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`planning-task-gantt-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
         .expect(compareResults.isValid())

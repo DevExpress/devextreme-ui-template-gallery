@@ -34,11 +34,11 @@ const checkScreenMode = async (t, screenMode) => {
       await t.wait(chartTimeout);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`analytics-geography-all-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`analytics-geography-all-embed=${embedded}-${screenMode[0]}`, 'body');
       await checkScreenMode(t, screenMode);
       await t.click(Selector('.dx-tabs .dx-item').nth(3));
       await t.wait(chartTimeout);
-      await takeScreenshot(`analytics-geography-year-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`analytics-geography-year-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
         .expect(compareResults.isValid())

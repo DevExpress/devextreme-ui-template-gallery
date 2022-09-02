@@ -29,11 +29,11 @@ const setEmbeddedMode = ClientFunction((embed) => {
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await t.expect(Selector('tr.dx-data-row').count).eql(embedded ? 18 : 16);
-      await takeScreenshot(`crm-contact-list-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`crm-contact-list-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t.click('tr.dx-data-row:first-child');
       await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
-      await takeScreenshot(`crm-contact-list-form-${project}-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
+      await takeScreenshot(`crm-contact-list-form-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
 
       await t
         .expect(compareResults.isValid())

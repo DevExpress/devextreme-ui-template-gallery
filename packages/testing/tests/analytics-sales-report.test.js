@@ -28,11 +28,11 @@ const setEmbeddedMode = ClientFunction((embed) => {
       await t.wait(chartTimeout);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`analytics-sales-report-all-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`analytics-sales-report-all-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-dropdownbutton'));
       await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(3));
       await t.wait(chartTimeout);
-      await takeScreenshot(`analytics-sales-report-year-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`analytics-sales-report-year-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
         .expect(compareResults.isValid())
