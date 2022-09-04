@@ -7,13 +7,13 @@
                 "Demos": [
                     {
                         "Title": "Contact List",
-                        "Name": "crm-contact-list",
+                        "Name": "CrmContactList",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular", "React"]
                     },
                     {
                         "Title": "Contact Form",
-                        "Name": "crm-contact-form",
+                        "Name": "CrmContactForm",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
@@ -22,12 +22,12 @@
                 "Demos": [
                     {
                         "Title": "Task List",
-                        "Name": "planning-task-list",
+                        "Name": "PlanningTaskList",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     },{
                         "Title": "Task Details",
-                        "Name": "planning-task-details",
+                        "Name": "PlanningTaskDetails",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
@@ -36,17 +36,17 @@
                 "Demos": [
                     {
                         "Title": "Dashboard",
-                        "Name": "analytics-dashboard",
+                        "Name": "AnalyticsDashboard",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     },{
                         "Title": "Sales Report",
-                        "Name": "analytics-sales-report",
+                        "Name": "AnalyticsSalesReport",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     },{
                         "Title": "Geography",
-                        "Name": "analytics-geography",
+                        "Name": "AnalyticsGeography",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
