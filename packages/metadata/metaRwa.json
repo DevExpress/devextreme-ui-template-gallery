@@ -7,46 +7,50 @@
                 "Demos": [
                     {
                         "Title": "Contact List",
-                        "Name": "CrmContactList",
+                        "Name": "crm-contact-list",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular", "React"]
                     },
                     {
                         "Title": "Contact Form",
-                        "Name": "CrmContactForm",
+                        "Name": "crm-contact-form",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
-                ],
+                ]
+            },
+            {
                 "Name": "Planning",
                 "Demos": [
                     {
                         "Title": "Task List",
-                        "Name": "PlanningTaskList",
+                        "Name": "planning-task-list",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     },{
                         "Title": "Task Details",
-                        "Name": "PlanningTaskDetails",
+                        "Name": "planning-task-details",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
-                ],
+                ]
+            },
+            {
                 "Name": "Analytics",
                 "Demos": [
                     {
                         "Title": "Dashboard",
-                        "Name": "AnalyticsDashboard",
+                        "Name": "analytics-dashboard",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     },{
                         "Title": "Sales Report",
-                        "Name": "AnalyticsSalesReport",
+                        "Name": "analytics-sales-report",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     },{
                         "Title": "Geography",
-                        "Name": "AnalyticsGeography",
+                        "Name": "analytics-geography",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
@@ -54,5 +58,4 @@
             }
         ]
     }
-    
 ]
