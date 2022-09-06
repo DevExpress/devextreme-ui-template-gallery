@@ -141,13 +141,13 @@ import DxDataGrid, {
   DxItem as DxGridToolbarItem,
   DxSearchPanel,
 } from 'devextreme-vue/data-grid';
+import { getContacts } from 'dx-rwa-data';
 
 import { contactStatusList, Contact, ContactStatus } from '@/types/contact';
 import { RowClickEvent } from 'devextreme/ui/data_grid';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { formatPhone } from '@/utils/formatters';
 import UserStatus from '@/components/user-status.vue';
-import ContactListService from './api/contact-list-service';
 import ContactPanel from './components/contact-panel.vue';
 
 type FilterContactStatus = ContactStatus | 'All Contacts';
@@ -159,19 +159,18 @@ const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
 
 const filterStatusList = ['All Contacts', ...contactStatusList];
 
-const getContacts = () => {
+const loadContacts = async () => {
   gridData.value = [];
   dataGrid.value?.instance.beginCustomLoading();
-  ContactListService.getAll().then((data) => {
-    if (data) {
-      gridData.value = data;
-      dataGrid.value?.instance.endCustomLoading();
-    }
-  });
+  gridData.value = await getContacts();
+
+  if (gridData.value) {
+    dataGrid.value?.instance.endCustomLoading();
+  }
 };
 
 onMounted(() => {
-  getContacts();
+  loadContacts();
 });
 
 const rowClick = (e: RowClickEvent) => {
@@ -196,7 +195,7 @@ const filterByStatus = (e: SelectionChangedEvent) => {
 };
 
 const refresh = () => {
-  getContacts();
+  loadContacts();
 };
 
 const customizePhoneCell = (cellInfo: {value: string}) => {

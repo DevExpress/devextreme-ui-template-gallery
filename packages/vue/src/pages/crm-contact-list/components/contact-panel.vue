@@ -181,6 +181,7 @@ import {
   onBeforeUnmount, onMounted, ref, watch,
 } from 'vue';
 
+import { getContact } from 'dx-rwa-data';
 import DxAccordion, { DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
 import DxButton from 'devextreme-vue/button';
 import {
@@ -200,7 +201,6 @@ import { sizes, subscribe, unsubscribe } from '@/utils/media-query';
 import { formatPrice } from '@/utils/formatters';
 import FormItemEditable from '@/components/form-item-editable.vue';
 import ContactActivities from '@/components/contact-activities.vue';
-import ContactService from '../../api/contact-service';
 
 const isEditing = ref(false);
 const isLoading = ref(false);
@@ -251,14 +251,10 @@ const screenSizeChanged = () => {
   }
 };
 
-const getContact = (userId: number) => {
+const loadContact = async (userId: number) => {
   isLoading.value = true;
-  ContactService.getContact(userId).then((response) => {
-    isLoading.value = false;
-    panelData.value = response.data;
-  }).catch((e: string) => {
-    console.log(e);
-  });
+  panelData.value = await getContact(userId);
+  isLoading.value = false;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -269,7 +265,7 @@ watch(
   () => props.userId,
   (newUserId) => {
     if (newUserId !== null) {
-      getContact(newUserId);
+      loadContact(newUserId);
     }
   },
 );

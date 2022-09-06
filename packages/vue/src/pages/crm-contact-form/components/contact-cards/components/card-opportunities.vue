@@ -51,7 +51,7 @@ import Rx from 'rxjs';
 import notify from 'devextreme/ui/notify';
 import DxButton from 'devextreme-vue/button';
 import DxLoadPanel from 'devextreme-vue/load-panel';
-import ContactDataService from '@/pages/crm-contact-form/api/data-service';
+import { getActiveContactOpportunities, getClosedContactOpportunities } from 'dx-rwa-data';
 import type { Opportunity } from '@/types/opportunities';
 import OpportunityTile from './opportunity-tile.vue';
 
@@ -65,17 +65,18 @@ const activeItems = ref<Opportunity[]>([]);
 const closedItems = ref<Opportunity[]>([]);
 const isLoading = ref<boolean>(false);
 
-function loadData() {
+async function loadData() {
   if (!props.contactId) return;
   isLoading.value = true;
 
-  const promiseActiveItems = ContactDataService.getActiveContactOpportunities(props.contactId);
-  const promiseClosedItems = ContactDataService.getClosedContactOpportunities(props.contactId);
+  const promiseActiveItems = getActiveContactOpportunities(props.contactId);
+  const promiseClosedItems = getClosedContactOpportunities(props.contactId);
 
-  Promise.all([promiseActiveItems, promiseClosedItems]).then((results) => {
-    [activeItems.value, closedItems.value] = results;
-    isLoading.value = false;
-  });
+  [activeItems.value, closedItems.value] = await Promise.all(
+    [promiseActiveItems, promiseClosedItems],
+  );
+
+  isLoading.value = false;
 }
 
 const refreshSubscription = inject<Rx.Subject<void>>('refresh-notifier')

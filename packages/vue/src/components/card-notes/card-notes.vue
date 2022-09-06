@@ -55,7 +55,7 @@ import DxLoadPanel from 'devextreme-vue/load-panel';
 import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
 import { formatDate } from '@/utils/formatters';
 
-import NotesService from '@/components/card-notes/notes-service';
+import { getContactNotes } from 'dx-rwa-data';
 import type { Note } from '@/types/notes';
 
 const props = withDefaults(defineProps<{
@@ -91,16 +91,14 @@ function addNote() {
   defaultText();
 }
 
-function loadData() {
+async function loadData() {
   if (props.contactId == null) {
     return;
   }
 
   isLoading.value = true;
-  NotesService.getContactNotes(props.contactId).then((data) => {
-    items.value = data;
-    isLoading.value = false;
-  });
+  items.value = await getContactNotes(props.contactId);
+  isLoading.value = false;
 }
 
 const refreshSubscription = inject<Rx.Subject<void>>('refresh-notifier')

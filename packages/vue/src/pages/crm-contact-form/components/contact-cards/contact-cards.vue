@@ -47,7 +47,7 @@ import type { Message } from '@/types/messages';
 import ContactActivities from '@/components/contact-activities.vue';
 import CardNotes from '@/components/card-notes/card-notes.vue';
 import CardMessages from '@/components/card-messages/card-messages.vue';
-import MessagesService from '@/components/card-messages/messages-service';
+import { getContactMessages } from 'dx-rwa-data';
 import CardTasks from './components/card-tasks.vue';
 import CardOpportunities from './components/card-opportunities.vue';
 
@@ -68,15 +68,13 @@ const props = withDefaults(defineProps<{
 const isMessagesLoading = ref<boolean>(true);
 const messages = ref<Message[]>([]);
 
-function loadMessages() {
+async function loadMessages() {
   if (!props.contactId) return;
 
   isMessagesLoading.value = true;
 
-  MessagesService.getContactMessages(props.contactId).then((data) => {
-    messages.value = data;
-    isMessagesLoading.value = false;
-  });
+  messages.value = await getContactMessages(props.contactId);
+  isMessagesLoading.value = false;
 }
 
 const refreshSubscription = inject<Rx.Subject<void>>('refresh-notifier')

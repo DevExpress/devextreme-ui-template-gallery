@@ -82,7 +82,7 @@ import {
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
 
-import ContactService from '@/pages/api/contact-service';
+import { getContact } from 'dx-rwa-data';
 import type { Contact } from '@/types/contact';
 
 import ContactForm from './components/contact-form.vue';
@@ -97,15 +97,13 @@ const refreshNotifier = new Rx.Subject<void>();
 
 provide('refresh-notifier', refreshNotifier);
 
-function loadData() {
+async function loadData() {
   isLoading.value = true;
-  ContactService.getContact(contactId).then((response) => {
-    contactData.value = response.data;
-    contactName.value = response.data.name;
-    isLoading.value = false;
-  }).catch((e: string) => {
-    console.log(e);
-  });
+  const data = await getContact(contactId);
+
+  contactData.value = data;
+  contactName.value = data.name;
+  isLoading.value = false;
 }
 
 const refresh = () => {
