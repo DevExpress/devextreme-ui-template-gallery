@@ -49,7 +49,7 @@ class MetadataChecker {
     const ext = {
       angular: 'ts',
       vue: 'ts',
-      react: 'tsx'
+      react: 'tsx',
     }[approach];
     const navigationModulePath = join(
       __dirname,
