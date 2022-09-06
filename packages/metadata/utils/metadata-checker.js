@@ -25,7 +25,7 @@ class MetadataChecker {
         viewPath = join(viewPath, 'views', `${viewName}.vue`);
         break;
       case 'react':
-        viewPath = join(viewPath, 'pages', viewName, `${viewName}.js`);
+        viewPath = join(viewPath, 'pages', viewName, `${viewName}.tsx`);
         break;
       default:
         throw new Error(`Unknown approach ${approach}`);
@@ -46,6 +46,7 @@ class MetadataChecker {
   }
 
   navigationModuleContent(approach) {
+    const ext = approach === 'angular' ? 'ts' : 'tsx';
     const navigationModulePath = join(
       __dirname,
       '..',
@@ -53,7 +54,7 @@ class MetadataChecker {
       approach,
       'src',
       approach === 'angular' ? 'app' : '',
-      `app-navigation.${'ts'}`,
+      `app-navigation.${ext}`,
     );
 
     return readFileSync(navigationModulePath)
