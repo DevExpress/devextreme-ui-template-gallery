@@ -17,7 +17,9 @@
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
-                ],
+                ]
+            },
+            {
                 "Name": "Planning",
                 "Demos": [
                     {
@@ -31,7 +33,9 @@
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
-                ],
+                ]
+            },
+            {
                 "Name": "Analytics",
                 "Demos": [
                     {
@@ -54,5 +58,4 @@
             }
         ]
     }
-
 ]
