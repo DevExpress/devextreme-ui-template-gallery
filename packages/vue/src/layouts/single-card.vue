@@ -30,6 +30,7 @@ watch(
 </script>
 
 <style lang="scss">
+@use '@/variables' as *;
 .single-card {
   width: 100%;
   height: 100%;

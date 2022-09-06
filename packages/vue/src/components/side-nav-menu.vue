@@ -18,92 +18,80 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import DxTreeView from 'devextreme-vue/ui/tree-view';
 import { sizes } from '@/utils/media-query';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import navigation from '../app-navigation';
+import { navigation } from '../app-navigation';
 
-export default {
-  props: {
-    compactMode: Boolean,
+const route = useRoute();
+const router = useRouter();
+
+const isLargeScreen = sizes()['screen-large'];
+const items = navigation.map((item) => {
+  if (item.path && !(/^\//.test(item.path))) {
+    // eslint-disable-next-line no-param-reassign
+    item.path = `/${item.path}`;
+  }
+  return { ...item, expanded: isLargeScreen };
+});
+
+const treeViewRef = ref<InstanceType<typeof DxTreeView> | null>(null);
+
+const props = defineProps<{
+  compactMode: boolean,
+}>();
+
+const emit = defineEmits(['click']);
+
+function forwardClick(...args: any[]) {
+  emit('click', args);
+}
+
+function handleItemClick(e) {
+  if (!e.itemData.path || props.compactMode) {
+    return;
+  }
+  router.push(e.itemData.path);
+
+  const pointerEvent = e.event;
+  pointerEvent.stopPropagation();
+}
+
+function updateSelection() {
+  if (!treeViewRef.value || !treeViewRef.value.instance) {
+    return;
+  }
+
+  treeViewRef.value.instance.selectItem(route.path);
+  treeViewRef.value.instance.expandItem(route.path);
+}
+
+onMounted(() => {
+  updateSelection();
+  if (props.compactMode) {
+    treeViewRef?.value?.instance.collapseAll();
+  }
+});
+
+watch(
+  () => route.path,
+  () => {
+    updateSelection();
   },
-  setup(props, context) {
-    const route = useRoute();
-    const router = useRouter();
+);
 
-    const isLargeScreen = sizes()['screen-large'];
-    const items = navigation.map((item) => {
-      if (item.path && !(/^\//.test(item.path))) {
-        // eslint-disable-next-line no-param-reassign
-        item.path = `/${item.path}`;
-      }
-      return { ...item, expanded: isLargeScreen };
-    });
-
-    const treeViewRef = ref(null);
-
-    function forwardClick(...args) {
-      context.emit('click', args);
-    }
-
-    function handleItemClick(e) {
-      if (!e.itemData.path || props.compactMode) {
-        return;
-      }
-      router.push(e.itemData.path);
-
-      const pointerEvent = e.event;
-      pointerEvent.stopPropagation();
-    }
-
-    function updateSelection() {
-      if (!treeViewRef.value || !treeViewRef.value.instance) {
-        return;
-      }
-
-      treeViewRef.value.instance.selectItem(route.path);
-      treeViewRef.value.instance.expandItem(route.path);
-    }
-
-    onMounted(() => {
+watch(
+  () => props.compactMode,
+  () => {
+    if (props.compactMode) {
+      treeViewRef.value?.instance.collapseAll();
+    } else {
       updateSelection();
-      if (props.compactMode) {
-        treeViewRef.value.instance.collapseAll();
-      }
-    });
-
-    watch(
-      () => route.path,
-      () => {
-        updateSelection();
-      },
-    );
-
-    watch(
-      () => props.compactMode,
-      () => {
-        if (props.compactMode) {
-          treeViewRef.value.instance.collapseAll();
-        } else {
-          updateSelection();
-        }
-      },
-    );
-
-    return {
-      treeViewRef,
-      items,
-      forwardClick,
-      handleItemClick,
-      updateSelection,
-    };
+    }
   },
-  components: {
-    DxTreeView,
-  },
-};
+);
 </script>
 
 <style lang="scss">

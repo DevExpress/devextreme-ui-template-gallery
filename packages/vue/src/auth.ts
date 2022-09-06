@@ -12,7 +12,7 @@ export const defaultUser: userInfo = {
   avatarUrl: 'https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png',
 };
 
-const authInfo: { _user: userInfo | null, [key: string]: unknown } = {
+export const authInfo: { _user: userInfo | null, [key: string]: any } = {
   _user: defaultUser,
   loggedIn() {
     return !!this._user;
@@ -103,5 +103,3 @@ const authInfo: { _user: userInfo | null, [key: string]: unknown } = {
     }
   },
 };
-
-export default authInfo;

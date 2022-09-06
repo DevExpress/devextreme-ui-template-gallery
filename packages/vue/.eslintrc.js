@@ -24,6 +24,7 @@ module.exports = {
     'class-methods-use-this': 'off',
     'vue/require-valid-default-prop': 'off',
     'linebreak-style': 0,
+    'import/prefer-default-export': 'off',
   },
   overrides: [
     {

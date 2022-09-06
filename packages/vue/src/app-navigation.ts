@@ -1,4 +1,4 @@
-export default [
+export const navigation = [
   {
     text: 'CRM',
     icon: 'user',

@@ -58,7 +58,7 @@ const cssClasses = computed(() => ['app'].concat(screen.getScreenSizeInfo.cssCla
         <div class="content">
           <router-view></router-view>
         </div>
-        <app-footer />
+        <app-footer v-if="$route.meta.noFooter !== true"/>
       </component>
     </div>
   </div>

@@ -1,14 +1,27 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import CrmContactList from '@/pages/crm-contact-list/crm-contact-list.vue';
 import CrmContactForm from '@/pages/crm-contact-form/crm-contact-form.vue';
+import LoginForm from '@/pages/login-form.vue';
 import defaultLayout from '../layouts/side-nav-outer-toolbar.vue';
+import simpleLayout from '../layouts/single-card.vue';
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
       path: '/',
       redirect: '/crm-contact-list',
+    },
+    {
+      path: '/login-form',
+      name: 'login-form',
+      meta: {
+        requiresAuth: false,
+        layout: simpleLayout,
+        noFooter: true,
+        title: 'Sign In',
+      },
+      component: LoginForm,
     },
     {
       path: '/crm-contact-list',
@@ -30,5 +43,3 @@ const router = createRouter({
     },
   ],
 });
-
-export default router;
