@@ -73,10 +73,9 @@ import DxForm, {
 import notify from 'devextreme/ui/notify';
 
 import { reactive, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { authInfo as auth } from '../auth';
 
-const route = useRoute();
 const router = useRouter();
 
 const formData = reactive({

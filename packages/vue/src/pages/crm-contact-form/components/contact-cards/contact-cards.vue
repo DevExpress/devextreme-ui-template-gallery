@@ -38,7 +38,6 @@ import {
   onMounted,
   ref,
 } from 'vue';
-import Rx from 'rxjs';
 import { DxTabPanel } from 'devextreme-vue/tab-panel';
 import { DxItem as DxTabItem } from 'devextreme-vue/tabs';
 import type { Task } from '@/types/task';
@@ -48,6 +47,7 @@ import ContactActivities from '@/components/contact-activities.vue';
 import CardNotes from '@/components/card-notes/card-notes.vue';
 import CardMessages from '@/components/card-messages/card-messages.vue';
 import { getContactMessages } from 'dx-rwa-data';
+import { SimpleSubject } from '@/utils/simple-subject';
 import CardTasks from './components/card-tasks.vue';
 import CardOpportunities from './components/card-opportunities.vue';
 
@@ -77,7 +77,7 @@ async function loadMessages() {
   isMessagesLoading.value = false;
 }
 
-const refreshSubscription = inject<Rx.Subject<void>>('refresh-notifier')
+const refreshSubscription = inject<SimpleSubject>('refresh-notifier')
   ?.subscribe(loadMessages);
 
 onMounted(() => {

@@ -47,12 +47,12 @@ import {
   onMounted,
   ref,
 } from 'vue';
-import Rx from 'rxjs';
 import notify from 'devextreme/ui/notify';
 import DxButton from 'devextreme-vue/button';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 import { getActiveContactOpportunities, getClosedContactOpportunities } from 'dx-rwa-data';
 import type { Opportunity } from '@/types/opportunities';
+import { SimpleSubject } from '@/utils/simple-subject';
 import OpportunityTile from './opportunity-tile.vue';
 
 const props = withDefaults(defineProps<{
@@ -79,7 +79,7 @@ async function loadData() {
   isLoading.value = false;
 }
 
-const refreshSubscription = inject<Rx.Subject<void>>('refresh-notifier')
+const refreshSubscription = inject<SimpleSubject>('refresh-notifier')
   ?.subscribe(loadData);
 
 onMounted(() => {

@@ -74,8 +74,6 @@
 
 <script setup lang="ts">
 import { onMounted, provide, ref } from 'vue';
-import * as Rx from 'rxjs';
-
 import DxButton from 'devextreme-vue/button';
 import {
   DxToolbar,
@@ -84,16 +82,16 @@ import {
 
 import { getContact } from 'dx-rwa-data';
 import type { Contact } from '@/types/contact';
+import { SimpleSubject } from '@/utils/simple-subject';
 
 import ContactForm from './components/contact-form.vue';
 import ContactCards from './components/contact-cards/contact-cards.vue';
 
 const contactId = 12;
-
 const contactName = ref('');
 const contactData = ref<Contact | Record<string, unknown>>({});
 const isLoading = ref(false);
-const refreshNotifier = new Rx.Subject<void>();
+const refreshNotifier = new SimpleSubject();
 
 provide('refresh-notifier', refreshNotifier);
 

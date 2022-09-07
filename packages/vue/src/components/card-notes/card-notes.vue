@@ -48,7 +48,6 @@ import {
   onMounted,
   ref,
 } from 'vue';
-import Rx from 'rxjs';
 import { DxTextArea } from 'devextreme-vue';
 import DxButton from 'devextreme-vue/button';
 import DxLoadPanel from 'devextreme-vue/load-panel';
@@ -57,6 +56,7 @@ import { formatDate } from '@/utils/formatters';
 
 import { getContactNotes } from 'dx-rwa-data';
 import type { Note } from '@/types/notes';
+import { SimpleSubject } from '@/utils/simple-subject';
 
 const props = withDefaults(defineProps<{
   contactName: string,
@@ -101,7 +101,7 @@ async function loadData() {
   isLoading.value = false;
 }
 
-const refreshSubscription = inject<Rx.Subject<void>>('refresh-notifier')
+const refreshSubscription = inject<SimpleSubject>('refresh-notifier')
   ?.subscribe(loadData);
 
 onMounted(() => {

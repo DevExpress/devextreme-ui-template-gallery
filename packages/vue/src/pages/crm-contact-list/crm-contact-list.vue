@@ -1,7 +1,6 @@
 <template>
   <div class="view-wrapper">
-    <dx-data-grid ref="dataGrid"
-                  :data-source="gridData"
+    <dx-data-grid :data-source="dataSource"
                   height="100%"
                   class="grid"
                   @row-click="rowClick">
@@ -125,7 +124,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import DxDropDownButton from 'devextreme-vue/drop-down-button';
 import DxDataGrid, {
   DxColumn,
@@ -145,6 +144,7 @@ import { getContacts } from 'dx-rwa-data';
 
 import { contactStatusList, Contact, ContactStatus } from '@/types/contact';
 import { RowClickEvent } from 'devextreme/ui/data_grid';
+import DataSource from 'devextreme/data/data_source';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { formatPhone } from '@/utils/formatters';
 import UserStatus from '@/components/user-status.vue';
@@ -152,25 +152,14 @@ import ContactPanel from './components/contact-panel.vue';
 
 type FilterContactStatus = ContactStatus | 'All Contacts';
 
-const gridData = ref<Contact[]>([]);
 const panelData = ref<Array<Contact> | null>(null);
 const isPanelOpen = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
 
 const filterStatusList = ['All Contacts', ...contactStatusList];
-
-const loadContacts = async () => {
-  gridData.value = [];
-  dataGrid.value?.instance.beginCustomLoading();
-  gridData.value = await getContacts();
-
-  if (gridData.value) {
-    dataGrid.value?.instance.endCustomLoading();
-  }
-};
-
-onMounted(() => {
-  loadContacts();
+const dataSource = new DataSource({
+  key: 'id',
+  load: () => getContacts(),
 });
 
 const rowClick = (e: RowClickEvent) => {
@@ -195,7 +184,7 @@ const filterByStatus = (e: SelectionChangedEvent) => {
 };
 
 const refresh = () => {
-  loadContacts();
+  dataSource.reload();
 };
 
 const customizePhoneCell = (cellInfo: {value: string}) => {
