@@ -2,11 +2,11 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { toogleEmbeddedClass } from './utils';
+import { toggleCommonConfiguration } from './utils';
 import { screenModes, chartTimeout } from '../config.js';
 
 const project = process.env.project;
-const BASE_URL = `http://localhost:${process.env.port}`;
+const BASE_URL = `http://localhost:${process.env.port}/#/analytics-dashboard`;
 
 fixture`Analytics Dashboard`;
 
@@ -20,13 +20,7 @@ const checkScreenMode = async (t, screenMode) => {
     test(`Analytics Dashboard (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await t.resizeWindow(...screenMode);
-
-      await t.navigateTo(`${BASE_URL}/#/analytics-dashboard`);
-
-      await toogleEmbeddedClass(embedded);
-
-      await t.wait(chartTimeout);
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, chartTimeout);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-dashboard-all-embed=${embedded}-${screenMode[0]}`, 'body');

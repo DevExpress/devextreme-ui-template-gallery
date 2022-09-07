@@ -3,18 +3,15 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { toogleEmbeddedClass } from './utils';
+import { toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const BASE_URL = `http://localhost:${process.env.port}`;
+const BASE_URL = `http://localhost:${process.env.port}/#/crm-contact-form`;
 
-fixture`Form`
-  .page(BASE_URL);
+fixture`Contact Form`;
 
 const setEmbedded = async (t, embed, screenMode) => {
-  await toogleEmbeddedClass(embed);
-
   if (embed) {
     if (screenMode[0] === 400) {
       await t.click('.view-wrapper .dx-icon-overflow');
@@ -28,14 +25,8 @@ const setEmbedded = async (t, embed, screenMode) => {
   screenModes.forEach((screenMode) => {
     test(`Crm contact form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
-      await t.resizeWindow(...screenMode);
-
-      await t.navigateTo(`${BASE_URL}/#/crm-contact-form`);
-
-      await setEmbedded(t, embedded, screenMode);
-
-      await t.wait(timeoutSecond);
+      
+      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       await t.click(Selector('.dx-drawer-content'));
       await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
@@ -49,13 +40,7 @@ const setEmbedded = async (t, embed, screenMode) => {
     test(`Crm contact form Form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await t.resizeWindow(...screenMode);
-
-      await t.navigateTo(`${BASE_URL}/#/crm-contact-form`);
-
-      await setEmbedded(t, embedded, screenMode);
-
-      await t.wait(timeoutSecond);
+      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       const form = Selector('.dx-form');
 
@@ -72,13 +57,8 @@ const setEmbedded = async (t, embed, screenMode) => {
       if (screenMode[0] === 400) return;
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await t.resizeWindow(...screenMode);
-
-      await t.navigateTo(`${BASE_URL}/#/crm-contact-form`);
-
-      await setEmbedded(t, embedded, screenMode);
-
-      await t.wait(timeoutSecond);
+      // eslint-disable-next-line max-len
+      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
       const tabPanels = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel]');

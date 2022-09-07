@@ -3,17 +3,15 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { toogleEmbeddedClass } from './utils';
+import { toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const BASE_URL = `http://localhost:${process.env.port}`;
+const BASE_URL = `http://localhost:${process.env.port}/#/planning-task-details`;
 
-fixture`Form`;
+fixture`Planning Details`;
 
 const setEmbedded = async (t, embed, screenMode) => {
-  await toogleEmbeddedClass(embed);
-
   if (embed) {
     if (screenMode[0] === 400) {
       if (project === 'react') {
@@ -31,14 +29,8 @@ const setEmbedded = async (t, embed, screenMode) => {
   screenModes.forEach((screenMode) => {
     test(`Planning task details form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
-      await t.resizeWindow(...screenMode);
-
-      await t.navigateTo(`${BASE_URL}/#/planning-task-details`);
-
-      await setEmbedded(t, embedded, screenMode);
-
-      await t.wait(timeoutSecond);
+      // eslint-disable-next-line max-len
+      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       await t.expect(Selector('.content .dx-toolbar-label').withText('Call to clarify customer requirements.').exists).ok();
       await takeScreenshot(`planning-task-details-embed=${embedded}-${screenMode[0]}`, 'body');
@@ -51,13 +43,8 @@ const setEmbedded = async (t, embed, screenMode) => {
     test(`Planning task details Form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await t.resizeWindow(...screenMode);
-
-      await t.navigateTo(`${BASE_URL}/#/planning-task-details`);
-
-      await setEmbedded(t, embedded, screenMode);
-
-      await t.wait(timeoutSecond);
+      // eslint-disable-next-line max-len
+      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       const form = Selector('.dx-form');
 
@@ -74,11 +61,8 @@ const setEmbedded = async (t, embed, screenMode) => {
       if (screenMode[0] === 400) return;
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await t.resizeWindow(...screenMode);
-
-      await t.navigateTo(`${BASE_URL}/#/planning-task-details`);
-
-      await setEmbedded(t, embedded, screenMode);
+      // eslint-disable-next-line max-len
+      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       await t.wait(timeoutSecond);
 

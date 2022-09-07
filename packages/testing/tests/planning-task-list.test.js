@@ -2,11 +2,11 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { toogleEmbeddedClass } from './utils';
-import { screenModes, timeoutSecond, fakeScreenSize } from '../config.js';
+import { toggleCommonConfiguration } from './utils';
+import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const BASE_URL = `http://localhost:${process.env.port}`;
+const BASE_URL = `http://localhost:${process.env.port}/#/planning-task-list`;
 
 fixture`Planning List`;
 
@@ -15,17 +15,15 @@ fixture`Planning List`;
     test(`Planning task list (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await t.navigateTo(`${BASE_URL}/#/planning-task-list`);
+      // eslint-disable-next-line max-len
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
 
-      await toogleEmbeddedClass(embedded);
-      if (embedded) {
-        await t.resizeWindow(...fakeScreenSize);
-      }
-      await t.resizeWindow(...screenMode);
-
-      await t.wait(timeoutSecond);
-
-      await takeScreenshot(`planning-task-grid-embed=${embedded}-project=${project}-${screenMode[0]}`, 'body');
+      await t.expect(Selector('body.dx-device-generic').count).eql(1);
+      await takeScreenshot(`planning-task-grid-embed=${embedded}-${screenMode[0]}`, 'body');
+      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
+      await takeScreenshot(`planning-task-kanban-embed=${embedded}-${screenMode[0]}`, 'body');
+      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
+      await takeScreenshot(`planning-task-gantt-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
         .expect(compareResults.isValid())
