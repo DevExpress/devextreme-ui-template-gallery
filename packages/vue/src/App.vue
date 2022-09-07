@@ -6,6 +6,7 @@ import {
   onBeforeUnmount,
   computed,
 } from 'vue';
+import simpleLayout from '@/layouts/single-card.vue';
 import AppFooter from './components/app-footer.vue';
 import { sizes, subscribe, unsubscribe } from './utils/media-query';
 
@@ -58,7 +59,7 @@ const cssClasses = computed(() => ['app'].concat(screen.getScreenSizeInfo.cssCla
         <div class="content">
           <router-view></router-view>
         </div>
-        <app-footer v-if="$route.meta.noFooter !== true"/>
+        <app-footer v-if="$route.meta.layout !== simpleLayout"/>
       </component>
     </div>
   </div>
@@ -99,5 +100,4 @@ body {
     }
   }
 }
-
 </style>
