@@ -7,7 +7,7 @@ export const toogleEmbeddedClass = ClientFunction((embed) => {
 });
 
 export const toggleCommonConfiguration = async (
-  t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize
+  t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize,
 ) => {
   await t.resizeWindow(...screenMode);
 
@@ -18,7 +18,7 @@ export const toggleCommonConfiguration = async (
     await t.resizeWindow(...fakeScreenSize);
     await t.resizeWindow(...screenMode);
   }
-  
+
   setEmbedded(t, embedded, screenMode);
 
   await t.wait(timeout);

@@ -25,7 +25,8 @@ const setEmbedded = async (t, embed, screenMode) => {
   screenModes.forEach((screenMode) => {
     test(`Crm contact form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-      
+
+      // eslint-disable-next-line max-len
       await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       await t.click(Selector('.dx-drawer-content'));
@@ -40,6 +41,7 @@ const setEmbedded = async (t, embed, screenMode) => {
     test(`Crm contact form Form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
+      // eslint-disable-next-line max-len
       await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       const form = Selector('.dx-form');
