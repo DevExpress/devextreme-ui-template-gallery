@@ -48,8 +48,8 @@ jobs:
           { project: 'angular', page: 'analytics-sales-report' },
           { project: 'angular', page: 'analytics-geography' },
           { project: 'react', page: 'crm-contact-list' },
-          { project: 'react', page: 'planning-task-details' },
-          { project: 'react', page: 'planning-task-list' },
+          # { project: 'react', page: 'planning-task-details' },
+          # { project: 'react', page: 'planning-task-list' },
         ]
     runs-on: ubuntu-latest
     timeout-minutes: 30
