@@ -1,0 +1,32 @@
+@use "../../../../variables.scss" as *;
+
+#contact-form {
+  min-height: 300px;
+}
+
+dx-form {
+  contact-status {
+    ::ng-deep {
+      span {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+.info {
+  position: relative;
+  padding-bottom: 30px;
+
+  contact-status {
+    position: absolute;
+    margin-top: 20px;
+  }
+}
+
+.form-custom-list-prop {
+  contact-status {
+    position: absolute;
+    padding: 15px 11px;
+  }
+}

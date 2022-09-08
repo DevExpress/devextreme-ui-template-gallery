@@ -1,0 +1,39 @@
+@use "../../../variables.scss" as *;
+@use "sass:math";
+
+$left-panel-width: 400px;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+}
+
+@include separator();
+
+.dx-toolbar ::ng-deep {
+  .dx-toolbar-label > div {
+    @include header();
+  }
+}
+
+.view-wrapper {
+  flex-direction: column;
+
+  .panels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+
+    .left {
+      flex: 1 400px;
+    }
+
+    .right {
+      flex: 1 calc(100% - 400px - 20px);
+      min-width: 360px;
+    }
+  }
+}
