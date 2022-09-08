@@ -1,4 +1,4 @@
-<div class="card dx-theme-text-color dx-theme-background-color">
+<div class="card dx-theme-text-color dx-theme-background-color" (click)="navigateToDetails()">
   <div class="card-wrapper" class="priority-{{ task.priority | lowercase }}">
     <div class="card-priority"></div>
     <dx-button icon="edit" (onClick)="notify()"></dx-button>

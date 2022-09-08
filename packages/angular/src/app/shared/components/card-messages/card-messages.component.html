@@ -1,63 +1,59 @@
 <div class="messages">
   <div class="input-content">
     <dx-text-box
-      label="Title"
+      label="Subject"
       stylingMode="outlined"
       [(value)]="messageTitle"
     ></dx-text-box>
     <dx-text-area
-      label="New Message"
+      label="Message"
       stylingMode="outlined"
       [(value)]="messageText"
+      [height]="150"
     ></dx-text-area>
     <dx-toolbar>
       <dxi-item
         location="before"
-        widget="dxButton"
-        [options]="{
-          text: 'Attach File',
-          stylingMode: 'contained',
-          type: 'default',
-          icon: 'attach'
-        }"
       >
+        <dx-file-uploader
+          class="file-uploader"
+          labelText=""
+          selectButtonText="Attach file"
+        >
+        </dx-file-uploader>
       </dxi-item>
       <dxi-item
         location="after"
         widget="dxButton"
         [options]="{
-          text: 'Send',
+          text: 'Add',
           stylingMode: 'outlined',
           type: 'default',
-          onClick: send
+          onClick: add
         }"
-      >
-      </dxi-item>
-      <dxi-item
-        location="after"
-        widget="dxButton"
-        [options]="{ text: 'Cancel', onClick: defaultText }"
       >
       </dxi-item>
     </dx-toolbar>
   </div>
   <div class="messages-content">
-    <div class="message-container" *ngFor="let data of items">
-      <div class="avatar">
-        {{ getAvatarText(data.manager) }}
-      </div>
-      <div class="message dx-card">
-        <div class="message-title">
-          <div class="left-title">
-            <div class="subject">{{ data.subject }}</div>
-            <div>{{ data.date | date: "MM/dd/y" }} - {{ data.manager }}</div>
-          </div>
-          <div>
-            <dx-button icon="overflow"></dx-button>
-          </div>
+    <dx-scroll-view>
+      <div class="message-container" *ngFor="let data of items?.concat(items)">
+        <div class="avatar">
+          {{ getAvatarText(data.manager) }}
         </div>
-        <div class="message-text">{{ setUserName(data.text) }}</div>
+        <div class="message dx-card">
+          <div class="message-title">
+            <div class="left-title">
+              <div class="subject">{{ data.subject }}</div>
+              <div>{{ data.date | date: "MM/dd/y" }} - {{ data.manager }}</div>
+            </div>
+            <div>
+              <dx-button icon="overflow"></dx-button>
+            </div>
+          </div>
+          <div class="message-text">{{ setUserName(data.text) }}</div>
+        </div>
       </div>
-    </div>
+    </dx-scroll-view>
   </div>
 </div>

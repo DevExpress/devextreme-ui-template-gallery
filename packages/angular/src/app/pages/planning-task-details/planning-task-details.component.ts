@@ -30,7 +30,7 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
 
   taskId = 1;
 
-  taskName: string;
+  taskName = 'Loading...';
 
   dataSubscription: Subscription = new Subscription();
 

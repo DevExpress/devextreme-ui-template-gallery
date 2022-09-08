@@ -12,7 +12,6 @@
     </dxi-item>
 
     <dxi-item
-      [visible]="displayGrid"
       location="after"
       locateInMenu="auto"
       cssClass="add-grid-row"
@@ -27,7 +26,6 @@
     </dxi-item>
 
     <dxi-item
-      [visible]="displayGrid"
       location="after"
       locateInMenu="auto"
       widget="dxButton"
@@ -40,7 +38,6 @@
     ></dxi-item>
 
     <dxi-item
-      [visible]="displayGrid"
       location="after"
       locateInMenu="auto"
       widget="dxButton"
@@ -57,7 +54,6 @@
     </dxi-item>
 
     <dxi-item
-      [visible]="displayGrid"
       location="after"
       locateInMenu="auto"
       widget="dxButton"
@@ -65,12 +61,23 @@
       [options]="{
         text: 'Export to PDF',
         icon: 'exportpdf',
-        onClick: exportDataGrid
+        onClick: exportPDFDataGrid
       }"
     ></dxi-item>
 
     <dxi-item
-      [visible]="displayGrid"
+      location="after"
+      locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
+        text: 'Export to Excel',
+        icon: 'exportxlsx',
+        onClick: exportXLSXDataGrid
+      }"
+    ></dxi-item>
+
+    <dxi-item
       location="after"
       locateInMenu="auto"
       widget="dxTextBox"

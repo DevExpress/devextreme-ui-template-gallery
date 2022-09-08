@@ -21,7 +21,7 @@ import { RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { UserPanelModule } from './user-panel/user-panel.component';
 
-type FilterContactStatus = ContactStatus | 'All Contacts';
+type FilterContactStatus = ContactStatus | 'All';
 
 @Component({
   templateUrl: './crm-contact-list.component.html',
@@ -33,7 +33,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
 
   statusList = contactStatusList;
 
-  filterStatusList = ['All Contacts', ...contactStatusList];
+  filterStatusList = ['All', ...contactStatusList];
 
   isPanelOpen = false;
 
@@ -80,7 +80,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
   filterByStatus = (e: SelectionChangedEvent) => {
     const { item: status }: { item: FilterContactStatus } = e;
 
-    if (status === 'All Contacts') {
+    if (status === 'All') {
       this.dataGrid.instance.clearFilter();
     } else {
       this.dataGrid.instance.filter(['status', '=', status]);

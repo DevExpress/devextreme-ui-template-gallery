@@ -2,12 +2,10 @@ import {
   Component, OnInit, NgModule, Output, ViewChild, OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  DxButtonModule,
-  DxDataGridModule,
-  DxTabsModule,
-  DxToolbarModule,
-} from 'devextreme-angular';
+import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
+import { DxTabsModule } from 'devextreme-angular/ui/tabs';
+import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
 import { taskPanelItems } from 'src/app/shared/types/resource';
@@ -64,7 +62,9 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
   searchDataGrid = (e: TextBoxInputEvent) => this.dataGrid.search(e.component.option('text'));
 
-  exportDataGrid = () => this.dataGrid.onExporting();
+  exportPDFDataGrid = () => this.dataGrid.onExporting();
+
+  exportXLSXDataGrid = () => this.dataGrid.onExporting();
 }
 
 @NgModule({

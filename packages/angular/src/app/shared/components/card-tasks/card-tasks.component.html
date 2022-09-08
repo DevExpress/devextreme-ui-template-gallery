@@ -7,14 +7,22 @@
     [selectionFilter]="['done', '=', true]"
   >
     <dxo-selection mode="multiple" [deferred]="true"></dxo-selection>
+
+    <dxo-row-dragging
+      [allowReordering]="true"
+      [onReorder]="onReorder"
+      [showDragIcons]="true"
+    ></dxo-row-dragging>
+
     <dxi-column
       dataField="text"
-      caption="Name"
+      caption="Subject"
       [hidingPriority]="3"
     ></dxi-column>
     <dxi-column
       dataField="date"
       dataType="date"
+      caption="Due Date"
       [hidingPriority]="1"
     ></dxi-column>
     <dxi-column
@@ -30,6 +38,7 @@
 
   <dx-load-panel
     [visible]="isLoading"
+    [showPane]="false"
     container="#card-tasks"
     [position]="{ of: '#card-tasks' }"
   ></dx-load-panel>

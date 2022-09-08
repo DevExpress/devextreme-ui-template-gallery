@@ -47,4 +47,30 @@ header {
   .user-button.authorization {
     margin-left: 10px;
   }
+
+
+  .messages {
+    padding-left: 10px;
+    position: relative;
+
+    .dx-icon-message {
+      font-size: 24px;
+    }
+
+    ::after {
+      display: block;
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background-color: red;
+      border-radius: 50%;
+      right: -6px;
+      top: -6px;
+      font-size: 12px;
+      font-weight: bold;
+      content: "4";
+      color: white;
+      padding: 2px 6px;
+    }
+  }
 }

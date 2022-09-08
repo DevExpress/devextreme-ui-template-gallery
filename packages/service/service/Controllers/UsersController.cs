@@ -79,7 +79,7 @@ namespace service.Controllers {
                     }),
                     tasks = s.TasksLists.Select(t => new {
                         text = t.Task.Task1.TrimEnd(' '),
-                        date = t.StartDate,
+                        date = t.DueDate,
                         status = t.Status,
                         priority = t.Priority,
 
