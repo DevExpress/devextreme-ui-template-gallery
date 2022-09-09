@@ -12,7 +12,7 @@ type State = {
     stateShort: string;
 };
 
-export type Contact = {
+export interface Contact {
     name: string,
     firstName: string,
     lastName: string,
@@ -26,4 +26,4 @@ export type Contact = {
     email: string,
     image: string,
     activities: Activity[],
-};
+}

@@ -1,9 +1,9 @@
-type userInfo = {
+interface userInfo {
   email: string;
   name: string;
   lastName: string;
   avatarUrl: string;
-};
+}
 
 export const defaultUser: userInfo = {
   email: 'jheart@dx-email.com',

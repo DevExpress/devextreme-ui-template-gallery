@@ -55,8 +55,7 @@ function handleItemClick(e) {
   }
   router.push(e.itemData.path);
 
-  const pointerEvent = e.event;
-  pointerEvent.stopPropagation();
+  e.event.stopPropagation();
 }
 
 function updateSelection() {
@@ -77,9 +76,7 @@ onMounted(() => {
 
 watch(
   () => route.path,
-  () => {
-    updateSelection();
-  },
+  updateSelection,
 );
 
 watch(

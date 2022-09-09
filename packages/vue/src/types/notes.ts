@@ -1,4 +1,4 @@
-export type Note = {
+export interface Note {
     manager: string,
     date: string | Date,
     text: string

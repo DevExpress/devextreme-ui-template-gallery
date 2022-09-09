@@ -1,44 +1,43 @@
 <template>
   <div class="notes" id="card-notes">
-    <div v-if="!isLoading" class="input-content">
-      <dx-text-area
-        label="New Note"
-        stylingMode="outlined"
-        :value="nodeText"
-        @value-changed="e => nodeText = e.value"
-      ></dx-text-area>
+    <load-component
+      :is-loading="isLoading"
+      :container-selector="'#card-notes'"
+    >
+        <div class="input-content">
+          <dx-text-area
+            label="New Note"
+            stylingMode="outlined"
+            :value="nodeText"
+            @value-changed="e => nodeText = e.value"
+          ></dx-text-area>
 
-      <dx-toolbar>
-        <dx-item
-          location="after"
-          widget="dxButton"
-          :options="{
+          <dx-toolbar>
+            <dx-item
+              location="after"
+              widget="dxButton"
+              :options="{
           text: 'Add',
           stylingMode: 'outlined',
           type: 'default',
           onClick: addNote
         }"
-        >
-        </dx-item>
-      </dx-toolbar>
-    </div>
-
-    <div v-if="!isLoading" class="notes-content">
-      <div class="note dx-card" v-for="note in items">
-        <div class="note-title">
-          <div>{{ formatDate(new Date(note.date)) }} - {{ note.manager }}</div>
-          <dx-button icon="overflow"></dx-button>
+            >
+            </dx-item>
+          </dx-toolbar>
         </div>
-        <div class="note-text">{{ note.text }}</div>
-      </div>
-    </div>
+        <div class="notes-content">
+          <div class="note dx-card" v-for="note in items">
+            <div class="note-title">
+              <div>{{ formatDate(new Date(note.date)) }} - {{ note.manager }}</div>
+              <dx-button icon="overflow"></dx-button>
+            </div>
+            <div class="note-text">{{ note.text }}</div>
+          </div>
+        </div>
+    </load-component>
   </div>
 
-  <dx-load-panel
-    :visible="isLoading"
-    container="#card-notes"
-    :position="{ of: '#card-notes' }"
-  ></dx-load-panel>
 </template>
 
 <script setup lang="ts">
@@ -50,13 +49,13 @@ import {
 } from 'vue';
 import { DxTextArea } from 'devextreme-vue';
 import DxButton from 'devextreme-vue/button';
-import DxLoadPanel from 'devextreme-vue/load-panel';
 import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
 import { formatDate } from '@/utils/formatters';
 
 import { getContactNotes } from 'dx-rwa-data';
 import type { Note } from '@/types/notes';
 import { SimpleSubject } from '@/utils/simple-subject';
+import LoadComponent from '@/components/load-component.vue';
 
 const props = withDefaults(defineProps<{
   contactName: string,

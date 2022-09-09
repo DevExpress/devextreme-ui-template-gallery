@@ -19,7 +19,7 @@ export type TaskPriority = (typeof taskPriorityList)[number];
 
 export type TaskStatus = (typeof taskStatusList)[number];
 
-export type Task = {
+export interface Task {
   id: number
   text: string,
   description: string,
@@ -34,4 +34,4 @@ export type Task = {
   messages: Messages,
   parentId: number,
   progress: number,
-};
+}

@@ -1,3 +1,8 @@
+import { ref } from 'vue';
+
+interface ScreenSizeInfo {cssClasses: string[], isXSmall?: boolean, isLarge?: boolean}
+type Handler = (arg?: unknown) => void;
+
 const Breakpoints = {
   XSmall: '(max-width: 599.99px)',
   Small: '(min-width: 600px) and (max-width: 959.99px)',
@@ -5,13 +10,12 @@ const Breakpoints = {
   Large: '(min-width: 1280px)',
 };
 
-type Handler = (arg?: unknown) => void;
-
-let handlers: Handler[] = [];
 const xSmallMedia = window.matchMedia(Breakpoints.XSmall);
 const smallMedia = window.matchMedia(Breakpoints.Small);
 const mediumMedia = window.matchMedia(Breakpoints.Medium);
 const largeMedia = window.matchMedia(Breakpoints.Large);
+
+const handlers = new Set<Handler>();
 
 [xSmallMedia, smallMedia, mediumMedia, largeMedia].forEach((media) => {
   media.addEventListener('change', () => {
@@ -26,8 +30,21 @@ export const sizes = () => ({
   'screen-large': largeMedia.matches,
 });
 
-export const subscribe = (handler:Handler) => handlers.push(handler);
+function getScreenSizeInfo(): ScreenSizeInfo {
+  const screenSizes: {[key: string]: boolean} = sizes();
+  return {
+    isXSmall: screenSizes['screen-x-small'],
+    isLarge: screenSizes['screen-large'],
+    cssClasses: Object.keys(screenSizes).filter((cl: string) => screenSizes[cl]),
+  };
+}
 
-export const unsubscribe = (handler:Handler) => {
-  handlers = handlers.filter((item) => item !== handler);
-};
+export const screenInfo = ref(getScreenSizeInfo());
+
+export const subscribe = (handler:Handler) => handlers.add(handler);
+
+export const unsubscribe = (handler:Handler) => handlers.delete(handler);
+
+subscribe(() => {
+  screenInfo.value = getScreenSizeInfo();
+});

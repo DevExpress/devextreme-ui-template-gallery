@@ -56,7 +56,7 @@
         <div class="left">
           <contact-form :contact-data="contactData"
                         :is-editing="false"
-                        :is-loading="isLoading  && !contactData?.name"/>
+                        :is-loading="isLoading"/>
         </div>
 
         <div class="right">

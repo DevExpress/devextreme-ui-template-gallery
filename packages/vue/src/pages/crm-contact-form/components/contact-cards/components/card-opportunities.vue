@@ -1,42 +1,40 @@
 <template>
   <div id="card-opportunies">
+    <load-component
+      :is-loading="isLoading"
+      :container-selector="'#card-opportunies'"
+    >
+      <dx-button
+        text="Add Opportunity"
+        icon="add"
+        width="300"
+        height="60"
+        styling-mode="outlined"
+        type="default"
+        class="add-tile"
+        @click="addOpportunity"
+      ></dx-button>
 
-    <dx-button
-      text="Add Opportunity"
-      icon="add"
-      width="300"
-      height="60"
-      styling-mode="outlined"
-      type="default"
-      class="add-tile"
-      @click="addOpportunity"
-    ></dx-button>
+      <div >
+        <div class="opportunities-block">
+          <div class="dx-form-group-caption">Active</div>
+          <div class="opportunities-container">
+            <div class="opportunities" v-for="item in activeItems">
+              <opportunity-tile :data="item"/>
+            </div>
+          </div>
+        </div>
 
-    <div v-if="!isLoading">
-      <div class="opportunities-block">
-        <div class="dx-form-group-caption">Active</div>
-        <div class="opportunities-container">
-          <div class="opportunities" v-for="item in activeItems">
-            <opportunity-tile :data="item"/>
+        <div class="opportunities-block">
+          <div class="dx-form-group-caption">Closed</div>
+          <div class="opportunities-container">
+            <div class="opportunities" v-for="item in closedItems">
+              <opportunity-tile :data="item"/>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="opportunities-block">
-        <div class="dx-form-group-caption">Closed</div>
-        <div class="opportunities-container">
-          <div class="opportunities" v-for="item in closedItems">
-            <opportunity-tile :data="item"/>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <dx-load-panel
-      :visible="isLoading"
-      container="#card-opportunies"
-      :position="{ of: '#card-opportunies' }"
-    ></dx-load-panel>
+    </load-component>
   </div>
 </template>
 
@@ -49,7 +47,7 @@ import {
 } from 'vue';
 import notify from 'devextreme/ui/notify';
 import DxButton from 'devextreme-vue/button';
-import DxLoadPanel from 'devextreme-vue/load-panel';
+import LoadComponent from '@/components/load-component.vue';
 import { getActiveContactOpportunities, getClosedContactOpportunities } from 'dx-rwa-data';
 import type { Opportunity } from '@/types/opportunities';
 import { SimpleSubject } from '@/utils/simple-subject';

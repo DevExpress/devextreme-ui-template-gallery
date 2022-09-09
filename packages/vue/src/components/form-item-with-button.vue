@@ -1,9 +1,7 @@
 <template>
   <dx-text-box
                :value="props.data[props.dataField]"
-               :label="props.textBoxOptions.label"
-               :stylingMode="props.textBoxOptions.stylingMode"
-               :mask="props.textBoxOptions.mask"
+               v-bind="props.textBoxOptions"
                :readOnly="!props.isEditing"
                @value-changed="e => {
                  /* eslint-disable-next-line vue/no-mutating-props */
@@ -12,10 +10,7 @@
 
   <dx-button
     v-if="!props.isEditing"
-    :text="props.buttonOptions.text"
-    :icon="props.buttonOptions.icon"
-    :type="props.buttonOptions.type"
-    :stylingMode="props.buttonOptions.stylingMode"
+    v-bind="props.buttonOptions"
   ></dx-button>
 </template>
 

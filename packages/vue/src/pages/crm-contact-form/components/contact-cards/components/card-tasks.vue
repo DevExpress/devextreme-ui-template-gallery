@@ -1,5 +1,9 @@
 <template>
   <div id="card-tasks">
+    <load-component
+      :is-loading="props.isLoading"
+      :container-selector="'#card-tasks'"
+    >
     <dx-data-grid
       v-if="!props.isLoading"
       :data-source="filteredTasks"
@@ -34,12 +38,7 @@
         </div>
       </dx-column>
     </dx-data-grid>
-
-    <dx-load-panel
-      :visible="props.isLoading"
-      container="#card-tasks"
-      :position="{ of: '#card-tasks' }"
-    />
+    </load-component>
   </div>
 
 </template>
@@ -50,7 +49,7 @@ import DxDataGrid, {
   DxColumn,
   DxSelection,
 } from 'devextreme-vue/data-grid';
-import DxLoadPanel from 'devextreme-vue/load-panel';
+import LoadComponent from '@/components/load-component.vue';
 import { Task } from '@/types/task';
 
 const props = withDefaults(defineProps<{

@@ -27,34 +27,36 @@
         ></dx-button>
       </dx-toolbar-item>
     </dx-toolbar>
-
-    <dx-form v-if="!isLoading"
-      :formData="contactData"
-      label-mode="floating"
-      :read-only="!isEditing"
+    <load-component
+      :is-loading="isLoading"
+      :container-selector="'#contact-form'"
     >
-      <dx-form-group-item :col-count="2" caption="Details">
-        <dx-form-item data-field="image">
-          <user-photo :link="contactData.image" :size="184"></user-photo>
-        </dx-form-item>
+      <dx-form :formData="contactData"
+               label-mode="floating"
+               :read-only="!isEditing"
+      >
+        <dx-form-group-item :col-count="2" caption="Details">
+          <dx-form-item data-field="image">
+            <user-photo :link="contactData.image" :size="184"></user-photo>
+          </dx-form-item>
 
-        <dx-form-group-item>
+          <dx-form-group-item>
 
-          <dx-form-item data-field="status">
-            <div class="info" v-if="!isEditing">
+            <dx-form-item data-field="status">
+              <div class="info" v-if="!isEditing">
                 <label class="dx-texteditor-label">Status</label>
                 <contact-status :status="contactData?.status"/>
               </div>
 
               <dx-select-box v-else
-                :value="contactData?.status"
-                :items="contactStatusList"
-                :styling-mode="editorOptions.stylingMode"
-                label="Status"
-                :read-only="false"
-                field-template="field"
-                item-template="item"
-                @value-changed="onChangeStatusSelect"
+                             :value="contactData?.status"
+                             :items="contactStatusList"
+                             :styling-mode="editorOptions.stylingMode"
+                             label="Status"
+                             :read-only="false"
+                             field-template="field"
+                             item-template="item"
+                             @value-changed="onChangeStatusSelect"
               >
                 <template #field>
                   <div class="form-custom-list-prop">
@@ -66,109 +68,104 @@
                   <contact-status :status="data"></contact-status>
                 </template>
               </dx-select-box>
+            </dx-form-item>
+
+            <dx-form-item
+              data-field="firstName"
+              :editor-options="editorOptions"
+            >
+            </dx-form-item>
+
+            <dx-form-item
+              data-field="lastName"
+              :editor-options="editorOptions"
+            >
+            </dx-form-item>
+          </dx-form-group-item>
+
+          <dx-form-item
+            dataField="position"
+            :editor-options="editorOptions"
+          />
+
+          <dx-form-item
+            dataField="manager"
+            :editor-options="editorOptions"
+          >
+            <form-item-editable
+              :data="contactData"
+              :data-field="'manager'"
+              label="Assigned to"
+              :is-editing = "isEditing"
+              :editor-options="editorOptions"
+            ></form-item-editable>
           </dx-form-item>
 
           <dx-form-item
-            data-field="firstName"
+            dataField="company"
             :editor-options="editorOptions"
+            :col-span="2"
           >
-          </dx-form-item>
-
-          <dx-form-item
-            data-field="lastName"
-            :editor-options="editorOptions"
-          >
+            <form-item-editable
+              :data="contactData"
+              :data-field="'company'"
+              :is-editing = "isEditing"
+              :editor-options="editorOptions"
+            ></form-item-editable>
           </dx-form-item>
         </dx-form-group-item>
 
-        <dx-form-item
-          dataField="position"
-          :editor-options="editorOptions"
-        />
-
-        <dx-form-item
-          dataField="manager"
-          :editor-options="editorOptions"
-        >
-          <form-item-editable
-            :data="contactData"
-            :data-field="'manager'"
-            label="Assigned to"
-            :is-editing = "isEditing"
+        <dx-form-group-item :col-count="4" caption="Contacts">
+          <dx-form-item
+            data-field="address"
+            :col-span="4"
             :editor-options="editorOptions"
-          ></form-item-editable>
-        </dx-form-item>
-
-        <dx-form-item
-          dataField="company"
-          :editor-options="editorOptions"
-          :col-span="2"
-        >
-          <form-item-editable
-            :data="contactData"
-            :data-field="'company'"
-            :is-editing = "isEditing"
+          />
+          <dx-form-item
+            data-field="city"
+            :col-span="2"
             :editor-options="editorOptions"
-          ></form-item-editable>
-        </dx-form-item>
-      </dx-form-group-item>
-
-      <dx-form-group-item :col-count="4" caption="Contacts">
-        <dx-form-item
-          data-field="address"
-          :col-span="4"
-          :editor-options="editorOptions"
-        />
-        <dx-form-item
-          data-field="city"
-          :col-span="2"
-          :editor-options="editorOptions"
-        />
-        <dx-form-item
-          data-field="state.stateShort"
-          :editor-options="editorOptions"
-          :label="{text: 'State'}"
-        />
-        <dx-form-item data-field="zipCode" :editor-options="editorOptions"/>
-        <dx-form-item data-field="phone" :col-span="2" >
-          <form-item-with-button
-            :data="contactData"
-            :data-field="'phone'"
-            :is-editing = "isEditing"
-            :text-box-options="{ stylingMode: editorOptions.stylingMode,
+          />
+          <dx-form-item
+            data-field="state.stateShort"
+            :editor-options="editorOptions"
+            :label="{text: 'State'}"
+          />
+          <dx-form-item data-field="zipCode" :editor-options="editorOptions"/>
+          <dx-form-item data-field="phone" :col-span="2" >
+            <form-item-with-button
+              :data="contactData"
+              :data-field="'phone'"
+              :is-editing = "isEditing"
+              :text-box-options="{ stylingMode: editorOptions.stylingMode,
                                  label: 'Phone',
                                  mask: '+1(000)000-0000', }"
-            :button-options="{
+              :button-options="{
                                text: 'Call',
                                icon: 'tel',
                                type: 'default',
                                stylingMode: 'outlined'
                               }"
-          ></form-item-with-button>
-        </dx-form-item>
-        <dx-form-item data-field="email" :col-span="2" >
-          <form-item-with-button
-            :data="contactData"
-            :data-field="'email'"
-            :is-editing = "isEditing"
-            :text-box-options="{ stylingMode: editorOptions.stylingMode,
+            ></form-item-with-button>
+          </dx-form-item>
+          <dx-form-item data-field="email" :col-span="2" >
+            <form-item-with-button
+              :data="contactData"
+              :data-field="'email'"
+              :is-editing = "isEditing"
+              :text-box-options="{ stylingMode: editorOptions.stylingMode,
                                  label: 'Email',}"
-            :button-options="{
+              :button-options="{
                                text: 'Send Email',
                                icon: 'email',
                                type: 'default',
                                stylingMode: 'outlined'
                               }"
-          ></form-item-with-button>
-        </dx-form-item>
-      </dx-form-group-item>
-    </dx-form>
-
-    <dx-load-panel
-      container="#contact-form"
-      :position="{ of: '#contact-form' }"
-      :visible="isLoading"
-    ></dx-load-panel>
+            ></form-item-with-button>
+          </dx-form-item>
+        </dx-form-group-item>
+      </dx-form>
+    </load-component>
   </div>
 
 </template>
@@ -188,67 +185,54 @@ import {
   DxItem as DxFormItem,
   DxGroupItem as DxFormGroupItem,
 } from 'devextreme-vue/form';
-import DxLoadPanel from 'devextreme-vue/load-panel';
-
+import LoadComponent from '@/components/load-component.vue';
 import { Contact, ContactStatus as ContactStatusType, contactStatusList } from '@/types/contact';
 import UserPhoto from '@/components/user-photo.vue';
 import ContactStatus from '@/components/user-status.vue';
 import FormItemEditable from '@/components/form-item-editable.vue';
 import FormItemWithButton from '@/components/form-item-with-button.vue';
 
+type FormData = Contact | Record<string, unknown>;
+
 const props = withDefaults(defineProps<{
-  isEditing: boolean,
   isLoading: boolean,
   contactData: Contact | null
 }>(), {
-  isEditing: false,
   isLoading: true,
   contactData: null,
 });
 
 const isEditing = ref(false);
 const editorOptions = computed(() => ({ stylingMode: isEditing.value ? 'filled' : 'underlined' }));
-const contactData = ref<Contact | Record<string, unknown>>({});
+const contactData = ref<FormData>({});
 
-let contactDataSaved: Contact | Record<string, unknown>;
+let contactDataSaved: FormData;
 
 const onChangeStatusSelect = ({ value }: {[value: string]: ContactStatusType}) => {
   contactData.value.status = value;
 };
 
 watch(
-  () => props.isEditing,
-  (isEditingValue) => {
-    isEditing.value = isEditingValue;
-  },
-);
-
-watch(
   () => props.contactData,
   (contactDataNew: Contact | null) => {
     if (contactDataNew != null) {
-      contactDataSaved = structuredClone(contactDataNew);
       contactData.value = contactDataNew;
     }
   },
 );
 
-function toggleStylingMode() {
-  isEditing.value = !isEditing.value;
-}
-
 function startEdit() {
-  toggleStylingMode();
+  contactDataSaved = { ...contactData.value };
+  isEditing.value = true;
 }
 
 function saveEdit() {
-  contactDataSaved = contactData.value;
-  toggleStylingMode();
+  isEditing.value = false;
 }
 
 function cancelEdit() {
-  contactData.value = structuredClone(contactDataSaved);
-  toggleStylingMode();
+  contactData.value = contactDataSaved;
+  isEditing.value = false;
 }
 </script>
 

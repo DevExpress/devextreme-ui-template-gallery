@@ -1,40 +1,36 @@
 <template>
   <div id="activities-list">
-    <dx-list v-if="!props.isLoading"
-        class="activities-list"
-        :items="props.items"
-        :scrollingEnabled="false"
-    >
-      <template #item="{ data: item }">
-        <div >
-          <div class="activity">
-            <div class="name">{{ item.name }}</div>
-            <div class="date" :class="{ by: props.showBy }">
+    <load-component :is-loading="props.isLoading" container-selector="#activities-list">
+      <dx-list class="activities-list"
+               :items="props.items"
+               :scrollingEnabled="false"
+      >
+        <template #item="{ data: item }">
+          <div >
+            <div class="activity">
+              <div class="name">{{ item.name }}</div>
+              <div class="date" :class="{ by: props.showBy }">
             <span>{{
                 formatDate(new Date(item.date))
               }}</span>
-              <span v-if="props.showBy">by</span>
-              <span>{{ item.manager }}</span>
+                <span v-if="props.showBy">by</span>
+                <span>{{ item.manager }}</span>
+              </div>
+              <dx-button icon="overflow"></dx-button>
             </div>
-            <dx-button icon="overflow"></dx-button>
           </div>
-        </div>
-      </template>
-    </dx-list>
+        </template>
+      </dx-list>
+    </load-component>
   </div>
-  <dx-load-panel
-    :visible="props.isLoading"
-    container="#activities-list"
-    :position="{ of: '#activities-list' }"
-  />
 </template>
 
 <script setup lang="ts">
 import DxList from 'devextreme-vue/list';
 import DxButton from 'devextreme-vue/button';
-import DxLoadPanel from 'devextreme-vue/load-panel';
 import { formatDate } from '@/utils/formatters';
 import type { Activity } from '@/types/activities';
+import LoadComponent from '@/components/load-component.vue';
 
 const props = withDefaults(defineProps<{
   isLoading: boolean,

@@ -1,50 +1,14 @@
 <script setup lang="ts">
 import {
-  getCurrentInstance,
-  reactive,
-  onMounted,
-  onBeforeUnmount,
-  computed,
+  computed, inject,
 } from 'vue';
+import { AppInfo } from '@/types/app-info';
 import simpleLayout from '@/layouts/single-card.vue';
 import AppFooter from './components/app-footer.vue';
-import { sizes, subscribe, unsubscribe } from './utils/media-query';
+import { screenInfo } from './utils/media-query';
 
-interface ScreenSizeInfo {cssClasses: string[], isXSmall?: boolean, isLarge?: boolean}
-
-function getScreenSizeInfo(): ScreenSizeInfo {
-  const screenSizes: {[key: string]: boolean} = sizes();
-
-  return {
-    isXSmall: screenSizes['screen-x-small'],
-    isLarge: screenSizes['screen-large'],
-    cssClasses: Object.keys(screenSizes).filter((cl: string) => screenSizes[cl]),
-  };
-}
-
-const vm = getCurrentInstance();
-
-const { title } = (vm?.proxy as unknown as {$appInfo: {title: string}}).$appInfo;
-const screen: {getScreenSizeInfo: ScreenSizeInfo} = reactive({
-  getScreenSizeInfo: { cssClasses: [] },
-});
-
-screen.getScreenSizeInfo = getScreenSizeInfo();
-
-function screenSizeChanged() {
-  screen.getScreenSizeInfo = getScreenSizeInfo();
-}
-
-onMounted(() => {
-  subscribe(screenSizeChanged);
-});
-
-onBeforeUnmount(() => {
-  unsubscribe(screenSizeChanged);
-});
-
-const cssClasses = computed(() => ['app'].concat(screen.getScreenSizeInfo.cssClasses));
-
+const appInfo = inject<AppInfo>('app-info');
+const cssClasses = computed(() => ['app'].concat(screenInfo.value.cssClasses));
 </script>
 
 <template>
@@ -52,9 +16,9 @@ const cssClasses = computed(() => ['app'].concat(screen.getScreenSizeInfo.cssCla
     <div :class="cssClasses">
       <component
           :is="$route.meta.layout"
-          :title="title"
-          :is-x-small="screen.getScreenSizeInfo.isXSmall"
-          :is-large="screen.getScreenSizeInfo.isLarge"
+          :title="appInfo?.title"
+          :is-x-small="screenInfo.isXSmall"
+          :is-large="screenInfo.isLarge"
       >
         <div class="content">
           <router-view></router-view>

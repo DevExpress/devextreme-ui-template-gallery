@@ -1,104 +1,101 @@
 <template>
-  <div class="panel" v-bind:class="{ pin: isPin, open: props.isPanelOpen }">
-    <dx-load-panel :width="300"
-                   :visible="isLoading"
-                   container=".panel"
-                   :position="{ of: '.panel' }"/>
+  <div id="contact-panel" class="panel" v-bind:class="{ pin: isPin, open: props.isPanelOpen }">
     <div class="data-wrapper">
-      <template v-if="panelData && !isLoading">
-        <div class="data-part">
-          <dx-toolbar>
-            <dx-item location="before">
-              <div class="contact-name">{{ panelData?.name }}</div>
-            </dx-item>
-            <dx-item location="before">
-              <user-status :status="panelData?.status"/>
-            </dx-item>
+      <load-component :width="300" container-selector="#contact-panel" :is-loading="isLoading">
+        <template v-if="panelData">
+          <div class="data-part">
+            <dx-toolbar>
+              <dx-item location="before">
+                <div class="contact-name">{{ panelData?.name }}</div>
+              </dx-item>
+              <dx-item location="before">
+                <user-status :status="panelData?.status"/>
+              </dx-item>
 
-            <dx-item
+              <dx-item
                 location="after"
                 widget="dxButton"
                 :visible="isPinEnabled"
                 :options="{ icon: isPin ? 'unpin' : 'pin', onClick: () => isPin = !isPin }"
-            >
-            </dx-item>
+              >
+              </dx-item>
 
-            <dx-item
+              <dx-item
                 location="after"
                 widget="dxButton"
                 :options="{ icon: 'close', onClick: () => emit('close') }"
-            >
-            </dx-item>
-          </dx-toolbar>
-        </div>
+              >
+              </dx-item>
+            </dx-toolbar>
+          </div>
 
-        <dx-scroll-view class="panel-scroll">
-          <div class="data-part border">
-            <dx-form
+          <dx-scroll-view class="panel-scroll">
+            <div class="data-part border">
+              <dx-form
                 :formData="panelData"
                 labelMode="floating"
                 :readOnly="!isEditing"
-            >
-              <dx-form-group-item :colCount="2">
-                <dx-form-item dataField="image">
-                  <user-photo :link="panelData.image" ></user-photo>
-                </dx-form-item>
+              >
+                <dx-form-group-item :colCount="2">
+                  <dx-form-item dataField="image">
+                    <user-photo :link="panelData.image" ></user-photo>
+                  </dx-form-item>
 
-                <dx-form-group-item>
-                  <dx-form-item
+                  <dx-form-group-item>
+                    <dx-form-item
                       dataField="company"
                       :editorOptions="editorOptions"
-                  >
-                    <form-item-editable
+                    >
+                      <form-item-editable
                         :data="panelData"
                         :dataField="'company'"
                         :isEditing = "isEditing"
                         :editorOptions="editorOptions"
-                    ></form-item-editable>
-                  </dx-form-item>
+                      ></form-item-editable>
+                    </dx-form-item>
 
-                  <dx-form-item
+                    <dx-form-item
                       dataField="position"
                       :editorOptions="editorOptions"
-                  ></dx-form-item>
+                    ></dx-form-item>
 
-                  <dx-form-item
+                    <dx-form-item
                       dataField="manager"
                       :editorOptions="editorOptions"
-                  >
-                    <form-item-editable
+                    >
+                      <form-item-editable
                         :data="panelData"
                         :dataField="'manager'"
                         :label="'Assigned to'"
                         :isEditing = "isEditing"
                         :editorOptions="editorOptions"
-                    ></form-item-editable>
-                  </dx-form-item>
+                      ></form-item-editable>
+                    </dx-form-item>
+                  </dx-form-group-item>
                 </dx-form-group-item>
-              </dx-form-group-item>
 
-              <dx-form-group-item>
-                <dx-form-item v-for="(item, index) in underContactFields"
-                              v-bind:key="index"
-                              :dataField="item.name"
-                              :editorOptions="item.editorOptions"
-                ><div class="icon-editor">
-                  <i class="dx-icon" :class="'dx-icon-' + item.editorOptions?.icon"></i>
-                  <dx-text-box
+                <dx-form-group-item>
+                  <dx-form-item v-for="(item, index) in underContactFields"
+                                v-bind:key="index"
+                                :dataField="item.name"
+                                :editorOptions="item.editorOptions"
+                  ><div class="icon-editor">
+                    <i class="dx-icon" :class="'dx-icon-' + item.editorOptions?.icon"></i>
+                    <dx-text-box
                       :value="panelData[item.name]"
                       :stylingMode="editorOptions.stylingMode"
                       :mask="item.editorOptions.mask"
                       :readOnly="!isEditing"
-                  ></dx-text-box>
-                </div>
-                </dx-form-item>
-              </dx-form-group-item>
-            </dx-form>
-          </div>
+                    ></dx-text-box>
+                  </div>
+                  </dx-form-item>
+                </dx-form-group-item>
+              </dx-form>
+            </div>
 
-          <div class="data-part border">
-            <dx-toolbar class="panel-toolbar">
-              <dx-item
+            <div class="data-part border">
+              <dx-toolbar class="panel-toolbar">
+                <dx-item
                   location="before"
                   widget="dxButton"
                   :options="isEditing ? {
@@ -113,10 +110,10 @@
                    type: 'default',
                     onClick: toggleEdit
                   }"
-              >
-              </dx-item>
+                >
+                </dx-item>
 
-              <dx-item
+                <dx-item
                   location="before"
                   :visible="isEditing"
                   widget="dxButton"
@@ -124,10 +121,10 @@
                   stylingMode: 'text',
                    text: 'Cancel',
                      onClick: toggleEdit}"
-              >
-              </dx-item>
+                >
+                </dx-item>
 
-              <dx-item
+                <dx-item
                   location="after"
                   widget="dxDropDownButton"
                   :options="{
@@ -135,43 +132,43 @@
                 stylingMode: 'contained',
                 items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
               }"
-              ></dx-item>
-            </dx-toolbar>
-          </div>
-          <div class="data-part">
-            <dx-accordion :multiple="true" :collapsible="true">
-              <template #title="{ data }">
-                <span class="accordion-title">{{ data.title }}</span>
-                <dx-button
+                ></dx-item>
+              </dx-toolbar>
+            </div>
+            <div class="data-part">
+              <dx-accordion :multiple="true" :collapsible="true">
+                <template #title="{ data }">
+                  <span class="accordion-title">{{ data.title }}</span>
+                  <dx-button
                     icon="add"
                     type="default"
                     stylingMode="text"
                     @click="e => {e.event.stopPropagation(); accordionPlusClick(e);}"
-                ></dx-button>
-              </template>
+                  ></dx-button>
+                </template>
 
-              <dx-accordion-item title="Opportunities">
-                <div v-for="(opportunity, i) in panelData.opportunities"
-                     v-bind:key="i"
-                    class="opportunities"
-                >
-                  <span class="value">{{ opportunity.name }} </span>
-                  <br />
-                  <span class="value black small">{{
-                      formatPrice(opportunity.price)
-                    }}</span>
-                  <br />
-                </div>
-              </dx-accordion-item>
+                <dx-accordion-item title="Opportunities">
+                  <div v-for="(opportunity, i) in panelData.opportunities"
+                       v-bind:key="i"
+                       class="opportunities"
+                  >
+                    <span class="value">{{ opportunity.name }} </span>
+                    <br />
+                    <span class="value black small">{{
+                        formatPrice(opportunity.price)
+                      }}</span>
+                    <br />
+                  </div>
+                </dx-accordion-item>
 
-              <dx-item title="Activities">
-                <contact-activities :items="panelData.activities"/>
-              </dx-item>
-            </dx-accordion>
-          </div>
-        </dx-scroll-view>
-      </template>
-
+                <dx-item title="Activities">
+                  <contact-activities :items="panelData.activities" :is-loading="false"/>
+                </dx-item>
+              </dx-accordion>
+            </div>
+          </dx-scroll-view>
+        </template>
+      </load-component>
     </div>
   </div>
 </template>
@@ -189,18 +186,18 @@ import {
   DxItem as DxFormItem,
   DxGroupItem as DxFormGroupItem,
 } from 'devextreme-vue/form';
-import DxLoadPanel from 'devextreme-vue/load-panel';
 import DxScrollView from 'devextreme-vue/scroll-view';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
-
-import { Contact } from '@/types/contact';
 import UserPhoto from '@/components/user-photo.vue';
 import UserStatus from '@/components/user-status.vue';
 import { sizes, subscribe, unsubscribe } from '@/utils/media-query';
 import { formatPrice } from '@/utils/formatters';
 import FormItemEditable from '@/components/form-item-editable.vue';
 import ContactActivities from '@/components/contact-activities.vue';
+import LoadComponent from '@/components/load-component.vue'
+
+import type { Contact } from '@/types/contact';
 
 const isEditing = ref(false);
 const isLoading = ref(false);
