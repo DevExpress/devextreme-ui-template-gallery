@@ -43,7 +43,7 @@ export const CardNotes = ({ items, user }: { items: Notes | undefined; user: str
   }, []);
   return (
     <div className='notes'>
-      <div className='input-content'>
+      <div className='input-notes'>
         <TextArea label='New Note' stylingMode='outlined' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged}></TextArea>
         <Toolbar>
           <Item
