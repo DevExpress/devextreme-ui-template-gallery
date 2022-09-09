@@ -30,14 +30,14 @@
           </div>
 
           <dx-scroll-view class="panel-scroll">
-            <div class="data-part border">
+            <div class="data-part border form-compact">
               <dx-form
                 :formData="panelData"
                 labelMode="floating"
                 :readOnly="!isEditing"
               >
-                <dx-form-group-item :colCount="2">
-                  <dx-form-item dataField="image">
+                <dx-form-group-item :colCount="2" cssClass="photo-row">
+                  <dx-form-item dataField="image" cssClass="photo-box">
                     <user-photo :link="panelData.image" ></user-photo>
                   </dx-form-item>
 
@@ -46,30 +46,32 @@
                       dataField="company"
                       :editorOptions="editorOptions"
                     >
-                      <form-item-editable
-                        :data="panelData"
-                        :dataField="'company'"
-                        :isEditing = "isEditing"
-                        :editorOptions="editorOptions"
-                      ></form-item-editable>
+                      <form-item-plain class="accent"
+                      :value="panelData['company']"
+                      :label="'Company'"
+                      :isEditing = "isEditing"
+                      />
                     </dx-form-item>
 
                     <dx-form-item
                       dataField="position"
                       :editorOptions="editorOptions"
-                    ></dx-form-item>
+                    >
+                      <form-item-plain :value="panelData['position']"
+                                       :label="'Position'"
+                                       :isEditing = "isEditing"
+                      />
+                    </dx-form-item>
 
                     <dx-form-item
                       dataField="manager"
                       :editorOptions="editorOptions"
                     >
-                      <form-item-editable
-                        :data="panelData"
-                        :dataField="'manager'"
+                      <form-item-plain class="accent"
+                        :value="panelData['manager']"
                         :label="'Assigned to'"
                         :isEditing = "isEditing"
-                        :editorOptions="editorOptions"
-                      ></form-item-editable>
+                      />
                     </dx-form-item>
                   </dx-form-group-item>
                 </dx-form-group-item>
@@ -79,15 +81,15 @@
                                 v-bind:key="index"
                                 :dataField="item.name"
                                 :editorOptions="item.editorOptions"
-                  ><div class="icon-editor">
-                    <i class="dx-icon" :class="'dx-icon-' + item.editorOptions?.icon"></i>
-                    <dx-text-box
-                      :value="panelData[item.name]"
-                      :stylingMode="editorOptions.stylingMode"
-                      :mask="item.editorOptions.mask"
-                      :readOnly="!isEditing"
-                    ></dx-text-box>
-                  </div>
+                  >
+                    <form-item-plain :icon="item.editorOptions?.icon"
+                                     :value="panelData[item.name]"
+                                     :isEditing = "isEditing"
+                                     :mask="item.editorOptions.mask"
+                                     :rendered-value="item.name === 'phone'?
+                                               formatPhone(panelData[item.name]):
+                                                panelData[item.name]"
+                    />
                   </dx-form-item>
                 </dx-form-group-item>
               </dx-form>
@@ -177,7 +179,7 @@
 import {
   onBeforeUnmount, onMounted, ref, watch,
 } from 'vue';
-
+// eslint-disable-next-line import/no-unresolved
 import { getContact } from 'dx-rwa-data';
 import DxAccordion, { DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
 import DxButton from 'devextreme-vue/button';
@@ -187,17 +189,16 @@ import {
   DxGroupItem as DxFormGroupItem,
 } from 'devextreme-vue/form';
 import DxScrollView from 'devextreme-vue/scroll-view';
-import { DxTextBox } from 'devextreme-vue/text-box';
 import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
 import UserPhoto from '@/components/user-photo.vue';
 import UserStatus from '@/components/user-status.vue';
 import { sizes, subscribe, unsubscribe } from '@/utils/media-query';
-import { formatPrice } from '@/utils/formatters';
-import FormItemEditable from '@/components/form-item-editable.vue';
+import { formatPrice, formatPhone } from '@/utils/formatters';
 import ContactActivities from '@/components/contact-activities.vue';
-import LoadComponent from '@/components/load-component.vue'
+import LoadComponent from '@/components/load-component.vue';
 
 import type { Contact } from '@/types/contact';
+import FormItemPlain from '@/components/form-item-plain.vue';
 
 const isEditing = ref(false);
 const isLoading = ref(false);
@@ -319,6 +320,15 @@ $side-panel-toolbar-height: 58px;
     &.open {
       top: 0;
       position: relative;
+    }
+  }
+  &:deep(.photo-row) > .dx-field-item-content > .dx-form-group .dx-box-flex {
+    & > .dx-item > .dx-item-content > .dx-item:first-child {
+      max-width: 140px;
+
+      .dx-field-item:not(.dx-last-col) {
+        padding-right: 0;
+      }
     }
   }
 

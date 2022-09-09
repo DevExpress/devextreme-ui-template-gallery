@@ -46,6 +46,7 @@ import type { Message } from '@/types/messages';
 import ContactActivities from '@/components/contact-activities.vue';
 import CardNotes from '@/components/card-notes/card-notes.vue';
 import CardMessages from '@/components/card-messages/card-messages.vue';
+// eslint-disable-next-line import/no-unresolved
 import { getContactMessages } from 'dx-rwa-data';
 import { SimpleSubject } from '@/utils/simple-subject';
 import CardTasks from './components/card-tasks.vue';

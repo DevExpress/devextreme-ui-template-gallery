@@ -140,6 +140,7 @@ import DxDataGrid, {
   DxItem as DxGridToolbarItem,
   DxSearchPanel,
 } from 'devextreme-vue/data-grid';
+// eslint-disable-next-line import/no-unresolved
 import { getContacts } from 'dx-rwa-data';
 
 import { contactStatusList, Contact, ContactStatus } from '@/types/contact';

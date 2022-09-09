@@ -1,12 +1,13 @@
 <template>
-  <dx-text-box
-               :value="props.data[props.dataField]"
-               v-bind="props.textBoxOptions"
-               :readOnly="!props.isEditing"
-               @value-changed="e => {
-                 /* eslint-disable-next-line vue/no-mutating-props */
-                 props.data[props.dataField] = e.value}"
-  ></dx-text-box>
+  <form-item-plain :label="props.textBoxOptions.label"
+                   :mask="props.textBoxOptions.mask"
+                   :rendered-value="props.renderedValue"
+                   :value="props.data[props.dataField]"
+                   :isEditing = "props.isEditing"
+                   @value-changed="e => {
+                   /* eslint-disable-next-line vue/no-mutating-props */
+                   props.data[props.dataField] = e.value}"
+  />
 
   <dx-button
     v-if="!props.isEditing"
@@ -15,13 +16,14 @@
 </template>
 
 <script setup lang="ts">
-import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxButton } from 'devextreme-vue/button';
+import FormItemPlain from '@/components/form-item-plain.vue';
 
 const props = withDefaults(defineProps<{
       data: {[key:string]: unknown},
       dataField: string,
       isEditing: boolean,
+      renderedValue?: string,
       textBoxOptions: {[key:string]: unknown},
       buttonOptions: {[key:string]: unknown},
     }>(), {
@@ -37,5 +39,6 @@ const props = withDefaults(defineProps<{
 <style scoped lang="scss">
 .dx-button {
   margin-top: 10px;
+  margin-left: 11px;
 }
 </style>

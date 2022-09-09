@@ -48,6 +48,7 @@ import {
 import notify from 'devextreme/ui/notify';
 import DxButton from 'devextreme-vue/button';
 import LoadComponent from '@/components/load-component.vue';
+// eslint-disable-next-line import/no-unresolved
 import { getActiveContactOpportunities, getClosedContactOpportunities } from 'dx-rwa-data';
 import type { Opportunity } from '@/types/opportunities';
 import { SimpleSubject } from '@/utils/simple-subject';
