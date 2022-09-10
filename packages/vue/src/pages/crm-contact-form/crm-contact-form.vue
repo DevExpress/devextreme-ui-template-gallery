@@ -73,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, provide, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import DxButton from 'devextreme-vue/button';
 import {
   DxToolbar,
@@ -82,7 +82,6 @@ import {
 // eslint-disable-next-line import/no-unresolved
 import { getContact } from 'dx-rwa-data';
 import type { Contact } from '@/types/contact';
-import { SimpleSubject } from '@/utils/simple-subject';
 
 import ContactForm from './components/contact-form.vue';
 import ContactCards from './components/contact-cards/contact-cards.vue';
@@ -91,9 +90,6 @@ const contactId = 12;
 const contactName = ref('');
 const contactData = ref<Contact | Record<string, unknown>>({});
 const isLoading = ref(false);
-const refreshNotifier = new SimpleSubject();
-
-provide('refresh-notifier', refreshNotifier);
 
 async function loadData() {
   isLoading.value = true;
@@ -105,7 +101,6 @@ async function loadData() {
 }
 
 const refresh = () => {
-  refreshNotifier.next();
   loadData();
 };
 

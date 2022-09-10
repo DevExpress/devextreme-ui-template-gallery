@@ -41,12 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  inject,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-} from 'vue';
+import { onMounted, ref } from 'vue';
 import { DxTextArea } from 'devextreme-vue';
 import DxButton from 'devextreme-vue/button';
 import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
@@ -54,7 +49,6 @@ import { formatDate } from '@/utils/formatters';
 // eslint-disable-next-line import/no-unresolved
 import { getContactNotes } from 'dx-rwa-data';
 import type { Note } from '@/types/notes';
-import { SimpleSubject } from '@/utils/simple-subject';
 import LoadComponent from '@/components/load-component.vue';
 
 const props = withDefaults(defineProps<{
@@ -100,15 +94,8 @@ async function loadData() {
   isLoading.value = false;
 }
 
-const refreshSubscription = inject<SimpleSubject>('refresh-notifier')
-  ?.subscribe(loadData);
-
 onMounted(() => {
   loadData();
-});
-
-onBeforeUnmount(() => {
-  refreshSubscription?.unsubscribe();
 });
 </script>
 

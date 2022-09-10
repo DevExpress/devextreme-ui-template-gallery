@@ -32,12 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  inject,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-} from 'vue';
+import { onMounted, ref } from 'vue';
 import { DxTabPanel } from 'devextreme-vue/tab-panel';
 import { DxItem as DxTabItem } from 'devextreme-vue/tabs';
 import type { Task } from '@/types/task';
@@ -48,7 +43,6 @@ import CardNotes from '@/components/card-notes/card-notes.vue';
 import CardMessages from '@/components/card-messages/card-messages.vue';
 // eslint-disable-next-line import/no-unresolved
 import { getContactMessages } from 'dx-rwa-data';
-import { SimpleSubject } from '@/utils/simple-subject';
 import CardTasks from './components/card-tasks.vue';
 import CardOpportunities from './components/card-opportunities.vue';
 
@@ -78,15 +72,8 @@ async function loadMessages() {
   isMessagesLoading.value = false;
 }
 
-const refreshSubscription = inject<SimpleSubject>('refresh-notifier')
-  ?.subscribe(loadMessages);
-
 onMounted(() => {
   loadMessages();
-});
-
-onBeforeUnmount(() => {
-  refreshSubscription?.unsubscribe();
 });
 </script>
 

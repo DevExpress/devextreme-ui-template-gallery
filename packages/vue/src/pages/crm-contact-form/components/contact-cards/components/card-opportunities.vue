@@ -39,19 +39,13 @@
 </template>
 
 <script setup lang="ts">
-import {
-  inject,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-} from 'vue';
+import { onMounted, ref } from 'vue';
 import notify from 'devextreme/ui/notify';
 import DxButton from 'devextreme-vue/button';
 import LoadComponent from '@/components/load-component.vue';
 // eslint-disable-next-line import/no-unresolved
 import { getActiveContactOpportunities, getClosedContactOpportunities } from 'dx-rwa-data';
 import type { Opportunity } from '@/types/opportunities';
-import { SimpleSubject } from '@/utils/simple-subject';
 import OpportunityTile from './opportunity-tile.vue';
 
 const props = withDefaults(defineProps<{
@@ -78,15 +72,8 @@ async function loadData() {
   isLoading.value = false;
 }
 
-const refreshSubscription = inject<SimpleSubject>('refresh-notifier')
-  ?.subscribe(loadData);
-
 onMounted(() => {
   loadData();
-});
-
-onBeforeUnmount(() => {
-  refreshSubscription?.unsubscribe();
 });
 
 function addOpportunity() {
