@@ -35,192 +35,148 @@
       :container-selector="'#contact-form'"
     >
       <div class="form-compact">
-        <dx-form :formData="contactData"
-               label-mode="floating"
-               :read-only="!isEditing"
-      >
-        <dx-form-group-item :col-count="2">
-          <dx-form-item data-field="image">
-            <user-photo :link="contactData.image" :size="184"></user-photo>
-          </dx-form-item>
-
-          <dx-form-group-item>
-
-            <dx-form-item data-field="status">
-              <form-item-plain :label="'Status'"
-                               :isEditing = "isEditing"
-                               @value-changed="(e) => contactData.status = e.value"
-              >
-                <template v-slot:valueTpl>
-                  <contact-status :status="contactData?.status"/>
-                </template>
-
-                <template v-slot:editorTpl>
-                  <dx-select-box :value="contactData?.status"
-                                 :items="contactStatusList"
-                                 label="Status"
-                                 field-template="field"
-                                 item-template="item"
-                                 @value-changed="onChangeStatusSelect"
-                  >
-                    <template #field>
-                      <div class="form-custom-list-prop">
-                        <contact-status :status="contactData?.status"></contact-status>
-                        <dx-text-box :readOnly="true"></dx-text-box>
-                      </div>
-
-                    </template>
-                    <template #item="{ data }">
-                      <contact-status :status="data"></contact-status>
-                    </template>
-                  </dx-select-box>
-                </template>
-              </form-item-plain>
+        <dx-form>
+          <dx-form-group-item :col-count="2">
+            <dx-form-item>
+              <user-photo :link="contactData.image" :size="184"></user-photo>
             </dx-form-item>
 
-            <dx-form-item
-              data-field="firstName"
-              :editor-options="editorOptions"
-            >
-              <form-item-plain :label="'First Name'"
-                               :value="contactData?.firstName"
+            <dx-form-group-item>
+              <dx-form-item>
+                <form-item-plain v-model="contactData.status"
+                                 :label="'Status'"
+                                 :isEditing = "isEditing"
+                >
+                  <template v-slot:valueTpl>
+                    <contact-status :status="contactData?.status"/>
+                  </template>
+
+                  <template v-slot:editorTpl>
+                    <dx-select-box :value="contactData?.status"
+                                   :items="contactStatusList"
+                                   label="Status"
+                                   field-template="field"
+                                   item-template="item"
+                                   @value-changed="e => contactData.value.status = e.value"
+                    >
+                      <template #field>
+                        <div class="form-custom-list-prop">
+                          <contact-status :status="contactData?.status"></contact-status>
+                          <dx-text-box :readOnly="true"></dx-text-box>
+                        </div>
+
+                      </template>
+                      <template #item="{ data }">
+                        <contact-status :status="data"></contact-status>
+                      </template>
+                    </dx-select-box>
+                  </template>
+                </form-item-plain>
+              </dx-form-item>
+
+              <dx-form-item>
+                <form-item-plain v-model="contactData.firstName"
+                                 :label="'First Name'"
+                                 :isEditing = "isEditing"
+                />
+              </dx-form-item>
+
+              <dx-form-item>
+                <form-item-plain v-model="contactData.lastName"
+                                 :label="'Last Name'"
+                                 :isEditing = "isEditing"
+                />
+              </dx-form-item>
+            </dx-form-group-item>
+
+            <dx-form-item>
+              <form-item-plain v-model="contactData.position"
+                               :label="'Position'"
                                :isEditing = "isEditing"
-                               @value-changed="(e) => contactData.firstName = e.value"
               />
             </dx-form-item>
 
-            <dx-form-item
-              data-field="lastName"
-              :editor-options="editorOptions"
-            >
-              <form-item-plain :label="'Last Name'"
-                              :value="contactData?.lastName"
-                              :isEditing = "isEditing"
-                               @value-changed="(e) => contactData.lastName = e.value"
-            />
+            <dx-form-item>
+              <form-item-plain class="accent"
+                               v-model="contactData.manager"
+                               :label="'Assigned to'"
+                               :isEditing = "isEditing"
+              />
+            </dx-form-item>
+
+            <dx-form-item :col-span="2">
+              <form-item-plain class="accent"
+                               :label="'Company'"
+                               v-model="contactData.company"
+                               :isEditing = "isEditing"
+              />
             </dx-form-item>
           </dx-form-group-item>
 
-          <dx-form-item
-            dataField="position"
-            :editor-options="editorOptions"
-          >
-            <form-item-plain :label="'Position'"
-                             :value="contactData?.position"
-                             :isEditing = "isEditing"
-                             @value-changed="(e) => contactData.position = e.value"
-            />
-          </dx-form-item>
+          <dx-form-group-item :col-count="4" caption="Contacts">
+            <dx-form-item :col-span="4" >
+              <form-item-plain :label="'Address'"
+                               v-model="contactData.address"
+                               :isEditing = "isEditing"
+              />
+            </dx-form-item>
+            <dx-form-item :col-span="2">
+              <form-item-plain :label="'City'"
+                               v-model="contactData.city"
+                               :isEditing = "isEditing"
+              />
+            </dx-form-item>
 
-          <dx-form-item
-            dataField="manager"
-            :editor-options="editorOptions"
-          >
-            <form-item-plain class="accent"
-                             :label="'Assigned to'"
-                             :value="contactData?.manager"
-                             :isEditing = "isEditing"
-                             @value-changed="(e) => contactData.manager = e.value"
-          />
-          </dx-form-item>
-
-          <dx-form-item
-            dataField="company"
-            :editor-options="editorOptions"
-            :col-span="2"
-          >
-            <form-item-plain class="accent"
-                             :label="'Company'"
-                             :value="contactData?.company"
-                             :isEditing = "isEditing"
-                             @value-changed="(e) => contactData.company = e.value"
-            />
-          </dx-form-item>
-        </dx-form-group-item>
-
-        <dx-form-group-item :col-count="4" caption="Contacts">
-          <dx-form-item
-            data-field="address"
-            :col-span="4"
-            :editor-options="editorOptions"
-          >
-            <form-item-plain :label="'Address'"
-                             :value="contactData?.address"
-                             :isEditing = "isEditing"
-                             @value-changed="(e) => contactData.address = e.value"
-            />
-          </dx-form-item>
-          <dx-form-item
-            data-field="city"
-            :col-span="2"
-            :editor-options="editorOptions"
-          >
-            <form-item-plain :label="'City'"
-                             :value="contactData?.city"
-                             :isEditing = "isEditing"
-                             @value-changed="(e) => contactData.city = e.value"
-            />
-          </dx-form-item>
-
-          <dx-form-item
-            data-field="state.stateShort"
-            :editor-options="editorOptions"
-          >
-            <form-item-plain :label="'State'"
-                             :value="contactData?.state?.stateShort"
-                             :isEditing = "isEditing"
-                             @value-changed="(e) => contactData.state.stateShort = e.value"
-            />
-          </dx-form-item>
-          <dx-form-item data-field="zipCode">
-            <form-item-plain :label="'Zip Code'"
-                             :value="contactData?.zipCode?.toString()"
-                             :isEditing = "isEditing"
-                             @value-changed="(e) => contactData.zipCode = e.value"
-            />
-          </dx-form-item>
-          <dx-form-item data-field="phone" :col-span="2" >
-            <form-item-with-button
-              :data="contactData"
-              :data-field="'phone'"
-              :is-editing = "isEditing"
-              :rendered-value="formatPhone(contactData.phone)"
-              @value-changed="(e) => contactData.phone = e.value"
-              :text-box-options="{
+            <dx-form-item>
+              <form-item-plain :label="'State'"
+                               v-model="contactData.state.stateShort"
+                               :isEditing = "isEditing"
+              />
+            </dx-form-item>
+            <dx-form-item>
+              <form-item-plain :label="'Zip Code'"
+                               v-model.number="contactData.zipCode"
+                               :isEditing = "isEditing"
+              />
+            </dx-form-item>
+            <dx-form-item :col-span="2" >
+              <form-item-with-button
+                v-model="contactData.phone"
+                :is-editing = "isEditing"
+                :rendered-value="formatPhone(contactData.phone)"
+                :text-box-options="{
                                  label: 'Phone',
                                  mask: '+1(000)000-0000', }"
-              :button-options="{
+                :button-options="{
                                text: 'Call',
                                icon: 'tel',
                                type: 'default',
                                stylingMode: 'outlined'
                               }"
-            ></form-item-with-button>
-          </dx-form-item>
-          <dx-form-item data-field="email" :col-span="2" >
-            <form-item-with-button
-              :data="contactData"
-              :data-field="'email'"
-              :is-editing = "isEditing"
-              :text-box-options="{ label: 'Email'}"
-              @value-changed="(e) => contactData.firstName = e.value"
-              :button-options="{
+              ></form-item-with-button>
+            </dx-form-item>
+            <dx-form-item :col-span="2" >
+              <form-item-with-button
+                v-model="contactData.email"
+                :is-editing = "isEditing"
+                :text-box-options="{ label: 'Email'}"
+                :button-options="{
                                text: 'Send Email',
                                icon: 'email',
                                type: 'default',
                                stylingMode: 'outlined'
                               }"
-            ></form-item-with-button>
-          </dx-form-item>
-        </dx-form-group-item>
-      </dx-form>
+              ></form-item-with-button>
+            </dx-form-item>
+          </dx-form-group-item>
+        </dx-form>
       </div>
     </load-component>
   </div>
 
 </template>
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 
 import DxButton from 'devextreme-vue/button';
 import {
@@ -236,14 +192,14 @@ import {
 import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxSelectBox } from 'devextreme-vue';
 import LoadComponent from '@/components/load-component.vue';
-import { Contact, ContactStatus as ContactStatusType, contactStatusList } from '@/types/contact';
+import { Contact, contactStatusList } from '@/types/contact';
 import UserPhoto from '@/components/user-photo.vue';
 import ContactStatus from '@/components/user-status.vue';
 import FormItemWithButton from '@/components/form-item-with-button.vue';
 import FormItemPlain from '@/components/form-item-plain.vue';
 import { formatPhone } from '@/utils/formatters';
 
-type FormData = Contact | Record<string, unknown>;
+const emptyContact = { state: { stateShort: '' } } as Contact;
 
 const props = withDefaults(defineProps<{
   isLoading: boolean,
@@ -254,22 +210,14 @@ const props = withDefaults(defineProps<{
 });
 
 const isEditing = ref(false);
-const editorOptions = computed(() => ({ stylingMode: isEditing.value ? 'filled' : 'underlined' }));
-const contactData = ref<FormData>({});
+const contactData = ref(emptyContact);
 
-let contactDataSaved: FormData;
-
-const onChangeStatusSelect = ({ value }: {[value: string]: ContactStatusType}) => {
-  console.log('---------->', value);
-  contactData.value.status = value;
-};
+let contactDataSaved = emptyContact;
 
 watch(
   () => props.contactData,
-  (contactDataNew: Contact | null) => {
-    if (contactDataNew != null) {
-      contactData.value = contactDataNew;
-    }
+  (contactDataNew: Contact| null) => {
+    contactData.value = contactDataNew || emptyContact;
   },
 );
 

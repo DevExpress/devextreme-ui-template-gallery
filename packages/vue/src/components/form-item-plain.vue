@@ -8,7 +8,8 @@
 
         <slot name="valueTpl">
           <span class="form-item-plain-value">
-            {{ props.renderedValue ? props.renderedValue : props.value }}</span>
+            {{ props.renderedValue ? props.renderedValue
+            : props.modelValue }}</span>
         </slot>
       </div>
     </template>
@@ -17,8 +18,8 @@
       <slot name="editorTpl">
         <dx-text-box
           :label="props.icon ? '' : props.label"
-          :value="props.value"
-          @value-changed="e => emit('valueChanged', e)"
+          :value="props.modelValue?.toString()"
+          @value-changed="e => emit('update:modelValue', e.value)"
           :mask="props.mask"
         ></dx-text-box>
       </slot>
@@ -30,17 +31,16 @@
 import { DxTextBox } from 'devextreme-vue/text-box';
 
 const props = defineProps<{
-  value?: string | number | Date,
+  modelValue?: number | string | Date,
   isEditing: boolean,
   label?: string,
   icon?: string,
   mask?: string,
   renderedValue?: string | number | Date,
-  editorTpl?: any
-  valueTpl?: any
+  editorTpl?: unknown
+  valueTpl?: unknown
 }>();
-const emit = defineEmits(['valueChanged']);
-
+const emit = defineEmits(['update:modelValue']);
 </script>
 <style scoped lang="scss">
 @use "@/variables" as *;

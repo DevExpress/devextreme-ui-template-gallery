@@ -31,48 +31,33 @@
 
           <dx-scroll-view class="panel-scroll">
             <div class="data-part border form-compact">
-              <dx-form
-                :formData="panelData"
-                labelMode="floating"
-                :readOnly="!isEditing"
-              >
+              <dx-form :formData="panelData">
                 <dx-form-group-item :colCount="2" cssClass="photo-row">
-                  <dx-form-item dataField="image" cssClass="photo-box">
+                  <dx-form-item cssClass="photo-box">
                     <user-photo :link="panelData.image" ></user-photo>
                   </dx-form-item>
 
                   <dx-form-group-item>
-                    <dx-form-item
-                      dataField="company"
-                      :editorOptions="editorOptions"
-                    >
+                    <dx-form-item>
                       <form-item-plain class="accent"
-                      :value="panelData['company']"
+                      v-model="panelData['company']"
                       :label="'Company'"
                       :isEditing = "isEditing"
-                      @value-changed="(e) => panelData['company'] = e.value"
                       />
                     </dx-form-item>
 
-                    <dx-form-item
-                      dataField="position"
-                      :editorOptions="editorOptions"
-                    >
-                      <form-item-plain :value="panelData['position']"
+                    <dx-form-item>
+                      <form-item-plain v-model="panelData['position']"
                                        :label="'Position'"
                                        :isEditing = "isEditing"
                       />
                     </dx-form-item>
 
-                    <dx-form-item
-                      dataField="manager"
-                      :editorOptions="editorOptions"
-                    >
+                    <dx-form-item>
                       <form-item-plain class="accent"
-                        :value="panelData['manager']"
+                        v-model="panelData['manager']"
                         :label="'Assigned to'"
                         :isEditing = "isEditing"
-                        @value-changed="(e) => panelData['manager'] = e.value"
                       />
                     </dx-form-item>
                   </dx-form-group-item>
@@ -81,12 +66,9 @@
                 <dx-form-group-item>
                   <dx-form-item v-for="(item, index) in underContactFields"
                                 v-bind:key="index"
-                                :dataField="item.name"
-                                :editorOptions="item.editorOptions"
-                                @value-changed="(e) => panelData['manager'] = e.value"
                   >
                     <form-item-plain :icon="item.editorOptions?.icon"
-                                     :value="panelData[item.name]"
+                                     v-model="panelData[item.name]"
                                      :isEditing = "isEditing"
                                      :mask="item.editorOptions.mask"
                                      :rendered-value="item.name === 'phone'?

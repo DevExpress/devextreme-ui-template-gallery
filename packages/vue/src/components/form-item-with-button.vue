@@ -2,9 +2,8 @@
   <form-item-plain :label="props.textBoxOptions.label"
                    :mask="props.textBoxOptions.mask"
                    :rendered-value="props.renderedValue"
-                   :value="props.data[props.dataField]"
+                   v-model="value"
                    :isEditing = "props.isEditing"
-                   @value-changed="e => emit('valueChanged', e)"
   />
 
   <dx-button
@@ -14,26 +13,33 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { DxButton } from 'devextreme-vue/button';
 import FormItemPlain from '@/components/form-item-plain.vue';
 
-const emit = defineEmits(['valueChanged']);
+const emit = defineEmits(['update:modelValue']);
 
 const props = withDefaults(defineProps<{
-      data: {[key:string]: unknown},
-      dataField: string,
+      modelValue: unknown,
       isEditing: boolean,
       renderedValue?: string,
       textBoxOptions: {[key:string]: unknown},
       buttonOptions: {[key:string]: unknown},
     }>(), {
   data: () => ({}),
-  dataField: '',
   isEditing: false,
   textBoxOptions: () => ({}),
   buttonOptions: () => ({}),
 });
 
+const value = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(newValue) {
+    emit('update:modelValue', newValue);
+  },
+});
 </script>
 
 <style scoped lang="scss">
