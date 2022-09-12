@@ -17,12 +17,13 @@ import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   CardActivitiesModule,
   ContactStatusModule,
-  FormItemBlueModule,
+  FormItemPlainModule,
   FormItemPhotoModule,
 } from 'src/app/shared/components';
 import { ScreenService, RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { Contact } from 'src/app/shared/types/contact';
+import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 
 @Component({
   selector: 'user-panel',
@@ -113,6 +114,10 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     this.isEditing = !this.isEditing;
     this.setEditorMode(this.isEditing);
   };
+
+  formatByMask(value, mask) {
+    return value.replace(/(\d{3})(\d{3})(\d+)/, '+1($1)$2-$3');
+  }
 }
 
 @NgModule({
@@ -128,10 +133,10 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
     CardActivitiesModule,
     ContactStatusModule,
-    FormItemBlueModule,
+    FormItemPlainModule,
     FormItemPhotoModule,
-
     CommonModule,
+    PhonePipeModule,
   ],
   declarations: [UserPanelComponent],
   exports: [UserPanelComponent],

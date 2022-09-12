@@ -22,30 +22,27 @@
       </div>
 
       <dx-scroll-view class="panel-scroll">
-        <div class="data-part border">
+        <div class="data-part border form-compact">
           <dx-form
             [formData]="user"
             labelMode="floating"
             [readOnly]="!isEditing"
           >
             <dxi-item itemType="group" [colCount]="2">
-              <dxi-item dataField="image" template="photo"></dxi-item>
+              <dxi-item dataField="image" template="photo" cssClass="photo"></dxi-item>
 
               <dxi-item itemType="group">
-                <dxi-item
+                <dxi-item cssClass="accent"
                   dataField="company"
-                  template="blue-text"
-                  [editorOptions]="editorOptions"
+                  template="item-plain"
                 ></dxi-item>
                 <dxi-item
                   dataField="position"
-                  [editorOptions]="editorOptions"
+                  template="item-plain"
                 ></dxi-item>
-                <dxi-item
+                <dxi-item cssClass="accent"
                   dataField="manager"
-                  template="blue-text"
-                  [editorOptions]="editorOptions"
-                >
+                  template="item-plain">
                   <dxo-label text="Assigned to"></dxo-label>
                 </dxi-item>
               </dxi-item>
@@ -54,47 +51,46 @@
             <dxi-item itemType="group">
               <dxi-item
                 dataField="phone"
-                template="editorByIcon"
+                template="phone"
                 [editorOptions]="{
-                  stylingMode: stylingMode,
                   mask: '+1(000)000-0000',
                   icon: 'tel'
                 }"
               ></dxi-item>
               <dxi-item
                 dataField="email"
-                template="editorByIcon"
+                template="item-plain"
                 [editorOptions]="{
-                  stylingMode: stylingMode,
                   icon: 'email'
                 }"
               ></dxi-item>
               <dxi-item
                 dataField="address"
-                template="editorByIcon"
+                template="item-plain"
                 [editorOptions]="{
-                  stylingMode: stylingMode,
                   icon: 'home'
                 }"
               ></dxi-item>
             </dxi-item>
 
-            <!-- T1085831 -->
-            <div *dxTemplate="let data of 'blue-text'">
-              <div *ngIf="!isEditing; then blue; else editing"></div>
-              <ng-template #blue>
-                <form-item-blue
-                  [label]="data.editorOptions.label"
-                  [value]="data.editorOptions.value"
-                ></form-item-blue>
-              </ng-template>
-              <ng-template #editing>
-                <dx-text-box
-                  [(value)]="user[data.dataField]"
-                  [label]="data.editorOptions.label"
-                ></dx-text-box>
-              </ng-template>
-            </div>
+            <ng-container *dxTemplate="let data of 'item-plain'">
+              <form-item-plain
+                [isEditing]="isEditing"
+                [label]="data.editorOptions.label"
+                [(value)]="user[data.dataField]"
+                [mask]="data.editorOptions.mask"
+              ></form-item-plain>
+            </ng-container>
+
+            <ng-container *dxTemplate="let data of 'phone'">
+              <form-item-plain
+                [isEditing]="isEditing"
+                [label]="data.editorOptions.label"
+                [(value)]="user[data.dataField]"
+                [mask]="data.editorOptions.mask"
+                [renderedValue]="data.editorOptions.value | phone"
+              ></form-item-plain>
+            </ng-container>
 
             <div *dxTemplate="let data of 'photo'">
               <form-item-photo
@@ -102,15 +98,6 @@
               ></form-item-photo>
             </div>
 
-            <div *dxTemplate="let data of 'editorByIcon'" class="icon-editor">
-              <i class="dx-icon dx-icon-{{ data.editorOptions.icon }}"></i>
-              <dx-text-box
-                [(value)]="user[data.dataField]"
-                [stylingMode]="data.editorOptions.stylingMode"
-                [mask]="data.editorOptions.mask"
-                [readOnly]="!isEditing"
-              ></dx-text-box>
-            </div>
           </dx-form>
         </div>
 
