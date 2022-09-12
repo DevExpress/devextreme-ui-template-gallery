@@ -57,7 +57,7 @@
                                    label="Status"
                                    field-template="field"
                                    item-template="item"
-                                   @value-changed="e => contactData.value.status = e.value"
+                                   @value-changed="({value}) => contactData.status = value"
                     >
                       <template #field>
                         <div class="form-custom-list-prop">

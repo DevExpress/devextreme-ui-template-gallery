@@ -14,7 +14,7 @@
       </div>
     </template>
 
-    <div v-show="props.isEditing" class="form-item-plain-editor-wrapper">
+    <div v-if="props.isEditing" class="form-item-plain-editor-wrapper">
       <slot name="editorTpl">
         <dx-text-box
           :label="props.icon ? '' : props.label"
