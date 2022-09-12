@@ -50,6 +50,7 @@
                       :value="panelData['company']"
                       :label="'Company'"
                       :isEditing = "isEditing"
+                      @value-changed="(e) => panelData['company'] = e.value"
                       />
                     </dx-form-item>
 
@@ -71,6 +72,7 @@
                         :value="panelData['manager']"
                         :label="'Assigned to'"
                         :isEditing = "isEditing"
+                        @value-changed="(e) => panelData['manager'] = e.value"
                       />
                     </dx-form-item>
                   </dx-form-group-item>
@@ -81,6 +83,7 @@
                                 v-bind:key="index"
                                 :dataField="item.name"
                                 :editorOptions="item.editorOptions"
+                                @value-changed="(e) => panelData['manager'] = e.value"
                   >
                     <form-item-plain :icon="item.editorOptions?.icon"
                                      :value="panelData[item.name]"
@@ -176,9 +179,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  onBeforeUnmount, onMounted, ref, watch,
-} from 'vue';
+import { ref, watch } from 'vue';
 // eslint-disable-next-line import/no-unresolved
 import { getContact } from 'dx-rwa-data';
 import DxAccordion, { DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
@@ -192,7 +193,7 @@ import DxScrollView from 'devextreme-vue/scroll-view';
 import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
 import UserPhoto from '@/components/user-photo.vue';
 import UserStatus from '@/components/user-status.vue';
-import { sizes, subscribe, unsubscribe } from '@/utils/media-query';
+import { screenInfo } from '@/utils/media-query';
 import { formatPrice, formatPhone } from '@/utils/formatters';
 import ContactActivities from '@/components/contact-activities.vue';
 import LoadComponent from '@/components/load-component.vue';
@@ -242,12 +243,15 @@ const underContactFields = [
     },
   }];
 
-const screenSizeChanged = () => {
-  isPinEnabled.value = sizes()['screen-medium'] || sizes()['screen-large'];
-  if (isPinEnabled.value === false) {
-    isPin.value = false;
-  }
-};
+watch(
+  screenInfo,
+  (newScreenInfo) => {
+    isPinEnabled.value = newScreenInfo.isLarge || newScreenInfo.isMedium;
+    if (isPinEnabled.value === false) {
+      isPin.value = false;
+    }
+  },
+);
 
 const loadContact = async (userId: number) => {
   isLoading.value = true;
@@ -267,14 +271,6 @@ watch(
     }
   },
 );
-
-onMounted(() => {
-  subscribe(screenSizeChanged);
-});
-
-onBeforeUnmount(() => {
-  unsubscribe(screenSizeChanged);
-});
 </script>
 
 <style scoped lang="scss">

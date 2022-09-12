@@ -4,9 +4,7 @@
                    :rendered-value="props.renderedValue"
                    :value="props.data[props.dataField]"
                    :isEditing = "props.isEditing"
-                   @value-changed="e => {
-                   /* eslint-disable-next-line vue/no-mutating-props */
-                   props.data[props.dataField] = e.value}"
+                   @value-changed="e => emit('valueChanged', e)"
   />
 
   <dx-button
@@ -18,6 +16,8 @@
 <script setup lang="ts">
 import { DxButton } from 'devextreme-vue/button';
 import FormItemPlain from '@/components/form-item-plain.vue';
+
+const emit = defineEmits(['valueChanged']);
 
 const props = withDefaults(defineProps<{
       data: {[key:string]: unknown},

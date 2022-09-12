@@ -1,24 +1,25 @@
 <template>
   <div class="form-item-plain">
-    <i v-if="icon" class="dx-icon" :class="{['dx-icon-' + icon]: icon}"></i>
-    <template v-if="!isEditing">
+    <i v-if="props.icon" class="dx-icon" :class="{['dx-icon-' + props.icon]: props.icon}"></i>
+    <template v-if="!props.isEditing">
       <div class="form-item-plain-wrapper"
-           :class="{'with-label':!icon}">
-        <label v-if="!icon" class="dx-texteditor-label">{{ label }}</label>
+           :class="{'with-label':!props.icon}">
+        <label v-if="!props.icon" class="dx-texteditor-label">{{ props.label }}</label>
 
         <slot name="valueTpl">
-          <span class="form-item-plain-value">{{ renderedValue ? renderedValue : value }}</span>
+          <span class="form-item-plain-value">
+            {{ props.renderedValue ? props.renderedValue : props.value }}</span>
         </slot>
       </div>
     </template>
 
-    <div v-show="isEditing" class="form-item-plain-editor-wrapper">
+    <div v-show="props.isEditing" class="form-item-plain-editor-wrapper">
       <slot name="editorTpl">
         <dx-text-box
-          :label="icon ? '' : label"
-          :value="value"
-          @valueChange="onChangeValue"
-          :mask="mask"
+          :label="props.icon ? '' : props.label"
+          :value="props.value"
+          @value-changed="e => emit('valueChanged', e)"
+          :mask="props.mask"
         ></dx-text-box>
       </slot>
     </div>
@@ -38,8 +39,8 @@ const props = defineProps<{
   editorTpl?: any
   valueTpl?: any
 }>();
-const emit = defineEmits(['valueChange']);
-const onChangeValue = (e: any) => emit(e);
+const emit = defineEmits(['valueChanged']);
+
 </script>
 <style scoped lang="scss">
 @use "@/variables" as *;

@@ -8,9 +8,9 @@ export const contactStatusList = [
 
 export type ContactStatus = (typeof contactStatusList)[number];
 
-type State = {
+interface State {
     stateShort: string;
-};
+}
 
 export interface Contact {
     name: string,

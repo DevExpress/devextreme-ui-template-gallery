@@ -49,6 +49,7 @@
             <dx-form-item data-field="status">
               <form-item-plain :label="'Status'"
                                :isEditing = "isEditing"
+                               @value-changed="(e) => contactData.status = e.value"
               >
                 <template v-slot:valueTpl>
                   <contact-status :status="contactData?.status"/>
@@ -84,6 +85,7 @@
               <form-item-plain :label="'First Name'"
                                :value="contactData?.firstName"
                                :isEditing = "isEditing"
+                               @value-changed="(e) => contactData.firstName = e.value"
               />
             </dx-form-item>
 
@@ -94,6 +96,7 @@
               <form-item-plain :label="'Last Name'"
                               :value="contactData?.lastName"
                               :isEditing = "isEditing"
+                               @value-changed="(e) => contactData.lastName = e.value"
             />
             </dx-form-item>
           </dx-form-group-item>
@@ -105,6 +108,7 @@
             <form-item-plain :label="'Position'"
                              :value="contactData?.position"
                              :isEditing = "isEditing"
+                             @value-changed="(e) => contactData.position = e.value"
             />
           </dx-form-item>
 
@@ -116,6 +120,7 @@
                              :label="'Assigned to'"
                              :value="contactData?.manager"
                              :isEditing = "isEditing"
+                             @value-changed="(e) => contactData.manager = e.value"
           />
           </dx-form-item>
 
@@ -128,6 +133,7 @@
                              :label="'Company'"
                              :value="contactData?.company"
                              :isEditing = "isEditing"
+                             @value-changed="(e) => contactData.company = e.value"
             />
           </dx-form-item>
         </dx-form-group-item>
@@ -141,6 +147,7 @@
             <form-item-plain :label="'Address'"
                              :value="contactData?.address"
                              :isEditing = "isEditing"
+                             @value-changed="(e) => contactData.address = e.value"
             />
           </dx-form-item>
           <dx-form-item
@@ -151,6 +158,7 @@
             <form-item-plain :label="'City'"
                              :value="contactData?.city"
                              :isEditing = "isEditing"
+                             @value-changed="(e) => contactData.city = e.value"
             />
           </dx-form-item>
 
@@ -161,12 +169,14 @@
             <form-item-plain :label="'State'"
                              :value="contactData?.state?.stateShort"
                              :isEditing = "isEditing"
+                             @value-changed="(e) => contactData.state.stateShort = e.value"
             />
           </dx-form-item>
           <dx-form-item data-field="zipCode">
             <form-item-plain :label="'Zip Code'"
                              :value="contactData?.zipCode?.toString()"
                              :isEditing = "isEditing"
+                             @value-changed="(e) => contactData.zipCode = e.value"
             />
           </dx-form-item>
           <dx-form-item data-field="phone" :col-span="2" >
@@ -175,6 +185,7 @@
               :data-field="'phone'"
               :is-editing = "isEditing"
               :rendered-value="formatPhone(contactData.phone)"
+              @value-changed="(e) => contactData.phone = e.value"
               :text-box-options="{
                                  label: 'Phone',
                                  mask: '+1(000)000-0000', }"
@@ -192,6 +203,7 @@
               :data-field="'email'"
               :is-editing = "isEditing"
               :text-box-options="{ label: 'Email'}"
+              @value-changed="(e) => contactData.firstName = e.value"
               :button-options="{
                                text: 'Send Email',
                                icon: 'email',
