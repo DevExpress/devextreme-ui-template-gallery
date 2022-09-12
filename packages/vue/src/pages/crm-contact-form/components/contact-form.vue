@@ -52,12 +52,11 @@
                   </template>
 
                   <template v-slot:editorTpl>
-                    <dx-select-box :value="contactData?.status"
+                    <dx-select-box label="Status"
+                                   v-model="contactData.status"
                                    :items="contactStatusList"
-                                   label="Status"
                                    field-template="field"
                                    item-template="item"
-                                   @value-changed="({value}) => contactData.status = value"
                     >
                       <template #field>
                         <div class="form-custom-list-prop">

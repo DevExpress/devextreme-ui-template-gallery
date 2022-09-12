@@ -18,8 +18,7 @@
       <slot name="editorTpl">
         <dx-text-box
           :label="props.icon ? '' : props.label"
-          :value="props.modelValue?.toString()"
-          @value-changed="e => emit('update:modelValue', e.value)"
+          v-model="value"
           :mask="props.mask"
         ></dx-text-box>
       </slot>
@@ -29,6 +28,7 @@
 
 <script setup lang="ts">
 import { DxTextBox } from 'devextreme-vue/text-box';
+import { computed } from 'vue';
 
 const props = defineProps<{
   modelValue?: number | string | Date,
@@ -41,6 +41,15 @@ const props = defineProps<{
   valueTpl?: unknown
 }>();
 const emit = defineEmits(['update:modelValue']);
+
+const value = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(newValue) {
+    emit('update:modelValue', newValue);
+  },
+});
 </script>
 <style scoped lang="scss">
 @use "@/variables" as *;
