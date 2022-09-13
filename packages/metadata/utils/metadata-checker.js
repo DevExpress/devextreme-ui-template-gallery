@@ -22,7 +22,7 @@ class MetadataChecker {
         viewPath = join(viewPath, 'app', 'pages', viewName, `${viewName}.component.html`);
         break;
       case 'vue':
-        viewPath = join(viewPath, 'views', `${viewName}.vue`);
+        viewPath = join(viewPath, 'pages', viewName, `${viewName}.vue`);
         break;
       case 'react':
         viewPath = join(viewPath, 'pages', viewName, `${viewName}.tsx`);
@@ -46,7 +46,11 @@ class MetadataChecker {
   }
 
   navigationModuleContent(approach) {
-    const ext = approach === 'angular' ? 'ts' : 'tsx';
+    const ext = {
+      angular: 'ts',
+      vue: 'ts',
+      react: 'tsx',
+    }[approach];
     const navigationModulePath = join(
       __dirname,
       '..',

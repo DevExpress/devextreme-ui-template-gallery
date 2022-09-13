@@ -4,6 +4,9 @@ export const packages = [{
 }, {
   name: 'react',
   port: 8081,
+}, {
+  name: 'vue',
+  port: 8080,
 }];
 
 export const screenModes = [
