@@ -35,6 +35,7 @@ class ResizeListener {
 
   subscribe(node) {
     this.mutationObserver.disconnect();
+    // eslint-disable-next-line no-param-reassign
     node.style.alignSelf = 'flex-start';
     this.resizeObserver.observe(node);
   }
