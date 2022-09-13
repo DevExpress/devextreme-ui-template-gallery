@@ -26,8 +26,8 @@
 </template>
 
 <script setup lang="ts">
-import DxList from 'devextreme-vue/list';
-import DxButton from 'devextreme-vue/button';
+import { DxList } from 'devextreme-vue/list';
+import { DxButton } from 'devextreme-vue/button';
 import { formatDate } from '@/utils/formatters';
 import type { Activity } from '@/types/activities';
 import LoadComponent from '@/components/load-component.vue';

@@ -41,7 +41,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import notify from 'devextreme/ui/notify';
-import DxButton from 'devextreme-vue/button';
+import { DxButton } from 'devextreme-vue/button';
 import LoadComponent from '@/components/load-component.vue';
 // eslint-disable-next-line import/no-unresolved
 import { getActiveContactOpportunities, getClosedContactOpportunities } from 'dx-rwa-data';

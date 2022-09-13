@@ -42,9 +42,9 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { DxTextArea } from 'devextreme-vue';
-import DxButton from 'devextreme-vue/button';
-import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
+import { DxTextArea } from 'devextreme-vue/text-area';
+import { DxButton } from 'devextreme-vue/button';
+import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { formatDate } from '@/utils/formatters';
 // eslint-disable-next-line import/no-unresolved
 import { getContactNotes } from 'dx-rwa-data';

@@ -2,12 +2,12 @@
 import {
   computed, inject,
 } from 'vue';
-import { AppInfo } from '@/types/app-info';
+import { AppInfo, appInfoInjectKey } from '@/types/app-info';
 import simpleLayout from '@/layouts/single-card.vue';
 import AppFooter from './components/app-footer.vue';
 import { screenInfo } from './utils/media-query';
 
-const appInfo = inject<AppInfo>('app-info');
+const appInfo = inject<AppInfo>(appInfoInjectKey);
 const cssClasses = computed(() => ['app'].concat(screenInfo.value.cssClasses));
 </script>
 
