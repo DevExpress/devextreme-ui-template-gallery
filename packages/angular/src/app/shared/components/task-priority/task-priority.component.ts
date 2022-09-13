@@ -50,7 +50,6 @@ import { TaskPriority } from 'src/app/shared/types/task';
 
         span {
           font-weight: 600;
-          font-size: 12px;
         }
       }
     `,

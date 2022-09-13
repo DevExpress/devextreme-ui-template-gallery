@@ -5,7 +5,7 @@
   overflow: hidden;
 }
 
-.form-compact {
+.form-compact  {
   .dx-layout-manager .dx-field-item:not(.dx-first-col) {
     padding-left: 0;
   }
@@ -24,6 +24,18 @@
     .accent {
       .custom-form-item-value {
         color: $accent-color;
+      }
+    }
+
+    task-priority span,
+    .status {
+      line-height: 18px;
+      font-size: 13px;
+    }
+
+    dx-select-box task-priority  {
+      .separator {
+        max-height: 12px;
       }
     }
   }

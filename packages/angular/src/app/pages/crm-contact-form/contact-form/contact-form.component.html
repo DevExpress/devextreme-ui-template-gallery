@@ -40,34 +40,34 @@
         <dxi-item itemType="group">
           <dxi-item
             dataField="status"
-            [template]="'statusField'"
+            template="statusField"
             [editorOptions]="editorOptions"
           >
           </dxi-item>
           <dxi-item
             dataField="firstName"
-            template="item-plain"
+            template="itemPlain"
             [editorOptions]="editorOptions"
           ></dxi-item>
           <dxi-item
             dataField="lastName"
-            template="item-plain"
+            template="itemPlain"
             [editorOptions]="editorOptions"
           ></dxi-item>
         </dxi-item>
         <dxi-item dataField="position"
-                  template="item-plain"
+                  template="itemPlain"
                   [editorOptions]="editorOptions"></dxi-item>
         <dxi-item  cssClass="accent"
                    dataField="manager"
-                   template="item-plain"
+                   template="itemPlain"
                    [editorOptions]="editorOptions"
         >
           <dxo-label text="Assigned to"></dxo-label>
         </dxi-item>
         <dxi-item cssClass="accent"
                   dataField="company"
-                  template="item-plain"
+                  template="itemPlain"
                   [editorOptions]="editorOptions"
                   [colSpan]="2"
         ></dxi-item>
@@ -76,28 +76,28 @@
       <dxi-item itemType="group" [colCount]="4" caption="Contacts">
         <dxi-item
           dataField="address"
-          template="item-plain"
+          template="itemPlain"
           [editorOptions]="editorOptions"
           [colSpan]="4"
         ></dxi-item>
         <dxi-item
           dataField="city"
-          template="item-plain"
+          template="itemPlain"
           [editorOptions]="editorOptions"
           [colSpan]="2"
         ></dxi-item>
         <dxi-item dataField="state.stateShort"
-                  template="item-plain"
+                  template="itemPlain"
                   [editorOptions]="editorOptions">
           <dxo-label text="State"></dxo-label>
         </dxi-item>
-        <dxi-item dataField="zipCode" template="item-plain" [editorOptions]="editorOptions"></dxi-item>
+        <dxi-item dataField="zipCode" template="itemPlain" [editorOptions]="editorOptions"></dxi-item>
         <dxi-item dataField="phone" template="phone" [colSpan]="2"></dxi-item>
         <dxi-item dataField="email" template="email" [colSpan]="2"></dxi-item>
       </dxi-item>
 
       <!-- T1085831 -->
-      <div *dxTemplate="let data of 'item-plain'">
+      <div *dxTemplate="let data of 'itemPlain'">
         <form-item-plain
           [isEditing]="isEditing"
           [label]="data.editorOptions.label"
@@ -173,7 +173,7 @@
           [isEditing]="isEditing"
           [label]="data.editorOptions.label"
           [value]="contactData$.phone"
-          [mask]="'+1(000)000-0000'"
+          mask="+1(000)000-0000"
           [renderedValue]="contactData$.phone | phone"
         ></form-item-plain>
         <dx-button class="form-item-plain-button"
@@ -181,7 +181,7 @@
                    [text]="'Call'"
                    [icon]="'tel'"
                    [type]="'default'"
-                   [stylingMode]="'outlined'"
+                   stylingMode="outlined"
         ></dx-button>
       </div>
 
@@ -196,7 +196,7 @@
                    [text]="'Send Email'"
                    [icon]="'email'"
                    [type]="'default'"
-                   [stylingMode]="'outlined'"
+                   stylingMode="outlined"
         ></dx-button>
       </div>
     </dx-form>

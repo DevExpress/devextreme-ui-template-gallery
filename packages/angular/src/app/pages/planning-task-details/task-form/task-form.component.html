@@ -1,4 +1,4 @@
-<div id="task-form">
+<div id="task-form" class="form-compact">
   <dx-toolbar>
     <dxi-item location="before"><span class="form-title">Details</span></dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
@@ -36,23 +36,23 @@
     <dxi-item itemType="group" [colCount]="2">
       <dxi-item cssClass="accent"
         dataField="company"
-        [template]="!isEditing ? 'item-plain' : null"
+        [template]="!isEditing ? 'itemPlain' : null"
         [editorOptions]="editorOptions"
       ></dxi-item>
       <dxi-item cssClass="accent"
         dataField="owner"
-        [template]="!isEditing ? 'item-plain' : null"
+        [template]="!isEditing ? 'itemPlain' : null"
         [editorOptions]="editorOptions"
       >
         <dxo-label text="Assigned to"></dxo-label>
       </dxi-item>
       <dxi-item
         dataField="priority"
-        [template]="'priorityField'"
+        template="priorityField"
       ></dxi-item>
       <dxi-item
         dataField="status"
-        [template]="'statusField'"
+        template="statusField"
       ></dxi-item>
       <dxi-item
         dataField="startDate"
@@ -89,14 +89,14 @@
     <dxi-item
       [colSpan]="2"
       dataField="description"
-      [template]="isEditing? null: 'item-plain'"
+      [template]="isEditing? null: 'itemPlain'"
       editorType="dxTextArea"
       [editorOptions]="editorOptions"
     >
       <dxo-label text="Details"></dxo-label>
     </dxi-item>
 
-    <div *dxTemplate="let data of 'item-plain'">
+    <div *dxTemplate="let data of 'itemPlain'">
       <form-item-plain
         [isEditing]="isEditing"
         [label]="data.editorOptions.label"
@@ -126,7 +126,7 @@
         >
           <div *dxTemplate="let data of 'field'">
             <div class="form-custom-list-prop">
-              <task-priority [showBar]="false" [value]="task.priority"></task-priority>
+              <task-priority [value]="task.priority"></task-priority>
               <dx-text-box [readOnly]="true"></dx-text-box>
             </div>
           </div>

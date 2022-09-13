@@ -114,10 +114,6 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     this.isEditing = !this.isEditing;
     this.setEditorMode(this.isEditing);
   };
-
-  formatByMask(value, mask) {
-    return value.replace(/(\d{3})(\d{3})(\d+)/, '+1($1)$2-$3');
-  }
 }
 
 @NgModule({

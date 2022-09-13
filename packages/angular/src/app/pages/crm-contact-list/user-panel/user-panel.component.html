@@ -34,15 +34,15 @@
               <dxi-item itemType="group">
                 <dxi-item cssClass="accent"
                   dataField="company"
-                  template="item-plain"
+                  template="itemPlain"
                 ></dxi-item>
                 <dxi-item
                   dataField="position"
-                  template="item-plain"
+                  template="itemPlain"
                 ></dxi-item>
                 <dxi-item cssClass="accent"
                   dataField="manager"
-                  template="item-plain">
+                  template="itemPlain">
                   <dxo-label text="Assigned to"></dxo-label>
                 </dxi-item>
               </dxi-item>
@@ -59,21 +59,21 @@
               ></dxi-item>
               <dxi-item
                 dataField="email"
-                template="item-plain"
+                template="itemPlain"
                 [editorOptions]="{
                   icon: 'email'
                 }"
               ></dxi-item>
               <dxi-item
                 dataField="address"
-                template="item-plain"
+                template="itemPlain"
                 [editorOptions]="{
                   icon: 'home'
                 }"
               ></dxi-item>
             </dxi-item>
 
-            <ng-container *dxTemplate="let data of 'item-plain'">
+            <ng-container *dxTemplate="let data of 'itemPlain'">
               <form-item-plain
                 [isEditing]="isEditing"
                 [label]="data.editorOptions.label"
