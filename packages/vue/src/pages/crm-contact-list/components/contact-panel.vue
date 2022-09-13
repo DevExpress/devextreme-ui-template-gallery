@@ -1,5 +1,5 @@
 <template>
-  <div id="contact-panel" class="panel" v-bind:class="{ pin: isPin, open: props.isPanelOpen }">
+  <div id="contact-panel" class="panel" :class="{ pin: isPin, open: props.isPanelOpen }">
     <div class="data-wrapper">
       <load-component :width="300" container-selector="#contact-panel" :is-loading="isLoading">
         <template v-if="panelData">
@@ -65,7 +65,7 @@
 
                 <dx-form-group-item>
                   <dx-form-item v-for="(item, index) in underContactFields"
-                                v-bind:key="index"
+                                :key="index"
                   >
                     <form-item-plain :icon="item.editorOptions?.icon"
                                      v-model="panelData[item.name]"
@@ -136,7 +136,7 @@
 
                 <dx-accordion-item title="Opportunities">
                   <div v-for="(opportunity, i) in panelData.opportunities"
-                       v-bind:key="i"
+                       :key="i"
                        class="opportunities"
                   >
                     <span class="value">{{ opportunity.name }} </span>
@@ -164,24 +164,23 @@
 import { ref, watch } from 'vue';
 // eslint-disable-next-line import/no-unresolved
 import { getContact } from 'dx-rwa-data';
-import DxAccordion, { DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
-import DxButton from 'devextreme-vue/button';
+import { DxAccordion, DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
+import { DxButton } from 'devextreme-vue/button';
 import {
   DxForm,
   DxItem as DxFormItem,
   DxGroupItem as DxFormGroupItem,
 } from 'devextreme-vue/form';
-import DxScrollView from 'devextreme-vue/scroll-view';
-import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
+import { DxScrollView } from 'devextreme-vue/scroll-view';
+import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import UserPhoto from '@/components/user-photo.vue';
 import UserStatus from '@/components/user-status.vue';
 import { screenInfo } from '@/utils/media-query';
 import { formatPrice, formatPhone } from '@/utils/formatters';
 import ContactActivities from '@/components/contact-activities.vue';
 import LoadComponent from '@/components/load-component.vue';
-
-import type { Contact } from '@/types/contact';
 import FormItemPlain from '@/components/form-item-plain.vue';
+import type { Contact } from '@/types/contact';
 
 const isEditing = ref(false);
 const isLoading = ref(false);
@@ -193,10 +192,8 @@ const props = withDefaults(defineProps<{
   userId: number | null
 }>(), { isPanelOpen: false, userId: null });
 
-const editorOptions = ref({ stylingMode: 'underlined' });
 const toggleEdit = () => {
   isEditing.value = !isEditing.value;
-  editorOptions.value = { stylingMode: isEditing.value ? 'filled' : 'underlined' };
 };
 
 const emit = defineEmits(['close']);
@@ -205,7 +202,6 @@ const underContactFields = [
   {
     name: 'phone',
     editorOptions: {
-      stylingMode: editorOptions.value.stylingMode,
       mask: '+1(000)000-0000',
       icon: 'tel',
     },
@@ -213,14 +209,12 @@ const underContactFields = [
   {
     name: 'email',
     editorOptions: {
-      stylingMode: editorOptions.value.stylingMode,
       icon: 'email',
     },
   },
   {
     name: 'address',
     editorOptions: {
-      stylingMode: editorOptions.value.stylingMode,
       icon: 'home',
     },
   }];
