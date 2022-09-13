@@ -74,7 +74,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import DxButton from 'devextreme-vue/button';
+import { DxButton } from 'devextreme-vue/button';
 import {
   DxToolbar,
   DxItem as DxToolbarItem,

@@ -60,10 +60,10 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { DxTextArea } from 'devextreme-vue';
+import { DxTextArea } from 'devextreme-vue/text-area';
 import { DxTextBox } from 'devextreme-vue/text-box';
-import DxButton from 'devextreme-vue/button';
-import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
+import { DxButton } from 'devextreme-vue/button';
+import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { formatDate } from '@/utils/formatters';
 import LoadComponent from '@/components/load-component.vue';
 

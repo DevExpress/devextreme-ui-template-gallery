@@ -64,8 +64,8 @@
 </template>
 
 <script setup lang="ts">
-import DxButton from 'devextreme-vue/button';
-import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
+import { DxButton } from 'devextreme-vue/button';
+import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
 import { authInfo as auth } from '../auth';
@@ -80,11 +80,10 @@ const user = ref({});
 defineProps<{
   menuToggleEnabled: boolean,
     title: string,
-    toggleMenuFunc:(e: any) => void,
-    // logOutFunc: (e: any) => void,
+    toggleMenuFunc:(e: unknown) => void,
 }>();
 
-auth.getUser().then((e: any) => {
+auth.getUser().then((e: unknown) => {
   user.value = e.data;
 });
 

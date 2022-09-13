@@ -177,7 +177,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import DxButton from 'devextreme-vue/button';
+import { DxButton } from 'devextreme-vue/button';
 import {
   DxToolbar,
   DxItem as DxToolbarItem,
