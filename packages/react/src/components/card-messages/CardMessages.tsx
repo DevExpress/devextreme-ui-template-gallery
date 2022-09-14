@@ -60,7 +60,7 @@ export const CardMessages = ({ items, user, updateMessagesCount }: { items: Mess
   }, []);
   return (
     <div className='messages'>
-      <div className='input-content'>
+      <div className='input-messages'>
         <TextBox label='Title' stylingMode='outlined' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged}></TextBox>
         <TextArea label='New Message' stylingMode='outlined' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged}></TextArea>
         <Toolbar>

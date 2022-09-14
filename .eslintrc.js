@@ -386,6 +386,7 @@ module.exports = {
         'packages/angular/*.*',
         'packages/shell/*.*',
         'packages/react/*.*',
+        'packages/vue/*.*',
       ],
       env: {
         jquery: true,

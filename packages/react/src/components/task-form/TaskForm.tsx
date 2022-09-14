@@ -41,9 +41,9 @@ const EditPriority = ({ label, value, setValue }: FormEdit) => {
 const CompanyField = ({ editorOptions }) => (
   <FormContext.Consumer>
     {({ data }) => (
-      <div className='info'>
+      <div className='details'>
         <label className='dx-texteditor-label'>{editorOptions.label}</label>
-        <span className='default-label dx-theme-accent-as-text-color'>{data.company}</span>
+        <span className='dx-theme-accent-as-text-color'>{data.company}</span>
       </div>
     )}
   </FormContext.Consumer>
@@ -52,9 +52,9 @@ const CompanyField = ({ editorOptions }) => (
 const OwnerField = ({ editorOptions }) => (
   <FormContext.Consumer>
     {({ data }) => (
-      <div className='info'>
+      <div className='details'>
         <label className='dx-texteditor-label'>{editorOptions.label}</label>
-        <span className='default-label dx-theme-accent-as-text-color'>{data.owner}</span>
+        <span className='dx-theme-accent-as-text-color'>{data.owner}</span>
       </div>
     )}
   </FormContext.Consumer>

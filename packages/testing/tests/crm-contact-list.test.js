@@ -1,39 +1,31 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector, ClientFunction } from 'testcafe';
+import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
+import { toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const BASE_URL = `http://localhost:${process.env.port}`;
+const BASE_URL = `http://localhost:${process.env.port}/#/crm-contact-list`;
 
-fixture`List`;
-
-const setEmbeddedMode = ClientFunction((embed) => {
-  if (!embed) return;
-  window.document.getElementsByTagName('body')[0].classList.add('embedded');
-});
+fixture`Contact List`;
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
     test(`Crm contact list (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await t.resizeWindow(...screenMode);
-
-      await t.navigateTo(`${BASE_URL}/#/crm-contact-list`);
-
-      await setEmbeddedMode(embedded);
-
-      await t.wait(timeoutSecond);
+      // eslint-disable-next-line max-len
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await t.expect(Selector('tr.dx-data-row').count).eql(embedded ? 18 : 16);
-      await takeScreenshot(`crm-contact-list-${project}-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`crm-contact-list-embed=${embedded}-${screenMode[0]}`, 'body');
 
-      await t.click('tr.dx-data-row:first-child');
-      await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
-      await takeScreenshot(`crm-contact-list-form-${project}-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
+      if (project === 'angular') { // TODO: remove `if` when this react functionality will be ready
+        await t.click('tr.dx-data-row:first-child');
+        await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
+        await takeScreenshot(`crm-contact-list-form-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
+      }
 
       await t
         .expect(compareResults.isValid())

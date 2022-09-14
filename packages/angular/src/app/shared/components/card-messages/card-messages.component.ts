@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
 import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
+import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
@@ -61,7 +62,7 @@ export class CardMessagesComponent {
     DxToolbarModule,
     DxFileUploaderModule,
     DxScrollViewModule,
-
+    DxButtonModule,
     CommonModule,
   ],
   declarations: [CardMessagesComponent],
