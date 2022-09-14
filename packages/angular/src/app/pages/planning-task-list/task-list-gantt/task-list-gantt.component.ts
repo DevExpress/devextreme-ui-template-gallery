@@ -26,7 +26,7 @@ export class TaskListGanttComponent implements OnChanges {
 
   navigateToDetails = () => {
     this.router.navigate(['/planning-task-details']);
-  }
+  };
 }
 
 @NgModule({

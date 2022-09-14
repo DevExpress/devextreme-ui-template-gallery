@@ -93,7 +93,7 @@ export class TaskListGridComponent implements OnChanges {
 
   navigateToDetails = () => {
     this.router.navigate(['/planning-task-details']);
-  }
+  };
 }
 
 @NgModule({

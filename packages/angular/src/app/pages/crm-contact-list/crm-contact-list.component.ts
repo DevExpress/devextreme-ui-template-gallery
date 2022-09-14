@@ -105,7 +105,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
   };
 
   onExporting(e) {
-    if(e.format === 'pdf') {
+    if (e.format === 'pdf') {
       const doc = new jsPDF();
       exportDataGridToPdf({
         jsPDFDocument: doc,

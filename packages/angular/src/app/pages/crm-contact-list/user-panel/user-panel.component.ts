@@ -116,7 +116,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   navigateToDetails = () => {
     this.router.navigate(['/crm-contact-details']);
-  }
+  };
 }
 
 @NgModule({

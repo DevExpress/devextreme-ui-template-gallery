@@ -20,12 +20,13 @@ export class CardActivitiesComponent implements OnInit, OnChanges {
 
   isLoading = true;
 
-  activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{ 
+  activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
     icon: 'overflow',
     items: [
       { text: 'View details' },
       { text: 'Delete' },
-    ]}
+    ],
+  },
   ];
 
   ngOnInit() {

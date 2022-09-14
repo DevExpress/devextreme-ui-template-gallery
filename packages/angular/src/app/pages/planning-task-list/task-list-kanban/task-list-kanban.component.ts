@@ -32,13 +32,14 @@ export class TaskListKanbanComponent implements OnInit, OnChanges {
 
   statuses = taskStatusList;
 
-  boardMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{ 
+  boardMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
     icon: 'more',
     items: [
       { text: 'Add card...' },
       { text: 'Copy list..' },
       { text: 'Move list..' },
-    ]}
+    ],
+  },
   ];
 
   fillOutBoard = (cards: Task[]): Board[] => {
