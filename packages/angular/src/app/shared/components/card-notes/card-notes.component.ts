@@ -5,6 +5,7 @@ import {
 import {
   DxTextAreaModule,
   DxToolbarModule,
+  DxButtonModule,
 } from 'devextreme-angular';
 import { Notes, Note } from 'src/app/shared/types/notes';
 
@@ -45,7 +46,7 @@ export class CardNotesComponent {
   imports: [
     DxTextAreaModule,
     DxToolbarModule,
-
+    DxButtonModule,
     CommonModule,
   ],
   declarations: [CardNotesComponent],

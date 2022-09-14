@@ -6,6 +6,7 @@ import {
   DxTextAreaModule,
   DxTextBoxModule,
   DxToolbarModule,
+  DxButtonModule,
 } from 'devextreme-angular';
 import { Message, Messages } from 'src/app/shared/types/messages';
 
@@ -59,7 +60,7 @@ export class CardMessagesComponent {
     DxTextAreaModule,
     DxTextBoxModule,
     DxToolbarModule,
-
+    DxButtonModule,
     CommonModule,
   ],
   declarations: [CardMessagesComponent],
