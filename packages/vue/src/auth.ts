@@ -12,7 +12,17 @@ export const defaultUser: userInfo = {
   avatarUrl: 'https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png',
 };
 
-export const authInfo: { _user: userInfo | null, [key: string]: any } = {
+interface AuthInfo {
+  _user: userInfo | null,
+  loggedIn: () => boolean,
+  logOut: () => Promise<void>,
+  logIn: (email:string, password: string) => Promise<Record<string, unknown>>
+  createAccount: (email:string, password: string) => Promise<Record<string, unknown>>
+  resetPassword: (email:string) => Promise<Record<string, unknown>>
+  changePassword: (email:string, recoveryCode: string) => Promise<Record<string, unknown>>
+  getUser: () => Promise<Record<string, unknown>>
+}
+export const authInfo: AuthInfo = {
   _user: defaultUser,
   loggedIn() {
     return !!this._user;

@@ -34,6 +34,12 @@
       }"
       ></dx-item>
       <dx-item
+          location="after">
+        <div class="messages">
+          <i class="dx-icon-message"></i>
+        </div>
+      </dx-item>
+      <dx-item
         location="after"
         locate-in-menu="auto"
         menu-item-template="menuUserItem"
@@ -137,11 +143,36 @@ const userMenuItems = [{
       padding: 0;
     }
 
-       .dx-toolbar-item.menu-button > .dx-toolbar-item-content {
-         .dx-icon {
-           color: $base-accent;
-         }
-       }
+    .dx-toolbar-item.menu-button > .dx-toolbar-item-content {
+      .dx-icon {
+        color: $base-accent;
+      }
+    }
+
+    .messages {
+      padding-left: 10px;
+      position: relative;
+
+      .dx-icon-message {
+        font-size: 24px;
+      }
+
+      ::after {
+        display: block;
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        background-color: red;
+        border-radius: 50%;
+        right: -6px;
+        top: -6px;
+        font-size: 12px;
+        font-weight: bold;
+        content: "4";
+        color: white;
+        padding: 2px 6px;
+      }
+    }
 
     .user-button.authorization {
       margin-left: 10px;

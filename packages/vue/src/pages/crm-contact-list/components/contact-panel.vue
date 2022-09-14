@@ -110,15 +110,27 @@
                      onClick: toggleEdit}"
                 >
                 </dx-item>
+                <dx-item
+                  location="before"
+                  :visible="!isEditing"
+                  widget="dxButton"
+                  :options="{ icon: false,
+                     stylingMode: 'outlined',
+                     type: 'default',
+                     text: 'Details',
+                     onClick: navigateToDetails}"
+                >
+                </dx-item>
 
                 <dx-item
                   location="after"
                   widget="dxDropDownButton"
                   :options="{
-                text: 'Actions',
-                stylingMode: 'contained',
-                items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
-              }"
+                    width: 120,
+                    text: 'Actions',
+                    stylingMode: 'contained',
+                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                 }"
                 ></dx-item>
               </dx-toolbar>
             </div>
@@ -162,6 +174,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { router } from '@/router';
 // eslint-disable-next-line import/no-unresolved
 import { getContact } from 'dx-rwa-data';
 import { DxAccordion, DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
@@ -247,6 +260,10 @@ watch(
     }
   },
 );
+
+const navigateToDetails = () => {
+  router.push('/crm-contact-details');
+};
 </script>
 
 <style scoped lang="scss">

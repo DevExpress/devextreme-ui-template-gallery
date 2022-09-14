@@ -1,6 +1,6 @@
 <template>
   <span :class="'status status-' + props.status?.toLowerCase()">
-             {{ ' ' + (props.status || '') }}</span>
+             {{ (props.status || '') }}</span>
 </template>
 
 <script setup lang="ts">

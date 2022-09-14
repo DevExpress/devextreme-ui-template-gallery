@@ -45,7 +45,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['click']);
 
-function forwardClick(...args: any[]) {
+function forwardClick(...args: unknown[]) {
   emit('click', args);
 }
 
