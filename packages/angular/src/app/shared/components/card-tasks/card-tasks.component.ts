@@ -1,5 +1,5 @@
 import {
-  Component, Input, NgModule, OnChanges, OnInit, SimpleChanges, ViewChild,
+  Component, Input, NgModule, OnChanges, SimpleChanges, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -25,7 +25,6 @@ export class CardTasksComponent implements OnChanges {
   @Input() manager: string;
 
   isLoading = true;
-
 
   constructor() {
     this.onReorder = this.onReorder.bind(this);

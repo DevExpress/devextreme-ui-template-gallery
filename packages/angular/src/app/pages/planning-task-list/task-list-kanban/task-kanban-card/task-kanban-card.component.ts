@@ -27,7 +27,7 @@ export class TaskKanbanCardComponent {
 
   navigateToDetails = () => {
     this.router.navigate(['/planning-task-details']);
-  }
+  };
 }
 
 @NgModule({
