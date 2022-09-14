@@ -25,6 +25,7 @@ module.exports = {
     'vue/require-valid-default-prop': 'off',
     'linebreak-style': 0,
     'import/prefer-default-export': 'off',
+    'default-param-last': 'off',
   },
   overrides: [
     {
