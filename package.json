@@ -15,14 +15,24 @@
     "lint-css-fix": "stylelint --fix **/*.{css,scss}",
     "lint-angular": "eslint packages/angular",
     "lint-react": "eslint packages/react",
+    "lint-vue": "cd packages/vue && vue-cli-service lint",
     "lint-utils": "eslint utils/",
     "lint-bundles": "npm-run-all -p lint-angular lint-react lint-vue",
     "lint-angular-fix": "eslint --fix packages/angular",
     "lint-utils --fix": "eslint --fix utils"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.18.9",
     "@typescript-eslint/eslint-plugin": "^4.8.0",
     "@typescript-eslint/parser": "^4.8.0",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-e2e-cypress": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-typescript": "^5.0.8",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/eslint-config-airbnb": "^6.0.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
     "babel-eslint": "^10.1.0",
     "eclint": "2.8.1",
     "eslint": "^7.13.0",
@@ -46,6 +56,8 @@
     "stylelint-config-standard": "^22.0.0",
     "stylelint-config-standard-scss": "^3.0.0",
     "stylelint-scss": "^4.1.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "vue": "^3.2.38",
+    "vue-eslint-parser": "^9.0.3"
   }
 }

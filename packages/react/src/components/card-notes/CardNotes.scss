@@ -1,6 +1,12 @@
 @use "../../variables.scss" as *;
 
-.input-content,
+.input-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-notes,
 .notes-content {
   padding: 20px;
 }

@@ -1,12 +1,12 @@
 @use "../../variables.scss" as *;
 
-.input-content {
+.input-messages {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.input-content,
+.input-messages,
 .messages-content {
   padding: 20px;
 }

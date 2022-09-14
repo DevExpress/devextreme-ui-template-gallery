@@ -27,7 +27,7 @@ createTestCafe('localhost', 1437, 1438)
       .browsers('chrome:headless')
       .reporter('minimal')
       .src([
-        `tests/${args.page}${args.project === 'angular' ? '' : '.react'}.test.js`,
+        `tests/${args.page}.test.js`,
       ]);
     runner.cache = true;
 

@@ -9,7 +9,7 @@
                         "Title": "Contact List",
                         "Name": "crm-contact-list",
                         "DemoType": "Rwa",
-                        "AvailableApproaches": ["Angular", "React"]
+                        "AvailableApproaches": ["Angular", "React", "Vue"]
                     },
                     {
                         "Title": "Contact Form",
@@ -17,7 +17,9 @@
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
-                ],
+                ]
+            },
+            {
                 "Name": "Planning",
                 "Demos": [
                     {
@@ -31,7 +33,9 @@
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }
-                ],
+                ]
+            },
+            {
                 "Name": "Analytics",
                 "Demos": [
                     {
@@ -54,5 +58,4 @@
             }
         ]
     }
-    
 ]

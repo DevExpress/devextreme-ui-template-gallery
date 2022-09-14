@@ -5,7 +5,7 @@ const packages = require('./packages');
 
 const filesForChange = {
   angular: 'angular.json',
-  vue: 'src/main.js',
+  vue: 'src/main.ts',
   react: 'src/App.tsx',
 };
 

@@ -6,7 +6,6 @@
   position: relative;
   padding-bottom: 30px;
 
-  .default-label,
   .priority-task,
   .status-task {
     position: absolute;
@@ -16,8 +15,13 @@
       font-size: 13px;
     }
   }
+}
 
-  .default-label {
+.details {
+  position: relative;
+  display: flex;
+
+  span {
     margin-top: 12px;
   }
 }

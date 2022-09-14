@@ -50,7 +50,7 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
 
   return (
     <div className={'side-nav-outer-toolbar'}>
-      <Header menuToggleEnabled toggleMenu={toggleMenu} title={title} />
+      <Header className='layout-header' menuToggleEnabled toggleMenu={toggleMenu} title={title} />
       <Drawer
         className={['drawer', patchCssClass].join(' ')}
         position={'before'}

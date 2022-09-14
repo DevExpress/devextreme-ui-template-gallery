@@ -7,6 +7,7 @@ export interface HeaderProps {
   menuToggleEnabled: boolean;
   title?: string;
   toggleMenu: (e: ClickEvent) => void;
+  className?: string;
 }
 
 export interface SideNavigationMenuProps {
