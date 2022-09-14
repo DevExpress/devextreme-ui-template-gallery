@@ -7,7 +7,7 @@ import {
 import { Task } from 'src/app/shared/types/task';
 import { Contact } from 'src/app/shared/types/contact';
 
-const API_URL = 'https://localhost:5001/api';
+const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
 
 @Injectable()
 export class RwaService {
