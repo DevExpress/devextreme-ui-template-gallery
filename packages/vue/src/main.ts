@@ -8,7 +8,7 @@ import './dx-styles.scss';
 const app = createApp(App);
 app.use(router);
 app.provide<AppInfo>(appInfoInjectKey, {
-  title: 'UI Templates Gallery',
+  title: 'UI Template Gallery',
 });
 
 app.mount('#app');

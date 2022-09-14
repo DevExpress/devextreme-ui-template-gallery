@@ -16,7 +16,7 @@
                 <span v-if="props.showBy">by</span>
                 <span>{{ item.manager }}</span>
               </div>
-              <dx-button icon="overflow"></dx-button>
+              <dx-menu class="overflow-menu" :items="activityMenuItems"></dx-menu>
             </div>
           </div>
         </template>
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { DxList } from 'devextreme-vue/list';
-import { DxButton } from 'devextreme-vue/button';
+import { DxMenu } from 'devextreme-vue/menu';
 import { formatDate } from '@/utils/formatters';
 import type { Activity } from '@/types/activities';
 import LoadComponent from '@/components/load-component.vue';
@@ -40,9 +40,18 @@ const props = withDefaults(defineProps<{
   isLoading: true,
   showBy: false,
 });
+
+const activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
+  icon: 'overflow',
+  items: [
+    { text: 'View details' },
+    { text: 'Delete' },
+  ],
+},
+];
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use '@/variables' as *;
 
 #activities-list {
@@ -51,7 +60,7 @@ const props = withDefaults(defineProps<{
   position: relative;
   display: block;
 
-  .dx-list-item {
+  &:deep(.dx-list-item) {
     margin: 10px 0;
     overflow: visible;
     background: transparent;

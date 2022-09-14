@@ -25,7 +25,7 @@
       <!-- Toolbar -->
       <dx-grid-toolbar>
         <dx-grid-toolbar-item location="before">
-          <div class="grid-header">Contact List</div>
+          <div class="grid-header">Contacts</div>
         </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item location="before" locateInMenu="auto">
@@ -143,7 +143,7 @@ import DxDataGrid, {
 // eslint-disable-next-line import/no-unresolved
 import { getContacts } from 'dx-rwa-data';
 
-import { contactStatusList, Contact, ContactStatus } from '@/types/contact';
+import { contactStatusList, Contact } from '@/types/contact';
 import { RowClickEvent } from 'devextreme/ui/data_grid';
 import DataSource from 'devextreme/data/data_source';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
@@ -151,13 +151,12 @@ import { formatPhone } from '@/utils/formatters';
 import UserStatus from '@/components/user-status.vue';
 import ContactPanel from './components/contact-panel.vue';
 
-type FilterContactStatus = ContactStatus | 'All Contacts';
-
 const panelData = ref<Array<Contact> | null>(null);
 const isPanelOpen = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
 
-const filterStatusList = ['All Contacts', ...contactStatusList];
+const filterStatusList = ['All', ...contactStatusList];
+type FilterContactStatus = typeof filterStatusList[number];
 const dataSource = new DataSource({
   key: 'id',
   load: () => getContacts(),
@@ -177,7 +176,7 @@ const addRow = () => {
 const filterByStatus = (e: SelectionChangedEvent) => {
   const { item: status }: { item: FilterContactStatus } = e;
 
-  if (status === 'All Contacts') {
+  if (status === 'All') {
     dataGrid.value?.instance.clearFilter();
   } else {
     dataGrid.value?.instance.filter(['status', '=', status]);

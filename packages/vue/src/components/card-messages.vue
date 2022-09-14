@@ -13,24 +13,25 @@
           label="Message"
           styling-mode="outlined"
           :value="messageText"
+          :height="150"
           @value-changed="e => messageText = e.value"
         />
 
         <dx-toolbar>
           <dx-item
-            location="before"
-            widget="dxButton"
-            :options="{
-          text: 'Attach File',
-          stylingMode: 'contained',
-          type: 'default',
-          icon: 'attach'
-        }"/>
+            location="before">
+            <dx-file-uploader
+              class="file-uploader"
+              labelText=""
+              selectButtonText="Attach file"
+            >
+            </dx-file-uploader>
+          </dx-item>
           <dx-item
             location="after"
             widget="dxButton"
             :options="{
-          text: 'Send',
+          text: 'Add',
           stylingMode: 'outlined',
           type: 'default',
           onClick: send
@@ -64,6 +65,7 @@ import { DxTextArea } from 'devextreme-vue/text-area';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
+import { DxFileUploader } from 'devextreme-vue/file-uploader';
 import { formatDate } from '@/utils/formatters';
 import LoadComponent from '@/components/load-component.vue';
 
@@ -127,9 +129,20 @@ function send() {
   gap: 20px;
 }
 
+:deep(.file-uploader) {
+  .dx-fileuploader-wrapper {
+    padding: 0;
+
+    .dx-fileuploader-input-wrapper {
+      padding: 0;
+    }
+  }
+}
+
 .input-content,
 .messages-content {
   padding: 20px;
+  height: 320px;
 }
 
 .messages-content {

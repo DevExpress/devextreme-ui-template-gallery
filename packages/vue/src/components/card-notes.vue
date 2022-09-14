@@ -17,11 +17,11 @@
               location="after"
               widget="dxButton"
               :options="{
-          text: 'Add',
-          stylingMode: 'outlined',
-          type: 'default',
-          onClick: addNote
-        }"
+                  text: 'Add',
+                  stylingMode: 'outlined',
+                  type: 'default',
+                  onClick: addNote
+              }"
             >
             </dx-item>
           </dx-toolbar>
@@ -102,8 +102,10 @@ onMounted(() => {
 <style scoped lang="scss">
 @use "@/variables" as *;
 
-#card-notes {
- min-height: 300px;
+.input-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .input-content,
@@ -118,7 +120,7 @@ onMounted(() => {
 
 .note {
   background-color: $base-bg;
-  padding: 5px 10px 10px 10px;
+  padding: 10px;
   margin-bottom: 10px;
 
   &:deep(.note-title) {
