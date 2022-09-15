@@ -56,21 +56,15 @@ header {
     .dx-icon-message {
       font-size: 24px;
     }
-
-    ::after {
+    .dx-badge {
       display: block;
       position: absolute;
-      width: 18px;
-      height: 18px;
       background-color: red;
-      border-radius: 50%;
-      right: -6px;
-      top: -6px;
-      font-size: 12px;
-      font-weight: bold;
-      content: "4";
       color: white;
-      padding: 2px 6px;
+      right: -15%;
+      top: -15%;
+      font-size: 12px;
+      padding: 0 4px;
     }
   }
 }
