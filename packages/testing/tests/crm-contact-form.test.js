@@ -38,23 +38,6 @@ const setEmbedded = async (t, embed, screenMode) => {
         .ok(compareResults.errorMessages());
     });
 
-    test(`Crm contact form Form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
-      const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
-      // eslint-disable-next-line max-len
-      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
-
-      const form = Selector('.dx-form');
-
-      await takeScreenshot(`crm-form-readonly-embed=${embedded}-${screenMode[0]}`, form);
-      await t.click(Selector('.dx-button[aria-label=Edit]'));
-      await takeScreenshot(`crm-form-edit-embed=${embedded}-${screenMode[0]}`, form);
-
-      await t
-        .expect(compareResults.isValid())
-        .ok(compareResults.errorMessages());
-    });
-
     test(`Crm contact form tabpanel (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       if (screenMode[0] === 400) return;
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
