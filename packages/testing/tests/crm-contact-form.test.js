@@ -7,9 +7,9 @@ import { toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const BASE_URL = `http://localhost:${process.env.port}/#/crm-contact-form`;
+const BASE_URL = `http://localhost:${process.env.port}/#/crm-contact-details`;
 
-fixture`Contact Form`;
+fixture`Contact Details`;
 
 const setEmbedded = async (t, embed, screenMode) => {
   if (embed) {
@@ -23,7 +23,7 @@ const setEmbedded = async (t, embed, screenMode) => {
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
-    test(`Crm contact form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
+    test(`Crm contact details (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
       // eslint-disable-next-line max-len
@@ -31,14 +31,31 @@ const setEmbedded = async (t, embed, screenMode) => {
 
       await t.click(Selector('.dx-drawer-content'));
       await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
-      await takeScreenshot(`crm-contact-form-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`crm-contact-details-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
         .expect(compareResults.isValid())
         .ok(compareResults.errorMessages());
     });
 
-    test(`Crm contact form tabpanel (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
+    test(`Crm contact details Form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
+      const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+
+      // eslint-disable-next-line max-len
+      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
+
+      const form = Selector('.dx-form');
+
+      await takeScreenshot(`crm-details-readonly-embed=${embedded}-${screenMode[0]}`, form);
+      await t.click(Selector('.dx-button[aria-label=Edit]'));
+      await takeScreenshot(`crm-details-edit-embed=${embedded}-${screenMode[0]}`, form);
+
+      await t
+        .expect(compareResults.isValid())
+        .ok(compareResults.errorMessages());
+    });
+
+    test(`Crm contact details tabpanel (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       if (screenMode[0] === 400) return;
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
@@ -54,7 +71,7 @@ const setEmbedded = async (t, embed, screenMode) => {
         const tabName = (await tab.innerText).toLowerCase();
 
         await t.click(tab);
-        await takeScreenshot(`crm-form-tab-${tabName}-embed=${embedded}-${screenMode[0]}`, tabPanels.nth(indexTab));
+        await takeScreenshot(`crm-details-tab-${tabName}-embed=${embedded}-${screenMode[0]}`, tabPanels.nth(indexTab));
       }
 
       await t
