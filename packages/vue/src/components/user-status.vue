@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<{
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use 'src/variables' as *;
 @use "sass:math";
 

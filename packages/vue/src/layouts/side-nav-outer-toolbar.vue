@@ -107,7 +107,7 @@ const drawerOptions = computed(() => {
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use '../variables' as *;
 
 .side-nav-outer-toolbar {
