@@ -14,10 +14,10 @@ import { AppInfo, appInfoInjectKey } from '@/types/app-info';
 const appInfo = inject<AppInfo>(appInfoInjectKey);
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "../variables.scss";
 
-.footer {
+.content-block footer {
   display: block;
   color: rgba($base-text-color, alpha($base-text-color) * 0.7);
   border-top: 1px solid rgba(0, 0, 0, 0.1);

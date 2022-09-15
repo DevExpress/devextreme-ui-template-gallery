@@ -33,10 +33,11 @@
         width: 180
       }"
       ></dx-item>
-      <dx-item
-          location="after">
-        <div class="messages">
-          <i class="dx-icon-message"></i>
+      <dx-item location="after">
+        <div class="messages" >
+          <div class="dx-icon-message">
+            <div class="dx-badge">4</div>
+          </div>
         </div>
       </dx-item>
       <dx-item
@@ -81,7 +82,7 @@ import UserPanel from './user-panel.vue';
 const router = useRouter();
 const route = useRoute();
 
-const user = ref({});
+const user = ref<Record<string, unknown> | unknown>({});
 
 defineProps<{
   menuToggleEnabled: boolean,
@@ -89,7 +90,7 @@ defineProps<{
     toggleMenuFunc:(e: unknown) => void,
 }>();
 
-auth.getUser().then((e: unknown) => {
+auth.getUser().then((e) => {
   user.value = e.data;
 });
 
@@ -119,8 +120,18 @@ const userMenuItems = [{
   onClick: onLogoutClick,
 }];
 </script>
-
 <style lang="scss">
+.dx-theme-generic {
+  .layout-header .dx-toolbar {
+    padding: 10px 0;
+  }
+
+  .user-button > .dx-button-content {
+    padding: 5px;
+  }
+}
+</style>
+<style scoped lang="scss">
 @use "../variables" as *;
 
 .header-component {
@@ -128,7 +139,7 @@ const userMenuItems = [{
   z-index: 1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 0 4px rgba(0, 0, 0, 0.15);
 
-  .dx-toolbar {
+  &:deep(.dx-toolbar) {
     &.header-toolbar .dx-toolbar-items-container .dx-toolbar-after {
       padding: 0 40px;
 
@@ -157,20 +168,15 @@ const userMenuItems = [{
         font-size: 24px;
       }
 
-      ::after {
+      .dx-badge {
         display: block;
         position: absolute;
-        width: 18px;
-        height: 18px;
         background-color: red;
-        border-radius: 50%;
-        right: -6px;
-        top: -6px;
-        font-size: 12px;
-        font-weight: bold;
-        content: "4";
         color: white;
-        padding: 2px 6px;
+        right: -15%;
+        top: -15%;
+        font-size: 12px;
+        padding: 0 4px;
       }
     }
 
@@ -178,21 +184,11 @@ const userMenuItems = [{
       margin-left: 10px;
     }
   }
-}
 
-.header-title .dx-item-content {
-  color: $base-accent;
-  padding: 0;
-  margin: 0;
-}
-
-.dx-theme-generic {
- .layout-header .dx-toolbar {
-    padding: 10px 0;
-  }
-
-  .user-button > .dx-button-content {
-    padding: 5px;
+  .header-title .dx-item-content {
+    color: $base-accent;
+    padding: 0;
+    margin: 0;
   }
 }
 

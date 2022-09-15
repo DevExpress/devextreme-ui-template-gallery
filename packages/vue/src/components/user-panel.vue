@@ -35,7 +35,7 @@ defineProps({
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use '@/variables.scss' as *;
 
 .user-info {
