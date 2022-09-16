@@ -172,7 +172,7 @@
 
     <div *dxTemplate="let data of 'dueDate'">
       <form-item-date
-        text="Due Date"
+        text="Set Due Date"
         [(value)]="task.dueDate"
         (valueChange)="dueDateChange($event)"
       ></form-item-date>
@@ -181,6 +181,7 @@
 
   <dx-load-panel
     [visible]="isLoading"
+    [showPane]="false"
     content="#task-form"
     [position]="{ of: '#task-form' }"
   ></dx-load-panel>

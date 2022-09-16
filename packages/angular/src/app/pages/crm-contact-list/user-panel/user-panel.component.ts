@@ -2,6 +2,7 @@ import {
   Component, OnInit, OnChanges, OnDestroy, NgModule, Output, Input, SimpleChanges, EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import {
   DxAccordionModule,
   DxButtonModule,
@@ -13,7 +14,6 @@ import {
   DxFormModule,
 } from 'devextreme-angular';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
-import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   CardActivitiesModule,
   ContactStatusModule,
@@ -53,7 +53,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   userPanelSubscriptions: Subscription[] = [];
 
-  constructor(private screen: ScreenService, private service: RwaService) {
+  constructor(private screen: ScreenService, private service: RwaService, private router: Router) {
     this.userPanelSubscriptions.push(this.screen.changed.subscribe(this.calculatePin.bind(this)));
   }
 
@@ -112,6 +112,10 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
   toggleEdit = () => {
     this.isEditing = !this.isEditing;
     this.setEditorMode(this.isEditing);
+  };
+
+  navigateToDetails = () => {
+    this.router.navigate(['/crm-contact-details']);
   };
 }
 

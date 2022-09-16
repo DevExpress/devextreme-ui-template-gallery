@@ -1,5 +1,16 @@
 <div id="card-opportunies">
   <ng-container *ngIf="!isLoading">
+    <dx-button
+      text="Add Opportunity"
+      icon="add"
+      width="300"
+      height="115"
+      stylingMode="outlined"
+      type="default"
+      class="add-tile"
+      (onClick)="addOpportunity()"
+    ></dx-button>
+
     <div class="opportunities-block">
       <div class="dx-form-group-caption">Active</div>
       <div class="opportunities-container">
@@ -11,17 +22,6 @@
         </div>
       </div>
     </div>
-
-    <dx-button
-      text="Add Opportunity"
-      icon="add"
-      width="320"
-      height="60"
-      stylingMode="outlined"
-      type="default"
-      class="add-tile"
-      (onClick)="addOpportunity()"
-    ></dx-button>
 
     <div class="opportunities-block">
       <div class="dx-form-group-caption">Closed</div>
@@ -36,19 +36,22 @@
     </div>
 
     <ng-template #opportunity let-item="item">
-      <div class="name">{{ item.name }}</div>
-      <div class="product-info"
-        >Products: {{ item.products }}, total:
-        <span class="total">{{ item.total | currency }}</span>
-      </div>
-      <div class="owner">
-        Owner: <span class="owner-name">{{ item.manager }}</span>
+      <div (click)="opportunityClick()" class="opportunity">
+        <div class="name">{{ item.name }}</div>
+        <div class="product-info"
+          >Products: {{ item.products }}, total:
+          <span class="total">{{ item.total | currency }}</span>
+        </div>
+        <div class="owner">
+          Owner: <span class="owner-name">{{ item.manager }}</span>
+        </div>
       </div>
     </ng-template>
   </ng-container>
 
   <dx-load-panel
     [visible]="isLoading"
+    [showPane]="false"
     container="#card-opportunies"
     [position]="{ of: '#card-opportunies' }"
   ></dx-load-panel>

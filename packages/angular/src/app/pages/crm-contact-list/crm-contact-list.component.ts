@@ -10,6 +10,8 @@ import {
   DxTextBoxModule,
 } from 'devextreme-angular';
 import { RowClickEvent, RowPreparedEvent, ColumnCustomizeTextArg } from 'devextreme/ui/data_grid';
+import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
+import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
 import {
   CardActivitiesModule,
   ContactStatusModule,
@@ -19,9 +21,12 @@ import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver-es';
+import { jsPDF } from 'jspdf';
 import { UserPanelModule } from './user-panel/user-panel.component';
 
-type FilterContactStatus = ContactStatus | 'All Contacts';
+type FilterContactStatus = ContactStatus | 'All';
 
 @Component({
   templateUrl: './crm-contact-list.component.html',
@@ -33,7 +38,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
 
   statusList = contactStatusList;
 
-  filterStatusList = ['All Contacts', ...contactStatusList];
+  filterStatusList = ['All', ...contactStatusList];
 
   isPanelOpen = false;
 
@@ -80,7 +85,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
   filterByStatus = (e: SelectionChangedEvent) => {
     const { item: status }: { item: FilterContactStatus } = e;
 
-    if (status === 'All Contacts') {
+    if (status === 'All') {
       this.dataGrid.instance.clearFilter();
     } else {
       this.dataGrid.instance.filter(['status', '=', status]);
@@ -98,6 +103,32 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
 
     return this.formatPhone(value.toString());
   };
+
+  onExporting(e) {
+    if (e.format === 'pdf') {
+      const doc = new jsPDF();
+      exportDataGridToPdf({
+        jsPDFDocument: doc,
+        component: e.component,
+      }).then(() => {
+        doc.save('Tasks.pdf');
+      });
+    } else {
+      const workbook = new Workbook();
+      const worksheet = workbook.addWorksheet('Tasks');
+
+      exportDataGridToXLSX({
+        component: e.component,
+        worksheet,
+        autoFilterEnabled: true,
+      }).then(() => {
+        workbook.xlsx.writeBuffer().then((buffer) => {
+          saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Tasks.xlsx');
+        });
+      });
+      e.cancel = true;
+    }
+  }
 }
 
 @NgModule({

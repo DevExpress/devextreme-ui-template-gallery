@@ -13,7 +13,11 @@
           <span *ngIf="showBy">by</span>
           <span>{{ item.manager }}</span>
         </div>
-        <dx-button icon="overflow"></dx-button>
+        <dx-menu 
+          class="overflow-menu"
+          [items]="activityMenuItems"
+          >
+        </dx-menu>
       </div>
     </div>
   </dx-list>
@@ -22,5 +26,6 @@
     container="#activities-list"
     [position]="{ of: '#activities-list' }"
     [visible]="isLoading"
+    [showPane]="false"
   ></dx-load-panel>
 </div>

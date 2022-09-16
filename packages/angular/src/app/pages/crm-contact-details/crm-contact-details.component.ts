@@ -22,11 +22,11 @@ import { ContactFormModule } from './contact-form/contact-form.component';
 import { ContactCardsModule } from './contact-cards/contact-cards.component';
 
 @Component({
-  templateUrl: './crm-contact-form.component.html',
-  styleUrls: ['./crm-contact-form.component.scss'],
+  templateUrl: './crm-contact-details.component.html',
+  styleUrls: ['./crm-contact-details.component.scss'],
   providers: [RwaService],
 })
-export class CrmContactFormComponent implements OnInit, OnDestroy {
+export class CrmContactDetailsComponent implements OnInit, OnDestroy {
   contactId = 12;
 
   contactData$: Observable<Contact>;
@@ -39,7 +39,7 @@ export class CrmContactFormComponent implements OnInit, OnDestroy {
 
   closedOpportunities: Opportunities;
 
-  contactName: string;
+  contactName = 'Loading...';
 
   subscriptions: Subscription[] = [];
 
@@ -99,6 +99,6 @@ export class CrmContactFormComponent implements OnInit, OnDestroy {
   ],
   providers: [],
   exports: [],
-  declarations: [CrmContactFormComponent],
+  declarations: [CrmContactDetailsComponent],
 })
-export class CrmContactFormModule { }
+export class CrmContactDetailsModule { }

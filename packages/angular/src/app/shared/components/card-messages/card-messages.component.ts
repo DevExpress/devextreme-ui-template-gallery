@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, Input, NgModule, OnInit,
+  Component, Input, NgModule,
 } from '@angular/core';
-import {
-  DxTextAreaModule,
-  DxTextBoxModule,
-  DxToolbarModule,
-  DxButtonModule,
-} from 'devextreme-angular';
+import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
+import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
+import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
+import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
+import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 import { Message, Messages } from 'src/app/shared/types/messages';
 
 @Component({
@@ -37,7 +37,7 @@ export class CardMessagesComponent {
     return text.replace('{username}', this.user);
   }
 
-  send = () => {
+  add = () => {
     if (this.messageText === '' || this.messageTitle === '') {
       return;
     }
@@ -60,6 +60,8 @@ export class CardMessagesComponent {
     DxTextAreaModule,
     DxTextBoxModule,
     DxToolbarModule,
+    DxFileUploaderModule,
+    DxScrollViewModule,
     DxButtonModule,
     CommonModule,
   ],

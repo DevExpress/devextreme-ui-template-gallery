@@ -13,7 +13,7 @@
                     },
                     {
                         "Title": "Contact Form",
-                        "Name": "crm-contact-form",
+                        "Name": "crm-contact-details",
                         "DemoType": "Rwa",
                         "AvailableApproaches": ["Angular"]
                     }

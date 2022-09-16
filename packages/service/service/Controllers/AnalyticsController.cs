@@ -48,10 +48,10 @@ namespace service.Controllers {
 
 
             return new List<SalesOrOpportunitiesByCategory>() {
-                new SalesOrOpportunitiesByCategory() { Name = "High",        Value = quotes.Where(q => q.QuoteOpportunity > 0.6).Sum(q => q.QuoteTotal) },
-                new SalesOrOpportunitiesByCategory() { Name = "Medium",      Value = quotes.Where(q => q.QuoteOpportunity > 0.3 && q.QuoteOpportunity < 0.6).Sum(q => q.QuoteTotal) },
-                new SalesOrOpportunitiesByCategory() { Name = "Low",         Value = quotes.Where(q => q.QuoteOpportunity > 0.12 && q.QuoteOpportunity < 0.3).Sum(q => q.QuoteTotal) },
-                new SalesOrOpportunitiesByCategory() { Name = "Unlikely",    Value = quotes.Where(q => q.QuoteOpportunity < 0.12).Sum(q => q.QuoteTotal) }
+                new SalesOrOpportunitiesByCategory() { Name = "Sales",        Value = quotes.Where(q => q.QuoteOpportunity > 0.6).Sum(q => q.QuoteTotal) },
+                new SalesOrOpportunitiesByCategory() { Name = "Quotes",      Value = quotes.Where(q => q.QuoteOpportunity > 0.3 && q.QuoteOpportunity < 0.6).Sum(q => q.QuoteTotal) },
+                new SalesOrOpportunitiesByCategory() { Name = "Opportunities",         Value = quotes.Where(q => q.QuoteOpportunity > 0.12 && q.QuoteOpportunity < 0.3).Sum(q => q.QuoteTotal) },
+                new SalesOrOpportunitiesByCategory() { Name = "Leads",    Value = quotes.Where(q => q.QuoteOpportunity < 0.12).Sum(q => q.QuoteTotal) }
             };
         }
 

@@ -6,9 +6,20 @@
   gap: 20px;
 }
 
+::ng-deep .file-uploader {
+  .dx-fileuploader-wrapper {
+    padding: 0;
+
+    .dx-fileuploader-input-wrapper {
+      padding: 0;
+    }
+  }
+}
+
 .input-content,
 .messages-content {
   padding: 20px;
+  height: 320px;
 }
 
 .messages-content {

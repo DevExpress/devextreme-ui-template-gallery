@@ -2,9 +2,19 @@
   *ngIf="!isLoading"
   [dataSource]="tasks"
   (onRowPrepared)="onRowPreparedGrid($event)"
+  (onRowClick)="navigateToDetails()"
   [columnAutoWidth]="true"
 >
-  <dxo-scrolling mode="virtual"></dxo-scrolling>
+  <dxo-paging [pageSize]="7"> </dxo-paging>
+  <dxo-pager
+    [visible]="true"
+  >
+  </dxo-pager>
+  <dxo-editing
+    mode="row"
+    [allowUpdating]="true"
+  >
+  </dxo-editing>
   <dxo-selection
     selectAllMode="allPages"
     showCheckBoxesMode="always"
@@ -110,6 +120,7 @@
 
 <dx-load-panel
   [visible]="isLoading"
+  [showPane]="false"
   container=".content"
   [position]="{ of: '.content' }"
 ></dx-load-panel>

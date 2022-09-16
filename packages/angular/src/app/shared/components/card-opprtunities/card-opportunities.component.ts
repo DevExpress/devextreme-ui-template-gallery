@@ -35,6 +35,10 @@ export class CardOpportunitiesComponent implements OnChanges {
   addOpportunity = () => {
     notify('Add opportunity event');
   };
+
+  opportunityClick() {
+    notify('Click opportunity event');
+  }
 }
 
 @NgModule({

@@ -2,12 +2,11 @@ import {
   Component, OnInit, NgModule, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  DxButtonModule,
-  DxLoadPanelModule,
-  DxScrollViewModule,
-  DxSortableModule,
-} from 'devextreme-angular';
+import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
+import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
+import { DxSortableModule } from 'devextreme-angular/ui/sortable';
+import { DxMenuModule } from 'devextreme-angular/ui/menu';
 import notify from 'devextreme/ui/notify';
 import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable';
 import { Task } from 'src/app/shared/types/task';
@@ -32,6 +31,16 @@ export class TaskListKanbanComponent implements OnInit, OnChanges {
   isLoading = true;
 
   statuses = taskStatusList;
+
+  boardMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
+    icon: 'more',
+    items: [
+      { text: 'Add card...' },
+      { text: 'Copy list..' },
+      { text: 'Move list..' },
+    ],
+  },
+  ];
 
   fillOutBoard = (cards: Task[]): Board[] => {
     const result: Board[] = [];
@@ -96,6 +105,7 @@ export class TaskListKanbanComponent implements OnInit, OnChanges {
     DxLoadPanelModule,
     DxScrollViewModule,
     DxSortableModule,
+    DxMenuModule,
 
     TaskKanbanCardModule,
 

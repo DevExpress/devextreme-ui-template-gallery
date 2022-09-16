@@ -5,6 +5,7 @@
     [dataSource]="dataSource"
     (onRowClick)="rowClick($event)"
     (onRowPrepared)="rowPrepared($event)"
+    (onExporting)="onExporting($event)"
   >
     <dxo-scrolling mode="virtual"></dxo-scrolling>
     <dxo-selection
@@ -19,11 +20,15 @@
       [visible]="true"
       placeholder="Contact Search"
     ></dxo-search-panel>
-    <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-export 
+      [enabled]="true" 
+      [allowExportSelectedData]="true" 
+      [formats]="['xlsx', 'pdf']">
+    </dxo-export>
 
     <dxo-toolbar>
       <dxi-item location="before">
-        <div class="grid-header">Contact List</div>
+        <div class="grid-header">Contacts</div>
       </dxi-item>
       <dxi-item location="before" locateInMenu="auto">
         <dx-drop-down-button

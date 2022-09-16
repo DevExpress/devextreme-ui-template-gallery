@@ -3,6 +3,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 import {
   DxButtonModule,
   DxDataGridComponent,
@@ -57,6 +58,9 @@ export class TaskListGridComponent implements OnChanges {
     });
   };
 
+  constructor(private router: Router) {
+  }
+
   isLoading = true;
 
   statusList = taskStatusList;
@@ -85,6 +89,10 @@ export class TaskListGridComponent implements OnChanges {
 
   tabsItemClick = (e: TabsItemClickEvenet) => {
     this.tabValueChanged.emit(e);
+  };
+
+  navigateToDetails = () => {
+    this.router.navigate(['/planning-task-details']);
   };
 }
 

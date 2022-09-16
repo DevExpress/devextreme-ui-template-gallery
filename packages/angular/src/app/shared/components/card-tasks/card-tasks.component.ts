@@ -1,5 +1,5 @@
 import {
-  Component, Input, NgModule, OnChanges, OnInit, SimpleChanges, ViewChild,
+  Component, Input, NgModule, OnChanges, SimpleChanges, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -7,6 +7,7 @@ import {
   DxDataGridModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
+import { RowDraggingReorderEvent } from 'devextreme/ui/data_grid';
 import { Task } from '../../types/task';
 
 @Component({
@@ -25,12 +26,25 @@ export class CardTasksComponent implements OnChanges {
 
   isLoading = true;
 
+  constructor() {
+    this.onReorder = this.onReorder.bind(this);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     this.isLoading = !changes.tasks?.currentValue;
 
     if (!this.isLoading) {
       this.currentTasks = changes.tasks.currentValue.filter((item) => !!item.status && !!item.priority);
     }
+  }
+
+  onReorder(e: RowDraggingReorderEvent) {
+    const visibleRows = e.component.getVisibleRows();
+    const toIndex = this.currentTasks.indexOf(visibleRows[e.toIndex].data);
+    const fromIndex = this.currentTasks.indexOf(e.itemData);
+
+    this.currentTasks.splice(fromIndex, 1);
+    this.currentTasks.splice(toIndex, 0, e.itemData);
   }
 }
 
