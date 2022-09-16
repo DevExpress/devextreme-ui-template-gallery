@@ -16,7 +16,7 @@ class MetadataChecker {
         result = false;
       }
     });
-    
+
     return result;
   }
 
