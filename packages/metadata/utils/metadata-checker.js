@@ -5,14 +5,19 @@ const { existsSync, readFileSync } = require('fs');
 const requireFromString = require('require-from-string');
 
 class MetadataChecker {
-  descriptionFileExists(viewName) {
-    const descriptionLocation = join(__dirname, '..', 'descriptions');
-    const descriptionFilePath = join(descriptionLocation, `${viewName}.md`);
-    if (!existsSync(descriptionFilePath)) {
-      console.error(`Description for view ${viewName} does not exists (${descriptionFilePath})`);
-      return false;
-    }
-    return true;
+  descriptionFileExists(demo) {
+    let result = true;
+
+    demo.AvailableApproaches.forEach((approach) => {
+      const descriptionLocation = join(__dirname, '..', 'descriptions', approach.toLowerCase());
+      const descriptionFilePath = join(descriptionLocation, `${demo.Name}.md`);
+      if (!existsSync(descriptionFilePath)) {
+        console.error(`Description for ${approach} view ${demo.Name} does not exists (${descriptionFilePath})`);
+        result = false;
+      }
+    });
+    
+    return result;
   }
 
   getViewFilePath(approach, viewName) {
@@ -91,7 +96,7 @@ class MetadataChecker {
   }
 
   checkView(demo) {
-    return this.descriptionFileExists(demo.Name)
+    return this.descriptionFileExists(demo)
             && this.viewFileExists(demo)
             && this.navigationExists(demo);
   }
