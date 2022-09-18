@@ -12,7 +12,7 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
   styleUrls: ['./card-analytics.component.scss'],
 })
 export class CardAnalytticsComponent implements OnChanges, OnInit {
-  @Input() title: string;
+  @Input() titleText: string;
 
   @Input() contentClass: string;
 

@@ -57,7 +57,7 @@
   <div class="cards">
     <card-analytics
       class="grey"
-      title="Opportunities"
+      titleText="Opportunities"
       [showData]="getTotal(opportunities)"
       contentClass="opportunities-total"
     >
@@ -71,7 +71,7 @@
     </card-analytics>
     <card-analytics
       class="grey"
-      title="Revenue Total"
+      titleText="Revenue Total"
       [showData]="getTotal(sales)"
       contentClass="revenue-total"
     >
@@ -85,7 +85,7 @@
     </card-analytics>
     <card-analytics
       class="grey"
-      title="Conversion"
+      titleText="Conversion"
       [showData]="true"
       contentClass="revenue-total"
     >
@@ -97,7 +97,7 @@
     </card-analytics>
     <card-analytics
       class="grey"
-      title="Leads"
+      titleText="Leads"
       [showData]="true"
       contentClass="revenue-total"
     >
@@ -110,7 +110,7 @@
   </div>
 
   <div class="cards">
-    <card-analytics title="Revenue" contentClass="sales" [showData]="!!sales">
+    <card-analytics titleText="Revenue" contentClass="sales" [showData]="!!sales">
       <dx-chart [dataSource]="sales">
         <dxi-series valueField="total"></dxi-series>
         <dxo-common-series-settings argumentField="date" type="splinearea">
@@ -122,7 +122,7 @@
       </dx-chart>
     </card-analytics>
     <card-analytics
-      title="Conversion Funnel (All Products)"
+      titleText="Conversion Funnel (All Products)"
       contentClass="opportunities"
       [showData]="!!opportunities"
     >
@@ -148,7 +148,7 @@
       </dx-funnel>
     </card-analytics>
     <card-analytics
-      title="Revenue Analysis"
+      titleText="Revenue Analysis"
       contentClass="sales-by-state"
       [showData]="!!salesByState"
     >
@@ -205,7 +205,7 @@
       </dx-data-grid>
     </card-analytics>
     <card-analytics
-      title="Revenue Snapshot (All Products)"
+      titleText="Revenue Snapshot (All Products)"
       contentClass="sales-by-category"
       [showData]="!!salesByCategory"
     >

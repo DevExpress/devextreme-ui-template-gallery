@@ -27,13 +27,9 @@
     ></dxi-column>
     <dxi-column
       caption="Assigned To"
-      cellTemplate="assignTemplate"
+      dataField="manager"
       [hidingPriority]="0"
-    >
-      <div *dxTemplate="let data of 'assignTemplate'">
-        {{ manager }}
-      </div>
-    </dxi-column>
+    ></dxi-column>
   </dx-data-grid>
 
   <dx-load-panel

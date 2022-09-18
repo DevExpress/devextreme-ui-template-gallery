@@ -46,7 +46,15 @@
 .sales-bars {
   width: calc(100% - 600px);
 }
-
+.sales-filter {
+  opacity: 60%;
+  display: inline-block;
+  
+  & dx-drop-down-button {
+    position: absolute;
+    top: 12px;
+  }
+}
 .cards {
   display: flex;
   margin: 8px -20px;
