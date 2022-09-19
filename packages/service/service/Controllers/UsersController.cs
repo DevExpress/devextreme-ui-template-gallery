@@ -13,19 +13,16 @@ namespace service.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("ApplicationPolicy")]
-    public class UsersController : ControllerBase
-    {
+    public class UsersController : ControllerBase {
         private readonly RwaContext _context;
 
-        public UsersController(RwaContext context)
-        {
+        public UsersController(RwaContext context) {
             _context = context;
         }
 
         // GET: api/Users/Contacts
         [HttpGet("Contacts")]
-        public async Task<ActionResult<IEnumerable<dynamic>>> GetContacts()
-        {
+        public async Task<ActionResult<IEnumerable<dynamic>>> GetContacts() {
             return await _context.Contacts
                 .Include(c => c.Company)
                 .Include(c => c.ActivitiesLists)
@@ -44,8 +41,7 @@ namespace service.Controllers {
 
         // GET: api/Users/Contacts/10
         [HttpGet("Contacts/{id}")]
-        public async Task<ActionResult<dynamic>> GetContact(int id)
-        {
+        public async Task<ActionResult<dynamic>> GetContact(int id) {
             return await _context.Contacts
                 //.Include(_ => _.Company)
                 .Include(_ => _.ActivitiesLists)
@@ -82,7 +78,7 @@ namespace service.Controllers {
                         date = t.DueDate,
                         status = t.Status,
                         priority = t.Priority,
-
+                        manager = t.Manager.EmployeeFullName
                     }),
                     image = s.EmployeePicture,
                 })
@@ -93,8 +89,7 @@ namespace service.Controllers {
         [HttpGet("Statuses")]
         public async Task<ActionResult<IEnumerable<dynamic>>> GetStatuses() {
             return await _context.Contacts
-               .Select(s => new
-               {
+               .Select(s => new {
                    text = s.EmployeeStatus,
                    status = s.EmployeeStatus,
                }).Distinct().ToListAsync();
@@ -102,8 +97,7 @@ namespace service.Controllers {
 
         // GET: api/Users/States
         [HttpGet("States")]
-        public async Task<ActionResult<IEnumerable<State>>> GetStates()
-        {
+        public async Task<ActionResult<IEnumerable<State>>> GetStates() {
             return await _context.States.ToListAsync();
         }
 
@@ -111,9 +105,8 @@ namespace service.Controllers {
         [HttpGet("Contacts/{id}/Opportunities")]
         public async Task<ActionResult<dynamic>> GetOpportunities(int id) {
             return await _context.OpportunitiesLists
-                .Where(o => o.ContactId == id)              
-                .Select(o => new
-                {
+                .Where(o => o.ContactId == id)
+                .Select(o => new {
                     name = o.Opportunity.Opportunity1,
                     manager = o.Manager.EmployeeFullName,
                     products = o.ProductsOpportunitiesLists.Count(),
@@ -124,12 +117,10 @@ namespace service.Controllers {
 
         // GET: api/Users/Contacts/10/Notes
         [HttpGet("Contacts/{id}/Notes")]
-        public async Task<ActionResult<dynamic>> GetNotes(int id)
-        {
+        public async Task<ActionResult<dynamic>> GetNotes(int id) {
             return await _context.NotesLists
                 .Where(n => n.ContactId == id)
-                .Select(n => new
-                {
+                .Select(n => new {
                     text = n.Note.Note1,
                     date = n.Date,
                     manager = n.Manager.EmployeeFullName,
@@ -139,12 +130,10 @@ namespace service.Controllers {
 
         // GET: api/Users/Contacts/10/Messages
         [HttpGet("Contacts/{id}/Messages")]
-        public async Task<ActionResult<dynamic>> GetMessages(int id)
-        {
+        public async Task<ActionResult<dynamic>> GetMessages(int id) {
             return await _context.MessagesLists
                 .Where(m => m.ContactId == id)
-                .Select(m => new
-                {
+                .Select(m => new {
                     text = m.Message.Message1,
                     subject = m.Message.Subject,
                     date = m.Date,
@@ -153,8 +142,7 @@ namespace service.Controllers {
                 .ToListAsync();
         }
 
-        private bool ContactExists(int id)
-        {
+        private bool ContactExists(int id) {
             return _context.Contacts.Any(e => e.Id == id);
         }
     }

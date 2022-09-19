@@ -28,8 +28,6 @@ namespace service.Controllers {
         { 
             return await _context.TasksLists
                 .AsSplitQuery()
-                .Where(t => t.ManagerId == 1)
-                .Where(t => t.ContactId == 12)
                 .Select(t => new {
                     id = t.TaskId,
                     text = t.Task.Task1.TrimEnd(' '),
@@ -66,7 +64,6 @@ namespace service.Controllers {
         {
             return await _context.TasksLists
                      .AsSplitQuery()
-                     .Where(t => t.ManagerId == 1)
                      .Where(t => t.ContactId == 12)
                      .Select(t => new {
                          id = t.TaskId,
@@ -82,11 +79,6 @@ namespace service.Controllers {
                          parentId = t.Task.ParentId,
                      })
                      .ToListAsync();
-        }
-
-        private bool TaskExists(int id)
-        {
-            return _context.Tasks.Any(e => e.Id == id);
         }
     }
 }
