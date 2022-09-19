@@ -99,8 +99,8 @@ namespace service.Controllers
             return sales;
         }
 
-        // GET: api/Analytics/Sales/21-02-01/21-03-01
-        [HttpGet("Sales/{startDateStr}/{endDateStr}")]
+        // GET: api/Analytics/SalesAdaptiveGrouped/21-02-01/21-03-01
+        [HttpGet("SalesAdaptiveGrouped/{startDateStr}/{endDateStr}")]
         public async Task<IEnumerable<Sales>> GetAdaptiveGroupedSalesSales(string startDateStr, string endDateStr)
         {
             var startDate = Convert.ToDateTime(startDateStr);
