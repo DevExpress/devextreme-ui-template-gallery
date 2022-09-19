@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using service.Models;
+using service.Data;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +29,7 @@ builder.Services
 
 builder.Services.AddDbContext<RwaContext>(options => {
     options.UseSqlServer(
-        String.Format(
+        string.Format(
             builder.Configuration["connectionString"],
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "db")
         ));
@@ -38,6 +39,17 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {
+    if (app.Configuration.GetValue<bool>("initializeDb")) {
+        using var scope = app.Services.CreateScope();
+        var services = scope.ServiceProvider;
+        try {
+            var context = services.GetRequiredService<RwaContext>();
+            DbInitializer.UpdateContactManager(context);
+        } catch (Exception ex) {
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred creating the DB.");
+        }
+    }
     app.UseSwagger();
     app.UseSwaggerUI();
 }

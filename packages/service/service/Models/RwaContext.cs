@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace service.Models
-{
-    public partial class RwaContext : DbContext
-    {
-        public RwaContext()
-        {
+namespace service.Models {
+    public partial class RwaContext : DbContext {
+        public RwaContext() {
         }
 
         public RwaContext(DbContextOptions<RwaContext> options)
-            : base(options)
-        {
+            : base(options) {
         }
 
         public virtual DbSet<ActivitiesList> ActivitiesLists { get; set; } = null!;
@@ -38,19 +34,15 @@ namespace service.Models
         public virtual DbSet<QuotesList> QuotesLists { get; set; } = null!;
         public virtual DbSet<ManagerStoreLocations> ManagerStoreLocations { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+            if (!optionsBuilder.IsConfigured) {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=BABICH-AL-NB-10\\SQLEXPRESS;Database=Rwa;Trusted_Connection=True;");
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ActivitiesList>(entity =>
-            {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<ActivitiesList>(entity => {
                 entity.ToTable("Activities_List");
 
                 entity.Property(e => e.Id)
@@ -92,8 +84,7 @@ namespace service.Models
                     .HasConstraintName("FK_Activities_List_Tasks");
             });
 
-            modelBuilder.Entity<Activity>(entity =>
-            {
+            modelBuilder.Entity<Activity>(entity => {
                 entity.HasIndex(e => e.Id, "IX_Statuses");
 
                 entity.Property(e => e.Id)
@@ -105,15 +96,13 @@ namespace service.Models
                     .HasColumnName("Activity");
             });
 
-            modelBuilder.Entity<Company>(entity =>
-            {
+            modelBuilder.Entity<Company>(entity => {
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name).HasMaxLength(255);
             });
 
-            modelBuilder.Entity<Contact>(entity =>
-            {
+            modelBuilder.Entity<Contact>(entity => {
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.CompanyId).HasColumnName("Company_Id");
@@ -202,8 +191,7 @@ namespace service.Models
                     .HasConstraintName("FK_Contacts_States");
             });
 
-            modelBuilder.Entity<Manager>(entity =>
-            {
+            modelBuilder.Entity<Manager>(entity => {
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.EmployeeAddress)
@@ -280,8 +268,7 @@ namespace service.Models
                     .HasColumnName("SSMA_TimeStamp");
             });
 
-            modelBuilder.Entity<Message>(entity =>
-            {
+            modelBuilder.Entity<Message>(entity => {
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
                     .HasColumnName("id");
@@ -293,8 +280,7 @@ namespace service.Models
                     .HasColumnName("subject");
             });
 
-            modelBuilder.Entity<MessagesList>(entity =>
-            {
+            modelBuilder.Entity<MessagesList>(entity => {
                 entity.ToTable("Messages_List");
 
                 entity.Property(e => e.Id)
@@ -334,8 +320,7 @@ namespace service.Models
                     .HasConstraintName("FK_Messages_List_Tasks");
             });
 
-            modelBuilder.Entity<Note>(entity =>
-            {
+            modelBuilder.Entity<Note>(entity => {
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
                     .HasColumnName("id");
@@ -343,8 +328,7 @@ namespace service.Models
                 entity.Property(e => e.Note1).HasColumnName("note");
             });
 
-            modelBuilder.Entity<NotesList>(entity =>
-            {
+            modelBuilder.Entity<NotesList>(entity => {
                 entity.ToTable("Notes_List");
 
                 entity.Property(e => e.Id)
@@ -384,8 +368,7 @@ namespace service.Models
                     .HasConstraintName("FK_Notes_List_Tasks");
             });
 
-            modelBuilder.Entity<OpportunitiesList>(entity =>
-            {
+            modelBuilder.Entity<OpportunitiesList>(entity => {
                 entity.ToTable("Opportunities_List");
 
                 entity.Property(e => e.Id)
@@ -419,8 +402,7 @@ namespace service.Models
                     .HasConstraintName("FK_Oportunities_List_Opportunities");
             });
 
-            modelBuilder.Entity<Opportunity>(entity =>
-            {
+            modelBuilder.Entity<Opportunity>(entity => {
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
                     .HasColumnName("id");
@@ -430,8 +412,7 @@ namespace service.Models
                     .HasColumnName("Opportunity");
             });
 
-            modelBuilder.Entity<Product>(entity =>
-            {
+            modelBuilder.Entity<Product>(entity => {
                 entity.Property(e => e.ProductId)
                     .HasColumnName("Product_ID");
 
@@ -459,8 +440,7 @@ namespace service.Models
                     .HasColumnName("Product_Sale_Price");
             });
 
-            modelBuilder.Entity<ProductsOpportunitiesList>(entity =>
-            {
+            modelBuilder.Entity<ProductsOpportunitiesList>(entity => {
                 entity.ToTable("Products_Opportunities_List");
 
                 entity.Property(e => e.Id)
@@ -482,8 +462,7 @@ namespace service.Models
                     .HasConstraintName("FK_Products_Opportunities_List_Products");
             });
 
-            modelBuilder.Entity<State>(entity =>
-            {
+            modelBuilder.Entity<State>(entity => {
                 entity.HasKey(e => e.SateId);
 
                 entity.Property(e => e.SateId).HasColumnName("Sate_ID");
@@ -510,8 +489,7 @@ namespace service.Models
                     .HasColumnName("State_Coords");
             });
 
-            modelBuilder.Entity<Task>(entity =>
-            {
+            modelBuilder.Entity<Task>(entity => {
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
                     .HasColumnName("id");
@@ -525,8 +503,7 @@ namespace service.Models
                     .HasColumnName("parent_id");
             });
 
-            modelBuilder.Entity<TasksList>(entity =>
-            {
+            modelBuilder.Entity<TasksList>(entity => {
                 entity.ToTable("Tasks_List");
 
                 entity.Property(e => e.Id)
@@ -568,16 +545,18 @@ namespace service.Models
                     .HasConstraintName("FK_Tasks_List_Tasks");
             });
 
-            modelBuilder.Entity<Order>(entity =>
-            {
+            modelBuilder.Entity<Order>(entity => {
                 entity.Property(e => e.OrderId)
                     .ValueGeneratedNever()
                     .HasColumnName("Order_ID");
 
                 entity.Property(e => e.OrderManagerLocationId)
-                    .HasMaxLength(50)
-                    .HasColumnName("Order_Manager_Location_ID")
-                    .IsFixedLength();
+                    .HasColumnName("Order_Manager_Location_ID");
+
+                entity.HasOne(d => d.ManagerStoreLocations)
+                .WithMany(p => p.Orders)
+                .HasForeignKey(d => d.OrderManagerLocationId)
+                .HasConstraintName("FK_Order_OrderManagerLocations");
 
                 entity.Property(e => e.OrderManagerId)
                     .HasColumnName("Order_Manager_ID");
@@ -592,8 +571,7 @@ namespace service.Models
                       .HasConstraintName("FK_Order_Managers");
             });
 
-            modelBuilder.Entity<OrdersList>(entity =>
-            {
+            modelBuilder.Entity<OrdersList>(entity => {
                 entity.ToTable("Order_Items");
 
                 entity.Property(e => e.OrderItemId)
@@ -621,8 +599,7 @@ namespace service.Models
                     .HasConstraintName("FK_Order_Items_Products");
             });
 
-            modelBuilder.Entity<Quote>(entity =>
-            {
+            modelBuilder.Entity<Quote>(entity => {
                 entity.Property(e => e.QuoteId)
                     .ValueGeneratedNever()
                     .HasColumnName("Quote_ID");
@@ -640,8 +617,7 @@ namespace service.Models
                     .HasColumnName("Quote_Opportunity");
             });
 
-            modelBuilder.Entity<QuotesList>(entity =>
-            {
+            modelBuilder.Entity<QuotesList>(entity => {
                 entity.ToTable("Quote_Items");
 
                 entity.Property(e => e.QuoteItemId)
@@ -669,8 +645,7 @@ namespace service.Models
                     .HasConstraintName("FK_Quote_Items_Products");
             });
 
-            modelBuilder.Entity<ManagerStoreLocations>(entity =>
-            {
+            modelBuilder.Entity<ManagerStoreLocations>(entity => {
                 entity.ToTable("Manager_Store_Locations");
 
                 entity.Property(e => e.ManagerStoreId)

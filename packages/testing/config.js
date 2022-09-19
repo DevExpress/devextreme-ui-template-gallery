@@ -16,5 +16,5 @@ export const screenModes = [
   [400, 800],
 ];
 
-export const timeoutSecond = 5000;
-export const chartTimeout = 10000;
+export const timeoutSecond = 10000;
+export const chartTimeout = 20000;

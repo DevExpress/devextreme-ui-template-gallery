@@ -1,0 +1,46 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/packages/service/service/service.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/packages/service/service/service.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/packages/service/service/service.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "restart LocalDb",
+            "command": "sqllocaldb stop devextreme-rwa && sqllocaldb delete devextreme-rwa sqllocaldb create devextreme-rwa && sqllocaldb start devextreme-rwa",
+            "type": "process",
+        }
+    ]
+}
