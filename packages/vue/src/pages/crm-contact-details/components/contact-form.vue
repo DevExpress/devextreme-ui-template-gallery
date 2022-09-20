@@ -236,6 +236,8 @@ function cancelEdit() {
 </script>
 
 <style scoped lang="scss">
+@use "@/variables.scss" as *;
+
 #contact-form {
   min-height: 300px;
 
@@ -250,7 +252,7 @@ function cancelEdit() {
   }
 
   .status {
-    font-size: 13px;
+    font-size: $base-font-size;
   }
 }
 

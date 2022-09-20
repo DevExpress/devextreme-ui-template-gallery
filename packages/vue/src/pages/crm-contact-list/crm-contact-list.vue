@@ -1,5 +1,5 @@
 <template>
-  <div class="view-wrapper">
+  <div class="contact-detail-container">
     <dx-data-grid :data-source="dataSource"
                   height="100%"
                   class="grid"
@@ -201,12 +201,15 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
 <style scoped lang="scss">
 @use "@/variables" as *;
 
-.view-wrapper {
+.contact-detail-container {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  padding-top: $main-container-padding-top;
+  padding-left: 0;
+  padding-right: 0;
 
   &:deep(.grid)  {
     @include separator();
@@ -220,8 +223,7 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
     }
 
     .dx-datagrid-header-panel {
-      padding-top: 20px;
-      padding-bottom: 10px;
+      padding: 0 $main-container-padding-right 0 $main-container-padding-left;
     }
 
     .clickable-row {

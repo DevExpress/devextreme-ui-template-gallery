@@ -38,6 +38,8 @@ defineProps({
 <style scoped lang="scss">
 @use '@/variables.scss' as *;
 
+$user-image-height: $toolbar-height;
+
 .user-info {
   display: flex;
   align-items: center;
@@ -50,8 +52,8 @@ defineProps({
   .image-container {
     overflow: hidden;
     border-radius: 4px;
-    height: 36px;
-    width: 36px;
+    height: $user-image-height;
+    width: $user-image-height;
     margin: 0 4px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);

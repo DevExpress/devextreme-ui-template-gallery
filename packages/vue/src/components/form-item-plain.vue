@@ -81,7 +81,7 @@ const value = computed({
     flex: 1;
 
     .form-item-plain-value {
-      font-size: 13px;
+      font-size: $base-font-size;
     }
 
     &.with-label {

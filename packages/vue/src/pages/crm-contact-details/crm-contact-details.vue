@@ -117,7 +117,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 16px 0 16px;
+  padding: $main-container-padding-top $main-container-padding-right 0 $main-container-padding-left;
 
   &:deep(.dx-toolbar) {
     .dx-toolbar-label > div {
@@ -125,8 +125,12 @@ onMounted(() => {
     }
   }
 
-  .view-wrapper {
+  &:deep(.view-wrapper) {
     flex-direction: column;
+
+    & > .dx-toolbar {
+      padding-bottom: 10px;
+    }
 
     .panels {
       display: flex;

@@ -1,8 +1,17 @@
 @use "../node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: "light");
+@use '../node_modules/devextreme/scss/widgets/material/sizes' as sizes with ($size: "compact");
+@use '../node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
 
 $side-panel-min-width: 60px;
 $side-panel-background: darken($base-bg, 5);
+
+$base-font-size: sizes.$material-base-font-size;
+$toolbar-height: toolbar_sizes.$material-toolbar-height;
+
+$main-container-padding-top: 20px;
+$main-container-padding-left: 16px;
+$main-container-padding-right: 16px;
 
 @mixin separator() {
   .separator {
