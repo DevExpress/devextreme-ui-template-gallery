@@ -1,5 +1,6 @@
-<div id="task-form">
+<div id="task-form" class="form-compact">
   <dx-toolbar>
+    <dxi-item location="before"><span class="form-title">Details</span></dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
       <dx-button
         text="Edit"
@@ -32,37 +33,31 @@
     labelMode="floating"
     [readOnly]="!isEditing"
   >
-    <dxi-item
-      dataField="name"
-      dataField="text"
-      [visible]="isEditing"
-    ></dxi-item>
-
-    <dxi-item itemType="group" caption="Details" [colCount]="2">
-      <dxi-item
+    <dxi-item itemType="group" [colCount]="2">
+      <dxi-item cssClass="accent"
         dataField="company"
-        [template]="!isEditing ? 'blue' : null"
+        [template]="!isEditing ? 'itemPlain' : null"
         [editorOptions]="editorOptions"
       ></dxi-item>
-      <dxi-item
+      <dxi-item cssClass="accent"
         dataField="owner"
-        [template]="!isEditing ? 'blue' : null"
+        [template]="!isEditing ? 'itemPlain' : null"
         [editorOptions]="editorOptions"
       >
         <dxo-label text="Assigned to"></dxo-label>
       </dxi-item>
       <dxi-item
         dataField="priority"
-        [template]="!isEditing ? 'priorityField' : 'priorityEditing'"
+        template="priorityField"
       ></dxi-item>
       <dxi-item
         dataField="status"
-        [template]="!isEditing ? 'statusField' : 'statusEditing'"
+        template="statusField"
       ></dxi-item>
       <dxi-item
         dataField="startDate"
         editorType="dxDateBox"
-        [template]="!isEditing && isEmptyStartDate ? 'startDate' : null"
+        [template]="isEditing && !isEmptyStartDate ? null: 'startDate'"
         [editorOptions]="{
           name: 'Start Date',
           onValueChanged: startDateChange,
@@ -74,7 +69,7 @@
       <dxi-item
         dataField="dueDate"
         editorType="dxDateBox"
-        [template]="!isEditing && isEmptyDueDate ? 'dueDate' : null"
+        [template]="isEditing && !isEmptyDueDate ? null: 'dueDate'"
         [editorOptions]="{
           name: 'Due Date',
           onValueChanged: dueDateChange,
@@ -86,96 +81,132 @@
     </dxi-item>
 
     <dxi-item
+      dataField="name"
+      dataField="text"
+      [visible]="isEditing"
+    ><dxo-label text="Title"></dxo-label></dxi-item>
+
+    <dxi-item
       [colSpan]="2"
       dataField="description"
+      [template]="isEditing? null: 'itemPlain'"
       editorType="dxTextArea"
       [editorOptions]="editorOptions"
     >
       <dxo-label text="Details"></dxo-label>
     </dxi-item>
 
-    <div *dxTemplate="let data of 'blue'">
-      <form-item-blue
+    <div *dxTemplate="let data of 'itemPlain'">
+      <form-item-plain
+        [isEditing]="isEditing"
         [label]="data.editorOptions.label"
         [value]="data.editorOptions.value"
-      ></form-item-blue>
+      ></form-item-plain>
     </div>
 
     <div *dxTemplate="let data of 'priorityField'">
-      <div class="info">
-        <label class="dx-texteditor-label">{{
-          data.editorOptions.label
-        }}</label>
-        <task-priority [value]="task.priority"></task-priority>
-      </div>
-    </div>
-
-    <div *dxTemplate="let data of 'priorityEditing'">
-      <dx-select-box
-        [(value)]="task.priority"
-        [items]="priorityList"
-        [stylingMode]="stylingMode"
+      <form-item-plain
+        [isEditing]="isEditing"
         [label]="data.editorOptions.label"
-        fieldTemplate="field"
-      >
-        <div *dxTemplate="let data of 'field'">
-          <div class="form-custom-list-prop">
-            <task-priority [value]="task.priority"></task-priority>
-            <dx-text-box [readOnly]="true"></dx-text-box>
-          </div>
-        </div>
+        [editorTpl]="priorityEditorTpl"
+        [valueTpl]="priorityValueTpl"
+      ></form-item-plain>
 
-        <div *dxTemplate="let data of 'item'">
-          <task-priority [value]="data"></task-priority>
-        </div>
-      </dx-select-box>
+      <ng-template #priorityValueTpl>
+        <task-priority [value]="task.priority"></task-priority>
+      </ng-template>
+
+      <ng-template #priorityEditorTpl>
+        <dx-select-box
+          [(value)]="task.priority"
+          [items]="priorityList"
+          [stylingMode]="stylingMode"
+          [label]="data.editorOptions.label"
+          fieldTemplate="field"
+        >
+          <div *dxTemplate="let data of 'field'">
+            <div class="form-custom-list-prop">
+              <task-priority [value]="task.priority"></task-priority>
+              <dx-text-box [readOnly]="true"></dx-text-box>
+            </div>
+          </div>
+
+          <div *dxTemplate="let data of 'item'">
+            <task-priority [value]="data"></task-priority>
+          </div>
+        </dx-select-box>
+      </ng-template>
     </div>
 
     <div *dxTemplate="let data of 'statusField'">
-      <div class="info">
-        <label class="dx-texteditor-label">{{
-          data.editorOptions.label
-        }}</label>
-        <task-status [value]="task.status"></task-status>
-      </div>
-    </div>
-
-    <div *dxTemplate="let data of 'statusEditing'">
-      <dx-select-box
-        [(value)]="task.status"
-        [items]="statusList"
-        [stylingMode]="stylingMode"
+      <form-item-plain
+        [isEditing]="isEditing"
         [label]="data.editorOptions.label"
-        [readOnly]="!isEditing"
-        fieldTemplate="field"
-      >
-        <div *dxTemplate="let data of 'field'">
-          <div class="form-custom-list-prop">
-            <task-status [value]="task.status"></task-status>
-            <dx-text-box [readOnly]="true"></dx-text-box>
-          </div>
-        </div>
+        [editorTpl]="statusEditorTpl"
+        [valueTpl]="statusValueTpl"
+      ></form-item-plain>
 
-        <div *dxTemplate="let data of 'item'">
-          <task-status [value]="data"></task-status>
-        </div>
-      </dx-select-box>
+      <ng-template #statusValueTpl>
+        <task-status [value]="task.status"></task-status>
+      </ng-template>
+
+      <ng-template #statusEditorTpl>
+        <dx-select-box
+          [(value)]="task.status"
+          [items]="statusList"
+          [stylingMode]="stylingMode"
+          [label]="data.editorOptions.label"
+          [readOnly]="!isEditing"
+          fieldTemplate="field"
+        >
+          <div *dxTemplate="let data of 'field'">
+            <div class="form-custom-list-prop">
+              <task-status [value]="task.status"></task-status>
+              <dx-text-box [readOnly]="true"></dx-text-box>
+            </div>
+          </div>
+
+          <div *dxTemplate="let data of 'item'">
+            <task-status [value]="data"></task-status>
+          </div>
+        </dx-select-box>
+      </ng-template>
     </div>
 
     <div *dxTemplate="let data of 'startDate'">
-      <form-item-date
-        text="Start Date"
-        [(value)]="task.startDate"
-        (valueChange)="startDateChange($event)"
-      ></form-item-date>
+      <ng-container *ngIf="!isEmptyStartDate else startDateEmptyTpl">
+        <form-item-plain
+          [label]="data.editorOptions.label"
+          [value]="task.startDate"
+          [renderedValue]="task.startDate | date: 'MM/dd/yyyy'"
+        ></form-item-plain>
+      </ng-container>
+
+      <ng-template #startDateEmptyTpl>
+        <form-item-date
+          text="Start Date"
+          [(value)]="task.startDate"
+          (valueChange)="startDateChange($event)"
+        ></form-item-date>
+      </ng-template>
     </div>
 
     <div *dxTemplate="let data of 'dueDate'">
-      <form-item-date
-        text="Set Due Date"
-        [(value)]="task.dueDate"
-        (valueChange)="dueDateChange($event)"
-      ></form-item-date>
+      <ng-container *ngIf="!isEmptyDueDate else dueDateEmptyTpl">
+        <form-item-plain
+          [label]="data.editorOptions.label"
+          [value]="task.dueDate"
+          [renderedValue]="task.dueDate | date: 'MM/dd/yyyy'"
+        ></form-item-plain>
+      </ng-container>
+
+      <ng-template #dueDateEmptyTpl>
+        <form-item-date
+          text="Set Due Date"
+          [(value)]="task.dueDate"
+          (valueChange)="dueDateChange($event)"
+        ></form-item-date>
+      </ng-template>
     </div>
   </dx-form>
 
