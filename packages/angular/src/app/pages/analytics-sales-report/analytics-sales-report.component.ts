@@ -27,42 +27,70 @@ import { Sales, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/anal
   providers: [RwaService],
 })
 export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
-  analyticsPanelItems = analyticsPanelItems;
+  subscriptions: Subscription[] = [];
+
+  groupByPeriods = ['Day', 'Month'];
 
   sales: Sales;
+
+  salesByDateAndCategory: Sales;
+
+  visualRange: unknown = {};
 
   salesByCategory: SalesOrOpportunitiesByCategory;
 
   selectionChange(e: SelectionChangedEvent) {
-    const dates = e.item.value.split('/');
-
-    this.loadData(dates[0], dates[1]);
+    var groupByPeriod = e.item.toLowerCase();
+    this.subscriptions.push(
+      this.service.getSalesByOrderDate(groupByPeriod)
+        .subscribe((data) => {
+          this.salesByDateAndCategory = data;
+        }),
+    );
   }
+
+  onRangeChanged = (e) => {
+    const [startDate, endDate] = e.value;
+    this.subscriptions
+      .push(
+        this.service.getSalesByCategory(startDate.toISOString(), endDate.toISOString())
+          .subscribe((data) => {
+            this.salesByCategory = data;
+          }),
+      );
+  };
 
   customizeSaleText(arg: { percentText: string }) {
     return arg.percentText;
   }
 
-  constructor(private service: RwaService) {
-  }
+  constructor(private service: RwaService) { }
 
-  subscriptions: Subscription[] = [];
-
-  loadData = (startDate: string, endDate: string) => {
-    const observable = forkJoin({
-      sales: this.service.getSales(startDate, endDate),
-      salesByCategory: this.service.getSalesByCategory(startDate, endDate),
-    });
-
-    this.subscriptions.push(observable.subscribe((data) => {
-      Object.keys(data).forEach((key) => this[key] = data[key]);
-    }));
+  loadData = (groupBy: string) => {
+    const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
+    this.subscriptions = [
+      ...this.subscriptions,
+      (forkJoin(
+        [
+          this.service.getSales(startDate, endDate),
+          this.service.getSalesByOrderDate(groupBy),
+          this.service.getSalesByCategory(startDate, endDate),
+        ],
+      ).subscribe(([sales, salesByDateAndCategory, salesByCategory]) => {
+        this.sales = sales;
+        this.salesByDateAndCategory = salesByDateAndCategory;
+        this.salesByCategory = salesByCategory;
+      })
+      ),
+    ];
   };
 
-  ngOnInit(): void {
-    const dates = analyticsPanelItems[4].value.split('/');
+  customiseToolip({ seriesName }) {
+    return { text: seriesName };
+  }
 
-    this.loadData(dates[0], dates[1]);
+  ngOnInit(): void {
+    this.loadData(this.groupByPeriods[1].toLowerCase());
   }
 
   ngOnDestroy(): void {

@@ -22,8 +22,6 @@ export class CardTasksComponent implements OnChanges {
 
   currentTasks: Task[];
 
-  @Input() manager: string;
-
   isLoading = true;
 
   constructor() {
