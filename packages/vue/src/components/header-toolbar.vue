@@ -40,7 +40,7 @@
           </div>
         </div>
       </dx-item>
-      <dx-item
+      <dx-item cssClass="toolbar-user-items"
         location="after"
         locate-in-menu="auto"
         menu-item-template="menuUserItem"
@@ -127,7 +127,7 @@ const userMenuItems = [{
   }
 
   .user-button > .dx-button-content {
-    padding: 5px;
+    padding: 0 5px;
   }
 }
 </style>
@@ -146,6 +146,10 @@ const userMenuItems = [{
       .screen-x-small & {
         padding: 0 20px;
       }
+    }
+
+    .toolbar-user-items .dx-item-content, .user-panel, .user-info {
+      height: 100%;
     }
 
     .dx-toolbar-item.dx-toolbar-button.menu-button {
