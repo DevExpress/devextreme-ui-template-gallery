@@ -3,6 +3,10 @@
 
 #tasks-grid {
   min-height: 300px;
+
+  .priority span {
+    font-size: 12px;
+  }
 }
 
 ::ng-deep {

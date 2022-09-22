@@ -10,14 +10,14 @@ import {
   DxTextBoxModule,
   DxToolbarModule,
 } from 'devextreme-angular';
-import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   ContactStatusModule,
-  FormItemBlueModule,
+  FormItemPlainModule,
   FormItemPhotoModule,
   FormItemWithButtonModule,
 } from 'src/app/shared/components';
 import { Observable, Subscription } from 'rxjs';
+import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
 
 @Component({
@@ -41,6 +41,14 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   editorOptions = { stylingMode: this.stylingMode };
 
   contactSubscription: Subscription = new Subscription();
+
+  get state() {
+    return this.contactData$.state.stateShort;
+  }
+
+  set state(value) {
+    this.contactData$.state.stateShort = value;
+  }
 
   ngOnInit() {
     this.setEditorMode(this.isEditing);
@@ -78,11 +86,12 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     DxLoadPanelModule,
 
     ContactStatusModule,
-    FormItemBlueModule,
+    FormItemPlainModule,
     FormItemPhotoModule,
     FormItemWithButtonModule,
 
     CommonModule,
+    PhonePipeModule,
   ],
   providers: [],
   exports: [ContactFormComponent],
