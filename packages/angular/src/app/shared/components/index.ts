@@ -19,6 +19,6 @@ export * from './card-tasks/card-tasks.component';
 export * from './card-opprtunities/card-opportunities.component';
 
 export * from './form-item-date/form-item-date.component';
-export * from './form-item-blue/form-item-blue.component';
+export * from './form-item-plain/form-item-plain.component';
 export * from './form-item-photo/form-item-photo.component';
 export * from './form-item-with-button/form-item-with-button.component';

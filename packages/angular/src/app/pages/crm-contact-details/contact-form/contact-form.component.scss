@@ -2,6 +2,10 @@
 
 #contact-form {
   min-height: 300px;
+
+  .form-title {
+    font-size: 16px;
+  }
 }
 
 dx-form {
@@ -11,6 +15,11 @@ dx-form {
         font-size: 13px;
       }
     }
+  }
+
+  .form-item-plain-button {
+    margin-left: 10px;
+    margin-top: 5px;
   }
 }
 
