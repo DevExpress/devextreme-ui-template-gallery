@@ -42,14 +42,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   contactSubscription: Subscription = new Subscription();
 
-  get state() {
-    return this.contactData$.state.stateShort;
-  }
-
-  set state(value) {
-    this.contactData$.state.stateShort = value;
-  }
-
   ngOnInit() {
     this.setEditorMode(this.isEditing);
 
