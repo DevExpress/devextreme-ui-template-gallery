@@ -1,7 +1,7 @@
 import {
-  Component, Input, NgModule, Output, EventEmitter,
+  Component, Input, NgModule, Output, EventEmitter, OnInit,
 } from '@angular/core';
-import { DxTextBoxModule } from 'devextreme-angular';
+import { DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -29,48 +29,52 @@ import { CommonModule } from '@angular/common';
         [label]="icon ? '' : label"
         [value]="value"
         (onValueChanged)="onChangeValue($event)"
+        (keyup)="valueChanged.emit(value)"
         [mask]="mask"
-      ></dx-text-box>
+        valueChangeEvent="keyup input change"
+      >
+        <dx-validator [validationRules]="validators" [validationGroup]="validationGroup"></dx-validator>
+      </dx-text-box>
     </ng-template>
   `,
   styles: [`
-  :host {
-    display: flex;
-    width: 100%;
-    gap: 5px;
-
-
-    .dx-icon {
+    :host {
       display: flex;
-      align-items: center;
-    }
+      width: 100%;
+      gap: 5px;
 
-    dx-text-box {
-      flex: 1;
-    }
 
-    .custom-form-item-wrapper {
-      position: relative;
-      padding: 9px 11px 8px;
-      block-size: 32.2px;
+      .dx-icon {
+        display: flex;
+        align-items: center;
+      }
 
-      &.with-label {
-        padding-top: 15px;
-        padding-bottom: 1px;
+      dx-text-box {
+        flex: 1;
+      }
 
-        .dx-texteditor-label {
-          top: 4px;
-          height: 11px;
-          line-height: 11px;
-          padding-left: 11px;
+      .custom-form-item-wrapper {
+        position: relative;
+        padding: 9px 11px 8px;
+        block-size: 32.2px;
+
+        &.with-label {
+          padding-top: 15px;
+          padding-bottom: 1px;
+
+          .dx-texteditor-label {
+            top: 4px;
+            height: 11px;
+            line-height: 11px;
+            padding-left: 11px;
+          }
+        }
+
+        .custom-form-item-value {
+          font-size: 13px;
         }
       }
-
-      .custom-form-item-value {
-        font-size: 13px;
-      }
     }
-  }
   `],
 })
 export class FormItemPlainComponent {
@@ -90,15 +94,22 @@ export class FormItemPlainComponent {
 
   @Input() valueTpl: any = null;
 
+  @Input() validators: any[] = [];
+
+  @Input() validationGroup: string = undefined;
+
   @Output() valueChange = new EventEmitter<string | Date | number>();
+
+  @Output() valueChanged = new EventEmitter<string | Date | number>();
 
   onChangeValue(event) {
     this.valueChange.emit(event.value);
+    this.valueChanged.emit(event);
   }
 }
 
 @NgModule({
-  imports: [DxTextBoxModule, CommonModule],
+  imports: [DxTextBoxModule, CommonModule, DxValidatorModule],
   declarations: [FormItemPlainComponent],
   exports: [FormItemPlainComponent],
 })

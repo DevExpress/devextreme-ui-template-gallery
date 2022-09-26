@@ -1,14 +1,17 @@
 import {
-  Component, OnInit, NgModule, Input, OnDestroy,
+  Component, OnInit, NgModule, Input, OnDestroy, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
+  DxFormComponent,
   DxFormModule,
   DxLoadPanelModule,
   DxSelectBoxModule,
   DxTextBoxModule,
   DxToolbarModule,
+  DxValidationGroupModule,
+  DxValidatorModule,
 } from 'devextreme-angular';
 import {
   ContactStatusModule,
@@ -19,6 +22,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
+import { ExtendPipeModule } from 'src/app/shared/extend.pipe';
 
 @Component({
   selector: 'contact-form',
@@ -26,6 +30,8 @@ import { Contact, contactStatusList } from 'src/app/shared/types/contact';
   styleUrls: ['./contact-form.component.scss'],
 })
 export class ContactFormComponent implements OnInit, OnDestroy {
+  @ViewChild('contactForm', { static: false }) contactForm: DxFormComponent;
+
   @Input() contactData: Observable<Contact>;
 
   contactData$: Contact;
@@ -36,15 +42,15 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   isLoading = true;
 
-  stylingMode = 'underlined';
-
-  editorOptions = { stylingMode: this.stylingMode };
+  isFormValid = true;
 
   contactSubscription: Subscription = new Subscription();
 
-  ngOnInit() {
-    this.setEditorMode(this.isEditing);
+  zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
 
+  validationGroup = 'contactFormValidationGroup';
+
+  ngOnInit() {
     this.contactSubscription = this.contactData.subscribe((data) => {
       this.contactData$ = data;
       this.isLoading = false;
@@ -55,16 +61,16 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.contactSubscription.unsubscribe();
   }
 
-  toggleEdit = () => {
-    this.isEditing = !this.isEditing;
-    this.setEditorMode(this.isEditing);
+  checkValidation = () => {
+    this.isFormValid = this.contactForm?.instance.validate().isValid;
   };
 
-  setEditorMode = (isEditing: boolean) => {
-    this.stylingMode = isEditing ? 'filled' : 'underlined';
-    this.editorOptions = {
-      stylingMode: this.stylingMode,
-    };
+  toggleEdit = () => {
+    if (this.isEditing) {
+      this.checkValidation();
+    }
+
+    this.isEditing = !this.isEditing;
   };
 }
 
@@ -81,9 +87,11 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     FormItemPlainModule,
     FormItemPhotoModule,
     FormItemWithButtonModule,
-
+    DxValidatorModule,
     CommonModule,
     PhonePipeModule,
+    ExtendPipeModule,
+    DxValidationGroupModule,
   ],
   providers: [],
   exports: [ContactFormComponent],

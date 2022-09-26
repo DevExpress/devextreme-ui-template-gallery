@@ -15,6 +15,7 @@
         text="Save"
         stylingMode="outlined"
         type="default"
+        [disabled]="!isFormValid"
         (onClick)="toggleEdit()"
       ></dx-button>
     </dxi-item>
@@ -28,12 +29,13 @@
   </dx-toolbar>
 
   <div class="form-compact">
-    <dx-form
+    <dx-form #contactForm
       *ngIf="!isLoading"
       class="form last"
       [formData]="contactData$"
       labelMode="floating"
       [readOnly]="!isEditing"
+      [validationGroup]="validationGroup"
     >
       <dxi-item itemType="group" [colCount]="2">
         <dxi-item dataField="image" template="photo"></dxi-item>
@@ -41,34 +43,33 @@
           <dxi-item
             dataField="status"
             template="statusField"
-            [editorOptions]="editorOptions"
           >
           </dxi-item>
           <dxi-item
             dataField="firstName"
             template="itemPlain"
-            [editorOptions]="editorOptions"
+            [editorOptions]="{ validators: [{type: 'required'}] }"
           ></dxi-item>
           <dxi-item
             dataField="lastName"
             template="itemPlain"
-            [editorOptions]="editorOptions"
+            [editorOptions]="{ validators: [{type: 'required', message: 'Value is required'}] }"
           ></dxi-item>
         </dxi-item>
         <dxi-item dataField="position"
                   template="itemPlain"
-                  [editorOptions]="editorOptions"></dxi-item>
-        <dxi-item  cssClass="accent"
-                   dataField="manager"
-                   template="itemPlain"
-                   [editorOptions]="editorOptions"
+                  [editorOptions]="{ validators: [{type: 'required', message: 'Value is required'}] }"></dxi-item>
+        <dxi-item cssClass="accent"
+                  dataField="manager"
+                  template="itemPlain"
+                  [editorOptions]="{ validators: [{type: 'required', message: 'Value is required'}] }"
         >
           <dxo-label text="Assigned to"></dxo-label>
         </dxi-item>
         <dxi-item cssClass="accent"
                   dataField="company"
                   template="itemPlain"
-                  [editorOptions]="editorOptions"
+                  [editorOptions]="{ validators: [{type: 'required', message: 'Value is required'}] }"
                   [colSpan]="2"
         ></dxi-item>
       </dxi-item>
@@ -77,19 +78,21 @@
         <dxi-item
           dataField="address"
           template="itemPlain"
-          [editorOptions]="editorOptions"
           [colSpan]="4"
         ></dxi-item>
         <dxi-item
           dataField="city"
           template="itemPlain"
-          [editorOptions]="editorOptions"
           [colSpan]="2"
         ></dxi-item>
         <dxi-item template="state">
           <dxo-label text="State"></dxo-label>
         </dxi-item>
-        <dxi-item dataField="zipCode" template="itemPlain" [editorOptions]="editorOptions"></dxi-item>
+        <dxi-item
+          dataField="zipCode" template="itemPlain"
+          [editorOptions]="{ validators: [zipCodeValidator] }">
+
+        </dxi-item>
         <dxi-item dataField="phone" template="phone" [colSpan]="2"></dxi-item>
         <dxi-item dataField="email" template="email" [colSpan]="2"></dxi-item>
       </dxi-item>
@@ -99,7 +102,10 @@
         <form-item-plain
           [isEditing]="isEditing"
           [label]="data.editorOptions.label"
+          [validators]="data.editorOptions.validators"
+          [validationGroup]="validationGroup"
           [(value)]="contactData$[data.dataField]"
+          (valueChanged)="checkValidation($event)"
         ></form-item-plain>
       </div>
 
@@ -135,9 +141,9 @@
           <dx-select-box
             [(value)]="contactData$.status"
             [items]="statusList"
-            [stylingMode]="stylingMode"
             [label]="data.editorOptions.label"
             [readOnly]="!isEditing"
+            width="100%"
             fieldTemplate="field"
           >
             <div *dxTemplate="let data of 'field'">
@@ -157,7 +163,6 @@
         <dx-select-box
           [(value)]="contactData$.status"
           [items]="statusList"
-          [stylingMode]="stylingMode"
           [label]="data.editorOptions.label"
           [readOnly]="!isEditing"
           fieldTemplate="field"
@@ -196,6 +201,7 @@
           [isEditing]="isEditing"
           [label]="data.editorOptions.label"
           [value]="contactData$.email"
+          [validators]="[{type: 'email', message: 'Email is invalid'}] "
         ></form-item-plain>
         <dx-button class="form-item-plain-button"
                    [visible]="!isEditing"
@@ -211,5 +217,6 @@
     container="#contact-form"
     [position]="{ of: '#contact-form' }"
     [visible]="isLoading"
+    [showPane]="false"
   ></dx-load-panel>
 </div>
