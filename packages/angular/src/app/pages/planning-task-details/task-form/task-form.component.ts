@@ -14,7 +14,7 @@ import {
   TaskProirityModule,
   TaskStatusModule,
   FormItemDateModule,
-  FormItemBlueModule,
+  FormItemPlainModule,
 } from 'src/app/shared/components';
 import { taskPriorityList, taskStatusList } from 'src/app/shared/types/task';
 import { Task } from 'src/app/shared/types/task';
@@ -55,7 +55,6 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
     if (!this.isLoading) {
       this.task.dueDate = null;
-
       this.isEmptyStartDate = !this.task?.startDate;
       this.isEmptyDueDate = !this.task?.dueDate;
     }
@@ -94,7 +93,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
     TaskProirityModule,
     TaskStatusModule,
     FormItemDateModule,
-    FormItemBlueModule,
+    FormItemPlainModule,
 
     CommonModule,
   ],

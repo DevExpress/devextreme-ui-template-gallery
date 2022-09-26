@@ -13,7 +13,7 @@ import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
-import { forkJoin, map, Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
 
@@ -27,47 +27,75 @@ import { Sales, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/anal
   providers: [RwaService],
 })
 export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
-  analyticsPanelItems = analyticsPanelItems;
+  subscriptions: Subscription[] = [];
+
+  groupByPeriods = ['Day', 'Month'];
 
   sales: Sales;
 
+  salesByDateAndCategory: Sales;
+
+  visualRange: unknown = {};
+
   salesByCategory: SalesOrOpportunitiesByCategory;
 
-  subscriptions: Subscription[] = [];
-
-  constructor(private service: RwaService) {
-  }
-
-  ngOnInit(): void {
-    const dates = analyticsPanelItems[4].value.split('/');
-
-    this.loadData(dates[0], dates[1]);
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
-  }
-
   selectionChange(e: SelectionChangedEvent) {
-    const dates = e.item.value.split('/');
-
-    this.loadData(dates[0], dates[1]);
+    var groupByPeriod = e.item.toLowerCase();
+    this.subscriptions.push(
+      this.service.getSalesByOrderDate(groupByPeriod)
+        .subscribe((data) => {
+          this.salesByDateAndCategory = data;
+        }),
+    );
   }
+
+  onRangeChanged = (e) => {
+    const [startDate, endDate] = e.value;
+    this.subscriptions
+      .push(
+        this.service.getSalesByCategory(startDate.toISOString(), endDate.toISOString())
+          .subscribe((data) => {
+            this.salesByCategory = data;
+          }),
+      );
+  };
 
   customizeSaleText(arg: { percentText: string }) {
     return arg.percentText;
   }
 
-  loadData = (startDate: string, endDate: string) => {
-    const observable$ = forkJoin([
-      this.service.getSales(startDate, endDate),
-      this.service.getSalesByCategory(startDate, endDate),
-    ]).pipe(map(([sales, salesByCategory]) => ({ sales, salesByCategory })));
+  constructor(private service: RwaService) { }
 
-    this.subscriptions.push(observable$.subscribe((data) => {
-      Object.keys(data).forEach((key) => this[key] = data[key]);
-    }));
+  loadData = (groupBy: string) => {
+    const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
+    this.subscriptions = [
+      ...this.subscriptions,
+      (forkJoin(
+        [
+          this.service.getSales(startDate, endDate),
+          this.service.getSalesByOrderDate(groupBy),
+          this.service.getSalesByCategory(startDate, endDate),
+        ],
+      ).subscribe(([sales, salesByDateAndCategory, salesByCategory]) => {
+        this.sales = sales;
+        this.salesByDateAndCategory = salesByDateAndCategory;
+        this.salesByCategory = salesByCategory;
+      })
+      ),
+    ];
   };
+
+  customiseToolip({ seriesName }) {
+    return { text: seriesName };
+  }
+
+  ngOnInit(): void {
+    this.loadData(this.groupByPeriods[1].toLowerCase());
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
 }
 
 @NgModule({

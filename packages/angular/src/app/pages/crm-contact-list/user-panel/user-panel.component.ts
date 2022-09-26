@@ -22,15 +22,17 @@ import {
   DxFormModule,
 } from 'devextreme-angular';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
+import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   CardActivitiesModule,
   ContactStatusModule,
-  FormItemBlueModule,
+  FormItemPlainModule,
   FormItemPhotoModule,
 } from 'src/app/shared/components';
 import { ScreenService, RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { Contact } from 'src/app/shared/types/contact';
+import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 
 @Component({
   selector: 'user-panel',
@@ -140,10 +142,10 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
     CardActivitiesModule,
     ContactStatusModule,
-    FormItemBlueModule,
+    FormItemPlainModule,
     FormItemPhotoModule,
-
     CommonModule,
+    PhonePipeModule,
   ],
   declarations: [UserPanelComponent],
   exports: [UserPanelComponent],

@@ -1,4 +1,5 @@
 @use "../../../../variables.scss" as *;
+@use "devextreme/scss/widgets/material/textEditor/sizes" as *;
 
 $side-panel-toolbar-height: 58px;
 
@@ -18,6 +19,10 @@ $side-panel-toolbar-height: 58px;
   .panel.opne {
     top: $side-panel-toolbar-height;
   }
+}
+
+.panel::ng-deep .dx-box-flex > .dx-item > .dx-item-content > .dx-item:first-child {
+  max-width: 140px;
 }
 
 .panel {
@@ -113,14 +118,5 @@ $side-panel-toolbar-height: 58px;
         margin-right: 2px;
       }
     }
-  }
-}
-
-.icon-editor {
-  display: flex;
-  gap: 15px;
-
-  dx-text-box {
-    flex: 1;
   }
 }
