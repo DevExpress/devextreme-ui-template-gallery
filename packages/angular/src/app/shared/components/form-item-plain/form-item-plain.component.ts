@@ -80,17 +80,17 @@ export class FormItemPlainComponent {
 
   @Input() icon: string;
 
-  @Input() value: string | Date | number;
+  @Input() value: string;
 
   @Input() mask: string;
 
-  @Input() renderedValue = '';
+  @Input() renderedValue: string | unknown = '';
 
   @Input() editorTpl: any = null;
 
   @Input() valueTpl: any = null;
 
-  @Output() valueChange = new EventEmitter<string | Date | number>();
+  @Output() valueChange = new EventEmitter<string>();
 
   onChangeValue(event) {
     this.valueChange.emit(event.value);

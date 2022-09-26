@@ -170,7 +170,7 @@
       <ng-container *ngIf="!isEmptyStartDate else startDateEmptyTpl">
         <form-item-plain
           [label]="data.editorOptions.label"
-          [value]="task.startDate"
+          [value]="task.startDate.toString()"
           [renderedValue]="task.startDate | date: 'MM/dd/yyyy'"
         ></form-item-plain>
       </ng-container>
@@ -188,7 +188,7 @@
       <ng-container *ngIf="!isEmptyDueDate else dueDateEmptyTpl">
         <form-item-plain
           [label]="data.editorOptions.label"
-          [value]="task.dueDate"
+          [value]="task.dueDate.toString()"
           [renderedValue]="task.dueDate | date: 'MM/dd/yyyy'"
         ></form-item-plain>
       </ng-container>

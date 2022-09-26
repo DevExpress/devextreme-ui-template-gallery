@@ -29,9 +29,9 @@
 
   <div class="form-compact">
     <dx-form
-      *ngIf="!isLoading"
+      *ngIf="contactData"
       class="form last"
-      [formData]="contactData$"
+      [formData]="contactData"
       labelMode="floating"
       [readOnly]="!isEditing"
     >
@@ -99,7 +99,7 @@
         <form-item-plain
           [isEditing]="isEditing"
           [label]="data.editorOptions.label"
-          [(value)]="contactData$[data.dataField]"
+          [(value)]="contactData[data.dataField]"
         ></form-item-plain>
       </div>
 
@@ -107,7 +107,7 @@
         <form-item-plain
           [isEditing]="isEditing"
           [label]="data.editorOptions.label "
-          [(value)]="contactData$.state.stateShort"
+          [(value)]="contactData.state.stateShort"
         ></form-item-plain>
       </div>
 
@@ -133,7 +133,7 @@
 
         <ng-template #statusEditorTpl>
           <dx-select-box
-            [(value)]="contactData$.status"
+            [(value)]="contactData.status"
             [items]="statusList"
             [stylingMode]="stylingMode"
             [label]="data.editorOptions.label"
@@ -142,7 +142,7 @@
           >
             <div *dxTemplate="let data of 'field'">
               <div class="form-custom-list-prop">
-                <contact-status [value]="contactData$.status"></contact-status>
+                <contact-status [value]="contactData.status"></contact-status>
                 <dx-text-box [readOnly]="true"></dx-text-box>
               </div>
             </div>
@@ -155,7 +155,7 @@
 
       <div *dxTemplate="let data of 'statusEditing'">
         <dx-select-box
-          [(value)]="contactData$.status"
+          [(value)]="contactData.status"
           [items]="statusList"
           [stylingMode]="stylingMode"
           [label]="data.editorOptions.label"
@@ -164,7 +164,7 @@
         >
           <div *dxTemplate="let data of 'field'">
             <div class="form-custom-list-prop">
-              <contact-status [value]="contactData$.status"></contact-status>
+              <contact-status [value]="contactData.status"></contact-status>
               <dx-text-box [readOnly]="true"></dx-text-box>
             </div>
           </div>
@@ -178,9 +178,9 @@
         <form-item-plain
           [isEditing]="isEditing"
           [label]="data.editorOptions.label"
-          [value]="contactData$.phone"
+          [value]="contactData.phone"
           mask="+1(000)000-0000"
-          [renderedValue]="contactData$.phone | phone"
+          [renderedValue]="contactData.phone | phone"
         ></form-item-plain>
         <dx-button class="form-item-plain-button"
                    [visible]="!isEditing"
@@ -195,7 +195,7 @@
         <form-item-plain
           [isEditing]="isEditing"
           [label]="data.editorOptions.label"
-          [value]="contactData$.email"
+          [value]="contactData.email"
         ></form-item-plain>
         <dx-button class="form-item-plain-button"
                    [visible]="!isEditing"
@@ -210,6 +210,6 @@
   <dx-load-panel
     container="#contact-form"
     [position]="{ of: '#contact-form' }"
-    [visible]="isLoading"
+    [visible]="!contactData"
   ></dx-load-panel>
 </div>

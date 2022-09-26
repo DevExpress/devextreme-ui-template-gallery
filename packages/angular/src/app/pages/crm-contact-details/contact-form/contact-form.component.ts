@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Input, OnDestroy,
+  Component, OnInit, NgModule, Input,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -25,16 +25,12 @@ import { Contact, contactStatusList } from 'src/app/shared/types/contact';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss'],
 })
-export class ContactFormComponent implements OnInit, OnDestroy {
-  @Input() contactData: Observable<Contact>;
-
-  contactData$: Contact;
+export class ContactFormComponent implements OnInit {
+  @Input() contactData: Contact;
 
   statusList = contactStatusList;
 
   isEditing = false;
-
-  isLoading = true;
 
   stylingMode = 'underlined';
 
@@ -44,15 +40,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.setEditorMode(this.isEditing);
-
-    this.contactSubscription = this.contactData.subscribe((data) => {
-      this.contactData$ = data;
-      this.isLoading = false;
-    });
-  }
-
-  ngOnDestroy() {
-    this.contactSubscription.unsubscribe();
   }
 
   toggleEdit = () => {
