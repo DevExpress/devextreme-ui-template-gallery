@@ -6,8 +6,10 @@ import {
 } from 'rxjs/operators';
 import { Task } from 'src/app/shared/types/task';
 import { Contact } from 'src/app/shared/types/contact';
+import { SalesOrOpportunitiesByCategory } from '../types/analytics';
 
 const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
+// const API_URL = 'https://localhost:5001/api';
 
 @Injectable()
 export class RwaService {
@@ -83,8 +85,11 @@ export class RwaService {
       .get(`${API_URL}/Analytics/OpportunitiesByCategory/${startDate}/${endDate}`);
 
     public getSalesByCategory = (startDate: string, endDate: string) => this.http
-      .get(`${API_URL}/Analytics/SalesByCategory/${startDate}/${endDate}`);
+      .get<SalesOrOpportunitiesByCategory>(`${API_URL}/Analytics/SalesByCategory/${startDate}/${endDate}`);
+
+    public getSalesByOrderDate = (groupByPeriod: string) => this.http
+      .get<any>(`${API_URL}/Analytics/SalesByOrderDate/${groupByPeriod}`);
 
     public getSales = (startDate: string, endDate: string) => this.http
-      .get<any>(`${API_URL}/Analytics/Sales/${startDate}/${endDate}`);
+      .get<any>(`${API_URL}/Analytics/SalesAdaptiveGrouped/${startDate}/${endDate}`);
 }

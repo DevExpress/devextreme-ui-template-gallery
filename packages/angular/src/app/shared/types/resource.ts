@@ -13,15 +13,15 @@ export const taskPanelItems: Array<{ text: string }> = [
 export const analyticsPanelItems: Array<{ text: string, value: string, key: number }> = [
   {
     text: 'Week',
-    value: '2020-10-11/2020-10-18',
+    value: '2020-01-24/2020-01-31',
     key: 1,
   }, {
     text: '2 Weeks',
-    value: '2020-10-07/2020-10-21',
+    value: '2020-01-14/2020-01-31',
     key: 2,
   }, {
     text: 'Month',
-    value: '2020-10-01/2020-11-01',
+    value: '2020-01-01/2020-02-01',
     key: 3,
   }, {
     text: 'Year',
