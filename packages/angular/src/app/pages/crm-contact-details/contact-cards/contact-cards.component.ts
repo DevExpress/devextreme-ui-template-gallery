@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Input,
+  Component, NgModule, Input,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -18,6 +18,7 @@ import { Activities } from 'src/app/shared/types/activities';
 import { Messages } from 'src/app/shared/types/messages';
 import { Notes } from 'src/app/shared/types/notes';
 import { Opportunities } from 'src/app/shared/types/opportunities';
+import { Task } from 'src/app/shared/types/task';
 
 @Component({
   selector: 'contact-cards',

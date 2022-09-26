@@ -42,6 +42,10 @@ export class TaskListKanbanComponent implements OnInit, OnChanges {
   },
   ];
 
+  constructor() {
+    this.kanbanDataSource = this.fillOutBoard([]);
+  }
+
   fillOutBoard = (cards: Task[]): Board[] => {
     const result: Board[] = [];
     for (const status of this.statuses) {
@@ -52,10 +56,6 @@ export class TaskListKanbanComponent implements OnInit, OnChanges {
 
     return result;
   };
-
-  constructor() {
-    this.kanbanDataSource = this.fillOutBoard([]);
-  }
 
   ngOnInit() {
     this.kanbanDataSource = this.fillOutBoard(this.dataSource);

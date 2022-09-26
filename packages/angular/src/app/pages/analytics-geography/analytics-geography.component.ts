@@ -40,6 +40,21 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
 
   salesByStateMarkers;
 
+  subscription: Subscription = new Subscription();
+
+  constructor(private service: RwaService) {
+  }
+
+  ngOnInit(): void {
+    const dates = analyticsPanelItems[4].value.split('/');
+
+    this.loadData(dates[0], dates[1]);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   selectionChange(e: TabsItemClickEvent) {
     const dates = e.itemData.value.split('/');
 
@@ -76,11 +91,6 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     return resultCoords;
   }
 
-  constructor(private service: RwaService) {
-  }
-
-  subscription: Subscription = new Subscription();
-
   loadData = (startDate: string, endDate: string) => {
     this.subscription = this.service.getSalesByStateAndCity(startDate, endDate).subscribe((data: SalesByStateAndCity) => {
       this.salesByStateAndCity = data;
@@ -102,16 +112,6 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
       };
     });
   };
-
-  ngOnInit(): void {
-    const dates = analyticsPanelItems[4].value.split('/');
-
-    this.loadData(dates[0], dates[1]);
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 }
 
 @NgModule({

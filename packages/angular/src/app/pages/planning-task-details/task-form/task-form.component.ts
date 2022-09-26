@@ -10,7 +10,6 @@ import {
   DxTextBoxModule,
   DxToolbarModule,
 } from 'devextreme-angular';
-import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   TaskProirityModule,
   TaskStatusModule,
@@ -74,11 +73,11 @@ export class TaskFormComponent implements OnInit, OnChanges {
     };
   };
 
-  startDateChange = (date: Date) => {
+  startDateChange = (date: string | Date) => {
     this.isEmptyStartDate = !date;
   };
 
-  dueDateChange = (date: Date) => {
+  dueDateChange = (date: string | Date) => {
     this.isEmptyDueDate = !date;
   };
 }

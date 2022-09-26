@@ -47,7 +47,7 @@
 
   <div class="panels">
     <div class="left">
-      <contact-form [contactData]="contactData$"></contact-form>
+      <contact-form [contactData]="contactData$ | async"></contact-form>
     </div>
 
     <div class="right">

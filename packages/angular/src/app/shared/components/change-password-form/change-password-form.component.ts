@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ValidationCallbackData } from 'devextreme/ui/validation_rules';
 import { DxFormModule } from 'devextreme-angular/ui/form';
@@ -7,21 +7,25 @@ import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import notify from 'devextreme/ui/notify';
 import { AuthService } from '../../services';
 
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-change-passsword-form',
   templateUrl: './change-password-form.component.html',
 })
-export class ChangePasswordFormComponent implements OnInit {
+export class ChangePasswordFormComponent implements OnInit, OnDestroy {
   loading = false;
 
   formData: any = {};
 
   recoveryCode = '';
 
+  paramMapSubscription: Subscription;
+
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
+    this.paramMapSubscription = this.route.paramMap.subscribe((params) => {
       this.recoveryCode = params.get('recoveryCode') || '';
     });
   }
@@ -42,6 +46,10 @@ export class ChangePasswordFormComponent implements OnInit {
   }
 
   confirmPassword = (e: ValidationCallbackData) => e.value === this.formData.password;
+
+  ngOnDestroy(): void {
+    this.paramMapSubscription.unsubscribe();
+  }
 }
 @NgModule({
   imports: [

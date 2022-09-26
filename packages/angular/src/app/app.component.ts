@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, OnDestroy, } from '@angular/core';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 
 @Component({
@@ -6,7 +6,7 @@ import { AuthService, ScreenService, AppInfoService } from './shared/services';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   @HostBinding('class') get getClass() {
     return Object.keys(this.screen.sizes).filter((cl) => this.screen.sizes[cl]).join(' ');
   }
@@ -15,5 +15,9 @@ export class AppComponent {
 
   isAuthenticated() {
     return this.authService.loggedIn;
+  }
+
+  ngOnDestroy(): void {
+    this.screen.onSubscribe();
   }
 }

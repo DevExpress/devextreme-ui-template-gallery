@@ -27,9 +27,9 @@
   </dx-toolbar>
 
   <dx-form
-    *ngIf="!isLoading"
+    *ngIf="contactData"
     class="form last"
-    [formData]="contactData$"
+    [formData]="contactData"
     labelMode="floating"
     [readOnly]="!isEditing"
   >
@@ -97,7 +97,7 @@
       </ng-template>
       <ng-template #editing>
         <dx-text-box
-          [(value)]="contactData$[data.dataField]"
+          [(value)]="contactData[data.dataField]"
           [label]="data.editorOptions.label"
         ></dx-text-box>
       </ng-template>
@@ -121,7 +121,7 @@
 
     <div *dxTemplate="let data of 'statusEditing'">
       <dx-select-box
-        [(value)]="contactData$.status"
+        [(value)]="contactData.status"
         [items]="statusList"
         [stylingMode]="stylingMode"
         [label]="data.editorOptions.label"
@@ -130,7 +130,7 @@
       >
         <div *dxTemplate="let data of 'field'">
           <div class="form-custom-list-prop">
-            <contact-status [value]="contactData$.status"></contact-status>
+            <contact-status [value]="contactData.status"></contact-status>
             <dx-text-box [readOnly]="true"></dx-text-box>
           </div>
         </div>
@@ -142,7 +142,7 @@
 
     <div *dxTemplate="let data of 'phone'">
       <form-item-with-button
-        [(value)]="contactData$.phone"
+        [(value)]="contactData.phone"
         [isEditing]="isEditing"
         [textBoxOptions]="{
           label: data.editorOptions.label,
@@ -160,7 +160,7 @@
 
     <div *dxTemplate="let data of 'email'">
       <form-item-with-button
-        [(value)]="contactData$.email"
+        [(value)]="contactData.email"
         [isEditing]="isEditing"
         [textBoxOptions]="{
           label: data.editorOptions.label,
@@ -179,7 +179,7 @@
   <dx-load-panel
     container="#contact-form"
     [position]="{ of: '#contact-form' }"
-    [visible]="isLoading"
+    [visible]="!contactData"
     [showPane]="false"
   ></dx-load-panel>
 </div>

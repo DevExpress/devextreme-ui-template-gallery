@@ -1,6 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, EventEmitter, Input, NgModule, OnInit, Output,
+  Component,
+  EventEmitter,
+  Input,
+  NgModule,
+  Output,
 } from '@angular/core';
 import {
   DxButtonModule,
@@ -18,7 +22,7 @@ import { Properties as DxButtonOptions } from 'devextreme/ui/button';
   }
   `],
 })
-export class FormItemWithButtonComponent implements OnInit {
+export class FormItemWithButtonComponent {
   @Input() value: string;
 
   @Output() valueChange = new EventEmitter();
@@ -28,9 +32,6 @@ export class FormItemWithButtonComponent implements OnInit {
   @Input() buttonOptions?: DxButtonOptions = {};
 
   @Input() isEditing? = true;
-
-  ngOnInit() {
-  }
 }
 
 @NgModule({

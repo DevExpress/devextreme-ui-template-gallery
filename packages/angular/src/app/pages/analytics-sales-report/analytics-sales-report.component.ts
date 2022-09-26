@@ -13,7 +13,7 @@ import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
-import { forkJoin, Subscription } from 'rxjs';
+import { forkJoin, map, Subscription } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
 
@@ -33,31 +33,10 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
 
   salesByCategory: SalesOrOpportunitiesByCategory;
 
-  selectionChange(e: SelectionChangedEvent) {
-    const dates = e.item.value.split('/');
-
-    this.loadData(dates[0], dates[1]);
-  }
-
-  customizeSaleText(arg: { percentText: string }) {
-    return arg.percentText;
-  }
+  subscriptions: Subscription[] = [];
 
   constructor(private service: RwaService) {
   }
-
-  subscriptions: Subscription[] = [];
-
-  loadData = (startDate: string, endDate: string) => {
-    const observable = forkJoin({
-      sales: this.service.getSales(startDate, endDate),
-      salesByCategory: this.service.getSalesByCategory(startDate, endDate),
-    });
-
-    this.subscriptions.push(observable.subscribe((data) => {
-      Object.keys(data).forEach((key) => this[key] = data[key]);
-    }));
-  };
 
   ngOnInit(): void {
     const dates = analyticsPanelItems[4].value.split('/');
@@ -68,6 +47,27 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
+
+  selectionChange(e: SelectionChangedEvent) {
+    const dates = e.item.value.split('/');
+
+    this.loadData(dates[0], dates[1]);
+  }
+
+  customizeSaleText(arg: { percentText: string }) {
+    return arg.percentText;
+  }
+
+  loadData = (startDate: string, endDate: string) => {
+    const observable$ = forkJoin([
+      this.service.getSales(startDate, endDate),
+      this.service.getSalesByCategory(startDate, endDate),
+    ]).pipe(map(([sales, salesByCategory]) => ({ sales, salesByCategory })));
+
+    this.subscriptions.push(observable$.subscribe((data) => {
+      Object.keys(data).forEach((key) => this[key] = data[key]);
+    }));
+  };
 }
 
 @NgModule({

@@ -34,15 +34,15 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
 
   dataSubscription: Subscription = new Subscription();
 
+  constructor(private service: RwaService) {
+  }
+
   loadData = () => {
     this.dataSubscription = this.service.getTask(this.taskId).subscribe((data) => {
       this.task = data;
       this.taskName = data.text;
     });
   };
-
-  constructor(private service: RwaService) {
-  }
 
   ngOnInit(): void {
     this.loadData();
