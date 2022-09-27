@@ -22,7 +22,6 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
-import { ExtendPipeModule } from 'src/app/shared/extend.pipe';
 
 @Component({
   selector: 'contact-form',
@@ -90,7 +89,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     DxValidatorModule,
     CommonModule,
     PhonePipeModule,
-    ExtendPipeModule,
     DxValidationGroupModule,
   ],
   providers: [],
