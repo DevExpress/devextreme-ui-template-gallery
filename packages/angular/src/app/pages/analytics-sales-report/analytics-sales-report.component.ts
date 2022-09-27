@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, OnDestroy, ViewChild
+  Component, OnInit, NgModule, OnDestroy, ViewChild,
 } from '@angular/core';
 
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
@@ -32,7 +32,7 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
   @ViewChild('range', { static: false }) range: DxRangeSelectorComponent;
 
   @ViewChild('chart', { static: false }) chart: DxChartComponent;
-  
+
   subscriptions: Subscription[] = [];
 
   groupByPeriods = ['Day', 'Month'];

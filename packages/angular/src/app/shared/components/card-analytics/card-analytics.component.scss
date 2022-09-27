@@ -98,13 +98,13 @@
 
 
     ::ng-deep .dx-loadpanel-indicator {
-        width: 24px;
-        height: 24px;
+      width: 24px;
+      height: 24px;
     }
   }
 
   &.wide {
-    margin-right: 0px;
+    margin-right: 0;
     grid-template-columns: repeat(1, 100%);
   }
 
@@ -140,12 +140,12 @@
     }
   }
 
-  :host { 
-     .card {
-       .content {
-         height: auto;
-       }
-     }
-   }
+  :host {
+    .card {
+      .content {
+        height: auto;
+      }
+    }
+  }
 }
 

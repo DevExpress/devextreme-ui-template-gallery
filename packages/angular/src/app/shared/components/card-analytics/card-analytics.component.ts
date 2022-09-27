@@ -8,7 +8,6 @@ import { DxMenuModule } from 'devextreme-angular/ui/menu';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-
 class ResizeObservable extends Observable<ResizeObserverEntry[]> {
   constructor(el: HTMLElement) {
     super((subscriber) => {
@@ -21,7 +20,7 @@ class ResizeObservable extends Observable<ResizeObserverEntry[]> {
       return function unsubscribe() {
         ro.unobserve(el);
         ro.disconnect();
-      }
+      };
     });
   }
 }
@@ -73,7 +72,7 @@ export class CardAnalytticsComponent implements OnChanges, OnInit, OnDestroy {
     this.position = { of: `.${(!this.isGreyCard() ? this.contentClass : 'title')}` };
     this.size = !this.isGreyCard() ? { width: 60, height: 60 } : { width: 50, height: 50 };
 
-    if(!this.isGreyCard() && this.component) {
+    if (!this.isGreyCard() && this.component) {
       this.resizeObserverSubscription = new ResizeObservable(this.observedElement)
         .pipe(debounceTime(300))
         .subscribe(this.resizeCallback.bind(this));
@@ -81,13 +80,13 @@ export class CardAnalytticsComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(!this.isGreyCard() && this.component) {
+    if (!this.isGreyCard() && this.component) {
       this.resizeObserverSubscription.unsubscribe();
     }
   }
 
   resizeCallback() {
-    if(this.component) { 
+    if (this.component) {
       this.component.instance.render();
     }
   }

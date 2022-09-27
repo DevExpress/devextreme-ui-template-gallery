@@ -63,23 +63,23 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
     this.dataSubscription.unsubscribe();
   }
 
-  addTask= () => {
+  addTask = () => {
     if (this.displayGrid) {
       this.dataGrid.addRow();
     } else {
       this.navigateToDetails();
     }
-  }
+  };
 
   refresh = () => {
-    if(this.displayGrid) {
+    if (this.displayGrid) {
       this.dataGrid.refresh();
     } else if (this.displayKanban) {
       this.kanban.refresh();
     } else {
       this.gantt.refresh();
     }
-  }
+  };
 
   chooseColumnDataGrid = () => this.dataGrid.showColumnChooser();
 
@@ -91,7 +91,7 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
     } else {
       this.gantt.onExporting();
     }
-  }
+  };
 
   exportDataGridToXSLX = () => this.dataGrid.onExportingToXLSX();
 

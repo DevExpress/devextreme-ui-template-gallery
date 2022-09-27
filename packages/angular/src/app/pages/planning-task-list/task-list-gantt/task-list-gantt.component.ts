@@ -1,5 +1,5 @@
 import {
-  Component, NgModule, Input, SimpleChanges, OnChanges, Output, ViewChild
+  Component, NgModule, Input, SimpleChanges, OnChanges, Output, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
