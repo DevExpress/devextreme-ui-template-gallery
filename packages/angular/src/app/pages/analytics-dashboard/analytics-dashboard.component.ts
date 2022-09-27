@@ -1,14 +1,14 @@
 import {
-  Component, OnInit, NgModule, OnDestroy,
+  Component, OnInit, NgModule, OnDestroy, ViewChild
 } from '@angular/core';
 
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
-import { DxChartModule } from 'devextreme-angular/ui/chart';
+import { DxPieChartModule, DxPieChartComponent } from 'devextreme-angular/ui/pie-chart';
+import { DxChartModule, DxChartComponent } from 'devextreme-angular/ui/chart';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
-import { DxFunnelModule } from 'devextreme-angular/ui/funnel';
+import { DxFunnelModule, DxFunnelComponent } from 'devextreme-angular/ui/funnel';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
@@ -30,6 +30,12 @@ import {
   providers: [RwaService],
 })
 export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
+  @ViewChild('chart', { static: false }) chart: DxChartComponent;
+
+  @ViewChild('pie', { static: false }) pie: DxPieChartComponent;
+
+  @ViewChild('funnel', { static: false }) funnel: DxFunnelComponent;
+
   analyticsPanelItems = analyticsPanelItems;
 
   salesByState: SalesByState;

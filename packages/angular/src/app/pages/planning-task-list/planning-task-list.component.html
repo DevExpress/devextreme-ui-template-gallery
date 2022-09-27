@@ -21,7 +21,7 @@
         text="Add Task"
         type="default"
         stylingMode="contained"
-        (onClick)="addDataGridRow()"
+        (onClick)="addTask()"
       ></dx-button>
     </dxi-item>
 
@@ -33,7 +33,7 @@
       [options]="{
         text: 'Refresh',
         icon: 'refresh',
-        onClick: refreshDataGrid
+        onClick: refresh
       }"
     ></dxi-item>
 
@@ -42,6 +42,7 @@
       locateInMenu="auto"
       widget="dxButton"
       showText="inMenu"
+      [disabled]="!displayGrid"
       [options]="{
         text: 'Column Chooser',
         icon: 'columnchooser',
@@ -49,7 +50,7 @@
       }"
     ></dxi-item>
 
-    <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
+    <dxi-item location="after" locateInMenu="auto">
       <div class="separator"></div>
     </dxi-item>
 
@@ -58,10 +59,24 @@
       locateInMenu="auto"
       widget="dxButton"
       showText="inMenu"
+      [disabled]="displayKanban"
       [options]="{
         text: 'Export to PDF',
         icon: 'exportpdf',
-        onClick: exportDataGrid
+        onClick: exportToPdf
+      }"
+    ></dxi-item>
+
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
+      [disabled]="!displayGrid"
+      [options]="{
+        text: 'Export to PDF',
+        icon: 'exportxlsx',
+        onClick: exportDataGridToXSLX
       }"
     ></dxi-item>
 
@@ -69,6 +84,7 @@
       location="after"
       locateInMenu="auto"
       widget="dxTextBox"
+      [disabled]="!displayGrid"
       [options]="{
         placeholder: 'Task Search',
         mode: 'search',
@@ -86,10 +102,10 @@
       ></task-list-grid>
     </div>
     <div *ngSwitchCase="taskPanelItems[1].text" class="kanban">
-      <task-list-kanban [dataSource]="tasks"></task-list-kanban>
+      <task-list-kanban #planningKanban [dataSource]="tasks"></task-list-kanban>
     </div>
     <div *ngSwitchCase="taskPanelItems[2].text" class="gantt">
-      <task-list-gantt [dataSource]="tasks"></task-list-gantt>
+      <task-list-gantt #planningGantt [dataSource]="tasks"></task-list-gantt>
     </div>
   </div>
 </div>

@@ -111,11 +111,11 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
         jsPDFDocument: doc,
         component: e.component,
       }).then(() => {
-        doc.save('Tasks.pdf');
+        doc.save('Contacts.pdf');
       });
     } else {
       const workbook = new Workbook();
-      const worksheet = workbook.addWorksheet('Tasks');
+      const worksheet = workbook.addWorksheet('Contacts');
 
       exportDataGridToXLSX({
         component: e.component,
@@ -123,7 +123,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
         autoFilterEnabled: true,
       }).then(() => {
         workbook.xlsx.writeBuffer().then((buffer) => {
-          saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Tasks.xlsx');
+          saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Contacts.xlsx');
         });
       });
       e.cancel = true;

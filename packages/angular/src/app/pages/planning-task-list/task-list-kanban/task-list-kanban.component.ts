@@ -1,11 +1,11 @@
 import {
-  Component, OnInit, NgModule, Input, SimpleChanges, OnChanges,
+  Component, OnInit, NgModule, Input, SimpleChanges, OnChanges, Output, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
-import { DxSortableModule } from 'devextreme-angular/ui/sortable';
+import { DxSortableModule, DxSortableComponent } from 'devextreme-angular/ui/sortable';
 import { DxMenuModule } from 'devextreme-angular/ui/menu';
 import notify from 'devextreme/ui/notify';
 import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable';
@@ -24,7 +24,11 @@ type Board = {
   styleUrls: ['./task-list-kanban.component.scss'],
 })
 export class TaskListKanbanComponent implements OnInit, OnChanges {
+  @ViewChild(DxSortableComponent, { static: false }) component: DxSortableComponent;
+
   @Input() dataSource: Task[];
+
+  @Output() refresh = () => this.component.instance.update();
 
   kanbanDataSource: Board[] = [];
 

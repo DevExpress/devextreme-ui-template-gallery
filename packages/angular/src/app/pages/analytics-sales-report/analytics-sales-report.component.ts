@@ -1,11 +1,11 @@
 import {
-  Component, OnInit, NgModule, OnDestroy,
+  Component, OnInit, NgModule, OnDestroy, ViewChild
 } from '@angular/core';
 
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
-import { DxChartModule } from 'devextreme-angular/ui/chart';
-import { DxRangeSelectorModule } from 'devextreme-angular/ui/range-selector';
+import { DxChartModule, DxChartComponent } from 'devextreme-angular/ui/chart';
+import { DxRangeSelectorModule, DxRangeSelectorComponent } from 'devextreme-angular/ui/range-selector';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 
@@ -27,9 +27,17 @@ import { Sales, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/anal
   providers: [RwaService],
 })
 export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
+  @ViewChild('bar', { static: false }) bar: DxChartComponent;
+
+  @ViewChild('range', { static: false }) range: DxRangeSelectorComponent;
+
+  @ViewChild('chart', { static: false }) chart: DxChartComponent;
+  
   subscriptions: Subscription[] = [];
 
   groupByPeriods = ['Day', 'Month'];
+
+  analyticsPanelItems = analyticsPanelItems;
 
   sales: Sales;
 

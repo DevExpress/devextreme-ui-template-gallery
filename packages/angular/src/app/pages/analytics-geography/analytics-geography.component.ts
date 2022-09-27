@@ -1,14 +1,14 @@
 import {
-  Component, OnInit, NgModule, OnDestroy,
+  Component, OnInit, NgModule, OnDestroy, ViewChild,
 } from '@angular/core';
 
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
+import { DxPieChartModule, DxPieChartComponent } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
-import { DxVectorMapModule } from 'devextreme-angular/ui/vector-map';
+import { DxVectorMapModule, DxVectorMapComponent } from 'devextreme-angular/ui/vector-map';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
@@ -30,6 +30,10 @@ import { SalesByState, SalesByStateAndCity } from 'src/app/shared/types/analytic
   providers: [RwaService],
 })
 export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
+  @ViewChild('map', { static: false }) map: DxVectorMapComponent;
+
+  @ViewChild('pie', { static: false }) pie: DxPieChartComponent;
+
   usaMap: any = mapsData.usa;
 
   analyticsPanelItems = analyticsPanelItems;
@@ -51,7 +55,7 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
   }
 
   customizeLegendText(arg: { index: number }) {
-    return ['< 80000K', '80000K to 100000K', '100000K to 400000K', '> 400000K'][arg.index];
+    return ['< 80000$', '80000$ to 100000$', '100000$ to 400000$', '> 400000$'][arg.index];
   }
 
   customizeItems(items: Array<LegendItem>) {

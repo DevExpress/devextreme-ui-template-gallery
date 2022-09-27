@@ -54,34 +54,38 @@
     ></dxi-item>
   </dx-toolbar>
 
-  <div class="cards">
+  <div class="cards grey">
     <card-analytics
       class="grey"
       titleText="Opportunities"
       [showData]="getTotal(opportunities)"
       contentClass="opportunities-total"
     >
-      <div class="total">{{
-        getTotal(opportunities) | currency: "USD":"$":"1.0-0"
-      }}</div>
-      <div class="percentage">
-        <i class="dx-icon-spinup"></i>
-        <span>20.3%</span>
+      <div *ngIf="getTotal(opportunities)">
+        <div class="total">
+          {{ getTotal(opportunities) | currency: "USD":"$":"1.0-0" }}
+        </div>
+        <div class="percentage">
+          <i class="dx-icon-spinup"></i>
+          <span>20.3%</span>
+        </div>
       </div>
     </card-analytics>
     <card-analytics
       class="grey"
       titleText="Revenue Total"
       [showData]="getTotal(sales)"
-      contentClass="revenue-total"
+      contentClass="revenue-total" 
     >
-      <div class="total">{{
-        getTotal(sales) | currency: "USD":"$":"1.0-0"
-      }}</div>
+    <div *ngIf="getTotal(sales)">
+      <div class="total">
+        {{ getTotal(sales) | currency: "USD":"$":"1.0-0" }}
+      </div>
       <div class="percentage">
         <i class="dx-icon-spinup"></i>
         <span>14.7%</span>
       </div>
+    </div>
     </card-analytics>
     <card-analytics
       class="grey"
@@ -110,13 +114,18 @@
   </div>
 
   <div class="cards">
-    <card-analytics titleText="Revenue" contentClass="sales" [showData]="!!sales">
-      <dx-chart [dataSource]="sales">
+    <card-analytics titleText="Revenue" contentClass="sales" [showData]="!!sales" [component]="chart">
+      <dx-chart #chart [dataSource]="sales">
         <dxi-series valueField="total"></dxi-series>
         <dxo-common-series-settings argumentField="date" type="splinearea">
           <dxo-border [visible]="true"></dxo-border>
         </dxo-common-series-settings>
-        <dxo-argument-axis argumentType="datetime"> </dxo-argument-axis>
+        <dxo-argument-axis argumentType="datetime"></dxo-argument-axis>
+        <dxi-value-axis>
+            <dxo-label>
+              <dxo-format type="currency" currency="USD"></dxo-format>
+            </dxo-label>
+        </dxi-value-axis>
         <dxo-legend [visible]="false"> </dxo-legend>
         <dxo-size [height]="270"></dxo-size>
       </dx-chart>
@@ -125,8 +134,10 @@
       titleText="Conversion Funnel (All Products)"
       contentClass="opportunities"
       [showData]="!!opportunities"
+      [component]="funnel"
     >
       <dx-funnel
+        #funnel
         [dataSource]="opportunities"
         argumentField="name"
         valueField="value"
@@ -208,8 +219,10 @@
       titleText="Revenue Snapshot (All Products)"
       contentClass="sales-by-category"
       [showData]="!!salesByCategory"
+      [component]="pie"
     >
       <dx-pie-chart
+        #pie
         [dataSource]="salesByCategory"
         type="doughnut"
         [diameter]="0.8"
