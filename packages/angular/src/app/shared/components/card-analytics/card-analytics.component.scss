@@ -48,6 +48,7 @@
 
   &.grey {
     margin: 20px 0;
+    grid-template-columns: repeat(4, 25%);
 
     .card {
       background-color: #f5f5f5;
@@ -116,10 +117,6 @@
         height: auto;
       }
     }
-  }
-
-  &.grey {
-    grid-template-columns: repeat(4, 25%);
   }
 }
 
