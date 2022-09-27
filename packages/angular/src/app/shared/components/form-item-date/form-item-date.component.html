@@ -1,4 +1,4 @@
-<dx-drop-down-button
+<dx-drop-down-button *ngIf="!value"
   icon="event"
   stylingMode="outlined"
   dropDownContentTemplate="dropDownContentTemplate"
@@ -10,3 +10,22 @@
     <dx-calendar (onValueChanged)="onValueChanged($event)"></dx-calendar>
   </div>
 </dx-drop-down-button>
+
+<dx-date-box *ngIf="isEditing && value"
+             [(value)]="value"
+             [name]="text"
+             [label]="label"
+             placeholder="MM/dd/y"
+             displayFormat="MM/dd/y"
+></dx-date-box>
+
+<edit-view-item *ngIf="!isEditing && value"
+                [label]="label"
+                [value]="value"
+                [renderedValue]="value | date: 'MM/dd/yyyy'"
+></edit-view-item>
+
+
+
+
+

@@ -1,48 +1,52 @@
 import {
-  Component, Input, NgModule, Output, EventEmitter, OnInit,
+  Component, Input, NgModule, Output, EventEmitter,
 } from '@angular/core';
 import { DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'form-item-plain',
+  selector: 'edit-view-item',
   template: `
     <i *ngIf="icon" class="dx-icon dx-icon-{{ icon }}"></i>
     <ng-container *ngIf="!isEditing; else editing">
-      <div class="custom-form-item-wrapper"
+      <div class="edit-view-item-wrapper"
            [class.with-label]="!icon">
         <label *ngIf="!icon" class="dx-texteditor-label">{{ label }}</label>
-        <ng-container *ngTemplateOutlet="valueTpl || defaultValueTpl"></ng-container>
+        <div #refValueContent>
+          <ng-content select="[view-content]"></ng-content>
+        </div>
+        <ng-container *ngIf="refValueContent.children.length === 0">
+          <span class="edit-view-item-value">{{ renderedValue ? renderedValue : value }}</span>
+        </ng-container>
       </div>
     </ng-container>
 
     <ng-template #editing>
-      <ng-container *ngTemplateOutlet="editorTpl || textboxEditor"></ng-container>
-    </ng-template>
-
-    <ng-template #defaultValueTpl>
-      <span class="custom-form-item-value">{{ renderedValue ? renderedValue : value }}</span>
-    </ng-template>
-
-    <ng-template #textboxEditor>
-      <dx-text-box
-        [label]="icon ? '' : label"
-        [value]="value"
-        (onValueChanged)="onChangeValue($event)"
-        (keyup)="valueChanged.emit(value)"
-        [mask]="mask"
-        valueChangeEvent="keyup input change"
-      >
-        <dx-validator [validationRules]="validators" [validationGroup]="validationGroup"></dx-validator>
-      </dx-text-box>
+      <div #refEditorContent class="editorContentWrapper">
+        <ng-content select="[editor-content]"></ng-content>
+      </div>
+      <ng-container *ngIf="refEditorContent.children.length === 0">
+        <dx-text-box
+          [label]="icon ? '' : label"
+          [value]="value"
+          (onValueChanged)="onChangeValue($event)"
+          [mask]="mask"
+          valueChangeEvent="keyup input change"
+        >
+          <dx-validator [validationRules]="validators" [validationGroup]="validationGroup"></dx-validator>
+        </dx-text-box>
+      </ng-container>
     </ng-template>
   `,
   styles: [`
     :host {
       display: flex;
       width: 100%;
-      gap: 5px;
 
+      .editorContentWrapper {
+        &:empty { display: none }
+        width: 100%;
+      }
 
       .dx-icon {
         display: flex;
@@ -53,7 +57,7 @@ import { CommonModule } from '@angular/common';
         flex: 1;
       }
 
-      .custom-form-item-wrapper {
+      .edit-view-item-wrapper {
         position: relative;
         padding: 9px 11px 8px;
         block-size: 32.2px;
@@ -70,14 +74,14 @@ import { CommonModule } from '@angular/common';
           }
         }
 
-        .custom-form-item-value {
+        .edit-view-item-value {
           font-size: 13px;
         }
       }
     }
   `],
 })
-export class FormItemPlainComponent {
+export class EditViewItemComponent {
   @Input() isEditing: boolean;
 
   @Input() label: string;
@@ -100,17 +104,14 @@ export class FormItemPlainComponent {
 
   @Output() valueChange = new EventEmitter<string | Date | number>();
 
-  @Output() valueChanged = new EventEmitter<string | Date | number>();
-
   onChangeValue(event) {
     this.valueChange.emit(event.value);
-    this.valueChanged.emit(event);
   }
 }
 
 @NgModule({
   imports: [DxTextBoxModule, CommonModule, DxValidatorModule],
-  declarations: [FormItemPlainComponent],
-  exports: [FormItemPlainComponent],
+  declarations: [EditViewItemComponent],
+  exports: [EditViewItemComponent],
 })
-export class FormItemPlainModule { }
+export class EditViewItemModule { }

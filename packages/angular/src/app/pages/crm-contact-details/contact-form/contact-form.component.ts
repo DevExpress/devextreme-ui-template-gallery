@@ -15,9 +15,9 @@ import {
 } from 'devextreme-angular';
 import {
   ContactStatusModule,
-  FormItemPlainModule,
   FormItemPhotoModule,
   FormItemWithButtonModule,
+  EditViewItemModule,
 } from 'src/app/shared/components';
 import { Observable, Subscription } from 'rxjs';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
@@ -29,8 +29,6 @@ import { Contact, contactStatusList } from 'src/app/shared/types/contact';
   styleUrls: ['./contact-form.component.scss'],
 })
 export class ContactFormComponent implements OnInit, OnDestroy {
-  @ViewChild('contactForm', { static: false }) contactForm: DxFormComponent;
-
   @Input() contactData: Observable<Contact>;
 
   contactData$: Contact;
@@ -40,8 +38,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   isEditing = false;
 
   isLoading = true;
-
-  isFormValid = true;
 
   contactSubscription: Subscription = new Subscription();
 
@@ -60,17 +56,17 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.contactSubscription.unsubscribe();
   }
 
-  checkValidation = () => {
-    this.isFormValid = this.contactForm?.instance.validate().isValid;
-  };
+  handleEditClick() {
+    this.isEditing = true;
+  }
 
-  toggleEdit = () => {
-    if (this.isEditing) {
-      this.checkValidation();
-    }
+  handleSaveClick() {
+    this.isEditing = false;
+  }
 
-    this.isEditing = !this.isEditing;
-  };
+  handleCancelClick() {
+    this.isEditing = false;
+  }
 }
 
 @NgModule({
@@ -83,7 +79,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     DxLoadPanelModule,
 
     ContactStatusModule,
-    FormItemPlainModule,
+    EditViewItemModule,
     FormItemPhotoModule,
     FormItemWithButtonModule,
     DxValidatorModule,

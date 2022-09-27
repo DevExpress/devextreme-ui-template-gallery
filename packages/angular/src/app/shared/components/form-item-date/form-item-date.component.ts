@@ -4,9 +4,10 @@ import {
 import {
   DxCalendarModule,
   DxDropDownButtonModule,
-
-  DxDropDownButtonComponent,
+  DxDropDownButtonComponent, DxDateBoxModule,
 } from 'devextreme-angular';
+
+import { EditViewItemModule } from 'src/app/shared/components/edit-view-item/edit-view-item.component';
 import { ValueChangedEvent } from 'devextreme/ui/calendar';
 import { CommonModule } from '@angular/common';
 
@@ -17,7 +18,13 @@ import { CommonModule } from '@angular/common';
 export class FormItemDateComponent {
   @ViewChild(DxDropDownButtonComponent) dropDownButtonComponent: DxDropDownButtonComponent;
 
+  @Input() isEditing = false;
+
+  @Input() dataField: string;
+
   @Input() text: string;
+
+  @Input() label = '';
 
   @Input() value!: string | Date;
 
@@ -37,7 +44,8 @@ export class FormItemDateComponent {
   imports: [
     DxCalendarModule,
     DxDropDownButtonModule,
-
+    EditViewItemModule,
+    DxDateBoxModule,
     CommonModule,
   ],
   providers: [],
