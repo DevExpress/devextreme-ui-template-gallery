@@ -1,4 +1,4 @@
-{
+module.exports = {
   "root": true,
   "ignorePatterns": [
     "projects/**/*"
@@ -9,8 +9,9 @@
         "*.ts"
       ],
       "parserOptions": {
+        "tsconfigRootDir": __dirname,
         "project": [
-          "tsconfig.json"
+          "./tsconfig.json"
         ],
         "createDefaultProgram": true
       },
