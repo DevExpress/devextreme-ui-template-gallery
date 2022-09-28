@@ -15,10 +15,6 @@ export class ScreenService {
       .subscribe((data) => this.changed.next(data));
   }
 
-  public onSubscribe(): void {
-    this.breakpointSubscription.unsubscribe();
-  }
-
   private isLargeScreen() {
     const isLarge = this.breakpointObserver$.isMatched(Breakpoints.Large);
     const isXLarge = this.breakpointObserver$.isMatched(Breakpoints.XLarge);

@@ -18,6 +18,6 @@ export class AppComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.screen.onSubscribe();
+    this.screen.breakpointSubscription.unsubscribe();
   }
 }
