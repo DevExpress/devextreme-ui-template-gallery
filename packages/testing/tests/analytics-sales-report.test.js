@@ -19,7 +19,7 @@ fixture`Analytics Sales Report`;
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-sales-report-all-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.dx-dropdownbutton'));
-      await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(1));
+      await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
       await t.wait(chartTimeout);
       await takeScreenshot(`analytics-sales-report-day-embed=${embedded}-${screenMode[0]}`, 'body');
 
