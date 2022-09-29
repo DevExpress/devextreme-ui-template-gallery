@@ -16,7 +16,6 @@ import {
 import {
   ContactStatusModule,
   FormItemPhotoModule,
-  FormItemWithButtonModule,
   EditViewItemModule,
 } from 'src/app/shared/components';
 import { Observable, Subscription } from 'rxjs';
@@ -81,7 +80,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     ContactStatusModule,
     EditViewItemModule,
     FormItemPhotoModule,
-    FormItemWithButtonModule,
     DxValidatorModule,
     CommonModule,
     PhonePipeModule,

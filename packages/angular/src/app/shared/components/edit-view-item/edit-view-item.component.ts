@@ -12,10 +12,10 @@ import { CommonModule } from '@angular/common';
       <div class="edit-view-item-wrapper"
            [class.with-label]="!icon">
         <label *ngIf="!icon" class="dx-texteditor-label">{{ label }}</label>
-        <div #refValueContent>
+        <div #refViewContent>
           <ng-content select="[view-content]"></ng-content>
         </div>
-        <ng-container *ngIf="refValueContent.children.length === 0">
+        <ng-container *ngIf="refViewContent.children.length === 0">
           <span class="edit-view-item-value">{{ renderedValue ? renderedValue : value }}</span>
         </ng-container>
       </div>
@@ -93,10 +93,6 @@ export class EditViewItemComponent {
   @Input() mask: string;
 
   @Input() renderedValue = '';
-
-  @Input() editorTpl: any = null;
-
-  @Input() valueTpl: any = null;
 
   @Input() validators: any[] = [];
 
