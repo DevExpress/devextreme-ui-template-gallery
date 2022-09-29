@@ -51,12 +51,16 @@ export class TaskFormComponent implements OnInit, OnChanges {
     }
   }
 
-  toggleEdit = () => {
-    this.isEditing = !this.isEditing;
+  handleEditClick = () => {
+    this.isEditing = true;
   };
 
-  startDateChange = (date: Date) => {
-    this.isEmptyStartDate = !date;
+  handleSaveClick = () => {
+    this.isEditing = false;
+  };
+
+  handleCancelClick = () => {
+    this.isEditing = false;
   };
 }
 

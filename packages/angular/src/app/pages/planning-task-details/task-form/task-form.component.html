@@ -7,7 +7,7 @@
         icon="edit"
         stylingMode="outlined"
         type="default"
-        (onClick)="toggleEdit()"
+        (onClick)="handleEditClick()"
       ></dx-button>
     </dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
@@ -15,13 +15,13 @@
         text="Save"
         stylingMode="outlined"
         type="default"
-        (onClick)="toggleEdit()"
+        (onClick)="handleSaveClick()"
       ></dx-button>
     </dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
       <dx-button
         text="Cancel"
-        (onClick)="toggleEdit()"
+        (onClick)="handleCancelClick()"
         stylingMode="text"
       ></dx-button>
     </dxi-item>
@@ -98,7 +98,6 @@
 
       <dxi-item>
         <form-item-date label="Start Date"
-                        dataField="startDate"
                         text="Set Start Date"
                         [isEditing]="isEditing"
                         [(value)]="task.startDate"
@@ -107,7 +106,6 @@
 
       <dxi-item>
         <form-item-date label="Due Date"
-                        dataField="dueDate"
                         text="Set Due Date"
                         [isEditing]="isEditing"
                         [(value)]="task.dueDate"
