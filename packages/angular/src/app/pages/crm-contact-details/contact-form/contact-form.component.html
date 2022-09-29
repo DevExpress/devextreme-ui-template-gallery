@@ -7,7 +7,7 @@
         icon="edit"
         stylingMode="outlined"
         type="default"
-        (onClick)="toggleEdit()"
+        (onClick)="handleEditClick()"
       ></dx-button>
     </dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
@@ -15,201 +15,172 @@
         text="Save"
         stylingMode="outlined"
         type="default"
-        (onClick)="toggleEdit()"
+        (onClick)="handleSaveClick()"
       ></dx-button>
     </dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
       <dx-button
         text="Cancel"
-        (onClick)="toggleEdit()"
+        (onClick)="handleCancelClick()"
         stylingMode="text"
       ></dx-button>
     </dxi-item>
   </dx-toolbar>
 
   <div class="form-compact">
-    <dx-form
+    <dx-form #contactForm
       *ngIf="!isLoading"
       class="form last"
       [formData]="contactData$"
       labelMode="floating"
-      [readOnly]="!isEditing"
+      [validationGroup]="validationGroup"
     >
       <dxi-item itemType="group" [colCount]="2">
-        <dxi-item dataField="image" template="photo"></dxi-item>
+        <dxi-item>
+          <form-item-photo
+            [link]="contactData$.image"
+            [size]="184"
+          ></form-item-photo>
+        </dxi-item>
         <dxi-item itemType="group">
-          <dxi-item
-            dataField="status"
-            template="statusField"
-            [editorOptions]="editorOptions"
-          >
+          <dxi-item>
+            <edit-view-item label="Status"
+                             [isEditing]="isEditing"
+                             [value]="contactData$.status"
+            >
+              <contact-status view-content [value]="contactData$.status"></contact-status>
+              <dx-select-box editor-content
+                             label="Status"
+                             [(value)]="contactData$.status"
+                             [items]="statusList"
+                             [readOnly]="!isEditing"
+                             width="100%"
+                             fieldTemplate="field"
+              >
+                <div *dxTemplate="let data of 'field'">
+                  <div class="form-custom-list-prop">
+                    <contact-status [value]="contactData$.status"></contact-status>
+                    <dx-text-box [readOnly]="true"></dx-text-box>
+                  </div>
+                </div>
+                <div *dxTemplate="let data of 'item'">
+                  <contact-status [value]="data"></contact-status>
+                </div>
+              </dx-select-box>
+            </edit-view-item>
           </dxi-item>
-          <dxi-item
-            dataField="firstName"
-            template="itemPlain"
-            [editorOptions]="editorOptions"
-          ></dxi-item>
-          <dxi-item
-            dataField="lastName"
-            template="itemPlain"
-            [editorOptions]="editorOptions"
-          ></dxi-item>
+
+          <dxi-item>
+            <edit-view-item label="First Name"
+                            [isEditing]="isEditing"
+                            [validators]="[{type: 'required'}]"
+                            [validationGroup]="validationGroup"
+                            [(value)]="contactData$.firstName"></edit-view-item>
+          </dxi-item>
+
+          <dxi-item>
+            <edit-view-item label="Last Name"
+                            [isEditing]="isEditing"
+                            [validators]="[{type: 'required'}]"
+                            [validationGroup]="validationGroup"
+                            [(value)]="contactData$.lastName"></edit-view-item>
+          </dxi-item>
         </dxi-item>
-        <dxi-item dataField="position"
-                  template="itemPlain"
-                  [editorOptions]="editorOptions"></dxi-item>
-        <dxi-item  cssClass="accent"
-                   dataField="manager"
-                   template="itemPlain"
-                   [editorOptions]="editorOptions"
-        >
-          <dxo-label text="Assigned to"></dxo-label>
+
+        <dxi-item>
+          <edit-view-item label="Position"
+                          [isEditing]="isEditing"
+                          [validators]="[{type: 'required'}]"
+                          [validationGroup]="validationGroup"
+                          [(value)]="contactData$.position"></edit-view-item>
         </dxi-item>
-        <dxi-item cssClass="accent"
-                  dataField="company"
-                  template="itemPlain"
-                  [editorOptions]="editorOptions"
-                  [colSpan]="2"
-        ></dxi-item>
+
+        <dxi-item cssClass="accent">
+          <edit-view-item label="Assigned to"
+                          [isEditing]="isEditing"
+                          [validators]="[{type: 'required'}]"
+                          [validationGroup]="validationGroup"
+                          [(value)]="contactData$.manager"></edit-view-item>
+        </dxi-item>
+
+        <dxi-item cssClass="accent" [colSpan]="2">
+          <edit-view-item label="Company"
+                         [isEditing]="isEditing"
+                         [validators]="[{type: 'required'}]"
+                         [validationGroup]="validationGroup"
+                         [(value)]="contactData$.company"></edit-view-item>
+        </dxi-item>
       </dxi-item>
 
       <dxi-item itemType="group" [colCount]="4" caption="Contacts">
-        <dxi-item
-          dataField="address"
-          template="itemPlain"
-          [editorOptions]="editorOptions"
-          [colSpan]="4"
-        ></dxi-item>
-        <dxi-item
-          dataField="city"
-          template="itemPlain"
-          [editorOptions]="editorOptions"
-          [colSpan]="2"
-        ></dxi-item>
-        <dxi-item template="state">
-          <dxo-label text="State"></dxo-label>
+        <dxi-item [colSpan]="4">
+          <edit-view-item label="Address"
+                          [isEditing]="isEditing"
+                          [validators]="[{type: 'required'}]"
+                          [validationGroup]="validationGroup"
+                          [(value)]="contactData$.address"></edit-view-item></dxi-item>
+
+        <dxi-item  [colSpan]="2" >
+          <edit-view-item label="City"
+                           [isEditing]="isEditing"
+                           [validators]="[{type: 'required'}]"
+                           [validationGroup]="validationGroup"
+                           [(value)]="contactData$['city']"></edit-view-item>
         </dxi-item>
-        <dxi-item dataField="zipCode" template="itemPlain" [editorOptions]="editorOptions"></dxi-item>
-        <dxi-item dataField="phone" template="phone" [colSpan]="2"></dxi-item>
-        <dxi-item dataField="email" template="email" [colSpan]="2"></dxi-item>
+
+        <dxi-item>
+          <edit-view-item label="State"
+                           [isEditing]="isEditing"
+                           [(value)]="contactData$.state.stateShort"
+          ></edit-view-item>
+        </dxi-item>
+
+        <dxi-item>
+          <edit-view-item label="Zip Code"
+                          [isEditing]="isEditing"
+                          [validators]="[zipCodeValidator]"
+                          [validationGroup]="validationGroup"
+                          [(value)]="contactData$.zipCode"></edit-view-item>
+        </dxi-item>
+
+        <dxi-item [colSpan]="2">
+          <edit-view-item label="Phone"
+                           [isEditing]="isEditing"
+                           [value]="contactData$.phone"
+                           mask="+1(000)000-0000"
+                           [renderedValue]="contactData$.phone | phone"
+          ></edit-view-item>
+          <dx-button class="form-item-button"
+                     [visible]="!isEditing"
+                     [text]="'Call'"
+                     [icon]="'tel'"
+                     [type]="'default'"
+                     stylingMode="outlined"
+          ></dx-button>
+        </dxi-item>
+
+        <dxi-item [colSpan]="2">
+          <edit-view-item label="Email"
+                           [isEditing]="isEditing"
+                           [value]="contactData$.email"
+                           [validators]="[{type: 'email'}] "
+          ></edit-view-item>
+          <dx-button class="form-item-button"
+                     [visible]="!isEditing"
+                     [text]="'Send Email'"
+                     [icon]="'email'"
+                     [type]="'default'"
+                     stylingMode="outlined"
+          ></dx-button>
+        </dxi-item>
       </dxi-item>
 
-      <!-- T1085831 -->
-      <div *dxTemplate="let data of 'itemPlain'">
-        <form-item-plain
-          [isEditing]="isEditing"
-          [label]="data.editorOptions.label"
-          [(value)]="contactData$[data.dataField]"
-        ></form-item-plain>
-      </div>
-
-      <div *dxTemplate="let data of 'state'">
-        <form-item-plain
-          [isEditing]="isEditing"
-          [label]="data.editorOptions.label "
-          [(value)]="contactData$.state.stateShort"
-        ></form-item-plain>
-      </div>
-
-      <div *dxTemplate="let data of 'photo'">
-        <form-item-photo
-          [link]="data.editorOptions.value"
-          [size]="184"
-        ></form-item-photo>
-      </div>
-
-      <div *dxTemplate="let data of 'statusField'">
-        <form-item-plain
-          [isEditing]="isEditing"
-          [label]="data.editorOptions.label"
-          [value]="data.editorOptions.value"
-          [valueTpl]="statusValueTpl"
-          [editorTpl]="statusEditorTpl"
-        ></form-item-plain>
-
-        <ng-template #statusValueTpl>
-          <contact-status [value]="data.editorOptions.value"></contact-status>
-        </ng-template>
-
-        <ng-template #statusEditorTpl>
-          <dx-select-box
-            [(value)]="contactData$.status"
-            [items]="statusList"
-            [stylingMode]="stylingMode"
-            [label]="data.editorOptions.label"
-            [readOnly]="!isEditing"
-            fieldTemplate="field"
-          >
-            <div *dxTemplate="let data of 'field'">
-              <div class="form-custom-list-prop">
-                <contact-status [value]="contactData$.status"></contact-status>
-                <dx-text-box [readOnly]="true"></dx-text-box>
-              </div>
-            </div>
-            <div *dxTemplate="let data of 'item'">
-              <contact-status [value]="data"></contact-status>
-            </div>
-          </dx-select-box>
-        </ng-template>
-      </div>
-
-      <div *dxTemplate="let data of 'statusEditing'">
-        <dx-select-box
-          [(value)]="contactData$.status"
-          [items]="statusList"
-          [stylingMode]="stylingMode"
-          [label]="data.editorOptions.label"
-          [readOnly]="!isEditing"
-          fieldTemplate="field"
-        >
-          <div *dxTemplate="let data of 'field'">
-            <div class="form-custom-list-prop">
-              <contact-status [value]="contactData$.status"></contact-status>
-              <dx-text-box [readOnly]="true"></dx-text-box>
-            </div>
-          </div>
-          <div *dxTemplate="let data of 'item'">
-            <contact-status [value]="data"></contact-status>
-          </div>
-        </dx-select-box>
-      </div>
-
-      <div *dxTemplate="let data of 'phone'">
-        <form-item-plain
-          [isEditing]="isEditing"
-          [label]="data.editorOptions.label"
-          [value]="contactData$.phone"
-          mask="+1(000)000-0000"
-          [renderedValue]="contactData$.phone | phone"
-        ></form-item-plain>
-        <dx-button class="form-item-plain-button"
-                   [visible]="!isEditing"
-                   [text]="'Call'"
-                   [icon]="'tel'"
-                   [type]="'default'"
-                   stylingMode="outlined"
-        ></dx-button>
-      </div>
-
-      <div *dxTemplate="let data of 'email'">
-        <form-item-plain
-          [isEditing]="isEditing"
-          [label]="data.editorOptions.label"
-          [value]="contactData$.email"
-        ></form-item-plain>
-        <dx-button class="form-item-plain-button"
-                   [visible]="!isEditing"
-                   [text]="'Send Email'"
-                   [icon]="'email'"
-                   [type]="'default'"
-                   stylingMode="outlined"
-        ></dx-button>
-      </div>
     </dx-form>
   </div>
   <dx-load-panel
     container="#contact-form"
     [position]="{ of: '#contact-form' }"
     [visible]="isLoading"
+    [showPane]="false"
   ></dx-load-panel>
 </div>

@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Input, OnDestroy,
+  Component, OnInit, NgModule, Input, OnDestroy, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -9,12 +9,13 @@ import {
   DxSelectBoxModule,
   DxTextBoxModule,
   DxToolbarModule,
+  DxValidationGroupModule,
+  DxValidatorModule,
 } from 'devextreme-angular';
 import {
   ContactStatusModule,
-  FormItemPlainModule,
   FormItemPhotoModule,
-  FormItemWithButtonModule,
+  EditViewItemModule,
 } from 'src/app/shared/components';
 import { Observable, Subscription } from 'rxjs';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
@@ -36,15 +37,13 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   isLoading = true;
 
-  stylingMode = 'underlined';
-
-  editorOptions = { stylingMode: this.stylingMode };
-
   contactSubscription: Subscription = new Subscription();
 
-  ngOnInit() {
-    this.setEditorMode(this.isEditing);
+  zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
 
+  validationGroup = 'contactFormValidationGroup';
+
+  ngOnInit() {
     this.contactSubscription = this.contactData.subscribe((data) => {
       this.contactData$ = data;
       this.isLoading = false;
@@ -55,17 +54,17 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.contactSubscription.unsubscribe();
   }
 
-  toggleEdit = () => {
-    this.isEditing = !this.isEditing;
-    this.setEditorMode(this.isEditing);
-  };
+  handleEditClick() {
+    this.isEditing = true;
+  }
 
-  setEditorMode = (isEditing: boolean) => {
-    this.stylingMode = isEditing ? 'filled' : 'underlined';
-    this.editorOptions = {
-      stylingMode: this.stylingMode,
-    };
-  };
+  handleSaveClick() {
+    this.isEditing = false;
+  }
+
+  handleCancelClick() {
+    this.isEditing = false;
+  }
 }
 
 @NgModule({
@@ -78,12 +77,12 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     DxLoadPanelModule,
 
     ContactStatusModule,
-    FormItemPlainModule,
+    EditViewItemModule,
     FormItemPhotoModule,
-    FormItemWithButtonModule,
-
+    DxValidatorModule,
     CommonModule,
     PhonePipeModule,
+    DxValidationGroupModule,
   ],
   providers: [],
   exports: [ContactFormComponent],
