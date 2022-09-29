@@ -163,7 +163,7 @@
           <edit-view-item label="Email"
                            [isEditing]="isEditing"
                            [value]="contactData$.email"
-                           [validators]="[{type: 'email', message: 'Email is invalid'}] "
+                           [validators]="[{type: 'email'}] "
           ></edit-view-item>
           <dx-button class="form-item-button"
                      [visible]="!isEditing"
