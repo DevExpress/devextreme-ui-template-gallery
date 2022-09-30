@@ -16,6 +16,7 @@ type State = {
 
 export type Contact = {
     name: string,
+    address: string,
     firstName: string,
     lastName: string,
     status: ContactStatus,
@@ -29,5 +30,6 @@ export type Contact = {
     phone: string,
     email: string,
     image: string,
+     zipCode: string,
     activities: Activities,
 };
