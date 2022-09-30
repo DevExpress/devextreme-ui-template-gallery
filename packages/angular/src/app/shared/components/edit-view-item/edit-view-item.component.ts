@@ -88,17 +88,17 @@ export class EditViewItemComponent {
 
   @Input() icon: string;
 
-  @Input() value: string | Date | number;
+  @Input() value: string;
 
   @Input() mask: string;
 
-  @Input() renderedValue = '';
+  @Input() renderedValue: string | unknown = '';
 
   @Input() validators: any[] = [];
 
   @Input() validationGroup: string = undefined;
 
-  @Output() valueChange = new EventEmitter<string | Date | number>();
+  @Output() valueChange = new EventEmitter<string>();
 
   onChangeValue(event) {
     this.valueChange.emit(event.value);
