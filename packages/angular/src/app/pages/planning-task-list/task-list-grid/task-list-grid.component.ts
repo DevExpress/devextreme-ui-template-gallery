@@ -36,8 +36,6 @@ export class TaskListGridComponent implements OnChanges {
 
   @Input() dataSource: Task[];
 
-  tasks: Task[];
-
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
 
   @Output() addRow = () => this.component.instance.addRow();
@@ -48,7 +46,7 @@ export class TaskListGridComponent implements OnChanges {
 
   @Output() search = (text: string) => this.component.instance.searchByText(text);
 
-  @Output() onExporting = () => {
+  @Output() exporting = () => {
     const doc = new jsPDF();
     exportDataGrid({
       jsPDFDocument: doc,
@@ -58,14 +56,16 @@ export class TaskListGridComponent implements OnChanges {
     });
   };
 
-  constructor(private router: Router) {
-  }
-
   isLoading = true;
+
+  priorityList = taskPriorityList;
 
   statusList = taskStatusList;
 
-  priorityList = taskPriorityList;
+  tasks: Task[];
+
+  constructor(private router: Router) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     const currentData = changes.dataSource.currentValue;

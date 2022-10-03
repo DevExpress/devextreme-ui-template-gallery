@@ -29,37 +29,39 @@
 
   <div class="form-compact">
     <dx-form #contactForm
-      *ngIf="!isLoading"
+      *ngIf="contactData"
       class="form last"
-      [formData]="contactData$"
+      [formData]="contactData"
       labelMode="floating"
       [validationGroup]="validationGroup"
     >
       <dxi-item itemType="group" [colCount]="2">
         <dxi-item>
           <form-item-photo
-            [link]="contactData$.image"
+            [link]="contactData.image"
             [size]="184"
           ></form-item-photo>
         </dxi-item>
         <dxi-item itemType="group">
           <dxi-item>
-            <edit-view-item label="Status"
-                             [isEditing]="isEditing"
-                             [value]="contactData$.status"
+            <edit-view-item
+              label="Status"
+              [isEditing]="isEditing"
+              [value]="contactData.status"
             >
-              <contact-status view-content [value]="contactData$.status"></contact-status>
-              <dx-select-box editor-content
-                             label="Status"
-                             [(value)]="contactData$.status"
-                             [items]="statusList"
+              <contact-status view-content [value]="contactData.status"></contact-status>
+              <dx-select-box
+                editor-content
+                label="Status"
+                [(value)]="contactData.status"
+                [items]="statusList"
                              [readOnly]="!isEditing"
                              width="100%"
                              fieldTemplate="field"
               >
                 <div *dxTemplate="let data of 'field'">
                   <div class="form-custom-list-prop">
-                    <contact-status [value]="contactData$.status"></contact-status>
+                    <contact-status [value]="contactData.status"></contact-status>
                     <dx-text-box [readOnly]="true"></dx-text-box>
                   </div>
                 </div>
@@ -75,7 +77,7 @@
                             [isEditing]="isEditing"
                             [validators]="[{type: 'required'}]"
                             [validationGroup]="validationGroup"
-                            [(value)]="contactData$.firstName"></edit-view-item>
+                            [(value)]="contactData.firstName"></edit-view-item>
           </dxi-item>
 
           <dxi-item>
@@ -83,7 +85,7 @@
                             [isEditing]="isEditing"
                             [validators]="[{type: 'required'}]"
                             [validationGroup]="validationGroup"
-                            [(value)]="contactData$.lastName"></edit-view-item>
+                            [(value)]="contactData.lastName"></edit-view-item>
           </dxi-item>
         </dxi-item>
 
@@ -92,7 +94,7 @@
                           [isEditing]="isEditing"
                           [validators]="[{type: 'required'}]"
                           [validationGroup]="validationGroup"
-                          [(value)]="contactData$.position"></edit-view-item>
+                          [(value)]="contactData.position"></edit-view-item>
         </dxi-item>
 
         <dxi-item cssClass="accent">
@@ -100,7 +102,7 @@
                           [isEditing]="isEditing"
                           [validators]="[{type: 'required'}]"
                           [validationGroup]="validationGroup"
-                          [(value)]="contactData$.manager"></edit-view-item>
+                          [(value)]="contactData.manager"></edit-view-item>
         </dxi-item>
 
         <dxi-item cssClass="accent" [colSpan]="2">
@@ -108,7 +110,7 @@
                          [isEditing]="isEditing"
                          [validators]="[{type: 'required'}]"
                          [validationGroup]="validationGroup"
-                         [(value)]="contactData$.company"></edit-view-item>
+                         [(value)]="contactData.company"></edit-view-item>
         </dxi-item>
       </dxi-item>
 
@@ -118,20 +120,20 @@
                           [isEditing]="isEditing"
                           [validators]="[{type: 'required'}]"
                           [validationGroup]="validationGroup"
-                          [(value)]="contactData$.address"></edit-view-item></dxi-item>
+                          [(value)]="contactData.address"></edit-view-item></dxi-item>
 
         <dxi-item  [colSpan]="2" >
           <edit-view-item label="City"
                            [isEditing]="isEditing"
                            [validators]="[{type: 'required'}]"
                            [validationGroup]="validationGroup"
-                           [(value)]="contactData$['city']"></edit-view-item>
+                           [(value)]="contactData['city']"></edit-view-item>
         </dxi-item>
 
         <dxi-item>
           <edit-view-item label="State"
                            [isEditing]="isEditing"
-                           [(value)]="contactData$.state.stateShort"
+                           [(value)]="contactData.state.stateShort"
           ></edit-view-item>
         </dxi-item>
 
@@ -140,15 +142,15 @@
                           [isEditing]="isEditing"
                           [validators]="[zipCodeValidator]"
                           [validationGroup]="validationGroup"
-                          [(value)]="contactData$.zipCode"></edit-view-item>
+                          [(value)]="contactData.zipCode"></edit-view-item>
         </dxi-item>
 
         <dxi-item [colSpan]="2">
           <edit-view-item label="Phone"
                            [isEditing]="isEditing"
-                           [value]="contactData$.phone"
+                           [value]="contactData.phone"
                            mask="+1(000)000-0000"
-                           [renderedValue]="contactData$.phone | phone"
+                           [renderedValue]="contactData.phone | phone"
           ></edit-view-item>
           <dx-button class="form-item-button"
                      [visible]="!isEditing"
@@ -162,7 +164,7 @@
         <dxi-item [colSpan]="2">
           <edit-view-item label="Email"
                            [isEditing]="isEditing"
-                           [value]="contactData$.email"
+                           [value]="contactData.email"
                            [validators]="[{type: 'email'}] "
           ></edit-view-item>
           <dx-button class="form-item-button"
@@ -180,7 +182,7 @@
   <dx-load-panel
     container="#contact-form"
     [position]="{ of: '#contact-form' }"
-    [visible]="isLoading"
+    [visible]="!contactData"
     [showPane]="false"
   ></dx-load-panel>
 </div>

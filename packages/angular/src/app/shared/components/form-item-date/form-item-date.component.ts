@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
 
   <ng-template #fieldTpl>
     <edit-view-item [label]="label"
-                    [value]="value"
+                    [value]="value.toString()"
                     [isEditing]="isEditing"
                     [renderedValue]="value | date: 'MM/dd/yyyy'"
     >
@@ -51,9 +51,9 @@ export class FormItemDateComponent {
 
   @Input() label = '';
 
-  @Input() value!: string | Date;
+  @Input() value!: string | Date | number;
 
-  @Output() valueChange: EventEmitter<string | Date> = new EventEmitter();
+  @Output() valueChange: EventEmitter<string | Date | number> = new EventEmitter();
 
   onValueChanged = (e: ValueChangedEvent) => {
     const { value } = e;

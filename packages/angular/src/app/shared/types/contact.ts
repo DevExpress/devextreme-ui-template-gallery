@@ -1,10 +1,12 @@
 import { Activities } from './activities';
+import { Task } from './task';
+import { Opportunities } from './opportunities';
 
-export const contactStatusList = [
+export const contactStatusList: string[] = [
   'Salaried',
   'Commission',
   'Terminated',
-] as const;
+];
 
 export type ContactStatus = (typeof contactStatusList)[number];
 
@@ -20,9 +22,11 @@ export type Contact = {
     status: ContactStatus,
     position: string,
     manager: string,
+    opportunities: Opportunities,
     company: string,
     city: string,
     state: State,
+    tasks: Task[],
     phone: string,
     email: string,
     image: string,

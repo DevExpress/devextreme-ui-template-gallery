@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Input, OnDestroy, ViewChild,
+  Component, NgModule, Input,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -17,7 +17,6 @@ import {
   FormItemPhotoModule,
   EditViewItemModule,
 } from 'src/app/shared/components';
-import { Observable, Subscription } from 'rxjs';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
 
@@ -26,33 +25,16 @@ import { Contact, contactStatusList } from 'src/app/shared/types/contact';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss'],
 })
-export class ContactFormComponent implements OnInit, OnDestroy {
-  @Input() contactData: Observable<Contact>;
-
-  contactData$: Contact;
+export class ContactFormComponent {
+  @Input() contactData: Contact;
 
   statusList = contactStatusList;
 
   isEditing = false;
 
-  isLoading = true;
-
-  contactSubscription: Subscription = new Subscription();
-
   zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
 
   validationGroup = 'contactFormValidationGroup';
-
-  ngOnInit() {
-    this.contactSubscription = this.contactData.subscribe((data) => {
-      this.contactData$ = data;
-      this.isLoading = false;
-    });
-  }
-
-  ngOnDestroy() {
-    this.contactSubscription.unsubscribe();
-  }
 
   handleEditClick() {
     this.isEditing = true;

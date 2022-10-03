@@ -12,11 +12,11 @@
           <dxi-item location="after" [visible]="isPinEnabled">
             <dx-button
               [icon]="isPin ? 'unpin' : 'pin'"
-              (onClick)="pinClick($event)"
+              (onClick)="pinClick()"
             ></dx-button>
           </dxi-item>
           <dxi-item location="after">
-            <dx-button icon="close" (onClick)="closePanel($event)"></dx-button>
+            <dx-button icon="close" (onClick)="closePanel()"></dx-button>
           </dxi-item>
         </dx-toolbar>
       </div>

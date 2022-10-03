@@ -1,5 +1,10 @@
 import {
-  Component, OnInit, NgModule, Input, ViewChild,
+  Component,
+  OnInit,
+  NgModule,
+  Input,
+  ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import { ItemClickEvent as TreeViewItemClickEvent } from 'devextreme/ui/tree_view';
 import { ItemClickEvent as ToolbarItemClickEvent } from 'devextreme/ui/toolbar';
@@ -12,22 +17,24 @@ import { Router, NavigationEnd } from '@angular/router';
 import { ScreenService } from '../../shared/services';
 import { SideNavigationMenuModule, HeaderModule } from '../../shared/components';
 
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-side-nav-inner-toolbar',
   templateUrl: './side-nav-inner-toolbar.component.html',
   styleUrls: ['./side-nav-inner-toolbar.component.scss'],
 })
-export class SideNavInnerToolbarComponent implements OnInit {
+export class SideNavInnerToolbarComponent implements OnInit, OnDestroy {
   @ViewChild(DxScrollViewComponent, { static: true }) scrollView!: DxScrollViewComponent;
+
+  @Input()
+  title!: string;
 
   selectedRoute = '';
 
   menuOpened!: boolean;
 
   temporaryMenuOpened = false;
-
-  @Input()
-  title!: string;
 
   menuMode = 'shrink';
 
@@ -37,20 +44,37 @@ export class SideNavInnerToolbarComponent implements OnInit {
 
   shaderEnabled = false;
 
+  routerSubscription: Subscription;
+
+  screenSubscription: Subscription;
+
+  get hideMenuAfterNavigation() {
+    return this.menuMode === 'overlap' || this.temporaryMenuOpened;
+  }
+
+  get showMenuAfterClick() {
+    return !this.menuOpened;
+  }
+
   constructor(private screen: ScreenService, private router: Router) { }
 
   ngOnInit() {
     this.menuOpened = this.screen.sizes['screen-large'];
 
-    this.router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        this.selectedRoute = val.urlAfterRedirects.split('?')[0];
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.selectedRoute = event.urlAfterRedirects.split('?')[0];
       }
     });
 
-    this.screen.changed.subscribe(() => this.updateDrawer());
+    this.screenSubscription = this.screen.changed.subscribe(() => this.updateDrawer());
 
     this.updateDrawer();
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
+    this.screenSubscription.unsubscribe();
   }
 
   updateDrawer() {
@@ -67,14 +91,6 @@ export class SideNavInnerToolbarComponent implements OnInit {
     this.menuOpened = !this.menuOpened;
     e.event?.stopPropagation();
   };
-
-  get hideMenuAfterNavigation() {
-    return this.menuMode === 'overlap' || this.temporaryMenuOpened;
-  }
-
-  get showMenuAfterClick() {
-    return !this.menuOpened;
-  }
 
   navigationChanged(event: TreeViewItemClickEvent) {
     const path = (event.itemData as any).path;

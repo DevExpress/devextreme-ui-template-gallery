@@ -1,5 +1,13 @@
 import {
-  Component, OnInit, OnChanges, OnDestroy, NgModule, Output, Input, SimpleChanges, EventEmitter,
+  Component,
+  OnInit,
+  OnChanges,
+  OnDestroy,
+  NgModule,
+  Output,
+  Input,
+  SimpleChanges,
+  EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';

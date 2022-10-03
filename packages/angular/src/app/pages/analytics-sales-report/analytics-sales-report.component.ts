@@ -39,6 +39,8 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
 
   salesByCategory: SalesOrOpportunitiesByCategory;
 
+  constructor(private service: RwaService) { }
+
   selectionChange(e: SelectionChangedEvent) {
     var groupByPeriod = e.item.toLowerCase();
     this.subscriptions.push(
@@ -63,8 +65,6 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
   customizeSaleText(arg: { percentText: string }) {
     return arg.percentText;
   }
-
-  constructor(private service: RwaService) { }
 
   loadData = (groupBy: string) => {
     const [startDate, endDate] = analyticsPanelItems[4].value.split('/');

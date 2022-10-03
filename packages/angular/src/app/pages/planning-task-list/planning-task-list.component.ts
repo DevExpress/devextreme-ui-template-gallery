@@ -62,7 +62,7 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
   searchDataGrid = (e: TextBoxInputEvent) => this.dataGrid.search(e.component.option('text'));
 
-  exportDataGrid = () => this.dataGrid.onExporting();
+  exportDataGrid = () => this.dataGrid.exporting();
 }
 
 @NgModule({
