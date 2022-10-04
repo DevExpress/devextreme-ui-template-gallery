@@ -6,9 +6,7 @@ import { ContactStatus } from 'src/app/shared/types/contact';
 
 @Component({
   selector: 'contact-status',
-  template: `
-  <span class="{{ input && 'input' }} status status-{{ value | lowercase }}">{{ value }}</span>
-`,
+  template: `<span class="{{ input && 'input' }} status status-{{ value | lowercase }}">{{ value }}</span>`,
   styleUrls: ['./contact-status.component.scss'],
 })
 export class ContactStatusComponent {
