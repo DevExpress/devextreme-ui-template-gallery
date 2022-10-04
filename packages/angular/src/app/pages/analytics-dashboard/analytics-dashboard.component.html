@@ -19,7 +19,7 @@
       location="after"
       locateInMenu="auto"
       cssclass="add-card"
-      >
+    >
       <dx-button
         icon="plus"
         text="Add Card"
@@ -63,7 +63,7 @@
     >
       <div class="total">{{
         getTotal(opportunities) | currency: "USD":"$":"1.0-0"
-      }}</div>
+        }}</div>
       <div class="percentage">
         <i class="dx-icon-spinup"></i>
         <span>20.3%</span>
@@ -75,9 +75,9 @@
       [showData]="getTotal(sales)"
       contentClass="revenue-total"
     >
-      <div class="total">{{
-        getTotal(sales) | currency: "USD":"$":"1.0-0"
-      }}</div>
+      <div class="total">
+        {{ getTotal(sales) | currency: "USD":"$":"1.0-0" }}
+      </div>
       <div class="percentage">
         <i class="dx-icon-spinup"></i>
         <span>14.7%</span>
