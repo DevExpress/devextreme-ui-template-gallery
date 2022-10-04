@@ -4,59 +4,110 @@
       <span class="toolbar-header">Task</span>
     </dxi-item>
     <dxi-item location="before">
-      <dx-tabs [selectedIndex]="0" [items]="taskPanelItems" (onItemClick)="tabValueChange($event)"></dx-tabs>
+      <dx-tabs
+        [selectedIndex]="0"
+        [items]="taskPanelItems"
+        (onItemClick)="tabValueChange($event)"
+      ></dx-tabs>
     </dxi-item>
 
     <dxi-item location="after" locateInMenu="auto" cssClass="add-grid-row">
-      <dx-button icon="plus" text="Add Task" type="default" stylingMode="contained" (onClick)="addDataGridRow()">
+      <dx-button
+        icon="plus"
+        text="Add Task"
+        type="default"
+        stylingMode="contained"
+        (onClick)="addDataGridRow()"
+      >
       </dx-button>
     </dxi-item>
 
-    <dxi-item location="after" locateInMenu="auto" widget="dxButton" showText="inMenu" [options]="{
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
         text: 'Refresh',
         icon: 'refresh',
         onClick: refreshDataGrid
-      }"></dxi-item>
+      }"
+    ></dxi-item>
 
-    <dxi-item location="after" locateInMenu="auto" widget="dxButton" showText="inMenu" [options]="{
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
         text: 'Column Chooser',
         icon: 'columnchooser',
         onClick: chooseColumnDataGrid
-      }"></dxi-item>
+      }"
+    ></dxi-item>
 
     <dxi-item [visible]="displayGrid" location="after" locateInMenu="auto">
       <div class="separator"></div>
     </dxi-item>
 
-    <dxi-item location="after" locateInMenu="auto" widget="dxButton" showText="inMenu" [options]="{
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+      widget="dxButton"
+      showText="inMenu"
+      [options]="{
         text: 'Export to PDF',
         icon: 'exportpdf',
         onClick: exportDataGrid
-      }"></dxi-item>
+      }"
+    ></dxi-item>
 
-    <dxi-item location="after" locateInMenu="auto" widget="dxTextBox" [options]="{
+    <dxi-item
+      location="after"
+      locateInMenu="auto"
+      widget="dxTextBox"
+      [options]="{
         placeholder: 'Task Search',
         mode: 'search',
         onInput: searchDataGrid
-      }"></dxi-item>
+      }"
+    ></dxi-item>
   </dx-toolbar>
-  <ng-container *ngIf="taskCollections$ | async as taskCollections; else loading">
-    <div class="task-list" *ngIf="taskCollections" [ngSwitch]="displayTaskComponent">
+  <ng-container
+    *ngIf="taskCollections$ | async as taskCollections; else loading"
+  >
+    <div
+      class="task-list"
+      *ngIf="taskCollections"
+      [ngSwitch]="displayTaskComponent"
+    >
       <div *ngSwitchCase="taskPanelItems[0].text" class="grid">
-        <task-list-grid #planningDataGrid [dataSource]="taskCollections.allTasks"
-          (tabValueChanged)="tabValueChange($event)">
+        <task-list-grid
+          #planningDataGrid
+          [dataSource]="taskCollections.allTasks"
+          (tabValueChanged)="tabValueChange($event)"
+        >
         </task-list-grid>
       </div>
       <div *ngSwitchCase="taskPanelItems[1].text" class="kanban">
-        <task-list-kanban [dataSource]="taskCollections.filteredTasks"></task-list-kanban>
+        <task-list-kanban
+          [dataSource]="taskCollections.filteredTasks"
+        ></task-list-kanban>
       </div>
       <div *ngSwitchCase="taskPanelItems[2].text" class="gantt">
-        <task-list-gantt [dataSource]="taskCollections.filteredTasks"></task-list-gantt>
+        <task-list-gantt
+          [dataSource]="taskCollections.filteredTasks"
+        ></task-list-gantt>
       </div>
     </div>
   </ng-container>
   <ng-template #loading>
-    <dx-load-panel [visible]="true" [showPane]="false" container=".content" [position]="{ of: '.content' }">
+    <dx-load-panel
+      [visible]="true"
+      [showPane]="false"
+      container=".content"
+      [position]="{ of: '.content' }"
+    >
     </dx-load-panel>
   </ng-template>
 </div>
