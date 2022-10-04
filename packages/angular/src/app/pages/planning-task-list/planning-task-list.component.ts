@@ -42,10 +42,10 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
   dataSubscription: Subscription = new Subscription();
 
+  taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
+
   constructor(private service: RwaService) {
   }
-
-  taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
   ngOnInit(): void {
     this.taskCollections$ = forkJoin([
