@@ -13,34 +13,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'form-item-date',
-  template: `<dx-drop-down-button *ngIf="!value; else fieldTpl"
-                                  icon="event"
-                                  stylingMode="outlined"
-                                  dropDownContentTemplate="dropDownContentTemplate"
-                                  [text]="text"
-                                  [dropDownOptions]="{ width: 'auto' }"
-                                  [showArrowIcon]="false"
-  >
-    <div *dxTemplate="let data of 'dropDownContentTemplate'">
-      <dx-calendar (onValueChanged)="onValueChanged($event)"></dx-calendar>
-    </div>
-  </dx-drop-down-button>
-
-  <ng-template #fieldTpl>
-    <edit-view-item [label]="label"
-                    [value]="value.toString()"
-                    [isEditing]="isEditing"
-                    [renderedValue]="value | date: 'MM/dd/yyyy'"
-    >
-      <dx-date-box editor-content
-                   [(value)]="value"
-                   [name]="text"
-                   [label]="label"
-                   placeholder="MM/dd/y"
-                   displayFormat="MM/dd/y"
-      ></dx-date-box>
-    </edit-view-item>
-  </ng-template>`,
+  templateUrl: './form-item-date.component.html',
 })
 export class FormItemDateComponent {
   @ViewChild(DxDropDownButtonComponent) dropDownButtonComponent: DxDropDownButtonComponent;

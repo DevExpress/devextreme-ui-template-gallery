@@ -23,8 +23,9 @@
 
       <dx-scroll-view class="panel-scroll">
         <div class="data-part border form-compact">
-          <dx-form [validationGroup]="validationGroup"
-                   labelMode="floating"
+          <dx-form
+            [validationGroup]="validationGroup"
+            labelMode="floating"
           >
             <dxi-item itemType="group" [colCount]="2">
               <dxi-item cssClass="photo">
@@ -33,48 +34,63 @@
 
               <dxi-item itemType="group">
                 <dxi-item cssClass="accent">
-                  <edit-view-item label="Company"
-                                  [isEditing]="isEditing"
-                                  [validators]="[{type: 'required'}]"
-                                  [validationGroup]="validationGroup"
-                                  [(value)]="user.company"></edit-view-item></dxi-item>
+                  <edit-view-item
+                    label="Company"
+                    [isEditing]="isEditing"
+                    [validators]="[{type: 'required'}]"
+                    [validationGroup]="validationGroup"
+                    [(value)]="user.company">
+                  </edit-view-item>
+                </dxi-item>
 
                 <dxi-item>
-                  <edit-view-item label="Position"
-                                  [isEditing]="isEditing"
-                                  [validators]="[{type: 'required'}]"
-                                  [validationGroup]="validationGroup"
-                                  [(value)]="user.position"></edit-view-item></dxi-item>
+                  <edit-view-item
+                    label="Position"
+                    [isEditing]="isEditing"
+                    [validators]="[{type: 'required'}]"
+                    [validationGroup]="validationGroup"
+                    [(value)]="user.position">
+                  </edit-view-item>
+                </dxi-item>
 
                 <dxi-item cssClass="accent">
-                  <edit-view-item label="Assigned to"
-                                  [isEditing]="isEditing"
-                                  [validators]="[{type: 'required'}]"
-                                  [validationGroup]="validationGroup"
-                                  [(value)]="user.manager"></edit-view-item></dxi-item>
+                  <edit-view-item
+                    label="Assigned to"
+                    [isEditing]="isEditing"
+                    [validators]="[{type: 'required'}]"
+                    [validationGroup]="validationGroup"
+                    [(value)]="user.manager">
+                  </edit-view-item></dxi-item>
               </dxi-item>
             </dxi-item>
 
             <dxi-item itemType="group">
               <dxi-item>
-                <edit-view-item label="Phone"
-                                icon="tel"
-                                mask="+1(000)000-0000"
-                                [isEditing]="isEditing"
-                                [value]="user.phone"
-                                [renderedValue]="user.phone | phone"></edit-view-item>
+                <edit-view-item
+                  label="Phone"
+                  icon="tel"
+                  mask="+1(000)000-0000"
+                  [isEditing]="isEditing"
+                  [value]="user.phone"
+                  [renderedValue]="user.phone | phone">
+                </edit-view-item>
               </dxi-item>
               <dxi-item>
-                <edit-view-item label="Email"
-                                icon="email"
-                                [isEditing]="isEditing"
-                                [value]="user.email"></edit-view-item>
+                <edit-view-item
+                  label="Email"
+                  icon="email"
+                  [isEditing]="isEditing"
+                  [value]="user.email">
+                </edit-view-item>
               </dxi-item>
               <dxi-item>
-                <edit-view-item label="Address"
-                                icon="home"
-                                [isEditing]="isEditing"
-                                [value]="user.address"></edit-view-item></dxi-item>
+                <edit-view-item
+                  label="Address"
+                  icon="home"
+                  [isEditing]="isEditing"
+                  [value]="user.address">
+                </edit-view-item>
+              </dxi-item>
             </dxi-item>
 
           </dx-form>
@@ -155,9 +171,9 @@
                 >
                   <span class="value">{{ opportunity.name }} </span>
                   <br />
-                  <span class="value black small">{{
-                    opportunity.price | currency: "USD":"$":"1.0-0"
-                  }}</span>
+                  <span class="value black small">
+                    {{ opportunity.price | currency: "USD":"$":"1.0-0" }}
+                  </span>
                   <br />
                 </div>
               </div>
