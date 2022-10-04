@@ -56,24 +56,17 @@ export class TaskListGridComponent implements OnChanges {
     });
   };
 
-  isLoading = true;
-
   priorityList = taskPriorityList;
 
   statusList = taskStatusList;
 
   tasks: Task[];
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    const currentData = changes.dataSource.currentValue;
-
-    this.isLoading = !currentData;
-
-    if (!this.isLoading) {
-      this.tasks = currentData.filter((item) => !!item.status && !!item.priority);
+    if (changes.dataSource) {
+      this.tasks = changes.dataSource.currentValue.filter((item) => !!item.status && !!item.priority);
     }
   }
 

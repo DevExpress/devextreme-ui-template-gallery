@@ -1,5 +1,4 @@
 <dx-scroll-view
-  *ngIf="!isLoading"
   class="scrollable-board"
   direction="horizontal"
   showScrollbar="always"
@@ -48,10 +47,3 @@
     </div>
   </dx-sortable>
 </dx-scroll-view>
-
-<dx-load-panel
-  [(visible)]="isLoading"
-  [showPane]="false"
-  container=".content"
-  [position]="{ of: '.content' }"
-></dx-load-panel>

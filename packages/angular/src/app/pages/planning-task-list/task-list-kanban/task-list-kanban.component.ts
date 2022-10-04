@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Input, SimpleChanges, OnChanges,
+  Component, NgModule, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
@@ -23,12 +23,10 @@ type Board = {
   templateUrl: './task-list-kanban.component.html',
   styleUrls: ['./task-list-kanban.component.scss'],
 })
-export class TaskListKanbanComponent implements OnInit, OnChanges {
+export class TaskListKanbanComponent implements OnChanges {
   @Input() dataSource: Task[];
 
   kanbanDataSource: Board[] = [];
-
-  isLoading = true;
 
   statuses = taskStatusList;
 
@@ -42,10 +40,6 @@ export class TaskListKanbanComponent implements OnInit, OnChanges {
   },
   ];
 
-  constructor() {
-    this.kanbanDataSource = this.fillOutBoard([]);
-  }
-
   fillOutBoard = (cards: Task[]): Board[] => {
     const result: Board[] = [];
     for (const status of this.statuses) {
@@ -57,12 +51,10 @@ export class TaskListKanbanComponent implements OnInit, OnChanges {
     return result;
   };
 
-  ngOnInit() {
-    this.kanbanDataSource = this.fillOutBoard(this.dataSource);
-  }
-
   ngOnChanges(changes: SimpleChanges) {
-    this.isLoading = changes.dataSource.currentValue === undefined;
+    if (changes.dataSource) {
+      this.kanbanDataSource = this.fillOutBoard(changes.dataSource.currentValue);
+    }
   }
 
   getCardsByStatus = (status: TaskStatus): Task[] => {

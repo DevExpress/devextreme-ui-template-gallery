@@ -11,7 +11,7 @@ import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
 import { forkJoin, Subscription } from 'rxjs';
 
@@ -41,6 +41,9 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
 
   constructor(private service: RwaService) { }
 
+  formatDate(dateTime: Date) {
+    return [dateTime.getFullYear(), (dateTime.getMonth() + 1), dateTime.getDate()].join('-');
+  }
   selectionChange(e: SelectionChangedEvent) {
     var groupByPeriod = e.item.toLowerCase();
     this.subscriptions.push(
@@ -55,7 +58,7 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
     const [startDate, endDate] = e.value;
     this.subscriptions
       .push(
-        this.service.getSalesByCategory(startDate.toISOString(), endDate.toISOString())
+        this.service.getSalesByCategory(this.formatDate(startDate), this.formatDate(endDate))
           .subscribe((data) => {
             this.salesByCategory = data;
           }),
