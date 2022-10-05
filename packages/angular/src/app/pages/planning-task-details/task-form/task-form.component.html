@@ -1,8 +1,6 @@
 <div id="task-form" class="form-compact">
   <dx-toolbar>
-    <dxi-item location="before">
-      <span class="form-title">Details</span>
-    </dxi-item>
+    <dxi-item location="before"><span class="form-title">Details</span></dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
       <dx-button
         text="Edit"
@@ -30,8 +28,8 @@
   </dx-toolbar>
 
   <dx-form *ngIf="!isLoading"
-    labelMode="floating"
-    validationGroup="taskFormValidationGroup"
+           labelMode="floating"
+           validationGroup="taskFormValidationGroup"
   >
     <dxi-item itemType="group" [colCount]="2">
       <dxi-item cssClass="accent">
@@ -43,24 +41,21 @@
       </dxi-item>
 
       <dxi-item cssClass="accent">
-        <edit-view-item
-          label="Assigned to"
-          [isEditing]="isEditing"
-          [(value)]="task.owner"
+        <edit-view-item label="Assigned to"
+                        [isEditing]="isEditing"
+                        [(value)]="task.owner"
         ></edit-view-item>
       </dxi-item>
 
       <dxi-item>
-        <edit-view-item
-          label="Priority"
-          [isEditing]="isEditing">
+        <edit-view-item label="Priority"
+                        [isEditing]="isEditing">
           <task-priority view-content [value]="task.priority"></task-priority>
-          <dx-select-box
-            editor-content
-            [(value)]="task.priority"
-            [items]="priorityList"
-            label="Priority"
-            fieldTemplate="field"
+          <dx-select-box editor-content
+                         [(value)]="task.priority"
+                         [items]="priorityList"
+                         label="Priority"
+                         fieldTemplate="field"
           >
             <div *dxTemplate="let data of 'field'">
               <div class="form-custom-list-prop">
@@ -77,17 +72,15 @@
       </dxi-item>
 
       <dxi-item>
-        <edit-view-item
-          label="Status"
-          [isEditing]="isEditing">
+        <edit-view-item label="Status"
+                        [isEditing]="isEditing">
           <task-status view-content [value]="task.status"></task-status>
-          <dx-select-box
-            editor-content
-            label="Status"
-            [(value)]="task.status"
-            [items]="statusList"
-            [readOnly]="!isEditing"
-            fieldTemplate="field"
+          <dx-select-box editor-content
+                         label="Status"
+                         [(value)]="task.status"
+                         [items]="statusList"
+                         [readOnly]="!isEditing"
+                         fieldTemplate="field"
           >
             <div *dxTemplate="let data of 'field'">
               <div class="form-custom-list-prop">
@@ -104,20 +97,18 @@
       </dxi-item>
 
       <dxi-item>
-        <form-item-date
-          label="Start Date"
-          text="Set Start Date"
-          [isEditing]="isEditing"
-          [(value)]="task.startDate"
+        <form-item-date label="Start Date"
+                        text="Set Start Date"
+                        [isEditing]="isEditing"
+                        [(value)]="task.startDate"
         ></form-item-date>
       </dxi-item>
 
       <dxi-item>
-        <form-item-date
-          label="Due Date"
-          text="Set Due Date"
-          [isEditing]="isEditing"
-          [(value)]="task.dueDate"
+        <form-item-date label="Due Date"
+                        text="Set Due Date"
+                        [isEditing]="isEditing"
+                        [(value)]="task.dueDate"
         ></form-item-date>
       </dxi-item>
 
@@ -125,14 +116,13 @@
 
     <dxi-item [colSpan]="2">
       <edit-view-item *ngIf="!isEditing"
-        [isEditing]="isEditing"
-        label="Details"
-        [value]="task.description"
+                      [isEditing]="isEditing"
+                      label="Details"
+                      [value]="task.description"
       ></edit-view-item>
       <dx-text-area *ngIf="isEditing"
-        label="Details"
-        [(value)]="task.description">
-      </dx-text-area>
+                    label="Details"
+                    [(value)]="task.description"></dx-text-area>
     </dxi-item>
   </dx-form>
 

@@ -1,8 +1,6 @@
 <div id="contact-form">
   <dx-toolbar>
-    <dxi-item location="before">
-      <span class="form-title">Details</span>
-    </dxi-item>
+    <dxi-item location="before"><span class="form-title">Details</span></dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
       <dx-button
         text="Edit"
@@ -57,9 +55,9 @@
                 label="Status"
                 [(value)]="contactData.status"
                 [items]="statusList"
-                [readOnly]="!isEditing"
-                width="100%"
-                fieldTemplate="field"
+                             [readOnly]="!isEditing"
+                             width="100%"
+                             fieldTemplate="field"
               >
                 <div *dxTemplate="let data of 'field'">
                   <div class="form-custom-list-prop">
@@ -76,118 +74,105 @@
 
           <dxi-item>
             <edit-view-item label="First Name"
-              [isEditing]="isEditing"
-              [validators]="[{type: 'required'}]"
-              [validationGroup]="validationGroup"
-              [(value)]="contactData.firstName"></edit-view-item>
+                            [isEditing]="isEditing"
+                            [validators]="[{type: 'required'}]"
+                            [validationGroup]="validationGroup"
+                            [(value)]="contactData.firstName"></edit-view-item>
           </dxi-item>
 
           <dxi-item>
             <edit-view-item label="Last Name"
-              [isEditing]="isEditing"
-              [validators]="[{type: 'required'}]"
-              [validationGroup]="validationGroup"
-              [(value)]="contactData.lastName"></edit-view-item>
+                            [isEditing]="isEditing"
+                            [validators]="[{type: 'required'}]"
+                            [validationGroup]="validationGroup"
+                            [(value)]="contactData.lastName"></edit-view-item>
           </dxi-item>
         </dxi-item>
 
         <dxi-item>
           <edit-view-item label="Position"
-            [isEditing]="isEditing"
-            [validators]="[{type: 'required'}]"
-            [validationGroup]="validationGroup"
-            [(value)]="contactData.position"></edit-view-item>
+                          [isEditing]="isEditing"
+                          [validators]="[{type: 'required'}]"
+                          [validationGroup]="validationGroup"
+                          [(value)]="contactData.position"></edit-view-item>
         </dxi-item>
 
         <dxi-item cssClass="accent">
           <edit-view-item label="Assigned to"
-            [isEditing]="isEditing"
-            [validators]="[{type: 'required'}]"
-            [validationGroup]="validationGroup"
-            [(value)]="contactData.manager"></edit-view-item>
+                          [isEditing]="isEditing"
+                          [validators]="[{type: 'required'}]"
+                          [validationGroup]="validationGroup"
+                          [(value)]="contactData.manager"></edit-view-item>
         </dxi-item>
 
         <dxi-item cssClass="accent" [colSpan]="2">
-          <edit-view-item
-            label="Company"
-            [isEditing]="isEditing"
-            [validators]="[{type: 'required'}]"
-            [validationGroup]="validationGroup"
-            [(value)]="contactData.company">
-          </edit-view-item>
+          <edit-view-item label="Company"
+                         [isEditing]="isEditing"
+                         [validators]="[{type: 'required'}]"
+                         [validationGroup]="validationGroup"
+                         [(value)]="contactData.company"></edit-view-item>
         </dxi-item>
       </dxi-item>
 
       <dxi-item itemType="group" [colCount]="4" caption="Contacts">
         <dxi-item [colSpan]="4">
-          <edit-view-item
-            label="Address"
-            [isEditing]="isEditing"
-            [validators]="[{type: 'required'}]"
-            [validationGroup]="validationGroup"
-            [(value)]="contactData.address">
-          </edit-view-item>
-        </dxi-item>
+          <edit-view-item label="Address"
+                          [isEditing]="isEditing"
+                          [validators]="[{type: 'required'}]"
+                          [validationGroup]="validationGroup"
+                          [(value)]="contactData.address"></edit-view-item></dxi-item>
 
         <dxi-item  [colSpan]="2" >
-          <edit-view-item
-            label="City"
-            [isEditing]="isEditing"
-            [validators]="[{type: 'required'}]"
-            [validationGroup]="validationGroup"
-            [(value)]="contactData['city']">
-          </edit-view-item>
+          <edit-view-item label="City"
+                           [isEditing]="isEditing"
+                           [validators]="[{type: 'required'}]"
+                           [validationGroup]="validationGroup"
+                           [(value)]="contactData['city']"></edit-view-item>
         </dxi-item>
 
         <dxi-item>
-          <edit-view-item
-            label="State"
-            [isEditing]="isEditing"
-            [(value)]="contactData.state.stateShort"
+          <edit-view-item label="State"
+                           [isEditing]="isEditing"
+                           [(value)]="contactData.state.stateShort"
           ></edit-view-item>
         </dxi-item>
 
         <dxi-item>
-          <edit-view-item
-            label="Zip Code"
-            [isEditing]="isEditing"
-            [validators]="[zipCodeValidator]"
-            [validationGroup]="validationGroup"
-            [(value)]="contactData.zipCode">
-          </edit-view-item>
+          <edit-view-item label="Zip Code"
+                          [isEditing]="isEditing"
+                          [validators]="[zipCodeValidator]"
+                          [validationGroup]="validationGroup"
+                          [(value)]="contactData.zipCode"></edit-view-item>
         </dxi-item>
 
         <dxi-item [colSpan]="2">
           <edit-view-item label="Phone"
-            [isEditing]="isEditing"
-            [value]="contactData.phone"
-            mask="+1(000)000-0000"
-            [renderedValue]="contactData.phone | phone"
+                           [isEditing]="isEditing"
+                           [value]="contactData.phone"
+                           mask="+1(000)000-0000"
+                           [renderedValue]="contactData.phone | phone"
           ></edit-view-item>
-          <dx-button
-            class="form-item-button"
-            [visible]="!isEditing"
-            [text]="'Call'"
-            [icon]="'tel'"
-            [type]="'default'"
-            stylingMode="outlined"
+          <dx-button class="form-item-button"
+                     [visible]="!isEditing"
+                     [text]="'Call'"
+                     [icon]="'tel'"
+                     [type]="'default'"
+                     stylingMode="outlined"
           ></dx-button>
         </dxi-item>
 
         <dxi-item [colSpan]="2">
-          <edit-view-item
-            label="Email"
-            [isEditing]="isEditing"
-            [value]="contactData.email"
-            [validators]="[{type: 'email'}] "
+          <edit-view-item label="Email"
+                           [isEditing]="isEditing"
+                           [value]="contactData.email"
+                           [validators]="[{type: 'email'}] "
           ></edit-view-item>
-          <dx-button
-            class="form-item-button"
-            [visible]="!isEditing"
-            [text]="'Send Email'"
-            [icon]="'email'"
-            [type]="'default'"
-            stylingMode="outlined"
+          <dx-button class="form-item-button"
+                     [visible]="!isEditing"
+                     [text]="'Send Email'"
+                     [icon]="'email'"
+                     [type]="'default'"
+                     stylingMode="outlined"
           ></dx-button>
         </dxi-item>
       </dxi-item>

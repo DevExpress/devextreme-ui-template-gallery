@@ -38,8 +38,8 @@
     <ng-template #opportunity let-item="item">
       <div (click)="opportunityClick()" class="opportunity">
         <div class="name">{{ item.name }}</div>
-        <div class="product-info">
-          Products: {{ item.products }}, total:
+        <div class="product-info"
+          >Products: {{ item.products }}, total:
           <span class="total">{{ item.total | currency }}</span>
         </div>
         <div class="owner">
