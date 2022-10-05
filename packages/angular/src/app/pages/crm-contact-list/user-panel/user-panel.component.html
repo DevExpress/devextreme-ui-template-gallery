@@ -26,7 +26,8 @@
           <dx-form [validationGroup]="validationGroup"
                    labelMode="floating"
           >
-            <dxi-item itemType="group" [colCount]="2">
+            <dxi-item itemType="group" [colCount]="2" >
+              <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
               <dxi-item cssClass="photo">
                 <form-item-photo [link]="user.image"></form-item-photo>
               </dxi-item>
@@ -106,6 +107,7 @@
             >
               <dx-button
                 text="Save"
+                icon="save"
                 stylingMode="outlined"
                 type="default"
                 (onClick)="toggleEdit()"

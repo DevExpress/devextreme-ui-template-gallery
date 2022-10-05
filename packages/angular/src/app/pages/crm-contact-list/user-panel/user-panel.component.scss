@@ -3,6 +3,16 @@
 
 $side-panel-toolbar-height: 58px;
 
+:host {
+  --side-panel-width: 350px;
+}
+
+@media only screen and (max-width: 400px) {
+  :host {
+    --side-panel-width: 100vw;
+  }
+}
+
 .screen-medium {
   .panel.open {
     top: $side-panel-toolbar-height;
@@ -21,19 +31,15 @@ $side-panel-toolbar-height: 58px;
   }
 }
 
-.panel::ng-deep .dx-box-flex > .dx-item > .dx-item-content > .dx-item:first-child {
-  max-width: 140px;
-}
-
-.panel {
+:host::ng-deep .panel {
   position: fixed;
-  right: -350px;
+  right: calc(-1 * var(--side-panel-width));
   top: $side-panel-toolbar-height;
   bottom: 0;
   background: $base-bg;
   transition: right 400ms;
 
-  ::ng-deep .embedded.dx-viewport & {
+  .embedded.dx-viewport & {
     top: 0;
   }
 
@@ -55,9 +61,9 @@ $side-panel-toolbar-height: 58px;
   }
 
   .data-wrapper {
-    width: 350px;
     padding-bottom: 16px;
     height: 100%;
+    width: var(--side-panel-width);
 
     .data-part {
       padding: 0 16px;
@@ -79,20 +85,22 @@ $side-panel-toolbar-height: 58px;
 
     .panel-toolbar {
       padding: 10px 3px 0 0;
+
+      .dx-button {
+        min-width: 90px;
+      }
     }
 
     .opportunities {
       padding-bottom: 10px;
     }
 
-    .accordion-title {
-      vertical-align: middle;
-      padding-right: 10px;
-    }
+    .dx-accordion {
+      margin: 0;
 
-    ::ng-deep & {
-      .dx-accordion {
-        margin: 0;
+      .accordion-title {
+        vertical-align: middle;
+        padding-right: 10px;
       }
 
       .dx-accordion-item {
@@ -105,11 +113,20 @@ $side-panel-toolbar-height: 58px;
       }
 
       .dx-accordion-item-title {
+        $height: 40px;
+
+        display: flex;
+        align-items: center;
         padding: 6px 0;
         background-color: transparent;
+        height: $height;
 
         .dx-accordion-item-title-caption {
           left: 0;
+        }
+
+        &::before {
+          top: calc(#{$height} / 2 - 12px);
         }
       }
 
