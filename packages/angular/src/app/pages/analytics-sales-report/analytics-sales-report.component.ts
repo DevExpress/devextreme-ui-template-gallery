@@ -27,17 +27,9 @@ import { Sales, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/anal
   providers: [RwaService],
 })
 export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
-  @ViewChild('bar', { static: false }) bar: DxChartComponent;
-
-  @ViewChild('range', { static: false }) range: DxRangeSelectorComponent;
-
-  @ViewChild('chart', { static: false }) chart: DxChartComponent;
-
   subscriptions: Subscription[] = [];
 
   groupByPeriods = ['Day', 'Month'];
-
-  analyticsPanelItems = analyticsPanelItems;
 
   sales: Sales;
 

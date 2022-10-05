@@ -21,11 +21,15 @@ export class TaskListGanttComponent implements OnChanges {
 
   @Input() dataSource: Task[];
 
-  @Output() refresh = () => this.component.instance.refresh();
+  refresh() {
+    this.component.instance.refresh();
+  }
 
-  @Output() insertTask = () => this.component.instance.insertTask({});
+  insertTask() {
+    this.component.instance.insertTask({});
+  }
 
-  @Output() onExporting = () => {
+  onExporting() {
     exportGanttToPdf(
       {
         component: this.component.instance,

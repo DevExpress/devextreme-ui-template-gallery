@@ -30,10 +30,6 @@ import { SalesByState, SalesByStateAndCity } from 'src/app/shared/types/analytic
   providers: [RwaService],
 })
 export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
-  @ViewChild('map', { static: false }) map: DxVectorMapComponent;
-
-  @ViewChild('pie', { static: false }) pie: DxPieChartComponent;
-
   usaMap: any = mapsData.usa;
 
   analyticsPanelItems = analyticsPanelItems;

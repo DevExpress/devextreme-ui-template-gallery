@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, NgModule, Input, SimpleChanges, OnChanges, OnInit, ElementRef, OnDestroy, Output,
+  Component, NgModule, Input, OnInit, ElementRef, OnDestroy,
 } from '@angular/core';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { PositionConfig } from 'devextreme/animation/position';
@@ -31,14 +31,12 @@ class ResizeObservable extends Observable<ResizeObserverEntry[]> {
   styleUrls: ['./card-analytics.component.scss'],
 })
 
-export class CardAnalytticsComponent implements OnChanges, OnInit, OnDestroy {
+export class CardAnalytticsComponent implements OnInit, OnDestroy {
   @Input() titleText: string;
 
   @Input() contentClass: string;
 
-  @Input() showData = false;
-
-  @Input() component: any;
+  @Input() component: { instance: { render: () => void }};
 
   @Input() isMenuVisible = true;
 
@@ -48,29 +46,28 @@ export class CardAnalytticsComponent implements OnChanges, OnInit, OnDestroy {
 
   observedElement = this.el.nativeElement;
 
-  cardMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
+  menuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
     icon: 'overflow',
     items: [
       { text: 'Hide' },
     ],
   }];
 
-  isLoading = true;
+  @Input() isLoading = true;
 
   position: PositionConfig;
 
-  size: { width: number, height: number };
+  lodingHeight: number;
 
   constructor(private el: ElementRef) {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.isLoading = !changes.showData.currentValue;
-  }
-
   ngOnInit(): void {
-    this.position = { of: `.${(!this.isGreyCard() ? this.contentClass : 'title')}` };
-    this.size = !this.isGreyCard() ? { width: 60, height: 60 } : { width: 50, height: 50 };
+    this.position = { 
+      of: `.${this.contentClass + (!this.isGreyCard() ? ' .content' : ' .title')}`,
+      at: (!this.isGreyCard() ? 'center' : 'right'),
+    };
+    this.lodingHeight = !this.isGreyCard() ? 60 : 50;
 
     if (!this.isGreyCard() && this.component) {
       this.resizeObserverSubscription = new ResizeObservable(this.observedElement)

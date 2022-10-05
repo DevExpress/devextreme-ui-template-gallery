@@ -28,7 +28,9 @@ export class TaskListKanbanComponent implements OnInit, OnChanges {
 
   @Input() dataSource: Task[];
 
-  @Output() refresh = () => this.component.instance.update();
+  refresh() { 
+    this.component.instance.update();
+  }
 
   kanbanDataSource: Board[] = [];
 

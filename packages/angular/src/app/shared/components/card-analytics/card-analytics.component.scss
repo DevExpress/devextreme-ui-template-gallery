@@ -26,15 +26,17 @@
       padding-right: 25px;
     }
 
+    &.sales-by-state-map {
+      .content {
+        height: 400px;
+      }
+    }
+
     .content {
       color: #757575;
       font-size: 14px;
       line-height: 17px;
       height: 270px;
-
-      &.sales-by-state-map {
-        height: 400px;
-      }
     }
   }
 }

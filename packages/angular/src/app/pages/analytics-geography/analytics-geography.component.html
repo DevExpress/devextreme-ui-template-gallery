@@ -58,7 +58,7 @@
     <card-analytics
       titleText="Revenue by States"
       contentClass="sales-by-state-map"
-      [showData]="!!salesByStateMarkers"
+      [isLoading]="!salesByStateMarkers"
       [component]="map"
     >
       <dx-vector-map id="vector-map" #map [bounds]="[-118, 50, -80, 25]">
@@ -92,7 +92,7 @@
     <card-analytics
       titleText="Revenue Analysis by States"
       contentClass="sales-by-state-and-city"
-      [showData]="!!salesByStateAndCity"
+      [isLoading]="!salesByStateAndCity"
     >
       <dx-data-grid [dataSource]="salesByStateAndCity" [height]="270">
         <dxi-column 
@@ -144,7 +144,7 @@
     <card-analytics
       titleText="Revenue Snaphot by States"
       contentClass="sales-by-state"
-      [showData]="!!salesByState"
+      [isLoading]="!salesByState"
       [component]="pie"
     >
       <dx-pie-chart

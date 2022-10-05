@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
-// import { ExportingEvent } from 'devextreme/ui/data_grid';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
@@ -30,7 +29,7 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
   @ViewChild('planningKanban', { static: false }) kanban: TaskListKanbanComponent;
 
-  @Output() tabValueChange = (e: TabsItemClickEvent) => {
+  tabValueChange(e: TabsItemClickEvent) {
     const { itemData } = e;
 
     this.displayTaskComponent = itemData.text;

@@ -30,12 +30,6 @@ import {
   providers: [RwaService],
 })
 export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
-  @ViewChild('chart', { static: false }) chart: DxChartComponent;
-
-  @ViewChild('pie', { static: false }) pie: DxPieChartComponent;
-
-  @ViewChild('funnel', { static: false }) funnel: DxFunnelComponent;
-
   analyticsPanelItems = analyticsPanelItems;
 
   salesByState: SalesByState;
@@ -45,6 +39,10 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
   opportunities: SalesOrOpportunitiesByCategory;
 
   sales: Sales;
+
+  salesTotal: number;
+
+  opportunitiesTotal: number;
 
   selectionChange(e: TabsItemClickEvent) {
     const dates = e.itemData.value.split('/');
@@ -83,6 +81,9 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(observable.subscribe((data) => {
       Object.keys(data).forEach((key) => this[key] = data[key]);
+
+      this.salesTotal = this.getTotal(this.sales);
+      this.opportunitiesTotal = this.getTotal(this.opportunities);
     }));
   };
 

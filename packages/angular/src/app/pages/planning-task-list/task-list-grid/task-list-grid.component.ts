@@ -43,15 +43,23 @@ export class TaskListGridComponent implements OnChanges {
 
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
 
-  @Output() addRow = () => this.component.instance.addRow();
+  addRow() { 
+    this.component.instance.addRow() 
+  };
 
-  @Output() refresh = () => this.component.instance.refresh();
+  refresh() {
+    this.component.instance.refresh();
+  }
 
-  @Output() showColumnChooser = () => this.component.instance.showColumnChooser();
+  showColumnChooser() {
+    this.component.instance.showColumnChooser();
+  }
 
-  @Output() search = (text: string) => this.component.instance.searchByText(text);
+  search(text: string) {
+    this.component.instance.searchByText(text);
+  }
 
-  @Output() onExportingToPdf = () => {
+  onExportingToPdf() {
     const doc = new jsPDF();
     exportToPdf({
       jsPDFDocument: doc,
@@ -61,7 +69,7 @@ export class TaskListGridComponent implements OnChanges {
     });
   };
 
-  @Output() onExportingToXLSX = () => {
+  onExportingToXLSX() {
     const workbook = new Workbook();
     const worksheet = workbook.addWorksheet('Tasks');
 
