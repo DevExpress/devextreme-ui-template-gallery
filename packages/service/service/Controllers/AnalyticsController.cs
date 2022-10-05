@@ -98,7 +98,7 @@ namespace service.Controllers
                 .ToListAsync();
             return sales;
         }
-
+        // TODO remove after update client to use api/Analytics/Sales
         // GET: api/Analytics/SalesAdaptiveGrouped/21-02-01/21-03-01
         [HttpGet("SalesAdaptiveGrouped/{startDateStr}/{endDateStr}")]
         public async Task<IEnumerable<Sales>> GetAdaptiveGroupedSalesSales(string startDateStr, string endDateStr)
@@ -124,22 +124,27 @@ namespace service.Controllers
         }
         
         // GET: api/Analytics/Sales/21-02-01/21-03-01
-        [HttpGet("Sales/{startDate}/{endDate}")]
-        public IEnumerable GetSales(string startDate, string endDate)
+        [HttpGet("Sales/{startDateStr}/{endDateStr}")]
+        public async Task<IEnumerable<Sales>> GetSales(string startDateStr, string endDateStr)
         {
-            var sales = _context.OrdersLists
-                .Where(i => i.Order.OrderDate.Value >= Convert.ToDateTime(startDate))
-                .Where(i => i.Order.OrderDate.Value <= Convert.ToDateTime(endDate))
-                .GroupBy(
-                    i => new { i.Product.ProductCategory, i.Order.OrderDate },
-                    i => i.OrderItemTotal.Value,
-                    (key, g) => new Sales {
-                        Date = Convert.ToDateTime(key.OrderDate),
-                        Category = key.ProductCategory,
-                        Total = Decimal.Round(g.Sum())
-                }).ToList();
+            var startDate = Convert.ToDateTime(startDateStr);
+            var endDate = Convert.ToDateTime(endDateStr);
 
-            return sales;
+            var groupByMonth = (endDate - startDate).TotalDays > 31;
+            Func<OrdersList, DateTime> keyFn = groupByMonth ?
+                (i) => new DateTime(i.Order.OrderDate.Value.Year, i.Order.OrderDate.Value.Month, 1) :
+                (i) => i.Order.OrderDate.Value;
+            var sales = await _context.OrdersLists
+                .Include(_ => _.Order)
+                .Where(i => i.Order.OrderDate >= startDate)
+                .Where(i => i.Order.OrderDate <= endDate)
+                .ToListAsync();
+            return sales
+                .GroupBy(
+                    keyFn,
+                    (v) => v.OrderItemTotal.Value,
+                    (key, v) => new Sales { Date = key, Total = v.Sum() }
+                    );
         }
 
         // GET: api/Analytics/SalesByStateAndCity/21-02-01/21-03-01
