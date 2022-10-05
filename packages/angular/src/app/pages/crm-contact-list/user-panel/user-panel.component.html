@@ -26,7 +26,8 @@
           <dx-form [validationGroup]="validationGroup"
                    labelMode="floating"
           >
-            <dxi-item itemType="group" [colCount]="2">
+            <dxi-item itemType="group" [colCount]="2" >
+              <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
               <dxi-item cssClass="photo">
                 <form-item-photo [link]="user.image"></form-item-photo>
               </dxi-item>
@@ -88,12 +89,14 @@
                 icon="edit"
                 stylingMode="outlined"
                 type="default"
+                [width]="90"
                 (onClick)="toggleEdit()"
               ></dx-button>
             </dxi-item>
             <dxi-item location="before" [visible]="!isEditing">
               <dx-button
                 text="Details"
+                [width]="90"
                 stylingMode="outlined"
                 type="default"
                 (onClick)="navigateToDetails()"
@@ -106,6 +109,8 @@
             >
               <dx-button
                 text="Save"
+                icon="save"
+                [width]="90"
                 stylingMode="outlined"
                 type="default"
                 (onClick)="toggleEdit()"
@@ -118,6 +123,7 @@
             >
               <dx-button
                 text="Cancel"
+                [width]="90"
                 (onClick)="toggleEdit()"
                 stylingMode="text"
               ></dx-button>

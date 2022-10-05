@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'edit-view-item',
   template: `
-    <i *ngIf="icon" class="dx-icon dx-icon-{{ icon }}"></i>
+    <i *ngIf="icon && !isEditing" class="dx-icon dx-icon-{{ icon }}"></i>
     <ng-container *ngIf="!isEditing; else editing">
       <div class="edit-view-item-wrapper"
            [class.with-label]="!icon">
@@ -22,35 +22,49 @@ import { CommonModule } from '@angular/common';
     </ng-container>
 
     <ng-template #editing>
-      <div #refEditorContent class="editorContentWrapper">
-        <ng-content select="[editor-content]"></ng-content>
+      <div class="editorContentWrapper">
+        <div #refEditorContent>
+          <ng-content select="[editor-content]"></ng-content>
+        </div>
+        <ng-container *ngIf="refEditorContent.children.length === 0">
+          <dx-text-box
+            [label]="icon ? '' : label"
+            [value]="value"
+            (onValueChanged)="onChangeValue($event)"
+            [mask]="mask"
+            valueChangeEvent="keyup input change"
+          >
+            <dx-validator [validationRules]="validators" [validationGroup]="validationGroup"></dx-validator>
+            <dxi-button *ngIf="icon" [options]="{icon, type: 'back'}" name="icon" location="before"></dxi-button>
+          </dx-text-box>
+        </ng-container>
       </div>
-      <ng-container *ngIf="refEditorContent.children.length === 0">
-        <dx-text-box
-          [label]="icon ? '' : label"
-          [value]="value"
-          (onValueChanged)="onChangeValue($event)"
-          [mask]="mask"
-          valueChangeEvent="keyup input change"
-        >
-          <dx-validator [validationRules]="validators" [validationGroup]="validationGroup"></dx-validator>
-        </dx-text-box>
-      </ng-container>
+
     </ng-template>
   `,
   styles: [`
+    @use '../../../../variables' as *;
+
     :host {
       display: flex;
       width: 100%;
 
-      .editorContentWrapper {
-        &:empty { display: none }
+      &::ng-deep .editorContentWrapper {
         width: 100%;
+
+        &:empty { display: none }
+
+        .dx-texteditor-buttons-container:first-child > .dx-button:first-child {
+          margin-left: 0;
+          pointer-events: none;
+        }
       }
 
       .dx-icon {
         display: flex;
         align-items: center;
+        font-size: 18px;
+        margin: 0 $text-button-horizontal-padding;
       }
 
       dx-text-box {
