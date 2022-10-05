@@ -45,12 +45,12 @@
     flex: 1 180px;
 
     .card {
-      background-color: #f5f5f5;
+      background-color: darken($base-bg, 5%);
       border: none;
       height: 120px;
 
       ::ng-deep .dx-button {
-        background-color: #f5f5f5;
+        background-color: darken($base-bg, 5%);
       }
 
       ::ng-deep .content {
@@ -60,7 +60,7 @@
           display: inline-block;
           font-size: 26px;
           font-weight: 700;
-          color: #000;
+          color: $base-text-color;
           margin-right: 27px;
         }
 
@@ -68,7 +68,7 @@
           display: inline-block;
           font-size: 16px;
           font-weight: 400;
-          color: #000;
+          color: $base-text-color;
           line-height: 24px;
 
           span {
