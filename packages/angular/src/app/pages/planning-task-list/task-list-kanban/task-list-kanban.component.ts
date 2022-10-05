@@ -3,7 +3,6 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
-import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 import { DxSortableModule } from 'devextreme-angular/ui/sortable';
 import { DxMenuModule } from 'devextreme-angular/ui/menu';
@@ -94,7 +93,6 @@ export class TaskListKanbanComponent implements OnChanges {
 @NgModule({
   imports: [
     DxButtonModule,
-    DxLoadPanelModule,
     DxScrollViewModule,
     DxSortableModule,
     DxMenuModule,

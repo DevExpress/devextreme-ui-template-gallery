@@ -42,7 +42,7 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
   constructor(private service: RwaService) { }
 
   formatDate(dateTime: Date) {
-    return [dateTime.getFullYear(), (dateTime.getMonth() + 1), dateTime.getDate()].join('-');
+    return formatDate(dateTime, 'YYYY-MM-dd', 'en');
   }
   selectionChange(e: SelectionChangedEvent) {
     var groupByPeriod = e.item.toLowerCase();

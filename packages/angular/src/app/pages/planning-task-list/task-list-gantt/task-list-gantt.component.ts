@@ -3,7 +3,6 @@ import {
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DxGanttModule } from 'devextreme-angular/ui/gantt';
-import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { Task } from 'src/app/shared/types/task';
 
 @Component({
@@ -25,7 +24,6 @@ export class TaskListGanttComponent {
 @NgModule({
   imports: [
     DxGanttModule,
-    DxLoadPanelModule,
 
     CommonModule,
   ],
