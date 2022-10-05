@@ -11,18 +11,15 @@
       ></dx-tabs>
     </dxi-item>
 
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      cssClass="add-grid-row"
-    >
+    <dxi-item location="after" locateInMenu="auto" cssClass="add-grid-row">
       <dx-button
         icon="plus"
         text="Add Task"
         type="default"
         stylingMode="contained"
         (onClick)="addDataGridRow()"
-      ></dx-button>
+      >
+      </dx-button>
     </dxi-item>
 
     <dxi-item
@@ -76,20 +73,41 @@
       }"
     ></dxi-item>
   </dx-toolbar>
-
-  <div class="task-list" [ngSwitch]="displayTaskComponent">
-    <div *ngSwitchCase="taskPanelItems[0].text" class="grid">
-      <task-list-grid
-        #planningDataGrid
-        [dataSource]="tasks"
-        (tabValueChanged)="tabValueChange($event)"
-      ></task-list-grid>
+  <ng-container
+    *ngIf="taskCollections$ | async as taskCollections; else loading"
+  >
+    <div
+      class="task-list"
+      *ngIf="taskCollections"
+      [ngSwitch]="displayTaskComponent"
+    >
+      <div *ngSwitchCase="taskPanelItems[0].text" class="grid">
+        <task-list-grid
+          #planningDataGrid
+          [dataSource]="taskCollections.allTasks"
+          (tabValueChanged)="tabValueChange($event)"
+        >
+        </task-list-grid>
+      </div>
+      <div *ngSwitchCase="taskPanelItems[1].text" class="kanban">
+        <task-list-kanban
+          [dataSource]="taskCollections.filteredTasks"
+        ></task-list-kanban>
+      </div>
+      <div *ngSwitchCase="taskPanelItems[2].text" class="gantt">
+        <task-list-gantt
+          [dataSource]="taskCollections.filteredTasks"
+        ></task-list-gantt>
+      </div>
     </div>
-    <div *ngSwitchCase="taskPanelItems[1].text" class="kanban">
-      <task-list-kanban [dataSource]="tasks"></task-list-kanban>
-    </div>
-    <div *ngSwitchCase="taskPanelItems[2].text" class="gantt">
-      <task-list-gantt [dataSource]="tasks"></task-list-gantt>
-    </div>
-  </div>
+  </ng-container>
+  <ng-template #loading>
+    <dx-load-panel
+      [visible]="true"
+      [showPane]="false"
+      container=".content"
+      [position]="{ of: '.content' }"
+    >
+    </dx-load-panel>
+  </ng-template>
 </div>
