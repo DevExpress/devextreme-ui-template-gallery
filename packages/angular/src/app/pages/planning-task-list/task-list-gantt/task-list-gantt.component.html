@@ -1,5 +1,4 @@
 <dx-gantt
-  *ngIf="!isLoading"
   [taskListWidth]="500"
   scaleType="weeks"
   (onTaskClick)="navigateToDetails()"
@@ -43,10 +42,3 @@
   <dxo-validation [autoUpdateParentTasks]="true"></dxo-validation>
   <dxo-editing [enabled]="true"></dxo-editing>
 </dx-gantt>
-
-<dx-load-panel
-  [visible]="isLoading"
-  [showPane]="false"
-  container=".content"
-  [position]="{ of: '.content' }"
-></dx-load-panel>

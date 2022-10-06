@@ -1,20 +1,12 @@
 <dx-data-grid
-  *ngIf="!isLoading"
   [dataSource]="tasks"
   (onRowPrepared)="onRowPreparedGrid($event)"
   (onRowClick)="navigateToDetails()"
   [columnAutoWidth]="true"
 >
-  <dxo-paging [pageSize]="7"> </dxo-paging>
-  <dxo-pager
-    [visible]="true"
-  >
-  </dxo-pager>
-  <dxo-editing
-    mode="row"
-    [allowUpdating]="true"
-  >
-  </dxo-editing>
+  <dxo-paging [pageSize]="15"> </dxo-paging>
+  <dxo-pager [visible]="true" [showPageSizeSelector]="true"> </dxo-pager>
+  <dxo-editing mode="row" [allowUpdating]="true"> </dxo-editing>
   <dxo-selection
     selectAllMode="allPages"
     showCheckBoxesMode="always"
@@ -43,7 +35,6 @@
     dataField="startDate"
     caption="Start Date"
     dataType="date"
-    sortOrder="desc"
     [hidingPriority]="2"
   >
     <dxi-validation-rule type="required"></dxi-validation-rule>
@@ -52,6 +43,7 @@
     dataField="dueDate"
     caption="Due Date"
     dataType="date"
+    sortOrder="asc"
     [hidingPriority]="1"
   >
     <dxi-validation-rule type="required"></dxi-validation-rule>
@@ -117,10 +109,3 @@
     </dx-select-box>
   </div>
 </dx-data-grid>
-
-<dx-load-panel
-  [visible]="isLoading"
-  [showPane]="false"
-  container=".content"
-  [position]="{ of: '.content' }"
-></dx-load-panel>
