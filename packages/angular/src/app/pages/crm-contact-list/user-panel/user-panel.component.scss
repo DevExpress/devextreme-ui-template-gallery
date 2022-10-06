@@ -1,40 +1,19 @@
 @use "../../../../variables.scss" as *;
 @use "devextreme/scss/widgets/material/textEditor/sizes" as *;
 
-$side-panel-toolbar-height: 58px;
-
 :host {
-  --side-panel-width: 350px;
+  --contact-side-panel-toolbar-top: 58px;
+  --contact-side-panel-width: 350px;
 }
 
-@media only screen and (max-width: 400px) {
-  :host {
-    --side-panel-width: 100vw;
-  }
-}
-
-.screen-medium {
-  .panel.open {
-    top: $side-panel-toolbar-height;
-  }
-}
-
-.screen-large ::ng-deep {
-  .panel.open {
-    top: 0;
-  }
-}
-
-.dx-drawer-overlap ::ng-deep {
-  .panel.opne {
-    top: $side-panel-toolbar-height;
-  }
+:host-context(.screen-x-small) {
+  --contact-side-panel-width: 100vw;
 }
 
 :host::ng-deep .panel {
   position: fixed;
-  right: calc(-1 * var(--side-panel-width));
-  top: $side-panel-toolbar-height;
+  right: calc(-1 * var(--contact-side-panel-width));
+  top: var(--contact-side-panel-toolbar-top);
   bottom: 0;
   background: $base-bg;
   transition: right 400ms;
@@ -63,19 +42,27 @@ $side-panel-toolbar-height: 58px;
   .data-wrapper {
     padding-bottom: 16px;
     height: 100%;
-    width: var(--side-panel-width);
+    width: var(--contact-side-panel-width);
 
     .data-part {
       padding: 0 16px;
 
+      &-toolbar {
+        padding: 10px 16px;
+        margin-bottom: $toolbar-margin-bottom;
+
+        .dx-button {
+          min-width: 90px;
+        }
+      }
+
       &.border {
-        padding-bottom: 5px;
         border-bottom: 1px solid $base-border-color;
       }
     }
 
     .panel-scroll {
-      height: calc(100% - #{$side-panel-toolbar-height});
+      height: calc(100% - 20px);
     }
 
     .contact-name {
@@ -83,56 +70,16 @@ $side-panel-toolbar-height: 58px;
       margin-right: 8px;
     }
 
-    .panel-toolbar {
-      padding: 10px 3px 0 0;
-
-      .dx-button {
-        min-width: 90px;
-      }
-    }
-
     .opportunities {
       padding-bottom: 10px;
     }
 
     .dx-accordion {
-      margin: 0;
-
       .accordion-title {
         vertical-align: middle;
         padding-right: 10px;
-      }
-
-      .dx-accordion-item {
-        box-shadow: none;
-        border: none;
-
-        &.dx-accordion-item-opened {
-          margin: 0;
-        }
-      }
-
-      .dx-accordion-item-title {
-        $height: 40px;
-
         display: flex;
         align-items: center;
-        padding: 6px 0;
-        background-color: transparent;
-        height: $height;
-
-        .dx-accordion-item-title-caption {
-          left: 0;
-        }
-
-        &::before {
-          top: calc(#{$height} / 2 - 12px);
-        }
-      }
-
-      .dx-accordion-item-body {
-        padding: 0;
-        margin-right: 2px;
       }
     }
   }

@@ -1,7 +1,7 @@
 import {
   Component, Input, NgModule, Output, EventEmitter,
 } from '@angular/core';
-import { DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
+import {DxButtonModule, DxTextBoxModule, DxValidatorModule} from 'devextreme-angular';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
       <div class="edit-view-item-wrapper"
            [class.with-label]="!icon">
         <label *ngIf="!icon" class="dx-texteditor-label">{{ label }}</label>
-        <div #refViewContent>
+        <div #refViewContent class="ref-wrapper">
           <ng-content select="[view-content]"></ng-content>
         </div>
         <ng-container *ngIf="refViewContent.children.length === 0">
@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
 
     <ng-template #editing>
       <div class="editorContentWrapper">
-        <div #refEditorContent>
+        <div #refEditorContent class="ref-wrapper">
           <ng-content select="[editor-content]"></ng-content>
         </div>
         <ng-container *ngIf="refEditorContent.children.length === 0">
@@ -35,7 +35,10 @@ import { CommonModule } from '@angular/common';
             valueChangeEvent="keyup input change"
           >
             <dx-validator [validationRules]="validators" [validationGroup]="validationGroup"></dx-validator>
-            <dxi-button *ngIf="icon" [options]="{icon, type: 'back'}" name="icon" location="before"></dxi-button>
+            <dxi-button *ngIf="icon"
+                        [options]="{icon, type: 'back', elementAttr: { class: 'field-icon' }}"
+                        name="icon" location="before"
+            ></dxi-button>
           </dx-text-box>
         </ng-container>
       </div>
@@ -48,13 +51,12 @@ import { CommonModule } from '@angular/common';
     :host {
       display: flex;
       width: 100%;
+      &::ng-deep .ref-wrapper:empty { display: none }
 
       &::ng-deep .editorContentWrapper {
         width: 100%;
 
-        &:empty { display: none }
-
-        .dx-texteditor-buttons-container:first-child > .dx-button:first-child {
+        .dx-widget.dx-button.field-icon {
           margin-left: 0;
           pointer-events: none;
         }
@@ -65,10 +67,6 @@ import { CommonModule } from '@angular/common';
         align-items: center;
         font-size: 18px;
         margin: 0 $text-button-horizontal-padding;
-      }
-
-      dx-text-box {
-        flex: 1;
       }
 
       .edit-view-item-wrapper {
@@ -89,11 +87,14 @@ import { CommonModule } from '@angular/common';
         }
 
         .edit-view-item-value {
+          display: block;
+          height: 15px;
           font-size: 13px;
         }
       }
     }
   `],
+
 })
 export class EditViewItemComponent {
   @Input() isEditing: boolean;
@@ -120,7 +121,7 @@ export class EditViewItemComponent {
 }
 
 @NgModule({
-  imports: [DxTextBoxModule, CommonModule, DxValidatorModule],
+  imports: [DxTextBoxModule, CommonModule, DxValidatorModule, DxButtonModule],
   declarations: [EditViewItemComponent],
   exports: [EditViewItemComponent],
 })

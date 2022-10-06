@@ -13,6 +13,7 @@ $background-color: $base-bg;
 $accent-color: $base-accent;
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 $text-button-horizontal-padding: $material-text-button-horizontal-padding;
+$toolbar-margin-bottom: 16px;
 
 @mixin separator() {
   .separator {
