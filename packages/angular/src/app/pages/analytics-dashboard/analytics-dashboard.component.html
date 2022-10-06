@@ -4,9 +4,7 @@
       <span class="toolbar-header">Dashboard</span>
     </dxi-item>
 
-    <dxi-item
-      location="before"
-      locateInMenu="auto">
+    <dxi-item location="before" locateInMenu="auto">
       <dx-tabs
         [selectedItemKeys]="[5]"
         keyExpr="key"
@@ -15,11 +13,7 @@
       ></dx-tabs>
     </dxi-item>
 
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      cssclass="add-card"
-      >
+    <dxi-item location="after" locateInMenu="auto" cssclass="add-card">
       <dx-button
         icon="plus"
         text="Add Card"
@@ -61,9 +55,9 @@
       [showData]="getTotal(opportunities)"
       contentClass="opportunities-total"
     >
-      <div class="total">{{
-        getTotal(opportunities) | currency: "USD":"$":"1.0-0"
-      }}</div>
+      <div class="total">
+        {{ getTotal(opportunities) | currency: "USD":"$":"1.0-0" }}
+      </div>
       <div class="percentage">
         <i class="dx-icon-spinup"></i>
         <span>20.3%</span>
@@ -75,9 +69,9 @@
       [showData]="getTotal(sales)"
       contentClass="revenue-total"
     >
-      <div class="total">{{
-        getTotal(sales) | currency: "USD":"$":"1.0-0"
-      }}</div>
+      <div class="total">
+        {{ getTotal(sales) | currency: "USD":"$":"1.0-0" }}
+      </div>
       <div class="percentage">
         <i class="dx-icon-spinup"></i>
         <span>14.7%</span>
@@ -110,7 +104,11 @@
   </div>
 
   <div class="cards">
-    <card-analytics titleText="Revenue" contentClass="sales" [showData]="!!sales">
+    <card-analytics
+      titleText="Revenue"
+      contentClass="sales"
+      [showData]="!!sales"
+    >
       <dx-chart [dataSource]="sales">
         <dxi-series valueField="total"></dxi-series>
         <dxo-common-series-settings argumentField="date" type="splinearea">
@@ -153,11 +151,7 @@
       [showData]="!!salesByState"
     >
       <dx-data-grid [dataSource]="salesByState" [height]="270">
-        <dxi-column
-          caption="State"
-          dataField="stateName"
-        >
-        </dxi-column>
+        <dxi-column caption="State" dataField="stateName"> </dxi-column>
 
         <dxi-column
           alignment="left"
