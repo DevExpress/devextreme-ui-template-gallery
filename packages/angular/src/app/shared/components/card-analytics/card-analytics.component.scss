@@ -45,12 +45,12 @@
     flex: 1 180px;
 
     .card {
-      background-color: darken($base-bg, 5%);
+      background-color: $side-panel-background;
       border: none;
       height: 120px;
 
       ::ng-deep .dx-button {
-        background-color: darken($base-bg, 5%);
+        background-color: $side-panel-background;
       }
 
       ::ng-deep .content {
