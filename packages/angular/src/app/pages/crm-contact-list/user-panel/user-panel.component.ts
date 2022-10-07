@@ -1,5 +1,13 @@
 import {
-  Component, OnInit, OnChanges, OnDestroy, NgModule, Output, Input, SimpleChanges, EventEmitter,
+  Component,
+  OnInit,
+  OnChanges,
+  OnDestroy,
+  NgModule,
+  Output,
+  Input,
+  SimpleChanges,
+  EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -18,7 +26,7 @@ import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   CardActivitiesModule,
   ContactStatusModule,
-  FormItemPlainModule,
+  EditViewItemModule,
   FormItemPhotoModule,
 } from 'src/app/shared/components';
 import { ScreenService, RwaService } from 'src/app/shared/services';
@@ -38,6 +46,8 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
   @Input() userId: number;
 
   @Output() isOpenChange = new EventEmitter<boolean>();
+
+  validationGroup = 'userValidationGroup';
 
   user: Contact;
 
@@ -134,7 +144,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
     CardActivitiesModule,
     ContactStatusModule,
-    FormItemPlainModule,
+    EditViewItemModule,
     FormItemPhotoModule,
     CommonModule,
     PhonePipeModule,

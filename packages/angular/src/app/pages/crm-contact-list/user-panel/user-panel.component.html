@@ -12,91 +12,70 @@
           <dxi-item location="after" [visible]="isPinEnabled">
             <dx-button
               [icon]="isPin ? 'unpin' : 'pin'"
-              (onClick)="pinClick($event)"
+              (onClick)="pinClick()"
             ></dx-button>
           </dxi-item>
           <dxi-item location="after">
-            <dx-button icon="close" (onClick)="closePanel($event)"></dx-button>
+            <dx-button icon="close" (onClick)="closePanel()"></dx-button>
           </dxi-item>
         </dx-toolbar>
       </div>
 
       <dx-scroll-view class="panel-scroll">
         <div class="data-part border form-compact">
-          <dx-form
-            [formData]="user"
-            labelMode="floating"
-            [readOnly]="!isEditing"
+          <dx-form [validationGroup]="validationGroup"
+                   labelMode="floating"
           >
             <dxi-item itemType="group" [colCount]="2">
-              <dxi-item dataField="image" template="photo" cssClass="photo"></dxi-item>
+              <dxi-item cssClass="photo">
+                <form-item-photo [link]="user.image"></form-item-photo>
+              </dxi-item>
 
               <dxi-item itemType="group">
-                <dxi-item cssClass="accent"
-                  dataField="company"
-                  template="itemPlain"
-                ></dxi-item>
-                <dxi-item
-                  dataField="position"
-                  template="itemPlain"
-                ></dxi-item>
-                <dxi-item cssClass="accent"
-                  dataField="manager"
-                  template="itemPlain">
-                  <dxo-label text="Assigned to"></dxo-label>
-                </dxi-item>
+                <dxi-item cssClass="accent">
+                  <edit-view-item label="Company"
+                                  [isEditing]="isEditing"
+                                  [validators]="[{type: 'required'}]"
+                                  [validationGroup]="validationGroup"
+                                  [(value)]="user.company"></edit-view-item></dxi-item>
+
+                <dxi-item>
+                  <edit-view-item label="Position"
+                                  [isEditing]="isEditing"
+                                  [validators]="[{type: 'required'}]"
+                                  [validationGroup]="validationGroup"
+                                  [(value)]="user.position"></edit-view-item></dxi-item>
+
+                <dxi-item cssClass="accent">
+                  <edit-view-item label="Assigned to"
+                                  [isEditing]="isEditing"
+                                  [validators]="[{type: 'required'}]"
+                                  [validationGroup]="validationGroup"
+                                  [(value)]="user.manager"></edit-view-item></dxi-item>
               </dxi-item>
             </dxi-item>
 
             <dxi-item itemType="group">
-              <dxi-item
-                dataField="phone"
-                template="phone"
-                [editorOptions]="{
-                  mask: '+1(000)000-0000',
-                  icon: 'tel'
-                }"
-              ></dxi-item>
-              <dxi-item
-                dataField="email"
-                template="itemPlain"
-                [editorOptions]="{
-                  icon: 'email'
-                }"
-              ></dxi-item>
-              <dxi-item
-                dataField="address"
-                template="itemPlain"
-                [editorOptions]="{
-                  icon: 'home'
-                }"
-              ></dxi-item>
+              <dxi-item>
+                <edit-view-item label="Phone"
+                                icon="tel"
+                                mask="+1(000)000-0000"
+                                [isEditing]="isEditing"
+                                [value]="user.phone"
+                                [renderedValue]="user.phone | phone"></edit-view-item>
+              </dxi-item>
+              <dxi-item>
+                <edit-view-item label="Email"
+                                icon="email"
+                                [isEditing]="isEditing"
+                                [value]="user.email"></edit-view-item>
+              </dxi-item>
+              <dxi-item>
+                <edit-view-item label="Address"
+                                icon="home"
+                                [isEditing]="isEditing"
+                                [value]="user.address"></edit-view-item></dxi-item>
             </dxi-item>
-
-            <ng-container *dxTemplate="let data of 'itemPlain'">
-              <form-item-plain
-                [isEditing]="isEditing"
-                [label]="data.editorOptions.label"
-                [(value)]="user[data.dataField]"
-                [mask]="data.editorOptions.mask"
-              ></form-item-plain>
-            </ng-container>
-
-            <ng-container *dxTemplate="let data of 'phone'">
-              <form-item-plain
-                [isEditing]="isEditing"
-                [label]="data.editorOptions.label"
-                [(value)]="user[data.dataField]"
-                [mask]="data.editorOptions.mask"
-                [renderedValue]="data.editorOptions.value | phone"
-              ></form-item-plain>
-            </ng-container>
-
-            <div *dxTemplate="let data of 'photo'">
-              <form-item-photo
-                [link]="data.editorOptions.value"
-              ></form-item-photo>
-            </div>
 
           </dx-form>
         </div>

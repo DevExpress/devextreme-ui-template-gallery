@@ -2,34 +2,34 @@ import { Activities } from './activities';
 import { Notes } from './notes';
 import { Messages } from './messages';
 
-export const taskStatusList = [
+export const taskStatusList: string[] = [
   'Open',
   'In Progress',
   'Deferred',
   'Completed',
-] as const;
+];
 
-export const taskPriorityList = [
+export const taskPriorityList: string[] = [
   'Low',
   'Normal',
   'High',
-] as const;
+];
 
 export type TaskPriority = (typeof taskPriorityList)[number];
 
 export type TaskStatus = (typeof taskStatusList)[number];
 
 export type Task = {
+  activities: Activities,
+  description: string,
   id: number
   text: string,
-  description: string,
   company: string,
   priority: TaskPriority,
-  startDate: Date,
-  dueDate: Date,
+  startDate: string | Date | number,
+  dueDate: string | Date | number,
   owner: string,
   status: TaskStatus,
-  activities: Activities,
   notes: Notes,
   messages: Messages,
   parentId: number,

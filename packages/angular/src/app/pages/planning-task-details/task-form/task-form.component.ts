@@ -10,15 +10,15 @@ import {
   DxTextBoxModule,
   DxToolbarModule,
 } from 'devextreme-angular';
-import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   TaskProirityModule,
   TaskStatusModule,
   FormItemDateModule,
-  FormItemPlainModule,
+  EditViewItemModule,
 } from 'src/app/shared/components';
 import { taskPriorityList, taskStatusList } from 'src/app/shared/types/task';
 import { Task } from 'src/app/shared/types/task';
+import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
 
 @Component({
   selector: 'task-form',
@@ -38,17 +38,8 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   isEmptyStartDate = true;
 
-  isEmptyDueDate = true;
-
-  stylingMode = 'underlined';
-
-  editorOptions = { stylingMode: this.stylingMode };
-
   ngOnInit() {
-    this.setEditorMode(this.isEditing);
-
     this.isEmptyStartDate = !this.task?.startDate;
-    this.isEmptyDueDate = !this.task?.dueDate;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -57,28 +48,19 @@ export class TaskFormComponent implements OnInit, OnChanges {
     if (!this.isLoading) {
       this.task.dueDate = null;
       this.isEmptyStartDate = !this.task?.startDate;
-      this.isEmptyDueDate = !this.task?.dueDate;
     }
   }
 
-  toggleEdit = () => {
-    this.isEditing = !this.isEditing;
-    this.setEditorMode(this.isEditing);
+  handleEditClick = () => {
+    this.isEditing = true;
   };
 
-  setEditorMode = (isEditing: boolean) => {
-    this.stylingMode = isEditing ? 'filled' : 'underlined';
-    this.editorOptions = {
-      stylingMode: this.stylingMode,
-    };
+  handleSaveClick = () => {
+    this.isEditing = false;
   };
 
-  startDateChange = (date: Date) => {
-    this.isEmptyStartDate = !date;
-  };
-
-  dueDateChange = (date: Date) => {
-    this.isEmptyDueDate = !date;
+  handleCancelClick = () => {
+    this.isEditing = false;
   };
 }
 
@@ -90,12 +72,12 @@ export class TaskFormComponent implements OnInit, OnChanges {
     DxSelectBoxModule,
     DxTextBoxModule,
     DxToolbarModule,
+    DxTextAreaModule,
 
     TaskProirityModule,
     TaskStatusModule,
     FormItemDateModule,
-    FormItemPlainModule,
-
+    EditViewItemModule,
     CommonModule,
   ],
   providers: [],

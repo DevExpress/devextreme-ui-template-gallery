@@ -1,17 +1,17 @@
 import {
-  Component, OnInit, NgModule, OnDestroy, ViewChild,
+  Component, OnInit, NgModule, OnDestroy,
 } from '@angular/core';
 
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
-import { DxChartModule, DxChartComponent } from 'devextreme-angular/ui/chart';
-import { DxRangeSelectorModule, DxRangeSelectorComponent } from 'devextreme-angular/ui/range-selector';
+import { DxChartModule } from 'devextreme-angular/ui/chart';
+import { DxRangeSelectorModule } from 'devextreme-angular/ui/range-selector';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
 import { forkJoin, Subscription } from 'rxjs';
 
@@ -39,6 +39,11 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
 
   salesByCategory: SalesOrOpportunitiesByCategory;
 
+  constructor(private service: RwaService) { }
+
+  formatDate(dateTime: Date) {
+    return formatDate(dateTime, 'YYYY-MM-dd', 'en');
+  }
   selectionChange(e: SelectionChangedEvent) {
     var groupByPeriod = e.item.toLowerCase();
     this.subscriptions.push(
@@ -53,7 +58,7 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
     const [startDate, endDate] = e.value;
     this.subscriptions
       .push(
-        this.service.getSalesByCategory(startDate.toISOString(), endDate.toISOString())
+        this.service.getSalesByCategory(this.formatDate(startDate), this.formatDate(endDate))
           .subscribe((data) => {
             this.salesByCategory = data;
           }),
@@ -63,8 +68,6 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
   customizeSaleText(arg: { percentText: string }) {
     return arg.percentText;
   }
-
-  constructor(private service: RwaService) { }
 
   loadData = (groupBy: string) => {
     const [startDate, endDate] = analyticsPanelItems[4].value.split('/');

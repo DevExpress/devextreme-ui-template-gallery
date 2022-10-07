@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Input, OnDestroy,
+  Component, NgModule, Input,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -9,14 +9,14 @@ import {
   DxSelectBoxModule,
   DxTextBoxModule,
   DxToolbarModule,
+  DxValidationGroupModule,
+  DxValidatorModule,
 } from 'devextreme-angular';
 import {
   ContactStatusModule,
-  FormItemPlainModule,
   FormItemPhotoModule,
-  FormItemWithButtonModule,
+  EditViewItemModule,
 } from 'src/app/shared/components';
-import { Observable, Subscription } from 'rxjs';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
 
@@ -25,47 +25,28 @@ import { Contact, contactStatusList } from 'src/app/shared/types/contact';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss'],
 })
-export class ContactFormComponent implements OnInit, OnDestroy {
-  @Input() contactData: Observable<Contact>;
-
-  contactData$: Contact;
+export class ContactFormComponent {
+  @Input() contactData: Contact;
 
   statusList = contactStatusList;
 
   isEditing = false;
 
-  isLoading = true;
+  zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
 
-  stylingMode = 'underlined';
+  validationGroup = 'contactFormValidationGroup';
 
-  editorOptions = { stylingMode: this.stylingMode };
-
-  contactSubscription: Subscription = new Subscription();
-
-  ngOnInit() {
-    this.setEditorMode(this.isEditing);
-
-    this.contactSubscription = this.contactData.subscribe((data) => {
-      this.contactData$ = data;
-      this.isLoading = false;
-    });
+  handleEditClick() {
+    this.isEditing = true;
   }
 
-  ngOnDestroy() {
-    this.contactSubscription.unsubscribe();
+  handleSaveClick() {
+    this.isEditing = false;
   }
 
-  toggleEdit = () => {
-    this.isEditing = !this.isEditing;
-    this.setEditorMode(this.isEditing);
-  };
-
-  setEditorMode = (isEditing: boolean) => {
-    this.stylingMode = isEditing ? 'filled' : 'underlined';
-    this.editorOptions = {
-      stylingMode: this.stylingMode,
-    };
-  };
+  handleCancelClick() {
+    this.isEditing = false;
+  }
 }
 
 @NgModule({
@@ -78,12 +59,12 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     DxLoadPanelModule,
 
     ContactStatusModule,
-    FormItemPlainModule,
+    EditViewItemModule,
     FormItemPhotoModule,
-    FormItemWithButtonModule,
-
+    DxValidatorModule,
     CommonModule,
     PhonePipeModule,
+    DxValidationGroupModule,
   ],
   providers: [],
   exports: [ContactFormComponent],

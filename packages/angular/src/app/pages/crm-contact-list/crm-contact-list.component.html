@@ -5,7 +5,7 @@
     [dataSource]="dataSource"
     (onRowClick)="rowClick($event)"
     (onRowPrepared)="rowPrepared($event)"
-    (onExporting)="onExporting($event)"
+    (exporting)="onExporting($event)"
   >
     <dxo-scrolling mode="virtual"></dxo-scrolling>
     <dxo-selection

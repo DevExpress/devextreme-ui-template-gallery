@@ -13,7 +13,7 @@ import {
   CardMessagesModule,
 } from 'src/app/shared/components';
 import { RwaService } from 'src/app/shared/services';
-import { forkJoin, Observable, Subscription } from 'rxjs';
+import { forkJoin, Observable, map, Subscription } from 'rxjs';
 import { Contact } from 'src/app/shared/types/contact';
 import { Messages } from 'src/app/shared/types/messages';
 import { Notes } from 'src/app/shared/types/notes';
@@ -43,25 +43,6 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  loadData = () => {
-    this.contactData$ = this.service.getContact(this.contactId);
-
-    const observable = forkJoin({
-      contactNotes: this.service.getContactNotes(this.contactId),
-      contactMessages: this.service.getContactMessages(this.contactId),
-      activeOpportunities: this.service.getActiveContactOpportunities(this.contactId),
-      closedOpportunities: this.service.getClosedContactOpportunities(this.contactId),
-    });
-
-    this.subscriptions.push(this.contactData$.subscribe((data) => {
-      this.contactName = data.name;
-    }));
-
-    this.subscriptions.push(observable.subscribe((data) => {
-      Object.keys(data).forEach((key) => this[key] = data[key]);
-    }));
-  };
-
   constructor(private service: RwaService) {
   }
 
@@ -72,6 +53,38 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
+
+  loadData = () => {
+    this.contactData$ = this.service.getContact(this.contactId);
+
+    const observable$ = forkJoin([
+      this.service.getContactNotes(this.contactId),
+      this.service.getContactMessages(this.contactId),
+      this.service.getActiveContactOpportunities(this.contactId),
+      this.service.getClosedContactOpportunities(this.contactId),
+    ]).pipe(
+      map(
+        ([
+          contactNotes,
+          contactMessages,
+          activeOpportunities,
+          closedOpportunities
+        ]) => ({
+          contactNotes,
+          contactMessages,
+          activeOpportunities,
+          closedOpportunities
+        }))
+      );
+
+    this.subscriptions.push(this.contactData$.subscribe((data) => {
+      this.contactName = data.name;
+    }));
+
+    this.subscriptions.push(observable$.subscribe((data) => {
+      Object.keys(data).forEach((key) => this[key] = data[key]);
+    }));
+  };
 
   refresh = () => {
     this.loadData();

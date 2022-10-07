@@ -3,12 +3,12 @@ import {
 } from '@angular/core';
 
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-import { DxPieChartModule, DxPieChartComponent } from 'devextreme-angular/ui/pie-chart';
+import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
-import { DxVectorMapModule, DxVectorMapComponent } from 'devextreme-angular/ui/vector-map';
+import { DxVectorMapModule } from 'devextreme-angular/ui/vector-map';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
@@ -39,6 +39,21 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
   salesByState: SalesByState;
 
   salesByStateMarkers;
+
+  subscription: Subscription = new Subscription();
+
+  constructor(private service: RwaService) {
+  }
+
+  ngOnInit(): void {
+    const dates = analyticsPanelItems[4].value.split('/');
+
+    this.loadData(dates[0], dates[1]);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   selectionChange(e: TabsItemClickEvent) {
     const dates = e.itemData.value.split('/');
@@ -76,11 +91,6 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     return resultCoords;
   }
 
-  constructor(private service: RwaService) {
-  }
-
-  subscription: Subscription = new Subscription();
-
   loadData = (startDate: string, endDate: string) => {
     this.subscription = this.service.getSalesByStateAndCity(startDate, endDate).subscribe((data: SalesByStateAndCity) => {
       this.salesByStateAndCity = data;
@@ -102,16 +112,6 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
       };
     });
   };
-
-  ngOnInit(): void {
-    const dates = analyticsPanelItems[4].value.split('/');
-
-    this.loadData(dates[0], dates[1]);
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 }
 
 @NgModule({

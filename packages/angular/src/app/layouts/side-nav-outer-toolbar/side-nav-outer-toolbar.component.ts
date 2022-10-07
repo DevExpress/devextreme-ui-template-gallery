@@ -1,5 +1,10 @@
 import {
-  Component, OnInit, NgModule, Input, ViewChild,
+  Component,
+  OnInit,
+  OnDestroy,
+  NgModule,
+  Input,
+  ViewChild,
 } from '@angular/core';
 import { ItemClickEvent } from 'devextreme/ui/tree_view';
 import { DxDrawerModule } from 'devextreme-angular/ui/drawer';
@@ -10,22 +15,24 @@ import { Router, NavigationEnd } from '@angular/router';
 import { ScreenService } from '../../shared/services';
 import { SideNavigationMenuModule, HeaderModule } from '../../shared/components';
 
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-side-nav-outer-toolbar',
   templateUrl: './side-nav-outer-toolbar.component.html',
   styleUrls: ['./side-nav-outer-toolbar.component.scss'],
 })
-export class SideNavOuterToolbarComponent implements OnInit {
+export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   @ViewChild(DxScrollViewComponent, { static: true }) scrollView!: DxScrollViewComponent;
+
+  @Input()
+  title!: string;
 
   selectedRoute = '';
 
   menuOpened!: boolean;
 
   temporaryMenuOpened = false;
-
-  @Input()
-  title!: string;
 
   menuMode = 'shrink';
 
@@ -35,20 +42,29 @@ export class SideNavOuterToolbarComponent implements OnInit {
 
   shaderEnabled = false;
 
+  routerSubscription: Subscription;
+
+  screenSubscription: Subscription;
+
   constructor(private screen: ScreenService, private router: Router) { }
 
   ngOnInit() {
     this.menuOpened = this.screen.sizes['screen-large'];
 
-    this.router.events.subscribe((val) => {
+    this.routerSubscription = this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.selectedRoute = val.urlAfterRedirects.split('?')[0];
       }
     });
 
-    this.screen.changed.subscribe(() => this.updateDrawer());
+    this.screenSubscription = this.screen.changed.subscribe(() => this.updateDrawer());
 
     this.updateDrawer();
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
+    this.screenSubscription.unsubscribe();
   }
 
   updateDrawer() {

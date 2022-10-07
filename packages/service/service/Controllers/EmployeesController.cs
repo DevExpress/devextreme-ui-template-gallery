@@ -13,19 +13,16 @@ namespace service.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("ApplicationPolicy")]
-    public class EmployeesController : ControllerBase
-    {
+    public class EmployeesController : ControllerBase {
         private readonly RwaContext _context;
 
-        public EmployeesController(RwaContext context)
-        {
+        public EmployeesController(RwaContext context) {
             _context = context;
         }
 
         // GET: api/Employees/Tasks/1
         [HttpGet("Tasks/{id}")]
-        public async Task<ActionResult<dynamic>> GetTask(int id)
-        { 
+        public async Task<ActionResult<dynamic?>> GetTask(int id) {
             return await _context.TasksLists
                 .AsSplitQuery()
                 .Select(t => new {
@@ -57,11 +54,51 @@ namespace service.Controllers {
                 })
                 .FirstOrDefaultAsync(t => t.id == id);
         }
+        // GET: api/Employees/FilteredTasks
+        [HttpGet("FilteredTasks")]
+        public async Task<ActionResult<dynamic>> GetFilteredTasks() {
+            return await _context.TasksLists
+                     .AsSplitQuery()
+                     .Where(t => t.ContactId == 12)
+                     .Select(t => new {
+                         id = t.TaskId,
+                         text = t.Task.Task1.TrimEnd(' '),
+                         startDate = t.StartDate,
+                         dueDate = t.DueDate,
+                         status = t.Status,
+                         priority = t.Priority,
+                         owner = t.Contact.EmployeeFullName,
+                         company = t.Contact.Company.Name,
+                         manager = t.Manager.EmployeeFullName,
+                         progress = t.Progress,
+                         parentId = t.Task.ParentId,
+                     })
+                     .ToListAsync();
+        }
+
+        [HttpGet("AllTasks")]
+        public async Task<ActionResult<dynamic>> GetAllTasks() {
+            return await _context.TasksLists
+                     .AsSplitQuery()
+                     .Select(t => new {
+                         id = t.TaskId,
+                         text = t.Task.Task1.TrimEnd(' '),
+                         startDate = t.StartDate,
+                         dueDate = t.DueDate,
+                         status = t.Status,
+                         priority = t.Priority,
+                         owner = t.Contact.EmployeeFullName,
+                         company = t.Contact.Company.Name,
+                         manager = t.Manager.EmployeeFullName,
+                         progress = t.Progress,
+                         parentId = t.Task.ParentId,
+                     })
+                     .ToListAsync();
+        }
 
         // GET: api/Employees/Tasks
         [HttpGet("Tasks")]
-        public async Task<ActionResult<dynamic>> GetTasks()
-        {
+        public async Task<ActionResult<dynamic>> GetTasks() {
             return await _context.TasksLists
                      .AsSplitQuery()
                      .Where(t => t.ContactId == 12)

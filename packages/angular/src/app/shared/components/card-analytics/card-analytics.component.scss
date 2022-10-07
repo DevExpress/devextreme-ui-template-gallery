@@ -6,7 +6,7 @@
     border-radius: 4px;
     box-shadow: none;
     position: relative;
-    border: 1px solid #e0e0e0;
+    border: 1px solid $base-border-color;
     overflow: hidden;
 
     .overflow-menu {
@@ -52,12 +52,12 @@
     grid-template-columns: repeat(4, calc(25% - 15px));
 
     .card {
-      background-color: #f5f5f5;
+      background-color: $side-panel-background;
       border: none;
       height: 120px;
 
       ::ng-deep .dx-button {
-        background-color: #f5f5f5;
+        background-color: $side-panel-background;
       }
 
       ::ng-deep .content {
@@ -67,7 +67,7 @@
           display: inline-block;
           font-size: 26px;
           font-weight: 700;
-          color: #000;
+          color: $base-text-color;
           margin-right: 27px;
         }
 
@@ -75,7 +75,7 @@
           display: inline-block;
           font-size: 16px;
           font-weight: 400;
-          color: #000;
+          color: $base-text-color;
           line-height: 24px;
 
           span {

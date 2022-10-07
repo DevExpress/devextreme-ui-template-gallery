@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Output, ViewChild, OnDestroy,
+  Component, OnInit, NgModule, ViewChild, OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -12,10 +12,11 @@ import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
 import { taskPanelItems } from 'src/app/shared/types/resource';
 import { Task } from 'src/app/shared/types/task';
 import { RwaService } from 'src/app/shared/services';
-import { Subscription } from 'rxjs';
+import { forkJoin, map, Observable, Subscription } from 'rxjs';
 import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
 import { TaskListKanbanModule, TaskListKanbanComponent } from './task-list-kanban/task-list-kanban.component';
 import { TaskListGanttComponent, TaskListGanttModule } from './task-list-gantt/task-list-gantt.component';
+import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 
 @Component({
   templateUrl: './planning-task-list.component.html',
@@ -49,10 +50,19 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
   dataSubscription: Subscription = new Subscription();
 
+  taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
+
   constructor(private service: RwaService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.taskCollections$ = forkJoin([
+      this.service.getFilteredTasks(),
+      this.service.getTasks()
+    ]).pipe(
+      map(
+        ([filteredTasks, allTasks]) => { return { allTasks, filteredTasks } })
+    );
     this.dataSubscription = this.service.getTasks().subscribe((tasks) => {
       this.tasks = tasks;
     });
@@ -105,6 +115,7 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
     DxDataGridModule,
     DxTabsModule,
     DxToolbarModule,
+    DxLoadPanelModule,
 
     TaskListKanbanModule,
     TaskListModule,

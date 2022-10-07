@@ -1,21 +1,21 @@
 import {
-  Component, OnInit, NgModule, OnDestroy, ViewChild,
+  Component, OnInit, NgModule, OnDestroy,
 } from '@angular/core';
 
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-import { DxPieChartModule, DxPieChartComponent } from 'devextreme-angular/ui/pie-chart';
-import { DxChartModule, DxChartComponent } from 'devextreme-angular/ui/chart';
+import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
+import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
-import { DxFunnelModule, DxFunnelComponent } from 'devextreme-angular/ui/funnel';
+import { DxFunnelModule } from 'devextreme-angular/ui/funnel';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
-import { forkJoin, Subscription } from 'rxjs';
+import { forkJoin, map, Subscription } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
 
@@ -32,13 +32,18 @@ import {
 export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
   analyticsPanelItems = analyticsPanelItems;
 
+  opportunities: SalesOrOpportunitiesByCategory;
+
+  sales: Sales;
+
   salesByState: SalesByState;
 
   salesByCategory: SalesOrOpportunitiesByCategory;
 
-  opportunities: SalesOrOpportunitiesByCategory;
+  subscriptions: Subscription[] = [];
 
-  sales: Sales;
+  constructor(private service: RwaService) {
+  }
 
   salesTotal: number;
 
@@ -63,23 +68,20 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
     return data.reduce((total, item) => total + (item.value || item.total), 0);
   }
 
-  constructor(private service: RwaService) {
-  }
-
-  subscriptions: Subscription[] = [];
-
   loadData = (startDate: string, endDate: string) => {
-    const observable = forkJoin({
-      opportunities: this.service.getOpportunitiesByCategory(startDate, endDate),
-      salesByCategory: this.service.getSalesByCategory(startDate, endDate),
-      sales: this.service.getSales(startDate, endDate),
-    });
+    const observable$ = forkJoin([
+      this.service.getOpportunitiesByCategory(startDate, endDate),
+      this.service.getSalesByCategory(startDate, endDate),
+      this.service.getSales(startDate, endDate),
+    ]).pipe(
+      map(([opportunities, salesByCategory, sales]) => ({ opportunities, salesByCategory, sales }))
+    );
 
     this.subscriptions.push(this.service.getSalesByStateAndCity(startDate, endDate).subscribe((data) => {
       this.salesByState = this.service.getSalesByState(data);
     }));
 
-    this.subscriptions.push(observable.subscribe((data) => {
+    this.subscriptions.push(observable$.subscribe((data) => {
       Object.keys(data).forEach((key) => this[key] = data[key]);
 
       this.salesTotal = this.getTotal(this.sales);
