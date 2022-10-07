@@ -42,12 +42,12 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private service: RwaService) {
-  }
-
   salesTotal: number;
 
   opportunitiesTotal: number;
+
+  constructor(private service: RwaService) {
+  }
 
   selectionChange(e: TabsItemClickEvent) {
     const dates = e.itemData.value.split('/');

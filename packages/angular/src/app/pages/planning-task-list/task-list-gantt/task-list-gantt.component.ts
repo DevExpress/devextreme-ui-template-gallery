@@ -20,6 +20,9 @@ export class TaskListGanttComponent {
 
   @Input() dataSource: Task[];
 
+  constructor(private router: Router) {
+  }
+
   refresh() {
     this.component.instance.refresh();
   }
@@ -36,9 +39,6 @@ export class TaskListGanttComponent {
       },
     ).then((doc) => doc.save('Tasks.pdf'));
   };
-
-  constructor(private router: Router) {
-  }
 
   navigateToDetails = () => {
     this.router.navigate(['/planning-task-details']);

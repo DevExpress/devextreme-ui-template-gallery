@@ -40,7 +40,16 @@ export class TaskListGridComponent implements OnChanges {
 
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
 
+  tasks: Task[];
+
   priorityList = taskPriorityList;
+
+  statusList = taskStatusList;
+
+  isLoading = true;
+
+  constructor(private router: Router) {
+  }
 
   addRow() { 
     this.component.instance.addRow();
@@ -82,15 +91,6 @@ export class TaskListGridComponent implements OnChanges {
       });
     });
   };
-
-  constructor(private router: Router) {
-  }
-
-  isLoading = true;
-
-  statusList = taskStatusList;
-
-  tasks: Task[];
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.dataSource) {

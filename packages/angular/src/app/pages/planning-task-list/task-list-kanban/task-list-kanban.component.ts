@@ -27,10 +27,6 @@ export class TaskListKanbanComponent implements OnChanges {
 
   @Input() dataSource: Task[];
 
-  refresh() { 
-    this.component.instance.update();
-  }
-
   kanbanDataSource: Board[] = [];
 
   statuses = taskStatusList;
@@ -44,6 +40,10 @@ export class TaskListKanbanComponent implements OnChanges {
     ],
   },
   ];
+
+  refresh() { 
+    this.component.instance.update();
+  }
 
   fillOutBoard = (cards: Task[]): Board[] => {
     const result: Board[] = [];

@@ -40,6 +40,8 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
 
   @Input() isMenuVisible = true;
 
+  @Input() isLoading = true;
+
   resizeObserver: ResizeObserver;
 
   resizeObserverSubscription: Subscription;
@@ -52,8 +54,6 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
       { text: 'Hide' },
     ],
   }];
-
-  @Input() isLoading = true;
 
   position: PositionConfig;
 

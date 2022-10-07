@@ -30,14 +30,6 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
   @ViewChild('planningKanban', { static: false }) kanban: TaskListKanbanComponent;
 
-  tabValueChange(e: TabsItemClickEvent) {
-    const { itemData } = e;
-
-    this.displayTaskComponent = itemData.text;
-    this.displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
-    this.displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
-  };
-
   tasks: Task[];
 
   taskPanelItems = taskPanelItems;
@@ -71,6 +63,14 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.dataSubscription.unsubscribe();
   }
+
+  tabValueChange(e: TabsItemClickEvent) {
+    const { itemData } = e;
+
+    this.displayTaskComponent = itemData.text;
+    this.displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
+    this.displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
+  };
 
   addTask = () => {
     if (this.displayGrid) {
