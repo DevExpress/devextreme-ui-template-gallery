@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
       <div class="edit-view-item-wrapper"
            [class.with-label]="!icon">
         <label *ngIf="!icon" class="dx-texteditor-label">{{ label }}</label>
-        <div #refViewContent class="ref-wrapper">
+        <div #refViewContent class="content-ng-wrapper">
           <ng-content select="[view-content]"></ng-content>
         </div>
         <ng-container *ngIf="refViewContent.children.length === 0">
@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
 
     <ng-template #editing>
       <div class="editorContentWrapper">
-        <div #refEditorContent class="ref-wrapper">
+        <div #refEditorContent class="content-ng-wrapper">
           <ng-content select="[editor-content]"></ng-content>
         </div>
         <ng-container *ngIf="refEditorContent.children.length === 0">
@@ -48,10 +48,14 @@ import { CommonModule } from '@angular/common';
   styles: [`
     @use '../../../../variables' as *;
 
+    $field-height: 32.2px;
+
     :host {
       display: flex;
       width: 100%;
-      &::ng-deep .ref-wrapper:empty { display: none }
+      height: $field-height;
+
+      .content-ng-wrapper:empty { display: none }
 
       &::ng-deep .editorContentWrapper {
         width: 100%;
@@ -59,6 +63,16 @@ import { CommonModule } from '@angular/common';
         .dx-widget.dx-button.field-icon {
           margin-left: 0;
           pointer-events: none;
+        }
+      }
+
+      @supports (-moz-appearance:none) {
+        .edit-view-item-value {
+          align-items: center;
+        }
+
+        &::ng-deep .dx-texteditor-input {
+          height: $field-height;
         }
       }
 
@@ -72,7 +86,7 @@ import { CommonModule } from '@angular/common';
       .edit-view-item-wrapper {
         position: relative;
         padding: 9px 11px 8px;
-        block-size: 32.2px;
+        block-size: $field-height;
 
         &.with-label {
           padding-top: 15px;
@@ -87,8 +101,9 @@ import { CommonModule } from '@angular/common';
         }
 
         .edit-view-item-value {
-          display: block;
-          height: 15px;
+          display: flex;
+          height: calc(#{$field-height} - 17px);
+          line-height: 16px;
           font-size: 13px;
         }
       }
