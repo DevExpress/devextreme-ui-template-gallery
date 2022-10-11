@@ -2,20 +2,24 @@ import {
   Component, OnInit, NgModule, OnDestroy,
 } from '@angular/core';
 
+import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
+import { DxTabsModule } from 'devextreme-angular/ui/tabs';
+import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxFunnelModule } from 'devextreme-angular/ui/funnel';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
+
+import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
 import { forkJoin, map, Subscription } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analytics/toolbar-analytics.component';
 
-import { analyticsPanelItems, Dates } from 'src/app/shared/types/resource';
+import { analyticsPanelItems } from 'src/app/shared/types/resource';
 import {
   Sales, SalesByState, SalesOrOpportunitiesByCategory,
 } from 'src/app/shared/types/analytics';
@@ -41,8 +45,10 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
   constructor(private service: RwaService) {
   }
 
-  selectionChange(dates: Dates) {
-    this.loadData(dates.startDate, dates.endDate);
+  selectionChange(e: TabsItemClickEvent) {
+    const dates = e.itemData.value.split('/');
+
+    this.loadData(dates[0], dates[1]);
   }
 
   customizeOppText(arg: { valueText: string }) {
@@ -89,13 +95,15 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [
+    DxButtonModule,
+    DxTabsModule,
+    DxToolbarModule,
     DxDataGridModule,
     DxBulletModule,
     DxFunnelModule,
     DxPieChartModule,
     DxChartModule,
     CardAnalyticsModule,
-    ToolbarAnalyticsModule,
 
     CommonModule,
   ],

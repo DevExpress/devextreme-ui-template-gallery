@@ -2,12 +2,16 @@ import {
   Component, OnInit, NgModule, OnDestroy,
 } from '@angular/core';
 
+import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
+import { DxTabsModule } from 'devextreme-angular/ui/tabs';
+import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxVectorMapModule } from 'devextreme-angular/ui/vector-map';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 
+import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
 
 import { CommonModule } from '@angular/common';
@@ -15,9 +19,8 @@ import { RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analytics/toolbar-analytics.component';
 
-import { analyticsPanelItems, Dates } from 'src/app/shared/types/resource';
+import { analyticsPanelItems } from 'src/app/shared/types/resource';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 import { SalesByState, SalesByStateAndCity } from 'src/app/shared/types/analytics';
 
@@ -52,8 +55,10 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  selectionChange(e: Dates) {
-    this.loadData(e.startDate, e.endDate);
+  selectionChange(e: TabsItemClickEvent) {
+    const dates = e.itemData.value.split('/');
+
+    this.loadData(dates[0], dates[1]);
   }
 
   customizeSaleText(arg: { percentText: string }) {
@@ -111,13 +116,15 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [
+    DxButtonModule,
+    DxTabsModule,
+    DxToolbarModule,
     DxDataGridModule,
     DxBulletModule,
     DxPieChartModule,
     DxVectorMapModule,
     DxChartModule,
     CardAnalyticsModule,
-    ToolbarAnalyticsModule,
 
     CommonModule,
   ],

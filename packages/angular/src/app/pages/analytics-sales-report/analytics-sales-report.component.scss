@@ -20,6 +20,13 @@
       @include header();
     }
   }
+
+  .add-card {
+    .dx-icon.dx-icon-plus,
+    .dx-button-text {
+      color: #fff;
+    }
+  }
 }
 
 .sales-range {

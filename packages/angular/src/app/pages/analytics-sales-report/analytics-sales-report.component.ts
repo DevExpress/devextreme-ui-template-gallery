@@ -16,7 +16,6 @@ import { RwaService } from 'src/app/shared/services';
 import { forkJoin, Subscription } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analytics/toolbar-analytics.component';
 
 import { analyticsPanelItems } from 'src/app/shared/types/resource';
 
@@ -111,7 +110,6 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
     DxDropDownButtonModule,
     DxRangeSelectorModule,
     CardAnalyticsModule,
-    ToolbarAnalyticsModule,
 
     CommonModule,
   ],

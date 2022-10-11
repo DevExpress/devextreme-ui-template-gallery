@@ -1,9 +1,25 @@
 <div class="view-wrapper">
+  <dx-toolbar>
+    <dxi-item location="before">
+      <span class="toolbar-header">Sales Report</span>
+    </dxi-item>
+    <dxi-item location="after" locateInMenu="auto" cssClass="add-card">
+      <dx-button icon="plus" text="Add Card" type="default" stylingMode="contained"></dx-button>
+    </dxi-item>
 
-  <toolbar-analytics
-    titleText="Sales Report"
-  >
-  </toolbar-analytics>
+    <dxi-item location="after" locateInMenu="auto" widget="dxButton" showText="inMenu" [options]="{
+        text: 'Refresh',
+        icon: 'refresh'
+      }"></dxi-item>
+
+    <dxi-item location="after" locateInMenu="auto">
+      <div class="separator"></div>
+    </dxi-item>
+
+    <dxi-item location="after" locateInMenu="auto" widget="dxButton" showText="inMenu" [options]="{
+        icon: 'export'
+      }"></dxi-item>
+  </dx-toolbar>
 
   <dx-range-selector [dataSource]="sales" class="sales-range" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
     <dxo-scale minorTickInterval="day" tickInterval="month" valueType="datetime">

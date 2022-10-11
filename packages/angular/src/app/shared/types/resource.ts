@@ -10,11 +10,7 @@ export const taskPanelItems: Array<{ text: string }> = [
   },
 ];
 
-export type PanelItem = { text: string, value: string, key: number };
-
-export type Dates = { startDate: string, endDate: string};
-
-export const analyticsPanelItems: Array<PanelItem> = [
+export const analyticsPanelItems: Array<{ text: string, value: string, key: number }> = [
   {
     text: 'Week',
     value: '2020-01-24/2020-01-31',
