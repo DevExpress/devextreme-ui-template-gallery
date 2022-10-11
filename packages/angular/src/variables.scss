@@ -1,6 +1,6 @@
 @use "../node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: "light");
 @use "../node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
-@use "../node_modules/devextreme/scss/widgets/material/button/sizes" as *;
+@use "../node_modules/devextreme/scss/widgets/material/button/mixins" as *;
 
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
 
@@ -12,7 +12,7 @@ $side-panel-background: darken($base-bg, 5);
 $background-color: $base-bg;
 $accent-color: $base-accent;
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
-$text-button-horizontal-padding: calc(#{$material-button-horizontal-padding} / 2);
+$text-button-horizontal-padding: $material-button-icononly-padding;
 $toolbar-margin-bottom: 16px;
 
 @mixin separator() {
