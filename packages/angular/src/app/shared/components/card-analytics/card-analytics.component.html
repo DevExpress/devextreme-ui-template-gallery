@@ -1,8 +1,13 @@
-<div class="card">
-  <dx-button icon="overflow"></dx-button>
+<div class="card {{ contentClass }}">
+  <dx-menu 
+    [visible]="isMenuVisible"
+    class="overflow-menu"
+    [items]="menuItems"
+    >
+  </dx-menu>
   <div class="title">{{ titleText }}</div>
   <ng-content select="[filter]"></ng-content>
-  <div class="content {{ contentClass }}">
+  <div class="content">
     <ng-content></ng-content>
   </div>
   <dx-load-panel
@@ -10,5 +15,8 @@
     [position]="position"
     [visible]="isLoading"
     [showPane]="false"
+    width="100%"
+    [height]="lodingHeight"
+    maxWidth="100%"
   ></dx-load-panel>
 </div>

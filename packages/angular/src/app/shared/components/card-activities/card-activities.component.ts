@@ -26,8 +26,7 @@ export class CardActivitiesComponent implements OnInit, OnChanges {
       { text: 'View details' },
       { text: 'Delete' },
     ],
-  },
-  ];
+  }];
 
   ngOnInit() {
     this.isLoading = !this.activities;

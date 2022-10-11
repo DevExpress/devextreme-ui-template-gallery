@@ -21,25 +21,51 @@
       }"></dxi-item>
   </dx-toolbar>
 
-  <dx-range-selector [dataSource]="sales" class="sales-range" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
-    <dxo-scale minorTickInterval="day" tickInterval="month" valueType="datetime">
-      <dxo-minor-tick [visible]="false"></dxo-minor-tick>
-      <dxo-marker [visible]="false"></dxo-marker>
-    </dxo-scale>
-    <dxo-size [height]="90"></dxo-size>
+  <div class="cards wide no-border">
+    <card-analytics
+      [isLoading]="!sales"
+      contentClass="sales-range"
+      [component]="range"
+      [isMenuVisible]="false"
+    >
+    <dx-range-selector #range [dataSource]="sales" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
+      <dxo-scale
+        minorTickInterval="day"
+        tickInterval="month"
+        valueType="datetime"
+      >
+        <dxo-minor-tick [visible]="false"></dxo-minor-tick>
+        <dxo-marker [visible]="false"></dxo-marker>
+      </dxo-scale>
+      <dxo-size [height]="90"></dxo-size>
 
-    <dxo-loading-indicator [show]="true"></dxo-loading-indicator>
+      <dxo-indent [right]="0" [left]="0"></dxo-indent>
 
-    <dxo-chart>
-      <dxi-series type="line" argumentField="date" valueField="total">
-      </dxi-series>
-    </dxo-chart>
-  </dx-range-selector>
+      <dxo-loading-indicator [show]="true"></dxo-loading-indicator>
+
+      <dxo-chart>
+        <dxi-series type="line" argumentField="date" valueField="total">
+        </dxi-series>
+      </dxo-chart>
+    </dx-range-selector>
+    </card-analytics>
+  </div>
 
   <div class="cards wide">
-    <card-analytics titleText="Product Sale by Range" className="sales-by-category" [showData]="!!salesByCategory">
-      <dx-pie-chart class="sales-pie" [dataSource]="salesByCategory" type="doughnut" [diameter]="0.8"
-        [innerRadius]="0.6">
+    <card-analytics
+      titleText="Product Sale by Range"
+      [isLoading]="!salesByCategory"
+      contentClass="sales-by-category"
+      [component]="bar"
+    >
+      <dx-pie-chart
+        #pie
+        class="sales-pie"
+        [dataSource]="salesByCategory"
+        type="doughnut"
+        [diameter]="0.8"
+        [innerRadius]="0.6"
+      >
         <dxi-series argumentField="name" valueField="value">
           <dxo-label backgroundColor="none" [radialOffset]="-20" [visible]="true" [customizeText]="customizeSaleText">
             <dxo-font color="#757575" [size]="15"></dxo-font>
@@ -55,7 +81,7 @@
         <dxo-legend [visible]="false"></dxo-legend>
       </dx-pie-chart>
 
-      <dx-chart class="sales-bars" [dataSource]="salesByCategory" [rotated]="true">
+      <dx-chart #bar class="sales-bars" [dataSource]="salesByCategory" [rotated]="true">
         <dxo-common-axis-settings [visible]="false">
           <dxo-tick [visible]="false"></dxo-tick>
         </dxo-common-axis-settings>
@@ -75,15 +101,15 @@
       </dx-chart>
     </card-analytics>
 
-    <card-analytics titleText="Sales Perfomance" className="sales" [showData]="!!sales">
+    <card-analytics titleText="Sales Perfomance" className="sales" [isLoading]="!salesByDateAndCategory"  [component]="chart">
       <div filter class="sales-filter" >
       <dx-drop-down-button stylingMode="text" [useSelectMode]="true"
         [items]="groupByPeriods" [selectedItemKey]="groupByPeriods[1]" (onSelectionChanged)="selectionChange($event)">
       </dx-drop-down-button>
       </div>
 
-      <dx-chart [dataSource]="salesByDateAndCategory">
-        <dxo-argument-axis [visualRange]="visualRange"> </dxo-argument-axis> -->
+      <dx-chart #chart [dataSource]="salesByDateAndCategory">
+        <dxo-argument-axis [visualRange]="visualRange"> </dxo-argument-axis>
         <dxo-tooltip [enabled]="true" [customizeTooltip]="customiseToolip"></dxo-tooltip>
         <dxo-series-template nameField="category"> </dxo-series-template>
 
