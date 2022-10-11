@@ -1,58 +1,12 @@
 <div class="view-wrapper">
-  <dx-toolbar>
-    <dxi-item location="before">
-      <span class="toolbar-header">Dashboard</span>
-    </dxi-item>
 
-    <dxi-item
-      location="before"
-      locateInMenu="auto">
-      <dx-tabs
-        [selectedItemKeys]="[5]"
-        keyExpr="key"
-        [items]="analyticsPanelItems"
-        (onItemClick)="selectionChange($event)"
-      ></dx-tabs>
-    </dxi-item>
-
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      cssclass="add-card"
-      >
-      <dx-button
-        icon="plus"
-        text="Add Card"
-        type="default"
-        stylingMode="contained"
-      ></dx-button>
-    </dxi-item>
-
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      widget="dxButton"
-      showText="inMenu"
-      [options]="{
-        text: 'Refresh',
-        icon: 'refresh'
-      }"
-    ></dxi-item>
-
-    <dxi-item location="after" locateInMenu="auto">
-      <div class="separator"></div>
-    </dxi-item>
-
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      widget="dxButton"
-      showText="inMenu"
-      [options]="{
-        icon: 'export'
-      }"
-    ></dxi-item>
-  </dx-toolbar>
+  <toolbar-analytics
+    titleText="Dashboard"
+    [panelItems]="analyticsPanelItems"
+    [selectedItems]="[5]"
+    (selectionChanged)="selectionChange($event)"
+  >
+  </toolbar-analytics>
 
   <div class="cards">
     <card-analytics
