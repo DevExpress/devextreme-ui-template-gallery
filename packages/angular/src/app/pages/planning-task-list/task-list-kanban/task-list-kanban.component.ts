@@ -23,7 +23,7 @@ type Board = {
   styleUrls: ['./task-list-kanban.component.scss'],
 })
 export class TaskListKanbanComponent implements OnChanges {
-  @ViewChild(DxSortableComponent, { static: false }) component: DxSortableComponent;
+  @ViewChild(DxSortableComponent, { static: false }) sortable: DxSortableComponent;
 
   @Input() dataSource: Task[];
 
@@ -42,7 +42,7 @@ export class TaskListKanbanComponent implements OnChanges {
   ];
 
   refresh() { 
-    this.component.instance.update();
+    this.sortable.instance.update();
   }
 
   fillOutBoard = (cards: Task[]): Board[] => {

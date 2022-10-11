@@ -34,7 +34,7 @@ import 'jspdf-autotable';
   styleUrls: ['./task-list-grid.component.scss'],
 })
 export class TaskListGridComponent implements OnChanges {
-  @ViewChild(DxDataGridComponent, { static: false }) component: DxDataGridComponent;
+  @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
 
   @Input() dataSource: Task[];
 
@@ -52,26 +52,26 @@ export class TaskListGridComponent implements OnChanges {
   }
 
   addRow() { 
-    this.component.instance.addRow();
+    this.grid.instance.addRow();
   };
 
   refresh() {
-    this.component.instance.refresh();
+    this.grid.instance.refresh();
   }
 
   showColumnChooser() {
-    this.component.instance.showColumnChooser();
+    this.grid.instance.showColumnChooser();
   }
 
   search(text: string) {
-    this.component.instance.searchByText(text);
+    this.grid.instance.searchByText(text);
   }
 
   onExportingToPdf() {
     const doc = new jsPDF();
     exportToPdf({
       jsPDFDocument: doc,
-      component: this.component.instance,
+      component: this.grid.instance,
     }).then(() => {
       doc.save('Tasks.pdf');
     });
@@ -82,7 +82,7 @@ export class TaskListGridComponent implements OnChanges {
     const worksheet = workbook.addWorksheet('Tasks');
 
     exportToXLSX({
-      component: this.component.instance,
+      component: this.grid.instance,
       worksheet,
       autoFilterEnabled: true,
     }).then(() => {

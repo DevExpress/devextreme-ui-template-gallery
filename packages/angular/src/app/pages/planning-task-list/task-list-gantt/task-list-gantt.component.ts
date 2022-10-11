@@ -16,7 +16,7 @@ import 'jspdf-autotable';
   styleUrls: ['./task-list-gantt.component.scss'],
 })
 export class TaskListGanttComponent {
-  @ViewChild(DxGanttComponent, { static: false }) component: DxGanttComponent;
+  @ViewChild(DxGanttComponent, { static: false }) gantt: DxGanttComponent;
 
   @Input() dataSource: Task[];
 
@@ -24,17 +24,17 @@ export class TaskListGanttComponent {
   }
 
   refresh() {
-    this.component.instance.refresh();
+    this.gantt.instance.refresh();
   }
 
   insertTask() {
-    this.component.instance.insertTask({});
+    this.gantt.instance.insertTask({});
   }
 
   onExporting() {
     exportGanttToPdf(
       {
-        component: this.component.instance,
+        component: this.gantt.instance,
         createDocumentMethod: (args?: any) => new jsPDF(args),
       },
     ).then((doc) => doc.save('Tasks.pdf'));

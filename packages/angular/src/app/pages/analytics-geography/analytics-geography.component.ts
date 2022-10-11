@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, OnDestroy, ViewChild,
+  Component, OnInit, NgModule, OnDestroy,
 } from '@angular/core';
 
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
