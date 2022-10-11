@@ -26,7 +26,8 @@
           <dx-form [validationGroup]="validationGroup"
                    labelMode="floating"
           >
-            <dxi-item itemType="group" [colCount]="2">
+            <dxi-item itemType="group" [colCount]="2" >
+              <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
               <dxi-item cssClass="photo">
                 <form-item-photo [link]="user.image"></form-item-photo>
               </dxi-item>
@@ -80,7 +81,7 @@
           </dx-form>
         </div>
 
-        <div class="data-part border">
+        <div class="data-part data-part-toolbar border">
           <dx-toolbar class="panel-toolbar">
             <dxi-item location="before" [visible]="!isEditing">
               <dx-button
@@ -106,6 +107,7 @@
             >
               <dx-button
                 text="Save"
+                icon="save"
                 stylingMode="outlined"
                 type="default"
                 (onClick)="toggleEdit()"
@@ -137,8 +139,8 @@
 
         <div class="data-part">
           <dx-accordion [multiple]="true" [collapsible]="true">
-            <div *dxTemplate="let t of 'title'">
-              <span class="accordion-title">{{ t.title }}</span>
+            <div class="accordion-title" *dxTemplate="let t of 'title'">
+              <span>{{ t.title }}</span>
               <dx-button
                 icon="add"
                 type="default"

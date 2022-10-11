@@ -36,6 +36,7 @@
       [validationGroup]="validationGroup"
     >
       <dxi-item itemType="group" [colCount]="2">
+        <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
         <dxi-item>
           <form-item-photo
             [link]="contactData.image"
@@ -115,6 +116,7 @@
       </dxi-item>
 
       <dxi-item itemType="group" [colCount]="4" caption="Contacts">
+        <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
         <dxi-item [colSpan]="4">
           <edit-view-item label="Address"
                           [isEditing]="isEditing"
@@ -145,12 +147,18 @@
                           [(value)]="contactData.zipCode"></edit-view-item>
         </dxi-item>
 
-        <dxi-item [colSpan]="2">
+
+
+      </dxi-item>
+
+      <dxi-item itemType="group" [colCount]="2">
+        <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
+        <dxi-item>
           <edit-view-item label="Phone"
-                           [isEditing]="isEditing"
-                           [value]="contactData.phone"
-                           mask="+1(000)000-0000"
-                           [renderedValue]="contactData.phone | phone"
+                          [isEditing]="isEditing"
+                          [value]="contactData.phone"
+                          mask="+1(000)000-0000"
+                          [renderedValue]="contactData.phone | phone"
           ></edit-view-item>
           <dx-button class="form-item-button"
                      [visible]="!isEditing"
@@ -161,11 +169,11 @@
           ></dx-button>
         </dxi-item>
 
-        <dxi-item [colSpan]="2">
+        <dxi-item >
           <edit-view-item label="Email"
-                           [isEditing]="isEditing"
-                           [value]="contactData.email"
-                           [validators]="[{type: 'email'}] "
+                          [isEditing]="isEditing"
+                          [value]="contactData.email"
+                          [validators]="[{type: 'email'}] "
           ></edit-view-item>
           <dx-button class="form-item-button"
                      [visible]="!isEditing"

@@ -1,18 +1,18 @@
 import {
   Component, Input, NgModule, Output, EventEmitter,
 } from '@angular/core';
-import { DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
+import {DxButtonModule, DxTextBoxModule, DxValidatorModule} from 'devextreme-angular';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'edit-view-item',
   template: `
-    <i *ngIf="icon" class="dx-icon dx-icon-{{ icon }}"></i>
     <ng-container *ngIf="!isEditing; else editing">
+      <i *ngIf="icon" class="dx-icon dx-icon-{{ icon }}"></i>
       <div class="edit-view-item-wrapper"
            [class.with-label]="!icon">
         <label *ngIf="!icon" class="dx-texteditor-label">{{ label }}</label>
-        <div #refViewContent>
+        <div #refViewContent class="ref-wrapper">
           <ng-content select="[view-content]"></ng-content>
         </div>
         <ng-container *ngIf="refViewContent.children.length === 0">
@@ -22,39 +22,51 @@ import { CommonModule } from '@angular/common';
     </ng-container>
 
     <ng-template #editing>
-      <div #refEditorContent class="editorContentWrapper">
-        <ng-content select="[editor-content]"></ng-content>
+      <div class="editorContentWrapper">
+        <div #refEditorContent class="ref-wrapper">
+          <ng-content select="[editor-content]"></ng-content>
+        </div>
+        <ng-container *ngIf="refEditorContent.children.length === 0">
+          <dx-text-box
+            [label]="icon ? '' : label"
+            [value]="value"
+            (onValueChanged)="onChangeValue($event)"
+            [mask]="mask"
+            valueChangeEvent="keyup input change"
+          >
+            <dx-validator [validationRules]="validators" [validationGroup]="validationGroup"></dx-validator>
+            <dxi-button *ngIf="icon"
+                        [options]="{icon, type: 'back', elementAttr: { class: 'field-icon' }}"
+                        name="icon" location="before"
+            ></dxi-button>
+          </dx-text-box>
+        </ng-container>
       </div>
-      <ng-container *ngIf="refEditorContent.children.length === 0">
-        <dx-text-box
-          [label]="icon ? '' : label"
-          [value]="value"
-          (onValueChanged)="onChangeValue($event)"
-          [mask]="mask"
-          valueChangeEvent="keyup input change"
-        >
-          <dx-validator [validationRules]="validators" [validationGroup]="validationGroup"></dx-validator>
-        </dx-text-box>
-      </ng-container>
+
     </ng-template>
   `,
   styles: [`
+    @use '../../../../variables' as *;
+
     :host {
       display: flex;
       width: 100%;
+      &::ng-deep .ref-wrapper:empty { display: none }
 
-      .editorContentWrapper {
-        &:empty { display: none }
+      &::ng-deep .editorContentWrapper {
         width: 100%;
+
+        .dx-widget.dx-button.field-icon {
+          margin-left: 0;
+          pointer-events: none;
+        }
       }
 
       .dx-icon {
         display: flex;
         align-items: center;
-      }
-
-      dx-text-box {
-        flex: 1;
+        font-size: 18px;
+        margin: 0 $text-button-horizontal-padding;
       }
 
       .edit-view-item-wrapper {
@@ -75,11 +87,14 @@ import { CommonModule } from '@angular/common';
         }
 
         .edit-view-item-value {
+          display: block;
+          height: 15px;
           font-size: 13px;
         }
       }
     }
   `],
+
 })
 export class EditViewItemComponent {
   @Input() isEditing: boolean;
@@ -106,7 +121,7 @@ export class EditViewItemComponent {
 }
 
 @NgModule({
-  imports: [DxTextBoxModule, CommonModule, DxValidatorModule],
+  imports: [DxTextBoxModule, CommonModule, DxValidatorModule, DxButtonModule],
   declarations: [EditViewItemComponent],
   exports: [EditViewItemComponent],
 })
