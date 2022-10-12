@@ -23,7 +23,7 @@ fixture`Planning List`;
       if (screenMode[0] === 400) {
         await t.click('.view-wrapper .dx-icon-overflow');
       }
-      await t.click(Selector('.content .dx-toolbar .dx-button[aria-label=Add Task]'));
+      await t.click(Selector('.dx-toolbar .dx-button[aria-label=Add Task]'));
       await takeScreenshot(`planning-task-grid-add-task-popup-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
       await takeScreenshot(`planning-task-kanban-embed=${embedded}-${screenMode[0]}`, 'body');
