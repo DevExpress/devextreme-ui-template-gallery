@@ -11,7 +11,7 @@
       ></dx-tabs>
     </dxi-item>
 
-    <dxi-item location="after" locateInMenu="auto" cssClass="add-grid-row">
+    <dxi-item location="after" locateInMenu="auto">
       <dx-button
         icon="plus"
         text="Add Task"
@@ -108,6 +108,7 @@
         <task-list-kanban
           #planningKanban
           [dataSource]="taskCollections.filteredTasks"
+          (addTaskEvent)="addTask()"
         ></task-list-kanban>
       </div>
       <div *ngSwitchCase="taskPanelItems[2].text" class="gantt">
@@ -127,4 +128,38 @@
     >
     </dx-load-panel>
   </ng-template>
+  <dx-popup
+    title="New Task"
+    [visible]="popupVisible"
+    width="auto"
+    height="auto"
+  >
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar="bottom"
+      location="after"
+      [options]="{
+        text: 'Save',
+        stylingMode: 'outlined',
+        type: 'default',
+        onClick: closePopup
+      }"
+    >
+    </dxi-toolbar-item>
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar="bottom"
+      location="after"
+      [options]="{
+        text: 'Cancel',
+        type: 'text',
+        onClick: closePopup
+      }"
+    >
+    </dxi-toolbar-item>
+    <task-form [task]="newTask"></task-form>
+  </dx-popup>
 </div>
+

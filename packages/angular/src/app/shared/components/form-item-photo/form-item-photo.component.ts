@@ -2,32 +2,12 @@ import { CommonModule } from '@angular/common';
 import {
   Component, Input, NgModule, OnInit,
 } from '@angular/core';
+import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
 
 @Component({
   selector: 'form-item-photo',
-  template: `
-    <div
-      [ngStyle]="{
-        'width.px': size,
-        'height.px': size,
-        'background-image': imageUrl
-      }"
-      class="photo dx-card"
-      [style.backgroundImage]="imageUrl"
-    ></div>
-  `,
-  styles: [`
-  :host{
-    position: relative;
-    display: flex;
-  }
-
-  .photo {
-    border-radius: 8px;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  `],
+  templateUrl: './form-item-photo.component.html',
+  styleUrls: ['./form-item-photo.component.scss'],
 })
 export class FormItemPhotoComponent implements OnInit {
   @Input() link: string;
@@ -42,7 +22,7 @@ export class FormItemPhotoComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, DxFileUploaderModule],
   declarations: [FormItemPhotoComponent],
   exports: [FormItemPhotoComponent],
 })

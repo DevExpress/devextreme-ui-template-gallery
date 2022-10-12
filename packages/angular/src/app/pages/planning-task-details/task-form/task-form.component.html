@@ -1,8 +1,8 @@
 <div id="task-form" class="form-compact">
-  <dx-toolbar>
+  <dx-toolbar [visible]="!!task?.text">
     <dxi-item location="before"
-      ><span class="form-title">Details</span></dxi-item
-    >
+      ><span class="form-title">Details</span>
+    </dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
       <dx-button
         text="Edit"
@@ -32,8 +32,18 @@
   <dx-form
     *ngIf="!isLoading"
     labelMode="floating"
-    validationGroup="taskFormValidationGroup"
+    [validationGroup]="validationGroup"
   >
+
+  <dxi-item [colSpan]="2" [visible]="!task.text">
+    <edit-view-item
+        [isEditing]="isEditing"
+        [label]="'Subject'"
+        [(value)]="task.text"
+        [validators]="[{type: 'required'}]"
+        [validationGroup]="validationGroup"
+      ></edit-view-item>
+  </dxi-item>
     <dxi-item itemType="group" [colCount]="2">
       <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
       <dxi-item cssClass="accent">
@@ -41,6 +51,8 @@
           [isEditing]="isEditing"
           [label]="'Company'"
           [(value)]="task.company"
+          [validators]="[{type: 'required'}]"
+          [validationGroup]="validationGroup"
         ></edit-view-item>
       </dxi-item>
 
@@ -49,6 +61,8 @@
           label="Assigned to"
           [isEditing]="isEditing"
           [(value)]="task.owner"
+          [validators]="[{type: 'required'}]"
+          [validationGroup]="validationGroup"
         ></edit-view-item>
       </dxi-item>
 
@@ -102,21 +116,39 @@
       </dxi-item>
 
       <dxi-item>
-        <form-item-date
-          label="Start Date"
-          text="Set Start Date"
-          [isEditing]="isEditing"
+        <edit-view-item 
+              *ngIf="!isEditing"
+              label="Start Date"
+              [value]="task.startDate | date: 'MM/dd/yyyy'"
+              [isEditing]="isEditing"
+        >
+        </edit-view-item>
+        <dx-date-box
+          *ngIf="isEditing"
           [(value)]="task.startDate"
-        ></form-item-date>
+          label="Start Date"
+          placeholder="MM/dd/y"
+          displayFormat="MM/dd/y"
+          type="date"
+        ></dx-date-box>
       </dxi-item>
 
       <dxi-item>
-        <form-item-date
+        <edit-view-item
+          *ngIf="!isEditing"
           label="Due Date"
-          text="Set Due Date"
+          [value]="task.dueDate | date: 'MM/dd/yyyy'"
           [isEditing]="isEditing"
+        >
+        </edit-view-item>
+        <dx-date-box
+          *ngIf="isEditing"
           [(value)]="task.dueDate"
-        ></form-item-date>
+          label="Due Date"
+          placeholder="MM/dd/y"
+          displayFormat="MM/dd/y"
+          type="date"
+      ></dx-date-box>
       </dxi-item>
     </dxi-item>
 

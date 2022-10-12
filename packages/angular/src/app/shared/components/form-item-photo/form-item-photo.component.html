@@ -1,0 +1,26 @@
+<div
+  [ngStyle]="{
+    'width.px': size,
+    'height.px': size,
+    'background-image': imageUrl
+  }"
+  *ngIf="link; else elseBlock"
+  class="photo dx-card"
+  [style.backgroundImage]="imageUrl"
+></div>
+<ng-template #elseBlock>
+  <div class="photo">
+    <div class="content">
+      <span>Drag and drop a photo here or click to browse for it</span>
+    </div>
+  </div>
+  <dx-file-uploader
+    dialogTrigger=".photo"
+    dropZone=".photo"
+    [multiple]="false"
+    accept="image/*"
+    uploadMode="instantly"
+    [visible]="false"
+    >
+  </dx-file-uploader>
+</ng-template>

@@ -20,8 +20,15 @@ fixture`Planning List`;
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`planning-task-grid-embed=${embedded}-${screenMode[0]}`, 'body');
+      if (screenMode[0] === 400) {
+        await t.click('.view-wrapper .dx-icon-overflow');
+      }
+      await t.click(Selector('.content .dx-toolbar .dx-button[aria-label=Add Task]'));
+      await takeScreenshot(`planning-task-grid-add-task-popup-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
       await takeScreenshot(`planning-task-kanban-embed=${embedded}-${screenMode[0]}`, 'body');
+      await t.click(Selector('.kanban .list .dx-button[aria-label=Add Task]'));
+      await takeScreenshot(`planning-task-kanban-add-task-popup-embed=${embedded}-${screenMode[0]}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
       await takeScreenshot(`planning-task-gantt-embed=${embedded}-${screenMode[0]}`, 'body');
 

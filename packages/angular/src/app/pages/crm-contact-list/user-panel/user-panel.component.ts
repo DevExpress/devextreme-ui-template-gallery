@@ -22,7 +22,6 @@ import {
   DxFormModule,
 } from 'devextreme-angular';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
-import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   CardActivitiesModule,
   ContactStatusModule,
@@ -31,7 +30,7 @@ import {
 } from 'src/app/shared/components';
 import { ScreenService, RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
-import { Contact } from 'src/app/shared/types/contact';
+import { Contact, newContact } from 'src/app/shared/types/contact';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 
 @Component({
@@ -50,6 +49,8 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
   validationGroup = 'userValidationGroup';
 
   user: Contact;
+
+  newUser = newContact;
 
   isLoading = true;
 
@@ -79,6 +80,10 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
     if (userId?.currentValue) {
       this.loadUserById(userId.currentValue);
+    } else {
+      this.user = this.newUser;
+      this.isLoading = false;
+      this.isEditing = true;
     }
   }
 
@@ -91,6 +96,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     this.userPanelSubscriptions.push(this.service.getContact(id).subscribe((data) => {
       this.user = data;
       this.isLoading = false;
+      this.isEditing = false;
     }));
   };
 

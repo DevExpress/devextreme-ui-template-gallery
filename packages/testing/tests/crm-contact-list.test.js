@@ -25,6 +25,11 @@ fixture`Contact List`;
         await t.click('tr.dx-data-row:first-child');
         await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
         await takeScreenshot(`crm-contact-list-form-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
+        if (screenMode[0] === 400) {
+          await t.click('.view-wrapper .dx-icon-overflow');
+        }
+        await t.click(Selector('.content .dx-toolbar .dx-button[aria-label=Add Contact]'));
+        await takeScreenshot(`crm-contact-list-add-contact-form-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
       }
 
       await t

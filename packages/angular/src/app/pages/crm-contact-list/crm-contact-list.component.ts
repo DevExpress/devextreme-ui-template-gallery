@@ -61,8 +61,9 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     this.dataSubscription.unsubscribe();
   }
 
-  addRow = () => {
-    this.dataGrid.instance.addRow();
+  addContact = () => {
+    this.userId = null;
+    this.isPanelOpen = true;
   };
 
   refresh = () => {
