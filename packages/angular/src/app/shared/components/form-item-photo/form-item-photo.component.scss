@@ -8,15 +8,11 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-   & > * {
-    pointer-events: none;
-   }
-
   .content {
     background-color: rgba(0, 0, 0, 0.04);
     border-width: 2px;
     border-style: dashed;
-    border-color:rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.1);
     padding: 10px;
     display: flex;
     flex-direction: column;
