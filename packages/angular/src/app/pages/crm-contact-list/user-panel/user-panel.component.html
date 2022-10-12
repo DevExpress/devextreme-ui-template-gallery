@@ -25,6 +25,7 @@
         <div class="data-part border form-compact">
           <dx-form [validationGroup]="validationGroup"
                    labelMode="floating"
+                   [class.readonly]="!isEditing"
           >
             <dxi-item itemType="group" [colCount]="2" >
               <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
@@ -34,49 +35,52 @@
 
               <dxi-item itemType="group">
                 <dxi-item cssClass="accent">
-                  <edit-view-item label="Company"
-                                  [isEditing]="isEditing"
-                                  [validators]="[{type: 'required'}]"
-                                  [validationGroup]="validationGroup"
-                                  [(value)]="user.company"></edit-view-item></dxi-item>
+                  <ng-container *ngTemplateOutlet="fieldTpl;
+                                context: {$implicit: {label: 'Company', value: user.company}}"></ng-container>
+                </dxi-item>
 
                 <dxi-item>
-                  <edit-view-item label="Position"
-                                  [isEditing]="isEditing"
-                                  [validators]="[{type: 'required'}]"
-                                  [validationGroup]="validationGroup"
-                                  [(value)]="user.position"></edit-view-item></dxi-item>
+                  <ng-container *ngTemplateOutlet="fieldTpl;
+                                context: {$implicit: {label: 'Position', value: user.position}}"></ng-container>
+                </dxi-item>
 
                 <dxi-item cssClass="accent">
-                  <edit-view-item label="Assigned to"
-                                  [isEditing]="isEditing"
-                                  [validators]="[{type: 'required'}]"
-                                  [validationGroup]="validationGroup"
-                                  [(value)]="user.manager"></edit-view-item></dxi-item>
+                  <ng-container *ngTemplateOutlet="fieldTpl;
+                                context: {$implicit: {label: 'Assigned to', value: user.manager}}"></ng-container>
+                </dxi-item>
               </dxi-item>
             </dxi-item>
 
             <dxi-item itemType="group">
               <dxi-item>
-                <edit-view-item label="Phone"
-                                icon="tel"
-                                mask="+1(000)000-0000"
-                                [isEditing]="isEditing"
-                                [value]="user.phone"
-                                [renderedValue]="user.phone | phone"></edit-view-item>
+                <ng-container *ngTemplateOutlet="fieldTpl;
+                                context: {$implicit: {value: user.phone, icon: 'tel', mask: '+1(000)000-0000'}}"></ng-container>
               </dxi-item>
               <dxi-item>
-                <edit-view-item label="Email"
-                                icon="email"
-                                [isEditing]="isEditing"
-                                [value]="user.email"></edit-view-item>
+                <ng-container *ngTemplateOutlet="fieldTpl;
+                                context: {$implicit: {value: user.email, icon: 'email', validators: [{type: 'email'}]}}"></ng-container>
               </dxi-item>
               <dxi-item>
-                <edit-view-item label="Address"
-                                icon="home"
-                                [isEditing]="isEditing"
-                                [value]="user.address"></edit-view-item></dxi-item>
+                <ng-container *ngTemplateOutlet="fieldTpl;
+                                context: {$implicit: {value: user.address, icon: 'home'}}"></ng-container>
+              </dxi-item>
             </dxi-item>
+
+            <ng-template #fieldTpl let-data>
+              <dx-text-box [label]="data.label"
+                           [(value)]="data.value"
+                           [readOnly]="!isEditing"
+                           [mask]="data.mask"
+                           valueChangeEvent="keyup input change"
+              >
+                <dx-validator [validationRules]="data.validators || [{type: 'required'}]" [validationGroup]="validationGroup"></dx-validator>
+                <dxi-button *ngIf="data.icon"
+                            [options]="{icon: data.icon, type: 'back', elementAttr: { class: 'label-icon' }}"
+                            name="icon"
+                            location="before"
+                ></dxi-button>
+              </dx-text-box>
+            </ng-template>
 
           </dx-form>
         </div>

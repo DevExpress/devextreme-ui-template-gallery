@@ -19,5 +19,4 @@ export * from './card-tasks/card-tasks.component';
 export * from './card-opprtunities/card-opportunities.component';
 
 export * from './form-item-date/form-item-date.component';
-export * from './edit-view-item/edit-view-item.component';
 export * from './form-item-photo/form-item-photo.component';

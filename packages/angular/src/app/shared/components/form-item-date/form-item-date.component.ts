@@ -7,7 +7,6 @@ import {
   DxDropDownButtonComponent, DxDateBoxModule,
 } from 'devextreme-angular';
 
-import { EditViewItemModule } from 'src/app/shared/components/edit-view-item/edit-view-item.component';
 import { ValueChangedEvent } from 'devextreme/ui/calendar';
 import { CommonModule } from '@angular/common';
 
@@ -27,19 +26,13 @@ import { CommonModule } from '@angular/common';
   </dx-drop-down-button>
 
   <ng-template #fieldTpl>
-    <edit-view-item [label]="label"
-                    [value]="value.toString()"
-                    [isEditing]="isEditing"
-                    [renderedValue]="value | date: 'MM/dd/yyyy'"
-    >
-      <dx-date-box editor-content
-                   [(value)]="value"
-                   [name]="text"
-                   [label]="label"
-                   placeholder="MM/dd/y"
-                   displayFormat="MM/dd/y"
-      ></dx-date-box>
-    </edit-view-item>
+    <dx-date-box [(value)]="value"
+                 [readOnly]="!isEditing"
+                 [name]="text"
+                 [label]="label"
+                 placeholder="MM/dd/y"
+                 displayFormat="MM/dd/y"
+    ></dx-date-box>
   </ng-template>`,
 })
 export class FormItemDateComponent {
@@ -69,7 +62,6 @@ export class FormItemDateComponent {
   imports: [
     DxCalendarModule,
     DxDropDownButtonModule,
-    EditViewItemModule,
     DxDateBoxModule,
     CommonModule,
   ],

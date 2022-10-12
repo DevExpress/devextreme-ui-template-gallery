@@ -33,6 +33,7 @@
       class="form last"
       [formData]="contactData"
       labelMode="floating"
+      [class.readonly]="!isEditing"
       [validationGroup]="validationGroup"
     >
       <dxi-item itemType="group" [colCount]="2">
@@ -45,121 +46,80 @@
         </dxi-item>
         <dxi-item itemType="group">
           <dxi-item>
-            <edit-view-item
+            <dx-select-box
               label="Status"
-              [isEditing]="isEditing"
-              [value]="contactData.status"
+              [(value)]="contactData.status"
+              [items]="statusList"
+              [readOnly]="!isEditing"
+              width="100%"
+              fieldTemplate="field"
             >
-              <contact-status view-content [value]="contactData.status"></contact-status>
-              <dx-select-box
-                editor-content
-                label="Status"
-                [(value)]="contactData.status"
-                [items]="statusList"
-                             [readOnly]="!isEditing"
-                             width="100%"
-                             fieldTemplate="field"
-              >
-                <div *dxTemplate="let data of 'field'">
-                  <div class="form-custom-list-prop">
-                    <contact-status [value]="contactData.status"></contact-status>
-                    <dx-text-box [readOnly]="true"></dx-text-box>
-                  </div>
-                </div>
-                <div *dxTemplate="let data of 'item'">
-                  <contact-status [value]="data"></contact-status>
-                </div>
-              </dx-select-box>
-            </edit-view-item>
+              <div *dxTemplate="let data of 'field'" class="form-item-custom">
+                <contact-status [value]="contactData.status"></contact-status>
+                <dx-text-box [readOnly]="true"></dx-text-box>
+              </div>
+              <div *dxTemplate="let data of 'item'">
+                <contact-status [value]="data"></contact-status>
+              </div>
+            </dx-select-box>
           </dxi-item>
 
           <dxi-item>
-            <edit-view-item label="First Name"
-                            [isEditing]="isEditing"
-                            [validators]="[{type: 'required'}]"
-                            [validationGroup]="validationGroup"
-                            [(value)]="contactData.firstName"></edit-view-item>
+            <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'First Name', value: contactData.firstName}}"></ng-container>
           </dxi-item>
 
           <dxi-item>
-            <edit-view-item label="Last Name"
-                            [isEditing]="isEditing"
-                            [validators]="[{type: 'required'}]"
-                            [validationGroup]="validationGroup"
-                            [(value)]="contactData.lastName"></edit-view-item>
+            <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'Last Name', value: contactData.lastName}}"></ng-container>
           </dxi-item>
         </dxi-item>
 
         <dxi-item>
-          <edit-view-item label="Position"
-                          [isEditing]="isEditing"
-                          [validators]="[{type: 'required'}]"
-                          [validationGroup]="validationGroup"
-                          [(value)]="contactData.position"></edit-view-item>
+          <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'Position', value: contactData.position}}"></ng-container>
         </dxi-item>
 
         <dxi-item cssClass="accent">
-          <edit-view-item label="Assigned to"
-                          [isEditing]="isEditing"
-                          [validators]="[{type: 'required'}]"
-                          [validationGroup]="validationGroup"
-                          [(value)]="contactData.manager"></edit-view-item>
+          <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'Assigned to', value: contactData.manager}}"></ng-container>
         </dxi-item>
 
         <dxi-item cssClass="accent" [colSpan]="2">
-          <edit-view-item label="Company"
-                         [isEditing]="isEditing"
-                         [validators]="[{type: 'required'}]"
-                         [validationGroup]="validationGroup"
-                         [(value)]="contactData.company"></edit-view-item>
+          <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'Company', value: contactData.company}}"></ng-container>
         </dxi-item>
       </dxi-item>
 
       <dxi-item itemType="group" [colCount]="4" caption="Contacts">
         <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
         <dxi-item [colSpan]="4">
-          <edit-view-item label="Address"
-                          [isEditing]="isEditing"
-                          [validators]="[{type: 'required'}]"
-                          [validationGroup]="validationGroup"
-                          [(value)]="contactData.address"></edit-view-item></dxi-item>
+          <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'Address', value: contactData.address}}"></ng-container>
+        </dxi-item>
 
         <dxi-item  [colSpan]="2" >
-          <edit-view-item label="City"
-                           [isEditing]="isEditing"
-                           [validators]="[{type: 'required'}]"
-                           [validationGroup]="validationGroup"
-                           [(value)]="contactData['city']"></edit-view-item>
+          <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'City', value: contactData.city}}"></ng-container>
         </dxi-item>
 
         <dxi-item>
-          <edit-view-item label="State"
-                           [isEditing]="isEditing"
-                           [(value)]="contactData.state.stateShort"
-          ></edit-view-item>
+          <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'State', value: contactData.state.stateShort}}"></ng-container>
         </dxi-item>
 
         <dxi-item>
-          <edit-view-item label="Zip Code"
-                          [isEditing]="isEditing"
-                          [validators]="[zipCodeValidator]"
-                          [validationGroup]="validationGroup"
-                          [(value)]="contactData.zipCode"></edit-view-item>
+          <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'Zip Code', value: contactData.zipCode, validators: [zipCodeValidator]}}"></ng-container>
         </dxi-item>
-
-
 
       </dxi-item>
 
       <dxi-item itemType="group" [colCount]="2">
         <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
         <dxi-item>
-          <edit-view-item label="Phone"
-                          [isEditing]="isEditing"
-                          [value]="contactData.phone"
-                          mask="+1(000)000-0000"
-                          [renderedValue]="contactData.phone | phone"
-          ></edit-view-item>
+          <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'Phone', value: contactData.phone, mask: '+1(000)000-0000'}}"></ng-container>
           <dx-button class="form-item-button"
                      [visible]="!isEditing"
                      [text]="'Call'"
@@ -170,11 +130,8 @@
         </dxi-item>
 
         <dxi-item >
-          <edit-view-item label="Email"
-                          [isEditing]="isEditing"
-                          [value]="contactData.email"
-                          [validators]="[{type: 'email'}] "
-          ></edit-view-item>
+          <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'Email', value: contactData.email, validators: [{type: 'email'}]}}"></ng-container>
           <dx-button class="form-item-button"
                      [visible]="!isEditing"
                      [text]="'Send Email'"
@@ -184,6 +141,17 @@
           ></dx-button>
         </dxi-item>
       </dxi-item>
+
+      <ng-template #fieldTpl let-data>
+        <dx-text-box [label]="data.label"
+                     [(value)]="data.value"
+                     [readOnly]="!isEditing"
+                     [mask]="data.mask"
+                     valueChangeEvent="keyup input change"
+        >
+          <dx-validator [validationRules]="data.validators || [{type: 'required'}]" [validationGroup]="validationGroup"></dx-validator>
+        </dx-text-box>
+      </ng-template>
 
     </dx-form>
   </div>

@@ -22,7 +22,7 @@
     }
 
     .accent {
-      .view-content-value {
+      .view-content-value, .dx-texteditor .dx-texteditor-input {
         color: $accent-color;
       }
     }
@@ -36,6 +36,35 @@
     dx-select-box task-priority {
       .separator {
         max-height: 12px;
+      }
+    }
+  }
+
+  .dx-texteditor .dx-widget.dx-button.label-icon {
+    margin-left: 0;
+    pointer-events: none;
+    border-color: transparent;
+
+    * {
+      opacity: 1
+    };
+  }
+
+  .readonly {
+    .dx-texteditor {
+       pointer-events: none;
+
+      .dx-texteditor-input {
+        color: $texteditor-edit-color;
+      }
+
+      &, & > * {
+        background-color: transparent;
+      }
+
+      &, & *, &:after {
+        border-color: transparent !important;
+        opacity: 1;
       }
     }
   }

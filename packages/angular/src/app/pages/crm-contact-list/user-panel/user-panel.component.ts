@@ -19,14 +19,12 @@ import {
   DxToolbarModule,
   DxLoadPanelModule,
   DxScrollViewModule,
-  DxFormModule,
+  DxFormModule, DxValidatorModule,
 } from 'devextreme-angular';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
-import { Properties as TextBoxProperties } from 'devextreme/ui/text_box';
 import {
   CardActivitiesModule,
   ContactStatusModule,
-  EditViewItemModule,
   FormItemPhotoModule,
 } from 'src/app/shared/components';
 import { ScreenService, RwaService } from 'src/app/shared/services';
@@ -141,10 +139,10 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     DxLoadPanelModule,
     DxScrollViewModule,
     DxFormModule,
+    DxValidatorModule,
 
     CardActivitiesModule,
     ContactStatusModule,
-    EditViewItemModule,
     FormItemPhotoModule,
     CommonModule,
     PhonePipeModule,

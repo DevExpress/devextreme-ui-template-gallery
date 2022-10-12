@@ -29,76 +29,63 @@
     </dxi-item>
   </dx-toolbar>
 
-  <dx-form
-    *ngIf="!isLoading"
-    labelMode="floating"
-    validationGroup="taskFormValidationGroup"
+  <dx-form *ngIf="!isLoading"
+           validationGroup="taskFormValidationGroup"
+           [class.readonly]="!isEditing"
+           labelMode="floating"
   >
     <dxi-item itemType="group" [colCount]="2">
       <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
       <dxi-item cssClass="accent">
-        <edit-view-item
-          [isEditing]="isEditing"
-          [label]="'Company'"
-          [(value)]="task.company"
-        ></edit-view-item>
+        <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'Company', value: task.company}}"></ng-container>
       </dxi-item>
 
       <dxi-item cssClass="accent">
-        <edit-view-item
-          label="Assigned to"
-          [isEditing]="isEditing"
-          [(value)]="task.owner"
-        ></edit-view-item>
+        <ng-container *ngTemplateOutlet="fieldTpl;
+           context: {$implicit: {label: 'Assigned to', value: task.owner}}"></ng-container>
       </dxi-item>
 
       <dxi-item>
-        <edit-view-item label="Priority" [isEditing]="isEditing">
-          <task-priority view-content [value]="task.priority"></task-priority>
-          <dx-select-box
-            editor-content
-            [(value)]="task.priority"
-            [items]="priorityList"
-            label="Priority"
-            fieldTemplate="field"
-          >
-            <div *dxTemplate="let data of 'field'">
-              <div class="form-custom-list-prop">
-                <task-priority [value]="task.priority"></task-priority>
-                <dx-text-box [readOnly]="true"></dx-text-box>
-              </div>
+        <dx-select-box
+          [(value)]="task.priority"
+          [items]="priorityList"
+          [readOnly]="!isEditing"
+          label="Priority"
+          fieldTemplate="field"
+        >
+          <div *dxTemplate="let data of 'field'">
+            <div class="form-item-custom">
+              <task-priority [value]="task.priority"></task-priority>
+              <dx-text-box [readOnly]="true"></dx-text-box>
             </div>
+          </div>
 
-            <div *dxTemplate="let data of 'item'">
-              <task-priority [value]="data"></task-priority>
-            </div>
-          </dx-select-box>
-        </edit-view-item>
+          <div *dxTemplate="let data of 'item'">
+            <task-priority [value]="data"></task-priority>
+          </div>
+        </dx-select-box>
       </dxi-item>
 
       <dxi-item>
-        <edit-view-item label="Status" [isEditing]="isEditing">
-          <task-status view-content [value]="task.status"></task-status>
-          <dx-select-box
-            editor-content
-            label="Status"
-            [(value)]="task.status"
-            [items]="statusList"
-            [readOnly]="!isEditing"
-            fieldTemplate="field"
-          >
-            <div *dxTemplate="let data of 'field'">
-              <div class="form-custom-list-prop">
-                <task-status [value]="task.status"></task-status>
-                <dx-text-box [readOnly]="true"></dx-text-box>
-              </div>
+        <dx-select-box
+          label="Status"
+          [(value)]="task.status"
+          [items]="statusList"
+          [readOnly]="!isEditing"
+          fieldTemplate="field"
+        >
+          <div *dxTemplate="let data of 'field'">
+            <div class="form-item-custom">
+              <task-status [value]="task.status"></task-status>
+              <dx-text-box [readOnly]="true"></dx-text-box>
             </div>
+          </div>
 
-            <div *dxTemplate="let data of 'item'">
-              <task-status [value]="data"></task-status>
-            </div>
-          </dx-select-box>
-        </edit-view-item>
+          <div *dxTemplate="let data of 'item'">
+            <task-status [value]="data"></task-status>
+          </div>
+        </dx-select-box>
       </dxi-item>
 
       <dxi-item>
@@ -121,18 +108,22 @@
     </dxi-item>
 
     <dxi-item [colSpan]="2">
-      <edit-view-item
-        *ngIf="!isEditing"
-        [isEditing]="isEditing"
-        label="Details"
-        [value]="task.description"
-      ></edit-view-item>
-      <dx-text-area
-        *ngIf="isEditing"
-        label="Details"
-        [(value)]="task.description"
+      <dx-text-area label="Details"
+                    [readOnly]="!isEditing"
+                    [(value)]="task.description"
       ></dx-text-area>
     </dxi-item>
+
+    <ng-template #fieldTpl let-data>
+      <dx-text-box [label]="data.label"
+                   [(value)]="data.value"
+                   [readOnly]="!isEditing"
+                   [mask]="data.mask"
+                   valueChangeEvent="keyup input change"
+      >
+        <dx-validator [validationRules]="data.validators || [{type: 'required'}]" [validationGroup]="validationGroup"></dx-validator>
+      </dx-text-box>
+    </ng-template>
   </dx-form>
 
   <dx-load-panel

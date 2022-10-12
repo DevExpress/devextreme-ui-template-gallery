@@ -15,7 +15,6 @@ import {
 import {
   ContactStatusModule,
   FormItemPhotoModule,
-  EditViewItemModule,
 } from 'src/app/shared/components';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
@@ -59,7 +58,6 @@ export class ContactFormComponent {
     DxLoadPanelModule,
 
     ContactStatusModule,
-    EditViewItemModule,
     FormItemPhotoModule,
     DxValidatorModule,
     CommonModule,
