@@ -1,25 +1,9 @@
 <div class="view-wrapper">
-  <dx-toolbar>
-    <dxi-item location="before">
-      <span class="toolbar-header">Sales Report</span>
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="auto" cssClass="add-card">
-      <dx-button icon="plus" text="Add Card" type="default" stylingMode="contained"></dx-button>
-    </dxi-item>
 
-    <dxi-item location="after" locateInMenu="auto" widget="dxButton" showText="inMenu" [options]="{
-        text: 'Refresh',
-        icon: 'refresh'
-      }"></dxi-item>
-
-    <dxi-item location="after" locateInMenu="auto">
-      <div class="separator"></div>
-    </dxi-item>
-
-    <dxi-item location="after" locateInMenu="auto" widget="dxButton" showText="inMenu" [options]="{
-        icon: 'export'
-      }"></dxi-item>
-  </dx-toolbar>
+  <toolbar-analytics
+    titleText="Sales Report"
+  >
+  </toolbar-analytics>
 
   <div class="cards wide no-border">
     <card-analytics
