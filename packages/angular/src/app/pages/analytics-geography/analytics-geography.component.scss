@@ -10,29 +10,6 @@
   padding: 20px 16px 0 16px;
 }
 
-::ng-deep {
-  .dx-toolbar {
-    .toolbar-header {
-      @include header();
-    }
-
-    .dx-tabs .dx-tab {
-      background-color: $background-color;
-
-      &:nth-child(2) {
-        width: 82px;
-      }
-    }
-  }
-
-  .add-card {
-    .dx-icon.dx-icon-plus,
-    .dx-button-text {
-      color: #fff;
-    }
-  }
-}
-
 .view-wrapper {
   flex-direction: column;
 
