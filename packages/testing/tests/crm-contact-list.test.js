@@ -28,7 +28,7 @@ fixture`Contact List`;
         if (screenMode[0] === 400) {
           await t.click('.view-wrapper .dx-icon-overflow');
         }
-        await t.click(Selector('.dx-toolbar .dx-button[aria-label=Add Contact]'));
+        await t.click(Selector('.dx-button[aria-label=Add Contact]'));
         await takeScreenshot(`crm-contact-list-add-contact-form-embed=${embedded}-${screenMode[0]}`, 'body');
       }
 
