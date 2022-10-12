@@ -1,7 +1,8 @@
 import {
-  Component, OnInit, NgModule, Output, ViewChild, OnDestroy,
+  Component, OnInit, NgModule, ViewChild, OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
@@ -13,8 +14,8 @@ import { Task } from 'src/app/shared/types/task';
 import { RwaService } from 'src/app/shared/services';
 import { forkJoin, map, Observable, Subscription } from 'rxjs';
 import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
-import { TaskListKanbanModule } from './task-list-kanban/task-list-kanban.component';
-import { TaskListGanttModule } from './task-list-gantt/task-list-gantt.component';
+import { TaskListKanbanModule, TaskListKanbanComponent } from './task-list-kanban/task-list-kanban.component';
+import { TaskListGanttComponent, TaskListGanttModule } from './task-list-gantt/task-list-gantt.component';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 
 @Component({
@@ -25,12 +26,9 @@ import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 export class PlanningTaskListComponent implements OnInit, OnDestroy {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
 
-  @Output() tabValueChange = (e: TabsItemClickEvent) => {
-    const { itemData } = e;
+  @ViewChild('planningGantt', { static: false }) gantt: TaskListGanttComponent;
 
-    this.displayTaskComponent = itemData.text;
-    this.displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
-  };
+  @ViewChild('planningKanban', { static: false }) kanban: TaskListKanbanComponent;
 
   tasks: Task[];
 
@@ -40,11 +38,13 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
   displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
 
+  displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
+
   dataSubscription: Subscription = new Subscription();
 
   taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
-  constructor(private service: RwaService) {
+  constructor(private service: RwaService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -64,15 +64,49 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
     this.dataSubscription.unsubscribe();
   }
 
-  addDataGridRow = () => this.dataGrid.addRow();
+  tabValueChange(e: TabsItemClickEvent) {
+    const { itemData } = e;
 
-  refreshDataGrid = () => this.dataGrid.refresh();
+    this.displayTaskComponent = itemData.text;
+    this.displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
+    this.displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
+  };
+
+  addTask = () => {
+    if (this.displayGrid) {
+      this.dataGrid.addRow();
+    } else {
+      this.navigateToDetails();
+    }
+  };
+
+  refresh = () => {
+    if (this.displayGrid) {
+      this.dataGrid.refresh();
+    } else if (this.displayKanban) {
+      this.kanban.refresh();
+    } else {
+      this.gantt.refresh();
+    }
+  };
 
   chooseColumnDataGrid = () => this.dataGrid.showColumnChooser();
 
   searchDataGrid = (e: TextBoxInputEvent) => this.dataGrid.search(e.component.option('text'));
 
-  exportDataGrid = () => this.dataGrid.exporting();
+  exportToPdf = () => {
+    if (this.displayGrid) {
+      this.dataGrid.onExportingToPdf();
+    } else {
+      this.gantt.onExporting();
+    }
+  };
+
+  exportDataGridToXSLX = () => this.dataGrid.onExportingToXLSX();
+
+  navigateToDetails = () => {
+    this.router.navigate(['/planning-task-details']);
+  };
 }
 
 @NgModule({

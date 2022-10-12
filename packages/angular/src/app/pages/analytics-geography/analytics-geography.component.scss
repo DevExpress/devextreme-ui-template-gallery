@@ -35,19 +35,8 @@
 
 .view-wrapper {
   flex-direction: column;
-}
 
-.cards {
-  display: flex;
-  margin: 8px -20px;
-  justify-content: space-between;
-  justify-items: stretch;
-
-  .column {
-    flex: 1 50%;
-  }
-
-  &.wide {
-    flex: 1 calc(100% - 20px);
+  .wide {
+    margin: 20px 0;
   }
 }

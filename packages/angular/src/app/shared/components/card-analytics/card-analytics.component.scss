@@ -1,10 +1,7 @@
 @use "../../../../variables.scss" as *;
 
 :host {
-  flex: 1 50%;
-
   .card {
-    margin: 20px;
     padding: 16px;
     border-radius: 4px;
     box-shadow: none;
@@ -12,7 +9,7 @@
     border: 1px solid $base-border-color;
     overflow: hidden;
 
-    .dx-button {
+    .overflow-menu {
       position: absolute;
       right: 10px;
       left: auto;
@@ -29,20 +26,30 @@
       padding-right: 25px;
     }
 
+    &.sales-by-state-map {
+      .content {
+        height: 400px;
+      }
+    }
+
     .content {
       color: #757575;
       font-size: 14px;
       line-height: 17px;
       height: 270px;
-
-      &.sales-by-state-map {
-        height: 400px;
-      }
     }
   }
+}
+
+::ng-deep .cards {
+  display: grid;
+  width: 100%;
+  gap: 20px;
+  grid-template-columns: repeat(2, calc(50% - 10px));
 
   &.grey {
-    flex: 1 180px;
+    margin: 20px 0;
+    grid-template-columns: repeat(4, calc(25% - 15px));
 
     .card {
       background-color: $side-panel-background;
@@ -90,21 +97,40 @@
         }
       }
     }
+
+
+    ::ng-deep .dx-loadpanel-indicator {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &.wide {
+    margin-right: 0;
+    grid-template-columns: repeat(1, 100%);
+  }
+
+  &.no-border.wide {
+    .card {
+      border: none;
+
+      ::ng-deep .content {
+        height: auto;
+      }
+    }
   }
 }
 
-::ng-deep .cards {
-  display: flex;
-  margin: 8px -20px;
-  justify-content: space-between;
-  justify-items: stretch;
-  flex-wrap: wrap;
-}
+@media only screen and (max-width: 900px) {
+  ::ng-deep .cards {
+    grid-template-columns: repeat(1, 100%);
 
-@media only screen and (max-width: 400px) {
+    &.grey {
+      grid-template-columns: repeat(2, calc(50% - 10px));
+    }
+  }
+
   :host {
-    flex: 1 360px;
-
     .card {
       .content {
         height: auto;
@@ -112,3 +138,12 @@
     }
   }
 }
+
+@media only screen and (max-width: 400px) {
+  ::ng-deep .cards {
+    &.grey {
+      grid-template-columns: repeat(1, 100%);
+    }
+  }
+}
+

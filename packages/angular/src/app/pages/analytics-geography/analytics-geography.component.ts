@@ -66,7 +66,7 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
   }
 
   customizeLegendText(arg: { index: number }) {
-    return ['< 80000K', '80000K to 100000K', '100000K to 400000K', '> 400000K'][arg.index];
+    return ['< 80000$', '80000$ to 100000$', '100000$ to 400000$', '> 400000$'][arg.index];
   }
 
   customizeItems(items: Array<LegendItem>) {

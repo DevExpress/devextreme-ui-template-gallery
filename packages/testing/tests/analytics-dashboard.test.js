@@ -3,7 +3,7 @@
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import { toggleCommonConfiguration } from './utils';
-import { screenModes, chartTimeout } from '../config.js';
+import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/analytics-dashboard`;
@@ -20,13 +20,13 @@ const checkScreenMode = async (t, screenMode) => {
     test(`Analytics Dashboard (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, chartTimeout);
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-dashboard-all-embed=${embedded}-${screenMode[0]}`, 'body');
       await checkScreenMode(t, screenMode);
       await t.click(Selector('.dx-tabs .dx-item').nth(3));
-      await t.wait(chartTimeout);
+      await t.wait(timeoutSecond);
       await takeScreenshot(`analytics-dashboard-year-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t

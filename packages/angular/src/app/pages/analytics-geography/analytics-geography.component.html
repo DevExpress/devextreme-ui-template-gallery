@@ -56,11 +56,12 @@
 
   <div class="cards wide">
     <card-analytics
-      title="Revenue by States"
+      titleText="Revenue by States"
       contentClass="sales-by-state-map"
-      [showData]="!!salesByStateMarkers"
+      [isLoading]="!salesByStateMarkers"
+      [component]="map"
     >
-      <dx-vector-map id="vector-map" [bounds]="[-118, 50, -80, 25]">
+      <dx-vector-map id="vector-map" #map [bounds]="[-118, 50, -80, 25]">
         <dxi-layer [dataSource]="usaMap" [hoverEnabled]="false"></dxi-layer>
         <dxi-layer
           [dataSource]="salesByStateMarkers"
@@ -88,90 +89,88 @@
   </div>
 
   <div class="cards">
-    <div class="column">
-      <card-analytics
-        title="Revenue Analysis by States"
-        contentClass="sales-by-state-and-city"
-        [showData]="!!salesByStateAndCity"
-      >
-        <dx-data-grid [dataSource]="salesByStateAndCity" [height]="270">
-          <dxi-column
-            caption="State"
-            dataField="stateName"
-            [hidingPriority]="2"
-          >
-          </dxi-column>
+    <card-analytics
+      titleText="Revenue Analysis by States"
+      contentClass="sales-by-state-and-city"
+      [isLoading]="!salesByStateAndCity"
+    >
+      <dx-data-grid [dataSource]="salesByStateAndCity" [height]="270">
+        <dxi-column 
+          caption="State" 
+          dataField="stateName"
+          [hidingPriority]="2"
+        > 
+        </dxi-column>
 
-          <dxi-column
-            caption="City"
-            dataField="city"
-          >
-          </dxi-column>
+        <dxi-column 
+          caption="City" 
+          dataField="city"
+        > 
+        </dxi-column>
 
-          <dxi-column
-            alignment="left"
-            caption="Amount"
-            dataField="total"
-            dataType="number"
-            format="currency"
-            [hidingPriority]="1"
-          >
-          </dxi-column>
-
-          <dxi-column
-            alignment="left"
-            caption="Percentage"
-            dataField="percentage"
-            cellTemplate="salesBullet"
-            [width]="200"
-          >
-          </dxi-column>
-
-          <div *dxTemplate="let cellInfo of 'salesBullet'">
-            <dx-bullet
-              [showTarget]="false"
-              [showZeroLevel]="false"
-              [value]="cellInfo.data.percentage * 100"
-              [startScaleValue]="0"
-              [endScaleValue]="100"
-            >
-              <dxo-tooltip [enabled]="false"></dxo-tooltip>
-              <dxo-size [width]="200" [height]="20"></dxo-size>
-            </dx-bullet>
-          </div>
-        </dx-data-grid>
-      </card-analytics>
-    </div>
-    <div class="column">
-      <card-analytics
-        title="Revenue Snaphot by States"
-        contentClass="sales-by-state"
-        [showData]="!!salesByState"
-      >
-        <dx-pie-chart
-          [dataSource]="salesByState"
-          type="doughnut"
-          [diameter]="0.8"
-          [innerRadius]="0.6"
+        <dxi-column
+          alignment="left"
+          caption="Amount"
+          dataField="total"
+          dataType="number"
+          format="currency"
+          [hidingPriority]="1"
         >
-          <dxi-series argumentField="stateName" valueField="total">
-            <dxo-label
-              backgroundColor="none"
-              [radialOffset]="-20"
-              [visible]="true"
-              [customizeText]="customizeSaleText"
-            >
-              <dxo-font color="#757575" [size]="15"></dxo-font>
-            </dxo-label>
-          </dxi-series>
+        </dxi-column>
 
-          <dxo-legend>
-            <dxo-margin [top]="70"></dxo-margin>
-          </dxo-legend>
+        <dxi-column
+          alignment="left"
+          caption="Percentage"
+          dataField="percentage"
+          cellTemplate="salesBullet"
+          [width]="200"
+        >
+        </dxi-column>
 
-          <dxo-size [height]="270"> </dxo-size>
-        </dx-pie-chart>
-      </card-analytics>
-    </div>
+        <div *dxTemplate="let cellInfo of 'salesBullet'">
+          <dx-bullet
+            [showTarget]="false"
+            [showZeroLevel]="false"
+            [value]="cellInfo.data.percentage * 100"
+            [startScaleValue]="0"
+            [endScaleValue]="100"
+          >
+            <dxo-tooltip [enabled]="false"></dxo-tooltip>
+            <dxo-size [width]="200" [height]="20"></dxo-size>
+          </dx-bullet>
+        </div>
+      </dx-data-grid>
+    </card-analytics>
+    <card-analytics
+      titleText="Revenue Snaphot by States"
+      contentClass="sales-by-state"
+      [isLoading]="!salesByState"
+      [component]="pie"
+    >
+      <dx-pie-chart
+        #pie
+        [dataSource]="salesByState"
+        type="doughnut"
+        [diameter]="0.8"
+        [innerRadius]="0.6"
+      >
+        <dxi-series argumentField="stateName" valueField="total">
+          <dxo-label
+            backgroundColor="none"
+            [radialOffset]="-20"
+            [visible]="true"
+            [customizeText]="customizeSaleText"
+          >
+            <dxo-font color="#757575" [size]="15"></dxo-font>
+          </dxo-label>
+        </dxi-series>
+
+        <dxo-legend>
+          <dxo-margin [top]="70"></dxo-margin>
+        </dxo-legend>
+
+        <dxo-size [height]="270"> </dxo-size>
+      </dx-pie-chart>
+    </card-analytics>
   </div>
 </div>

@@ -42,6 +42,10 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
+  salesTotal: number;
+
+  opportunitiesTotal: number;
+
   constructor(private service: RwaService) {
   }
 
@@ -79,6 +83,9 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(observable$.subscribe((data) => {
       Object.keys(data).forEach((key) => this[key] = data[key]);
+
+      this.salesTotal = this.getTotal(this.sales);
+      this.opportunitiesTotal = this.getTotal(this.opportunities);
     }));
   };
 
