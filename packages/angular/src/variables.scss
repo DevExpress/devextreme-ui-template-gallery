@@ -1,8 +1,11 @@
 @use "../node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: "light");
 @use "../node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
 @use "../node_modules/devextreme/scss/widgets/material/button/sizes" as *;
+@use "../node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
 
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
+@forward "../node_modules/devextreme/scss/widgets/material/textEditor/colors";
+
 
 @use "sass:math";
 @use "sass:color";
@@ -40,7 +43,7 @@ $toolbar-margin-bottom: 16px;
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
-  color: #757575de;
+  color: $texteditor-label-color;
 }
 
 @mixin message-text {
