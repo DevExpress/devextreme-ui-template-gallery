@@ -9,7 +9,8 @@ import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import Form, { SimpleItem, GroupItem, Label } from 'devextreme-react/form';
-import { DropDownButton, Calendar } from 'devextreme-react';
+import DropDownButton from 'devextreme-react/drop-down-button';
+import Calendar from 'devextreme-react/calendar';
 import { TaskPriority, TaskStatus } from '../../shared/types/task';
 import { FormEdit, FormEditComponent, FormTask } from '../../shared/types/task-form';
 

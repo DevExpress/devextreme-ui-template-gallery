@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './crm-contact-list.scss';
 
-import DataGrid, { Sorting, Selection, HeaderFilter, Scrolling, SearchPanel, ColumnChooser, Export, Column, Toolbar, Item } from 'devextreme-react/data-grid';
+import DataGrid, { 
+  Sorting, Selection, HeaderFilter, Scrolling, SearchPanel,
+  ColumnChooser, Export, Column, Toolbar, Item
+} from 'devextreme-react/data-grid';
 import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
-import { Button, DropDownButton, SelectBox, TextBox } from 'devextreme-react';
+import Button from 'devextreme-react/button';
+import DropDownButton from 'devextreme-react/drop-down-button';
+import SelectBox from 'devextreme-react/select-box';
+import TextBox from 'devextreme-react/text-box';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { getContacts } from 'dx-rwa-data';
 import { contactStatusList, ContactStatus } from '../../shared/types/crm-contact';
