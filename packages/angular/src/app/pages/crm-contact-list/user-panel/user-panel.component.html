@@ -140,8 +140,8 @@
 
         <div class="data-part">
           <dx-accordion [multiple]="true" [collapsible]="true" [visible]="!!userId">
-            <div *dxTemplate="let t of 'title'">
-              <span class="accordion-title">{{ t.title }}</span>
+            <div class="accordion-title" *dxTemplate="let t of 'title'">
+              <span>{{ t.title }}</span>
               <dx-button
                 icon="add"
                 type="default"
