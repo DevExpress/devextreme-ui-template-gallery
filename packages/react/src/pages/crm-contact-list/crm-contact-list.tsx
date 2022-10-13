@@ -97,7 +97,6 @@ export const CRMContactList = () => {
   };
 
   return (
-    <React.Fragment>
       <div className={'view crm-contact-list'}>
         <div className={'view-wrapper'}>
           {!loading ? (
@@ -151,6 +150,5 @@ export const CRMContactList = () => {
           )}
         </div>
       </div>
-    </React.Fragment>
   );
 };
