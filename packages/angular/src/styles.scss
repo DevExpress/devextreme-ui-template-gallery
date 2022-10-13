@@ -21,13 +21,6 @@
       padding: 15px 0;
     }
 
-    .accent {
-      .view-content-value,
-      .dx-texteditor .dx-texteditor-input {
-        color: $accent-color;
-      }
-    }
-
     task-priority span,
     .status {
       line-height: 18px;
@@ -52,6 +45,12 @@
   }
 
   .readonly {
+    .accent {
+      .dx-texteditor .dx-texteditor-input {
+        color: $accent-color;
+      }
+    }
+
     .dx-texteditor {
       pointer-events: none;
 
