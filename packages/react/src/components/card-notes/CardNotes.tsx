@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
-import { formatDate } from "devextreme/localization";
+import { formatDate } from 'devextreme/localization';
 import { Notes, Note } from '../../shared/types/card-notes';
 import './CardNotes.scss';
 

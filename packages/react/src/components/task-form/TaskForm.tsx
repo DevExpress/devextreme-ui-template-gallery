@@ -16,10 +16,10 @@ import { FormEdit, FormEditComponent, FormTask } from '../../shared/types/task-f
 
 const EditComponent = ({ items, editComponent: Component, label, value, setValue }: FormEditComponent) => {
   const EditField = (data: string) => (
-      <div className='form-custom-list-prop'>
-        {data && <Component text={data}></Component>}
-        <TextBox readOnly></TextBox>
-      </div>
+    <div className='form-custom-list-prop'>
+      {data && <Component text={data}></Component>}
+      <TextBox readOnly></TextBox>
+    </div>
   );
   const EditItem = (data: string) => <Component text={data}></Component>;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import notify from 'devextreme/ui/notify';
 import Button from 'devextreme-react/button';
-import { formatDate } from "devextreme/localization";
+import { formatDate } from 'devextreme/localization';
 import { Task } from '../../../shared/types/task';
 import { Avatar } from '../../avatar/Avatar';
 import './Card.scss';
