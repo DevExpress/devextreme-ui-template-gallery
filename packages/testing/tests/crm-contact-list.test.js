@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { getPostfix, toggleCommonConfiguration } from './utils';
+import { toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
@@ -19,12 +19,14 @@ fixture`Contact List`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`crm-contact-list${getPostfix(embedded, screenMode)}`, 'body');
+      await takeScreenshot(`crm-contact-list-embed=${embedded}-${screenMode[0]}`, 'body');
 
       if (project === 'angular') { // TODO: remove `if` when this react functionality will be ready
         await t.click('tr.dx-data-row:first-child');
         await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
-        await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
+        await takeScreenshot(`crm-contact-list-form-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
+        await t.click(Selector('.dx-button[aria-label=Edit]'));
+        await takeScreenshot(`crm-contact-list-form-edit-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
       }
 
       await t
