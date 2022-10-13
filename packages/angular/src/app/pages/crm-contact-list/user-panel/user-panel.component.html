@@ -22,10 +22,10 @@
       </div>
 
       <dx-scroll-view class="panel-scroll">
-        <div class="data-part border form-compact">
+        <div class="data-part border custom-form">
           <dx-form [validationGroup]="validationGroup"
                    labelMode="floating"
-                   [class.readonly]="!isEditing"
+                   [class.view-mode]="!isEditing"
           >
             <dxi-item itemType="group" [colCount]="2" >
               <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
@@ -62,7 +62,7 @@
               </dxi-item>
               <dxi-item>
                 <ng-container *ngTemplateOutlet="fieldTpl;
-                                context: {$implicit: {value: user.address, icon: 'home'}}"></ng-container>
+                                context: {$implicit: {value: user.address, icon: 'home', validators: []}}"></ng-container>
               </dxi-item>
             </dxi-item>
 
@@ -71,11 +71,14 @@
                            [(value)]="data.value"
                            [readOnly]="!isEditing"
                            [mask]="data.mask"
+                           [inputAttr]="{class: 'custom-field-input'}"
+                           [elementAttr]="{class: 'custom-field'}"
+                           stylingMode="filled"
                            valueChangeEvent="keyup input change"
               >
                 <dx-validator [validationRules]="data.validators || [{type: 'required'}]" [validationGroup]="validationGroup"></dx-validator>
                 <dxi-button *ngIf="data.icon"
-                            [options]="{icon: data.icon, type: 'back', elementAttr: { class: 'label-icon' }}"
+                            [options]="{icon: data.icon, type: 'back', elementAttr: { class: 'custom-field-icon' }}"
                             name="icon"
                             location="before"
                 ></dxi-button>

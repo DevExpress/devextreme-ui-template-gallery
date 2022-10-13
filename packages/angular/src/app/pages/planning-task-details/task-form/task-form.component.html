@@ -1,4 +1,4 @@
-<div id="task-form" class="form-compact">
+<div id="task-form" class="custom-form">
   <dx-toolbar>
     <dxi-item location="before"
       ><span class="form-title">Details</span></dxi-item
@@ -31,7 +31,7 @@
 
   <dx-form *ngIf="!isLoading"
            validationGroup="taskFormValidationGroup"
-           [class.readonly]="!isEditing"
+           [class.view-mode]="!isEditing"
            labelMode="floating"
   >
     <dxi-item itemType="group" [colCount]="2">
@@ -47,15 +47,16 @@
       </dxi-item>
 
       <dxi-item>
-        <dx-select-box
-          [(value)]="task.priority"
-          [items]="priorityList"
-          [readOnly]="!isEditing"
-          label="Priority"
-          fieldTemplate="field"
+        <dx-select-box label="Priority"
+                       [(value)]="task.priority"
+                       [items]="priorityList"
+                       [readOnly]="!isEditing"
+                       [elementAttr]="{class: 'custom-field'}"
+                       stylingMode="filled"
+                       fieldTemplate="field"
         >
           <div *dxTemplate="let data of 'field'">
-            <div class="form-item-custom">
+            <div>
               <task-priority [value]="task.priority"></task-priority>
               <dx-text-box [readOnly]="true"></dx-text-box>
             </div>
@@ -68,15 +69,16 @@
       </dxi-item>
 
       <dxi-item>
-        <dx-select-box
-          label="Status"
-          [(value)]="task.status"
-          [items]="statusList"
-          [readOnly]="!isEditing"
-          fieldTemplate="field"
+        <dx-select-box label="Status"
+                       [(value)]="task.status"
+                       [items]="statusList"
+                       [readOnly]="!isEditing"
+                       [elementAttr]="{class: 'custom-field'}"
+                       stylingMode="filled"
+                       fieldTemplate="field"
         >
           <div *dxTemplate="let data of 'field'">
-            <div class="form-item-custom">
+            <div>
               <task-status [value]="task.status"></task-status>
               <dx-text-box [readOnly]="true"></dx-text-box>
             </div>
@@ -111,6 +113,8 @@
       <dx-text-area label="Details"
                     [readOnly]="!isEditing"
                     [(value)]="task.description"
+                    [elementAttr]="{class: 'custom-field'}"
+                    stylingMode="filled"
       ></dx-text-area>
     </dxi-item>
 
@@ -119,6 +123,9 @@
                    [(value)]="data.value"
                    [readOnly]="!isEditing"
                    [mask]="data.mask"
+                   [elementAttr]="{class: 'custom-field'}"
+                   [inputAttr]="{class: 'custom-field-input'}"
+                   stylingMode="filled"
                    valueChangeEvent="keyup input change"
       >
         <dx-validator [validationRules]="data.validators || [{type: 'required'}]" [validationGroup]="validationGroup"></dx-validator>

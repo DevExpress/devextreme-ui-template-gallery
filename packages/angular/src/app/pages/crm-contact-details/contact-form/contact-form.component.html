@@ -27,13 +27,13 @@
     </dxi-item>
   </dx-toolbar>
 
-  <div class="form-compact">
+  <div class="custom-form">
     <dx-form #contactForm
       *ngIf="contactData"
       class="form last"
       [formData]="contactData"
       labelMode="floating"
-      [class.readonly]="!isEditing"
+      [class.view-mode]="!isEditing"
       [validationGroup]="validationGroup"
     >
       <dxi-item itemType="group" [colCount]="2">
@@ -51,6 +51,7 @@
               [(value)]="contactData.status"
               [items]="statusList"
               [readOnly]="!isEditing"
+              stylingMode="filled"
               width="100%"
               fieldTemplate="field"
             >
@@ -147,6 +148,9 @@
                      [(value)]="data.value"
                      [readOnly]="!isEditing"
                      [mask]="data.mask"
+                     [elementAttr]="{class: 'custom-field'}"
+                     [inputAttr]="{class: 'custom-field-input'}"
+                     stylingMode="filled"
                      valueChangeEvent="keyup input change"
         >
           <dx-validator [validationRules]="data.validators || [{type: 'required'}]" [validationGroup]="validationGroup"></dx-validator>

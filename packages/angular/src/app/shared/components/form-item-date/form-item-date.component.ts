@@ -30,6 +30,9 @@ import { CommonModule } from '@angular/common';
                  [readOnly]="!isEditing"
                  [name]="text"
                  [label]="label"
+                 [inputAttr]="{class: 'custom-field-input'}"
+                 [elementAttr]="{class: 'custom-field'}"
+                 stylingMode="filled"
                  placeholder="MM/dd/y"
                  displayFormat="MM/dd/y"
     ></dx-date-box>

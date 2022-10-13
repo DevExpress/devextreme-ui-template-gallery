@@ -29,12 +29,12 @@
   }
 }
 
-.form-item-custom {
+.custom-field {
   task-priority,
   task-status {
     position: absolute;
     bottom: 0;
-    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 2px);
+    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 3px);
 
     ::ng-deep {
       span {
