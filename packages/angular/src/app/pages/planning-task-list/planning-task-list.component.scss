@@ -8,10 +8,16 @@
   flex-direction: column;
   flex-grow: 1;
   padding: 20px 16px 0 16px;
+
+  .dx-toolbar {
+    margin-bottom: $toolbar-margin-bottom;
+  }
 }
 
 ::ng-deep {
   .dx-toolbar {
+    margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
+
     .toolbar-header {
       @include header();
     }
