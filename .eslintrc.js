@@ -429,6 +429,7 @@ module.exports = {
         propWrapperFunctions: ['forbidExtraProps'],
       },
       rules: {
+        'jsx-boolean-value': ['error', 'never'],
         'block-spacing': 'error',
         'comma-spacing': 'error',
         'computed-property-spacing': 'error',
