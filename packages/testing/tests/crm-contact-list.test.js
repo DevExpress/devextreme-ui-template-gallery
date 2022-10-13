@@ -22,10 +22,10 @@ fixture`Contact List`;
       await takeScreenshot(`crm-contact-list-embed=${embedded}-${screenMode[0]}`, 'body');
 
       if (project === 'angular') { // TODO: remove `if` when this react functionality will be ready
-        if (screenMode[0] === 400) {
-          await t.click('.view-wrapper .dx-icon-overflow');
-        }
-        await t.click(Selector('.dx-button[aria-label=Add Contact]'));
+        // if (screenMode[0] === 400) {
+        //   await t.click('.view-wrapper .dx-icon-overflow');
+        // }
+        await t.click(Selector('.dx-button').withText('Add contact'));
         await takeScreenshot(`crm-contact-list-add-contact-form-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
         await t.click('tr.dx-data-row:first-child');
         await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
