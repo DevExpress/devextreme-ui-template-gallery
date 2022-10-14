@@ -35,7 +35,7 @@ jobs:
       working-directory: packages/metadata
 
   testcafe:
-    name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }}
+    name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }} - ${{ matrix.theme }}
     strategy:
       fail-fast: false
       matrix:
