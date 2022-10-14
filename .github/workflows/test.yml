@@ -39,6 +39,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        theme: [
+          "material.blue.light.compact",
+          "material.blue.dark.compact"
+        ],
         ARGS: [
           { project: 'angular', page: 'crm-contact-form' },
           { project: 'angular', page: 'crm-contact-list' },
@@ -78,6 +82,9 @@ jobs:
 
     - name: Run npm install
       run: npm install --no-audit --no-fund
+
+    - name: Set theme
+      run: npm run set-theme -- ${{ matrix.theme }}
 
     - name: Build
       run: npm run build
