@@ -153,7 +153,7 @@ export const PlanningTaskList = () => {
           }}
         />
       </Toolbar>
-      <Component dataSource={data} ref={gridRef} />
+      <Component dataSource={data} ref={list === listsData[0] ? gridRef : null} />
     </div>
   );
 };
