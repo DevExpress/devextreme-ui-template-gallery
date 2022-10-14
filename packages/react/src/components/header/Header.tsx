@@ -1,11 +1,14 @@
-import React from 'react';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import TextBox from 'devextreme-react/text-box';
 import Button from 'devextreme-react/button';
-import { UserPanel } from '../user-panel/UserPanel';
-import './Header.scss';
+
 import { Template } from 'devextreme-react/core/template';
+
+import { UserPanel } from '../user-panel/UserPanel';
+
 import type { HeaderProps } from '../../types';
+
+import './Header.scss';
 
 export const Header = ({ menuToggleEnabled, title, toggleMenu, className }: HeaderProps) => {
   return (

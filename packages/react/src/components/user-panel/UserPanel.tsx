@@ -1,10 +1,15 @@
 import React, { useMemo } from 'react';
+
 import { useNavigate } from 'react-router-dom';
+
 import ContextMenu, { Position } from 'devextreme-react/context-menu';
 import List from 'devextreme-react/list';
+
 import { useAuth } from '../../contexts/auth';
-import './UserPanel.scss';
+
 import type { UserPanelProps } from '../../types';
+
+import './UserPanel.scss';
 
 export const UserPanel = ({ menuMode }: UserPanelProps) => {
   const { user, signOut } = useAuth();

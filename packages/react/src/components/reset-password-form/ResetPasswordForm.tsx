@@ -1,9 +1,13 @@
 import React, { useState, useRef, useCallback } from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
+
 import Form, { Item, Label, ButtonItem, ButtonOptions, RequiredRule, EmailRule } from 'devextreme-react/form';
 import LoadIndicator from 'devextreme-react/load-indicator';
 import notify from 'devextreme/ui/notify';
+
 import { resetPassword } from '../../api/auth';
+
 import './ResetPasswordForm.scss';
 
 const notificationText = "We've sent a link to reset your password. Check your inbox.";

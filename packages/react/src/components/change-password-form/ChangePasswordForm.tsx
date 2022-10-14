@@ -1,8 +1,11 @@
 import React, { useState, useRef, useCallback } from 'react';
+
 import { useNavigate, useParams } from 'react-router-dom';
+
 import Form, { Item, Label, ButtonItem, ButtonOptions, RequiredRule, CustomRule } from 'devextreme-react/form';
 import LoadIndicator from 'devextreme-react/load-indicator';
 import notify from 'devextreme/ui/notify';
+
 import { changePassword } from '../../api/auth';
 
 export const ChangePasswordForm = () => {

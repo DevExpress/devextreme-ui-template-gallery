@@ -1,13 +1,19 @@
+
+import React, { useState, useCallback, useRef } from 'react';
+
 import Drawer from 'devextreme-react/drawer';
 import ScrollView from 'devextreme-react/scroll-view';
-import React, { useState, useCallback, useRef } from 'react';
-import { useNavigate } from 'react-router';
-import { Header, SideNavigationMenu, Footer } from '../../components';
-import './side-nav-outer-toolbar.scss';
-import { useScreenSize } from '../../utils/media-query';
 import { Template } from 'devextreme-react/core/template';
+
+import { useNavigate } from 'react-router';
+
+import { Header, SideNavigationMenu, Footer } from '../../components';
+import { useScreenSize } from '../../utils/media-query';
 import { useMenuPatch } from '../../utils/patches';
+
 import type { SideNavToolbarProps } from '../../types';
+
+import './side-nav-outer-toolbar.scss';
 
 export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren<SideNavToolbarProps>) => {
   const scrollViewRef = useRef<ScrollView>(null);

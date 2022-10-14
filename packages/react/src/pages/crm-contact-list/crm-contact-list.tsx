@@ -1,19 +1,23 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import './crm-contact-list.scss';
 
 import DataGrid, { 
   Sorting, Selection, HeaderFilter, Scrolling, SearchPanel,
   ColumnChooser, Export, Column, Toolbar, Item
 } from 'devextreme-react/data-grid';
-import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
 import Button from 'devextreme-react/button';
 import DropDownButton from 'devextreme-react/drop-down-button';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
-import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
-import { getContacts } from 'dx-rwa-data';
-import { contactStatusList, ContactStatus } from '../../shared/types/crm-contact';
 import LoadPanel from 'devextreme-react/load-panel';
+
+import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
+
+import { getContacts } from 'dx-rwa-data';
+
+import { contactStatusList, ContactStatus } from '../../shared/types/crm-contact';
+
+import './crm-contact-list.scss';
 
 type FilterContactStatus = ContactStatus | 'All Contacts';
 

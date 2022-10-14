@@ -1,18 +1,23 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import './TaskForm.scss';
+
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import LoadPanel from 'devextreme-react/load-panel';
-import { PriorityTask } from '../priority-task/PriorityTask';
-import { StatusTask } from '../status-task/StatusTask';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
-import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import Form, { SimpleItem, GroupItem, Label } from 'devextreme-react/form';
 import DropDownButton from 'devextreme-react/drop-down-button';
 import Calendar from 'devextreme-react/calendar';
+
+import { PriorityTask } from '../priority-task/PriorityTask';
+import { StatusTask } from '../status-task/StatusTask';
+
+import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
+
 import { TaskPriority, TaskStatus } from '../../shared/types/task';
 import { FormEdit, FormEditComponent, FormTask } from '../../shared/types/task-form';
+
+import './TaskForm.scss';
 
 const EditComponent = ({ items, editComponent: Component, label, value, setValue }: FormEditComponent) => {
   const EditField = (data: string) => (

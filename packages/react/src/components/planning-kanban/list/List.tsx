@@ -1,11 +1,13 @@
-import React from 'react';
 import ScrollView from 'devextreme-react/scroll-view';
 import Sortable from 'devextreme-react/sortable';
 import Button from 'devextreme-react/button';
 import notify from 'devextreme/ui/notify';
-import { Task } from '../../../shared/types/task';
-import { Card } from '../card/Card';
 import { DragStartEvent, ReorderEvent } from 'devextreme/ui/sortable';
+
+import { Task } from '../../../shared/types/task';
+
+import { Card } from '../card/Card';
+
 import './List.scss';
 
 const onMoreBtnClick = () => {

@@ -1,13 +1,19 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
-import dxTextBox from 'devextreme/ui/text_box';
-import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
-import { getTasks } from 'dx-rwa-data';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
-import './planning-task-list.scss';
+
+import dxTextBox from 'devextreme/ui/text_box';
+
+import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
+
+import { getTasks } from 'dx-rwa-data';
+
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+
+import './planning-task-list.scss';
 
 const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 

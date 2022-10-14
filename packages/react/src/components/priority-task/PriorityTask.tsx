@@ -1,4 +1,5 @@
 import { TaskProp } from '../../shared/types/task';
+
 import './PriorityTask.scss';
 
 export const PriorityTask = ({ text }: TaskProp) => (

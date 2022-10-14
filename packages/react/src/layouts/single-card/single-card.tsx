@@ -1,7 +1,10 @@
 import React from 'react';
+
 import ScrollView from 'devextreme-react/scroll-view';
-import './single-card.scss';
+
 import type { SingleCardProps } from '../../types';
+
+import './single-card.scss';
 
 export const SingleCard = ({ title, description, children }: React.PropsWithChildren<SingleCardProps>) => {
   return (

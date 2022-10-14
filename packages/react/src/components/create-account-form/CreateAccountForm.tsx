@@ -1,9 +1,13 @@
 import React, { useState, useRef, useCallback } from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
+
 import Form, { Item, Label, ButtonItem, ButtonOptions, RequiredRule, CustomRule, EmailRule } from 'devextreme-react/form';
 import notify from 'devextreme/ui/notify';
 import LoadIndicator from 'devextreme-react/load-indicator';
+
 import { createAccount } from '../../api/auth';
+
 import './CreateAccountForm.scss';
 
 export const CreateAccountForm = () => {
