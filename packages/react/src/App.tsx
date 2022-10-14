@@ -1,6 +1,5 @@
 import 'devextreme/scss/bundles/dx.material.blue.light.compact.scss';
 import 'devexpress-gantt/dist/dx-gantt.css';
-import React from 'react';
 import { HashRouter as Router } from 'react-router-dom';
 import './dx-styles.scss';
 import LoadPanel from 'devextreme-react/load-panel';
@@ -10,7 +9,7 @@ import { useScreenSizeClass } from './utils/media-query';
 import { Content } from './Content';
 import { UnauthenticatedContent } from './UnauthenticatedContent';
 
-function App() {
+function RootApp() {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -24,7 +23,7 @@ function App() {
   return <UnauthenticatedContent />;
 }
 
-export const Root = () => {
+export const App = () => {
   const screenSizeClass = useScreenSizeClass();
 
   return (
@@ -32,7 +31,7 @@ export const Root = () => {
       <AuthProvider>
         <NavigationProvider>
           <div className={`app ${screenSizeClass}`}>
-            <App />
+            <RootApp />
           </div>
         </NavigationProvider>
       </AuthProvider>
