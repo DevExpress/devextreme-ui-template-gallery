@@ -12,6 +12,7 @@ fixture`Contact List`;
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
+    const theme = process.env.theme;
     test(`Crm contact list (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
@@ -19,12 +20,12 @@ fixture`Contact List`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`crm-contact-list-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`crm-contact-list-embed=${embedded}-${theme}-${screenMode[0]}`, 'body');
 
       if (project === 'angular') { // TODO: remove `if` when this react functionality will be ready
         await t.click('tr.dx-data-row:first-child');
         await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
-        await takeScreenshot(`crm-contact-list-form-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
+        await takeScreenshot(`crm-contact-list-form-embed=${embedded}-${theme}-${screenMode[0]}`, Selector('.data-wrapper'));
       }
 
       await t

@@ -12,6 +12,7 @@ fixture`Planning List`;
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
+    const theme = process.env.theme;
     test(`Planning task list (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
@@ -19,11 +20,11 @@ fixture`Planning List`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`planning-task-grid-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`planning-task-grid-embed=${embedded}-${theme}-${screenMode[0]}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
-      await takeScreenshot(`planning-task-kanban-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`planning-task-kanban-embed=${embedded}-${theme}-${screenMode[0]}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
-      await takeScreenshot(`planning-task-gantt-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`planning-task-gantt-embed=${embedded}-${theme}-${screenMode[0]}`, 'body');
 
       await t
         .expect(compareResults.isValid())

@@ -27,6 +27,7 @@ const setEmbedded = async (t, embed, screenMode) => {
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
+    const theme = process.env.theme;
     test(`Planning task details form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
       // eslint-disable-next-line max-len
@@ -48,9 +49,9 @@ const setEmbedded = async (t, embed, screenMode) => {
 
       const form = Selector('.dx-form');
 
-      await takeScreenshot(`planning-task-form-readonly-embed=${embedded}-${screenMode[0]}`, form);
+      await takeScreenshot(`planning-task-form-readonly-embed=${embedded}-${theme}-${screenMode[0]}`, form);
       await t.click(Selector('.dx-button[aria-label=Edit]'));
-      await takeScreenshot(`planning-task-form-edit-embed=${embedded}-${screenMode[0]}`, form);
+      await takeScreenshot(`planning-task-form-edit-embed=${embedded}-${theme}-${screenMode[0]}`, form);
 
       await t
         .expect(compareResults.isValid())
@@ -75,7 +76,7 @@ const setEmbedded = async (t, embed, screenMode) => {
         const tabName = (await tab.innerText).toLowerCase();
 
         await t.click(tab);
-        await takeScreenshot(`planning-task-form-tab-${tabName}-embed=${embedded}-${screenMode[0]}`, tabPanels.nth(indexTab));
+        await takeScreenshot(`planning-task-form-tab-${tabName}-embed=${embedded}-${theme}-${screenMode[0]}`, tabPanels.nth(indexTab));
       }
 
       await t

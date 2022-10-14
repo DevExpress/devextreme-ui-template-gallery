@@ -23,6 +23,7 @@ const setEmbedded = async (t, embed, screenMode) => {
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
+    const theme = process.env.theme;
     test(`Crm contact details (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
@@ -31,7 +32,7 @@ const setEmbedded = async (t, embed, screenMode) => {
 
       await t.click(Selector('.dx-drawer-content'));
       await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
-      await takeScreenshot(`crm-contact-details-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`crm-contact-details-embed=${embedded}-${theme}-${screenMode[0]}`, 'body');
 
       await t
         .expect(compareResults.isValid())
@@ -46,9 +47,9 @@ const setEmbedded = async (t, embed, screenMode) => {
 
       const form = Selector('.dx-form');
 
-      await takeScreenshot(`crm-form-readonly-embed=${embedded}-${screenMode[0]}`, form);
+      await takeScreenshot(`crm-form-readonly-embed=${embedded}-${theme}-${screenMode[0]}`, form);
       await t.click(Selector('.dx-button[aria-label=Edit]'));
-      await takeScreenshot(`crm-form-edit-embed=${embedded}-${screenMode[0]}`, form);
+      await takeScreenshot(`crm-form-edit-embed=${embedded}-${theme}-${screenMode[0]}`, form);
 
       await t
         .expect(compareResults.isValid())
@@ -71,7 +72,7 @@ const setEmbedded = async (t, embed, screenMode) => {
         const tabName = (await tab.innerText).toLowerCase();
 
         await t.click(tab);
-        await takeScreenshot(`crm-form-tab-${tabName}-embed=${embedded}-${screenMode[0]}`, tabPanels.nth(indexTab));
+        await takeScreenshot(`crm-form-tab-${tabName}-embed=${embedded}-${theme}-${screenMode[0]}`, tabPanels.nth(indexTab));
       }
 
       await t
