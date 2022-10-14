@@ -40,8 +40,8 @@ jobs:
       fail-fast: false
       matrix:
         theme: [
-          "material.blue.light.compact",
-          "material.blue.dark.compact"
+          material.blue.light.compact,
+          material.blue.dark.compact
         ],
         ARGS: [
           { project: 'angular', page: 'crm-contact-form' },
