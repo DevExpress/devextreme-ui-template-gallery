@@ -27,10 +27,10 @@
     </dxi-item>
   </dx-toolbar>
 
-  <div class="custom-form">
+  <div>
     <dx-form #contactForm
       *ngIf="contactData"
-      class="form last"
+      class="form last plain-styled-form"
       [formData]="contactData"
       labelMode="floating"
       [class.view-mode]="!isEditing"
@@ -66,52 +66,71 @@
           </dxi-item>
 
           <dxi-item>
-            <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'First Name', value: contactData.firstName}}"></ng-container>
+            <form-textbox label="First Name"
+                         [(value)]="contactData.firstName"
+                         [isEditing]="isEditing"
+            ></form-textbox>
           </dxi-item>
 
           <dxi-item>
-            <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'Last Name', value: contactData.lastName}}"></ng-container>
+            <form-textbox label="Last Name"
+                         [(value)]="contactData.lastName"
+                         [isEditing]="isEditing"
+            ></form-textbox>
           </dxi-item>
         </dxi-item>
 
         <dxi-item>
-          <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'Position', value: contactData.position}}"></ng-container>
+          <form-textbox label="Position"
+                       [(value)]="contactData.position"
+                       [isEditing]="isEditing"
+          ></form-textbox>
         </dxi-item>
 
         <dxi-item cssClass="accent">
-          <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'Assigned to', value: contactData.manager}}"></ng-container>
+          <form-textbox label="Assigned to"
+                       [(value)]="contactData.manager"
+                       [isEditing]="isEditing"
+          ></form-textbox>
         </dxi-item>
 
         <dxi-item cssClass="accent" [colSpan]="2">
-          <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'Company', value: contactData.company}}"></ng-container>
+          <form-textbox label="Company"
+                       [(value)]="contactData.company"
+                       [isEditing]="isEditing"
+          ></form-textbox>
         </dxi-item>
       </dxi-item>
 
       <dxi-item itemType="group" [colCount]="4" caption="Contacts">
         <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
         <dxi-item [colSpan]="4">
-          <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'Address', value: contactData.address}}"></ng-container>
+          <form-textbox label="Address"
+                       [(value)]="contactData.address"
+                       [isEditing]="isEditing"
+          ></form-textbox>
         </dxi-item>
 
         <dxi-item  [colSpan]="2" >
-          <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'City', value: contactData.city}}"></ng-container>
+          <form-textbox label="City"
+                       [(value)]="contactData.city"
+                       [isEditing]="isEditing"
+          ></form-textbox>
         </dxi-item>
 
         <dxi-item>
-          <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'State', value: contactData.state.stateShort}}"></ng-container>
+          <form-textbox label="State"
+                       [(value)]="contactData.state.stateShort"
+                       [isEditing]="isEditing"
+          ></form-textbox>
         </dxi-item>
 
         <dxi-item>
-          <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'Zip Code', value: contactData.zipCode, validators: [zipCodeValidator]}}"></ng-container>
+          <form-textbox label="Zip Code"
+                       [(value)]="contactData.zipCode"
+                       [isEditing]="isEditing"
+                       [validators]="[zipCodeValidator]"
+          ></form-textbox>
         </dxi-item>
 
       </dxi-item>
@@ -119,8 +138,12 @@
       <dxi-item itemType="group" [colCount]="2">
         <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
         <dxi-item>
-          <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'Phone', value: contactData.phone, mask: '+1(000)000-0000'}}"></ng-container>
+          <form-textbox label="Phone"
+                       [(value)]="contactData.phone"
+                       [isEditing]="isEditing"
+                       mask="+1(000)000-0000"
+                       [validators]="[]"
+          ></form-textbox>
           <dx-button class="form-item-button"
                      [visible]="!isEditing"
                      [text]="'Call'"
@@ -130,9 +153,12 @@
           ></dx-button>
         </dxi-item>
 
-        <dxi-item >
-          <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'Email', value: contactData.email, validators: [{type: 'email'}]}}"></ng-container>
+        <dxi-item>
+          <form-textbox label="Email"
+                       [(value)]="contactData.email"
+                       [isEditing]="isEditing"
+                       [validators]="[{type: 'email'}]"
+          ></form-textbox>
           <dx-button class="form-item-button"
                      [visible]="!isEditing"
                      [text]="'Send Email'"
@@ -142,21 +168,6 @@
           ></dx-button>
         </dxi-item>
       </dxi-item>
-
-      <ng-template #fieldTpl let-data>
-        <dx-text-box [label]="data.label"
-                     [(value)]="data.value"
-                     [readOnly]="!isEditing"
-                     [mask]="data.mask"
-                     [elementAttr]="{class: 'custom-field'}"
-                     [inputAttr]="{class: 'custom-field-input'}"
-                     stylingMode="filled"
-                     valueChangeEvent="keyup input change"
-        >
-          <dx-validator [validationRules]="data.validators || [{type: 'required'}]" [validationGroup]="validationGroup"></dx-validator>
-        </dx-text-box>
-      </ng-template>
-
     </dx-form>
   </div>
   <dx-load-panel

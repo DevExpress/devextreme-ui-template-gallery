@@ -8,12 +8,14 @@ import {
   DxLoadPanelModule,
   DxSelectBoxModule,
   DxTextBoxModule,
-  DxToolbarModule, DxValidatorModule,
+  DxToolbarModule,
+  DxValidatorModule,
 } from 'devextreme-angular';
 import {
   TaskProirityModule,
   TaskStatusModule,
   FormItemDateModule,
+  FormTextboxModule,
 } from 'src/app/shared/components';
 import { taskPriorityList, taskStatusList } from 'src/app/shared/types/task';
 import { Task } from 'src/app/shared/types/task';
@@ -76,6 +78,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
     DxTextAreaModule,
     DxValidatorModule,
 
+    FormTextboxModule,
     TaskProirityModule,
     TaskStatusModule,
     FormItemDateModule,

@@ -1,4 +1,4 @@
-<div id="task-form" class="custom-form">
+<div id="task-form">
   <dx-toolbar>
     <dxi-item location="before"
       ><span class="form-title">Details</span></dxi-item
@@ -31,19 +31,26 @@
 
   <dx-form *ngIf="!isLoading"
            validationGroup="taskFormValidationGroup"
+           class="plain-styled-form"
            [class.view-mode]="!isEditing"
            labelMode="floating"
   >
     <dxi-item itemType="group" [colCount]="2">
       <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
       <dxi-item cssClass="accent">
-        <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'Company', value: task.company}}"></ng-container>
+        <form-textbox label="Company"
+                     [(value)]="task.company"
+                     [isEditing]="isEditing"
+                     [validationGroup]="validationGroup"
+        ></form-textbox>
       </dxi-item>
 
       <dxi-item cssClass="accent">
-        <ng-container *ngTemplateOutlet="fieldTpl;
-           context: {$implicit: {label: 'Assigned to', value: task.owner}}"></ng-container>
+        <form-textbox label="Assigned to"
+                     [(value)]="task.owner"
+                     [isEditing]="isEditing"
+                     [validationGroup]="validationGroup"
+        ></form-textbox>
       </dxi-item>
 
       <dxi-item>
@@ -51,7 +58,7 @@
                        [(value)]="task.priority"
                        [items]="priorityList"
                        [readOnly]="!isEditing"
-                       [elementAttr]="{class: 'custom-field'}"
+                       [elementAttr]="{class: 'form-editor'}"
                        stylingMode="filled"
                        fieldTemplate="field"
         >
@@ -73,7 +80,7 @@
                        [(value)]="task.status"
                        [items]="statusList"
                        [readOnly]="!isEditing"
-                       [elementAttr]="{class: 'custom-field'}"
+                       [elementAttr]="{class: 'form-editor'}"
                        stylingMode="filled"
                        fieldTemplate="field"
         >
@@ -113,24 +120,10 @@
       <dx-text-area label="Details"
                     [readOnly]="!isEditing"
                     [(value)]="task.description"
-                    [elementAttr]="{class: 'custom-field'}"
+                    [elementAttr]="{class: 'form-editor'}"
                     stylingMode="filled"
       ></dx-text-area>
     </dxi-item>
-
-    <ng-template #fieldTpl let-data>
-      <dx-text-box [label]="data.label"
-                   [(value)]="data.value"
-                   [readOnly]="!isEditing"
-                   [mask]="data.mask"
-                   [elementAttr]="{class: 'custom-field'}"
-                   [inputAttr]="{class: 'custom-field-input'}"
-                   stylingMode="filled"
-                   valueChangeEvent="keyup input change"
-      >
-        <dx-validator [validationRules]="data.validators || [{type: 'required'}]" [validationGroup]="validationGroup"></dx-validator>
-      </dx-text-box>
-    </ng-template>
   </dx-form>
 
   <dx-load-panel

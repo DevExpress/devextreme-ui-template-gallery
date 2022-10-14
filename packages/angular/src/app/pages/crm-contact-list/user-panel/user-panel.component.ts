@@ -19,12 +19,14 @@ import {
   DxToolbarModule,
   DxLoadPanelModule,
   DxScrollViewModule,
-  DxFormModule, DxValidatorModule,
+  DxFormModule,
+  DxValidatorModule,
 } from 'devextreme-angular';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
 import {
   CardActivitiesModule,
   ContactStatusModule,
+  FormTextboxModule,
   FormItemPhotoModule,
 } from 'src/app/shared/components';
 import { ScreenService, RwaService } from 'src/app/shared/services';
@@ -57,10 +59,6 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   isPinEnabled = false;
 
-  stylingMode = 'underlined';
-
-  editorOptions = { stylingMode: this.stylingMode };
-
   userPanelSubscriptions: Subscription[] = [];
 
   constructor(private screen: ScreenService, private service: RwaService, private router: Router) {
@@ -69,7 +67,6 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.calculatePin();
-    this.setEditorMode(this.isEditing);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -112,16 +109,8 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     e.event.stopPropagation();
   };
 
-  setEditorMode = (isEditing: boolean) => {
-    this.stylingMode = isEditing ? 'filled' : 'underlined';
-    this.editorOptions = {
-      stylingMode: this.stylingMode,
-    };
-  };
-
   toggleEdit = () => {
     this.isEditing = !this.isEditing;
-    this.setEditorMode(this.isEditing);
   };
 
   navigateToDetails = () => {
@@ -141,6 +130,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     DxFormModule,
     DxValidatorModule,
 
+    FormTextboxModule,
     CardActivitiesModule,
     ContactStatusModule,
     FormItemPhotoModule,

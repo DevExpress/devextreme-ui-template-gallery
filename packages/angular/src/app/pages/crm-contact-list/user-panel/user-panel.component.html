@@ -22,8 +22,9 @@
       </div>
 
       <dx-scroll-view class="panel-scroll">
-        <div class="data-part border custom-form">
+        <div class="data-part border">
           <dx-form [validationGroup]="validationGroup"
+                   class="plain-styled-form"
                    labelMode="floating"
                    [class.view-mode]="!isEditing"
           >
@@ -35,56 +36,51 @@
 
               <dxi-item itemType="group">
                 <dxi-item cssClass="accent">
-                  <ng-container *ngTemplateOutlet="fieldTpl;
-                                context: {$implicit: {label: 'Company', value: user.company}}"></ng-container>
+                  <form-textbox label="Company"
+                               [(value)]="user.company"
+                               [isEditing]="isEditing"
+                  ></form-textbox>
                 </dxi-item>
 
                 <dxi-item>
-                  <ng-container *ngTemplateOutlet="fieldTpl;
-                                context: {$implicit: {label: 'Position', value: user.position}}"></ng-container>
+                  <form-textbox label="Position"
+                               [(value)]="user.position"
+                               [isEditing]="isEditing"
+                  ></form-textbox>
                 </dxi-item>
 
                 <dxi-item cssClass="accent">
-                  <ng-container *ngTemplateOutlet="fieldTpl;
-                                context: {$implicit: {label: 'Assigned to', value: user.manager}}"></ng-container>
+                  <form-textbox label="Assigned to"
+                               [(value)]="user.manager"
+                               [isEditing]="isEditing"
+                  ></form-textbox>
                 </dxi-item>
               </dxi-item>
             </dxi-item>
 
             <dxi-item itemType="group">
               <dxi-item>
-                <ng-container *ngTemplateOutlet="fieldTpl;
-                                context: {$implicit: {value: user.phone, icon: 'tel', mask: '+1(000)000-0000'}}"></ng-container>
+                <form-textbox [(value)]="user.phone"
+                             [isEditing]="isEditing"
+                             icon="tel"
+                             mask="+1(000)000-0000"
+                ></form-textbox>
               </dxi-item>
               <dxi-item>
-                <ng-container *ngTemplateOutlet="fieldTpl;
-                                context: {$implicit: {value: user.email, icon: 'email', validators: [{type: 'email'}]}}"></ng-container>
+                <form-textbox [(value)]="user.email"
+                             [isEditing]="isEditing"
+                             icon="email"
+                             [validators]="[{type: 'email'}]"
+                ></form-textbox>
               </dxi-item>
               <dxi-item>
-                <ng-container *ngTemplateOutlet="fieldTpl;
-                                context: {$implicit: {value: user.address, icon: 'home', validators: []}}"></ng-container>
+                <form-textbox [(value)]="user.address"
+                             [isEditing]="isEditing"
+                             icon="home"
+                             [validators]="[]"
+                ></form-textbox>
               </dxi-item>
             </dxi-item>
-
-            <ng-template #fieldTpl let-data>
-              <dx-text-box [label]="data.label"
-                           [(value)]="data.value"
-                           [readOnly]="!isEditing"
-                           [mask]="data.mask"
-                           [inputAttr]="{class: 'custom-field-input'}"
-                           [elementAttr]="{class: 'custom-field'}"
-                           stylingMode="filled"
-                           valueChangeEvent="keyup input change"
-              >
-                <dx-validator [validationRules]="data.validators || [{type: 'required'}]" [validationGroup]="validationGroup"></dx-validator>
-                <dxi-button *ngIf="data.icon"
-                            [options]="{icon: data.icon, type: 'back', elementAttr: { class: 'custom-field-icon' }}"
-                            name="icon"
-                            location="before"
-                ></dxi-button>
-              </dx-text-box>
-            </ng-template>
-
           </dx-form>
         </div>
 

@@ -5,7 +5,7 @@
   overflow: hidden;
 }
 
-.custom-form {
+.plain-styled-form {
   .dx-layout-manager .dx-field-item:not(.dx-first-col) {
     padding-left: 0;
   }
@@ -34,25 +34,18 @@
     }
   }
 
-  .dx-texteditor.custom-field .custom-field-icon:first-child {
-    margin-left: 0;
-    pointer-events: none;
-    border-color: transparent;
-    background-color: transparent;
-  }
-
-  .view-mode {
+  &.view-mode {
     .accent {
-      .dx-texteditor.custom-field .custom-field-input {
+      .dx-texteditor.form-editor .form-editor-input {
         color: $accent-color;
       }
     }
 
     .dx-texteditor,
-    .dx-texteditor.custom-field, {
+    .dx-texteditor.form-editor, {
       pointer-events: none;
 
-      .custom-field-input {
+      .form-editor-input {
         color: $texteditor-edit-color;
       }
 

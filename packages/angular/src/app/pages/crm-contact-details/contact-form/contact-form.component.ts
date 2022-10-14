@@ -14,6 +14,7 @@ import {
 } from 'devextreme-angular';
 import {
   ContactStatusModule,
+  FormTextboxModule,
   FormItemPhotoModule,
 } from 'src/app/shared/components';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
@@ -57,6 +58,7 @@ export class ContactFormComponent {
     DxTextBoxModule,
     DxLoadPanelModule,
 
+    FormTextboxModule,
     ContactStatusModule,
     FormItemPhotoModule,
     DxValidatorModule,
