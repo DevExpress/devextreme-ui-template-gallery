@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './crm-contact-list.scss';
 
 import DataGrid, { 
@@ -17,90 +17,79 @@ import LoadPanel from 'devextreme-react/load-panel';
 
 type FilterContactStatus = ContactStatus | 'All Contacts';
 
+const cellNameRender = (cell: ColumnCellTemplateData) => (
+  <div className={'name-template'}>
+    <div>{cell.data.name}</div>
+    <div className={'position'}>{cell.data.position}</div>
+  </div>
+);
+
+const cellStatusRender = (cell: ColumnCellTemplateData) => (
+  <div>
+    <span className={'status status-' + cell.data.status.toLowerCase()}>{cell.data.status}</span>
+  </div>
+);
+
+const statusRender = (data: string) => (
+  <div>
+    <span className={'status status-' + data.toLowerCase()}>{data}</span>
+  </div>
+);
+
+const fieldRender = (data: string) => (
+  <div>
+    {data && statusRender(data)}
+    <TextBox readOnly={true} />
+  </div>
+);
+
+const editCellStatusRender = () => (
+  <SelectBox className={'cell-info'} dataSource={contactStatusList} itemRender={statusRender} fieldRender={fieldRender} />
+);
+
+const cellPhoneRender = (cell: ColumnCellTemplateData) => (
+  String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3')
+);
+
+const filterStatusList = ['All Contacts', ...contactStatusList];
+
 export const CRMContactList = () => {
-  let grid: any = null;
-
-  const statusList = contactStatusList;
-
-  const filterStatusList = ['All Contacts', ...contactStatusList];
-
   const [status, setStatus] = useState(filterStatusList[0]);
   const [gridData, setGridData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  let grid = useRef<DataGrid>(null);
+
   useEffect(() => {
     getContacts()
-      .then((data) => setGridData(data))
+      .then((data) => {
+        setGridData(data);
+        if(data.length) {
+          setLoading(false);
+        }
+      })
       .catch((error) => console.log(error));
   }, []);
 
-  useEffect(() => {
-    if (gridData.length !== 0) {
-      setLoading(false);
-    }
-  }, [gridData]);
-
-  const cellNameRender = (cell: ColumnCellTemplateData) => {
-    return (
-      <div className={'name-template'}>
-        <div>{cell.data.name}</div>
-        <div className={'position'}>{cell.data.position}</div>
-      </div>
-    );
-  };
-
-  const cellStatusRender = (cell: ColumnCellTemplateData) => {
-    return (
-      <div>
-        <span className={'status status-' + cell.data.status.toLowerCase()}>{cell.data.status}</span>
-      </div>
-    );
-  };
-
-  const statusRender = (data: string) => {
-    return (
-      <div>
-        <span className={'status status-' + data.toLowerCase()}>{data}</span>
-      </div>
-    );
-  };
-
-  const fieldRender = (data: string) => {
-    return (
-      <div>
-        {data && statusRender(data)}
-        <TextBox readOnly={true} />
-      </div>
-    );
-  };
-
-  const editCellStatusRender = () => {
-    return <SelectBox className={'cell-info'} dataSource={statusList} itemRender={statusRender} fieldRender={fieldRender} />;
-  };
-
-  const cellPhoneRender = (cell: ColumnCellTemplateData): string => {
-    return String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
-  };
-
-  const filterByStatus = (e: SelectionChangedEvent) => {
+  const filterByStatus = useCallback((e: SelectionChangedEvent) => {
     const { item: status }: { item: FilterContactStatus } = e;
-
+  
     if (status === 'All Contacts') {
-      grid.instance.clearFilter();
+      grid.current!.instance.clearFilter();
     } else {
-      grid.instance.filter(['status', '=', status]);
+      grid.current!.instance.filter(['status', '=', status]);
     }
-
+  
     setStatus(status);
-  };
-
-  const addRow = () => {
-    grid.instance.addRow();
-  };
-
-  const refresh = () => {
-    grid.instance.refresh();
-  };
+  }, []);
+  
+  const addRow = useCallback(() => {
+    grid.current!.instance.addRow();
+  }, []);
+  
+  const refresh = useCallback(() => {
+    grid.current!.instance.refresh();
+  }, []);
 
   return (
       <div className={'view crm-contact-list'}>
@@ -110,9 +99,7 @@ export const CRMContactList = () => {
               className={'grid'}
               noDataText={''}
               dataSource={gridData}
-              ref={(ref) => {
-                grid = ref;
-              }}
+              ref={grid}
             >
               <SearchPanel visible={true} placeholder={'Contact Search'} />
               <ColumnChooser enabled={true} />

@@ -13,6 +13,7 @@ const TASK_ID = 1;
 export const PlanningTaskDetails = () => {
   const [task, setTask] = useState<Task>();
   const [messagesCount, setMessagesCount] = useState(0);
+
   const loadData = useCallback(() => {
     getTask(TASK_ID)
       .then((data) => {
@@ -21,13 +22,17 @@ export const PlanningTaskDetails = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
   const updateMessagesCount = useCallback((count) => {
     setMessagesCount(count);
   }, []);
+  
+  const refresh = useCallback(() => loadData(), [loadData]);
+
   useEffect(() => {
     loadData();
   }, [loadData]);
-  const refresh = useCallback(() => loadData(), [loadData]);
+
   return (
     <div className='view-wrapper-details'>
       <Toolbar>

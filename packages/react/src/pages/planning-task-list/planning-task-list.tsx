@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
 import dxTextBox from 'devextreme/ui/text_box';
@@ -13,6 +13,7 @@ const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
 export const PlanningTaskList = () => {
   const gridRef = useRef<DataGrid>(null);
+
   const [list, setList] = useState(listsData[0]);
   const [index, setIndex] = useState(0);
   const [itemVisibility, setItemVisibility] = useState(true);
@@ -23,25 +24,35 @@ export const PlanningTaskList = () => {
       .then((data) => setData(data))
       .catch((error) => console.log(error));
   }, []);
-  const Component = list === listsData[0] ? PlanningGrid : list === listsData[1] ? PlanningKanban : PlanningGantt;
+
+  const Component = useMemo(() => {
+    if(list === listsData[0]) {
+      return PlanningGrid;
+    } else if(list === listsData[1]) {
+      return PlanningKanban;
+    } else {
+      return PlanningGantt;
+    }
+  }, [list]);
+  
   const onTabClick = useCallback((e: { itemData: string }) => {
     setList(e.itemData);
     setIndex(listsData.findIndex((d) => d === e.itemData));
-    if (e.itemData === listsData[0]) {
-      setItemVisibility(true);
-    } else {
-      setItemVisibility(false);
-    }
+    setItemVisibility(e.itemData === listsData[0]);
   }, []);
+
   const addDataGridRow = useCallback(() => {
     gridRef.current!.instance.addRow();
   }, []);
+
   const refresh = useCallback(() => {
     gridRef.current!.instance.refresh();
-  }, [gridRef]);
+  }, []);
+
   const showColumnChooser = useCallback(() => {
     gridRef.current!.instance.showColumnChooser();
-  }, [gridRef]);
+  }, []);
+
   const exportToPDF = useCallback(() => {
     const doc = new jsPDF();
     exportDataGrid({
@@ -50,13 +61,12 @@ export const PlanningTaskList = () => {
     }).then(() => {
       doc.save('Tasks.pdf');
     });
-  }, [gridRef]);
-  const search = useCallback(
-    (e: { component: dxTextBox }) => {
+  }, []);
+
+  const search = useCallback((e: { component: dxTextBox }) => {
       gridRef.current!.instance.searchByText(e.component.option('text')!);
-    },
-    [gridRef]
-  );
+  }, []);
+
   return (
     <div className='view-wrapper-list'>
       <Toolbar>
