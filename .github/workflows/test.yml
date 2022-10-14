@@ -40,8 +40,8 @@ jobs:
       fail-fast: false
       matrix:
         theme: [
-          'material.blue.light.compact',
-          'material.blue.dark.compact'
+          { fullName: 'material.blue.light.compact', name: 'material.light' },
+          { fullName: 'material.blue.dark.compact', name: 'material.dark' }
         ]
         ARGS: [
           { project: 'angular', page: 'crm-contact-form' },
@@ -84,19 +84,19 @@ jobs:
       run: npm install --no-audit --no-fund
 
     - name: Set theme
-      run: npm run set-theme -- ${{ matrix.theme }}
+      run: npm run set-theme -- ${{ matrix.theme.fullName }}
 
     - name: Build
       run: npm run build
       working-directory: packages/${{ matrix.ARGS.project }}
 
     - name: Start app
-      run: npm run start-apps -- --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme }}
+      run: npm run start-apps -- --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme.name }}
       working-directory: packages/testing
 
     - name: Run tests
       run: |
-        all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true  --theme ${{ matrix.theme }}"
+        all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true  --theme ${{ matrix.theme.name }}"
         echo "$all_args"
         npm run test-testcafe -- $all_args
       working-directory: packages/testing
