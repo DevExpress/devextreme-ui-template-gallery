@@ -28,7 +28,7 @@ fixture`Planning List`;
         await t.click('.view-wrapper .dx-icon-overflow');
       }
       await t.click(Selector('[aria-label="Add Task"]'));
-      await takeScreenshot(`planning-task-add-task-popup-embed=${embedded}-${screenMode[0]}`, Selector('.dx-popup-normal'));
+      await takeScreenshot(`planning-task-add-task-popup-embed=${embedded}-${screenMode[0]}`, 'body');
 
       await t
         .expect(compareResults.isValid())
