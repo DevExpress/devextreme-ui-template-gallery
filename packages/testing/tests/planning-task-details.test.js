@@ -34,7 +34,7 @@ const setEmbedded = async (t, embed, screenMode) => {
       await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       await t.expect(Selector('.content .dx-toolbar-label').withText('Call to clarify customer requirements.').exists).ok();
-      await takeScreenshot(`planning-task-details-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`planning-task-details-embed=${embedded}-${theme}-${screenMode[0]}`, 'body');
 
       await t
         .expect(compareResults.isValid())
