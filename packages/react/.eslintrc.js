@@ -20,7 +20,7 @@ module.exports = {
     'ecmaVersion': 'latest',
     'sourceType': 'module'
   },
-  'plugins': ['react', '@typescript-eslint', 'react-perf'],
+  'plugins': ['react', '@typescript-eslint', 'react-perf', 'import'],
   'rules': {
     'jsx-quotes': ['error', 'prefer-single'],
     'block-spacing': 'error',
@@ -100,5 +100,6 @@ module.exports = {
     ],
     'react/jsx-boolean-value': ['error', 'never'],
     '@typescript-eslint/no-unused-vars': ['error'],
+    'import/no-default-export': 'error',
   }
 };
