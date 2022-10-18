@@ -18,6 +18,6 @@ export * from './card-messages/card-messages.component';
 export * from './card-tasks/card-tasks.component';
 export * from './card-opprtunities/card-opportunities.component';
 
-export * from './form-item-date/form-item-date.component';
+export * from './form-datebox/form-datebox.component';
 export * from './form-item-photo/form-item-photo.component';
 export * from './form-textbox/form-textbox.component';
