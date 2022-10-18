@@ -1,3 +1,4 @@
+import React from 'react';
 import notify from 'devextreme/ui/notify';
 import Button from 'devextreme-react/button';
 import { formatDate } from 'devextreme/localization';

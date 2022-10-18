@@ -15,7 +15,7 @@ export const ChangePasswordForm = () => {
   const { recoveryCode } = useParams();
 
   const onSubmit = useCallback(
-    async (e) => {
+    async(e) => {
       e.preventDefault();
       const { password } = formData.current;
       setLoading(true);
@@ -37,18 +37,18 @@ export const ChangePasswordForm = () => {
   return (
     <form onSubmit={onSubmit}>
       <Form formData={formData.current} disabled={loading}>
-        <Item dataField={'password'} editorType={'dxTextBox'} editorOptions={passwordEditorOptions}>
+        <Item dataField='password' editorType='dxTextBox' editorOptions={passwordEditorOptions}>
           <RequiredRule message='Password is required' />
           <Label visible={false} />
         </Item>
-        <Item dataField={'confirmedPassword'} editorType={'dxTextBox'} editorOptions={confirmedPasswordEditorOptions}>
+        <Item dataField='confirmedPassword' editorType='dxTextBox' editorOptions={confirmedPasswordEditorOptions}>
           <RequiredRule message='Password is required' />
-          <CustomRule message={'Passwords do not match'} validationCallback={confirmPassword} />
+          <CustomRule message='Passwords do not match' validationCallback={confirmPassword} />
           <Label visible={false} />
         </Item>
         <ButtonItem>
-          <ButtonOptions width={'100%'} type={'default'} useSubmitBehavior={true}>
-            <span className='dx-button-text'>{loading ? <LoadIndicator width={'24px'} height={'24px'} visible={true} /> : 'Continue'}</span>
+          <ButtonOptions width='100%' type='default' useSubmitBehavior>
+            <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Continue'}</span>
           </ButtonOptions>
         </ButtonItem>
       </Form>

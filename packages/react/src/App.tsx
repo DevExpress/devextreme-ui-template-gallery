@@ -1,3 +1,4 @@
+import React from 'react';
 import 'devextreme/scss/bundles/dx.material.blue.light.compact.scss';
 import 'devexpress-gantt/dist/dx-gantt.css';
 import { HashRouter as Router } from 'react-router-dom';
@@ -13,7 +14,7 @@ function RootApp() {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <LoadPanel visible={true} />;
+    return <LoadPanel visible />;
   }
 
   if (user) {

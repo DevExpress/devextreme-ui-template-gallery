@@ -111,11 +111,12 @@ const StatusField = ({ editorOptions }) => (
   </FormContext.Consumer>
 );
 
-const FormContext = React.createContext({
-  data: { priority: '', status: '', company: '', owner: '' },
-  setValue: (obj: { priority?: TaskPriority; status?: TaskStatus }) => {},
-  dueDateChange: (value: any) => {},
-});
+type Context = {
+  data: { priority: string, status: string, company: string, owner: string },
+  setValue: (obj: { priority?: TaskPriority; status?: TaskStatus }) => void,
+  dueDateChange: (value: any) => void,
+}
+const FormContext = React.createContext<Context>({} as Context);
 
 export const TaskForm = ({ task }: { task: FormTask | undefined }) => {
   const [data, setData] = useState(task);

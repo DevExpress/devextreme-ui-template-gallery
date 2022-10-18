@@ -40,7 +40,7 @@ export const PlanningTaskList = () => {
       return PlanningGantt;
     }
   }, [list]);
-  
+
   const onTabClick = useCallback((e: { itemData: string }) => {
     setList(e.itemData);
     setIndex(listsData.findIndex((d) => d === e.itemData));
@@ -48,29 +48,29 @@ export const PlanningTaskList = () => {
   }, []);
 
   const addDataGridRow = useCallback(() => {
-    gridRef.current!.instance.addRow();
+    gridRef.current?.instance.addRow();
   }, []);
 
   const refresh = useCallback(() => {
-    gridRef.current!.instance.refresh();
+    gridRef.current?.instance.refresh();
   }, []);
 
   const showColumnChooser = useCallback(() => {
-    gridRef.current!.instance.showColumnChooser();
+    gridRef.current?.instance.showColumnChooser();
   }, []);
 
   const exportToPDF = useCallback(() => {
     const doc = new jsPDF();
     exportDataGrid({
       jsPDFDocument: doc,
-      component: gridRef.current!.instance,
+      component: gridRef.current?.instance,
     }).then(() => {
       doc.save('Tasks.pdf');
     });
   }, []);
 
   const search = useCallback((e: { component: dxTextBox }) => {
-      gridRef.current!.instance.searchByText(e.component.option('text')!);
+    gridRef.current?.instance.searchByText(e.component.option('text')!);
   }, []);
 
   return (

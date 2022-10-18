@@ -1,3 +1,4 @@
+import React from 'react';
 import ScrollView from 'devextreme-react/scroll-view';
 import Sortable from 'devextreme-react/sortable';
 import Button from 'devextreme-react/button';

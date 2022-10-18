@@ -1,3 +1,4 @@
+/* eslint-env node */
 module.exports = {
   'root': true,
   'env': {
@@ -34,7 +35,7 @@ module.exports = {
     'no-eval': 'error',
     'no-undef': 'error',
     'no-unused-expressions': 'off',
-    'no-unused-vars': ['error'],
+    'no-unused-vars': 'off',
     'no-extend-native': 'error',
     'no-alert': 'error',
     'no-whitespace-before-property': 'error',
@@ -98,5 +99,6 @@ module.exports = {
       }
     ],
     'react/jsx-boolean-value': ['error', 'never'],
+    '@typescript-eslint/no-unused-vars': ['error'],
   }
 };
