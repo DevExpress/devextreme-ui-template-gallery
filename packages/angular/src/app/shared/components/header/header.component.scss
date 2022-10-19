@@ -5,13 +5,13 @@
   z-index: 1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 0 4px rgba(0, 0, 0, 0.15);
 
-  ::ng-deep .dx-toolbar {
-    .dx-icon {
-      color: $base-accent;
-    }
+  .header-toolbar {
+    padding-right: 20px;
 
-    .dx-toolbar-after {
-      padding: 0 20px;
+    ::ng-deep .menu-button {
+      .dx-icon {
+        color: $base-accent;
+      }
     }
   }
 }
