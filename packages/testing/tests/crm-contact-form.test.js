@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { toggleCommonConfiguration } from './utils';
+import { getPostfix, toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
@@ -31,7 +31,7 @@ const setEmbedded = async (t, embed, screenMode) => {
 
       await t.click(Selector('.dx-drawer-content'));
       await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
-      await takeScreenshot(`crm-contact-details-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`crm-contact-details${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
         .expect(compareResults.isValid())
@@ -46,9 +46,9 @@ const setEmbedded = async (t, embed, screenMode) => {
 
       const form = Selector('.dx-form');
 
-      await takeScreenshot(`crm-form-readonly-embed=${embedded}-${screenMode[0]}`, form);
+      await takeScreenshot(`crm-form-readonly${getPostfix(embedded, screenMode)}`, form);
       await t.click(Selector('.dx-button[aria-label=Edit]'));
-      await takeScreenshot(`crm-form-edit-embed=${embedded}-${screenMode[0]}`, form);
+      await takeScreenshot(`crm-form-edit${getPostfix(embedded, screenMode)}`, form);
 
       await t
         .expect(compareResults.isValid())
@@ -71,7 +71,7 @@ const setEmbedded = async (t, embed, screenMode) => {
         const tabName = (await tab.innerText).toLowerCase();
 
         await t.click(tab);
-        await takeScreenshot(`crm-form-tab-${tabName}-embed=${embedded}-${screenMode[0]}`, tabPanels.nth(indexTab));
+        await takeScreenshot(`crm-form-tab-${tabName}${getPostfix(embedded, screenMode)}`, tabPanels.nth(indexTab));
       }
 
       await t
