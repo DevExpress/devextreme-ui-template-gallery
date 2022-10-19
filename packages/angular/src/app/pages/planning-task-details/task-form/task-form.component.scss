@@ -29,11 +29,12 @@
   }
 }
 
-.form-custom-list-prop {
+.form-editor {
   task-priority,
   task-status {
     position: absolute;
-    padding: 15px 11px;
+    bottom: 0;
+    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 3px);
 
     ::ng-deep {
       span {
