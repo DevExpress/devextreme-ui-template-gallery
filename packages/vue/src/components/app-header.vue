@@ -1,10 +1,9 @@
 <template>
-  <header class="header-component">
+  <header>
     <dx-toolbar class="header-toolbar">
-      <dx-item
-        :visible="menuToggleEnabled"
-        location="before"
-        css-class="menu-button"
+      <dx-item :visible="menuToggleEnabled"
+               location="before"
+               css-class="menu-button"
       >
         <template #default>
           <dx-button
@@ -15,10 +14,9 @@
         </template>
       </dx-item>
 
-      <dx-item
-        v-if="title"
-        location="before"
-        css-class="header-title dx-toolbar-label"
+      <dx-item v-if="title"
+               location="before"
+               css-class="header-title dx-toolbar-label"
       >
         <div>{{ title }}</div>
       </dx-item>
@@ -50,7 +48,7 @@
             <dx-button
               class="user-button authorization"
               :width="160"
-              height="100%"
+              :height="38"
               styling-mode="text"
             >
               <user-panel :user="user" :menu-items="userMenuItems" menu-mode="context" />
@@ -121,46 +119,32 @@ const userMenuItems = [{
 }];
 </script>
 <style lang="scss">
-.dx-theme-generic {
-  .layout-header .dx-toolbar {
-    padding: 10px 0;
-  }
-
-  .user-button > .dx-button-content {
-    padding: 0 5px;
-  }
-}
 </style>
 <style scoped lang="scss">
 @use "../variables" as *;
 
-.header-component {
+header {
   flex: 0 0 auto;
   z-index: 1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 0 4px rgba(0, 0, 0, 0.15);
 
-  &:deep(.dx-toolbar) {
-    &.header-toolbar .dx-toolbar-items-container .dx-toolbar-after {
-      padding: 0 40px;
+  padding: 10px 0;
+  background-color: $base-bg;
 
-      .screen-x-small & {
-        padding: 0 20px;
-      }
-    }
+  :deep(.header-title) {
+    color: $accent-color;
+  }
 
-    .toolbar-user-items .dx-item-content, .user-panel, .user-info {
-      height: 100%;
-    }
+  .header-toolbar {
+    padding-right: 20px;
 
-    .dx-toolbar-item.dx-toolbar-button.menu-button {
-      width: $side-panel-min-width;
-      text-align: center;
-      padding: 0;
-    }
+    .user-button.authorization {
+      margin-left: 10px;
+      padding: 4px;
 
-    .dx-toolbar-item.menu-button > .dx-toolbar-item-content {
-      .dx-icon {
-        color: $base-accent;
+      :deep(.dx-button-content) {
+        padding: 0;
+        height: 100%;
       }
     }
 
@@ -184,27 +168,13 @@ const userMenuItems = [{
       }
     }
 
-    .user-button.authorization {
-      margin-left: 10px;
-    }
-  }
+    :deep(.dx-toolbar-item.menu-button) {
+      width: $side-panel-min-width;
+      text-align: center;
+      padding: 0;
 
-  .header-title .dx-item-content {
-    color: $base-accent;
-    padding: 0;
-    margin: 0;
-  }
-}
-
-.dx-scrollable-content {
-  > .dx-treeview-node-container:first-child {
-    > .dx-treeview-node:first-child {
-      > .dx-treeview-item {
-        box-shadow: inset 0 4px 8px rgb(0, 0, 0, 0.05);
-
-        .screen-large & {
-          box-shadow: none;
-        }
+      .dx-icon {
+        color: $accent-color;
       }
     }
   }

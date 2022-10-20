@@ -26,11 +26,17 @@
         location="after"
         widget="dxButton"
         [options]="{
-          text: 'Add',
+          text: 'Send',
           stylingMode: 'outlined',
           type: 'default',
-          onClick: add
+          onClick: send
         }"
+      >
+      </dxi-item>
+      <dxi-item
+        location="after"
+        widget="dxButton"
+        [options]="{ text: 'Cancel', onClick: defaultText }"
       >
       </dxi-item>
     </dx-toolbar>

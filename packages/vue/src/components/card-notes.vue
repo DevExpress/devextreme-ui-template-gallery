@@ -13,17 +13,20 @@
           ></dx-text-area>
 
           <dx-toolbar>
-            <dx-item
-              location="after"
-              widget="dxButton"
-              :options="{
-                  text: 'Add',
-                  stylingMode: 'outlined',
-                  type: 'default',
-                  onClick: addNote
-              }"
-            >
-            </dx-item>
+            <dx-item widget="dxButton"
+                     location="after"
+                     :options="{
+                         text: 'Add',
+                         stylingMode: 'outlined',
+                         type: 'default',
+                         onClick: addNote
+                     }"/>
+            <dx-item widget="dxButton"
+                     location="after"
+                     :options="{
+                        text: 'Cancel',
+                       onClick: defaultText
+              }"/>
           </dx-toolbar>
         </div>
         <div class="notes-content">

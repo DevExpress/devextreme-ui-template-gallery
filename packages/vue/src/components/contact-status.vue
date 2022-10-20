@@ -24,7 +24,7 @@ span.status {
     }
   }
 
-  font-size: 12px;
+  font-size: 13px;
 
   &::before {
     $diameter: 10px;

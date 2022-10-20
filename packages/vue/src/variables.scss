@@ -1,13 +1,29 @@
 @use "../node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: "light");
-@use '../node_modules/devextreme/scss/widgets/material/sizes' as sizes with ($size: "compact");
+@use "../node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
+@use "../node_modules/devextreme/scss/widgets/material/button/mixins" as *;
+@use "../node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
+@use "../node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
 @use '../node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
+
+
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
+@forward "../node_modules/devextreme/scss/widgets/material/textEditor/colors";
+
+@use "sass:math";
+@use "sass:color";
+
+$base-font-size: $material-base-font-size;
+$toolbar-height: toolbar_sizes.$material-toolbar-height;
 
 $side-panel-min-width: 60px;
 $side-panel-background: darken($base-bg, 5);
-
-$base-font-size: sizes.$material-base-font-size;
-$toolbar-height: toolbar_sizes.$material-toolbar-height;
+$background-color: $base-bg;
+$accent-color: $base-accent;
+$background-gray-color: color.change($base-text-color, $alpha: 0.04);
+$text-button-horizontal-padding: $material-button-icononly-padding;
+$toolbar-margin-bottom: 16px;
+$texteditor-edit-color: $texteditor-color;
+$filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
 
 $main-container-padding-top: 20px;
 $main-container-padding-left: 16px;

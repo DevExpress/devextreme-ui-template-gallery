@@ -25,7 +25,7 @@ export class CardNotesComponent {
     this.nodeText = '';
   };
 
-  send = () => {
+  add = () => {
     if (this.nodeText === '') {
       return;
     }

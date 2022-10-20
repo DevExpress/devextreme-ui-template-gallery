@@ -34,138 +34,124 @@
       :is-loading="isLoading"
       :container-selector="'#contact-form'"
     >
-      <div class="form-compact">
-        <dx-form>
+      <div>
+        <dx-form class="plain-styled-form" :class="{'view-mode': !isEditing}">
           <dx-form-group-item :col-count="2">
             <dx-form-item>
-              <user-photo :link="contactData.image" :size="184"></user-photo>
+              <user-photo :link="contactData.image" :size="184"/>
             </dx-form-item>
 
             <dx-form-group-item>
               <dx-form-item>
-                <form-item-plain v-model="contactData.status"
-                                 :label="'Status'"
-                                 :isEditing = "isEditing"
+                <dx-select-box label="Status"
+                               v-model="contactData.status"
+                               :items="contactStatusList"
+                               :read-only="!isEditing"
+                               :element-attr="{class: 'form-editor'}"
+                               :input-attr="{class: 'form-editor-input'}"
+                               field-template="field"
+                               item-template="item"
                 >
-                  <template v-slot:valueTpl>
-                    <contact-status :status="contactData?.status"/>
-                  </template>
+                  <template #field>
+                    <div class="status-editor-field">
+                      <contact-status :status="contactData?.status" class="contact-status"/>
+                      <dx-text-box :read-only="true"/>
+                    </div>
 
-                  <template v-slot:editorTpl>
-                    <dx-select-box label="Status"
-                                   v-model="contactData.status"
-                                   :items="contactStatusList"
-                                   field-template="field"
-                                   item-template="item"
-                    >
-                      <template #field>
-                        <div class="form-custom-list-prop">
-                          <contact-status :status="contactData?.status"></contact-status>
-                          <dx-text-box :readOnly="true"></dx-text-box>
-                        </div>
-
-                      </template>
-                      <template #item="{ data }">
-                        <contact-status :status="data"></contact-status>
-                      </template>
-                    </dx-select-box>
                   </template>
-                </form-item-plain>
+                  <template #item="{ data }">
+                    <contact-status :status="data" class="contact-status"/>
+                  </template>
+                </dx-select-box>
               </dx-form-item>
 
               <dx-form-item>
-                <form-item-plain v-model="contactData.firstName"
-                                 :label="'First Name'"
-                                 :isEditing = "isEditing"
-                />
+                <form-textbox label="First Name"
+                              v-model="contactData.firstName"
+                              :is-editing = "isEditing"/>
               </dx-form-item>
 
               <dx-form-item>
-                <form-item-plain v-model="contactData.lastName"
-                                 :label="'Last Name'"
-                                 :isEditing = "isEditing"
-                />
+                <form-textbox label="Last Name"
+                              v-model="contactData.lastName"
+                              :is-editing = "isEditing"/>
               </dx-form-item>
             </dx-form-group-item>
 
             <dx-form-item>
-              <form-item-plain v-model="contactData.position"
-                               :label="'Position'"
-                               :isEditing = "isEditing"
-              />
+              <form-textbox label="Position"
+                            v-model="contactData.position"
+                            :is-editing = "isEditing"/>
             </dx-form-item>
 
-            <dx-form-item>
-              <form-item-plain class="accent"
-                               v-model="contactData.manager"
-                               :label="'Assigned to'"
-                               :isEditing = "isEditing"
-              />
+            <dx-form-item cssClass="accent">
+              <form-textbox label="Assigned to"
+                            v-model="contactData.manager"
+                            :is-editing = "isEditing"/>
             </dx-form-item>
 
-            <dx-form-item :col-span="2">
-              <form-item-plain class="accent"
-                               :label="'Company'"
-                               v-model="contactData.company"
-                               :isEditing = "isEditing"
+            <dx-form-item :col-span="2" cssClass="accent">
+              <form-textbox label="Company"
+                            v-model="contactData.company"
+                            :is-editing = "isEditing"
               />
             </dx-form-item>
           </dx-form-group-item>
 
           <dx-form-group-item :col-count="4" caption="Contacts">
+            <dx-col-count-by-screen :xs="2"></dx-col-count-by-screen>
             <dx-form-item :col-span="4" >
-              <form-item-plain :label="'Address'"
-                               v-model="contactData.address"
-                               :isEditing = "isEditing"
+              <form-textbox label="Address"
+                            v-model="contactData.address"
+                            :is-editing = "isEditing"
               />
             </dx-form-item>
             <dx-form-item :col-span="2">
-              <form-item-plain :label="'City'"
-                               v-model="contactData.city"
-                               :isEditing = "isEditing"
-              />
+              <form-textbox label="City"
+                            v-model="contactData.city"
+                            :is-editing = "isEditing"/>
             </dx-form-item>
 
             <dx-form-item>
-              <form-item-plain :label="'State'"
-                               v-model="contactData.state.stateShort"
-                               :isEditing = "isEditing"
-              />
+              <form-textbox label="State"
+                            v-model="contactData.state.stateShort"
+                            :is-editing = "isEditing"/>
             </dx-form-item>
             <dx-form-item>
-              <form-item-plain :label="'Zip Code'"
-                               v-model.number="contactData.zipCode"
-                               :isEditing = "isEditing"
+              <form-textbox label="Zip Code"
+                            v-model.number="contactData.zipCode"
+                            :is-editing = "isEditing"
               />
             </dx-form-item>
-            <dx-form-item :col-span="2" >
-              <form-item-with-button
-                v-model="contactData.phone"
-                :is-editing = "isEditing"
-                :rendered-value="formatPhone(contactData.phone)"
-                :text-box-options="{
-                                 label: 'Phone',
-                                 mask: '+1(000)000-0000', }"
-                :button-options="{
-                               text: 'Call',
-                               icon: 'tel',
-                               type: 'default',
-                               stylingMode: 'outlined'
-                              }"
-              ></form-item-with-button>
+          </dx-form-group-item>
+          <dx-form-group-item :col-count="2" cssClass="contact-fields-group">
+            <dx-col-count-by-screen :xs="2"></dx-col-count-by-screen>
+            <dx-form-item>
+              <form-textbox label="Phone"
+                            v-model.number="contactData.phone"
+                            :is-editing = "isEditing"
+                            mask="+1(000)000-0000"/>
+              <dx-button v-if="!isEditing"
+                         class="form-item-button"
+                         v-bind="{
+                                  text: 'Call',
+                                  icon: 'tel',
+                                  type: 'default',
+                                  stylingMode: 'outlined'
+                                 }"/>
             </dx-form-item>
-            <dx-form-item :col-span="2" >
-              <form-item-with-button
-                v-model="contactData.email"
-                :is-editing = "isEditing"
-                :text-box-options="{ label: 'Email'}"
-                :button-options="{
+            <dx-form-item>
+              <form-textbox label="Email"
+                            v-model.number="contactData.email"
+                            :is-editing = "isEditing"/>
+              <dx-button v-if="!isEditing"
+                         class="form-item-button"
+                         v-bind="{
                                text: 'Send Email',
                                icon: 'email',
                                type: 'default',
                                stylingMode: 'outlined'
-                              }"
-              ></form-item-with-button>
+                              }"/>
             </dx-form-item>
           </dx-form-group-item>
         </dx-form>
@@ -187,16 +173,15 @@ import {
   DxForm,
   DxItem as DxFormItem,
   DxGroupItem as DxFormGroupItem,
+  DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxSelectBox } from 'devextreme-vue';
 import LoadComponent from '@/components/load-component.vue';
 import { Contact, contactStatusList } from '@/types/contact';
 import UserPhoto from '@/components/user-photo.vue';
-import ContactStatus from '@/components/user-status.vue';
-import FormItemWithButton from '@/components/form-item-with-button.vue';
-import FormItemPlain from '@/components/form-item-plain.vue';
-import { formatPhone } from '@/utils/formatters';
+import ContactStatus from '@/components/contact-status.vue';
+import FormTextbox from '@/components/form-textbox.vue';
 
 const emptyContact = { state: { stateShort: '' } } as Contact;
 
@@ -241,27 +226,38 @@ function cancelEdit() {
 #contact-form {
   min-height: 300px;
 
-  .info {
-    position: relative;
-    padding-bottom: 30px;
-
-    .status {
-      position: absolute;
-      margin-top: 20px;
-    }
+  .form-title {
+    font-size: 16px;
   }
 
-  .status {
-    font-size: $base-font-size;
+  .dx-toolbar {
+    margin-bottom: $toolbar-margin-bottom;
   }
 }
 
-.form-custom-list-prop {
-  padding-left: 11px;
+.dx-form {
+  .form-item-button {
+    margin-left: 10px;
+    margin-top: 5px;
+  }
+}
 
-  .status {
+.info {
+  position: relative;
+  padding-bottom: 30px;
+
+  contact-status {
     position: absolute;
-    margin-top: 15px;
+    margin-top: 20px;
+  }
+}
+
+.status-editor-field {
+  .contact-status {
+    position: absolute;
+    bottom: 0;
+    font-size: 13px;
+    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 2px);
   }
 }
 </style>

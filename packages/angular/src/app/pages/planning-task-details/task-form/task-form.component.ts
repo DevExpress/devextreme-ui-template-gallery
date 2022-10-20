@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Input, SimpleChanges, OnChanges,
+  Component, NgModule, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -26,7 +26,7 @@ import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss'],
 })
-export class TaskFormComponent implements OnInit, OnChanges {
+export class TaskFormComponent implements OnChanges {
   @Input() task: Task;
 
   statusList = taskStatusList;
@@ -37,21 +37,10 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   isLoading = true;
 
-  isEmptyStartDate = true;
-
   validationGroup = 'contactFormValidationGroup';
-
-  ngOnInit() {
-    this.isEmptyStartDate = !this.task?.startDate;
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.isLoading = !changes.task.currentValue;
-
-    if (!this.isLoading) {
-      this.task.dueDate = null;
-      this.isEmptyStartDate = !this.task?.startDate;
-    }
   }
 
   handleEditClick = () => {

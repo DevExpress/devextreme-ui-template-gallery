@@ -33,14 +33,9 @@
           caption="Due Date"
           :hiding-priority="1"
         ></dx-column>
-        <dx-column
-          caption="Assigned To"
-          cell-template="assignTemplate"
-          :hiding-priority="0"
-        />
-        <template #assignTemplate>
-          {{ props.manager }}
-        </template>
+        <dx-column caption="Assigned To"
+                   dataField="manager"
+                   :hiding-priority="0"/>
       </dx-data-grid>
     </load-component>
   </div>

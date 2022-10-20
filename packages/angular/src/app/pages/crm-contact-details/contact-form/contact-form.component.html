@@ -55,7 +55,7 @@
               width="100%"
               fieldTemplate="field"
             >
-              <div *dxTemplate="let data of 'field'" class="form-item-custom">
+              <div *dxTemplate="let data of 'field'" class="status-editor-field">
                 <contact-status [value]="contactData.status"></contact-status>
                 <dx-text-box [readOnly]="true"></dx-text-box>
               </div>
@@ -135,7 +135,7 @@
 
       </dxi-item>
 
-      <dxi-item itemType="group" [colCount]="2">
+      <dxi-item itemType="group" [colCount]="2" cssClass="contact-fields-group">
         <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
         <dxi-item>
           <form-textbox label="Phone"

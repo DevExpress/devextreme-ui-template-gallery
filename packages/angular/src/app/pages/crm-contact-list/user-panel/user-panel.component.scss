@@ -10,7 +10,7 @@
   --contact-side-panel-width: 100vw;
 }
 
-:host::ng-deep .panel {
+:host .panel {
   position: fixed;
   right: calc(-1 * var(--contact-side-panel-width));
   top: var(--contact-side-panel-toolbar-top);
@@ -47,6 +47,10 @@
     .data-part {
       padding: 0 16px;
 
+      &.border {
+        border-bottom: 1px solid $base-border-color;
+      }
+
       &-toolbar {
         padding: 10px 16px;
         margin-bottom: $toolbar-margin-bottom;
@@ -54,10 +58,6 @@
         .dx-button {
           min-width: 90px;
         }
-      }
-
-      &.border {
-        border-bottom: 1px solid $base-border-color;
       }
     }
 

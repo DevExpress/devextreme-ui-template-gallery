@@ -18,24 +18,26 @@
         />
 
         <dx-toolbar>
-          <dx-item
-            location="before">
+          <dx-item location="before">
             <dx-file-uploader
               class="file-uploader"
               labelText=""
-              selectButtonText="Attach file"
-            >
-            </dx-file-uploader>
+              selectButtonText="Attach file"/>
           </dx-item>
-          <dx-item
-            location="after"
-            widget="dxButton"
-            :options="{
-          text: 'Add',
-          stylingMode: 'outlined',
-          type: 'default',
-          onClick: send
-        }"/>
+          <dx-item widget="dxButton"
+                   location="after"
+                   :options="{
+                       text: 'Send',
+                       stylingMode: 'outlined',
+                       type: 'default',
+                       onClick: send,
+          }"/>
+          <dx-item widget="dxButton"
+                   location="after"
+                   :options="{
+                        text: 'Cancel',
+                       onClick: defaultText
+              }"/>
         </dx-toolbar>
       </div>
       <div class="messages-content" >

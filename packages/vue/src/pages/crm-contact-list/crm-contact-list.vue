@@ -1,5 +1,5 @@
 <template>
-  <div class="contact-detail-container">
+  <div class="view-wrapper">
     <dx-data-grid :data-source="dataSource"
                   height="100%"
                   class="grid"
@@ -111,7 +111,7 @@
       </template>
 
       <template #statusCellTemplate="{ data }">
-        <user-status :status="data.data?.status"/>
+        <contact-status :status="data.data?.status"/>
       </template>
 
     </dx-data-grid>
@@ -148,7 +148,7 @@ import { RowClickEvent } from 'devextreme/ui/data_grid';
 import DataSource from 'devextreme/data/data_source';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { formatPhone } from '@/utils/formatters';
-import UserStatus from '@/components/user-status.vue';
+import ContactStatus from '@/components/contact-status.vue';
 import ContactPanel from './components/contact-panel.vue';
 
 const panelData = ref<Array<Contact> | null>(null);
@@ -201,29 +201,28 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
 <style scoped lang="scss">
 @use "@/variables" as *;
 
-.contact-detail-container {
+.view-wrapper {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  padding-top: $main-container-padding-top;
-  padding-left: 0;
-  padding-right: 0;
 
-  &:deep(.grid)  {
+  .grid  {
     @include separator();
 
     .name-template {
       margin: -6px 0;
+
       .position {
         font-size: 12px;
-        color: #757575de;
+        color: $texteditor-label-color;
       }
     }
 
-    .dx-datagrid-header-panel {
-      padding: 0 $main-container-padding-right 0 $main-container-padding-left;
+    :deep(.dx-datagrid-header-panel) {
+      padding-top: 20px;
+      padding-bottom: $toolbar-margin-bottom;
     }
 
     .clickable-row {
@@ -231,14 +230,18 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
     }
 
     .grid-header {
-      font-size: 22px;
-      font-weight: 500;
-      padding-right: 25px;
+      @include header();
     }
   }
 }
 
 .edit-cell {
   position: relative;
+
+  contact-status {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 11px;
+  }
 }
 </style>
