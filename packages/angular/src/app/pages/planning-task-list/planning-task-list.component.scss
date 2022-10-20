@@ -4,10 +4,7 @@
 @include separator();
 
 :host {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  padding: 20px 16px 0 16px;
+  @include page-container();
 
   .dx-toolbar {
     margin-bottom: $toolbar-margin-bottom;

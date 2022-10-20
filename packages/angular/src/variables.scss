@@ -16,6 +16,7 @@ $accent-color: $base-accent;
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 $text-button-horizontal-padding: $material-button-icononly-padding;
 $toolbar-margin-bottom: 16px;
+$content-padding: 20px 16px 0 16px;
 
 @mixin separator() {
   .separator {
@@ -48,4 +49,11 @@ $toolbar-margin-bottom: 16px;
 @mixin message-text {
   padding-top: 5px;
   line-height: 21px;
+}
+
+@mixin page-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: $content-padding;
 }

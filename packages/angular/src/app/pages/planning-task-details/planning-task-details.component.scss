@@ -4,10 +4,7 @@
 $left-panel-width: 400px;
 
 :host {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  padding: 20px 16px 0 16px;
+  @include page-container();
 }
 
 .dx-toolbar ::ng-deep {

@@ -11,6 +11,7 @@ $side-panel-toolbar-height: 76px;
 @include separator();
 
 .view-wrapper {
+  padding: $content-padding;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -28,8 +29,7 @@ $side-panel-toolbar-height: 76px;
     }
 
     ::ng-deep & {
-      .dx-datagrid-header-panel {
-        padding-top: 20px;
+      .dx-toolbar {
         padding-bottom: $toolbar-margin-bottom;
       }
 
