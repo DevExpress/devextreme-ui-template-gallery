@@ -2,6 +2,7 @@
 @use "../node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
 @use "../node_modules/devextreme/scss/widgets/material/button/mixins" as *;
 @use "../node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
+@use "../node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
 
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
 @forward "../node_modules/devextreme/scss/widgets/material/textEditor/colors";
@@ -16,6 +17,8 @@ $accent-color: $base-accent;
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 $text-button-horizontal-padding: $material-button-icononly-padding;
 $toolbar-margin-bottom: 16px;
+$texteditor-edit-color: $texteditor-color;
+$filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
 
 @mixin separator() {
   .separator {

@@ -37,9 +37,10 @@ dx-form {
   }
 }
 
-.form-custom-list-prop {
+.form-item-custom {
   contact-status {
     position: absolute;
-    padding: 15px 11px;
+    bottom: 0;
+    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 2px);
   }
 }
