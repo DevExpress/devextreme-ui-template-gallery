@@ -5,10 +5,15 @@ $left-panel-width: 400px;
 $right-panel-width: 360px;
 
 :host {
-  @include page-container();
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: $content-padding;
+}
 
-  &::ng-deep .contact-name-toolbar-item {
-    min-width: 575px;
+@media only screen and (max-width: 875px) {
+  ::ng-deep .contact-name-toolbar-item {
+    min-width: calc(#{$left-panel-width} + #{$right-panel-width} - 145px);
   }
 }
 
