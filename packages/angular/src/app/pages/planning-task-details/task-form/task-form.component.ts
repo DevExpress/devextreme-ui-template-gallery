@@ -2,19 +2,21 @@ import {
   Component, OnInit, NgModule, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DxButtonModule } from 'devextreme-angular/ui/button';
-import { DxFormModule } from 'devextreme-angular/ui/form';
-import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
-import { DxSelectBoxModule } from 'devextreme-angular/ui/select-box';
-import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
-import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
-import { DxDateBoxModule } from 'devextreme-angular/ui/date-box';
+import {
+  DxButtonModule,
+  DxFormModule,
+  DxLoadPanelModule,
+  DxSelectBoxModule,
+  DxTextBoxModule,
+  DxTextAreaModule,
+  DxToolbarModule,
+  DxValidatorModule,
+} from 'devextreme-angular';
 import {
   TaskProirityModule,
   TaskStatusModule,
   FormItemDateModule,
-  EditViewItemModule,
+  FormTextboxModule,
 } from 'src/app/shared/components';
 import { taskPriorityList, taskStatusList } from 'src/app/shared/types/task';
 import { Task } from 'src/app/shared/types/task';
@@ -24,7 +26,7 @@ import { Task } from 'src/app/shared/types/task';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss'],
 })
-export class TaskFormComponent implements OnChanges {
+export class TaskFormComponent implements OnChanges, OnInit {
   @Input() task: Task;
 
   isEditing = false;
@@ -35,7 +37,13 @@ export class TaskFormComponent implements OnChanges {
 
   isLoading = true;
 
+  isEmptyStartDate = true;
+
   validationGroup = 'taskFormValidationGroup';
+
+  ngOnInit() {
+    this.isEmptyStartDate = !this.task?.startDate;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.isLoading = !changes.task.currentValue;
@@ -65,14 +73,14 @@ export class TaskFormComponent implements OnChanges {
     DxLoadPanelModule,
     DxSelectBoxModule,
     DxTextBoxModule,
-    DxToolbarModule,
     DxTextAreaModule,
-    DxDateBoxModule,
+    DxToolbarModule,
+    DxValidatorModule,
 
+    FormTextboxModule,
     TaskProirityModule,
     TaskStatusModule,
     FormItemDateModule,
-    EditViewItemModule,
     CommonModule,
   ],
   providers: [],

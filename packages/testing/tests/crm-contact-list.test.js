@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { toggleCommonConfiguration } from './utils';
+import { getPostfix, toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
@@ -19,12 +19,14 @@ fixture`Contact List`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`crm-contact-list-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`crm-contact-list${getPostfix(embedded, screenMode)}`, 'body');
 
       if (project === 'angular') { // TODO: remove `if` when this react functionality will be ready
         await t.click('tr.dx-data-row:first-child');
         await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
-        await takeScreenshot(`crm-contact-list-form-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
+        await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
+        await t.click(Selector('.dx-button[aria-label=Edit]'));
+        await takeScreenshot(`crm-contact-list-form-edit${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
         if (screenMode[0] === 400) {
           await t.click(Selector('[aria-label="close"]'));
           await t.click('.view-wrapper .dx-icon-overflow');
@@ -33,7 +35,7 @@ fixture`Contact List`;
         if (screenMode[0] === 400) {
           await t.click('.view-wrapper .dx-icon-overflow');
         }
-        await takeScreenshot(`crm-contact-list-add-contact-form-embed=${embedded}-${screenMode[0]}`, Selector('.data-wrapper'));
+        await takeScreenshot(`crm-contact-list-add-contact-form-embed=${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
       }
 
       await t

@@ -9,6 +9,7 @@ const args = parseArgs(argv.slice(1), {
     page: '',
     concurrency: '0',
     quarantineMode: false,
+    theme: '',
   },
 });
 
@@ -37,6 +38,7 @@ createTestCafe('localhost', 1437, 1438)
 
     env.project = args.project;
     env.port = currentPackage.port;
+    env.theme = args.theme;
 
     return runner.run({
       quarantineMode: args.quarantineMode === 'true',

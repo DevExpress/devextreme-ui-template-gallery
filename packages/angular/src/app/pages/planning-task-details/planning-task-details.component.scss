@@ -11,6 +11,8 @@ $left-panel-width: 400px;
 }
 
 .dx-toolbar ::ng-deep {
+  margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
+
   .dx-toolbar-label > div {
     @include header();
   }
@@ -27,10 +29,12 @@ $left-panel-width: 400px;
 
     .left {
       flex: 1 400px;
+      margin-top: 8px;
     }
 
     .right {
       flex: 1 calc(100% - 400px - 20px);
+      margin-top: 8px;
       min-width: 360px;
     }
   }
