@@ -21,12 +21,6 @@
                          type: 'default',
                          onClick: addNote
                      }"/>
-            <dx-item widget="dxButton"
-                     location="after"
-                     :options="{
-                        text: 'Cancel',
-                       onClick: defaultText
-              }"/>
           </dx-toolbar>
         </div>
         <div class="notes-content">

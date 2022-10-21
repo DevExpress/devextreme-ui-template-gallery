@@ -32,12 +32,6 @@
                        type: 'default',
                        onClick: send,
           }"/>
-          <dx-item widget="dxButton"
-                   location="after"
-                   :options="{
-                        text: 'Cancel',
-                       onClick: defaultText
-              }"/>
         </dx-toolbar>
       </div>
       <div class="messages-content" >
