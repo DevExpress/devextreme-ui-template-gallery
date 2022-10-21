@@ -32,6 +32,12 @@
       }
     }
 
+    &.sales-range {
+      .content {
+        height: auto;
+      }
+    }
+
     .content {
       color: $texteditor-label-color;
       font-size: 14px;
@@ -108,16 +114,6 @@
   &.wide {
     margin-right: 0;
     grid-template-columns: repeat(1, 100%);
-  }
-
-  &.no-border.wide {
-    .card {
-      border: none;
-
-      ::ng-deep .content {
-        height: auto;
-      }
-    }
   }
 }
 
