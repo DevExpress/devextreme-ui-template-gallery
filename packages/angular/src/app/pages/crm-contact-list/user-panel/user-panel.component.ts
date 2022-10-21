@@ -116,6 +116,10 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   toggleEdit = () => {
     this.isEditing = !this.isEditing;
+
+    if (!this.userId) {
+      this.closePanel();
+    }
   };
 
   navigateToDetails = () => {
