@@ -73,7 +73,7 @@ import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
-import { authInfo as auth } from '../auth';
+import { authInfo as auth, AuthUser } from '../auth';
 
 import UserPanel from './user-panel.vue';
 
@@ -88,7 +88,7 @@ defineProps<{
     toggleMenuFunc:(e: unknown) => void,
 }>();
 
-auth.getUser().then((e) => {
+auth.getUser().then((e: AuthUser) => {
   user.value = e.data;
 });
 
