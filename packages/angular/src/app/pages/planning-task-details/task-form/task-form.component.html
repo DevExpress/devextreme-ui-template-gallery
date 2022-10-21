@@ -30,7 +30,6 @@
   </dx-toolbar>
 
   <dx-form *ngIf="!isLoading"
-           validationGroup="taskFormValidationGroup"
            class="plain-styled-form"
            [class.view-mode]="!isEditing"
            labelMode="floating"
@@ -49,7 +48,6 @@
         <form-textbox label="Company"
                      [(value)]="task.company"
                      [isEditing]="isEditing"
-                     [validationGroup]="validationGroup"
         ></form-textbox>
       </dxi-item>
 
@@ -57,7 +55,6 @@
         <form-textbox label="Assigned to"
                      [(value)]="task.owner"
                      [isEditing]="isEditing"
-                     [validationGroup]="validationGroup"
         ></form-textbox>
       </dxi-item>
 

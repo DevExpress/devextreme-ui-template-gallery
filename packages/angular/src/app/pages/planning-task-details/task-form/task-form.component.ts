@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Input, SimpleChanges, OnChanges,
+  Component, NgModule, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -26,7 +26,7 @@ import { Task } from 'src/app/shared/types/task';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss'],
 })
-export class TaskFormComponent implements OnChanges, OnInit {
+export class TaskFormComponent implements OnChanges {
   @Input() task: Task;
 
   isEditing = false;
@@ -36,14 +36,6 @@ export class TaskFormComponent implements OnChanges, OnInit {
   priorityList = taskPriorityList;
 
   isLoading = true;
-
-  isEmptyStartDate = true;
-
-  validationGroup = 'taskFormValidationGroup';
-
-  ngOnInit() {
-    this.isEmptyStartDate = !this.task?.startDate;
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.isLoading = !changes.task.currentValue;

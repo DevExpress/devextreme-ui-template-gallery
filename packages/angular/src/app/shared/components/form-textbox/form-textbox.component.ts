@@ -22,8 +22,6 @@ export class FormTextboxComponent {
 
   @Input() icon: string = null;
 
-  @Input() validationGroup: string = undefined;
-
   @Input() validators: any[] = [];
 
   @Input() value!: string;

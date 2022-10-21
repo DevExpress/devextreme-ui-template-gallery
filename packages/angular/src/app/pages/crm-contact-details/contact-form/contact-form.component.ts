@@ -34,8 +34,6 @@ export class ContactFormComponent {
 
   zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
 
-  validationGroup = 'contactFormValidationGroup';
-
   handleEditClick() {
     this.isEditing = true;
   }

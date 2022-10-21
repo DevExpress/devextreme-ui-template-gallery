@@ -47,8 +47,6 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   @Output() isOpenChange = new EventEmitter<boolean>();
 
-  validationGroup = 'userValidationGroup';
-
   user: Contact;
 
   newUser = newContact;
