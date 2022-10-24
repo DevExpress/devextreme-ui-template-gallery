@@ -37,7 +37,7 @@ export class CardMessagesComponent {
     return text.replace('{username}', this.user);
   }
 
-  add = () => {
+  send = () => {
     if (this.messageText === '' || this.messageTitle === '') {
       return;
     }

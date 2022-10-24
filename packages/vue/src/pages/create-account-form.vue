@@ -113,7 +113,7 @@ function confirmPassword(e: {value: ''}) {
   return e.value === formData.password;
 }</script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use "../variables" as *;
 
 .create-account-form {

@@ -16,122 +16,112 @@
                 location="after"
                 widget="dxButton"
                 :visible="isPinEnabled"
-                :options="{ icon: isPin ? 'unpin' : 'pin', onClick: () => isPin = !isPin }"
-              >
-              </dx-item>
+                :options="{ icon: isPin ? 'unpin' : 'pin', onClick: () => isPin = !isPin }"/>
 
               <dx-item
                 location="after"
                 widget="dxButton"
-                :options="{ icon: 'close', onClick: () => emit('close') }"
-              >
-              </dx-item>
+                :options="{ icon: 'close', onClick: () => emit('close') }"/>
             </dx-toolbar>
           </div>
 
           <dx-scroll-view class="panel-scroll">
-            <div class="data-part border form-compact">
-              <dx-form :formData="panelData">
-                <dx-form-group-item :colCount="2" cssClass="photo-row">
-                  <dx-form-item cssClass="photo-box">
+            <div class="data-part border">
+              <dx-form :class="{'view-mode': !isEditing}"
+                       class="plain-styled-form">
+                <dx-form-group-item :col-count="2" css-class="photo-row">
+                  <dx-form-item css-class="photo-box">
                     <user-photo :link="panelData.image" ></user-photo>
                   </dx-form-item>
 
-                  <dx-form-group-item>
-                    <dx-form-item>
-                      <form-item-plain class="accent"
-                      v-model="panelData['company']"
-                      :label="'Company'"
-                      :isEditing = "isEditing"
-                      />
+                  <dx-form-group-item >
+                    <dx-form-item css-class="accent">
+                      <form-textbox :label="'Company'"
+                                    v-model="panelData['company']"
+                                    :is-editing = "isEditing"/>
                     </dx-form-item>
 
                     <dx-form-item>
-                      <form-item-plain v-model="panelData['position']"
+                      <form-textbox v-model="panelData['position']"
                                        :label="'Position'"
-                                       :isEditing = "isEditing"
-                      />
+                                       :is-editing = "isEditing"/>
                     </dx-form-item>
 
-                    <dx-form-item>
-                      <form-item-plain class="accent"
-                        v-model="panelData['manager']"
-                        :label="'Assigned to'"
-                        :isEditing = "isEditing"
-                      />
+                    <dx-form-item css-class="accent">
+                      <form-textbox :label="'Assigned to'"
+                                    v-model="panelData['manager']"
+                                    :is-editing = "isEditing"/>
                     </dx-form-item>
                   </dx-form-group-item>
                 </dx-form-group-item>
 
-                <dx-form-group-item>
+                <dx-form-group-item cssClass="contact-fields-group">
                   <dx-form-item v-for="(item, index) in underContactFields"
-                                :key="index"
-                  >
-                    <form-item-plain :icon="item.editorOptions?.icon"
-                                     v-model="panelData[item.name]"
-                                     :isEditing = "isEditing"
-                                     :mask="item.editorOptions.mask"
-                                     :rendered-value="item.name === 'phone'?
-                                               formatPhone(panelData[item.name]):
-                                                panelData[item.name]"
-                    />
+                                :key="index">
+                    <form-textbox :icon="item.icon"
+                                  v-model="panelData[item.name]"
+                                  :is-editing = "isEditing"
+                                  :mask="item.mask"/>
                   </dx-form-item>
                 </dx-form-group-item>
               </dx-form>
             </div>
 
-            <div class="data-part border">
+            <div class="data-part data-part-toolbar border">
               <dx-toolbar class="panel-toolbar">
-                <dx-item
-                  location="before"
-                  widget="dxButton"
-                  :options="isEditing ? {
-                    icon: false,
-                  stylingMode: 'outlined',
-                   text: 'Save',
-                    type: 'default',
-                    onClick: toggleEdit} :
-                  { icon: 'edit',
-                  stylingMode: 'outlined',
-                   text: 'Edit',
-                   type: 'default',
-                    onClick: toggleEdit
-                  }"
-                >
+                <dx-item location="before" :visible="!isEditing">
+                  <dx-button text="Edit"
+                             icon="edit"
+                             stylingMode="outlined"
+                             type="default"
+                             @click="toggleEdit()"/>
                 </dx-item>
 
-                <dx-item
-                  location="before"
-                  :visible="isEditing"
-                  widget="dxButton"
-                  :options="{ icon: false,
-                  stylingMode: 'text',
-                   text: 'Cancel',
-                     onClick: toggleEdit}"
-                >
+                <dx-item location="before" :visible="!isEditing">
+                  <dx-button text="Details"
+                             styling-mode="outlined"
+                             type="default"
+                             @click="navigateToDetails()"/>
                 </dx-item>
 
-                <dx-item
-                  location="after"
-                  widget="dxDropDownButton"
-                  :options="{
-                text: 'Actions',
-                stylingMode: 'contained',
-                items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
-              }"
-                ></dx-item>
+                <dx-item location="before" locateInMenu="before" :visible="isEditing">
+                  <dx-button text="Save"
+                             icon="save"
+                             styling-mode="outlined"
+                             type="default"
+                             @click="toggleEdit()"/>
+                </dx-item>
+
+                <dx-item location="before" locateInMenu="before" :visible="isEditing">
+                  <dx-button text="Cancel"
+                             @click="toggleEdit()"
+                             styling-mode="text"
+                  ></dx-button>
+                </dx-item>
+
+                <dx-item location="after"
+                         widget="dxDropDownButton"
+                         :options="{
+                                  width: 120,
+                                  text: 'Actions',
+                                  stylingMode: 'contained',
+                                  items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                         }"/>
               </dx-toolbar>
             </div>
+
             <div class="data-part">
               <dx-accordion :multiple="true" :collapsible="true">
                 <template #title="{ data }">
-                  <span class="accordion-title">{{ data.title }}</span>
-                  <dx-button
-                    icon="add"
-                    type="default"
-                    stylingMode="text"
-                    @click="e => {e.event.stopPropagation(); accordionPlusClick(e);}"
-                  ></dx-button>
+                  <div class="accordion-title">
+                    <span>{{ data.title }}</span>
+                    <dx-button
+                      icon="add"
+                      type="default"
+                      stylingMode="text"
+                      @click="e => {e.event.stopPropagation(); accordionPlusClick(e);}"
+                    ></dx-button>
+                  </div>
                 </template>
 
                 <dx-accordion-item title="Opportunities">
@@ -162,6 +152,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { router } from '@/router';
 // eslint-disable-next-line import/no-unresolved
 import { getContact } from 'dx-rwa-data';
 import { DxAccordion, DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
@@ -174,13 +165,13 @@ import {
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import UserPhoto from '@/components/user-photo.vue';
-import UserStatus from '@/components/user-status.vue';
+import UserStatus from '@/components/contact-status.vue';
 import { screenInfo } from '@/utils/media-query';
-import { formatPrice, formatPhone } from '@/utils/formatters';
+import { formatPrice } from '@/utils/formatters';
 import ContactActivities from '@/components/contact-activities.vue';
 import LoadComponent from '@/components/load-component.vue';
-import FormItemPlain from '@/components/form-item-plain.vue';
 import type { Contact } from '@/types/contact';
+import FormTextbox from '@/components/form-textbox.vue';
 
 const isEditing = ref(false);
 const isLoading = ref(false);
@@ -201,22 +192,16 @@ const emit = defineEmits(['close']);
 const underContactFields = [
   {
     name: 'phone',
-    editorOptions: {
-      mask: '+1(000)000-0000',
-      icon: 'tel',
-    },
+    mask: '+1(000)000-0000',
+    icon: 'tel',
   },
   {
     name: 'email',
-    editorOptions: {
-      icon: 'email',
-    },
+    icon: 'email',
   },
   {
     name: 'address',
-    editorOptions: {
-      icon: 'home',
-    },
+    icon: 'home',
   }];
 
 watch(
@@ -247,29 +232,29 @@ watch(
     }
   },
 );
+
+const navigateToDetails = () => {
+  router.push('/crm-contact-details');
+};
 </script>
 
+<style lang="scss">
+#contact-panel {
+  --contact-side-panel-toolbar-top: 58px;
+  --contact-side-panel-width: 350px;
+}
+
+.screen-x-small #contact-panel {
+  --contact-side-panel-width: 100vw;
+}
+</style>
 <style scoped lang="scss">
 @use "@/variables" as *;
 
-$side-panel-toolbar-height: 58px;
-
-.screen-medium {
-  .panel.open {
-    top: $side-panel-toolbar-height;
-  }
-}
-
-.dx-drawer-overlap {
-  .panel.opne {
-    top: $side-panel-toolbar-height;
-  }
-}
-
 .panel {
   position: fixed;
-  right: -350px;
-  top: $side-panel-toolbar-height;
+  right: calc(-1 * var(--contact-side-panel-width));
+  top: var(--contact-side-panel-toolbar-top);
   bottom: 0;
   background: $base-bg;
   transition: right 400ms;
@@ -280,7 +265,7 @@ $side-panel-toolbar-height: 58px;
 
   &.open {
     right: 0;
-    box-shadow: 0 0 16px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0 16px $base-border-color;
   }
 
   &.pin {
@@ -294,32 +279,31 @@ $side-panel-toolbar-height: 58px;
       position: relative;
     }
   }
-  &:deep(.photo-row) > .dx-field-item-content > .dx-form-group .dx-box-flex {
-    & > .dx-item > .dx-item-content > .dx-item:first-child {
-      max-width: 140px;
 
-      .dx-field-item:not(.dx-last-col) {
-        padding-right: 0;
-      }
-    }
-  }
-
-  &:deep(.data-wrapper) {
-    width: 350px;
+  .data-wrapper {
     padding-bottom: 16px;
     height: 100%;
+    width: var(--contact-side-panel-width);
 
     .data-part {
       padding: 0 16px;
 
       &.border {
-        padding-bottom: 5px;
         border-bottom: 1px solid $base-border-color;
+      }
+
+      &-toolbar {
+        padding: 10px 16px;
+        margin-bottom: $toolbar-margin-bottom;
+
+        .dx-button {
+          min-width: 90px;
+        }
       }
     }
 
     .panel-scroll {
-      height: calc(100% - #{$side-panel-toolbar-height});
+      height: calc(100% - 20px);
     }
 
     .contact-name {
@@ -327,60 +311,18 @@ $side-panel-toolbar-height: 58px;
       margin-right: 8px;
     }
 
-    .panel-toolbar {
-      padding: 10px 3px 0 0;
-    }
-
     .opportunities {
       padding-bottom: 10px;
     }
 
-    .accordion-title {
-      vertical-align: middle;
-      padding-right: 10px;
-    }
-
     .dx-accordion {
-      margin: 0;
-    }
-
-    .dx-accordion-item {
-      box-shadow: none;
-      border: none;
-
-      &.dx-accordion-item-opened {
-        margin: 0;
+      .accordion-title {
+        vertical-align: middle;
+        padding-right: 10px;
+        display: flex;
+        align-items: center;
       }
     }
-
-    .dx-state-focused >,
-    .dx-state-hover > {
-      .dx-accordion-item-title {
-        background-color: transparent;
-      }
-    }
-    .dx-accordion-item-title {
-      padding: 6px 0;
-      background-color: transparent;
-
-      .dx-accordion-item-title-caption {
-        left: 0;
-      }
-    }
-
-    .dx-accordion-item-body {
-      padding: 0;
-      margin-right: 2px;
-    }
-  }
-}
-
-.icon-editor {
-  display: flex;
-  gap: 15px;
-
-  .dx-textbox {
-    flex: 1;
   }
 }
 </style>

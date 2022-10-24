@@ -1,10 +1,9 @@
 <template>
-  <header class="header-component">
+  <header>
     <dx-toolbar class="header-toolbar">
-      <dx-item
-        :visible="menuToggleEnabled"
-        location="before"
-        css-class="menu-button"
+      <dx-item :visible="menuToggleEnabled"
+               location="before"
+               css-class="menu-button"
       >
         <template #default>
           <dx-button
@@ -15,10 +14,9 @@
         </template>
       </dx-item>
 
-      <dx-item
-        v-if="title"
-        location="before"
-        css-class="header-title dx-toolbar-label"
+      <dx-item v-if="title"
+               location="before"
+               css-class="header-title dx-toolbar-label"
       >
         <div>{{ title }}</div>
       </dx-item>
@@ -33,7 +31,14 @@
         width: 180
       }"
       ></dx-item>
-      <dx-item
+      <dx-item location="after">
+        <div class="messages" >
+          <div class="dx-icon-message">
+            <div class="dx-badge">4</div>
+          </div>
+        </div>
+      </dx-item>
+      <dx-item cssClass="toolbar-user-items"
         location="after"
         locate-in-menu="auto"
         menu-item-template="menuUserItem"
@@ -43,7 +48,7 @@
             <dx-button
               class="user-button authorization"
               :width="160"
-              height="100%"
+              :height="38"
               styling-mode="text"
             >
               <user-panel :user="user" :menu-items="userMenuItems" menu-mode="context" />
@@ -68,14 +73,14 @@ import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
-import { authInfo as auth } from '../auth';
+import { authInfo as auth, AuthUser } from '../auth';
 
 import UserPanel from './user-panel.vue';
 
 const router = useRouter();
 const route = useRoute();
 
-const user = ref({});
+const user = ref<Record<string, unknown> | unknown>({});
 
 defineProps<{
   menuToggleEnabled: boolean,
@@ -83,7 +88,7 @@ defineProps<{
     toggleMenuFunc:(e: unknown) => void,
 }>();
 
-auth.getUser().then((e: unknown) => {
+auth.getUser().then((e: AuthUser) => {
   user.value = e.data;
 });
 
@@ -113,67 +118,63 @@ const userMenuItems = [{
   onClick: onLogoutClick,
 }];
 </script>
-
 <style lang="scss">
+</style>
+<style scoped lang="scss">
 @use "../variables" as *;
 
-.header-component {
+header {
   flex: 0 0 auto;
   z-index: 1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 0 4px rgba(0, 0, 0, 0.15);
 
-  .dx-toolbar {
-    &.header-toolbar .dx-toolbar-items-container .dx-toolbar-after {
-      padding: 0 40px;
+  padding: 10px 0;
+  background-color: $base-bg;
 
-      .screen-x-small & {
-        padding: 0 20px;
-      }
-    }
+  :deep(.header-title) {
+    color: $accent-color;
+  }
 
-    .dx-toolbar-item.dx-toolbar-button.menu-button {
-      width: $side-panel-min-width;
-      text-align: center;
-      padding: 0;
-    }
-
-       .dx-toolbar-item.menu-button > .dx-toolbar-item-content {
-         .dx-icon {
-           color: $base-accent;
-         }
-       }
+  .header-toolbar {
+    padding-right: 20px;
 
     .user-button.authorization {
       margin-left: 10px;
+      padding: 4px;
+
+      :deep(.dx-button-content) {
+        padding: 0;
+        height: 100%;
+      }
     }
-  }
-}
 
-.header-title .dx-item-content {
-  color: $base-accent;
-  padding: 0;
-  margin: 0;
-}
+    .messages {
+      padding-left: 10px;
+      position: relative;
 
-.dx-theme-generic {
- .layout-header .dx-toolbar {
-    padding: 10px 0;
-  }
+      .dx-icon-message {
+        font-size: 24px;
+      }
 
-  .user-button > .dx-button-content {
-    padding: 5px;
-  }
-}
+      .dx-badge {
+        display: block;
+        position: absolute;
+        background-color: red;
+        color: white;
+        right: -15%;
+        top: -15%;
+        font-size: 12px;
+        padding: 0 4px;
+      }
+    }
 
-.dx-scrollable-content {
-  > .dx-treeview-node-container:first-child {
-    > .dx-treeview-node:first-child {
-      > .dx-treeview-item {
-        box-shadow: inset 0 4px 8px rgb(0, 0, 0, 0.05);
+    :deep(.dx-toolbar-item.menu-button) {
+      width: $side-panel-min-width;
+      text-align: center;
+      padding: 0;
 
-        .screen-large & {
-          box-shadow: none;
-        }
+      .dx-icon {
+        color: $accent-color;
       }
     }
   }

@@ -101,7 +101,7 @@ async function onSubmit() {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use "@/variables" as *;
 
 .login-form {

@@ -1,6 +1,6 @@
 <template>
   <div class="side-nav-outer-toolbar">
-    <header-toolbar
+    <app-header
       class="layout-header"
       :menu-toggle-enabled="true"
       :toggle-menu-func="toggleMenu"
@@ -40,8 +40,8 @@ import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 // eslint-disable-next-line import/no-unresolved
 import DevExpress from 'devextreme';
+import AppHeader from '@/components/app-header.vue';
 import SideNavMenu from '../components/side-nav-menu.vue';
-import HeaderToolbar from '../components/header-toolbar.vue';
 // eslint-disable-next-line no-undef
 import ToolbarItemClickEvent = DevExpress.ui.dxFileManager.ToolbarItemClickEvent;
 
@@ -107,7 +107,7 @@ const drawerOptions = computed(() => {
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use '../variables' as *;
 
 .side-nav-outer-toolbar {
