@@ -1,0 +1,16 @@
+@use "../../../../variables.scss" as *;
+@use "sass:math";
+
+@include separator();
+
+.toolbar-header {
+  @include header();
+}
+
+::ng-deep {
+  .dx-tabs {
+    .dx-tab {
+      background-color: $background-color;
+    }
+  }
+}

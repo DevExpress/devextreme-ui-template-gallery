@@ -9,12 +9,13 @@ import {
   DxSelectBoxModule,
   DxTextBoxModule,
   DxToolbarModule,
+  DxValidatorModule,
 } from 'devextreme-angular';
 import {
   TaskProirityModule,
   TaskStatusModule,
   FormItemDateModule,
-  EditViewItemModule,
+  FormTextboxModule,
 } from 'src/app/shared/components';
 import { taskPriorityList, taskStatusList } from 'src/app/shared/types/task';
 import { Task } from 'src/app/shared/types/task';
@@ -37,6 +38,8 @@ export class TaskFormComponent implements OnInit, OnChanges {
   isLoading = true;
 
   isEmptyStartDate = true;
+
+  validationGroup = 'contactFormValidationGroup';
 
   ngOnInit() {
     this.isEmptyStartDate = !this.task?.startDate;
@@ -73,11 +76,12 @@ export class TaskFormComponent implements OnInit, OnChanges {
     DxTextBoxModule,
     DxToolbarModule,
     DxTextAreaModule,
+    DxValidatorModule,
 
+    FormTextboxModule,
     TaskProirityModule,
     TaskStatusModule,
     FormItemDateModule,
-    EditViewItemModule,
     CommonModule,
   ],
   providers: [],

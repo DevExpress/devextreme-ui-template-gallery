@@ -1,0 +1,56 @@
+<dx-toolbar>
+  <dxi-item location="before">
+    <span class="toolbar-header">{{ titleText }}</span>
+  </dxi-item>
+
+  <dxi-item
+    *ngIf="panelItems"
+    location="before"
+    locateInMenu="auto">
+    <dx-tabs
+      [selectedItemKeys]="selectedItems"
+      keyExpr="key"
+      [items]="panelItems"
+      (onItemClick)="selectionChange($event)"
+    ></dx-tabs>
+  </dxi-item>
+
+  <dxi-item
+    location="after"
+    locateInMenu="auto"
+    >
+    <dx-button
+      class="add-card"
+      icon="plus"
+      text="Add Card"
+      type="default"
+      stylingMode="contained"
+    ></dx-button>
+  </dxi-item>
+
+  <dxi-item
+    location="after"
+    locateInMenu="auto"
+    widget="dxButton"
+    showText="inMenu"
+    [options]="{
+      text: 'Refresh',
+      icon: 'refresh'
+    }"
+  ></dxi-item>
+
+  <dxi-item location="after" locateInMenu="auto">
+    <div class="separator"></div>
+  </dxi-item>
+
+  <dxi-item
+    location="after"
+    locateInMenu="auto"
+    widget="dxButton"
+    showText="inMenu"
+    [options]="{
+      icon: 'export',
+      text: 'Export'
+    }"
+  ></dxi-item>
+</dx-toolbar>

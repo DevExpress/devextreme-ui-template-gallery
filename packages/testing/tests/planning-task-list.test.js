@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { toggleCommonConfiguration } from './utils';
+import { getPostfix, toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
@@ -19,11 +19,11 @@ fixture`Planning List`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`planning-task-grid-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`planning-task-grid${getPostfix(embedded, screenMode)}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
-      await takeScreenshot(`planning-task-kanban-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`planning-task-kanban${getPostfix(embedded, screenMode)}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
-      await takeScreenshot(`planning-task-gantt-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`planning-task-gantt${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
         .expect(compareResults.isValid())

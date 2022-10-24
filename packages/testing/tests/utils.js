@@ -6,6 +6,11 @@ export const toogleEmbeddedClass = ClientFunction((embed) => {
   window.document.getElementsByTagName('body')[0].classList.add('embedded');
 });
 
+export const getPostfix = (embedded, screenMode) => {
+  const theme = process.env.theme;
+  return `-embed=${embedded}-${theme}-${screenMode[0]}`;
+};
+
 export const toggleCommonConfiguration = async (
   t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize,
 ) => {

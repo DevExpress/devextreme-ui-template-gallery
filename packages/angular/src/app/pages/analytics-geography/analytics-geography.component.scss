@@ -10,44 +10,10 @@
   padding: 20px 16px 0 16px;
 }
 
-::ng-deep {
-  .dx-toolbar {
-    .toolbar-header {
-      @include header();
-    }
-
-    .dx-tabs .dx-tab {
-      background-color: $background-color;
-
-      &:nth-child(2) {
-        width: 82px;
-      }
-    }
-  }
-
-  .add-card {
-    .dx-icon.dx-icon-plus,
-    .dx-button-text {
-      color: #fff;
-    }
-  }
-}
-
 .view-wrapper {
   flex-direction: column;
-}
 
-.cards {
-  display: flex;
-  margin: 8px -20px;
-  justify-content: space-between;
-  justify-items: stretch;
-
-  .column {
-    flex: 1 50%;
-  }
-
-  &.wide {
-    flex: 1 calc(100% - 20px);
+  .wide {
+    margin: 20px 0;
   }
 }

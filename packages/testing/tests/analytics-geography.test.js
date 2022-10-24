@@ -2,8 +2,8 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { toggleCommonConfiguration } from './utils';
-import { screenModes, chartTimeout } from '../config.js';
+import { getPostfix, toggleCommonConfiguration } from './utils';
+import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/analytics-geography`;
@@ -21,14 +21,14 @@ const checkScreenMode = async (t, screenMode) => {
     test(`Analytics Geography (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, chartTimeout);
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`analytics-geography-all-embed=${embedded}-${screenMode[0]}`, 'body');
+      await takeScreenshot(`analytics-geography-all${getPostfix(embedded, screenMode)}`, 'body');
       await checkScreenMode(t, screenMode);
       await t.click(Selector('.dx-tabs .dx-item').nth(3));
-      await t.wait(chartTimeout);
-      await takeScreenshot(`analytics-geography-year-embed=${embedded}-${screenMode[0]}`, 'body');
+      await t.wait(timeoutSecond);
+      await takeScreenshot(`analytics-geography-year${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
         .expect(compareResults.isValid())

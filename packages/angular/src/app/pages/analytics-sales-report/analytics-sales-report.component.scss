@@ -20,17 +20,6 @@
       @include header();
     }
   }
-
-  .add-card {
-    .dx-icon.dx-icon-plus,
-    .dx-button-text {
-      color: #fff;
-    }
-  }
-}
-
-.sales-range {
-  margin-top: 20px;
 }
 
 .sales-pie,
@@ -56,21 +45,7 @@
   }
 }
 
-.cards {
-  display: flex;
-  margin: 8px -20px;
-  flex-direction: column;
-
-  &.wide > * {
-    flex: 1 100%;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  .cards.wide > * {
-    flex: 1 320px;
-  }
-
+@media only screen and (max-width: 600px) {
   .sales-pie,
   .sales-bars {
     display: block;
