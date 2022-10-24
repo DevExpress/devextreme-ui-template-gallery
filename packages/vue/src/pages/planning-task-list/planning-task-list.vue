@@ -30,7 +30,7 @@
              onClick: reload
         }"/>
 
-      <dx-toolbar-item :visible="activeTabId === 'grid'"
+      <dx-toolbar-item :disabled="activeTabId !== 'grid'"
                        location="after"
                        locateInMenu="auto"
                        widget="dxButton"
@@ -41,12 +41,11 @@
              onClick: chooseColumnDataGrid
          }" />
 
-      <dx-toolbar-item :visible="['grid', 'gantt'].includes(activeTabId)"
-                       location="after" locateInMenu="auto">
+      <dx-toolbar-item location="after" locateInMenu="auto">
         <div class="separator"></div>
       </dx-toolbar-item>
 
-      <dx-toolbar-item :visible="['grid', 'gantt'].includes(activeTabId)"
+      <dx-toolbar-item :disabled="!['grid', 'gantt'].includes(activeTabId)"
                        location="after"
                        locateInMenu="auto"
                        widget="dxButton"
@@ -54,10 +53,21 @@
                        :options="{
             text: 'Export to PDF',
             icon: 'exportpdf',
-            onClick: exportDataGrid
+            onClick: exportToPdf
         }"/>
 
-      <dx-toolbar-item location="after"
+      <dx-toolbar-item :disabled="!['grid'].includes(activeTabId)"
+                       location="after"
+                       locateInMenu="auto"
+                       widget="dxButton"
+                       showText="inMenu"
+                       :options="{
+                            text: 'Export to Exel',
+                            icon: 'exportxlsx',
+                            onClick: exportToXlsx
+                       }"/>
+      <dx-toolbar-item :disabled="!['grid'].includes(activeTabId)"
+                       location="after"
                        locateInMenu="auto"
                        widget="dxTextBox"
                        :options="{
@@ -93,9 +103,8 @@ import {
 } from 'devextreme-vue/toolbar';
 
 // eslint-disable-next-line import/no-unresolved
-import { getTasks } from 'dx-rwa-data';
+import { getTasks, getFilteredTasks } from 'dx-rwa-data';
 import DataSource from 'devextreme/data/data_source';
-
 import { taskPanelItems, TaskPanelItemsIds } from '@/types/resource';
 import type { Task } from '@/types/task';
 
@@ -109,15 +118,32 @@ const activeTabId = ref<TaskPanelItemsIds>('grid');
 const tasksGridCmp = ref<InstanceType<typeof TaskListGrid> | null>(null);
 const tasksGanttCmp = ref<InstanceType<typeof TaskListGantt> | null>(null);
 
+const kanbanData = ref<Task[]>([]);
+const ganttData = ref<Task[]>([]);
+
 const addDataGridRow = () => tasksGridCmp.value?.addRow();
 const chooseColumnDataGrid = () => tasksGridCmp.value.showColumnChooser();
 const searchDataGrid = (e: TextBoxInputEvent) => tasksGridCmp.value.search(e.component.option('text'));
-const exportDataGrid = () => {
+const exportToPdf = () => {
   ({
     grid: tasksGridCmp,
     gantt: tasksGanttCmp,
     kanban: null,
-  })[activeTabId.value]?.value.onExporting();
+  })[activeTabId.value]?.value.exportToPdf();
+};
+
+const exportToXlsx = () => {
+  tasksGridCmp.value.exportToXlsx();
+};
+
+const getFilteredTasksAsync = async () => {
+  isLoading.value = true;
+
+  const filteredTasks = await getFilteredTasks();
+
+  isLoading.value = false;
+  kanbanData.value = [...filteredTasks];
+  ganttData.value = filteredTasks;
 };
 
 const tabValueChange = (e: TabsItemClickEvent) => {
@@ -125,29 +151,27 @@ const tabValueChange = (e: TabsItemClickEvent) => {
   displayTaskComponent.value = itemData.text;
   const tabId = taskPanelItems.find((item) => displayTaskComponent.value === item.text)?.id;
   activeTabId.value = tabId || 'grid';
-};
-const kanbanData = ref<Task[]>([]);
-const ganttData = ref<Task[]>([]);
 
-const getTasksAsync = () => getTasks().then(
-  (data: Task[]) => {
-    kanbanData.value = [...data];
-    ganttData.value = [...data];
-    isLoading.value = false;
-    return data.filter((item) => !!item.status && !!item.priority);
-  },
-);
+  if (tabId !== 'grid' && kanbanData.value.length === 0) {
+    getFilteredTasksAsync();
+  }
+};
 
 const dataSource = new DataSource({
   key: 'id',
-  load: () => getTasksAsync(),
+  load: async () => {
+    const tasks = await getTasks();
+    return tasks.filter((item) => !!item.status && !!item.priority);
+  },
 });
 
 const reload = () => {
   isLoading.value = true;
-  getTasksAsync();
+
   if (activeTabId.value === 'grid') {
     dataSource.reload();
+  } else {
+    getFilteredTasksAsync();
   }
 };
 </script>
@@ -159,34 +183,28 @@ const reload = () => {
 @include separator();
 
 .view-wrapper {
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
   padding: 20px 16px 0 16px;
-}
 
-.task-list {
- min-height: 500px;
+  .dx-toolbar {
+    margin-bottom: $toolbar-margin-bottom;
+  }
 }
 
 :deep(.dx-toolbar) {
+
   .toolbar-header {
     @include header();
   }
 
   .dx-tabs .dx-tab {
     background-color: $background-color;
-
-    &:nth-child(2) {
-      width: 150px;
-    }
   }
 }
 
-.add-grid-row {
-  .dx-icon.dx-icon-plus,
-  .dx-button-text {
-    color: #fff;
-  }
+.view-wrapper {
+  flex-direction: column;
 }
 </style>

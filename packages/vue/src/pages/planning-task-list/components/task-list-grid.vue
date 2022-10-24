@@ -1,14 +1,15 @@
 <template>
   <dx-data-grid ref="dxDataGridCmp"
                 height="100%"
+                id="tasks-grid"
                 :data-source="dataSource"
                 @row-prepared="onRowPreparedGrid"
                 :column-auto-width="true"
   >
     <dx-load-panel :enabled="true" :show-pane="false"/>
     <dx-scrolling row-rendering-mode="virtual"/>
-    <dx-paging :page-size="7"/>
-    <dx-pager :visible="true"/>
+    <dx-paging :page-size="15"/>
+    <dx-pager :visible="true" :show-page-size-selector="true"/>
     <dx-editing mode="row"
                 :allow-updating="true"/>
 
@@ -36,7 +37,6 @@
     <dx-column data-field="startDate"
                caption="Start Date"
                data-type="date"
-               sort-order="desc"
                :hiding-priority="2"
     >
       <dx-required-rule/>
@@ -44,6 +44,7 @@
     <dx-column data-field="dueDate"
                caption="Due Date"
                data-type="date"
+               sort-order="asc"
                :hiding-priority="1"
     >
       <dx-required-rule/>
@@ -143,12 +144,15 @@ import 'jspdf-autotable';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxSelectBox } from 'devextreme-vue/select-box';
 import { jsPDF as JsPDF } from 'jspdf';
-import { exportDataGrid } from 'devextreme/pdf_exporter';
+import { saveAs } from 'file-saver-es';
+import { exportDataGrid as exportGridToPdf } from 'devextreme/pdf_exporter';
+import { exportDataGrid as exportToXLSX } from 'devextreme/excel_exporter';
 import type DataSource from 'devextreme/data/data_source';
 
 import type { Task } from '@/types/task';
 import type { RowPreparedEvent } from 'devextreme/ui/data_grid';
 import { taskPriorityList as priorityList, taskStatusList as statusList } from '@/types/task';
+import { Workbook } from 'exceljs';
 import TaskPriority from './components/task-priority.vue';
 
 const props = withDefaults(defineProps<{
@@ -174,9 +178,9 @@ const getStatusHtml = (status: string) => `<span
             class="status status-${status?.replace(/ /g, '-').toLowerCase()}">${status}
       </span>`;
 
-const onExporting = () => {
+const exportToPdf = () => {
   const doc = new JsPDF();
-  exportDataGrid({
+  exportGridToPdf({
     jsPDFDocument: doc,
     component: dxDataGridCmp.value.instance,
   }).then(() => {
@@ -184,9 +188,25 @@ const onExporting = () => {
   });
 };
 
+const exportToXlsx = () => {
+  const workbook = new Workbook();
+  const worksheet = workbook.addWorksheet('Tasks');
+
+  exportToXLSX({
+    component: dxDataGridCmp.value.instance,
+    worksheet,
+    autoFilterEnabled: true,
+  }).then(() => {
+    workbook.xlsx.writeBuffer().then((buffer) => {
+      saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Tasks.xlsx');
+    });
+  });
+};
+
 defineExpose({
   addRow,
-  onExporting,
+  exportToPdf,
+  exportToXlsx,
 });
 </script>
 
@@ -196,28 +216,17 @@ defineExpose({
 
 #tasks-grid {
   min-height: 300px;
-}
 
-:deep(.dx-datagrid-header-panel) {
-  padding-top: 0;
-}
-
-:deep(.dx-datagrid-header-panel) .dx-datagrid-toolbar-button .dx-icon.dx-icon-plus,
-.dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-button-text {
-  color: #fff;
-}
-
-:deep(.dx-row) {
-  &.completed {
-    background: $background-gray-color;
-  }
-
-  .priority span {
+  :deep(.priority span) {
     font-size: 13px;
   }
 }
 
-.edit-cell {
+:deep(.dx-row.completed) {
+  background: $background-gray-color;
+}
+
+:deep(.edit-cell) {
   position: relative;
 
   .task-priority,
@@ -247,5 +256,4 @@ defineExpose({
     color: #2b9029;
   }
 }
-
 </style>

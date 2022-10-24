@@ -27,5 +27,6 @@ export const getStates = async () => await getData('Users/States');
 export const getActiveContactOpportunities = async (id) => await getContactOpportunities(id, true);
 export const getClosedContactOpportunities = async (id) => await getContactOpportunities(id, false);
 
-export const getTasks = async () => await getData('Employees/Tasks');
+export const getTasks = async () => await getData('Employees/AllTasks');
+export const getFilteredTasks = async () => await getData('Employees/FilteredTasks');
 export const getTask = async (id) => await getData(`Employees/Tasks/${id}`);
