@@ -24,10 +24,6 @@
 
     .dx-tabs .dx-tab {
       background-color: $background-color;
-
-      &:nth-child(2) {
-        width: 150px;
-      }
     }
   }
 }
