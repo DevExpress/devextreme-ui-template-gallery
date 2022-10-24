@@ -12,7 +12,7 @@ const BASE_URL = `http://localhost:${port}/#/analytics-sales-report`;
 fixture`Analytics Sales Report`;
 
 [false, true].forEach((embedded) => {
-  [screenModes].forEach((screenMode) => {
+  screenModes.forEach((screenMode) => {
     test(`Analytics Sales Report (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
