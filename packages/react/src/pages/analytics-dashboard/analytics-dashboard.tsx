@@ -88,7 +88,7 @@ export const AnalyticsDashboard = () => {
   }, []);
 
   return (
-    <div className='view-wrapper'>
+    <div className='view-wrapper-dashboard'>
       <Toolbar>
         <Item location='before'>
           <span className='toolbar-header'>Dashboard</span>
