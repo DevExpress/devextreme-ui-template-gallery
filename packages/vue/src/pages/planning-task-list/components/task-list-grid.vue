@@ -3,6 +3,7 @@
                 height="100%"
                 id="tasks-grid"
                 :data-source="dataSource"
+                @row-click="navigateToDetails"
                 @row-prepared="onRowPreparedGrid"
                 :column-auto-width="true"
   >
@@ -140,8 +141,8 @@ import { jsPDF as JsPDF } from 'jspdf';
 import { saveAs } from 'file-saver-es';
 import { exportDataGrid as exportGridToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportToXLSX } from 'devextreme/excel_exporter';
-import type DataSource from 'devextreme/data/data_source';
 
+import { router } from '@/router';
 import type { Task } from '@/types/task';
 import type { RowPreparedEvent } from 'devextreme/ui/data_grid';
 import { taskPriorityList as priorityList, taskStatusList as statusList } from '@/types/task';
@@ -165,6 +166,10 @@ const onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
   if (data.status === 'Completed') {
     rowElement.classList.add('completed');
   }
+};
+
+const navigateToDetails = () => {
+  router.push('/planning-task-details');
 };
 
 const addRow = () => dxDataGridCmp.value?.instance.addRow();
