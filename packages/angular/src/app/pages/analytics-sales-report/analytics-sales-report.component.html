@@ -5,7 +5,7 @@
   >
   </toolbar-analytics>
 
-  <div class="cards wide no-border">
+  <div class="cards wide">
     <card-analytics
       [isLoading]="!sales"
       contentClass="sales-range"
@@ -20,10 +20,9 @@
       >
         <dxo-minor-tick [visible]="false"></dxo-minor-tick>
         <dxo-marker [visible]="false"></dxo-marker>
+        <dxo-label format="MMM yyyy"></dxo-label>
       </dxo-scale>
       <dxo-size [height]="90"></dxo-size>
-
-      <dxo-indent [right]="0" [left]="0"></dxo-indent>
 
       <dxo-loading-indicator [show]="true"></dxo-loading-indicator>
 
@@ -33,9 +32,7 @@
       </dxo-chart>
     </dx-range-selector>
     </card-analytics>
-  </div>
 
-  <div class="cards wide">
     <card-analytics
       titleText="Product Sale by Range"
       [isLoading]="!salesByCategory"
