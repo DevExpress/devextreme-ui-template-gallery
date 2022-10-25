@@ -76,18 +76,19 @@
             onInput: searchDataGrid
         }"/>
     </dx-toolbar>
-
+    <load-component :is-loading="isLoading">
     <div class="task-list">
-      <div  v-if="taskPanelItems[0].text == displayTaskComponent" class="grid">
-        <task-list-grid ref="tasksGridCmp" :data-source="dataSource"/>
+      <div  v-if="taskPanelItems[0].text === displayTaskComponent" class="grid">
+        <task-list-grid ref="tasksGridCmp" :data-source="gridData"/>
       </div>
-      <div v-if="taskPanelItems[1].text == displayTaskComponent" class="kanban">
-        <task-list-kanban :tasks="kanbanData" :is-loading="isLoading"></task-list-kanban>
+      <div v-else-if="taskPanelItems[1].text === displayTaskComponent" class="kanban">
+        <task-list-kanban :tasks="kanbanData"></task-list-kanban>
       </div>
-      <div v-else-if="taskPanelItems[2].text == displayTaskComponent" class="gantt">
+      <div v-else-if="taskPanelItems[2].text === displayTaskComponent" class="gantt">
         <task-list-gantt ref="tasksGanttCmp" :tasks="ganttData"></task-list-gantt>
       </div>
     </div>
+    </load-component>
   </div>
 </template>
 
@@ -104,10 +105,10 @@ import {
 
 // eslint-disable-next-line import/no-unresolved
 import { getTasks, getFilteredTasks } from 'dx-rwa-data';
-import DataSource from 'devextreme/data/data_source';
 import { taskPanelItems, TaskPanelItemsIds } from '@/types/resource';
 import type { Task } from '@/types/task';
 
+import LoadComponent from '@/components/load-component.vue';
 import TaskListGrid from './components/task-list-grid.vue';
 import TaskListKanban from './components/task-list-kanban/task-list-kanban.vue';
 import TaskListGantt from './components/task-list-gantt.vue';
@@ -118,6 +119,7 @@ const activeTabId = ref<TaskPanelItemsIds>('grid');
 const tasksGridCmp = ref<InstanceType<typeof TaskListGrid> | null>(null);
 const tasksGanttCmp = ref<InstanceType<typeof TaskListGantt> | null>(null);
 
+const gridData = ref<Task[]>([]);
 const kanbanData = ref<Task[]>([]);
 const ganttData = ref<Task[]>([]);
 
@@ -136,14 +138,22 @@ const exportToXlsx = () => {
   tasksGridCmp.value.exportToXlsx();
 };
 
-const getFilteredTasksAsync = async () => {
+const loadFilteredTasksAsync = async () => {
   isLoading.value = true;
 
   const filteredTasks = await getFilteredTasks();
 
-  isLoading.value = false;
   kanbanData.value = [...filteredTasks];
   ganttData.value = filteredTasks;
+  isLoading.value = false;
+};
+
+const loadTasksAsync = async () => {
+  isLoading.value = true;
+  const tasks = await getTasks();
+
+  gridData.value = tasks.filter((item) => !!item.status && !!item.priority);
+  isLoading.value = false;
 };
 
 const tabValueChange = (e: TabsItemClickEvent) => {
@@ -153,27 +163,25 @@ const tabValueChange = (e: TabsItemClickEvent) => {
   activeTabId.value = tabId || 'grid';
 
   if (tabId !== 'grid' && kanbanData.value.length === 0) {
-    getFilteredTasksAsync();
+    loadFilteredTasksAsync();
+  } else if (tabId === 'grid' && gridData.value.length === 0) {
+    loadTasksAsync();
   }
 };
-
-const dataSource = new DataSource({
-  key: 'id',
-  load: async () => {
-    const tasks = await getTasks();
-    return tasks.filter((item) => !!item.status && !!item.priority);
-  },
-});
 
 const reload = () => {
   isLoading.value = true;
-
   if (activeTabId.value === 'grid') {
-    dataSource.reload();
+    loadTasksAsync();
+    ganttData.value = [];
+    kanbanData.value = [];
   } else {
-    getFilteredTasksAsync();
+    gridData.value = [];
+    loadFilteredTasksAsync();
   }
 };
+
+loadTasksAsync();
 </script>
 
 <style scoped lang="scss">

@@ -1,51 +1,49 @@
 <template>
-  <load-component :is-loading="props.isLoading">
-    <dx-scroll-view class="scrollable-board"
-                    :direction="'horizontal'"
-                    :show-scrollbar="'always'"
+  <dx-scroll-view class="scrollable-board"
+                  direction="horizontal"
+                  show-scrollbar="always"
+  >
+    <dx-sortable class="sortable-lists"
+                 item-orientation="horizontal"
+                 handle=".list-title"
+                 @reorder="onListReorder"
     >
-      <dx-sortable class="sortable-lists"
-                   item-orientation="horizontal"
-                   handle=".list-title"
-                   @reorder="onListReorder"
-      >
-        <div class="list" v-for="board in kanbanDataSource">
-          <div class="list-title dx-theme-text-color">
-            <span>{{ board.name }}</span>
-            <dx-menu :items="boardMenuItems"/>
-          </div>
-          <dx-scroll-view class="scrollable-list"
-                          direction="vertical"
-                          showScrollbar="always"
-          >
-            <dx-sortable class="sortable-cards"
-                         group="cardsGroup"
-                         :data="board"
-                         @dragStart="onTaskDragStart"
-                         @reorder="onTaskDrop"
-                         @add="onTaskDrop"
-            >
-              <div v-for="task in board.cards">
-                <task-kanban-card class="dx-card" :task="task"></task-kanban-card>
-              </div>
-            </dx-sortable>
-
-            <div class="add-task">
-              <dx-button icon="plus"
-                         text="Add Task"
-                         stylingMode="text"
-                         @click="notify('Add task event')"
-              />
-            </div>
-          </dx-scroll-view>
+      <div class="list" v-for="board in kanbanDataSource">
+        <div class="list-title dx-theme-text-color">
+          <span>{{ board.name }}</span>
+          <dx-menu :items="boardMenuItems"/>
         </div>
-      </dx-sortable>
-    </dx-scroll-view>
-  </load-component>
+        <dx-scroll-view class="scrollable-list"
+                        direction="vertical"
+                        showScrollbar="always"
+        >
+          <dx-sortable class="sortable-cards"
+                       group="cardsGroup"
+                       :data="board"
+                       @dragStart="onTaskDragStart"
+                       @reorder="onTaskDrop"
+                       @add="onTaskDrop"
+          >
+            <div v-for="task in board.cards">
+              <task-kanban-card class="dx-card" :task="task"></task-kanban-card>
+            </div>
+          </dx-sortable>
+
+          <div class="add-task">
+            <dx-button icon="plus"
+                       text="Add Task"
+                       stylingMode="text"
+                       @click="notify('Add task event')"
+            />
+          </div>
+        </dx-scroll-view>
+      </div>
+    </dx-sortable>
+  </dx-scroll-view>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 import 'jspdf-autotable';
 import { Task, TaskStatus, taskStatusList } from '@/types/task';
 import { AddEvent, ReorderEvent, DragStartEvent } from 'devextreme/ui/sortable';
@@ -53,7 +51,6 @@ import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxSortable } from 'devextreme-vue/sortable';
 import { DxButton } from 'devextreme-vue/button';
 import { DxMenu } from 'devextreme-vue/menu';
-import LoadComponent from '@/components/load-component.vue';
 import TaskKanbanCard from './components/task-kanban-card.vue';
 
 interface Board {
@@ -62,11 +59,9 @@ interface Board {
 }
 
 const props = withDefaults(defineProps<{
-  isLoading: boolean,
   tasks: Task[]
 }>(), {
   tasks: () => [],
-  isLoading: true,
 });
 
 const statuses = taskStatusList;

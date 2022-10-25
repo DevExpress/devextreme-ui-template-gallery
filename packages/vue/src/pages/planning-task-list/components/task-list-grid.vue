@@ -71,11 +71,7 @@
       <dx-select-box class="edit-cell"
                      :value="cellData?.value"
                      :items="priorityList"
-                     @value-changed="(e, arg) => {
-          cellData.setValue(e.value);
-          cellData.component.refresh();
-          cellData.component.focus();
-        }"
+                     @value-changed="(e) => onPrioritySelectChange(e.value, cellData)"
                      @selection-changed="cellData.component.updateDimensions"
                      field-template="field"
       >
@@ -92,7 +88,7 @@
     </template>
 
     <template #cellStatus="{ data }">
-      <div v-html="getStatusHtml(data.value)"/>
+      <task-status :status="data.value"/>
     </template>
 
     <template #editCellStatus="{ data: cellInfo }">
@@ -100,19 +96,16 @@
         class="edit-cell"
         :value="cellInfo.value"
         :items="statusList"
-        @value-changed="(e) => {
-          cellInfo.setValue(e.value);
-          cellInfo.component.refresh();
-        }"
+        @value-changed="(e) => onStatusSelectChange(e.value, cellInfo)"
         @selection-changed="cellInfo.component.updateDimensions"
         fieldTemplate="field"
       >
         <template #field>
-          <div class="task-status" v-html="getStatusHtml(cellInfo.value || '')"/>
+          <task-status :status="cellInfo.value"/>
           <dx-text-box :readOnly="true"></dx-text-box>
         </template>
         <template #item="{data}">
-          <div v-html="getStatusHtml(data)"/>
+          <task-status :status="data"/>
         </template>
       </dx-select-box>
     </template>
@@ -153,10 +146,11 @@ import type { Task } from '@/types/task';
 import type { RowPreparedEvent } from 'devextreme/ui/data_grid';
 import { taskPriorityList as priorityList, taskStatusList as statusList } from '@/types/task';
 import { Workbook } from 'exceljs';
+import TaskStatus from '@/components/task-status.vue';
 import TaskPriority from './components/task-priority.vue';
 
 const props = withDefaults(defineProps<{
-  dataSource: DataSource | null
+  dataSource: Task[] | null
 }>(), {
   dataSource: () => null,
 });
@@ -174,9 +168,16 @@ const onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
 };
 
 const addRow = () => dxDataGridCmp.value?.instance.addRow();
-const getStatusHtml = (status: string) => `<span
-            class="status status-${status?.replace(/ /g, '-').toLowerCase()}">${status}
-      </span>`;
+const onPrioritySelectChange = (value: string, cellData: Record<string, any>) => {
+  cellData.setValue(value);
+  cellData.component.refresh();
+  cellData.component.focus();
+};
+
+const onStatusSelectChange = (value: string, cellInfo: Record<string, any>) => {
+  cellInfo.setValue(value);
+  cellInfo.component.refresh();
+};
 
 const exportToPdf = () => {
   const doc = new JsPDF();
@@ -207,6 +208,12 @@ defineExpose({
   addRow,
   exportToPdf,
   exportToXlsx,
+  showColumnChooser() {
+    dxDataGridCmp.value.instance.showColumnChooser();
+  },
+  search(text: string) {
+    dxDataGridCmp.value.instance.searchByText(text);
+  },
 });
 </script>
 
@@ -234,26 +241,6 @@ defineExpose({
     position: absolute;
     margin-top: 10px;
     margin-left: 11px;
-  }
-}
-
-:deep(span.status) {
-  font-size: 14px;
-
-  &.status-open {
-    color: #505ed9;
-  }
-
-  &.status-in-progress {
-    color: #34aa95;
-  }
-
-  &.status-deferred {
-    color: #969696;
-  }
-
-  &.status-completed {
-    color: #2b9029;
   }
 }
 </style>
