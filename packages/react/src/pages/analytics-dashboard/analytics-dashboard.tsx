@@ -1,7 +1,7 @@
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Bullet, { Size as BulletSize, Tooltip } from 'devextreme-react/bullet';
 import Chart, { Series, CommonSeriesSettings, ArgumentAxis, ValueAxis, Legend, Size, Label, Format, Border } from 'devextreme-react/chart';
-import Funnel, { Label as FunnelLabel, Format as FunnelFormat, Legend as FunnelLegend, Size as FunnelSize } from 'devextreme-react/funnel';
+import Funnel, { Label as FunnelLabel, Format as FunnelFormat, Legend as FunnelLegend, Size as FunnelSize, Margin } from 'devextreme-react/funnel';
 import PieChart, { Label as PielLabel, Legend as PieLegend, Size as PieSize, Series as PieSeries, Font, Margin as PieMargin } from 'devextreme-react/pie-chart';
 import DataGrid, { Column } from 'devextreme-react/data-grid';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -147,10 +147,12 @@ export const AnalyticsDashboard = () => {
         </CardAnalytics>
         <CardAnalytics title='Conversion Funnel (All Products)'>
           <Funnel dataSource={opportunities} argumentField='name' valueField='value'>
-            <FunnelLabel>
+            <FunnelLabel visible={true} position='inside' backgroundColor='none' customizeText={({ valueText }) => `$${valueText}`}>
               <FunnelFormat type='largeNumber' precision='1' />
             </FunnelLabel>
-            <FunnelLegend visible={true} />
+            <FunnelLegend visible={true}>
+              <Margin top={70} />
+            </FunnelLegend>
             <FunnelSize height={270} />
           </Funnel>
         </CardAnalytics>
