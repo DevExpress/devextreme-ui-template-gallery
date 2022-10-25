@@ -1,7 +1,9 @@
 import Toolbar, { Item } from 'devextreme-react/toolbar';
+import Bullet, { Size as BulletSize, Tooltip } from 'devextreme-react/bullet';
 import Chart, { Series, CommonSeriesSettings, ArgumentAxis, ValueAxis, Legend, Size, Label, Format, Border } from 'devextreme-react/chart';
 import Funnel, { Label as FunnelLabel, Format as FunnelFormat, Legend as FunnelLegend, Size as FunnelSize } from 'devextreme-react/funnel';
 import PieChart, { Label as PielLabel, Legend as PieLegend, Size as PieSize, Series as PieSeries, Font, Margin as PieMargin } from 'devextreme-react/pie-chart';
+import DataGrid, { Column } from 'devextreme-react/data-grid';
 import React, { useCallback, useEffect, useState } from 'react';
 import { CardAnalytics } from '../../components/card-analytics/CardAnalytics';
 import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, getSalesByState } from 'dx-rwa-data';
@@ -68,10 +70,10 @@ export const AnalyticsDashboard = () => {
       })
       .catch((error) => console.log(error));
 
-    // getSalesByStateAndCity(...dateRange)
-    //   .then((data) => getSalesByState(data))
-    //   .then((data) => setSalesByState(data))
-    //   .catch((error) => console.log(error));
+    getSalesByStateAndCity(...dateRange)
+      .then((data) => getSalesByState(data))
+      .then((data) => setSalesByState(data))
+      .catch((error) => console.log(error));
   }, [dateRange]);
 
   const onTabClick = useCallback((e: { itemData: string }) => {
@@ -152,7 +154,26 @@ export const AnalyticsDashboard = () => {
             <FunnelSize height={270} />
           </Funnel>
         </CardAnalytics>
-        <CardAnalytics title='Revenue Analysis'>blabla</CardAnalytics>
+        <CardAnalytics title='Revenue Analysis'>
+          <DataGrid dataSource={salesByState} height={270}>
+            <Column caption='State' dataField='stateName' />
+            <Column alignment='left' caption='Sales' dataField='total' dataType='number' format='currency' sortOrder='desc' hidingPriority={2} />
+            <Column alignment='left' caption='% Sold' dataField='percentage' name='percentN' format='percent' hidingPriority={1} />
+            <Column
+              alignment='left'
+              caption='Percentage'
+              dataField='percentage'
+              name='percentB'
+              cellRender={(cellInfo) => (
+                <Bullet showTarget={false} showZeroLevel={false} value={cellInfo.data.percentage * 100} startScaleValue={0} endScaleValue={100}>
+                  <Tooltip enabled={false} />
+                  <Size width={200} height={20} />
+                </Bullet>
+              )}
+              width={200}
+            />
+          </DataGrid>
+        </CardAnalytics>
         <CardAnalytics title='Revenue Snapshot (All Products)'>
           <PieChart dataSource={salesByCategory} type='doughnut' diameter={0.8} innerRadius={0.6}>
             <PieSeries argumentField='name' valueField='value'>

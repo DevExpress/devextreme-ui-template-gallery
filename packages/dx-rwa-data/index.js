@@ -1,4 +1,5 @@
 const axios = require('axios');
+const _ = require('lodash');
 
 const baseUrl = 'https://js.devexpress.com/Demos/RwaService/api';
 
@@ -40,33 +41,25 @@ export const getSalesByOrderDate = async (groupByPeriod) => await getData(`Analy
 
 export const getSales = async (startDate, endDate) => await getData(`Analytics/Sales/${startDate}/${endDate}`);
 
-// TODO: rewrite from angular approach
+export const getSalesByState = (data) => {
+  const dataByState = _.chain(data)
+    .groupBy((s) => s.stateName)
+    .map((val) => {
+      let total = 0;
+      let percentage = 0;
+      val.forEach((v) => {
+        total += v.total;
+        percentage += v.percentage;
+      });
 
-// export const getSalesByState = (data) => {
-//   let dataByState;
-//   from(data)
-//     .pipe(
-//       groupBy((s: any) => s.stateName),
-//       mergeMap((group) => group.pipe(toArray())),
-//       map((val) => {
-//         let total = 0;
-//         let percentage = 0;
-//         val.forEach((v) => {
-//           total += v.total;
-//           percentage += v.percentage;
-//         });
+      return {
+        stateName: val[0].stateName,
+        stateCoords: val[0].stateCoords,
+        total,
+        percentage,
+      };
+    })
+    .value();
 
-//         return {
-//           stateName: val[0].stateName,
-//           stateCoords: val[0].stateCoords,
-//           total,
-//           percentage,
-//         };
-//       }),
-//       toArray(),
-//     ).subscribe((data) => {
-//       dataByState = data;
-//     });
-
-//   return dataByState;
-// };
+  return dataByState;
+};
