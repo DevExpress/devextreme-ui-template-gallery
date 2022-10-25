@@ -34,32 +34,28 @@ defineProps({
   user: Object,
 });
 </script>
-
-<style lang="scss">
+<style></style>
+<style scoped lang="scss">
 @use '@/variables.scss' as *;
+
+$user-image-height: $toolbar-height;
 
 .user-info {
   display: flex;
   align-items: center;
 
-  .dx-toolbar-menu-section & {
-    padding: 10px 6px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
   .image-container {
     overflow: hidden;
-    border-radius: 4px;
-    height: 36px;
-    width: 36px;
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
     margin: 0 4px;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 
     .user-image {
       width: 100%;
       height: 100%;
-      background: url('https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png') no-repeat #fff;
+      background: url("https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png") no-repeat #fff;
       background-size: cover;
     }
   }
@@ -71,27 +67,30 @@ defineProps({
   }
 }
 
-.user-panel {
-  .dx-list-item .dx-icon {
+.user-panel  {
+  :deep(.dx-list-item) .dx-icon {
     vertical-align: middle;
     color: $base-text-color;
     margin-right: 16px;
   }
-  .dx-rtl .dx-list-item .dx-icon {
+
+  :deep(.dx-rtl) .dx-list-item .dx-icon {
     margin-right: 0;
     margin-left: 16px;
   }
 }
 
-.dx-context-menu.user-menu.dx-menu-base {
+:deep(.dx-context-menu.user-menu) {
   &.dx-rtl {
     .dx-submenu .dx-menu-items-container .dx-icon {
       margin-left: 16px;
     }
   }
+
   .dx-submenu .dx-menu-items-container .dx-icon {
     margin-right: 16px;
   }
+
   .dx-menu-item .dx-menu-item-content {
     padding: 3px 15px 4px;
   }

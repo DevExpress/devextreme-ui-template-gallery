@@ -66,13 +66,13 @@ export const router = createRouter({
       component: loadComponent('crm-contact-list/crm-contact-list'),
     },
     {
-      path: '/crm-contact-form',
-      name: 'crm-contact-form',
+      path: '/crm-contact-details',
+      name: 'crm-contact-details',
       meta: {
         requiresAuth: true,
         layout: defaultLayout,
       },
-      component: loadComponent('crm-contact-form/crm-contact-form'),
+      component: loadComponent('crm-contact-details/crm-contact-details'),
     },
   ],
 });

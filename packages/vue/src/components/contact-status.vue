@@ -1,6 +1,6 @@
 <template>
   <span :class="'status status-' + props.status?.toLowerCase()">
-             {{ ' ' + (props.status || '') }}</span>
+             {{ (props.status || '') }}</span>
 </template>
 
 <script setup lang="ts">
@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<{
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use 'src/variables' as *;
 @use "sass:math";
 
@@ -24,7 +24,7 @@ span.status {
     }
   }
 
-  font-size: 12px;
+  font-size: 13px;
 
   &::before {
     $diameter: 10px;

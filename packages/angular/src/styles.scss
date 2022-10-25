@@ -5,7 +5,7 @@
   overflow: hidden;
 }
 
-.form-compact {
+.plain-styled-form {
   .dx-layout-manager .dx-field-item:not(.dx-first-col) {
     padding-left: 0;
   }
@@ -13,29 +13,48 @@
   .dx-field-item {
     padding: 0;
 
-    &:not(.dx-first-row):not(.dx-field-item-has-group) {
-      padding-top: 15px;
-    }
-
-    &.dx-field-item-has-group.dx-first-col.dx-last-row {
+    &.contact-fields-group {
       padding: 15px 0;
     }
 
-    .accent {
-      .view-content-value {
-        color: $accent-color;
-      }
-    }
-
-    task-priority span,
+    task-priority,
     .status {
       line-height: 18px;
       font-size: 13px;
     }
 
-    dx-select-box task-priority {
+    task-priority {
       .separator {
         max-height: 12px;
+      }
+    }
+  }
+
+  &.view-mode {
+    .accent {
+      .dx-texteditor.form-editor .form-editor-input {
+        color: $accent-color;
+      }
+    }
+
+    .dx-texteditor,
+    .dx-texteditor.form-editor, {
+      pointer-events: none;
+
+      .form-editor-input {
+        color: $texteditor-edit-color;
+      }
+
+      &,
+      & > * {
+        background-color: transparent;
+      }
+
+      &,
+      & *,
+      &::after {
+        border-color: transparent;
+        opacity: 1;
       }
     }
   }
