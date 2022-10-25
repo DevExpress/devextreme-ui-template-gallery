@@ -8,7 +8,7 @@ type CardProps = {
   title?: string;
   contentClass: string;
   isLoading?: boolean;
-  kind?: 'normal' | 'small';
+  kind?: 'normal' | 'compact';
 };
 
 const menuItems: Array<{ icon: string; items: Array<{ text: string }> }> = [

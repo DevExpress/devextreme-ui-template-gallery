@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
-import Bullet, { Size as BulletSize, Tooltip } from 'devextreme-react/bullet';
+import Bullet, { Tooltip } from 'devextreme-react/bullet';
 import Chart, { Series, CommonSeriesSettings, ArgumentAxis, ValueAxis, Legend, Size, Label, Format, Border } from 'devextreme-react/chart';
 import Funnel, { Label as FunnelLabel, Format as FunnelFormat, Legend as FunnelLegend, Size as FunnelSize, Margin } from 'devextreme-react/funnel';
 import PieChart, { Label as PielLabel, Legend as PieLegend, Size as PieSize, Series as PieSeries, Font, Margin as PieMargin } from 'devextreme-react/pie-chart';
@@ -9,8 +9,6 @@ import DataGrid, { Column } from 'devextreme-react/data-grid';
 import { CardAnalytics } from '../../components/card-analytics/CardAnalytics';
 import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, getSalesByState } from 'dx-rwa-data';
 import './analytics-dashboard.scss';
-
-type PanelItem = { text: string; value: string; key: number };
 
 const tabItems = {
   Week: {
@@ -132,28 +130,28 @@ export const AnalyticsDashboard = () => {
         />
       </Toolbar>
       <div className='cards grey'>
-        <CardAnalytics title='Opportunities' contentClass='opportunities-total' kind='small' isLoading={!opportunitiesTotal}>
+        <CardAnalytics title='Opportunities' contentClass='opportunities-total' kind='compact' isLoading={!opportunitiesTotal}>
           <div className='total'>{currencyFormatter.format(opportunitiesTotal)}</div>
           <div className='percentage'>
             <i className='dx-icon-spinup'></i>
             <span>20.3%</span>
           </div>
         </CardAnalytics>
-        <CardAnalytics title='Revenue Total' contentClass='revenue-total' kind='small' isLoading={!salesTotal}>
+        <CardAnalytics title='Revenue Total' contentClass='revenue-total' kind='compact' isLoading={!salesTotal}>
           <div className='total'>{currencyFormatter.format(salesTotal)}</div>
           <div className='percentage'>
             <i className='dx-icon-spinup'></i>
             <span>14.7%</span>
           </div>
         </CardAnalytics>
-        <CardAnalytics title='Conversion' kind='small' contentClass='conversion'>
+        <CardAnalytics title='Conversion' kind='compact' contentClass='conversion'>
           <div className='total'>16%</div>
           <div className='percentage'>
             <i className='dx-icon-spindown'></i>
             <span>2.3%</span>
           </div>
         </CardAnalytics>
-        <CardAnalytics contentClass='leads' kind='small' title='Leads'>
+        <CardAnalytics contentClass='leads' kind='compact' title='Leads'>
           <div className='total'>51</div>
           <div className='percentage'>
             <i className='dx-icon-spinup'></i>
@@ -162,7 +160,7 @@ export const AnalyticsDashboard = () => {
         </CardAnalytics>
       </div>
       <div className='cards'>
-        <CardAnalytics title='Revenue' contentClass='sales' isLoading={!sales}>
+        <CardAnalytics title='Revenue' contentClass='sales' isLoading={!sales.length}>
           <Chart dataSource={sales}>
             <Series valueField='total' />
             <CommonSeriesSettings argumentField='date' type='splinearea'>
@@ -178,7 +176,7 @@ export const AnalyticsDashboard = () => {
             <Size height={270} />
           </Chart>
         </CardAnalytics>
-        <CardAnalytics title='Conversion Funnel (All Products)' contentClass='opportunities' isLoading={!opportunities}>
+        <CardAnalytics title='Conversion Funnel (All Products)' contentClass='opportunities' isLoading={!opportunities.length}>
           <Funnel dataSource={opportunities} argumentField='name' valueField='value'>
             <FunnelLabel visible={true} position='inside' backgroundColor='none' customizeText={({ valueText }) => `$${valueText}`}>
               <FunnelFormat type='largeNumber' precision='1' />
@@ -189,7 +187,7 @@ export const AnalyticsDashboard = () => {
             <FunnelSize height={270} />
           </Funnel>
         </CardAnalytics>
-        <CardAnalytics title='Revenue Analysis' contentClass='sales-by-state' isLoading={!salesByState}>
+        <CardAnalytics title='Revenue Analysis' contentClass='sales-by-state' isLoading={!salesByState.length}>
           <DataGrid dataSource={salesByState} height={270}>
             <Column caption='State' dataField='stateName' />
             <Column alignment='left' caption='Sales' dataField='total' dataType='number' format='currency' sortOrder='desc' hidingPriority={2} />
@@ -209,7 +207,7 @@ export const AnalyticsDashboard = () => {
             />
           </DataGrid>
         </CardAnalytics>
-        <CardAnalytics title='Revenue Snapshot (All Products)' contentClass='sales-by-category' isLoading={!salesByCategory}>
+        <CardAnalytics title='Revenue Snapshot (All Products)' contentClass='sales-by-category' isLoading={!salesByCategory.length}>
           <PieChart dataSource={salesByCategory} type='doughnut' diameter={0.8} innerRadius={0.6}>
             <PieSeries argumentField='name' valueField='value'>
               <PielLabel backgroundColor='none' radialOffset={-20} visible={true} customizeText={({ percentText }) => percentText}>
