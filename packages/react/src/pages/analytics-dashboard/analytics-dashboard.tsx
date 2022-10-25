@@ -179,7 +179,7 @@ export const AnalyticsDashboard = () => {
         <CardAnalytics title='Revenue Snapshot (All Products)'>
           <PieChart dataSource={salesByCategory} type='doughnut' diameter={0.8} innerRadius={0.6}>
             <PieSeries argumentField='name' valueField='value'>
-              <PielLabel backgroundColor='none' radialOffset={-20} visible={true}>
+              <PielLabel backgroundColor='none' radialOffset={-20} visible={true} customizeText={({ percentText }) => percentText}>
                 <Font color='#757575' size={15} />
               </PielLabel>
             </PieSeries>
