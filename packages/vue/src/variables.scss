@@ -54,7 +54,7 @@ $main-container-padding-right: 16px;
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
-  color: #757575de;
+  color: $texteditor-label-color;
 }
 
 @mixin message-text {

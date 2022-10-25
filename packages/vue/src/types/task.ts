@@ -26,7 +26,7 @@ export interface Task {
   company: string,
   priority: TaskPriority,
   startDate: Date,
-  dueDate: Date,
+  dueDate: Date | null,
   owner: string,
   status: TaskStatus,
   activities: Activity[],

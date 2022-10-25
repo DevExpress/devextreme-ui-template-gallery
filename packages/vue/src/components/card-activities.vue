@@ -68,7 +68,7 @@ const activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }>
 
 #activities-list {
   padding: 10px;
-  min-height: 300px;
+  min-height: 250px;
   position: relative;
   display: block;
 

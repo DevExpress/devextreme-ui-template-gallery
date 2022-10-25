@@ -5,9 +5,8 @@
         <dx-button icon="arrowleft" />
       </dx-toolbar-item>
       <dx-toolbar-item
-        :text="contactName"
         location="before"
-        css-class="contact-name-toolbar-item"
+        :text="contactName"
       />
       <dx-toolbar-item
         location="after"
@@ -20,16 +19,17 @@
         />
       </dx-toolbar-item>
       <dx-toolbar-item
-        widget="dxDropDownButton"
         location="after"
-        locate-in-menu="auto"
-        :options="{
-          text:'Actions',
-          stylingMode:'text',
-          width:120,
-          items: ['Assign to Me', 'Archive']
-        }"
-      />
+      >
+        <dx-drop-down-button
+          text="ACTIONS"
+          :width="120"
+          styling-mode="text"
+        >
+          <dx-drop-down-item text="Assign to Me" />
+          <dx-drop-down-item text="Archive" />
+        </dx-drop-down-button>
+      </dx-toolbar-item>
       <dx-toolbar-item
         location="after"
         locate-in-menu="auto"
@@ -37,9 +37,9 @@
         <div class="separator" />
       </dx-toolbar-item>
       <dx-toolbar-item
-        widget="dxButton"
         location="after"
         locate-in-menu="auto"
+        widget="dxButton"
         show-text="inMenu"
         :options="{
           text: 'Copy',
@@ -47,9 +47,9 @@
         }"
       />
       <dx-toolbar-item
-        widget="dxButton"
         location="after"
         locate-in-menu="auto"
+        widget="dxButton"
         show-text="inMenu"
         :options="{
           text: 'Refresh',
@@ -84,6 +84,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { DxButton } from 'devextreme-vue/button';
+import { DxDropDownButton, DxItem as DxDropDownItem } from 'devextreme-vue/drop-down-button';
 import {
   DxToolbar,
   DxItem as DxToolbarItem,
@@ -163,5 +164,4 @@ $right-panel-width: 360px;
     }
   }
 }
-
 </style>

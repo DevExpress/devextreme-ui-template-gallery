@@ -4,7 +4,7 @@
     id="card-messages"
   >
     <load-component
-      :is-loading="isLoading"
+      :is-loading="props.isLoading"
       :container-selector="'#card-messages'"
     >
       <div class="input-content">
@@ -42,41 +42,44 @@
           />
         </dx-toolbar>
       </div>
-      <div class="messages-content">
-        <div
-          class="message-container"
-          v-for="data in items"
-        >
-          <div class="avatar">
-            {{ getAvatarText(data.manager) }}
-          </div>
-          <div class="message dx-card">
-            <div class="message-title">
-              <div class="left-title">
-                <div class="subject">
-                  {{ data.subject }}
-                </div>
-                <div>{{ formatDate(new Date(data.date)) }} - {{ data.manager }}</div>
-              </div>
-              <dx-button icon="overflow" />
+      <dx-scroll-view>
+        <div class="messages-content">
+          <div
+            class="message-container"
+            v-for="data in items.concat(items)"
+          >
+            <div class="avatar">
+              {{ getAvatarText(data.manager) }}
             </div>
-            <div class="message-text">
-              {{ setUserName(data.text) }}
+            <div class="message dx-card">
+              <div class="message-title">
+                <div class="left-title">
+                  <div class="subject">
+                    {{ data.subject }}
+                  </div>
+                  <div>{{ formatDate(new Date(data.date)) }} - {{ data.manager }}</div>
+                </div>
+                <dx-button icon="overflow" />
+              </div>
+              <div class="message-text">
+                {{ setUserName(data.text) }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </dx-scroll-view>
     </load-component>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { ref, watch } from 'vue';
 import { DxTextArea } from 'devextreme-vue/text-area';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { DxFileUploader } from 'devextreme-vue/file-uploader';
+import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { formatDate } from '@/utils/formatters';
 import LoadComponent from '@/components/load-component.vue';
 
@@ -84,17 +87,24 @@ import type { Message } from '@/types/messages';
 
 const props = withDefaults(defineProps<{
   isLoading: boolean,
-  contactName: string,
+  user: string,
   messages: Message[],
 }>(), {
-  contactName: '',
+  user: '',
   isLoading: true,
   messages: () => [],
 });
 
-const items = computed(() => [...props.messages]);
+const items = ref<Message[]>(props.messages);
 const messageText = ref<string>('');
 const messageTitle = ref<string>('');
+
+watch(
+  () => props.messages,
+  (newValue) => {
+    items.value = newValue;
+  },
+);
 
 function defaultText() {
   messageTitle.value = '';
@@ -106,7 +116,7 @@ function getAvatarText(name: string) {
 }
 
 function setUserName(text: string) {
-  return text.replace('{username}', props.contactName);
+  return text.replace('{username}', props.user);
 }
 
 function send() {
@@ -117,7 +127,7 @@ function send() {
   const newMessage: Message = {
     subject: messageTitle.value,
     text: messageText.value,
-    manager: props.contactName,
+    manager: props.user,
     date: new Date(),
   };
 
@@ -133,15 +143,14 @@ function send() {
 #card-messages {
   min-height: 300px;
 }
-
 .input-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-:deep(.file-uploader) {
-  .dx-fileuploader-wrapper {
+.file-uploader {
+  :deep(.dx-fileuploader-wrapper) {
     padding: 0;
 
     .dx-fileuploader-input-wrapper {
@@ -150,13 +159,16 @@ function send() {
   }
 }
 
-.input-content,
-.messages-content {
+.input-content {
   padding: 20px;
+}
+
+.dx-scrollview {
   height: 320px;
 }
 
 .messages-content {
+  padding: 20px;
   border-top: 1px solid $base-border-color;
   background-color: $side-panel-background;
 }
