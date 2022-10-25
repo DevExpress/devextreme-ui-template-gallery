@@ -23,7 +23,7 @@ import DxTreeView from 'devextreme-vue/ui/tree-view';
 import { sizes } from '@/utils/media-query';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { navigation } from '../app-navigation';
+import { navigation } from '@/app-navigation';
 
 const route = useRoute();
 const router = useRouter();
@@ -45,7 +45,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['click']);
 
-function forwardClick(...args: any[]) {
+function forwardClick(...args: unknown[]) {
   emit('click', args);
 }
 
@@ -91,7 +91,7 @@ watch(
 );
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use "../variables" as *;
 .side-navigation-menu {
   display: flex;
@@ -99,7 +99,8 @@ watch(
   min-height: 100%;
   height: 100%;
   width: 250px !important;
-  .menu-container {
+
+  &:deep(.menu-container) {
     min-height: 100%;
     display: flex;
     flex: 1;

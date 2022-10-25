@@ -28,7 +28,6 @@ const cssClasses = computed(() => ['app'].concat(screenInfo.value.cssClasses));
     </div>
   </div>
 </template>
-
 <style lang="scss">
 html,
 body {
@@ -45,9 +44,10 @@ body {
 * {
   box-sizing: border-box;
 }
-
+</style>
+<style scoped lang="scss">
+@use "@/variables" as *;
 .app {
-  @import "@/variables.scss";
   background-color: darken($base-bg, 5);
   display: flex;
   height: 100%;
@@ -57,6 +57,7 @@ body {
     position: relative;
     flex-grow: 1;
     width: 100%;
+    background: $base-bg;
 
     .view-wrapper {
       display: flex;
@@ -64,9 +65,13 @@ body {
     }
   }
 
-  .form-compact {
+  &:deep(.form-compact) {
     .dx-layout-manager .dx-field-item:not(.dx-first-col) {
       padding-left: 0;
+    }
+
+    .dx-box-item-content {
+      gap: 10px;
     }
 
     .dx-field-item {
