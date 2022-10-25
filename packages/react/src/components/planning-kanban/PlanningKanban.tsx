@@ -14,7 +14,7 @@ import { List } from './list/List';
 
 import './PlanningKanban.scss';
 
-const reorder = (items: any[], item: any, fromIndex: number, toIndex: number) => {
+const reorder = <T, >(items: T[], item: T, fromIndex: number, toIndex: number) => {
   let result = items;
   if (fromIndex >= 0) {
     result = [...result.slice(0, fromIndex), ...result.slice(fromIndex + 1)];
