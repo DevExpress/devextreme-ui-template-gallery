@@ -6,7 +6,7 @@ export const ConversionFunnelCard = ({ datasource }) => (
   <CardAnalytics title='Conversion Funnel (All Products)' contentClass='opportunities' isLoading={!datasource.length}>
     <Funnel dataSource={datasource} argumentField='name' valueField='value'>
       <Label visible position='inside' backgroundColor='none' customizeText={({ valueText }) => `$${valueText}`}>
-        <Format type='largeNumber' precision='1' />
+        <Format type='largeNumber' precision={1} />
       </Label>
       <Legend visible>
         <Margin top={70} />
