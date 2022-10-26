@@ -6,7 +6,7 @@ export const RevenueSnapshotCard = ({ datasource }) => (
   <CardAnalytics title='Revenue Snapshot (All Products)' contentClass='sales-by-category' isLoading={!datasource.length}>
     <PieChart dataSource={datasource} type='doughnut' diameter={0.8} innerRadius={0.6}>
       <Series argumentField='name' valueField='value'>
-        <Label backgroundColor='none' radialOffset={-20} visible={true} customizeText={({ percentText }) => percentText}>
+        <Label backgroundColor='none' radialOffset={-20} visible customizeText={({ percentText }) => percentText}>
           <Font color='#757575' size={15} />
         </Label>
       </Series>

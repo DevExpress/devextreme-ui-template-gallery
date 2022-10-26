@@ -7,7 +7,7 @@ export const RevenueCard = ({ datasource }) => (
     <Chart dataSource={datasource}>
       <Series valueField='total' />
       <CommonSeriesSettings argumentField='date' type='splinearea'>
-        <Border visible={true} />
+        <Border visible />
       </CommonSeriesSettings>
       <ArgumentAxis argumentType='datetime' />
       <ValueAxis>

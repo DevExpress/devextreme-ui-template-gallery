@@ -5,10 +5,10 @@ import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics'
 export const ConversionFunnelCard = ({ datasource }) => (
   <CardAnalytics title='Conversion Funnel (All Products)' contentClass='opportunities' isLoading={!datasource.length}>
     <Funnel dataSource={datasource} argumentField='name' valueField='value'>
-      <Label visible={true} position='inside' backgroundColor='none' customizeText={({ valueText }) => `$${valueText}`}>
+      <Label visible position='inside' backgroundColor='none' customizeText={({ valueText }) => `$${valueText}`}>
         <Format type='largeNumber' precision='1' />
       </Label>
-      <Legend visible={true}>
+      <Legend visible>
         <Margin top={70} />
       </Legend>
       <Size height={270} />

@@ -26,7 +26,7 @@ export const CardAnalytics = ({ isLoading = false, title, contentClass, children
 
   return (
     <div className={`card ${contentClass}`}>
-      <Menu visible={true} className='overflow-menu' items={menuItems} />
+      <Menu visible className='overflow-menu' items={menuItems} />
       <div className='title'>{title}</div>
       <div className='content'>{children}</div>
       <LoadPanel container={`.${contentClass}`} position={calculateLoadPanelPosition()} visible={isLoading} showPane={false} width='100%' height={compact ? 50 : 60} maxWidth='100%' />
