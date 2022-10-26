@@ -118,7 +118,7 @@ type Context = {
 }
 const FormContext = React.createContext<Context>({} as Context);
 
-export const TaskForm = ({ task }: { task: FormTask }) => {
+export const TaskForm = ({ task }: { task?: FormTask }) => {
   const [data, setData] = useState(task);
   const [isDueDate, setDueDate] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -134,7 +134,7 @@ export const TaskForm = ({ task }: { task: FormTask }) => {
     setEditing(!editing);
   }, [editing]);
   const dueDateChange = (value) => {
-    setData({ ...task, ...{ dueDate: value } });
+    setData({ ...data!, ...{ dueDate: value } });
     setDueDate(!!value);
   };
   const updateTask = (obj) => {
@@ -156,7 +156,7 @@ export const TaskForm = ({ task }: { task: FormTask }) => {
       {loading ? (
         <LoadPanel container='.task-form' visible position={{ of: '.task-form' }} />
       ) : (
-        <FormContext.Provider value={{ data: data, setValue: updateTask, dueDateChange: dueDateChange }}>
+        <FormContext.Provider value={{ data: data!, setValue: updateTask, dueDateChange: dueDateChange }}>
           <Form formData={data} labelMode='floating' readOnly={!editing}>
             <SimpleItem dataField='text' visible={editing}></SimpleItem>
             <GroupItem itemType='group' caption='Details' colCount={2}>
