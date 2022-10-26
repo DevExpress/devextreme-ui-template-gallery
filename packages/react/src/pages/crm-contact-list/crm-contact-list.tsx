@@ -1,156 +1,151 @@
-import React, { useState, useEffect } from 'react';
-import './crm-contact-list.scss';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-import DataGrid, { Sorting, Selection, HeaderFilter, Scrolling, SearchPanel, ColumnChooser, Export, Column, Toolbar, Item } from 'devextreme-react/data-grid';
-import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
-import { Button, DropDownButton, SelectBox, TextBox } from 'devextreme-react';
-import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
-import { getContacts } from 'dx-rwa-data';
-import { contactStatusList, ContactStatus } from '../../shared/types/crm-contact';
+import DataGrid, {
+  Sorting, Selection, HeaderFilter, Scrolling, SearchPanel,
+  ColumnChooser, Export, Column, Toolbar, Item
+} from 'devextreme-react/data-grid';
+import Button from 'devextreme-react/button';
+import DropDownButton from 'devextreme-react/drop-down-button';
+import SelectBox from 'devextreme-react/select-box';
+import TextBox from 'devextreme-react/text-box';
 import LoadPanel from 'devextreme-react/load-panel';
+
+import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
+
+import { getContacts } from 'dx-rwa-data';
+
+import { contactStatusList, ContactStatus } from '../../shared/types/crm-contact';
+
+import './crm-contact-list.scss';
 
 type FilterContactStatus = ContactStatus | 'All Contacts';
 
+const cellNameRender = (cell: ColumnCellTemplateData) => (
+  <div className='name-template'>
+    <div>{cell.data.name}</div>
+    <div className='position'>{cell.data.position}</div>
+  </div>
+);
+
+const cellStatusRender = (cell: ColumnCellTemplateData) => (
+  <div>
+    <span className={`status status-${cell.data.status.toLowerCase()}`}>{cell.data.status}</span>
+  </div>
+);
+
+const statusRender = (data: string) => (
+  <div>
+    <span className={`status status-${data.toLowerCase()}`}>{data}</span>
+  </div>
+);
+
+const fieldRender = (data: string) => (
+  <div>
+    {data && statusRender(data)}
+    <TextBox readOnly />
+  </div>
+);
+
+const editCellStatusRender = () => (
+  <SelectBox className='cell-info' dataSource={contactStatusList} itemRender={statusRender} fieldRender={fieldRender} />
+);
+
+const cellPhoneRender = (cell: ColumnCellTemplateData) => (
+  String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3')
+);
+
+const filterStatusList = ['All Contacts', ...contactStatusList];
+
 export const CRMContactList = () => {
-  let grid: any = null;
-
-  const statusList = contactStatusList;
-
-  const filterStatusList = ['All Contacts', ...contactStatusList];
-
   const [status, setStatus] = useState(filterStatusList[0]);
   const [gridData, setGridData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const grid = useRef<DataGrid>(null);
+
   useEffect(() => {
     getContacts()
-      .then((data) => setGridData(data))
+      .then((data) => {
+        setGridData(data);
+        if (data.length) {
+          setLoading(false);
+        }
+      })
       .catch((error) => console.log(error));
   }, []);
 
-  useEffect(() => {
-    if (gridData.length !== 0) {
-      setLoading(false);
-    }
-  }, [gridData]);
-
-  const cellNameRender = (cell: ColumnCellTemplateData) => {
-    return (
-      <div className={'name-template'}>
-        <div>{cell.data.name}</div>
-        <div className={'position'}>{cell.data.position}</div>
-      </div>
-    );
-  };
-
-  const cellStatusRender = (cell: ColumnCellTemplateData) => {
-    return (
-      <div>
-        <span className={'status status-' + cell.data.status.toLowerCase()}>{cell.data.status}</span>
-      </div>
-    );
-  };
-
-  const statusRender = (data: string) => {
-    return (
-      <div>
-        <span className={'status status-' + data.toLowerCase()}>{data}</span>
-      </div>
-    );
-  };
-
-  const fieldRender = (data: string) => {
-    return (
-      <div>
-        {data && statusRender(data)}
-        <TextBox readOnly={true} />
-      </div>
-    );
-  };
-
-  const editCellStatusRender = () => {
-    return <SelectBox className={'cell-info'} dataSource={statusList} itemRender={statusRender} fieldRender={fieldRender} />;
-  };
-
-  const cellPhoneRender = (cell: ColumnCellTemplateData): string => {
-    return String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
-  };
-
-  const filterByStatus = (e: SelectionChangedEvent) => {
+  const filterByStatus = useCallback((e: SelectionChangedEvent) => {
     const { item: status }: { item: FilterContactStatus } = e;
 
     if (status === 'All Contacts') {
-      grid.instance.clearFilter();
+      grid.current?.instance.clearFilter();
     } else {
-      grid.instance.filter(['status', '=', status]);
+      grid.current?.instance.filter(['status', '=', status]);
     }
 
     setStatus(status);
-  };
+  }, []);
 
-  const addRow = () => {
-    grid.instance.addRow();
-  };
+  const addRow = useCallback(() => {
+    grid.current?.instance.addRow();
+  }, []);
 
-  const refresh = () => {
-    grid.instance.refresh();
-  };
+  const refresh = useCallback(() => {
+    grid.current?.instance.refresh();
+  }, []);
 
   return (
-    <React.Fragment>
-      <div className={'view crm-contact-list'}>
-        <div className={'view-wrapper'}>
-          {!loading ? (
-            <DataGrid
-              className={'grid'}
-              noDataText={''}
-              dataSource={gridData}
-              ref={(ref) => {
-                grid = ref;
-              }}
-            >
-              <SearchPanel visible={true} placeholder={'Contact Search'} />
-              <ColumnChooser enabled={true} />
-              <Export enabled={true} allowExportSelectedData={true} />
-              <Selection selectAllMode={'allPages'} showCheckBoxesMode={'always'} mode={'multiple'} />
-              <HeaderFilter visible={true} />
-              <Sorting mode={'multiple'} />
-              <Scrolling mode={'virtual'} />
-              <Toolbar>
-                <Item location={'before'}>
-                  <div className={'grid-header'}>Contact List</div>
-                </Item>
-                <Item location={'before'} locateInMenu={'auto'}>
-                  <DropDownButton dataSource={filterStatusList} stylingMode={'text'} width={160} selectedItemKey={status} useSelectMode={true} onSelectionChanged={filterByStatus}></DropDownButton>
-                </Item>
-                <Item location={'after'} locateInMenu={'auto'}>
-                  <Button icon={'plus'} text={'Add Contact'} type={'default'} stylingMode={'contained'} onClick={addRow}></Button>
-                </Item>
-                <Item location={'after'} locateInMenu={'auto'} showText={'inMenu'} widget={'dxButton'}>
-                  <Button icon={'refresh'} text={'Refresh'} stylingMode={'text'} onClick={refresh}></Button>
-                </Item>
-                <Item location={'after'} locateInMenu={'auto'}>
-                  <div className={'separator'}></div>
-                </Item>
-                <Item name={'exportButton'}></Item>
-                <Item location={'after'} locateInMenu={'auto'}>
-                  <div className={'separator'}></div>
-                </Item>
-                <Item name={'columnChooserButton'} locateInMenu={'auto'}></Item>
-                <Item name={'searchPanel'} locateInMenu={'auto'}></Item>
-              </Toolbar>
-              <Column dataField={'name'} caption={'Name'} sortOrder={'asc'} hidingPriority={5} minWidth={150} cellRender={cellNameRender}></Column>
-              <Column dataField={'company'} caption={'Company'} hidingPriority={5} minWidth={150}></Column>
-              <Column dataField={'status'} caption={'Status'} dataType={'string'} hidingPriority={3} minWidth={100} cellRender={cellStatusRender} editCellRender={editCellStatusRender}></Column>
-              <Column dataField={'assignedTo'} caption={'Assigned to'} hidingPriority={4}></Column>
-              <Column dataField={'phone'} caption={'Phone'} hidingPriority={2} cellRender={cellPhoneRender}></Column>
-              <Column dataField={'email'} caption={'Email'} hidingPriority={1}></Column>
-            </DataGrid>
-          ) : (
-            <LoadPanel visible={true} />
-          )}
-        </div>
+    <div className='view crm-contact-list'>
+      <div className='view-wrapper'>
+        {!loading ? (
+          <DataGrid
+            className='grid'
+            noDataText=''
+            dataSource={gridData}
+            ref={grid}
+          >
+            <SearchPanel visible placeholder='Contact Search' />
+            <ColumnChooser enabled />
+            <Export enabled allowExportSelectedData />
+            <Selection selectAllMode='allPages' showCheckBoxesMode='always' mode='multiple' />
+            <HeaderFilter visible />
+            <Sorting mode='multiple' />
+            <Scrolling mode='virtual' />
+            <Toolbar>
+              <Item location='before'>
+                <div className='grid-header'>Contact List</div>
+              </Item>
+              <Item location='before' locateInMenu='auto'>
+                <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus}></DropDownButton>
+              </Item>
+              <Item location='after' locateInMenu='auto'>
+                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addRow}></Button>
+              </Item>
+              <Item location='after' locateInMenu='auto' showText='inMenu' widget='dxButton'>
+                <Button icon='refresh' text='Refresh' stylingMode='text' onClick={refresh}></Button>
+              </Item>
+              <Item location='after' locateInMenu='auto'>
+                <div className='separator'></div>
+              </Item>
+              <Item name='exportButton'></Item>
+              <Item location='after' locateInMenu='auto'>
+                <div className='separator'></div>
+              </Item>
+              <Item name='columnChooserButton' locateInMenu='auto'></Item>
+              <Item name='searchPanel' locateInMenu='auto'></Item>
+            </Toolbar>
+            <Column dataField='name' caption='Name' sortOrder='asc' hidingPriority={5} minWidth={150} cellRender={cellNameRender}></Column>
+            <Column dataField='company' caption='Company' hidingPriority={5} minWidth={150}></Column>
+            <Column dataField='status' caption='Status' dataType='string' hidingPriority={3} minWidth={100} cellRender={cellStatusRender} editCellRender={editCellStatusRender}></Column>
+            <Column dataField='assignedTo' caption='Assigned to' hidingPriority={4}></Column>
+            <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender}></Column>
+            <Column dataField='email' caption='Email' hidingPriority={1}></Column>
+          </DataGrid>
+        ) : (
+          <LoadPanel visible />
+        )}
       </div>
-    </React.Fragment>
+    </div>
   );
 };

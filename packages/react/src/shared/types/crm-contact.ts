@@ -10,7 +10,7 @@ export type ContactStatus = (typeof contactStatusList)[number];
 
 interface State {
     stateShort: string;
-};
+}
 
 export interface Contact {
     name: string,
@@ -26,4 +26,4 @@ export interface Contact {
     email: string,
     image: string,
     activities: Activities,
-};
+}
