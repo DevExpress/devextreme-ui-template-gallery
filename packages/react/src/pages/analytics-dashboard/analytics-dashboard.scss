@@ -15,7 +15,7 @@
     gap: 20px;
     grid-template-columns: repeat(2, calc(50% - 10px));
 
-    &.grey {
+    &.compact {
       margin: 20px 0;
       grid-template-columns: repeat(4, calc(25% - 15px));
 
@@ -92,7 +92,7 @@
     .cards {
       grid-template-columns: repeat(1, 100%);
 
-      &.grey {
+      &.compact {
         grid-template-columns: repeat(2, calc(50% - 10px));
       }
     }
@@ -106,7 +106,7 @@
 
   @media only screen and (max-width: 400px) {
     .cards {
-      &.grey {
+      &.compact {
         grid-template-columns: repeat(1, 100%);
       }
     }

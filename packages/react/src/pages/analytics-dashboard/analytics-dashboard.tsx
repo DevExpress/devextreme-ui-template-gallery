@@ -46,6 +46,10 @@ const currencyFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 0,
 });
 
+const DashboardCardsGroup = ({ children, compact = false }) => (
+  <div className={`cards${(compact && ' compact') || ''}`}>{compact ? React.Children.map(children, (child) => React.cloneElement(child, { compact })) : children}</div>
+);
+
 export const AnalyticsDashboard = () => {
   const [tabIndex, setTabIndex] = useState(tabItems[DEFAULT_TAB_KEY].index);
   const [dateRange, setDateRange] = useState(tabItems[DEFAULT_TAB_KEY].period.split('/'));
@@ -129,37 +133,37 @@ export const AnalyticsDashboard = () => {
           }}
         />
       </Toolbar>
-      <div className='cards grey'>
-        <CardAnalytics title='Opportunities' contentClass='opportunities-total' kind='compact' isLoading={!opportunitiesTotal}>
+      <DashboardCardsGroup compact>
+        <CardAnalytics title='Opportunities' contentClass='opportunities-total' isLoading={!opportunitiesTotal}>
           <div className='total'>{currencyFormatter.format(opportunitiesTotal)}</div>
           <div className='percentage'>
             <i className='dx-icon-spinup'></i>
             <span>20.3%</span>
           </div>
         </CardAnalytics>
-        <CardAnalytics title='Revenue Total' contentClass='revenue-total' kind='compact' isLoading={!salesTotal}>
+        <CardAnalytics title='Revenue Total' contentClass='revenue-total' isLoading={!salesTotal}>
           <div className='total'>{currencyFormatter.format(salesTotal)}</div>
           <div className='percentage'>
             <i className='dx-icon-spinup'></i>
             <span>14.7%</span>
           </div>
         </CardAnalytics>
-        <CardAnalytics title='Conversion' kind='compact' contentClass='conversion'>
+        <CardAnalytics title='Conversion' contentClass='conversion'>
           <div className='total'>16%</div>
           <div className='percentage'>
             <i className='dx-icon-spindown'></i>
             <span>2.3%</span>
           </div>
         </CardAnalytics>
-        <CardAnalytics contentClass='leads' kind='compact' title='Leads'>
+        <CardAnalytics contentClass='leads' title='Leads'>
           <div className='total'>51</div>
           <div className='percentage'>
             <i className='dx-icon-spinup'></i>
             <span>8.5%</span>
           </div>
         </CardAnalytics>
-      </div>
-      <div className='cards'>
+      </DashboardCardsGroup>
+      <DashboardCardsGroup>
         <CardAnalytics title='Revenue' contentClass='sales' isLoading={!sales.length}>
           <Chart dataSource={sales}>
             <Series valueField='total' />
@@ -220,7 +224,7 @@ export const AnalyticsDashboard = () => {
             <PieSize height={270} />
           </PieChart>
         </CardAnalytics>
-      </div>
+      </DashboardCardsGroup>
     </div>
   );
 };
