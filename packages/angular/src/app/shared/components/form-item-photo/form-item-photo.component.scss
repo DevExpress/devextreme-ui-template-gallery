@@ -2,7 +2,7 @@
   border-radius: 8px;
   background-repeat: no-repeat;
   background-size: cover;
-  
+
   &.uploader {
     background-color: rgba(0, 0, 0, 0.04);
     border-width: 2px;
@@ -18,7 +18,7 @@
     user-select: none;
     line-height: inherit;
     margin-bottom: 5px;
-  
+
     & > span {
       font-weight: 100;
       opacity: 0.5;
