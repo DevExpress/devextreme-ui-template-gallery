@@ -3,6 +3,6 @@ export interface Message {
     subject: string,
     date: string | Date,
     text: string
-};
+}
 
 export type Messages = Message[];

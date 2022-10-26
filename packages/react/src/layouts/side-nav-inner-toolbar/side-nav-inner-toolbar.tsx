@@ -1,15 +1,21 @@
+
+import React, { useState, useCallback, useRef } from 'react';
+
 import Button from 'devextreme-react/button';
 import Drawer from 'devextreme-react/drawer';
 import ScrollView from 'devextreme-react/scroll-view';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
-import React, { useState, useCallback, useRef } from 'react';
-import { useNavigate } from 'react-router';
-import { Header, SideNavigationMenu, Footer } from '../../components';
-import './side-nav-inner-toolbar.scss';
-import { useScreenSize } from '../../utils/media-query';
 import { Template } from 'devextreme-react/core/template';
+
+import { useNavigate } from 'react-router';
+
+import { Header, SideNavigationMenu, Footer } from '../../components';
+import { useScreenSize } from '../../utils/media-query';
 import { useMenuPatch } from '../../utils/patches';
+
 import type { SideNavToolbarProps } from '../../types';
+
+import './side-nav-inner-toolbar.scss';
 
 export const SideNavInnerToolbar = ({ title, children }: React.PropsWithChildren<SideNavToolbarProps>) => {
   const scrollViewRef = useRef<ScrollView>(null);
@@ -51,10 +57,10 @@ export const SideNavInnerToolbar = ({ title, children }: React.PropsWithChildren
   );
 
   return (
-    <div className={'side-nav-inner-toolbar'}>
+    <div className='side-nav-inner-toolbar'>
       <Drawer
         className={['drawer', patchCssClass].join(' ')}
-        position={'before'}
+        position='before'
         closeOnOutsideClick={onOutsideClick}
         openedStateMode={isLarge ? 'shrink' : 'overlap'}
         revealMode={isXSmall ? 'slide' : 'expand'}
@@ -62,32 +68,32 @@ export const SideNavInnerToolbar = ({ title, children }: React.PropsWithChildren
         maxSize={250}
         shading={isLarge ? false : true}
         opened={menuStatus === MenuStatus.Closed ? false : true}
-        template={'menu'}
+        template='menu'
       >
-        <div className={'container'}>
+        <div className='container'>
           <Header menuToggleEnabled={isXSmall} toggleMenu={toggleMenu} />
-          <ScrollView ref={scrollViewRef} className={'layout-body with-footer'}>
-            <div className={'content'}>
+          <ScrollView ref={scrollViewRef} className='layout-body with-footer'>
+            <div className='content'>
               {React.Children.map(children, (item: any) => {
                 return item.type !== Footer && item;
               })}
             </div>
-            <div className={'content-block'}>
+            <div className='content-block'>
               {React.Children.map(children, (item: any) => {
                 return item.type === Footer && item;
               })}
             </div>
           </ScrollView>
         </div>
-        <Template name={'menu'}>
+        <Template name='menu'>
           <SideNavigationMenu compactMode={menuStatus === MenuStatus.Closed} selectedItemChanged={onNavigationChanged} openMenu={temporaryOpenMenu} onMenuReady={onMenuReady}>
-            <Toolbar id={'navigation-header'}>
+            <Toolbar id='navigation-header'>
               {!isXSmall && (
-                <Item location={'before'} cssClass={'menu-button'}>
+                <Item location='before' cssClass='menu-button'>
                   <Button icon='menu' stylingMode='text' onClick={toggleMenu} />
                 </Item>
               )}
-              <Item location={'before'} cssClass={'header-title'} text={title} />
+              <Item location='before' cssClass='header-title' text={title} />
             </Toolbar>
           </SideNavigationMenu>
         </Template>

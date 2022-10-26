@@ -1,24 +1,30 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import './TaskForm.scss';
+
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import LoadPanel from 'devextreme-react/load-panel';
-import { PriorityTask } from '../priority-task/PriorityTask';
-import { StatusTask } from '../status-task/StatusTask';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
-import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import Form, { SimpleItem, GroupItem, Label } from 'devextreme-react/form';
-import { DropDownButton, Calendar } from 'devextreme-react';
+import DropDownButton from 'devextreme-react/drop-down-button';
+import Calendar from 'devextreme-react/calendar';
+
+import { PriorityTask } from '../priority-task/PriorityTask';
+import { StatusTask } from '../status-task/StatusTask';
+
+import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
+
 import { TaskPriority, TaskStatus } from '../../shared/types/task';
 import { FormEdit, FormEditComponent, FormTask } from '../../shared/types/task-form';
 
+import './TaskForm.scss';
+
 const EditComponent = ({ items, editComponent: Component, label, value, setValue }: FormEditComponent) => {
   const EditField = (data: string) => (
-      <div className='form-custom-list-prop'>
-        {data && <Component text={data}></Component>}
-        <TextBox readOnly></TextBox>
-      </div>
+    <div className='form-custom-list-prop'>
+      {data && <Component text={data}></Component>}
+      <TextBox readOnly></TextBox>
+    </div>
   );
   const EditItem = (data: string) => <Component text={data}></Component>;
 
@@ -105,13 +111,14 @@ const StatusField = ({ editorOptions }) => (
   </FormContext.Consumer>
 );
 
-const FormContext = React.createContext({
-  data: { priority: '', status: '', company: '', owner: '' },
-  setValue: (obj: { priority?: TaskPriority; status?: TaskStatus }) => {},
-  dueDateChange: (value: any) => {},
-});
+type Context = {
+  data: { priority: string, status: string, company: string, owner: string },
+  setValue: (obj: { priority?: TaskPriority; status?: TaskStatus }) => void,
+  dueDateChange: (value: Date) => void,
+}
+const FormContext = React.createContext<Context>({} as Context);
 
-export const TaskForm = ({ task }: { task: FormTask | undefined }) => {
+export const TaskForm = ({ task }: { task: FormTask }) => {
   const [data, setData] = useState(task);
   const [isDueDate, setDueDate] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -127,7 +134,7 @@ export const TaskForm = ({ task }: { task: FormTask | undefined }) => {
     setEditing(!editing);
   }, [editing]);
   const dueDateChange = (value) => {
-    setData({ ...task!, ...{ dueDate: value } });
+    setData({ ...task, ...{ dueDate: value } });
     setDueDate(!!value);
   };
   const updateTask = (obj) => {
@@ -149,7 +156,7 @@ export const TaskForm = ({ task }: { task: FormTask | undefined }) => {
       {loading ? (
         <LoadPanel container='.task-form' visible position={{ of: '.task-form' }} />
       ) : (
-        <FormContext.Provider value={{ data: data!, setValue: updateTask, dueDateChange: dueDateChange }}>
+        <FormContext.Provider value={{ data: data, setValue: updateTask, dueDateChange: dueDateChange }}>
           <Form formData={data} labelMode='floating' readOnly={!editing}>
             <SimpleItem dataField='text' visible={editing}></SimpleItem>
             <GroupItem itemType='group' caption='Details' colCount={2}>

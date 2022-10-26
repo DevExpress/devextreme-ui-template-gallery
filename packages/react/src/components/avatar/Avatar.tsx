@@ -1,3 +1,4 @@
+import React from 'react';
 import './Avatar.scss';
 
 export const Avatar = ({ owner }: { owner: string }) => (

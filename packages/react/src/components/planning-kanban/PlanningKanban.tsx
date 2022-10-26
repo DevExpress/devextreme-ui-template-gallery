@@ -1,14 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
+
 import ScrollView from 'devextreme-react/scroll-view';
 import Sortable from 'devextreme-react/sortable';
 import LoadPanel from 'devextreme-react/load-panel';
-import { PlanningProps, Task } from '../../shared/types/task';
-import { STATUS_ITEMS } from '../../shared/constants';
+
 import { DragStartEvent, ReorderEvent } from 'devextreme/ui/sortable';
+
+import { PlanningProps, Task } from '../../shared/types/task';
+
+import { STATUS_ITEMS } from '../../shared/constants';
+
 import { List } from './list/List';
+
 import './PlanningKanban.scss';
 
-const reorder = (items: any[], item: Object, fromIndex: number, toIndex: number) => {
+const reorder = <T, >(items: T[], item: T, fromIndex: number, toIndex: number) => {
   let result = items;
   if (fromIndex >= 0) {
     result = [...result.slice(0, fromIndex), ...result.slice(fromIndex + 1)];

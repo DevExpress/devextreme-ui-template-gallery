@@ -6,7 +6,7 @@ export { CreateAccountForm } from './create-account-form/CreateAccountForm';
 export { ChangePasswordForm } from './change-password-form/ChangePasswordForm';
 export { SideNavigationMenu } from './side-navigation-menu/SideNavigationMenu';
 export { PlanningGrid } from './planning-grid/PlanningGrid';
-export { PlanningKanban } from './plannin-kanban/PlanningKanban';
+export { PlanningKanban } from './planning-kanban/PlanningKanban';
 export { TaskForm } from './task-form/TaskForm';
 export { CardActivities } from './card-activities/CardActivities';
 export { CardNotes } from './card-notes/CardNotes';
