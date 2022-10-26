@@ -39,8 +39,16 @@ const calculateTotal = (data: Array<any>) => {
   return data.reduce((total, item) => total + (item.value || item.total), 0);
 };
 
-const DashboardCardsGroup = ({ children, compact = false }) => (
-  <div className={`cards${(compact && ' compact') || ''}`}>{compact ? React.Children.map(children, (child) => React.cloneElement(child, { compact })) : children}</div>
+type DashboardCardsGroupProps = { compact?: boolean };
+
+const DashboardCardsGroup = ({ children, compact = false }: React.PropsWithChildren<DashboardCardsGroupProps>) => (
+  <div className={`cards${compact ? ' compact' : ''}`}>
+    {React.Children.map(children, (child) => {
+      if (React.isValidElement(child)) {
+        return React.cloneElement(child, { compact });
+      }
+    })}
+  </div>
 );
 
 export const AnalyticsDashboard = () => {
