@@ -7,12 +7,14 @@ import { ContactStatus } from 'src/app/shared/types/contact';
 @Component({
   selector: 'contact-status',
   template: `
-  <span class="{{ input && 'input' }} status status-{{ value | lowercase }}">{{ value }}</span>
+  <span class="{{ input && 'input' }} status status-{{ value | lowercase }}">{{ showText ? value : '' }}</span>
 `,
   styleUrls: ['./contact-status.component.scss'],
 })
 export class ContactStatusComponent {
   @Input() value: ContactStatus;
+
+  @Input() showText = true;
 
   @Input() input?: boolean = false;
 }

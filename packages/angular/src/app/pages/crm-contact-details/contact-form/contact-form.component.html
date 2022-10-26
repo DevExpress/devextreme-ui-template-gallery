@@ -56,8 +56,13 @@
               fieldTemplate="field"
             >
               <div *dxTemplate="let data of 'field'" class="status-editor-field">
-                <contact-status [value]="contactData.status"></contact-status>
-                <dx-text-box [readOnly]="true"></dx-text-box>
+                <contact-status class="status-indicator" [showText]="false" [value]="data"></contact-status>
+                <dx-text-box
+                  class="status-{{data.toLowerCase()}}"
+                  [inputAttr]="{class: 'status-input'}"
+                  [readOnly]="true"
+                  [value]="data">
+                </dx-text-box>
               </div>
               <div *dxTemplate="let data of 'item'">
                 <contact-status [value]="data"></contact-status>
