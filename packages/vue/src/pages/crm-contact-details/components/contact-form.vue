@@ -30,13 +30,13 @@
         ></dx-button>
       </dx-toolbar-item>
     </dx-toolbar>
-    <load-component
-      :is-loading="isLoading"
-      :container-selector="'#contact-form'"
-    >
-      <div>
-        <dx-form class="plain-styled-form" :class="{'view-mode': !isEditing}">
+    <load-component :is-loading="isLoading"
+                    :container-selector="'#contact-form'">
+        <dx-form class="plain-styled-form"
+                 :class="{'view-mode': !isEditing}"
+                 labelMode="floating">
           <dx-form-group-item :col-count="2">
+            <dx-col-count-by-screen :xs="2"/>
             <dx-form-item>
               <user-photo :link="contactData.image" :size="184"/>
             </dx-form-item>
@@ -121,6 +121,7 @@
               <form-textbox label="Zip Code"
                             v-model.number="contactData.zipCode"
                             :is-editing = "isEditing"
+                            :validators="[zipCodeValidator]"
               />
             </dx-form-item>
           </dx-form-group-item>
@@ -138,12 +139,14 @@
                                   icon: 'tel',
                                   type: 'default',
                                   stylingMode: 'outlined'
-                                 }"/>
+                                 }"
+                         :validators="[]"/>
             </dx-form-item>
             <dx-form-item>
               <form-textbox label="Email"
                             v-model.number="contactData.email"
-                            :is-editing = "isEditing"/>
+                            :is-editing = "isEditing"
+                            :validators="[{type: 'email'}]"/>
               <dx-button v-if="!isEditing"
                          class="form-item-button"
                          v-bind="{
@@ -155,7 +158,6 @@
             </dx-form-item>
           </dx-form-group-item>
         </dx-form>
-      </div>
     </load-component>
   </div>
 
@@ -197,6 +199,7 @@ const isEditing = ref(false);
 const contactData = ref(emptyContact);
 
 let contactDataSaved = emptyContact;
+const zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
 
 watch(
   () => props.contactData,
@@ -235,7 +238,7 @@ function cancelEdit() {
   }
 }
 
-.dx-form {
+.plain-styled-form {
   .form-item-button {
     margin-left: 10px;
     margin-top: 5px;
