@@ -1,5 +1,5 @@
 const axios = require('axios');
-const _ = require('lodash');
+const lodash = require('lodash');
 
 const baseUrl = 'https://js.devexpress.com/Demos/RwaService/api';
 
@@ -42,7 +42,7 @@ export const getSalesByOrderDate = async (groupByPeriod) => await getData(`Analy
 export const getSales = async (startDate, endDate) => await getData(`Analytics/Sales/${startDate}/${endDate}`);
 
 export const getSalesByState = (data) => {
-  const dataByState = _.chain(data)
+  const dataByState = lodash.chain(data)
     .groupBy((s) => s.stateName)
     .map((val) => {
       let total = 0;
