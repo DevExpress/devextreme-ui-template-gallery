@@ -58,8 +58,9 @@
               <div *dxTemplate="let data of 'field'" class="status-editor-field">
                 <contact-status class="status-indicator" [showText]="false" [value]="data"></contact-status>
                 <dx-text-box
-                  class="status-{{data.toLowerCase()}}"
-                  [inputAttr]="{class: 'status-input'}"
+                  class="status-{{data | lowercase}}"
+                  [hoverStateEnabled]="false"
+                  [inputAttr]="{class: 'status-input status-editor-input'}"
                   [readOnly]="true"
                   [value]="data">
                 </dx-text-box>
