@@ -6,7 +6,7 @@
           <dxi-item location="before">
             <span class="contact-name value">{{ user.name }}</span>
           </dxi-item>
-          <dxi-item location="before" [visible]="!!userId">
+          <dxi-item location="before">
             <contact-status [value]="user.status"></contact-status>
           </dxi-item>
           <dxi-item location="after" [visible]="isPinEnabled">
@@ -128,7 +128,6 @@
             </dxi-item>
             <dxi-item
               location="after"
-              [visible]="!!userId"
               widget="dxDropDownButton"
               [options]="{
                 width: 120,
@@ -141,7 +140,7 @@
         </div>
 
         <div class="data-part">
-          <dx-accordion [multiple]="true" [collapsible]="true" [visible]="!!userId">
+          <dx-accordion [multiple]="true" [collapsible]="true">
             <div class="accordion-title" *dxTemplate="let t of 'title'">
               <span>{{ t.title }}</span>
               <dx-button

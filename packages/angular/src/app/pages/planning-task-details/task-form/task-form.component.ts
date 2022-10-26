@@ -29,6 +29,8 @@ import { Task } from 'src/app/shared/types/task';
 export class TaskFormComponent implements OnChanges {
   @Input() task: Task;
 
+  @Input() contentByScreen: { xs: number, sm: number }
+
   isEditing = false;
 
   statusList = taskStatusList;

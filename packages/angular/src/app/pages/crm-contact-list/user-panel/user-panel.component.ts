@@ -31,7 +31,7 @@ import {
 } from 'src/app/shared/components';
 import { ScreenService, RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
-import { Contact, newContact } from 'src/app/shared/types/contact';
+import { Contact } from 'src/app/shared/types/contact';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 
 @Component({
@@ -48,8 +48,6 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
   @Output() isOpenChange = new EventEmitter<boolean>();
 
   user: Contact;
-
-  newUser = newContact;
 
   isLoading = true;
 
@@ -74,10 +72,6 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
     if (userId?.currentValue) {
       this.loadUserById(userId.currentValue);
-    } else {
-      this.user = this.newUser;
-      this.isLoading = false;
-      this.isEditing = true;
     }
   }
 
@@ -116,10 +110,6 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   toggleEdit = () => {
     this.isEditing = !this.isEditing;
-
-    if (!this.userId) {
-      this.closePanel();
-    }
   };
 
   navigateToDetails = () => {

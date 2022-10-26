@@ -1,0 +1,120 @@
+<dx-popup
+    title="New Contact"
+    [visible]="popupVisible"
+    width="auto"
+    height="auto"
+  >
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar="bottom"
+      location="after"
+      [options]="{
+        text: 'Save',
+        stylingMode: 'outlined',
+        type: 'default',
+        onClick: closePopup
+      }"
+    >
+    </dxi-toolbar-item>
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar="bottom"
+      location="after"
+      [options]="{
+        text: 'Cancel',
+        type: 'text',
+        onClick: closePopup
+      }"
+    >
+    </dxi-toolbar-item>
+  <dx-form class="plain-styled-form"
+          labelMode="floating"
+          [class.view-mode]="!isEditing"   
+  >
+    <dxi-item itemType="group">
+      <dxo-col-count-by-screen [xs]="1" [sm]="1" [md]="1" [lg]="1"></dxo-col-count-by-screen>
+      <dxi-item cssClass="photo">
+        <div *dxTemplate>
+          <form-item-photo [link]="newUser.image"></form-item-photo>
+        </div>
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item itemType="group">
+      <dxo-col-count-by-screen [xs]="1" [sm]="1" [md]="2" [lg]="2"></dxo-col-count-by-screen>
+        <dxi-item cssClass="accent">
+          <div *dxTemplate>
+            <form-textbox label="First Name"
+                        [(value)]="newUser.firstName"
+                        [isEditing]="isEditing"
+          ></form-textbox>
+        </div>
+      </dxi-item>
+      <dxi-item cssClass="accent">
+        <div *dxTemplate>
+          <form-textbox label="Last Name"
+                        [(value)]="newUser.lastName"
+                        [isEditing]="isEditing"
+          ></form-textbox>
+        </div>
+      </dxi-item>
+      <dxi-item cssClass="accent">
+        <div *dxTemplate>
+          <form-textbox label="Company"
+                        [(value)]="newUser.company"
+                        [isEditing]="isEditing"
+          ></form-textbox>
+        </div>
+      </dxi-item>
+      <dxi-item>
+        <div *dxTemplate>
+          <form-textbox label="Position"
+                        [(value)]="newUser.position"
+                        [isEditing]="isEditing"
+          ></form-textbox>
+        </div>
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item itemType="group" cssClass="contact-fields-group">
+      <dxo-col-count-by-screen [xs]="1" [sm]="1" [md]="2" [lg]="2"></dxo-col-count-by-screen>
+
+      <dxi-item cssClass="accent">
+        <div *dxTemplate>
+          <form-textbox label="Assigned to"
+                        [(value)]="newUser.manager"
+                        [isEditing]="isEditing"
+          ></form-textbox>
+        </div>
+      </dxi-item>
+      <dxi-item>
+        <div *dxTemplate>
+          <form-textbox [(value)]="newUser.phone"
+                        [isEditing]="isEditing"
+                        icon="tel"
+                        mask="+1(000)000-0000"
+          ></form-textbox>
+        </div>
+      </dxi-item>
+      <dxi-item>
+        <div *dxTemplate>
+          <form-textbox [(value)]="newUser.email"
+                        [isEditing]="isEditing"
+                        icon="email"
+                        [validators]="[{type: 'email'}]"
+          ></form-textbox>
+        </div>
+      </dxi-item>
+      <dxi-item>
+        <div *dxTemplate>
+          <form-textbox [(value)]="newUser.address"
+                        [isEditing]="isEditing"
+                        icon="home"
+                        [validators]="[]"
+          ></form-textbox>
+        </div>
+      </dxi-item>
+    </dxi-item>
+  </dx-form>
+</dx-popup>

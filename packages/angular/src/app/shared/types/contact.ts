@@ -35,7 +35,7 @@ export type Contact = {
 };
 
 export const newContact: Contact = { 
-  name: 'New Contact',
+  name: '',
   firstName: '',
   lastName: '',
   status: 'Salaried',

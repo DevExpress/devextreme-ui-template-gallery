@@ -25,6 +25,7 @@ import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { jsPDF } from 'jspdf';
 import { UserPanelModule } from './user-panel/user-panel.component';
+import { UserPopupComponent, UserPopupModule } from './user-popup/user-popup.component';
 
 type FilterContactStatus = ContactStatus | 'All';
 
@@ -35,6 +36,8 @@ type FilterContactStatus = ContactStatus | 'All';
 })
 export class CrmContactListComponent implements OnInit, OnDestroy {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
+
+  @ViewChild('userPopup', { static: true }) userPopup: UserPopupComponent;
 
   statusList = contactStatusList;
 
@@ -61,9 +64,8 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     this.dataSubscription.unsubscribe();
   }
 
-  addContact = () => {
-    this.userId = null;
-    this.isPanelOpen = true;
+  addContact() {
+    this.userPopup.popupVisible = true;
   };
 
   refresh = () => {
@@ -141,6 +143,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     DxTextBoxModule,
 
     UserPanelModule,
+    UserPopupModule,
 
     CardActivitiesModule,
     ContactStatusModule,

@@ -27,15 +27,12 @@ fixture`Contact List`;
         await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
         await t.click(Selector('.dx-button[aria-label=Edit]'));
         await takeScreenshot(`crm-contact-list-form-edit${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
+        await t.click(Selector('[aria-label="close"]'));
         if (screenMode[0] === 400) {
-          await t.click(Selector('[aria-label="close"]'));
           await t.click('.view-wrapper .dx-icon-overflow');
         }
         await t.click(Selector('[aria-label="Add Contact"]'));
-        if (screenMode[0] === 400) {
-          await t.click('.view-wrapper .dx-icon-overflow');
-        }
-        await takeScreenshot(`crm-contact-list-add-contact-form-embed=${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
+        await takeScreenshot(`crm-contact-list-add-contact-popup-embed=${getPostfix(embedded, screenMode)}`, 'body');
       }
 
       await t
