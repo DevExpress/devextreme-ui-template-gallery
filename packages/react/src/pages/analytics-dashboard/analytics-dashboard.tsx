@@ -34,7 +34,7 @@ const tabItems = {
 
 const DEFAULT_TAB_KEY = 'All';
 
-const calculateTotal = (data: Array<any>) => {
+const calculateTotal = (data) => {
   if (!data) return;
   return data.reduce((total, item) => total + (item.value || item.total), 0);
 };
