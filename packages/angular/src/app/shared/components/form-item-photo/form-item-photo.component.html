@@ -9,12 +9,12 @@
   [style.backgroundImage]="imageUrl"
 ></div>
 <ng-template #upload>
-  <div class="photo-upload">
+  <div class="photo uploader">
     <span>Drag and drop a photo here or click the area to select it from a folder</span>
   </div>
   <dx-file-uploader
-    dialogTrigger=".photo-upload"
-    dropZone=".photo-upload"
+    dialogTrigger=".photo"
+    dropZone=".photo"
     [multiple]="false"
     accept="image/*"
     uploadMode="instantly"
