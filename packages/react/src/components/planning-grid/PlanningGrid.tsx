@@ -1,13 +1,18 @@
 import React, { useEffect, useState, useCallback } from 'react';
+
 import DataGrid, { Column, Selection, Sorting, HeaderFilter, Scrolling, RequiredRule } from 'devextreme-react/data-grid';
 import LoadPanel from 'devextreme-react/load-panel';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
+
 import { PriorityTask } from '../priority-task/PriorityTask';
 import { StatusTask } from '../status-task/StatusTask';
+
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
+
 import { Task, PlanningProps } from '../../shared/types/task';
 import { GridEdit, GridEditComponent } from '../../shared/types/planning-grid';
+
 import './PlanningGrid.scss';
 
 const EditComponent = ({ items, editComponent: Component, setValue }: GridEditComponent) => {

@@ -1,3 +1,4 @@
+import React from 'react';
 import { TaskPriority, TaskStatus, TaskProp } from './task';
 
 export interface GridEdit {
