@@ -1,18 +1,25 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
-import dxTextBox from 'devextreme/ui/text_box';
-import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
-import { getTasks } from 'dx-rwa-data';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
-import './planning-task-list.scss';
+
+import dxTextBox from 'devextreme/ui/text_box';
+
+import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
+
+import { getTasks } from 'dx-rwa-data';
+
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+
+import './planning-task-list.scss';
 
 const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
 export const PlanningTaskList = () => {
   const gridRef = useRef<DataGrid>(null);
+
   const [list, setList] = useState(listsData[0]);
   const [index, setIndex] = useState(0);
   const [itemVisibility, setItemVisibility] = useState(true);
@@ -23,40 +30,49 @@ export const PlanningTaskList = () => {
       .then((data) => setData(data))
       .catch((error) => console.log(error));
   }, []);
-  const Component = list === listsData[0] ? PlanningGrid : list === listsData[1] ? PlanningKanban : PlanningGantt;
+
+  const Component = useMemo(() => {
+    if(list === listsData[0]) {
+      return PlanningGrid;
+    } else if(list === listsData[1]) {
+      return PlanningKanban;
+    } else {
+      return PlanningGantt;
+    }
+  }, [list]);
+
   const onTabClick = useCallback((e: { itemData: string }) => {
     setList(e.itemData);
     setIndex(listsData.findIndex((d) => d === e.itemData));
-    if (e.itemData === listsData[0]) {
-      setItemVisibility(true);
-    } else {
-      setItemVisibility(false);
-    }
+    setItemVisibility(e.itemData === listsData[0]);
   }, []);
+
   const addDataGridRow = useCallback(() => {
-    gridRef.current!.instance.addRow();
+    gridRef.current?.instance.addRow();
   }, []);
+
   const refresh = useCallback(() => {
-    gridRef.current!.instance.refresh();
-  }, [gridRef]);
+    gridRef.current?.instance.refresh();
+  }, []);
+
   const showColumnChooser = useCallback(() => {
-    gridRef.current!.instance.showColumnChooser();
-  }, [gridRef]);
+    gridRef.current?.instance.showColumnChooser();
+  }, []);
+
   const exportToPDF = useCallback(() => {
     const doc = new jsPDF();
     exportDataGrid({
       jsPDFDocument: doc,
-      component: gridRef.current!.instance,
+      component: gridRef.current?.instance,
     }).then(() => {
       doc.save('Tasks.pdf');
     });
-  }, [gridRef]);
-  const search = useCallback(
-    (e: { component: dxTextBox }) => {
-      gridRef.current!.instance.searchByText(e.component.option('text')!);
-    },
-    [gridRef]
-  );
+  }, []);
+
+  const search = useCallback((e: { component: dxTextBox }) => {
+    gridRef.current?.instance.searchByText(e.component.option('text')!);
+  }, []);
+
   return (
     <div className='view-wrapper-list'>
       <Toolbar>
@@ -137,7 +153,7 @@ export const PlanningTaskList = () => {
           }}
         />
       </Toolbar>
-      <Component dataSource={data} ref={gridRef} />
+      <Component dataSource={data} ref={list === listsData[0] ? gridRef : null} />
     </div>
   );
 };

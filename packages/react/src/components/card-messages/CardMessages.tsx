@@ -1,11 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react';
+
 import TextBox from 'devextreme-react/text-box';
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
-import { Avatar } from '../avatar/Avatar';
-import { formatDate } from "devextreme/localization";
+
+import { formatDate } from 'devextreme/localization';
+
 import { Message, Messages } from '../../shared/types/card-messages';
+import { Avatar } from '../avatar/Avatar';
+
 import './CardMessages.scss';
 
 const getText = (text: string, user: string) => {
