@@ -1,0 +1,48 @@
+@use "@/variables.scss" as *;
+
+.view-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+
+  .cards, .tiles {
+    display: grid;
+    width: 100%;
+    grid-gap: 20px;
+    gap: 20px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, calc(50% - 10px));
+
+    .card-wrapper {
+      flex: 1 50%;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .view-wrapper .cards {
+    grid-template-columns: repeat(1, 100%);
+  }
+
+  .card {
+    .content {
+      height: auto;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 400px) {
+  .cards {
+    &.grey {
+      grid-template-columns: repeat(1, 100%);
+    }
+  }
+}
+
+
+
+
