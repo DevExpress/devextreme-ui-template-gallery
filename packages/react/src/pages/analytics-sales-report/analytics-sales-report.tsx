@@ -40,7 +40,9 @@ export const SalesRangeCard = ({ datasource, range, onRangeChanged }) => (
   </CardAnalytics>
 );
 
-export const ProductSaleByRangeCard = ({ datasource }) => (
+type ProductSaleByRangeCardProps = { datasource: Array<{ [key: string]: unknown }> };
+
+export const ProductSaleByRangeCard = React.memo<ProductSaleByRangeCardProps>(({ datasource }) => (
   <CardAnalytics title='Product Sale by Range' contentClass='sales-by-category' isLoading={!datasource.length}>
     <PieChart id='pie' className='sales-pie' dataSource={datasource} type='doughnut' diameter={0.8} innerRadius={0.6}>
       <Series argumentField='name' valueField='value'>
@@ -67,7 +69,7 @@ export const ProductSaleByRangeCard = ({ datasource }) => (
       </ValueAxis>
     </Chart>
   </CardAnalytics>
-);
+));
 
 export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPeriodChanged, range }) => (
   <CardAnalytics
@@ -110,8 +112,7 @@ export const AnalyticsSalesReport = () => {
   }, []);
 
   const onPeriodChanged = useCallback((e) => {
-    const groupByPeriod = e.item;
-    setGroupByPeriod(groupByPeriod);
+    setGroupByPeriod(e.item);
   }, []);
 
   useEffect(() => {
