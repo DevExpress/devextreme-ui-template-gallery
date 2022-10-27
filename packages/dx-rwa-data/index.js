@@ -1,5 +1,4 @@
 const axios = require('axios');
-const lodash = require('lodash');
 
 const baseUrl = 'https://js.devexpress.com/Demos/RwaService/api';
 
@@ -42,24 +41,29 @@ export const getSalesByOrderDate = async (groupByPeriod) => await getData(`Analy
 export const getSales = async (startDate, endDate) => await getData(`Analytics/Sales/${startDate}/${endDate}`);
 
 export const getSalesByState = (data) => {
-  const dataByState = lodash.chain(data)
-    .groupBy((s) => s.stateName)
-    .map((val) => {
-      let total = 0;
-      let percentage = 0;
-      val.forEach((v) => {
-        total += v.total;
-        percentage += v.percentage;
-      });
+  const groupedData = data
+    .reduce((result, item) => {
+      if (!result[item.stateName]) {
+        result[item.stateName] = [];
+      }
+      result[item.stateName].push(item);
+      return result;
+    }, {});
 
-      return {
-        stateName: val[0].stateName,
-        stateCoords: val[0].stateCoords,
-        total,
-        percentage,
-      };
-    })
-    .value();
+  const dataByState = Object.values(groupedData).map((val) => {
+    let total = 0;
+    let percentage = 0;
+    val.forEach((v) => {
+      total += v.total;
+      percentage += v.percentage;
+    });
 
+    return {
+      stateName: val[0].stateName,
+      stateCoords: val[0].stateCoords,
+      total,
+      percentage,
+    };
+  });
   return dataByState;
 };
