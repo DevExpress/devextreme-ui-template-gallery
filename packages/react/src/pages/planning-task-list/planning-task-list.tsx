@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
+import { useNavigate } from 'react-router-dom';
 
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
+import Sortable from 'devextreme-react/sortable';
+import Gantt from 'devextreme-react/gantt';
+import { exportGantt as exportGanttToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridXSLX } from 'devextreme/excel_exporter';
 import LoadPanel from 'devextreme-react/load-panel';
@@ -23,6 +27,10 @@ const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
 export const PlanningTaskList = () => {
   const gridRef = useRef<DataGrid>(null);
+  const kanbanRef = useRef<Sortable>(null);
+  const ganttRef = useRef<Gantt>(null);
+
+  const navigate = useNavigate();
 
   const [list, setList] = useState(listsData[0]);
   const [index, setIndex] = useState(0);
@@ -50,27 +58,46 @@ export const PlanningTaskList = () => {
     setIndex(listsData.findIndex((d) => d === e.itemData));
   }, []);
 
-  const addDataGridRow = useCallback(() => {
-    gridRef.current?.instance.addRow();
-  }, []);
+  const addTask = useCallback(() => {
+    if(list === listsData[0]) {
+      gridRef.current?.instance.addRow();
+    } else {
+      navigate('/planning-task-details');
+    }
+  }, [list]);
 
   const refresh = useCallback(() => {
-    gridRef.current?.instance.refresh();
-  }, []);
+    if(list === listsData[0]) {
+      gridRef.current?.instance.refresh();
+    } else if(list === listsData[1]) {
+      kanbanRef.current?.instance.update();
+    } else {
+      ganttRef.current?.instance.refresh();
+    }
+  }, [list]);
 
   const showColumnChooser = useCallback(() => {
     gridRef.current?.instance.showColumnChooser();
   }, []);
 
   const exportToPDF = useCallback(() => {
-    const doc = new jsPDF();
-    exportDataGrid({
-      jsPDFDocument: doc,
-      component: gridRef.current?.instance,
-    }).then(() => {
-      doc.save('Tasks.pdf');
-    });
-  }, []);
+    if(list === listsData[0]) {
+      const doc = new jsPDF();
+      exportDataGrid({
+        jsPDFDocument: doc,
+        component: gridRef.current?.instance,
+      }).then(() => {
+        doc.save('Tasks.pdf');
+      });
+    } else {
+      exportGanttToPdf(
+        {
+          component: ganttRef.current?.instance,
+          createDocumentMethod: (args) => new jsPDF(args),
+        },
+      ).then((doc) => doc.save('gantt.pdf'));
+    }
+  }, [list]);
 
   const exportToXSLX = useCallback(() => {
     const workbook = new Workbook();
@@ -110,13 +137,12 @@ export const PlanningTaskList = () => {
           location='after'
           widget='dxButton'
           locateInMenu='auto'
-          cssClass='add-grid-row'
           options={{
             icon: 'plus',
             text: 'ADD TASK',
             type: 'default',
             stylingMode: 'contained',
-            onClick: addDataGridRow,
+            onClick: addTask,
           }}
         />
         <Item
@@ -183,8 +209,8 @@ export const PlanningTaskList = () => {
       </Toolbar>
       {loading && <LoadPanel container='.content' visible position={{ of: '.content' }} />}
       {!loading && list === listsData[0] && <PlanningGrid dataSource={gridData} ref={gridRef} />}
-      {!loading && list === listsData[1] && <PlanningKanban dataSource={filteredData} />}
-      {!loading && list === listsData[2] && <PlanningGantt dataSource={filteredData} />}
+      {!loading && list === listsData[1] && <PlanningKanban dataSource={filteredData} ref={kanbanRef} />}
+      {!loading && list === listsData[2] && <PlanningGantt dataSource={filteredData} ref={ganttRef} />}
     </div>
   );
 };

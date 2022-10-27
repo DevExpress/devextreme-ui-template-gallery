@@ -25,7 +25,8 @@ const reorder = <T, >(items: T[], item: T, fromIndex: number, toIndex: number) =
 
   return result;
 };
-export const PlanningKanban = ({ dataSource }: PlanningProps) => {
+
+export const PlanningKanban = React.forwardRef<Sortable, PlanningProps>(({ dataSource }, ref) => {
   const [lists, setLists] = useState<Task[][]>([]);
   const [statuses, setStatuses] = useState(STATUS_ITEMS);
   useEffect(() => {
@@ -65,7 +66,7 @@ export const PlanningKanban = ({ dataSource }: PlanningProps) => {
   return (
     <div id='kanban'>
       <ScrollView direction='horizontal' showScrollbar='always'>
-        <Sortable itemOrientation='horizontal' handle='.list-title' onReorder={onListReorder}>
+        <Sortable ref={ref} itemOrientation='horizontal' handle='.list-title' onReorder={onListReorder}>
           {lists.map((tasks, listIndex) => {
             const status = statuses[listIndex];
             return <List key={status} title={status} index={listIndex} tasks={tasks} onTaskDragStart={onTaskDragStart} onTaskDrop={onTaskDrop} />;
@@ -74,4 +75,4 @@ export const PlanningKanban = ({ dataSource }: PlanningProps) => {
       </ScrollView>
     </div>
   );
-};
+});

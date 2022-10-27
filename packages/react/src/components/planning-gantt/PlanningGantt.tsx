@@ -6,9 +6,9 @@ import { PlanningProps } from '../../shared/types/task';
 
 import './PlanningGantt.scss';
 
-export const PlanningGantt = ({ dataSource }: PlanningProps) => {
+export const PlanningGantt = React.forwardRef<Gantt, PlanningProps>(({ dataSource }, ref) => {
   return (
-    <Gantt taskListWidth={500} scaleType='weeks' height={700}>
+    <Gantt ref={ref} taskListWidth={500} scaleType='weeks' height={700}>
       <Tasks dataSource={dataSource} startExpr='startDate' endExpr='dueDate' titleExpr='text' />
       <Column dataField='text' caption='Subject' width={300} />
       <Column dataField='startDate' caption='Start Date' dataType='date' sortOrder='asc' />
@@ -32,4 +32,4 @@ export const PlanningGantt = ({ dataSource }: PlanningProps) => {
       <Editing enabled />
     </Gantt>
   );
-};
+});

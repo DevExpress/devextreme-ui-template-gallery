@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import DataGrid, {
   Column, Selection, Sorting, HeaderFilter,
@@ -17,7 +18,7 @@ import { GridEdit, GridEditComponent } from '../../shared/types/planning-grid';
 
 import './PlanningGrid.scss';
 
-const EditComponent = ({ items, editComponent: Component, setValue }: GridEditComponent) => {
+const EditComponent = ({ items, editComponent: Component, setValue, value }: GridEditComponent) => {
   const EditField = (data: string) => (
     <div>
       {data && <Component text={data}></Component>}
@@ -26,23 +27,32 @@ const EditComponent = ({ items, editComponent: Component, setValue }: GridEditCo
   );
   const EditItem = (data: string) => <Component text={data}></Component>;
 
-  return <SelectBox className='edit-cell' items={items} fieldRender={EditField} itemRender={EditItem} onValueChange={(value) => setValue(value)}></SelectBox>;
+  return <SelectBox className='edit-cell' defaultValue={value} items={items} fieldRender={EditField} itemRender={EditItem} onValueChange={(value) => setValue(value)}></SelectBox>;
 };
 
-const EditStatus = ({ setValue }: GridEdit) => <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} setValue={setValue} />;
-const EditPriority = ({ setValue }: GridEdit) => <EditComponent items={PRIORITY_ITEMS} editComponent={PriorityTask} setValue={setValue} />;
+const EditStatus = ({ setValue, value }: GridEdit) => <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} setValue={setValue} value={value} />;
+const EditPriority = ({ setValue, value }: GridEdit) => <EditComponent items={PRIORITY_ITEMS} editComponent={PriorityTask} setValue={setValue} value={value} />;
 export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
   const [data, setData] = useState<Task[]>();
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     setData(dataSource.filter((d) => d.status && d.priority));
   }, [dataSource]);
+
   const onRowPrepared = useCallback(({ rowType, rowElement, data }) => {
     if (rowType !== 'header' && data.status === 'Completed') {
       rowElement.classList.add('completed');
     }
   }, []);
+
+  const navigateToDetails = useCallback(() => {
+    navigate('/planning-task-details');
+  }, []);
+
   return (
-    <DataGrid ref={ref} dataSource={data} columnAutoWidth onRowPrepared={onRowPrepared}>
+    <DataGrid ref={ref} dataSource={data} columnAutoWidth onRowPrepared={onRowPrepared} onRowClick={navigateToDetails}>
       <Paging pageSize={15}></Paging>
       <Pager visible showPageSizeSelector></Pager>
       <Editing mode='row' allowUpdating></Editing>
