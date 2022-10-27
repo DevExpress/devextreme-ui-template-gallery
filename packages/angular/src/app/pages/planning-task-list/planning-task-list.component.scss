@@ -11,17 +11,15 @@
 
   .dx-toolbar {
     margin-bottom: $toolbar-margin-bottom;
-  }
-}
 
-:host::ng-deep {
-  .dx-toolbar {
-    .toolbar-header {
-      @include header();
-    }
+    &::ng-deep {
+      .toolbar-header {
+        @include header();
+      }
 
-    .dx-tabs .dx-tab {
-      background-color: $background-color;
+      .dx-tabs .dx-tab {
+        background-color: $background-color;
+      }
     }
   }
 }
