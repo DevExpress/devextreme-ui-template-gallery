@@ -4,47 +4,39 @@
       <dx-toolbar-item location="before">
         <dx-button icon="arrowleft" />
       </dx-toolbar-item>
-      <dx-toolbar-item
-        location="before"
-        :text="contactName"/>
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto">
-        <dx-button
-          text="Terminate"
-          type="default"
-          styling-mode="contained"/>
+      <dx-toolbar-item :text="contactName"
+                       location="before"
+                       cssClass="contact-name-toolbar-item"/>
+      <dx-toolbar-item location="after" locate-in-menu="auto">
+        <dx-button text="Terminate"
+                   type="default"
+                   styling-mode="contained"/>
       </dx-toolbar-item>
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto"
-        widget="dxDropDownButton"
-        :options="{
+      <dx-toolbar-item widget="dxDropDownButton"
+                       location="after"
+                       locate-in-menu="auto"
+                       :options="{
             text:'Actions',
             stylingMode:'text',
             width:120,
             items: ['Assign to Me', 'Archive']
           }"/>
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto">
+      <dx-toolbar-item location="after" locate-in-menu="auto">
         <div class="separator" />
       </dx-toolbar-item>
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto"
-        widget="dxButton"
-        show-text="inMenu"
-        :options="{
+      <dx-toolbar-item widget="dxButton"
+                       location="after"
+                       locate-in-menu="auto"
+                       show-text="inMenu"
+                       :options="{
             text: 'Copy',
             icon: 'copy'
           }"/>
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto"
-        widget="dxButton"
-        show-text="inMenu"
-        :options="{
+      <dx-toolbar-item widget="dxButton"
+                       location="after"
+                       locate-in-menu="auto"
+                       show-text="inMenu"
+                       :options="{
             text: 'Refresh',
             icon: 'refresh',
             onClick: refresh

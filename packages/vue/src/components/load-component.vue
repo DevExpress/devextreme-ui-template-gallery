@@ -14,7 +14,7 @@ import DxLoadPanel from 'devextreme-vue/load-panel';
 
 const props = withDefaults(defineProps<{
   isLoading: boolean,
-  containerSelector: string,
+  containerSelector?: string,
   width?: number,
 }>(), {
   isLoading: false,

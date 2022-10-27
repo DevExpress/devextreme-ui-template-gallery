@@ -27,15 +27,11 @@
     </dxi-item>
   </dx-toolbar>
 
-  <div>
-    <dx-form #contactForm
-      *ngIf="contactData"
-      class="form last plain-styled-form"
-      [formData]="contactData"
-      labelMode="floating"
-      [class.view-mode]="!isEditing"
-      [validationGroup]="validationGroup"
-    >
+    <dx-form *ngIf="contactData"
+             class="form last plain-styled-form"
+             [formData]="contactData"
+             labelMode="floating"
+             [class.view-mode]="!isEditing">
       <dxi-item itemType="group" [colCount]="2">
         <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
         <dxi-item>
@@ -117,7 +113,7 @@
           ></form-textbox>
         </dxi-item>
 
-        <dxi-item  [colSpan]="2" >
+        <dxi-item [colSpan]="2" >
           <form-textbox label="City"
                        [(value)]="contactData.city"
                        [isEditing]="isEditing"
@@ -175,7 +171,6 @@
         </dxi-item>
       </dxi-item>
     </dx-form>
-  </div>
   <dx-load-panel
     container="#contact-form"
     [position]="{ of: '#contact-form' }"
