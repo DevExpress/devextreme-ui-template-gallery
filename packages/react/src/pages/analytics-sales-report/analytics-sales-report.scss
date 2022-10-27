@@ -1,0 +1,37 @@
+.sales-pie,
+.sales-bars {
+  display: inline-block;
+  height: 100%;
+}
+
+.sales-pie {
+  width: 400px;
+}
+
+.sales-bars {
+  width: calc(100% - 600px);
+}
+
+.sales-filter {
+  display: inline-block;
+
+  & dx-drop-down-button {
+    position: absolute;
+    top: 12px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sales-pie,
+  .sales-bars {
+    display: block;
+  }
+
+  .sales-pie {
+    width: 320px;
+  }
+
+  .sales-bars {
+    width: 320px;
+  }
+}
