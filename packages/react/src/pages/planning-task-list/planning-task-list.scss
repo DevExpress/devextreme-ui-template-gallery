@@ -4,6 +4,8 @@
 @include separator();
 
 .dx-toolbar {
+  margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
+
   .toolbar-header {
     @include header();
   }
@@ -13,16 +15,13 @@
   }
 }
 
-.add-grid-row {
-  .dx-icon.dx-icon-plus,
-  .dx-button-text {
-    color: #fff;
-  }
-}
-
 .view-wrapper-list {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   padding: 20px 16px 0 16px;
+
+  .dx-toolbar {
+    margin-bottom: $toolbar-margin-bottom;
+  }
 }

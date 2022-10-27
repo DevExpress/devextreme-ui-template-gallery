@@ -10,6 +10,7 @@ $side-panel-background: darken($base-bg, 5);
 $background-color: $base-bg;
 $accent-color: $base-accent;
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
+$toolbar-margin-bottom: 16px;
 
 @mixin separator() {
   .separator {

@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver-es';
 
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
+import { exportDataGrid as exportDataGridXSLX } from 'devextreme/excel_exporter';
 
 import dxTextBox from 'devextreme/ui/text_box';
 
@@ -22,7 +25,7 @@ export const PlanningTaskList = () => {
 
   const [list, setList] = useState(listsData[0]);
   const [index, setIndex] = useState(0);
-  const [itemVisibility, setItemVisibility] = useState(true);
+  // const [itemVisibility, setItemVisibility] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -44,7 +47,7 @@ export const PlanningTaskList = () => {
   const onTabClick = useCallback((e: { itemData: string }) => {
     setList(e.itemData);
     setIndex(listsData.findIndex((d) => d === e.itemData));
-    setItemVisibility(e.itemData === listsData[0]);
+    // setItemVisibility(e.itemData === listsData[0]);
   }, []);
 
   const addDataGridRow = useCallback(() => {
@@ -69,6 +72,21 @@ export const PlanningTaskList = () => {
     });
   }, []);
 
+  const exportToXSLX = useCallback(() => {
+    const workbook = new Workbook();
+    const worksheet = workbook.addWorksheet('Main sheet');
+
+    exportDataGridXSLX({
+      component: gridRef.current?.instance,
+      worksheet,
+      autoFilterEnabled: true,
+    }).then(() => {
+      workbook.xlsx.writeBuffer().then((buffer) => {
+        saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+      });
+    });
+  }, []);
+
   const search = useCallback((e: { component: dxTextBox }) => {
     gridRef.current?.instance.searchByText(e.component.option('text')!);
   }, []);
@@ -89,7 +107,6 @@ export const PlanningTaskList = () => {
           }}
         />
         <Item
-          visible={itemVisibility}
           location='after'
           widget='dxButton'
           locateInMenu='auto'
@@ -103,7 +120,6 @@ export const PlanningTaskList = () => {
           }}
         />
         <Item
-          visible={itemVisibility}
           location='after'
           widget='dxButton'
           showText='inMenu'
@@ -115,7 +131,6 @@ export const PlanningTaskList = () => {
           }}
         />
         <Item
-          visible={itemVisibility}
           location='after'
           widget='dxButton'
           showText='inMenu'
@@ -126,11 +141,10 @@ export const PlanningTaskList = () => {
             onClick: showColumnChooser,
           }}
         />
-        <Item visible={itemVisibility} location='after' locateInMenu='auto'>
+        <Item location='after' locateInMenu='auto'>
           <div className='separator'></div>
         </Item>
         <Item
-          visible={itemVisibility}
           location='after'
           widget='dxButton'
           showText='inMenu'
@@ -142,7 +156,17 @@ export const PlanningTaskList = () => {
           }}
         />
         <Item
-          visible={itemVisibility}
+          location='after'
+          widget='dxButton'
+          showText='inMenu'
+          locateInMenu='auto'
+          options={{
+            icon: 'exportxlsx',
+            text: 'Export To PDF',
+            onClick: exportToXSLX,
+          }}
+        />
+        <Item
           location='after'
           widget='dxTextBox'
           locateInMenu='auto'
