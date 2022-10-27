@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { DashboardContainer } from '../../components/dashboard-container/DashboardContainer';
-import { DashboardCardsGroup } from '../../components/dashboard-container/DashboardCardGroup';
+import { Dashboard } from '../../components/dashboard/Dashboard';
+import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { SalesRangeCard } from './cards/SalesRangeCard';
 import { ProductSaleByRangeCard } from './cards/ProductSaleByRangeCard';
 import { SalesPerformanceCard } from './cards/SalesPerformanceCard';
@@ -50,12 +50,12 @@ export const AnalyticsSalesReport = () => {
   }, [groupByPeriod]);
 
   return (
-    <DashboardContainer title='Sales Report'>
+    <Dashboard title='Sales Report'>
       <DashboardCardsGroup kind='wide'>
         <SalesRangeCard datasource={sales} range={dateRange} onRangeChanged={onRangeChanged} />
         <ProductSaleByRangeCard datasource={salesByCategory} />
         <SalesPerformanceCard datasource={salesByDateAndCategory} periods={groupByPeriods} selectedPeriod={groupByPeriod} onPeriodChanged={onPeriodChanged} range={dateRange} />
       </DashboardCardsGroup>
-    </DashboardContainer>
+    </Dashboard>
   );
 };

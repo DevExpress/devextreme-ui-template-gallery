@@ -7,8 +7,8 @@ import { RevenueAnalysisCard } from './cards/RevenueAnalysisCard';
 import { ConversionFunnelCard } from './cards/ConversionFunnelCard';
 import { RevenueCard } from './cards/RevenueCard';
 import { ConversionTicker, LeadsTicker, OpportunitiesTicker, RevenueTotalTicker } from './cards/TickerCards';
-import { DashboardContainer } from '../../components/dashboard-container/DashboardContainer';
-import { DashboardCardsGroup } from '../../components/dashboard-container/DashboardCardGroup';
+import { Dashboard } from '../../components/dashboard/Dashboard';
+import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 
 const calculateTotal = (data) => {
@@ -50,7 +50,7 @@ export const AnalyticsDashboard = () => {
   }, []);
 
   return (
-    <DashboardContainer
+    <Dashboard
       title='Dashboard'
       additionalToolbarContent={
         <Item
@@ -76,6 +76,6 @@ export const AnalyticsDashboard = () => {
         <RevenueAnalysisCard datasource={salesByState} />
         <RevenueSnapshotCard datasource={salesByCategory} />
       </DashboardCardsGroup>
-    </DashboardContainer>
+    </Dashboard>
   );
 };

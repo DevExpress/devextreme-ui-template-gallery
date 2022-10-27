@@ -7,7 +7,7 @@ type DashboardContainerProps = {
   additionalToolbarContent?: ReactNode;
 };
 
-export const DashboardContainer = ({ title, additionalToolbarContent, children }: React.PropsWithChildren<DashboardContainerProps>) => {
+export const Dashboard = ({ title, additionalToolbarContent, children }: React.PropsWithChildren<DashboardContainerProps>) => {
   return (
     <div className='view-wrapper-dashboard'>
       <Toolbar>
