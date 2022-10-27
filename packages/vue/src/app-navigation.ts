@@ -29,4 +29,23 @@ export const navigation = [
       },
     ],
   },
+  {
+    text: 'Analytics',
+    icon: 'chart',
+    path: '',
+    items: [
+      {
+        text: 'Dashboard',
+        path: '/analytics-dashboard',
+      },
+      /* {
+        text: 'Sales Report',
+        path: '/analytics-sales-report',
+      },
+      {
+        text: 'Geography',
+        path: '/analytics-geography',
+      }, */
+    ],
+  },
 ];
