@@ -24,7 +24,7 @@ import { formatDate } from 'devextreme/localization';
 import './analytics-sales-report.scss';
 
 export const SalesRangeCard = ({ datasource, range, onRangeChanged }) => (
-  <CardAnalytics title='' contentClass='sales-range' isLoading={!datasource.length}>
+  <CardAnalytics title='' contentClass='sales-range' isLoading={!datasource.length} hideMenu>
     <RangeSelector id='range' dataSource={datasource} value={range} onValueChanged={onRangeChanged}>
       <Scale minorTickInterval='day' tickInterval='month' valueType='datetime'>
         <MinorTick visible={false} />
