@@ -128,7 +128,7 @@ export const AnalyticsSalesReport = () => {
   }, [dateRange]);
 
   useEffect(() => {
-    getSalesByOrderDate(groupByPeriod)
+    getSalesByOrderDate(groupByPeriod.toLowerCase())
       .then((data) => setSalesByDateAndCategory(data))
       .catch((error) => console.log(error));
   }, [groupByPeriod]);
