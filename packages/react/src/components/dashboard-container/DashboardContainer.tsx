@@ -3,15 +3,16 @@ import Button from 'devextreme-react/button';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 
 type DashboardContainerProps = {
+  title: string;
   additionalToolbarContent?: ReactNode;
 };
 
-export const DashboardContainer = ({ children, additionalToolbarContent }: React.PropsWithChildren<DashboardContainerProps>) => {
+export const DashboardContainer = ({ title, additionalToolbarContent, children }: React.PropsWithChildren<DashboardContainerProps>) => {
   return (
     <div className='view-wrapper-dashboard'>
       <Toolbar>
         <Item location='before'>
-          <span className='toolbar-header'>Dashboard</span>
+          <span className='toolbar-header'>{title}</span>
         </Item>
         {additionalToolbarContent}
         <Item location='after' locateInMenu='auto'>

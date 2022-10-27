@@ -75,6 +75,7 @@ export const AnalyticsDashboard = () => {
 
   return (
     <DashboardContainer
+      title='Dashboard'
       additionalToolbarContent={
         <Item
           location='before'

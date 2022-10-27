@@ -134,7 +134,7 @@ export const AnalyticsSalesReport = () => {
   }, [groupByPeriod]);
 
   return (
-    <DashboardContainer>
+    <DashboardContainer title='Sales Report'>
       <DashboardCardsGroup kind='wide'>
         <SalesRangeCard datasource={sales} range={dateRange} onRangeChanged={onRangeChanged} />
         <ProductSaleByRangeCard datasource={salesByCategory} />
