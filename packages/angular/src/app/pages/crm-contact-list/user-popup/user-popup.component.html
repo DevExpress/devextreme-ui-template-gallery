@@ -1,6 +1,6 @@
 <dx-popup
     title="New Contact"
-    [visible]="popupVisible"
+    [(visible)]="popupVisible"
     width="auto"
     height="auto"
   >
@@ -23,7 +23,8 @@
       location="after"
       [options]="{
         text: 'Cancel',
-        type: 'text',
+        stylingMode: 'text',
+        type: 'default',
         onClick: closePopup
       }"
     >
