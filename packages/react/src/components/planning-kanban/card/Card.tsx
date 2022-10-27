@@ -18,7 +18,7 @@ export const Card = ({ task }: { task: Task }) => {
   }, []);
 
   return (
-    <div className='card dx-card dx-theme-text-color dx-theme-background-color' onClick={navigateToDetails}>
+    <div className='kanban-card dx-card dx-theme-text-color dx-theme-background-color' onClick={navigateToDetails}>
       <div className={`card-wrapper priority-${task.priority.toLowerCase()}`}>
         <div className='card-priority'></div>
         <Button className='edit-button' icon='edit' />
