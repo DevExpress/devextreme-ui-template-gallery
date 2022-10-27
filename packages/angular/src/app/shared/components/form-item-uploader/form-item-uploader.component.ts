@@ -35,7 +35,7 @@ import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
       height: 124px;
       user-select: none;
       line-height: inherit;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
 
       & > span {
         font-weight: 100;
