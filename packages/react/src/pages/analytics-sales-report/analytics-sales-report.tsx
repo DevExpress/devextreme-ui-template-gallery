@@ -48,7 +48,7 @@ export const ProductSaleByRangeCard = ({ datasource }) => (
           <Font color='#757575' size={15} />
         </PieLabel>
       </Series>
-      <Legend>
+      <Legend visible={false}>
         <Margin top={70} />
       </Legend>
       <Size height={270} />

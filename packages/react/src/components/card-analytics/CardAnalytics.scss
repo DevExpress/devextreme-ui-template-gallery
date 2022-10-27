@@ -1,4 +1,4 @@
-@use "../../variables.scss" as *;
+@use '../../variables.scss' as *;
 
 .card {
   padding: 16px;
@@ -23,6 +23,20 @@
     margin-bottom: 20px;
     display: inline-block;
     padding-right: 25px;
+  }
+
+  &.sales-by-state-map {
+    .content {
+      height: 400px;
+    }
+  }
+
+  &.sales-range {
+    margin-top: 20px;
+
+    .content {
+      height: auto;
+    }
   }
 
   .content {
