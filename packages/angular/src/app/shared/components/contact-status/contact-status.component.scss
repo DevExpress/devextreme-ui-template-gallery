@@ -1,13 +1,5 @@
 @use "sass:math";
 
-@mixin status($status-color) {
-  color: $status-color;
-
-  &::before {
-    background: $status-color;
-  }
-}
-
 span.status {
   font-size: 13px;
 
@@ -25,17 +17,5 @@ span.status {
   &.input {
     display: block;
     padding: 15px 16px 14px;
-  }
-
-  &.status-commission {
-    @include status(#03a9f4);
-  }
-
-  &.status-salaried {
-    @include status(#2eb52c);
-  }
-
-  &.status-terminated {
-    @include status(#de8e8c);
   }
 }
