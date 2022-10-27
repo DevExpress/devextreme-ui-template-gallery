@@ -1,9 +1,14 @@
 <template>
-  <div class="opportunity" @click="opportunityClick()">
-    <div class="name">{{ props.data.name }}</div>
-    <div class="product-info"
-    >Products: {{ props.data.products }}, total:
-      <span class="total">{{  formatPrice(props.data.total)  }}</span>
+  <div
+    class="opportunity"
+    @click="opportunityClick()"
+  >
+    <div class="name">
+      {{ props.data.name }}
+    </div>
+    <div class="product-info">
+      Products: {{ props.data.products }}, total:
+      <span class="total">{{ formatPrice(props.data.total) }}</span>
     </div>
     <div class="owner">
       Owner: <span class="owner-name">{{ props.data.manager }}</span>

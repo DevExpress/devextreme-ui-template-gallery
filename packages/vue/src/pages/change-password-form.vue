@@ -1,6 +1,9 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <dx-form :form-data="formData" :disabled="loading">
+    <dx-form
+      :form-data="formData"
+      :disabled="loading"
+    >
       <dx-item
         data-field="password"
         editor-type="dxTextBox"
@@ -13,9 +16,9 @@
         data-field="confirmedPassword"
         editor-type="dxTextBox"
         :editor-options="{
-            stylingMode: 'filled',
-            placeholder: 'Confirm Password',
-            mode: 'password' }"
+          stylingMode: 'filled',
+          placeholder: 'Confirm Password',
+          mode: 'password' }"
       >
         <dx-required-rule message="Password is required" />
         <dx-custom-rule
@@ -30,15 +33,19 @@
           type="default"
           template="changePassword"
           :use-submit-behavior="true"
-        >
-        </dx-button-options>
+        />
       </dx-button-item>
 
       <template #changePassword>
         <div>
           <span class="dx-button-text">
-              <dx-load-indicator v-if="loading" width="24px" height="24px" :visible="true" />
-              <span v-if="!loading">Continue</span>
+            <dx-load-indicator
+              v-if="loading"
+              width="24px"
+              height="24px"
+              :visible="true"
+            />
+            <span v-if="!loading">Continue</span>
           </span>
         </div>
       </template>

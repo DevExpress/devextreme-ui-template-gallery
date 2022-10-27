@@ -13,23 +13,33 @@
         type="default"
         class="add-tile"
         @click="addOpportunity"
-      ></dx-button>
+      />
 
-      <div >
+      <div>
         <div class="opportunities-block">
-          <div class="dx-form-group-caption">Active</div>
+          <div class="dx-form-group-caption">
+            Active
+          </div>
           <div class="opportunities-container">
-            <div class="opportunities" v-for="item in activeItems">
-              <opportunity-tile :data="item"/>
+            <div
+              class="opportunities"
+              v-for="item in activeItems"
+            >
+              <opportunity-tile :data="item" />
             </div>
           </div>
         </div>
 
         <div class="opportunities-block">
-          <div class="dx-form-group-caption">Closed</div>
+          <div class="dx-form-group-caption">
+            Closed
+          </div>
           <div class="opportunities-container">
-            <div class="opportunities" v-for="item in closedItems">
-              <opportunity-tile :data="item"/>
+            <div
+              class="opportunities"
+              v-for="item in closedItems"
+            >
+              <opportunity-tile :data="item" />
             </div>
           </div>
         </div>

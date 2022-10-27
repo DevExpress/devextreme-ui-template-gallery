@@ -1,40 +1,51 @@
 <template>
-  <dx-gantt ref="dxGanttCmp"
-            :task-list-width="500"
-            :scale-type="'weeks'"
-            @task-click="onTaskClick"
-            :height="700">
+  <dx-gantt
+    ref="dxGanttCmp"
+    :task-list-width="500"
+    :scale-type="'weeks'"
+    @task-click="onTaskClick"
+    :height="700"
+  >
+    <dx-tasks
+      :data-source="props.tasks"
+      :start-expr="'startDate'"
+      :end-expr="'dueDate'"
+      title-expr="text"
+    />
 
-    <dx-tasks :data-source="props.tasks"
-              :start-expr="'startDate'"
-              :end-expr="'dueDate'"
-              title-expr="text"/>
-
-    <dx-gantt-column data-field="text" caption="Subject" :width="300"/>
-    <dx-gantt-column data-field="startDate"
-                     caption="Start Date"
-                     data-type="date"
-                     sort-order="asc"/>
-    <dx-gantt-column data-field="dueDate"
-                     caption="Due Date"
-                     data-type="date"/>
+    <dx-gantt-column
+      data-field="text"
+      caption="Subject"
+      :width="300"
+    />
+    <dx-gantt-column
+      data-field="startDate"
+      caption="Start Date"
+      data-type="date"
+      sort-order="asc"
+    />
+    <dx-gantt-column
+      data-field="dueDate"
+      caption="Due Date"
+      data-type="date"
+    />
 
     <dx-gantt-toolbar>
-      <dx-item name="undo"/>
-      <dx-item name="redo"/>
-      <dx-item name="separator"/>
-      <dx-item name="collapseAll"/>
-      <dx-item name="expandAll"/>
-      <dx-item name="separator"/>
-      <dx-item name="addTask"/>
-      <dx-item name="deleteTask"/>
-      <dx-item name="separator"/>
-      <dx-item name="zoomIn"/>
-      <dx-item name="zoomOut"/>
+      <dx-item name="undo" />
+      <dx-item name="redo" />
+      <dx-item name="separator" />
+      <dx-item name="collapseAll" />
+      <dx-item name="expandAll" />
+      <dx-item name="separator" />
+      <dx-item name="addTask" />
+      <dx-item name="deleteTask" />
+      <dx-item name="separator" />
+      <dx-item name="zoomIn" />
+      <dx-item name="zoomOut" />
     </dx-gantt-toolbar>
 
-    <dx-validation :auto-update-parent-tasks="true"/>
-    <dx-editing :enabled="true"/>
+    <dx-validation :auto-update-parent-tasks="true" />
+    <dx-editing :enabled="true" />
   </dx-gantt>
 </template>
 

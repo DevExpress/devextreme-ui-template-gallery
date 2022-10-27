@@ -1,39 +1,50 @@
 <template>
-  <dx-scroll-view class="scrollable-board"
-                  direction="horizontal"
-                  show-scrollbar="always"
+  <dx-scroll-view
+    class="scrollable-board"
+    direction="horizontal"
+    show-scrollbar="always"
   >
-    <dx-sortable class="sortable-lists"
-                 item-orientation="horizontal"
-                 handle=".list-title"
-                 @reorder="onListReorder"
+    <dx-sortable
+      class="sortable-lists"
+      item-orientation="horizontal"
+      handle=".list-title"
+      @reorder="onListReorder"
     >
-      <div class="list" v-for="board in kanbanDataSource">
+      <div
+        class="list"
+        v-for="board in kanbanDataSource"
+      >
         <div class="list-title dx-theme-text-color">
           <span>{{ board.name }}</span>
-          <dx-menu :items="boardMenuItems"/>
+          <dx-menu :items="boardMenuItems" />
         </div>
-        <dx-scroll-view class="scrollable-list"
-                        direction="vertical"
-                        showScrollbar="always"
+        <dx-scroll-view
+          class="scrollable-list"
+          direction="vertical"
+          show-scrollbar="always"
         >
-          <dx-sortable class="sortable-cards"
-                       group="cardsGroup"
-                       :data="board"
-                       @dragStart="onTaskDragStart"
-                       @reorder="onTaskDrop"
-                       @add="onTaskDrop"
+          <dx-sortable
+            class="sortable-cards"
+            group="cardsGroup"
+            :data="board"
+            @dragStart="onTaskDragStart"
+            @reorder="onTaskDrop"
+            @add="onTaskDrop"
           >
             <div v-for="task in board.cards">
-              <task-kanban-card class="dx-card" :task="task"></task-kanban-card>
+              <task-kanban-card
+                class="dx-card"
+                :task="task"
+              />
             </div>
           </dx-sortable>
 
           <div class="add-task">
-            <dx-button icon="plus"
-                       text="Add Task"
-                       stylingMode="text"
-                       @click="notify('Add task event')"
+            <dx-button
+              icon="plus"
+              text="Add Task"
+              styling-mode="text"
+              @click="notify('Add task event')"
             />
           </div>
         </dx-scroll-view>

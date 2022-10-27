@@ -5,8 +5,8 @@
     :width="props.width"
     :container="props.containerSelector"
     :position="{ of: props.containerSelector }"
-  ></dx-load-panel>
-  <slot v-if="!props.isLoading"/>
+  />
+  <slot v-if="!props.isLoading" />
 </template>
 
 <script setup lang="ts">
