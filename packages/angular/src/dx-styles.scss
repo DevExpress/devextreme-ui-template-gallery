@@ -56,12 +56,12 @@ body {
   }
 }
 
-.embedded {
+.embedded.embedded {
   .layout-header,
   .dx-swatch-additional,
   .with-footer .content-block,
   .dx-drawer-shader {
-    display: none !important;
+    display: none;
   }
 
   .dx-drawer-content {
