@@ -17,7 +17,7 @@ import Chart, {
   Point,
   Tooltip,
   ArgumentAxis,
-  Size as ChartSize,
+  Size as ChartSize
 } from 'devextreme-react/chart';
 import DropDownButton from 'devextreme-react/drop-down-button';
 import { formatDate } from 'devextreme/localization';
@@ -76,9 +76,9 @@ export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPe
     </div>
     <Chart id='chart' dataSource={datasource}>
       <ArgumentAxis visualRange={range} />
-      <Tooltip enabled />
+      <Tooltip enabled customizeTooltip={({ seriesName }) => ({ text: seriesName })} />
       <SeriesTemplate nameField='category' />
-      <CommonSeriesSettings argumentField='name' valueField='total' hoverMode='includePoints'>
+      <CommonSeriesSettings argumentField='date' valueField='total' hoverMode='includePoints'>
         <Point hoverMode='allArgumentPoints' />
       </CommonSeriesSettings>
       <ArgumentAxis argumentType='datetime' valueMarginsEnabled='false' />
@@ -88,7 +88,7 @@ export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPe
   </CardAnalytics>
 );
 
-const formatDateRange = (dateRange: Date[]) => dateRange.map(date => formatDate(date, 'yyyy-MM-dd'));
+const formatDateRange = (dateRange: Date[]) => dateRange.map((date) => formatDate(date, 'yyyy-MM-dd'));
 
 const groupByPeriods = ['Day', 'Month'];
 
@@ -96,7 +96,7 @@ export const AnalyticsSalesReport = () => {
   const [sales, setSales] = useState([]);
   const [salesByCategory, setSalesByCategory] = useState([]);
   const [salesByDateAndCategory, setSalesByDateAndCategory] = useState([]);
-  const [dateRange, setDateRange] = useState([new Date('2018-01-01'), new Date('2022-01-01')]);
+  const [dateRange, setDateRange] = useState([new Date('2018-01-01'), new Date('2022-01-01')]); //TODO: share default ranges between all dashboard views
   const [groupByPeriod, setGroupByPeriod] = useState(groupByPeriods[1]);
 
   const onRangeChanged = useCallback((e) => {
@@ -116,15 +116,16 @@ export const AnalyticsSalesReport = () => {
   }, []);
 
   useEffect(() => {
-    Promise.all([
-      getSalesByCategory(...formatDateRange(dateRange))
-        .then((data) => setSalesByCategory(data)),
-      getSalesByOrderDate(groupByPeriod)
-        .then((data) => setSalesByDateAndCategory(data))
-    ]).catch(
-      (error) => console.log(error)
-    );
+    getSalesByCategory(...formatDateRange(dateRange))
+      .then((data) => setSalesByCategory(data))
+      .catch((error) => console.log(error));
   }, [dateRange]);
+
+  useEffect(() => {
+    getSalesByOrderDate(groupByPeriod)
+      .then((data) => setSalesByDateAndCategory(data))
+      .catch((error) => console.log(error));
+  }, [groupByPeriod]);
 
   return (
     <DashboardContainer>
