@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+
 import LoadPanel from 'devextreme-react/load-panel';
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
-import { formatDate } from "devextreme/localization";
+
+import { formatDate } from 'devextreme/localization';
+
 import classNames from 'classnames';
+
 import { Activities, Activity } from '../../shared/types/card-activities';
+
 import './CardActivities.scss';
 
 const ListTemplate = (item: Activity) => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { TaskProp } from '../../shared/types/task';
+
 import './StatusTask.scss';
 
 export const StatusTask = ({ text }: TaskProp) => (
