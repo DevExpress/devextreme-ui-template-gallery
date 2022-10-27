@@ -1,18 +1,31 @@
-interface userInfo {
+interface UserInfo {
   email: string;
   name: string;
   lastName: string;
   avatarUrl: string;
 }
 
-export const defaultUser: userInfo = {
+export const defaultUser: UserInfo = {
   email: 'jheart@dx-email.com',
   name: 'John',
   lastName: 'Heart',
   avatarUrl: 'https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png',
 };
 
-export const authInfo: { _user: userInfo | null, [key: string]: any } = {
+export type AuthUser = {isOk: boolean, data?: UserInfo | null};
+
+interface AuthInfo {
+  _user: UserInfo | null,
+  loggedIn: () => boolean,
+  logOut: () => Promise<void>,
+  logIn: (email:string, password: string) => Promise<Record<string, unknown>>
+  createAccount: (email:string, password: string) => Promise<Record<string, unknown>>
+  resetPassword: (email:string) => Promise<Record<string, unknown>>
+  changePassword: (email:string, recoveryCode: string) => Promise<Record<string, unknown>>
+  getUser: () => Promise<AuthUser>
+}
+
+export const authInfo: AuthInfo = {
   _user: defaultUser,
   loggedIn() {
     return !!this._user;

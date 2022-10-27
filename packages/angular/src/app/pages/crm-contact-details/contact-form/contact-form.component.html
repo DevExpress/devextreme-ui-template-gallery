@@ -55,9 +55,15 @@
               width="100%"
               fieldTemplate="field"
             >
-              <div *dxTemplate="let data of 'field'" class="form-item-custom">
-                <contact-status [value]="contactData.status"></contact-status>
-                <dx-text-box [readOnly]="true"></dx-text-box>
+              <div *dxTemplate="let data of 'field'" class="status-editor-field">
+                <contact-status class="status-indicator" [showText]="false" [value]="data"></contact-status>
+                <dx-text-box
+                  class="status-{{data | lowercase}}"
+                  [hoverStateEnabled]="false"
+                  [inputAttr]="{class: 'status-input status-editor-input'}"
+                  [readOnly]="true"
+                  [value]="data">
+                </dx-text-box>
               </div>
               <div *dxTemplate="let data of 'item'">
                 <contact-status [value]="data"></contact-status>
@@ -135,7 +141,7 @@
 
       </dxi-item>
 
-      <dxi-item itemType="group" [colCount]="2">
+      <dxi-item itemType="group" [colCount]="2" cssClass="contact-fields-group">
         <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
         <dxi-item>
           <form-textbox label="Phone"

@@ -13,11 +13,7 @@
   .dx-field-item {
     padding: 0;
 
-    &:not(.dx-first-row):not(.dx-field-item-has-group) {
-      padding-top: 15px;
-    }
-
-    &.dx-field-item-has-group.dx-first-col.dx-last-row {
+    &.contact-fields-group {
       padding: 15px 0;
     }
 
@@ -62,4 +58,30 @@
       }
     }
   }
+}
+
+@mixin status($status-color) {
+  color: $status-color;
+
+  &.dx-texteditor {
+    .status-input.status-editor-input {
+      color: $status-color;
+    }
+  }
+
+  &::before {
+    background: $status-color;
+  }
+}
+
+.status-commission {
+  @include status(#03a9f4);
+}
+
+.status-salaried {
+  @include status(#2eb52c);
+}
+
+.status-terminated {
+  @include status(#de8e8c);
 }

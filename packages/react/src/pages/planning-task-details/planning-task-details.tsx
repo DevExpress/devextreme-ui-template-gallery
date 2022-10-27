@@ -1,18 +1,24 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import './planning-task-details.scss';
+
 import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
+
 import { TaskForm, CardActivities, CardNotes, CardMessages } from '../../components';
+
 import { Task } from '../../shared/types/task';
+
 import { getTask } from 'dx-rwa-data';
+
+import './planning-task-details.scss';
 
 const TASK_ID = 1;
 
 export const PlanningTaskDetails = () => {
   const [task, setTask] = useState<Task>();
   const [messagesCount, setMessagesCount] = useState(0);
+
   const loadData = useCallback(() => {
     getTask(TASK_ID)
       .then((data) => {
@@ -21,13 +27,17 @@ export const PlanningTaskDetails = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
   const updateMessagesCount = useCallback((count) => {
     setMessagesCount(count);
   }, []);
+
+  const refresh = useCallback(() => loadData(), [loadData]);
+
   useEffect(() => {
     loadData();
   }, [loadData]);
-  const refresh = useCallback(() => loadData(), [loadData]);
+
   return (
     <div className='view-wrapper-details'>
       <Toolbar>

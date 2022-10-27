@@ -1,3 +1,4 @@
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { SingleCard } from './layouts';
 import { LoginForm, ResetPasswordForm, ChangePasswordForm, CreateAccountForm } from './components';
@@ -37,7 +38,7 @@ export const UnauthenticatedContent = () => {
           </SingleCard>
         }
       />
-      <Route path='*' element={<Navigate to={'/login'} />}></Route>
+      <Route path='*' element={<Navigate to='/login' />}></Route>
     </Routes>
   );
 };

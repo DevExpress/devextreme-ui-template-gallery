@@ -8,7 +8,7 @@
         text="Add Opportunity"
         icon="add"
         width="300"
-        height="60"
+        height="115"
         styling-mode="outlined"
         type="default"
         class="add-tile"

@@ -29,3 +29,41 @@ export const getClosedContactOpportunities = async (id) => await getContactOppor
 
 export const getTasks = async () => await getData('Employees/Tasks');
 export const getTask = async (id) => await getData(`Employees/Tasks/${id}`);
+
+export const getSalesByStateAndCity = async (startDate, endDate) => await getData(`Analytics/SalesByStateAndCity/${startDate}/${endDate}`);
+
+export const getOpportunitiesByCategory = async (startDate, endDate) => await getData(`Analytics/OpportunitiesByCategory/${startDate}/${endDate}`);
+
+export const getSalesByCategory = async (startDate, endDate) => await getData(`Analytics/SalesByCategory/${startDate}/${endDate}`);
+
+export const getSalesByOrderDate = async (groupByPeriod) => await getData(`Analytics/SalesByOrderDate/${groupByPeriod}`);
+
+export const getSales = async (startDate, endDate) => await getData(`Analytics/Sales/${startDate}/${endDate}`);
+
+export const getSalesByState = (data) => {
+  const groupedData = data
+    .reduce((result, item) => {
+      if (!result[item.stateName]) {
+        result[item.stateName] = [];
+      }
+      result[item.stateName].push(item);
+      return result;
+    }, {});
+
+  const dataByState = Object.values(groupedData).map((val) => {
+    let total = 0;
+    let percentage = 0;
+    val.forEach((v) => {
+      total += v.total;
+      percentage += v.percentage;
+    });
+
+    return {
+      stateName: val[0].stateName,
+      stateCoords: val[0].stateCoords,
+      total,
+      percentage,
+    };
+  });
+  return dataByState;
+};

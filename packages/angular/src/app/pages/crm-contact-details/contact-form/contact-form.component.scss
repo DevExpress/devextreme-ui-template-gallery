@@ -12,15 +12,7 @@
   }
 }
 
-dx-form {
-  contact-status {
-    ::ng-deep {
-      span {
-        font-size: 13px;
-      }
-    }
-  }
-
+.dx-form {
   .form-item-button {
     margin-left: 10px;
     margin-top: 5px;
@@ -30,17 +22,18 @@ dx-form {
 .info {
   position: relative;
   padding-bottom: 30px;
-
-  contact-status {
-    position: absolute;
-    margin-top: 20px;
-  }
 }
 
-.form-item-custom {
-  contact-status {
-    position: absolute;
-    bottom: 0;
-    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 2px);
+.status-editor-field {
+  display: flex;
+
+  .status-indicator {
+    display: flex;
+    align-self: flex-end;
+    padding-left: $list-padding-left;
+  }
+
+  ::ng-deep .status-input.status-input {
+    padding-left: 0;
   }
 }
