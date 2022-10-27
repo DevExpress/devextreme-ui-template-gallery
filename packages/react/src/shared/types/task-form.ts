@@ -1,4 +1,5 @@
-import { TaskPriority, TaskStatus, CommonTask,TaskProp } from './task';
+import React from 'react';
+import { TaskPriority, TaskStatus, CommonTask, TaskProp } from './task';
 
 export interface FormEdit {
     label: string;
@@ -10,6 +11,6 @@ export interface FormEditComponent extends FormEdit {
     editComponent: React.ComponentType<TaskProp>;
 }
 
-export interface FormTask extends CommonTask  {
+export interface FormTask extends CommonTask {
     dueDate: Date | null,
 }

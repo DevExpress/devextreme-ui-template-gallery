@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+
 import LoadPanel from 'devextreme-react/load-panel';
-import { PlanningProps } from '../../shared/types/task';
 import Gantt, { Tasks, Column, Toolbar, Item, Validation, Editing } from 'devextreme-react/gantt';
+
+import { PlanningProps } from '../../shared/types/task';
+
 import './PlanningGantt.scss';
 
 export const PlanningGantt = ({ dataSource }: PlanningProps) => {
