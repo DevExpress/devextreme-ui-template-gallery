@@ -5,8 +5,8 @@
     :width="props.width"
     :container="props.containerSelector"
     :position="{ of: props.containerSelector }"
-  ></dx-load-panel>
-  <slot v-if="!props.isLoading"/>
+  />
+  <slot v-if="!props.isLoading" />
 </template>
 
 <script setup lang="ts">
@@ -14,7 +14,7 @@ import DxLoadPanel from 'devextreme-vue/load-panel';
 
 const props = withDefaults(defineProps<{
   isLoading: boolean,
-  containerSelector: string,
+  containerSelector?: string,
   width?: number,
 }>(), {
   isLoading: false,

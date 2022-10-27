@@ -9,7 +9,6 @@ import {
   DxSelectBoxModule,
   DxTextBoxModule,
   DxToolbarModule,
-  DxValidationGroupModule,
   DxValidatorModule,
 } from 'devextreme-angular';
 import {
@@ -33,8 +32,6 @@ export class ContactFormComponent {
   isEditing = false;
 
   zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
-
-  validationGroup = 'contactFormValidationGroup';
 
   handleEditClick() {
     this.isEditing = true;
@@ -64,7 +61,6 @@ export class ContactFormComponent {
     DxValidatorModule,
     CommonModule,
     PhonePipeModule,
-    DxValidationGroupModule,
   ],
   providers: [],
   exports: [ContactFormComponent],

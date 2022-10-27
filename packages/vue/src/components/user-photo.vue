@@ -1,12 +1,13 @@
 <template>
   <div class="host">
-    <div :style="{
+    <div
+      :style="{
         width: props.size + 'px',
         height: props.size+ 'px',
         'backgroundImage': `url('data:image/png;base64,${props.link}')`
       }"
-         class="photo dx-card"
-    ></div>
+      class="photo dx-card"
+    />
   </div>
 </template>
 

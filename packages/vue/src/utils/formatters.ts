@@ -13,5 +13,5 @@ export function formatPrice(price: number): string {
 }
 
 export function formatDate(date: Date): string {
-  return formatLocDate(date, 'MM/dd/yyyy');
+  return formatLocDate(new Date(date), 'MM/dd/yyyy');
 }

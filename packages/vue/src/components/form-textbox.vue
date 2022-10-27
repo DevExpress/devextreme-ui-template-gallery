@@ -1,20 +1,24 @@
 <template>
-  <dx-text-box :label="label"
-               v-model="value"
-               :readOnly="!isEditing"
-               :mask="mask"
-               :elementAttr="{class: 'form-editor'}"
-               :inputAttr="{class: 'form-editor-input'}"
-               stylingMode="filled"
-               valueChangeEvent="keyup input change"
+  <dx-text-box
+    :label="label"
+    v-model="value"
+    :read-only="!isEditing"
+    :mask="mask"
+    :element-attr="{class: 'form-editor'}"
+    :input-attr="{class: 'form-editor-input'}"
+    styling-mode="filled"
+    value-change-event="keyup input change"
   >
-    <dx-validator :validationRules="validators || [{type: 'required'}]"
-                  :validationGroup="validationGroup"/>
-    <dx-text-box-button v-if="icon"
-                :options="{icon: icon, type: 'back', elementAttr: { class: 'form-editor-icon' }}"
-                name="icon"
-                location="before"
-    ></dx-text-box-button>
+    <dx-validator
+      :validation-rules="validators || [{type: 'required'}]"
+      :validation-group="validationGroup"
+    />
+    <dx-text-box-button
+      v-if="icon"
+      :options="{icon: icon, type: 'back', elementAttr: { class: 'form-editor-icon' }}"
+      name="icon"
+      location="before"
+    />
   </dx-text-box>
 </template>
 

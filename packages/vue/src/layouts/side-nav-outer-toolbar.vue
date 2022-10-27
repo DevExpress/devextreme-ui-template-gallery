@@ -18,7 +18,10 @@
       :shading="drawerOptions.shaderEnabled"
       :close-on-outside-click="drawerOptions.closeOnOutsideClick"
     >
-      <dx-scroll-view ref="scrollViewRef" class="with-footer">
+      <dx-scroll-view
+        ref="scrollViewRef"
+        class="with-footer"
+      >
         <slot />
         <slot name="footer" />
       </dx-scroll-view>

@@ -14,32 +14,33 @@
           :deferred="true"
           show-check-boxes-mode="always"
           mode="multiple"
-        ></dx-selection>
+        />
         <dx-row-dragging
           :allow-reordering="true"
           :on-reorder="onReorder"
           :show-drag-icons="true"
-        ></dx-row-dragging>
+        />
 
         <!--  Grid Columns    -->
         <dx-column
-          dataField="text"
+          data-field="text"
           caption="Subject"
           :hiding-priority="3"
-        ></dx-column>
+        />
         <dx-column
-          dataField="date"
-          dataType="date"
+          data-field="date"
+          data-type="date"
           caption="Due Date"
           :hiding-priority="1"
-        ></dx-column>
-        <dx-column caption="Assigned To"
-                   dataField="manager"
-                   :hiding-priority="0"/>
+        />
+        <dx-column
+          caption="Assigned To"
+          data-field="manager"
+          :hiding-priority="0"
+        />
       </dx-data-grid>
     </load-component>
   </div>
-
 </template>
 
 <script setup lang="ts">
