@@ -5,89 +5,123 @@
         <span class="toolbar-header">Task</span>
       </dx-toolbar-item>
       <dx-toolbar-item location="before">
-        <dx-tabs :selected-index="0"
-                 :items="taskPanelItems"
-                 @item-click="tabValueChange"/>
+        <dx-tabs
+          :selected-index="0"
+          :items="taskPanelItems"
+          @item-click="tabValueChange"
+        />
       </dx-toolbar-item>
 
-      <dx-toolbar-item location="after"
-                       locateInMenu="auto"
-                       cssClass="add-grid-row">
-        <dx-button icon="plus"
-                   text="Add Task"
-                   type="default"
-                   styling-mode="contained"
-                   @click="addDataGridRow"/>
+      <dx-toolbar-item
+        location="after"
+        locate-in-menu="auto"
+        css-class="add-grid-row"
+      >
+        <dx-button
+          icon="plus"
+          text="Add Task"
+          type="default"
+          styling-mode="contained"
+          @click="addDataGridRow"
+        />
       </dx-toolbar-item>
 
-      <dx-toolbar-item location="after"
-                       locateInMenu="auto"
-                       widget="dxButton"
-                       showText="inMenu"
-                       :options="{
-             text: 'Refresh',
-             icon: 'refresh',
-             onClick: reload
-        }"/>
+      <dx-toolbar-item
+        location="after"
+        locate-in-menu="auto"
+        widget="dxButton"
+        show-text="inMenu"
+        :options="{
+          text: 'Refresh',
+          icon: 'refresh',
+          onClick: reload
+        }"
+      />
 
-      <dx-toolbar-item :disabled="activeTabId !== 'grid'"
-                       location="after"
-                       locateInMenu="auto"
-                       widget="dxButton"
-                       showText="inMenu"
-                       :options="{
-             text: 'Column Chooser',
-             icon: 'columnchooser',
-             onClick: chooseColumnDataGrid
-         }" />
+      <dx-toolbar-item
+        :disabled="activeTabId !== 'grid'"
+        location="after"
+        locate-in-menu="auto"
+        widget="dxButton"
+        show-text="inMenu"
+        :options="{
+          text: 'Column Chooser',
+          icon: 'columnchooser',
+          onClick: chooseColumnDataGrid
+        }"
+      />
 
-      <dx-toolbar-item location="after" locateInMenu="auto">
-        <div class="separator"></div>
+      <dx-toolbar-item
+        location="after"
+        locate-in-menu="auto"
+      >
+        <div class="separator" />
       </dx-toolbar-item>
 
-      <dx-toolbar-item :disabled="!['grid', 'gantt'].includes(activeTabId)"
-                       location="after"
-                       locateInMenu="auto"
-                       widget="dxButton"
-                       showText="inMenu"
-                       :options="{
-            text: 'Export to PDF',
-            icon: 'exportpdf',
-            onClick: exportToPdf
-        }"/>
+      <dx-toolbar-item
+        :disabled="!['grid', 'gantt'].includes(activeTabId)"
+        location="after"
+        locate-in-menu="auto"
+        widget="dxButton"
+        show-text="inMenu"
+        :options="{
+          text: 'Export to PDF',
+          icon: 'exportpdf',
+          onClick: exportToPdf
+        }"
+      />
 
-      <dx-toolbar-item :disabled="!['grid'].includes(activeTabId)"
-                       location="after"
-                       locateInMenu="auto"
-                       widget="dxButton"
-                       showText="inMenu"
-                       :options="{
-                            text: 'Export to Exel',
-                            icon: 'exportxlsx',
-                            onClick: exportToXlsx
-                       }"/>
-      <dx-toolbar-item :disabled="!['grid'].includes(activeTabId)"
-                       location="after"
-                       locateInMenu="auto"
-                       widget="dxTextBox"
-                       :options="{
-            placeholder: 'Task Search',
-            mode: 'search',
-            onInput: searchDataGrid
-        }"/>
+      <dx-toolbar-item
+        :disabled="!['grid'].includes(activeTabId)"
+        location="after"
+        locate-in-menu="auto"
+        widget="dxButton"
+        show-text="inMenu"
+        :options="{
+          text: 'Export to Exel',
+          icon: 'exportxlsx',
+          onClick: exportToXlsx
+        }"
+      />
+      <dx-toolbar-item
+        :disabled="!['grid'].includes(activeTabId)"
+        location="after"
+        locate-in-menu="auto"
+        widget="dxTextBox"
+        :options="{
+          placeholder: 'Task Search',
+          mode: 'search',
+          onInput: searchDataGrid
+        }"
+      />
     </dx-toolbar>
     <load-component :is-loading="isLoading">
-    <div class="task-list">
-      <div  v-if="taskPanelItems[0].text === displayTaskComponent" class="grid">
-        <task-list-grid ref="tasksGridCmp" :data-source="gridData"/>
+      <div class="task-list">
+        <div
+          v-if="taskPanelItems[0].text === displayTaskComponent"
+          class="grid"
+        >
+          <task-list-grid
+            ref="tasksGridCmp"
+            :data-source="gridData"
+          />
+        </div>
+        <div
+          v-else-if="taskPanelItems[1].text === displayTaskComponent"
+          class="kanban"
+        >
+          <task-list-kanban :tasks="kanbanData" />
+        </div>
+        <div
+          v-else-if="taskPanelItems[2].text === displayTaskComponent"
+          class="gantt"
+        >
+          <task-list-gantt
+            ref="tasksGanttCmp"
+            :tasks="ganttData"
+          />
+        </div>
       </div>
-      <div v-else-if="taskPanelItems[1].text === displayTaskComponent" class="kanban">
-        <task-list-kanban :tasks="kanbanData"></task-list-kanban>
-      </div>
-      <div v-else-if="taskPanelItems[2].text === displayTaskComponent" class="gantt">
-        <task-list-gantt ref="tasksGanttCmp" :tasks="ganttData"></task-list-gantt>
-      </div>
-    </div>
     </load-component>
   </div>
 </template>

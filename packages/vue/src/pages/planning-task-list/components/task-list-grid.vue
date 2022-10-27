@@ -1,95 +1,129 @@
 <template>
-  <dx-data-grid ref="dxDataGridCmp"
-                height="100%"
-                id="tasks-grid"
-                :data-source="dataSource"
-                @row-click="navigateToDetails"
-                @row-prepared="onRowPreparedGrid"
-                :column-auto-width="true"
+  <dx-data-grid
+    ref="dxDataGridCmp"
+    height="100%"
+    id="tasks-grid"
+    :data-source="dataSource"
+    @row-click="navigateToDetails"
+    @row-prepared="onRowPreparedGrid"
+    :column-auto-width="true"
   >
-    <dx-load-panel :enabled="true" :show-pane="false"/>
-    <dx-scrolling row-rendering-mode="virtual"/>
-    <dx-paging :page-size="15"/>
-    <dx-pager :visible="true" :show-page-size-selector="true"/>
-    <dx-editing mode="row"
-                :allow-updating="true"/>
+    <dx-load-panel
+      :enabled="true"
+      :show-pane="false"
+    />
+    <dx-scrolling row-rendering-mode="virtual" />
+    <dx-paging :page-size="15" />
+    <dx-pager
+      :visible="true"
+      :show-page-size-selector="true"
+    />
+    <dx-editing
+      mode="row"
+      :allow-updating="true"
+    />
 
-    <dx-selection  select-all-mode="allPages"
-                   show-check-boxes-mode="always"
-                   mode="multiple"/>
-    <dx-sorting mode="multiple"/>
-    <dx-header-filter :visible="true"/>
+    <dx-selection
+      select-all-mode="allPages"
+      show-check-boxes-mode="always"
+      mode="multiple"
+    />
+    <dx-sorting mode="multiple" />
+    <dx-header-filter :visible="true" />
 
-    <dx-column data-field="text" caption="Subject" :hiding-priority="7">
-      <dx-required-rule/>
-    </dx-column>
-    <dx-column data-field="company" caption="Company" :hiding-priority="6">
-      <dx-required-rule/>
-    </dx-column>
-    <dx-column data-field="priority"
-               caption="Priority"
-               :hiding-priority="4"
-               cell-template="cellPriority"
-               edit-cell-template="editCellPriority"
+    <dx-column
+      data-field="text"
+      caption="Subject"
+      :hiding-priority="7"
     >
-      <dx-column-lookup :data-source="priorityList"/>
-      <dx-required-rule/>
+      <dx-required-rule />
     </dx-column>
-    <dx-column data-field="startDate"
-               caption="Start Date"
-               data-type="date"
-               :hiding-priority="2"
+    <dx-column
+      data-field="company"
+      caption="Company"
+      :hiding-priority="6"
     >
-      <dx-required-rule/>
+      <dx-required-rule />
     </dx-column>
-    <dx-column data-field="dueDate"
-               caption="Due Date"
-               data-type="date"
-               sort-order="asc"
-               :hiding-priority="1"
+    <dx-column
+      data-field="priority"
+      caption="Priority"
+      :hiding-priority="4"
+      cell-template="cellPriority"
+      edit-cell-template="editCellPriority"
     >
-      <dx-required-rule/>
+      <dx-column-lookup :data-source="priorityList" />
+      <dx-required-rule />
     </dx-column>
-    <dx-column data-field="owner" caption="Owner" :hiding-priority="5">
-      <dx-required-rule/>
-    </dx-column>
-    <dx-column data-field="status"
-               caption="Status"
-               :hiding-priority="3"
-               :min-width="120"
-               cell-template="cellStatus"
-               edit-cell-template="editCellStatus"
+    <dx-column
+      data-field="startDate"
+      caption="Start Date"
+      data-type="date"
+      :hiding-priority="2"
     >
-      <dx-column-lookup :data-source="statusList"/>
-      <dx-required-rule/>
+      <dx-required-rule />
+    </dx-column>
+    <dx-column
+      data-field="dueDate"
+      caption="Due Date"
+      data-type="date"
+      sort-order="asc"
+      :hiding-priority="1"
+    >
+      <dx-required-rule />
+    </dx-column>
+    <dx-column
+      data-field="owner"
+      caption="Owner"
+      :hiding-priority="5"
+    >
+      <dx-required-rule />
+    </dx-column>
+    <dx-column
+      data-field="status"
+      caption="Status"
+      :hiding-priority="3"
+      :min-width="120"
+      cell-template="cellStatus"
+      edit-cell-template="editCellStatus"
+    >
+      <dx-column-lookup :data-source="statusList" />
+      <dx-required-rule />
     </dx-column>
 
     <template #cellPriority="{ data }">
-      <task-priority :value="data?.data?.priority || ''"></task-priority>
+      <task-priority :value="data?.data?.priority || ''" />
     </template>
 
     <template #editCellPriority="{ data: cellData }">
-      <dx-select-box class="edit-cell"
-                     :value="cellData?.value"
-                     :items="priorityList"
-                     @value-changed="(e) => onPrioritySelectChange(e.value, cellData)"
-                     @selection-changed="cellData.component.updateDimensions"
-                     field-template="field"
+      <dx-select-box
+        class="edit-cell"
+        :value="cellData?.value"
+        :items="priorityList"
+        @value-changed="(e) => onPrioritySelectChange(e.value, cellData)"
+        @selection-changed="cellData.component.updateDimensions"
+        field-template="field"
       >
         <template #field>
           <div class="form-custom-list-prop">
-            <task-priority :value="cellData.value" class="task-priority"></task-priority>
-            <dx-text-box :readOnly="true"></dx-text-box>
+            <task-priority
+              :value="cellData.value"
+              class="task-priority"
+            />
+            <dx-text-box :read-only="true" />
           </div>
         </template>
         <template #item="{ data }">
-          <task-priority :value="data" class="task-priority"></task-priority>
+          <task-priority
+            :value="data"
+            class="task-priority"
+          />
         </template>
       </dx-select-box>
     </template>
 
     <template #cellStatus="{ data }">
-      <task-status :status="data.value"/>
+      <task-status :status="data.value" />
     </template>
 
     <template #editCellStatus="{ data: cellInfo }">
@@ -99,14 +133,14 @@
         :items="statusList"
         @value-changed="(e) => onStatusSelectChange(e.value, cellInfo)"
         @selection-changed="cellInfo.component.updateDimensions"
-        fieldTemplate="field"
+        field-template="field"
       >
         <template #field>
-          <task-status :status="cellInfo.value"/>
-          <dx-text-box :readOnly="true"></dx-text-box>
+          <task-status :status="cellInfo.value" />
+          <dx-text-box :read-only="true" />
         </template>
         <template #item="{data}">
-          <task-status :status="data"/>
+          <task-status :status="data" />
         </template>
       </dx-select-box>
     </template>

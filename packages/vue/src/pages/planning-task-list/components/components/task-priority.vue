@@ -1,6 +1,9 @@
 <template>
-  <div class="priority" :class="'priority-' + props.value?.toLowerCase()">
-    <div class="separator"></div>
+  <div
+    class="priority"
+    :class="'priority-' + props.value?.toLowerCase()"
+  >
+    <div class="separator" />
     <span>{{ props.value }}</span>
   </div>
 </template>

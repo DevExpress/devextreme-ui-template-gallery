@@ -1,5 +1,6 @@
 <template>
-  <div class="dx-swatch-additional side-navigation-menu"
+  <div
+    class="dx-swatch-additional side-navigation-menu"
     @click="forwardClick"
   >
     <slot />

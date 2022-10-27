@@ -1,22 +1,34 @@
 <template>
   <div id="activities-list">
-    <load-component :is-loading="props.isLoading" container-selector="#activities-list">
-      <dx-list class="activities-list"
-               :items="props.items"
-               :scrollingEnabled="false"
+    <load-component
+      :is-loading="props.isLoading"
+      container-selector="#activities-list"
+    >
+      <dx-list
+        class="activities-list"
+        :items="props.items"
+        :scrolling-enabled="false"
       >
         <template #item="{ data: item }">
-          <div >
+          <div>
             <div class="activity">
-              <div class="name">{{ item.name }}</div>
-              <div class="date" :class="{ by: props.showBy }">
-            <span>{{
-                formatDate(new Date(item.date))
-              }}</span>
+              <div class="name">
+                {{ item.name }}
+              </div>
+              <div
+                class="date"
+                :class="{ by: props.showBy }"
+              >
+                <span>{{
+                  formatDate(new Date(item.date))
+                }}</span>
                 <span v-if="props.showBy">by</span>
                 <span>{{ item.manager }}</span>
               </div>
-              <dx-menu class="overflow-menu" :items="activityMenuItems"></dx-menu>
+              <dx-menu
+                class="overflow-menu"
+                :items="activityMenuItems"
+              />
             </div>
           </div>
         </template>

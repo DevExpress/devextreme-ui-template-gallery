@@ -1,5 +1,8 @@
 <template>
-  <span class="task-status" :class="{[className]: true}">
+  <span
+    class="task-status"
+    :class="{[className]: true}"
+  >
     {{ props.status }}</span>
 </template>
 <script setup lang="ts">

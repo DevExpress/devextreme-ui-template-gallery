@@ -1,166 +1,222 @@
 <template>
-  <div id="contact-form" >
+  <div id="contact-form">
     <dx-toolbar>
       <dx-toolbar-item location="before">
         <span class="dx-form-group-caption">Details</span>
       </dx-toolbar-item>
-      <dx-toolbar-item location="after" locateInMenu="after" :visible="!isEditing">
+      <dx-toolbar-item
+        location="after"
+        locate-in-menu="after"
+        :visible="!isEditing"
+      >
         <dx-button
           text="Edit"
           icon="edit"
-          stylingMode="outlined"
+          styling-mode="outlined"
           type="default"
           :visible="!isLoading"
           @click="startEdit()"
-        ></dx-button>
+        />
       </dx-toolbar-item>
-      <dx-toolbar-item location="after" locateInMenu="after" :visible="isEditing">
+      <dx-toolbar-item
+        location="after"
+        locate-in-menu="after"
+        :visible="isEditing"
+      >
         <dx-button
           text="Save"
-          stylingMode="outlined"
+          styling-mode="outlined"
           type="default"
           @click="saveEdit()"
-        ></dx-button>
+        />
       </dx-toolbar-item>
-      <dx-toolbar-item location="after" locateInMenu="after" :visible="isEditing">
+      <dx-toolbar-item
+        location="after"
+        locate-in-menu="after"
+        :visible="isEditing"
+      >
         <dx-button
           text="Cancel"
           @click="cancelEdit()"
           styling-mode="text"
-        ></dx-button>
+        />
       </dx-toolbar-item>
     </dx-toolbar>
-    <load-component :is-loading="isLoading"
-                    :container-selector="'#contact-form'">
-        <dx-form class="plain-styled-form"
-                 :class="{'view-mode': !isEditing}"
-                 labelMode="floating">
-          <dx-form-group-item :col-count="2">
-            <dx-col-count-by-screen :xs="2"/>
+    <load-component
+      :is-loading="isLoading"
+      :container-selector="'#contact-form'"
+    >
+      <dx-form
+        class="plain-styled-form"
+        :class="{'view-mode': !isEditing}"
+        label-mode="floating"
+      >
+        <dx-form-group-item :col-count="2">
+          <dx-col-count-by-screen :xs="2" />
+          <dx-form-item>
+            <user-photo
+              :link="contactData.image"
+              :size="184"
+            />
+          </dx-form-item>
+
+          <dx-form-group-item>
             <dx-form-item>
-              <user-photo :link="contactData.image" :size="184"/>
+              <dx-select-box
+                label="Status"
+                v-model="contactData.status"
+                :items="contactStatusList"
+                :read-only="!isEditing"
+                :element-attr="{class: 'form-editor'}"
+                :input-attr="{class: 'form-editor-input'}"
+                field-template="field"
+                item-template="item"
+              >
+                <template #field>
+                  <div class="status-editor-field">
+                    <contact-status
+                      :status="contactData?.status"
+                      class="contact-status"
+                    />
+                    <dx-text-box :read-only="true" />
+                  </div>
+                </template>
+                <template #item="{ data }">
+                  <contact-status
+                    :status="data"
+                    class="contact-status"
+                  />
+                </template>
+              </dx-select-box>
             </dx-form-item>
-
-            <dx-form-group-item>
-              <dx-form-item>
-                <dx-select-box label="Status"
-                               v-model="contactData.status"
-                               :items="contactStatusList"
-                               :read-only="!isEditing"
-                               :element-attr="{class: 'form-editor'}"
-                               :input-attr="{class: 'form-editor-input'}"
-                               field-template="field"
-                               item-template="item"
-                >
-                  <template #field>
-                    <div class="status-editor-field">
-                      <contact-status :status="contactData?.status" class="contact-status"/>
-                      <dx-text-box :read-only="true"/>
-                    </div>
-
-                  </template>
-                  <template #item="{ data }">
-                    <contact-status :status="data" class="contact-status"/>
-                  </template>
-                </dx-select-box>
-              </dx-form-item>
-
-              <dx-form-item>
-                <form-textbox label="First Name"
-                              v-model="contactData.firstName"
-                              :is-editing = "isEditing"/>
-              </dx-form-item>
-
-              <dx-form-item>
-                <form-textbox label="Last Name"
-                              v-model="contactData.lastName"
-                              :is-editing = "isEditing"/>
-              </dx-form-item>
-            </dx-form-group-item>
 
             <dx-form-item>
-              <form-textbox label="Position"
-                            v-model="contactData.position"
-                            :is-editing = "isEditing"/>
+              <form-textbox
+                label="First Name"
+                v-model="contactData.firstName"
+                :is-editing="isEditing"
+              />
             </dx-form-item>
 
-            <dx-form-item cssClass="accent">
-              <form-textbox label="Assigned to"
-                            v-model="contactData.manager"
-                            :is-editing = "isEditing"/>
-            </dx-form-item>
-
-            <dx-form-item :col-span="2" cssClass="accent">
-              <form-textbox label="Company"
-                            v-model="contactData.company"
-                            :is-editing = "isEditing"
+            <dx-form-item>
+              <form-textbox
+                label="Last Name"
+                v-model="contactData.lastName"
+                :is-editing="isEditing"
               />
             </dx-form-item>
           </dx-form-group-item>
 
-          <dx-form-group-item :col-count="4" caption="Contacts">
-            <dx-col-count-by-screen :xs="2"></dx-col-count-by-screen>
-            <dx-form-item :col-span="4" >
-              <form-textbox label="Address"
-                            v-model="contactData.address"
-                            :is-editing = "isEditing"
-              />
-            </dx-form-item>
-            <dx-form-item :col-span="2">
-              <form-textbox label="City"
-                            v-model="contactData.city"
-                            :is-editing = "isEditing"/>
-            </dx-form-item>
+          <dx-form-item>
+            <form-textbox
+              label="Position"
+              v-model="contactData.position"
+              :is-editing="isEditing"
+            />
+          </dx-form-item>
 
-            <dx-form-item>
-              <form-textbox label="State"
-                            v-model="contactData.state.stateShort"
-                            :is-editing = "isEditing"/>
-            </dx-form-item>
-            <dx-form-item>
-              <form-textbox label="Zip Code"
-                            v-model.number="contactData.zipCode"
-                            :is-editing = "isEditing"
-                            :validators="[zipCodeValidator]"
-              />
-            </dx-form-item>
-          </dx-form-group-item>
-          <dx-form-group-item :col-count="2" cssClass="contact-fields-group">
-            <dx-col-count-by-screen :xs="2"></dx-col-count-by-screen>
-            <dx-form-item>
-              <form-textbox label="Phone"
-                            v-model.number="contactData.phone"
-                            :is-editing = "isEditing"
-                            mask="+1(000)000-0000"/>
-              <dx-button v-if="!isEditing"
-                         class="form-item-button"
-                         v-bind="{
-                                  text: 'Call',
-                                  icon: 'tel',
-                                  type: 'default',
-                                  stylingMode: 'outlined'
-                                 }"
-                         :validators="[]"/>
-            </dx-form-item>
-            <dx-form-item>
-              <form-textbox label="Email"
-                            v-model.number="contactData.email"
-                            :is-editing = "isEditing"
-                            :validators="[{type: 'email'}]"/>
-              <dx-button v-if="!isEditing"
-                         class="form-item-button"
-                         v-bind="{
-                               text: 'Send Email',
-                               icon: 'email',
-                               type: 'default',
-                               stylingMode: 'outlined'
-                              }"/>
-            </dx-form-item>
-          </dx-form-group-item>
-        </dx-form>
+          <dx-form-item css-class="accent">
+            <form-textbox
+              label="Assigned to"
+              v-model="contactData.manager"
+              :is-editing="isEditing"
+            />
+          </dx-form-item>
+
+          <dx-form-item
+            :col-span="2"
+            css-class="accent"
+          >
+            <form-textbox
+              label="Company"
+              v-model="contactData.company"
+              :is-editing="isEditing"
+            />
+          </dx-form-item>
+        </dx-form-group-item>
+
+        <dx-form-group-item
+          :col-count="4"
+          caption="Contacts"
+        >
+          <dx-col-count-by-screen :xs="2" />
+          <dx-form-item :col-span="4">
+            <form-textbox
+              label="Address"
+              v-model="contactData.address"
+              :is-editing="isEditing"
+            />
+          </dx-form-item>
+          <dx-form-item :col-span="2">
+            <form-textbox
+              label="City"
+              v-model="contactData.city"
+              :is-editing="isEditing"
+            />
+          </dx-form-item>
+
+          <dx-form-item>
+            <form-textbox
+              label="State"
+              v-model="contactData.state.stateShort"
+              :is-editing="isEditing"
+            />
+          </dx-form-item>
+          <dx-form-item>
+            <form-textbox
+              label="Zip Code"
+              v-model.number="contactData.zipCode"
+              :is-editing="isEditing"
+              :validators="[zipCodeValidator]"
+            />
+          </dx-form-item>
+        </dx-form-group-item>
+        <dx-form-group-item
+          :col-count="2"
+          css-class="contact-fields-group"
+        >
+          <dx-col-count-by-screen :xs="2" />
+          <dx-form-item>
+            <form-textbox
+              label="Phone"
+              v-model.number="contactData.phone"
+              :is-editing="isEditing"
+              mask="+1(000)000-0000"
+            />
+            <dx-button
+              v-if="!isEditing"
+              class="form-item-button"
+              v-bind="{
+                text: 'Call',
+                icon: 'tel',
+                type: 'default',
+                stylingMode: 'outlined'
+              }"
+              :validators="[]"
+            />
+          </dx-form-item>
+          <dx-form-item>
+            <form-textbox
+              label="Email"
+              v-model.number="contactData.email"
+              :is-editing="isEditing"
+              :validators="[{type: 'email'}]"
+            />
+            <dx-button
+              v-if="!isEditing"
+              class="form-item-button"
+              v-bind="{
+                text: 'Send Email',
+                icon: 'email',
+                type: 'default',
+                stylingMode: 'outlined'
+              }"
+            />
+          </dx-form-item>
+        </dx-form-group-item>
+      </dx-form>
     </load-component>
   </div>
-
 </template>
 <script setup lang="ts">
 import { ref, watch } from 'vue';

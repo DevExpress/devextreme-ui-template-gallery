@@ -1,22 +1,33 @@
 <template>
-  <div class="card dx-theme-text-color dx-theme-background-color" @click="navigateToDetails()">
-    <div class="card-wrapper" :class="`priority-${ task.priority.toLowerCase() }`">
-      <div class="card-priority"></div>
-      <dx-button icon="edit" @click="notifyByCard()"></dx-button>
+  <div
+    class="card dx-theme-text-color dx-theme-background-color"
+    @click="navigateToDetails()"
+  >
+    <div
+      class="card-wrapper"
+      :class="`priority-${ task.priority.toLowerCase() }`"
+    >
+      <div class="card-priority" />
+      <dx-button
+        icon="edit"
+        @click="notifyByCard()"
+      />
       <div class="card-content">
-        <div class="card-subject dx-theme-text-color">{{ task.text }}</div>
+        <div class="card-subject dx-theme-text-color">
+          {{ task.text }}
+        </div>
         <div class="card-data">
           <span class="priority">{{ task.priority }}</span>
           <span class="date dx-theme-text-color">{{
-              formatDate(task.dueDate)
-            }}</span>
+            formatDate(task.dueDate)
+          }}</span>
         </div>
         <div class="card-assignee">
           <span class="company dx-theme-text-color">{{ task.company }}</span>
           <div
             class="circle"
             :data-letters="getAvatarText(task.owner)"
-          ></div>
+          />
         </div>
       </div>
     </div>

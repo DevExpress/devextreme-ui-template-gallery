@@ -4,7 +4,9 @@
       <div class="image-container">
         <div class="user-image" />
       </div>
-      <div class="user-name">{{user?.name}} {{user?.lastName}}</div>
+      <div class="user-name">
+        {{ user?.name }} {{ user?.lastName }}
+      </div>
     </div>
 
     <dx-context-menu
@@ -15,12 +17,17 @@
       show-event="dxclick"
       css-class="user-menu"
     >
-      <dx-position my="top center" at="bottom center" />
+      <dx-position
+        my="top center"
+        at="bottom center"
+      />
     </dx-context-menu>
 
-    <dx-list v-if="menuMode === 'list'"
-             class="dx-toolbar-menu-action"
-             :items="menuItems" />
+    <dx-list
+      v-if="menuMode === 'list'"
+      class="dx-toolbar-menu-action"
+      :items="menuItems"
+    />
   </div>
 </template>
 

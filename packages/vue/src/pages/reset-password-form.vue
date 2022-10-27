@@ -1,6 +1,12 @@
 <template>
-  <form class="reset-password-form" @submit.prevent="onSubmit">
-    <dx-form :form-data="formData" :disabled="loading">
+  <form
+    class="reset-password-form"
+    @submit.prevent="onSubmit"
+  >
+    <dx-form
+      :form-data="formData"
+      :disabled="loading"
+    >
       <dx-item
         data-field="email"
         editor-type="dxTextBox"
@@ -17,21 +23,27 @@
           type="default"
           template="resetTemplate"
           :use-submit-behavior="true"
-        >
-        </dx-button-options>
+        />
       </dx-button-item>
       <dx-item>
         <template #default>
           <div class="login-link">
-            Return to <router-link to="/login-form">Sign In</router-link>
+            Return to <router-link to="/login-form">
+              Sign In
+            </router-link>
           </div>
         </template>
       </dx-item>
       <template #resetTemplate>
         <div>
           <span class="dx-button-text">
-              <dx-load-indicator v-if="loading" width="24px" height="24px" :visible="true" />
-              <span v-if="!loading">Reset my password</span>
+            <dx-load-indicator
+              v-if="loading"
+              width="24px"
+              height="24px"
+              :visible="true"
+            />
+            <span v-if="!loading">Reset my password</span>
           </span>
         </div>
       </template>
