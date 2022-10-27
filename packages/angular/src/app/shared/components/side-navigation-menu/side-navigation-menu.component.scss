@@ -6,11 +6,11 @@
   flex-direction: column;
   min-height: 100%;
   height: 100%;
-  width: 250px !important;
 
   .menu-container {
     background-color: $side-panel-background;
     min-height: 100%;
+    width: 250px;
     display: flex;
     flex: 1;
 
@@ -21,17 +21,9 @@
 
       // ##
 
-      .dx-scrollable-content {
-        > .dx-treeview-node-container:first-child {
-          > .dx-treeview-node:first-child {
-            > .dx-treeview-item {
-              box-shadow: inset 0 4px 8px rgb(0, 0, 0, 0.05);
-
-              .screen-large & {
-                box-shadow: none;
-              }
-            }
-          }
+      > .dx-treeview-node:first-child {
+        > .dx-treeview-item:not(.screen-large &) {
+          box-shadow: inset 0 4px 8px rgb(0, 0, 0, 0.05);
         }
       }
 
@@ -40,17 +32,17 @@
         padding-left: 0;
         padding-right: 0;
 
-        .dx-icon {
-          width: $side-panel-min-width !important;
-          margin: 0 !important;
+        .dx-icon.dx-icon {
+          width: $side-panel-min-width;
+          margin: 0;
         }
       }
 
       // ##
 
       // ## Arrow customization
-      .dx-treeview-node {
-        padding: 0 0 !important;
+      .dx-treeview-node.dx-treeview-node {
+        padding: 0 0;
       }
 
       .dx-treeview-toggle-item-visibility {
