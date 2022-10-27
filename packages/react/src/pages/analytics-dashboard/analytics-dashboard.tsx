@@ -9,31 +9,7 @@ import { RevenueCard } from './cards/RevenueCard';
 import { ConversionTicker, LeadsTicker, OpportunitiesTicker, RevenueTotalTicker } from './cards/TickerCards';
 import { DashboardContainer } from '../../components/dashboard-container/DashboardContainer';
 import { DashboardCardsGroup } from '../../components/dashboard-container/DashboardCardGroup';
-
-const tabItems = {
-  Week: {
-    period: '2020-01-24/2020-01-31',
-    index: 0,
-  },
-  '2 Weeks': {
-    period: '2020-01-14/2020-01-31',
-    index: 1,
-  },
-  Month: {
-    period: '2020-01-01/2020-02-01',
-    index: 2,
-  },
-  Year: {
-    period: '2020-01-01/2021-01-01',
-    index: 3,
-  },
-  All: {
-    period: '2018-01-01/2022-01-01',
-    index: 4,
-  },
-};
-
-const DEFAULT_TAB_KEY = 'All';
+import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 
 const calculateTotal = (data) => {
   if (!data) return;
@@ -41,8 +17,8 @@ const calculateTotal = (data) => {
 };
 
 export const AnalyticsDashboard = () => {
-  const [tabIndex, setTabIndex] = useState(tabItems[DEFAULT_TAB_KEY].index);
-  const [dateRange, setDateRange] = useState(tabItems[DEFAULT_TAB_KEY].period.split('/'));
+  const [tabIndex, setTabIndex] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].index);
+  const [dateRange, setDateRange] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/'));
   const [opportunities, setOpportunities] = useState([]);
   const [salesByCategory, setSalesByCategory] = useState([]);
   const [sales, setSales] = useState([]);
@@ -68,7 +44,7 @@ export const AnalyticsDashboard = () => {
   }, [dateRange]);
 
   const onTabClick = useCallback((e: { itemData: string }) => {
-    const { index, period } = tabItems[e.itemData];
+    const { index, period } = ANALYTICS_PERIODS[e.itemData];
     setTabIndex(index);
     setDateRange(period.split('/'));
   }, []);
@@ -81,7 +57,7 @@ export const AnalyticsDashboard = () => {
           location='before'
           widget='dxTabs'
           options={{
-            dataSource: Object.keys(tabItems),
+            dataSource: Object.keys(ANALYTICS_PERIODS),
             selectedIndex: tabIndex,
             onItemClick: onTabClick,
           }}

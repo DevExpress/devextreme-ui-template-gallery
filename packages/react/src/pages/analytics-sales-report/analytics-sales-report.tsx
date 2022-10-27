@@ -22,6 +22,7 @@ import Chart, {
 import DropDownButton from 'devextreme-react/drop-down-button';
 import { formatDate } from 'devextreme/localization';
 import './analytics-sales-report.scss';
+import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 
 export const SalesRangeCard = ({ datasource, range, onRangeChanged }) => (
   <CardAnalytics title='' contentClass='sales-range' isLoading={!datasource.length} hideMenu>
@@ -97,13 +98,15 @@ export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPe
 
 const formatDateRange = (dateRange: Date[]) => dateRange.map((date) => formatDate(date, 'yyyy-MM-dd'));
 
+const defaultDateRange = ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/').map((d) => new Date(d));
+
 const groupByPeriods = ['Day', 'Month'];
 
 export const AnalyticsSalesReport = () => {
   const [sales, setSales] = useState([]);
   const [salesByCategory, setSalesByCategory] = useState([]);
   const [salesByDateAndCategory, setSalesByDateAndCategory] = useState([]);
-  const [dateRange, setDateRange] = useState([new Date('2018-01-01'), new Date('2022-01-01')]); //TODO: share default ranges between all dashboard views
+  const [dateRange, setDateRange] = useState(defaultDateRange);
   const [groupByPeriod, setGroupByPeriod] = useState(groupByPeriods[1]);
 
   const onRangeChanged = useCallback((e) => {
