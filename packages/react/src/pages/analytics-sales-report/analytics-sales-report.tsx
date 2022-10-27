@@ -19,8 +19,9 @@ import Chart, {
   ArgumentAxis,
   Size as ChartSize,
 } from 'devextreme-react/chart';
-import './analytics-sales-report.scss';
 import DropDownButton from 'devextreme-react/drop-down-button';
+import { formatDate } from 'devextreme/localization';
+import './analytics-sales-report.scss';
 
 export const SalesRangeCard = ({ datasource, range, onRangeChanged }) => (
   <CardAnalytics title='' contentClass='sales-range' isLoading={!datasource.length}>
@@ -87,9 +88,7 @@ export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPe
   </CardAnalytics>
 );
 
-const formatDate = (dateTime: Date) => {
-  return dateTime.toLocaleDateString('en-GB').split('/').reverse().join('-');
-};
+const formatDateRange = (dateRange: Date[]) => dateRange.map(date => formatDate(date, 'yyyy-MM-dd'));
 
 const groupByPeriods = ['Day', 'Month'];
 
@@ -98,12 +97,10 @@ export const AnalyticsSalesReport = () => {
   const [salesByCategory, setSalesByCategory] = useState([]);
   const [salesByDateAndCategory, setSalesByDateAndCategory] = useState([]);
   const [dateRange, setDateRange] = useState([new Date('2018-01-01'), new Date('2022-01-01')]);
-  const [visualRange, setVisualRange] = useState(['2018-01-01', '2022-01-01']);
   const [groupByPeriod, setGroupByPeriod] = useState(groupByPeriods[1]);
 
   const onRangeChanged = useCallback((e) => {
     const [startDate, endDate] = e.value;
-    setVisualRange([formatDate(startDate), formatDate(endDate)]);
     setDateRange([startDate, endDate]);
   }, []);
 
@@ -113,20 +110,21 @@ export const AnalyticsSalesReport = () => {
   }, []);
 
   useEffect(() => {
-    getSales(...visualRange)
+    getSales(...formatDateRange(dateRange))
       .then((data) => setSales(data))
       .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
-    getSalesByCategory(...visualRange)
-      .then((data) => setSalesByCategory(data))
-      .catch((error) => console.log(error));
-
-    getSalesByOrderDate(groupByPeriod)
-      .then((data) => setSalesByDateAndCategory(data))
-      .catch((error) => console.log(error));
-  }, [visualRange]);
+    Promise.all([
+      getSalesByCategory(...formatDateRange(dateRange))
+        .then((data) => setSalesByCategory(data)),
+      getSalesByOrderDate(groupByPeriod)
+        .then((data) => setSalesByDateAndCategory(data))
+    ]).catch(
+      (error) => console.log(error)
+    );
+  }, [dateRange]);
 
   return (
     <DashboardContainer>
