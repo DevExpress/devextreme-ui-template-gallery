@@ -17,7 +17,7 @@ import Chart, {
   Point,
   Tooltip,
   ArgumentAxis,
-  Size as ChartSize
+  Size as ChartSize,
 } from 'devextreme-react/chart';
 import DropDownButton from 'devextreme-react/drop-down-button';
 import { formatDate } from 'devextreme/localization';
@@ -81,13 +81,12 @@ export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPe
     }
   >
     <Chart id='chart' dataSource={datasource}>
-      <ArgumentAxis visualRange={range} />
+      <ArgumentAxis visualRange={range} argumentType='datetime' valueMarginsEnabled={false} />
       <Tooltip enabled customizeTooltip={({ seriesName }) => ({ text: seriesName })} />
       <SeriesTemplate nameField='category' />
       <CommonSeriesSettings argumentField='date' valueField='total' hoverMode='includePoints'>
         <Point hoverMode='allArgumentPoints' />
       </CommonSeriesSettings>
-      <ArgumentAxis argumentType='datetime' valueMarginsEnabled='false' />
       <ChartLegend visible={false} />
       <ChartSize height={270} />
     </Chart>
