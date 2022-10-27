@@ -70,10 +70,16 @@ export const ProductSaleByRangeCard = ({ datasource }) => (
 );
 
 export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPeriodChanged, range }) => (
-  <CardAnalytics title='Sales Perfomance' contentClass='sales' isLoading={!datasource.length}>
-    <div className='sales-filter'>
-      <DropDownButton stylingMode='text' useSelectMode items={periods} selectedItemKey={selectedPeriod} onSelectionChanged={onPeriodChanged} />
-    </div>
+  <CardAnalytics
+    title='Sales Perfomance'
+    contentClass='sales'
+    isLoading={!datasource.length}
+    additionalHeaderContent={
+      <div className='sales-filter'>
+        <DropDownButton stylingMode='text' useSelectMode items={periods} selectedItemKey={selectedPeriod} onSelectionChanged={onPeriodChanged} />
+      </div>
+    }
+  >
     <Chart id='chart' dataSource={datasource}>
       <ArgumentAxis visualRange={range} />
       <Tooltip enabled customizeTooltip={({ seriesName }) => ({ text: seriesName })} />
