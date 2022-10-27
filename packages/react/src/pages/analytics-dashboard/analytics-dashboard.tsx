@@ -62,28 +62,20 @@ export const AnalyticsDashboard = () => {
   const [opportunitiesTotal, setOpportunitiesTotal] = useState(0);
 
   useEffect(() => {
-    getOpportunitiesByCategory(...dateRange)
-      .then((data) => {
+    Promise.all([
+      getOpportunitiesByCategory(...dateRange).then((data) => {
         setOpportunities(data);
         setOpportunitiesTotal(calculateTotal(data));
-      })
-      .catch((error) => console.log(error));
-
-    getSalesByCategory(...dateRange)
-      .then((data) => setSalesByCategory(data))
-      .catch((error) => console.log(error));
-
-    getSales(...dateRange)
-      .then((data) => {
+      }),
+      getSalesByCategory(...dateRange).then((data) => setSalesByCategory(data)),
+      getSales(...dateRange).then((data) => {
         setSales(data);
         setSalesTotal(calculateTotal(data));
-      })
-      .catch((error) => console.log(error));
-
-    getSalesByStateAndCity(...dateRange)
-      .then((data) => getSalesByState(data))
-      .then((data) => setSalesByState(data))
-      .catch((error) => console.log(error));
+      }),
+      getSalesByStateAndCity(...dateRange)
+        .then((data) => getSalesByState(data))
+        .then((data) => setSalesByState(data)),
+    ]).catch((error) => console.log(error));
   }, [dateRange]);
 
   const onTabClick = useCallback((e: { itemData: string }) => {

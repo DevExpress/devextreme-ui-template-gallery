@@ -11,7 +11,7 @@ type CardProps = {
   compact?: boolean;
 };
 
-const menuItems: Array<{ icon: string; items: Array<{ text: string }> }> = [
+const menuItems = [
   {
     icon: 'overflow',
     items: [{ text: 'Hide' }],
