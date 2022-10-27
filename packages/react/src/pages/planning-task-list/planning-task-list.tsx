@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 
@@ -6,12 +6,13 @@ import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridXSLX } from 'devextreme/excel_exporter';
+import LoadPanel from 'devextreme-react/load-panel';
 
 import dxTextBox from 'devextreme/ui/text_box';
 
 import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
 
-import { getTasks } from 'dx-rwa-data';
+import { getTasks, getFilteredTasks } from 'dx-rwa-data';
 
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
@@ -25,29 +26,28 @@ export const PlanningTaskList = () => {
 
   const [list, setList] = useState(listsData[0]);
   const [index, setIndex] = useState(0);
-  // const [itemVisibility, setItemVisibility] = useState(true);
-  const [data, setData] = useState([]);
+  const [gridData, setGridData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getTasks()
-      .then((data) => setData(data))
+      .then((data) => setGridData(data))
+      .catch((error) => console.log(error));
+    getFilteredTasks()
+      .then((data) => setFilteredData(data))
       .catch((error) => console.log(error));
   }, []);
 
-  const Component = useMemo(() => {
-    if(list === listsData[0]) {
-      return PlanningGrid;
-    } else if(list === listsData[1]) {
-      return PlanningKanban;
-    } else {
-      return PlanningGantt;
+  useEffect(() => {
+    if(filteredData.length && gridData.length) {
+      setLoading(false);
     }
-  }, [list]);
+  }, [filteredData, gridData]);
 
   const onTabClick = useCallback((e: { itemData: string }) => {
     setList(e.itemData);
     setIndex(listsData.findIndex((d) => d === e.itemData));
-    // setItemVisibility(e.itemData === listsData[0]);
   }, []);
 
   const addDataGridRow = useCallback(() => {
@@ -93,7 +93,7 @@ export const PlanningTaskList = () => {
 
   return (
     <div className='view-wrapper-list'>
-      <Toolbar>
+      <Toolbar className='toolbar-common'>
         <Item location='before'>
           <span className='toolbar-header'>Task</span>
         </Item>
@@ -135,6 +135,7 @@ export const PlanningTaskList = () => {
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
+          disabled={list !== listsData[0]}
           options={{
             icon: 'columnchooser',
             text: 'Column Chooser',
@@ -149,6 +150,7 @@ export const PlanningTaskList = () => {
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
+          disabled={list === listsData[1]}
           options={{
             icon: 'exportpdf',
             text: 'Export To PDF',
@@ -160,9 +162,10 @@ export const PlanningTaskList = () => {
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
+          disabled={list !== listsData[0]}
           options={{
             icon: 'exportxlsx',
-            text: 'Export To PDF',
+            text: 'Export To XSLX',
             onClick: exportToXSLX,
           }}
         />
@@ -170,6 +173,7 @@ export const PlanningTaskList = () => {
           location='after'
           widget='dxTextBox'
           locateInMenu='auto'
+          disabled={list !== listsData[0]}
           options={{
             mode: 'search',
             placeholder: 'Task Search',
@@ -177,7 +181,10 @@ export const PlanningTaskList = () => {
           }}
         />
       </Toolbar>
-      <Component dataSource={data} ref={list === listsData[0] ? gridRef : null} />
+      {loading && <LoadPanel container='.content' visible position={{ of: '.content' }} />}
+      {!loading && list === listsData[0] && <PlanningGrid dataSource={gridData} ref={gridRef} />}
+      {!loading && list === listsData[1] && <PlanningKanban dataSource={filteredData} />}
+      {!loading && list === listsData[2] && <PlanningGantt dataSource={filteredData} />}
     </div>
   );
 };
