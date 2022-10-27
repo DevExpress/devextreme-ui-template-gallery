@@ -45,7 +45,7 @@ const DashboardCardsGroup = ({ children, compact = false }: React.PropsWithChild
   <div className={`cards${compact ? ' compact' : ''}`}>
     {React.Children.map(children, (child) => {
       if (React.isValidElement(child)) {
-        return React.cloneElement(child, { compact });
+        return React.cloneElement<DashboardCardsGroupProps>(child as React.ReactElement<DashboardCardsGroupProps>, { compact });
       }
     })}
   </div>
