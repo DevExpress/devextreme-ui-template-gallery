@@ -7,10 +7,18 @@
   display: inline-block;
   vertical-align: top;
   white-space: normal;
+
+  .add-task {
+    padding: 10px;
+
+    .dx-icon,
+    .dx-button-text {
+      color: $accent-color;
+    }
+  }
 }
 
 .sortable-cards {
-  min-height: 380px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -29,17 +37,4 @@
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-
-  .dx-button {
-    background-color: rgba(0, 0, 0, 0);
-  }
-}
-
-.add-task {
-  padding: 10px;
-
-  .dx-icon,
-  .dx-button-text {
-    color: $accent-color;
-  }
 }
