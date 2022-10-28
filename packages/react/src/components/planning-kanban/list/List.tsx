@@ -15,9 +15,9 @@ import './List.scss';
 const boardMenuItems = [{
   icon: 'more',
   items: [
-    { text: 'Add card...' },
-    { text: 'Copy list..' },
-    { text: 'Move list..' },
+    { text: 'Add card' },
+    { text: 'Copy list' },
+    { text: 'Move list' },
   ],
 },
 ];
