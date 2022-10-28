@@ -39,12 +39,12 @@ export const PlanningTaskList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getTasks()
-      .then((data) => setGridData(data))
-      .catch((error) => console.log(error));
-    getFilteredTasks()
-      .then((data) => setFilteredData(data))
-      .catch((error) => console.log(error));
+    Promise.all([
+      getTasks()
+        .then((data) => setGridData(data)),
+      getFilteredTasks()
+        .then((data) => setFilteredData(data))
+    ]).catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
