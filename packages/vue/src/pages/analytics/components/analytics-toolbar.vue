@@ -71,6 +71,7 @@ import {
 } from 'devextreme-vue/toolbar';
 import { DxTabs } from 'devextreme-vue/tabs';
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
+import { onMounted } from 'vue';
 
 const props = withDefaults(defineProps<{
   showTabs?: boolean
@@ -78,12 +79,15 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits(['tab-change']);
 const [initialStartDate, initialEndDate] = analyticsPanelItems[4].value.split('/');
-emit('tab-change', [initialStartDate, initialEndDate]);
 
 const selectionChange = (e: TabsItemClickEvent) => {
   const [startDate, endDate] = e.itemData.value.split('/');
   emit('tab-change', [startDate, endDate]);
 };
+
+onMounted(() => {
+  emit('tab-change', [initialStartDate, initialEndDate]);
+});
 </script>
 
 <style scoped lang="scss">

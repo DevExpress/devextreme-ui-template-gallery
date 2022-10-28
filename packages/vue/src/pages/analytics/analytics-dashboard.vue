@@ -1,21 +1,21 @@
 <template>
   <div class="view-wrapper">
     <analytics-toolbar
+      ref="tabs"
       :show-tabs="true"
       @tab-change="tabChange($event)"
     >
       Dashboard
     </analytics-toolbar>
-
     <div class="tiles">
       <card-analytics
         class="grey"
         title="Opportunities"
-        :show-data="getTotal(opportunities) >= 0"
+        :show-data="data.opportunities !== null"
         content-class="opportunities-total"
       >
         <div class="total">
-          {{ formatPrice(getTotal(opportunities)) }}
+          {{ formatPrice(getTotal(data.opportunities)) }}
         </div>
         <div class="percentage">
           <i class="dx-icon-spinup" />
@@ -25,11 +25,11 @@
       <card-analytics
         class="grey"
         title="Revenue Total"
-        :show-data="!!getTotal(sales)"
+        :show-data="data.sales !== null"
         content-class="revenue-total"
       >
         <div class="total">
-          {{ formatPrice(getTotal(sales)) }}
+          {{ formatPrice(getTotal(data.sales)) }}
         </div>
         <div class="percentage">
           <i class="dx-icon-spinup" />
@@ -70,9 +70,11 @@
       <card-analytics
         title="Revenue"
         content-class="sales"
-        :show-data="!!sales"
       >
-        <dx-chart :data-source="sales">
+        <dx-chart
+          v-if="data.sales"
+          :data-source="data.sales"
+        >
           <dx-series value-field="total" />
           <dx-common-series-settings
             argument-field="date"
@@ -97,10 +99,10 @@
       <card-analytics
         title="Conversion Funnel (All Products)"
         content-class="opportunities"
-        :show-data="!!opportunities"
       >
         <dx-funnel
-          :data-source="opportunities"
+          v-if="data.opportunities"
+          :data-source="data.opportunities"
           argument-field="name"
           value-field="value"
         >
@@ -127,10 +129,9 @@
       <card-analytics
         title="Revenue Analysis"
         content-class="sales-by-state"
-        :show-data="!!salesByState"
       >
         <dx-data-grid
-          :data-source="salesByState"
+          :data-source="data.salesByState"
           :height="270"
         >
           <dx-column
@@ -184,10 +185,10 @@
       <card-analytics
         title="Revenue Snapshot (All Products)"
         content-class="sales-by-category"
-        :show-data="!!salesByCategory"
       >
         <dx-pie-chart
-          :data-source="salesByCategory"
+          v-if="data.salesByCategory"
+          :data-source="data.salesByCategory"
           type="doughnut"
           :diameter="0.8"
           :inner-radius="0.6"
@@ -218,12 +219,19 @@
       </card-analytics>
     </div>
   </div>
+  <dx-load-panel
+    container=".view-wrapper"
+    :visible="isLoading(data)"
+    :show-pane="true"
+    width="100%"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { DxDataGrid, DxColumn } from 'devextreme-vue/data-grid';
 import { DxBullet, DxTooltip as DxBulletTooltip, DxSize as DxBulletSize } from 'devextreme-vue/bullet';
+import { DxLoadPanel } from 'devextreme-vue/load-panel';
 import {
   DxChart,
   DxSeries,
@@ -258,7 +266,7 @@ import {
 import { formatPrice } from '@/utils/formatters';
 import {
   Sales,
-  SalesByState,
+  SalesByState, SalesByStateAndCity,
   SalesOrOpportunitiesByCategory,
 } from '@/types/analytics';
 
@@ -271,44 +279,78 @@ import {
   getSalesByState,
 } from 'dx-rwa-data';
 
-import CardAnalytics from '../components/card-analytics.vue';
-import AnalyticsToolbar from '../components/analytics-toolbar.vue';
+import CardAnalytics from './components/card-analytics.vue';
+import AnalyticsToolbar from './components/analytics-toolbar.vue';
 
-const salesByState = ref<SalesByState>();
-const salesByCategory = ref<SalesOrOpportunitiesByCategory>();
-const opportunities = ref<SalesOrOpportunitiesByCategory>();
-const sales = ref<Sales>();
-
-const loadData = async (startDate: string, endDate: string) => {
-  [opportunities.value, salesByCategory.value, sales.value] = await Promise.allSettled(
-    [
-      getOpportunitiesByCategory(startDate, endDate),
-      getSalesByCategory(startDate, endDate),
-      getSales(startDate, endDate),
-    ],
-  ).then((results) => results.map((r) => (r.status === 'fulfilled' ? r.value : [])));
-
-  const salesByStateAndCity = await getSalesByStateAndCity(startDate, endDate);
-
-  salesByState.value = await getSalesByState(salesByStateAndCity);
+type DashboardData = {
+  opportunities: SalesOrOpportunitiesByCategory | null,
+  sales: Sales | null,
+  salesByState: SalesByState | null,
+  salesByCategory: SalesByStateAndCity | null,
 };
+
+type DashboardDataName = keyof DashboardData;
+type DashboardDataType = DashboardData[keyof DashboardData];
+type DataLoader = (startDate: string, endDate: string) => Promise<any[]>;
+
+const loaders: { [key in DashboardDataName]: DataLoader } = {
+  opportunities: getOpportunitiesByCategory,
+  salesByCategory: getSalesByCategory,
+  sales: getSales,
+  salesByState: (startDate: string, endDate: string) => getSalesByStateAndCity(startDate, endDate)
+    .then((result: SalesByStateAndCity) => getSalesByState(result)),
+};
+
+const data = ref({} as DashboardData);
+
+const getTotal = (value: Array<{value?: number, total?: number}>) => (value || [])
+  .reduce((total, item) => total + (item.value || item.total || 0), 0);
+
+const updateData = (propName: DashboardDataName, value: DashboardDataType = null) => {
+  data.value = { ...data.value, [propName]: value };
+};
+
+const loadData = (startDate: string, endDate: string) => {
+  (Object.entries(loaders) as [[DashboardDataName, DataLoader]]).forEach(([dataName, loader]) => {
+    updateData(dataName);
+
+    loader(startDate, endDate).then((result: DashboardDataType) => updateData(dataName, result));
+  });
+};
+
+const isLoading = (dashboardData: DashboardData) => Object.values(dashboardData).includes(null);
 
 const tabChange = ([startDate, endDate]: string[]) => {
   loadData(startDate, endDate);
 };
-
-// eslint-disable-next-line max-len
-const getTotal = (data: any[]) => data?.reduce((total, item) => total + (item.value || item.total || 0), 0);
 </script>
 
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
 @use "sass:math";
-@use "../analytics";
+@use "./analytics";
+
+.view-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+}
 
 .tiles {
   margin: 20px 0;
   grid-template-columns: repeat(4, calc(25% - 15px));
+}
 
+@media only screen and (max-width: 900px) {
+  .tiles {
+    grid-template-columns: repeat(2, calc(50% - 10px));
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .tiles {
+    grid-template-columns: repeat(1, 100%);
+  }
 }
 </style>

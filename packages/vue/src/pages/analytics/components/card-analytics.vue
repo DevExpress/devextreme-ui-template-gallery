@@ -4,32 +4,51 @@
       class="card"
       :class="props.contentClass"
     >
-      <dx-button icon="overflow" />
+      <dx-menu
+        :visible="isMenuVisible"
+        class="overflow-menu"
+        :items="menuItems"
+      >
+      </dx-menu>
       <div class="title">
         {{ props.title }}
       </div>
       <slot name="filter" />
-      <load-component
+      <div
+        v-if="showData"
+        class="content {{ props.contentClass }}"
+      >
+        <slot />
+      </div>
+      <!--      <load-component
         :is-loading="!showData"
         :container-selector="`.card.${props.contentClass}`"
       >
-        <div class="content {{ props.contentClass }}">
-          <slot />
-        </div>
-      </load-component>
+
+      </load-component>-->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { DxButton } from 'devextreme-vue/button';
-import LoadComponent from '@/components/load-component.vue';
+import { DxMenu } from 'devextreme-vue/menu';
 
-const props = defineProps<{
+const menuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
+  icon: 'overflow',
+  items: [
+    { text: 'Hide' },
+  ],
+}];
+
+const props = withDefaults(defineProps<{
   title: string,
   contentClass: string,
-  showData: boolean,
-}>();
+  showData?: boolean,
+  isMenuVisible?: boolean,
+}>(), {
+  showData: true,
+  isMenuVisible: true,
+});
 
 </script>
 
@@ -45,11 +64,11 @@ const props = defineProps<{
   border: 1px solid #e0e0e0;
   overflow: hidden;
 
-  .dx-button {
+  .overflow-menu {
     position: absolute;
-    right: 10px;
+    right: 5px;
     left: auto;
-    top: 10px;
+    top: 5px;
   }
 
   :deep(.content) {
@@ -89,9 +108,6 @@ const props = defineProps<{
       line-height: 17px;
       height: 270px;
 
-      &.sales-by-state-map {
-        height: 400px;
-      }
       .total {
         display: inline-block;
         font-size: 26px;
@@ -132,10 +148,8 @@ const props = defineProps<{
   .card {
     flex: 1 360px;
 
-    .card {
-      .content {
-        height: auto;
-      }
+    .content {
+      height: auto;
     }
   }
 }

@@ -61,16 +61,16 @@ export const router = createRouter({
       { name: 'crm-contact-details' },
       { name: 'planning-task-list' },
       { name: 'planning-task-details' },
-      { parent: 'analytics/', name: 'analytics-dashboard' },
-      { parent: 'analytics/', name: 'analytics-sales-report' },
-      { parent: 'analytics/', name: 'analytics-geography' },
+      { folder: 'analytics', file: 'analytics-dashboard' },
+      { folder: 'analytics', file: 'analytics-sales-report' },
+      { folder: 'analytics', file: 'analytics-geography' },
     ].map((route) => ({
-      path: `/${route.name}`,
+      path: `/${route.name || route.file}`,
       meta: {
         requiresAuth: true,
         layout: defaultLayout,
       },
-      component: loadComponent(`${route.parent || ''}${route.name}/${route.name}`),
+      component: loadComponent(`${route.folder || ''}${route.name || ''}/${route.name || route.file}`),
     })),
   ],
 });
