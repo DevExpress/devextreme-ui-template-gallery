@@ -2,7 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Dashboard } from '../../components/dashboard/Dashboard';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { getSalesByStateAndCity, getSalesByState } from 'dx-rwa-data';
-import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
+import {
+  ANALYTICS_PERIODS,
+  DEFAULT_ANALYTICS_PERIOD_KEY,
+} from '../../shared/constants';
 import { Item } from 'devextreme-react/toolbar';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 import { RevenueByStatesCard } from './cards/RevenueByStatesCard';
@@ -20,8 +23,12 @@ const createMapCoords = (coords: string) => {
 };
 
 export const AnalyticsGeography = () => {
-  const [tabIndex, setTabIndex] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].index);
-  const [dateRange, setDateRange] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/'));
+  const [tabIndex, setTabIndex] = useState(
+    ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].index
+  );
+  const [dateRange, setDateRange] = useState(
+    ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/')
+  );
   const [salesByStateAndCity, setSalesByStateAndCity] = useState([]);
   const [salesByState, setSalesByState] = useState([]);
   const [salesByStateMarkers, setSalesByStateMarkers] = useState({});
@@ -72,7 +79,10 @@ export const AnalyticsGeography = () => {
       }
     >
       <DashboardCardsGroup kind='wide'>
-        <RevenueByStatesCard datasource={salesByStateMarkers} mapsData={mapsData} />
+        <RevenueByStatesCard
+          datasource={salesByStateMarkers}
+          mapsData={mapsData}
+        />
       </DashboardCardsGroup>
       <DashboardCardsGroup>
         <RevenueAnalysisByStatesCard datasource={salesByStateAndCity} />
