@@ -10,7 +10,7 @@ type CardProps = {
   contentClass: string;
   isLoading?: boolean;
   compact?: boolean;
-  hideMenu?: boolean;
+  menuVisible?: boolean;
 };
 
 const menuItems = [
@@ -20,7 +20,7 @@ const menuItems = [
   },
 ];
 
-export const CardAnalytics = ({ isLoading = false, title, contentClass, children, compact = false, additionalHeaderContent, hideMenu = false }: React.PropsWithChildren<CardProps>) => {
+export const CardAnalytics = ({ isLoading = false, title, contentClass, children, compact = false, additionalHeaderContent, menuVisible = true }: React.PropsWithChildren<CardProps>) => {
   const calculateLoadPanelPosition = (): PositionConfig => ({
     of: `.${contentClass + (compact ? ' .title' : ' .content')}`,
     at: compact ? 'right' : 'center',
@@ -28,7 +28,7 @@ export const CardAnalytics = ({ isLoading = false, title, contentClass, children
 
   return (
     <div className={`card ${contentClass}`}>
-      <Menu visible={!hideMenu} className='overflow-menu' items={menuItems} />
+      <Menu visible={menuVisible} className='overflow-menu' items={menuItems} />
       <div className='title'>{title}</div>
       {additionalHeaderContent}
       <div className='content'>{children}</div>
