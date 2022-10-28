@@ -7,7 +7,11 @@ type DashboardContainerProps = {
   additionalToolbarContent?: ReactNode;
 };
 
-export const Dashboard = ({ title, additionalToolbarContent, children }: React.PropsWithChildren<DashboardContainerProps>) => {
+export const Dashboard = ({
+  title,
+  additionalToolbarContent,
+  children,
+}: React.PropsWithChildren<DashboardContainerProps>) => {
   return (
     <div className='view-wrapper-dashboard'>
       <Toolbar>
@@ -16,7 +20,13 @@ export const Dashboard = ({ title, additionalToolbarContent, children }: React.P
         </Item>
         {additionalToolbarContent}
         <Item location='after' locateInMenu='auto'>
-          <Button className='add-card' icon='plus' text='Add Card' type='default' stylingMode='contained' />
+          <Button
+            className='add-card'
+            icon='plus'
+            text='Add Card'
+            type='default'
+            stylingMode='contained'
+          />
         </Item>
         <Item
           location='after'

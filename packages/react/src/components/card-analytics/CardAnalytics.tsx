@@ -20,7 +20,15 @@ const menuItems = [
   },
 ];
 
-export const CardAnalytics = ({ isLoading = false, title, contentClass, children, compact = false, additionalHeaderContent, menuVisible = true }: React.PropsWithChildren<CardProps>) => {
+export const CardAnalytics = ({
+  isLoading = false,
+  title,
+  contentClass,
+  children,
+  compact = false,
+  additionalHeaderContent,
+  menuVisible = true,
+}: React.PropsWithChildren<CardProps>) => {
   const calculateLoadPanelPosition = (): PositionConfig => ({
     of: `.${contentClass + (compact ? ' .title' : ' .content')}`,
     at: compact ? 'right' : 'center',
@@ -32,7 +40,15 @@ export const CardAnalytics = ({ isLoading = false, title, contentClass, children
       <div className='title'>{title}</div>
       {additionalHeaderContent}
       <div className='content'>{children}</div>
-      <LoadPanel container={`.${contentClass}`} position={calculateLoadPanelPosition()} visible={isLoading} showPane={false} width='100%' height={compact ? 50 : 60} maxWidth='100%' />
+      <LoadPanel
+        container={`.${contentClass}`}
+        position={calculateLoadPanelPosition()}
+        visible={isLoading}
+        showPane={false}
+        width='100%'
+        height={compact ? 50 : 60}
+        maxWidth='100%'
+      />
     </div>
   );
 };

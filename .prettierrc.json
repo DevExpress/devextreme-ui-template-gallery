@@ -1,7 +1,6 @@
 {
     "tabWidth": 2,
     "htmlWhitespaceSensitivity": "strict",
-    "printWidth": 200,
     "overrides": [
         {
             "files": [
