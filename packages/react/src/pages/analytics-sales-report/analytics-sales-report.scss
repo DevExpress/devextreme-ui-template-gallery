@@ -1,3 +1,19 @@
+.card {
+  &.sales-by-state-map {
+    .content {
+      height: 400px;
+    }
+  }
+
+  &.sales-range {
+    margin-top: 20px;
+
+    .content {
+      height: auto;
+    }
+  }
+}
+
 .sales-pie,
 .sales-bars {
   display: inline-block;
