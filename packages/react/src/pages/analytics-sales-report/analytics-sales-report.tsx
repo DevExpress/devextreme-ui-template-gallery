@@ -32,7 +32,7 @@ export const AnalyticsSalesReport = () => {
   }, []);
 
   useEffect(() => {
-    getSales(...formatDateRange(dateRange))
+    getSales(...formatDateRange(defaultDateRange))
       .then((data) => setSales(data))
       .catch((error) => console.log(error));
   }, []);
