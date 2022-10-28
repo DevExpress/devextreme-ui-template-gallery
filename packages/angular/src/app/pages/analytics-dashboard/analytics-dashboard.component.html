@@ -1,5 +1,4 @@
 <div class="view-wrapper">
-
   <toolbar-analytics
     titleText="Dashboard"
     [panelItems]="analyticsPanelItems"
@@ -12,12 +11,12 @@
     <card-analytics
       class="grey"
       titleText="Opportunities"
-      [isLoading]="!opportunitiesTotal"
+      [isLoading]="data.opportunities === null"
       contentClass="opportunities-total"
     >
-      <div *ngIf="opportunitiesTotal">
+      <div>
         <div class="total">
-          {{ opportunitiesTotal | currency: "USD":"$":"1.0-0" }}
+          {{ getTotal | apply: data.opportunities | currency: "USD":"$":"1.0-0" }}
         </div>
         <div class="percentage">
           <i class="dx-icon-spinup"></i>
@@ -28,12 +27,12 @@
     <card-analytics
       class="grey"
       titleText="Revenue Total"
-      [isLoading]="!salesTotal"
-      contentClass="revenue-total" 
+      [isLoading]="data.sales === null"
+      contentClass="revenue-total"
     >
-    <div *ngIf="salesTotal">
+    <div>
       <div class="total">
-        {{ salesTotal | currency: "USD":"$":"1.0-0" }}
+        {{ getTotal | apply: data.sales | currency: "USD":"$":"1.0-0" }}
       </div>
       <div class="percentage">
         <i class="dx-icon-spinup"></i>
@@ -68,8 +67,8 @@
   </div>
 
   <div class="cards">
-    <card-analytics titleText="Revenue" contentClass="sales" [isLoading]="!sales" [component]="chart">
-      <dx-chart #chart [dataSource]="sales">
+    <card-analytics titleText="Revenue" contentClass="sales" [component]="chart">
+      <dx-chart #chart [dataSource]="data.sales">
         <dxi-series valueField="total"></dxi-series>
         <dxo-common-series-settings argumentField="date" type="splinearea">
           <dxo-border [visible]="true"></dxo-border>
@@ -87,12 +86,11 @@
     <card-analytics
       titleText="Conversion Funnel (All Products)"
       contentClass="opportunities"
-      [isLoading]="!opportunities"
       [component]="funnel"
     >
       <dx-funnel
         #funnel
-        [dataSource]="opportunities"
+        [dataSource]="data.opportunities"
         argumentField="name"
         valueField="value"
       >
@@ -115,9 +113,8 @@
     <card-analytics
       titleText="Revenue Analysis"
       contentClass="sales-by-state"
-      [isLoading]="!salesByState"
     >
-      <dx-data-grid [dataSource]="salesByState" [height]="270">
+      <dx-data-grid [dataSource]="data.salesByState || []" [height]="270">
         <dxi-column
           caption="State"
           dataField="stateName"
@@ -172,12 +169,11 @@
     <card-analytics
       titleText="Revenue Snapshot (All Products)"
       contentClass="sales-by-category"
-      [isLoading]="!salesByCategory"
       [component]="pie"
     >
       <dx-pie-chart
         #pie
-        [dataSource]="salesByCategory"
+        [dataSource]="data.salesByCategory"
         type="doughnut"
         [diameter]="0.8"
         [innerRadius]="0.6"
@@ -202,3 +198,8 @@
     </card-analytics>
   </div>
 </div>
+<dx-load-panel
+  container=".view-wrapper"
+  [visible]="isLoading | apply: data"
+  [showPane]="true"
+></dx-load-panel>
