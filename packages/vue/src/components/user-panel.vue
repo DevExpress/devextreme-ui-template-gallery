@@ -41,7 +41,14 @@ defineProps({
   user: Object,
 });
 </script>
-<style></style>
+<style lang="scss">
+.dx-toolbar-menu-section .user-panel {
+  .user-info {
+    padding: 10px 6px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+</style>
 <style scoped lang="scss">
 @use '@/variables.scss' as *;
 

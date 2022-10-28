@@ -9,17 +9,14 @@ import { screenInfo } from './utils/media-query';
 
 const appInfo = inject<AppInfo>(appInfoInjectKey);
 const cssClasses = computed(() => ['app'].concat(screenInfo.value.cssClasses));
+document.title = appInfo?.title || '';
 </script>
 
 <template>
-  <div
-    id="root"
-    class="dx-theme-generic"
-  >
+  <div id="root">
     <div :class="cssClasses">
       <component
         :is="$route.meta.layout"
-        :title="appInfo?.title"
         :is-x-small="screenInfo.isXSmall"
         :is-large="screenInfo.isLarge"
       >

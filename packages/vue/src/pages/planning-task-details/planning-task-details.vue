@@ -10,6 +10,7 @@
       />
       <dx-toolbar-item
         location="after"
+        locate-in-menu="auto"
       >
         <dx-drop-down-button
           text="ACTIONS"
@@ -31,6 +32,7 @@
           icon: 'attach'
         }"
       />
+
       <dx-toolbar-item
         location="after"
         locate-in-menu="auto"

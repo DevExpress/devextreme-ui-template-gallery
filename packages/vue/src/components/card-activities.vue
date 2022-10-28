@@ -1,5 +1,8 @@
 <template>
-  <div id="activities-list">
+  <div
+    id="activities-list"
+    :class="{load: !isLoading}"
+  >
     <load-component
       :is-loading="props.isLoading"
       container-selector="#activities-list"
@@ -62,28 +65,30 @@ const activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }>
 },
 ];
 </script>
-
-<style scoped lang="scss">
-@use '@/variables' as *;
-
-#activities-list {
-  padding: 10px;
-  min-height: 250px;
-  position: relative;
-  display: block;
-
-  &:deep(.dx-list-item) {
+<style lang="scss">
+.activities-list {
+  .dx-list-item {
     margin: 10px 0;
     overflow: visible;
     background: transparent;
   }
 }
+</style>
+<style scoped lang="scss">
+@use '@/variables' as *;
 
-.activities-list {
+#activities-list {
+  padding: 10px;
+  min-height: 300px;
+  position: relative;
+  display: block;
+
   &.load {
     min-height: auto;
   }
+}
 
+.activities-list {
   .dx-list-item-content {
     padding: 0;
     overflow: visible;
@@ -127,12 +132,11 @@ const activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }>
         padding: 0;
       }
 
-      .dx-button {
+      .overflow-menu {
         position: absolute;
         right: 15px;
       }
     }
   }
 }
-
 </style>

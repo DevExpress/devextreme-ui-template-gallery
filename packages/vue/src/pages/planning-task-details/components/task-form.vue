@@ -54,6 +54,7 @@
           label-mode="floating"
         >
           <dx-form-group-item :col-count="2">
+            <dx-col-count-by-screen :xs="2"/>
             <dx-form-item css-class="accent">
               <form-textbox
                 label="Company"
@@ -158,8 +159,8 @@ import {
   DxForm,
   DxItem as DxFormItem,
   DxGroupItem as DxFormGroupItem,
+  DxColCountByScreen,
 } from 'devextreme-vue/form';
-import { DxDateBox } from 'devextreme-vue/date-box';
 import { DxSelectBox } from 'devextreme-vue/select-box';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import LoadComponent from '@/components/load-component.vue';

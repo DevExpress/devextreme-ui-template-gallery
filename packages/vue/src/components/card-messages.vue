@@ -46,7 +46,7 @@
         <div class="messages-content">
           <div
             class="message-container"
-            v-for="data in items.concat(items)"
+            v-for="data in items"
           >
             <div class="avatar">
               {{ getAvatarText(data.manager) }}
