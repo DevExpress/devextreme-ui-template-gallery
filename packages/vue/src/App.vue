@@ -12,18 +12,21 @@ const cssClasses = computed(() => ['app'].concat(screenInfo.value.cssClasses));
 </script>
 
 <template>
-  <div id="root" class="dx-theme-generic">
+  <div
+    id="root"
+    class="dx-theme-generic"
+  >
     <div :class="cssClasses">
       <component
-          :is="$route.meta.layout"
-          :title="appInfo?.title"
-          :is-x-small="screenInfo.isXSmall"
-          :is-large="screenInfo.isLarge"
+        :is="$route.meta.layout"
+        :title="appInfo?.title"
+        :is-x-small="screenInfo.isXSmall"
+        :is-large="screenInfo.isLarge"
       >
         <div class="content">
-          <router-view></router-view>
+          <router-view />
         </div>
-        <app-footer v-if="$route.meta.layout !== simpleLayout"/>
+        <app-footer v-if="$route.meta.layout !== simpleLayout" />
       </component>
     </div>
   </div>

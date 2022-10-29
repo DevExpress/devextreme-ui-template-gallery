@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import notify from 'devextreme/ui/notify';
+import { useNavigate } from 'react-router-dom';
+
 import Button from 'devextreme-react/button';
 import { formatDate } from 'devextreme/localization';
 
@@ -9,13 +11,20 @@ import { Avatar } from '../../avatar/Avatar';
 
 import './Card.scss';
 
-const onClick = (task: Task) => () => {
+const onClick = (task: Task) => (e) => {
+  e.event.stopPropagation();
   notify(`Edit '${task.text}' card event`);
 };
 
 export const Card = ({ task }: { task: Task }) => {
+  const navigate = useNavigate();
+
+  const navigateToDetails = useCallback(() => {
+    navigate('/planning-task-details');
+  }, []);
+
   return (
-    <div className='card dx-card dx-theme-text-color dx-theme-background-color'>
+    <div className='kanban-card dx-card dx-theme-text-color dx-theme-background-color' onClick={navigateToDetails}>
       <div className={`card-wrapper priority-${task.priority.toLowerCase()}`}>
         <div className='card-priority'></div>
         <Button className='edit-button' icon='edit' onClick={onClick(task)} />

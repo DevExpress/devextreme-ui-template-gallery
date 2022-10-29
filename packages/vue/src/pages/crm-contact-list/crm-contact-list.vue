@@ -1,125 +1,171 @@
 <template>
   <div class="view-wrapper">
-    <dx-data-grid :data-source="dataSource"
-                  height="100%"
-                  class="grid"
-                  @row-click="rowClick">
-
+    <dx-data-grid
+      :data-source="dataSource"
+      height="100%"
+      class="grid"
+      @row-click="rowClick"
+    >
       <!-- Options -->
-      <dx-scrolling :mode="'virtual'"/>
-      <dx-column-chooser :enabled="true"/>
-      <dx-sorting mode="multiple"/>
-      <dx-header-filter :visible="true"/>
-      <dx-load-panel :enabled="true" :show-pane="false"/>
+      <dx-scrolling :mode="'virtual'" />
+      <dx-column-chooser :enabled="true" />
+      <dx-sorting mode="multiple" />
+      <dx-header-filter :visible="true" />
+      <dx-load-panel
+        :enabled="true"
+        :show-pane="false"
+      />
       <dx-selection
-          select-all-mode="allPages"
-          show-check-boxes-mode="always"
-          mode="multiple"
-      ></dx-selection>
+        select-all-mode="allPages"
+        show-check-boxes-mode="always"
+        mode="multiple"
+      />
       <dx-search-panel
-          :visible="true"
-          placeholder="Contact Search"
-      ></dx-search-panel>
-      <dx-export :enabled="true" :allow-export-selected-data="true"></dx-export>
+        :visible="true"
+        placeholder="Contact Search"
+      />
+      <dx-export
+        :enabled="true"
+        :allow-export-selected-data="true"
+      />
 
       <!-- Toolbar -->
       <dx-grid-toolbar>
         <dx-grid-toolbar-item location="before">
-          <div class="grid-header">Contacts</div>
-        </dx-grid-toolbar-item>
-
-        <dx-grid-toolbar-item location="before" locateInMenu="auto">
-          <dx-drop-down-button
-              stylingMode="text"
-              :width="160"
-              :useSelectMode="true"
-              :items="filterStatusList"
-              :selectedItemKey="filterStatusList[0]"
-              @selection-changed="filterByStatus"
-          ></dx-drop-down-button>
+          <div class="grid-header">
+            Contacts
+          </div>
         </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item
-            location="after"
-            locate-in-menu="auto"
-            widget="dxButton"
-            :options="{
+          location="before"
+          locate-in-menu="auto"
+        >
+          <dx-drop-down-button
+            styling-mode="text"
+            :width="160"
+            :use-select-mode="true"
+            :items="filterStatusList"
+            :selected-item-key="filterStatusList[0]"
+            @selection-changed="filterByStatus"
+          />
+        </dx-grid-toolbar-item>
+
+        <dx-grid-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+          widget="dxButton"
+          :options="{
             icon: 'plus',
             text: 'Add Contact',
             type: 'default',
             stylingMode: 'contained',
             onClick: addRow
           }"
+        />
+
+        <dx-grid-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+          show-text="inMenu"
+          widget="dxButton"
+          :options="{ text: 'Refresh', icon: 'refresh', onClick: refresh }"
+        />
+
+        <dx-grid-toolbar-item
+          location="after"
+          locate-in-menu="auto"
         >
+          <div class="separator" />
+        </dx-grid-toolbar-item>
+
+        <dx-grid-toolbar-item name="exportButton" />
+
+        <dx-grid-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+        >
+          <div class="separator" />
         </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item
-            location="after"
-            locate-in-menu="auto"
-            show-text="inMenu"
-            widget="dxButton"
-            :options="{ text: 'Refresh', icon: 'refresh', onClick: refresh }"
-        >
-        </dx-grid-toolbar-item>
+          name="columnChooserButton"
+          locate-in-menu="auto"
+        />
 
-        <dx-grid-toolbar-item location="after" locate-in-menu="auto">
-          <div class="separator"></div>
-        </dx-grid-toolbar-item>
-
-        <dx-grid-toolbar-item name="exportButton"></dx-grid-toolbar-item>
-
-        <dx-grid-toolbar-item location="after" locate-in-menu="auto">
-          <div class="separator"></div>
-        </dx-grid-toolbar-item>
-
-        <dx-grid-toolbar-item name="columnChooserButton" locateInMenu="auto"></dx-grid-toolbar-item>
-
-        <dx-grid-toolbar-item name="searchPanel" locateInMenu="auto"></dx-grid-toolbar-item>
+        <dx-grid-toolbar-item
+          name="searchPanel"
+          locate-in-menu="auto"
+        />
       </dx-grid-toolbar>
 
       <!-- Columns -->
-      <dx-column data-field="name"
-                  caption="Name"
-                 sortOrder="asc"
-                 cell-template="nameCellTemplate"
-                 :hiding-priority="5"
-                 :min-width="150" ><dx-required-rule/></dx-column>
-      <dx-column data-field="company" caption="Company" :hiding-priority="5" :min-width="150" />
-      <dx-column data-field="status"
-          caption="Status"
-          data-type="string"
-          cell-template="statusCellTemplate"
-          :hiding-priority="3"
-          :min-width="100"
-      />
-      <dx-column data-field="assignedTo" caption="Assigned to" :hiding-priority="4" />
-      <dx-column data-field="phone" caption="Phone"
-                 :hiding-priority="2"
-                 :customizeText="customizePhoneCell" >
-        <dx-required-rule/>
+      <dx-column
+        data-field="name"
+        caption="Name"
+        sort-order="asc"
+        cell-template="nameCellTemplate"
+        :hiding-priority="5"
+        :min-width="150"
+      >
+        <dx-required-rule />
       </dx-column>
-      <dx-column data-field="email" caption="Email" :hiding-priority="1" >
-        <dx-required-rule/>
+      <dx-column
+        data-field="company"
+        caption="Company"
+        :hiding-priority="5"
+        :min-width="150"
+      />
+      <dx-column
+        data-field="status"
+        caption="Status"
+        data-type="string"
+        cell-template="statusCellTemplate"
+        :hiding-priority="3"
+        :min-width="100"
+      />
+      <dx-column
+        data-field="assignedTo"
+        caption="Assigned to"
+        :hiding-priority="4"
+      />
+      <dx-column
+        data-field="phone"
+        caption="Phone"
+        :hiding-priority="2"
+        :customize-text="customizePhoneCell"
+      >
+        <dx-required-rule />
+      </dx-column>
+      <dx-column
+        data-field="email"
+        caption="Email"
+        :hiding-priority="1"
+      >
+        <dx-required-rule />
       </dx-column>
 
       <!-- Templates  -->
       <template #nameCellTemplate="{ data }">
         <div class="name-template">
-          <div>{{data.data.name}}</div>
-          <div class="position">{{ data.data.position }}</div>
+          <div>{{ data.data.name }}</div>
+          <div class="position">
+            {{ data.data.position }}
+          </div>
         </div>
       </template>
 
       <template #statusCellTemplate="{ data }">
-        <contact-status :status="data.data?.status"/>
+        <contact-status :status="data.data?.status" />
       </template>
-
     </dx-data-grid>
 
     <!--  Contact panel  -->
-    <contact-panel :user-id="panelData?.id"
-                   :is-panel-open="isPanelOpen"
-                   @close="isPanelOpen = false"/>
+    <contact-panel
+      :user-id="panelData?.id"
+      :is-panel-open="isPanelOpen"
+      @close="isPanelOpen = false"
+    />
   </div>
 </template>
 

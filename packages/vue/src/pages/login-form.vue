@@ -1,6 +1,12 @@
 <template>
-  <form class="login-form" @submit.prevent="onSubmit">
-    <dx-form :form-data="formData" :disabled="loading">
+  <form
+    class="login-form"
+    @submit.prevent="onSubmit"
+  >
+    <dx-form
+      :form-data="formData"
+      :disabled="loading"
+    >
       <dx-item
         data-field="email"
         editor-type="dxTextBox"
@@ -11,8 +17,8 @@
         <dx-label :visible="false" />
       </dx-item>
       <dx-item
-        data-field='password'
-        editor-type='dxTextBox'
+        data-field="password"
+        editor-type="dxTextBox"
         :editor-options="{ stylingMode: 'filled', placeholder: 'Password', mode: 'password' }"
       >
         <dx-required-rule message="Password is required" />
@@ -31,13 +37,14 @@
           type="default"
           template="signInTemplate"
           :use-submit-behavior="true"
-        >
-        </dx-button-options>
+        />
       </dx-button-item>
       <dx-item>
         <template #default>
           <div class="link">
-            <router-link to="/reset-password">Forgot password?</router-link>
+            <router-link to="/reset-password">
+              Forgot password?
+            </router-link>
           </div>
         </template>
       </dx-item>
@@ -51,7 +58,12 @@
       <template #signInTemplate>
         <div>
           <span class="dx-button-text">
-            <dx-load-indicator v-if="loading" width="24px" height="24px" :visible="true" />
+            <dx-load-indicator
+              v-if="loading"
+              width="24px"
+              height="24px"
+              :visible="true"
+            />
             <span v-if="!loading">Sign In</span>
           </span>
         </div>

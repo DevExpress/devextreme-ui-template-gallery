@@ -1,40 +1,49 @@
 <template>
-  <div class="notes" id="card-notes">
+  <div
+    class="notes"
+    id="card-notes"
+  >
     <load-component
       :is-loading="isLoading"
       :container-selector="'#card-notes'"
     >
-        <div class="input-content">
-          <dx-text-area
-            label="New Note"
-            stylingMode="outlined"
-            :value="nodeText"
-            @value-changed="e => nodeText = e.value"
-          ></dx-text-area>
+      <div class="input-content">
+        <dx-text-area
+          label="New Note"
+          styling-mode="outlined"
+          :value="nodeText"
+          @value-changed="e => nodeText = e.value"
+        />
 
-          <dx-toolbar>
-            <dx-item widget="dxButton"
-                     location="after"
-                     :options="{
-                         text: 'Add',
-                         stylingMode: 'outlined',
-                         type: 'default',
-                         onClick: addNote
-                     }"/>
-          </dx-toolbar>
-        </div>
-        <div class="notes-content">
-          <div class="note dx-card" v-for="note in items">
-            <div class="note-title">
-              <div>{{ formatDate(new Date(note.date)) }} - {{ note.manager }}</div>
-              <dx-button icon="overflow"></dx-button>
-            </div>
-            <div class="note-text">{{ note.text }}</div>
+        <dx-toolbar>
+          <dx-item
+            widget="dxButton"
+            location="after"
+            :options="{
+              text: 'Add',
+              stylingMode: 'outlined',
+              type: 'default',
+              onClick: addNote
+            }"
+          />
+        </dx-toolbar>
+      </div>
+      <div class="notes-content">
+        <div
+          class="note dx-card"
+          v-for="note in items"
+        >
+          <div class="note-title">
+            <div>{{ formatDate(new Date(note.date)) }} - {{ note.manager }}</div>
+            <dx-button icon="overflow" />
+          </div>
+          <div class="note-text">
+            {{ note.text }}
           </div>
         </div>
+      </div>
     </load-component>
   </div>
-
 </template>
 
 <script setup lang="ts">

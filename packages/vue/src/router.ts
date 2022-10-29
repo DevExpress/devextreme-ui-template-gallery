@@ -74,6 +74,15 @@ export const router = createRouter({
       },
       component: loadComponent('crm-contact-details/crm-contact-details'),
     },
+    {
+      path: '/planning-task-list',
+      name: 'planning-task-list',
+      meta: {
+        // requiresAuth: true,
+        layout: defaultLayout,
+      },
+      component: loadComponent('planning-task-list/planning-task-list'),
+    },
   ],
 });
 

@@ -11,19 +11,15 @@
 
   .dx-toolbar {
     margin-bottom: $toolbar-margin-bottom;
-  }
-}
 
-::ng-deep {
-  .dx-toolbar {
-    margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
+    &::ng-deep {
+      .toolbar-header {
+        @include header();
+      }
 
-    .toolbar-header {
-      @include header();
-    }
-
-    .dx-tabs .dx-tab {
-      background-color: $background-color;
+      .dx-tabs .dx-tab {
+        background-color: $background-color;
+      }
     }
   }
 }

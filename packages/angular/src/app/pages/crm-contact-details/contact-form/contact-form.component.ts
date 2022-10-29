@@ -9,7 +9,6 @@ import {
   DxSelectBoxModule,
   DxTextBoxModule,
   DxToolbarModule,
-  DxValidationGroupModule,
   DxValidatorModule,
 } from 'devextreme-angular';
 import {
@@ -62,7 +61,6 @@ export class ContactFormComponent {
     DxValidatorModule,
     CommonModule,
     PhonePipeModule,
-    DxValidationGroupModule,
   ],
   providers: [],
   exports: [ContactFormComponent],

@@ -1,9 +1,10 @@
 <template>
   <header>
     <dx-toolbar class="header-toolbar">
-      <dx-item :visible="menuToggleEnabled"
-               location="before"
-               css-class="menu-button"
+      <dx-item
+        :visible="menuToggleEnabled"
+        location="before"
+        css-class="menu-button"
       >
         <template #default>
           <dx-button
@@ -14,36 +15,40 @@
         </template>
       </dx-item>
 
-      <dx-item v-if="title"
-               location="before"
-               css-class="header-title dx-toolbar-label"
+      <dx-item
+        v-if="title"
+        location="before"
+        css-class="header-title dx-toolbar-label"
       >
         <div>{{ title }}</div>
       </dx-item>
       <dx-item
-          location="after"
-          locate-in-menu="auto"
-          widget="dxTextBox"
-          :options="{
-        stylingMode: 'outlined',
-        mode: 'search',
-        placeholder: 'Search',
-        width: 180
-      }"
-      ></dx-item>
+        location="after"
+        locate-in-menu="auto"
+        widget="dxTextBox"
+        :options="{
+          stylingMode: 'outlined',
+          mode: 'search',
+          placeholder: 'Search',
+          width: 180
+        }"
+      />
       <dx-item location="after">
-        <div class="messages" >
+        <div class="messages">
           <div class="dx-icon-message">
-            <div class="dx-badge">4</div>
+            <div class="dx-badge">
+              4
+            </div>
           </div>
         </div>
       </dx-item>
-      <dx-item cssClass="toolbar-user-items"
+      <dx-item
+        css-class="toolbar-user-items"
         location="after"
         locate-in-menu="auto"
         menu-item-template="menuUserItem"
       >
-      <template #default>
+        <template #default>
           <div>
             <dx-button
               class="user-button authorization"
@@ -51,7 +56,11 @@
               :height="38"
               styling-mode="text"
             >
-              <user-panel :user="user" :menu-items="userMenuItems" menu-mode="context" />
+              <user-panel
+                :user="user"
+                :menu-items="userMenuItems"
+                menu-mode="context"
+              />
             </dx-button>
           </div>
         </template>

@@ -14,7 +14,7 @@ export const navigation = [
       },
     ],
   },
-  /* {
+  {
     text: 'Planning',
     icon: 'event',
     path: '',
@@ -23,10 +23,10 @@ export const navigation = [
         text: 'Task List',
         path: '/planning-task-list',
       },
-      {
+      /* {
         text: 'Task Details',
         path: '/planning-task-details',
-      },
+      }, */
     ],
-  }, */
+  },
 ];

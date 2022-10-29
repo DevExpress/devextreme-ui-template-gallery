@@ -3,6 +3,7 @@ import { AppInfo, appInfoInjectKey } from '@/types/app-info';
 import App from './App.vue';
 import { router } from './router';
 import 'devextreme/scss/bundles/dx.material.blue.light.compact.scss';
+import 'devexpress-gantt/dist/dx-gantt.css';
 import './dx-styles.scss';
 import './styles.scss';
 

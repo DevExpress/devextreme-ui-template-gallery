@@ -5,65 +5,76 @@
         <dx-button icon="arrowleft" />
       </dx-toolbar-item>
       <dx-toolbar-item
+        :text="contactName"
         location="before"
-        :text="contactName"/>
+        css-class="contact-name-toolbar-item"
+      />
       <dx-toolbar-item
         location="after"
-        locate-in-menu="auto">
+        locate-in-menu="auto"
+      >
         <dx-button
           text="Terminate"
           type="default"
-          styling-mode="contained"/>
+          styling-mode="contained"
+        />
       </dx-toolbar-item>
+      <dx-toolbar-item
+        widget="dxDropDownButton"
+        location="after"
+        locate-in-menu="auto"
+        :options="{
+          text:'Actions',
+          stylingMode:'text',
+          width:120,
+          items: ['Assign to Me', 'Archive']
+        }"
+      />
       <dx-toolbar-item
         location="after"
         locate-in-menu="auto"
-        widget="dxDropDownButton"
-        :options="{
-            text:'Actions',
-            stylingMode:'text',
-            width:120,
-            items: ['Assign to Me', 'Archive']
-          }"/>
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto">
+      >
         <div class="separator" />
       </dx-toolbar-item>
       <dx-toolbar-item
+        widget="dxButton"
         location="after"
         locate-in-menu="auto"
-        widget="dxButton"
         show-text="inMenu"
         :options="{
-            text: 'Copy',
-            icon: 'copy'
-          }"/>
+          text: 'Copy',
+          icon: 'copy'
+        }"
+      />
       <dx-toolbar-item
+        widget="dxButton"
         location="after"
         locate-in-menu="auto"
-        widget="dxButton"
         show-text="inMenu"
         :options="{
-            text: 'Refresh',
-            icon: 'refresh',
-            onClick: refresh
-          }"/>
+          text: 'Refresh',
+          icon: 'refresh',
+          onClick: refresh
+        }"
+      />
     </dx-toolbar>
 
     <div class="panels">
       <div class="left">
-        <contact-form :contact-data="contactData"
-                      :is-editing="false"
-                      :is-loading="isLoading && !contactData.name"/>
+        <contact-form
+          :contact-data="contactData"
+          :is-editing="false"
+          :is-loading="isLoading && !contactData.name"
+        />
       </div>
 
       <div class="right">
-        <contact-cards :is-loading="isLoading"
-                       :contact-name="contactData?.name"
-                       :contact-id="contactId"
-                       :tasks="contactData?.tasks"
-                       :activities="contactData?.activities"
+        <contact-cards
+          :is-loading="isLoading"
+          :contact-name="contactData?.name"
+          :contact-id="contactId"
+          :tasks="contactData?.tasks"
+          :activities="contactData?.activities"
         />
       </div>
     </div>
