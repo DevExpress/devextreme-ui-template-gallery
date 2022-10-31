@@ -1,0 +1,33 @@
+@use '../../variables.scss' as *;
+
+.card {
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: none;
+  position: relative;
+  border: 1px solid $base-border-color;
+  overflow: hidden;
+
+  .overflow-menu {
+    position: absolute;
+    right: 10px;
+    left: auto;
+    top: 10px;
+  }
+
+  .title {
+    color: $base-text-color;
+    line-height: 19px;
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: inline-block;
+    padding-right: 25px;
+  }
+
+  .content {
+    font-size: 14px;
+    line-height: 17px;
+    height: 270px;
+  }
+}

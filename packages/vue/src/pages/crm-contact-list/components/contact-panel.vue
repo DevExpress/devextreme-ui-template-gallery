@@ -1,67 +1,94 @@
 <template>
-  <div id="contact-panel" class="panel" :class="{ pin: isPin, open: props.isPanelOpen }">
+  <div
+    id="contact-panel"
+    class="panel"
+    :class="{ pin: isPin, open: props.isPanelOpen }"
+  >
     <div class="data-wrapper">
-      <load-component :width="300" container-selector="#contact-panel" :is-loading="isLoading">
+      <load-component
+        :width="300"
+        container-selector="#contact-panel"
+        :is-loading="isLoading"
+      >
         <template v-if="panelData">
           <div class="data-part">
             <dx-toolbar>
               <dx-item location="before">
-                <div class="contact-name">{{ panelData?.name }}</div>
+                <div class="contact-name">
+                  {{ panelData?.name }}
+                </div>
               </dx-item>
               <dx-item location="before">
-                <user-status :status="panelData?.status"/>
+                <user-status :status="panelData?.status" />
               </dx-item>
 
               <dx-item
                 location="after"
                 widget="dxButton"
                 :visible="isPinEnabled"
-                :options="{ icon: isPin ? 'unpin' : 'pin', onClick: () => isPin = !isPin }"/>
+                :options="{ icon: isPin ? 'unpin' : 'pin', onClick: () => isPin = !isPin }"
+              />
 
               <dx-item
                 location="after"
                 widget="dxButton"
-                :options="{ icon: 'close', onClick: () => emit('close') }"/>
+                :options="{ icon: 'close', onClick: () => emit('close') }"
+              />
             </dx-toolbar>
           </div>
 
           <dx-scroll-view class="panel-scroll">
             <div class="data-part border">
-              <dx-form :class="{'view-mode': !isEditing}"
-                       class="plain-styled-form">
-                <dx-form-group-item :col-count="2" css-class="photo-row">
+              <dx-form
+                :class="{'view-mode': !isEditing}"
+                class="plain-styled-form"
+              >
+                <dx-form-group-item
+                  :col-count="2"
+                  css-class="photo-row"
+                >
                   <dx-form-item css-class="photo-box">
-                    <user-photo :link="panelData.image" ></user-photo>
+                    <user-photo :link="panelData.image" />
                   </dx-form-item>
 
-                  <dx-form-group-item >
+                  <dx-form-group-item>
                     <dx-form-item css-class="accent">
-                      <form-textbox :label="'Company'"
-                                    v-model="panelData['company']"
-                                    :is-editing = "isEditing"/>
+                      <form-textbox
+                        :label="'Company'"
+                        v-model="panelData['company']"
+                        :is-editing="isEditing"
+                      />
                     </dx-form-item>
 
                     <dx-form-item>
-                      <form-textbox v-model="panelData['position']"
-                                       :label="'Position'"
-                                       :is-editing = "isEditing"/>
+                      <form-textbox
+                        v-model="panelData['position']"
+                        :label="'Position'"
+                        :is-editing="isEditing"
+                      />
                     </dx-form-item>
 
                     <dx-form-item css-class="accent">
-                      <form-textbox :label="'Assigned to'"
-                                    v-model="panelData['manager']"
-                                    :is-editing = "isEditing"/>
+                      <form-textbox
+                        :label="'Assigned to'"
+                        v-model="panelData['manager']"
+                        :is-editing="isEditing"
+                      />
                     </dx-form-item>
                   </dx-form-group-item>
                 </dx-form-group-item>
 
-                <dx-form-group-item cssClass="contact-fields-group">
-                  <dx-form-item v-for="(item, index) in underContactFields"
-                                :key="index">
-                    <form-textbox :icon="item.icon"
-                                  v-model="panelData[item.name]"
-                                  :is-editing = "isEditing"
-                                  :mask="item.mask"/>
+                <dx-form-group-item css-class="contact-fields-group">
+                  <dx-form-item
+                    v-for="(item, index) in underContactFields"
+                    :key="index"
+                  >
+                    <form-textbox
+                      :icon="item.icon"
+                      v-model="panelData[item.name]"
+                      :is-editing="isEditing"
+                      :mask="item.mask"
+                    />
                   </dx-form-item>
                 </dx-form-group-item>
               </dx-form>
@@ -69,77 +96,107 @@
 
             <div class="data-part data-part-toolbar border">
               <dx-toolbar class="panel-toolbar">
-                <dx-item location="before" :visible="!isEditing">
-                  <dx-button text="Edit"
-                             icon="edit"
-                             stylingMode="outlined"
-                             type="default"
-                             @click="toggleEdit()"/>
+                <dx-item
+                  location="before"
+                  :visible="!isEditing"
+                >
+                  <dx-button
+                    text="Edit"
+                    icon="edit"
+                    styling-mode="outlined"
+                    type="default"
+                    @click="toggleEdit()"
+                  />
                 </dx-item>
 
-                <dx-item location="before" :visible="!isEditing">
-                  <dx-button text="Details"
-                             styling-mode="outlined"
-                             type="default"
-                             @click="navigateToDetails()"/>
+                <dx-item
+                  location="before"
+                  :visible="!isEditing"
+                >
+                  <dx-button
+                    text="Details"
+                    styling-mode="outlined"
+                    type="default"
+                    @click="navigateToDetails()"
+                  />
                 </dx-item>
 
-                <dx-item location="before" locateInMenu="before" :visible="isEditing">
-                  <dx-button text="Save"
-                             icon="save"
-                             styling-mode="outlined"
-                             type="default"
-                             @click="toggleEdit()"/>
+                <dx-item
+                  location="before"
+                  locate-in-menu="before"
+                  :visible="isEditing"
+                >
+                  <dx-button
+                    text="Save"
+                    icon="save"
+                    styling-mode="outlined"
+                    type="default"
+                    @click="toggleEdit()"
+                  />
                 </dx-item>
 
-                <dx-item location="before" locateInMenu="before" :visible="isEditing">
-                  <dx-button text="Cancel"
-                             @click="toggleEdit()"
-                             styling-mode="text"
-                  ></dx-button>
+                <dx-item
+                  location="before"
+                  locate-in-menu="before"
+                  :visible="isEditing"
+                >
+                  <dx-button
+                    text="Cancel"
+                    @click="toggleEdit()"
+                    styling-mode="text"
+                  />
                 </dx-item>
 
-                <dx-item location="after"
-                         widget="dxDropDownButton"
-                         :options="{
-                                  width: 120,
-                                  text: 'Actions',
-                                  stylingMode: 'contained',
-                                  items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
-                         }"/>
+                <dx-item
+                  location="after"
+                  widget="dxDropDownButton"
+                  :options="{
+                    width: 120,
+                    text: 'Actions',
+                    stylingMode: 'contained',
+                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                  }"
+                />
               </dx-toolbar>
             </div>
 
             <div class="data-part">
-              <dx-accordion :multiple="true" :collapsible="true">
+              <dx-accordion
+                :multiple="true"
+                :collapsible="true"
+              >
                 <template #title="{ data }">
                   <div class="accordion-title">
                     <span>{{ data.title }}</span>
                     <dx-button
                       icon="add"
                       type="default"
-                      stylingMode="text"
+                      styling-mode="text"
                       @click="e => {e.event.stopPropagation(); accordionPlusClick(e);}"
-                    ></dx-button>
+                    />
                   </div>
                 </template>
 
                 <dx-accordion-item title="Opportunities">
-                  <div v-for="(opportunity, i) in panelData.opportunities"
-                       :key="i"
-                       class="opportunities"
+                  <div
+                    v-for="(opportunity, i) in panelData.opportunities"
+                    :key="i"
+                    class="opportunities"
                   >
                     <span class="value">{{ opportunity.name }} </span>
-                    <br />
+                    <br>
                     <span class="value black small">{{
-                        formatPrice(opportunity.price)
-                      }}</span>
-                    <br />
+                      formatPrice(opportunity.price)
+                    }}</span>
+                    <br>
                   </div>
                 </dx-accordion-item>
 
                 <dx-item title="Activities">
-                  <contact-activities :items="panelData.activities" :is-loading="false"/>
+                  <contact-activities
+                    :items="panelData.activities"
+                    :is-loading="false"
+                  />
                 </dx-item>
               </dx-accordion>
             </div>

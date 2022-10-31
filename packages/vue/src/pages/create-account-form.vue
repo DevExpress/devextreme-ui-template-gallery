@@ -1,6 +1,12 @@
 <template>
-  <form class="create-account-form" @submit.prevent="onSubmit">
-    <dx-form :form-data="formData" :disabled="loading">
+  <form
+    class="create-account-form"
+    @submit.prevent="onSubmit"
+  >
+    <dx-form
+      :form-data="formData"
+      :disabled="loading"
+    >
       <dx-item
         data-field="email"
         editor-type="dxTextBox"
@@ -22,9 +28,9 @@
         data-field="confirmedPassword"
         editor-type="dxTextBox"
         :editor-options="{
-           stylingMode: 'filled',
-           placeholder: 'Confirm Password',
-           mode: 'password'
+          stylingMode: 'filled',
+          placeholder: 'Confirm Password',
+          mode: 'password'
         }"
       >
         <dx-required-rule message="Password is required" />
@@ -36,10 +42,14 @@
       </dx-item>
       <dx-item>
         <template #default>
-          <div class='policy-info'>
+          <div class="policy-info">
             By creating an account, you agree to the
-            <router-link to="#">Terms of Service</router-link> and
-            <router-link to="#">Privacy Policy</router-link>
+            <router-link to="#">
+              Terms of Service
+            </router-link> and
+            <router-link to="#">
+              Privacy Policy
+            </router-link>
           </div>
         </template>
       </dx-item>
@@ -49,21 +59,27 @@
           type="default"
           template="createAccount"
           :use-submit-behavior="true"
-        >
-        </dx-button-options>
+        />
       </dx-button-item>
       <dx-item>
         <template #default>
           <div class="login-link">
-            Have an account? <router-link to="/login-form">Sign In</router-link>
+            Have an account? <router-link to="/login-form">
+              Sign In
+            </router-link>
           </div>
         </template>
       </dx-item>
       <template #createAccount>
         <div>
           <span class="dx-button-text">
-              <dx-load-indicator v-if="loading" width="24px" height="24px" :visible="true" />
-              <span v-if="!loading">Create a new account</span>
+            <dx-load-indicator
+              v-if="loading"
+              width="24px"
+              height="24px"
+              :visible="true"
+            />
+            <span v-if="!loading">Create a new account</span>
           </span>
         </div>
       </template>

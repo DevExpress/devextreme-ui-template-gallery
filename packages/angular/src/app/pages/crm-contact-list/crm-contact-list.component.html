@@ -20,9 +20,9 @@
       [visible]="true"
       placeholder="Contact Search"
     ></dxo-search-panel>
-    <dxo-export 
-      [enabled]="true" 
-      [allowExportSelectedData]="true" 
+    <dxo-export
+      [enabled]="true"
+      [allowExportSelectedData]="true"
       [formats]="['xlsx', 'pdf']">
     </dxo-export>
 
@@ -107,8 +107,10 @@
     ></dxi-column>
 
     <div *dxTemplate="let cellInfo of 'name'" class="name-template">
-      <div>{{ cellInfo.data.name }}</div>
-      <div class="position">{{ cellInfo.data.position }}</div>
+      <div>
+        <div>{{ cellInfo.data.name }}</div>
+        <div class="position">{{ cellInfo.data.position }}</div>
+      </div>
     </div>
 
     <div *dxTemplate="let cellInfo of 'cellStatus'">

@@ -1,8 +1,13 @@
 <template>
-  <div class="messages" id="card-messages">
-    <load-component :is-loading="isLoading"
-                    :container-selector="'#card-messages'">
-      <div class="input-content" >
+  <div
+    class="messages"
+    id="card-messages"
+  >
+    <load-component
+      :is-loading="isLoading"
+      :container-selector="'#card-messages'"
+    >
+      <div class="input-content">
         <dx-text-box
           label="Subject"
           styling-mode="outlined"
@@ -21,33 +26,43 @@
           <dx-item location="before">
             <dx-file-uploader
               class="file-uploader"
-              labelText=""
-              selectButtonText="Attach file"/>
+              label-text=""
+              select-button-text="Attach file"
+            />
           </dx-item>
-          <dx-item widget="dxButton"
-                   location="after"
-                   :options="{
-                       text: 'Send',
-                       stylingMode: 'outlined',
-                       type: 'default',
-                       onClick: send,
-          }"/>
+          <dx-item
+            widget="dxButton"
+            location="after"
+            :options="{
+              text: 'Send',
+              stylingMode: 'outlined',
+              type: 'default',
+              onClick: send,
+            }"
+          />
         </dx-toolbar>
       </div>
-      <div class="messages-content" >
-        <div class="message-container" v-for="data in items">
+      <div class="messages-content">
+        <div
+          class="message-container"
+          v-for="data in items"
+        >
           <div class="avatar">
             {{ getAvatarText(data.manager) }}
           </div>
           <div class="message dx-card">
             <div class="message-title">
               <div class="left-title">
-                <div class="subject">{{ data.subject }}</div>
+                <div class="subject">
+                  {{ data.subject }}
+                </div>
                 <div>{{ formatDate(new Date(data.date)) }} - {{ data.manager }}</div>
               </div>
-              <dx-button icon="overflow"></dx-button>
+              <dx-button icon="overflow" />
             </div>
-            <div class="message-text">{{ setUserName(data.text) }}</div>
+            <div class="message-text">
+              {{ setUserName(data.text) }}
+            </div>
           </div>
         </div>
       </div>

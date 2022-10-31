@@ -1,8 +1,8 @@
 <template>
   <div class="content-block">
     <footer class="footer">
-      Copyright © 2011-{{new Date().getFullYear()}} {{appInfo?.title}} Inc.
-      <br />All trademarks or registered trademarks are property of their
+      Copyright © 2011-{{ new Date().getFullYear() }} {{ appInfo?.title }} Inc.
+      <br>All trademarks or registered trademarks are property of their
       respective owners.
     </footer>
   </div>

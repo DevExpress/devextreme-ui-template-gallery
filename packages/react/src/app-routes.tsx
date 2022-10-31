@@ -1,4 +1,4 @@
-import { CRMContactForm, CRMContactList, PlanningTaskList, PlanningTaskDetails } from './pages';
+import { CRMContactForm, CRMContactList, PlanningTaskList, PlanningTaskDetails, AnalyticsDashboard, AnalyticsSalesReport } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -17,6 +17,14 @@ const routes = [
   {
     path: '/planning-task-details',
     element: PlanningTaskDetails,
+  },
+  {
+    path: '/analytics-dashboard',
+    element: AnalyticsDashboard,
+  },
+  {
+    path: '/analytics-sales-report',
+    element: AnalyticsSalesReport,
   },
 ];
 

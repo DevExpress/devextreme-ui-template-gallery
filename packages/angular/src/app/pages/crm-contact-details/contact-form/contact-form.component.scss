@@ -22,18 +22,18 @@
 .info {
   position: relative;
   padding-bottom: 30px;
-
-  contact-status {
-    position: absolute;
-    margin-top: 20px;
-  }
 }
 
 .status-editor-field {
-  contact-status {
-    position: absolute;
-    font-size: 13px;
-    bottom: 0;
-    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 2px);
+  display: flex;
+
+  .status-indicator {
+    display: flex;
+    align-self: flex-end;
+    padding-left: $list-padding-left;
+  }
+
+  ::ng-deep .status-input.status-input {
+    padding-left: 0;
   }
 }

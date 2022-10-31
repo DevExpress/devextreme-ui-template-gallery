@@ -2,30 +2,41 @@
   <div class="dx-card">
     <dx-tab-panel :show-nav-buttons="true">
       <dx-tab-item title="Tasks">
-        <card-tasks :tasks="props.tasks"
-                    :is-loading="props.isLoading"
-                    :manager="props.contactName"/>
+        <card-tasks
+          :tasks="props.tasks"
+          :is-loading="props.isLoading"
+          :manager="props.contactName"
+        />
       </dx-tab-item>
 
       <dx-tab-item title="Activities">
-        <contact-activities :is-loading="props.isLoading"
-                            :items="props.activities"
-                            :show-by="true"/>
+        <contact-activities
+          :is-loading="props.isLoading"
+          :items="props.activities"
+          :show-by="true"
+        />
       </dx-tab-item>
 
       <dx-tab-item title="Opportunities">
-        <card-opportunities :contact-id="props.contactId"/>
+        <card-opportunities :contact-id="props.contactId" />
       </dx-tab-item>
 
       <dx-tab-item title="Notes">
-        <card-notes :contact-name="props.contactName"
-                    :contact-id="props.contactId"/>
+        <card-notes
+          :contact-name="props.contactName"
+          :contact-id="props.contactId"
+        />
       </dx-tab-item>
 
-      <dx-tab-item title="Messages" :badge="messages?.length + ''">
-        <card-messages :contact-name="props.contactName"
-                       :messages="messages"
-                       :isLoading="isMessagesLoading"/>
+      <dx-tab-item
+        title="Messages"
+        :badge="messages?.length + ''"
+      >
+        <card-messages
+          :contact-name="props.contactName"
+          :messages="messages"
+          :is-loading="isMessagesLoading"
+        />
       </dx-tab-item>
     </dx-tab-panel>
   </div>

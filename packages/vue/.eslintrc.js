@@ -7,6 +7,7 @@ module.exports = {
     '@vue/eslint-config-airbnb',
     '@vue/typescript/recommended',
     'plugin:vue/vue3-essential',
+    'plugin:vue/vue3-strongly-recommended',
   ],
   parser: 'vue-eslint-parser',
   parserOptions: {
@@ -26,6 +27,12 @@ module.exports = {
     'linebreak-style': 0,
     'import/prefer-default-export': 'off',
     'default-param-last': 'off',
+    'vue/max-attributes-per-line': ['error', {
+      singleline: {
+        max: 1,
+      },
+      multiline: 1,
+    }],
   },
   overrides: [
     {

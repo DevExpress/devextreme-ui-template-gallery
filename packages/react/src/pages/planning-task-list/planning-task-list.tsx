@@ -1,14 +1,22 @@
-import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver-es';
+import { useNavigate } from 'react-router-dom';
 
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
+import Sortable from 'devextreme-react/sortable';
+import Gantt from 'devextreme-react/gantt';
+import { exportGantt as exportGanttToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
+import { exportDataGrid as exportDataGridXSLX } from 'devextreme/excel_exporter';
+import LoadPanel from 'devextreme-react/load-panel';
 
 import dxTextBox from 'devextreme/ui/text_box';
 
 import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
 
-import { getTasks } from 'dx-rwa-data';
+import { getTasks, getFilteredTasks } from 'dx-rwa-data';
 
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
@@ -19,53 +27,95 @@ const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
 export const PlanningTaskList = () => {
   const gridRef = useRef<DataGrid>(null);
+  const kanbanRef = useRef<Sortable>(null);
+  const ganttRef = useRef<Gantt>(null);
 
-  const [list, setList] = useState(listsData[0]);
+  const navigate = useNavigate();
+
+  const [listView, kanbanView, ganttView] = listsData;
+
+  const [view, setView] = useState(listView);
   const [index, setIndex] = useState(0);
-  const [itemVisibility, setItemVisibility] = useState(true);
-  const [data, setData] = useState([]);
+  const [gridData, setGridData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const isDataGrid = view === listView;
+  const isKanban = view === kanbanView;
 
   useEffect(() => {
-    getTasks()
-      .then((data) => setData(data))
-      .catch((error) => console.log(error));
+    Promise.all([
+      getTasks()
+        .then((data) => setGridData(data)),
+      getFilteredTasks()
+        .then((data) => setFilteredData(data))
+    ]).catch((error) => console.log(error));
   }, []);
 
-  const Component = useMemo(() => {
-    if(list === listsData[0]) {
-      return PlanningGrid;
-    } else if(list === listsData[1]) {
-      return PlanningKanban;
-    } else {
-      return PlanningGantt;
+  useEffect(() => {
+    if(filteredData.length && gridData.length) {
+      setLoading(false);
     }
-  }, [list]);
+  }, [filteredData, gridData]);
 
   const onTabClick = useCallback((e: { itemData: string }) => {
-    setList(e.itemData);
+    setView(e.itemData);
     setIndex(listsData.findIndex((d) => d === e.itemData));
-    setItemVisibility(e.itemData === listsData[0]);
   }, []);
 
-  const addDataGridRow = useCallback(() => {
-    gridRef.current?.instance.addRow();
-  }, []);
+  const addTask = useCallback(() => {
+    if(isDataGrid) {
+      gridRef.current?.instance.addRow();
+    } else {
+      navigate('/planning-task-details');
+    }
+  }, [view]);
 
   const refresh = useCallback(() => {
-    gridRef.current?.instance.refresh();
-  }, []);
+    if(isDataGrid) {
+      gridRef.current?.instance.refresh();
+    } else if(isKanban) {
+      kanbanRef.current?.instance.update();
+    } else {
+      ganttRef.current?.instance.refresh();
+    }
+  }, [view]);
 
   const showColumnChooser = useCallback(() => {
     gridRef.current?.instance.showColumnChooser();
   }, []);
 
   const exportToPDF = useCallback(() => {
-    const doc = new jsPDF();
-    exportDataGrid({
-      jsPDFDocument: doc,
+    if(isDataGrid) {
+      const doc = new jsPDF();
+      exportDataGrid({
+        jsPDFDocument: doc,
+        component: gridRef.current?.instance,
+      }).then(() => {
+        doc.save('Tasks.pdf');
+      });
+    } else {
+      exportGanttToPdf(
+        {
+          component: ganttRef.current?.instance,
+          createDocumentMethod: (args) => new jsPDF(args),
+        },
+      ).then((doc) => doc.save('gantt.pdf'));
+    }
+  }, [view]);
+
+  const exportToXSLX = useCallback(() => {
+    const workbook = new Workbook();
+    const worksheet = workbook.addWorksheet('Main sheet');
+
+    exportDataGridXSLX({
       component: gridRef.current?.instance,
+      worksheet,
+      autoFilterEnabled: true,
     }).then(() => {
-      doc.save('Tasks.pdf');
+      workbook.xlsx.writeBuffer().then((buffer) => {
+        saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+      });
     });
   }, []);
 
@@ -75,7 +125,7 @@ export const PlanningTaskList = () => {
 
   return (
     <div className='view-wrapper-list'>
-      <Toolbar>
+      <Toolbar className='toolbar-common'>
         <Item location='before'>
           <span className='toolbar-header'>Task</span>
         </Item>
@@ -89,21 +139,18 @@ export const PlanningTaskList = () => {
           }}
         />
         <Item
-          visible={itemVisibility}
           location='after'
           widget='dxButton'
           locateInMenu='auto'
-          cssClass='add-grid-row'
           options={{
             icon: 'plus',
             text: 'ADD TASK',
             type: 'default',
             stylingMode: 'contained',
-            onClick: addDataGridRow,
+            onClick: addTask,
           }}
         />
         <Item
-          visible={itemVisibility}
           location='after'
           widget='dxButton'
           showText='inMenu'
@@ -115,26 +162,26 @@ export const PlanningTaskList = () => {
           }}
         />
         <Item
-          visible={itemVisibility}
           location='after'
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
+          disabled={view !== listView}
           options={{
             icon: 'columnchooser',
             text: 'Column Chooser',
             onClick: showColumnChooser,
           }}
         />
-        <Item visible={itemVisibility} location='after' locateInMenu='auto'>
+        <Item location='after' locateInMenu='auto'>
           <div className='separator'></div>
         </Item>
         <Item
-          visible={itemVisibility}
           location='after'
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
+          disabled={isKanban}
           options={{
             icon: 'exportpdf',
             text: 'Export To PDF',
@@ -142,10 +189,22 @@ export const PlanningTaskList = () => {
           }}
         />
         <Item
-          visible={itemVisibility}
+          location='after'
+          widget='dxButton'
+          showText='inMenu'
+          locateInMenu='auto'
+          disabled={view !== listView}
+          options={{
+            icon: 'exportxlsx',
+            text: 'Export To XSLX',
+            onClick: exportToXSLX,
+          }}
+        />
+        <Item
           location='after'
           widget='dxTextBox'
           locateInMenu='auto'
+          disabled={view !== listView}
           options={{
             mode: 'search',
             placeholder: 'Task Search',
@@ -153,7 +212,10 @@ export const PlanningTaskList = () => {
           }}
         />
       </Toolbar>
-      <Component dataSource={data} ref={list === listsData[0] ? gridRef : null} />
+      {loading && <LoadPanel container='.content' visible position={{ of: '.content' }} />}
+      {!loading && isDataGrid && <PlanningGrid dataSource={gridData} ref={gridRef} />}
+      {!loading && isKanban && <PlanningKanban dataSource={filteredData} ref={kanbanRef} />}
+      {!loading && view === ganttView && <PlanningGantt dataSource={filteredData} ref={ganttRef} />}
     </div>
   );
 };
