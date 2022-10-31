@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
-import LoadPanel from 'devextreme-react/load-panel';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
 import Form, { SimpleItem, GroupItem, Label } from 'devextreme-react/form';
@@ -11,10 +10,11 @@ import Calendar from 'devextreme-react/calendar';
 
 import { PriorityTask } from '../priority-task/PriorityTask';
 import { StatusTask } from '../status-task/StatusTask';
+import { withLoadPanel } from '../../shared/utils/withLoadPanel';
 
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 
-import { TaskPriority, TaskStatus } from '../../shared/types/task';
+import { Task, TaskPriority, TaskStatus } from '../../shared/types/task';
 import { FormEdit, FormEditComponent, FormTask } from '../../shared/types/task-form';
 
 import './TaskForm.scss';
@@ -118,28 +118,74 @@ type Context = {
 }
 const FormContext = React.createContext<Context>({} as Context);
 
+const TaskFormDetails = ({ editing, data, setData }: { editing: boolean, data: Task, setData: (data) => void }) => {
+  const [isDueDate, setDueDate] = useState(false);
+  const editorOptions = { stylingMode: editing ? 'filled' : 'underlined' };
+  const dueDateChange = (value) => {
+    setData({ ...data, ...{ dueDate: value } });
+    setDueDate(!!value);
+  };
+  const updateTask = (obj) => {
+    setData({ ...data, ...obj });
+  };
+  return (
+    <FormContext.Provider value={{ data: data, setValue: updateTask, dueDateChange: dueDateChange }}>
+      <Form formData={data} labelMode='floating' readOnly={!editing}>
+        <SimpleItem dataField='text' visible={editing}></SimpleItem>
+        <GroupItem itemType='group' caption='Details' colCount={2}>
+          <SimpleItem dataField='company' render={editing ? undefined : CompanyField} editorOptions={editorOptions}></SimpleItem>
+          <SimpleItem dataField='owner' render={editing ? undefined : OwnerField} editorOptions={editorOptions}>
+            <Label text='Assigned to'></Label>
+          </SimpleItem>
+          <SimpleItem dataField='priority' render={editing ? PriorityEditing : PriorityField}></SimpleItem>
+          <SimpleItem dataField='status' render={editing ? StatusEditing : StatusField}></SimpleItem>
+          <SimpleItem
+            dataField='startDate'
+            editorType='dxDateBox'
+            editorOptions={{
+              name: 'Start Date',
+              placeholder: 'MM/dd/y',
+              displayFormat: 'MM/dd/y',
+              ...editorOptions,
+            }}
+          ></SimpleItem>
+          <SimpleItem
+            dataField='dueDate'
+            editorType='dxDateBox'
+            render={editing || isDueDate ? undefined : DueDateTemplate}
+            editorOptions={{
+              name: 'Due Date',
+              placeholder: 'MM/dd/y',
+              displayFormat: 'MM/dd/y',
+              onValueChange: dueDateChange,
+              ...editorOptions,
+            }}
+          ></SimpleItem>
+        </GroupItem>
+
+        <SimpleItem colSpan={2} dataField='description' editorType='dxTextArea' editorOptions={editorOptions}>
+          <Label text='Details'></Label>
+        </SimpleItem>
+      </Form>
+    </FormContext.Provider>
+  );
+};
+
+const TaskFormWithLoadPanel = withLoadPanel(TaskFormDetails);
+
 export const TaskForm = ({ task }: { task?: FormTask }) => {
   const [data, setData] = useState(task);
-  const [isDueDate, setDueDate] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
-  const editorOptions = { stylingMode: editing ? 'filled' : 'underlined' };
+
   useEffect(() => {
     if (task) {
-      setLoading(false);
       setData({ ...task, ...{ dueDate: null } });
     }
   }, [task]);
   const toggleEditing = useCallback(() => {
     setEditing(!editing);
   }, [editing]);
-  const dueDateChange = (value) => {
-    setData({ ...data!, ...{ dueDate: value } });
-    setDueDate(!!value);
-  };
-  const updateTask = (obj) => {
-    setData({ ...data, ...obj });
-  };
+
   return (
     <div className='task-form'>
       <Toolbar>
@@ -153,49 +199,15 @@ export const TaskForm = ({ task }: { task?: FormTask }) => {
           <Button text='Cancel' stylingMode='text' onClick={toggleEditing}></Button>
         </Item>
       </Toolbar>
-      {loading ? (
-        <LoadPanel container='.task-form' visible position={{ of: '.task-form' }} />
-      ) : (
-        <FormContext.Provider value={{ data: data!, setValue: updateTask, dueDateChange: dueDateChange }}>
-          <Form formData={data} labelMode='floating' readOnly={!editing}>
-            <SimpleItem dataField='text' visible={editing}></SimpleItem>
-            <GroupItem itemType='group' caption='Details' colCount={2}>
-              <SimpleItem dataField='company' render={editing ? undefined : CompanyField} editorOptions={editorOptions}></SimpleItem>
-              <SimpleItem dataField='owner' render={editing ? undefined : OwnerField} editorOptions={editorOptions}>
-                <Label text='Assigned to'></Label>
-              </SimpleItem>
-              <SimpleItem dataField='priority' render={editing ? PriorityEditing : PriorityField}></SimpleItem>
-              <SimpleItem dataField='status' render={editing ? StatusEditing : StatusField}></SimpleItem>
-              <SimpleItem
-                dataField='startDate'
-                editorType='dxDateBox'
-                editorOptions={{
-                  name: 'Start Date',
-                  placeholder: 'MM/dd/y',
-                  displayFormat: 'MM/dd/y',
-                  ...editorOptions,
-                }}
-              ></SimpleItem>
-              <SimpleItem
-                dataField='dueDate'
-                editorType='dxDateBox'
-                render={editing || isDueDate ? undefined : DueDateTemplate}
-                editorOptions={{
-                  name: 'Due Date',
-                  placeholder: 'MM/dd/y',
-                  displayFormat: 'MM/dd/y',
-                  onValueChange: dueDateChange,
-                  ...editorOptions,
-                }}
-              ></SimpleItem>
-            </GroupItem>
-
-            <SimpleItem colSpan={2} dataField='description' editorType='dxTextArea' editorOptions={editorOptions}>
-              <Label text='Details'></Label>
-            </SimpleItem>
-          </Form>
-        </FormContext.Provider>
-      )}
+      <TaskFormWithLoadPanel
+        data={data}
+        editing={editing}
+        setData={setData}
+        panelProps={{
+          container: '.task-form',
+          position: { of: '.task-form' },
+        }}
+      />
     </div>
   );
 };
