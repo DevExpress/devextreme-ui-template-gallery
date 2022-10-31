@@ -65,15 +65,6 @@ const activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }>
 },
 ];
 </script>
-<style lang="scss">
-.activities-list {
-  .dx-list-item {
-    margin: 10px 0;
-    overflow: visible;
-    background: transparent;
-  }
-}
-</style>
 <style scoped lang="scss">
 @use '@/variables' as *;
 
@@ -82,6 +73,12 @@ const activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }>
   min-height: 300px;
   position: relative;
   display: block;
+
+  :deep(.dx-list-item) {
+    margin: 10px 0;
+    overflow: visible;
+    background: transparent;
+  }
 
   &.load {
     min-height: auto;

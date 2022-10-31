@@ -17,6 +17,7 @@ document.title = appInfo?.title || '';
     <div :class="cssClasses">
       <component
         :is="$route.meta.layout"
+        :title="appInfo?.title"
         :is-x-small="screenInfo.isXSmall"
         :is-large="screenInfo.isLarge"
       >
