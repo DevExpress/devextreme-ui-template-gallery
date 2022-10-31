@@ -14,12 +14,12 @@
   "license": "MIT",
   "devDependencies": {
     "@vasily.strelyaev/tcd-screenshot-updater": "^0.2.0",
-    "@vasily.strelyaev/testcafe-reporter-dashboard-devextreme": "^1.0.0",
     "devextreme-screenshot-comparer": "^2.0.14",
     "fs-extra": "^10.0.0",
     "http-server": "^14.1.0"
   },
   "dependencies": {
+    "@vasily.strelyaev/testcafe-reporter-dashboard-devextreme": "^1.0.0",
     "testcafe": "^2.1.0",
     "minimist": "^1.2.6"
   }
