@@ -107,6 +107,10 @@ jobs:
       run: |
         all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true  --theme ${{ matrix.theme.name }}"
         echo "$all_args"
+        export TESTCAFE_DASHBOARD_DEVEXTREME_LAYOUT_TESTING_ENABLED=true
+        export TESTCAFE_DASHBOARD_DEVEXTREME_TOKEN=eyJwcm9qZWN0SWQiOiI5ZjRlMTJjMC1kNmExLTQxZDEtYmE1OS0wZTI3OTE1N2QxZDAiLCJ0b2tlblNlY3JldCI6InQwQXh6bzFMczBDVE81VU95bzc2dkF2eE05Ym9pQ3JxajRCQUtyWm5la0EzYlp3SENOR3RoamFaWkhoa0xvRnJZM1lvV0ZlbEt2S2JyYjFkbEs5UFVoMmlGaG9aVlprdTU1NXhZWmhGQkQ0eWtBZENJWkJvdU9ZV1hDWlRkVi9sQUFxMVNlMkFtRkg5UkRXTTlTcEk0WmVOSkEwZnYwNUlDN3Q3UXFmZ3o2VUdYVDNvZDJHQ2RqclVKYnZrZ2ZmNjdRb3RNaXZuTG1CSmM4REdLelhhbmhobzMzVzE5U1Axd1NSNGR6d3ZWdHp2dGV2em5Da0cwR0dSc3Z3OWdQS214UHpFUGsreTJtMjlSZm92dGtuNGZtb0prRng1RzBSZ2o2WnhPSXBrUDZOMVZyWWhuTk9lc1VEQmVobzB1VGFjTlNwZFE0N2FVZCsydmM3Q3Y0QmtZQT09In0=
+        export TESTCAFE_DASHBOARD_DEVEXTREME_URL=https://devextreme.resolve.sh
+        export TESTCAFE_DASHBOARD_DEVEXTREME_BUILD_ID=${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
         npm run test-testcafe -- $all_args
       working-directory: packages/testing
 

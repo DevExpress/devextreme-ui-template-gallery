@@ -2,6 +2,7 @@ import createTestCafe from 'testcafe';
 import { argv, env, exit } from 'process';
 import parseArgs from 'minimist';
 import { packages } from './config.js';
+import dashboardReporter from '@vasily.strelyaev/testcafe-reporter-dashboard-devextreme';
 
 const args = parseArgs(argv.slice(1), {
   default: {
@@ -26,7 +27,7 @@ createTestCafe('localhost', 1437, 1438)
 
     const runner = testCafe.createRunner()
       .browsers('chrome:headless')
-      .reporter('minimal')
+      .reporter(['minimal', dashboardReporter])
       .src([
         `tests/${args.page}.test.js`,
       ]);

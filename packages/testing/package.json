@@ -7,17 +7,20 @@
   "scripts": {
     "start-apps": "node ./run-server.js",
     "stop-apps": "node ./kill-server.js",
-    "test-testcafe": "node ./runner.js"
+    "test-testcafe": "node ./runner.js",
+    "tcd-update": "tcd-update"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@vasily.strelyaev/tcd-screenshot-updater": "^0.2.0",
+    "@vasily.strelyaev/testcafe-reporter-dashboard-devextreme": "^1.0.0",
     "devextreme-screenshot-comparer": "^2.0.14",
     "fs-extra": "^10.0.0",
     "http-server": "^14.1.0"
   },
   "dependencies": {
-    "minimist": "^1.2.6",
-    "testcafe": "^2.1.0"
+    "testcafe": "^2.1.0",
+    "minimist": "^1.2.6"
   }
 }
