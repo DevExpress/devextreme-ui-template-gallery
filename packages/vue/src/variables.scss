@@ -4,6 +4,7 @@
 @use "../node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
 @use "../node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
 @use '../node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
+@use "../node_modules/devextreme/scss/widgets/material/list/sizes" as *;
 
 
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
@@ -24,6 +25,7 @@ $text-button-horizontal-padding: $material-button-icononly-padding;
 $toolbar-margin-bottom: 16px;
 $texteditor-edit-color: $texteditor-color;
 $filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
+$list-padding-left: $material-list-item-horizontal-padding;
 
 $main-container-padding-top: 20px;
 $main-container-padding-left: 16px;

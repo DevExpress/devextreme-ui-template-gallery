@@ -1,21 +1,20 @@
 <template>
-  <span :class="'status status-' + props.status?.toLowerCase()">
-    {{ (props.status || '') }}</span>
+  <span :class="'contact-status status-' + props.value?.toLowerCase()">
+    {{ (props.showText ? this.props.value : '') }}</span>
 </template>
 
 <script setup lang="ts">
+import { ContactStatus } from '@/types/contact';
+
 const props = withDefaults(defineProps<{
-    status: string
+  value: ContactStatus,
+  showText: boolean
   }>(), {
-  status: '',
+  showText: true,
 });
 </script>
-
-<style scoped lang="scss">
-@use 'src/variables' as *;
-@use "sass:math";
-
-span.status {
+<style lang="scss">
+.contact-status {
   @mixin status($status-color) {
     color: $status-color;
 
@@ -23,7 +22,24 @@ span.status {
       background: $status-color;
     }
   }
+  &.status-commission {
+    @include status(#03a9f4);
+  }
 
+  &.status-salaried {
+    @include status(#2eb52c);
+  }
+
+  &.status-terminated {
+    @include status(#de8e8c);
+  }
+}
+</style>
+<style scoped lang="scss">
+@use 'src/variables' as *;
+@use "sass:math";
+
+.contact-status {
   font-size: 13px;
 
   &::before {
@@ -37,21 +53,9 @@ span.status {
     display: inline-block;
   }
 
-  &.input {
+  :deep(&.input) {
     display: block;
     padding: 15px 16px 14px;
-  }
-
-  &.status-commission {
-    @include status(#03a9f4);
-  }
-
-  &.status-salaried {
-    @include status(#2eb52c);
-  }
-
-  &.status-terminated {
-    @include status(#de8e8c);
   }
 }
 </style>

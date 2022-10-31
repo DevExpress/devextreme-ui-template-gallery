@@ -22,7 +22,7 @@
         location="after"
       >
         <dx-drop-down-button
-          text="ACTIONS"
+          text="Actions"
           :width="120"
           styling-mode="text"
         >

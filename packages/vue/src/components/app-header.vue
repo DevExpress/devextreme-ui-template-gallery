@@ -131,6 +131,10 @@ const userMenuItems = [{
 <style scoped lang="scss">
 @use "../variables" as *;
 
+:global(.dx-theme-generic header .dx-toolbar.header-toolbar) {
+  padding: 10px 0;
+}
+
 header {
   flex: 0 0 auto;
   z-index: 1;

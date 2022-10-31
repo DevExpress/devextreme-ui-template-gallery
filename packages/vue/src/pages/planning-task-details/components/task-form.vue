@@ -137,6 +137,7 @@
           <dx-form-item>
             <dx-text-area
               label="Details"
+              styling-mode="filled"
               v-model="data.description"
             />
           </dx-form-item>
