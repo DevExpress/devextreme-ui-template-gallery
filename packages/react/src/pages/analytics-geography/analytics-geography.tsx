@@ -14,6 +14,22 @@ import { RevenueSnapshotByStatesCard } from './cards/RevenueSnapshotByStates';
 
 const createMapCoords = (coords: string) => coords.split(', ').map(parseFloat);
 
+const getSalesByStateMarkers = (salesByState) => ({
+  type: 'StateCollection',
+  features: salesByState.map((item) => ({
+    type: 'State',
+    geometry: {
+      type: 'Point',
+      coordinates: createMapCoords(item.stateCoords),
+    },
+    properties: {
+      text: item.stateName,
+      value: item.total,
+      tooltip: `<b>${item.stateName}</b>\n${item.total}K`,
+    },
+  })),
+});
+
 export const AnalyticsGeography = () => {
   const [tabIndex, setTabIndex] = useState(
     ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].index
@@ -28,23 +44,10 @@ export const AnalyticsGeography = () => {
   useEffect(() => {
     getSalesByStateAndCity(...dateRange).then((data) => {
       setSalesByStateAndCity(data);
+
       const salesByStateResult = getSalesByState(data);
       setSalesByState(salesByStateResult);
-      setSalesByStateMarkers({
-        type: 'StateCollection',
-        features: salesByStateResult.map((item) => ({
-          type: 'State',
-          geometry: {
-            type: 'Point',
-            coordinates: createMapCoords(item.stateCoords),
-          },
-          properties: {
-            text: item.stateName,
-            value: item.total,
-            tooltip: `<b>${item.stateName}</b>\n${item.total}K`,
-          },
-        })),
-      });
+      setSalesByStateMarkers(getSalesByStateMarkers(salesByStateResult));
     });
   }, [dateRange]);
 
