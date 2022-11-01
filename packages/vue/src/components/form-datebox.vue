@@ -7,6 +7,7 @@
     display-format="MM/dd/y"
     :element-attr="{class: 'form-editor'}"
     :input-attr="{class: 'form-editor-input'}"
+    picker-type="calendar"
     styling-mode="filled"
   />
 </template>
