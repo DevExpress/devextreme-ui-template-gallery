@@ -43,6 +43,7 @@ export const TaskForm = ({ task }: { task?: FormTask }) => {
         </Item>
       </Toolbar>
       <TaskFormWithLoadPanel
+        loading={!data}
         data={data}
         editing={editing}
         onDataChanged={onDataChanged}
