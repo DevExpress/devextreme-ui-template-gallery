@@ -28,7 +28,8 @@ fixture`Planning List`;
         await t.click('.view-wrapper .dx-icon-overflow');
       }
       await t.click(Selector('[aria-label="Add Task"]'));
-      await t.typeText(Selector('.dx-date-box input'), '10/26/2022');
+      await t.typeText(Selector('form-item-date[label="Start Date"] .dx-datebox'), '10/26/2022', { replace: true });
+      await t.typeText(Selector('form-item-date[label="Due Date"] .dx-datebox'), '10/26/2022', { replace: true });
       await takeScreenshot(`planning-task-add-task-popup-embed=${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
