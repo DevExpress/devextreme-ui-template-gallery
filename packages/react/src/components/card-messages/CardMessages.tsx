@@ -36,7 +36,7 @@ const Card = ({ data, user }: { data: Message; user: string }) => (
   </div>
 );
 
-export const CardMessages = ({ items, user, updateMessagesCount }: { items: Messages | undefined; user: string | undefined; updateMessagesCount: any }) => {
+export const CardMessages = ({ items, user, updateMessagesCount }: { items: Messages | undefined; user: string | undefined; updateMessagesCount: (number)=> void }) => {
   const [messages, setMessages] = useState(items);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
@@ -93,7 +93,7 @@ export const CardMessages = ({ items, user, updateMessagesCount }: { items: Mess
       </div>
       <div className='messages-content'>
         {messages?.map((message, index) => (
-          <Card key={index} data={message} user={user!}></Card>
+          <Card key={index} data={message} user={user ?? ''}></Card>
         ))}
       </div>
     </div>
