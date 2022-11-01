@@ -12,15 +12,7 @@ import { RevenueByStatesCard } from './cards/RevenueByStatesCard';
 import { RevenueAnalysisByStatesCard } from './cards/RevenueAnalysisByStatesCard';
 import { RevenueSnapshotByStatesCard } from './cards/RevenueSnapshotByStates';
 
-const createMapCoords = (coords: string) => {
-  const resultCoords: number[] = [];
-
-  coords.split(', ').forEach((coord) => {
-    resultCoords.push(parseFloat(coord));
-  });
-
-  return resultCoords;
-};
+const createMapCoords = (coords: string) => coords.split(', ').map(parseFloat);
 
 export const AnalyticsGeography = () => {
   const [tabIndex, setTabIndex] = useState(
@@ -54,7 +46,6 @@ export const AnalyticsGeography = () => {
         })),
       });
     });
-    console.log({ salesByStateAndCity, salesByState });
   }, [dateRange]);
 
   const onTabClick = useCallback((e: { itemData: string }) => {
