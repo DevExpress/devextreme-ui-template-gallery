@@ -44,13 +44,13 @@ jobs:
           { fullName: 'material.blue.dark.compact', name: 'material.dark' }
         ]
         ARGS: [
-          # { project: 'angular', page: 'crm-contact-form' },
-          # { project: 'angular', page: 'crm-contact-list' },
-          # { project: 'angular', page: 'planning-task-details' },
-          # { project: 'angular', page: 'planning-task-list' },
-          # { project: 'angular', page: 'analytics-dashboard' },
-          # { project: 'angular', page: 'analytics-sales-report' },
-          # { project: 'angular', page: 'analytics-geography' },
+          { project: 'angular', page: 'crm-contact-form' },
+          { project: 'angular', page: 'crm-contact-list' },
+          { project: 'angular', page: 'planning-task-details' },
+          { project: 'angular', page: 'planning-task-list' },
+          { project: 'angular', page: 'analytics-dashboard' },
+          { project: 'angular', page: 'analytics-sales-report' },
+          { project: 'angular', page: 'analytics-geography' },
           # { project: 'react', page: 'crm-contact-list' },
           # { project: 'react', page: 'planning-task-details' },
           # { project: 'react', page: 'planning-task-list' },
