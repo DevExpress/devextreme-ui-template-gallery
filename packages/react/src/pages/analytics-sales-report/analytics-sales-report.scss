@@ -1,12 +1,12 @@
 .card {
   &.sales-by-state-map {
-    .content {
+    .card-contents {
       height: 400px;
     }
   }
 
   &.sales-range {
-    .content {
+    .card-contents {
       height: auto;
     }
   }

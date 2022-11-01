@@ -28,7 +28,7 @@
           background-color: $side-panel-background;
         }
 
-        .content {
+        .card-contents {
           height: auto;
 
           .total {
@@ -81,7 +81,7 @@
       .card {
         border: none;
 
-        .content {
+        .card-contents {
           height: auto;
         }
       }
@@ -98,7 +98,7 @@
     }
 
     .card {
-      .content {
+      .card-contents {
         height: auto;
       }
     }
