@@ -43,9 +43,9 @@ export const AnalyticsGeography = () => {
 
   useEffect(() => {
     getSalesByStateAndCity(...dateRange).then((data) => {
-      setSalesByStateAndCity(data);
-
       const salesByStateResult = getSalesByState(data);
+
+      setSalesByStateAndCity(data);
       setSalesByState(salesByStateResult);
       setSalesByStateMarkers(getSalesByStateMarkers(salesByStateResult));
     });
