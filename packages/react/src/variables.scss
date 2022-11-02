@@ -1,6 +1,12 @@
 @use "../node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: "light");
+@use "../node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
+@use "../node_modules/devextreme/scss/widgets/material/button/mixins" as *;
+@use "../node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
+@use "../node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
+@use "../node_modules/devextreme/scss/widgets/material/list/sizes" as *;
 
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
+@forward "../node_modules/devextreme/scss/widgets/material/textEditor/colors";
 
 @use "sass:math";
 @use "sass:color";
