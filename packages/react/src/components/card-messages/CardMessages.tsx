@@ -4,6 +4,8 @@ import TextBox from 'devextreme-react/text-box';
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
+import FileUploder from 'devextreme-react/file-uploader';
+import ScrollView from 'devextreme-react/scroll-view';
 
 import { formatDate } from 'devextreme/localization';
 
@@ -40,9 +42,11 @@ export const CardMessages = ({ items, user, updateMessagesCount }: { items: Mess
   const [messages, setMessages] = useState(items);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
+
   useEffect(() => {
     setMessages(items);
   }, [items]);
+
   const send = useCallback(() => {
     if ((message === '' && title === '') || !messages || !user) {
       return;
@@ -52,32 +56,26 @@ export const CardMessages = ({ items, user, updateMessagesCount }: { items: Mess
     setMessage('');
     updateMessagesCount(messages.length + 1);
   }, [message, title, messages, user, updateMessagesCount]);
-  const cancel = useCallback(() => {
-    setTitle('');
-    setMessage('');
-  }, []);
+
   const onTitleChanged = useCallback((value) => {
     setTitle(value);
   }, []);
+
   const onMessageChanged = useCallback((value) => {
     setMessage(value);
   }, []);
+
   return (
     <div className='messages'>
       <div className='input-messages'>
-        <TextBox label='Title' stylingMode='outlined' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged}></TextBox>
-        <TextArea label='New Message' stylingMode='outlined' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged}></TextArea>
+        <TextBox label='Subject' stylingMode='outlined' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged}></TextBox>
+        <TextArea label='Message' height={150} stylingMode='outlined' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged}></TextArea>
         <Toolbar>
           <Item
             location='before'
-            widget='dxButton'
-            options={{
-              text: 'Attach File',
-              stylingMode: 'contained',
-              type: 'default',
-              icon: 'attach',
-            }}
-          ></Item>
+          >
+            <FileUploder className='file-uploader' labelText='' selectButtonText='Attach file'></FileUploder>
+          </Item>
           <Item
             location='after'
             widget='dxButton'
@@ -88,14 +86,15 @@ export const CardMessages = ({ items, user, updateMessagesCount }: { items: Mess
               onClick: send,
             }}
           ></Item>
-          <Item location='after' widget='dxButton' options={{ text: 'Cancel', onClick: cancel }}></Item>
         </Toolbar>
       </div>
-      <div className='messages-content'>
-        {messages?.map((message, index) => (
-          <Card key={index} data={message} user={user!}></Card>
-        ))}
-      </div>
+      <ScrollView className='message-list'>
+        <div className='messages-content'>
+          {messages?.map((message, index) => (
+            <Card key={index} data={message} user={user!}></Card>
+          ))}
+        </div>
+      </ScrollView>
     </div>
   );
 };
