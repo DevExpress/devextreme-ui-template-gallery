@@ -23,10 +23,10 @@ export const navigation = [
         text: 'Task List',
         path: '/planning-task-list',
       },
-      /* {
+      {
         text: 'Task Details',
         path: '/planning-task-details',
-      }, */
+      },
     ],
   },
 ];

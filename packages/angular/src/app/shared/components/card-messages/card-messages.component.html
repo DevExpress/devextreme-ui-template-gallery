@@ -36,9 +36,9 @@
       </dxi-item>
     </dx-toolbar>
   </div>
-  <div class="messages-content">
-    <dx-scroll-view>
-      <div class="message-container" *ngFor="let data of items?.concat(items)">
+  <dx-scroll-view>
+    <div class="messages-content">
+      <div class="message-container" *ngFor="let data of items">
         <div class="avatar">
           {{ getAvatarText(data.manager) }}
         </div>
@@ -55,6 +55,6 @@
           <div class="message-text">{{ setUserName(data.text) }}</div>
         </div>
       </div>
-    </dx-scroll-view>
-  </div>
+    </div>
+  </dx-scroll-view>
 </div>

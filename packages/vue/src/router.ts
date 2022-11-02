@@ -78,10 +78,19 @@ export const router = createRouter({
       path: '/planning-task-list',
       name: 'planning-task-list',
       meta: {
-        // requiresAuth: true,
+        requiresAuth: true,
         layout: defaultLayout,
       },
       component: loadComponent('planning-task-list/planning-task-list'),
+    },
+    {
+      path: '/planning-task-details',
+      name: 'planning-task-details',
+      meta: {
+        requiresAuth: true,
+        layout: defaultLayout,
+      },
+      component: loadComponent('planning-task-details/planning-task-details'),
     },
   ],
 });

@@ -10,7 +10,7 @@
       <div class="card-priority" />
       <dx-button
         icon="edit"
-        @click="notifyByCard()"
+        @click="notifyByCard"
       />
       <div class="card-content">
         <div class="card-subject dx-theme-text-color">
@@ -39,6 +39,7 @@ import { Task } from '@/types/task';
 import notify from 'devextreme/ui/notify';
 import { DxButton } from 'devextreme-vue/button';
 import { formatDate } from '@/utils/formatters';
+import { router } from '@/router';
 
 const props = withDefaults(defineProps<{
   task: Task | null
@@ -48,12 +49,13 @@ const props = withDefaults(defineProps<{
 
 const getAvatarText = (name: string) => name.split(' ').map((namePart) => namePart[0]).join('');
 
-const notifyByCard = () => {
+const notifyByCard = (event: {event: Event}) => {
+  event.event.stopPropagation();
   notify(`Edit '${props.task?.text}' card event`);
 };
 
 const navigateToDetails = () => {
-  // this.router.navigate(['/planning-task-details']);
+  router.push('/planning-task-details');
 };
 </script>
 
