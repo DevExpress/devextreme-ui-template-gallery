@@ -47,7 +47,7 @@
       align-items: center;
       justify-content: center;
     }
-
+    
     .message {
       background-color: $base-bg;
       padding: 10px;
@@ -61,7 +61,6 @@
           font-weight: 700;
         }
       }
-
       .message-text {
         @include message-text();
       }
