@@ -1,17 +1,19 @@
 @use "../../variables.scss" as *;
 @use "sass:math";
 
-.dx-toolbar {
-  .toolbar-title {
-    @include header();
-  }
-}
-
 .view-wrapper-details {
   flex-direction: column;
   display: flex;
   flex-grow: 1;
   padding: 20px 16px 0 16px;
+
+  .dx-toolbar {
+    margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
+
+    .dx-toolbar-label > div {
+      @include header();
+    }
+  }
 
   .panels {
     display: flex;
@@ -21,10 +23,12 @@
 
     .left {
       flex: 1 400px;
+      margin-top: 8px;
     }
 
     .right {
       flex: 1 calc(100% - 400px - 20px);
+      margin-top: 8px;
       min-width: 360px;
     }
   }
