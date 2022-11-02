@@ -9,7 +9,7 @@ export const navigation = [
         path: '/crm-contact-list',
       },
       {
-        text: 'Contact Form',
+        text: 'Contact Details',
         path: '/crm-contact-form',
       },
     ],
