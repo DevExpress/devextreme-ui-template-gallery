@@ -120,7 +120,7 @@ export const PlanningTaskList = () => {
   }, []);
 
   const search = useCallback((e: { component: dxTextBox }) => {
-    gridRef.current?.instance.searchByText(e.component.option('text')!);
+    gridRef.current?.instance.searchByText(e.component.option('text') ?? '');
   }, []);
 
   return (
