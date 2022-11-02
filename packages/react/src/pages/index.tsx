@@ -4,3 +4,4 @@ export { PlanningTaskList } from './planning-task-list/planning-task-list';
 export { PlanningTaskDetails } from './planning-task-details/planning-task-details';
 export { AnalyticsDashboard } from './analytics-dashboard/analytics-dashboard';
 export { AnalyticsSalesReport } from './analytics-sales-report/analytics-sales-report';
+export { AnalyticsGeography } from './analytics-geography/analytics-geography';
