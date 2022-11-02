@@ -3,44 +3,17 @@
 .task-form {
   min-height: 300px;
 
-  .form-title {
-    font-size: 16px;
-  }
-
   .dx-toolbar {
     margin-bottom: $toolbar-margin-bottom;
   }
 }
 
-.info {
-  position: relative;
-  padding-bottom: 30px;
-
+.form-editor {
   .priority-task,
   .status-task {
     position: absolute;
-    margin-top: 15px;
-
-    span {
-      font-size: 13px;
-    }
-  }
-}
-
-.details {
-  position: relative;
-  display: flex;
-
-  span {
-    margin-top: 12px;
-  }
-}
-
-.form-custom-list-prop {
-  .priority-task,
-  .status-task {
-    position: absolute;
-    padding: 15px 11px;
+    bottom: 0;
+    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 3px);
 
     span {
       font-size: 13px;

@@ -16,7 +16,9 @@ $side-panel-background: darken($base-bg, 5);
 $background-color: $base-bg;
 $accent-color: $base-accent;
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
+$filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
 $toolbar-margin-bottom: 16px;
+$texteditor-edit-color: $texteditor-color;
 
 @mixin separator() {
   .separator {
