@@ -225,7 +225,7 @@ import UserPhoto from '@/components/user-photo.vue';
 import UserStatus from '@/components/contact-status.vue';
 import { screenInfo } from '@/utils/media-query';
 import { formatPrice } from '@/utils/formatters';
-import ContactActivities from '@/components/contact-activities.vue';
+import ContactActivities from '@/components/card-activities.vue';
 import LoadComponent from '@/components/load-component.vue';
 import type { Contact } from '@/types/contact';
 import FormTextbox from '@/components/form-textbox.vue';
