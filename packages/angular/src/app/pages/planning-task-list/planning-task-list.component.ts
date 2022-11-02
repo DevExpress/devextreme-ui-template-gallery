@@ -2,7 +2,6 @@ import {
   Component, OnInit, NgModule, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
@@ -12,8 +11,8 @@ import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
 import { taskPanelItems } from 'src/app/shared/types/resource';
 import { Task, newTask } from 'src/app/shared/types/task';
-import { RwaService } from 'src/app/shared/services';
-import { forkJoin, map, Observable } from 'rxjs';
+import { RwaService, ScreenService } from 'src/app/shared/services';
+import { forkJoin, map, Observable, Subscription } from 'rxjs';
 import { TaskFormModule } from '../planning-task-details/task-form/task-form.component';
 import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
 import { TaskListKanbanModule, TaskListKanbanComponent } from './task-list-kanban/task-list-kanban.component';
@@ -44,9 +43,13 @@ export class PlanningTaskListComponent implements OnInit {
 
   taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
+  screenSubscription: Subscription;
+
   popupVisible = false;
 
-  constructor(private service: RwaService, private router: Router) {
+  popupFullScreen = false;
+
+  constructor(private service: RwaService, private screen: ScreenService) {
     this.closePopup = this.closePopup.bind(this);
   }
 
@@ -58,6 +61,9 @@ export class PlanningTaskListComponent implements OnInit {
       map(
         ([filteredTasks, allTasks]) => { return { allTasks, filteredTasks }  })
     );
+
+    this.popupFullScreen = this.checkScreenSize();
+    this.screenSubscription = this.screen.changed.subscribe(() => this.updatePopup());
   }
 
   tabValueChange(e: TabsItemClickEvent) {
@@ -67,6 +73,14 @@ export class PlanningTaskListComponent implements OnInit {
     this.displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
     this.displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
   };
+
+  checkScreenSize() {
+    return this.screen.sizes['screen-small'] || this.screen.sizes['screen-x-small'];
+  }
+
+  updatePopup() {
+    this.popupFullScreen = this.checkScreenSize();
+  }
 
   closePopup() {
     this.popupVisible = false;

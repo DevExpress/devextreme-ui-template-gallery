@@ -1,6 +1,7 @@
 import {
   Component,
   NgModule,
+  OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -19,8 +20,10 @@ import {
   FormItemPhotoModule,
   FormItemUploaderModule,
 } from 'src/app/shared/components';
+import { ScreenService } from '../../../shared/services';
 import { newContact } from 'src/app/shared/types/contact';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'user-popup',
@@ -28,15 +31,32 @@ import { PhonePipeModule } from 'src/app/shared/phone.pipe';
   providers: [],
 })
 
-export class UserPopupComponent {
+export class UserPopupComponent implements OnInit {
   newUser = newContact;
 
   popupVisible = false;
 
+  popupFullScreen = false;
+
   isEditing = true;
 
-  constructor() {
+  screenSubscription: Subscription;
+
+  constructor(private screen: ScreenService) {
     this.closePopup = this.closePopup.bind(this);
+  }
+
+  ngOnInit(): void {
+    this.popupFullScreen = this.checkScreenSize();
+    this.screenSubscription = this.screen.changed.subscribe(() => this.updatePopup());
+  }
+
+  checkScreenSize() {
+    return this.screen.sizes['screen-small'] || this.screen.sizes['screen-x-small'];
+  }
+
+  updatePopup() {
+    this.popupFullScreen = this.checkScreenSize();
   }
 
   closePopup() {

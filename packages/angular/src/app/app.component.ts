@@ -1,6 +1,5 @@
 import { Component, HostBinding, OnDestroy, } from '@angular/core';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
-import Popup, { Properties } from "devextreme/ui/popup";
 
 @Component({
   selector: 'app-root',
@@ -13,12 +12,6 @@ export class AppComponent implements OnDestroy {
   }
 
   constructor(private authService: AuthService, private screen: ScreenService, public appInfo: AppInfoService) { 
-    Popup.defaultOptions<Properties>({
-      device: { deviceType: "phone" },
-      options: {
-          fullScreen: true,
-      },
-    });
   }
 
   isAuthenticated() {
