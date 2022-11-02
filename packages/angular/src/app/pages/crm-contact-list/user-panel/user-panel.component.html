@@ -2,7 +2,7 @@
   <div class="data-wrapper">
     <ng-container *ngIf="!isLoading">
       <div class="data-part">
-        <dx-toolbar>
+        <dx-toolbar class="panel-toolbar">
           <dxi-item location="before">
             <span class="contact-name value">{{ user.name }}</span>
           </dxi-item>
@@ -85,7 +85,7 @@
         </div>
 
         <div class="data-part data-part-toolbar border">
-          <dx-toolbar class="panel-toolbar">
+          <dx-toolbar>
             <dxi-item location="before" [visible]="!isEditing">
               <dx-button
                 text="Edit"
