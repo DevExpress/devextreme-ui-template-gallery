@@ -12,8 +12,8 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "devexpress-gantt": "^4.1.33",
-    "devextreme": "^22.1.5",
-    "devextreme-vue": "^22.1.5",
+    "devextreme": "22.2-next",
+    "devextreme-vue": "22.2-next",
     "dx-rwa-data": "^1.0.0",
     "exceljs": "^3.10.0",
     "file-saver-es": "^2.0.5",
