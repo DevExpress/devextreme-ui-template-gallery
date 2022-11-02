@@ -47,16 +47,12 @@ export class UserPopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.popupFullScreen = this.checkScreenSize();
+    this.popupFullScreen = this.screen.isSmallScreen();
     this.screenSubscription = this.screen.changed.subscribe(() => this.updatePopup());
   }
 
-  checkScreenSize() {
-    return this.screen.sizes['screen-small'] || this.screen.sizes['screen-x-small'];
-  }
-
   updatePopup() {
-    this.popupFullScreen = this.checkScreenSize();
+    this.popupFullScreen = this.screen.isSmallScreen();
   }
 
   closePopup() {

@@ -30,4 +30,8 @@ export class ScreenService {
       'screen-large': this.isLargeScreen(),
     };
   }
+
+  public isSmallScreen() {
+    return this.sizes['screen-small'] || this.sizes['screen-x-small'];
+  }
 }

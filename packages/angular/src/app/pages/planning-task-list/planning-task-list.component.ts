@@ -62,7 +62,7 @@ export class PlanningTaskListComponent implements OnInit {
         ([filteredTasks, allTasks]) => { return { allTasks, filteredTasks }  })
     );
 
-    this.popupFullScreen = this.checkScreenSize();
+    this.popupFullScreen = this.screen.isSmallScreen();
     this.screenSubscription = this.screen.changed.subscribe(() => this.updatePopup());
   }
 
@@ -74,12 +74,8 @@ export class PlanningTaskListComponent implements OnInit {
     this.displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
   };
 
-  checkScreenSize() {
-    return this.screen.sizes['screen-small'] || this.screen.sizes['screen-x-small'];
-  }
-
   updatePopup() {
-    this.popupFullScreen = this.checkScreenSize();
+    this.popupFullScreen = this.screen.isSmallScreen();;
   }
 
   closePopup() {
