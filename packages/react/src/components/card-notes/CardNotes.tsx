@@ -28,22 +28,23 @@ const Card = ({ note }: { note: Note }) => {
 export const CardNotes = ({ items, user }: { items: Notes | undefined; user: string | undefined }) => {
   const [noteText, setNoteText] = useState('');
   const [data, setData] = useState(items);
-  const onNoteTextChanged = useCallback((value) => {
-    setNoteText(value);
-  }, []);
+
   useEffect(() => {
     setData(items);
   }, [items]);
-  const send = useCallback(() => {
+
+  const add = useCallback(() => {
     if (noteText === '' || !data || !user) {
       return;
     }
     setData([...data, { manager: user, date: new Date(), text: noteText }]);
     setNoteText('');
   }, [noteText, data, user]);
-  const cancel = useCallback(() => {
-    setNoteText('');
+
+  const onNoteTextChanged = useCallback((value) => {
+    setNoteText(value);
   }, []);
+
   return (
     <div className='notes'>
       <div className='input-notes'>
@@ -53,13 +54,12 @@ export const CardNotes = ({ items, user }: { items: Notes | undefined; user: str
             location='after'
             widget='dxButton'
             options={{
-              text: 'Send',
+              text: 'Add',
               stylingMode: 'outlined',
               type: 'default',
-              onClick: send,
+              onClick: add,
             }}
           />
-          <Item location='after' widget='dxButton' options={{ text: 'Cancel', onClick: cancel }} />
         </Toolbar>
       </div>
 

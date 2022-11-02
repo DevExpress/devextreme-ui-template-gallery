@@ -40,7 +40,7 @@ export const PlanningTaskDetails = () => {
 
   return (
     <div className='view-wrapper-details'>
-      <Toolbar>
+      <Toolbar className='toolbar-details'>
         <ToolbarItem location='before'>
           <Button icon='arrowleft'></Button>
         </ToolbarItem>
