@@ -56,6 +56,7 @@ export const AnalyticsDashboard = () => {
         <Item
           location='before'
           widget='dxTabs'
+          locateInMenu='auto'
           options={{
             dataSource: Object.keys(ANALYTICS_PERIODS),
             selectedIndex: tabIndex,
