@@ -1,5 +1,15 @@
+@use "../../variables.scss" as *;
+
 .task-form {
   min-height: 300px;
+
+  .form-title {
+    font-size: 16px;
+  }
+
+  .dx-toolbar {
+    margin-bottom: $toolbar-margin-bottom;
+  }
 }
 
 .info {
