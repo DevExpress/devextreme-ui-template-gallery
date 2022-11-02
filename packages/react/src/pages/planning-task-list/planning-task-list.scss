@@ -11,11 +11,11 @@
 
   .dx-toolbar {
     margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
-
+  
     .toolbar-header {
       @include header();
     }
-
+  
     .dx-tabs .dx-tab {
       background-color: $background-color;
     }
