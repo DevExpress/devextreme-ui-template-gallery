@@ -34,13 +34,13 @@ const ListTemplate = (item: Activity) => {
   );
 };
 
-const ActivitiesList = ({ activities }) => {
+const ListActivities = ({ activities }) => {
   return (
     <List className='activities-list' dataSource={activities} scrollingEnabled={false} itemRender={ListTemplate} />
   );
 };
 
-const ActivitiesWithLoadPanel = withLoadPanel(ActivitiesList);
+const ActivitiesWithLoadPanel = withLoadPanel(ListActivities);
 
 export const CardActivities = ({ activities }: { activities: Activities | undefined }) => (
   <div className={classNames({ 'card-activities': true, load: !activities })}>
