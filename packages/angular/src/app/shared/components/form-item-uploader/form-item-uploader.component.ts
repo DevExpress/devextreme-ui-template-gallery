@@ -23,6 +23,7 @@ import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
       [multiple]="false"
       accept="image/*"
       uploadMode="instantly"
+      [showFileList]=false
       [visible]="false"
       (onDropZoneEnter)="onDropZoneEnter($event)"
       (onDropZoneLeave)="onDropZoneLeave($event)"
