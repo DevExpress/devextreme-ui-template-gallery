@@ -7,6 +7,7 @@ import SelectBox from 'devextreme-react/select-box';
 import DateBox from 'devextreme-react/date-box';
 import TextArea from 'devextreme-react/text-area';
 import TextBox from 'devextreme-react/text-box';
+import Validator from 'devextreme-react/validator';
 
 import { FormTextbox } from '../form-textbox/FormTextbox';
 
@@ -17,22 +18,24 @@ import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 
 import { Task } from '../../shared/types/task';
 
-const PriorityField = (data) => (
+const validationGroup = 'taskFormValidationGroup';
+
+const PriorityField = (data: string) => (
   <>
     <PriorityTask text={data}></PriorityTask>
     <TextBox readOnly></TextBox>
   </>
 );
 
-const StatusField = (data) => (
+const StatusField = (data: string) => (
   <>
     <StatusTask text={data}></StatusTask>
     <TextBox readOnly></TextBox>
   </>
 );
 
-const PriorityItem = (data) => <PriorityTask text={data}></PriorityTask>;
-const StatusItem = (data) => <StatusTask text={data}></StatusTask>;
+const PriorityItem = (data: string) => <PriorityTask text={data}></PriorityTask>;
+const StatusItem = (data: string) => <StatusTask text={data}></StatusTask>;
 
 export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boolean, data: Task, onDataChanged: (data) => void }) => {
   const updateCompany = (company) => {
@@ -58,7 +61,11 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
   };
 
   return (
-    <Form labelMode='floating' className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}>
+    <Form
+      labelMode='floating'
+      className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}
+      validationGroup={validationGroup}
+    >
       <GroupItem itemType='group' colCount={2}>
         <ColCountByScreen xs={2}></ColCountByScreen>
         <SimpleItem cssClass='accent'>
@@ -67,6 +74,7 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
             value={data.company}
             isEditing={!editing}
             onValueChange={updateCompany}
+            validationGroup={validationGroup}
           ></FormTextbox>
         </SimpleItem>
         <SimpleItem cssClass='accent'>
@@ -75,6 +83,7 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
             value={data.owner}
             isEditing={!editing}
             onValueChange={updateOwner}
+            validationGroup={validationGroup}
           ></FormTextbox>
         </SimpleItem>
         <SimpleItem>
@@ -118,6 +127,7 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
             displayFormat='MM/dd/y'
             onValueChange={updateStartDate}
           >
+            <Validator validationRules={[{ type: 'required' }]} validationGroup={validationGroup}></Validator>
           </DateBox>
         </SimpleItem>
         <SimpleItem>
@@ -133,6 +143,7 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
             displayFormat='MM/dd/y'
             onValueChange={updateDueDate}
           >
+            <Validator validationRules={[{ type: 'required' }]} validationGroup={validationGroup}></Validator>
           </DateBox>
         </SimpleItem>
       </GroupItem>

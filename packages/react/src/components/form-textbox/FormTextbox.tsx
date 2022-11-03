@@ -4,8 +4,8 @@ import TextBox from 'devextreme-react/text-box';
 import Validator from 'devextreme-react/validator';
 
 export const FormTextbox = ({
-  value, label, isEditing, onValueChange,
-}: { value: string, label: string, isEditing: boolean, onValueChange: (data) => void }) => {
+  value, label, isEditing, onValueChange, validationGroup
+}: { value: string, label: string, isEditing: boolean, onValueChange: (data) => void, validationGroup: string }) => {
   return (
     <TextBox
       label={label}
@@ -16,7 +16,7 @@ export const FormTextbox = ({
       stylingMode='filled'
       onValueChange={onValueChange}
     >
-      <Validator validationRules={[{ type: 'required' }]}></Validator>
+      <Validator validationRules={[{ type: 'required' }]} validationGroup={validationGroup}></Validator>
     </TextBox>
   );
 };
