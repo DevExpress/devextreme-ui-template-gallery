@@ -13,3 +13,4 @@ export { CardNotes } from './card-notes/CardNotes';
 export { CardMessages } from './card-messages/CardMessages';
 export { Avatar } from './avatar/Avatar';
 export { PlanningGantt } from './planning-gantt/PlanningGantt';
+export { ContactForm } from './contact-form/ContactForm';
