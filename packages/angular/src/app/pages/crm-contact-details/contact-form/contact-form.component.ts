@@ -18,6 +18,7 @@ import {
 } from 'src/app/shared/components';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
+import { ValidationRule } from 'devextreme/ui/validation_rules';
 
 @Component({
   selector: 'contact-form',
@@ -31,7 +32,7 @@ export class ContactFormComponent {
 
   isEditing = false;
 
-  zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
+  zipCodeValidator: ValidationRule[] = [{ type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' }];
 
   handleEditClick() {
     this.isEditing = true;
