@@ -9,8 +9,8 @@ export const navigation = [
         path: '/crm-contact-list',
       },
       {
-        text: 'Contact Form',
-        path: '/crm-contact-form',
+        text: 'Contact Details',
+        path: '/crm-contact-details',
       },
     ],
   },

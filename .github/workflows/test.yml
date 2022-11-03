@@ -44,7 +44,7 @@ jobs:
           { fullName: 'material.blue.dark.compact', name: 'material.dark' }
         ]
         ARGS: [
-          { project: 'angular', page: 'crm-contact-form' },
+          { project: 'angular', page: 'crm-contact-details' },
           { project: 'angular', page: 'crm-contact-list' },
           { project: 'angular', page: 'planning-task-details' },
           { project: 'angular', page: 'planning-task-list' },
@@ -54,7 +54,7 @@ jobs:
           # { project: 'react', page: 'crm-contact-list' },
           # { project: 'react', page: 'planning-task-details' },
           # { project: 'react', page: 'planning-task-list' },
-          # { project: 'vue', page: 'crm-contact-form' },
+          # { project: 'vue', page: 'crm-contact-details' },
           # { project: 'vue', page: 'crm-contact-list' },
         ]
     runs-on: ubuntu-latest
