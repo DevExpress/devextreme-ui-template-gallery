@@ -7,34 +7,34 @@
     gap: 20px;
     padding: 20px;
   }
-  
+
   .file-uploader {
     .dx-fileuploader-wrapper {
       padding: 0;
-  
+
       .dx-fileuploader-input-wrapper {
         padding: 0;
       }
     }
   }
-  
+
   .message-list {
     height: 320px;
   }
-  
+
   .messages-content {
     padding: 20px;
     border-top: 1px solid $base-border-color;
     background-color: $side-panel-background;
   }
-  
+
   .message-container {
     display: flex;
-  
+
     &:nth-child(odd) {
       flex-direction: row-reverse;
     }
-  
+
     .circle {
       width: 32px;
       height: 32px;
@@ -47,21 +47,21 @@
       align-items: center;
       justify-content: center;
     }
-  
+
     .message {
       background-color: $base-bg;
       padding: 10px;
       margin-bottom: 10px;
-  
+
       .message-title {
         @include message-title();
-  
+
         .subject {
           color: $base-text-color;
           font-weight: 700;
         }
       }
-  
+
       .message-text {
         @include message-text();
       }
