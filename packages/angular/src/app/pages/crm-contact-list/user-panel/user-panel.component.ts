@@ -15,24 +15,19 @@ import {
   DxAccordionModule,
   DxButtonModule,
   DxDropDownButtonModule,
-  DxTextBoxModule,
   DxToolbarModule,
   DxLoadPanelModule,
   DxScrollViewModule,
-  DxFormModule,
-  DxValidatorModule,
 } from 'devextreme-angular';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
 import {
   CardActivitiesModule,
   ContactStatusModule,
-  FormTextboxModule,
-  FormItemPhotoModule,
 } from 'src/app/shared/components';
+import { UserFormModule } from '../user-form/user-form.component';
 import { ScreenService, RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { Contact } from 'src/app/shared/types/contact';
-import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 
 @Component({
   selector: 'user-panel',
@@ -122,19 +117,14 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     DxAccordionModule,
     DxButtonModule,
     DxDropDownButtonModule,
-    DxTextBoxModule,
     DxToolbarModule,
     DxLoadPanelModule,
     DxScrollViewModule,
-    DxFormModule,
-    DxValidatorModule,
 
-    FormTextboxModule,
+    UserFormModule,
     CardActivitiesModule,
     ContactStatusModule,
-    FormItemPhotoModule,
     CommonModule,
-    PhonePipeModule,
   ],
   declarations: [UserPanelComponent],
   exports: [UserPanelComponent],

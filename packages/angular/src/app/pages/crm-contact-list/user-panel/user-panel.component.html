@@ -23,78 +23,7 @@
 
       <dx-scroll-view class="panel-scroll">
         <div class="data-part border">
-          <dx-form class="plain-styled-form"
-                   labelMode="floating"
-                   [class.view-mode]="!isEditing"
-          >
-            <dxi-item itemType="group" [colCount]="2" >
-              <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
-              <dxi-item cssClass="photo">
-                <div *dxTemplate>
-                  <form-item-photo [link]="user.image"></form-item-photo>
-                </div>
-              </dxi-item>
-
-              <dxi-item itemType="group">
-                <dxi-item cssClass="accent">
-                  <div *dxTemplate>
-                    <form-textbox label="Company"
-                                [(value)]="user.company"
-                                [isEditing]="isEditing"
-                    ></form-textbox>
-                  </div>
-                </dxi-item>
-
-                <dxi-item>
-                  <div *dxTemplate>
-                    <form-textbox label="Position"
-                                [(value)]="user.position"
-                                [isEditing]="isEditing"
-                    ></form-textbox>
-                  </div>
-                </dxi-item>
-
-                <dxi-item cssClass="accent">
-                  <div *dxTemplate>
-                    <form-textbox label="Assigned to"
-                                [(value)]="user.manager"
-                                [isEditing]="isEditing"
-                    ></form-textbox>
-                  </div>
-                </dxi-item>
-              </dxi-item>
-            </dxi-item>
-
-            <dxi-item itemType="group" cssClass="contact-fields-group">
-              <dxi-item>
-                <div *dxTemplate>
-                  <form-textbox [(value)]="user.phone"
-                              [isEditing]="isEditing"
-                              icon="tel"
-                              mask="+1(000)000-0000"
-                  ></form-textbox>
-                </div>
-              </dxi-item>
-              <dxi-item>
-                <div *dxTemplate>
-                  <form-textbox [(value)]="user.email"
-                              [isEditing]="isEditing"
-                              icon="email"
-                              [validators]="[{type: 'email'}]"
-                  ></form-textbox>
-                </div>
-              </dxi-item>
-              <dxi-item>
-                <div *dxTemplate>
-                  <form-textbox [(value)]="user.address"
-                              [isEditing]="isEditing"
-                              icon="home"
-                              [validators]="[]"
-                  ></form-textbox>
-                </div>
-              </dxi-item>
-            </dxi-item>
-          </dx-form>
+          <user-form [user]="user" [contentByScreen]="{ xs: 2, sm: 2 }"></user-form>
         </div>
 
         <div class="data-part data-part-toolbar border">

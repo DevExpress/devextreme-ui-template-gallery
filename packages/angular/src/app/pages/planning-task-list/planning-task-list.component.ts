@@ -6,14 +6,14 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-import { DxPopupModule } from 'devextreme-angular/ui/popup';
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
 import { taskPanelItems } from 'src/app/shared/types/resource';
 import { Task, newTask } from 'src/app/shared/types/task';
-import { RwaService, ScreenService } from 'src/app/shared/services';
-import { forkJoin, map, Observable, Subscription } from 'rxjs';
+import { RwaService } from 'src/app/shared/services';
+import { forkJoin, map, Observable } from 'rxjs';
 import { TaskFormModule } from '../planning-task-details/task-form/task-form.component';
+import { FormPopupModule, FormPopupComponent} from 'src/app/shared/components';
 import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
 import { TaskListKanbanModule, TaskListKanbanComponent } from './task-list-kanban/task-list-kanban.component';
 import { TaskListGanttComponent, TaskListGanttModule } from './task-list-gantt/task-list-gantt.component';
@@ -31,6 +31,8 @@ export class PlanningTaskListComponent implements OnInit {
 
   @ViewChild('planningKanban', { static: false }) kanban: TaskListKanbanComponent;
 
+  @ViewChild('taskPopup', { static: true }) taskPopup: FormPopupComponent;
+
   newTask = newTask;
 
   taskPanelItems = taskPanelItems;
@@ -43,15 +45,7 @@ export class PlanningTaskListComponent implements OnInit {
 
   taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
-  screenSubscription: Subscription;
-
-  popupVisible = false;
-
-  popupFullScreen = false;
-
-  constructor(private service: RwaService, private screen: ScreenService) {
-    this.closePopup = this.closePopup.bind(this);
-  }
+  constructor(private service: RwaService) { }
 
   ngOnInit(): void {
     this.taskCollections$ = forkJoin([
@@ -61,9 +55,6 @@ export class PlanningTaskListComponent implements OnInit {
       map(
         ([filteredTasks, allTasks]) => { return { allTasks, filteredTasks }  })
     );
-
-    this.popupFullScreen = this.screen.isSmallScreen();
-    this.screenSubscription = this.screen.changed.subscribe(() => this.updatePopup());
   }
 
   tabValueChange(e: TabsItemClickEvent) {
@@ -74,16 +65,8 @@ export class PlanningTaskListComponent implements OnInit {
     this.displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
   };
 
-  updatePopup() {
-    this.popupFullScreen = this.screen.isSmallScreen();;
-  }
-
-  closePopup() {
-    this.popupVisible = false;
-  }
-
   addTask = () => {
-    this.popupVisible = true;
+    this.taskPopup.popupVisible = true;
   };
 
   refresh = () => {
@@ -118,7 +101,7 @@ export class PlanningTaskListComponent implements OnInit {
     DxTabsModule,
     DxToolbarModule,
     DxLoadPanelModule,
-    DxPopupModule,
+    FormPopupModule,
 
     TaskFormModule,
     TaskListKanbanModule,

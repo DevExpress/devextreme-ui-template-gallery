@@ -128,40 +128,11 @@
     >
     </dx-load-panel>
   </ng-template>
-  <dx-popup
-    title="New Task"
-    [(visible)]="popupVisible"
-    [fullScreen]="popupFullScreen"
-    width="auto"
-    height="auto"
-  >
-
-    <dxi-toolbar-item
-      widget="dxButton"
-      toolbar="bottom"
-      location="after"
-      [options]="{
-        text: 'Save',
-        stylingMode: 'outlined',
-        type: 'default',
-        onClick: closePopup
-      }"
+  <form-popup
+    #taskPopup
+    titleText="New Task"
     >
-    </dxi-toolbar-item>
-
-    <dxi-toolbar-item
-      widget="dxButton"
-      toolbar="bottom"
-      location="after"
-      [options]="{
-        text: 'Cancel',
-        stylingMode: 'text',
-        type: 'default',
-        onClick: closePopup
-      }"
-    >
-    </dxi-toolbar-item>
-    <task-form [task]="newTask" [contentByScreen]="{ xs: 1, sm: 1 }"></task-form>
-  </dx-popup>
+      <task-form [task]="newTask" [contentByScreen]="{ xs: 1, sm: 1 }"></task-form>
+  </form-popup>
 </div>
 

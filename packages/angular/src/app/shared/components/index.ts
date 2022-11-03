@@ -22,3 +22,4 @@ export * from './form-datebox/form-datebox.component';
 export * from './form-item-photo/form-item-photo.component';
 export * from './form-textbox/form-textbox.component';
 export * from './form-item-uploader/form-item-uploader.component';
+export * from './form-popup/form-popup.component';
