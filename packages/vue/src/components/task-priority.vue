@@ -1,6 +1,6 @@
 <template>
   <div
-    class="priority"
+    class="task-priority"
     :class="'priority-' + props.value?.toLowerCase()"
   >
     <div class="separator" />
@@ -17,7 +17,7 @@ const props = withDefaults(
 );
 </script>
 <style scoped lang="scss">
-.priority {
+.task-priority {
   display: flex;
   align-items: center;
 

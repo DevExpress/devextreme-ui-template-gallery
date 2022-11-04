@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { DxTextArea } from 'devextreme-vue/text-area';
 import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
@@ -58,17 +58,28 @@ import type { Note } from '@/types/notes';
 import LoadComponent from '@/components/load-component.vue';
 
 const props = withDefaults(defineProps<{
-  contactName: string,
-  contactId: number | null,
+  user: string,
+  contactId?: number | null,
+  items?: Note[],
 }>(), {
   contactId: null,
-  contactName: '',
+  user: '',
 });
 
 const isLoading = ref(true);
 const items = ref<Note[]>([]);
 
 const nodeText = ref<string>('');
+
+watch(
+  () => props.items,
+  (newValue) => {
+    if (newValue && newValue.length > 0) {
+      items.value = newValue;
+      isLoading.value = false;
+    }
+  },
+);
 
 function defaultText() {
   nodeText.value = '';
@@ -78,9 +89,8 @@ function addNote() {
   if (nodeText.value === '') {
     return;
   }
-
   const newNote: Note = {
-    manager: props.contactName,
+    manager: props.user,
     date: new Date(),
     text: nodeText.value,
   };
@@ -101,7 +111,9 @@ async function loadData() {
 }
 
 onMounted(() => {
-  loadData();
+  if (props.contactId) {
+    loadData();
+  }
 });
 </script>
 
@@ -129,12 +141,12 @@ onMounted(() => {
   padding: 10px;
   margin-bottom: 10px;
 
-  &:deep(.note-title) {
+  .note-title {
     @include message-title();
   }
 
   .note-text {
-   @include message-text();
+    @include message-text();
   }
 }
 </style>

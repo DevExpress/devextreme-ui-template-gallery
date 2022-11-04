@@ -156,7 +156,7 @@
       </template>
 
       <template #statusCellTemplate="{ data }">
-        <contact-status :status="data.data?.status" />
+        <contact-status :value="data.data?.status" />
       </template>
     </dx-data-grid>
 
@@ -258,7 +258,6 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
     @include separator();
 
     .name-template {
-      margin: -6px 0;
 
       .position {
         font-size: 12px;
