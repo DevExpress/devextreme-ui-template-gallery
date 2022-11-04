@@ -5,7 +5,7 @@ import {
 import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
 
 @Component({
-  selector: 'form-item-photo-uploader',
+  selector: 'form-photo-uploader',
   template: `
     <div 
       id="uploader"
@@ -54,7 +54,7 @@ import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
     }
   `],
 })
-export class FormItemPhotoUploaderComponent { 
+export class FormPhotoUploaderComponent { 
   isDropZoneActive = false;
 
   onDropZoneEnter(e) {
@@ -68,7 +68,7 @@ export class FormItemPhotoUploaderComponent {
 
 @NgModule({
   imports: [CommonModule, DxFileUploaderModule],
-  declarations: [FormItemPhotoUploaderComponent],
-  exports: [FormItemPhotoUploaderComponent],
+  declarations: [FormPhotoUploaderComponent],
+  exports: [FormPhotoUploaderComponent],
 })
-export class FormItemPhotoUploaderModule { }
+export class FormPhotoUploaderModule { }

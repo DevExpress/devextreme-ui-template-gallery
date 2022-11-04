@@ -24,7 +24,7 @@ import {
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
 import {
   FormTextboxModule,
-  FormItemPhotoModule,
+  FormPhotoModule,
   CardActivitiesModule,
   ContactStatusModule,
 } from 'src/app/shared/components';
@@ -127,7 +127,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     DxValidatorModule,
 
     FormTextboxModule,
-    FormItemPhotoModule,
+    FormPhotoModule,
     CardActivitiesModule,
     ContactStatusModule,
     CommonModule,

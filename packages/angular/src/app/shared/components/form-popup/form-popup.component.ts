@@ -39,7 +39,7 @@ import {
     }
 
     ngOnDestroy(): void {
-        this.screenSubscription.unsubscribe();
+      this.screenSubscription.unsubscribe();
     }
   
     updatePopupByScreenSize() {

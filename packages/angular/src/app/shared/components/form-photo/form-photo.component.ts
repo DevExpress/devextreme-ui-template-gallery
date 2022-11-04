@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'form-item-photo',
+  selector: 'form-photo',
   template: `
   <div
     [ngStyle]="{
@@ -28,7 +28,7 @@ import {
     }
   `],
 })
-export class FormItemPhotoComponent implements OnInit {
+export class FormPhotoComponent implements OnInit {
   @Input() link: string;
 
   @Input() size?: number = 124;
@@ -42,7 +42,7 @@ export class FormItemPhotoComponent implements OnInit {
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [FormItemPhotoComponent],
-  exports: [FormItemPhotoComponent],
+  declarations: [FormPhotoComponent],
+  exports: [FormPhotoComponent],
 })
-export class FormItemPhotoModule { }
+export class FormPhotoModule { }
