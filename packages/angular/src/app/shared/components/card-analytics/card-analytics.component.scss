@@ -8,14 +8,16 @@
     border: 1px solid $base-border-color;
     overflow: hidden;
 
-    .overflow-menu {
-      position: absolute;
-      right: 10px;
-      left: auto;
-    }
-
     .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       padding: $content-padding;
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
     }
 
     .title {
@@ -46,7 +48,7 @@
       .content {
         border-top: 1px solid $base-border-color;
         padding: 0;
-        margin-bottom: $content-padding;
+        height: 286px;
       }
     }
 

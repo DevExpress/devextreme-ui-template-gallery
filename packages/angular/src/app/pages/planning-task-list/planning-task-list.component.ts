@@ -1,8 +1,7 @@
 import {
-  Component, OnInit, NgModule, ViewChild, OnDestroy,
+  Component, OnInit, NgModule, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
@@ -10,9 +9,11 @@ import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
 import { taskPanelItems } from 'src/app/shared/types/resource';
-import { Task } from 'src/app/shared/types/task';
+import { Task, newTask } from 'src/app/shared/types/task';
 import { RwaService } from 'src/app/shared/services';
-import { forkJoin, map, Observable, Subscription } from 'rxjs';
+import { forkJoin, map, Observable } from 'rxjs';
+import { TaskFormModule } from '../planning-task-details/task-form/task-form.component';
+import { FormPopupModule, FormPopupComponent} from 'src/app/shared/components';
 import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
 import { TaskListKanbanModule, TaskListKanbanComponent } from './task-list-kanban/task-list-kanban.component';
 import { TaskListGanttComponent, TaskListGanttModule } from './task-list-gantt/task-list-gantt.component';
@@ -23,14 +24,16 @@ import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
   styleUrls: ['./planning-task-list.component.scss'],
   providers: [RwaService],
 })
-export class PlanningTaskListComponent implements OnInit, OnDestroy {
+export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
 
   @ViewChild('planningGantt', { static: false }) gantt: TaskListGanttComponent;
 
   @ViewChild('planningKanban', { static: false }) kanban: TaskListKanbanComponent;
 
-  tasks: Task[];
+  @ViewChild('taskPopup', { static: true }) taskPopup: FormPopupComponent;
+
+  newTask = newTask;
 
   taskPanelItems = taskPanelItems;
 
@@ -40,12 +43,9 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
 
   displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
 
-  dataSubscription: Subscription = new Subscription();
-
   taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
-  constructor(private service: RwaService, private router: Router) {
-  }
+  constructor(private service: RwaService) { }
 
   ngOnInit(): void {
     this.taskCollections$ = forkJoin([
@@ -53,15 +53,8 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
       this.service.getTasks()
     ]).pipe(
       map(
-        ([filteredTasks, allTasks]) => { return { allTasks, filteredTasks } })
+        ([filteredTasks, allTasks]) => { return { allTasks, filteredTasks }  })
     );
-    this.dataSubscription = this.service.getTasks().subscribe((tasks) => {
-      this.tasks = tasks;
-    });
-  }
-
-  ngOnDestroy() {
-    this.dataSubscription.unsubscribe();
   }
 
   tabValueChange(e: TabsItemClickEvent) {
@@ -73,11 +66,7 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
   };
 
   addTask = () => {
-    if (this.displayGrid) {
-      this.dataGrid.addRow();
-    } else {
-      this.navigateToDetails();
-    }
+    this.taskPopup.popupVisible = true;
   };
 
   refresh = () => {
@@ -103,10 +92,6 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
   };
 
   exportDataGridToXSLX = () => this.dataGrid.onExportingToXLSX();
-
-  navigateToDetails = () => {
-    this.router.navigate(['/planning-task-details']);
-  };
 }
 
 @NgModule({
@@ -116,7 +101,9 @@ export class PlanningTaskListComponent implements OnInit, OnDestroy {
     DxTabsModule,
     DxToolbarModule,
     DxLoadPanelModule,
+    FormPopupModule,
 
+    TaskFormModule,
     TaskListKanbanModule,
     TaskListModule,
     TaskListGanttModule,

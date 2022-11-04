@@ -27,10 +27,6 @@ export class TaskListGanttComponent {
     this.gantt.instance.refresh();
   }
 
-  insertTask() {
-    this.gantt.instance.insertTask({});
-  }
-
   onExporting() {
     exportGanttToPdf(
       {

@@ -15,7 +15,6 @@ import {
   DxAccordionModule,
   DxButtonModule,
   DxDropDownButtonModule,
-  DxTextBoxModule,
   DxToolbarModule,
   DxLoadPanelModule,
   DxScrollViewModule,
@@ -24,15 +23,14 @@ import {
 } from 'devextreme-angular';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
 import {
+  FormTextboxModule,
+  FormPhotoModule,
   CardActivitiesModule,
   ContactStatusModule,
-  FormTextboxModule,
-  FormItemPhotoModule,
 } from 'src/app/shared/components';
 import { ScreenService, RwaService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { Contact } from 'src/app/shared/types/contact';
-import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 
 @Component({
   selector: 'user-panel',
@@ -46,8 +44,6 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
   @Input() userId: number;
 
   @Output() isOpenChange = new EventEmitter<boolean>();
-
-  validationGroup = 'userValidationGroup';
 
   user: Contact;
 
@@ -86,6 +82,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     this.userPanelSubscriptions.push(this.service.getContact(id).subscribe((data) => {
       this.user = data;
       this.isLoading = false;
+      this.isEditing = false;
     }));
   };
 
@@ -123,7 +120,6 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     DxAccordionModule,
     DxButtonModule,
     DxDropDownButtonModule,
-    DxTextBoxModule,
     DxToolbarModule,
     DxLoadPanelModule,
     DxScrollViewModule,
@@ -131,11 +127,10 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     DxValidatorModule,
 
     FormTextboxModule,
+    FormPhotoModule,
     CardActivitiesModule,
     ContactStatusModule,
-    FormItemPhotoModule,
     CommonModule,
-    PhonePipeModule,
   ],
   declarations: [UserPanelComponent],
   exports: [UserPanelComponent],

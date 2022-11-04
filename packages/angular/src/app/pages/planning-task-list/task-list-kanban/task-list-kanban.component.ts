@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, Input, SimpleChanges, OnChanges, ViewChild,
+  Component, NgModule, Input, SimpleChanges, OnChanges, ViewChild, Output, EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
@@ -26,6 +26,8 @@ export class TaskListKanbanComponent implements OnChanges {
   @ViewChild(DxSortableComponent, { static: false }) sortable: DxSortableComponent;
 
   @Input() dataSource: Task[];
+
+  @Output() addTaskEvent: EventEmitter<any> = new EventEmitter();
 
   kanbanDataSource: Board[] = [];
 
@@ -91,9 +93,9 @@ export class TaskListKanbanComponent implements OnChanges {
     toData.cards.splice(toIndex, 0, itemData);
   }
 
-  notify = (text: string) => {
-    notify(text);
-  };
+  addTask() {
+    this.addTaskEvent.emit();
+  }
 }
 
 @NgModule({
