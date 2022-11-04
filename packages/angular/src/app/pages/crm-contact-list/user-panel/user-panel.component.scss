@@ -47,6 +47,12 @@
     .data-part {
       padding: 0 16px;
 
+      .panel-toolbar {
+        ::ng-deep .dx-toolbar-items-container {
+          height: $toolbar-items-container-height;
+        }
+      }
+
       &.border {
         border-bottom: 1px solid $base-border-color;
       }
