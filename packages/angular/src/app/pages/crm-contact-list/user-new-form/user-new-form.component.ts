@@ -24,8 +24,6 @@ import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 export class UserNewFormComponent {
   newUser = newContact;
 
-  isEditing = true;
-
   constructor() { }
 }
 
