@@ -69,23 +69,30 @@
                 :read-only="!isEditing"
                 :element-attr="{class: 'form-editor'}"
                 :input-attr="{class: 'form-editor-input'}"
+                styling-mode="filled"
                 field-template="field"
                 item-template="item"
               >
-                <template #field>
+                <template #field="{ data }">
                   <div class="status-editor-field">
-                    <contact-status
-                      :status="contactData?.status"
-                      class="contact-status"
+                    <span class="status-indicator">
+                      <contact-status
+                        :value="contactData?.status"
+                        :show-text="false"
+                      />
+                    </span>
+                    <dx-text-box
+                      :read-only="true"
+                      :hover-state-enabled="false"
+                      :input-attr="{
+                        // eslint-disable-next-line max-len
+                        class: `status-editor-input contact-status status-${data?.toLowerCase()}`}"
+                      :value="data"
                     />
-                    <dx-text-box :read-only="true" />
                   </div>
                 </template>
                 <template #item="{ data }">
-                  <contact-status
-                    :status="data"
-                    class="contact-status"
-                  />
+                  <contact-status :value="data" />
                 </template>
               </dx-select-box>
             </dx-form-item>
@@ -304,19 +311,19 @@ function cancelEdit() {
 .info {
   position: relative;
   padding-bottom: 30px;
-
-  contact-status {
-    position: absolute;
-    margin-top: 20px;
-  }
 }
 
 .status-editor-field {
-  .contact-status {
-    position: absolute;
-    bottom: 0;
-    font-size: 13px;
-    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 2px);
+  display: flex;
+
+  :deep(.status-indicator) {
+    display: flex;
+    align-self: flex-end;
+    padding-left: $list-padding-left;
+  }
+
+  :deep(.status-editor-input) {
+    padding-left: 0;
   }
 }
 </style>

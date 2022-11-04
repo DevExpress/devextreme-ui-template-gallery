@@ -22,8 +22,15 @@ export const Header = ({ menuToggleEnabled, title, toggleMenu, className }: Head
         <Item location='after' locateInMenu='auto'>
           <TextBox placeholder='Search' width={180} mode='search' stylingMode='outlined'></TextBox>
         </Item>
+        <Item location='after'>
+          <div className='messages'>
+            <div className='dx-icon-message'>
+              <div className='dx-badge'>4</div>
+            </div>
+          </div>
+        </Item>
         <Item location='after' locateInMenu='auto' menuItemTemplate='userPanelTemplate'>
-          <Button className='user-button authorization' width={160} height='100%' stylingMode='text'>
+          <Button className='user-button authorization' width={160} height={38} stylingMode='text'>
             <UserPanel menuMode='context' />
           </Button>
         </Item>
