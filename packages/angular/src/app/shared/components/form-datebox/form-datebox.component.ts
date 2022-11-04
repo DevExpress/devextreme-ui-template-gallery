@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
                            stylingMode="filled"
                            placeholder="MM/dd/y"
                            displayFormat="MM/dd/y"
+                           pickerType="calendar"
   ></dx-date-box>`,
 })
 export class FormDateboxComponent {

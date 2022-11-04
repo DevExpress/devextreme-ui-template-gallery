@@ -16,7 +16,7 @@ import {
   CardActivitiesModule,
   ContactStatusModule,
 } from 'src/app/shared/components';
-import { Contact, contactStatusList, ContactStatus } from 'src/app/shared/types/contact';
+import { Contact, contactStatusList, ContactStatus, } from 'src/app/shared/types/contact';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
@@ -25,6 +25,11 @@ import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { jsPDF } from 'jspdf';
 import { UserPanelModule } from './user-panel/user-panel.component';
+import { UserNewFormModule } from './user-new-form/user-new-form.component';
+import {
+  FormPopupModule,
+  FormPopupComponent,
+} from 'src/app/shared/components/'
 
 type FilterContactStatus = ContactStatus | 'All';
 
@@ -35,6 +40,8 @@ type FilterContactStatus = ContactStatus | 'All';
 })
 export class CrmContactListComponent implements OnInit, OnDestroy {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
+
+  @ViewChild('userPopup', { static: true }) userPopup: FormPopupComponent;
 
   statusList = contactStatusList;
 
@@ -61,8 +68,8 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     this.dataSubscription.unsubscribe();
   }
 
-  addRow = () => {
-    this.dataGrid.instance.addRow();
+  addContact() {
+    this.userPopup.popupVisible = true;
   };
 
   refresh = () => {
@@ -140,7 +147,8 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     DxTextBoxModule,
 
     UserPanelModule,
-
+    UserNewFormModule,
+    FormPopupModule,
     CardActivitiesModule,
     ContactStatusModule,
 

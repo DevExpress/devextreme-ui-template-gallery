@@ -8,6 +8,7 @@ import {
   DxLoadPanelModule,
   DxSelectBoxModule,
   DxTextBoxModule,
+  DxTextAreaModule,
   DxToolbarModule,
   DxValidatorModule,
 } from 'devextreme-angular';
@@ -19,7 +20,6 @@ import {
 } from 'src/app/shared/components';
 import { taskPriorityList, taskStatusList } from 'src/app/shared/types/task';
 import { Task } from 'src/app/shared/types/task';
-import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
 
 @Component({
   selector: 'task-form',
@@ -29,18 +29,22 @@ import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
 export class TaskFormComponent implements OnChanges {
   @Input() task: Task;
 
+  @Input() contentByScreen: { xs: number, sm: number }
+
+  isEditing = false;
+
   statusList = taskStatusList;
 
   priorityList = taskPriorityList;
 
-  isEditing = false;
-
   isLoading = true;
-
-  validationGroup = 'contactFormValidationGroup';
 
   ngOnChanges(changes: SimpleChanges) {
     this.isLoading = !changes.task.currentValue;
+
+    if (!this.isLoading) {
+      this.isEditing = !this.task?.text;
+    }
   }
 
   handleEditClick = () => {
@@ -63,8 +67,8 @@ export class TaskFormComponent implements OnChanges {
     DxLoadPanelModule,
     DxSelectBoxModule,
     DxTextBoxModule,
-    DxToolbarModule,
     DxTextAreaModule,
+    DxToolbarModule,
     DxValidatorModule,
 
     FormTextboxModule,
