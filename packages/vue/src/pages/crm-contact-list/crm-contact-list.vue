@@ -60,7 +60,7 @@
             text: 'Add Contact',
             type: 'default',
             stylingMode: 'contained',
-            onClick: addRow
+            onClick: addContact
           }"
         />
 
@@ -167,6 +167,14 @@
       @close="isPanelOpen = false"
     />
   </div>
+
+  <form-popup
+    title="New Contact"
+    v-model:is-visible="isAddContactPopupOpened"
+    @save="onSaveUserNewForm"
+  >
+    <user-new-form :validation-group="newUserValidationGroup" />
+  </form-popup>
 </template>
 
 <script setup lang="ts">
@@ -195,14 +203,21 @@ import DataSource from 'devextreme/data/data_source';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { formatPhone } from '@/utils/formatters';
 import ContactStatus from '@/components/contact-status.vue';
+import FormPopup from '@/components/form-popup.vue';
+import validationEngine from 'devextreme/ui/validation_engine';
+import UserNewForm from './components/user-new-form.vue';
 import ContactPanel from './components/contact-panel.vue';
 
+const filterStatusList = ['All', ...contactStatusList];
+type FilterContactStatus = typeof filterStatusList[number];
+
+const newUserValidationGroup = 'new-user';
 const panelData = ref<Array<Contact> | null>(null);
 const isPanelOpen = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
 
-const filterStatusList = ['All', ...contactStatusList];
-type FilterContactStatus = typeof filterStatusList[number];
+const isAddContactPopupOpened = ref(false);
+
 const dataSource = new DataSource({
   key: 'id',
   load: () => getContacts(),
@@ -215,8 +230,8 @@ const rowClick = (e: RowClickEvent) => {
   }
 };
 
-const addRow = () => {
-  dataGrid.value?.instance.addRow();
+const addContact = () => {
+  isAddContactPopupOpened.value = true;
 };
 
 const filterByStatus = (e: SelectionChangedEvent) => {
@@ -241,6 +256,12 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
   }
 
   return formatPhone(value.toString());
+};
+
+const onSaveUserNewForm = () => {
+  if (validationEngine.validateGroup(newUserValidationGroup).isValid) {
+    isAddContactPopupOpened.value = false;
+  }
 };
 </script>
 

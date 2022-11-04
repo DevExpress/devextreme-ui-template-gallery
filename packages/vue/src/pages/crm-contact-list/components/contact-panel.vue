@@ -48,7 +48,7 @@
                   css-class="photo-row"
                 >
                   <dx-form-item css-class="photo-box">
-                    <user-photo :link="panelData.image" />
+                    <form-photo :link="panelData.image" />
                   </dx-form-item>
 
                   <dx-form-group-item>
@@ -221,7 +221,7 @@ import {
 } from 'devextreme-vue/form';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
-import UserPhoto from '@/components/user-photo.vue';
+import FormPhoto from '@/components/form-photo.vue';
 import UserStatus from '@/components/contact-status.vue';
 import { screenInfo } from '@/utils/media-query';
 import { formatPrice } from '@/utils/formatters';
