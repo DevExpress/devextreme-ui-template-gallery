@@ -10,7 +10,7 @@ import {
 } from 'devextreme-angular';
 import {
   FormTextboxModule,
-  FormItemUploaderModule,
+  FormItemPhotoUploaderModule,
 } from 'src/app/shared/components';
 import { newContact } from 'src/app/shared/types/contact';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
@@ -34,7 +34,7 @@ export class UserNewFormComponent {
     DxValidatorModule,
 
     FormTextboxModule,
-    FormItemUploaderModule,
+    FormItemPhotoUploaderModule,
 
     CommonModule,
     PhonePipeModule,

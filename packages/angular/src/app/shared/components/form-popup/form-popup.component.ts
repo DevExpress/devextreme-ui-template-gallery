@@ -35,14 +35,14 @@ import {
   
     ngOnInit(): void {
       this.popupFullScreen = this.screen.isSmallScreen();
-      this.screenSubscription = this.screen.changed.subscribe(() => this.updatePopup());
+      this.screenSubscription = this.screen.changed.subscribe(() => this.updatePopupByScreenSize());
     }
 
     ngOnDestroy(): void {
         this.screenSubscription.unsubscribe();
     }
   
-    updatePopup() {
+    updatePopupByScreenSize() {
       this.popupFullScreen = this.screen.isSmallScreen();
     }
   
