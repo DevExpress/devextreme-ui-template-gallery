@@ -1,7 +1,6 @@
 import {
   Component,
   NgModule,
-  Input,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -10,27 +9,22 @@ import {
   DxValidatorModule,
 } from 'devextreme-angular';
 import {
-  CardActivitiesModule,
-  ContactStatusModule,
   FormTextboxModule,
-  FormItemPhotoModule,
   FormItemUploaderModule,
 } from 'src/app/shared/components';
-import { Contact } from 'src/app/shared/types/contact';
+import { newContact } from 'src/app/shared/types/contact';
 import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 
 @Component({
-  selector: 'user-form',
-  templateUrl: './user-form.component.html',
+  selector: 'user-new-form',
+  templateUrl: './user-new-form.component.html',
   providers: [],
 })
 
-export class UserFormComponent {
-  @Input() user: Contact;
+export class UserNewFormComponent {
+  newUser = newContact;
 
-  @Input() contentByScreen: { xs: number, sm: number };
-
-  isEditing = false;
+  isEditing = true;
 
   constructor() { }
 }
@@ -42,15 +36,12 @@ export class UserFormComponent {
     DxValidatorModule,
 
     FormTextboxModule,
-    CardActivitiesModule,
-    ContactStatusModule,
-    FormItemPhotoModule,
     FormItemUploaderModule,
 
     CommonModule,
     PhonePipeModule,
   ],
-  declarations: [UserFormComponent],
-  exports: [UserFormComponent],
+  declarations: [UserNewFormComponent],
+  exports: [UserNewFormComponent],
 })
-export class UserFormModule { }
+export class UserNewFormModule { }

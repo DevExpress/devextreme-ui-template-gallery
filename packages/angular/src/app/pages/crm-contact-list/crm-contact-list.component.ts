@@ -16,7 +16,7 @@ import {
   CardActivitiesModule,
   ContactStatusModule,
 } from 'src/app/shared/components';
-import { Contact, contactStatusList, ContactStatus, newContact } from 'src/app/shared/types/contact';
+import { Contact, contactStatusList, ContactStatus, } from 'src/app/shared/types/contact';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { CommonModule } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
@@ -25,7 +25,7 @@ import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { jsPDF } from 'jspdf';
 import { UserPanelModule } from './user-panel/user-panel.component';
-import { UserFormModule } from './user-form/user-form.component';
+import { UserNewFormModule } from './user-new-form/user-new-form.component';
 import {
   FormPopupModule,
   FormPopupComponent,
@@ -50,8 +50,6 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
   isPanelOpen = false;
 
   userId: number;
-
-  newUser = newContact;
 
   dataSource: Contact[];
 
@@ -149,7 +147,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     DxTextBoxModule,
 
     UserPanelModule,
-    UserFormModule,
+    UserNewFormModule,
     FormPopupModule,
     CardActivitiesModule,
     ContactStatusModule,
