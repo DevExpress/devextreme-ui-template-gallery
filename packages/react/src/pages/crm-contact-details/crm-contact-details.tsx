@@ -5,7 +5,15 @@ import Button from 'devextreme-react/button';
 import DropDowmButton from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 
-import { ContactForm, ToolbarDetails, CardActivities, CardNotes, CardMessages, CardTasks } from '../../components';
+import {
+  ContactForm,
+  ToolbarDetails,
+  CardActivities,
+  CardNotes,
+  CardMessages,
+  CardTasks,
+  CardOpportunities
+} from '../../components';
 
 import { Contact } from '../../shared/types/crm-contact';
 import { withLoadPanel } from '../../shared/utils/withLoadPanel';
@@ -14,8 +22,8 @@ import {
   getContact,
   getContactNotes,
   getContactMessages,
-  // getActiveContactOpportunities,
-  // getClosedContactOpportunities
+  getActiveContactOpportunities,
+  getClosedContactOpportunities
 } from 'dx-rwa-data';
 
 import './crm-contact-details.scss';
@@ -24,12 +32,15 @@ const CONTACT_ID = 12;
 
 const ContactFormWithLoadPanel = withLoadPanel(ContactForm);
 const CardTasksWithLoadPanel = withLoadPanel(CardTasks);
+const CardOpportunitiesWithLoadPanel = withLoadPanel(CardOpportunities);
 
 export const CRMContactDetails = () => {
   const [data, setData] = useState<Contact>();
   const [messagesCount, setMessagesCount] = useState(0);
   const [notes, setNotes] = useState();
   const [messages, setMessages] = useState([]);
+  const [activeOpportunities, setActiveOpportunities] = useState();
+  const [closedOpportunities, setClosedOpportunities] = useState();
 
   useEffect(() => {
     Promise.all([
@@ -45,7 +56,15 @@ export const CRMContactDetails = () => {
         .then((data) => {
           setMessages(data);
           setMessagesCount(data.length);
-        })
+        }),
+      getActiveContactOpportunities(CONTACT_ID)
+        .then((data) => {
+          setActiveOpportunities(data);
+        }),
+      getClosedContactOpportunities(CONTACT_ID)
+        .then((data) => {
+          setClosedOpportunities(data);
+        }),
     ]).catch((error) => console.log(error));
   }, []);
 
@@ -125,11 +144,22 @@ export const CRMContactDetails = () => {
               <TabPanelItem title='Activities'>
                 <CardActivities activities={data?.activities} />
               </TabPanelItem>
+              <TabPanelItem title='Opportunities'>
+                <CardOpportunitiesWithLoadPanel
+                  loading={!activeOpportunities || !closedOpportunities}
+                  active={activeOpportunities}
+                  closed={closedOpportunities}
+                  panelProps={{
+                    container: '.card-opportunies',
+                    position: { of: '.card-opportunies' },
+                  }}
+                />
+              </TabPanelItem>
               <TabPanelItem title='Notes'>
-                <CardNotes items={notes} user={data?.name}></CardNotes>
+                <CardNotes items={notes} user={data?.name} />
               </TabPanelItem>
               <TabPanelItem title='Messages' badge={messagesCount}>
-                <CardMessages items={messages} user={data?.name} updateMessagesCount={updateMessagesCount}></CardMessages>
+                <CardMessages items={messages} user={data?.name} updateMessagesCount={updateMessagesCount} />
               </TabPanelItem>
             </TabPanel>
           </div>
