@@ -16,7 +16,6 @@ import {
 } from '../../components';
 
 import { Contact } from '../../shared/types/crm-contact';
-import { withLoadPanel } from '../../shared/utils/withLoadPanel';
 
 import {
   getContact,
@@ -31,8 +30,6 @@ import './crm-contact-details.scss';
 const CONTACT_ID = 12;
 
 // const ContactFormWithLoadPanel = withLoadPanel(ContactForm);
-const CardTasksWithLoadPanel = withLoadPanel(CardTasks);
-const CardOpportunitiesWithLoadPanel = withLoadPanel(CardOpportunities);
 
 export const CRMContactDetails = () => {
   const [data, setData] = useState<Contact>();
@@ -132,27 +129,17 @@ export const CRMContactDetails = () => {
           <div className='dx-card'>
             <TabPanel showNavButtons deferRendering={false}>
               <TabPanelItem title='Tasks'>
-                <CardTasksWithLoadPanel
+                <CardTasks
                   tasks={data?.tasks}
-                  loading={!data}
-                  panelProps={{
-                    container: '.card-tasks',
-                    position: { of: '.card-tasks' },
-                  }}
                 />
               </TabPanelItem>
               <TabPanelItem title='Activities'>
                 <CardActivities activities={data?.activities} />
               </TabPanelItem>
               <TabPanelItem title='Opportunities'>
-                <CardOpportunitiesWithLoadPanel
-                  loading={!activeOpportunities || !closedOpportunities}
+                <CardOpportunities
                   active={activeOpportunities}
                   closed={closedOpportunities}
-                  panelProps={{
-                    container: '.card-opportunies',
-                    position: { of: '.card-opportunies' },
-                  }}
                 />
               </TabPanelItem>
               <TabPanelItem title='Notes'>

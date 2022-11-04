@@ -6,6 +6,8 @@ import { formatNumber } from 'devextreme/localization';
 
 import { Opportunities } from '../../shared/types/card-opportunities';
 
+import { withLoadPanel } from '../../shared/utils/withLoadPanel';
+
 import './CardOpportunities.scss';
 
 const addOpportunity = () => {
@@ -15,7 +17,7 @@ const format = (item: number) => {
   return formatNumber(item, { type: 'currency', precision: 2 });
 };
 
-const CardsTemplate = ({ items, title }: { items: Opportunities, title: string}) => (
+const CardTemplate = ({ items, title }: { items: Opportunities, title: string}) => (
   <div className='opportunities-block'>
     <div className='dx-form-group-caption'>{title}</div>
     <div className='opportunities-container'>
@@ -36,22 +38,38 @@ const CardsTemplate = ({ items, title }: { items: Opportunities, title: string})
   </div>
 );
 
-export const CardOpportunities = ({ active, closed }: { active: Opportunities, closed: Opportunities }) => {
+const Cards = ({ active, closed }: { active: Opportunities, closed: Opportunities }) => (
+  <>
+    <Button
+      text='Add Opportunity'
+      icon='add'
+      width={300}
+      height={115}
+      stylingMode='outlined'
+      type='default'
+      className='add-tile'
+      onClick={addOpportunity}
+    ></Button>
+
+    <CardTemplate title='Active' items={active} />
+    <CardTemplate title='Closed' items={closed} />
+  </>
+);
+
+const CardsWithLoadPanel = withLoadPanel(Cards);
+
+export const CardOpportunities = ({ active, closed }: { active?: Opportunities, closed?: Opportunities }) => {
   return (
     <div className='card-opportunies'>
-      <Button
-        text='Add Opportunity'
-        icon='add'
-        width={300}
-        height={115}
-        stylingMode='outlined'
-        type='default'
-        className='add-tile'
-        onClick={addOpportunity}
-      ></Button>
-
-      <CardsTemplate title='Active' items={active} />
-      <CardsTemplate title='Closed' items={closed} />
+      <CardsWithLoadPanel
+        active={active}
+        closed={closed}
+        loading={!active || !closed}
+        panelProps={{
+          container: '.card-opportunies',
+          position: { of: '.card-opportunies' }
+        }}
+      />
     </div>
   );
 };
