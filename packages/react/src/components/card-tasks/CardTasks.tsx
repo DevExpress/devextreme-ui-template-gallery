@@ -4,9 +4,11 @@ import DataGrid, { Selection, RowDragging, Column } from 'devextreme-react/data-
 
 import { RowDraggingReorderEvent } from 'devextreme/ui/data_grid';
 
+import { Task } from '../../shared/types/task';
+
 import './CardTasks.scss';
 
-export const CardTasks = ({ tasks }) => {
+export const CardTasks = ({ tasks }: { tasks: Task[] }) => {
   const [gridData, setGridData] = useState(tasks.filter((item) => !!item.status && !!item.priority));
 
   const onReorder = useCallback((e: RowDraggingReorderEvent) => {

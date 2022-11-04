@@ -1,6 +1,6 @@
 import { Activities } from './card-activities';
 import { Task } from './task';
-import { Opportunities } from './oportunities';
+import { Opportunities } from './card-opportunities';
 
 export const contactStatusList = [
   'Salaried',

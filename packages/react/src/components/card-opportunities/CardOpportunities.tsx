@@ -4,16 +4,18 @@ import Button from 'devextreme-react/button';
 import notify from 'devextreme/ui/notify';
 import { formatNumber } from 'devextreme/localization';
 
+import { Opportunities } from '../../shared/types/card-opportunities';
+
 import './CardOpportunities.scss';
 
 const addOpportunity = () => {
   notify('Add opportunity event');
 };
-const format = (item) => {
+const format = (item: number) => {
   return formatNumber(item, { type: 'currency', precision: 2 });
 };
 
-const CardsTemplate = ({ items, title }) => (
+const CardsTemplate = ({ items, title }: { items: Opportunities, title: string}) => (
   <div className='opportunities-block'>
     <div className='dx-form-group-caption'>{title}</div>
     <div className='opportunities-container'>
@@ -22,7 +24,7 @@ const CardsTemplate = ({ items, title }) => (
           <div className='opportunity'>
             <div className='name'>{item.name}</div>
             <div className='product-info'>
-              Products: {item.products}, total: <span className='total'>{format(item)}</span>
+              Products: {item.products}, total: <span className='total'>{format(item.total)}</span>
             </div>
             <div className='owner'>
               Owner: <span className='owner-name'>{item.manager}</span>
@@ -34,7 +36,7 @@ const CardsTemplate = ({ items, title }) => (
   </div>
 );
 
-export const CardOpportunities = ({ active, closed }) => {
+export const CardOpportunities = ({ active, closed }: { active: Opportunities, closed: Opportunities }) => {
   return (
     <div className='card-opportunies'>
       <Button
