@@ -1,40 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
-import Toolbar, { Item } from 'devextreme-react/toolbar';
+import { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import DropDowmButton from 'devextreme-react/drop-down-button';
+import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 
-import { ContactForm } from '../../components';
+import { ContactForm, ToolbarDetails, CardActivities, CardNotes, CardMessages, CardTasks } from '../../components';
 
 import { Contact } from '../../shared/types/crm-contact';
 import { withLoadPanel } from '../../shared/utils/withLoadPanel';
 
-import { getContact } from 'dx-rwa-data';
+import {
+  getContact,
+  getContactNotes,
+  getContactMessages,
+  // getActiveContactOpportunities,
+  // getClosedContactOpportunities
+} from 'dx-rwa-data';
 
 import './crm-contact-details.scss';
 
 const CONTACT_ID = 12;
 
 const ContactFormWithLoadPanel = withLoadPanel(ContactForm);
+const CardTasksWithLoadPanel = withLoadPanel(CardTasks);
 
 export const CRMContactDetails = () => {
   const [data, setData] = useState<Contact>();
+  const [messagesCount, setMessagesCount] = useState(0);
+  const [notes, setNotes] = useState();
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    getContact(CONTACT_ID)
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => console.log(error));
+    Promise.all([
+      getContact(CONTACT_ID)
+        .then((data) => {
+          setData(data);
+        }),
+      getContactNotes(CONTACT_ID)
+        .then((data) => {
+          setNotes(data);
+        }),
+      getContactMessages(CONTACT_ID)
+        .then((data) => {
+          setMessages(data);
+          setMessagesCount(data.length);
+        })
+    ]).catch((error) => console.log(error));
+  }, []);
+
+  const updateMessagesCount = useCallback((count) => {
+    setMessagesCount(count);
   }, []);
 
   return (
     <div className='view-wrapper-contact-details'>
-      <Toolbar className='toolbar-contact-details'>
-        <Item location='before'>
-          <Button icon='arrowleft'></Button>
-        </Item>
-        <Item location='before' cssClass='contact-name-toolbar-item' text={data ? data.name : 'Loading...'}></Item>
+      <ToolbarDetails name={data?.name}>
         <Item location='after' locateInMenu='auto'>
           <Button
             text='Terminate'
@@ -74,7 +95,7 @@ export const CRMContactDetails = () => {
             // onClick: refresh
           }}
         ></Item>
-      </Toolbar>
+      </ToolbarDetails>
 
       <div className='panels'>
         <div className='left'>
@@ -89,7 +110,29 @@ export const CRMContactDetails = () => {
         </div>
 
         <div className='right'>
-
+          <div className='dx-card'>
+            <TabPanel showNavButtons deferRendering={false}>
+              <TabPanelItem title='Tasks'>
+                <CardTasksWithLoadPanel
+                  tasks={data?.tasks}
+                  loading={!data}
+                  panelProps={{
+                    container: '.card-tasks',
+                    position: { of: '.card-tasks' },
+                  }}
+                />
+              </TabPanelItem>
+              <TabPanelItem title='Activities'>
+                <CardActivities activities={data?.activities} />
+              </TabPanelItem>
+              <TabPanelItem title='Notes'>
+                <CardNotes items={notes} user={data?.name}></CardNotes>
+              </TabPanelItem>
+              <TabPanelItem title='Messages' badge={messagesCount}>
+                <CardMessages items={messages} user={data?.name} updateMessagesCount={updateMessagesCount}></CardMessages>
+              </TabPanelItem>
+            </TabPanel>
+          </div>
         </div>
       </div>
     </div>

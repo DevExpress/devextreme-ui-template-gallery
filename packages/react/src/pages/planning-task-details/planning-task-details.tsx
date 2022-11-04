@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
-import Button from 'devextreme-react/button';
+import { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 
-import { TaskForm, CardActivities, CardNotes, CardMessages } from '../../components';
+import { TaskForm, CardActivities, CardNotes, CardMessages, ToolbarDetails } from '../../components';
 
 import { Task } from '../../shared/types/task';
 
@@ -40,11 +39,7 @@ export const PlanningTaskDetails = () => {
 
   return (
     <div className='view-wrapper-details'>
-      <Toolbar className='toolbar-details'>
-        <ToolbarItem location='before'>
-          <Button icon='arrowleft'></Button>
-        </ToolbarItem>
-        <ToolbarItem location='before' text={task?.text}></ToolbarItem>
+      <ToolbarDetails name={task?.text}>
         <ToolbarItem location='after' locateInMenu='auto'>
           <DropDownButton text='ACTIONS' stylingMode='contained'>
             <DropDownItem text='Duplicate'></DropDownItem>
@@ -73,7 +68,7 @@ export const PlanningTaskDetails = () => {
             onClick: refresh,
           }}
         ></ToolbarItem>
-      </Toolbar>
+      </ToolbarDetails>
       <div className='panels'>
         <div className='left'>{task && <TaskForm task={task}></TaskForm>}</div>
         <div className='right'>

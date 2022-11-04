@@ -7,14 +7,6 @@
   flex-grow: 1;
   padding: 20px 16px 0 16px;
 
-  .toolbar-details {
-    margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
-
-    .dx-toolbar-label > div {
-      @include header();
-    }
-  }
-
   .panels {
     display: flex;
     flex-wrap: wrap;
