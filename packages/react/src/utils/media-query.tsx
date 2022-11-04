@@ -37,9 +37,10 @@ export const useScreenSizeClass = () => {
 };
 
 let handlers: Handle[] = [];
-const xSmallMedia = window.matchMedia('(max-width: 599.99px)');
-const smallMedia = window.matchMedia('(min-width: 600px) and (max-width: 959.99px)');
-const mediumMedia = window.matchMedia('(min-width: 960px) and (max-width: 1279.99px)');
+
+const xSmallMedia = window.matchMedia('(max-width: 599.98px)');
+const smallMedia = window.matchMedia('(min-width: 600px) and (max-width: 959.98px)');
+const mediumMedia = window.matchMedia('(min-width: 960px) and (max-width: 1279.98px)');
 const largeMedia = window.matchMedia('(min-width: 1280px)');
 
 [xSmallMedia, smallMedia, mediumMedia, largeMedia].forEach((media) => {
