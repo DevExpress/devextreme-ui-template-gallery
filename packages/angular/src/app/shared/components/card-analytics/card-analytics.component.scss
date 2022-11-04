@@ -2,7 +2,6 @@
 
 :host {
   .card {
-    padding: 16px;
     border-radius: 4px;
     box-shadow: none;
     position: relative;
@@ -16,12 +15,15 @@
       top: 10px;
     }
 
+    .header {
+      padding: $content-padding;
+    }
+
     .title {
       color: $base-text-color;
       line-height: 19px;
       font-weight: 500;
       font-size: 16px;
-      margin-bottom: 20px;
       display: inline-block;
       padding-right: 25px;
     }
@@ -40,7 +42,18 @@
       }
     }
 
+    &.grid {
+
+      .content {
+        border-top: 1px solid $base-border-color;
+        padding: 0;
+        margin-bottom: $content-padding;
+      }
+    }
+
     .content {
+      box-sizing: content-box;
+      padding: 0 $content-padding $content-padding;
       color: $texteditor-label-color;
       font-size: 14px;
       line-height: 17px;

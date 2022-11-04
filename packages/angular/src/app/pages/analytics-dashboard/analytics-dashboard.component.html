@@ -29,7 +29,7 @@
       class="grey"
       titleText="Revenue Total"
       [isLoading]="!salesTotal"
-      contentClass="revenue-total" 
+      contentClass="revenue-total"
     >
     <div *ngIf="salesTotal">
       <div class="total">
@@ -114,7 +114,7 @@
     </card-analytics>
     <card-analytics
       titleText="Revenue Analysis"
-      contentClass="sales-by-state"
+      contentClass="sales-by-state grid"
       [isLoading]="!salesByState"
     >
       <dx-data-grid [dataSource]="salesByState" [height]="270">

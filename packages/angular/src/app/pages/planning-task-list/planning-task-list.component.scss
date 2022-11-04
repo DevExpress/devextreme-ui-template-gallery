@@ -7,10 +7,10 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 16px 0 16px;
 
   .dx-toolbar {
-    margin-bottom: $toolbar-margin-bottom;
+    padding: 16px;
+    border-bottom: 1px solid $base-border-color;
 
     &::ng-deep {
       .toolbar-header {
