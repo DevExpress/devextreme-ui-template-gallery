@@ -51,6 +51,7 @@
         <task-form
           :data="taskData"
           :is-editing="false"
+          :contentByScreen="{ xs: 2, sm: 2 }"
           :is-loading="isLoading && !taskData.name"
         />
       </div>
@@ -107,7 +108,7 @@ import type { Task } from '@/types/task';
 import CardNotes from '@/components/card-notes.vue';
 import CardActivities from '@/components/card-activities.vue';
 import CardMessages from '@/components/card-messages.vue';
-import TaskForm from './components/task-form.vue';
+import TaskForm from '../components/task-form.vue';
 
 const taskId = 1;
 const taskName = ref('');

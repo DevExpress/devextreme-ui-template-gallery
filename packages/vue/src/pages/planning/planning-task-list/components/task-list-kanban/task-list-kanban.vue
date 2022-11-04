@@ -44,7 +44,7 @@
               icon="plus"
               text="Add Task"
               styling-mode="text"
-              @click="notify('Add task event')"
+              @click="addTask"
             />
           </div>
         </dx-scroll-view>
@@ -74,6 +74,8 @@ const props = withDefaults(defineProps<{
 }>(), {
   tasks: () => [],
 });
+
+const emit = defineEmits(['add-task']);
 
 const statuses = taskStatusList;
 const boardMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
@@ -122,8 +124,8 @@ function onTaskDrop(e: ReorderEvent | AddEvent) {
   toData.cards.splice(toIndex, 0, itemData);
 }
 
-const notify = (text: string) => {
-  notify(text);
+const addTask = (text: string) => {
+  emit('add-task');
 };
 </script>
 
