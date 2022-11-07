@@ -6,10 +6,11 @@ import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { DxRangeSelectorModule } from 'devextreme-angular/ui/range-selector';
-import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+
+import { ValueChangedEvent } from 'devextreme/viz/range_selector';
 
 import { CommonModule, formatDate } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
@@ -42,7 +43,7 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
 
   constructor(private service: RwaService) { }
 
-  formatDate(dateTime: Date) {
+  formatDate(dateTime: string | number | Date) {
     return formatDate(dateTime, 'YYYY-MM-dd', 'en');
   }
   selectionChange(e: SelectionChangedEvent) {
@@ -55,7 +56,7 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
     );
   }
 
-  onRangeChanged = (e) => {
+  onRangeChanged = (e: ValueChangedEvent) => {
     const [startDate, endDate] = e.value;
     this.subscriptions
       .push(
@@ -104,7 +105,6 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [
-    DxButtonModule,
     DxToolbarModule,
     DxPieChartModule,
     DxChartModule,

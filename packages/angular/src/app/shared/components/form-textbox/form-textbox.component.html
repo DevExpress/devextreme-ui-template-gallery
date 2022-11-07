@@ -7,7 +7,7 @@
              stylingMode="filled"
              valueChangeEvent="keyup input change"
 >
-  <dx-validator [validationRules]="validators || [{type: 'required'}]" [validationGroup]="validationGroup"></dx-validator>
+  <dx-validator [validationRules]="validators"></dx-validator>
   <dxi-button *ngIf="icon"
               [options]="{icon: icon, type: 'back', elementAttr: { class: 'form-editor-icon' }}"
               name="icon"

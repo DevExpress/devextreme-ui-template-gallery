@@ -6,12 +6,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 0 4px rgba(0, 0, 0, 0.15);
 }
 
-:host-context(.dx-theme-generic) {
-  .dx-toolbar {
-    padding: 10px 0;
-  }
-}
-
 header {
   padding: 10px 0;
   background-color: $base-bg;
@@ -22,6 +16,10 @@ header {
 
   .header-toolbar {
     padding-right: 20px;
+
+    ::ng-deep .dx-toolbar-items-container {
+      height: $toolbar-items-container-height;
+    }
 
     .user-button.authorization {
       margin-left: 10px;
