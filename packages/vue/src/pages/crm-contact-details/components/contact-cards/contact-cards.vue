@@ -23,7 +23,7 @@
 
       <dx-tab-item title="Notes">
         <card-notes
-          :contact-name="props.contactName"
+          :user="props.contactName"
           :contact-id="props.contactId"
         />
       </dx-tab-item>
@@ -33,7 +33,7 @@
         :badge="messages?.length + ''"
       >
         <card-messages
-          :contact-name="props.contactName"
+          :user="props.contactName"
           :messages="messages"
           :is-loading="isMessagesLoading"
         />
@@ -49,7 +49,7 @@ import { DxItem as DxTabItem } from 'devextreme-vue/tabs';
 import type { Task } from '@/types/task';
 import type { Activity } from '@/types/activities';
 import type { Message } from '@/types/messages';
-import ContactActivities from '@/components/contact-activities.vue';
+import ContactActivities from '@/components/card-activities.vue';
 import CardNotes from '@/components/card-notes.vue';
 import CardMessages from '@/components/card-messages.vue';
 // eslint-disable-next-line import/no-unresolved

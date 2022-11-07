@@ -57,17 +57,17 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
 
   position: PositionConfig;
 
-  lodingHeight: number;
+  loadingHeight: number;
 
   constructor(private el: ElementRef) {
   }
 
   ngOnInit(): void {
-    this.position = { 
+    this.position = {
       of: `.${this.contentClass + (!this.isGreyCard() ? ' .content' : ' .title')}`,
       at: (!this.isGreyCard() ? 'center' : 'right'),
     };
-    this.lodingHeight = !this.isGreyCard() ? 60 : 50;
+    this.loadingHeight = !this.isGreyCard() ? 60 : 50;
 
     if (!this.isGreyCard() && this.component) {
       this.resizeObserverSubscription = new ResizeObservable(this.observedElement)

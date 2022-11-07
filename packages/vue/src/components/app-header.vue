@@ -43,7 +43,6 @@
         </div>
       </dx-item>
       <dx-item
-        css-class="toolbar-user-items"
         location="after"
         locate-in-menu="auto"
         menu-item-template="menuUserItem"
@@ -132,11 +131,14 @@ const userMenuItems = [{
 <style scoped lang="scss">
 @use "../variables" as *;
 
+:global(.dx-theme-generic header .dx-toolbar.header-toolbar) {
+  padding: 10px 0;
+}
+
 header {
   flex: 0 0 auto;
   z-index: 1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 0 4px rgba(0, 0, 0, 0.15);
-
   padding: 10px 0;
   background-color: $base-bg;
 

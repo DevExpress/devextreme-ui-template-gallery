@@ -16,7 +16,7 @@
         location="after"
         locate-in-menu="auto"
         css-class="add-grid-row"
-      >
+      ><div>
         <dx-button
           icon="plus"
           text="Add Task"
@@ -24,8 +24,8 @@
           styling-mode="contained"
           @click="addDataGridRow"
         />
+      </div>
       </dx-toolbar-item>
-
       <dx-toolbar-item
         location="after"
         locate-in-menu="auto"

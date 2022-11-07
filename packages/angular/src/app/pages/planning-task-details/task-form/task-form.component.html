@@ -1,8 +1,8 @@
 <div id="task-form">
-  <dx-toolbar>
+  <dx-toolbar [visible]="!!task?.text">
     <dxi-item location="before"
-      ><span class="form-title">Details</span></dxi-item
-    >
+      ><span class="dx-form-group-caption">Details</span>
+    </dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
       <dx-button
         text="Edit"
@@ -30,99 +30,117 @@
   </dx-toolbar>
 
   <dx-form *ngIf="!isLoading"
-           validationGroup="taskFormValidationGroup"
            class="plain-styled-form"
            [class.view-mode]="!isEditing"
            labelMode="floating"
   >
-    <dxi-item itemType="group" [colCount]="2">
-      <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
-      <dxi-item cssClass="accent">
-        <form-textbox label="Company"
-                     [(value)]="task.company"
-                     [isEditing]="isEditing"
-                     [validationGroup]="validationGroup"
+    <dxi-item [visible]="!task.text">
+      <div *dxTemplate>
+        <form-textbox label="Subject"
+            [(value)]="task.text"
+            [isEditing]="isEditing"
         ></form-textbox>
+      </div>
+    </dxi-item>
+    <dxi-item itemType="group">
+      <dxo-col-count-by-screen [xs]="contentByScreen.xs" [sm]="contentByScreen.sm" [md]="2" [lg]="2"></dxo-col-count-by-screen>
+      <dxi-item cssClass="accent">
+        <div *dxTemplate>
+          <form-textbox label="Company"
+                      [(value)]="task.company"
+                      [isEditing]="isEditing"
+          ></form-textbox>
+      </div>
       </dxi-item>
 
       <dxi-item cssClass="accent">
-        <form-textbox label="Assigned to"
-                     [(value)]="task.owner"
-                     [isEditing]="isEditing"
-                     [validationGroup]="validationGroup"
-        ></form-textbox>
+        <div *dxTemplate>
+          <form-textbox label="Assigned to"
+                      [(value)]="task.owner"
+                      [isEditing]="isEditing"
+          ></form-textbox>
+        </div>
       </dxi-item>
 
       <dxi-item>
-        <dx-select-box label="Priority"
-                       [(value)]="task.priority"
-                       [items]="priorityList"
-                       [readOnly]="!isEditing"
-                       [elementAttr]="{class: 'form-editor'}"
-                       stylingMode="filled"
-                       fieldTemplate="field"
-        >
-          <div *dxTemplate="let data of 'field'">
-            <div>
-              <task-priority [value]="task.priority"></task-priority>
-              <dx-text-box [readOnly]="true"></dx-text-box>
+        <div *dxTemplate>
+          <dx-select-box label="Priority"
+                        [(value)]="task.priority"
+                        [items]="priorityList"
+                        [readOnly]="!isEditing"
+                        [elementAttr]="{class: 'form-editor'}"
+                        stylingMode="filled"
+                        fieldTemplate="field"
+          >
+            <div *dxTemplate="let data of 'field'">
+              <div>
+                <task-priority [value]="task.priority"></task-priority>
+                <dx-text-box [readOnly]="true"></dx-text-box>
+              </div>
             </div>
-          </div>
 
-          <div *dxTemplate="let data of 'item'">
-            <task-priority [value]="data"></task-priority>
-          </div>
-        </dx-select-box>
-      </dxi-item>
-
-      <dxi-item>
-        <dx-select-box label="Status"
-                       [(value)]="task.status"
-                       [items]="statusList"
-                       [readOnly]="!isEditing"
-                       [elementAttr]="{class: 'form-editor'}"
-                       stylingMode="filled"
-                       fieldTemplate="field"
-        >
-          <div *dxTemplate="let data of 'field'">
-            <div>
-              <task-status [value]="task.status"></task-status>
-              <dx-text-box [readOnly]="true"></dx-text-box>
+            <div *dxTemplate="let data of 'item'">
+              <task-priority [value]="data"></task-priority>
             </div>
-          </div>
-
-          <div *dxTemplate="let data of 'item'">
-            <task-status [value]="data"></task-status>
-          </div>
-        </dx-select-box>
+          </dx-select-box>
+        </div>
       </dxi-item>
 
       <dxi-item>
-        <form-item-date
-          label="Start Date"
-          text="Set Start Date"
-          [isEditing]="isEditing"
-          [(value)]="task.startDate"
-        ></form-item-date>
+        <div *dxTemplate>
+          <dx-select-box label="Status"
+                        [(value)]="task.status"
+                        [items]="statusList"
+                        [readOnly]="!isEditing"
+                        [elementAttr]="{class: 'form-editor'}"
+                        stylingMode="filled"
+                        fieldTemplate="field"
+          >
+            <div *dxTemplate="let data of 'field'">
+              <div>
+                <task-status [value]="task.status"></task-status>
+                <dx-text-box [readOnly]="true"></dx-text-box>
+              </div>
+            </div>
+
+            <div *dxTemplate="let data of 'item'">
+              <task-status [value]="data"></task-status>
+            </div>
+          </dx-select-box>
+        </div>
       </dxi-item>
 
       <dxi-item>
-        <form-item-date
-          label="Due Date"
-          text="Set Due Date"
-          [isEditing]="isEditing"
-          [(value)]="task.dueDate"
-        ></form-item-date>
+        <div *dxTemplate>
+          <form-item-date
+            label="Start Date"
+            text="Set Start Date"
+            [isEditing]="isEditing"
+            [(value)]="task.startDate"
+          ></form-item-date>
+        </div>
+      </dxi-item>
+
+      <dxi-item>
+        <div *dxTemplate>
+          <form-item-date
+            label="Due Date"
+            text="Set Due Date"
+            [isEditing]="isEditing"
+            [(value)]="task.dueDate"
+          ></form-item-date>
+        </div>
       </dxi-item>
     </dxi-item>
-
-    <dxi-item [colSpan]="2">
-      <dx-text-area label="Details"
-                    [readOnly]="!isEditing"
-                    [(value)]="task.description"
-                    [elementAttr]="{class: 'form-editor'}"
-                    stylingMode="filled"
-      ></dx-text-area>
+    <dxi-item>
+      <div *dxTemplate>
+        <dx-text-area label="Details"
+                      [readOnly]="!isEditing"
+                      [(value)]="task.description"
+                      [elementAttr]="{class: 'form-editor'}"
+                      stylingMode="filled"
+        ></dx-text-area>
+      </div>
     </dxi-item>
   </dx-form>
 

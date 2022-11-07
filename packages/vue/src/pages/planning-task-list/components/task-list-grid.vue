@@ -182,7 +182,7 @@ import type { RowPreparedEvent } from 'devextreme/ui/data_grid';
 import { taskPriorityList as priorityList, taskStatusList as statusList } from '@/types/task';
 import { Workbook } from 'exceljs';
 import TaskStatus from '@/components/task-status.vue';
-import TaskPriority from './components/task-priority.vue';
+import TaskPriority from '@/components/task-priority.vue';
 
 const props = withDefaults(defineProps<{
   dataSource: Task[] | null

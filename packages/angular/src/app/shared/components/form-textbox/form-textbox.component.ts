@@ -5,6 +5,7 @@ import {
   DxTextBoxModule,
   DxValidatorModule
 } from "devextreme-angular";
+import { ValidationRule } from 'devextreme/ui/validation_rules';
 
 @Component({
   selector: 'form-textbox',
@@ -22,9 +23,7 @@ export class FormTextboxComponent {
 
   @Input() icon: string = null;
 
-  @Input() validationGroup: string = undefined;
-
-  @Input() validators: any[] = [];
+  @Input() validators: ValidationRule[] = [{ type: 'required' }];
 
   @Input() value!: string;
 

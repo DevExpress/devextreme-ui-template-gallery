@@ -30,6 +30,28 @@ export type Contact = {
     phone: string,
     email: string,
     image: string,
-     zipCode: string,
+    zipCode: string,
     activities: Activities,
 };
+
+export const newContact: Contact = { 
+  name: '',
+  firstName: '',
+  lastName: '',
+  status: 'Salaried',
+  position: '',
+  manager: '',
+  company: '',
+  city: '',
+  state: {
+    stateShort: '',
+  },
+  phone: '',
+  email: '',
+  image: '',
+  address: '',
+  zipCode: '',
+  activities: [],
+  opportunities: [],
+  tasks: [],
+}

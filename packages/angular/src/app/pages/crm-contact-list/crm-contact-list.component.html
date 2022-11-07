@@ -46,7 +46,7 @@
           icon="plus"
           type="default"
           stylingMode="contained"
-          (onClick)="addRow()"
+          (onClick)="addContact()"
         ></dx-button>
       </dxi-item>
       <dxi-item
@@ -138,4 +138,12 @@
   </dx-data-grid>
 
   <user-panel [userId]="userId" [(isOpen)]="isPanelOpen"></user-panel>
+
+  <form-popup
+    #userPopup
+    titleText="New Contact"
+    >
+
+    <user-new-form></user-new-form>
+  </form-popup>
 </div>
