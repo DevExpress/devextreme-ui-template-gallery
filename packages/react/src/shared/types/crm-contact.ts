@@ -1,14 +1,9 @@
 import { Activities } from './card-activities';
 import { Task } from './task';
 import { Opportunities } from './card-opportunities';
+import { CONTACT_STATUS_LIST } from '../constants';
 
-export const contactStatusList = [
-  'Salaried',
-  'Commission',
-  'Terminated',
-] as const;
-
-export type ContactStatus = (typeof contactStatusList)[number];
+export type ContactStatus = (typeof CONTACT_STATUS_LIST)[number];
 
 interface State {
     stateShort: string;

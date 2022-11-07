@@ -13,49 +13,40 @@ import LoadPanel from 'devextreme-react/load-panel';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
 
+import { ContactStatus } from '../../components';
+
 import { getContacts } from 'dx-rwa-data';
 
-import { contactStatusList, ContactStatus } from '../../shared/types/crm-contact';
+import { ContactStatus as ContactStatusType } from '../../shared/types/crm-contact';
+import { CONTACT_STATUS_LIST } from '../../shared/constants';
 
 import './crm-contact-list.scss';
 
-type FilterContactStatus = ContactStatus | 'All Contacts';
+type FilterContactStatus = ContactStatusType | 'All Contacts';
 
-const cellNameRender = (cell: ColumnCellTemplateData) => (
+const CellNameRender = (cell: ColumnCellTemplateData) => (
   <div className='name-template'>
     <div>{cell.data.name}</div>
     <div className='position'>{cell.data.position}</div>
   </div>
 );
 
-const cellStatusRender = (cell: ColumnCellTemplateData) => (
-  <div>
-    <span className={`status status-${cell.data.status.toLowerCase()}`}>{cell.data.status}</span>
-  </div>
-);
-
-const statusRender = (data: string) => (
-  <div>
-    <span className={`status status-${data.toLowerCase()}`}>{data}</span>
-  </div>
-);
-
-const fieldRender = (data: string) => (
-  <div>
-    {data && statusRender(data)}
+const FieldRender = (text: string) => (
+  <>
+    <ContactStatus text={text} />
     <TextBox readOnly />
-  </div>
+  </>
 );
 
-const editCellStatusRender = () => (
-  <SelectBox className='cell-info' dataSource={contactStatusList} itemRender={statusRender} fieldRender={fieldRender} />
+const EditCellStatusRender = () => (
+  <SelectBox className='cell-info' dataSource={CONTACT_STATUS_LIST} itemRender={ContactStatus} fieldRender={FieldRender} />
 );
 
 const cellPhoneRender = (cell: ColumnCellTemplateData) => (
   String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3')
 );
 
-const filterStatusList = ['All Contacts', ...contactStatusList];
+const filterStatusList = ['All Contacts', ...CONTACT_STATUS_LIST];
 
 export const CRMContactList = () => {
   const [status, setStatus] = useState(filterStatusList[0]);
@@ -135,9 +126,9 @@ export const CRMContactList = () => {
               <Item name='columnChooserButton' locateInMenu='auto'></Item>
               <Item name='searchPanel' locateInMenu='auto'></Item>
             </Toolbar>
-            <Column dataField='name' caption='Name' sortOrder='asc' hidingPriority={5} minWidth={150} cellRender={cellNameRender}></Column>
+            <Column dataField='name' caption='Name' sortOrder='asc' hidingPriority={5} minWidth={150} cellRender={CellNameRender}></Column>
             <Column dataField='company' caption='Company' hidingPriority={5} minWidth={150}></Column>
-            <Column dataField='status' caption='Status' dataType='string' hidingPriority={3} minWidth={100} cellRender={cellStatusRender} editCellRender={editCellStatusRender}></Column>
+            <Column dataField='status' caption='Status' dataType='string' hidingPriority={3} minWidth={100} cellRender={ContactStatus} editCellRender={EditCellStatusRender}></Column>
             <Column dataField='assignedTo' caption='Assigned to' hidingPriority={4}></Column>
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender}></Column>
             <Column dataField='email' caption='Email' hidingPriority={1}></Column>

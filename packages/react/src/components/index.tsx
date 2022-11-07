@@ -17,3 +17,4 @@ export { ContactForm } from './contact-form/ContactForm';
 export { ToolbarDetails } from './toolbar-details/ToolbarDetails';
 export { CardTasks } from './card-tasks/CardTasks';
 export { CardOpportunities } from './card-opportunities/CardOpportunities';
+export { ContactStatus } from './contact-status/ContactStatus';

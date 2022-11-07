@@ -1,0 +1,46 @@
+@use "../../variables.scss" as *;
+@use "sass:math";
+
+.status-contact {
+    font-size: 13px;
+
+    &::before {
+      $diameter: 10px;
+
+      content: " ";
+      width: $diameter;
+      height: $diameter;
+      border-radius: math.div($diameter, 2);
+      margin-right: math.div($diameter, 2);
+      display: inline-block;
+    }
+
+    &.input {
+      display: block;
+      padding: 15px 16px 14px;
+    }
+
+    &.status-commission {
+      color: $base-accent;
+
+      &::before {
+        background-color: $base-accent;
+      }
+    }
+
+    &.status-salaried {
+      color: #2eb52c;
+
+      &::before {
+        background-color: #2eb52c;
+      }
+    }
+
+    &.status-terminated {
+      color: #de8e8c;
+
+      &::before {
+        background-color: #de8e8c;
+      }
+    }
+  }

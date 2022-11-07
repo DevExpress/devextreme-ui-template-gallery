@@ -6,7 +6,7 @@ import DropDowmButton from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 
 import {
-  // ContactForm,
+  ContactForm,
   ToolbarDetails,
   CardActivities,
   CardNotes,
@@ -28,8 +28,6 @@ import {
 import './crm-contact-details.scss';
 
 const CONTACT_ID = 12;
-
-// const ContactFormWithLoadPanel = withLoadPanel(ContactForm);
 
 export const CRMContactDetails = () => {
   const [data, setData] = useState<Contact>();
@@ -123,14 +121,9 @@ export const CRMContactDetails = () => {
 
       <div className='panels'>
         <div className='left'>
-          {/* <ContactFormWithLoadPanel
-            loading={!data}
+          <ContactForm
             data={data}
-            panelProps={{
-              container: '.contact-form',
-              position: { of: '.contact-form' },
-            }}
-          /> */}
+          ></ContactForm>
         </div>
 
         <div className='right'>

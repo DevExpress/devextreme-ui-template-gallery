@@ -3,9 +3,17 @@ import React from 'react';
 import TextBox from 'devextreme-react/text-box';
 import Validator from 'devextreme-react/validator';
 
-export const FormTextbox = ({
-  value, label, isEditing, onValueChange, validationGroup
-}: { value: string, label: string, isEditing: boolean, onValueChange: (data) => void, validationGroup: string }) => {
+interface TextboxProps {
+  value: string,
+  label: string,
+  isEditing: boolean,
+  onValueChange: (data) => void,
+  validationGroup?: string,
+  validators?: any[],
+  mask?: string,
+}
+
+export const FormTextbox = ({ value, label, isEditing, onValueChange, validationGroup, validators, mask = '' }: TextboxProps) => {
   return (
     <TextBox
       label={label}
@@ -15,8 +23,9 @@ export const FormTextbox = ({
       inputAttr={{ class: 'form-editor-input' }}
       stylingMode='filled'
       onValueChange={onValueChange}
+      mask={mask}
     >
-      <Validator validationRules={[{ type: 'required' }]} validationGroup={validationGroup}></Validator>
+      <Validator validationRules={validators || [{ type: 'required' }]} validationGroup={validationGroup}></Validator>
     </TextBox>
   );
 };
