@@ -13,6 +13,10 @@ import './CardOpportunities.scss';
 const addOpportunity = () => {
   notify('Add opportunity event');
 };
+const opportunityClick = () => {
+  notify('Click opportunity event');
+};
+
 const format = (item: number) => {
   return formatNumber(item, { type: 'currency', precision: 2 });
 };
@@ -23,7 +27,7 @@ const CardTemplate = ({ items, title }: { items: Opportunities, title: string}) 
     <div className='opportunities-container'>
       {items.map((item) => (
         <div key={item.name} className='opportunities'>
-          <div className='opportunity'>
+          <div onClick={opportunityClick} className='opportunity'>
             <div className='name'>{item.name}</div>
             <div className='product-info'>
               Products: {item.products}, total: <span className='total'>{format(item.total)}</span>

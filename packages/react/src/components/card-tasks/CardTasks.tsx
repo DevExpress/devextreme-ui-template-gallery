@@ -10,6 +10,8 @@ import { Task } from '../../shared/types/task';
 
 import './CardTasks.scss';
 
+const selectionFilter = [['done', '=', true]];
+
 const Grid = ({ tasks }) => {
   const [gridData, setGridData] = useState(tasks);
 
@@ -20,9 +22,9 @@ const Grid = ({ tasks }) => {
 
     setGridData([
       ...gridData.slice(0, fromIndex),
-      ...gridData.slice(fromIndex + 1, toIndex),
+      ...gridData.slice(fromIndex + 1, toIndex + 1),
       e.itemData,
-      ...gridData.slice(toIndex)
+      ...gridData.slice(toIndex + 1)
     ]);
   }, [gridData]);
 
@@ -30,7 +32,7 @@ const Grid = ({ tasks }) => {
     <DataGrid
       dataSource={gridData}
       columnAutoWidth
-      selectionFilter={['done', '=', true]}
+      selectionFilter={selectionFilter}
     >
       <Selection mode='multiple' deferred></Selection>
 
