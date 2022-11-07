@@ -9,8 +9,7 @@
   flex-grow: 1;
 
   .dx-toolbar {
-    padding: 16px;
-    border-bottom: 1px solid $base-border-color;
+    padding: 20px $content-padding $content-padding;
 
     &::ng-deep {
       .toolbar-header {
@@ -22,6 +21,10 @@
       }
     }
   }
+}
+
+.gantt, .kanban {
+  padding: 0 $content-padding;
 }
 
 .view-wrapper {
