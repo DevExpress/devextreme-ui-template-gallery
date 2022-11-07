@@ -38,8 +38,8 @@ const Card = ({ data, user }: { data: Message; user: string }) => (
   </div>
 );
 
-export const CardMessages = ({ items, user, updateMessagesCount }: {
-  items: Messages | undefined; user: string | undefined; updateMessagesCount: (count: number) => void
+export const CardMessages = ({ items, user, onMessagesCountChanged }: {
+  items?: Messages; user?: string; onMessagesCountChanged: (count: number) => void
 }) => {
   const [messages, setMessages] = useState(items);
   const [title, setTitle] = useState('');
@@ -56,8 +56,8 @@ export const CardMessages = ({ items, user, updateMessagesCount }: {
     setMessages([...messages, { manager: user, date: new Date(), text: message, subject: title }]);
     setTitle('');
     setMessage('');
-    updateMessagesCount(messages.length + 1);
-  }, [message, title, messages, user, updateMessagesCount]);
+    onMessagesCountChanged(messages.length + 1);
+  }, [message, title, messages, user, onMessagesCountChanged]);
 
   const onTitleChanged = useCallback((value) => {
     setTitle(value);
@@ -93,7 +93,7 @@ export const CardMessages = ({ items, user, updateMessagesCount }: {
       <ScrollView className='message-list'>
         <div className='messages-content'>
           {user && messages?.map((message, index) => (
-            <Card key={index} data={message} user={user}></Card>
+            <Card key={index} data={message} user={user} />
           ))}
         </div>
       </ScrollView>

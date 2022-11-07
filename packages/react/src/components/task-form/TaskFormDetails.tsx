@@ -20,22 +20,22 @@ import { Task } from '../../shared/types/task';
 
 const validationGroup = 'taskFormValidationGroup';
 
-const PriorityField = (data: string) => (
+const renderPriorityField = (data: string) => (
   <>
     <PriorityTask text={data}></PriorityTask>
     <TextBox readOnly></TextBox>
   </>
 );
 
-const StatusField = (data: string) => (
+const renderStatusField = (data: string) => (
   <>
     <StatusTask text={data}></StatusTask>
     <TextBox readOnly></TextBox>
   </>
 );
 
-const PriorityItem = (data: string) => <PriorityTask text={data}></PriorityTask>;
-const StatusItem = (data: string) => <StatusTask text={data}></StatusTask>;
+const renderPriorityItem = (data: string) => <PriorityTask text={data}></PriorityTask>;
+const renderStatusItem = (data: string) => <StatusTask text={data}></StatusTask>;
 
 export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boolean, data: Task, onDataChanged: (data) => void }) => {
   const updateCompany = (company) => {
@@ -94,8 +94,8 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
             readOnly={!editing}
             elementAttr={{ class: 'form-editor' }}
             stylingMode='filled'
-            fieldRender={PriorityField}
-            itemRender={PriorityItem}
+            fieldRender={renderPriorityField}
+            itemRender={renderPriorityItem}
             onValueChange={updatePriority}
           >
           </SelectBox>
@@ -108,8 +108,8 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
             readOnly={!editing}
             elementAttr={{ class: 'form-editor' }}
             stylingMode='filled'
-            fieldRender={StatusField}
-            itemRender={StatusItem}
+            fieldRender={renderStatusField}
+            itemRender={renderStatusItem}
             onValueChange={updateStatus}
           >
           </SelectBox>

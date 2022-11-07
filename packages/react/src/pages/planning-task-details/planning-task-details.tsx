@@ -28,7 +28,7 @@ export const PlanningTaskDetails = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const updateMessagesCount = useCallback((count) => {
+  const onMessagesCountChanged = useCallback((count) => {
     setMessagesCount(count);
   }, []);
 
@@ -86,7 +86,7 @@ export const PlanningTaskDetails = () => {
                 <CardNotes items={task?.notes} user={task?.owner}></CardNotes>
               </TabPanelItem>
               <TabPanelItem title='Messages' badge={messagesCount}>
-                <CardMessages items={task?.messages} user={task?.owner} updateMessagesCount={updateMessagesCount}></CardMessages>
+                <CardMessages items={task?.messages} user={task?.owner} onMessagesCountChanged={onMessagesCountChanged}></CardMessages>
               </TabPanelItem>
             </TabPanel>
           </div>

@@ -65,7 +65,7 @@ export const CardNotes = ({ items, user }: { items: Notes | undefined; user: str
 
       <div className='notes-content'>
         {data?.map((note, index) => (
-          <Card key={index} note={note}></Card>
+          <Card key={index} note={note} />
         ))}
       </div>
     </div>
