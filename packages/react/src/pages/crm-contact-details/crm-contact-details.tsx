@@ -40,6 +40,10 @@ export const CRMContactDetails = () => {
   const [closedOpportunities, setClosedOpportunities] = useState();
 
   useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = useCallback(() => {
     Promise.all([
       getContact(CONTACT_ID)
         .then((data) => {
@@ -63,6 +67,10 @@ export const CRMContactDetails = () => {
           setClosedOpportunities(data);
         }),
     ]).catch((error) => console.log(error));
+  }, []);
+
+  const refresh = useCallback(() => {
+    loadData();
   }, []);
 
   const updateMessagesCount = useCallback((count) => {
@@ -108,7 +116,7 @@ export const CRMContactDetails = () => {
           options={{
             text: 'Refresh',
             icon: 'refresh',
-            // onClick: refresh
+            onClick: refresh
           }}
         ></Item>
       </ToolbarDetails>
