@@ -5,7 +5,7 @@ import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics'
 
 export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPeriodChanged, range }) => (
   <CardAnalytics
-    title='Sales Perfomance'
+    title='Sales Performance'
     contentClass='sales'
     isLoading={!datasource.length}
     additionalHeaderContent={
