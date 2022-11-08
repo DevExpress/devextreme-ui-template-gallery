@@ -22,15 +22,16 @@
     <dx-item
       location="after"
       locate-in-menu="auto"
-      cssClass="add-card"
-    ><div>
-      <dx-button
-        icon="plus"
-        text="Add Card"
-        type="default"
-        styling-mode="contained"
-      />
-    </div>
+      css-class="add-card"
+    >
+      <div>
+        <dx-button
+          icon="plus"
+          text="Add Card"
+          type="default"
+          styling-mode="contained"
+        />
+      </div>
     </dx-item>
 
     <dx-item
@@ -48,7 +49,9 @@
       location="after"
       locate-in-menu="auto"
     >
-      <div class="separator" />
+      <div>
+        <div class="separator" />
+      </div>
     </dx-item>
 
     <dx-item
