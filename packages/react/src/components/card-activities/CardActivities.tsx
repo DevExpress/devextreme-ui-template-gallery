@@ -1,16 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import LoadPanel from 'devextreme-react/load-panel';
 import List from 'devextreme-react/list';
-import Button from 'devextreme-react/button';
+import Menu from 'devextreme-react/menu';
 
 import { formatDate } from 'devextreme/localization';
 
 import classNames from 'classnames';
 
 import { Activities, Activity } from '../../shared/types/card-activities';
+import { withLoadPanel } from '../../shared/utils/withLoadPanel';
 
 import './CardActivities.scss';
+
+const activityMenuItems = [{
+  icon: 'overflow',
+  items: [
+    { text: 'View details' },
+    { text: 'Delete' },
+  ],
+}];
 
 const ListTemplate = (item: Activity) => {
   return (
@@ -21,23 +29,28 @@ const ListTemplate = (item: Activity) => {
         <span>by</span>
         <span>{item.manager}</span>
       </div>
-      <Button icon='overflow'></Button>
+      <Menu className='overflow-menu' items={activityMenuItems}></Menu>
     </div>
   );
 };
 
-export const CardActivities = ({ activities }: { activities: Activities | undefined }) => {
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    activities && setLoading(false);
-  }, [activities]);
+const ActivitiesList = ({ activities }) => {
   return (
-    <div className={classNames({ 'card-activities': true, load: loading })}>
-      {loading ? (
-        <LoadPanel container='.card-activities' visible position={{ of: '.card-activities' }} />
-      ) : (
-        <List className='activities-list' dataSource={activities} scrollingEnabled={false} itemRender={ListTemplate} />
-      )}
-    </div>
+    <List className='activities-list' dataSource={activities} scrollingEnabled={false} itemRender={ListTemplate} />
   );
 };
+
+const ActivitiesWithLoadPanel = withLoadPanel(ActivitiesList);
+
+export const CardActivities = ({ activities }: { activities: Activities | undefined }) => (
+  <div className={classNames({ 'card-activities': true, load: !activities })}>
+    <ActivitiesWithLoadPanel
+      activities={activities}
+      loading={!activities}
+      panelProps={{
+        container: '.card-activities',
+        position: { of: '.card-activities' }
+      }}
+    />
+  </div>
+);
