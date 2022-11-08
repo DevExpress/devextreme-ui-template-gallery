@@ -74,7 +74,7 @@
           }
 
           &:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
-            background-color: lighten($base-bg, 4);
+            background-color: darken($base-bg, 4);
           }
         }
       }
