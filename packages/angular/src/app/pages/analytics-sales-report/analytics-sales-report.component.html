@@ -12,7 +12,7 @@
       [component]="range"
       [isMenuVisible]="false"
     >
-    <dx-range-selector #range [dataSource]="sales" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
+    <dx-range-selector #range [dataSource]="sales" [redrawOnResize]="false" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
       <dxo-scale
         minorTickInterval="day"
         tickInterval="month"
@@ -22,7 +22,7 @@
         <dxo-marker [visible]="false"></dxo-marker>
         <dxo-label format="MMM yyyy"></dxo-label>
       </dxo-scale>
-      <dxo-size [height]="90" [width]="334"></dxo-size>
+      <dxo-size [height]="90"></dxo-size>
 
       <dxo-loading-indicator [show]="true"></dxo-loading-indicator>
 
