@@ -82,7 +82,7 @@
       </dx-chart>
     </card-analytics>
 
-    <card-analytics titleText="Sales Perfomance" className="sales" [isLoading]="!salesByDateAndCategory"  [component]="chart">
+    <card-analytics titleText="Sales Performance" className="sales" [isLoading]="!salesByDateAndCategory"  [component]="chart">
       <div filter class="sales-filter" >
       <dx-drop-down-button stylingMode="text" [useSelectMode]="true"
         [items]="groupByPeriods" [selectedItemKey]="groupByPeriods[1]" (onSelectionChanged)="selectionChange($event)">
