@@ -83,9 +83,7 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
   }
 
   resizeCallback() {
-    if (this.component) {
-      this.component.instance.render();
-    }
+    
   }
 
   isGreyCard() {
