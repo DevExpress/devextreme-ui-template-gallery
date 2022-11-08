@@ -19,7 +19,7 @@ import { contactStatusList, ContactStatus } from '../../shared/types/crm-contact
 
 import './crm-contact-list.scss';
 
-type FilterContactStatus = ContactStatus | 'All Contacts';
+type FilterContactStatus = ContactStatus | 'All';
 
 const cellNameRender = (cell: ColumnCellTemplateData) => (
   <div className='name-template'>
@@ -55,7 +55,7 @@ const cellPhoneRender = (cell: ColumnCellTemplateData) => (
   String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3')
 );
 
-const filterStatusList = ['All Contacts', ...contactStatusList];
+const filterStatusList = ['All', ...contactStatusList];
 
 export const CRMContactList = () => {
   const [status, setStatus] = useState(filterStatusList[0]);
@@ -78,7 +78,7 @@ export const CRMContactList = () => {
   const filterByStatus = useCallback((e: SelectionChangedEvent) => {
     const { item: status }: { item: FilterContactStatus } = e;
 
-    if (status === 'All Contacts') {
+    if (status === 'All') {
       grid.current?.instance.clearFilter();
     } else {
       grid.current?.instance.filter(['status', '=', status]);
@@ -114,7 +114,7 @@ export const CRMContactList = () => {
             <Scrolling mode='virtual' />
             <Toolbar>
               <Item location='before'>
-                <div className='grid-header'>Contact List</div>
+                <div className='grid-header'>Contacts</div>
               </Item>
               <Item location='before' locateInMenu='auto'>
                 <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus}></DropDownButton>

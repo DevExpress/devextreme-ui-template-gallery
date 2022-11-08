@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Button from 'devextreme-react/button';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
+import './Dashboard.scss';
 
 type DashboardContainerProps = {
   title: string;

@@ -1,0 +1,14 @@
+@use '../../variables.scss' as *;
+@use 'sass:math';
+
+@include separator();
+
+.dx-toolbar {
+  .toolbar-header {
+    @include header();
+  }
+
+  .dx-tabs .dx-tab {
+    background-color: $background-color;
+  }
+}
