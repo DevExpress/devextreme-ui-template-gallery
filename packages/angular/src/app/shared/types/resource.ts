@@ -36,3 +36,4 @@ export const analyticsPanelItems: Array<PanelItem> = [
     value: '2018-01-01/2022-01-01',
     key: 5,
   }];
+  // to remove
