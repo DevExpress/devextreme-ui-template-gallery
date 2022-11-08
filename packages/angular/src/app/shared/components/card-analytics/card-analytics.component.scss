@@ -9,15 +9,14 @@
     overflow: hidden;
 
     .header {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding: $content-padding;
+      padding: $content-padding $content-padding 0;
+    }
 
-      > div {
-        display: flex;
-        align-items: center;
-      }
+    .overflow-menu {
+      position: absolute;
+      right: 10px;
+      left: auto;
+      top: 10px;
     }
 
     .title {
@@ -25,6 +24,7 @@
       line-height: 19px;
       font-weight: 500;
       font-size: 16px;
+      margin-bottom: 20px;
       display: inline-block;
       padding-right: 25px;
     }
@@ -32,6 +32,13 @@
     &.sales-by-state-map {
       .content {
         height: 400px;
+      }
+    }
+
+    &.grid {
+      .content {
+        padding-left: 0;
+        padding-right: 0;
       }
     }
 
@@ -43,18 +50,9 @@
       }
     }
 
-    &.grid {
-
-      .content {
-        border-top: 1px solid $base-border-color;
-        padding: 0;
-        height: 286px;
-      }
-    }
-
     .content {
-      box-sizing: content-box;
       padding: 0 $content-padding $content-padding;
+      box-sizing: content-box;
       color: $texteditor-label-color;
       font-size: 14px;
       line-height: 17px;

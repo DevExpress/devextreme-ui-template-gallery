@@ -1,14 +1,13 @@
 <div class="card {{ contentClass }}">
   <div class="header">
-    <div>
-      <div class="title">{{ titleText }}</div>
-      <ng-content select="[filter]"></ng-content>
-    </div>
     <dx-menu
       [visible]="isMenuVisible"
+      class="overflow-menu"
       [items]="menuItems"
-    >
+      >
     </dx-menu>
+    <div class="title">{{ titleText }}</div>
+    <ng-content select="[filter]"></ng-content>
   </div>
   <div class="content">
     <ng-content></ng-content>
