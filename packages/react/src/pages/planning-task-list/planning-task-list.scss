@@ -3,23 +3,23 @@
 
 @include separator();
 
-.dx-toolbar {
-  margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
-
-  .toolbar-header {
-    @include header();
-  }
-
-  .dx-tabs .dx-tab {
-    background-color: $background-color;
-  }
-}
-
 .view-wrapper-list {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   padding: 20px 16px 0 16px;
+
+  .dx-toolbar {
+    margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
+
+    .toolbar-header {
+      @include header();
+    }
+
+    .dx-tabs .dx-tab {
+      background-color: $background-color;
+    }
+  }
 
   .toolbar-common {
     margin-bottom: $toolbar-margin-bottom;
