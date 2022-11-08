@@ -33,6 +33,7 @@
         caption="Percentage"
         data-field="percentage"
         cell-template="salesBullet"
+        :width="200"
       />
 
       <template #salesBullet="{ data }">
