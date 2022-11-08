@@ -12,7 +12,7 @@ import './CardTasks.scss';
 
 const selectionFilter = [['done', '=', true]];
 
-const Grid = ({ tasks }) => {
+const Grid = ({ tasks }: { tasks: Task[] }) => {
   const [gridData, setGridData] = useState(tasks);
 
   const onReorder = useCallback((e: RowDraggingReorderEvent) => {

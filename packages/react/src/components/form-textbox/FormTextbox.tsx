@@ -1,19 +1,17 @@
 import React from 'react';
 
 import TextBox from 'devextreme-react/text-box';
-import Validator from 'devextreme-react/validator';
+import Validator, { RequiredRule } from 'devextreme-react/validator';
 
-interface TextboxProps {
+type TextboxProps = {
   value: string,
   label: string,
   isEditing: boolean,
   onValueChange: (data) => void,
-  validationGroup?: string,
-  validators?: any[],
   mask?: string,
 }
 
-export const FormTextbox = ({ value, label, isEditing, onValueChange, validationGroup, validators, mask = '' }: TextboxProps) => {
+export const FormTextbox = ({ value, label, isEditing, onValueChange, mask = '', children }: React.PropsWithChildren<TextboxProps>) => {
   return (
     <TextBox
       label={label}
@@ -25,7 +23,10 @@ export const FormTextbox = ({ value, label, isEditing, onValueChange, validation
       onValueChange={onValueChange}
       mask={mask}
     >
-      <Validator validationRules={validators || [{ type: 'required' }]} validationGroup={validationGroup}></Validator>
+      <Validator>
+        <RequiredRule />
+        {children}
+      </Validator>
     </TextBox>
   );
 };

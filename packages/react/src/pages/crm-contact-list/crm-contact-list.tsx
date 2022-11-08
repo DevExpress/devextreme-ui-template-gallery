@@ -24,22 +24,22 @@ import './crm-contact-list.scss';
 
 type FilterContactStatus = ContactStatusType | 'All Contacts';
 
-const CellNameRender = (cell: ColumnCellTemplateData) => (
+const cellNameRender = (cell: ColumnCellTemplateData) => (
   <div className='name-template'>
     <div>{cell.data.name}</div>
     <div className='position'>{cell.data.position}</div>
   </div>
 );
 
-const FieldRender = (text: string) => (
+const fieldRender = (text: string) => (
   <>
     <ContactStatus text={text} />
     <TextBox readOnly />
   </>
 );
 
-const EditCellStatusRender = () => (
-  <SelectBox className='cell-info' dataSource={CONTACT_STATUS_LIST} itemRender={ContactStatus} fieldRender={FieldRender} />
+const editCellStatusRender = () => (
+  <SelectBox className='cell-info' dataSource={CONTACT_STATUS_LIST} itemRender={ContactStatus} fieldRender={fieldRender} />
 );
 
 const cellPhoneRender = (cell: ColumnCellTemplateData) => (
@@ -126,9 +126,9 @@ export const CRMContactList = () => {
               <Item name='columnChooserButton' locateInMenu='auto'></Item>
               <Item name='searchPanel' locateInMenu='auto'></Item>
             </Toolbar>
-            <Column dataField='name' caption='Name' sortOrder='asc' hidingPriority={5} minWidth={150} cellRender={CellNameRender}></Column>
+            <Column dataField='name' caption='Name' sortOrder='asc' hidingPriority={5} minWidth={150} cellRender={cellNameRender}></Column>
             <Column dataField='company' caption='Company' hidingPriority={5} minWidth={150}></Column>
-            <Column dataField='status' caption='Status' dataType='string' hidingPriority={3} minWidth={100} cellRender={ContactStatus} editCellRender={EditCellStatusRender}></Column>
+            <Column dataField='status' caption='Status' dataType='string' hidingPriority={3} minWidth={100} cellRender={ContactStatus} editCellRender={editCellStatusRender}></Column>
             <Column dataField='assignedTo' caption='Assigned to' hidingPriority={4}></Column>
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender}></Column>
             <Column dataField='email' caption='Email' hidingPriority={1}></Column>

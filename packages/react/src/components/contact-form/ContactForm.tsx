@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 
 import { ToolbarForm } from '../toolbar-form/ToolbarForm';
 import { ContactFromDetails } from './ContactFormDetails';
@@ -14,9 +14,9 @@ const ContactFromDetailsWithLoadPanel = withLoadPanel(ContactFromDetails);
 export const ContactForm = ({ data }: { data?: Contact }) => {
   const [editing, setEditing] = useState(false);
 
-  const handleEditClick = useCallback(() => {
+  const handleEditClick = () => {
     setEditing(!editing);
-  }, [editing]);
+  };
 
   return (
     <div className='contact-form'>

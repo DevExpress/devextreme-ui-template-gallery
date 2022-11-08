@@ -71,7 +71,7 @@ export const CRMContactDetails = () => {
     loadData();
   }, []);
 
-  const updateMessagesCount = useCallback((count) => {
+  const onMessagesCountChanged = useCallback((count) => {
     setMessagesCount(count);
   }, []);
 
@@ -147,7 +147,7 @@ export const CRMContactDetails = () => {
                 <CardNotes items={notes} user={data?.name} />
               </TabPanelItem>
               <TabPanelItem title='Messages' badge={messagesCount}>
-                <CardMessages items={messages} user={data?.name} updateMessagesCount={updateMessagesCount} />
+                <CardMessages items={messages} user={data?.name} onMessagesCountChanged={onMessagesCountChanged} />
               </TabPanelItem>
             </TabPanel>
           </div>
