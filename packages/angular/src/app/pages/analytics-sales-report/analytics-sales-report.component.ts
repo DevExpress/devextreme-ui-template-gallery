@@ -70,7 +70,7 @@ export class AnalyticsSalesReportComponent implements OnInit {
       ['sales', this.service.getSales(startDate, endDate)],
       ['salesByDateAndCategory', this.service.getSalesByOrderDate(groupBy)],
     ].forEach(([dataName, loader]: [string, Observable<any>]) => {
-        this[dataName]  = null;
+        this[dataName] = null;
         loader.subscribe((data) => this[dataName] = data);
       }
     );
