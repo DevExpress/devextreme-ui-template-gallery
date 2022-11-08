@@ -37,6 +37,7 @@
 
     &.grid {
       .content {
+        border-top: 1px solid $base-border-color;
         padding-left: 0;
         padding-right: 0;
       }
