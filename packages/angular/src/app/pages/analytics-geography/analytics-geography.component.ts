@@ -20,7 +20,7 @@ import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analyt
 import { analyticsPanelItems, Dates } from 'src/app/shared/types/resource';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 import { SalesByState, SalesByStateAndCity } from 'src/app/shared/types/analytics';
-import {DxLoadPanelModule} from "devextreme-angular/ui/load-panel";
+import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
 
 @Component({
   templateUrl: './analytics-geography.component.html',

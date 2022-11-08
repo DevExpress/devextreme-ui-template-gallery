@@ -20,9 +20,9 @@ import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analyt
 
 import { analyticsPanelItems } from 'src/app/shared/types/resource';
 
-import {Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory} from 'src/app/shared/types/analytics';
-import {DxLoadPanelModule} from "devextreme-angular/ui/load-panel";
-import {ApplyPipeModule} from "../../shared/apply.pipe";
+import { Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/analytics';
+import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
+import { ApplyPipeModule } from "../../shared/apply.pipe";
 
 type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
 

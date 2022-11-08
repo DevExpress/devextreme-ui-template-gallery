@@ -18,10 +18,10 @@ import { analyticsPanelItems, Dates } from 'src/app/shared/types/resource';
 import {
   Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory,
 } from 'src/app/shared/types/analytics';
-import {DxLoadPanelModule} from "devextreme-angular/ui/load-panel";
-import {ApplyPipeModule} from "src/app/shared/apply.pipe";
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs";
+import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
+import { ApplyPipeModule } from "src/app/shared/apply.pipe";
+import { map } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
 
