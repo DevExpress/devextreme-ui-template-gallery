@@ -22,14 +22,15 @@
     <dx-item
       location="after"
       locate-in-menu="auto"
-      cssclass="add-card"
-    >
+      cssClass="add-card"
+    ><div>
       <dx-button
         icon="plus"
         text="Add Card"
         type="default"
         styling-mode="contained"
       />
+    </div>
     </dx-item>
 
     <dx-item
@@ -56,7 +57,8 @@
       widget="dxButton"
       show-text="inMenu"
       :options="{
-        icon: 'export'
+        icon: 'export',
+        text: 'Export'
       }"
     />
   </dx-toolbar>
@@ -90,7 +92,7 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use "@/variables.scss" as *;
 @use "sass:math";
 
@@ -99,18 +101,14 @@ onMounted(() => {
   @include header();
 }
 
-.dx-tabs :deep(.dx-tab) {
+.dx-tab {
   background-color: $background-color;
-
-  &:nth-child(2) {
-    width: 82px;
-  }
+  text-align: center;
 }
 
-.add-card {
-  .dx-icon.dx-icon-plus,
-  .dx-button-text {
-    color: #fff;
+@media only screen and (max-width: 400px) {
+  .dx-tab {
+    min-width: 70px;
   }
 }
 </style>

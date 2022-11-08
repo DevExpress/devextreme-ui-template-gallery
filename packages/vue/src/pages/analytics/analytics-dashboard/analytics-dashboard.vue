@@ -1,7 +1,6 @@
 <template>
   <div class="view-wrapper">
     <analytics-toolbar
-      ref="tabs"
       :show-tabs="true"
       @tab-change="tabChange($event)"
     >
@@ -67,7 +66,7 @@ import LoadingPanel from '../components/loading-panel.vue';
 import AnalyticsToolbar from '../components/analytics-toolbar.vue';
 
 import RevenueSnapshotCard from './components/revenue-snapshot-card.vue';
-import AnalyticTile from './components/abalytic-tile.vue';
+import AnalyticTile from './components/analytic-tile.vue';
 import ConversionCard from './components/conversion-card.vue';
 import RevenueCard from './components/revenue-card.vue';
 import RevenueAnalysisCard from './components/revenue-analysis-card.vue';
@@ -120,14 +119,22 @@ const tabChange = ([startDate, endDate]: string[]) => {
 }
 
 @media only screen and (max-width: 900px) {
-  .tiles {
-    grid-template-columns: repeat(2, calc(50% - 10px));
+  .view-wrapper {
+    .tiles {
+      grid-template-columns: repeat(2, calc(50% - 10px));
+    }
+
+    .cards {
+      grid-template-columns: repeat(1, 100%);
+    }
   }
 }
 
 @media only screen and (max-width: 400px) {
-  .tiles {
-    grid-template-columns: repeat(1, 100%);
+  .view-wrapper {
+    .tiles, .cards {
+      grid-template-columns: repeat(1, 100%);
+    }
   }
 }
 </style>
