@@ -1,5 +1,5 @@
-@use "../../variables.scss" as *;
-@use "sass:math";
+@use '../../variables.scss' as *;
+@use 'sass:math';
 
 .view.crm-contact-list {
   width: 100%;
@@ -30,7 +30,7 @@
 
     .dx-datagrid-header-panel {
       padding-top: 20px;
-      padding-bottom: 10px;
+      padding-bottom: $toolbar-margin-bottom;
     }
 
     .clickable-row {
@@ -46,6 +46,7 @@
     position: relative;
 
     .status {
+      font-size: 13px;
       position: absolute;
       margin-top: 10px;
       margin-left: 11px;

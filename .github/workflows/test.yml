@@ -51,6 +51,7 @@ jobs:
           { project: 'angular', page: 'analytics-dashboard' },
           { project: 'angular', page: 'analytics-sales-report' },
           { project: 'angular', page: 'analytics-geography' },
+          { project: 'react', page: 'crm-contact-form' },
           { project: 'react', page: 'crm-contact-list' },
           { project: 'react', page: 'planning-task-details' },
           { project: 'react', page: 'planning-task-list' },
@@ -59,6 +60,11 @@ jobs:
           { project: 'react', page: 'analytics-geography' },
           { project: 'vue', page: 'crm-contact-form' },
           { project: 'vue', page: 'crm-contact-list' },
+          { project: 'vue', page: 'planning-task-details' },
+          { project: 'vue', page: 'planning-task-list' },
+          { project: 'vue', page: 'analytics-dashboard' },
+          { project: 'vue', page: 'analytics-sales-report' },
+          { project: 'vue', page: 'analytics-geography' },
         ]
     runs-on: ubuntu-latest
     timeout-minutes: 30

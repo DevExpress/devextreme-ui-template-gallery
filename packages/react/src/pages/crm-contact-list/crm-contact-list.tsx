@@ -95,6 +95,10 @@ export const CRMContactList = () => {
     grid.current?.instance.refresh();
   }, []);
 
+  const onRowPrepared = useCallback(({ rowElement }) => {
+    rowElement.classList.add('clickable-row');
+  }, []);
+
   return (
     <div className='view crm-contact-list'>
       <div className='view-wrapper'>
@@ -104,6 +108,7 @@ export const CRMContactList = () => {
             noDataText=''
             dataSource={gridData}
             ref={grid}
+            onRowPrepared={onRowPrepared}
           >
             <SearchPanel visible placeholder='Contact Search' />
             <ColumnChooser enabled />
