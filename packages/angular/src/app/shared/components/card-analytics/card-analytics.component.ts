@@ -31,7 +31,7 @@ class ResizeObservable extends Observable<ResizeObserverEntry[]> {
   styleUrls: ['./card-analytics.component.scss'],
 })
 
-export class CardAnalytticsComponent implements OnInit, OnDestroy {
+export class CardAnalytticsComponent implements OnInit {
   @Input() titleText: string;
 
   @Input() contentClass: string;
@@ -76,16 +76,7 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    if (!this.isGreyCard() && this.component) {
-      this.resizeObserverSubscription.unsubscribe();
-    }
-  }
-
   resizeCallback() {
-    if (this.component) {
-      this.component.instance.render();
-    }
   }
 
   isGreyCard() {
