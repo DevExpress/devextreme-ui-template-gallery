@@ -5,8 +5,9 @@ import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import { getPostfix, toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
-const project = process.env.project;
-const BASE_URL = `http://localhost:${process.env.port}/#/analytics-sales-report`;
+const project = process.env.project || 'angular';
+const port = process.env.port || '4200';
+const BASE_URL = `http://localhost:${port}/#/analytics-sales-report`;
 
 fixture`Analytics Sales Report`;
 
@@ -17,6 +18,18 @@ fixture`Analytics Sales Report`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
+      await takeScreenshot(`analytics-sales-report-month${getPostfix(embedded, screenMode)}`, 'body');
+
+      await t.drag(Selector('.slider').nth(1), -100, 0, { offsetX: 10, offsetY: 10 });
+      await t.drag(Selector('.slider').nth(0), 100, 0, { offsetX: 10, offsetY: 10 });
+
+      await takeScreenshot(`analytics-sales-report-month-range${getPostfix(embedded, screenMode)}`, 'body');
+
+      await t.click(Selector('.dx-dropdownbutton'));
+      await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
+      await t.wait(chartTimeout);
+      await takeScreenshot(`analytics-sales-report-day-range${getPostfix(embedded, screenMode)}`, 'body');
+
       await takeScreenshot(`analytics-sales-report-all${getPostfix(embedded, screenMode)}`, 'body');
       if (Selector('.dx-dropdownbutton').length !== 0) {
         await t.click(Selector('.dx-dropdownbutton'));
