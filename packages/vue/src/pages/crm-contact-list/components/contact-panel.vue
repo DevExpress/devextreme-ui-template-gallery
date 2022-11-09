@@ -12,7 +12,7 @@
       >
         <template v-if="panelData">
           <div class="data-part">
-            <dx-toolbar>
+            <dx-toolbar class="panel-toolbar">
               <dx-item location="before">
                 <div class="contact-name">
                   {{ panelData?.name }}
@@ -95,7 +95,7 @@
             </div>
 
             <div class="data-part data-part-toolbar border">
-              <dx-toolbar class="panel-toolbar">
+              <dx-toolbar>
                 <dx-item
                   location="before"
                   :visible="!isEditing"
@@ -318,6 +318,12 @@ const navigateToDetails = () => {
 
   .embedded.dx-viewport & {
     top: 0;
+  }
+
+  .panel-toolbar {
+    :deep(.dx-toolbar-items-container) {
+      height: $toolbar-items-container-height;
+    }
   }
 
   &.open {
