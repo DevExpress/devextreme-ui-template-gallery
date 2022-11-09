@@ -34,9 +34,8 @@ const renderPriorityField = (data: string) => (
 
 const renderStatusField = (data: string) => (
   <div className='status-task-editor-field'>
-    <StatusTask text={data} showText={false}></StatusTask>
     <TextBox
-      className={`status-task status-${data.toLowerCase()}`}
+      className={`status-task status-${data.toLowerCase().replace(' ', '-')}`}
       inputAttr={{ class: 'status-editor-input' }}
       readOnly
       text={data}

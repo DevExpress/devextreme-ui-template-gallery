@@ -192,15 +192,13 @@ body {
 }
 
 @mixin status-task($status-color) {
+  color: $status-color;
+
   &.dx-texteditor {
     .status-editor-input {
       color: $status-color;
       padding-left: 0;
     }
-  }
-
-  &.status-open {
-    color: $status-color;
   }
 }
 
