@@ -39,6 +39,7 @@
   &.grid {
 
     .content {
+      border-top: 1px solid $base-border-color;
       padding: 0 0 $content-padding;
     }
   }

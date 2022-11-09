@@ -9,7 +9,7 @@ export const RevenueAnalysisByStatesCard = ({ datasource }) => (
     contentClass='sales-by-state-and-city grid'
     isLoading={!datasource.length}
   >
-    <DataGrid dataSource={datasource} height={270}>
+    <DataGrid dataSource={datasource} height={290}>
       <Column caption='State' dataField='stateName' hidingPriority={2} />
       <Column caption='City' dataField='city' />
       <Column
