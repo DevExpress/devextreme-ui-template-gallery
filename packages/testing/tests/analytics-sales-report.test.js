@@ -10,13 +10,19 @@ const BASE_URL = `http://localhost:${process.env.port}/#/analytics-sales-report`
 
 fixture`Analytics Sales Report`;
 
-[false, true].forEach((embedded) => {
+[false].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
     test(`Analytics Sales Report (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
+
+      const label = Selector('dx-range-selector').addCustomDOMProperties({
+        innerHTML: el => el.innerHTML,
+      });
+
+      await t.expect(label.innerHTML).eql('');
       await takeScreenshot(`analytics-sales-report-all${getPostfix(embedded, screenMode)}`, 'body');
       if (Selector('.dx-dropdownbutton').length !== 0) {
         await t.click(Selector('.dx-dropdownbutton'));
