@@ -11,21 +11,6 @@
   .view-wrapper .cards {
     grid-template-columns: repeat(1, 100%);
   }
-
-  .card {
-    .content {
-      height: auto;
-    }
-  }
-}
-
-
-@media only screen and (max-width: 400px) {
-  .cards {
-    &.grey {
-      grid-template-columns: repeat(1, 100%);
-    }
-  }
 }
 
 

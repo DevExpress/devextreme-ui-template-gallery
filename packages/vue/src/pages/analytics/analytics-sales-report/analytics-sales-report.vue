@@ -5,13 +5,14 @@
     <div class="cards">
       <sales-range-card
         :data="sales"
+        class="sales-range-card"
         @range-changed="onRangeChanged"
       />
       <sales-by-range-card :data="salesByCategory" />
       <sales-performance-card
         :data="salesByDateAndCategory"
         :group-by-periods="groupByPeriods"
-        :visualRange = "visualRange"
+        :visual-range="visualRange"
         @performance-period-changed="performancePeriodChange"
       />
     </div>
@@ -84,6 +85,10 @@ onMounted(() => {
   grid-gap: 20px;
   gap: 20px;
   grid-template-columns: repeat(1,100%);
+
+  .sales-range-card :deep(.content) {
+    height: auto;
+  }
 }
 
 @media only screen and (max-width: 400px) {

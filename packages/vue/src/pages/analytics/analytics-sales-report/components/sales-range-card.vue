@@ -59,7 +59,6 @@ const props = defineProps<{
   margin-top: 20px;
 
   .content {
-    height: auto;
     min-height: 90px;
   }
 }

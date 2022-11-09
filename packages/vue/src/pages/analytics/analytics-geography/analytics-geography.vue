@@ -36,6 +36,22 @@ const data = [salesByStateAndCity, salesByState, salesByStateMarkers];
 
 const createMapCoords = (coords: string) => coords.split(', ').map((coord) => parseFloat(coord));
 
+const getSalesByStateMarkers = () => ({
+  type: 'StateCollection',
+  features: salesByState.value?.map((item: Record<string, any>) => ({
+    type: 'State',
+    geometry: {
+      type: 'Point',
+      coordinates: createMapCoords(item.stateCoords),
+    },
+    properties: {
+      text: item.stateName,
+      value: item.total,
+      tooltip: `<b>${item.stateName}</b>\n${item.total}K`,
+    },
+  })),
+});
+
 const loadData = async (startDate: string, endDate: string) => {
   salesByStateAndCity.value = null;
   salesByState.value = null;
@@ -43,21 +59,7 @@ const loadData = async (startDate: string, endDate: string) => {
 
   salesByStateAndCity.value = await getSalesByStateAndCity(startDate, endDate);
   salesByState.value = calcSalesByState(salesByStateAndCity.value);
-  salesByStateMarkers.value = {
-    type: 'StateCollection',
-    features: salesByState.value?.map((item: Record<string, any>) => ({
-      type: 'State',
-      geometry: {
-        type: 'Point',
-        coordinates: createMapCoords(item.stateCoords),
-      },
-      properties: {
-        text: item.stateName,
-        value: item.total,
-        tooltip: `<b>${item.stateName}</b>\n${item.total}K`,
-      },
-    })),
-  };
+  salesByStateMarkers.value = getSalesByStateMarkers();
 };
 
 const tabChange = ([startDate, endDate]: string[]) => loadData(startDate, endDate);

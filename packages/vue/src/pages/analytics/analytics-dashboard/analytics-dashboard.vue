@@ -32,7 +32,7 @@
       <analytic-tile
         title="Leads"
         total="51"
-        :up="false"
+        :up="true"
         percent="8.5"
       />
     </div>
