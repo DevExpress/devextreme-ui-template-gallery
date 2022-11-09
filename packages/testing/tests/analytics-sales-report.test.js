@@ -17,7 +17,7 @@ fixture`Analytics Sales Report`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      if(screenMode === 400) {
+      if (screenMode[0] === 400) {
         const rangeSelector = Selector('dx-range-selector');
         const state = await rangeSelector();
         await t.expect(state.boundingClientRect.width).eql(334);
