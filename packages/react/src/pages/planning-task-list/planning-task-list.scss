@@ -10,8 +10,6 @@
   padding: 20px 16px 0 16px;
 
   .dx-toolbar {
-    margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
-
     .toolbar-header {
       @include header();
     }
