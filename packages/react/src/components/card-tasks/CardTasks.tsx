@@ -34,30 +34,30 @@ const Grid = ({ tasks }: { tasks: Task[] }) => {
       columnAutoWidth
       selectionFilter={selectionFilter}
     >
-      <Selection mode='multiple' deferred></Selection>
+      <Selection mode='multiple' deferred />
 
       <RowDragging
         allowReordering
         onReorder={onReorder}
         showDragIcons
-      ></RowDragging>
+      />
 
       <Column
         dataField='text'
         caption='Subject'
         hidingPriority={3}
-      ></Column>
+      />
       <Column
         dataField='date'
         dataType='date'
         caption='Due Date'
         hidingPriority={1}
-      ></Column>
+      />
       <Column
         caption='Assigned To'
         dataField='manager'
         hidingPriority={0}
-      ></Column>
+      />
     </DataGrid>
   );
 };

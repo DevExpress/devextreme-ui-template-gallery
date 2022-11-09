@@ -28,7 +28,7 @@ const renderPriorityField = (data: string) => (
       readOnly
       text={data}
       hoverStateEnabled={false}
-    ></TextBox>
+    />
   </div>
 );
 
@@ -41,7 +41,7 @@ const renderStatusField = (data: string) => (
       readOnly
       text={data}
       hoverStateEnabled={false}
-    ></TextBox>
+    />
   </div>
 );
 
@@ -60,15 +60,14 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
         className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}
       >
         <GroupItem itemType='group' colCount={2}>
-          <ColCountByScreen xs={2}></ColCountByScreen>
+          <ColCountByScreen xs={2} />
           <SimpleItem cssClass='accent'>
             <FormTextbox
               label='Company'
               value={data.company}
               isEditing={!editing}
               onValueChange={updateField('company')}
-            >
-            </FormTextbox>
+            />
           </SimpleItem>
           <SimpleItem cssClass='accent'>
             <FormTextbox
@@ -76,8 +75,7 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
               value={data.owner}
               isEditing={!editing}
               onValueChange={updateField('owner')}
-            >
-            </FormTextbox>
+            />
           </SimpleItem>
           <SimpleItem>
             <SelectBox
@@ -89,8 +87,7 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
               fieldRender={renderPriorityField}
               itemRender={renderPriorityItem}
               onValueChange={updateField('priority')}
-            >
-            </SelectBox>
+            />
           </SimpleItem>
           <SimpleItem>
             <SelectBox
@@ -102,8 +99,7 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
               fieldRender={renderStatusField}
               itemRender={renderStatusItem}
               onValueChange={updateField('status')}
-            >
-            </SelectBox>
+            />
           </SimpleItem>
           <SimpleItem>
             <DateBox
@@ -111,7 +107,6 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
               readOnly={!editing}
               name='Set Start Date'
               label='Start Date'
-              // elementAttr={{ class: 'form-editor' }}
               inputAttr={{ class: 'form-editor-input' }}
               stylingMode='filled'
               placeholder='MM/dd/y'
@@ -129,7 +124,6 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
               readOnly={!editing}
               name='Set Due Date'
               label='Due Date'
-              // elementAttr={{ class: 'form-editor' }}
               inputAttr={{ class: 'form-editor-input' }}
               stylingMode='filled'
               placeholder='MM/dd/y'
@@ -148,10 +142,9 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
             label='Details'
             readOnly={!editing}
             value={data.description}
-            // elementAttr={{ class: 'form-editor' }}
             stylingMode='filled'
             onValueChange={updateField('description')}
-          ></TextArea>
+          />
         </SimpleItem>
       </Form>
     </ValidationGroup>

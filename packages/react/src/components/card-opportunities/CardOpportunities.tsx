@@ -53,7 +53,7 @@ const Cards = ({ active, closed }: { active: Opportunities, closed: Opportunitie
       type='default'
       className='add-tile'
       onClick={addOpportunity}
-    ></Button>
+    />
 
     <CardTemplate title='Active' items={active} />
     <CardTemplate title='Closed' items={closed} />

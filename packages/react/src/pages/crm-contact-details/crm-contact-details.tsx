@@ -83,7 +83,7 @@ export const CRMContactDetails = () => {
             text='Terminate'
             type='default'
             stylingMode='contained'
-          ></Button>
+          />
         </Item>
         <Item location='after' locateInMenu='auto'>
           <DropDowmButton
@@ -91,7 +91,7 @@ export const CRMContactDetails = () => {
             stylingMode='text'
             width={120}
             items={['Assign to Me', 'Archive']}
-          ></DropDowmButton>
+          />
         </Item>
         <Item location='after' locateInMenu='auto'>
           <div className='separator'></div>
@@ -105,7 +105,7 @@ export const CRMContactDetails = () => {
             text: 'Copy',
             icon: 'copy'
           }}
-        ></Item>
+        />
         <Item
           location='after'
           locateInMenu='auto'
@@ -116,14 +116,14 @@ export const CRMContactDetails = () => {
             icon: 'refresh',
             onClick: refresh
           }}
-        ></Item>
+        />
       </ToolbarDetails>
 
       <div className='panels'>
         <div className='left'>
           <ContactForm
             data={data}
-          ></ContactForm>
+          />
         </div>
 
         <div className='right'>
