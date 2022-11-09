@@ -17,7 +17,7 @@
     </template>
 
     <dx-chart :data-source="data">
-      <dx-argument-axis />
+      <dx-argument-axis :visual-range="props.visualRange"/>
       <dx-tooltip
         :enabled="true"
         :customize-tooltip="seriesName => ({ text: seriesName })"
@@ -62,6 +62,7 @@ import CardAnalytics from '../../components/card-analytics.vue';
 const emit = defineEmits(['performance-period-changed']);
 
 const props = defineProps<{
+  visualRange: [Date, Date],
   groupByPeriods: string[],
   data: Sales
 }>();
