@@ -1,31 +1,33 @@
 @use "../../variables.scss" as *;
 
-.input-notes {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.input-notes,
-.notes-content {
-  padding: 20px;
-}
-
-.notes-content {
-  border-top: 1px solid $base-border-color;
-  background-color: $side-panel-background;
-}
-
-.note {
-  background-color: $base-bg;
-  padding: 10px;
-  margin-bottom: 10px;
-
-  .note-title {
-    @include message-title();
+.notes {
+  .input-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  .note-text {
-    @include message-text();
+  .input-notes,
+  .notes-content {
+    padding: 20px;
+  }
+
+  .notes-content {
+    border-top: 1px solid $base-border-color;
+    background-color: $side-panel-background;
+  }
+
+  .note {
+    background-color: $base-bg;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    .note-title {
+      @include message-title();
+    }
+
+    .note-text {
+      @include message-text();
+    }
   }
 }

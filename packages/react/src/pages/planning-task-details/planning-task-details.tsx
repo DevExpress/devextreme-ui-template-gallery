@@ -28,7 +28,7 @@ export const PlanningTaskDetails = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const updateMessagesCount = useCallback((count) => {
+  const onMessagesCountChanged = useCallback((count) => {
     setMessagesCount(count);
   }, []);
 
@@ -40,11 +40,11 @@ export const PlanningTaskDetails = () => {
 
   return (
     <div className='view-wrapper-details'>
-      <Toolbar>
+      <Toolbar className='toolbar-details'>
         <ToolbarItem location='before'>
           <Button icon='arrowleft'></Button>
         </ToolbarItem>
-        <ToolbarItem location='before' text={task?.text} cssClass='toolbar-title'></ToolbarItem>
+        <ToolbarItem location='before' text={task?.text}></ToolbarItem>
         <ToolbarItem location='after' locateInMenu='auto'>
           <DropDownButton text='ACTIONS' stylingMode='contained'>
             <DropDownItem text='Duplicate'></DropDownItem>
@@ -86,7 +86,7 @@ export const PlanningTaskDetails = () => {
                 <CardNotes items={task?.notes} user={task?.owner}></CardNotes>
               </TabPanelItem>
               <TabPanelItem title='Messages' badge={messagesCount}>
-                <CardMessages items={task?.messages} user={task?.owner} updateMessagesCount={updateMessagesCount}></CardMessages>
+                <CardMessages items={task?.messages} user={task?.owner} onMessagesCountChanged={onMessagesCountChanged}></CardMessages>
               </TabPanelItem>
             </TabPanel>
           </div>

@@ -6,19 +6,19 @@ import Button from 'devextreme-react/button';
 import { withLoadPanel } from '../../shared/utils/withLoadPanel';
 import { TaskFormDetails } from './TaskFormDetails';
 
-import { FormTask } from '../../shared/types/task-form';
+import { Task } from '../../shared/types/task';
 
 import './TaskForm.scss';
 
 const TaskFormWithLoadPanel = withLoadPanel(TaskFormDetails);
 
-export const TaskForm = ({ task }: { task?: FormTask }) => {
+export const TaskForm = ({ task }: { task?: Task }) => {
   const [data, setData] = useState(task);
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     if (task) {
-      setData({ ...task, ...{ dueDate: null } });
+      setData(task);
     }
   }, [task]);
 
@@ -32,6 +32,9 @@ export const TaskForm = ({ task }: { task?: FormTask }) => {
   return (
     <div className='task-form'>
       <Toolbar>
+        <Item location='before'>
+          <span className='dx-form-group-caption'>Details</span>
+        </Item>
         <Item location='after' locateInMenu='after' visible={!editing}>
           <Button text='Edit' icon='edit' stylingMode='outlined' type='default' onClick={toggleEditing}></Button>
         </Item>

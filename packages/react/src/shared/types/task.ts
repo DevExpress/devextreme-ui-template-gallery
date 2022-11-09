@@ -6,8 +6,8 @@ export type TaskPriority = 'Low' | 'Normal' | 'High';
 
 export type TaskStatus = 'Open' | 'In Progress' | 'Deferred' | 'Completed';
 
-export interface CommonTask {
-    id: number
+export interface Task {
+    id: number,
     text: string,
     description: string,
     company: string,
@@ -20,9 +20,6 @@ export interface CommonTask {
     messages: Messages,
     parentId: number,
     progress: number,
-}
-
-export interface Task extends CommonTask {
     dueDate: Date,
 }
 export interface TaskProp {

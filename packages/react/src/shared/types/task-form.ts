@@ -1,5 +1,5 @@
 import React from 'react';
-import { TaskPriority, TaskStatus, CommonTask, TaskProp } from './task';
+import { TaskPriority, TaskStatus, TaskProp } from './task';
 
 export interface FormEdit {
     label: string;
@@ -9,8 +9,4 @@ export interface FormEdit {
 export interface FormEditComponent extends FormEdit {
     items: string[];
     editComponent: React.ComponentType<TaskProp>;
-}
-
-export interface FormTask extends CommonTask {
-    dueDate: Date | null,
 }
