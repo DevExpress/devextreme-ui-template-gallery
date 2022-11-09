@@ -17,6 +17,11 @@ fixture`Analytics Sales Report`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
+      if(screenMode === 400) {
+        const rangeSelector = Selector('dx-range-selector');
+        const state = await rangeSelector();
+        await t.expect(state.boundingClientRect.width).eql(334);
+      }
       await takeScreenshot(`analytics-sales-report-all${getPostfix(embedded, screenMode)}`, 'body');
       if (Selector('.dx-dropdownbutton').length !== 0) {
         await t.click(Selector('.dx-dropdownbutton'));
