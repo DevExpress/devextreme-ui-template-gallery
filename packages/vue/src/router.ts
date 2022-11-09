@@ -56,42 +56,22 @@ export const router = createRouter({
       },
       component: loadComponent('change-password-form'),
     },
-    {
-      path: '/crm-contact-list',
-      name: 'crm-contact-list',
+    ...[
+      { name: 'crm-contact-list' },
+      { name: 'crm-contact-details' },
+      { name: 'planning-task-list' },
+      { name: 'planning-task-details' },
+      { folder: 'analytics/', name: 'analytics-dashboard' },
+      { folder: 'analytics/', name: 'analytics-sales-report' },
+      { folder: 'analytics/', name: 'analytics-geography' },
+    ].map((route) => ({
+      path: `/${route.name}`,
       meta: {
         requiresAuth: true,
         layout: defaultLayout,
       },
-      component: loadComponent('crm-contact-list/crm-contact-list'),
-    },
-    {
-      path: '/crm-contact-details',
-      name: 'crm-contact-details',
-      meta: {
-        requiresAuth: true,
-        layout: defaultLayout,
-      },
-      component: loadComponent('crm-contact-details/crm-contact-details'),
-    },
-    {
-      path: '/planning-task-list',
-      name: 'planning-task-list',
-      meta: {
-        requiresAuth: true,
-        layout: defaultLayout,
-      },
-      component: loadComponent('planning-task-list/planning-task-list'),
-    },
-    {
-      path: '/planning-task-details',
-      name: 'planning-task-details',
-      meta: {
-        requiresAuth: true,
-        layout: defaultLayout,
-      },
-      component: loadComponent('planning-task-details/planning-task-details'),
-    },
+      component: loadComponent(`${route.folder || ''}${route.name || ''}/${route.name}`),
+    })),
   ],
 });
 

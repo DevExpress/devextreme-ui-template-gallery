@@ -7,7 +7,6 @@
 
   <div class="cards wide">
     <card-analytics
-      [isLoading]="!sales"
       contentClass="sales-range"
       [component]="range"
       [isMenuVisible]="false"
@@ -35,7 +34,6 @@
 
     <card-analytics
       titleText="Product Sale by Range"
-      [isLoading]="!salesByCategory"
       contentClass="sales-by-category"
       [component]="bar"
     >
@@ -82,7 +80,7 @@
       </dx-chart>
     </card-analytics>
 
-    <card-analytics titleText="Sales Performance" className="sales" [isLoading]="!salesByDateAndCategory"  [component]="chart">
+    <card-analytics titleText="Sales Performance" className="sales" [component]="chart">
       <div filter class="sales-filter" >
       <dx-drop-down-button stylingMode="text" [useSelectMode]="true"
         [items]="groupByPeriods" [selectedItemKey]="groupByPeriods[1]" (onSelectionChanged)="selectionChange($event)">
@@ -108,3 +106,9 @@
     </card-analytics>
   </div>
 </div>
+<dx-load-panel
+  container=".view-wrapper"
+  [position]="{of: '.app-content-wrapper'}"
+  [visible]="isLoading | apply: [sales, salesByCategory, salesByDateAndCategory]"
+  [showPane]="true"
+></dx-load-panel>

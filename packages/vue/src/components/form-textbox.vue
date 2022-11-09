@@ -10,7 +10,7 @@
     value-change-event="keyup input change"
   >
     <dx-validator
-      :validation-rules="validators || [{type: 'required'}]"
+      :validation-rules="validators"
       :validation-group="validationGroup"
     />
     <dx-text-box-button
@@ -24,18 +24,23 @@
 
 <script setup lang="ts">
 import { DxTextBox, DxButton as DxTextBoxButton } from 'devextreme-vue/text-box';
-import { DxValidator } from 'devextreme-vue/validator';
+import { DxValidator, DxValidationRule, DxRequiredRule } from 'devextreme-vue/validator';
 import { computed } from 'vue';
 
-const props = defineProps<{
+const props = withDefaults(
+  defineProps<{
   modelValue?: number | string | Date,
   isEditing: boolean,
   label?: string,
   icon?: string,
   mask?: string,
   validationGroup?: string,
-  validators?: Record<string, any>[],
-}>();
+  validators?: Array<typeof DxValidationRule>,
+}>(),
+  {
+    validators: () => [{ type: 'required' }],
+  },
+);
 const emit = defineEmits(['update:modelValue']);
 
 const value = computed({
