@@ -2,9 +2,9 @@
 @use "sass:math";
 
 .toolbar-details {
-    margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
+  margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
 
-    .dx-toolbar-label > div {
-      @include header();
-    }
+  .dx-toolbar-label > div {
+    @include header();
+  }
 }

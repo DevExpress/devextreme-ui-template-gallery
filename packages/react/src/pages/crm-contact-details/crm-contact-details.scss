@@ -15,9 +15,9 @@ $right-panel-width: 360px;
       min-width: calc(#{$left-panel-width} + #{$right-panel-width} - 145px);
     }
   }
-  
+
   @include separator();
- 
+
   .panels {
     display: flex;
     flex-wrap: wrap;
