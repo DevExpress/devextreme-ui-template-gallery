@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, NgModule, Input, OnInit, ElementRef, OnDestroy,
+  Component, NgModule, Input, OnInit, ElementRef, OnDestroy, AfterContentInit,
 } from '@angular/core';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { PositionConfig } from 'devextreme/animation/position';
@@ -31,12 +31,12 @@ class ResizeObservable extends Observable<ResizeObserverEntry[]> {
   styleUrls: ['./card-analytics.component.scss'],
 })
 
-export class CardAnalytticsComponent implements OnInit, OnDestroy {
+export class CardAnalytticsComponent implements OnInit, AfterContentInit, OnDestroy {
   @Input() titleText: string;
 
   @Input() contentClass: string;
 
-  @Input() component: { instance: { render: () => void }};
+  @Input() component: { instance: { render: () => void, element: () => HTMLElement }};
 
   @Input() isMenuVisible = true;
 
@@ -68,10 +68,12 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
       at: (!this.isGreyCard() ? 'center' : 'right'),
     };
     this.loadingHeight = !this.isGreyCard() ? 60 : 50;
+  }
 
+  ngAfterContentInit(): void {
     if (!this.isGreyCard() && this.component) {
-      this.resizeObserverSubscription = new ResizeObservable(this.observedElement)
-        .pipe(debounceTime(300))
+      this.resizeObserverSubscription = new ResizeObservable(this.component.instance.element())
+        .pipe(debounceTime(100))
         .subscribe(this.resizeCallback.bind(this));
     }
   }
