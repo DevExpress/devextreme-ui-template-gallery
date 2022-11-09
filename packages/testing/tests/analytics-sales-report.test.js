@@ -17,13 +17,27 @@ fixture`Analytics Sales Report`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`analytics-sales-report-all${getPostfix(embedded, screenMode)}`, 'body');
+      await takeScreenshot(`analytics-sales-report-month${getPostfix(embedded, screenMode)}`, 'body');
+
       if (Selector('.dx-dropdownbutton').length !== 0) {
         await t.click(Selector('.dx-dropdownbutton'));
         await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
         await t.wait(timeoutSecond);
         await takeScreenshot(`analytics-sales-report-day${getPostfix(embedded, screenMode)}`, 'body');
       }
+
+      await t.drag(Selector('.slider').nth(1), -100, 0, { offsetX: 10, offsetY: 10 });
+      await t.drag(Selector('.slider').nth(0), 100, 0, { offsetX: 10, offsetY: 10 });
+      await t.wait(timeoutSecond);
+
+      if (Selector('.dx-dropdownbutton').length !== 0) {
+        await takeScreenshot(`analytics-sales-report-day-range${getPostfix(embedded, screenMode)}`, 'body');
+        await t.click(Selector('.dx-dropdownbutton'));
+        await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(1));
+        await t.wait(timeoutSecond);
+      }
+
+      await takeScreenshot(`analytics-sales-report-month-range${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
         .expect(compareResults.isValid())
