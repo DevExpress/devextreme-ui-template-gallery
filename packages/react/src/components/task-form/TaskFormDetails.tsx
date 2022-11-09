@@ -20,17 +20,29 @@ import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import { Task } from '../../shared/types/task';
 
 const renderPriorityField = (data: string) => (
-  <>
-    <PriorityTask text={data}></PriorityTask>
-    <TextBox readOnly></TextBox>
-  </>
+  <div className='priority-task-editor-field'>
+    <PriorityTask text={data} showText={false}></PriorityTask>
+    <TextBox
+      className={`priority-task priority-${data.toLowerCase()}`}
+      inputAttr={{ class: 'priority-editor-input' }}
+      readOnly
+      text={data}
+      hoverStateEnabled={false}
+    ></TextBox>
+  </div>
 );
 
 const renderStatusField = (data: string) => (
-  <>
-    <StatusTask text={data}></StatusTask>
-    <TextBox readOnly></TextBox>
-  </>
+  <div className='status-task-editor-field'>
+    <StatusTask text={data} showText={false}></StatusTask>
+    <TextBox
+      className={`status-task status-${data.toLowerCase()}`}
+      inputAttr={{ class: 'status-editor-input' }}
+      readOnly
+      text={data}
+      hoverStateEnabled={false}
+    ></TextBox>
+  </div>
 );
 
 const renderPriorityItem = (data: string) => <PriorityTask text={data}></PriorityTask>;
@@ -73,7 +85,6 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
               value={data.priority}
               items={PRIORITY_ITEMS}
               readOnly={!editing}
-              elementAttr={{ class: 'form-editor' }}
               stylingMode='filled'
               fieldRender={renderPriorityField}
               itemRender={renderPriorityItem}
@@ -87,7 +98,6 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
               value={data.status}
               items={STATUS_ITEMS}
               readOnly={!editing}
-              elementAttr={{ class: 'form-editor' }}
               stylingMode='filled'
               fieldRender={renderStatusField}
               itemRender={renderStatusItem}
@@ -101,7 +111,7 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
               readOnly={!editing}
               name='Set Start Date'
               label='Start Date'
-              elementAttr={{ class: 'form-editor' }}
+              // elementAttr={{ class: 'form-editor' }}
               inputAttr={{ class: 'form-editor-input' }}
               stylingMode='filled'
               placeholder='MM/dd/y'
@@ -119,7 +129,7 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
               readOnly={!editing}
               name='Set Due Date'
               label='Due Date'
-              elementAttr={{ class: 'form-editor' }}
+              // elementAttr={{ class: 'form-editor' }}
               inputAttr={{ class: 'form-editor-input' }}
               stylingMode='filled'
               placeholder='MM/dd/y'
@@ -138,7 +148,7 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
             label='Details'
             readOnly={!editing}
             value={data.description}
-            elementAttr={{ class: 'form-editor' }}
+            // elementAttr={{ class: 'form-editor' }}
             stylingMode='filled'
             onValueChange={updateField('description')}
           ></TextArea>
