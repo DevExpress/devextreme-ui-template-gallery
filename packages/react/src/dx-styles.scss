@@ -158,3 +158,32 @@ body {
     }
   }
 }
+
+@mixin status-contact($status-color) {
+  color: $status-color;
+
+  &.dx-texteditor {
+    .status-editor-input {
+      color: $status-color;
+      padding-left: 0;
+    }
+  }
+
+  &::before {
+    background-color: $status-color;
+  }
+}
+
+.status-contact {
+  &.status-commission {
+    @include status-contact(#03a9f4);
+  }
+
+  &.status-salaried {
+    @include status-contact(#2eb52c);
+  }
+
+  &.status-terminated {
+    @include status-contact(#de8e8c);
+  }
+}

@@ -2,8 +2,8 @@ import React from 'react';
 
 import './ContactStatus.scss';
 
-export const ContactStatus = ({ text }: { text: string }) => (
+export const ContactStatus = ({ text, showText = true }: { text: string, showText?: boolean }) => (
   <div className={`status-contact status-${text.toLowerCase()}`}>
-    <span>{text}</span>
+    <span>{showText ? text : ''}</span>
   </div>
 );

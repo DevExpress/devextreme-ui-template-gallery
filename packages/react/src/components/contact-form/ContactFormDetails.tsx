@@ -18,10 +18,16 @@ import { CONTACT_STATUS_LIST } from '../../shared/constants';
 const PHOTO_SIZE = 184;
 
 const statusRender = (text: string) => (
-  <>
-    <ContactStatus text={text} />
-    <TextBox readOnly />
-  </>
+  <div className='status-editor-field'>
+    <ContactStatus text={text} showText={false} />
+    <TextBox
+      className={`status-contact status-${text.toLowerCase()}`}
+      inputAttr={{ class: 'status-editor-input' }}
+      readOnly
+      text={text}
+      hoverStateEnabled={false}
+    />
+  </div>
 );
 
 const statusItemRender = (text: string) => <ContactStatus text={text} />;
