@@ -2,21 +2,23 @@
 @use "sass:math";
 
 .status-contact {
-  font-size: 13px;
+  span {
+    font-size: 13px;
 
-  &::before {
-    $diameter: 10px;
+    &::before {
+      $diameter: 10px;
 
-    content: " ";
-    width: $diameter;
-    height: $diameter;
-    border-radius: math.div($diameter, 2);
-    margin-right: math.div($diameter, 2);
-    display: inline-block;
-  }
+      content: " ";
+      width: $diameter;
+      height: $diameter;
+      border-radius: math.div($diameter, 2);
+      margin-right: math.div($diameter, 2);
+      display: inline-block;
+    }
 
-  &.input {
-    display: block;
-    padding: 15px 16px 14px;
+    &.input {
+      display: block;
+      padding: 15px 16px 14px;
+    }
   }
 }
