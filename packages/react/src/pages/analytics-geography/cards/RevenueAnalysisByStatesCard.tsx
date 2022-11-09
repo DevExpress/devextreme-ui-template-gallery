@@ -6,7 +6,7 @@ import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics'
 export const RevenueAnalysisByStatesCard = ({ datasource }) => (
   <CardAnalytics
     title='Revenue Analysis by States'
-    contentClass='sales-by-state-and-city'
+    contentClass='sales-by-state-and-city grid'
     isLoading={!datasource.length}
   >
     <DataGrid dataSource={datasource} height={270}>
