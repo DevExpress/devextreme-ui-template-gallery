@@ -11,29 +11,25 @@
       <analytic-tile
         title="Opportunities"
         :data="opportunities"
-        :up="true"
-        percent="20.3"
+        :percentage="20.3"
       />
 
       <analytic-tile
         title="Revenue Total"
         :data="sales"
-        :up="true"
-        percent="14.7"
+        :percentage="14.7"
       />
 
       <analytic-tile
         title="Conversion"
         total="16%"
-        :up="false"
-        percent="2.3"
+        :percentage="-2.3"
       />
 
       <analytic-tile
         title="Leads"
         total="51"
-        :up="true"
-        percent="8.5"
+        :percentage="8.5"
       />
     </div>
 
