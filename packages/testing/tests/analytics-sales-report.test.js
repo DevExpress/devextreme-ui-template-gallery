@@ -22,7 +22,8 @@ fixture`Analytics Sales Report`;
       if (screenMode[0] === 400) {
         await t.expect(state.boundingClientRect.width).eql(334);
       } else {
-        await t.expect(state.boundingClientRect.width).eql(1074);
+        await t.expect(screenMode[0]).eql(1280);
+        await t.expect(state.boundingClientRect.width).eql(embedded ? 1214 : 964);
       }
 
       await takeScreenshot(`analytics-sales-report-all${getPostfix(embedded, screenMode)}`, 'body');
