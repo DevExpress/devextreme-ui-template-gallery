@@ -22,12 +22,13 @@ fixture`Analytics Sales Report`;
 
       await t.drag(Selector('.slider').nth(1), -100, 0, { offsetX: 10, offsetY: 10 });
       await t.drag(Selector('.slider').nth(0), 100, 0, { offsetX: 10, offsetY: 10 });
+      await t.wait(timeoutSecond);
 
       await takeScreenshot(`analytics-sales-report-month-range${getPostfix(embedded, screenMode)}`, 'body');
 
       await t.click(Selector('.dx-dropdownbutton'));
       await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
-      await t.wait(chartTimeout);
+      await t.wait(timeoutSecond);
       await takeScreenshot(`analytics-sales-report-day-range${getPostfix(embedded, screenMode)}`, 'body');
 
       await takeScreenshot(`analytics-sales-report-all${getPostfix(embedded, screenMode)}`, 'body');
