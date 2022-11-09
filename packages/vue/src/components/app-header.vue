@@ -147,7 +147,7 @@ header {
   }
 
   .header-toolbar {
-    padding-right: 20px;
+    padding-right: $content-padding;
 
     .user-button.authorization {
       margin-left: 10px;

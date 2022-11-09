@@ -16,13 +16,14 @@
 $base-font-size: $material-base-font-size;
 $toolbar-height: toolbar_sizes.$material-toolbar-height;
 
+$content-padding: 16px;
 $side-panel-min-width: 60px;
 $side-panel-background: darken($base-bg, 5);
 $background-color: $base-bg;
 $accent-color: $base-accent;
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 $text-button-horizontal-padding: $material-button-icononly-padding;
-$toolbar-margin-bottom: 16px;
+$toolbar-margin-bottom: $content-padding;
 $texteditor-edit-color: $texteditor-color;
 $filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
 $list-padding-left: $material-list-item-horizontal-padding;

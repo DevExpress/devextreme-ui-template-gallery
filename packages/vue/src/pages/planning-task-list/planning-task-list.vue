@@ -228,10 +228,9 @@ loadTasksAsync();
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 16px 0 16px;
 
   .dx-toolbar {
-    margin-bottom: $toolbar-margin-bottom;
+    padding: 20px $content-padding $content-padding;
   }
 }
 
@@ -248,5 +247,10 @@ loadTasksAsync();
 
 .view-wrapper {
   flex-direction: column;
+}
+
+.gantt,
+.kanban {
+  padding: 0 $content-padding;
 }
 </style>
