@@ -59,8 +59,8 @@ export const router = createRouter({
     ...[
       { name: 'crm-contact-list' },
       { name: 'crm-contact-details' },
-      { name: 'planning-task-list' },
-      { name: 'planning-task-details' },
+      { folder: 'planning/', name: 'planning-task-list' },
+      { folder: 'planning/', name: 'planning-task-details' },
       { folder: 'analytics/', name: 'analytics-dashboard' },
       { folder: 'analytics/', name: 'analytics-sales-report' },
       { folder: 'analytics/', name: 'analytics-geography' },

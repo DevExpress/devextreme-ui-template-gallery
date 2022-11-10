@@ -12,7 +12,9 @@
         :lg="1"
       />
       <dx-form-item class="uploader">
-        <form-photo-uploader />
+        <div>
+          <form-photo-uploader />
+        </div>
       </dx-form-item>
     </dx-form-item>
 
