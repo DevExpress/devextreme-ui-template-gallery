@@ -54,7 +54,7 @@
           label-mode="floating"
         >
           <dx-form-group-item :col-count="2">
-            <dx-col-count-by-screen :xs="2"/>
+            <dx-col-count-by-screen :xs="2" />
             <dx-form-item css-class="accent">
               <form-textbox
                 label="Company"
@@ -87,13 +87,15 @@
                     <status-indicator
                       :is-field="true"
                       :show-bar="true"
-                      :value="data.priority" />
+                      :value="data.priority"
+                    />
                   </div>
                 </template>
                 <template #item="{ data }">
                   <status-indicator
                     :show-bar="true"
-                    :value="data" />
+                    :value="data"
+                  />
                 </template>
               </dx-select-box>
             </dx-form-item>
@@ -113,12 +115,14 @@
                   <div class="task-editor-field">
                     <status-indicator
                       :is-field="true"
-                      :value="data.status" />
+                      :value="data.status"
+                    />
                   </div>
                 </template>
                 <template #item="{ data }">
                   <status-indicator
-                    :value="data" />
+                    :value="data"
+                  />
                 </template>
               </dx-select-box>
             </dx-form-item>
@@ -172,7 +176,6 @@ import { DxSelectBox } from 'devextreme-vue/select-box';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import LoadComponent from '@/components/load-component.vue';
 import FormTextbox from '@/components/form-textbox.vue';
-import TaskStatus from '@/components/task-status.vue';
 import FormDatebox from '@/components/form-datebox.vue';
 
 const emptyData = {} as Task;

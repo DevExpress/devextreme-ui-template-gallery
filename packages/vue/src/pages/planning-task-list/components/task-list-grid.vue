@@ -94,7 +94,8 @@
     <template #cellPriority="{ data }">
       <status-indicator
         :show-bar="true"
-        :value="data?.data?.priority || ''" />
+        :value="data?.data?.priority || ''"
+      />
     </template>
 
     <template #editCellPriority="{ data: cellData }">
@@ -111,13 +112,15 @@
             <status-indicator
               :show-bar="true"
               :is-field="true"
-              :value="cellData.value" />
+              :value="cellData.value"
+            />
           </div>
         </template>
         <template #item="{ data }">
-        <status-indicator
-          :show-bar="true"
-          :value="data" />
+          <status-indicator
+            :show-bar="true"
+            :value="data"
+          />
         </template>
       </dx-select-box>
     </template>
@@ -138,11 +141,13 @@
         <template #field>
           <status-indicator
             :is-field="true"
-            :value="cellInfo.value" />
+            :value="cellInfo.value"
+          />
         </template>
         <template #item="{data}">
           <status-indicator
-            :value="data" />
+            :value="data"
+          />
         </template>
       </dx-select-box>
     </template>
