@@ -92,7 +92,9 @@
     </dx-column>
 
     <template #cellPriority="{ data }">
-      <task-priority :value="data?.data?.priority || ''" />
+      <status-indicator
+        :show-bar="true"
+        :value="data?.data?.priority || ''" />
     </template>
 
     <template #editCellPriority="{ data: cellData }">
@@ -106,24 +108,22 @@
       >
         <template #field>
           <div class="form-custom-list-prop">
-            <task-priority
-              :value="cellData.value"
-              class="task-priority"
-            />
-            <dx-text-box :read-only="true" />
+            <status-indicator
+              :show-bar="true"
+              :is-field="true"
+              :value="cellData.value" />
           </div>
         </template>
         <template #item="{ data }">
-          <task-priority
-            :value="data"
-            class="task-priority"
-          />
+        <status-indicator
+          :show-bar="true"
+          :value="data" />
         </template>
       </dx-select-box>
     </template>
 
     <template #cellStatus="{ data }">
-      <task-status :status="data.value" />
+      <status-indicator :value="data.value" />
     </template>
 
     <template #editCellStatus="{ data: cellInfo }">
@@ -136,11 +136,13 @@
         field-template="field"
       >
         <template #field>
-          <task-status :status="cellInfo.value" />
-          <dx-text-box :read-only="true" />
+          <status-indicator
+            :is-field="true"
+            :value="cellInfo.value" />
         </template>
         <template #item="{data}">
-          <task-status :status="data" />
+          <status-indicator
+            :value="data" />
         </template>
       </dx-select-box>
     </template>
@@ -181,8 +183,7 @@ import type { Task } from '@/types/task';
 import type { RowPreparedEvent } from 'devextreme/ui/data_grid';
 import { taskPriorityList as priorityList, taskStatusList as statusList } from '@/types/task';
 import { Workbook } from 'exceljs';
-import TaskStatus from '@/components/task-status.vue';
-import TaskPriority from '@/components/task-priority.vue';
+import StatusIndicator from '@/components/status-indicator.vue';
 
 const props = withDefaults(defineProps<{
   dataSource: Task[] | null
@@ -275,11 +276,5 @@ defineExpose({
 :deep(.edit-cell) {
   position: relative;
 
-  .task-priority,
-  .task-status {
-    position: absolute;
-    margin-top: 10px;
-    margin-left: 11px;
-  }
 }
 </style>
