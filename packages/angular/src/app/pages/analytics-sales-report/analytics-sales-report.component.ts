@@ -90,6 +90,7 @@ export class AnalyticsSalesReportComponent implements OnInit, AfterViewInit {
     const text = document.getElementById('range-text') as any;
 
     rangeSelectorContainer.initWidth = text.getBBox().width;
+    rangeSelectorContainer.initText = text.textContent
   }
 
   ngOnInit(): void {
