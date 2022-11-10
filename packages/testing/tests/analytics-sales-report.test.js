@@ -19,7 +19,7 @@ fixture`Analytics Sales Report`;
       const getBox = ClientFunction(() => {
         return {
           currentWidth: document.getElementById('range-text').getBBox().width,
-          initWidth: document.getElementById('rangeSelector').initDidth
+          initWidth: document.getElementById('rangeSelector').initWidth
         }
       });
 
