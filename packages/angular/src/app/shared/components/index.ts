@@ -9,8 +9,7 @@ export * from './user-panel/user-panel.component';
 
 export * from './contact-status/contact-status.component';
 
-export * from './task-status/task-status.component';
-export * from './task-priority/task-priority.component';
+export * from './status-indicator/status-indicator.component';
 
 export * from './card-activities/card-activities.component';
 export * from './card-notes/card-notes.component';

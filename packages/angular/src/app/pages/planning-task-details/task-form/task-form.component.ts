@@ -13,8 +13,7 @@ import {
   DxValidatorModule,
 } from 'devextreme-angular';
 import {
-  TaskProirityModule,
-  TaskStatusModule,
+  StatusIndicatorModule,
   FormItemDateModule,
   FormTextboxModule,
 } from 'src/app/shared/components';
@@ -72,8 +71,7 @@ export class TaskFormComponent implements OnChanges {
     DxValidatorModule,
 
     FormTextboxModule,
-    TaskProirityModule,
-    TaskStatusModule,
+    StatusIndicatorModule,
     FormItemDateModule,
     CommonModule,
   ],
