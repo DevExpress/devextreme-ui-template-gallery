@@ -17,12 +17,4 @@
 
 .edit-cell {
   position: relative;
-
-  ::ng-deep .status-indicator {
-    margin-left: $list-padding-left;
-  }
-
-  ::ng-deep .status-editor-input.status-input {
-    padding-left: 0;
-  }
 }
