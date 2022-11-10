@@ -19,15 +19,18 @@ fixture`Analytics Sales Report`;
       const getBox = ClientFunction(() => {
         return {
           currentWidth: document.getElementById('range-text').getBBox().width,
+          currentText: document.getElementById('range-text').textContent,
           initWidth: document.getElementById('rangeSelector').initWidth,
           initText: document.getElementById('rangeSelector').initText
         }
       });
 
+      const textValue = '12/1/2021';
       const box = await getBox();
       await t.expect(Math.floor(box.currentWidth)).eql(52);
+      await t.expect(box.currentText).eql(textValue);
       await t.expect(Math.floor(box.initWidth)).eql(48);
-      await t.expect(box.initText).eql('12/1/2021');
+      await t.expect(box.initText).eql(textValue);
     });
   });
 });
