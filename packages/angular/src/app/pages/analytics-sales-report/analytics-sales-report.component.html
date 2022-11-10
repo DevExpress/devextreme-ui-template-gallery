@@ -8,28 +8,173 @@
   <div class="cards wide">
     <card-analytics
       contentClass="sales-range"
-      [component]="range"
       [isMenuVisible]="false"
     >
-    <dx-range-selector #range [dataSource]="sales" [(value)]="visualRange" theme="material.blue.light.compact" (onValueChanged)="onRangeChanged($event)">
-      <dxo-scale
-        minorTickInterval="day"
-        tickInterval="month"
-        valueType="datetime"
-      >
-        <dxo-minor-tick [visible]="false"></dxo-minor-tick>
-        <dxo-marker [visible]="false"></dxo-marker>
-        <dxo-label format="MMM yyyy"></dxo-label>
-      </dxo-scale>
-      <dxo-size [height]="90"></dxo-size>
-
-      <dxo-loading-indicator [show]="true"></dxo-loading-indicator>
-
-      <dxo-chart>
-        <dxi-series type="line" argumentField="date" valueField="total">
-        </dxi-series>
-      </dxo-chart>
-    </dx-range-selector>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" fill="none" stroke="none" stroke-width="0" class="dxrs
+   dxrs-range-selector" width="964" height="90" style="line-height: normal;
+   user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); display:
+   block; overflow: hidden; touch-action: pan-y;" direction="ltr">
+    <defs>
+        <filter id="DevExpress_1" x="-50%" y="-50%" width="200%" height="200%" transform="translate(0,0)">
+            <feGaussianBlur in="SourceGraphic" result="gaussianBlurResult" stdDeviation="3"></feGaussianBlur>
+            <feOffset in="gaussianBlurResult" result="offsetResult" dx="2" dy="6"></feOffset>
+            <feFlood result="floodResult" flood-color="" flood-opacity="0.8"></feFlood>
+            <feComposite in="floodResult" in2="offsetResult" operator="in" result="compositeResult"></feComposite>
+            <feComposite in="SourceGraphic" in2="compositeResult" operator="over"></feComposite>
+        </filter>
+        <clipPath id="DevExpress_2">
+            <rect x="0" y="0" width="964" height="90" transform="translate(0,0)"></rect>
+        </clipPath>
+        <clipPath id="DevExpress_3">
+            <rect x="24" y="20" width="916" height="51" transform="translate(0,0)"></rect>
+        </clipPath>
+    </defs>
+    <g class="dxrs-view" clip-path="url(#DevExpress_3)">
+        <g class="dxrs-series-group">
+            <g class="dxc-series">
+                <g class="dxc-elements" stroke="#1db2f5" stroke-width="2">
+                    <path d="M 24 48 L 60 25 L 97 38 L 135 53 L 170 65 L 207
+   65 L 243 63 L 280 69 L 316 70 L 354 56 L 391 62 L 427 52 L 465 71 L 501 66
+   L 538 58 L 575 65 L 609 61 L 646 61 L 682 62 L 720 64 L 756 60 L 793 68 L
+   830 62 L 867 63 L 904 63 L 940 59" transform="translate(0,0)" stroke-width="2"></path>
+                </g>
+                <g fill="#1db2f5" stroke="#1db2f5" stroke-width="0" r="6" visibility="hidden" class="dxc-markers"
+                    opacity="1"></g>
+            </g>
+            <g class="dxc-labels" pointer-events="none" opacity="1" transform="translate(0,0)"></g>
+        </g>
+    </g>
+    <g class="dxrs-slidersContainer" clip-path="url(#DevExpress_2)">
+        <path d="M 24
+   20 L 24 20 L 24 71 L 24 71 Z M 940 20 L 940 20 L 940 71 L 940 71 Z" transform="translate(0,0)" fill="#ffffff"
+            fill-opacity="0.75"></path>
+        <g class="slider" transform="translate(24,20)">
+            <path d="M 0 0 L 0 51" transform="translate(0.5,0)" stroke-width="1" stroke="#03a9f4" stroke-opacity="0.5">
+            </path>
+            <g class="slider-marker" transform="translate(0,-20)">
+                <path d="M 0 0 L 57 0 L 57 16 L 4 16 L 0 20 L
+   0 16 L 0 16 Z" transform="translate(0,0)" fill="#03a9f4"></path><text x="0" y="0" transform="translate(4,12)"
+                    text-anchor="start" style="white-space: pre; fill: rgb(255, 255, 255); font-size: 11px;
+   font-family: Roboto, RobotoFallback, Helvetica, Arial, sans-serif;
+   font-weight: 400; cursor: default;">11/1/2019</text>
+            </g>
+        </g>
+        <g class="slider" transform="translate(940,20)">
+            <path d="M 0 0 L 0 51" transform="translate(0.5,0)" stroke-width="1" stroke="#03a9f4" stroke-opacity="0.5">
+            </path>
+            <g class="slider-marker" transform="translate(0,-20)">
+                <path d="M -56 0 L 1 0 L 1 16 L 1 16 L 1 20 L
+   -3 16 L -56 16 Z" transform="translate(0,0)" fill="#03a9f4"></path><text x="0" y="0" transform="translate(-52,12)"
+                    text-anchor="start" style="white-space: pre; fill: rgb(255, 255, 255); font-size: 11px;
+   font-family: Roboto, RobotoFallback, Helvetica, Arial, sans-serif;
+   font-weight: 400; cursor: default;">12/1/2021</text>
+            </g>
+        </g>
+    </g>
+    <g class="dxrs-scale" clip-path="url(#DevExpress_2)">
+        <g class="dxrs-range-selector-axis" transform="translate(0,-5.5)">
+            <g class="dxrs-range-selector-line">
+                <path d="M 24 26 L 24 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 60 26
+   L 60 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1" stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 97 26 L 97 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 135 26 L 135 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 170 26 L 170 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 207 26 L 207 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 243 26 L 243 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 280 26 L 280 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 316 26 L 316 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 354 26 L 354 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 391 26 L 391 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 427 26 L 427 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 465 26 L 465 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 501 26 L 501 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 538 26 L 538 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 575 26 L 575 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 609 26 L 609 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 646 26 L 646 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 682 26 L 682 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 720 26 L 720 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 756 26 L 756 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 793 26 L 793 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 830 26 L 830 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 867 26 L 867 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 904 26 L 904 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+                <path d="M 940 26 L 940 77" transform="translate(0.5,0)" stroke="#000000" stroke-width="1"
+                    stroke-opacity="0.17" opacity="1"></path>
+            </g>
+            <g class="dxrs-range-selector-title"></g>
+        </g>
+    </g>
+    <g class="dxrs-scale-elements" clip-path="url(#DevExpress_2)">
+        <g class="dxrs-range-selector-elements" transform="translate(0,-5.5)"><text x="24" y="51"
+                transform="translate(0,41.5)" text-anchor="middle" style="white-space: pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54);
+   font-family: Roboto, RobotoFallback, Helvetica, Arial, sans-serif;
+   font-weight: 400; cursor: default;">Nov 2019</text><text x="97" y="51" transform="translate(0,41.5)"
+                text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">Jan 2020</text><text x="170" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">Mar 2020</text><text x="243" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">May 2020</text><text x="316" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">Jul 2020</text><text x="391" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">Sep 2020</text><text x="465" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">Nov 2020</text><text x="538" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">Jan 2021</text><text x="609" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">Mar 2021</text><text x="682" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">May 2021</text><text x="756" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">Jul 2021</text><text x="830" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">Sep 2021</text><text x="904" y="51" transform="translate(0,41.5)" text-anchor="middle" style="white-space:
+   pre; font-size: 11px; fill: rgba(0, 0, 0, 0.54); font-family: Roboto,
+   RobotoFallback, Helvetica, Arial, sans-serif; font-weight: 400; cursor:
+   default;">Nov 2021</text></g>
+    </g>
+    <g class="dxrs-scale-breaks"></g>
+</svg>
     </card-analytics>
 
     <card-analytics
