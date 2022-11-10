@@ -19,7 +19,8 @@ fixture`Analytics Sales Report`;
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-sales-report-month${getPostfix(embedded, screenMode)}`, 'body');
 
-      if (Selector('.dx-dropdownbutton').exists()) {
+      const isPeriodSelectorBoxExists = await Selector('.dx-dropdownbutton').exists();
+      if (isPeriodSelectorBoxExists) {
         await t.click(Selector('.dx-dropdownbutton'));
         await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
         await t.wait(timeoutSecond);
@@ -30,7 +31,7 @@ fixture`Analytics Sales Report`;
       await t.drag(Selector('.slider').nth(0), 100, 0, { offsetX: 10, offsetY: 10 });
       await t.wait(timeoutSecond);
 
-      if (Selector('.dx-dropdownbutton').exists()) {
+      if (isPeriodSelectorBoxExists) {
         await takeScreenshot(`analytics-sales-report-day-range${getPostfix(embedded, screenMode)}`, 'body');
         await t.click(Selector('.dx-dropdownbutton'));
         await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(1));
