@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Item } from 'devextreme-react/toolbar';
-import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, getSalesByState } from 'dx-rwa-data';
+import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, calcSalesByState } from 'dx-rwa-data';
 import './analytics-dashboard.scss';
 import { RevenueSnapshotCard } from './cards/RevenueSnapshotCard';
 import { RevenueAnalysisCard } from './cards/RevenueAnalysisCard';
@@ -38,7 +38,7 @@ export const AnalyticsDashboard = () => {
         setSalesTotal(calculateTotal(data));
       }),
       getSalesByStateAndCity(...dateRange)
-        .then((data) => getSalesByState(data))
+        .then((data) => calcSalesByState(data))
         .then((data) => setSalesByState(data)),
     ]).catch((error) => console.log(error));
   }, [dateRange]);

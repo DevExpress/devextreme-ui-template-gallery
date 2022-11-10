@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Dashboard } from '../../components/dashboard/Dashboard';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
-import { getSalesByStateAndCity, getSalesByState } from 'dx-rwa-data';
+import { getSalesByStateAndCity, calcSalesByState } from 'dx-rwa-data';
 import {
   ANALYTICS_PERIODS,
   DEFAULT_ANALYTICS_PERIOD_KEY,
@@ -43,7 +43,7 @@ export const AnalyticsGeography = () => {
 
   useEffect(() => {
     getSalesByStateAndCity(...dateRange).then((data) => {
-      const salesByStateResult = getSalesByState(data);
+      const salesByStateResult = calcSalesByState(data);
 
       setSalesByStateAndCity(data);
       setSalesByState(salesByStateResult);

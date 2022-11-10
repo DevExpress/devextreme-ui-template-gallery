@@ -37,7 +37,7 @@ export const CardAnalytics = ({
   return (
     <div className={`card ${contentClass}`}>
       <Menu visible={menuVisible} className='overflow-menu' items={menuItems} />
-      <div className='title'>{title}</div>
+      {title && <div className='title'>{title}</div>}
       {additionalHeaderContent}
       <div className='card-contents'>{children}</div>
       <LoadPanel
