@@ -16,12 +16,16 @@ fixture`Analytics Sales Report`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => { }, screenMode, timeoutSecond);
 
 
-      const getBoxWidth = ClientFunction(() => {
-        return document.getElementById('range-text').getBBox().width;
+      const getBox = ClientFunction(() => {
+        return {
+          currentWidth: document.getElementById('range-text').getBBox().width,
+          initWidth: document.getElementById('rangeSelector').initDidth
+        }
       });
 
-      const width = await getBoxWidth();
-      await t.expect(Math.floor(width)).eql(52);
+      const box = await getBox();
+      await t.expect(Math.floor(box.currentWidth)).eql(52);
+      await t.expect(Math.floor(box.initWidth)).eql(100);
     });
   });
 });

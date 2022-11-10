@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule,
+  Component, OnInit, NgModule, AfterViewInit,
 } from '@angular/core';
 
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
@@ -31,7 +31,7 @@ type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | Sal
   styleUrls: ['./analytics-sales-report.component.scss'],
   providers: [RwaService],
 })
-export class AnalyticsSalesReportComponent implements OnInit {
+export class AnalyticsSalesReportComponent implements OnInit, AfterViewInit {
   groupByPeriods = ['Day', 'Month'];
 
   sales: Sales = null;
@@ -82,6 +82,14 @@ export class AnalyticsSalesReportComponent implements OnInit {
 
   customiseToolip({ seriesName }) {
     return { text: seriesName };
+  }
+
+  ngAfterViewInit(): void {
+    const rangeSelectorContainer = document.getElementById('rangeSelector') as any;
+
+    const text = document.getElementById('range-text') as any;
+
+    rangeSelectorContainer.initWidth = text.getBBox().width;
   }
 
   ngOnInit(): void {
