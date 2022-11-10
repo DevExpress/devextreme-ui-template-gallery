@@ -35,8 +35,6 @@ $texteditor-edit-color: $texteditor-color;
 
 @mixin status {
   .status {
-    font-size: 12px;
-
     &::before {
       $diameter: 10px;
 
