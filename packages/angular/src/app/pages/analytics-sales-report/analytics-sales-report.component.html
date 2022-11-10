@@ -11,7 +11,7 @@
       [component]="range"
       [isMenuVisible]="false"
     >
-    <dx-range-selector #range [dataSource]="sales" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
+    <dx-range-selector #range [dataSource]="sales" [(value)]="visualRange" theme="material.blue.light.compact" (onValueChanged)="onRangeChanged($event)">
       <dxo-scale
         minorTickInterval="day"
         tickInterval="month"
@@ -42,6 +42,7 @@
         class="sales-pie"
         [dataSource]="salesByCategory"
         type="doughnut"
+        theme="material.blue.light.compact"
         [diameter]="0.8"
         [innerRadius]="0.6"
       >
@@ -60,7 +61,7 @@
         <dxo-legend [visible]="false"></dxo-legend>
       </dx-pie-chart>
 
-      <dx-chart #bar class="sales-bars" [dataSource]="salesByCategory" [rotated]="true">
+      <dx-chart #bar class="sales-bars" [dataSource]="salesByCategory" [rotated]="true" theme="material.blue.light.compact">
         <dxo-common-axis-settings [visible]="false">
           <dxo-tick [visible]="false"></dxo-tick>
         </dxo-common-axis-settings>
@@ -87,7 +88,7 @@
       </dx-drop-down-button>
       </div>
 
-      <dx-chart #chart [dataSource]="salesByDateAndCategory">
+      <dx-chart #chart [dataSource]="salesByDateAndCategory" theme="material.blue.light.compact">
         <dxo-argument-axis [visualRange]="visualRange"> </dxo-argument-axis>
         <dxo-tooltip [enabled]="true" [customizeTooltip]="customiseToolip"></dxo-tooltip>
         <dxo-series-template nameField="category"> </dxo-series-template>
