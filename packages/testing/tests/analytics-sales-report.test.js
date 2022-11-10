@@ -19,7 +19,7 @@ fixture`Analytics Sales Report`;
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-sales-report-month${getPostfix(embedded, screenMode)}`, 'body');
 
-      const isPeriodSelectorBoxExists = await Selector('.dx-dropdownbutton').exists();
+      const isPeriodSelectorBoxExists = await Selector('.dx-dropdownbutton').exists;
       if (isPeriodSelectorBoxExists) {
         await t.click(Selector('.dx-dropdownbutton'));
         await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
