@@ -86,6 +86,16 @@ export class AnalyticsSalesReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData(this.groupByPeriods[1].toLowerCase());
+
+    setInterval(() => {
+      const text = document.getElementById('range-text');
+      if (text) {
+        const bbox = text.getBBox();
+        if (Math.floor(bbox.width) !== 20) {
+          throw new Error(bbox);
+        }
+      }
+    }, 100)
   }
 }
 
