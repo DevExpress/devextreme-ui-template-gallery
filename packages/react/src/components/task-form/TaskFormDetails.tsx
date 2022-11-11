@@ -21,7 +21,7 @@ import { Task } from '../../shared/types/task';
 
 const renderPriorityField = (data: string) => (
   <div className='priority-task-editor-field'>
-    <PriorityTask text={data} showText={false}></PriorityTask>
+    <PriorityTask text={data} showText={false} />
     <TextBox
       className={`priority-task priority-${data.toLowerCase()}`}
       inputAttr={{ class: 'priority-editor-input' }}
@@ -44,8 +44,8 @@ const renderStatusField = (data: string) => (
   </div>
 );
 
-const renderPriorityItem = (data: string) => <PriorityTask text={data}></PriorityTask>;
-const renderStatusItem = (data: string) => <StatusTask text={data}></StatusTask>;
+const renderPriorityItem = (data: string) => <PriorityTask text={data} />;
+const renderStatusItem = (data: string) => <StatusTask text={data} />;
 
 export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boolean, data: Task, onDataChanged: (data) => void }) => {
   const updateField = (field: string) => (value) => {

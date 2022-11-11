@@ -5,7 +5,7 @@ import './PriorityTask.scss';
 
 export const PriorityTask = ({ text, showText = true }: TaskProp) => (
   <div className={`priority-task priority-${text.toLowerCase()}`}>
-    <div className='separator-task'></div>
+    <div className='separator-task' />
     <span>{showText ? text : ''}</span>
   </div>
 );

@@ -21,13 +21,13 @@ import './PlanningGrid.scss';
 const EditComponent = ({ items, editComponent: Component, setValue, value }: GridEditComponent) => {
   const EditField = (data: string) => (
     <div>
-      {data && <Component text={data}></Component>}
-      <TextBox readOnly></TextBox>
+      {data && <Component text={data} />}
+      <TextBox readOnly />
     </div>
   );
-  const EditItem = (data: string) => <Component text={data}></Component>;
+  const EditItem = (data: string) => <Component text={data} />;
 
-  return <SelectBox className='edit-cell' defaultValue={value} items={items} fieldRender={EditField} itemRender={EditItem} onValueChange={(value) => setValue(value)}></SelectBox>;
+  return <SelectBox className='edit-cell' defaultValue={value} items={items} fieldRender={EditField} itemRender={EditItem} onValueChange={(value) => setValue(value)} />;
 };
 
 const EditStatus = ({ setValue, value }: GridEdit) => <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} setValue={setValue} value={value} />;
@@ -53,9 +53,9 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
 
   return (
     <DataGrid className='planning-grid' ref={ref} dataSource={data} columnAutoWidth onRowPrepared={onRowPrepared} onRowClick={navigateToDetails}>
-      <Paging pageSize={15}></Paging>
-      <Pager visible showPageSizeSelector></Pager>
-      <Editing mode='row' allowUpdating></Editing>
+      <Paging pageSize={15} />
+      <Pager visible showPageSizeSelector />
+      <Editing mode='row' allowUpdating />
       <Selection selectAllMode='allPages' showCheckBoxesMode='always' mode='multiple' />
       <HeaderFilter visible />
       <Sorting mode='multiple' />

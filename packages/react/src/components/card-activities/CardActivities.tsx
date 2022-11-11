@@ -29,7 +29,7 @@ const ListTemplate = (item: Activity) => {
         <span>by</span>
         <span>{item.manager}</span>
       </div>
-      <Menu className='overflow-menu' items={activityMenuItems}></Menu>
+      <Menu className='overflow-menu' items={activityMenuItems} />
     </div>
   );
 };
