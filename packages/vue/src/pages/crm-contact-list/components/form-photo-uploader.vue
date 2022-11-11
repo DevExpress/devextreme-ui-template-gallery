@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <div
-      id="dropzone-external"
-      ref="dropzone"
-      :class="isDropZoneActive
-        ? 'dx-theme-accent-as-border-color'
-        : 'dx-theme-border-color'
-      "
-    >
-      <span>Drag and drop a photo here or click the area to select it from a folder</span>
-    </div>
+  <div
+    id="dropzone"
+    ref="dropzone"
+    :class="isDropZoneActive
+      ? 'dx-theme-accent-as-border-color'
+      : 'dx-theme-border-color'
+    "
+  >
+    <span>Drag and drop a photo here or click the area to select it from a folder</span>
   </div>
   <dx-file-uploader
-    ref="uploader"
-    drop-zone="#dropzone-external"
+    :drop-zone="dropzone"
+    :dialog-trigger="dropzone"
     :multiple="false"
     accept="image/*"
     upload-mode="instantly"
@@ -25,30 +23,23 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { DxFileUploader } from 'devextreme-vue/file-uploader';
 
 const isDropZoneActive = ref(false);
-
-const onDropZoneEnter = (e: {dropZoneElement: {id: string}}) => {
-  if (e.dropZoneElement.id === 'uploader') { isDropZoneActive.value = true; }
-};
-
-const onDropZoneLeave = (e: {dropZoneElement: {id: string}}) => {
-  if (e.dropZoneElement.id === 'uploader') { isDropZoneActive.value = false; }
-};
-
-const uploader = ref<InstanceType<typeof DxFileUploader>>();
 const dropzone = ref<InstanceType<typeof HTMLElement>>();
 
-onMounted(() => {
-  uploader.value?.instance.option('dialogTrigger', dropzone.value);
-  uploader.value?.instance.option('dropZone', dropzone.value);
-});
+const onDropZoneEnter = (e: {dropZoneElement: HTMLElement}) => {
+  if (e.dropZoneElement === dropzone.value) { isDropZoneActive.value = true; }
+};
+
+const onDropZoneLeave = (e: {dropZoneElement: HTMLElement}) => {
+  if (e.dropZoneElement === dropzone.value) { isDropZoneActive.value = false; }
+};
 </script>
 
 <style scoped lang="scss">
-#dropzone-external {
+#dropzone {
   background-color: rgba(183, 183, 183, 0.1);
   border-width: 2px;
   border-style: dashed;
