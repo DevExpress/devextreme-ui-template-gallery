@@ -50,10 +50,6 @@ export class TaskListGridComponent implements OnChanges {
   constructor(private router: Router) {
   }
 
-  addRow() {
-    this.grid.instance.addRow();
-  };
-
   refresh() {
     this.grid.instance.refresh();
   }
