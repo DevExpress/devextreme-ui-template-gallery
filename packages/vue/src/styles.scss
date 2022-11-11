@@ -22,12 +22,6 @@
       line-height: 18px;
       font-size: 13px;
     }
-
-    .task-priority {
-      .separator {
-        max-height: 12px;
-      }
-    }
   }
 
   &.view-mode {
@@ -58,4 +52,46 @@
       }
     }
   }
+}
+
+@mixin status($status-color) {
+  color: $status-color;
+
+  &.dx-texteditor {
+    .status-input.status-editor-input {
+      color: $status-color;
+    }
+  }
+
+  &::before {
+    background: $status-color;
+  }
+}
+
+.status-indicator-open {
+  @include status(#505ed9);
+}
+
+.status-indicator-in-progress {
+  @include status(#34aa95);
+}
+
+.status-indicator-deferred {
+  @include status(#969696);
+}
+
+.status-indicator-completed {
+  @include status(#2b9029);
+}
+
+.status-indicator-low {
+  @include status(#d3a268);
+}
+
+.status-indicator-normal {
+  @include status(#6fbaca);
+}
+
+.status-indicator-high {
+  @include status(#ff5722);
 }

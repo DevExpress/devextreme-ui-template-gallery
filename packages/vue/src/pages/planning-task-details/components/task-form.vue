@@ -54,7 +54,7 @@
           label-mode="floating"
         >
           <dx-form-group-item :col-count="2">
-            <dx-col-count-by-screen :xs="2"/>
+            <dx-col-count-by-screen :xs="2" />
             <dx-form-item css-class="accent">
               <form-textbox
                 label="Company"
@@ -84,12 +84,18 @@
               >
                 <template #field>
                   <div class="task-editor-field">
-                    <task-priority :value="data.priority" />
-                    <dx-text-box :read-only="true" />
+                    <status-indicator
+                      :is-field="true"
+                      :show-bar="true"
+                      :value="data.priority"
+                    />
                   </div>
                 </template>
                 <template #item="{ data }">
-                  <task-priority :value="data" />
+                  <status-indicator
+                    :show-bar="true"
+                    :value="data"
+                  />
                 </template>
               </dx-select-box>
             </dx-form-item>
@@ -107,12 +113,16 @@
               >
                 <template #field>
                   <div class="task-editor-field">
-                    <task-status :status="data.status" />
-                    <dx-text-box :read-only="true" />
+                    <status-indicator
+                      :is-field="true"
+                      :value="data.status"
+                    />
                   </div>
                 </template>
                 <template #item="{ data }">
-                  <task-status :status="data" />
+                  <status-indicator
+                    :value="data"
+                  />
                 </template>
               </dx-select-box>
             </dx-form-item>
@@ -148,7 +158,7 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import TaskPriority from '@/components/task-priority.vue';
+import StatusIndicator from '@/components/status-indicator.vue';
 import { DxButton } from 'devextreme-vue/button';
 import { DxTextArea } from 'devextreme-vue/text-area';
 import { taskPriorityList, Task, taskStatusList } from '@/types/task';
@@ -166,7 +176,6 @@ import { DxSelectBox } from 'devextreme-vue/select-box';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import LoadComponent from '@/components/load-component.vue';
 import FormTextbox from '@/components/form-textbox.vue';
-import TaskStatus from '@/components/task-status.vue';
 import FormDatebox from '@/components/form-datebox.vue';
 
 const emptyData = {} as Task;
@@ -205,17 +214,6 @@ function handleCancelClick() {
   isEditing.value = false;
 }
 </script>
-
-<style lang="scss">
-.dx-popup-content {
-  .task-priority, .task-status {
-    span {
-      font-size: 13px;
-    }
-  }
-}
-
-</style>
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
 
@@ -224,20 +222,6 @@ function handleCancelClick() {
 
   .dx-toolbar {
     margin-bottom: $toolbar-margin-bottom;
-  }
-}
-
-:deep(.form-editor) {
-  .task-priority,
-  .task-status {
-    position: absolute;
-    bottom: 0;
-    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 3px);
-
-    &,
-    span {
-      font-size: 13px;
-    }
   }
 }
 </style>
