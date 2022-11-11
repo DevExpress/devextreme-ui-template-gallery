@@ -41,11 +41,11 @@ export class StatusIndicatorComponent implements OnInit {
   }
 
   getValue(value: string): string {
-    return this.showBar ? `| ${value}` : value;
+    return (this.showBar ? '| ' : '') + value;
   }
 
   spaceToUnderscore = (value: TaskStatus) =>
-    (value ? value.replace(/ /g, '-') : '');
+    (value?.replace(/ /g, '-') || '');
 }
 
 @NgModule({
