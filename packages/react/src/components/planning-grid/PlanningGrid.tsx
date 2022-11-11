@@ -6,32 +6,42 @@ import DataGrid, {
   RequiredRule, Paging, Pager, Editing
 } from 'devextreme-react/data-grid';
 import SelectBox from 'devextreme-react/select-box';
-import TextBox from 'devextreme-react/text-box';
 
-import { PriorityTask } from '../priority-task/PriorityTask';
-import { StatusTask } from '../status-task/StatusTask';
+import { ItemField } from '../item-field/ItemField';
+import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../shared/renderMethods';
 
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 
 import { Task, PlanningProps } from '../../shared/types/task';
-import { GridEdit, GridEditComponent } from '../../shared/types/planning-grid';
+import { GridEdit } from '../../shared/types/planning-grid';
 
 import './PlanningGrid.scss';
 
-const EditComponent = ({ items, editComponent: Component, setValue, value }: GridEditComponent) => {
-  const editFieldRender = (data: string) => (
-    <div>
-      {data && <Component text={data} />}
-      <TextBox readOnly />
-    </div>
-  );
-  const editItemRender = (data: string) => <Component text={data} />;
-
-  return <SelectBox className='edit-cell' defaultValue={value} items={items} fieldRender={editFieldRender} itemRender={editItemRender} onValueChange={(value) => setValue(value)} />;
+const priorityCellRender = ({ text }) => {
+  return <ItemField text={`| ${text}`} />;
 };
 
-const editStatusRender = ({ setValue, value }: GridEdit) => <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} setValue={setValue} value={value} />;
-const editPriorityRender = ({ setValue, value }: GridEdit) => <EditComponent items={PRIORITY_ITEMS} editComponent={PriorityTask} setValue={setValue} value={value} />;
+const editStatusRender = ({ setValue, value }: GridEdit) => (
+  <SelectBox
+    className='edit-cell'
+    defaultValue={value}
+    items={STATUS_ITEMS}
+    fieldRender={editFieldRender}
+    itemRender={statusItemRender}
+    onValueChange={(value) => setValue(value)}
+  />
+);
+const editPriorityRender = ({ setValue, value }: GridEdit) => (
+  <SelectBox
+    className='edit-cell'
+    defaultValue={value}
+    items={PRIORITY_ITEMS}
+    fieldRender={priorityFieldRender}
+    itemRender={priorityItemRender}
+    onValueChange={(value) => setValue(value)}
+  />
+);
+
 export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
   const [data, setData] = useState<Task[]>();
 
@@ -66,7 +76,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       <Column dataField='company' caption='Company' hidingPriority={6}>
         <RequiredRule />
       </Column>
-      <Column dataField='priority' caption='Priority' cellRender={PriorityTask} editCellRender={editPriorityRender} hidingPriority={4}>
+      <Column dataField='priority' caption='Priority' cellRender={priorityCellRender} editCellRender={editPriorityRender} hidingPriority={4}>
         <RequiredRule />
       </Column>
       <Column dataField='startDate' caption='Start Date' dataType='date' hidingPriority={2}>
@@ -78,7 +88,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       <Column dataField='owner' caption='Owner' hidingPriority={5}>
         <RequiredRule />
       </Column>
-      <Column dataField='status' caption='Status' minWidth={120} cellRender={StatusTask} editCellRender={editStatusRender} hidingPriority={3}>
+      <Column dataField='status' caption='Status' minWidth={120} cellRender={ItemField} editCellRender={editStatusRender} hidingPriority={3}>
         <RequiredRule />
       </Column>
     </DataGrid>

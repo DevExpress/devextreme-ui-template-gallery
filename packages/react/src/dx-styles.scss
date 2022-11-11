@@ -1,0 +1,243 @@
+@use "./variables.scss" as *;
+
+.app {
+  background-color: $side-panel-background;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.app .content {
+  line-height: 1.5;
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+
+  .view {
+    display: contents;
+
+    .view-wrapper {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      overflow: hidden;
+    }
+  }
+
+  h2 {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.app .content-block {
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 20px;
+}
+
+.screen-x-small .content-block {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.responsive-paddings {
+  padding: 20px;
+
+  .screen-large & {
+    padding: 40px;
+  }
+}
+
+.dx-card.wide-card {
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+  border-right: 0;
+  border-left: 0;
+}
+
+.with-footer > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+  height: 100%;
+
+  & > .dx-scrollview-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.embedded {
+  .layout-header,
+  .dx-swatch-additional,
+  .with-footer .content-block,
+  .dx-drawer-shader {
+    display: none !important;
+  }
+
+  .dx-drawer-content {
+    padding: initial !important;
+  }
+
+  .dx-drawer-panel-content,
+  .dx-drawer-panel-content .dx-overlay-content {
+    width: initial !important;
+  }
+}
+
+.plain-styled-form {
+  .dx-layout-manager .dx-field-item:not(.dx-first-col) {
+    padding-left: 0;
+  }
+
+  .dx-field-item {
+    padding: 0;
+
+    &.contact-fields-group {
+      padding: 15px 0;
+    }
+
+    .item-field {
+      line-height: 18px;
+      font-size: 13px;
+    }
+  }
+
+  &.view-mode {
+    .accent {
+      .dx-texteditor.form-editor .form-editor-input {
+        color: $accent-color;
+      }
+    }
+
+    .dx-texteditor,
+    .dx-texteditor.form-editor {
+      pointer-events: none;
+
+      .form-editor-input {
+        color: $texteditor-edit-color;
+      }
+
+      &,
+      & > * {
+        background-color: transparent;
+      }
+
+      &,
+      & *,
+      &::after {
+        border-color: transparent;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.details-card {
+  border: none;
+}
+
+@mixin status-contact($status-color) {
+  color: $status-color;
+
+  &.dx-texteditor {
+    .status-editor-input {
+      color: $status-color;
+      padding-left: 0;
+    }
+  }
+
+  span {
+    &::before {
+      background-color: $status-color;
+    }
+  }
+}
+
+.status-contact {
+  &.status-commission {
+    @include status-contact(#03a9f4);
+  }
+
+  &.status-salaried {
+    @include status-contact(#2eb52c);
+  }
+
+  &.status-terminated {
+    @include status-contact(#de8e8c);
+  }
+}
+
+@mixin item-field($status-color) {
+  color: $status-color;
+
+  &.dx-texteditor {
+    .item-editor-input {
+      color: $status-color;
+      padding-left: 0;
+    }
+  }
+}
+
+.item-field {
+  &.item-open {
+    @include item-field(#505ed9);
+  }
+
+  &.item-in-progress {
+    @include item-field(#34aa95);
+  }
+
+  &.item-deferred {
+    @include item-field(#969696);
+  }
+
+  &.item-completed {
+    @include item-field(#2b9029);
+  }
+
+  &.item-low {
+    @include item-field(#d3a268);
+  }
+
+  &.item-normal {
+    @include item-field(#6fbaca);
+  }
+
+  &.item-high {
+    @include item-field(#ff5722);
+  }
+
+  span {
+    font-size: 14px;
+  }
+}
+
+.item-editor-field {
+  display: flex;
+  padding-left: $list-padding-left;
+
+  .item-field {
+    align-self: flex-end;
+  }
+}
+
