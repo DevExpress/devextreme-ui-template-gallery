@@ -52,7 +52,7 @@ export const List = ({
           ))}
         </Sortable>
         <div className='add-task'>
-          <Button icon='plus' text='Add Task' stylingMode='text' onClick={onAddTaskBtnClick} />
+          <Button icon='plus' text='Add Task' stylingMode='text' onClick={onAddTaskBtnClick} width='100%' />
         </div>
       </ScrollView>
     </div>
