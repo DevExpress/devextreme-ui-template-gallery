@@ -1,0 +1,38 @@
+@use "../../variables.scss" as *;
+@use "sass:math";
+
+$left-panel-width: 400px;
+$right-panel-width: 360px;
+
+.view-wrapper-contact-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+
+  @media only screen and (max-width: 875px) {
+    .contact-name-toolbar-item {
+      min-width: calc(#{$left-panel-width} + #{$right-panel-width} - 145px);
+    }
+  }
+
+  @include separator();
+
+  .panels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+
+    .left {
+      flex: 1 $left-panel-width;
+      margin-top: 8px;
+    }
+
+    .right {
+      flex: 1 calc(100% - #{$left-panel-width} - 20px);
+      margin-top: 8px;
+      min-width: 360px;
+    }
+  }
+}
