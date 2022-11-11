@@ -24,7 +24,7 @@ export interface Contact {
   phone: string,
   email: string,
   image: string,
-  zipCode: string,
+  zipCode: number,
   tasks: Task[],
   activities: Activities,
 }

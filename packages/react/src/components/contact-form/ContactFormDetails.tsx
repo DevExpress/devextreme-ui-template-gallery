@@ -148,7 +148,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         <ItemForm>
           <FormTextbox
             label='Zip Code'
-            value={formData.zipCode}
+            value={formData.zipCode.toString()}
             isEditing={!editing}
             onValueChange={updateField('zipCode')}
           >
