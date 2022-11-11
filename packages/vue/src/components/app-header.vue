@@ -151,7 +151,6 @@ header {
 
     .user-button.authorization {
       margin-left: 10px;
-      padding: 4px;
 
       :deep(.dx-button-content) {
         padding: 0;
