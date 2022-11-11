@@ -28,6 +28,7 @@
       <dx-export
         :enabled="true"
         :allow-export-selected-data="true"
+        :formats="['xlsx', 'pdf']"
       />
 
       <!-- Toolbar -->
@@ -55,15 +56,17 @@
         <dx-grid-toolbar-item
           location="after"
           locate-in-menu="auto"
-          widget="dxButton"
-          :options="{
-            icon: 'plus',
-            text: 'Add Contact',
-            type: 'default',
-            stylingMode: 'contained',
-            onClick: addContact
-          }"
-        />
+        >
+          <div>
+            <dx-button
+              text="Add Contact"
+              icon="plus"
+              type="default"
+              styling-mode="contained"
+              @click="addContact"
+            />
+          </div>
+        </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item
           location="after"
@@ -77,7 +80,7 @@
           location="after"
           locate-in-menu="auto"
         >
-          <div class="separator" />
+          <div><div class="separator" /></div>
         </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item name="exportButton" />
@@ -86,7 +89,7 @@
           location="after"
           locate-in-menu="auto"
         >
-          <div class="separator" />
+          <div><div class="separator" /></div>
         </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item
@@ -181,6 +184,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import DxDropDownButton from 'devextreme-vue/drop-down-button';
+import { DxButton } from 'devextreme-vue/button';
 import DxDataGrid, {
   DxColumn,
   DxColumnChooser,

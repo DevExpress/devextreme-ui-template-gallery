@@ -214,7 +214,7 @@ const props = withDefaults(defineProps<{
 
 const isCreateMode = props.data === newTask;
 const isEditing = ref(isCreateMode);
-const data = ref(newTask);
+const data = ref(props.data);
 
 watch(
   () => props.data,

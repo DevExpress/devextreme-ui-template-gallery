@@ -9,7 +9,6 @@
         class="tasks-grid"
         :data-source="filteredTasks"
         :column-auto-width="true"
-        :selection-filter="['done', '=', true]"
       >
         <dx-selection
           show-check-boxes-mode="always"
