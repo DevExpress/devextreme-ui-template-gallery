@@ -203,7 +203,7 @@ import FormDatebox from '@/components/form-datebox.vue';
 
 const props = withDefaults(defineProps<{
   isLoading?: boolean,
-  data?: Task | null,
+  data?: Task,
   contentByScreen: { xs: number, sm: number },
   validationGroup?: string,
 }>(), {
@@ -215,6 +215,13 @@ const props = withDefaults(defineProps<{
 const isCreateMode = props.data === newTask;
 const isEditing = ref(isCreateMode);
 const data = ref(newTask);
+
+watch(
+  () => props.data,
+  (newValue) => {
+    data.value = newValue;
+  },
+);
 
 let dataSaved: Task | null = null;
 

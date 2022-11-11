@@ -28,7 +28,7 @@
       <dx-form-item>
         <form-textbox
           label="First Name"
-          v-model="newUser.firstName"
+          v-model="contact.firstName"
           :is-editing="true"
           :validation-group="props.validationGroup"
         />
@@ -36,7 +36,7 @@
       <dx-form-item css-class="accent">
         <form-textbox
           label="Last Name"
-          v-model="newUser.lastName"
+          v-model="contact.lastName"
           :is-editing="true"
           :validation-group="props.validationGroup"
         />
@@ -44,7 +44,7 @@
       <dx-form-item css-class="accent">
         <form-textbox
           label="Company"
-          v-model="newUser.company"
+          v-model="contact.company"
           :is-editing="true"
           :validators="[]"
           :validation-group="props.validationGroup"
@@ -53,7 +53,7 @@
       <dx-form-item>
         <form-textbox
           label="Position"
-          v-model="newUser.position"
+          v-model="contact.position"
           :is-editing="true"
           :validators="[]"
           :validation-group="props.validationGroup"
@@ -75,7 +75,7 @@
       <dx-form-item css-class="accent">
         <form-textbox
           label="Assigned to"
-          v-model="newUser.manager"
+          v-model="contact.manager"
           :is-editing="true"
           :validators="[]"
           :validation-group="props.validationGroup"
@@ -83,7 +83,7 @@
       </dx-form-item>
       <dx-form-item>
         <form-textbox
-          v-model="newUser.phone"
+          v-model="contact.phone"
           :is-editing="true"
           icon="tel"
           mask="+1(000)000-0000"
@@ -93,7 +93,7 @@
       </dx-form-item>
       <dx-form-item>
         <form-textbox
-          v-model="newUser.email"
+          v-model="contact.email"
           :is-editing="true"
           icon="email"
           :validators="[{type: 'email'}]"
@@ -101,7 +101,7 @@
       </dx-form-item>
       <dx-form-item>
         <form-textbox
-          v-model="newUser.address"
+          v-model="contact.address"
           :is-editing="true"
           icon="home"
           :validators="[]"
@@ -127,5 +127,5 @@ const props = defineProps<{
   validationGroup: string
 }>();
 
-const newUser = ref(newContact);
+const contact = ref(newContact);
 </script>

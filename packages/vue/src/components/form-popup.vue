@@ -4,9 +4,10 @@
     v-if="isVisible"
     :title="props.title"
     :visible="isVisible"
-    :full-screen="isFullScreen"
+    :full-screen="screenInfo.isSmall || screenInfo.isXSmall"
     width="auto"
     height="auto"
+    @option-changed="() => popup?.instance?.repaint()"
   >
     <dx-toolbar-item
       widget="dxButton"
@@ -36,11 +37,9 @@
 </template>
 
 <script setup lang="ts">
-import {
-  onMounted, onUnmounted, ref, watch,
-} from 'vue';
+import { ref, watch } from 'vue';
 import { DxPopup, DxToolbarItem } from 'devextreme-vue/popup';
-import { subscribe, unsubscribe, isSmallScreen } from '@/utils/media-query';
+import { screenInfo } from '@/utils/media-query';
 
 const props = withDefaults(
   defineProps<{
@@ -55,8 +54,7 @@ const props = withDefaults(
 const emit = defineEmits(['save', 'update:isVisible']);
 
 const isVisible = ref(props.isVisible);
-const isFullScreen = ref(isSmallScreen());
-const popup = ref<InstanceType<typeof DxPopup> | null>(null);
+const popup = ref<InstanceType<typeof DxPopup>>();
 
 watch(
   () => props.isVisible,
@@ -73,15 +71,6 @@ const close = () => {
   isVisible.value = false;
   emit('update:isVisible', false);
 };
-
-const updatePopupByScreenSize = () => {
-  isFullScreen.value = isSmallScreen();
-  popup.value?.instance?.repaint();
-};
-
-onMounted(() => subscribe(updatePopupByScreenSize));
-
-onUnmounted(() => unsubscribe(updatePopupByScreenSize));
 </script>
 <style scoped lang="scss">
 

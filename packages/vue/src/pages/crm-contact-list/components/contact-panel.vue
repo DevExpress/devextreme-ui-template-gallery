@@ -19,7 +19,7 @@
                 </div>
               </dx-item>
               <dx-item location="before">
-                <user-status :status="panelData?.status" />
+                <contact-status :status="panelData?.status" />
               </dx-item>
 
               <dx-item
@@ -222,7 +222,7 @@ import {
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import FormPhoto from '@/components/form-photo.vue';
-import UserStatus from '@/components/contact-status.vue';
+import ContactStatus from '@/components/contact-status.vue';
 import { screenInfo } from '@/utils/media-query';
 import { formatPrice } from '@/utils/formatters';
 import ContactActivities from '@/components/card-activities.vue';
@@ -237,8 +237,8 @@ const isPinEnabled = ref(true);
 const panelData = ref<Contact | null>(null);
 const props = withDefaults(defineProps<{
   isPanelOpen: boolean,
-  userId: number | null
-}>(), { isPanelOpen: false, userId: null });
+  contactId: number | null
+}>(), { isPanelOpen: false, contactId: null });
 
 const toggleEdit = () => {
   isEditing.value = !isEditing.value;
@@ -271,9 +271,9 @@ watch(
   },
 );
 
-const loadContact = async (userId: number) => {
+const loadContact = async (contactId: number) => {
   isLoading.value = true;
-  panelData.value = await getContact(userId);
+  panelData.value = await getContact(contactId);
   isLoading.value = false;
 };
 
@@ -282,10 +282,10 @@ function accordionPlusClick(/* e : Event */) {
 }
 
 watch(
-  () => props.userId,
-  (newUserId) => {
-    if (newUserId !== null) {
-      loadContact(newUserId);
+  () => props.contactId,
+  (newId) => {
+    if (newId !== null) {
+      loadContact(newId);
     }
   },
 );

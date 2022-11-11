@@ -49,11 +49,6 @@ function getScreenSizeInfo(): ScreenSizeInfo {
 
 export const screenInfo = ref(getScreenSizeInfo());
 
-export const isSmallScreen = () => {
-  const screenSizes = getScreenSizeInfo();
-  return screenSizes.isXSmall || screenSizes.isSmall;
-};
-
 export const subscribe = (handler:Handler) => handlers.add(handler);
 
 export const unsubscribe = (handler:Handler) => handlers.delete(handler);

@@ -162,7 +162,7 @@
 
     <!--  Contact panel  -->
     <contact-panel
-      :user-id="panelData?.id"
+      :contact-id="panelData?.id"
       :is-panel-open="isPanelOpen"
       @close="isPanelOpen = false"
     />
@@ -171,9 +171,9 @@
   <form-popup
     title="New Contact"
     v-model:is-visible="isAddContactPopupOpened"
-    @save="onSaveUserNewForm"
+    @save="onSaveContactNewForm"
   >
-    <user-new-form :validation-group="newUserValidationGroup" />
+    <contact-new-form :validation-group="newContactValidationGroup" />
   </form-popup>
 </template>
 
@@ -205,13 +205,13 @@ import { formatPhone } from '@/utils/formatters';
 import ContactStatus from '@/components/contact-status.vue';
 import FormPopup from '@/components/form-popup.vue';
 import validationEngine from 'devextreme/ui/validation_engine';
-import UserNewForm from './components/user-new-form.vue';
+import ContactNewForm from './components/contact-new-form.vue';
 import ContactPanel from './components/contact-panel.vue';
 
 const filterStatusList = ['All', ...contactStatusList];
 type FilterContactStatus = typeof filterStatusList[number];
 
-const newUserValidationGroup = 'new-user';
+const newContactValidationGroup = 'new-contact';
 const panelData = ref<Array<Contact> | null>(null);
 const isPanelOpen = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
@@ -258,8 +258,8 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
   return formatPhone(value.toString());
 };
 
-const onSaveUserNewForm = () => {
-  if (validationEngine.validateGroup(newUserValidationGroup).isValid) {
+const onSaveContactNewForm = () => {
+  if (validationEngine.validateGroup(newContactValidationGroup).isValid) {
     isAddContactPopupOpened.value = false;
   }
 };
