@@ -89,10 +89,6 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
   refresh = () => {
     this.loadData();
   };
-
-  formatPhone = (number: string | number) => String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
-
-  getSizeQualifier = (width: number) => (width < 415 ? 'xs' : 'lg');
 }
 
 @NgModule({

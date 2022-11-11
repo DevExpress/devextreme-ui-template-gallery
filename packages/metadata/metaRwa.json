@@ -1,58 +1,107 @@
 [
     {
-        "Name": "UI Templates",
+        "Name": "CRM",
         "Groups": [
             {
-                "Name": "CRM",
+                "Name": "Contact List",
                 "Demos": [
                     {
                         "Title": "Contact List",
                         "Name": "crm-contact-list",
                         "DemoType": "Rwa",
-                        "AvailableApproaches": ["Angular", "React", "Vue"]
-                    },
-                    {
-                        "Title": "Contact Form",
-                        "Name": "crm-contact-details",
-                        "DemoType": "Rwa",
-                        "AvailableApproaches": ["Angular"]
+                        "AvailableApproaches": [
+                            "Angular",
+                            "React",
+                            "Vue"
+                        ]
                     }
                 ]
             },
             {
-                "Name": "Planning",
+                "Name": "Contact Form",
+                "Demos": [
+                    {
+                        "Title": "Contact Form",
+                        "Name": "crm-contact-details",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Name": "Planning",
+        "Groups": [
+            {
+                "Name": "Task List",
                 "Demos": [
                     {
                         "Title": "Task List",
                         "Name": "planning-task-list",
                         "DemoType": "Rwa",
-                        "AvailableApproaches": ["Angular"]
-                    },{
-                        "Title": "Task Details",
-                        "Name": "planning-task-details",
-                        "DemoType": "Rwa",
-                        "AvailableApproaches": ["Angular"]
+                        "AvailableApproaches": [
+                            "Angular"
+                        ]
                     }
                 ]
             },
             {
-                "Name": "Analytics",
+                "Name": "Task Details",
+                "Demos": [
+                    {
+                        "Title": "Task Details",
+                        "Name": "planning-task-details",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Name": "Analytics",
+        "Groups": [
+            {
+                "Name": "Dashboard",
                 "Demos": [
                     {
                         "Title": "Dashboard",
                         "Name": "analytics-dashboard",
                         "DemoType": "Rwa",
-                        "AvailableApproaches": ["Angular"]
-                    },{
+                        "AvailableApproaches": [
+                            "Angular"
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "Sales Report",
+                "Demos": [
+                    {
                         "Title": "Sales Report",
                         "Name": "analytics-sales-report",
                         "DemoType": "Rwa",
-                        "AvailableApproaches": ["Angular"]
-                    },{
+                        "AvailableApproaches": [
+                            "Angular"
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "Geography",
+                "Demos": [
+                    {
                         "Title": "Geography",
                         "Name": "analytics-geography",
                         "DemoType": "Rwa",
-                        "AvailableApproaches": ["Angular"]
+                        "AvailableApproaches": [
+                            "Angular"
+                        ]
                     }
                 ]
             }

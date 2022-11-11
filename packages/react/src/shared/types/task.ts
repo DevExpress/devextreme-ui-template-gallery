@@ -24,6 +24,7 @@ export interface Task {
 }
 export interface TaskProp {
     text: string;
+    showText?: boolean;
 }
 export interface PlanningProps {
     dataSource: Task[];

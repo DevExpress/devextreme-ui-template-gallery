@@ -6,19 +6,10 @@
       [items]="menuItems"
       >
     </dx-menu>
-    <div class="title">{{ titleText }}</div>
+    <div *ngIf="titleText" class="title">{{ titleText }}</div>
     <ng-content select="[filter]"></ng-content>
   </div>
-  <div class="content">
+  <div *ngIf="!isLoading" class="content">
     <ng-content></ng-content>
   </div>
-  <dx-load-panel
-    container="{{ '.' + contentClass }}"
-    [position]="position"
-    [visible]="isLoading"
-    [showPane]="false"
-    width="100%"
-    [height]="loadingHeight"
-    maxWidth="100%"
-  ></dx-load-panel>
 </div>

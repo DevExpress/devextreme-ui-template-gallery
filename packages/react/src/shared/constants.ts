@@ -26,3 +26,9 @@ export const ANALYTICS_PERIODS = {
 
 export const DEFAULT_ANALYTICS_PERIOD_KEY = 'All';
 
+export const CONTACT_STATUS_LIST = [
+  'Salaried',
+  'Commission',
+  'Terminated',
+];
+

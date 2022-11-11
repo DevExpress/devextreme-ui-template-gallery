@@ -20,6 +20,7 @@ import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analyt
 import { analyticsPanelItems, Dates } from 'src/app/shared/types/resource';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 import { SalesByState, SalesByStateAndCity } from 'src/app/shared/types/analytics';
+import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
 
 @Component({
   templateUrl: './analytics-geography.component.html',
@@ -38,6 +39,8 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
   salesByStateMarkers;
 
   subscription: Subscription = new Subscription();
+
+  isLoading = false;
 
   constructor(private service: RwaService) {
   }
@@ -87,7 +90,12 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
   }
 
   loadData = (startDate: string, endDate: string) => {
-    this.subscription = this.service.getSalesByStateAndCity(startDate, endDate).subscribe((data: SalesByStateAndCity) => {
+    this.isLoading = true;
+    this.salesByStateAndCity = null;
+    this.salesByState = null;
+    this.salesByStateMarkers = null;
+
+    this.service.getSalesByStateAndCity(startDate, endDate).subscribe((data: SalesByStateAndCity) => {
       this.salesByStateAndCity = data;
       this.salesByState = this.service.getSalesByState(data);
       this.salesByStateMarkers = {
@@ -105,6 +113,8 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
           },
         })),
       };
+
+      this.isLoading = false;
     });
   };
 }
@@ -118,7 +128,7 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     DxChartModule,
     CardAnalyticsModule,
     ToolbarAnalyticsModule,
-
+    DxLoadPanelModule,
     CommonModule,
   ],
   providers: [],
