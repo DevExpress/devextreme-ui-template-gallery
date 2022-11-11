@@ -3,7 +3,7 @@
 This repository includes responsive UI Templates for the most pupular UI/UX patterns in web LOB applications. Currently, this project is in the 'preview' stage and contains the following CRM and Project Management UI templates:
 
 * [CRM. Contact List](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/crm-contact-list)
-* [CRM. Contact Form](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/crm-contact-form)
+* [CRM. Contact Details](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/crm-contact-details)
 * [Planning. Task List](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/planning-task-list)
 * [Planning. Task Details](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/planning-task-details)
 
@@ -20,7 +20,7 @@ UI Template sources for Angular are in the [packages/angular](packages/angular) 
 **CRM**
 
 * [Contact List](packages/angular/src/app/pages/crm-contact-list/) 
-* [Contact Form](packages/angular/src/app/pages/crm-contact-form/)
+* [Contact Details](packages/angular/src/app/pages/crm-contact-details/)
 
 **Planning**
 
