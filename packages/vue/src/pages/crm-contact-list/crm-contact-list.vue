@@ -2,6 +2,7 @@
   <div class="view-wrapper">
     <dx-data-grid
       :data-source="dataSource"
+      :allow-column-reordering="true"
       height="100%"
       class="grid"
       @row-click="rowClick"
