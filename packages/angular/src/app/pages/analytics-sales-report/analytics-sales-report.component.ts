@@ -1,70 +1,63 @@
 import {
-  Component, OnInit, NgModule, OnDestroy,
+  Component, OnInit, NgModule,
 } from '@angular/core';
 
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { DxRangeSelectorModule } from 'devextreme-angular/ui/range-selector';
+import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
-import { ValueChangedEvent } from 'devextreme/viz/range_selector';
-
 import { CommonModule, formatDate } from '@angular/common';
 import { RwaService } from 'src/app/shared/services';
-import { forkJoin, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
 import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analytics/toolbar-analytics.component';
 
 import { analyticsPanelItems } from 'src/app/shared/types/resource';
 
-import { Sales, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/analytics';
+import { Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/analytics';
+import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
+import { ApplyPipeModule } from "../../shared/apply.pipe";
+
+type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
 
 @Component({
   templateUrl: './analytics-sales-report.component.html',
   styleUrls: ['./analytics-sales-report.component.scss'],
   providers: [RwaService],
 })
-export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
-  subscriptions: Subscription[] = [];
-
+export class AnalyticsSalesReportComponent implements OnInit {
   groupByPeriods = ['Day', 'Month'];
 
-  sales: Sales;
-
-  salesByDateAndCategory: Sales;
+  sales: Sales = null;
+  salesByCategory: SalesOrOpportunitiesByCategory = null;
+  salesByDateAndCategory: SalesOrOpportunitiesByCategory = null;
 
   visualRange: unknown = {};
 
-  salesByCategory: SalesOrOpportunitiesByCategory;
-
   constructor(private service: RwaService) { }
 
-  formatDate(dateTime: string | number | Date) {
-    return formatDate(dateTime, 'YYYY-MM-dd', 'en');
-  }
-  selectionChange(e: SelectionChangedEvent) {
-    var groupByPeriod = e.item.toLowerCase();
-    this.subscriptions.push(
-      this.service.getSalesByOrderDate(groupByPeriod)
-        .subscribe((data) => {
-          this.salesByDateAndCategory = data;
-        }),
-    );
+  selectionChange({item: period}: SelectionChangedEvent) {
+    this.salesByDateAndCategory = null;
+
+    this.service.getSalesByOrderDate(period.toLowerCase())
+      .subscribe((data) => {
+        this.salesByDateAndCategory = data;
+      })
   }
 
-  onRangeChanged = (e: ValueChangedEvent) => {
-    const [startDate, endDate] = e.value;
-    this.subscriptions
-      .push(
-        this.service.getSalesByCategory(this.formatDate(startDate), this.formatDate(endDate))
-          .subscribe((data) => {
-            this.salesByCategory = data;
-          }),
-      );
+  onRangeChanged = ({value: dates}) => {
+    const [startDate, endDate] = dates.map((date) => formatDate(date, 'YYYY-MM-dd', 'en'));
+    this.salesByCategory = null;
+
+    this.service.getSalesByCategory(startDate, endDate).subscribe((data) => {
+      this.salesByCategory = data;
+          });
   };
 
   customizeSaleText(arg: { percentText: string }) {
@@ -73,22 +66,19 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
 
   loadData = (groupBy: string) => {
     const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
-    this.subscriptions = [
-      ...this.subscriptions,
-      (forkJoin(
-        [
-          this.service.getSales(startDate, endDate),
-          this.service.getSalesByOrderDate(groupBy),
-          this.service.getSalesByCategory(startDate, endDate),
-        ],
-      ).subscribe(([sales, salesByDateAndCategory, salesByCategory]) => {
-        this.sales = sales;
-        this.salesByDateAndCategory = salesByDateAndCategory;
-        this.salesByCategory = salesByCategory;
-      })
-      ),
-    ];
+    [
+      ['sales', this.service.getSales(startDate, endDate)],
+      ['salesByDateAndCategory', this.service.getSalesByOrderDate(groupBy)],
+    ].forEach(([dataName, loader]: [string, Observable<any>]) => {
+        this[dataName] = null;
+        loader.subscribe((data) => this[dataName] = data);
+      }
+    );
   };
+
+  isLoading = (data: DashboardData[]) => {
+    return data.includes(null);
+  }
 
   customiseToolip({ seriesName }) {
     return { text: seriesName };
@@ -97,14 +87,12 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadData(this.groupByPeriods[1].toLowerCase());
   }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
-  }
 }
 
 @NgModule({
   imports: [
+    DxLoadPanelModule,
+    DxButtonModule,
     DxToolbarModule,
     DxPieChartModule,
     DxChartModule,
@@ -112,7 +100,7 @@ export class AnalyticsSalesReportComponent implements OnInit, OnDestroy {
     DxRangeSelectorModule,
     CardAnalyticsModule,
     ToolbarAnalyticsModule,
-
+    ApplyPipeModule,
     CommonModule,
   ],
   providers: [],

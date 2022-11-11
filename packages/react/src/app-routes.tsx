@@ -1,10 +1,10 @@
-import { CRMContactForm, CRMContactList, PlanningTaskList, PlanningTaskDetails, AnalyticsDashboard, AnalyticsSalesReport, AnalyticsGeography } from './pages';
+import { CRMContactDetails, CRMContactList, PlanningTaskList, PlanningTaskDetails, AnalyticsDashboard, AnalyticsSalesReport, AnalyticsGeography } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
   {
-    path: '/crm-contact-form',
-    element: CRMContactForm,
+    path: '/crm-contact-details',
+    element: CRMContactDetails,
   },
   {
     path: '/crm-contact-list',

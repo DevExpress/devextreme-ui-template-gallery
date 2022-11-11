@@ -20,6 +20,7 @@ $filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-pa
 $toolbar-margin-bottom: 16px;
 $texteditor-edit-color: $texteditor-color;
 $toolbar-items-container-height: 38px;
+$list-padding-left: $material-list-item-horizontal-padding;
 
 @mixin separator() {
   .separator {
@@ -30,51 +31,6 @@ $toolbar-items-container-height: 38px;
     .dx-toolbar-menu-section & {
       height: 1px;
       width: auto;
-    }
-  }
-}
-
-@mixin status {
-  .status {
-    font-size: 12px;
-
-    &::before {
-      $diameter: 10px;
-
-      content: " ";
-      width: $diameter;
-      height: $diameter;
-      border-radius: math.div($diameter, 2);
-      margin-right: math.div($diameter, 2);
-      display: inline-block;
-    }
-
-    &.input {
-      padding: 15px 16px 14px;
-    }
-
-    &.status-commission {
-      color: $base-accent;
-
-      &::before {
-        background-color: $base-accent;
-      }
-    }
-
-    &.status-salaried {
-      color: #2eb52c;
-
-      &::before {
-        background-color: #2eb52c;
-      }
-    }
-
-    &.status-terminated {
-      color: #de8e8c;
-
-      &::before {
-        background-color: #de8e8c;
-      }
     }
   }
 }

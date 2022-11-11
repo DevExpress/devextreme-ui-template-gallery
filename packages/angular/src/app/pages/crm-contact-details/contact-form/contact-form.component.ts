@@ -16,7 +16,6 @@ import {
   FormTextboxModule,
   FormPhotoModule,
 } from 'src/app/shared/components';
-import { PhonePipeModule } from 'src/app/shared/phone.pipe';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
 
@@ -61,7 +60,6 @@ export class ContactFormComponent {
     FormPhotoModule,
     DxValidatorModule,
     CommonModule,
-    PhonePipeModule,
   ],
   providers: [],
   exports: [ContactFormComponent],
