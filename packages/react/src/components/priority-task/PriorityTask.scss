@@ -1,31 +1,4 @@
 .priority-task {
-  display: flex;
-  align-items: center;
-
-  &.priority-low {
-    color: #d3a268;
-
-    .separator-task {
-      background: #d3a268;
-    }
-  }
-
-  &.priority-normal {
-    color: #6fbaca;
-
-    .separator-task {
-      background: #6fbaca;
-    }
-  }
-
-  &.priority-high {
-    color: #ff5722;
-
-    .separator-task {
-      background: #ff5722;
-    }
-  }
-
   .separator-task {
     width: 2px;
     height: 18px;

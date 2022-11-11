@@ -10,7 +10,7 @@ export const navigation = [
       },
       {
         text: 'Contact Details',
-        path: '/crm-contact-form',
+        path: '/crm-contact-details',
       },
     ],
   },

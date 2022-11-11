@@ -3,9 +3,9 @@ import { TaskProp } from '../../shared/types/task';
 
 import './PriorityTask.scss';
 
-export const PriorityTask = ({ text }: TaskProp) => (
+export const PriorityTask = ({ text, showText = true }: TaskProp) => (
   <div className={`priority-task priority-${text.toLowerCase()}`}>
     <div className='separator-task'></div>
-    <span>{text}</span>
+    <span>{showText ? text : ''}</span>
   </div>
 );
