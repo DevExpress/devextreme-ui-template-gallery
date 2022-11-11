@@ -20,7 +20,7 @@ const activityMenuItems = [{
   ],
 }];
 
-const ListTemplate = (item: Activity) => {
+const listItemRender = (item: Activity) => {
   return (
     <div className='activity'>
       <div className='name'>{item.name}</div>
@@ -36,7 +36,7 @@ const ListTemplate = (item: Activity) => {
 
 const ActivitiesList = ({ activities }) => {
   return (
-    <List className='activities-list' dataSource={activities} scrollingEnabled={false} itemRender={ListTemplate} />
+    <List className='activities-list' dataSource={activities} scrollingEnabled={false} itemRender={listItemRender} />
   );
 };
 

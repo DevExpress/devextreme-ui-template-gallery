@@ -19,19 +19,19 @@ import { GridEdit, GridEditComponent } from '../../shared/types/planning-grid';
 import './PlanningGrid.scss';
 
 const EditComponent = ({ items, editComponent: Component, setValue, value }: GridEditComponent) => {
-  const EditField = (data: string) => (
+  const editFieldRender = (data: string) => (
     <div>
       {data && <Component text={data} />}
       <TextBox readOnly />
     </div>
   );
-  const EditItem = (data: string) => <Component text={data} />;
+  const editItemRender = (data: string) => <Component text={data} />;
 
-  return <SelectBox className='edit-cell' defaultValue={value} items={items} fieldRender={EditField} itemRender={EditItem} onValueChange={(value) => setValue(value)} />;
+  return <SelectBox className='edit-cell' defaultValue={value} items={items} fieldRender={editFieldRender} itemRender={editItemRender} onValueChange={(value) => setValue(value)} />;
 };
 
-const EditStatus = ({ setValue, value }: GridEdit) => <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} setValue={setValue} value={value} />;
-const EditPriority = ({ setValue, value }: GridEdit) => <EditComponent items={PRIORITY_ITEMS} editComponent={PriorityTask} setValue={setValue} value={value} />;
+const editStatusRender = ({ setValue, value }: GridEdit) => <EditComponent items={STATUS_ITEMS} editComponent={StatusTask} setValue={setValue} value={value} />;
+const editPriorityRender = ({ setValue, value }: GridEdit) => <EditComponent items={PRIORITY_ITEMS} editComponent={PriorityTask} setValue={setValue} value={value} />;
 export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
   const [data, setData] = useState<Task[]>();
 
@@ -66,7 +66,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       <Column dataField='company' caption='Company' hidingPriority={6}>
         <RequiredRule />
       </Column>
-      <Column dataField='priority' caption='Priority' cellRender={PriorityTask} editCellRender={EditPriority} hidingPriority={4}>
+      <Column dataField='priority' caption='Priority' cellRender={PriorityTask} editCellRender={editPriorityRender} hidingPriority={4}>
         <RequiredRule />
       </Column>
       <Column dataField='startDate' caption='Start Date' dataType='date' hidingPriority={2}>
@@ -78,7 +78,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       <Column dataField='owner' caption='Owner' hidingPriority={5}>
         <RequiredRule />
       </Column>
-      <Column dataField='status' caption='Status' minWidth={120} cellRender={StatusTask} editCellRender={EditStatus} hidingPriority={3}>
+      <Column dataField='status' caption='Status' minWidth={120} cellRender={StatusTask} editCellRender={editStatusRender} hidingPriority={3}>
         <RequiredRule />
       </Column>
     </DataGrid>
