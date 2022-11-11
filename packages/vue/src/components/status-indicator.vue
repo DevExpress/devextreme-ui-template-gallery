@@ -35,7 +35,7 @@ const props = withDefaults(
 );
 
 function getValue(): string {
-  return props.showBar ? `| ${props.value}` : props.value;
+  return (props.showBar ? '| ' : '') + props.value;
 }
 </script>
 <style scoped lang="scss">
