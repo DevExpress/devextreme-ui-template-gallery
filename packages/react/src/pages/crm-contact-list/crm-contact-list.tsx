@@ -56,7 +56,6 @@ export const CRMContactList = () => {
   const [loading, setLoading] = useState(true);
   const [isOpen, setPanelOpen] = useState(false);
   const [contactId, setContactId] = useState(null);
-  const [popupvisible, setPopupVisible] = useState(false);
 
   const grid = useRef<DataGrid>(null);
 
@@ -82,7 +81,6 @@ export const CRMContactList = () => {
 
     setStatus(status);
   }, []);
-
 
   const addRow = useCallback(() => {
     grid.current?.instance.addRow();
