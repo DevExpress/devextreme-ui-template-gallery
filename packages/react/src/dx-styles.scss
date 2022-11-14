@@ -128,6 +128,14 @@ body {
         margin-bottom: 3px;
       }
     }
+    .dx-texteditor.form-editor {
+      .form-editor-icon:first-child {
+        margin-left: 0;
+        pointer-events: none;
+        border-color: transparent;
+        background-color: transparent;
+      }
+    }
   }
 
   &.view-mode {
@@ -138,7 +146,7 @@ body {
     }
 
     .dx-texteditor,
-    .dx-texteditor.form-editor, {
+    .dx-texteditor.form-editor {
       pointer-events: none;
 
       .form-editor-input {
