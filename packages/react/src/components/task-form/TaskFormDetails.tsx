@@ -47,7 +47,7 @@ const renderStatusField = (data: string) => (
 const renderPriorityItem = (data: string) => <PriorityTask text={data}></PriorityTask>;
 const renderStatusItem = (data: string) => <StatusTask text={data}></StatusTask>;
 
-export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boolean, data: Task, onDataChanged: (data) => void }) => {
+export const TaskFormDetails = ({ editing, data, colCountByScreen, onDataChanged }: { editing: boolean, data: Task, colCountByScreen: {xs: number, sm: number}, onDataChanged: (data) => void }) => {
   const updateField = (field: string) => (value) => {
     onDataChanged({ ...data, ...{ [field]: value } });
   };
@@ -58,8 +58,16 @@ export const TaskFormDetails = ({ editing, data, onDataChanged }: { editing: boo
         labelMode='floating'
         className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}
       >
+        <SimpleItem visible={!data.text}>
+          <FormTextbox
+            label='Subject'
+            value={data.text}
+            isEditing={!editing}
+            onValueChange={updateField('text')}
+          ></FormTextbox>
+        </SimpleItem>
         <GroupItem itemType='group' colCount={2}>
-          <ColCountByScreen xs={2} />
+          <ColCountByScreen xs={colCountByScreen.xs} sm={colCountByScreen.sm} />
           <SimpleItem cssClass='accent'>
             <FormTextbox
               label='Company'

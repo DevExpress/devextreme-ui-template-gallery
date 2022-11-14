@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
-import { useNavigate } from 'react-router-dom';
 
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import DataGrid from 'devextreme-react/data-grid';
@@ -14,7 +13,9 @@ import LoadPanel from 'devextreme-react/load-panel';
 
 import dxTextBox from 'devextreme/ui/text_box';
 
-import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
+import { PlanningGrid, PlanningKanban, PlanningGantt, FormPopup, TaskFormDetails } from '../../components';
+
+import { newTask } from '../../shared/types/task';
 
 import { getTasks, getFilteredTasks } from 'dx-rwa-data';
 
@@ -30,8 +31,6 @@ export const PlanningTaskList = () => {
   const kanbanRef = useRef<Sortable>(null);
   const ganttRef = useRef<Gantt>(null);
 
-  const navigate = useNavigate();
-
   const [listView, kanbanView, ganttView] = listsData;
 
   const [view, setView] = useState(listView);
@@ -39,6 +38,8 @@ export const PlanningTaskList = () => {
   const [gridData, setGridData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [newTaskData, setNewTaskData] = useState(newTask);
+  const [popupvisible, setPopupVisible] = useState(false);
 
   const isDataGrid = view === listView;
   const isKanban = view === kanbanView;
@@ -58,18 +59,22 @@ export const PlanningTaskList = () => {
     }
   }, [filteredData, gridData]);
 
+  const onDataChanged = useCallback(data => {
+    setNewTaskData(data);
+  }, []);
+
   const onTabClick = useCallback((e: { itemData: string }) => {
     setView(e.itemData);
     setIndex(listsData.findIndex((d) => d === e.itemData));
   }, []);
 
+  const changePopupVisibility = () => {
+    setPopupVisible(!popupvisible);
+  };
+
   const addTask = useCallback(() => {
-    if(isDataGrid) {
-      gridRef.current?.instance.addRow();
-    } else {
-      navigate('/planning-task-details');
-    }
-  }, [view]);
+    changePopupVisibility();
+  }, []);
 
   const refresh = useCallback(() => {
     if(isDataGrid) {
@@ -214,8 +219,11 @@ export const PlanningTaskList = () => {
       </Toolbar>
       {loading && <LoadPanel container='.content' visible position={{ of: '.content' }} />}
       {!loading && isDataGrid && <PlanningGrid dataSource={gridData} ref={gridRef} />}
-      {!loading && isKanban && <PlanningKanban dataSource={filteredData} ref={kanbanRef} />}
+      {!loading && isKanban && <PlanningKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
       {!loading && view === ganttView && <PlanningGantt dataSource={filteredData} ref={ganttRef} />}
+      <FormPopup title='New Task' visible={popupvisible} changeVisibility={changePopupVisibility}>
+        <TaskFormDetails colCountByScreen={{ xs: 1, sm: 1 }} data={newTaskData} editing onDataChanged={onDataChanged} />
+      </FormPopup>
     </div>
   );
 };

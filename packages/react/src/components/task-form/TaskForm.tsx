@@ -35,6 +35,10 @@ export const TaskForm = ({ task }: { task?: Task }) => {
         data={data}
         editing={editing}
         onDataChanged={onDataChanged}
+        colCountByScreen={{
+          xs: 2,
+          sm: 2,
+        }}
         panelProps={{
           container: '.task-form',
           position: { of: '.task-form' },

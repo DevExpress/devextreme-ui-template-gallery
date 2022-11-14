@@ -7,7 +7,7 @@ export type TaskPriority = 'Low' | 'Normal' | 'High';
 export type TaskStatus = 'Open' | 'In Progress' | 'Deferred' | 'Completed';
 
 export interface Task {
-    id: number,
+    id?: number,
     text: string,
     description: string,
     company: string,
@@ -28,4 +28,21 @@ export interface TaskProp {
 }
 export interface PlanningProps {
     dataSource: Task[];
+    changePopupVisibility?: () => void;
 }
+
+export const newTask: Task = {
+  text: '',
+  description: '',
+  company: '',
+  priority: 'Low',
+  startDate: new Date(),
+  dueDate: new Date(),
+  owner: '',
+  status: 'Open',
+  activities: [],
+  notes: [],
+  messages: [],
+  parentId: 0,
+  progress: 0,
+};
