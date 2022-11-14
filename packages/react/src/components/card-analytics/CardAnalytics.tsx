@@ -16,7 +16,10 @@ type CardProps = {
 const menuItems = [
   {
     icon: 'overflow',
-    items: [{ text: 'Hide' }],
+    items: [
+      { text: 'Configure' },
+      { text: 'Remove' },
+    ],
   },
 ];
 
