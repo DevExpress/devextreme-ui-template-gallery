@@ -11,7 +11,6 @@
         :selection-filter="['done', '=', true]"
       >
         <dx-selection
-          :deferred="true"
           show-check-boxes-mode="always"
           mode="multiple"
         />
