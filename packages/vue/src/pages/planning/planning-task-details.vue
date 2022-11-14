@@ -57,7 +57,7 @@
       </div>
 
       <div class="right">
-        <div class="dx-card">
+        <div class="dx-card details-card">
           <dx-tab-panel
             :show-nav-buttons="true"
             :defer-rendering="false"
@@ -173,7 +173,7 @@ $left-panel-width: 400px;
     .right {
       flex: 1 calc(100% - 400px - 20px);
       margin-top: 8px;
-      min-width: 360px;
+      min-width: 340px;
     }
   }
 }

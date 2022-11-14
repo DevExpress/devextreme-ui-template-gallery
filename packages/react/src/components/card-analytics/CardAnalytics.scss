@@ -1,12 +1,15 @@
 @use '../../variables.scss' as *;
 
 .card {
-  padding: 16px;
   border-radius: 4px;
   box-shadow: none;
   position: relative;
   border: 1px solid $base-border-color;
   overflow: hidden;
+
+  .header {
+    padding: $content-padding $content-padding 0;
+  }
 
   .overflow-menu {
     position: absolute;
@@ -26,8 +29,17 @@
   }
 
   .content {
+    padding: 0 $content-padding $content-padding;
+    box-sizing: content-box;
     font-size: 14px;
     line-height: 17px;
     height: 270px;
+  }
+
+  &.grid {
+    .content {
+      border-top: 1px solid $base-border-color;
+      padding: 0 0 $content-padding;
+    }
   }
 }

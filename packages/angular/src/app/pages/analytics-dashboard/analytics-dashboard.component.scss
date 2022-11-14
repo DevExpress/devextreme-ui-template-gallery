@@ -13,3 +13,11 @@
 .view-wrapper {
   flex-direction: column;
 }
+
+::ng-deep {
+  td.dx-command-adaptive.dx-command-adaptive,
+  td.sales-bullet.sales-bullet {
+    border-left: none;
+    border-right: none;
+  }
+}

@@ -168,6 +168,10 @@ body {
   }
 }
 
+.details-card {
+  border: none;
+}
+
 @mixin status-contact($status-color) {
   color: $status-color;
 

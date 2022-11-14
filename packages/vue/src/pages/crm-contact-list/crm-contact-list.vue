@@ -2,6 +2,7 @@
   <div class="view-wrapper">
     <dx-data-grid
       :data-source="dataSource"
+      :allow-column-reordering="true"
       height="100%"
       class="grid"
       @row-click="rowClick"
@@ -287,8 +288,12 @@ const onSaveContactNewForm = () => {
     }
 
     :deep(.dx-datagrid-header-panel) {
-      padding-top: 20px;
-      padding-bottom: $toolbar-margin-bottom;
+      padding: 0 $content-padding;
+
+      .dx-toolbar {
+        margin-bottom: 0;
+        padding: $toolbar-margin-bottom 0;
+      }
     }
 
     .clickable-row {

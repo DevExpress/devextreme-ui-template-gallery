@@ -7,10 +7,9 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 16px 0 16px;
 
-  .dx-toolbar {
-    margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
+  .dx-toolbar.toolbar-common {
+    padding: 20px $content-padding $content-padding;
 
     .toolbar-header {
       @include header();
@@ -21,7 +20,8 @@
     }
   }
 
-  .toolbar-common {
-    margin-bottom: $toolbar-margin-bottom;
+  .gantt,
+  .kanban {
+    margin: 0 $content-padding;
   }
 }

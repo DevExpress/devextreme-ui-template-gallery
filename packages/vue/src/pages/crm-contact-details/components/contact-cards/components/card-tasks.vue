@@ -91,6 +91,6 @@ const onReorder = (e: RowDraggingReorderEvent) => {
 <style scoped>
 #card-tasks {
   min-height: 300px;
-  padding: 20px;
+  padding: 20px 0;
 }
 </style>
