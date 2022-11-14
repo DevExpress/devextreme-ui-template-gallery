@@ -8,7 +8,7 @@ import DataGrid, {
 import SelectBox from 'devextreme-react/select-box';
 
 import { ItemField } from '../item-field/ItemField';
-import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../shared/renderMethods';
+import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../shared/itemFieldRenderMethods';
 
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 
@@ -20,6 +20,8 @@ import './PlanningGrid.scss';
 const priorityCellRender = ({ text }) => {
   return <ItemField text={`| ${text}`} />;
 };
+
+const CellComponent = ({ data }: { data: { text: string }}) => <ItemField text={data.text} />;
 
 const editStatusRender = ({ setValue, value }: GridEdit) => (
   <SelectBox
@@ -88,7 +90,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       <Column dataField='owner' caption='Owner' hidingPriority={5}>
         <RequiredRule />
       </Column>
-      <Column dataField='status' caption='Status' minWidth={120} cellRender={ItemField} editCellRender={editStatusRender} hidingPriority={3}>
+      <Column dataField='status' caption='Status' minWidth={120} cellComponent={CellComponent} editCellRender={editStatusRender} hidingPriority={3}>
         <RequiredRule />
       </Column>
     </DataGrid>

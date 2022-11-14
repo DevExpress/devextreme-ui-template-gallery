@@ -12,7 +12,7 @@ import ValidationGroup from 'devextreme-react/validation-group';
 import { FormTextbox } from '../form-textbox/FormTextbox';
 
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
-import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../shared/renderMethods';
+import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../shared/itemFieldRenderMethods';
 
 import { Task } from '../../shared/types/task';
 
