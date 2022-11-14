@@ -12,7 +12,7 @@ const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
 // const API_URL = 'https://localhost:5001/api';
 
 @Injectable()
-export class RwaService {
+export class DataService {
   constructor(private http: HttpClient) {}
 
   public getContacts = () =>

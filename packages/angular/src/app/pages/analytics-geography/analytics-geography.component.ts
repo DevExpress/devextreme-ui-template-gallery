@@ -11,7 +11,7 @@ import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
 
 import { CommonModule } from '@angular/common';
-import { RwaService } from 'src/app/shared/services';
+import { DataService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
@@ -25,7 +25,7 @@ import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
 @Component({
   templateUrl: './analytics-geography.component.html',
   styleUrls: ['./analytics-geography.component.scss'],
-  providers: [RwaService],
+  providers: [DataService],
 })
 export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
   usaMap: any = mapsData.usa;
@@ -42,7 +42,7 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
 
   isLoading = false;
 
-  constructor(private service: RwaService) {
+  constructor(private service: DataService) {
   }
 
   ngOnInit(): void {

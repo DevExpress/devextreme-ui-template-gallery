@@ -16,7 +16,7 @@ import dxTextBox from 'devextreme/ui/text_box';
 
 import { PlanningGrid, PlanningKanban, PlanningGantt } from '../../components';
 
-import { getTasks, getFilteredTasks } from 'dx-rwa-data';
+import { getTasks, getFilteredTasks } from '../../../../dx-template-gallery-data';
 
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';

@@ -10,7 +10,7 @@ import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
 import { taskPanelItems } from 'src/app/shared/types/resource';
 import { Task, newTask } from 'src/app/shared/types/task';
-import { RwaService } from 'src/app/shared/services';
+import { DataService } from 'src/app/shared/services';
 import { forkJoin, map, Observable } from 'rxjs';
 import { TaskFormModule } from '../planning-task-details/task-form/task-form.component';
 import { FormPopupModule, FormPopupComponent} from 'src/app/shared/components';
@@ -22,7 +22,7 @@ import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 @Component({
   templateUrl: './planning-task-list.component.html',
   styleUrls: ['./planning-task-list.component.scss'],
-  providers: [RwaService],
+  providers: [DataService],
 })
 export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
@@ -45,7 +45,7 @@ export class PlanningTaskListComponent implements OnInit {
 
   taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
-  constructor(private service: RwaService) { }
+  constructor(private service: DataService) { }
 
   ngOnInit(): void {
     this.taskCollections$ = forkJoin([

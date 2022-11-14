@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 // eslint-disable-next-line import/no-unresolved
-import { getSalesByStateAndCity, calcSalesByState } from 'dx-rwa-data';
+import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 
 import { SalesByState, SalesByStateAndCity } from '@/types/analytics';
 import AnalyticsToolbar from '@/pages/analytics/components/analytics-toolbar.vue';

@@ -8,7 +8,7 @@ import { TaskForm, CardActivities, CardNotes, CardMessages, ToolbarDetails } fro
 
 import { Task } from '../../shared/types/task';
 
-import { getTask } from 'dx-rwa-data';
+import { getTask } from '../../../../dx-template-gallery-data';
 
 import './planning-task-details.scss';
 
