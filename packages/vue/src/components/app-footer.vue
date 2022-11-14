@@ -20,7 +20,7 @@ const appInfo = inject<AppInfo>(appInfoInjectKey);
 .content-block footer {
   display: block;
   color: rgba($base-text-color, alpha($base-text-color) * 0.7);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid $base-border-color;
   padding-top: 20px;
   padding-bottom: 24px;
 }

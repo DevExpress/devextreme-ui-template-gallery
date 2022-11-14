@@ -55,7 +55,7 @@ const opportunityClick = () => {
 }
 
 .owner {
-  color: rgba(117, 117, 117, 0.87);
+  color: $texteditor-label-color;
   font-size: 14px;
 
   .owner-name {
