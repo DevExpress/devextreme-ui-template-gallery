@@ -54,7 +54,7 @@
         <dx-form-group-item :col-count="2">
           <dx-col-count-by-screen :xs="2" />
           <dx-form-item>
-            <user-photo
+            <form-photo
               :link="contactData.image"
               :size="184"
             />
@@ -244,7 +244,7 @@ import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxSelectBox } from 'devextreme-vue';
 import LoadComponent from '@/components/load-component.vue';
 import { Contact, contactStatusList } from '@/types/contact';
-import UserPhoto from '@/components/user-photo.vue';
+import FormPhoto from '@/components/form-photo.vue';
 import ContactStatus from '@/components/contact-status.vue';
 import FormTextbox from '@/components/form-textbox.vue';
 

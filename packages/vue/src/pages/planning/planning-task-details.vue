@@ -51,6 +51,7 @@
         <task-form
           :data="taskData"
           :is-editing="false"
+          :contentByScreen="{ xs: 2, sm: 2 }"
           :is-loading="isLoading && !taskData.name"
         />
       </div>

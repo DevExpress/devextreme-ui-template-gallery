@@ -3,6 +3,7 @@ import { ref } from 'vue';
 interface ScreenSizeInfo {
   cssClasses: string[],
   isXSmall: boolean,
+  isSmall: boolean,
   isMedium: boolean
   isLarge: boolean
 }
@@ -39,6 +40,7 @@ function getScreenSizeInfo(): ScreenSizeInfo {
   const screenSizes: {[key: string]: boolean} = sizes();
   return {
     isXSmall: screenSizes['screen-x-small'],
+    isSmall: screenSizes['screen-small'],
     isMedium: screenSizes['screen-medium'],
     isLarge: screenSizes['screen-large'],
     cssClasses: Object.keys(screenSizes).filter((cl: string) => screenSizes[cl]),

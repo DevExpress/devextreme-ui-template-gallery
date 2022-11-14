@@ -20,7 +20,7 @@ export type TaskPriority = (typeof taskPriorityList)[number];
 export type TaskStatus = (typeof taskStatusList)[number];
 
 export interface Task {
-  id: number
+  id: number | null,
   text: string,
   description: string,
   company: string,
@@ -32,6 +32,23 @@ export interface Task {
   activities: Activity[],
   notes: Notes,
   messages: Messages,
-  parentId: number,
+  parentId: number | null,
   progress: number,
 }
+
+export const newTask: Task = {
+  id: null,
+  text: '',
+  description: '',
+  company: '',
+  priority: 'Low',
+  startDate: new Date(),
+  dueDate: new Date(),
+  owner: '',
+  status: 'Open',
+  activities: [],
+  notes: [],
+  messages: [],
+  parentId: null,
+  progress: 0,
+};
