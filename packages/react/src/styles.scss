@@ -1,0 +1,98 @@
+@use "./variables.scss" as *;
+
+@mixin status-contact($status-color) {
+  color: $status-color;
+
+  &.dx-texteditor {
+    .status-editor-input {
+      color: $status-color;
+      padding-left: 0;
+    }
+  }
+
+  span {
+    &::before {
+      background-color: $status-color;
+    }
+  }
+}
+
+.status-contact {
+  &.status-commission {
+    @include status-contact(#03a9f4);
+  }
+
+  &.status-salaried {
+    @include status-contact(#2eb52c);
+  }
+
+  &.status-terminated {
+    @include status-contact(#de8e8c);
+  }
+}
+
+@mixin status-task($status-color) {
+  color: $status-color;
+
+  &.dx-texteditor {
+    .status-editor-input {
+      color: $status-color;
+      padding-left: 0;
+    }
+  }
+}
+
+.status-task {
+  &.status-open {
+    @include status-task(#505ed9);
+  }
+
+  &.status-in-progress {
+    @include status-task(#34aa95);
+  }
+
+  &.status-deferred {
+    @include status-task(#969696);
+  }
+
+  &.status-completed {
+    @include status-task(#2b9029);
+  }
+
+  span {
+    font-size: 14px;
+  }
+}
+
+@mixin priority-task($status-color) {
+  color: $status-color;
+
+  &.dx-texteditor {
+    .priority-editor-input {
+      color: $status-color;
+      padding-left: 0;
+      font-weight: 600;
+    }
+  }
+
+  .separator-task {
+    background: $status-color;
+  }
+}
+
+.priority-task {
+  display: flex;
+  align-items: center;
+
+  &.priority-low {
+    @include priority-task(#d3a268);
+  }
+
+  &.priority-normal {
+    @include priority-task(#6fbaca);
+  }
+
+  &.priority-high {
+    @include priority-task(#ff5722);
+  }
+}
