@@ -38,11 +38,6 @@
 
 .sales-filter {
   display: inline-block;
-
-  & dx-drop-down-button {
-    position: absolute;
-    top: 12px;
-  }
 }
 
 @media only screen and (max-width: 600px) {

@@ -5,6 +5,10 @@
   overflow: hidden;
 }
 
+.details-card {
+  border: none;
+}
+
 .plain-styled-form {
   .dx-layout-manager .dx-field-item:not(.dx-first-col) {
     padding-left: 0;
