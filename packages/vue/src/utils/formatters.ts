@@ -5,7 +5,6 @@ export function formatPhone(number: string): string {
 }
 
 export function formatPrice(price: number, precision?: number): string {
-  console.log({ price, precision });
   return formatNumber(price, {
     type: 'currency',
     precision: precision || 0,
