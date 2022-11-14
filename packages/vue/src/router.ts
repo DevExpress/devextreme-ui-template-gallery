@@ -59,18 +59,18 @@ export const router = createRouter({
     ...[
       { name: 'crm-contact-list' },
       { name: 'crm-contact-details' },
-      { name: 'planning-task-list' },
-      { name: 'planning-task-details' },
-      { folder: 'analytics/', name: 'analytics-dashboard' },
-      { folder: 'analytics/', name: 'analytics-sales-report' },
-      { folder: 'analytics/', name: 'analytics-geography' },
-    ].map((route) => ({
-      path: `/${route.name}`,
+      { folder: 'planning', name: 'planning-task-list' },
+      { folder: 'planning', file: 'planning-task-details' },
+      { folder: 'analytics', name: 'analytics-dashboard' },
+      { folder: 'analytics', name: 'analytics-sales-report' },
+      { folder: 'analytics', name: 'analytics-geography' },
+    ].map(({ folder, name, file }) => ({
+      path: `/${name || file}`,
       meta: {
         requiresAuth: true,
         layout: defaultLayout,
       },
-      component: loadComponent(`${route.folder || ''}${route.name || ''}/${route.name}`),
+      component: loadComponent([folder, name, name, file].filter(Boolean).join('/')),
     })),
   ],
 });

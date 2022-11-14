@@ -20,6 +20,7 @@ $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 $filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
 $toolbar-margin-bottom: $content-padding;
 $texteditor-edit-color: $texteditor-color;
+$toolbar-items-container-height: 38px;
 $list-padding-left: $material-list-item-horizontal-padding;
 
 @mixin separator() {
