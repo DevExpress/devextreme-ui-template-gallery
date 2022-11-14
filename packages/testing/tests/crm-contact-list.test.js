@@ -27,7 +27,7 @@ fixture`Contact List`;
         await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
         await t.click(Selector('.dx-button[aria-label=Edit]'));
         await takeScreenshot(`crm-contact-list-form-edit${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
-        await t.click(Selector('[aria-label="close"]'));
+        await t.click(Selector('[aria-label="Close"]'));
         if (screenMode[0] === 400) {
           await t.click('.view-wrapper .dx-icon-overflow');
         }
