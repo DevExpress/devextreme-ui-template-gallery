@@ -1,6 +1,6 @@
 <template>
   <div id="task-form">
-    <dx-toolbar>
+    <dx-toolbar v-if="!isCreateMode">
       <dx-toolbar-item location="before">
         <span class="dx-form-group-caption">Details</span>
       </dx-toolbar-item>
@@ -14,7 +14,7 @@
           icon="edit"
           styling-mode="outlined"
           type="default"
-          :visible="!isLoading"
+          :visible="!props.isLoading"
           @click="handleEditClick()"
         />
       </dx-toolbar-item>
@@ -52,14 +52,34 @@
           class="plain-styled-form"
           :class="{'view-mode': !isEditing}"
           label-mode="floating"
+          :validation-group="props.validationGroup"
         >
           <dx-form-group-item :col-count="2">
-            <dx-col-count-by-screen :xs="2"/>
+            <dx-col-count-by-screen
+              :xs="props.contentByScreen.xs"
+              :sm="props.contentByScreen.sm"
+              :md="2"
+              :lg="2"
+            />
+            <dx-form-item
+              :visible="isCreateMode"
+              :col-span="2"
+            >
+              <form-textbox
+                label="Subject"
+                v-model="data.text"
+                :is-editing="isEditing"
+                :validation-group="props.validationGroup"
+              />
+            </dx-form-item>
+
             <dx-form-item css-class="accent">
               <form-textbox
                 label="Company"
                 v-model="data.company"
                 :is-editing="isEditing"
+                :validators="[]"
+                :validation-group="props.validationGroup"
               />
             </dx-form-item>
 
@@ -68,6 +88,7 @@
                 label="Assigned to"
                 v-model="data.owner"
                 :is-editing="isEditing"
+                :validation-group="props.validationGroup"
               />
             </dx-form-item>
 
@@ -84,12 +105,18 @@
               >
                 <template #field>
                   <div class="task-editor-field">
-                    <task-priority :value="data.priority" />
-                    <dx-text-box :read-only="true" />
+                    <status-indicator
+                      :is-field="true"
+                      :show-bar="true"
+                      :value="data.priority"
+                    />
                   </div>
                 </template>
                 <template #item="{ data }">
-                  <task-priority :value="data" />
+                  <status-indicator
+                    :show-bar="true"
+                    :value="data"
+                  />
                 </template>
               </dx-select-box>
             </dx-form-item>
@@ -107,12 +134,16 @@
               >
                 <template #field>
                   <div class="task-editor-field">
-                    <task-status :status="data.status" />
-                    <dx-text-box :read-only="true" />
+                    <status-indicator
+                      :is-field="true"
+                      :value="data.status"
+                    />
                   </div>
                 </template>
                 <template #item="{ data }">
-                  <task-status :status="data" />
+                  <status-indicator
+                    :value="data"
+                  />
                 </template>
               </dx-select-box>
             </dx-form-item>
@@ -133,12 +164,12 @@
               />
             </dx-form-item>
           </dx-form-group-item>
-
           <dx-form-item>
             <dx-text-area
               label="Details"
               styling-mode="filled"
               v-model="data.description"
+              :validation-group="props.validationGroup"
             />
           </dx-form-item>
         </dx-form>
@@ -148,10 +179,12 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import TaskPriority from '@/components/task-priority.vue';
+import StatusIndicator from '@/components/status-indicator.vue';
 import { DxButton } from 'devextreme-vue/button';
 import { DxTextArea } from 'devextreme-vue/text-area';
-import { taskPriorityList, Task, taskStatusList } from '@/types/task';
+import {
+  taskPriorityList, Task, taskStatusList, newTask,
+} from '@/types/task';
 import {
   DxToolbar,
   DxItem as DxToolbarItem,
@@ -166,30 +199,31 @@ import { DxSelectBox } from 'devextreme-vue/select-box';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import LoadComponent from '@/components/load-component.vue';
 import FormTextbox from '@/components/form-textbox.vue';
-import TaskStatus from '@/components/task-status.vue';
 import FormDatebox from '@/components/form-datebox.vue';
 
-const emptyData = {} as Task;
-
 const props = withDefaults(defineProps<{
-  isLoading: boolean,
-  data: Task | null
+  isLoading?: boolean,
+  data?: Task,
+  contentByScreen: { xs: number, sm: number },
+  validationGroup?: string,
 }>(), {
-  isLoading: true,
-  data: null,
+  isLoading: false,
+  data: () => newTask,
+  validationGroup: undefined,
 });
 
-const isEditing = ref(false);
-const data = ref(emptyData);
-
-let dataSaved = emptyData;
+const isCreateMode = props.data === newTask;
+const isEditing = ref(isCreateMode);
+const data = ref(newTask);
 
 watch(
   () => props.data,
-  (contactDataNew: Task | null) => {
-    data.value = contactDataNew || emptyData;
+  (newValue) => {
+    data.value = newValue;
   },
 );
+
+let dataSaved: Task | null = null;
 
 function handleEditClick() {
   dataSaved = { ...data.value };
@@ -201,43 +235,21 @@ function handleSaveClick() {
 }
 
 function handleCancelClick() {
-  data.value = dataSaved;
+  if (dataSaved) {
+    data.value = dataSaved;
+  }
+
   isEditing.value = false;
 }
 </script>
-
-<style lang="scss">
-.dx-popup-content {
-  .task-priority, .task-status {
-    span {
-      font-size: 13px;
-    }
-  }
-}
-
-</style>
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
 
 #task-form {
-  min-height: 300px;
+  min-height: 250px;
 
   .dx-toolbar {
     margin-bottom: $toolbar-margin-bottom;
-  }
-}
-
-:deep(.form-editor) {
-  .task-priority,
-  .task-status {
-    position: absolute;
-    bottom: 0;
-    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 3px);
-
-    &,
-    span {
-      font-size: 13px;
-    }
   }
 }
 </style>

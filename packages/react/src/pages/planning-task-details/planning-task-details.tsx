@@ -72,7 +72,7 @@ export const PlanningTaskDetails = () => {
       <div className='panels'>
         <div className='left'>{task && <TaskForm task={task}></TaskForm>}</div>
         <div className='right'>
-          <div className='dx-card'>
+          <div className='dx-card details-card'>
             <TabPanel showNavButtons deferRendering={false}>
               <TabPanelItem title='Activities'>
                 <CardActivities activities={task?.activities} />

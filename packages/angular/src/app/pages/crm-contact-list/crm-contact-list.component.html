@@ -3,6 +3,7 @@
     class="grid"
     noDataText=""
     [dataSource]="dataSource"
+    [allowColumnReordering]="true"
     (onRowClick)="rowClick($event)"
     (onRowPrepared)="rowPrepared($event)"
     (exporting)="onExporting($event)"

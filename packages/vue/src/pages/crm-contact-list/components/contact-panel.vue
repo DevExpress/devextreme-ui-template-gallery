@@ -12,14 +12,14 @@
       >
         <template v-if="panelData">
           <div class="data-part">
-            <dx-toolbar>
+            <dx-toolbar class="panel-toolbar">
               <dx-item location="before">
                 <div class="contact-name">
                   {{ panelData?.name }}
                 </div>
               </dx-item>
               <dx-item location="before">
-                <user-status :status="panelData?.status" />
+                <contact-status :status="panelData?.status" />
               </dx-item>
 
               <dx-item
@@ -48,7 +48,7 @@
                   css-class="photo-row"
                 >
                   <dx-form-item css-class="photo-box">
-                    <user-photo :link="panelData.image" />
+                    <form-photo :link="panelData.image" />
                   </dx-form-item>
 
                   <dx-form-group-item>
@@ -95,7 +95,7 @@
             </div>
 
             <div class="data-part data-part-toolbar border">
-              <dx-toolbar class="panel-toolbar">
+              <dx-toolbar>
                 <dx-item
                   location="before"
                   :visible="!isEditing"
@@ -221,8 +221,8 @@ import {
 } from 'devextreme-vue/form';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
-import UserPhoto from '@/components/user-photo.vue';
-import UserStatus from '@/components/contact-status.vue';
+import FormPhoto from '@/components/form-photo.vue';
+import ContactStatus from '@/components/contact-status.vue';
 import { screenInfo } from '@/utils/media-query';
 import { formatPrice } from '@/utils/formatters';
 import ContactActivities from '@/components/card-activities.vue';
@@ -237,8 +237,8 @@ const isPinEnabled = ref(true);
 const panelData = ref<Contact | null>(null);
 const props = withDefaults(defineProps<{
   isPanelOpen: boolean,
-  userId: number | null
-}>(), { isPanelOpen: false, userId: null });
+  contactId: number | null
+}>(), { isPanelOpen: false, contactId: null });
 
 const toggleEdit = () => {
   isEditing.value = !isEditing.value;
@@ -271,9 +271,9 @@ watch(
   },
 );
 
-const loadContact = async (userId: number) => {
+const loadContact = async (contactId: number) => {
   isLoading.value = true;
-  panelData.value = await getContact(userId);
+  panelData.value = await getContact(contactId);
   isLoading.value = false;
 };
 
@@ -282,10 +282,10 @@ function accordionPlusClick(/* e : Event */) {
 }
 
 watch(
-  () => props.userId,
-  (newUserId) => {
-    if (newUserId !== null) {
-      loadContact(newUserId);
+  () => props.contactId,
+  (newId) => {
+    if (newId !== null) {
+      loadContact(newId);
     }
   },
 );
@@ -318,6 +318,12 @@ const navigateToDetails = () => {
 
   .embedded.dx-viewport & {
     top: 0;
+  }
+
+  .panel-toolbar {
+    :deep(.dx-toolbar-items-container) {
+      height: $toolbar-items-container-height;
+    }
   }
 
   &.open {

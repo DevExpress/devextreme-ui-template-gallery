@@ -2,6 +2,7 @@
   <div class="view-wrapper">
     <dx-data-grid
       :data-source="dataSource"
+      :allow-column-reordering="true"
       height="100%"
       class="grid"
       @row-click="rowClick"
@@ -60,7 +61,7 @@
             text: 'Add Contact',
             type: 'default',
             stylingMode: 'contained',
-            onClick: addRow
+            onClick: addContact
           }"
         />
 
@@ -162,11 +163,19 @@
 
     <!--  Contact panel  -->
     <contact-panel
-      :user-id="panelData?.id"
+      :contact-id="panelData?.id"
       :is-panel-open="isPanelOpen"
       @close="isPanelOpen = false"
     />
   </div>
+
+  <form-popup
+    title="New Contact"
+    v-model:is-visible="isAddContactPopupOpened"
+    @save="onSaveContactNewForm"
+  >
+    <contact-new-form :validation-group="newContactValidationGroup" />
+  </form-popup>
 </template>
 
 <script setup lang="ts">
@@ -195,14 +204,21 @@ import DataSource from 'devextreme/data/data_source';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { formatPhone } from '@/utils/formatters';
 import ContactStatus from '@/components/contact-status.vue';
+import FormPopup from '@/components/form-popup.vue';
+import validationEngine from 'devextreme/ui/validation_engine';
+import ContactNewForm from './components/contact-new-form.vue';
 import ContactPanel from './components/contact-panel.vue';
 
+const filterStatusList = ['All', ...contactStatusList];
+type FilterContactStatus = typeof filterStatusList[number];
+
+const newContactValidationGroup = 'new-contact';
 const panelData = ref<Array<Contact> | null>(null);
 const isPanelOpen = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
 
-const filterStatusList = ['All', ...contactStatusList];
-type FilterContactStatus = typeof filterStatusList[number];
+const isAddContactPopupOpened = ref(false);
+
 const dataSource = new DataSource({
   key: 'id',
   load: () => getContacts(),
@@ -215,8 +231,8 @@ const rowClick = (e: RowClickEvent) => {
   }
 };
 
-const addRow = () => {
-  dataGrid.value?.instance.addRow();
+const addContact = () => {
+  isAddContactPopupOpened.value = true;
 };
 
 const filterByStatus = (e: SelectionChangedEvent) => {
@@ -242,6 +258,12 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
 
   return formatPhone(value.toString());
 };
+
+const onSaveContactNewForm = () => {
+  if (validationEngine.validateGroup(newContactValidationGroup).isValid) {
+    isAddContactPopupOpened.value = false;
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -266,8 +288,12 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
     }
 
     :deep(.dx-datagrid-header-panel) {
-      padding-top: 20px;
-      padding-bottom: $toolbar-margin-bottom;
+      padding: 0 $content-padding;
+
+      .dx-toolbar {
+        margin-bottom: 0;
+        padding: $toolbar-margin-bottom 0;
+      }
     }
 
     .clickable-row {

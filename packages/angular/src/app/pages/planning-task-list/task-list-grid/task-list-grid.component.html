@@ -64,7 +64,11 @@
   </dxi-column>
 
   <div *dxTemplate="let cellInfo of 'cellPriority'">
-    <task-priority [value]="cellInfo.data.priority"></task-priority>
+    <status-indicator
+      [isField]="false"
+      [showBar]="true"
+      [value]="cellInfo.data.priority">
+    </status-indicator>
   </div>
 
   <div *dxTemplate="let cellInfo of 'editCellPriority'">
@@ -77,17 +81,16 @@
       fieldTemplate="field"
     >
       <div *dxTemplate="let data of 'field'">
-        <task-priority [value]="cellInfo.value"></task-priority>
-        <dx-text-box [readOnly]="true"></dx-text-box>
+        <status-indicator [showBar]="true" [value]="cellInfo.value"></status-indicator>
       </div>
       <div *dxTemplate="let data of 'item'">
-        <task-priority [value]="data"></task-priority>
+        <status-indicator [showBar]="true" [isField]="false" [value]="data"></status-indicator>
       </div>
     </dx-select-box>
   </div>
 
   <div *dxTemplate="let cellInfo of 'cellStatus'">
-    <task-status [value]="cellInfo.data.status"></task-status>
+    <status-indicator [isField]="false" [value]="cellInfo.data.status"></status-indicator>
   </div>
 
   <div *dxTemplate="let cellInfo of 'editCellStatus'">
@@ -100,11 +103,10 @@
       fieldTemplate="field"
     >
       <div *dxTemplate="let data of 'field'">
-        <task-status [value]="cellInfo.value"></task-status>
-        <dx-text-box [readOnly]="true"></dx-text-box>
+        <status-indicator [value]="cellInfo.value"></status-indicator>
       </div>
       <div *dxTemplate="let s of 'item'">
-        <task-status [value]="s"></task-status>
+        <status-indicator [isField]="false" [value]="s"></status-indicator>
       </div>
     </dx-select-box>
   </div>

@@ -74,13 +74,18 @@
           >
             <div *dxTemplate="let data of 'field'">
               <div>
-                <task-priority [value]="task.priority"></task-priority>
-                <dx-text-box [readOnly]="true"></dx-text-box>
+                <status-indicator
+                  [showBar]="true"
+                  [value]="task.priority"
+                ></status-indicator>
               </div>
             </div>
 
             <div *dxTemplate="let data of 'item'">
-              <task-priority [value]="data"></task-priority>
+              <status-indicator
+                [showBar]="true"
+                [isField]="false"
+                [value]="data"></status-indicator>
             </div>
           </dx-select-box>
         </div>
@@ -98,13 +103,12 @@
           >
             <div *dxTemplate="let data of 'field'">
               <div>
-                <task-status [value]="task.status"></task-status>
-                <dx-text-box [readOnly]="true"></dx-text-box>
+                <status-indicator [value]="task.status"></status-indicator>
               </div>
             </div>
 
             <div *dxTemplate="let data of 'item'">
-              <task-status [value]="data"></task-status>
+              <status-indicator [isField]="false" [value]="data"></status-indicator>
             </div>
           </dx-select-box>
         </div>
