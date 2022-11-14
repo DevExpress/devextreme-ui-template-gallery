@@ -19,6 +19,8 @@ import { getContacts } from 'dx-rwa-data';
 
 import { ContactStatus as ContactStatusType } from '../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
+import { ContactNewForm } from './contact-new-form/contactNewForm';
+import { FormPopup } from '../../components';
 
 import './crm-contact-list.scss';
 
@@ -52,6 +54,7 @@ export const CRMContactList = () => {
   const [status, setStatus] = useState(filterStatusList[0]);
   const [gridData, setGridData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [popupvisible, setPopupVisible] = useState(false);
 
   const grid = useRef<DataGrid>(null);
 
@@ -78,8 +81,12 @@ export const CRMContactList = () => {
     setStatus(status);
   }, []);
 
-  const addRow = useCallback(() => {
-    grid.current?.instance.addRow();
+  const changePopupVisibility = () => {
+    setPopupVisible(!popupvisible);
+  };
+
+  const addContact = useCallback(() => {
+    changePopupVisibility();
   }, []);
 
   const refresh = useCallback(() => {
@@ -111,7 +118,7 @@ export const CRMContactList = () => {
                 <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus}></DropDownButton>
               </Item>
               <Item location='after' locateInMenu='auto'>
-                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addRow}></Button>
+                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addContact}></Button>
               </Item>
               <Item location='after' locateInMenu='auto' showText='inMenu' widget='dxButton'>
                 <Button icon='refresh' text='Refresh' stylingMode='text' onClick={refresh}></Button>
@@ -132,6 +139,10 @@ export const CRMContactList = () => {
             <Column dataField='assignedTo' caption='Assigned to' hidingPriority={4}></Column>
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender}></Column>
             <Column dataField='email' caption='Email' hidingPriority={1}></Column>
+
+            <FormPopup title='New Contact' visible={popupvisible} changeVisibility={changePopupVisibility}>
+              <ContactNewForm />
+            </FormPopup>
           </DataGrid>
         ) : (
           <LoadPanel visible />
