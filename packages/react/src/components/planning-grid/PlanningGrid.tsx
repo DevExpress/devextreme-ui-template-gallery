@@ -52,7 +52,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
   }, []);
 
   return (
-    <DataGrid ref={ref} dataSource={data} columnAutoWidth onRowPrepared={onRowPrepared} onRowClick={navigateToDetails}>
+    <DataGrid className='planning-grid' ref={ref} dataSource={data} columnAutoWidth onRowPrepared={onRowPrepared} onRowClick={navigateToDetails}>
       <Paging pageSize={15}></Paging>
       <Pager visible showPageSizeSelector></Pager>
       <Editing mode='row' allowUpdating></Editing>

@@ -8,7 +8,7 @@ import { ContactStatus } from '@/types/contact';
 
 const props = withDefaults(defineProps<{
   value: ContactStatus,
-  showText: boolean
+  showText?: boolean
   }>(), {
   showText: true,
 });

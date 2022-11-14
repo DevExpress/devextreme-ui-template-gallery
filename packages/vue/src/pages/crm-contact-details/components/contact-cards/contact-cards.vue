@@ -1,5 +1,5 @@
 <template>
-  <div class="dx-card">
+  <div class="dx-card details-card">
     <dx-tab-panel :show-nav-buttons="true">
       <dx-tab-item title="Tasks">
         <card-tasks
