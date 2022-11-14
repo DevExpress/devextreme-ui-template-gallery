@@ -7,6 +7,7 @@ import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/analytics-sales-report`;
+const requestLogger = RequestLogger();
 
 fixture`Analytics Sales Report`;
 
@@ -14,7 +15,8 @@ fixture`Analytics Sales Report`;
   screenModes.forEach((screenMode) => {
     test(`Analytics Sales Report (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => { },
+        screenMode, timeoutSecond, true, requestLogger);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-sales-report-month${getPostfix(embedded, screenMode)}`, 'body');
@@ -43,6 +45,6 @@ fixture`Analytics Sales Report`;
       await t
         .expect(compareResults.isValid())
         .ok(compareResults.errorMessages());
-    });
+    }).requestHooks(requestLogger);
   });
 });
