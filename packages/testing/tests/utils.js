@@ -3,17 +3,19 @@ import { fakeScreenSize } from '../config';
 
 const FONTSCOUNT = 4;
 async function awaitFontsLoaded(requestLogger, t, timeout) {
+  if (requestLogger) {
   // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const fontsCount = requestLogger.requests
-      .map(({ request }) => request.url)
-      .filter((reqUrl) => reqUrl.endsWith('.woff2'))
-      .length;
-    if (fontsCount < FONTSCOUNT) {
+    while (true) {
+      const fontsCount = requestLogger.requests
+        .map(({ request }) => request.url)
+        .filter((reqUrl) => reqUrl.endsWith('.woff2'))
+        .length;
+      if (fontsCount < FONTSCOUNT) {
       // eslint-disable-next-line no-await-in-loop
-      await t.wait(timeout);
-    } else {
-      break;
+        await t.wait(timeout);
+      } else {
+        break;
+      }
     }
   }
 }
