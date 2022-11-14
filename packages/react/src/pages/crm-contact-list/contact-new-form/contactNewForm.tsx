@@ -21,9 +21,7 @@ export const ContactNewForm = () => {
       <FormItem itemType='group'>
         <ColCountByScreen xs={1} sm={1} md={1} lg={1}></ColCountByScreen>
         <FormItem>
-          <div>
-            <FormPhotoUploader />
-          </div>
+          <FormPhotoUploader />
         </FormItem>
       </FormItem>
 

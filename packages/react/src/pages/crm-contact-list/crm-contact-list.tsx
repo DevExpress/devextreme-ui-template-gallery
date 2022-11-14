@@ -95,8 +95,8 @@ export const CRMContactList = () => {
 
   return (
     <div className='view crm-contact-list'>
-      <div className='view-wrapper'>
-        {!loading ? (
+      {!loading ? (
+        <div className='view-wrapper'>
           <DataGrid
             className='grid'
             noDataText=''
@@ -139,15 +139,14 @@ export const CRMContactList = () => {
             <Column dataField='assignedTo' caption='Assigned to' hidingPriority={4}></Column>
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender}></Column>
             <Column dataField='email' caption='Email' hidingPriority={1}></Column>
-
-            <FormPopup title='New Contact' visible={popupvisible} changeVisibility={changePopupVisibility}>
-              <ContactNewForm />
-            </FormPopup>
           </DataGrid>
-        ) : (
-          <LoadPanel visible />
-        )}
-      </div>
+          <FormPopup title='New Contact' visible={popupvisible} changeVisibility={changePopupVisibility}>
+            <ContactNewForm />
+          </FormPopup>
+        </div>
+      ) : (
+        <LoadPanel visible />
+      )}
     </div>
   );
 };
