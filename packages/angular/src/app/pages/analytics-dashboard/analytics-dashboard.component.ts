@@ -9,7 +9,7 @@ import { DxFunnelModule } from 'devextreme-angular/ui/funnel';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 
 import { CommonModule } from '@angular/common';
-import { RwaService } from 'src/app/shared/services';
+import { DataService } from 'src/app/shared/services';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
 import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analytics/toolbar-analytics.component';
@@ -30,7 +30,7 @@ type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
 @Component({
   templateUrl: './analytics-dashboard.component.html',
   styleUrls: ['./analytics-dashboard.component.scss'],
-  providers: [RwaService],
+  providers: [DataService],
 })
 export class AnalyticsDashboardComponent implements OnInit {
   analyticsPanelItems = analyticsPanelItems;
@@ -40,7 +40,7 @@ export class AnalyticsDashboardComponent implements OnInit {
   salesByState: SalesByState = null;
   salesByCategory: SalesByStateAndCity = null;
 
-  constructor(private service: RwaService) {}
+  constructor(private service: DataService) {}
 
   selectionChange(dates: Dates) {
     this.loadData(dates.startDate, dates.endDate);

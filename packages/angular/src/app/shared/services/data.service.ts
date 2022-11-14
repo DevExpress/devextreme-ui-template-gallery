@@ -8,11 +8,11 @@ import { Task } from 'src/app/shared/types/task';
 import { Contact } from 'src/app/shared/types/contact';
 import { SalesOrOpportunitiesByCategory } from '../types/analytics';
 
-const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
+const API_URL = 'https://js.devexpress.com/Demos/DataService/api';
 // const API_URL = 'https://localhost:5001/api';
 
 @Injectable()
-export class RwaService {
+export class DataService {
   constructor(private http: HttpClient) {}
 
   public getContacts = () =>

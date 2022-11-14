@@ -28,7 +28,7 @@ import {
   getSalesByOrderDate,
   getSalesByCategory,
   getSales,
-} from 'dx-rwa-data';
+} from 'dx-template-gallery-data';
 import {
   Sales,
   SalesByStateAndCity,
