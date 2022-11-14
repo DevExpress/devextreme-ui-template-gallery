@@ -21,7 +21,8 @@ export class TaskKanbanCardComponent {
 
   getAvatarText = (name: string) => name.split(' ').map((name) => name[0]).join('');
 
-  notify = () => {
+  notify = (e) => {
+    e.event.stopPropagation();
     notify(`Edit '${this.task.text}' card event`);
   };
 
