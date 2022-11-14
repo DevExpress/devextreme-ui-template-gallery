@@ -2,15 +2,15 @@
 
 .task-form {
   min-height: 300px;
+}
 
-  .priority-task-editor-field,
-  .status-task-editor-field {
-    display: flex;
-    padding-left: $list-padding-left;
+.priority-task-editor-field,
+.status-task-editor-field {
+  display: flex;
+  padding-left: $list-padding-left;
 
-    .priority-task,
-    .status-task {
-      align-self: flex-end;
-    }
+  .priority-task,
+  .status-task {
+    align-self: flex-end;
   }
 }

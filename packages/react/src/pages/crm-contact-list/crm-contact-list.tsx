@@ -89,6 +89,12 @@ export const CRMContactList = () => {
     changePopupVisibility();
   }, []);
 
+  const onSavePopupClick = (e) => {
+    if(!e.validationGroup.validate().isValid) return;
+
+    changePopupVisibility();
+  };
+
   const refresh = useCallback(() => {
     grid.current?.instance.refresh();
   }, []);
@@ -141,7 +147,7 @@ export const CRMContactList = () => {
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender}></Column>
             <Column dataField='email' caption='Email' hidingPriority={1}></Column>
           </DataGrid>
-          <FormPopup title='New Contact' visible={popupvisible} changeVisibility={changePopupVisibility}>
+          <FormPopup title='New Contact' visible={popupvisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
             <ContactNewForm />
           </FormPopup>
         </div>

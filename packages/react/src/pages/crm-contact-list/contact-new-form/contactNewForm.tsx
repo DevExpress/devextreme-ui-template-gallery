@@ -33,7 +33,6 @@ export const ContactNewForm = () => {
             value={newContact.firstName}
             isEditing={false}
             onValueChange={updateField('firstName')}
-            // validationGroup={validationGroup}
           ></FormTextbox>
         </FormItem>
         <FormItem>
@@ -42,7 +41,6 @@ export const ContactNewForm = () => {
             value={newContact.lastName}
             isEditing={false}
             onValueChange={updateField('lastName')}
-            // validationGroup={validationGroup}
           ></FormTextbox>
         </FormItem>
       </FormItem>
@@ -55,7 +53,6 @@ export const ContactNewForm = () => {
             value={newContact.company}
             isEditing={false}
             onValueChange={updateField('company')}
-            // validationGroup={validationGroup}
           ></FormTextbox>
         </FormItem>
         <FormItem>
@@ -64,7 +61,6 @@ export const ContactNewForm = () => {
             value={newContact.position}
             isEditing={false}
             onValueChange={updateField('position')}
-            // validationGroup={validationGroup}
           ></FormTextbox>
         </FormItem>
       </FormItem>
@@ -77,7 +73,6 @@ export const ContactNewForm = () => {
             label='Assigned to'
             isEditing={false}
             onValueChange={updateField('manager')}
-            // validationGroup={validationGroup}
           ></FormTextbox>
         </FormItem>
         <FormItem>
@@ -87,7 +82,6 @@ export const ContactNewForm = () => {
             onValueChange={updateField('phone')}
             icon='tel'
             mask='+1(000)000-0000'
-            // validationGroup={validationGroup}
           ></FormTextbox>
         </FormItem>
         <FormItem>
@@ -96,7 +90,6 @@ export const ContactNewForm = () => {
             onValueChange={updateField('email')}
             isEditing={false}
             icon='email'
-            //  validationGroup={validationGroup}
           ></FormTextbox>
         </FormItem>
         <FormItem>
@@ -105,7 +98,6 @@ export const ContactNewForm = () => {
             isEditing={false}
             onValueChange={updateField('address')}
             icon='home'
-            // validationGroup={validationGroup}
           ></FormTextbox>
         </FormItem>
       </FormItem>
