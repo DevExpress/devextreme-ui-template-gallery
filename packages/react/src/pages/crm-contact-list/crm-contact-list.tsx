@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
+import './crm-contact-list.scss';
+
 import DataGrid, {
   Sorting, Selection, HeaderFilter, Scrolling, SearchPanel,
   ColumnChooser, Export, Column, Toolbar, Item
@@ -21,10 +23,6 @@ import { ContactStatus as ContactStatusType } from '../../shared/types/crm-conta
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
 
 import { ContactPanel } from './contact-panel/contactPanel';
-import { ContactNewForm } from './contact-new-form/contactNewForm';
-
-import './crm-contact-list.scss';
-import { FormPopup } from '../../components';
 
 type FilterContactStatus = ContactStatusType | 'All Contacts';
 
@@ -85,12 +83,9 @@ export const CRMContactList = () => {
     setStatus(status);
   }, []);
 
-  const changePopupVisibility = () => {
-    setPopupVisible(!popupvisible);
-  };
 
-  const addContact = useCallback(() => {
-    changePopupVisibility();
+  const addRow = useCallback(() => {
+    grid.current?.instance.addRow();
   }, []);
 
   const changePanelOpen = () => {
@@ -133,7 +128,7 @@ export const CRMContactList = () => {
               <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus}></DropDownButton>
             </Item>
             <Item location='after' locateInMenu='auto'>
-              <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addContact}></Button>
+              <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addRow}></Button>
             </Item>
             <Item location='after' locateInMenu='auto' showText='inMenu' widget='dxButton'>
               <Button icon='refresh' text='Refresh' stylingMode='text' onClick={refresh}></Button>
@@ -156,9 +151,6 @@ export const CRMContactList = () => {
           <Column dataField='email' caption='Email' hidingPriority={1}></Column>
         </DataGrid>
         { contactId && <ContactPanel contactId={contactId} isOpen={isOpen} changePanelOpen={changePanelOpen}></ContactPanel> }
-        <FormPopup title='New Contact' visible={popupvisible} changeVisibility={changePopupVisibility}>
-          <ContactNewForm />
-        </FormPopup>
         {loading && <LoadPanel container='.content' visible position={{ of: '.content' }} />}
       </div>
     </div>
