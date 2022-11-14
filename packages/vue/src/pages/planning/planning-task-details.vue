@@ -57,7 +57,7 @@
       </div>
 
       <div class="right">
-        <div class="dx-card">
+        <div class="dx-card details-card">
           <dx-tab-panel
             :show-nav-buttons="true"
             :defer-rendering="false"

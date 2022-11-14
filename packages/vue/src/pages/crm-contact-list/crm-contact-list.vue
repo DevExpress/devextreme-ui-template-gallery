@@ -288,8 +288,12 @@ const onSaveContactNewForm = () => {
     }
 
     :deep(.dx-datagrid-header-panel) {
-      padding-top: 20px;
-      padding-bottom: $toolbar-margin-bottom;
+      padding: 0 $content-padding;
+
+      .dx-toolbar {
+        margin-bottom: 0;
+        padding: $toolbar-margin-bottom 0;
+      }
     }
 
     .clickable-row {

@@ -1,11 +1,11 @@
 <template>
   <card-analytics
     title="Revenue Analysis by States"
-    content-class="sales-by-state-and-city"
+    content-class="sales-by-state-and-city grid"
   >
     <dx-data-grid
       :data-source="props.data"
-      :height="270"
+      :height="290"
       :load-panel="{enabled: false}"
     >
       <dx-column
