@@ -20,11 +20,11 @@ const activityMenuItems = [{
   ],
 }];
 
-const ListTemplate = (item: Activity) => {
+const renderListItem = (item: Activity) => {
   return (
     <div className='activity'>
       <div className='name'>{item.name}</div>
-      <div className='date'>
+      <div className='date by'>
         <span>{formatDate(new Date(item.date), 'MM/dd/yyyy')}</span>
         <span>by</span>
         <span>{item.manager}</span>
@@ -36,7 +36,7 @@ const ListTemplate = (item: Activity) => {
 
 const ActivitiesList = ({ activities }) => {
   return (
-    <List className='activities-list' dataSource={activities} scrollingEnabled={false} itemRender={ListTemplate} />
+    <List className='activities-list' dataSource={activities} scrollingEnabled={false} itemRender={renderListItem} />
   );
 };
 
