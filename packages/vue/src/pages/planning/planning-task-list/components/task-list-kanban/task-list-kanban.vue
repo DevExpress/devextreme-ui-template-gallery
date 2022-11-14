@@ -168,6 +168,7 @@ const addTask = (text: string) => {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-height: 100px;
 
   .dx-sortable {
     display: block;
