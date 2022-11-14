@@ -23,7 +23,7 @@ import {
   getContactMessages,
   getActiveContactOpportunities,
   getClosedContactOpportunities
-} from '../../../../dx-template-gallery-data';
+} from 'dx-template-gallery-data';
 
 import './crm-contact-details.scss';
 

@@ -4,7 +4,7 @@ import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGro
 import { SalesRangeCard } from './cards/SalesRangeCard';
 import { ProductSaleByRangeCard } from './cards/ProductSaleByRangeCard';
 import { SalesPerformanceCard } from './cards/SalesPerformanceCard';
-import { getSalesByCategory, getSales, getSalesByOrderDate } from '../../../../dx-template-gallery-data';
+import { getSalesByCategory, getSales, getSalesByOrderDate } from 'dx-template-gallery-data';
 import { formatDate } from 'devextreme/localization';
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 import './analytics-sales-report.scss';
