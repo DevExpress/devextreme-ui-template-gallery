@@ -94,6 +94,7 @@ export const CRMContactList = () => {
             className='grid'
             noDataText=''
             dataSource={gridData}
+            allowColumnReordering
             ref={grid}
           >
             <SearchPanel visible placeholder='Contact Search' />
