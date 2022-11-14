@@ -1,6 +1,6 @@
 <template>
   <span :class="'contact-status status-' + props.value?.toLowerCase()">
-    {{ (props.showText ? this.props.value : '') }}</span>
+    {{ (props.showText ? props.value : '') }}</span>
 </template>
 
 <script setup lang="ts">
