@@ -15,7 +15,7 @@
           styling-mode="outlined"
           type="default"
           :visible="!props.isLoading"
-          @click="handleEditClick()"
+          @click="handleEditClick"
         />
       </dx-toolbar-item>
       <dx-toolbar-item
@@ -27,7 +27,7 @@
           text="Save"
           styling-mode="outlined"
           type="default"
-          @click="handleSaveClick()"
+          @click="handleSaveClick"
         />
       </dx-toolbar-item>
       <dx-toolbar-item
@@ -37,7 +37,7 @@
       >
         <dx-button
           text="Cancel"
-          @click="handleCancelClick()"
+          @click="handleCancelClick"
           styling-mode="text"
         />
       </dx-toolbar-item>
@@ -46,134 +46,127 @@
       :is-loading="isLoading"
       :container-selector="'#task-form'"
     >
-      <div>
-        <dx-form
-          :form-data="data"
-          class="plain-styled-form"
-          :class="{'view-mode': !isEditing}"
-          label-mode="floating"
-          :validation-group="props.validationGroup"
-        >
-          <dx-form-group-item :col-count="2">
-            <dx-col-count-by-screen
-              :xs="props.contentByScreen.xs"
-              :sm="props.contentByScreen.sm"
-              :md="2"
-              :lg="2"
-            />
-            <dx-form-item
-              :visible="isCreateMode"
-              :col-span="2"
-            >
-              <form-textbox
-                label="Subject"
-                v-model="data.text"
-                :is-editing="isEditing"
-                :validation-group="props.validationGroup"
-              />
-            </dx-form-item>
-
-            <dx-form-item css-class="accent">
-              <form-textbox
-                label="Company"
-                v-model="data.company"
-                :is-editing="isEditing"
-                :validators="[]"
-                :validation-group="props.validationGroup"
-              />
-            </dx-form-item>
-
-            <dx-form-item css-class="accent">
-              <form-textbox
-                label="Assigned to"
-                v-model="data.owner"
-                :is-editing="isEditing"
-                :validation-group="props.validationGroup"
-              />
-            </dx-form-item>
-
-            <dx-form-item>
-              <dx-select-box
-                label="Priority"
-                v-model="data.priority"
-                :items="taskPriorityList"
-                :read-only="!isEditing"
-                :element-attr="{class: 'form-editor'}"
-                field-template="field"
-                item-template="item"
-                styling-mode="filled"
-              >
-                <template #field>
-                  <div class="task-editor-field">
-                    <status-indicator
-                      :is-field="true"
-                      :show-bar="true"
-                      :value="data.priority"
-                    />
-                  </div>
-                </template>
-                <template #item="{ data }">
-                  <status-indicator
-                    :show-bar="true"
-                    :value="data"
-                  />
-                </template>
-              </dx-select-box>
-            </dx-form-item>
-
-            <dx-form-item>
-              <dx-select-box
-                label="Status"
-                v-model="data.status"
-                :items="taskStatusList"
-                :read-only="!isEditing"
-                :element-attr="{class: 'form-editor'}"
-                field-template="field"
-                item-template="item"
-                styling-mode="filled"
-              >
-                <template #field>
-                  <div class="task-editor-field">
-                    <status-indicator
-                      :is-field="true"
-                      :value="data.status"
-                    />
-                  </div>
-                </template>
-                <template #item="{ data }">
-                  <status-indicator
-                    :value="data"
-                  />
-                </template>
-              </dx-select-box>
-            </dx-form-item>
-
-            <dx-form-item>
-              <form-datebox
-                label="Start Date"
-                v-model="data.startDate"
-                :is-editing="isEditing"
-              />
-            </dx-form-item>
-
-            <dx-form-item>
-              <form-datebox
-                label="Due Date"
-                v-model="data.dueDate"
-                :is-editing="isEditing"
-              />
-            </dx-form-item>
-          </dx-form-group-item>
-          <dx-form-item>
-            <dx-text-area
-              label="Details"
-              styling-mode="filled"
-              v-model="data.description"
-              :validation-group="props.validationGroup"
+      <dx-form
+        :form-data="data"
+        class="plain-styled-form"
+        :class="{'view-mode': !isEditing}"
+        label-mode="floating"
+      >
+        <dx-form-group-item :col-count="2">
+          <dx-col-count-by-screen
+            :xs="props.contentByScreen.xs"
+            :sm="props.contentByScreen.sm"
+            :md="2"
+            :lg="2"
+          />
+          <dx-form-item
+            :visible="isCreateMode"
+            :col-span="2"
+          >
+            <form-textbox
+              label="Subject"
+              v-model="data.text"
+              :is-editing="isEditing"
             />
           </dx-form-item>
-        </dx-form>
-      </div>
+
+          <dx-form-item css-class="accent">
+            <form-textbox
+              label="Company"
+              v-model="data.company"
+              :is-editing="isEditing"
+              :validators="[]"
+            />
+          </dx-form-item>
+
+          <dx-form-item css-class="accent">
+            <form-textbox
+              label="Assigned to"
+              v-model="data.owner"
+              :is-editing="isEditing"
+            />
+          </dx-form-item>
+
+          <dx-form-item>
+            <dx-select-box
+              label="Priority"
+              v-model="data.priority"
+              :items="taskPriorityList"
+              :read-only="!isEditing"
+              :element-attr="{class: 'form-editor'}"
+              field-template="field"
+              item-template="item"
+              styling-mode="filled"
+            >
+              <template #field>
+                <div class="task-editor-field">
+                  <status-indicator
+                    :is-field="true"
+                    :show-bar="true"
+                    :value="data.priority"
+                  />
+                </div>
+              </template>
+              <template #item="{ data }">
+                <status-indicator
+                  :show-bar="true"
+                  :value="data"
+                />
+              </template>
+            </dx-select-box>
+          </dx-form-item>
+
+          <dx-form-item>
+            <dx-select-box
+              label="Status"
+              v-model="data.status"
+              :items="taskStatusList"
+              :read-only="!isEditing"
+              :element-attr="{class: 'form-editor'}"
+              field-template="field"
+              item-template="item"
+              styling-mode="filled"
+            >
+              <template #field>
+                <div class="task-editor-field">
+                  <status-indicator
+                    :is-field="true"
+                    :value="data.status"
+                  />
+                </div>
+              </template>
+              <template #item="{ data }">
+                <status-indicator
+                  :value="data"
+                />
+              </template>
+            </dx-select-box>
+          </dx-form-item>
+
+          <dx-form-item>
+            <form-datebox
+              label="Start Date"
+              v-model="data.startDate"
+              :is-editing="isEditing"
+            />
+          </dx-form-item>
+
+          <dx-form-item>
+            <form-datebox
+              label="Due Date"
+              v-model="data.dueDate"
+              :is-editing="isEditing"
+            />
+          </dx-form-item>
+        </dx-form-group-item>
+        <dx-form-item>
+          <dx-text-area
+            label="Details"
+            styling-mode="filled"
+            v-model="data.description"
+          />
+        </dx-form-item>
+      </dx-form>
     </load-component>
   </div>
 </template>
@@ -196,7 +189,6 @@ import {
   DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxSelectBox } from 'devextreme-vue/select-box';
-import { DxTextBox } from 'devextreme-vue/text-box';
 import LoadComponent from '@/components/load-component.vue';
 import FormTextbox from '@/components/form-textbox.vue';
 import FormDatebox from '@/components/form-datebox.vue';
@@ -208,11 +200,11 @@ const props = withDefaults(defineProps<{
   validationGroup?: string,
 }>(), {
   isLoading: false,
-  data: () => newTask,
+  data: () => ({ ...newTask }),
   validationGroup: undefined,
 });
 
-const isCreateMode = props.data === newTask;
+const isCreateMode = !props.data.id;
 const isEditing = ref(isCreateMode);
 const data = ref(props.data);
 
@@ -230,8 +222,10 @@ function handleEditClick() {
   isEditing.value = true;
 }
 
-function handleSaveClick() {
-  isEditing.value = false;
+function handleSaveClick({ validationGroup }: {validationGroup: Record<string, any>}) {
+  if (validationGroup.validate().isValid) {
+    isEditing.value = false;
+  }
 }
 
 function handleCancelClick() {

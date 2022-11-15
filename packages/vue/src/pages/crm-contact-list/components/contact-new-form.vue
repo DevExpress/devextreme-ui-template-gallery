@@ -2,7 +2,6 @@
   <dx-form
     class="plain-styled-form"
     label-mode="floating"
-    :validation-group="props.validationGroup"
   >
     <dx-form-item item-type="group">
       <dx-col-count-by-screen
@@ -30,7 +29,6 @@
           label="First Name"
           v-model="contact.firstName"
           :is-editing="true"
-          :validation-group="props.validationGroup"
         />
       </dx-form-item>
       <dx-form-item css-class="accent">
@@ -38,7 +36,6 @@
           label="Last Name"
           v-model="contact.lastName"
           :is-editing="true"
-          :validation-group="props.validationGroup"
         />
       </dx-form-item>
       <dx-form-item css-class="accent">
@@ -47,7 +44,6 @@
           v-model="contact.company"
           :is-editing="true"
           :validators="[]"
-          :validation-group="props.validationGroup"
         />
       </dx-form-item>
       <dx-form-item>
@@ -56,7 +52,6 @@
           v-model="contact.position"
           :is-editing="true"
           :validators="[]"
-          :validation-group="props.validationGroup"
         />
       </dx-form-item>
     </dx-form-item>
@@ -78,7 +73,6 @@
           v-model="contact.manager"
           :is-editing="true"
           :validators="[]"
-          :validation-group="props.validationGroup"
         />
       </dx-form-item>
       <dx-form-item>
@@ -88,7 +82,6 @@
           icon="tel"
           mask="+1(000)000-0000"
           :validators="[]"
-          :validation-group="props.validationGroup"
         />
       </dx-form-item>
       <dx-form-item>
@@ -96,7 +89,6 @@
           v-model="contact.email"
           :is-editing="true"
           icon="email"
-          :validators="[{type: 'email'}]"
         />
       </dx-form-item>
       <dx-form-item>
@@ -105,7 +97,6 @@
           :is-editing="true"
           icon="home"
           :validators="[]"
-          :validation-group="props.validationGroup"
         />
       </dx-form-item>
     </dx-form-item>
