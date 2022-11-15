@@ -103,7 +103,7 @@ import {
 } from 'devextreme-vue/toolbar';
 import { DxTabPanel, DxItem } from 'devextreme-vue/tab-panel';
 // eslint-disable-next-line import/no-unresolved
-import { getTask } from 'dx-rwa-data';
+import { getTask } from 'dx-template-gallery-data';
 import type { Task } from '@/types/task';
 import CardNotes from '@/components/card-notes.vue';
 import CardActivities from '@/components/card-activities.vue';

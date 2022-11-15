@@ -149,7 +149,7 @@ import {
 import validationEngine from 'devextreme/ui/validation_engine';
 
 // eslint-disable-next-line import/no-unresolved
-import { getTasks, getFilteredTasks } from 'dx-rwa-data';
+import { getTasks, getFilteredTasks } from 'dx-template-gallery-data';
 import { taskPanelItems, TaskPanelItemsIds } from '@/types/resource';
 import type { Task } from '@/types/task';
 import FormPopup from '@/components/form-popup.vue';

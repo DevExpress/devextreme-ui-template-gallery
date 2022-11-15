@@ -54,7 +54,7 @@ import notify from 'devextreme/ui/notify';
 import { DxButton } from 'devextreme-vue/button';
 import LoadComponent from '@/components/load-component.vue';
 // eslint-disable-next-line import/no-unresolved
-import { getActiveContactOpportunities, getClosedContactOpportunities } from 'dx-rwa-data';
+import { getActiveContactOpportunities, getClosedContactOpportunities } from 'dx-template-gallery-data';
 import type { Opportunity } from '@/types/opportunities';
 import OpportunityTile from './opportunity-tile.vue';
 

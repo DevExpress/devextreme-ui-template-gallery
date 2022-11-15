@@ -28,7 +28,7 @@ import {
   CardActivitiesModule,
   ContactStatusModule,
 } from 'src/app/shared/components';
-import { ScreenService, RwaService } from 'src/app/shared/services';
+import { ScreenService, DataService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { Contact } from 'src/app/shared/types/contact';
 
@@ -36,7 +36,7 @@ import { Contact } from 'src/app/shared/types/contact';
   selector: 'user-panel',
   templateUrl: './user-panel.component.html',
   styleUrls: ['./user-panel.component.scss'],
-  providers: [RwaService],
+  providers: [DataService],
 })
 export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isOpen = false;
@@ -57,7 +57,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   userPanelSubscriptions: Subscription[] = [];
 
-  constructor(private screen: ScreenService, private service: RwaService, private router: Router) {
+  constructor(private screen: ScreenService, private service: DataService, private router: Router) {
     this.userPanelSubscriptions.push(this.screen.changed.subscribe(this.calculatePin.bind(this)));
   }
 

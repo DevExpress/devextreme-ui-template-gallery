@@ -53,7 +53,7 @@ import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { formatDate } from '@/utils/formatters';
 // eslint-disable-next-line import/no-unresolved
-import { getContactNotes } from 'dx-rwa-data';
+import { getContactNotes } from 'dx-template-gallery-data';
 import type { Note } from '@/types/notes';
 import LoadComponent from '@/components/load-component.vue';
 
