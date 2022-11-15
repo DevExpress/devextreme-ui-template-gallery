@@ -40,7 +40,7 @@ const Card = ({ data, user }: { data: Message; user: string }) => (
     <Avatar owner={data.manager} />
     <div className='message dx-card'>
       <div className='message-title'>
-        <div className='left-title'>
+        <div>
           <div className='subject'>{data.subject}</div>
           <div>
             {formatDate(new Date(data.date), 'MM/dd/yyyy')} - {data.manager}
@@ -120,13 +120,15 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
             />
           </Toolbar>
         </div>
-        <ScrollView className='message-list'>
-          <div className='messages-content'>
-            {user && messages?.map((message, index) => (
-              <Card key={index} data={message} user={user} />
-            ))}
-          </div>
-        </ScrollView>
+        <div className='messages-content'>
+          <ScrollView>
+            <div className='message-list'>
+              {user && messages?.map((message, index) => (
+                <Card key={index} data={message} user={user} />
+              ))}
+            </div>
+          </ScrollView>
+        </div>
       </div>
     </ValidationGroup>
   );
