@@ -29,12 +29,12 @@ export const List = ({
   onTaskDrop,
   changePopupVisibility,
 }: {
-  title: string;
-  index: number;
-  tasks: Task[];
-  onTaskDragStart: (e: DragStartEvent) => void;
-  onTaskDrop: (e: ReorderEvent) => void;
-  changePopupVisibility?;
+  title: string,
+  index: number,
+  tasks: Task[],
+  onTaskDragStart: (e: DragStartEvent) => void,
+  onTaskDrop: (e: ReorderEvent) => void,
+  changePopupVisibility,
 }) => {
 
   const onAddTaskBtnClick = () => {
