@@ -49,7 +49,6 @@
             "styles": [
               "node_modules/devextreme/scss/bundles/dx.material.blue.light.compact.scss",
               "node_modules/devexpress-gantt/dist/dx-gantt.css",
-              "src/dx-styles.scss",
               "src/styles.scss"
             ],
             "scripts": []

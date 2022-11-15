@@ -12,8 +12,7 @@ import {
   CardActivitiesModule,
   CardNotesModule,
   CardMessagesModule,
-  TaskProirityModule,
-  TaskStatusModule,
+  StatusIndicatorModule,
 } from 'src/app/shared/components';
 import { Task } from 'src/app/shared/types/task';
 import { RwaService } from 'src/app/shared/services';
@@ -66,8 +65,7 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
     CardNotesModule,
     CardMessagesModule,
     TaskFormModule,
-    TaskProirityModule,
-    TaskStatusModule,
+    StatusIndicatorModule,
 
     CommonModule,
   ],

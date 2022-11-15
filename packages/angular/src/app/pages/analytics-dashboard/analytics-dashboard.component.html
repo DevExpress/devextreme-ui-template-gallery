@@ -112,9 +112,9 @@
     </card-analytics>
     <card-analytics
       titleText="Revenue Analysis"
-      contentClass="sales-by-state"
+      contentClass="sales-by-state grid"
     >
-      <dx-data-grid [dataSource]="salesByState" [height]="270" [loadPanel]="{enabled: false}">
+      <dx-data-grid [dataSource]="salesByState" [height]="290" [loadPanel]="{enabled: false}">
         <dxi-column
           caption="State"
           dataField="stateName"
@@ -148,6 +148,7 @@
           dataField="percentage"
           name="percentB"
           cellTemplate="salesBullet"
+          cssClass="sales-bullet"
           [width]="200"
         >
         </dxi-column>

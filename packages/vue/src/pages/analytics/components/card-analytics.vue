@@ -4,17 +4,19 @@
       class="card"
       :class="props.contentClass"
     >
-      <dx-menu
-        :visible="props.isMenuVisible"
-        class="overflow-menu"
-        :items="menuItems"
-      />
-      <div
-        v-if="props.title"
-        class="title">
-        {{ props.title }}
+      <div class="header">
+        <dx-menu
+          :visible="props.isMenuVisible"
+          class="overflow-menu"
+          :items="menuItems"
+        />
+        <div
+          v-if="props.title"
+          class="title">
+          {{ props.title }}
+        </div>
+        <slot name="filter" />
       </div>
-      <slot name="filter" />
       <div
         v-if="showData"
         class="content"
@@ -31,7 +33,8 @@ import { DxMenu } from 'devextreme-vue/menu';
 const menuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
   icon: 'overflow',
   items: [
-    { text: 'Hide' },
+    { text: 'Configure' },
+    { text: 'Remove' },
   ],
 }];
 
@@ -52,13 +55,16 @@ const props = withDefaults(defineProps<{
 @use '@/variables.scss' as *;
 
 .card {
-  padding: 16px;
   border-radius: 4px;
   box-shadow: none;
   position: relative;
   background-color: $background-color;
   border: 1px solid $border-color;
   overflow: hidden;
+
+  .header {
+    padding: $content-padding $content-padding 0;
+  }
 
   .overflow-menu {
     position: absolute;
@@ -68,6 +74,8 @@ const props = withDefaults(defineProps<{
   }
 
   :deep(.content) {
+    padding: 0 $content-padding $content-padding;
+    box-sizing: content-box;
     color: #757575;
     font-size: 14px;
     line-height: 17px;
@@ -82,6 +90,14 @@ const props = withDefaults(defineProps<{
     margin-bottom: 20px;
     display: inline-block;
     padding-right: 25px;
+  }
+
+  &.grid {
+    .content {
+      border-top: 1px solid $base-border-color;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
 }

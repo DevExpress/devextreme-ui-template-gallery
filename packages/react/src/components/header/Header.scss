@@ -11,8 +11,12 @@
     color: $accent-color;
   }
 
-  .header-toolbar {
-    padding-right: 20px;
+  .dx-toolbar.header-toolbar {
+    padding-right: $content-padding;
+
+    .dx-toolbar-items-container {
+      height: $toolbar-items-container-height;
+    }
 
     .user-button.authorization {
       margin-left: 10px;

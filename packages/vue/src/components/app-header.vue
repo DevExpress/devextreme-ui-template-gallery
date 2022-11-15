@@ -126,14 +126,8 @@ const userMenuItems = [{
   onClick: onLogoutClick,
 }];
 </script>
-<style lang="scss">
-</style>
 <style scoped lang="scss">
 @use "../variables" as *;
-
-:global(.dx-theme-generic header .dx-toolbar.header-toolbar) {
-  padding: 10px 0;
-}
 
 header {
   flex: 0 0 auto;
@@ -147,7 +141,11 @@ header {
   }
 
   .header-toolbar {
-    padding-right: 20px;
+    padding-right: $content-padding;
+
+    :deep(.dx-toolbar-items-container) {
+      height: $toolbar-items-container-height;
+    }
 
     .user-button.authorization {
       margin-left: 10px;

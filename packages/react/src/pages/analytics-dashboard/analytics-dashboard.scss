@@ -88,6 +88,12 @@
     }
   }
 
+  td.dx-command-adaptive.dx-command-adaptive,
+  td.sales-bullet.sales-bullet {
+    border-left: none;
+    border-right: none;
+  }
+
   @media only screen and (max-width: 900px) {
     .cards {
       grid-template-columns: repeat(1, 100%);

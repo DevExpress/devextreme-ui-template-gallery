@@ -1,8 +1,88 @@
 @use "variables.scss" as *;
 
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.content {
+  line-height: 1.5;
+
+  h2 {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.content-block {
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 20px;
+
+  .screen-x-small & {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+.responsive-paddings {
+  padding: 20px;
+
+  .screen-large & {
+    padding: 40px;
+  }
+}
+
+.dx-card.wide-card {
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+  border-right: 0;
+  border-left: 0;
+}
+
+.with-footer > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+  height: 100%;
+
+  & > .dx-scrollview-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+}
+
+.embedded.embedded {
+  .layout-header,
+  .dx-swatch-additional,
+  .with-footer .content-block,
+  .dx-drawer-shader {
+    display: none;
+  }
+
+  .dx-drawer-content {
+    padding: initial !important;
+  }
+
+  .dx-drawer-panel-content,
+  .dx-drawer-panel-content .dx-overlay-content {
+    width: initial !important;
+  }
+}
+
 .view-wrapper {
   display: flex;
   overflow: hidden;
+}
+
+.details-card {
+  border: none;
 }
 
 .plain-styled-form {
@@ -17,16 +97,10 @@
       padding: 15px 0;
     }
 
-    task-priority,
+    .status-indicator,
     .status {
       line-height: 18px;
       font-size: 13px;
-    }
-
-    task-priority {
-      .separator {
-        max-height: 12px;
-      }
     }
   }
 
@@ -84,4 +158,32 @@
 
 .status-terminated {
   @include status(#de8e8c);
+}
+
+.status-indicator-open {
+  @include status(#505ed9);
+}
+
+.status-indicator-in-progress {
+  @include status(#34aa95);
+}
+
+.status-indicator-deferred {
+  @include status(#969696);
+}
+
+.status-indicator-completed {
+  @include status(#2b9029);
+}
+
+.status-indicator-low {
+  @include status(#d3a268);
+}
+
+.status-indicator-normal {
+  @include status(#6fbaca);
+}
+
+.status-indicator-high {
+  @include status(#ff5722);
 }

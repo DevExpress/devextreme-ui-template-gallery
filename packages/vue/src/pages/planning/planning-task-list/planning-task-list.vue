@@ -16,15 +16,16 @@
         location="after"
         locate-in-menu="auto"
         css-class="add-grid-row"
-      ><div>
-        <dx-button
-          icon="plus"
-          text="Add Task"
-          type="default"
-          styling-mode="contained"
-          @click="addDataGridRow"
-        />
-      </div>
+      >
+        <div>
+          <dx-button
+            icon="plus"
+            text="Add Task"
+            type="default"
+            styling-mode="contained"
+            @click="addTask"
+          />
+        </div>
       </dx-toolbar-item>
       <dx-toolbar-item
         location="after"
@@ -110,7 +111,8 @@
           v-else-if="taskPanelItems[1].text === displayTaskComponent"
           class="kanban"
         >
-          <task-list-kanban :tasks="kanbanData" />
+          <task-list-kanban :tasks="kanbanData"
+                            @add-task="addTask"/>
         </div>
         <div
           v-else-if="taskPanelItems[2].text === displayTaskComponent"
@@ -124,6 +126,14 @@
       </div>
     </load-component>
   </div>
+  <form-popup
+    title="New Task"
+    v-model:is-visible="isNewTaskPopupOpened"
+    @save="onSaveNewTask"
+  >
+    <task-form :validation-group="newTaskValidationGroup"
+               :content-by-screen="{ xs: 1, sm: 1 }" />
+  </form-popup>
 </template>
 
 <script setup lang="ts">
@@ -136,13 +146,15 @@ import {
   DxToolbar,
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
+import validationEngine from 'devextreme/ui/validation_engine';
 
 // eslint-disable-next-line import/no-unresolved
 import { getTasks, getFilteredTasks } from 'dx-rwa-data';
 import { taskPanelItems, TaskPanelItemsIds } from '@/types/resource';
 import type { Task } from '@/types/task';
-
+import FormPopup from '@/components/form-popup.vue';
 import LoadComponent from '@/components/load-component.vue';
+import TaskForm from '../components/task-form.vue';
 import TaskListGrid from './components/task-list-grid.vue';
 import TaskListKanban from './components/task-list-kanban/task-list-kanban.vue';
 import TaskListGantt from './components/task-list-gantt.vue';
@@ -156,8 +168,12 @@ const tasksGanttCmp = ref<InstanceType<typeof TaskListGantt> | null>(null);
 const gridData = ref<Task[]>([]);
 const kanbanData = ref<Task[]>([]);
 const ganttData = ref<Task[]>([]);
+const isNewTaskPopupOpened = ref(false);
+const newTaskValidationGroup = 'new-task';
 
-const addDataGridRow = () => tasksGridCmp.value?.addRow();
+const addTask = () => {
+  isNewTaskPopupOpened.value = true;
+};
 const chooseColumnDataGrid = () => tasksGridCmp.value.showColumnChooser();
 const searchDataGrid = (e: TextBoxInputEvent) => tasksGridCmp.value.search(e.component.option('text'));
 const exportToPdf = () => {
@@ -215,6 +231,12 @@ const reload = () => {
   }
 };
 
+const onSaveNewTask = () => {
+  if (validationEngine.validateGroup(newTaskValidationGroup).isValid) {
+    isNewTaskPopupOpened.value = false;
+  }
+};
+
 loadTasksAsync();
 </script>
 
@@ -228,10 +250,9 @@ loadTasksAsync();
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 16px 0 16px;
 
   .dx-toolbar {
-    margin-bottom: $toolbar-margin-bottom;
+    padding: 20px $content-padding $content-padding;
   }
 }
 
@@ -248,5 +269,10 @@ loadTasksAsync();
 
 .view-wrapper {
   flex-direction: column;
+}
+
+.gantt,
+.kanban {
+  padding: 0 $content-padding;
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
   <card-analytics
     title="Revenue Analysis"
-    content-class="sales-by-state"
+    content-class="sales-by-state grid"
   >
     <dx-data-grid
       :data-source="props.data"
-      :height="270"
+      :height="290"
       :load-panel="{enabled: false}"
     >
       <dx-column
@@ -35,6 +35,7 @@
         data-field="percentage"
         name="percentB"
         cell-template="salesBullet"
+        cssClass="sales-bullet"
         :width="200"
       />
 
@@ -68,3 +69,11 @@ const props = defineProps<{
   data: SalesByState
 }>();
 </script>
+
+<style scoped>
+:deep(td.dx-command-adaptive.dx-command-adaptive),
+:deep(td.sales-bullet.sales-bullet) {
+  border-left: none;
+  border-right: none;
+}
+</style>
