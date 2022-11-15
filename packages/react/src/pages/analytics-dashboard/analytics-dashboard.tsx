@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Item } from 'devextreme-react/toolbar';
-import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, getSalesByState } from 'dx-template-gallery-data';
+import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 import './analytics-dashboard.scss';
 import { RevenueSnapshotCard } from './cards/RevenueSnapshotCard';
 import { RevenueAnalysisCard } from './cards/RevenueAnalysisCard';

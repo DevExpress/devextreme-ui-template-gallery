@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Dashboard } from '../../components/dashboard/Dashboard';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
-import { getSalesByStateAndCity, getSalesByState } from 'dx-template-gallery-data';
+import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 import {
   ANALYTICS_PERIODS,
   DEFAULT_ANALYTICS_PERIOD_KEY,
