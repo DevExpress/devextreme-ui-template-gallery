@@ -86,9 +86,9 @@ export const CRMContactList = () => {
     grid.current?.instance.addRow();
   }, []);
 
-  const changePanelOpen = () => {
+  const changePanelOpen = useCallback(() => {
     setPanelOpen(!isOpen);
-  };
+  }, [isOpen]);
 
   const refresh = useCallback(() => {
     grid.current?.instance.refresh();

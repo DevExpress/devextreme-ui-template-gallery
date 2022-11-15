@@ -9,6 +9,7 @@ import Form, { Item as FormItem, ColCountByScreen } from 'devextreme-react/form'
 import Accordion, { Item as AccordionItem } from 'devextreme-react/accordion';
 import LoadPanel from 'devextreme-react/load-panel';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
+import { formatNumber } from 'devextreme/localization'
 import { getContact } from 'dx-rwa-data';
 import { Contact } from '../../../shared/types/crm-contact';
 import { CardActivities } from '../../../components/card-activities/CardActivities';
@@ -39,12 +40,12 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
     }
   }, [loadData]);
 
-  const currencyFormatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  });
+  const formatPrice = (price) => {
+    return formatNumber(price, {
+      type: 'currency',
+      currency: 'USD',
+    });
+  };
 
   const validationGroup = 'contactValidationGroup';
 
@@ -63,7 +64,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
   const closePanel = useCallback(() => {
     setIsPin(false);
     changePanelOpen();
-  }, [isOpen, isPin]);
+  }, []);
 
   const toggleEdit = useCallback(() => {
     setIsEditing(!isEditing);
@@ -93,7 +94,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
           <div className='opportunities' key={idx}>
             <span className='value'>{item.name}</span>
             <br />
-            <span className='value black small'>{currencyFormatter.format(item.price)}</span>
+            <span className='value black small'>{formatPrice(item.price)}</span>
           </div>
         );
       }));
@@ -144,7 +145,6 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                       value={contact?.company}
                       isEditing={!isEditing}
                       onValueChange={updateField('company')}
-                      // validationGroup={validationGroup}
                     ></FormTextbox>
                   </FormItem>
                   <FormItem>
@@ -153,7 +153,6 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                       value={contact?.position}
                       isEditing={!isEditing}
                       onValueChange={updateField('position')}
-                      // validationGroup={validationGroup}
                     ></FormTextbox>
                   </FormItem>
                   <FormItem cssClass='accent'>
@@ -162,7 +161,6 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                       value={contact?.manager}
                       isEditing={!isEditing}
                       onValueChange={updateField('manager')}
-                      // validationGroup={validationGroup}
                     ></FormTextbox>
                   </FormItem>
                 </FormItem>
@@ -176,7 +174,6 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                     onValueChange={updateField('phone')}
                     icon='tel'
                     mask='+1(000)000-0000'
-                    // validationGroup={validationGroup}
                   ></FormTextbox>
                 </FormItem>
                 <FormItem>
@@ -185,7 +182,6 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                     isEditing={!isEditing}
                     onValueChange={updateField('email')}
                     icon='email'
-                    // validationGroup={validationGroup}
                   ></FormTextbox>
                 </FormItem>
                 <FormItem>
@@ -194,7 +190,6 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                     isEditing={!isEditing}
                     onValueChange={updateField('address')}
                     icon='home'
-                    // validationGroup={validationGroup}
                   ></FormTextbox>
                 </FormItem>
               </FormItem>
