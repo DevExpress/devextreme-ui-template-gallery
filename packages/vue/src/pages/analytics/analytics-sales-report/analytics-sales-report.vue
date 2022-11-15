@@ -24,10 +24,12 @@ import { onMounted, ref } from 'vue';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { formatDate } from 'devextreme/localization';
+
 import {
   getSalesByOrderDate,
   getSalesByCategory,
   getSales,
+  // eslint-disable-next-line
 } from 'dx-template-gallery-data';
 import {
   Sales,

@@ -6,7 +6,7 @@
     >
       <dx-data-grid
         v-if="!props.isLoading"
-        class="tasks-grid"
+        class="grid-tasks"
         :data-source="filteredTasks"
         :column-auto-width="true"
       >
