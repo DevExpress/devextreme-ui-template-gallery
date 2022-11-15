@@ -196,7 +196,7 @@ import DxDataGrid, {
   DxSearchPanel,
 } from 'devextreme-vue/data-grid';
 // eslint-disable-next-line import/no-unresolved
-import { getContacts } from 'dx-rwa-data';
+import { getContacts } from 'dx-template-gallery-data';
 
 import { contactStatusList, Contact } from '@/types/contact';
 import { RowClickEvent } from 'devextreme/ui/data_grid';

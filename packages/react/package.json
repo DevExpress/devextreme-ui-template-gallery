@@ -14,7 +14,7 @@
     "classnames": "^2.3.1",
     "devextreme": "^22.1.5",
     "devextreme-react": "^22.1.5",
-    "dx-rwa-data": "^1.0.0",
+    "dx-template-gallery-data": "^1.0.0",
     "exceljs": "^4.3.0",
     "file-saver-es": "^2.0.5",
     "jspdf": "^2.5.1",
