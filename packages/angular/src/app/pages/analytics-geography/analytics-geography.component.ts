@@ -11,7 +11,7 @@ import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
 
 import { CommonModule } from '@angular/common';
-import { RwaService } from 'src/app/shared/services';
+import { DataService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
@@ -20,11 +20,12 @@ import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analyt
 import { analyticsPanelItems, Dates } from 'src/app/shared/types/resource';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 import { SalesByState, SalesByStateAndCity } from 'src/app/shared/types/analytics';
+import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
 
 @Component({
   templateUrl: './analytics-geography.component.html',
   styleUrls: ['./analytics-geography.component.scss'],
-  providers: [RwaService],
+  providers: [DataService],
 })
 export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
   usaMap: any = mapsData.usa;
@@ -39,7 +40,9 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
 
   subscription: Subscription = new Subscription();
 
-  constructor(private service: RwaService) {
+  isLoading = false;
+
+  constructor(private service: DataService) {
   }
 
   ngOnInit(): void {
@@ -87,7 +90,12 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
   }
 
   loadData = (startDate: string, endDate: string) => {
-    this.subscription = this.service.getSalesByStateAndCity(startDate, endDate).subscribe((data: SalesByStateAndCity) => {
+    this.isLoading = true;
+    this.salesByStateAndCity = null;
+    this.salesByState = null;
+    this.salesByStateMarkers = null;
+
+    this.service.getSalesByStateAndCity(startDate, endDate).subscribe((data: SalesByStateAndCity) => {
       this.salesByStateAndCity = data;
       this.salesByState = this.service.getSalesByState(data);
       this.salesByStateMarkers = {
@@ -105,6 +113,8 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
           },
         })),
       };
+
+      this.isLoading = false;
     });
   };
 }
@@ -118,7 +128,7 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     DxChartModule,
     CardAnalyticsModule,
     ToolbarAnalyticsModule,
-
+    DxLoadPanelModule,
     CommonModule,
   ],
   providers: [],

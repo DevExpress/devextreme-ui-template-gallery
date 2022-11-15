@@ -2,18 +2,21 @@
 
 :host {
   .card {
-    padding: 16px;
     border-radius: 4px;
     box-shadow: none;
     position: relative;
     border: 1px solid $base-border-color;
     overflow: hidden;
 
+    .header {
+      padding: $content-padding $content-padding 0;
+    }
+
     .overflow-menu {
       position: absolute;
-      right: 10px;
+      right: 5px;
       left: auto;
-      top: 10px;
+      top: 5px;
     }
 
     .title {
@@ -32,6 +35,14 @@
       }
     }
 
+    &.grid {
+      .content {
+        border-top: 1px solid $base-border-color;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
     &.sales-range {
       margin-top: 20px;
 
@@ -41,6 +52,8 @@
     }
 
     .content {
+      padding: 0 $content-padding $content-padding;
+      box-sizing: content-box;
       color: $texteditor-label-color;
       font-size: 14px;
       line-height: 17px;

@@ -90,7 +90,7 @@ import {
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
 // eslint-disable-next-line import/no-unresolved
-import { getContact } from 'dx-rwa-data';
+import { getContact } from 'dx-template-gallery-data';
 import type { Contact } from '@/types/contact';
 
 import ContactForm from './components/contact-form.vue';
@@ -160,7 +160,7 @@ $right-panel-width: 360px;
     .right {
       flex: 1 calc(100% - #{$left-panel-width} - 20px);
       margin-top: 8px;
-      min-width: 360px;
+      min-width: 340px;
     }
   }
 }

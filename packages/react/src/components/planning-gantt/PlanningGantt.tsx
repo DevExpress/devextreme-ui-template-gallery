@@ -8,7 +8,7 @@ import './PlanningGantt.scss';
 
 export const PlanningGantt = React.forwardRef<Gantt, PlanningProps>(({ dataSource }, ref) => {
   return (
-    <Gantt ref={ref} taskListWidth={500} scaleType='weeks' height={700}>
+    <Gantt className='gantt' ref={ref} taskListWidth={500} scaleType='weeks' height={700}>
       <Tasks dataSource={dataSource} startExpr='startDate' endExpr='dueDate' titleExpr='text' />
       <Column dataField='text' caption='Subject' width={300} />
       <Column dataField='startDate' caption='Start Date' dataType='date' sortOrder='asc' />

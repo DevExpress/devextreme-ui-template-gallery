@@ -2,21 +2,4 @@
 
 .task-form {
   min-height: 300px;
-
-  .dx-toolbar {
-    margin-bottom: $toolbar-margin-bottom;
-  }
-}
-
-.form-editor {
-  .priority-task,
-  .status-task {
-    position: absolute;
-    bottom: 0;
-    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 3px);
-
-    span {
-      font-size: 13px;
-    }
-  }
 }

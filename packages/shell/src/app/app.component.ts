@@ -18,7 +18,7 @@ export class AppComponent {
 
   views = [
     'crm-contact-list',
-    'crm-contact-form',
+    'crm-contact-details',
     'planning-task-list',
     'planning-task-details',
   ];

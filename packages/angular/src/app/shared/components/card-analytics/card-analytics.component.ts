@@ -40,9 +40,7 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
 
   @Input() isMenuVisible = true;
 
-  @Input() isLoading = true;
-
-  resizeObserver: ResizeObserver;
+  @Input() isLoading = false;
 
   resizeObserverSubscription: Subscription;
 
@@ -51,24 +49,17 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
   menuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
     icon: 'overflow',
     items: [
-      { text: 'Hide' },
+      { text: 'Configure' },
+      { text: 'Remove' },
     ],
   }];
 
   position: PositionConfig;
 
-  loadingHeight: number;
-
   constructor(private el: ElementRef) {
   }
 
   ngOnInit(): void {
-    this.position = {
-      of: `.${this.contentClass + (!this.isGreyCard() ? ' .content' : ' .title')}`,
-      at: (!this.isGreyCard() ? 'center' : 'right'),
-    };
-    this.loadingHeight = !this.isGreyCard() ? 60 : 50;
-
     if (!this.isGreyCard() && this.component) {
       this.resizeObserverSubscription = new ResizeObservable(this.observedElement)
         .pipe(debounceTime(300))

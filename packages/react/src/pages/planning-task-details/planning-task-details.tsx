@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
-import Button from 'devextreme-react/button';
+import { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 
-import { TaskForm, CardActivities, CardNotes, CardMessages } from '../../components';
+import { TaskForm, CardActivities, CardNotes, CardMessages, ToolbarDetails } from '../../components';
 
 import { Task } from '../../shared/types/task';
 
-import { getTask } from 'dx-rwa-data';
+import { getTask } from 'dx-template-gallery-data';
 
 import './planning-task-details.scss';
 
@@ -40,16 +39,12 @@ export const PlanningTaskDetails = () => {
 
   return (
     <div className='view-wrapper-details'>
-      <Toolbar className='toolbar-details'>
-        <ToolbarItem location='before'>
-          <Button icon='arrowleft'></Button>
-        </ToolbarItem>
-        <ToolbarItem location='before' text={task?.text}></ToolbarItem>
+      <ToolbarDetails name={task?.text}>
         <ToolbarItem location='after' locateInMenu='auto'>
           <DropDownButton text='ACTIONS' stylingMode='contained'>
-            <DropDownItem text='Duplicate'></DropDownItem>
-            <DropDownItem text='Close'></DropDownItem>
-            <DropDownItem text='Delete'></DropDownItem>
+            <DropDownItem text='Duplicate' />
+            <DropDownItem text='Close' />
+            <DropDownItem text='Delete' />
           </DropDownButton>
         </ToolbarItem>
         <ToolbarItem
@@ -61,7 +56,7 @@ export const PlanningTaskDetails = () => {
             text: 'Attach',
             icon: 'attach',
           }}
-        ></ToolbarItem>
+        />
         <ToolbarItem
           location='after'
           locateInMenu='auto'
@@ -72,21 +67,21 @@ export const PlanningTaskDetails = () => {
             icon: 'refresh',
             onClick: refresh,
           }}
-        ></ToolbarItem>
-      </Toolbar>
+        />
+      </ToolbarDetails>
       <div className='panels'>
-        <div className='left'>{task && <TaskForm task={task}></TaskForm>}</div>
+        <div className='left'>{task && <TaskForm task={task} />}</div>
         <div className='right'>
-          <div className='dx-card'>
+          <div className='dx-card details-card'>
             <TabPanel showNavButtons deferRendering={false}>
               <TabPanelItem title='Activities'>
                 <CardActivities activities={task?.activities} />
               </TabPanelItem>
               <TabPanelItem title='Notes'>
-                <CardNotes items={task?.notes} user={task?.owner}></CardNotes>
+                <CardNotes items={task?.notes} user={task?.owner} />
               </TabPanelItem>
               <TabPanelItem title='Messages' badge={messagesCount}>
-                <CardMessages items={task?.messages} user={task?.owner} onMessagesCountChanged={onMessagesCountChanged}></CardMessages>
+                <CardMessages items={task?.messages} user={task?.owner} onMessagesCountChanged={onMessagesCountChanged} />
               </TabPanelItem>
             </TabPanel>
           </div>

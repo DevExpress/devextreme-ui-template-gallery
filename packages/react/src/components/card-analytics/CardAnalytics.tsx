@@ -16,7 +16,10 @@ type CardProps = {
 const menuItems = [
   {
     icon: 'overflow',
-    items: [{ text: 'Hide' }],
+    items: [
+      { text: 'Configure' },
+      { text: 'Remove' },
+    ],
   },
 ];
 
@@ -36,9 +39,11 @@ export const CardAnalytics = ({
 
   return (
     <div className={`card ${contentClass}`}>
-      <Menu visible={menuVisible} className='overflow-menu' items={menuItems} />
-      <div className='title'>{title}</div>
-      {additionalHeaderContent}
+      <div className='header'>
+        <Menu visible={menuVisible} className='overflow-menu' items={menuItems} />
+        <div className='title'>{title}</div>
+        {additionalHeaderContent}
+      </div>
       <div className='content'>{children}</div>
       <LoadPanel
         container={`.${contentClass}`}

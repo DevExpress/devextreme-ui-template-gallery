@@ -16,8 +16,7 @@ import {
 import { RowPreparedEvent } from 'devextreme/ui/data_grid';
 import { ItemClickEvent as TabsItemClickEvenet } from 'devextreme/ui/tabs';
 import {
-  TaskProirityModule,
-  TaskStatusModule,
+  StatusIndicatorModule,
 } from 'src/app/shared/components';
 import { exportDataGrid as exportToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportToXLSX } from 'devextreme/excel_exporter';
@@ -50,10 +49,6 @@ export class TaskListGridComponent implements OnChanges {
 
   constructor(private router: Router) {
   }
-
-  addRow() { 
-    this.grid.instance.addRow();
-  };
 
   refresh() {
     this.grid.instance.refresh();
@@ -126,8 +121,7 @@ export class TaskListGridComponent implements OnChanges {
     DxTextBoxModule,
     DxToolbarModule,
 
-    TaskProirityModule,
-    TaskStatusModule,
+    StatusIndicatorModule,
 
     HttpClientModule,
     CommonModule,

@@ -12,18 +12,17 @@ import {
   CardActivitiesModule,
   CardNotesModule,
   CardMessagesModule,
-  TaskProirityModule,
-  TaskStatusModule,
+  StatusIndicatorModule,
 } from 'src/app/shared/components';
 import { Task } from 'src/app/shared/types/task';
-import { RwaService } from 'src/app/shared/services';
+import { DataService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { TaskFormModule } from './task-form/task-form.component';
 
 @Component({
   templateUrl: './planning-task-details.component.html',
   styleUrls: ['./planning-task-details.component.scss'],
-  providers: [RwaService],
+  providers: [DataService],
 })
 export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
   task: Task;
@@ -34,7 +33,7 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
 
   dataSubscription: Subscription = new Subscription();
 
-  constructor(private service: RwaService) {
+  constructor(private service: DataService) {
   }
 
   loadData = () => {
@@ -66,8 +65,7 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
     CardNotesModule,
     CardMessagesModule,
     TaskFormModule,
-    TaskProirityModule,
-    TaskStatusModule,
+    StatusIndicatorModule,
 
     CommonModule,
   ],

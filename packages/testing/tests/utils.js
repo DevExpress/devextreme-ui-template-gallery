@@ -11,7 +11,6 @@ async function awaitFontsLoaded(requestLogger, t, timeout) {
         .filter((reqUrl) => reqUrl.endsWith('.woff2'));
       // eslint-disable-next-line no-await-in-loop
       await t.wait(timeout);
-      console.log('fontsCount:', fontsCount);
       if (fontsCount.length >= FONTSCOUNT) {
         break;
       }

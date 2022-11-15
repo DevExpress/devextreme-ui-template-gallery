@@ -20,7 +20,7 @@ export const Header = ({ menuToggleEnabled, title, toggleMenu, className }: Head
         </Item>
         <Item location='before' cssClass='header-title' text={title} visible={!!title} />
         <Item location='after' locateInMenu='auto'>
-          <TextBox placeholder='Search' width={180} mode='search' stylingMode='outlined'></TextBox>
+          <TextBox placeholder='Search' width={180} mode='search' stylingMode='outlined' />
         </Item>
         <Item location='after'>
           <div className='messages'>

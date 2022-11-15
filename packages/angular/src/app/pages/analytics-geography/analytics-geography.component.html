@@ -11,7 +11,6 @@
     <card-analytics
       titleText="Revenue by States"
       contentClass="sales-by-state-map"
-      [isLoading]="!salesByStateMarkers"
       [component]="map"
     >
       <dx-vector-map id="vector-map" #map [bounds]="[-118, 50, -80, 25]">
@@ -44,21 +43,20 @@
   <div class="cards">
     <card-analytics
       titleText="Revenue Analysis by States"
-      contentClass="sales-by-state-and-city"
-      [isLoading]="!salesByStateAndCity"
+      contentClass="sales-by-state-and-city grid"
     >
-      <dx-data-grid [dataSource]="salesByStateAndCity" [height]="270">
-        <dxi-column 
-          caption="State" 
+      <dx-data-grid [dataSource]="salesByStateAndCity" [height]="290" [loadPanel]="{enabled: false}">
+        <dxi-column
+          caption="State"
           dataField="stateName"
           [hidingPriority]="2"
-        > 
+        >
         </dxi-column>
 
-        <dxi-column 
-          caption="City" 
+        <dxi-column
+          caption="City"
           dataField="city"
-        > 
+        >
         </dxi-column>
 
         <dxi-column
@@ -95,9 +93,8 @@
       </dx-data-grid>
     </card-analytics>
     <card-analytics
-      titleText="Revenue Snaphot by States"
+      titleText="Revenue Snapshot by States"
       contentClass="sales-by-state"
-      [isLoading]="!salesByState"
       [component]="pie"
     >
       <dx-pie-chart
@@ -127,3 +124,9 @@
     </card-analytics>
   </div>
 </div>
+<dx-load-panel
+  container=".view-wrapper"
+  [position]="{of: '.app-content-wrapper'}"
+  [visible]="isLoading"
+  [showPane]="true"
+></dx-load-panel>

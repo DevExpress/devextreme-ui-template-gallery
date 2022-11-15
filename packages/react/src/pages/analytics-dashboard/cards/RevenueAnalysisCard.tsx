@@ -4,8 +4,8 @@ import DataGrid, { Column } from 'devextreme-react/data-grid';
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
 
 export const RevenueAnalysisCard = ({ datasource }) => (
-  <CardAnalytics title='Revenue Analysis' contentClass='sales-by-state' isLoading={!datasource.length}>
-    <DataGrid dataSource={datasource} height={270}>
+  <CardAnalytics title='Revenue Analysis' contentClass='sales-by-state grid' isLoading={!datasource.length}>
+    <DataGrid dataSource={datasource} height={290}>
       <Column caption='State' dataField='stateName' />
       <Column alignment='left' caption='Sales' dataField='total' dataType='number' format='currency' sortOrder='desc' hidingPriority={2} />
       <Column alignment='left' caption='% Sold' dataField='percentage' name='percentN' format='percent' hidingPriority={1} />
@@ -13,6 +13,7 @@ export const RevenueAnalysisCard = ({ datasource }) => (
         alignment='left'
         caption='Percentage'
         dataField='percentage'
+        cssClass='sales-bullet'
         name='percentB'
         cellRender={(cellInfo) => (
           <Bullet showTarget={false} showZeroLevel={false} value={cellInfo.data.percentage * 100} startScaleValue={0} endScaleValue={100}>

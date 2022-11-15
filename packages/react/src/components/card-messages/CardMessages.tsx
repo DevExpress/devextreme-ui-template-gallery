@@ -20,7 +20,7 @@ const getText = (text: string, user: string) => {
 
 const Card = ({ data, user }: { data: Message; user: string }) => (
   <div className='message-container'>
-    <Avatar owner={data.manager}></Avatar>
+    <Avatar owner={data.manager} />
     <div className='message dx-card'>
       <div className='message-title'>
         <div className='left-title'>
@@ -30,7 +30,7 @@ const Card = ({ data, user }: { data: Message; user: string }) => (
           </div>
         </div>
         <div>
-          <Button icon='overflow'></Button>
+          <Button icon='overflow' />
         </div>
       </div>
       <div className='message-text'>{getText(data.text, user)}</div>
@@ -70,13 +70,13 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
   return (
     <div className='messages'>
       <div className='input-messages'>
-        <TextBox label='Subject' stylingMode='outlined' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged}></TextBox>
-        <TextArea label='Message' height={150} stylingMode='outlined' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged}></TextArea>
+        <TextBox label='Subject' stylingMode='outlined' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged} />
+        <TextArea label='Message' height={150} stylingMode='outlined' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged} />
         <Toolbar>
           <Item
             location='before'
           >
-            <FileUploder className='file-uploader' labelText='' selectButtonText='Attach file'></FileUploder>
+            <FileUploder className='file-uploader' labelText='' selectButtonText='Attach file' />
           </Item>
           <Item
             location='after'
@@ -87,7 +87,7 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
               type: 'default',
               onClick: send,
             }}
-          ></Item>
+          />
         </Toolbar>
       </div>
       <ScrollView className='message-list'>
