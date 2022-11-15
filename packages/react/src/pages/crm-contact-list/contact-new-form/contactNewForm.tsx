@@ -1,22 +1,21 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import Form, { Item as FormItem, ColCountByScreen } from 'devextreme-react/form';
-import { newContact } from '../../../shared/types/crm-contact';
+import { newContact, Contact } from '../../../shared/types/crm-contact';
 import { FormTextbox, FormPhotoUploader } from '../../../components';
 
 export const ContactNewForm = () => {
-  const validationGroup = 'contactNewValidationGroup';
+  const [newContactData, setNewContactData] = useState<Contact>(newContact);
 
   const updateField = (field: string) => (value) => {
-    return { ...newContact, ...{ [field]: value } };
+    return setNewContactData({ ...newContactData, ...{ [field]: value } });
   };
 
   return (
     <Form
       labelMode='floating'
       className='plain-styled-form'
-      validationGroup={validationGroup}
     >
       <FormItem itemType='group'>
         <ColCountByScreen xs={1} sm={1} md={1} lg={1}></ColCountByScreen>

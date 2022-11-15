@@ -12,13 +12,13 @@ export const FormPhotoUploader = () => {
     if (e.dropZoneElement.id === 'uploader') {
       setDropZoneActive(true);
     }
-  }, [isDropZoneActive]);
+  }, []);
 
   const onDropZoneLeave = useCallback((e) => {
     if (e.dropZoneElement.id === 'uploader') {
       setDropZoneActive(false);
     }
-  }, [isDropZoneActive]);
+  }, []);
 
   return (
     <div>

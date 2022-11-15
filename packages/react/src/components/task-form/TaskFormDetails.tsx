@@ -55,18 +55,17 @@ export const TaskFormDetails = ({ editing, data, colCountByScreen, onDataChanged
     <Form
       labelMode='floating'
       className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}
-      validationGroup='taskValidationGroup'
     >
-      <SimpleItem visible={!data.text}>
+      <SimpleItem visible={!data.text} colSpan={2}>
         <FormTextbox
           label='Subject'
           value={data.text}
           isEditing={!editing}
           onValueChange={updateField('text')}
-        ></FormTextbox>
+        />
       </SimpleItem>
       <GroupItem itemType='group' colCount={2}>
-        <ColCountByScreen xs={colCountByScreen.xs} sm={colCountByScreen.sm} />
+        <ColCountByScreen xs={colCountByScreen.xs} sm={colCountByScreen.sm} md={2} lg={2} />
         <SimpleItem cssClass='accent'>
           <FormTextbox
             label='Company'

@@ -3,15 +3,15 @@ import React from 'react';
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
 import { useScreenSize } from './../../utils/media-query';
 
-type FormPopupProps = {
+type PopupProps = {
   title: string,
   children,
   visible: boolean,
   changeVisibility: () => void,
-  onSaveClick: (event) => void
+  onSaveClick: (event) => void,
 }
 
-export const FormPopup = ({ title, children, visible, changeVisibility, onSaveClick } : FormPopupProps) => {
+export const FormPopup = ({ title, children, visible, changeVisibility, onSaveClick } : PopupProps) => {
   const { isXSmall, isSmall } = useScreenSize();
 
   return (
