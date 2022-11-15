@@ -34,7 +34,7 @@ const Grid = ({ tasks }: { tasks: Task[] }) => {
       columnAutoWidth
       selectionFilter={selectionFilter}
     >
-      <Selection mode='multiple' deferred />
+      <Selection mode='multiple' />
 
       <RowDragging
         allowReordering
