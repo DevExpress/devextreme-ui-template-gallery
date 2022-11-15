@@ -14,6 +14,7 @@ fixture`Analytics Sales Report`;
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
     test(`Analytics Sales Report (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
+      console.log(`Analytics Sales Report (${project}, embed=${embedded}, ${screenMode[0]})`);
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => { },
         screenMode, timeoutSecond, true, requestLogger);

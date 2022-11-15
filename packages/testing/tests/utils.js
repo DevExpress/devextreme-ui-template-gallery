@@ -9,11 +9,10 @@ async function awaitFontsLoaded(requestLogger, t, timeout) {
       const fontsCount = requestLogger.requests
         .map(({ request }) => request.url)
         .filter((reqUrl) => reqUrl.endsWith('.woff2'));
-      console.log('fontsCount:', fontsCount);
-      if (fontsCount.length < FONTSCOUNT) {
       // eslint-disable-next-line no-await-in-loop
-        await t.wait(timeout);
-      } else {
+      await t.wait(timeout);
+      console.log('fontsCount:', fontsCount);
+      if (fontsCount.length >= FONTSCOUNT) {
         break;
       }
     }
