@@ -41,7 +41,7 @@ export const CardAnalytics = ({
     <div className={`card ${contentClass}`}>
       <div className='header'>
         <Menu visible={menuVisible} className='overflow-menu' items={menuItems} />
-        <div className='title'>{title}</div>
+        {title && <div className='title'>{title}</div>}
         {additionalHeaderContent}
       </div>
       <div className='card-contents'>{children}</div>
