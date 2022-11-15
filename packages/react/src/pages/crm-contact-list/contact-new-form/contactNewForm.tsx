@@ -18,21 +18,21 @@ export const ContactNewForm = () => {
       className='plain-styled-form'
     >
       <FormItem itemType='group'>
-        <ColCountByScreen xs={1} sm={1} md={1} lg={1}></ColCountByScreen>
+        <ColCountByScreen xs={1} sm={1} md={1} lg={1} />
         <FormItem>
           <FormPhotoUploader />
         </FormItem>
       </FormItem>
 
       <FormItem itemType='group'>
-        <ColCountByScreen xs={1} sm={1} md={2} lg={2}></ColCountByScreen>
+        <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
         <FormItem>
           <FormTextbox
             label='First Name'
             value={newContact.firstName}
             isEditing={false}
             onValueChange={updateField('firstName')}
-          ></FormTextbox>
+          />
         </FormItem>
         <FormItem>
           <FormTextbox
@@ -40,19 +40,19 @@ export const ContactNewForm = () => {
             value={newContact.lastName}
             isEditing={false}
             onValueChange={updateField('lastName')}
-          ></FormTextbox>
+          />
         </FormItem>
       </FormItem>
 
       <FormItem itemType='group'>
-        <ColCountByScreen xs={1} sm={1} md={2} lg={2}></ColCountByScreen>
+        <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
         <FormItem>
           <FormTextbox
             label='Company'
             value={newContact.company}
             isEditing={false}
             onValueChange={updateField('company')}
-          ></FormTextbox>
+          />
         </FormItem>
         <FormItem>
           <FormTextbox
@@ -60,19 +60,19 @@ export const ContactNewForm = () => {
             value={newContact.position}
             isEditing={false}
             onValueChange={updateField('position')}
-          ></FormTextbox>
+          />
         </FormItem>
       </FormItem>
 
       <FormItem itemType='group' cssClass='contact-fields-group'>
-        <ColCountByScreen xs={1} sm={1} md={2} lg={2}></ColCountByScreen>
+        <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
         <FormItem>
           <FormTextbox
             value={newContact.manager}
             label='Assigned to'
             isEditing={false}
             onValueChange={updateField('manager')}
-          ></FormTextbox>
+          />
         </FormItem>
         <FormItem>
           <FormTextbox
@@ -81,7 +81,7 @@ export const ContactNewForm = () => {
             onValueChange={updateField('phone')}
             icon='tel'
             mask='+1(000)000-0000'
-          ></FormTextbox>
+          />
         </FormItem>
         <FormItem>
           <FormTextbox
@@ -89,7 +89,7 @@ export const ContactNewForm = () => {
             onValueChange={updateField('email')}
             isEditing={false}
             icon='email'
-          ></FormTextbox>
+          />
         </FormItem>
         <FormItem>
           <FormTextbox
@@ -97,7 +97,7 @@ export const ContactNewForm = () => {
             isEditing={false}
             onValueChange={updateField('address')}
             icon='home'
-          ></FormTextbox>
+          />
         </FormItem>
       </FormItem>
     </Form>

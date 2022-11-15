@@ -23,3 +23,4 @@ export { FormTextbox } from './form-textbox/FormTextbox';
 export { FormPhoto } from './form-photo/FormPhoto';
 export { FormPhotoUploader } from './form-photo-uploader/FormPhotoUploader';
 export { ContactStatus } from './contact-status/ContactStatus';
+export { ItemField } from './item-field/ItemField';

@@ -6,45 +6,14 @@ import Form, { SimpleItem, GroupItem, ColCountByScreen } from 'devextreme-react/
 import SelectBox from 'devextreme-react/select-box';
 import DateBox from 'devextreme-react/date-box';
 import TextArea from 'devextreme-react/text-area';
-import TextBox from 'devextreme-react/text-box';
 import Validator, { RequiredRule } from 'devextreme-react/validator';
 
 import { FormTextbox } from '../form-textbox/FormTextbox';
 
-import { PriorityTask } from '../priority-task/PriorityTask';
-import { StatusTask } from '../status-task/StatusTask';
-
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
+import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../shared/itemFieldRenderMethods';
 
 import { Task } from '../../shared/types/task';
-
-const renderPriorityField = (data: string) => (
-  <div className='priority-task-editor-field'>
-    <PriorityTask text={data} showText={false}></PriorityTask>
-    <TextBox
-      className={`priority-task priority-${data.toLowerCase()}`}
-      inputAttr={{ class: 'priority-editor-input' }}
-      readOnly
-      text={data}
-      hoverStateEnabled={false}
-    />
-  </div>
-);
-
-const renderStatusField = (data: string) => (
-  <div className='status-task-editor-field'>
-    <TextBox
-      className={`status-task status-${data.toLowerCase().replace(' ', '-')}`}
-      inputAttr={{ class: 'status-editor-input' }}
-      readOnly
-      text={data}
-      hoverStateEnabled={false}
-    />
-  </div>
-);
-
-const renderPriorityItem = (data: string) => <PriorityTask text={data}></PriorityTask>;
-const renderStatusItem = (data: string) => <StatusTask text={data}></StatusTask>;
 
 export const TaskFormDetails = ({ editing, data, colCountByScreen, onDataChanged }: { editing: boolean, data: Task, colCountByScreen: {xs: number, sm: number}, onDataChanged: (data) => void }) => {
   const updateField = (field: string) => (value) => {
@@ -64,7 +33,7 @@ export const TaskFormDetails = ({ editing, data, colCountByScreen, onDataChanged
           onValueChange={updateField('text')}
         />
       </SimpleItem>
-      <GroupItem itemType='group' colCount={2}>
+      <GroupItem itemType='group'>
         <ColCountByScreen xs={colCountByScreen.xs} sm={colCountByScreen.sm} md={2} lg={2} />
         <SimpleItem cssClass='accent'>
           <FormTextbox
@@ -89,8 +58,8 @@ export const TaskFormDetails = ({ editing, data, colCountByScreen, onDataChanged
             items={PRIORITY_ITEMS}
             readOnly={!editing}
             stylingMode='filled'
-            fieldRender={renderPriorityField}
-            itemRender={renderPriorityItem}
+            fieldRender={priorityFieldRender}
+            itemRender={priorityItemRender}
             onValueChange={updateField('priority')}
           />
         </SimpleItem>
@@ -101,8 +70,8 @@ export const TaskFormDetails = ({ editing, data, colCountByScreen, onDataChanged
             items={STATUS_ITEMS}
             readOnly={!editing}
             stylingMode='filled'
-            fieldRender={renderStatusField}
-            itemRender={renderStatusItem}
+            fieldRender={editFieldRender}
+            itemRender={statusItemRender}
             onValueChange={updateField('status')}
           />
         </SimpleItem>

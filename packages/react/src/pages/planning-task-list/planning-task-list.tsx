@@ -17,7 +17,7 @@ import { PlanningGrid, PlanningKanban, PlanningGantt, FormPopup, TaskFormDetails
 
 import { newTask } from '../../shared/types/task';
 
-import { getTasks, getFilteredTasks } from 'dx-rwa-data';
+import { getTasks, getFilteredTasks } from 'dx-template-gallery-data';
 
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
@@ -185,7 +185,7 @@ export const PlanningTaskList = () => {
           }}
         />
         <Item location='after' locateInMenu='auto'>
-          <div className='separator'></div>
+          <div className='separator' />
         </Item>
         <Item
           location='after'

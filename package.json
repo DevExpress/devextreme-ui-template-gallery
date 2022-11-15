@@ -19,6 +19,7 @@
     "lint-utils": "eslint utils/",
     "lint-bundles": "npm-run-all -p lint-angular lint-react lint-vue",
     "lint-angular-fix": "eslint --fix packages/angular",
+    "lint-react-fix": "eslint --fix packages/react",
     "lint-utils --fix": "eslint --fix utils"
   },
   "devDependencies": {

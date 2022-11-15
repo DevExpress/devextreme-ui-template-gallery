@@ -6,12 +6,12 @@
     >
       <dx-data-grid
         v-if="!props.isLoading"
+        class="tasks-grid"
         :data-source="filteredTasks"
         :column-auto-width="true"
         :selection-filter="['done', '=', true]"
       >
         <dx-selection
-          :deferred="true"
           show-check-boxes-mode="always"
           mode="multiple"
         />
@@ -88,9 +88,15 @@ const onReorder = (e: RowDraggingReorderEvent) => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use "@/variables.scss" as *;
+
 #card-tasks {
   min-height: 300px;
-  padding: 20px 0;
+  padding: 20px 0 0;
+}
+
+.grid-tasks {
+  border-top: 1px solid $base-border-color;
 }
 </style>

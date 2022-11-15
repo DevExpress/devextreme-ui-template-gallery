@@ -45,7 +45,7 @@ export const List = ({
     <div className='list'>
       <div className='list-title dx-theme-text-color'>
         <span>{title}</span>
-        <Menu items={boardMenuItems}></Menu>
+        <Menu items={boardMenuItems} />
       </div>
       <ScrollView className='scrollable-list' direction='vertical' showScrollbar='always'>
         <Sortable className='sortable-cards' group='cardsGroup' data={index} onDragStart={onTaskDragStart} onReorder={onTaskDrop} onAdd={onTaskDrop}>

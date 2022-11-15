@@ -12,7 +12,7 @@ export const FormPhoto = ({ link, size }: { link?: string, size: number }) => {
           height: size,
           backgroundImage: `url('data:image/png;base64,${link}')`
         }}
-      ></div>
+      />
     </div>
   );
 };
