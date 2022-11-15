@@ -28,7 +28,7 @@
     padding-right: 25px;
   }
 
-  .content {
+  .card-contents {
     padding: 0 $content-padding $content-padding;
     box-sizing: content-box;
     font-size: 14px;
@@ -37,7 +37,7 @@
   }
 
   &.grid {
-    .content {
+    .card-contents {
       border-top: 1px solid $base-border-color;
       padding: 0 0 $content-padding;
     }

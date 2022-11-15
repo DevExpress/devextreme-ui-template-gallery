@@ -44,7 +44,7 @@ export const CardAnalytics = ({
         <div className='title'>{title}</div>
         {additionalHeaderContent}
       </div>
-      <div className='content'>{children}</div>
+      <div className='card-contents'>{children}</div>
       <LoadPanel
         container={`.${contentClass}`}
         position={calculateLoadPanelPosition()}
