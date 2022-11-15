@@ -70,7 +70,7 @@ export const PlanningTaskDetails = () => {
         />
       </ToolbarDetails>
       <div className='panels'>
-        <div className='left'>{task && <TaskForm task={task} />}</div>
+        <div className='left'><TaskForm task={task} /></div>
         <div className='right'>
           <div className='dx-card details-card'>
             <TabPanel showNavButtons deferRendering={false}>
