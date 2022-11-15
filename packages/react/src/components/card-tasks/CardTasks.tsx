@@ -30,6 +30,7 @@ const Grid = ({ tasks }: { tasks: Task[] }) => {
 
   return (
     <DataGrid
+      className='tasks-grid'
       dataSource={gridData}
       columnAutoWidth
       selectionFilter={selectionFilter}
