@@ -19,7 +19,7 @@ import {
 import { Contact, contactStatusList, ContactStatus, } from 'src/app/shared/types/contact';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { CommonModule } from '@angular/common';
-import { RwaService } from 'src/app/shared/services';
+import { DataService } from 'src/app/shared/services';
 import { Subscription } from 'rxjs';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
@@ -36,7 +36,7 @@ type FilterContactStatus = ContactStatus | 'All';
 @Component({
   templateUrl: './crm-contact-list.component.html',
   styleUrls: ['./crm-contact-list.component.scss'],
-  providers: [RwaService],
+  providers: [DataService],
 })
 export class CrmContactListComponent implements OnInit, OnDestroy {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
@@ -55,7 +55,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
 
   dataSubscription: Subscription = new Subscription();
 
-  constructor(private service: RwaService) {
+  constructor(private service: DataService) {
   }
 
   ngOnInit(): void {

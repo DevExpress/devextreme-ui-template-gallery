@@ -15,7 +15,7 @@ import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
 
 import { ContactStatus } from '../../components';
 
-import { getContacts } from 'dx-rwa-data';
+import { getContacts } from 'dx-template-gallery-data';
 
 import { ContactStatus as ContactStatusType } from '../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';

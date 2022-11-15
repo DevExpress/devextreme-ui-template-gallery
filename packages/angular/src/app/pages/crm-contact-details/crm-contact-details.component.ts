@@ -12,7 +12,7 @@ import {
   CardNotesModule,
   CardMessagesModule,
 } from 'src/app/shared/components';
-import { RwaService } from 'src/app/shared/services';
+import { DataService } from 'src/app/shared/services';
 import { forkJoin, Observable, map, Subscription } from 'rxjs';
 import { Contact } from 'src/app/shared/types/contact';
 import { Messages } from 'src/app/shared/types/messages';
@@ -24,7 +24,7 @@ import { ContactCardsModule } from './contact-cards/contact-cards.component';
 @Component({
   templateUrl: './crm-contact-details.component.html',
   styleUrls: ['./crm-contact-details.component.scss'],
-  providers: [RwaService],
+  providers: [DataService],
 })
 export class CrmContactDetailsComponent implements OnInit, OnDestroy {
   contactId = 12;
@@ -43,7 +43,7 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private service: RwaService) {
+  constructor(private service: DataService) {
   }
 
   ngOnInit(): void {
