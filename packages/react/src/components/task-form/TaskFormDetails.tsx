@@ -23,7 +23,7 @@ export const TaskFormDetails = ({ editing, data, colCountByScreen, onDataChanged
   return (
     <Form
       labelMode='floating'
-      className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}
+      className={classNames({ 'plain-styled-form task-form-details': true, 'view-mode': !editing })}
     >
       <SimpleItem visible={!data.text} colSpan={2}>
         <FormTextbox

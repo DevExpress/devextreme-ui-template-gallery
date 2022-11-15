@@ -8,7 +8,7 @@ type PopupProps = {
   children,
   visible: boolean,
   changeVisibility: () => void,
-  onSaveClick: (event) => void,
+  onSaveClick: () => void,
 }
 
 export const FormPopup = ({ title, children, visible, changeVisibility, onSaveClick } : PopupProps) => {
