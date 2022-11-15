@@ -99,6 +99,7 @@ module.exports = {
       }
     ],
     'react/jsx-boolean-value': ['error', 'never'],
+    'react/self-closing-comp': ['error'],
     '@typescript-eslint/no-unused-vars': ['error'],
     'import/no-default-export': 'error',
   }

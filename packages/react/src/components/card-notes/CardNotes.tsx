@@ -17,7 +17,7 @@ const Card = ({ note }: { note: Note }) => {
           {formatDate(new Date(note.date), 'MM/dd/yyyy')} - {note.manager}
         </div>
         <div>
-          <Button icon='overflow'></Button>
+          <Button icon='overflow' />
         </div>
       </div>
       <div className='note-text'>{note.text}</div>
@@ -48,7 +48,7 @@ export const CardNotes = ({ items, user }: { items: Notes | undefined; user: str
   return (
     <div className='notes'>
       <div className='input-notes'>
-        <TextArea label='New Note' stylingMode='outlined' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged}></TextArea>
+        <TextArea label='New Note' stylingMode='outlined' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged} />
         <Toolbar>
           <Item
             location='after'

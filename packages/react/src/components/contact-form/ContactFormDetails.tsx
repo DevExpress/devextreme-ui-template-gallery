@@ -49,9 +49,9 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
       labelMode='floating'
     >
       <GroupItem colCount={2}>
-        <ColCountByScreen xs={2}></ColCountByScreen>
+        <ColCountByScreen xs={2} />
         <ItemForm>
-          <FormPhoto link={formData.image} size={PHOTO_SIZE}></FormPhoto>
+          <FormPhoto link={formData.image} size={PHOTO_SIZE} />
         </ItemForm>
 
         <GroupItem>
@@ -117,7 +117,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
       </GroupItem>
 
       <GroupItem colCount={4} caption='Contacts'>
-        <ColCountByScreen xs={2}></ColCountByScreen>
+        <ColCountByScreen xs={2} />
         <ItemForm colSpan={4}>
           <FormTextbox
             label='Address'
@@ -161,7 +161,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
       </GroupItem>
 
       <GroupItem colCount={2} cssClass='contact-fields-group'>
-        <ColCountByScreen xs={2}></ColCountByScreen>
+        <ColCountByScreen xs={2} />
         <ItemForm>
           <FormTextbox
             label='Phone'
@@ -177,7 +177,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
             icon='tel'
             type='default'
             stylingMode='outlined'
-          ></Button>
+          />
         </ItemForm>
 
         <ItemForm>
@@ -196,7 +196,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
             icon='email'
             type='default'
             stylingMode='outlined'
-          ></Button>
+          />
         </ItemForm>
       </GroupItem>
     </From>
