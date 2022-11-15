@@ -84,7 +84,7 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
           </ScrollView>
         </div>
         <Template name='menu'>
-          <SideNavigationMenu compactMode={menuStatus === MenuStatus.Closed} selectedItemChanged={onNavigationChanged} openMenu={temporaryOpenMenu} onMenuReady={onMenuReady}></SideNavigationMenu>
+          <SideNavigationMenu compactMode={menuStatus === MenuStatus.Closed} selectedItemChanged={onNavigationChanged} openMenu={temporaryOpenMenu} onMenuReady={onMenuReady} />
         </Template>
       </Drawer>
     </div>

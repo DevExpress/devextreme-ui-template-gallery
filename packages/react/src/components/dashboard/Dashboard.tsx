@@ -40,7 +40,7 @@ export const Dashboard = ({
           }}
         />
         <Item location='after' locateInMenu='auto'>
-          <div className='separator'></div>
+          <div className='separator' />
         </Item>
         <Item
           location='after'

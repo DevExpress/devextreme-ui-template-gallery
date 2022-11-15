@@ -20,7 +20,7 @@ const activityMenuItems = [{
   ],
 }];
 
-const renderListItem = (item: Activity) => {
+const listItemRender = (item: Activity) => {
   return (
     <div className='activity'>
       <div className='name'>{item.name}</div>
@@ -29,14 +29,14 @@ const renderListItem = (item: Activity) => {
         <span>by</span>
         <span>{item.manager}</span>
       </div>
-      <Menu className='overflow-menu' items={activityMenuItems}></Menu>
+      <Menu className='overflow-menu' items={activityMenuItems} />
     </div>
   );
 };
 
 const ActivitiesList = ({ activities }) => {
   return (
-    <List className='activities-list' dataSource={activities} scrollingEnabled={false} itemRender={renderListItem} />
+    <List className='activities-list' dataSource={activities} scrollingEnabled={false} itemRender={listItemRender} />
   );
 };
 
