@@ -89,9 +89,7 @@ export const CRMContactList = () => {
     changePopupVisibility();
   }, []);
 
-  const onSavePopupClick = (e) => {
-    if(!e.validationGroup.validate().isValid) return;
-
+  const onSavePopupClick = () => {
     changePopupVisibility();
   };
 
