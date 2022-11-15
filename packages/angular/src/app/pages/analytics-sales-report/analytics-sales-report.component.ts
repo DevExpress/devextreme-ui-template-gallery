@@ -12,7 +12,7 @@ import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
 import { CommonModule, formatDate } from '@angular/common';
-import { RwaService } from 'src/app/shared/services';
+import { DataService } from 'src/app/shared/services';
 import { Observable } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
@@ -29,7 +29,7 @@ type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | Sal
 @Component({
   templateUrl: './analytics-sales-report.component.html',
   styleUrls: ['./analytics-sales-report.component.scss'],
-  providers: [RwaService],
+  providers: [DataService],
 })
 export class AnalyticsSalesReportComponent implements OnInit {
   groupByPeriods = ['Day', 'Month'];
@@ -40,7 +40,7 @@ export class AnalyticsSalesReportComponent implements OnInit {
 
   visualRange: unknown = {};
 
-  constructor(private service: RwaService) { }
+  constructor(private service: DataService) { }
 
   selectionChange({item: period}: SelectionChangedEvent) {
     this.salesByDateAndCategory = null;

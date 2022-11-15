@@ -23,7 +23,7 @@ import {
   getContactMessages,
   getActiveContactOpportunities,
   getClosedContactOpportunities
-} from 'dx-rwa-data';
+} from 'dx-template-gallery-data';
 
 import './crm-contact-details.scss';
 
@@ -94,7 +94,7 @@ export const CRMContactDetails = () => {
           />
         </Item>
         <Item location='after' locateInMenu='auto'>
-          <div className='separator'></div>
+          <div className='separator' />
         </Item>
         <Item
           location='after'

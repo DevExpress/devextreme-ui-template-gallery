@@ -9,9 +9,9 @@ export const ToolbarDetails = ({ name, children }: { name?: string, children: JS
   return (
     <Toolbar className='toolbar-details'>
       <ToolbarItem location='before'>
-        <Button icon='arrowleft'></Button>
+        <Button icon='arrowleft' />
       </ToolbarItem>
-      <ToolbarItem location='before' text={ name ?? 'Loading...' }></ToolbarItem>
+      <ToolbarItem location='before' text={ name ?? 'Loading...' } />
       {children}
     </Toolbar>
   );

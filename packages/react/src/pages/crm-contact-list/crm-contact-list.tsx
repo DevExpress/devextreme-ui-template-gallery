@@ -17,7 +17,7 @@ import { ColumnCellTemplateData, RowClickEvent } from 'devextreme/ui/data_grid';
 
 import { ContactStatus } from '../../components';
 
-import { getContacts } from 'dx-rwa-data';
+import { getContacts } from 'dx-template-gallery-data';
 
 import { ContactStatus as ContactStatusType } from '../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
@@ -124,30 +124,30 @@ export const CRMContactList = () => {
                 <div className='grid-header'>Contacts</div>
               </Item>
               <Item location='before' locateInMenu='auto'>
-                <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus}></DropDownButton>
+                <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus} />
               </Item>
               <Item location='after' locateInMenu='auto'>
-                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addRow}></Button>
+                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addRow} />
               </Item>
               <Item location='after' locateInMenu='auto' showText='inMenu' widget='dxButton'>
-                <Button icon='refresh' text='Refresh' stylingMode='text' onClick={refresh}></Button>
+                <Button icon='refresh' text='Refresh' stylingMode='text' onClick={refresh} />
               </Item>
               <Item location='after' locateInMenu='auto'>
-                <div className='separator'></div>
+                <div className='separator' />
               </Item>
-              <Item name='exportButton'></Item>
+              <Item name='exportButton' />
               <Item location='after' locateInMenu='auto'>
-                <div className='separator'></div>
+                <div className='separator' />
               </Item>
-              <Item name='columnChooserButton' locateInMenu='auto'></Item>
-              <Item name='searchPanel' locateInMenu='auto'></Item>
+              <Item name='columnChooserButton' locateInMenu='auto' />
+              <Item name='searchPanel' locateInMenu='auto' />
             </Toolbar>
-            <Column dataField='name' caption='Name' sortOrder='asc' hidingPriority={5} minWidth={150} cellRender={cellNameRender}></Column>
-            <Column dataField='company' caption='Company' hidingPriority={5} minWidth={150}></Column>
-            <Column dataField='status' caption='Status' dataType='string' hidingPriority={3} minWidth={100} cellRender={ContactStatus} editCellRender={editCellStatusRender}></Column>
-            <Column dataField='assignedTo' caption='Assigned to' hidingPriority={4}></Column>
-            <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender}></Column>
-            <Column dataField='email' caption='Email' hidingPriority={1}></Column>
+            <Column dataField='name' caption='Name' sortOrder='asc' hidingPriority={5} minWidth={150} cellRender={cellNameRender} />
+            <Column dataField='company' caption='Company' hidingPriority={5} minWidth={150} />
+            <Column dataField='status' caption='Status' dataType='string' hidingPriority={3} minWidth={100} cellRender={ContactStatus} editCellRender={editCellStatusRender} />
+            <Column dataField='assignedTo' caption='Assigned to' hidingPriority={4} />
+            <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender} />
+            <Column dataField='email' caption='Email' hidingPriority={1} />
           </DataGrid>
           {contactId && <ContactPanel contactId={contactId} isOpen={isOpen} changePanelOpen={changePanelOpen} />}
         </div>

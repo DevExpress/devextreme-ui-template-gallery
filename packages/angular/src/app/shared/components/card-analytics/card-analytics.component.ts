@@ -49,7 +49,8 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
   menuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
     icon: 'overflow',
     items: [
-      { text: 'Hide' },
+      { text: 'Configure' },
+      { text: 'Remove' },
     ],
   }];
 

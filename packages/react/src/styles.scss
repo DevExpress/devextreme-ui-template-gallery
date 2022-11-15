@@ -116,18 +116,11 @@ body {
       padding: 15px 0;
     }
 
-    .priority-task,
-    .status-task {
+    .item-field {
       line-height: 18px;
       font-size: 13px;
     }
 
-    .priority-task {
-      .separator-task {
-        max-height: 12px;
-        margin-bottom: 3px;
-      }
-    }
     .dx-texteditor.form-editor {
       .form-editor-icon:first-child {
         margin-left: 0;
@@ -203,32 +196,44 @@ body {
   }
 }
 
-@mixin status-task($status-color) {
+@mixin item-field($status-color) {
   color: $status-color;
 
   &.dx-texteditor {
-    .status-editor-input {
+    .item-editor-input {
       color: $status-color;
       padding-left: 0;
     }
   }
 }
 
-.status-task {
-  &.status-open {
-    @include status-task(#505ed9);
+.item-field {
+  &.item-open {
+    @include item-field(#505ed9);
   }
 
-  &.status-in-progress {
-    @include status-task(#34aa95);
+  &.item-in-progress {
+    @include item-field(#34aa95);
   }
 
-  &.status-deferred {
-    @include status-task(#969696);
+  &.item-deferred {
+    @include item-field(#969696);
   }
 
-  &.status-completed {
-    @include status-task(#2b9029);
+  &.item-completed {
+    @include item-field(#2b9029);
+  }
+
+  &.item-low {
+    @include item-field(#d3a268);
+  }
+
+  &.item-normal {
+    @include item-field(#6fbaca);
+  }
+
+  &.item-high {
+    @include item-field(#ff5722);
   }
 
   span {
@@ -236,35 +241,11 @@ body {
   }
 }
 
-@mixin priority-task($status-color) {
-  color: $status-color;
-
-  &.dx-texteditor {
-    .priority-editor-input {
-      color: $status-color;
-      padding-left: 0;
-      font-weight: 600;
-    }
-  }
-
-  .separator-task {
-    background: $status-color;
-  }
-}
-
-.priority-task {
+.item-editor-field {
   display: flex;
-  align-items: center;
+  padding-left: $list-padding-left;
 
-  &.priority-low {
-    @include priority-task(#d3a268);
-  }
-
-  &.priority-normal {
-    @include priority-task(#6fbaca);
-  }
-
-  &.priority-high {
-    @include priority-task(#ff5722);
+  .item-field {
+    align-self: flex-end;
   }
 }
