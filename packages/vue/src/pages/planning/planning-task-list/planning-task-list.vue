@@ -56,7 +56,9 @@
         location="after"
         locate-in-menu="auto"
       >
-        <div><div class="separator" /></div>
+        <div>
+          <div class="separator" />
+        </div>
       </dx-toolbar-item>
 
       <dx-toolbar-item

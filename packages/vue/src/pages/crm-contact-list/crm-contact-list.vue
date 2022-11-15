@@ -80,7 +80,9 @@
           location="after"
           locate-in-menu="auto"
         >
-          <div><div class="separator" /></div>
+          <div>
+            <div class="separator" />
+          </div>
         </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item name="exportButton" />
@@ -89,7 +91,9 @@
           location="after"
           locate-in-menu="auto"
         >
-          <div><div class="separator" /></div>
+          <div>
+            <div class="separator" />
+          </div>
         </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item
