@@ -120,6 +120,15 @@ body {
       line-height: 18px;
       font-size: 13px;
     }
+
+    .dx-texteditor.form-editor {
+      .form-editor-icon:first-child {
+        margin-left: 0;
+        pointer-events: none;
+        border-color: transparent;
+        background-color: transparent;
+      }
+    }
   }
 
   &.view-mode {
