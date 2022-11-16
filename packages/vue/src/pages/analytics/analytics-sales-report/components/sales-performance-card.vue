@@ -71,10 +71,5 @@ const props = defineProps<{
 <style scoped lang="scss">
 .sales-filter {
   display: inline-block;
-
-  & .dx-dropdownbutton {
-    position: absolute;
-    top: 12px;
-  }
 }
 </style>
