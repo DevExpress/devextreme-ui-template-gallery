@@ -2,9 +2,9 @@
   [dataSource]="tasks"
   (onRowPrepared)="onRowPreparedGrid($event)"
   (onRowClick)="navigateToDetails($event)"
-  (onEditingStart)="onEditingStart()"
-  (onEditCanceled)="onEditEnd()"
-  (onSaved)="onEditEnd()"
+  (onEditingStart)="toogleUseNavigation()"
+  (onEditCanceled)="toogleUseNavigation()"
+  (onSaved)="toogleUseNavigation()"
   [hoverStateEnabled]="true"
   [columnAutoWidth]="true"
 >

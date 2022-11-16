@@ -48,7 +48,7 @@ const editPriorityRender = ({ setValue, value }: GridEdit) => (
 
 export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
   const [data, setData] = useState<Task[]>();
-  const [navigation, setNavigation] = useState<boolean>(true);
+  const [useNavigation, setUseNavigation] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -63,17 +63,13 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
   }, []);
 
   const navigateToDetails = useCallback(({ rowType }: RowClickEvent) => {
-    if (navigation && rowType !== 'detailAdaptive') {
+    if (useNavigation && rowType !== 'detailAdaptive') {
       navigate('/planning-task-details');
     }
   }, []);
 
-  const onEditingStart = useCallback(() => {
-    setNavigation(false);
-  }, []);
-
-  const onEditEnd = useCallback(() => {
-    setNavigation(true);
+  const toogleUseNavigation = useCallback(() => {
+    setUseNavigation(false);
   }, []);
 
   return (
@@ -83,9 +79,9 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       dataSource={data}
       columnAutoWidth
       hoverStateEnabled
-      onEditingStart={onEditingStart}
-      onEditCanceled={onEditEnd}
-      onSaved={onEditEnd}
+      onEditingStart={toogleUseNavigation}
+      onEditCanceled={toogleUseNavigation}
+      onSaved={toogleUseNavigation}
       onRowPrepared={onRowPrepared}
       onRowClick={navigateToDetails}>
       <Paging pageSize={15} />

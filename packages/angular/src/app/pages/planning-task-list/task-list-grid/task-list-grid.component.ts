@@ -47,7 +47,7 @@ export class TaskListGridComponent implements OnChanges {
 
   isLoading = true;
 
-  navigation = true;
+  useNavigation = true;
 
   constructor(private router: Router) {
   }
@@ -105,12 +105,8 @@ export class TaskListGridComponent implements OnChanges {
     }
   };
 
-  onEditingStart = () => {
-    this.navigation = false;
-  };
-
-  onEditEnd = () => {
-    this.navigation = true;
+  toogleUseNavigation = () => {
+    this.useNavigation = !this.useNavigation;
   };
 
   tabsItemClick = (e: TabsItemClickEvenet) => {
@@ -118,7 +114,7 @@ export class TaskListGridComponent implements OnChanges {
   };
 
   navigateToDetails = (e: RowClickEvent) => {
-    if(this.navigation && e.rowType !== 'detailAdaptive') {
+    if(this.useNavigation && e.rowType !== 'detailAdaptive') {
       this.router.navigate(['/planning-task-details']);
     }
   };

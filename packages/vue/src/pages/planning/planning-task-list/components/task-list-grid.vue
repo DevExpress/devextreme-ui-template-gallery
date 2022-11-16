@@ -6,9 +6,9 @@
     :data-source="dataSource"
     @row-click="navigateToDetails($event)"
     @row-prepared="onRowPreparedGrid"
-    @editing-start="onEditingStart"
-    @edit-canceled="onEditEnd"
-    @saved="onEditEnd"
+    @editing-start="toogleUseNavigation"
+    @edit-canceled="toogleUseNavigation"
+    @saved="toogleUseNavigation"
     :hover-state-enabled="true"
     :column-auto-width="true"
   >
@@ -201,7 +201,7 @@ const props = withDefaults(defineProps<{
 });
 
 const dxDataGridCmp = ref<InstanceType<typeof DxDataGrid> | null>(null);
-const navigation = ref<boolean>(true);
+let useNavigation = true;
 
 const onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
   const { rowType, rowElement, data } = e;
@@ -214,17 +214,13 @@ const onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
 };
 
 const navigateToDetails = (e: RowClickEvent) => {
-  if(navigation.value && e.rowType !== 'detailAdaptive') {
+  if (useNavigation && e.rowType !== 'detailAdaptive') {
     router.push('/planning-task-details');
   }
 };
 
-const onEditingStart = () {
-  navigation.value = false;
-}
-
-const onEditEnd = () {
-  navigation.value = true;
+const toogleUseNavigation = () => {
+  useNavigation = !useNavigation;
 };
 
 const addRow = () => dxDataGridCmp.value?.instance.addRow();
