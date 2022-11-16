@@ -6,6 +6,7 @@ import Button from 'devextreme-react/button';
 import { formatDate } from 'devextreme/localization';
 import Validator, { RequiredRule } from 'devextreme-react/validator';
 import ValidationGroup from 'devextreme-react/validation-group';
+import ScrollView from 'devextreme-react/scroll-view';
 
 import { Notes, Note } from '../../shared/types/card-notes';
 
@@ -88,10 +89,14 @@ export const CardNotes = ({ items, user }: { items: Notes | undefined; user: str
           </Toolbar>
         </div>
 
-        <div className='notes-content'>
-          {data?.map((note, index) => (
-            <Card key={index} note={note} />
-          ))}
+        <div className='messages-content'>
+          <ScrollView>
+            <div className='message-list'>
+              {data?.map((note, index) => (
+                <Card key={index} note={note} />
+              ))}
+            </div>
+          </ScrollView>
         </div>
       </div>
     </ValidationGroup>
