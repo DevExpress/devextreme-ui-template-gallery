@@ -69,7 +69,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
   }, []);
 
   const toogleUseNavigation = useCallback(() => {
-    setUseNavigation(false);
+    setUseNavigation(!useNavigation);
   }, []);
 
   return (
