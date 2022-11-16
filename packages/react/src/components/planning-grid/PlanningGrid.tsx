@@ -48,7 +48,7 @@ const editPriorityRender = ({ setValue, value }: GridEdit) => (
 
 export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
   const [data, setData] = useState<Task[]>();
-  const [useNavigation, setUseNavigation] = useState<boolean>(true);
+  let useNavigation = true;
 
   const navigate = useNavigate();
 
@@ -69,7 +69,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
   }, []);
 
   const toogleUseNavigation = useCallback(() => {
-    setUseNavigation(!useNavigation);
+    useNavigation = !useNavigation;
   }, []);
 
   return (
