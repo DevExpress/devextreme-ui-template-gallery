@@ -7,6 +7,8 @@ import DataGrid, {
 } from 'devextreme-react/data-grid';
 import SelectBox from 'devextreme-react/select-box';
 
+import { RowClickEvent } from 'devextreme/ui/data_grid';
+
 import { ItemField } from '../item-field/ItemField';
 import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../shared/itemFieldRenderMethods';
 
@@ -46,6 +48,7 @@ const editPriorityRender = ({ setValue, value }: GridEdit) => (
 
 export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
   const [data, setData] = useState<Task[]>();
+  const [navigation, setNavigation] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -59,12 +62,32 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
     }
   }, []);
 
-  const navigateToDetails = useCallback(() => {
-    navigate('/planning-task-details');
+  const navigateToDetails = useCallback(({ rowType }: RowClickEvent) => {
+    if (navigation && rowType !== 'detailAdaptive') {
+      navigate('/planning-task-details');
+    }
+  }, []);
+
+  const onEditingStart = useCallback(() => {
+    setNavigation(false);
+  }, []);
+
+  const onEditEnd = useCallback(() => {
+    setNavigation(true);
   }, []);
 
   return (
-    <DataGrid className='planning-grid' ref={ref} dataSource={data} columnAutoWidth onRowPrepared={onRowPrepared} onRowClick={navigateToDetails}>
+    <DataGrid
+      className='planning-grid'
+      ref={ref}
+      dataSource={data}
+      columnAutoWidth
+      hoverStateEnabled
+      onEditingStart={onEditingStart}
+      onEditCanceled={onEditEnd}
+      onSaved={onEditEnd}
+      onRowPrepared={onRowPrepared}
+      onRowClick={navigateToDetails}>
       <Paging pageSize={15} />
       <Pager visible showPageSizeSelector />
       <Editing mode='row' allowUpdating />
