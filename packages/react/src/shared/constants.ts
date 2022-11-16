@@ -36,6 +36,7 @@ export const CONTACT_STATUS_LIST = [
 ];
 
 export const newTask: Task = {
+  id: 0,
   text: '',
   description: '',
   company: '',

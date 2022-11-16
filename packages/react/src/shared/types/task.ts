@@ -7,7 +7,7 @@ export type TaskPriority = 'Low' | 'Normal' | 'High';
 export type TaskStatus = 'Open' | 'In Progress' | 'Deferred' | 'Completed';
 
 export interface Task {
-    id?: number,
+    id: number,
     text: string,
     description: string,
     company: string,
