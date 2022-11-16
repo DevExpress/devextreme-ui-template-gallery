@@ -47,8 +47,6 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
     });
   };
 
-  const validationGroup = 'contactValidationGroup';
-
   const onDataChanged = useCallback(data => {
     setContact(data);
   }, []);
@@ -129,9 +127,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
         <ScrollView className='panel-scroll'>
           <div className='data-part border'>
             <Form
-              labelMode='floating'
               className={classNames({ 'plain-styled-form': true, 'view-mode': !isEditing })}
-              validationGroup={validationGroup}
             >
               <FormItem itemType='group' colCount={2}>
                 <ColCountByScreen xs={2} />
