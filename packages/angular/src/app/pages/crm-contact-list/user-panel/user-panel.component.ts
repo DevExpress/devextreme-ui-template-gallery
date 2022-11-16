@@ -86,12 +86,12 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     }));
   };
 
-  closePanel = () => {
+  onClosePanel = () => {
     this.isOpened = false;
     this.isOpenedChange.emit(this.isOpened);
   };
 
-  pinClick = () => {
+  onPinClick = () => {
     this.isPinned = !this.isPinned;
   };
 
