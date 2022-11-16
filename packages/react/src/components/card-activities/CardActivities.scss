@@ -1,4 +1,4 @@
-@use '../../variables.scss' as *;
+@use "../../variables.scss" as *;
 
 .card-activities {
   padding: 10px;
@@ -6,18 +6,20 @@
   position: relative;
   display: block;
 
+  .activities-list {
+    .dx-list-item {
+      margin: 10px 0;
+      overflow: visible;
+      background: transparent;
+    }
+  }
+
   &.load {
     min-height: 300px;
   }
 }
 
 .activities-list {
-  .dx-list-item {
-    margin: 10px 0;
-    overflow: visible;
-    background: transparent;
-  }
-
   .dx-list-item-content {
     padding: 0;
     overflow: visible;
