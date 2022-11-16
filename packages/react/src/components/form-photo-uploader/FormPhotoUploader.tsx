@@ -6,7 +6,13 @@ import { FileUploader } from 'devextreme-react/file-uploader';
 
 export const FormPhotoUploader = () => {
   const [isDropZoneActive, setDropZoneActive] = useState(false);
-  const uploaderZone = useRef<any>();
+
+  const uploaderZone = useRef();
+
+  const getUploaderRef = useCallback(
+    (element) => {
+      uploaderZone.current = element;
+    }, []);
 
   const onDropZoneEnter = useCallback((e) => {
     if (e.dropZoneElement.id === 'uploader') {
@@ -23,7 +29,7 @@ export const FormPhotoUploader = () => {
   return (
     <div>
       <div
-        ref={uploaderZone}
+        ref={getUploaderRef}
         id='uploader'
         className={`${ isDropZoneActive
           ? 'dx-theme-accent-as-border-color'

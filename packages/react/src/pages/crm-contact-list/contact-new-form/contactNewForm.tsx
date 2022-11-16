@@ -14,7 +14,6 @@ export const ContactNewForm = () => {
 
   return (
     <Form
-      labelMode='floating'
       className='plain-styled-form'
     >
       <FormItem itemType='group'>
