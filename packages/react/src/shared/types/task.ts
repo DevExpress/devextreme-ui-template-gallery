@@ -30,19 +30,3 @@ export interface PlanningProps {
     dataSource: Task[];
     changePopupVisibility?: () => void;
 }
-
-export const newTask: Task = {
-  text: '',
-  description: '',
-  company: '',
-  priority: 'Low',
-  startDate: new Date(),
-  dueDate: new Date(),
-  owner: '',
-  status: 'Open',
-  activities: [],
-  notes: [],
-  messages: [],
-  parentId: 0,
-  progress: 0,
-};

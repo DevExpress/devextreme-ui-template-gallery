@@ -5,13 +5,12 @@ import { useScreenSize } from './../../utils/media-query';
 
 type PopupProps = {
   title: string,
-  children,
   visible: boolean,
   changeVisibility: () => void,
   onSaveClick: () => void,
 }
 
-export const FormPopup = ({ title, children, visible, changeVisibility, onSaveClick } : PopupProps) => {
+export const FormPopup = ({ title, visible, changeVisibility, onSaveClick, children } : React.PropsWithChildren<PopupProps>) => {
   const { isXSmall, isSmall } = useScreenSize();
 
   return (

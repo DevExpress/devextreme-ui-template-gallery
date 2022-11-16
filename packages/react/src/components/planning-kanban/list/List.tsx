@@ -34,12 +34,8 @@ export const List = ({
   tasks: Task[],
   onTaskDragStart: (e: DragStartEvent) => void,
   onTaskDrop: (e: ReorderEvent) => void,
-  changePopupVisibility,
+  changePopupVisibility?: () => void,
 }) => {
-
-  const onAddTaskBtnClick = () => {
-    changePopupVisibility();
-  };
 
   return (
     <div className='list'>
@@ -54,7 +50,7 @@ export const List = ({
           ))}
         </Sortable>
         <div className='add-task'>
-          <Button icon='plus' text='Add Task' stylingMode='text' onClick={onAddTaskBtnClick} />
+          <Button icon='plus' text='Add Task' stylingMode='text' onClick={changePopupVisibility} />
         </div>
       </ScrollView>
     </div>

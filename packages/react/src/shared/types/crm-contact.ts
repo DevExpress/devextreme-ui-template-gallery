@@ -10,7 +10,7 @@ interface State {
 }
 
 export interface Contact {
-    id: number | null,
+    id: number,
     name: string,
     address: string,
     firstName: string,
@@ -29,26 +29,3 @@ export interface Contact {
     opportunities: Opportunities,
     tasks: Task[],
 }
-
-export const newContact: Contact = {
-  id: null,
-  name: '',
-  address: '',
-  firstName: '',
-  lastName: '',
-  status: 'Salaried',
-  position: '',
-  manager: '',
-  company: '',
-  city: '',
-  state: {
-    stateShort: '',
-  },
-  zipCode: 0,
-  phone: '',
-  email: '',
-  image: '',
-  activities: [],
-  opportunities: [],
-  tasks: [],
-};

@@ -15,7 +15,7 @@ import dxTextBox from 'devextreme/ui/text_box';
 
 import { PlanningGrid, PlanningKanban, PlanningGantt, FormPopup, TaskFormDetails } from '../../components';
 
-import { newTask } from '../../shared/types/task';
+import { newTask } from '../../shared/constants';
 
 import { getTasks, getFilteredTasks } from 'dx-template-gallery-data';
 
@@ -39,7 +39,7 @@ export const PlanningTaskList = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [newTaskData, setNewTaskData] = useState(newTask);
-  const [popupvisible, setPopupVisible] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
 
   const isDataGrid = view === listView;
   const isKanban = view === kanbanView;
@@ -69,12 +69,8 @@ export const PlanningTaskList = () => {
   }, []);
 
   const changePopupVisibility = () => {
-    setPopupVisible(!popupvisible);
+    setPopupVisible(!popupVisible);
   };
-
-  const addTask = useCallback(() => {
-    changePopupVisibility();
-  }, []);
 
   const onSavePopupClick = () => {
     changePopupVisibility();
@@ -156,7 +152,7 @@ export const PlanningTaskList = () => {
             text: 'ADD TASK',
             type: 'default',
             stylingMode: 'contained',
-            onClick: addTask,
+            onClick: changePopupVisibility,
           }}
         />
         <Item
@@ -225,7 +221,7 @@ export const PlanningTaskList = () => {
       {!loading && isDataGrid && <PlanningGrid dataSource={gridData} ref={gridRef} />}
       {!loading && isKanban && <PlanningKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
       {!loading && view === ganttView && <PlanningGantt dataSource={filteredData} ref={ganttRef} />}
-      <FormPopup title='New Task' visible={popupvisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
+      <FormPopup title='New Task' visible={popupVisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
         <TaskFormDetails colCountByScreen={{ xs: 1, sm: 1 }} data={newTaskData} editing onDataChanged={onDataChanged} />
       </FormPopup>
     </div>

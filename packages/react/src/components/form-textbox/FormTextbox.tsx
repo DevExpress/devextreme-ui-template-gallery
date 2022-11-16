@@ -4,7 +4,7 @@ import TextBox, { Button as TextBoxButton } from 'devextreme-react/text-box';
 import Validator, { RequiredRule } from 'devextreme-react/validator';
 
 type TextboxProps = {
-  value?: string,
+  value: string,
   label?: string,
   isEditing: boolean,
   onValueChange: (data) => void,

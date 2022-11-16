@@ -54,7 +54,7 @@ export const CRMContactList = () => {
   const [status, setStatus] = useState(filterStatusList[0]);
   const [gridData, setGridData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [popupvisible, setPopupVisible] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
 
   const grid = useRef<DataGrid>(null);
 
@@ -82,12 +82,8 @@ export const CRMContactList = () => {
   }, []);
 
   const changePopupVisibility = () => {
-    setPopupVisible(!popupvisible);
+    setPopupVisible(!popupVisible);
   };
-
-  const addContact = useCallback(() => {
-    changePopupVisibility();
-  }, []);
 
   const onSavePopupClick = () => {
     changePopupVisibility();
@@ -123,7 +119,7 @@ export const CRMContactList = () => {
                 <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus} />
               </Item>
               <Item location='after' locateInMenu='auto'>
-                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addContact} />
+                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={changePopupVisibility} />
               </Item>
               <Item location='after' locateInMenu='auto' showText='inMenu' widget='dxButton'>
                 <Button icon='refresh' text='Refresh' stylingMode='text' onClick={refresh} />
@@ -145,7 +141,7 @@ export const CRMContactList = () => {
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender} />
             <Column dataField='email' caption='Email' hidingPriority={1} />
           </DataGrid>
-          <FormPopup title='New Contact' visible={popupvisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
+          <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
             <ContactNewForm />
           </FormPopup>
         </div>

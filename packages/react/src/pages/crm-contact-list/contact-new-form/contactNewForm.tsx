@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
 
-import Form, { Item as FormItem, ColCountByScreen } from 'devextreme-react/form';
-import { newContact, Contact } from '../../../shared/types/crm-contact';
+import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
+import { Contact } from '../../../shared/types/crm-contact';
+import { newContact } from '../../../shared/constants';
 import { FormTextbox, FormPhotoUploader } from '../../../components';
 
 export const ContactNewForm = () => {
@@ -16,19 +17,19 @@ export const ContactNewForm = () => {
     <Form
       className='plain-styled-form'
     >
-      <FormItem itemType='group'>
+      <GroupItem>
         <ColCountByScreen xs={1} sm={1} md={1} lg={1} />
         <FormItem>
           <FormPhotoUploader />
         </FormItem>
-      </FormItem>
+      </GroupItem>
 
-      <FormItem itemType='group'>
+      <GroupItem>
         <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
         <FormItem>
           <FormTextbox
             label='First Name'
-            value={newContact.firstName}
+            value={newContactData.firstName}
             isEditing={false}
             onValueChange={updateField('firstName')}
           />
@@ -36,19 +37,19 @@ export const ContactNewForm = () => {
         <FormItem>
           <FormTextbox
             label='Last Name'
-            value={newContact.lastName}
+            value={newContactData.lastName}
             isEditing={false}
             onValueChange={updateField('lastName')}
           />
         </FormItem>
-      </FormItem>
+      </GroupItem>
 
-      <FormItem itemType='group'>
+      <GroupItem>
         <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
         <FormItem>
           <FormTextbox
             label='Company'
-            value={newContact.company}
+            value={newContactData.company}
             isEditing={false}
             onValueChange={updateField('company')}
           />
@@ -56,18 +57,18 @@ export const ContactNewForm = () => {
         <FormItem>
           <FormTextbox
             label='Position'
-            value={newContact.position}
+            value={newContactData.position}
             isEditing={false}
             onValueChange={updateField('position')}
           />
         </FormItem>
-      </FormItem>
+      </GroupItem>
 
-      <FormItem itemType='group' cssClass='contact-fields-group'>
+      <GroupItem cssClass='contact-fields-group'>
         <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
         <FormItem>
           <FormTextbox
-            value={newContact.manager}
+            value={newContactData.manager}
             label='Assigned to'
             isEditing={false}
             onValueChange={updateField('manager')}
@@ -75,7 +76,7 @@ export const ContactNewForm = () => {
         </FormItem>
         <FormItem>
           <FormTextbox
-            value={newContact.phone}
+            value={newContactData.phone}
             isEditing={false}
             onValueChange={updateField('phone')}
             icon='tel'
@@ -84,7 +85,7 @@ export const ContactNewForm = () => {
         </FormItem>
         <FormItem>
           <FormTextbox
-            value={newContact.email}
+            value={newContactData.email}
             onValueChange={updateField('email')}
             isEditing={false}
             icon='email'
@@ -92,13 +93,13 @@ export const ContactNewForm = () => {
         </FormItem>
         <FormItem>
           <FormTextbox
-            value={newContact.address}
+            value={newContactData.address}
             isEditing={false}
             onValueChange={updateField('address')}
             icon='home'
           />
         </FormItem>
-      </FormItem>
+      </GroupItem>
     </Form>
   );
 };
