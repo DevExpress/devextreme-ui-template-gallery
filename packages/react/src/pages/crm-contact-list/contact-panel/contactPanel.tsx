@@ -9,8 +9,8 @@ import Form, { Item as FormItem, ColCountByScreen } from 'devextreme-react/form'
 import Accordion, { Item as AccordionItem } from 'devextreme-react/accordion';
 import LoadPanel from 'devextreme-react/load-panel';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
-import { formatNumber } from 'devextreme/localization'
-import { getContact } from 'dx-rwa-data';
+import { formatNumber } from 'devextreme/localization';
+import { getContact } from 'dx-template-gallery-data';
 import { Contact } from '../../../shared/types/crm-contact';
 import { CardActivities } from '../../../components/card-activities/CardActivities';
 import { FormTextbox, FormPhoto, ContactStatus } from '../../../components';
@@ -82,7 +82,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
     return (
       <div>
         <span>{item.title}</span>
-        <Button icon='add' type='default' stylingMode='text' onClick={accordionTitleClick}></Button>
+        <Button icon='add' type='default' stylingMode='text' onClick={accordionTitleClick} />
       </div>
     );
   };
@@ -105,7 +105,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
   };
 
   return (
-    <div className={classNames({ 'panel': true, 'open': isOpen, 'pin': isPin })}>
+    <div id='contact-panel' className={classNames({ 'panel': true, 'open': isOpen, 'pin': isPin })}>
       <div className='data-wrapper'>
         <div className='data-part'>
           <Toolbar className='panel-toolbar'>
@@ -113,16 +113,16 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
               <span className='contact-name value'>{contact?.name}</span>
             </ToolbarItem>
             <ToolbarItem location='before'>
-              <ContactStatus text={contact?.status}></ContactStatus>
+              <ContactStatus text={contact?.status} />
             </ToolbarItem>
             <ToolbarItem
               location='after'
               visible
             >
-              <Button icon='pin' onClick={pinClick}></Button>
+              <Button icon='pin' onClick={pinClick} />
             </ToolbarItem>
             <ToolbarItem location='after'>
-              <Button icon='close' onClick={closePanel}></Button>
+              <Button icon='close' onClick={closePanel} />
             </ToolbarItem>
           </Toolbar>
         </div>
@@ -145,7 +145,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                       value={contact?.company}
                       isEditing={!isEditing}
                       onValueChange={updateField('company')}
-                    ></FormTextbox>
+                    />
                   </FormItem>
                   <FormItem>
                     <FormTextbox
@@ -153,7 +153,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                       value={contact?.position}
                       isEditing={!isEditing}
                       onValueChange={updateField('position')}
-                    ></FormTextbox>
+                    />
                   </FormItem>
                   <FormItem cssClass='accent'>
                     <FormTextbox
@@ -161,7 +161,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                       value={contact?.manager}
                       isEditing={!isEditing}
                       onValueChange={updateField('manager')}
-                    ></FormTextbox>
+                    />
                   </FormItem>
                 </FormItem>
               </FormItem>
@@ -174,7 +174,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                     onValueChange={updateField('phone')}
                     icon='tel'
                     mask='+1(000)000-0000'
-                  ></FormTextbox>
+                  />
                 </FormItem>
                 <FormItem>
                   <FormTextbox
@@ -182,7 +182,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                     isEditing={!isEditing}
                     onValueChange={updateField('email')}
                     icon='email'
-                  ></FormTextbox>
+                  />
                 </FormItem>
                 <FormItem>
                   <FormTextbox
@@ -190,7 +190,7 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
                     isEditing={!isEditing}
                     onValueChange={updateField('address')}
                     icon='home'
-                  ></FormTextbox>
+                  />
                 </FormItem>
               </FormItem>
             </Form>
@@ -199,26 +199,26 @@ export const ContactPanel = ({ contactId, isOpen, changePanelOpen } : { contactI
           <div className='data-part data-part-toolbar border'>
             <Toolbar>
               <ToolbarItem location='before' visible={!isEditing}>
-                <Button icon='edit' text='Edit' stylingMode='outlined' type='default' onClick={toggleEdit}></Button>
+                <Button icon='edit' text='Edit' stylingMode='outlined' type='default' onClick={toggleEdit} />
               </ToolbarItem>
               <ToolbarItem location='before' visible={!isEditing}>
-                <Button text='Details' stylingMode='outlined' type='default' onClick={navigateToDetails}></Button>
+                <Button text='Details' stylingMode='outlined' type='default' onClick={navigateToDetails} />
               </ToolbarItem>
               <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
-                <Button text='Save' stylingMode='outlined' type='default' onClick={toggleEdit}></Button>
+                <Button text='Save' stylingMode='outlined' type='default' onClick={toggleEdit} />
               </ToolbarItem>
               <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
-                <Button text='Cancel' stylingMode='text' onClick={toggleEdit}></Button>
+                <Button text='Cancel' stylingMode='text' onClick={toggleEdit} />
               </ToolbarItem>
               <ToolbarItem location='after' visible={!isEditing}>
-                <DropDownButton text='Actions' width={120} stylingMode='contained' items={['Call', 'Send Fax', 'Send Email', 'Make a Meeting']}></DropDownButton>
+                <DropDownButton text='Actions' width={120} stylingMode='contained' items={['Call', 'Send Fax', 'Send Email', 'Make a Meeting']} />
               </ToolbarItem>
             </Toolbar>
           </div>
           <div className='data-part'>
             <Accordion multiple collapsible itemTitleRender={customTitle}>
-              <AccordionItem title='Opportunities' render={customOpportunities}></AccordionItem>
-              <AccordionItem title='Activities' render={customActivities}></AccordionItem>
+              <AccordionItem title='Opportunities' render={customOpportunities} />
+              <AccordionItem title='Activities' render={customActivities} />
             </Accordion>
           </div>
         </ScrollView>

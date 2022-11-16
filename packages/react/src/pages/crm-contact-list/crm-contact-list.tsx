@@ -109,6 +109,7 @@ export const CRMContactList = () => {
             className='grid'
             noDataText=''
             dataSource={gridData}
+            onRowClick={rowClick}
             allowColumnReordering
             ref={grid}
           >

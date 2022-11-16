@@ -1,11 +1,11 @@
 @use "../../../variables.scss" as *;
 
-.panel {
+#contact-panel {
   --contact-side-panel-toolbar-top: 58px;
   --contact-side-panel-width: 350px;
 }
 
-.screen-x-small .panel {
+.screen-x-small #contact-panel {
   --contact-side-panel-width: 100vw;
 }
 
