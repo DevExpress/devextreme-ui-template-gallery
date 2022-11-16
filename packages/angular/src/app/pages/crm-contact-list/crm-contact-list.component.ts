@@ -47,7 +47,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
 
   filterStatusList = ['All', ...contactStatusList];
 
-  isPanelOpen = false;
+  isPanelOpened = false;
 
   userId: number;
 
@@ -80,7 +80,7 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     const { data } = e;
 
     this.userId = data.id;
-    this.isPanelOpen = true;
+    this.isPanelOpened = true;
   }
 
   rowPrepared = (e: RowPreparedEvent) => {
