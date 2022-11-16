@@ -35,7 +35,7 @@
       />
       <dx-item location="after">
         <div class="messages">
-          <div class="dx-icon-message">
+          <div class="dx-icon-bell">
             <div class="dx-badge">
               4
             </div>
@@ -160,7 +160,7 @@ header {
       padding-left: 10px;
       position: relative;
 
-      .dx-icon-message {
+      .dx-icon-bell {
         font-size: 24px;
       }
 
