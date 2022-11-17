@@ -2,9 +2,11 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-import { Button, DropDownButton, ScrollView } from 'devextreme-react';
+import { Button } from 'devextreme-react/button';
+import { DropDownButton } from 'devextreme-react/drop-down-button';
+import { ScrollView } from 'devextreme-react/scroll-view';
 import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
-import Form, { Item as FormItem, ColCountByScreen } from 'devextreme-react/form';
+import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
 import Accordion, { Item as AccordionItem } from 'devextreme-react/accordion';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
 import { formatNumber } from 'devextreme/localization';
@@ -26,30 +28,30 @@ const renderCustomTitle = (item) => {
   );
 };
 
+const formatPrice = (price) => {
+  return formatNumber(price, {
+    type: 'currency',
+    currency: 'USD',
+  });
+};
+
 export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDataChanged } : { contact: Contact, isOpened: boolean, changePanelOpened:()=> void, onDataChanged:(data)=> void }) => {
-  const [isPinned, setisPinned] = useState(false);
+  const [isPinned, setIsPinned] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const { isLarge, isMedium } = useScreenSize();
 
   const navigate = useNavigate();
-
-  const formatPrice = (price) => {
-    return formatNumber(price, {
-      type: 'currency',
-      currency: 'USD',
-    });
-  };
 
   const updateField = (field: string) => (value) => {
     onDataChanged({ ...contact, ...{ [field]: value } });
   };
 
   const onPinClick = useCallback(() => {
-    setisPinned(!isPinned);
+    setIsPinned(!isPinned);
   }, [isPinned]);
 
   const onClosePanelClick = useCallback(() => {
-    setisPinned(false);
+    setIsPinned(false);
     changePanelOpened();
   }, []);
 
@@ -57,11 +59,11 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
     setIsEditing(!isEditing);
   }, [isEditing]);
 
-  const navigateToDetails = () => {
+  const navigateToDetails = useCallback(() => {
     navigate('/crm-contact-details');
-  };
+  }, []);
 
-  const renderCustomOpportunities = () => {
+  const renderCustomOpportunities = useCallback(() => {
     return (
       contact.opportunities.map((item, idx) => {
         return (
@@ -72,11 +74,11 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
           </div>
         );
       }));
-  };
+  }, [contact]);
 
-  const renderCustomActivities = () => {
+  const renderCustomActivities = useCallback(() => {
     return (<CardActivities activities={contact.activities} />);
-  };
+  }, [contact]);
 
   return (
     <div id='contact-panel' className={classNames({ 'panel': true, 'open': isOpened, 'pin': isPinned && (isLarge || isMedium) })}>
@@ -93,7 +95,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
               location='after'
               visible={isLarge || isMedium}
             >
-              <Button icon='pin' onClick={onPinClick} />
+              <Button icon={isPinned ? 'pin' : 'unpin'} onClick={onPinClick} />
             </ToolbarItem>
             <ToolbarItem location='after'>
               <Button icon='close' onClick={onClosePanelClick} />
@@ -105,12 +107,12 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
             <Form
               className={classNames({ 'plain-styled-form': true, 'view-mode': !isEditing })}
             >
-              <FormItem itemType='group' colCount={2}>
+              <GroupItem colCount={2}>
                 <ColCountByScreen xs={2} />
                 <FormItem cssClass='photo'>
                   <FormPhoto link={contact.image} size={124} />
                 </FormItem>
-                <FormItem itemType='group'>
+                <GroupItem>
                   <FormItem cssClass='accent'>
                     <FormTextbox
                       label='Company'
@@ -135,10 +137,10 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                       onValueChange={updateField('manager')}
                     />
                   </FormItem>
-                </FormItem>
-              </FormItem>
+                </GroupItem>
+              </GroupItem>
 
-              <FormItem itemType='group' cssClass='contact-fields-group'>
+              <GroupItem cssClass='contact-fields-group'>
                 <FormItem>
                   <FormTextbox
                     value={contact.phone}
@@ -164,7 +166,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                     icon='home'
                   />
                 </FormItem>
-              </FormItem>
+              </GroupItem>
             </Form>
           </div>
 

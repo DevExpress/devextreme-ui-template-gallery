@@ -28,9 +28,7 @@ export const ContactPanel = ({ contactId, isOpened, changePanelOpened } : { cont
   }, []);
 
   useEffect(() => {
-    if(contactId) {
-      loadData();
-    }
+    loadData();
   }, [loadData]);
 
   return (
