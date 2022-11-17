@@ -2,7 +2,7 @@ import { ClientFunction } from 'testcafe';
 import { fakeScreenSize } from '../config';
 
 const FONTSCOUNT = 4;
-export async function awaitFontsLoaded(requestLogger, t, timeout) {
+export async function awaitFontsLoaded(t, requestLogger, timeout) {
   if (requestLogger) {
   // eslint-disable-next-line no-constant-condition
     while (true) {
