@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
@@ -9,23 +9,9 @@ import ValidationGroup from 'devextreme-react/validation-group';
 import ScrollView from 'devextreme-react/scroll-view';
 
 import { Notes, Note } from '../../shared/types/card-notes';
+import { createDefaultValidatorExtender } from '../../shared/utils/extendDefaultValidator';
 
 import './CardNotes.scss';
-
-let forceValidationBypass = true;
-const extendDefaultValidator = (e) => {
-  const defaultAdapter = e.component.option('adapter');
-  const newAdapter = {
-    ...defaultAdapter,
-    applyValidationResults: defaultAdapter.applyValidationResults,
-    getValue: defaultAdapter.getValue,
-    bypass: () => {
-      return forceValidationBypass;
-    }
-  };
-
-  e.component.option('adapter', newAdapter);
-};
 
 const Card = ({ note }: { note: Note }) => {
   return (
@@ -43,26 +29,27 @@ const Card = ({ note }: { note: Note }) => {
   );
 };
 
-export const CardNotes = ({ items, user }: { items: Notes | undefined; user: string | undefined }) => {
+export const CardNotes = ({ items, user }: { items?: Notes; user?: string }) => {
   const [noteText, setNoteText] = useState('');
   const [data, setData] = useState(items);
+  const bypassRef = useRef(true);
 
   useEffect(() => {
     setData(items);
   }, [items]);
 
   const add = useCallback((e) => {
-    forceValidationBypass = false;
+    bypassRef.current = false;
     if (!e.validationGroup.validate().isValid || !data || !user) {
       return;
     }
     setData([...data, { manager: user, date: new Date(), text: noteText }]);
     setNoteText('');
-    forceValidationBypass = true;
+    bypassRef.current = true;
   }, [noteText, data, user]);
 
   const onNoteTextChanged = useCallback((value) => {
-    forceValidationBypass = true;
+    bypassRef.current = true;
     setNoteText(value);
   }, []);
 
@@ -71,7 +58,7 @@ export const CardNotes = ({ items, user }: { items: Notes | undefined; user: str
       <div className='notes'>
         <div className='input-notes'>
           <TextArea label='New Note' stylingMode='outlined' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged}>
-            <Validator onInitialized={extendDefaultValidator}>
+            <Validator onInitialized={createDefaultValidatorExtender(bypassRef)}>
               <RequiredRule />
             </Validator>
           </TextArea>

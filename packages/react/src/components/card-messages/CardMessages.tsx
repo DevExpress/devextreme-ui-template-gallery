@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 
 import TextBox from 'devextreme-react/text-box';
 import TextArea from 'devextreme-react/text-area';
@@ -12,24 +12,11 @@ import ValidationGroup from 'devextreme-react/validation-group';
 import { formatDate } from 'devextreme/localization';
 
 import { Message, Messages } from '../../shared/types/card-messages';
+import { createDefaultValidatorExtender } from '../../shared/utils/extendDefaultValidator';
+
 import { Avatar } from '../avatar/Avatar';
 
 import './CardMessages.scss';
-
-let forceValidationBypass = true;
-const extendDefaultValidator = (e) => {
-  const defaultAdapter = e.component.option('adapter');
-  const newAdapter = {
-    ...defaultAdapter,
-    applyValidationResults: defaultAdapter.applyValidationResults,
-    getValue: defaultAdapter.getValue,
-    bypass: () => {
-      return forceValidationBypass;
-    }
-  };
-
-  e.component.option('adapter', newAdapter);
-};
 
 const getText = (text: string, user: string) => {
   return text.replace('{username}', user);
@@ -61,13 +48,14 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
   const [messages, setMessages] = useState(items);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
+  const bypassRef = useRef(true);
 
   useEffect(() => {
     setMessages(items);
   }, [items]);
 
   const send = useCallback((e) => {
-    forceValidationBypass = false;
+    bypassRef.current = false;
     if (!e.validationGroup.validate().isValid || !messages || !user) {
       return;
     }
@@ -75,16 +63,16 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
     setTitle('');
     setMessage('');
     onMessagesCountChanged(messages.length + 1);
-    forceValidationBypass = true;
+    bypassRef.current = true;
   }, [message, title, messages, user, onMessagesCountChanged]);
 
   const onTitleChanged = useCallback((value) => {
-    forceValidationBypass = true;
+    bypassRef.current = true;
     setTitle(value);
   }, []);
 
   const onMessageChanged = useCallback((value) => {
-    forceValidationBypass = true;
+    bypassRef.current = true;
     setMessage(value);
   }, []);
 
@@ -93,12 +81,12 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
       <div className='messages'>
         <div className='input-messages'>
           <TextBox label='Subject' stylingMode='outlined' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged}>
-            <Validator onInitialized={extendDefaultValidator}>
+            <Validator onInitialized={createDefaultValidatorExtender(bypassRef)}>
               <RequiredRule />
             </Validator>
           </TextBox>
           <TextArea label='Message' height={150} stylingMode='outlined' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged}>
-            <Validator onInitialized={extendDefaultValidator}>
+            <Validator onInitialized={createDefaultValidatorExtender(bypassRef)}>
               <RequiredRule />
             </Validator>
           </TextArea>
