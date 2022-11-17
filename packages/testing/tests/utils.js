@@ -2,17 +2,23 @@ import { ClientFunction } from 'testcafe';
 import { fakeScreenSize } from '../config';
 
 const FONTSCOUNT = 4;
+const WAIT_ATTEMPTS = 10;
+
 export async function awaitFontsLoaded(t, requestLogger, timeout) {
   if (requestLogger) {
-  // eslint-disable-next-line no-constant-condition
-    while (true) {
-      const fontsCount = requestLogger.requests
+    // eslint-disable-next-line no-constant-condition
+    for (let i = 1; i <= WAIT_ATTEMPTS; i += 1) {
+      const fontURLs = requestLogger.requests
         .map(({ request }) => request.url)
         .filter((reqUrl) => reqUrl.endsWith('.woff2'));
       // eslint-disable-next-line no-await-in-loop
       await t.wait(timeout);
-      if (fontsCount.length >= FONTSCOUNT) {
+      if (fontURLs.length >= FONTSCOUNT) {
         break;
+      }
+      if (i === WAIT_ATTEMPTS) {
+        // eslint-disable-next-line no-console
+        console.log(...fontURLs);
       }
     }
   }
