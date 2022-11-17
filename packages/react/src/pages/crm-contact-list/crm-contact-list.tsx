@@ -93,9 +93,9 @@ export const CRMContactList = () => {
     changePopupVisibility();
   };
 
-  const changePanelOpen = useCallback(() => {
-    setPanelOpened(true);
-  }, []);
+  const changePanelOpened = useCallback(() => {
+    setPanelOpened(!isPanelOpened);
+  }, [isPanelOpened]);
 
   const refresh = useCallback(() => {
     grid.current?.instance.refresh();
@@ -105,7 +105,7 @@ export const CRMContactList = () => {
     const { data } = e;
 
     setContactId(data.id);
-    changePanelOpen();
+    changePanelOpened();
   }, []);
 
   return (
@@ -157,7 +157,7 @@ export const CRMContactList = () => {
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender} />
             <Column dataField='email' caption='Email' hidingPriority={1} />
           </DataGrid>
-          <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpen={changePanelOpen} />
+          <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} />
           <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
             <ContactNewForm />
           </FormPopup>

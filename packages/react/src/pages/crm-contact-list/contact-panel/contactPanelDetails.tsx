@@ -27,7 +27,7 @@ const renderCustomTitle = (item) => {
   );
 };
 
-export const ContactPanelDetails = ({ contact, isOpened, changePanelOpen, onDataChanged } : { contact: Contact, isOpened: boolean, changePanelOpen:()=> void, onDataChanged:(data)=> void }) => {
+export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDataChanged } : { contact: Contact, isOpened: boolean, changePanelOpened:()=> void, onDataChanged:(data)=> void }) => {
   const [isPinned, setisPinned] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const { isLarge, isMedium } = useScreenSize();
@@ -51,7 +51,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpen, onData
 
   const onClosePanelClick = useCallback(() => {
     setisPinned(false);
-    changePanelOpen();
+    changePanelOpened();
   }, []);
 
   const toggleEditHandler = useCallback(() => {
