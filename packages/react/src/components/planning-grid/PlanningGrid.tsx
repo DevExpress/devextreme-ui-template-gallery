@@ -19,6 +19,8 @@ import { GridEdit } from '../../shared/types/planning-grid';
 
 import './PlanningGrid.scss';
 
+let useNavigation = true;
+
 const priorityCellRender = ({ text }) => {
   return <ItemField text={`| ${text}`} />;
 };
@@ -48,7 +50,6 @@ const editPriorityRender = ({ setValue, value }: GridEdit) => (
 
 export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
   const [data, setData] = useState<Task[]>();
-  let useNavigation = true;
 
   const navigate = useNavigate();
 
