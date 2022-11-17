@@ -85,6 +85,16 @@ body {
   border: none;
 }
 
+.dx-form {
+  .dx-texteditor-label {
+    height: auto;
+  }
+
+  .dx-texteditor-with-label .dx-label {
+    line-height: 1;
+  }
+}
+
 .plain-styled-form {
   .dx-layout-manager .dx-field-item:not(.dx-first-col) {
     padding-left: 0;

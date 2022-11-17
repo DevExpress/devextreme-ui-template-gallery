@@ -21,6 +21,8 @@ import { getContacts } from 'dx-template-gallery-data';
 
 import { ContactStatus as ContactStatusType } from '../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
+import { ContactNewForm } from './contact-new-form/contactNewForm';
+import { FormPopup } from '../../components';
 
 import { ContactPanel } from './contact-panel/contactPanel';
 
@@ -56,6 +58,7 @@ export const CRMContactList = () => {
   const [loading, setLoading] = useState(true);
   const [isOpen, setPanelOpen] = useState(false);
   const [contactId, setContactId] = useState(null);
+  const [popupVisible, setPopupVisible] = useState(false);
 
   const grid = useRef<DataGrid>(null);
 
@@ -82,9 +85,13 @@ export const CRMContactList = () => {
     setStatus(status);
   }, []);
 
-  const addRow = useCallback(() => {
-    grid.current?.instance.addRow();
-  }, []);
+  const changePopupVisibility = () => {
+    setPopupVisible(!popupVisible);
+  };
+
+  const onSavePopupClick = () => {
+    changePopupVisibility();
+  };
 
   const changePanelOpen = useCallback(() => {
     setPanelOpen(!isOpen);
@@ -128,7 +135,7 @@ export const CRMContactList = () => {
                 <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus} />
               </Item>
               <Item location='after' locateInMenu='auto'>
-                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addRow} />
+                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={changePopupVisibility} />
               </Item>
               <Item location='after' locateInMenu='auto' showText='inMenu' widget='dxButton'>
                 <Button icon='refresh' text='Refresh' stylingMode='text' onClick={refresh} />
@@ -151,6 +158,9 @@ export const CRMContactList = () => {
             <Column dataField='email' caption='Email' hidingPriority={1} />
           </DataGrid>
           {contactId && <ContactPanel contactId={contactId} isOpen={isOpen} changePanelOpen={changePanelOpen} />}
+          <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
+            <ContactNewForm />
+          </FormPopup>
         </div>
       ) : (
         <LoadPanel visible />
