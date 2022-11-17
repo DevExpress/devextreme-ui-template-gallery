@@ -4,9 +4,9 @@ import {
 } from '@angular/core';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { PositionConfig } from 'devextreme/animation/position';
-import { DxMenuModule } from 'devextreme-angular/ui/menu';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { DropDownMenuModule } from '../drop-down-menu/drop-down-menu.component';
 
 class ResizeObservable extends Observable<ResizeObserverEntry[]> {
   constructor(el: HTMLElement) {
@@ -46,13 +46,10 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
 
   observedElement = this.el.nativeElement;
 
-  menuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
-    icon: 'overflow',
-    items: [
-      { text: 'Configure' },
-      { text: 'Remove' },
-    ],
-  }];
+  menuItems: Array<{ text: string }> = [
+    { text: 'Configure' },
+    { text: 'Remove' },
+  ];
 
   position: PositionConfig;
 
@@ -87,7 +84,7 @@ export class CardAnalytticsComponent implements OnInit, OnDestroy {
 @NgModule({
   imports: [
     DxLoadPanelModule,
-    DxMenuModule,
+    DropDownMenuModule,
 
     CommonModule,
   ],

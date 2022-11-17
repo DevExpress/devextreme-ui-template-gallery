@@ -13,11 +13,10 @@
           <span *ngIf="showBy">by</span>
           <span>{{ item.manager }}</span>
         </div>
-        <dx-menu 
-          class="overflow-menu"
+        <drop-down-menu
           [items]="activityMenuItems"
           >
-        </dx-menu>
+        </drop-down-menu>
       </div>
     </div>
   </dx-list>

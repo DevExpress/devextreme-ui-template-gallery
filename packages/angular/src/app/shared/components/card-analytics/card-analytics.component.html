@@ -1,11 +1,10 @@
 <div class="card {{ contentClass }}">
   <div class="header">
-    <dx-menu
+    <drop-down-menu
       [visible]="isMenuVisible"
-      class="overflow-menu"
       [items]="menuItems"
       >
-    </dx-menu>
+    </drop-down-menu>
     <div *ngIf="titleText" class="title">{{ titleText }}</div>
     <ng-content select="[filter]"></ng-content>
   </div>
