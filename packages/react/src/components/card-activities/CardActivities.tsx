@@ -1,7 +1,7 @@
 import React from 'react';
 
 import List from 'devextreme-react/list';
-import Menu from 'devextreme-react/menu';
+import { CardMenu } from '../card-menu/CardMenu';
 
 import { formatDate } from 'devextreme/localization';
 
@@ -12,13 +12,10 @@ import { withLoadPanel } from '../../shared/utils/withLoadPanel';
 
 import './CardActivities.scss';
 
-const activityMenuItems = [{
-  icon: 'overflow',
-  items: [
-    { text: 'View details' },
-    { text: 'Delete' },
-  ],
-}];
+const activityMenuItems = [
+  { text: 'View details' },
+  { text: 'Delete' },
+];
 
 const listItemRender = (item: Activity) => {
   return (
@@ -29,7 +26,7 @@ const listItemRender = (item: Activity) => {
         <span>by</span>
         <span>{item.manager}</span>
       </div>
-      <Menu className='overflow-menu' items={activityMenuItems} />
+      <CardMenu items={activityMenuItems} />
     </div>
   );
 };

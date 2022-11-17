@@ -5,7 +5,7 @@ import {
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
-import { DropDownMenuModule } from '../drop-down-menu/drop-down-menu.component';
+import { CardMenuModule } from '../card-menu/card-menu.component';
 import { Activities } from 'src/app/shared/types/activities';
 
 @Component({
@@ -39,7 +39,7 @@ export class CardActivitiesComponent implements OnInit, OnChanges {
     DxListModule,
     DxButtonModule,
     DxLoadPanelModule,
-    DropDownMenuModule,
+    CardMenuModule,
 
     CommonModule,
   ],

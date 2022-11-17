@@ -1,10 +1,10 @@
 <div class="card {{ contentClass }}">
   <div class="header">
-    <drop-down-menu
+    <card-menu
       [visible]="isMenuVisible"
       [items]="menuItems"
       >
-    </drop-down-menu>
+    </card-menu>
     <div *ngIf="titleText" class="title">{{ titleText }}</div>
     <ng-content select="[filter]"></ng-content>
   </div>

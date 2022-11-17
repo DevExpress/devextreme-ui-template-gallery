@@ -2,11 +2,11 @@ import { Component, Input, NgModule } from '@angular/core';
 import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 
 @Component({
-  selector: 'drop-down-menu',
-  templateUrl: './drop-down-menu.component.html',
-  styleUrls: ['./drop-down-menu.component.scss']
+  selector: 'card-menu',
+  templateUrl: './card-menu.component.html',
+  styleUrls: ['./card-menu.component.scss']
 })
-export class DropDownMenuComponent {
+export class CardMenuComponent {
   @Input() items: Array<{ text: string }>;
   @Input() visible = true;
 
@@ -16,7 +16,7 @@ export class DropDownMenuComponent {
 
 @NgModule({
   imports: [DxDropDownButtonModule],
-  declarations: [DropDownMenuComponent],
-  exports: [DropDownMenuComponent],
+  declarations: [CardMenuComponent],
+  exports: [CardMenuComponent],
 })
-export class DropDownMenuModule { }
+export class CardMenuModule { }

@@ -9,7 +9,7 @@ import { DxSortableModule, DxSortableComponent } from 'devextreme-angular/ui/sor
 import notify from 'devextreme/ui/notify';
 import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable';
 
-import { DropDownMenuModule } from 'src/app/shared/components';
+import { CardMenuModule } from 'src/app/shared/components';
 import { Task } from 'src/app/shared/types/task';
 import { TaskStatus, taskStatusList } from 'src/app/shared/types/task';
 import { TaskKanbanCardModule } from './task-kanban-card/task-kanban-card.component';
@@ -103,7 +103,7 @@ export class TaskListKanbanComponent implements OnChanges {
     DxSortableModule,
 
     TaskKanbanCardModule,
-    DropDownMenuModule,
+    CardMenuModule,
 
     CommonModule,
   ],

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import LoadPanel from 'devextreme-react/load-panel';
-import Menu from 'devextreme-react/menu';
+import { CardMenu } from '../card-menu/CardMenu';
 import { PositionConfig } from 'devextreme/animation/position';
 import './CardAnalytics.scss';
 
@@ -14,13 +14,8 @@ type CardProps = {
 };
 
 const menuItems = [
-  {
-    icon: 'overflow',
-    items: [
-      { text: 'Configure' },
-      { text: 'Remove' },
-    ],
-  },
+  { text: 'Configure' },
+  { text: 'Remove' },
 ];
 
 export const CardAnalytics = ({
@@ -40,7 +35,7 @@ export const CardAnalytics = ({
   return (
     <div className={`card ${contentClass}`}>
       <div className='header'>
-        <Menu visible={menuVisible} className='overflow-menu' items={menuItems} />
+        <CardMenu visible={menuVisible} items={menuItems} />
         <div className='title'>{title}</div>
         {additionalHeaderContent}
       </div>
