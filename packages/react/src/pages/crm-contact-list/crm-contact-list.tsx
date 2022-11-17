@@ -157,7 +157,7 @@ export const CRMContactList = () => {
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender} />
             <Column dataField='email' caption='Email' hidingPriority={1} />
           </DataGrid>
-          <ContactPanel contactId={contactId} isOpen={isPanelOpened} changePanelOpen={changePanelOpen} />
+          <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpen={changePanelOpen} />
           <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
             <ContactNewForm />
           </FormPopup>

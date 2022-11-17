@@ -27,7 +27,7 @@ const renderCustomTitle = (item) => {
   );
 };
 
-export const ContactPanelDetails = ({ contact, isOpen, changePanelOpen, onDataChanged } : { contact: Contact, isOpen: boolean, changePanelOpen:()=> void, onDataChanged:(data)=> void }) => {
+export const ContactPanelDetails = ({ contact, isOpened, changePanelOpen, onDataChanged } : { contact: Contact, isOpened: boolean, changePanelOpen:()=> void, onDataChanged:(data)=> void }) => {
   const [isPinned, setisPinned] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const { isLarge, isMedium } = useScreenSize();
@@ -80,7 +80,7 @@ export const ContactPanelDetails = ({ contact, isOpen, changePanelOpen, onDataCh
   };
 
   return (
-    <div id='contact-panel' className={classNames({ 'panel': true, 'open': isOpen, 'pin': isPinned && (isLarge || isMedium) })}>
+    <div id='contact-panel' className={classNames({ 'panel': true, 'open': isOpened, 'pin': isPinned && (isLarge || isMedium) })}>
       <div className='data-wrapper'>
         <div className='data-part'>
           <Toolbar className='panel-toolbar'>
