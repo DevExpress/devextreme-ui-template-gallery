@@ -246,7 +246,7 @@ function handleCancelClick() {
 @use "@/variables.scss" as *;
 
 #task-form {
-  min-height: 250px;
+  min-height: 300px;
 
   .dx-toolbar {
     margin-bottom: $toolbar-margin-bottom;
