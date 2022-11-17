@@ -1,3 +1,6 @@
+import { Task } from './types/task';
+import { Contact } from './types/crm-contact';
+
 export const PRIORITY_ITEMS = ['Low', 'Normal', 'High'];
 export const STATUS_ITEMS = ['Open', 'In Progress', 'Deferred', 'Completed'];
 
@@ -32,3 +35,42 @@ export const CONTACT_STATUS_LIST = [
   'Terminated',
 ];
 
+export const newTask: Task = {
+  id: 0,
+  text: '',
+  description: '',
+  company: '',
+  priority: 'Low',
+  startDate: new Date(),
+  dueDate: new Date(),
+  owner: '',
+  status: 'Open',
+  activities: [],
+  notes: [],
+  messages: [],
+  parentId: 0,
+  progress: 0,
+};
+
+export const newContact: Contact = {
+  id: 0,
+  name: '',
+  address: '',
+  firstName: '',
+  lastName: '',
+  status: 'Salaried',
+  position: '',
+  manager: '',
+  company: '',
+  city: '',
+  state: {
+    stateShort: '',
+  },
+  zipCode: 0,
+  phone: '',
+  email: '',
+  image: '',
+  activities: [],
+  opportunities: [],
+  tasks: [],
+};
