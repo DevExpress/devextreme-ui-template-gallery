@@ -13,7 +13,7 @@ import {
   DxTextBoxModule,
   DxToolbarModule,
 } from 'devextreme-angular';
-import { RowPreparedEvent } from 'devextreme/ui/data_grid';
+import { RowPreparedEvent, RowClickEvent } from 'devextreme/ui/data_grid';
 import { ItemClickEvent as TabsItemClickEvenet } from 'devextreme/ui/tabs';
 import {
   StatusIndicatorModule,
@@ -46,6 +46,8 @@ export class TaskListGridComponent implements OnChanges {
   statusList = taskStatusList;
 
   isLoading = true;
+
+  useNavigation = true;
 
   constructor(private router: Router) {
   }
@@ -103,12 +105,18 @@ export class TaskListGridComponent implements OnChanges {
     }
   };
 
+  toogleUseNavigation = () => {
+    this.useNavigation = !this.useNavigation;
+  };
+
   tabsItemClick = (e: TabsItemClickEvenet) => {
     this.tabValueChanged.emit(e);
   };
 
-  navigateToDetails = () => {
-    this.router.navigate(['/planning-task-details']);
+  navigateToDetails = (e: RowClickEvent) => {
+    if(this.useNavigation && e.rowType !== 'detailAdaptive') {
+      this.router.navigate(['/planning-task-details']);
+    }
   };
 }
 
