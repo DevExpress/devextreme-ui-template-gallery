@@ -56,8 +56,8 @@ export const CRMContactList = () => {
   const [status, setStatus] = useState(filterStatusList[0]);
   const [gridData, setGridData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isOpen, setPanelOpen] = useState(false);
-  const [contactId, setContactId] = useState(null);
+  const [isPanelOpened, setPanelOpened] = useState(false);
+  const [contactId, setContactId] = useState(0);
   const [popupVisible, setPopupVisible] = useState(false);
 
   const grid = useRef<DataGrid>(null);
@@ -94,14 +94,14 @@ export const CRMContactList = () => {
   };
 
   const changePanelOpen = useCallback(() => {
-    setPanelOpen(!isOpen);
-  }, [isOpen]);
+    setPanelOpened(true);
+  }, []);
 
   const refresh = useCallback(() => {
     grid.current?.instance.refresh();
   }, []);
 
-  const rowClick = useCallback((e: RowClickEvent) => {
+  const onRowClick = useCallback((e: RowClickEvent) => {
     const { data } = e;
 
     setContactId(data.id);
@@ -116,7 +116,7 @@ export const CRMContactList = () => {
             className='grid'
             noDataText=''
             dataSource={gridData}
-            onRowClick={rowClick}
+            onRowClick={onRowClick}
             allowColumnReordering
             ref={grid}
           >
@@ -157,7 +157,7 @@ export const CRMContactList = () => {
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender} />
             <Column dataField='email' caption='Email' hidingPriority={1} />
           </DataGrid>
-          {contactId && <ContactPanel contactId={contactId} isOpen={isOpen} changePanelOpen={changePanelOpen} />}
+          <ContactPanel contactId={contactId} isOpen={isPanelOpened} changePanelOpen={changePanelOpen} />
           <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
             <ContactNewForm />
           </FormPopup>
