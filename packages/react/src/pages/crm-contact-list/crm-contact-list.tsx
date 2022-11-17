@@ -19,6 +19,8 @@ import { getContacts } from 'dx-template-gallery-data';
 
 import { ContactStatus as ContactStatusType } from '../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
+import { ContactNewForm } from './contact-new-form/contactNewForm';
+import { FormPopup } from '../../components';
 
 import './crm-contact-list.scss';
 
@@ -52,6 +54,7 @@ export const CRMContactList = () => {
   const [status, setStatus] = useState(filterStatusList[0]);
   const [gridData, setGridData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [popupVisible, setPopupVisible] = useState(false);
 
   const grid = useRef<DataGrid>(null);
 
@@ -78,9 +81,13 @@ export const CRMContactList = () => {
     setStatus(status);
   }, []);
 
-  const addRow = useCallback(() => {
-    grid.current?.instance.addRow();
-  }, []);
+  const changePopupVisibility = () => {
+    setPopupVisible(!popupVisible);
+  };
+
+  const onSavePopupClick = () => {
+    changePopupVisibility();
+  };
 
   const refresh = useCallback(() => {
     grid.current?.instance.refresh();
@@ -92,8 +99,8 @@ export const CRMContactList = () => {
 
   return (
     <div className='view crm-contact-list'>
-      <div className='view-wrapper'>
-        {!loading ? (
+      {!loading ? (
+        <div className='view-wrapper'>
           <DataGrid
             className='grid'
             noDataText=''
@@ -117,7 +124,7 @@ export const CRMContactList = () => {
                 <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus} />
               </Item>
               <Item location='after' locateInMenu='auto'>
-                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addRow} />
+                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={changePopupVisibility} />
               </Item>
               <Item location='after' locateInMenu='auto' showText='inMenu' widget='dxButton'>
                 <Button icon='refresh' text='Refresh' stylingMode='text' onClick={refresh} />
@@ -139,10 +146,13 @@ export const CRMContactList = () => {
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender} />
             <Column dataField='email' caption='Email' hidingPriority={1} />
           </DataGrid>
-        ) : (
-          <LoadPanel visible />
-        )}
-      </div>
+          <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
+            <ContactNewForm />
+          </FormPopup>
+        </div>
+      ) : (
+        <LoadPanel visible />
+      )}
     </div>
   );
 };

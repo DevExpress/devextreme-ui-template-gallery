@@ -3,7 +3,6 @@ import ScrollView from 'devextreme-react/scroll-view';
 import Sortable from 'devextreme-react/sortable';
 import Button from 'devextreme-react/button';
 import Menu from 'devextreme-react/menu';
-import notify from 'devextreme/ui/notify';
 import { DragStartEvent, ReorderEvent } from 'devextreme/ui/sortable';
 
 import { Task } from '../../../shared/types/task';
@@ -22,23 +21,22 @@ const boardMenuItems = [{
 },
 ];
 
-const onAddTaskBtnClick = () => {
-  notify('Add task event');
-};
-
 export const List = ({
   title,
   index,
   tasks,
   onTaskDragStart,
   onTaskDrop,
+  changePopupVisibility,
 }: {
-  title: string;
-  index: number;
-  tasks: Task[];
-  onTaskDragStart: (e: DragStartEvent) => void;
-  onTaskDrop: (e: ReorderEvent) => void;
+  title: string,
+  index: number,
+  tasks: Task[],
+  onTaskDragStart: (e: DragStartEvent) => void,
+  onTaskDrop: (e: ReorderEvent) => void,
+  changePopupVisibility?: () => void,
 }) => {
+
   return (
     <div className='list'>
       <div className='list-title dx-theme-text-color'>
@@ -52,7 +50,7 @@ export const List = ({
           ))}
         </Sortable>
         <div className='add-task'>
-          <Button icon='plus' text='Add Task' stylingMode='text' onClick={onAddTaskBtnClick} width='100%' />
+          <Button icon='plus' text='Add Task' stylingMode='text' onClick={changePopupVisibility} width='100%' />
         </div>
       </ScrollView>
     </div>
