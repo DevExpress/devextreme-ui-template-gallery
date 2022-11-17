@@ -268,9 +268,7 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
 };
 
 const onSaveContactNewForm = () => {
-  if (validationEngine.validateGroup(newContactValidationGroup).isValid) {
-    isAddContactPopupOpened.value = false;
-  }
+  isAddContactPopupOpened.value = false;
 };
 </script>
 

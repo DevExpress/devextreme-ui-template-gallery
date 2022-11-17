@@ -89,6 +89,7 @@
           v-model="contact.email"
           :is-editing="true"
           icon="email"
+          :validators="[{type: 'email'}, {type: 'required'}]"
         />
       </dx-form-item>
       <dx-form-item>
