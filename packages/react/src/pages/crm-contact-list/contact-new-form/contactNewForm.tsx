@@ -42,10 +42,6 @@ export const ContactNewForm = () => {
             onValueChange={updateField('lastName')}
           />
         </FormItem>
-      </GroupItem>
-
-      <GroupItem>
-        <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
         <FormItem>
           <FormTextbox
             label='Company'
