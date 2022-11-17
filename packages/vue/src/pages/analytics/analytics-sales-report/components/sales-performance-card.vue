@@ -7,7 +7,6 @@
       <div class="sales-filter">
         <dx-drop-down-button
           styling-mode="text"
-          :width="85"
           :use-select-mode="true"
           :items="props.groupByPeriods"
           :selected-item-key="props.groupByPeriods[1]"
