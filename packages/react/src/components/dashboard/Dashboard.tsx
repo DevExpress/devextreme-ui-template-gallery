@@ -14,7 +14,7 @@ export const Dashboard = ({
   children,
 }: React.PropsWithChildren<DashboardContainerProps>) => {
   return (
-    <div className='view-wrapper-dashboard'>
+    <div className='view-wrapper view-wrapper-dashboard'>
       <Toolbar>
         <Item location='before'>
           <span className='toolbar-header'>{title}</span>
