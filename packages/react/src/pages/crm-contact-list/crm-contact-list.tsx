@@ -21,10 +21,8 @@ import { getContacts } from 'dx-template-gallery-data';
 
 import { ContactStatus as ContactStatusType } from '../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
-import { ContactNewForm } from './contact-new-form/contactNewForm';
-import { FormPopup } from '../../components';
-
-import { ContactPanel } from './contact-panel/contactPanel';
+import { FormPopup, ContactNewForm } from '../../components';
+import { ContactPanel } from './contact-panel/ContactPanel';
 
 type FilterContactStatus = ContactStatusType | 'All';
 

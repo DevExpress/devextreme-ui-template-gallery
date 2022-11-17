@@ -2,7 +2,6 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-import './contactPanel.scss';
 import { Button, DropDownButton, ScrollView } from 'devextreme-react';
 import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Form, { Item as FormItem, ColCountByScreen } from 'devextreme-react/form';
