@@ -28,4 +28,5 @@ export interface TaskProp {
 }
 export interface PlanningProps {
     dataSource: Task[];
+    changePopupVisibility?: () => void;
 }
