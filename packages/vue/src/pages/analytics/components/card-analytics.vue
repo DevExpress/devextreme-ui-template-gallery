@@ -65,9 +65,9 @@ const props = withDefaults(defineProps<{
 
   .overflow-menu {
     position: absolute;
-    right: 5px;
+    right: 8px;
     left: auto;
-    top: 5px;
+    top: 10px;
   }
 
   :deep(.content) {
