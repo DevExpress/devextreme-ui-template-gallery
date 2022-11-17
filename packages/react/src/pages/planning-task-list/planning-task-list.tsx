@@ -149,7 +149,7 @@ export const PlanningTaskList = () => {
           locateInMenu='auto'
           options={{
             icon: 'plus',
-            text: 'ADD TASK',
+            text: 'Add Task',
             type: 'default',
             stylingMode: 'contained',
             onClick: changePopupVisibility,
