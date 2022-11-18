@@ -53,7 +53,7 @@ const props = withDefaults(
     isVisible: false,
   },
 );
-let validationGroup: any = null;
+let validationGroup: typeof DxValidationGroup = null;
 
 const emit = defineEmits(['save', 'update:isVisible']);
 
