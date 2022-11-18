@@ -1,10 +1,9 @@
 import { ClientFunction } from 'testcafe';
 import { fakeScreenSize } from '../config';
 
-// const FONTSCOUNT = 4;
 const WAIT_ATTEMPTS = 10;
 
-export async function awaitFontsLoaded(t, requestLogger, timeout) {
+async function awaitFontsLoaded(t, requestLogger, timeout = 1000) {
   if (requestLogger) {
     // eslint-disable-next-line no-constant-condition
     for (let i = 1; i <= WAIT_ATTEMPTS; i += 1) {
@@ -40,11 +39,12 @@ export const getPostfix = (embedded, screenMode) => {
 };
 
 export const toggleCommonConfiguration = async (
-  t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize,
+  t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize, requestLogger
 ) => {
   await t.resizeWindow(...screenMode);
 
   await t.navigateTo(url);
+  await awaitFontsLoaded(t, requestLogger)
   await toogleEmbeddedClass(embedded);
   if (embedded && isDoubleResize) {
     await forceResizeRecalculation(t, screenMode);

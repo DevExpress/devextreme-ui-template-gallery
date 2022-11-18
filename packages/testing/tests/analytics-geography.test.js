@@ -3,7 +3,7 @@
 import { Selector, RequestLogger } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import {
-  getPostfix, toggleCommonConfiguration, forceResizeRecalculation, awaitFontsLoaded,
+  getPostfix, toggleCommonConfiguration, forceResizeRecalculation,
 } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
@@ -24,8 +24,8 @@ const checkScreenMode = async (t, screenMode) => {
     test(`Analytics Geography (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
-      await awaitFontsLoaded(t, requestLogger, 1000);
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {},
+        screenMode, timeoutSecond, false, requestLogger);
       await forceResizeRecalculation(t, screenMode);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
