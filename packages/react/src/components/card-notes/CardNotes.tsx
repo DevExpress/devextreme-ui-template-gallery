@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
@@ -9,7 +9,6 @@ import ValidationGroup from 'devextreme-react/validation-group';
 import ScrollView from 'devextreme-react/scroll-view';
 
 import { Notes, Note } from '../../shared/types/card-notes';
-import { createDefaultValidatorExtender } from '../../shared/utils/extendDefaultValidator';
 
 import './CardNotes.scss';
 
@@ -32,24 +31,20 @@ const Card = ({ note }: { note: Note }) => {
 export const CardNotes = ({ items, user }: { items?: Notes; user?: string }) => {
   const [noteText, setNoteText] = useState('');
   const [data, setData] = useState(items);
-  const bypassRef = useRef(true);
 
   useEffect(() => {
     setData(items);
   }, [items]);
 
   const add = useCallback((e) => {
-    bypassRef.current = false;
     if (!e.validationGroup.validate().isValid || !data || !user) {
       return;
     }
     setData([...data, { manager: user, date: new Date(), text: noteText }]);
-    setNoteText('');
-    bypassRef.current = true;
+    e.validationGroup.reset();
   }, [noteText, data, user]);
 
   const onNoteTextChanged = useCallback((value) => {
-    bypassRef.current = true;
     setNoteText(value);
   }, []);
 
@@ -58,7 +53,7 @@ export const CardNotes = ({ items, user }: { items?: Notes; user?: string }) => 
       <div className='notes'>
         <div className='input-notes'>
           <TextArea label='New Note' stylingMode='outlined' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged}>
-            <Validator onInitialized={createDefaultValidatorExtender(bypassRef)}>
+            <Validator>
               <RequiredRule />
             </Validator>
           </TextArea>

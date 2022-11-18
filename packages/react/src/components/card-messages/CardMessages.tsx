@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import TextBox from 'devextreme-react/text-box';
 import TextArea from 'devextreme-react/text-area';
@@ -12,7 +12,6 @@ import ValidationGroup from 'devextreme-react/validation-group';
 import { formatDate } from 'devextreme/localization';
 
 import { Message, Messages } from '../../shared/types/card-messages';
-import { createDefaultValidatorExtender } from '../../shared/utils/extendDefaultValidator';
 
 import { Avatar } from '../avatar/Avatar';
 
@@ -48,31 +47,25 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
   const [messages, setMessages] = useState(items);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
-  const bypassRef = useRef(true);
 
   useEffect(() => {
     setMessages(items);
   }, [items]);
 
   const send = useCallback((e) => {
-    bypassRef.current = false;
     if (!e.validationGroup.validate().isValid || !messages || !user) {
       return;
     }
     setMessages([...messages, { manager: user, date: new Date(), text: message, subject: title }]);
-    setTitle('');
-    setMessage('');
     onMessagesCountChanged(messages.length + 1);
-    bypassRef.current = true;
+    e.validationGroup.reset();
   }, [message, title, messages, user, onMessagesCountChanged]);
 
   const onTitleChanged = useCallback((value) => {
-    bypassRef.current = true;
     setTitle(value);
   }, []);
 
   const onMessageChanged = useCallback((value) => {
-    bypassRef.current = true;
     setMessage(value);
   }, []);
 
@@ -81,12 +74,12 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
       <div className='messages'>
         <div className='input-messages'>
           <TextBox label='Subject' stylingMode='outlined' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged}>
-            <Validator onInitialized={createDefaultValidatorExtender(bypassRef)}>
+            <Validator>
               <RequiredRule />
             </Validator>
           </TextBox>
           <TextArea label='Message' height={150} stylingMode='outlined' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged}>
-            <Validator onInitialized={createDefaultValidatorExtender(bypassRef)}>
+            <Validator>
               <RequiredRule />
             </Validator>
           </TextArea>
