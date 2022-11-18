@@ -108,7 +108,7 @@ const activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }>
     .date {
       padding: 0 10px;
       font-size: 12px;
-      color: #757575de;
+      color: $texteditor-label-color;
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;

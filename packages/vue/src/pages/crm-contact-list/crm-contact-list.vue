@@ -171,8 +171,8 @@
     <!--  Contact panel  -->
     <contact-panel
       :contact-id="panelData?.id"
-      :is-panel-open="isPanelOpen"
-      @close="isPanelOpen = false"
+      :is-panel-open="isPanelOpened"
+      @close="isPanelOpened = false"
     />
   </div>
 
@@ -221,7 +221,7 @@ const filterStatusList = ['All', ...contactStatusList];
 type FilterContactStatus = typeof filterStatusList[number];
 
 const panelData = ref<Array<Contact> | null>(null);
-const isPanelOpen = ref(false);
+const isPanelOpened = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
 
 const isAddContactPopupOpened = ref(false);
@@ -234,7 +234,7 @@ const dataSource = new DataSource({
 const rowClick = (e: RowClickEvent) => {
   if (e.data.id) {
     panelData.value = e.data;
-    isPanelOpen.value = true;
+    isPanelOpened.value = true;
   }
 };
 

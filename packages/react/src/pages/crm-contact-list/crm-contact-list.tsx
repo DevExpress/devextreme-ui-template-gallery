@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
+import './crm-contact-list.scss';
+
 import DataGrid, {
   Sorting, Selection, HeaderFilter, Scrolling, SearchPanel,
   ColumnChooser, Export, Column, Toolbar, Item
@@ -11,7 +13,7 @@ import TextBox from 'devextreme-react/text-box';
 import LoadPanel from 'devextreme-react/load-panel';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
-import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
+import { ColumnCellTemplateData, RowClickEvent } from 'devextreme/ui/data_grid';
 
 import { ContactStatus } from '../../components';
 
@@ -19,8 +21,8 @@ import { getContacts } from 'dx-template-gallery-data';
 
 import { ContactStatus as ContactStatusType } from '../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
-
-import './crm-contact-list.scss';
+import { FormPopup, ContactNewForm } from '../../components';
+import { ContactPanel } from './contact-panel/ContactPanel';
 
 type FilterContactStatus = ContactStatusType | 'All';
 
@@ -52,6 +54,9 @@ export const CRMContactList = () => {
   const [status, setStatus] = useState(filterStatusList[0]);
   const [gridData, setGridData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isPanelOpened, setPanelOpened] = useState(false);
+  const [contactId, setContactId] = useState(0);
+  const [popupVisible, setPopupVisible] = useState(false);
 
   const grid = useRef<DataGrid>(null);
 
@@ -78,28 +83,42 @@ export const CRMContactList = () => {
     setStatus(status);
   }, []);
 
-  const addRow = useCallback(() => {
-    grid.current?.instance.addRow();
-  }, []);
+  const changePopupVisibility = () => {
+    setPopupVisible(!popupVisible);
+  };
+
+  const onSavePopupClick = () => {
+    changePopupVisibility();
+  };
+
+  const changePanelOpened = useCallback(() => {
+    setPanelOpened(!isPanelOpened);
+  }, [isPanelOpened]);
 
   const refresh = useCallback(() => {
     grid.current?.instance.refresh();
   }, []);
 
+  const onRowClick = useCallback(({ data }: RowClickEvent) => {
+    setContactId(data.id);
+    changePanelOpened();
+  }, []);
+
   return (
     <div className='view crm-contact-list'>
-      <div className='view-wrapper'>
-        {!loading ? (
+      {!loading ? (
+        <div className='view-wrapper'>
           <DataGrid
             className='grid'
             noDataText=''
             dataSource={gridData}
+            onRowClick={onRowClick}
             allowColumnReordering
             ref={grid}
           >
             <SearchPanel visible placeholder='Contact Search' />
             <ColumnChooser enabled />
-            <Export enabled allowExportSelectedData />
+            <Export enabled allowExportSelectedData formats={['xlsx', 'pdf']} />
             <Selection selectAllMode='allPages' showCheckBoxesMode='always' mode='multiple' />
             <HeaderFilter visible />
             <Sorting mode='multiple' />
@@ -112,7 +131,7 @@ export const CRMContactList = () => {
                 <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus} />
               </Item>
               <Item location='after' locateInMenu='auto'>
-                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={addRow} />
+                <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={changePopupVisibility} />
               </Item>
               <Item location='after' locateInMenu='auto' showText='inMenu' widget='dxButton'>
                 <Button icon='refresh' text='Refresh' stylingMode='text' onClick={refresh} />
@@ -134,10 +153,14 @@ export const CRMContactList = () => {
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender} />
             <Column dataField='email' caption='Email' hidingPriority={1} />
           </DataGrid>
-        ) : (
-          <LoadPanel visible />
-        )}
-      </div>
+          <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} />
+          <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
+            <ContactNewForm />
+          </FormPopup>
+        </div>
+      ) : (
+        <LoadPanel visible />
+      )}
     </div>
   );
 };

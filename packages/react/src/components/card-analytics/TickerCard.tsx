@@ -1,5 +1,6 @@
 import React from 'react';
 import { CardAnalytics } from './CardAnalytics';
+import './TickerCard.scss';
 
 export const TickerCard = ({ title, contentClass, value, percentage, formatValue = (value) => value }) => (
   <CardAnalytics contentClass={contentClass} title={title} isLoading={!value} compact>

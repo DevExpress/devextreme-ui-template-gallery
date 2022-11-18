@@ -51,13 +51,11 @@ const data = [sales, salesByDateAndCategory, salesByCategory];
 const groupByPeriods = ['Day', 'Month'];
 
 const performancePeriodChange = async ({ item: period }: SelectionChangedEvent) => {
-  salesByDateAndCategory.value = null;
   salesByDateAndCategory.value = await getSalesByOrderDate(period.toLowerCase());
 };
 
 const onRangeChanged = async (dates: [Date, Date]) => {
   visualRange.value = dates;
-  salesByCategory.value = null;
   salesByCategory.value = await getSalesByCategory(
     ...dates.map((date) => formatDate(date, 'yyyy-MM-dd')),
   );

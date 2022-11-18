@@ -24,9 +24,9 @@ const listItemRender = (item: Activity) => {
   return (
     <div className='activity'>
       <div className='name'>{item.name}</div>
-      <div className='date'>
+      <div className='date by'>
         <span>{formatDate(new Date(item.date), 'MM/dd/yyyy')}</span>
-        <span>by</span>
+        <span className='by-span'>by</span>
         <span>{item.manager}</span>
       </div>
       <Menu className='overflow-menu' items={activityMenuItems} />
@@ -42,7 +42,7 @@ const ActivitiesList = ({ activities }) => {
 
 const ActivitiesWithLoadPanel = withLoadPanel(ActivitiesList);
 
-export const CardActivities = ({ activities }: { activities: Activities | undefined }) => (
+export const CardActivities = ({ activities }: { activities?: Activities }) => (
   <div className={classNames({ 'card-activities': true, load: !activities })}>
     <ActivitiesWithLoadPanel
       activities={activities}

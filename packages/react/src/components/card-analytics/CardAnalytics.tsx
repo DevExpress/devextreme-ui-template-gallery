@@ -33,7 +33,7 @@ export const CardAnalytics = ({
   menuVisible = true,
 }: React.PropsWithChildren<CardProps>) => {
   const calculateLoadPanelPosition = (): PositionConfig => ({
-    of: `.${contentClass + (compact ? ' .title' : ' .content')}`,
+    of: `.${contentClass + (compact ? ' .title' : ' .card-contents')}`,
     at: compact ? 'right' : 'center',
   });
 
@@ -41,10 +41,10 @@ export const CardAnalytics = ({
     <div className={`card ${contentClass}`}>
       <div className='header'>
         <Menu visible={menuVisible} className='overflow-menu' items={menuItems} />
-        <div className='title'>{title}</div>
+        {title && <div className='title'>{title}</div>}
         {additionalHeaderContent}
       </div>
-      <div className='content'>{children}</div>
+      <div className='card-contents'>{children}</div>
       <LoadPanel
         container={`.${contentClass}`}
         position={calculateLoadPanelPosition()}

@@ -16,7 +16,7 @@ function withNavigationWatcher(Component: React.ElementType, path: string) {
 
     useEffect(
       () => {
-        setNavigationData!({ currentPath: path });
+        setNavigationData?.({ currentPath: path });
       },
       [path, setNavigationData]
     );

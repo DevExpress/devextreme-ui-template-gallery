@@ -86,6 +86,16 @@ body {
   box-sizing: border-box;
 }
 
+.dx-form {
+  .dx-texteditor-label {
+    height: auto;
+  }
+
+  .dx-texteditor-with-label .dx-label {
+    line-height: 1;
+  }
+}
+
 .embedded {
   .layout-header,
   .dx-swatch-additional,
@@ -119,6 +129,15 @@ body {
     .item-field {
       line-height: 18px;
       font-size: 13px;
+    }
+
+    .dx-texteditor.form-editor {
+      .form-editor-icon:first-child {
+        margin-left: 0;
+        pointer-events: none;
+        border-color: transparent;
+        background-color: transparent;
+      }
     }
   }
 
@@ -226,10 +245,6 @@ body {
   &.item-high {
     @include item-field(#ff5722);
   }
-
-  span {
-    font-size: 14px;
-  }
 }
 
 .item-editor-field {
@@ -239,4 +254,14 @@ body {
   .item-field {
     align-self: flex-end;
   }
+}
+
+.message-list {
+  max-height: 320px;
+}
+
+.messages-content {
+  padding: 20px;
+  border-top: 1px solid $base-border-color;
+  background-color: $side-panel-background;
 }

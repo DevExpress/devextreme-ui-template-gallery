@@ -95,7 +95,7 @@ const onReorder = (e: RowDraggingReorderEvent) => {
   padding: 20px 0 0;
 }
 
-.grid-tasks {
+.tasks-grid {
   border-top: 1px solid $base-border-color;
 }
 </style>

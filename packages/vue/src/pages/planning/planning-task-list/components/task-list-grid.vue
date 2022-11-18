@@ -4,8 +4,12 @@
     height="100%"
     id="tasks-grid"
     :data-source="dataSource"
-    @row-click="navigateToDetails"
+    @row-click="navigateToDetails($event)"
     @row-prepared="onRowPreparedGrid"
+    @editing-start="toogleUseNavigation"
+    @edit-canceled="toogleUseNavigation"
+    @saved="toogleUseNavigation"
+    :hover-state-enabled="true"
     :column-auto-width="true"
   >
     <dx-load-panel
@@ -185,7 +189,7 @@ import { exportDataGrid as exportToXLSX } from 'devextreme/excel_exporter';
 
 import { router } from '@/router';
 import type { Task } from '@/types/task';
-import type { RowPreparedEvent } from 'devextreme/ui/data_grid';
+import type { RowPreparedEvent, RowClickEvent } from 'devextreme/ui/data_grid';
 import { taskPriorityList as priorityList, taskStatusList as statusList } from '@/types/task';
 import { Workbook } from 'exceljs';
 import StatusIndicator from '@/components/status-indicator.vue';
@@ -197,6 +201,7 @@ const props = withDefaults(defineProps<{
 });
 
 const dxDataGridCmp = ref<InstanceType<typeof DxDataGrid> | null>(null);
+let useNavigation = true;
 
 const onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
   const { rowType, rowElement, data } = e;
@@ -208,8 +213,14 @@ const onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
   }
 };
 
-const navigateToDetails = () => {
-  router.push('/planning-task-details');
+const navigateToDetails = (e: RowClickEvent) => {
+  if (useNavigation && e.rowType !== 'detailAdaptive') {
+    router.push('/planning-task-details');
+  }
+};
+
+const toogleUseNavigation = () => {
+  useNavigation = !useNavigation;
 };
 
 const addRow = () => dxDataGridCmp.value?.instance.addRow();
@@ -268,6 +279,7 @@ defineExpose({
 
 #tasks-grid {
   min-height: 300px;
+  border-top: 1px solid $base-border-color;
 
   :deep(.priority span) {
     font-size: 13px;

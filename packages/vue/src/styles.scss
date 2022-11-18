@@ -76,6 +76,16 @@
   height: 100%;
 }
 
+.dx-form {
+  .dx-texteditor-label {
+    height: auto;
+  }
+
+  .dx-texteditor-with-label .dx-label {
+    line-height: 1;
+  }
+}
+
 $side-panel-min-width: 60px;
 
 .embedded {

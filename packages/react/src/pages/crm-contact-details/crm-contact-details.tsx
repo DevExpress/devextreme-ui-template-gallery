@@ -76,7 +76,7 @@ export const CRMContactDetails = () => {
   }, []);
 
   return (
-    <div className='view-wrapper-contact-details'>
+    <div className='view-wrapper view-wrapper-contact-details'>
       <ToolbarDetails name={data?.name}>
         <Item location='after' locateInMenu='auto'>
           <Button
