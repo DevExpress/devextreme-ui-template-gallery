@@ -24,7 +24,7 @@ const listItemRender = (item: Activity) => {
   return (
     <div className='activity'>
       <div className='name'>{item.name}</div>
-      <div className='date'>
+      <div className='date by'>
         <span>{formatDate(new Date(item.date), 'MM/dd/yyyy')}</span>
         <span className='by-span'>by</span>
         <span>{item.manager}</span>

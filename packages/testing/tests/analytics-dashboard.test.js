@@ -1,12 +1,15 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector } from 'testcafe';
+import { Selector, RequestLogger } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { getPostfix, toggleCommonConfiguration } from './utils';
+import {
+  getPostfix, toggleCommonConfiguration, forceResizeRecalculation,
+} from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/analytics-dashboard`;
+const requestLogger = RequestLogger();
 
 fixture`Analytics Dashboard`;
 
@@ -20,7 +23,9 @@ const checkScreenMode = async (t, screenMode) => {
     test(`Analytics Dashboard (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond);
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {},
+        screenMode, timeoutSecond, false, requestLogger);
+      await forceResizeRecalculation(t, screenMode);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-dashboard-all${getPostfix(embedded, screenMode)}`, 'body');
@@ -32,6 +37,6 @@ const checkScreenMode = async (t, screenMode) => {
       await t
         .expect(compareResults.isValid())
         .ok(compareResults.errorMessages());
-    });
+    }).requestHooks(requestLogger);
   });
 });

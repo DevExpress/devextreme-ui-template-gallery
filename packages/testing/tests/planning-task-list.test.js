@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector } from 'testcafe';
+import { Selector, RequestLogger } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { getPostfix, toggleCommonConfiguration } from './utils';
+import { getPostfix, toggleCommonConfiguration, forceResizeRecalculation } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/planning-task-list`;
+const requestLogger = RequestLogger();
 
 fixture`Planning List`;
 
@@ -16,7 +17,8 @@ fixture`Planning List`;
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
       // eslint-disable-next-line max-len
-      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
+      await forceResizeRecalculation(t, screenMode);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`planning-task-grid${getPostfix(embedded, screenMode)}`, 'body');
@@ -28,6 +30,7 @@ fixture`Planning List`;
         await t.click('.view-wrapper .dx-icon-overflow');
       }
       await t.click(Selector('[aria-label="Add Task"]'));
+      // TODO: works only in angular, replace form-item-date with another selector
       await t.typeText(Selector('form-item-date[label="Start Date"] .dx-datebox'), '10/26/2022', { replace: true });
       await t.typeText(Selector('form-item-date[label="Due Date"] .dx-datebox'), '10/26/2022', { replace: true });
       await takeScreenshot(`planning-task-add-task-popup-embed=${getPostfix(embedded, screenMode)}`, 'body');
@@ -35,6 +38,6 @@ fixture`Planning List`;
       await t
         .expect(compareResults.isValid())
         .ok(compareResults.errorMessages());
-    });
+    }).requestHooks(requestLogger);
   });
 });

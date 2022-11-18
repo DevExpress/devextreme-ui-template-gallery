@@ -8,7 +8,7 @@
     </div>
     <div class="product-info">
       Products: {{ props.data.products }}, total:
-      <span class="total">{{ formatPrice(props.data.total) }}</span>
+      <span class="total">{{ formatPrice(props.data.total, 2) }}</span>
     </div>
     <div class="owner">
       Owner: <span class="owner-name">{{ props.data.manager }}</span>
@@ -55,7 +55,7 @@ const opportunityClick = () => {
 }
 
 .owner {
-  color: rgba(117, 117, 117, 0.87);
+  color: $texteditor-label-color;
   font-size: 14px;
 
   .owner-name {

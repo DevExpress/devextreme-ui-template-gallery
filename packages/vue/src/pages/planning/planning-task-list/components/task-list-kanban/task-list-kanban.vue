@@ -44,6 +44,7 @@
               icon="plus"
               text="Add Task"
               styling-mode="text"
+              width="100%"
               @click="addTask"
             />
           </div>
