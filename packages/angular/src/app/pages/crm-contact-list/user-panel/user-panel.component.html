@@ -1,4 +1,4 @@
-<div class="panel" [ngClass]="{ pin: isPin, open: isOpen }">
+<div class="panel" [ngClass]="{ pin: isPinned, open: isOpened }">
   <div class="data-wrapper">
     <ng-container *ngIf="!isLoading">
       <div class="data-part">
@@ -12,11 +12,11 @@
           <dxi-item location="after" [visible]="isPinEnabled">
             <dx-button
               [icon]="isPin ? 'pin' : 'unpin'"
-              (onClick)="pinClick()"
+              (onClick)="onPinClick()"
             ></dx-button>
           </dxi-item>
           <dxi-item location="after">
-            <dx-button icon="close" (onClick)="closePanel()"></dx-button>
+            <dx-button icon="close" (onClick)="onClosePanel()"></dx-button>
           </dxi-item>
         </dx-toolbar>
       </div>
@@ -38,7 +38,7 @@
               <dxi-item itemType="group">
                 <dxi-item cssClass="accent">
                   <div *dxTemplate>
-                    <form-textbox 
+                    <form-textbox
                             label="Company"
                             [(value)]="user.company"
                             [isEditing]="isEditing"
@@ -48,7 +48,7 @@
 
                 <dxi-item>
                   <div *dxTemplate>
-                    <form-textbox 
+                    <form-textbox
                             label="Position"
                             [(value)]="user.position"
                             [isEditing]="isEditing"
@@ -58,7 +58,7 @@
 
                 <dxi-item cssClass="accent">
                   <div *dxTemplate>
-                    <form-textbox 
+                    <form-textbox
                             label="Assigned to"
                             [(value)]="user.manager"
                             [isEditing]="isEditing"
@@ -71,7 +71,7 @@
             <dxi-item itemType="group" cssClass="contact-fields-group">
               <dxi-item>
                 <div *dxTemplate>
-                  <form-textbox 
+                  <form-textbox
                           [(value)]="user.phone"
                           [isEditing]="isEditing"
                           icon="tel"
@@ -81,7 +81,7 @@
               </dxi-item>
               <dxi-item>
                 <div *dxTemplate>
-                  <form-textbox 
+                  <form-textbox
                           [(value)]="user.email"
                           [isEditing]="isEditing"
                           icon="email"
@@ -91,7 +91,7 @@
               </dxi-item>
               <dxi-item>
                 <div *dxTemplate>
-                  <form-textbox 
+                  <form-textbox
                           [(value)]="user.address"
                           [isEditing]="isEditing"
                           icon="home"

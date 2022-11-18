@@ -2,7 +2,7 @@
   <div
     id="contact-panel"
     class="panel"
-    :class="{ pin: isPin, open: props.isPanelOpen }"
+    :class="{ pin: isPinned, open: props.isPanelOpened }"
   >
     <div class="data-wrapper">
       <load-component
@@ -26,7 +26,7 @@
                 location="after"
                 widget="dxButton"
                 :visible="isPinEnabled"
-                :options="{ icon: isPin ? 'pin' : 'unpin', onClick: () => isPin = !isPin }"
+                :options="{ icon: isPinned ? 'pin' : 'unpin', onClick: () => isPinned = !isPinned }"
               />
 
               <dx-item
@@ -232,13 +232,13 @@ import FormTextbox from '@/components/form-textbox.vue';
 
 const isEditing = ref(false);
 const isLoading = ref(false);
-const isPin = ref(false);
+const isPinned = ref(false);
 const isPinEnabled = ref(true);
 const panelData = ref<Contact | null>(null);
 const props = withDefaults(defineProps<{
-  isPanelOpen: boolean,
+  isPanelOpened: boolean,
   contactId: number | null
-}>(), { isPanelOpen: false, contactId: null });
+}>(), { isPanelOpened: false, contactId: null });
 
 const toggleEdit = () => {
   isEditing.value = !isEditing.value;
@@ -266,7 +266,7 @@ watch(
   (newScreenInfo) => {
     isPinEnabled.value = newScreenInfo.isLarge || newScreenInfo.isMedium;
     if (isPinEnabled.value === false) {
-      isPin.value = false;
+      isPinned.value = false;
     }
   },
 );
