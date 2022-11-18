@@ -1,49 +1,56 @@
 <template>
-  <div
-    class="notes"
-    id="card-notes"
-  >
-    <load-component
-      :is-loading="isLoading"
-      :container-selector="'#card-notes'"
+  <dx-validation-group>
+    <div
+      class="notes"
+      id="card-notes"
     >
-      <div class="input-content">
-        <dx-text-area
-          label="New Note"
-          styling-mode="outlined"
-          :value="nodeText"
-          @value-changed="e => nodeText = e.value"
-        />
+      <load-component
+        :is-loading="isLoading"
+        :container-selector="'#card-notes'"
+      >
+        <div class="input-content">
+          <dx-text-area
+            label="New Note"
+            styling-mode="outlined"
+            :value="nodeText"
+            value-change-event="keyup"
+            @value-changed="e => nodeText = e.value"
+          >
+            <dx-validator>
+              <dx-required-rule />
+            </dx-validator>
+          </dx-text-area>
 
-        <dx-toolbar>
-          <dx-item
-            widget="dxButton"
-            location="after"
-            :options="{
-              text: 'Add',
-              stylingMode: 'outlined',
-              type: 'default',
-              onClick: addNote
-            }"
-          />
-        </dx-toolbar>
-      </div>
-      <div class="notes-content">
-        <div
-          class="note dx-card"
-          v-for="note in items"
-        >
-          <div class="note-title">
-            <div>{{ formatDate(new Date(note.date)) }} - {{ note.manager }}</div>
-            <dx-button icon="overflow" />
-          </div>
-          <div class="note-text">
-            {{ note.text }}
+          <dx-toolbar>
+            <dx-item
+              widget="dxButton"
+              location="after"
+              :options="{
+                text: 'Add',
+                stylingMode: 'outlined',
+                type: 'default',
+                onClick: addNote
+              }"
+            />
+          </dx-toolbar>
+        </div>
+        <div class="notes-content">
+          <div
+            class="note dx-card"
+            v-for="note in items"
+          >
+            <div class="note-title">
+              <div>{{ formatDate(new Date(note.date)) }} - {{ note.manager }}</div>
+              <dx-button icon="overflow" />
+            </div>
+            <div class="note-text">
+              {{ note.text }}
+            </div>
           </div>
         </div>
-      </div>
-    </load-component>
-  </div>
+      </load-component>
+    </div>
+  </dx-validation-group>
 </template>
 
 <script setup lang="ts">
@@ -51,6 +58,8 @@ import { onMounted, ref, watch } from 'vue';
 import { DxTextArea } from 'devextreme-vue/text-area';
 import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
+import { DxValidationGroup } from 'devextreme-vue/validation-group';
+import DxValidator, { DxRequiredRule } from 'devextreme-vue/validator';
 import { formatDate } from '@/utils/formatters';
 // eslint-disable-next-line import/no-unresolved
 import { getContactNotes } from 'dx-template-gallery-data';
@@ -81,12 +90,8 @@ watch(
   },
 );
 
-function defaultText() {
-  nodeText.value = '';
-}
-
-function addNote() {
-  if (nodeText.value === '') {
+function addNote(e: any) {
+  if (!e.validationGroup.validate().isValid) {
     return;
   }
   const newNote: Note = {
@@ -97,7 +102,7 @@ function addNote() {
 
   items.value.push(newNote);
 
-  defaultText();
+  e.validationGroup.reset();
 }
 
 async function loadData() {
