@@ -99,9 +99,7 @@ export const CRMContactList = () => {
     grid.current?.instance.refresh();
   }, []);
 
-  const onRowClick = useCallback((e: RowClickEvent) => {
-    const { data } = e;
-
+  const onRowClick = useCallback(({ data }: RowClickEvent) => {
     setContactId(data.id);
     changePanelOpened();
   }, []);
