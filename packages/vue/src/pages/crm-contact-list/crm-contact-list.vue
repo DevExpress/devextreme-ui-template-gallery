@@ -181,7 +181,7 @@
     v-model:is-visible="isAddContactPopupOpened"
     @save="onSaveContactNewForm"
   >
-    <contact-new-form :validation-group="newContactValidationGroup" />
+    <contact-new-form/>
   </form-popup>
 </template>
 
@@ -220,7 +220,6 @@ import ContactPanel from './components/contact-panel.vue';
 const filterStatusList = ['All', ...contactStatusList];
 type FilterContactStatus = typeof filterStatusList[number];
 
-const newContactValidationGroup = 'new-contact';
 const panelData = ref<Array<Contact> | null>(null);
 const isPanelOpen = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);

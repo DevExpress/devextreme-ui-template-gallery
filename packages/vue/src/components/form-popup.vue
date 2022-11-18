@@ -31,7 +31,7 @@
         onClick: close
       }"
     />
-    <dx-validation-group @initialized="onInitValidationGroup">
+    <dx-validation-group ref="validationGroup">
       <slot />
     </dx-validation-group>
   </dx-popup>
@@ -53,7 +53,7 @@ const props = withDefaults(
     isVisible: false,
   },
 );
-let validationGroup: typeof DxValidationGroup = null;
+const validationGroup = ref<InstanceType<typeof DxValidationGroup>>();
 
 const emit = defineEmits(['save', 'update:isVisible']);
 
@@ -67,12 +67,8 @@ watch(
   },
 );
 
-const onInitValidationGroup = ({ component: group }: {component: typeof DxValidationGroup}) => {
-  validationGroup = group;
-};
-
 const save = () => {
-  if (validationEngine.validateGroup(validationGroup).isValid) {
+  if (validationEngine.validateGroup(validationGroup.value?.instance).isValid) {
     emit('save');
   }
 };
@@ -82,6 +78,3 @@ const close = () => {
   emit('update:isVisible', false);
 };
 </script>
-<style scoped lang="scss">
-
-</style>

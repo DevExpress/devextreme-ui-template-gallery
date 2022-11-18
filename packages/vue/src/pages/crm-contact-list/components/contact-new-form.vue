@@ -115,9 +115,5 @@ import { newContact } from '@/types/contact';
 import FormTextbox from '@/components/form-textbox.vue';
 import FormPhotoUploader from './form-photo-uploader.vue';
 
-const props = defineProps<{
-  validationGroup: string
-}>();
-
-const contact = ref(newContact);
+const contact = ref({ ...newContact });
 </script>
