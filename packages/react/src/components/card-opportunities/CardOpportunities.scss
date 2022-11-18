@@ -14,30 +14,30 @@
     background: $side-panel-background;
     flex: 1 300px;
     max-width: 300px;
-  
+
     .opportunity {
       cursor: pointer;
     }
-  
+
     .name {
       font-size: 16px;
       font-weight: 700;
       padding-bottom: 8px;
     }
-  
+
     .product-info {
       font-size: 12px;
       padding-bottom: 16px;
-  
+
       .total {
         font-size: 16px;
       }
     }
-  
+
     .owner {
       color: $texteditor-label-color;
       font-size: 14px;
-  
+
       .owner-name {
         color: $base-text-color;
       }
