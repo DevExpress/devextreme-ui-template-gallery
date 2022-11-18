@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import { Selector, RequestLogger } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { getPostfix, toggleCommonConfiguration } from './utils';
+import { getPostfix, toggleCommonConfiguration, forceResizeRecalculation } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
