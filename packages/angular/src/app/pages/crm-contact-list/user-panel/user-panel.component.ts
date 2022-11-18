@@ -39,11 +39,11 @@ import { Contact } from 'src/app/shared/types/contact';
   providers: [DataService],
 })
 export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() isOpen = false;
+  @Input() isOpened = false;
 
   @Input() userId: number;
 
-  @Output() isOpenChange = new EventEmitter<boolean>();
+  @Output() isOpenedChange = new EventEmitter<boolean>();
 
   user: Contact;
 
@@ -51,7 +51,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   isEditing = false;
 
-  isPin = false;
+  isPinned = false;
 
   isPinEnabled = false;
 
@@ -86,19 +86,19 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     }));
   };
 
-  closePanel = () => {
-    this.isOpen = false;
-    this.isOpenChange.emit(this.isOpen);
+  onClosePanel = () => {
+    this.isOpened = false;
+    this.isOpenedChange.emit(this.isOpened);
   };
 
-  pinClick = () => {
-    this.isPin = !this.isPin;
+  onPinClick = () => {
+    this.isPinned = !this.isPinned;
   };
 
   calculatePin = () => {
     this.isPinEnabled = this.screen.sizes['screen-large'] || this.screen.sizes['screen-medium'];
-    if (this.isPin && !this.isPinEnabled) {
-      this.isPin = false;
+    if (this.isPinned && !this.isPinEnabled) {
+      this.isPinned = false;
     }
   };
 
