@@ -11,7 +11,6 @@ export class CardMenuComponent {
   @Input() visible = true;
 
   constructor() { }
-
 }
 
 @NgModule({
