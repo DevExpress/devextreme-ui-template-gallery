@@ -1,7 +1,7 @@
 import { ClientFunction } from 'testcafe';
 import { fakeScreenSize } from '../config';
 
-const FONTSCOUNT = 4;
+// const FONTSCOUNT = 4;
 const WAIT_ATTEMPTS = 10;
 
 export async function awaitFontsLoaded(t, requestLogger, timeout) {
@@ -13,7 +13,7 @@ export async function awaitFontsLoaded(t, requestLogger, timeout) {
         .filter((reqUrl) => reqUrl.endsWith('.woff2'));
       // eslint-disable-next-line no-await-in-loop
       await t.wait(timeout);
-      if (fontURLs.length >= FONTSCOUNT) {
+      if (fontURLs.some((url) => url.includes('roboto')) && fontURLs.some((url) => url.includes('dxicons'))) {
         break;
       }
       if (i === WAIT_ATTEMPTS) {
