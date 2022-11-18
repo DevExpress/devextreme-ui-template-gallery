@@ -39,12 +39,12 @@ export const getPostfix = (embedded, screenMode) => {
 };
 
 export const toggleCommonConfiguration = async (
-  t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize, requestLogger
+  t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize, requestLogger,
 ) => {
   await t.resizeWindow(...screenMode);
 
   await t.navigateTo(url);
-  await awaitFontsLoaded(t, requestLogger)
+  await awaitFontsLoaded(t, requestLogger);
   await toogleEmbeddedClass(embedded);
   if (embedded && isDoubleResize) {
     await forceResizeRecalculation(t, screenMode);
