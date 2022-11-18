@@ -24,7 +24,7 @@ export const Header = ({ menuToggleEnabled, title, toggleMenu, className }: Head
         </Item>
         <Item location='after'>
           <div className='messages'>
-            <div className='dx-icon-message'>
+            <div className='dx-icon-bell'>
               <div className='dx-badge'>4</div>
             </div>
           </div>

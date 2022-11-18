@@ -26,7 +26,7 @@
                 location="after"
                 widget="dxButton"
                 :visible="isPinEnabled"
-                :options="{ icon: isPinned ? 'unpin' : 'pin', onClick: () => isPinned = !isPinned }"
+                :options="{ icon: isPinned ? 'pin' : 'unpin', onClick: () => isPinned = !isPinned }"
               />
 
               <dx-item

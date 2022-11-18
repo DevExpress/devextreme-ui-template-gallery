@@ -2,6 +2,7 @@
 @use "sass:math";
 
 .view-wrapper-details {
+  position: relative;
   flex-direction: column;
   display: flex;
   flex-grow: 1;

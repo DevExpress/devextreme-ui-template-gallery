@@ -7,7 +7,6 @@
       <div class="sales-filter">
         <dx-drop-down-button
           styling-mode="text"
-          :width="85"
           :use-select-mode="true"
           :items="props.groupByPeriods"
           :selected-item-key="props.groupByPeriods[1]"
@@ -71,10 +70,5 @@ const props = defineProps<{
 <style scoped lang="scss">
 .sales-filter {
   display: inline-block;
-
-  & .dx-dropdownbutton {
-    position: absolute;
-    top: 12px;
-  }
 }
 </style>

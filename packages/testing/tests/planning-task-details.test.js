@@ -14,11 +14,7 @@ fixture`Planning Details`;
 const setEmbedded = async (t, embed, screenMode) => {
   if (embed) {
     if (screenMode[0] === 400) {
-      if (project === 'react') {
-        await t.click('.view-wrapper-details .dx-icon-overflow');
-      } else {
-        await t.click('.view-wrapper .dx-icon-overflow');
-      }
+      await t.click('.view-wrapper .dx-icon-overflow');
     }
 
     await t.click('.dx-icon-refresh');

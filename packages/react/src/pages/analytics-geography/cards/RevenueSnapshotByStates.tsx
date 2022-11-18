@@ -11,7 +11,7 @@ import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics'
 
 export const RevenueSnapshotByStatesCard = ({ datasource }) => (
   <CardAnalytics
-    title='Revenue Snaphot by States'
+    title='Revenue Snapshot by States'
     contentClass='sales-by-state'
     isLoading={!datasource.length}
   >

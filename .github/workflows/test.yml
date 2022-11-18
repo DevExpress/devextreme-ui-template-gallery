@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Get sources
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Use Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '16'
 
@@ -51,21 +51,30 @@ jobs:
           { project: 'angular', page: 'analytics-dashboard' },
           { project: 'angular', page: 'analytics-sales-report' },
           { project: 'angular', page: 'analytics-geography' },
-          # { project: 'react', page: 'crm-contact-list' },
-          # { project: 'react', page: 'planning-task-details' },
-          # { project: 'react', page: 'planning-task-list' },
-          # { project: 'vue', page: 'crm-contact-details' },
-          # { project: 'vue', page: 'crm-contact-list' },
+          # { project: 'react', page: 'crm-contact-details' }, // Button doesn't hide (screen width 400)
+          # { project: 'react', page: 'crm-contact-list' }, // The 'Add contact' button color differs under overlay
+          # { project: 'react', page: 'planning-task-details' }, // Title width is different (screen width 400). Menu stays opened
+          # { project: 'react', page: 'planning-task-list' }, // The form-item-date[label="Start Date"] selector works only for angular, rewrite test. Scrollbar have different length
+          # { project: 'react', page: 'analytics-dashboard' }, // Menu contents disappear after item click (screen width 400)
+          { project: 'react', page: 'analytics-sales-report' },
+          # { project: 'react', page: 'analytics-geography' }, // Menu contents disappear after item click (screen width 400)
+          # { project: 'vue', page: 'crm-contact-details' }, //Wrong status color
+          { project: 'vue', page: 'crm-contact-list' },
+          # { project: 'vue', page: 'planning-task-details' }, // Title width is different (screen width 400)
+          # { project: 'vue', page: 'planning-task-list' }, // The form-item-date[label="Start Date"] selector works only for angular, rewrite test
+          { project: 'vue', page: 'analytics-dashboard' },
+          # { project: 'vue', page: 'analytics-sales-report' }, // Scrollbar have different length
+          { project: 'vue', page: 'analytics-geography' },
         ]
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
     - name: Get sources
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Use Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '16'
 
@@ -103,8 +112,8 @@ jobs:
 
     - name: Copy screenshots artifacts
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
-        name: screenshots
+        name: screenshots-${{ matrix.ARGS.project }}
         path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
         if-no-files-found: ignore

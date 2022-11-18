@@ -74,13 +74,13 @@ export const SideNavInnerToolbar = ({ title, children }: React.PropsWithChildren
           <Header menuToggleEnabled={isXSmall} toggleMenu={toggleMenu} />
           <ScrollView ref={scrollViewRef} className='layout-body with-footer'>
             <div className='content'>
-              {React.Children.map(children, (item: any) => {
-                return item.type !== Footer && item;
+              {React.Children.map(children, (item) => {
+                return React.isValidElement(item) && item.type !== Footer && item;
               })}
             </div>
             <div className='content-block'>
-              {React.Children.map(children, (item: any) => {
-                return item.type === Footer && item;
+              {React.Children.map(children, (item) => {
+                return React.isValidElement(item) && item.type === Footer && item;
               })}
             </div>
           </ScrollView>

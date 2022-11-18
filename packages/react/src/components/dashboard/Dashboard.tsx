@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Button from 'devextreme-react/button';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
+import './Dashboard.scss';
 
 type DashboardContainerProps = {
   title: string;
@@ -13,7 +14,7 @@ export const Dashboard = ({
   children,
 }: React.PropsWithChildren<DashboardContainerProps>) => {
   return (
-    <div className='view-wrapper-dashboard'>
+    <div className='view-wrapper view-wrapper-dashboard'>
       <Toolbar>
         <Item location='before'>
           <span className='toolbar-header'>{title}</span>
