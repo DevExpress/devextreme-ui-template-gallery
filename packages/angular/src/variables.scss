@@ -54,3 +54,15 @@ $list-padding-left: $material-list-item-horizontal-padding;
   padding-top: 5px;
   line-height: 21px;
 }
+
+@mixin messages-content {
+  .message-list {
+    max-height: 320px;
+  }
+  
+  .messages-content {
+    padding: 20px;
+    border-top: 1px solid $base-border-color;
+    background-color: $side-panel-background;
+  }
+}

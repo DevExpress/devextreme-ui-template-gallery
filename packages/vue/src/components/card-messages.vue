@@ -53,32 +53,34 @@
             />
           </dx-toolbar>
         </div>
-        <dx-scroll-view>
-          <div class="messages-content">
-            <div
-              class="message-container"
-              v-for="data in items"
-            >
-              <div class="avatar">
-                {{ getAvatarText(data.manager) }}
-              </div>
-              <div class="message dx-card">
-                <div class="message-title">
-                  <div>
-                    <div class="subject">
-                      {{ data.subject }}
-                    </div>
-                    <div>{{ formatDate(new Date(data.date)) }} - {{ data.manager }}</div>
-                  </div>
-                  <dx-button icon="overflow" />
+        <div class="messages-content">
+          <dx-scroll-view>
+            <div class="message-list">
+              <div
+                class="message-container"
+                v-for="data in items"
+              >
+                <div class="avatar">
+                  {{ getAvatarText(data.manager) }}
                 </div>
-                <div class="message-text">
-                  {{ setUserName(data.text) }}
+                <div class="message dx-card">
+                  <div class="message-title">
+                    <div>
+                      <div class="subject">
+                        {{ data.subject }}
+                      </div>
+                      <div>{{ formatDate(new Date(data.date)) }} - {{ data.manager }}</div>
+                    </div>
+                    <dx-button icon="overflow" />
+                  </div>
+                  <div class="message-text">
+                    {{ setUserName(data.text) }}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </dx-scroll-view>
+          </dx-scroll-view>
+        </div>
       </load-component>
     </div>
   </dx-validation-group>
@@ -149,6 +151,8 @@ function send(e: any) {
 <style scoped lang="scss">
 @use "@/variables" as *;
 
+@include messages-content();
+
 #card-messages {
   min-height: 300px;
 }
@@ -170,16 +174,6 @@ function send(e: any) {
 
 .input-content {
   padding: 20px;
-}
-
-.dx-scrollview {
-  height: 320px;
-}
-
-.messages-content {
-  padding: 20px;
-  border-top: 1px solid $base-border-color;
-  background-color: $side-panel-background;
 }
 
 .message-container {

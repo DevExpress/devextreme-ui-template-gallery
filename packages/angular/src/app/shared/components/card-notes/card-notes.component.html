@@ -24,17 +24,20 @@
         </dxi-item>
       </dx-toolbar>
     </div>
-
-    <div class="notes-content">
-      <div class="note dx-card" *ngFor="let note of items">
-        <div class="note-title">
-          <div>{{ note.date | date: "MM/dd/y" }} - {{ note.manager }}</div>
-          <div>
-            <dx-button icon="overflow"></dx-button>
+    <div class="messages-content">
+      <dx-scroll-view>
+        <div class="message-list">
+          <div class="note dx-card" *ngFor="let note of items">
+            <div class="note-title">
+              <div>{{ note.date | date: "MM/dd/y" }} - {{ note.manager }}</div>
+              <div>
+                <dx-button icon="overflow"></dx-button>
+              </div>
+            </div>
+            <div class="note-text">{{ note.text }}</div>
           </div>
         </div>
-        <div class="note-text">{{ note.text }}</div>
-      </div>
+      </dx-scroll-view>
     </div>
   </div>
 </dx-validation-group>

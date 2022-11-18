@@ -7,7 +7,8 @@ import {
   DxToolbarModule,
   DxButtonModule,
   DxValidationGroupModule,
-  DxValidatorModule
+  DxValidatorModule,
+  DxScrollViewModule
 } from 'devextreme-angular';
 import { Notes, Note } from 'src/app/shared/types/notes';
 
@@ -47,6 +48,7 @@ export class CardNotesComponent {
     DxButtonModule,
     DxValidationGroupModule,
     DxValidatorModule,
+    DxScrollViewModule,
     CommonModule,
   ],
   declarations: [CardNotesComponent],

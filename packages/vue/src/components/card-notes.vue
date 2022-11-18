@@ -34,19 +34,23 @@
             />
           </dx-toolbar>
         </div>
-        <div class="notes-content">
-          <div
-            class="note dx-card"
-            v-for="note in items"
-          >
-            <div class="note-title">
-              <div>{{ formatDate(new Date(note.date)) }} - {{ note.manager }}</div>
-              <dx-button icon="overflow" />
+        <div class="messages-content">
+          <dx-scroll-view>
+            <div class="message-list">
+              <div
+                class="note dx-card"
+                v-for="note in items"
+              >
+                <div class="note-title">
+                  <div>{{ formatDate(new Date(note.date)) }} - {{ note.manager }}</div>
+                  <dx-button icon="overflow" />
+                </div>
+                <div class="note-text">
+                  {{ note.text }}
+                </div>
+              </div>
             </div>
-            <div class="note-text">
-              {{ note.text }}
-            </div>
-          </div>
+          </dx-scroll-view>
         </div>
       </load-component>
     </div>
@@ -60,6 +64,7 @@ import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
 import DxValidator, { DxRequiredRule } from 'devextreme-vue/validator';
+import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { formatDate } from '@/utils/formatters';
 // eslint-disable-next-line import/no-unresolved
 import { getContactNotes } from 'dx-template-gallery-data';
@@ -125,20 +130,13 @@ onMounted(() => {
 <style scoped lang="scss">
 @use "@/variables" as *;
 
+@include messages-content();
+
 .input-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-
-.input-content,
-.notes-content {
   padding: 20px;
-}
-
-.notes-content {
-  border-top: 1px solid $base-border-color;
-  background-color: $side-panel-background;
 }
 
 .note {
