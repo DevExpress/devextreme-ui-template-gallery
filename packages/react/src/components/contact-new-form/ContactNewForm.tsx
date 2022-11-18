@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 
 import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
-import { Contact } from '../../../shared/types/crm-contact';
-import { newContact } from '../../../shared/constants';
-import { FormTextbox, FormPhotoUploader } from '../../../components';
+import { Contact } from '../../shared/types/crm-contact';
+import { newContact } from '../../shared/constants';
+import { FormTextbox, FormPhotoUploader } from '../../components';
 
 export const ContactNewForm = () => {
   const [newContactData, setNewContactData] = useState<Contact>(newContact);

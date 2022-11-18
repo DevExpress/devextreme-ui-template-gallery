@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
+import './crm-contact-list.scss';
+
 import DataGrid, {
   Sorting, Selection, HeaderFilter, Scrolling, SearchPanel,
   ColumnChooser, Export, Column, Toolbar, Item
@@ -11,7 +13,7 @@ import TextBox from 'devextreme-react/text-box';
 import LoadPanel from 'devextreme-react/load-panel';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
-import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
+import { ColumnCellTemplateData, RowClickEvent } from 'devextreme/ui/data_grid';
 
 import { ContactStatus } from '../../components';
 
@@ -19,10 +21,8 @@ import { getContacts } from 'dx-template-gallery-data';
 
 import { ContactStatus as ContactStatusType } from '../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
-import { ContactNewForm } from './contact-new-form/contactNewForm';
-import { FormPopup } from '../../components';
-
-import './crm-contact-list.scss';
+import { FormPopup, ContactNewForm } from '../../components';
+import { ContactPanel } from './contact-panel/ContactPanel';
 
 type FilterContactStatus = ContactStatusType | 'All';
 
@@ -54,6 +54,8 @@ export const CRMContactList = () => {
   const [status, setStatus] = useState(filterStatusList[0]);
   const [gridData, setGridData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isPanelOpened, setPanelOpened] = useState(false);
+  const [contactId, setContactId] = useState(0);
   const [popupVisible, setPopupVisible] = useState(false);
 
   const grid = useRef<DataGrid>(null);
@@ -89,12 +91,17 @@ export const CRMContactList = () => {
     changePopupVisibility();
   };
 
+  const changePanelOpened = useCallback(() => {
+    setPanelOpened(!isPanelOpened);
+  }, [isPanelOpened]);
+
   const refresh = useCallback(() => {
     grid.current?.instance.refresh();
   }, []);
 
-  const onRowPrepared = useCallback(({ rowElement }) => {
-    rowElement.classList.add('clickable-row');
+  const onRowClick = useCallback(({ data }: RowClickEvent) => {
+    setContactId(data.id);
+    changePanelOpened();
   }, []);
 
   return (
@@ -105,13 +112,13 @@ export const CRMContactList = () => {
             className='grid'
             noDataText=''
             dataSource={gridData}
+            onRowClick={onRowClick}
             allowColumnReordering
             ref={grid}
-            onRowPrepared={onRowPrepared}
           >
             <SearchPanel visible placeholder='Contact Search' />
             <ColumnChooser enabled />
-            <Export enabled allowExportSelectedData />
+            <Export enabled allowExportSelectedData formats={['xlsx', 'pdf']} />
             <Selection selectAllMode='allPages' showCheckBoxesMode='always' mode='multiple' />
             <HeaderFilter visible />
             <Sorting mode='multiple' />
@@ -146,6 +153,7 @@ export const CRMContactList = () => {
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender} />
             <Column dataField='email' caption='Email' hidingPriority={1} />
           </DataGrid>
+          <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} />
           <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
             <ContactNewForm />
           </FormPopup>
