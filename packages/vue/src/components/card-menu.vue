@@ -1,6 +1,7 @@
 <template>
   <drop-down-button
     :items="props.items"
+    :visible="props.visible"
     icon="overflow"
     :show-arrow-icon="false"
     styling-mode="text"
