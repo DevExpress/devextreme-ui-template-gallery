@@ -3,7 +3,7 @@ import Chart, { ArgumentAxis, Border, CommonSeriesSettings, Format, Label, Legen
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
 
 export const RevenueCard = ({ datasource }) => (
-  <CardAnalytics title='Revenue' contentClass='sales' isLoading={!datasource.length}>
+  <CardAnalytics title='Revenue' contentClass='sales'>
     <Chart dataSource={datasource}>
       <Series valueField='total' />
       <CommonSeriesSettings argumentField='date' type='splinearea'>

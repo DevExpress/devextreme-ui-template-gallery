@@ -4,7 +4,7 @@ import DataGrid, { Column } from 'devextreme-react/data-grid';
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
 
 export const RevenueAnalysisCard = ({ datasource }) => (
-  <CardAnalytics title='Revenue Analysis' contentClass='sales-by-state grid' isLoading={!datasource.length}>
+  <CardAnalytics title='Revenue Analysis' contentClass='sales-by-state grid'>
     <DataGrid dataSource={datasource} height={290}>
       <Column caption='State' dataField='stateName' />
       <Column alignment='left' caption='Sales' dataField='total' dataType='number' format='currency' sortOrder='desc' hidingPriority={2} />

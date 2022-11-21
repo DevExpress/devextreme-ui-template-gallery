@@ -7,7 +7,6 @@ export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPe
   <CardAnalytics
     title='Sales Performance'
     contentClass='sales'
-    isLoading={!datasource.length}
     additionalHeaderContent={
       <div className='sales-filter'>
         <DropDownButton stylingMode='text' useSelectMode items={periods} selectedItemKey={selectedPeriod} onSelectionChanged={onPeriodChanged} />

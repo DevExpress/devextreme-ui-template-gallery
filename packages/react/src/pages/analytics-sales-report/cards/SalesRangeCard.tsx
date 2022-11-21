@@ -3,7 +3,7 @@ import React from 'react';
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
 
 export const SalesRangeCard = ({ datasource, range, onRangeChanged }) => (
-  <CardAnalytics title='' contentClass='sales-range' isLoading={!datasource.length} menuVisible={false}>
+  <CardAnalytics title='' contentClass='sales-range' menuVisible={false}>
     <RangeSelector id='range' dataSource={datasource} value={range} onValueChanged={onRangeChanged}>
       <Scale minorTickInterval='day' tickInterval='month' valueType='datetime'>
         <MinorTick visible={false} />

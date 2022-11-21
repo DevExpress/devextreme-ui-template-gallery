@@ -3,7 +3,7 @@ import PieChart, { Font, Label, Legend, Margin, Series, Size } from 'devextreme-
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
 
 export const RevenueSnapshotCard = ({ datasource }) => (
-  <CardAnalytics title='Revenue Snapshot (All Products)' contentClass='sales-by-category' isLoading={!datasource.length}>
+  <CardAnalytics title='Revenue Snapshot (All Products)' contentClass='sales-by-category'>
     <PieChart dataSource={datasource} type='doughnut' diameter={0.8} innerRadius={0.6}>
       <Series argumentField='name' valueField='value'>
         <Label backgroundColor='none' radialOffset={-20} visible customizeText={({ percentText }) => percentText}>

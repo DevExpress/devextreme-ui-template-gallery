@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
+
 import { Item } from 'devextreme-react/toolbar';
+import { LoadPanel } from 'devextreme-react/load-panel';
+
 import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
-import './analytics-dashboard.scss';
+
 import { RevenueSnapshotCard } from './cards/RevenueSnapshotCard';
 import { RevenueAnalysisCard } from './cards/RevenueAnalysisCard';
 import { ConversionFunnelCard } from './cards/ConversionFunnelCard';
@@ -11,8 +14,9 @@ import { Dashboard } from '../../components/dashboard/Dashboard';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 
+import './analytics-dashboard.scss';
+
 const calculateTotal = (data) => {
-  if (!data) return;
   return data.reduce((total, item) => total + (item.value || item.total), 0);
 };
 
@@ -25,6 +29,7 @@ export const AnalyticsDashboard = () => {
   const [salesByState, setSalesByState] = useState([]);
   const [salesTotal, setSalesTotal] = useState(0);
   const [opportunitiesTotal, setOpportunitiesTotal] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
@@ -40,43 +45,49 @@ export const AnalyticsDashboard = () => {
       getSalesByStateAndCity(...dateRange)
         .then((data) => calcSalesByState(data))
         .then((data) => setSalesByState(data)),
-    ]).catch((error) => console.log(error));
+    ])
+      .then(() => setIsLoading(false))
+      .catch((error) => console.log(error));
   }, [dateRange]);
 
   const onTabClick = useCallback((e: { itemData: string }) => {
     const { index, period } = ANALYTICS_PERIODS[e.itemData];
     setTabIndex(index);
     setDateRange(period.split('/'));
+    setIsLoading(true);
   }, []);
 
   return (
-    <Dashboard
-      title='Dashboard'
-      additionalToolbarContent={
-        <Item
-          location='before'
-          widget='dxTabs'
-          locateInMenu='auto'
-          options={{
-            dataSource: Object.keys(ANALYTICS_PERIODS),
-            selectedIndex: tabIndex,
-            onItemClick: onTabClick,
-          }}
-        />
-      }
-    >
-      <DashboardCardsGroup kind='compact'>
-        <OpportunitiesTicker value={opportunitiesTotal} />
-        <RevenueTotalTicker value={salesTotal} />
-        <ConversionTicker value={16} />
-        <LeadsTicker value={51} />
-      </DashboardCardsGroup>
-      <DashboardCardsGroup>
-        <RevenueCard datasource={sales} />
-        <ConversionFunnelCard datasource={opportunities} />
-        <RevenueAnalysisCard datasource={salesByState} />
-        <RevenueSnapshotCard datasource={salesByCategory} />
-      </DashboardCardsGroup>
-    </Dashboard>
+    <>
+      <Dashboard
+        title='Dashboard'
+        additionalToolbarContent={
+          <Item
+            location='before'
+            widget='dxTabs'
+            locateInMenu='auto'
+            options={{
+              dataSource: Object.keys(ANALYTICS_PERIODS),
+              selectedIndex: tabIndex,
+              onItemClick: onTabClick,
+            }}
+          />
+        }
+      >
+        <DashboardCardsGroup kind='compact'>
+          <OpportunitiesTicker value={opportunitiesTotal} />
+          <RevenueTotalTicker value={salesTotal} />
+          <ConversionTicker value={16} />
+          <LeadsTicker value={51} />
+        </DashboardCardsGroup>
+        <DashboardCardsGroup>
+          <RevenueCard datasource={sales} />
+          <ConversionFunnelCard datasource={opportunities} />
+          <RevenueAnalysisCard datasource={salesByState} />
+          <RevenueSnapshotCard datasource={salesByCategory} />
+        </DashboardCardsGroup>
+      </Dashboard>
+      <LoadPanel container='.view-wrapper-dashboard' visible={isLoading} position={{ of: '.layout-body' }} />
+    </>
   );
 };

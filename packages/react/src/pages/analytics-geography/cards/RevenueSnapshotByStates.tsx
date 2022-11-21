@@ -13,7 +13,6 @@ export const RevenueSnapshotByStatesCard = ({ datasource }) => (
   <CardAnalytics
     title='Revenue Snapshot by States'
     contentClass='sales-by-state'
-    isLoading={!datasource.length}
   >
     <PieChart
       id='pie'

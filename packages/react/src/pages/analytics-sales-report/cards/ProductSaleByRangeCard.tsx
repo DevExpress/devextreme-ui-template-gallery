@@ -6,7 +6,7 @@ import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics'
 type ProductSaleByRangeCardProps = { datasource: Array<{ [key: string]: unknown }> };
 
 export const ProductSaleByRangeCard = React.memo<ProductSaleByRangeCardProps>(({ datasource }) => (
-  <CardAnalytics title='Product Sale by Range' contentClass='sales-by-category' isLoading={!datasource.length}>
+  <CardAnalytics title='Product Sale by Range' contentClass='sales-by-category'>
     <PieChart id='pie' className='sales-pie' dataSource={datasource} type='doughnut' diameter={0.8} innerRadius={0.6}>
       <Series argumentField='name' valueField='value'>
         <Label backgroundColor='none' radialOffset={-20} visible customizeText={({ percentText }) => percentText}>
