@@ -11,12 +11,13 @@
       <dx-toolbar-item
         location="after"
         locate-in-menu="auto"
-      >
+      ><div>
         <dx-button
           text="Terminate"
           type="default"
           styling-mode="contained"
         />
+      </div>
       </dx-toolbar-item>
       <dx-toolbar-item
         location="after"
@@ -34,7 +35,9 @@
         location="after"
         locate-in-menu="auto"
       >
-        <div class="separator" />
+        <div>
+          <div class="separator" />
+        </div>
       </dx-toolbar-item>
       <dx-toolbar-item
         location="after"

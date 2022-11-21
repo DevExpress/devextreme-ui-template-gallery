@@ -48,12 +48,14 @@
 
     <div class="panels">
       <div class="left">
-        <task-form
-          :data="taskData"
-          :is-editing="false"
-          :contentByScreen="{ xs: 2, sm: 2 }"
-          :is-loading="isLoading && !taskData.name"
-        />
+        <dx-validation-group>
+          <task-form
+            :data="taskData"
+            :is-editing="false"
+            :content-by-screen="{ xs: 2, sm: 2 }"
+            :is-loading="isLoading && !taskData.name"
+          />
+        </dx-validation-group>
       </div>
 
       <div class="right">
@@ -102,6 +104,7 @@ import {
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
 import { DxTabPanel, DxItem } from 'devextreme-vue/tab-panel';
+import { DxValidationGroup } from 'devextreme-vue';
 // eslint-disable-next-line import/no-unresolved
 import { getTask } from 'dx-template-gallery-data';
 import type { Task } from '@/types/task';

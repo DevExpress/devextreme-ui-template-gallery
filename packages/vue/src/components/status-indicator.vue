@@ -24,8 +24,8 @@ import { DxTextBox } from 'devextreme-vue/text-box';
 const props = withDefaults(
   defineProps<{
     value: string,
-    showBar: boolean,
-    isField: boolean,
+    showBar?: boolean,
+    isField?: boolean,
   }>(),
   {
     value: '',

@@ -51,6 +51,7 @@ import {
   getSalesByCategory,
   getSales,
   getSalesByState,
+  // eslint-disable-next-line
 } from 'dx-template-gallery-data';
 import {
   Sales,

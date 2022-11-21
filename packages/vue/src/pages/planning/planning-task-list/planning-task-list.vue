@@ -56,7 +56,9 @@
         location="after"
         locate-in-menu="auto"
       >
-        <div class="separator" />
+        <div>
+          <div class="separator" />
+        </div>
       </dx-toolbar-item>
 
       <dx-toolbar-item
@@ -111,8 +113,10 @@
           v-else-if="taskPanelItems[1].text === displayTaskComponent"
           class="kanban"
         >
-          <task-list-kanban :tasks="kanbanData"
-                            @add-task="addTask"/>
+          <task-list-kanban
+            :tasks="kanbanData"
+            @add-task="addTask"
+          />
         </div>
         <div
           v-else-if="taskPanelItems[2].text === displayTaskComponent"
@@ -131,8 +135,7 @@
     v-model:is-visible="isNewTaskPopupOpened"
     @save="onSaveNewTask"
   >
-    <task-form :validation-group="newTaskValidationGroup"
-               :content-by-screen="{ xs: 1, sm: 1 }" />
+    <task-form :content-by-screen="{ xs: 1, sm: 1 }" />
   </form-popup>
 </template>
 
@@ -232,9 +235,7 @@ const reload = () => {
 };
 
 const onSaveNewTask = () => {
-  if (validationEngine.validateGroup(newTaskValidationGroup).isValid) {
-    isNewTaskPopupOpened.value = false;
-  }
+  isNewTaskPopupOpened.value = false;
 };
 
 loadTasksAsync();

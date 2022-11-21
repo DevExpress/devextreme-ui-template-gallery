@@ -13,10 +13,10 @@
     :drop-zone="dropzone"
     :dialog-trigger="dropzone"
     :multiple="false"
-    accept="image/*"
-    upload-mode="instantly"
     :show-file-list="false"
     :visible="false"
+    accept="image/*"
+    upload-mode="instantly"
     @drop-zone-enter="onDropZoneEnter"
     @drop-zone-leave="onDropZoneLeave"
   />

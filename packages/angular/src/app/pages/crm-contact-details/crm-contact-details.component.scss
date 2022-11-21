@@ -11,12 +11,6 @@ $right-panel-width: 360px;
   padding: 20px 16px 0 16px;
 }
 
-@media only screen and (max-width: 875px) {
-  ::ng-deep .contact-name-toolbar-item {
-    min-width: calc(#{$left-panel-width} + #{$right-panel-width} - 145px);
-  }
-}
-
 @include separator();
 
 .dx-toolbar ::ng-deep {
