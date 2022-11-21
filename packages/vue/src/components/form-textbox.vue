@@ -4,10 +4,7 @@
     v-model="value"
     :read-only="!isEditing"
     :mask="mask"
-    :element-attr="{class: 'form-editor'}"
-    :input-attr="{class: 'form-editor-input'}"
-    styling-mode="filled"
-    value-change-event="keyup input change"
+    v-bind="formEditorProps"
   >
     <dx-validator
       :validation-rules="validators"
@@ -26,6 +23,7 @@
 import { DxTextBox, DxButton as DxTextBoxButton } from 'devextreme-vue/text-box';
 import { DxValidator, DxValidationRule, DxRequiredRule } from 'devextreme-vue/validator';
 import { computed } from 'vue';
+import { formEditorProps } from '@/shared/form-editor-config';
 
 const props = withDefaults(
   defineProps<{

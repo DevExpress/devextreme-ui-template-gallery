@@ -93,10 +93,9 @@
               v-model="data.priority"
               :items="taskPriorityList"
               :read-only="!isEditing"
-              :element-attr="{class: 'form-editor'}"
               field-template="field"
               item-template="item"
-              styling-mode="filled"
+              v-bind="formEditorProps"
             >
               <template #field>
                 <div class="task-editor-field">
@@ -122,10 +121,9 @@
               v-model="data.status"
               :items="taskStatusList"
               :read-only="!isEditing"
-              :element-attr="{class: 'form-editor'}"
               field-template="field"
               item-template="item"
-              styling-mode="filled"
+              v-bind="formEditorProps"
             >
               <template #field>
                 <div class="task-editor-field">
@@ -171,7 +169,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import StatusIndicator from '@/components/status-indicator.vue';
 import { DxButton } from 'devextreme-vue/button';
 import { DxTextArea } from 'devextreme-vue/text-area';
@@ -192,6 +190,7 @@ import { DxSelectBox } from 'devextreme-vue/select-box';
 import LoadComponent from '@/components/load-component.vue';
 import FormTextbox from '@/components/form-textbox.vue';
 import FormDatebox from '@/components/form-datebox.vue';
+import { formEditorProps } from '@/shared/form-editor-config';
 
 const props = withDefaults(defineProps<{
   isLoading?: boolean,
@@ -204,13 +203,14 @@ const props = withDefaults(defineProps<{
   validationGroup: undefined,
 });
 
-const isCreateMode = !props.data.id;
-const isEditing = ref(isCreateMode);
+const isCreateMode = computed(() => !props.data.id);
+const isEditing = ref(true);
 const data = ref(props.data);
 
 watch(
   () => props.data,
   (newValue) => {
+    isEditing.value = !newValue.id;
     data.value = newValue;
   },
 );
