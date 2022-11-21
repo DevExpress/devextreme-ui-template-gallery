@@ -82,7 +82,7 @@
 
     <card-analytics titleText="Sales Performance" className="sales" [component]="chart">
       <div filter class="sales-filter" >
-      <dx-drop-down-button stylingMode="text" [useSelectMode]="true" [dropDownOptions]="{width: 65}"
+      <dx-drop-down-button stylingMode="text" [useSelectMode]="true"
         [items]="groupByPeriods" [selectedItemKey]="groupByPeriods[1]" (onSelectionChanged)="selectionChange($event)">
       </dx-drop-down-button>
       </div>
