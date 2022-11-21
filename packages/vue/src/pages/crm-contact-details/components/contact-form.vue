@@ -170,12 +170,17 @@
             />
           </dx-form-item>
           <dx-form-item>
-            <form-textbox
+            <dx-number-box
               label="Zip Code"
               v-model.number="contactData.zipCode"
               :is-editing="isEditing"
-              :validators="[zipCodeValidator]"
-            />
+              :element-attr="{class: 'form-editor'}"
+              :input-attr="{class: 'form-editor-input'}"
+              styling-mode="filled"
+              value-change-event="keyup input change"
+            >
+              <dx-validator :validation-rules="[zipCodeValidator]" />
+            </dx-number-box>
           </dx-form-item>
         </dx-form-group-item>
         <dx-form-group-item
@@ -241,6 +246,8 @@ import {
   DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxTextBox } from 'devextreme-vue/text-box';
+import { DxNumberBox } from 'devextreme-vue/number-box';
+import { DxValidator } from 'devextreme-vue/validator';
 import { DxSelectBox } from 'devextreme-vue';
 import LoadComponent from '@/components/load-component.vue';
 import { Contact, contactStatusList } from '@/types/contact';

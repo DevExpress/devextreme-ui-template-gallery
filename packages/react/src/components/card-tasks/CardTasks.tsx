@@ -10,8 +10,6 @@ import { Task } from '../../shared/types/task';
 
 import './CardTasks.scss';
 
-const selectionFilter = [['done', '=', true]];
-
 const Grid = ({ tasks }: { tasks: Task[] }) => {
   const [gridData, setGridData] = useState(tasks);
 
@@ -33,7 +31,6 @@ const Grid = ({ tasks }: { tasks: Task[] }) => {
       className='tasks-grid'
       dataSource={gridData}
       columnAutoWidth
-      selectionFilter={selectionFilter}
     >
       <Selection mode='multiple' />
 

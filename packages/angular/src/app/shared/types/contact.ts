@@ -30,11 +30,11 @@ export type Contact = {
     phone: string,
     email: string,
     image: string,
-    zipCode: string,
+    zipCode: number,
     activities: Activities,
 };
 
-export const newContact: Contact = { 
+export const newContact: Contact = {
   name: '',
   firstName: '',
   lastName: '',
@@ -50,7 +50,7 @@ export const newContact: Contact = {
   email: '',
   image: '',
   address: '',
-  zipCode: '',
+  zipCode: null,
   activities: [],
   opportunities: [],
   tasks: [],
