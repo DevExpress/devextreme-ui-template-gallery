@@ -25,9 +25,9 @@ fixture`Analytics Sales Report`;
 
       const isPeriodSelectorBoxVisible = screenModes[0] === screenMode;
       if (isPeriodSelectorBoxVisible) {
-        await t.click(Selector('.dx-dropdownbutton'));
+        await t.click(Selector('.sales-filter .dx-dropdownbutton'));
 
-        await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
+        await t.click(Selector('.sales-filter .dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
         await t.wait(timeoutSecond);
         await takeScreenshot(`analytics-sales-report-day${getPostfix(embedded, screenMode)}`, 'body');
       }
