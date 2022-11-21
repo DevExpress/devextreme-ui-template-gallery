@@ -28,7 +28,7 @@
                 <span v-if="props.showBy">by</span>
                 <span>{{ item.manager }}</span>
               </div>
-              <dx-menu
+              <card-menu
                 class="overflow-menu"
                 :items="activityMenuItems"
               />
@@ -42,10 +42,10 @@
 
 <script setup lang="ts">
 import { DxList } from 'devextreme-vue/list';
-import { DxMenu } from 'devextreme-vue/menu';
 import { formatDate } from '@/utils/formatters';
 import type { Activity } from '@/types/activities';
 import LoadComponent from '@/components/load-component.vue';
+import CardMenu from '@/components/card-menu.vue';
 
 const props = withDefaults(defineProps<{
   isLoading: boolean,
@@ -56,13 +56,9 @@ const props = withDefaults(defineProps<{
   showBy: false,
 });
 
-const activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
-  icon: 'overflow',
-  items: [
-    { text: 'View details' },
-    { text: 'Delete' },
-  ],
-},
+const activityMenuItems: Array<{ text: string }> = [
+  { text: 'View details' },
+  { text: 'Delete' },
 ];
 </script>
 <style scoped lang="scss">
@@ -108,7 +104,7 @@ const activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }>
     .date {
       padding: 0 10px;
       font-size: 12px;
-      color: #757575de;
+      color: $texteditor-label-color;
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;

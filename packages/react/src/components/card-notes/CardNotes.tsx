@@ -4,6 +4,9 @@ import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import { formatDate } from 'devextreme/localization';
+import Validator, { RequiredRule } from 'devextreme-react/validator';
+import ValidationGroup from 'devextreme-react/validation-group';
+import ScrollView from 'devextreme-react/scroll-view';
 
 import { Notes, Note } from '../../shared/types/card-notes';
 
@@ -25,7 +28,7 @@ const Card = ({ note }: { note: Note }) => {
   );
 };
 
-export const CardNotes = ({ items, user }: { items: Notes | undefined; user: string | undefined }) => {
+export const CardNotes = ({ items, user }: { items?: Notes; user?: string }) => {
   const [noteText, setNoteText] = useState('');
   const [data, setData] = useState(items);
 
@@ -33,12 +36,12 @@ export const CardNotes = ({ items, user }: { items: Notes | undefined; user: str
     setData(items);
   }, [items]);
 
-  const add = useCallback(() => {
-    if (noteText === '' || !data || !user) {
+  const add = useCallback((e) => {
+    if (!e.validationGroup.validate().isValid || !data || !user) {
       return;
     }
     setData([...data, { manager: user, date: new Date(), text: noteText }]);
-    setNoteText('');
+    e.validationGroup.reset();
   }, [noteText, data, user]);
 
   const onNoteTextChanged = useCallback((value) => {
@@ -46,28 +49,38 @@ export const CardNotes = ({ items, user }: { items: Notes | undefined; user: str
   }, []);
 
   return (
-    <div className='notes'>
-      <div className='input-notes'>
-        <TextArea label='New Note' stylingMode='outlined' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged} />
-        <Toolbar>
-          <Item
-            location='after'
-            widget='dxButton'
-            options={{
-              text: 'Add',
-              stylingMode: 'outlined',
-              type: 'default',
-              onClick: add,
-            }}
-          />
-        </Toolbar>
-      </div>
+    <ValidationGroup>
+      <div className='notes'>
+        <div className='input-notes'>
+          <TextArea label='New Note' stylingMode='outlined' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged}>
+            <Validator>
+              <RequiredRule />
+            </Validator>
+          </TextArea>
+          <Toolbar>
+            <Item
+              location='after'
+              widget='dxButton'
+              options={{
+                text: 'Add',
+                stylingMode: 'outlined',
+                type: 'default',
+                onClick: add,
+              }}
+            />
+          </Toolbar>
+        </div>
 
-      <div className='notes-content'>
-        {data?.map((note, index) => (
-          <Card key={index} note={note} />
-        ))}
+        <div className='messages-content'>
+          <ScrollView>
+            <div className='message-list'>
+              {data?.map((note, index) => (
+                <Card key={index} note={note} />
+              ))}
+            </div>
+          </ScrollView>
+        </div>
       </div>
-    </div>
+    </ValidationGroup>
   );
 };

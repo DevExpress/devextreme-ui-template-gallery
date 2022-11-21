@@ -2,12 +2,16 @@ import { CommonModule } from '@angular/common';
 import {
   Component, Input, NgModule,
 } from '@angular/core';
-import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
-import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
-import { DxButtonModule } from 'devextreme-angular/ui/button';
-import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
-import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
+import { 
+  DxTextAreaModule,
+  DxTextBoxModule,
+  DxButtonModule,
+  DxToolbarModule,
+  DxFileUploaderModule,
+  DxScrollViewModule,
+  DxValidationGroupModule,
+  DxValidatorModule,
+} from 'devextreme-angular';
 import { Message, Messages } from 'src/app/shared/types/messages';
 
 @Component({
@@ -24,11 +28,6 @@ export class CardMessagesComponent {
 
   messageText = '';
 
-  defaultText = () => {
-    this.messageTitle = '';
-    this.messageText = '';
-  };
-
   getAvatarText(name: string) {
     return name.split(' ').map((name) => name[0]).join('');
   }
@@ -37,8 +36,8 @@ export class CardMessagesComponent {
     return text.replace('{username}', this.user);
   }
 
-  send = () => {
-    if (this.messageText === '' || this.messageTitle === '') {
+  send = (e) => {
+    if (!e.validationGroup.validate().isValid) {
       return;
     }
 
@@ -51,7 +50,7 @@ export class CardMessagesComponent {
 
     this.items.push(newMessage);
 
-    this.defaultText();
+    e.validationGroup.reset();
   };
 }
 
@@ -63,6 +62,8 @@ export class CardMessagesComponent {
     DxFileUploaderModule,
     DxScrollViewModule,
     DxButtonModule,
+    DxValidationGroupModule,
+    DxValidatorModule,
     CommonModule,
   ],
   declarations: [CardMessagesComponent],

@@ -6,7 +6,7 @@
     [allowColumnReordering]="true"
     (onRowClick)="rowClick($event)"
     (onRowPrepared)="rowPrepared($event)"
-    (exporting)="onExporting($event)"
+    (onExporting)="onExporting($event)"
   >
     <dxo-scrolling mode="virtual"></dxo-scrolling>
     <dxo-selection
@@ -138,7 +138,7 @@
     </div>
   </dx-data-grid>
 
-  <user-panel [userId]="userId" [(isOpen)]="isPanelOpen"></user-panel>
+  <user-panel [userId]="userId" [(isOpened)]="isPanelOpened"></user-panel>
 
   <form-popup
     #userPopup

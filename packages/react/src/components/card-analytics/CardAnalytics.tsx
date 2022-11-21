@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import LoadPanel from 'devextreme-react/load-panel';
-import Menu from 'devextreme-react/menu';
+import { CardMenu } from '../card-menu/CardMenu';
 import { PositionConfig } from 'devextreme/animation/position';
 import './CardAnalytics.scss';
 
@@ -14,13 +14,8 @@ type CardProps = {
 };
 
 const menuItems = [
-  {
-    icon: 'overflow',
-    items: [
-      { text: 'Configure' },
-      { text: 'Remove' },
-    ],
-  },
+  { text: 'Configure' },
+  { text: 'Remove' },
 ];
 
 export const CardAnalytics = ({
@@ -33,18 +28,18 @@ export const CardAnalytics = ({
   menuVisible = true,
 }: React.PropsWithChildren<CardProps>) => {
   const calculateLoadPanelPosition = (): PositionConfig => ({
-    of: `.${contentClass + (compact ? ' .title' : ' .content')}`,
+    of: `.${contentClass + (compact ? ' .title' : ' .card-contents')}`,
     at: compact ? 'right' : 'center',
   });
 
   return (
     <div className={`card ${contentClass}`}>
       <div className='header'>
-        <Menu visible={menuVisible} className='overflow-menu' items={menuItems} />
-        <div className='title'>{title}</div>
+        <CardMenu visible={menuVisible} items={menuItems} />
+        {title && <div className='title'>{title}</div>}
         {additionalHeaderContent}
       </div>
-      <div className='content'>{children}</div>
+      <div className='card-contents'>{children}</div>
       <LoadPanel
         container={`.${contentClass}`}
         position={calculateLoadPanelPosition()}

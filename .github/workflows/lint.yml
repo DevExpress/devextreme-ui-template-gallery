@@ -16,10 +16,10 @@ jobs:
 
     steps:
     - name: Get sources
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Use Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '16'
 
@@ -48,7 +48,7 @@ jobs:
 
     - name: Archive artifacts
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: artifacts
         path: test-results.xml

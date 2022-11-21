@@ -16,7 +16,7 @@
       >
         <div class="list-title dx-theme-text-color">
           <span>{{ board.name }}</span>
-          <dx-menu :items="boardMenuItems" />
+          <card-menu :items="boardMenuItems" />
         </div>
         <dx-scroll-view
           class="scrollable-list"
@@ -44,6 +44,7 @@
               icon="plus"
               text="Add Task"
               styling-mode="text"
+              width="100%"
               @click="addTask"
             />
           </div>
@@ -61,7 +62,8 @@ import { AddEvent, ReorderEvent, DragStartEvent } from 'devextreme/ui/sortable';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxSortable } from 'devextreme-vue/sortable';
 import { DxButton } from 'devextreme-vue/button';
-import { DxMenu } from 'devextreme-vue/menu';
+
+import CardMenu from '@/components/card-menu.vue';
 import TaskKanbanCard from './components/task-kanban-card.vue';
 
 interface Board {
@@ -78,14 +80,10 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits(['add-task']);
 
 const statuses = taskStatusList;
-const boardMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
-  icon: 'more',
-  items: [
-    { text: 'Add card' },
-    { text: 'Copy list' },
-    { text: 'Move list' },
-  ],
-},
+const boardMenuItems: Array<{ text: string }> = [
+  { text: 'Add card' },
+  { text: 'Copy list' },
+  { text: 'Move list' },
 ];
 
 const fillOutBoard = (cards: Task[]): Board[] => {

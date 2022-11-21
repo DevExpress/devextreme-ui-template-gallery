@@ -12,7 +12,8 @@
     <div class="list" *ngFor="let board of kanbanDataSource">
       <div class="list-title dx-theme-text-color">
         <span>{{ board.name }}</span>
-        <dx-menu [items]="boardMenuItems"> </dx-menu>
+        <card-menu [items]="boardMenuItems">
+        </card-menu>
       </div>
       <dx-scroll-view
         class="scrollable-list"
@@ -37,6 +38,7 @@
             icon="plus"
             text="Add Task"
             stylingMode="text"
+            width="100%"
             (onClick)="addTask()"
           ></dx-button>
         </div>

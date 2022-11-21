@@ -1,7 +1,7 @@
 import React from 'react';
 
 import List from 'devextreme-react/list';
-import Menu from 'devextreme-react/menu';
+import { CardMenu } from '../card-menu/CardMenu';
 
 import { formatDate } from 'devextreme/localization';
 
@@ -12,24 +12,21 @@ import { withLoadPanel } from '../../shared/utils/withLoadPanel';
 
 import './CardActivities.scss';
 
-const activityMenuItems = [{
-  icon: 'overflow',
-  items: [
-    { text: 'View details' },
-    { text: 'Delete' },
-  ],
-}];
+const activityMenuItems = [
+  { text: 'View details' },
+  { text: 'Delete' },
+];
 
 const listItemRender = (item: Activity) => {
   return (
     <div className='activity'>
       <div className='name'>{item.name}</div>
-      <div className='date'>
+      <div className='date by'>
         <span>{formatDate(new Date(item.date), 'MM/dd/yyyy')}</span>
-        <span>by</span>
+        <span className='by-span'>by</span>
         <span>{item.manager}</span>
       </div>
-      <Menu className='overflow-menu' items={activityMenuItems} />
+      <CardMenu items={activityMenuItems} />
     </div>
   );
 };
@@ -42,7 +39,7 @@ const ActivitiesList = ({ activities }) => {
 
 const ActivitiesWithLoadPanel = withLoadPanel(ActivitiesList);
 
-export const CardActivities = ({ activities }: { activities: Activities | undefined }) => (
+export const CardActivities = ({ activities }: { activities?: Activities }) => (
   <div className={classNames({ 'card-activities': true, load: !activities })}>
     <ActivitiesWithLoadPanel
       activities={activities}

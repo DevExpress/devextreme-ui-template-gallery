@@ -5,7 +5,7 @@ import {
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
-import { DxMenuModule } from 'devextreme-angular/ui/menu';
+import { CardMenuModule } from '../card-menu/card-menu.component';
 import { Activities } from 'src/app/shared/types/activities';
 
 @Component({
@@ -20,13 +20,10 @@ export class CardActivitiesComponent implements OnInit, OnChanges {
 
   isLoading = true;
 
-  activityMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
-    icon: 'overflow',
-    items: [
-      { text: 'View details' },
-      { text: 'Delete' },
-    ],
-  }];
+  activityMenuItems: Array<{ text: string }> = [
+    { text: 'View details' },
+    { text: 'Delete' },
+  ];
 
   ngOnInit() {
     this.isLoading = !this.activities;
@@ -42,7 +39,7 @@ export class CardActivitiesComponent implements OnInit, OnChanges {
     DxListModule,
     DxButtonModule,
     DxLoadPanelModule,
-    DxMenuModule,
+    CardMenuModule,
 
     CommonModule,
   ],

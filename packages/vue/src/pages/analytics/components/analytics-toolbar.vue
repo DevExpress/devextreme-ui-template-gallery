@@ -104,7 +104,7 @@ onMounted(() => {
   @include header();
 }
 
-.dx-tab {
+.dx-tabs .dx-tab {
   background-color: $background-color;
   text-align: center;
 }

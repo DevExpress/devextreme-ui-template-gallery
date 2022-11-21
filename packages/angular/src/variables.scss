@@ -17,7 +17,6 @@ $side-panel-background: darken($base-bg, 5);
 $background-color: $base-bg;
 $accent-color: $base-accent;
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
-$text-button-horizontal-padding: $material-button-icononly-padding;
 $toolbar-margin-bottom: $content-padding;
 $toolbar-items-container-height: 38px;
 $texteditor-edit-color: $texteditor-color;
@@ -45,7 +44,6 @@ $list-padding-left: $material-list-item-horizontal-padding;
 
 @mixin message-title {
   display: flex;
-  align-items: center;
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
@@ -55,4 +53,16 @@ $list-padding-left: $material-list-item-horizontal-padding;
 @mixin message-text {
   padding-top: 5px;
   line-height: 21px;
+}
+
+@mixin messages-content {
+  .message-list {
+    max-height: 320px;
+  }
+
+  .messages-content {
+    padding: 20px;
+    border-top: 1px solid $base-border-color;
+    background-color: $side-panel-background;
+  }
 }

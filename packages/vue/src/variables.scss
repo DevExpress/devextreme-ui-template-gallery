@@ -23,7 +23,6 @@ $background-color: $base-bg;
 $border-color: $base-border-color;
 $accent-color: $base-accent;
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
-$text-button-horizontal-padding: $material-button-icononly-padding;
 $toolbar-margin-bottom: $content-padding;
 $texteditor-edit-color: $texteditor-color;
 $filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
@@ -56,7 +55,6 @@ $main-container-padding-right: 16px;
 
 @mixin message-title {
   display: flex;
-  align-items: center;
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
@@ -66,4 +64,16 @@ $main-container-padding-right: 16px;
 @mixin message-text {
   padding-top: 5px;
   line-height: 21px;
+}
+
+@mixin messages-content {
+  .message-list {
+    max-height: 320px;
+  }
+  
+  .messages-content {
+    padding: 20px;
+    border-top: 1px solid $base-border-color;
+    background-color: $side-panel-background;
+  }
 }

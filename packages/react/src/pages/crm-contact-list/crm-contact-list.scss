@@ -1,5 +1,5 @@
-@use "../../variables.scss" as *;
-@use "sass:math";
+@use '../../variables.scss' as *;
+@use 'sass:math';
 
 .view.crm-contact-list {
   width: 100%;
@@ -19,11 +19,9 @@
     height: 100%;
 
     .name-template {
-      margin: -6px 0;
-
       .position {
         font-size: 12px;
-        color: #757575de;
+        color: $texteditor-label-color;
       }
     }
 
@@ -49,6 +47,7 @@
     position: relative;
 
     .status {
+      font-size: 13px;
       position: absolute;
       margin-top: 10px;
       margin-left: 11px;

@@ -43,8 +43,6 @@ export class AnalyticsSalesReportComponent implements OnInit {
   constructor(private service: DataService) { }
 
   selectionChange({item: period}: SelectionChangedEvent) {
-    this.salesByDateAndCategory = null;
-
     this.service.getSalesByOrderDate(period.toLowerCase())
       .subscribe((data) => {
         this.salesByDateAndCategory = data;
@@ -53,7 +51,6 @@ export class AnalyticsSalesReportComponent implements OnInit {
 
   onRangeChanged = ({value: dates}) => {
     const [startDate, endDate] = dates.map((date) => formatDate(date, 'YYYY-MM-dd', 'en'));
-    this.salesByCategory = null;
 
     this.service.getSalesByCategory(startDate, endDate).subscribe((data) => {
       this.salesByCategory = data;
