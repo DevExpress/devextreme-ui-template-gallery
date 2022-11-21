@@ -274,6 +274,8 @@ const onSaveContactNewForm = () => {
 <style scoped lang="scss">
 @use "@/variables" as *;
 
+@include separator();
+
 .view-wrapper {
   position: absolute;
   top: 0;
@@ -282,8 +284,6 @@ const onSaveContactNewForm = () => {
   right: 0;
 
   .grid  {
-    @include separator();
-
     .name-template {
 
       .position {

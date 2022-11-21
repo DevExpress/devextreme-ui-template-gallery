@@ -34,10 +34,10 @@ $main-container-padding-left: 16px;
 $main-container-padding-right: 16px;
 
 
-@mixin separator($width: 1px, $height: 24px) {
+@mixin separator() {
   .separator {
-    height: $height;
-    width: $width;
+    height: 24px;
+    width: 1px;
     background: $base-border-color;
 
     .dx-toolbar-menu-section & {

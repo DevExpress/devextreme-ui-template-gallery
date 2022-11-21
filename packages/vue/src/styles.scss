@@ -196,7 +196,3 @@ $side-panel-min-width: 60px;
 .status-indicator-high {
   @include status(#ff5722);
 }
-
-.dx-popup-content  {
-  @include separator('auto', 1px);
-}
