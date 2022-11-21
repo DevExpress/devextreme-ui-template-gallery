@@ -34,6 +34,8 @@ fixture`Planning List`;
       await t.typeText(Selector('form-item-date[label="Start Date"] .dx-datebox'), '10/26/2022', { replace: true });
       await t.typeText(Selector('form-item-date[label="Due Date"] .dx-datebox'), '10/26/2022', { replace: true });
       await takeScreenshot(`planning-task-add-task-popup-embed=${getPostfix(embedded, screenMode)}`, 'body');
+      await t.click(Selector('[aria-label="Save"]'));
+      await takeScreenshot(`planning-task-add-task-popup-validate-embed=${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
         .expect(compareResults.isValid())

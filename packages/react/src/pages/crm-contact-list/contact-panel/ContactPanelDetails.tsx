@@ -14,6 +14,7 @@ import { Contact } from '../../../shared/types/crm-contact';
 import { CardActivities } from '../../../components/card-activities/CardActivities';
 import { FormTextbox, FormPhoto, ContactStatus } from '../../../components';
 import { useScreenSize } from '../../../utils/media-query';
+import ValidationGroup from 'devextreme-react/validation-group';
 
 const accordionTitleClick = (e: ButtonClickEvent) => {
   e.event?.stopPropagation();
@@ -59,6 +60,11 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
     setIsEditing(!isEditing);
   }, [isEditing]);
 
+  const onSaveClick = useCallback((e) => {
+    if(!e.validationGroup.validate().isValid) return;
+    setIsEditing(!isEditing);
+  }, []);
+
   const navigateToDetails = useCallback(() => {
     navigate('/crm-contact-details');
   }, []);
@@ -81,122 +87,124 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
   }, [contact]);
 
   return (
-    <div id='contact-panel' className={classNames({ 'panel': true, 'open': isOpened, 'pin': isPinned && (isLarge || isMedium) })}>
-      <div className='data-wrapper'>
-        <div className='data-part'>
-          <Toolbar className='panel-toolbar'>
-            <ToolbarItem location='before'>
-              <span className='contact-name value'>{contact.name}</span>
-            </ToolbarItem>
-            <ToolbarItem location='before'>
-              <ContactStatus text={contact.status} />
-            </ToolbarItem>
-            <ToolbarItem
-              location='after'
-              visible={isLarge || isMedium}
-            >
-              <Button icon={isPinned ? 'pin' : 'unpin'} onClick={onPinClick} />
-            </ToolbarItem>
-            <ToolbarItem location='after'>
-              <Button icon='close' onClick={onClosePanelClick} />
-            </ToolbarItem>
-          </Toolbar>
-        </div>
-        <ScrollView className='panel-scroll'>
-          <div className='data-part border'>
-            <Form
-              className={classNames({ 'plain-styled-form': true, 'view-mode': !isEditing })}
-            >
-              <GroupItem colCount={2}>
-                <ColCountByScreen xs={2} />
-                <FormItem cssClass='photo'>
-                  <FormPhoto link={contact.image} size={124} />
-                </FormItem>
-                <GroupItem>
-                  <FormItem cssClass='accent'>
+    <ValidationGroup>
+      <div id='contact-panel' className={classNames({ 'panel': true, 'open': isOpened, 'pin': isPinned && (isLarge || isMedium) })}>
+        <div className='data-wrapper'>
+          <div className='data-part'>
+            <Toolbar className='panel-toolbar'>
+              <ToolbarItem location='before'>
+                <span className='contact-name value'>{contact.name}</span>
+              </ToolbarItem>
+              <ToolbarItem location='before'>
+                <ContactStatus text={contact.status} />
+              </ToolbarItem>
+              <ToolbarItem
+                location='after'
+                visible={isLarge || isMedium}
+              >
+                <Button icon={isPinned ? 'pin' : 'unpin'} onClick={onPinClick} />
+              </ToolbarItem>
+              <ToolbarItem location='after'>
+                <Button icon='close' onClick={onClosePanelClick} />
+              </ToolbarItem>
+            </Toolbar>
+          </div>
+          <ScrollView className='panel-scroll'>
+            <div className='data-part border'>
+              <Form
+                className={classNames({ 'plain-styled-form': true, 'view-mode': !isEditing })}
+              >
+                <GroupItem colCount={2}>
+                  <ColCountByScreen xs={2} />
+                  <FormItem cssClass='photo'>
+                    <FormPhoto link={contact.image} size={124} />
+                  </FormItem>
+                  <GroupItem>
+                    <FormItem cssClass='accent'>
+                      <FormTextbox
+                        label='Company'
+                        value={contact.company}
+                        isEditing={!isEditing}
+                        onValueChange={updateField('company')}
+                      />
+                    </FormItem>
+                    <FormItem>
+                      <FormTextbox
+                        label='Position'
+                        value={contact.position}
+                        isEditing={!isEditing}
+                        onValueChange={updateField('position')}
+                      />
+                    </FormItem>
+                    <FormItem cssClass='accent'>
+                      <FormTextbox
+                        label='Assigned to'
+                        value={contact.manager}
+                        isEditing={!isEditing}
+                        onValueChange={updateField('manager')}
+                      />
+                    </FormItem>
+                  </GroupItem>
+                </GroupItem>
+
+                <GroupItem cssClass='contact-fields-group'>
+                  <FormItem>
                     <FormTextbox
-                      label='Company'
-                      value={contact.company}
+                      value={contact.phone}
                       isEditing={!isEditing}
-                      onValueChange={updateField('company')}
+                      onValueChange={updateField('phone')}
+                      icon='tel'
+                      mask='+1(000)000-0000'
                     />
                   </FormItem>
                   <FormItem>
                     <FormTextbox
-                      label='Position'
-                      value={contact.position}
+                      value={contact.email}
                       isEditing={!isEditing}
-                      onValueChange={updateField('position')}
+                      onValueChange={updateField('email')}
+                      icon='email'
                     />
                   </FormItem>
-                  <FormItem cssClass='accent'>
+                  <FormItem>
                     <FormTextbox
-                      label='Assigned to'
-                      value={contact.manager}
+                      value={contact.address}
                       isEditing={!isEditing}
-                      onValueChange={updateField('manager')}
+                      onValueChange={updateField('address')}
+                      icon='home'
                     />
                   </FormItem>
                 </GroupItem>
-              </GroupItem>
+              </Form>
+            </div>
 
-              <GroupItem cssClass='contact-fields-group'>
-                <FormItem>
-                  <FormTextbox
-                    value={contact.phone}
-                    isEditing={!isEditing}
-                    onValueChange={updateField('phone')}
-                    icon='tel'
-                    mask='+1(000)000-0000'
-                  />
-                </FormItem>
-                <FormItem>
-                  <FormTextbox
-                    value={contact.email}
-                    isEditing={!isEditing}
-                    onValueChange={updateField('email')}
-                    icon='email'
-                  />
-                </FormItem>
-                <FormItem>
-                  <FormTextbox
-                    value={contact.address}
-                    isEditing={!isEditing}
-                    onValueChange={updateField('address')}
-                    icon='home'
-                  />
-                </FormItem>
-              </GroupItem>
-            </Form>
-          </div>
-
-          <div className='data-part data-part-toolbar border'>
-            <Toolbar>
-              <ToolbarItem location='before' visible={!isEditing}>
-                <Button icon='edit' text='Edit' stylingMode='outlined' type='default' onClick={toggleEditHandler} />
-              </ToolbarItem>
-              <ToolbarItem location='before' visible={!isEditing}>
-                <Button text='Details' stylingMode='outlined' type='default' onClick={navigateToDetails} />
-              </ToolbarItem>
-              <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
-                <Button text='Save' stylingMode='outlined' type='default' onClick={toggleEditHandler} />
-              </ToolbarItem>
-              <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
-                <Button text='Cancel' stylingMode='text' onClick={toggleEditHandler} />
-              </ToolbarItem>
-              <ToolbarItem location='after' visible={!isEditing}>
-                <DropDownButton text='Actions' width={120} stylingMode='contained' items={['Call', 'Send Fax', 'Send Email', 'Make a Meeting']} />
-              </ToolbarItem>
-            </Toolbar>
-          </div>
-          <div className='data-part'>
-            <Accordion multiple collapsible itemTitleRender={renderCustomTitle}>
-              <AccordionItem title='Opportunities' render={renderCustomOpportunities} />
-              <AccordionItem title='Activities' render={renderCustomActivities} />
-            </Accordion>
-          </div>
-        </ScrollView>
+            <div className='data-part data-part-toolbar border'>
+              <Toolbar>
+                <ToolbarItem location='before' visible={!isEditing}>
+                  <Button icon='edit' text='Edit' stylingMode='outlined' type='default' onClick={toggleEditHandler} />
+                </ToolbarItem>
+                <ToolbarItem location='before' visible={!isEditing}>
+                  <Button text='Details' stylingMode='outlined' type='default' onClick={navigateToDetails} />
+                </ToolbarItem>
+                <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
+                  <Button text='Save' stylingMode='outlined' type='default' onClick={onSaveClick} />
+                </ToolbarItem>
+                <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
+                  <Button text='Cancel' stylingMode='text' onClick={toggleEditHandler} />
+                </ToolbarItem>
+                <ToolbarItem location='after' visible={!isEditing}>
+                  <DropDownButton text='Actions' width={120} stylingMode='contained' items={['Call', 'Send Fax', 'Send Email', 'Make a Meeting']} />
+                </ToolbarItem>
+              </Toolbar>
+            </div>
+            <div className='data-part'>
+              <Accordion multiple collapsible itemTitleRender={renderCustomTitle}>
+                <AccordionItem title='Opportunities' render={renderCustomOpportunities} />
+                <AccordionItem title='Activities' render={renderCustomActivities} />
+              </Accordion>
+            </div>
+          </ScrollView>
+        </div>
       </div>
-    </div>
+    </ValidationGroup>
   );
 };

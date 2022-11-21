@@ -11,6 +11,7 @@ import {
   DxTextAreaModule,
   DxToolbarModule,
   DxValidatorModule,
+  DxValidationGroupModule,
 } from 'devextreme-angular';
 import {
   StatusIndicatorModule,
@@ -50,7 +51,8 @@ export class TaskFormComponent implements OnChanges {
     this.isEditing = true;
   };
 
-  handleSaveClick = () => {
+  handleSaveClick = (e) => {
+    if(!e.validationGroup.validate().isValid) return;
     this.isEditing = false;
   };
 
@@ -69,6 +71,7 @@ export class TaskFormComponent implements OnChanges {
     DxTextAreaModule,
     DxToolbarModule,
     DxValidatorModule,
+    DxValidationGroupModule,
 
     FormTextboxModule,
     StatusIndicatorModule,

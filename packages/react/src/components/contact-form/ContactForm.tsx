@@ -7,6 +7,8 @@ import { withLoadPanel } from '../../shared/utils/withLoadPanel';
 
 import { Contact } from '../../shared/types/crm-contact';
 
+import ValidationGroup from 'devextreme-react/validation-group';
+
 import './ContactForm.scss';
 
 const ContactFromDetailsWithLoadPanel = withLoadPanel(ContactFromDetails);
@@ -20,16 +22,18 @@ export const ContactForm = ({ data }: { data?: Contact }) => {
 
   return (
     <div className='contact-form'>
-      <ToolbarForm toggleEditing={handleEditClick} editing={editing} />
-      <ContactFromDetailsWithLoadPanel
-        loading={!data}
-        data={data}
-        editing={editing}
-        panelProps={{
-          container: '.contact-form',
-          position: { of: '.contact-form' },
-        }}
-      />
+      <ValidationGroup>
+        <ToolbarForm toggleEditing={handleEditClick} editing={editing} />
+        <ContactFromDetailsWithLoadPanel
+          loading={!data}
+          data={data}
+          editing={editing}
+          panelProps={{
+            container: '.contact-form',
+            position: { of: '.contact-form' },
+          }}
+        />
+      </ValidationGroup>
     </div>
   );
 };

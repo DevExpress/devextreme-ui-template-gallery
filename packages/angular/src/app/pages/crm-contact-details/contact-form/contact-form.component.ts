@@ -10,6 +10,7 @@ import {
   DxTextBoxModule,
   DxToolbarModule,
   DxValidatorModule,
+  DxValidationGroupModule,
 } from 'devextreme-angular';
 import {
   ContactStatusModule,
@@ -37,7 +38,8 @@ export class ContactFormComponent {
     this.isEditing = true;
   }
 
-  handleSaveClick() {
+  handleSaveClick(e) {
+    if(!e.validationGroup.validate().isValid) return;
     this.isEditing = false;
   }
 
@@ -54,6 +56,7 @@ export class ContactFormComponent {
     DxButtonModule,
     DxTextBoxModule,
     DxLoadPanelModule,
+    DxValidationGroupModule,
 
     FormTextboxModule,
     ContactStatusModule,

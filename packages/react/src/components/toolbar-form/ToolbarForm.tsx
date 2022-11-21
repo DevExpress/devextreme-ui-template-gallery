@@ -6,6 +6,13 @@ import Button from 'devextreme-react/button';
 import './ToolbarForm.scss';
 
 export const ToolbarForm = ({ editing, toggleEditing }) => {
+
+  const onSaveClick = (e) => {
+    if (!e.validationGroup.validate().isValid) return;
+
+    toggleEditing();
+  };
+
   return (
     <Toolbar className='toolbar-form'>
       <Item location='before'>
@@ -15,7 +22,7 @@ export const ToolbarForm = ({ editing, toggleEditing }) => {
         <Button text='Edit' icon='edit' stylingMode='outlined' type='default' onClick={toggleEditing} />
       </Item>
       <Item location='after' locateInMenu='after' visible={editing}>
-        <Button text='Save' stylingMode='outlined' type='default' onClick={toggleEditing} />
+        <Button text='Save' stylingMode='outlined' type='default' onClick={onSaveClick} />
       </Item>
       <Item location='after' locateInMenu='after' visible={editing}>
         <Button text='Cancel' stylingMode='text' onClick={toggleEditing} />
