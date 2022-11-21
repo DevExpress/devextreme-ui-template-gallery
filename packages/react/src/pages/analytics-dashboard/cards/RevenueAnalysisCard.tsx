@@ -2,8 +2,9 @@ import React from 'react';
 import Bullet, { Size, Tooltip } from 'devextreme-react/bullet';
 import DataGrid, { Column } from 'devextreme-react/data-grid';
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
+import { SaleByState } from '../../../shared/types/analytics';
 
-export const RevenueAnalysisCard = ({ datasource }) => (
+export const RevenueAnalysisCard = ({ datasource }: { datasource: SaleByState[] }) => (
   <CardAnalytics title='Revenue Analysis' contentClass='sales-by-state grid'>
     <DataGrid dataSource={datasource} height={290}>
       <Column caption='State' dataField='stateName' />

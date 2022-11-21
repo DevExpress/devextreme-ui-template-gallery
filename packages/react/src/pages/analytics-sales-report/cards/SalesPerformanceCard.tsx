@@ -1,9 +1,15 @@
 import React from 'react';
 import Chart, { ArgumentAxis, CommonSeriesSettings, Legend, Point, SeriesTemplate, Size, Tooltip } from 'devextreme-react/chart';
 import DropDownButton from 'devextreme-react/drop-down-button';
-import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
+import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
-export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPeriodChanged, range }) => (
+import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
+import { Sale } from '../../../shared/types/analytics';
+
+export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPeriodChanged, range }: {
+  datasource: Sale[], periods: string[], selectedPeriod: string, onPeriodChanged: (e: SelectionChangedEvent) => void,
+  range: Date[]
+}) => (
   <CardAnalytics
     title='Sales Performance'
     contentClass='sales'

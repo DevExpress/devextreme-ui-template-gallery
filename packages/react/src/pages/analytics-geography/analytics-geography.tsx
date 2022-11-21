@@ -5,6 +5,7 @@ import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGro
 import { RevenueByStatesCard } from './cards/RevenueByStatesCard';
 import { RevenueAnalysisByStatesCard } from './cards/RevenueAnalysisByStatesCard';
 import { RevenueSnapshotByStatesCard } from './cards/RevenueSnapshotByStates';
+import { SaleByStateAndCity, SaleByState } from '../../shared/types/analytics';
 
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 import {
@@ -41,8 +42,8 @@ export const AnalyticsGeography = () => {
   const [dateRange, setDateRange] = useState(
     ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/')
   );
-  const [salesByStateAndCity, setSalesByStateAndCity] = useState([]);
-  const [salesByState, setSalesByState] = useState([]);
+  const [salesByStateAndCity, setSalesByStateAndCity] = useState<SaleByStateAndCity[]>([]);
+  const [salesByState, setSalesByState] = useState<SaleByState[]>([]);
   const [salesByStateMarkers, setSalesByStateMarkers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 

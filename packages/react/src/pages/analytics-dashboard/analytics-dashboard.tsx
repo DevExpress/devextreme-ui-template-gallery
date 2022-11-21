@@ -13,20 +13,21 @@ import { ConversionTicker, LeadsTicker, OpportunitiesTicker, RevenueTotalTicker 
 import { Dashboard } from '../../components/dashboard/Dashboard';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
+import { Sale, SaleOrOpportunityByCategory, SaleByState } from '../../shared/types/analytics';
 
 import './analytics-dashboard.scss';
 
-const calculateTotal = (data) => {
-  return data.reduce((total, item) => total + (item.value || item.total), 0);
+const calculateTotal = (data: (SaleOrOpportunityByCategory & Sale)[]) => {
+  return data.reduce((acc, item) => acc + (item.value || item.total), 0);
 };
 
 export const AnalyticsDashboard = () => {
   const [tabIndex, setTabIndex] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].index);
   const [dateRange, setDateRange] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/'));
-  const [opportunities, setOpportunities] = useState([]);
-  const [salesByCategory, setSalesByCategory] = useState([]);
-  const [sales, setSales] = useState([]);
-  const [salesByState, setSalesByState] = useState([]);
+  const [opportunities, setOpportunities] = useState<SaleOrOpportunityByCategory[]>([]);
+  const [salesByCategory, setSalesByCategory] = useState<SaleOrOpportunityByCategory[]>([]);
+  const [sales, setSales] = useState<Sale[]>([]);
+  const [salesByState, setSalesByState] = useState<SaleByState[]>([]);
   const [salesTotal, setSalesTotal] = useState(0);
   const [opportunitiesTotal, setOpportunitiesTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);

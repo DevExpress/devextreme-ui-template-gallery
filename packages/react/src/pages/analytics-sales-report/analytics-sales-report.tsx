@@ -5,11 +5,14 @@ import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGro
 import { SalesRangeCard } from './cards/SalesRangeCard';
 import { ProductSaleByRangeCard } from './cards/ProductSaleByRangeCard';
 import { SalesPerformanceCard } from './cards/SalesPerformanceCard';
+import { Sale, SaleOrOpportunityByCategory } from '../../shared/types/analytics';
 
 import { getSalesByCategory, getSales, getSalesByOrderDate } from 'dx-template-gallery-data';
 
 import { formatDate } from 'devextreme/localization';
 import LoadPanel from 'devextreme-react/load-panel';
+import { ValueChangedEvent } from 'devextreme/viz/range_selector';
+import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 
@@ -22,20 +25,20 @@ const defaultDateRange = ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.
 const groupByPeriods = ['Day', 'Month'];
 
 export const AnalyticsSalesReport = () => {
-  const [sales, setSales] = useState([]);
-  const [salesByCategory, setSalesByCategory] = useState([]);
-  const [salesByDateAndCategory, setSalesByDateAndCategory] = useState([]);
+  const [sales, setSales] = useState<Sale[]>([]);
+  const [salesByCategory, setSalesByCategory] = useState<SaleOrOpportunityByCategory[]>([]);
+  const [salesByDateAndCategory, setSalesByDateAndCategory] = useState<Sale[]>([]);
   const [dateRange, setDateRange] = useState(defaultDateRange);
   const [groupByPeriod, setGroupByPeriod] = useState(groupByPeriods[1]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const onRangeChanged = useCallback((e) => {
+  const onRangeChanged = useCallback((e: ValueChangedEvent) => {
     const [startDate, endDate] = e.value;
-    setDateRange([startDate, endDate]);
+    setDateRange([startDate, endDate] as Date[]);
     setIsLoading(true);
   }, []);
 
-  const onPeriodChanged = useCallback((e) => {
+  const onPeriodChanged = useCallback((e: SelectionChangedEvent) => {
     setGroupByPeriod(e.item);
     setIsLoading(true);
   }, []);
@@ -70,7 +73,13 @@ export const AnalyticsSalesReport = () => {
         <DashboardCardsGroup kind='wide'>
           <SalesRangeCard datasource={sales} range={dateRange} onRangeChanged={onRangeChanged} />
           <ProductSaleByRangeCard datasource={salesByCategory} />
-          <SalesPerformanceCard datasource={salesByDateAndCategory} periods={groupByPeriods} selectedPeriod={groupByPeriod} onPeriodChanged={onPeriodChanged} range={dateRange} />
+          <SalesPerformanceCard
+            datasource={salesByDateAndCategory}
+            periods={groupByPeriods}
+            selectedPeriod={groupByPeriod}
+            onPeriodChanged={onPeriodChanged}
+            range={dateRange}
+          />
         </DashboardCardsGroup>
       </Dashboard>
       <LoadPanel container='.view-wrapper-dashboard' visible={isLoading} position={{ of: '.layout-body' }} />

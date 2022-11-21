@@ -1,8 +1,9 @@
 import React from 'react';
 import Funnel, { Format, Label, Legend, Margin, Size } from 'devextreme-react/funnel';
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
+import { SaleOrOpportunityByCategory } from '../../../shared/types/analytics';
 
-export const ConversionFunnelCard = ({ datasource }) => (
+export const ConversionFunnelCard = ({ datasource }: { datasource: SaleOrOpportunityByCategory[] }) => (
   <CardAnalytics title='Conversion Funnel (All Products)' contentClass='conversion-funnel'>
     <Funnel dataSource={datasource} argumentField='name' valueField='value'>
       <Label visible position='inside' backgroundColor='none' customizeText={({ valueText }) => `$${valueText}`}>

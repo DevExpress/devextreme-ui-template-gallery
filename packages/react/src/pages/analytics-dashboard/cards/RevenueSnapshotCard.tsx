@@ -1,8 +1,9 @@
 import React from 'react';
 import PieChart, { Font, Label, Legend, Margin, Series, Size } from 'devextreme-react/pie-chart';
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
+import { SaleOrOpportunityByCategory } from '../../../shared/types/analytics';
 
-export const RevenueSnapshotCard = ({ datasource }) => (
+export const RevenueSnapshotCard = ({ datasource }: { datasource: SaleOrOpportunityByCategory[] }) => (
   <CardAnalytics title='Revenue Snapshot (All Products)' contentClass='sales-by-category'>
     <PieChart dataSource={datasource} type='doughnut' diameter={0.8} innerRadius={0.6}>
       <Series argumentField='name' valueField='value'>
