@@ -6,10 +6,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { inject } from 'vue';
-import { AppInfo, appInfoInjectKey } from '@/types/app-info';
-
-const appInfo = inject<AppInfo>(appInfoInjectKey);
 </script>
 
 <style scoped lang="scss">
