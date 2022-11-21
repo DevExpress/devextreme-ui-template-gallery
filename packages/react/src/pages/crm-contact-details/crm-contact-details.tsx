@@ -85,7 +85,7 @@ export const CRMContactDetails = () => {
             stylingMode='contained'
           />
         </Item>
-        <Item location='after' locateInMenu='auto'>
+        <Item location='after'>
           <DropDowmButton
             text='Actions'
             stylingMode='text'
