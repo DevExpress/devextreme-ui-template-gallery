@@ -5,7 +5,7 @@
       :class="props.contentClass"
     >
       <div class="header">
-        <dx-menu
+        <card-menu
           :visible="props.isMenuVisible"
           class="overflow-menu"
           :items="menuItems"
@@ -28,15 +28,12 @@
 </template>
 
 <script setup lang="ts">
-import { DxMenu } from 'devextreme-vue/menu';
+import CardMenu from '@/components/card-menu.vue';
 
-const menuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
-  icon: 'overflow',
-  items: [
-    { text: 'Configure' },
-    { text: 'Remove' },
-  ],
-}];
+const menuItems: Array<{ text: string }> = [
+  { text: 'Configure' },
+  { text: 'Remove' },
+];
 
 const props = withDefaults(defineProps<{
   title?: string,
@@ -68,9 +65,9 @@ const props = withDefaults(defineProps<{
 
   .overflow-menu {
     position: absolute;
-    right: 5px;
+    right: 8px;
     left: auto;
-    top: 5px;
+    top: 10px;
   }
 
   :deep(.content) {
