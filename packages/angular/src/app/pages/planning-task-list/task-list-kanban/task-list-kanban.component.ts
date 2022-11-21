@@ -5,9 +5,11 @@ import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 import { DxSortableModule, DxSortableComponent } from 'devextreme-angular/ui/sortable';
-import { DxMenuModule } from 'devextreme-angular/ui/menu';
+
 import notify from 'devextreme/ui/notify';
 import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable';
+
+import { CardMenuModule } from 'src/app/shared/components';
 import { Task } from 'src/app/shared/types/task';
 import { TaskStatus, taskStatusList } from 'src/app/shared/types/task';
 import { TaskKanbanCardModule } from './task-kanban-card/task-kanban-card.component';
@@ -33,14 +35,10 @@ export class TaskListKanbanComponent implements OnChanges {
 
   statuses = taskStatusList;
 
-  boardMenuItems: Array<{ icon: string, items: Array<{ text: string }> }> = [{
-    icon: 'more',
-    items: [
-      { text: 'Add card' },
-      { text: 'Copy list' },
-      { text: 'Move list' },
-    ],
-  },
+  boardMenuItems: Array<{ text: string }> = [
+    { text: 'Add card' },
+    { text: 'Copy list' },
+    { text: 'Move list' },
   ];
 
   refresh() {
@@ -103,9 +101,9 @@ export class TaskListKanbanComponent implements OnChanges {
     DxButtonModule,
     DxScrollViewModule,
     DxSortableModule,
-    DxMenuModule,
 
     TaskKanbanCardModule,
+    CardMenuModule,
 
     CommonModule,
   ],

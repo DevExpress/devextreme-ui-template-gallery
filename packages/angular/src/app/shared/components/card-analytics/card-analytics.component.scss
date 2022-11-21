@@ -12,11 +12,11 @@
       padding: $content-padding $content-padding 0;
     }
 
-    .overflow-menu {
+    ::ng-deep .overflow-menu {
       position: absolute;
-      right: 5px;
+      right: 8px;
       left: auto;
-      top: 5px;
+      top: 10px;
     }
 
     .title {
