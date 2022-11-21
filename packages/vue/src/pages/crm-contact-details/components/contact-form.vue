@@ -69,7 +69,7 @@
                 :read-only="!isEditing"
                 field-template="field"
                 item-template="item"
-                v-bind="formEditorProps"
+                v-bind="formEditorSelectBoxProps"
               >
                 <template #field="{ data }">
                   <div class="status-editor-field">
@@ -244,7 +244,7 @@ import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxNumberBox } from 'devextreme-vue/number-box';
 import { DxValidator } from 'devextreme-vue/validator';
 import { DxSelectBox } from 'devextreme-vue';
-import { formEditorProps } from '@/shared/form-editor-config';
+import { formEditorProps, formEditorSelectBoxProps } from '@/shared/form-editor-config';
 import LoadComponent from '@/components/load-component.vue';
 import { Contact, contactStatusList } from '@/types/contact';
 import FormPhoto from '@/components/form-photo.vue';
