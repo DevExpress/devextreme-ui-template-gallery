@@ -1,75 +1,89 @@
 <template>
-  <div
-    class="messages"
-    id="card-messages"
-  >
-    <load-component
-      :is-loading="props.isLoading"
-      :container-selector="'#card-messages'"
+  <dx-validation-group>
+    <div
+      class="messages"
+      id="card-messages"
     >
-      <div class="input-content">
-        <dx-text-box
-          label="Subject"
-          styling-mode="outlined"
-          :value="messageTitle"
-          @value-changed="e => messageTitle = e.value"
-        />
-        <dx-text-area
-          label="Message"
-          styling-mode="outlined"
-          :value="messageText"
-          :height="150"
-          @value-changed="e => messageText = e.value"
-        />
-
-        <dx-toolbar>
-          <dx-item location="before">
-            <dx-file-uploader
-              class="file-uploader"
-              label-text=""
-              select-button-text="Attach file"
-            />
-          </dx-item>
-          <dx-item
-            widget="dxButton"
-            location="after"
-            :options="{
-              text: 'Send',
-              stylingMode: 'outlined',
-              type: 'default',
-              onClick: send,
-            }"
-          />
-        </dx-toolbar>
-      </div>
-      <dx-scroll-view>
-        <div class="messages-content">
-          <div
-            class="message-container"
-            v-for="data in items"
+      <load-component
+        :is-loading="props.isLoading"
+        :container-selector="'#card-messages'"
+      >
+        <div class="input-content">
+          <dx-text-box
+            label="Subject"
+            styling-mode="outlined"
+            :value="messageTitle"
+            value-change-event="keyup"
+            @value-changed="e => messageTitle = e.value"
           >
-            <div class="avatar">
-              {{ getAvatarText(data.manager) }}
-            </div>
-            <div class="message dx-card">
-              <div class="message-title">
-                <div class="left-title">
-                  <div class="subject">
-                    {{ data.subject }}
-                  </div>
-                  <div>{{ formatDate(new Date(data.date)) }} - {{ data.manager }}</div>
-                </div>
-                <dx-button icon="overflow" />
-              </div>
-              <div class="message-text">
-                {{ setUserName(data.text) }}
-              </div>
-            </div>
-          </div>
+            <dx-validator>
+              <dx-required-rule />
+            </dx-validator>
+          </dx-text-box>
+          <dx-text-area
+            label="Message"
+            styling-mode="outlined"
+            :value="messageText"
+            :height="150"
+            value-change-event="keyup"
+            @value-changed="e => messageText = e.value"
+          >
+            <dx-validator>
+              <dx-required-rule />
+            </dx-validator>
+          </dx-text-area>
+
+          <dx-toolbar>
+            <dx-item location="before">
+              <dx-file-uploader
+                class="file-uploader"
+                label-text=""
+                select-button-text="Attach file"
+              />
+            </dx-item>
+            <dx-item
+              widget="dxButton"
+              location="after"
+              :options="{
+                text: 'Send',
+                stylingMode: 'outlined',
+                type: 'default',
+                onClick: send,
+              }"
+            />
+          </dx-toolbar>
         </div>
-      </dx-scroll-view>
-    </load-component>
-  </div>
+        <div class="messages-content">
+          <dx-scroll-view>
+            <div class="message-list">
+              <div
+                class="message-container"
+                v-for="data in items"
+              >
+                <div class="avatar">
+                  {{ getAvatarText(data.manager) }}
+                </div>
+                <div class="message dx-card">
+                  <div class="message-title">
+                    <div>
+                      <div class="subject">
+                        {{ data.subject }}
+                      </div>
+                      <div>{{ formatDate(new Date(data.date)) }} - {{ data.manager }}</div>
+                    </div>
+                    <dx-button icon="overflow" />
+                  </div>
+                  <div class="message-text">
+                    {{ setUserName(data.text) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </dx-scroll-view>
+        </div>
+      </load-component>
+    </div>
+  </dx-validation-group>
 </template>
 
 <script setup lang="ts">
@@ -80,6 +94,8 @@ import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { DxFileUploader } from 'devextreme-vue/file-uploader';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
+import { DxValidationGroup } from 'devextreme-vue/validation-group';
+import DxValidator, { DxRequiredRule } from 'devextreme-vue/validator';
 import { formatDate } from '@/utils/formatters';
 import LoadComponent from '@/components/load-component.vue';
 
@@ -106,11 +122,6 @@ watch(
   },
 );
 
-function defaultText() {
-  messageTitle.value = '';
-  messageText.value = '';
-}
-
 function getAvatarText(name: string) {
   return name.split(' ').map((namePart) => namePart[0]).join('');
 }
@@ -119,8 +130,8 @@ function setUserName(text: string) {
   return text.replace('{username}', props.user);
 }
 
-function send() {
-  if (messageText.value === '' || messageTitle.value === '') {
+function send(e: any) {
+  if (!e.validationGroup.validate().isValid) {
     return;
   }
 
@@ -133,12 +144,14 @@ function send() {
 
   items.value.push(newMessage);
 
-  defaultText();
+  e.validationGroup.reset();
 }
 </script>
 
 <style scoped lang="scss">
 @use "@/variables" as *;
+
+@include messages-content();
 
 #card-messages {
   min-height: 300px;
@@ -161,16 +174,6 @@ function send() {
 
 .input-content {
   padding: 20px;
-}
-
-.dx-scrollview {
-  height: 320px;
-}
-
-.messages-content {
-  padding: 20px;
-  border-top: 1px solid $base-border-color;
-  background-color: $side-panel-background;
 }
 
 .message-container {
