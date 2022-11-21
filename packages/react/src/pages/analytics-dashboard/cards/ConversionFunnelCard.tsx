@@ -3,7 +3,7 @@ import Funnel, { Format, Label, Legend, Margin, Size } from 'devextreme-react/fu
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
 
 export const ConversionFunnelCard = ({ datasource }) => (
-  <CardAnalytics title='Conversion Funnel (All Products)' contentClass='opportunities' isLoading={!datasource.length}>
+  <CardAnalytics title='Conversion Funnel (All Products)' contentClass='conversion-funnel' isLoading={!datasource.length}>
     <Funnel dataSource={datasource} argumentField='name' valueField='value'>
       <Label visible position='inside' backgroundColor='none' customizeText={({ valueText }) => `$${valueText}`}>
         <Format type='largeNumber' precision={1} />

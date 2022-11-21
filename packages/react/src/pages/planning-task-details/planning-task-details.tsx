@@ -38,7 +38,7 @@ export const PlanningTaskDetails = () => {
   }, [loadData]);
 
   return (
-    <div className='view-wrapper-details'>
+    <div className='view-wrapper view-wrapper-details'>
       <ToolbarDetails name={task?.text}>
         <ToolbarItem location='after' locateInMenu='auto'>
           <DropDownButton text='ACTIONS' stylingMode='contained'>

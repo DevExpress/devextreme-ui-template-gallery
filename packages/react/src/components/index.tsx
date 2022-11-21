@@ -15,6 +15,7 @@ export { CardMessages } from './card-messages/CardMessages';
 export { Avatar } from './avatar/Avatar';
 export { PlanningGantt } from './planning-gantt/PlanningGantt';
 export { ContactForm } from './contact-form/ContactForm';
+export { ContactNewForm } from './contact-new-form/ContactNewForm';
 export { ToolbarDetails } from './toolbar-details/ToolbarDetails';
 export { CardTasks } from './card-tasks/CardTasks';
 export { CardOpportunities } from './card-opportunities/CardOpportunities';

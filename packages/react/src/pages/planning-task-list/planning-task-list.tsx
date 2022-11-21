@@ -125,11 +125,11 @@ export const PlanningTaskList = () => {
   }, []);
 
   const search = useCallback((e: { component: dxTextBox }) => {
-    gridRef.current?.instance.searchByText(e.component.option('text')!);
+    gridRef.current?.instance.searchByText(e.component.option('text') ?? '');
   }, []);
 
   return (
-    <div className='view-wrapper-list'>
+    <div className='view-wrapper view-wrapper-list'>
       <Toolbar className='toolbar-common'>
         <Item location='before'>
           <span className='toolbar-header'>Task</span>
@@ -149,7 +149,7 @@ export const PlanningTaskList = () => {
           locateInMenu='auto'
           options={{
             icon: 'plus',
-            text: 'ADD TASK',
+            text: 'Add Task',
             type: 'default',
             stylingMode: 'contained',
             onClick: changePopupVisibility,

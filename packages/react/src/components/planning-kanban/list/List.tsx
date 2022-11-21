@@ -50,7 +50,7 @@ export const List = ({
           ))}
         </Sortable>
         <div className='add-task'>
-          <Button icon='plus' text='Add Task' stylingMode='text' onClick={changePopupVisibility} />
+          <Button icon='plus' text='Add Task' stylingMode='text' onClick={changePopupVisibility} width='100%' />
         </div>
       </ScrollView>
     </div>

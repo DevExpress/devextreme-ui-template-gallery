@@ -259,3 +259,13 @@ body {
     align-self: flex-end;
   }
 }
+
+.message-list {
+  max-height: 320px;
+}
+
+.messages-content {
+  padding: 20px;
+  border-top: 1px solid $base-border-color;
+  background-color: $side-panel-background;
+}

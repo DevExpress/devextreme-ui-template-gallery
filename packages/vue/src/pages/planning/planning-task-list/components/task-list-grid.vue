@@ -279,6 +279,7 @@ defineExpose({
 
 #tasks-grid {
   min-height: 300px;
+  border-top: 1px solid $base-border-color;
 
   :deep(.priority span) {
     font-size: 13px;

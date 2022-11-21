@@ -1,12 +1,12 @@
 .card {
   &.sales-by-state-map {
-    .content {
+    .card-contents {
       height: 400px;
     }
   }
 
   &.sales-range {
-    .content {
+    .card-contents {
       height: auto;
     }
   }
@@ -28,8 +28,6 @@
 
 .sales-filter {
   display: inline-block;
-  position: absolute;
-  top: 12px;
 }
 
 @media only screen and (max-width: 600px) {
