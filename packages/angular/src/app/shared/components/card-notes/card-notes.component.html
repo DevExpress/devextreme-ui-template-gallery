@@ -1,34 +1,43 @@
-<div class="notes">
-  <div class="input-content">
-    <dx-text-area
-      label="New Note"
-      stylingMode="outlined"
-      [(value)]="nodeText"
-    ></dx-text-area>
-    <dx-toolbar>
-      <dxi-item
-        location="after"
-        widget="dxButton"
-        [options]="{
-          text: 'Add',
-          stylingMode: 'outlined',
-          type: 'default',
-          onClick: add
-        }"
+<dx-validation-group>
+  <div class="notes">
+    <div class="input-content">
+      <dx-text-area
+        label="New Note"
+        stylingMode="outlined"
+        [(value)]="nodeText"
       >
-      </dxi-item>
-    </dx-toolbar>
-  </div>
-
-  <div class="notes-content">
-    <div class="note dx-card" *ngFor="let note of items">
-      <div class="note-title">
-        <div>{{ note.date | date: "MM/dd/y" }} - {{ note.manager }}</div>
-        <div>
-          <dx-button icon="overflow"></dx-button>
+        <dx-validator>
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dx-validator>
+      </dx-text-area>
+      <dx-toolbar>
+        <dxi-item
+          location="after"
+          widget="dxButton"
+          [options]="{
+            text: 'Add',
+            stylingMode: 'outlined',
+            type: 'default',
+            onClick: add
+          }"
+        >
+        </dxi-item>
+      </dx-toolbar>
+    </div>
+    <div class="messages-content">
+      <dx-scroll-view>
+        <div class="message-list">
+          <div class="note dx-card" *ngFor="let note of items">
+            <div class="note-title">
+              <div>{{ note.date | date: "MM/dd/y" }} - {{ note.manager }}</div>
+              <div>
+                <dx-button icon="overflow"></dx-button>
+              </div>
+            </div>
+            <div class="note-text">{{ note.text }}</div>
+          </div>
         </div>
-      </div>
-      <div class="note-text">{{ note.text }}</div>
+      </dx-scroll-view>
     </div>
   </div>
-</div>
+</dx-validation-group>

@@ -56,16 +56,18 @@
 }
 
 @media only screen and (max-width: 400px) {
-  .activities-list {
-    .activity {
-      .date {
-        grid-row-start: 2;
-        padding: 0;
-      }
+  .card-activities {
+    .activities-list {
+      .activity {
+        .date {
+          grid-row-start: 2;
+          padding: 0;
+        }
 
-      .overflow-menu {
-        position: absolute;
-        right: 15px;
+        .overflow-menu {
+          position: absolute;
+          right: 15px;
+        }
       }
     }
   }
