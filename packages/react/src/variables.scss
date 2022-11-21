@@ -89,6 +89,7 @@ $list-padding-left: $material-list-item-horizontal-padding;
 
 @mixin message-title {
   display: flex;
+  align-items: center;
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
