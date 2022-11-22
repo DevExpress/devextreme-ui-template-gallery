@@ -75,7 +75,6 @@
               label="Company"
               v-model="data.company"
               :is-editing="isEditing"
-              :validators="[]"
             />
           </dx-form-item>
 

@@ -43,7 +43,6 @@
           label="Company"
           v-model="contact.company"
           :is-editing="true"
-          :validators="[]"
         />
       </dx-form-item>
       <dx-form-item>
@@ -51,7 +50,6 @@
           label="Position"
           v-model="contact.position"
           :is-editing="true"
-          :validators="[]"
         />
       </dx-form-item>
     </dx-form-item>
@@ -72,7 +70,6 @@
           label="Assigned to"
           v-model="contact.manager"
           :is-editing="true"
-          :validators="[]"
         />
       </dx-form-item>
       <dx-form-item>
@@ -81,7 +78,6 @@
           :is-editing="true"
           icon="tel"
           mask="+1(000)000-0000"
-          :validators="[]"
         />
       </dx-form-item>
       <dx-form-item>
@@ -97,7 +93,6 @@
           v-model="contact.address"
           :is-editing="true"
           icon="home"
-          :validators="[]"
         />
       </dx-form-item>
     </dx-form-item>

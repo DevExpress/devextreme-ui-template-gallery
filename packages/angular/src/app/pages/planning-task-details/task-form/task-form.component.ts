@@ -11,7 +11,6 @@ import {
   DxTextAreaModule,
   DxToolbarModule,
   DxValidatorModule,
-  DxValidationGroupModule,
 } from 'devextreme-angular';
 import {
   StatusIndicatorModule,
@@ -71,7 +70,6 @@ export class TaskFormComponent implements OnChanges {
     DxTextAreaModule,
     DxToolbarModule,
     DxValidatorModule,
-    DxValidationGroupModule,
 
     FormTextboxModule,
     StatusIndicatorModule,
