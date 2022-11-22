@@ -19,7 +19,7 @@
                 </div>
               </dx-item>
               <dx-item location="before">
-                <contact-status :value="panelData?.status" />
+                <contact-status :status="panelData?.status" />
               </dx-item>
 
               <dx-item
@@ -47,6 +47,7 @@
                   :col-count="2"
                   css-class="photo-row"
                 >
+                  <DxColCountByScreen :xs="2" />
                   <dx-form-item css-class="photo-box">
                     <form-photo :link="panelData.image" />
                   </dx-form-item>
@@ -218,6 +219,7 @@ import {
   DxForm,
   DxItem as DxFormItem,
   DxGroupItem as DxFormGroupItem,
+  DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
