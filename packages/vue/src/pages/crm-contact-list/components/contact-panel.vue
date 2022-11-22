@@ -40,8 +40,7 @@
           <dx-scroll-view class="panel-scroll">
             <div class="data-part border">
               <dx-form
-                :class="{'view-mode': !isEditing}"
-                class="plain-styled-form"
+                :class="{'view-mode': !isEditing, 'plain-styled-form dx-form': true}"
               >
                 <dx-form-group-item
                   :col-count="2"

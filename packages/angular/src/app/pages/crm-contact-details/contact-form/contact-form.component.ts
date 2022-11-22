@@ -20,6 +20,7 @@ import {
 } from 'src/app/shared/components';
 import { Contact, contactStatusList } from 'src/app/shared/types/contact';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
+import { ClickEvent } from 'devextreme/ui/button';
 
 @Component({
   selector: 'contact-form',
@@ -39,8 +40,8 @@ export class ContactFormComponent {
     this.isEditing = true;
   }
 
-  handleSaveClick(e) {
-    if(!e.validationGroup.validate().isValid) return;
+  handleSaveClick({ validationGroup }: ClickEvent) {
+    if(!validationGroup.validate().isValid) return;
     this.isEditing = false;
   }
 

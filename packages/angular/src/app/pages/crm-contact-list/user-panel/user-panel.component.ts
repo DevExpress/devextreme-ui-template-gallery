@@ -96,8 +96,8 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     this.isPinned = !this.isPinned;
   };
 
-  onSaveClick = (e) => {
-    if (!e.validationGroup.validate().isValid) return;
+  onSaveClick = ({ validationGroup } : ButtonClickEvent) => {
+    if (!validationGroup.validate().isValid) return;
     this.isEditing = !this.isEditing;
   }
 

@@ -2,13 +2,14 @@ import React from 'react';
 
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
+import { ClickEvent } from 'devextreme/ui/button';
 
 import './ToolbarForm.scss';
 
 export const ToolbarForm = ({ editing, toggleEditing }) => {
 
-  const onSaveClick = (e) => {
-    if (!e.validationGroup.validate().isValid) return;
+  const onSaveClick = ({ validationGroup }: ClickEvent) => {
+    if (!validationGroup.validate().isValid) return;
 
     toggleEditing();
   };

@@ -60,8 +60,8 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
     setIsEditing(!isEditing);
   }, [isEditing]);
 
-  const onSaveClick = useCallback((e) => {
-    if(!e.validationGroup.validate().isValid) return;
+  const onSaveClick = useCallback(({ validationGroup } : ButtonClickEvent) => {
+    if(!validationGroup.validate().isValid) return;
     setIsEditing(!isEditing);
   }, []);
 
