@@ -29,7 +29,7 @@ fixture`Planning List`;
       if (screenMode[0] === 400) {
         await t.click('.view-wrapper .dx-icon-overflow');
       }
-      await t.click(Selector('[aria-label="Add Task"]')); 
+      await t.click(Selector('[aria-label="Add Task"]'));
       // TODO: works only in angular, replace form-item-date with another selector
       await t.typeText(Selector('form-item-date[label="Start Date"] .dx-datebox'), '10/26/2022', { replace: true });
       await t.typeText(Selector('form-item-date[label="Due Date"] .dx-datebox'), '10/26/2022', { replace: true });
