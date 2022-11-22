@@ -52,6 +52,16 @@
         :class="{'view-mode': !isEditing}"
         label-mode="floating"
       >
+        <dx-form-item
+            :visible="isCreateMode"
+            :col-span="2"
+        >
+          <form-textbox
+            label="Subject"
+            v-model="data.text"
+            :is-editing="isEditing"
+          />
+        </dx-form-item>
         <dx-form-group-item :col-count="2">
           <dx-col-count-by-screen
             :xs="props.contentByScreen.xs"
@@ -59,16 +69,6 @@
             :md="2"
             :lg="2"
           />
-          <dx-form-item
-            :visible="isCreateMode"
-            :col-span="2"
-          >
-            <form-textbox
-              label="Subject"
-              v-model="data.text"
-              :is-editing="isEditing"
-            />
-          </dx-form-item>
 
           <dx-form-item css-class="accent">
             <form-textbox
