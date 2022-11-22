@@ -40,7 +40,7 @@
       <revenue-snapshot-card :data="salesByCategory" />
     </div>
   </div>
-  <loading-panel :data="data" />
+  <loading-panel :loading="loading" />
 </template>
 
 <script setup lang="ts">
@@ -73,14 +73,25 @@ const sales = ref<Sales | null>(null);
 const salesByState = ref<SalesByState | null>(null);
 const salesByCategory = ref<SalesByStateAndCity | null>(null);
 
+const loading = ref<boolean>(true);
+
 const data = [opportunities, salesByCategory, sales, salesByState];
 
-const loadData = (startDate: string, endDate: string) => {
-  [getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByState]
-    .forEach(async (loader, i) => {
-      data[i].value = null;
-      data[i].value = await loader(startDate, endDate);
-    });
+const loadData = async (startDate: string, endDate: string) => {
+  loading.value = true;
+
+  const results = await Promise.all([
+    getOpportunitiesByCategory(startDate, endDate),
+    getSalesByCategory(startDate, endDate),
+    getSales(startDate, endDate),
+    getSalesByState(startDate, endDate),
+  ]);
+
+  results.forEach((result, index) => {
+    data[index].value = result;
+  });
+
+  loading.value = false;
 };
 
 const tabChange = ([startDate, endDate]: string[]) => {

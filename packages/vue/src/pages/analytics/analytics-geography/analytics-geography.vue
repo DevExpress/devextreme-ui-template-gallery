@@ -14,7 +14,7 @@
       <revenue-snapshot-card :data="salesByState" />
     </div>
   </div>
-  <loading-panel :data="data" />
+  <loading-panel :loading="loading" />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -32,7 +32,7 @@ const salesByState = ref<SalesByState | null>(null);
 const salesByStateAndCity = ref<SalesByStateAndCity | null>(null);
 const salesByStateMarkers = ref<Record<string, any> | null>(null);
 
-const data = [salesByStateAndCity, salesByState, salesByStateMarkers];
+const loading = ref<boolean>(true);
 
 const createMapCoords = (coords: string) => coords.split(', ').map((coord) => parseFloat(coord));
 
@@ -53,13 +53,11 @@ const getSalesByStateMarkers = () => ({
 });
 
 const loadData = async (startDate: string, endDate: string) => {
-  salesByStateAndCity.value = null;
-  salesByState.value = null;
-  salesByStateMarkers.value = null;
-
+  loading.value = true;
   salesByStateAndCity.value = await getSalesByStateAndCity(startDate, endDate);
-  salesByState.value = calcSalesByState(salesByStateAndCity.value);
+  salesByState.value = await calcSalesByState(salesByStateAndCity.value);
   salesByStateMarkers.value = getSalesByStateMarkers();
+  loading.value = false;
 };
 
 const tabChange = ([startDate, endDate]: string[]) => loadData(startDate, endDate);
