@@ -63,7 +63,7 @@ jobs:
           { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)
           { project: 'vue', page: 'planning-task-list' }, # The form-item-date[label="Start Date"] selector works only for angular, rewrite test
           { project: 'vue', page: 'analytics-dashboard' },
-          { project: 'vue', page: 'analytics-sales-report' }, # Scrollbar have different length
+          { project: 'vue', page: 'analytics-sales-report' },
           { project: 'vue', page: 'analytics-geography' },
         ]
     runs-on: ubuntu-latest
