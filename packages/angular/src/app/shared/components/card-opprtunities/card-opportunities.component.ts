@@ -7,7 +7,7 @@ import {
   DxLoadPanelModule,
 } from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
-import { Activities } from 'src/app/shared/types/activities';
+import { Activity } from 'src/app/shared/types/activities';
 
 @Component({
   selector: 'card-opportunities',
@@ -15,19 +15,15 @@ import { Activities } from 'src/app/shared/types/activities';
   styleUrls: ['./card-opportunities.component.scss'],
 })
 export class CardOpportunitiesComponent implements OnChanges {
-  @Input() active: Activities;
+  @Input() openedActivities: Activity[];
 
-  @Input() closed: Activities;
-
-  messageToast = '';
+  @Input() closedActivities: Activity[];
 
   isLoading = true;
 
-  isVisibleToast = false;
-
   ngOnChanges(changes: SimpleChanges) {
-    const isLoadActive = !changes.active?.currentValue;
-    const isLoadClosed = !changes.closed?.currentValue;
+    const isLoadActive = !changes.openedActivities?.currentValue;
+    const isLoadClosed = !changes.closedActivities?.currentValue;
 
     this.isLoading = isLoadActive || isLoadClosed;
   }

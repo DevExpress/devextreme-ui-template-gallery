@@ -93,10 +93,9 @@
               v-model="data.priority"
               :items="taskPriorityList"
               :read-only="!isEditing"
-              :element-attr="{class: 'form-editor'}"
               field-template="field"
               item-template="item"
-              styling-mode="filled"
+              v-bind="formSelectBoxProps"
             >
               <template #field>
                 <div class="task-editor-field">
@@ -122,10 +121,9 @@
               v-model="data.status"
               :items="taskStatusList"
               :read-only="!isEditing"
-              :element-attr="{class: 'form-editor'}"
               field-template="field"
               item-template="item"
-              styling-mode="filled"
+              v-bind="formSelectBoxProps"
             >
               <template #field>
                 <div class="task-editor-field">
@@ -192,20 +190,22 @@ import { DxSelectBox } from 'devextreme-vue/select-box';
 import LoadComponent from '@/components/load-component.vue';
 import FormTextbox from '@/components/form-textbox.vue';
 import FormDatebox from '@/components/form-datebox.vue';
+import { formSelectBoxProps } from '@/shared/form-editor-config';
 
 const props = withDefaults(defineProps<{
+  isCreateMode?: boolean,
   isLoading?: boolean,
   data?: Task,
   contentByScreen: { xs: number, sm: number },
   validationGroup?: string,
 }>(), {
   isLoading: false,
+  isCreateMode: false,
   data: () => ({ ...newTask }),
   validationGroup: undefined,
 });
 
-const isCreateMode = !props.data.id;
-const isEditing = ref(isCreateMode);
+const isEditing = ref(props.isCreateMode);
 const data = ref(props.data);
 
 watch(

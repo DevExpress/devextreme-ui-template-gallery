@@ -6,7 +6,8 @@ import From, { Item as ItemForm, GroupItem, ColCountByScreen } from 'devextreme-
 import SelectBox from 'devextreme-react/select-box';
 import Button from 'devextreme-react/button';
 import TextBox from 'devextreme-react/text-box';
-import { PatternRule, EmailRule } from 'devextreme-react/validator';
+import Validator, { PatternRule, EmailRule } from 'devextreme-react/validator';
+import NumberBox from 'devextreme-react/number-box';
 
 import { FormPhoto } from '../form-photo/FormPhoto';
 import { ContactStatus } from '../contact-status/ContactStatus';
@@ -146,17 +147,22 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         </ItemForm>
 
         <ItemForm>
-          <FormTextbox
+          <NumberBox
             label='Zip Code'
-            value={formData.zipCode.toString()}
-            isEditing={!editing}
+            value={formData.zipCode}
+            readOnly={!editing}
+            elementAttr={{ class: 'form-editor' }}
+            inputAttr={{ class: 'form-editor-input' }}
+            stylingMode='filled'
             onValueChange={updateField('zipCode')}
           >
-            <PatternRule
-              pattern='/^\d{5}$/'
-              message='Zip is invalid'
-            />
-          </FormTextbox>
+            <Validator>
+              <PatternRule
+                pattern='/^\d{5}$/'
+                message='Zip is invalid'
+              />
+            </Validator>
+          </NumberBox>
         </ItemForm>
       </GroupItem>
 
