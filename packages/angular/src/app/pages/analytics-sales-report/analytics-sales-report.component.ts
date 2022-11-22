@@ -13,18 +13,16 @@ import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
 import { CommonModule, formatDate } from '@angular/common';
 import { DataService } from 'src/app/shared/services';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 
 import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
 import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analytics/toolbar-analytics.component';
 
 import { analyticsPanelItems } from 'src/app/shared/types/resource';
 
-import { Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/analytics';
+import { Sales, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/analytics';
 import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
 import { ApplyPipeModule } from "../../shared/apply.pipe";
-
-type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
 
 @Component({
   templateUrl: './analytics-sales-report.component.html',
@@ -40,21 +38,27 @@ export class AnalyticsSalesReportComponent implements OnInit {
 
   visualRange: unknown = {};
 
+  isLoading: boolean = true;
+
   constructor(private service: DataService) { }
 
   selectionChange({item: period}: SelectionChangedEvent) {
+    this.isLoading = true;
     this.service.getSalesByOrderDate(period.toLowerCase())
       .subscribe((data) => {
         this.salesByDateAndCategory = data;
-      })
+        this.isLoading = false;
+    })
   }
 
   onRangeChanged = ({value: dates}) => {
+    this.isLoading = true;
     const [startDate, endDate] = dates.map((date) => formatDate(date, 'YYYY-MM-dd', 'en'));
 
     this.service.getSalesByCategory(startDate, endDate).subscribe((data) => {
       this.salesByCategory = data;
-          });
+      this.isLoading = false;
+    });
   };
 
   customizeSaleText(arg: { percentText: string }) {
@@ -62,20 +66,23 @@ export class AnalyticsSalesReportComponent implements OnInit {
   }
 
   loadData = (groupBy: string) => {
+    const tasks: Observable<any>[] = [];
     const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
-    [
-      ['sales', this.service.getSales(startDate, endDate)],
-      ['salesByDateAndCategory', this.service.getSalesByOrderDate(groupBy)],
-    ].forEach(([dataName, loader]: [string, Observable<any>]) => {
-        this[dataName] = null;
-        loader.subscribe((data) => this[dataName] = data);
-      }
-    );
+    const loaders = {
+      'sales': this.service.getSales(startDate, endDate),
+      'salesByDateAndCategory': this.service.getSalesByOrderDate(groupBy),
+    };
+    for(let loader in loaders) {
+      tasks.push(loaders[loader]);
+    }
+    forkJoin(tasks).subscribe((results) => {
+      const keys = Object.keys(loaders);
+      results.forEach((result, index) => {
+        this[keys[index]] = result;
+      });
+      this.isLoading = false
+    });
   };
-
-  isLoading = (data: DashboardData[]) => {
-    return data.includes(null);
-  }
 
   customiseToolip({ seriesName }) {
     return { text: seriesName };

@@ -21,11 +21,7 @@ import {
 import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
 import { ApplyPipeModule } from "src/app/shared/apply.pipe";
 import { map } from "rxjs/operators";
-import { Observable } from "rxjs";
-
-type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
-
-type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
+import { Observable, forkJoin } from "rxjs";
 
 @Component({
   templateUrl: './analytics-dashboard.component.html',
@@ -39,6 +35,8 @@ export class AnalyticsDashboardComponent implements OnInit {
   sales: Sales = null;
   salesByState: SalesByState = null;
   salesByCategory: SalesByStateAndCity = null;
+
+  isLoading: boolean = true;
 
   constructor(private service: DataService) {}
 
@@ -55,25 +53,27 @@ export class AnalyticsDashboardComponent implements OnInit {
   }
 
   loadData = (startDate: string, endDate: string) => {
-    [
-      ['opportunities', this.service.getOpportunitiesByCategory],
-      ['sales', this.service.getSales],
-      ['salesByCategory', this.service.getSalesByCategory],
-      ['salesByState', (startDate: string, endDate: string) => this.service.getSalesByStateAndCity(startDate, endDate).pipe(
+    const tasks: Observable<any>[] = [];
+    this.isLoading = true;
+    const loaders = {
+      'opportunities': this.service.getOpportunitiesByCategory(startDate, endDate),
+      'sales': this.service.getSales(startDate, endDate),
+      'salesByCategory': this.service.getSalesByCategory(startDate, endDate),
+      'salesByState': this.service.getSalesByStateAndCity(startDate, endDate).pipe(
         map((data) => this.service.getSalesByState(data))
       )
-      ]
-    ].forEach(async ([dataName, loader]: [string, DataLoader]) => {
-      this[dataName] = null;
-      loader(startDate, endDate).subscribe((result: DashboardData) => {
-        this[dataName] = result;
+    };
+    for(let loader in loaders) {
+      tasks.push(loaders[loader]);
+    }
+    forkJoin(tasks).subscribe((results) => {
+      const keys = Object.keys(loaders);
+      results.forEach((result, index) => {
+        this[keys[index]] = result;
       });
+      this.isLoading = false;
     });
   };
-
-  isLoading = (data: DashboardData[]) => {
-    return data.includes(null);
-  }
 
   getTotal(data: Array<{value?: number, total?: number}> ): number {
     return (data || []).reduce((total, item) => total + (item.value || item.total), 0);
