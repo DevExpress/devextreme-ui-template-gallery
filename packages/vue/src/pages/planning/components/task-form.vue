@@ -169,7 +169,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import StatusIndicator from '@/components/status-indicator.vue';
 import { DxButton } from 'devextreme-vue/button';
 import { DxTextArea } from 'devextreme-vue/text-area';
@@ -193,24 +193,24 @@ import FormDatebox from '@/components/form-datebox.vue';
 import { formSelectBoxProps } from '@/shared/form-editor-config';
 
 const props = withDefaults(defineProps<{
+  isCreateMode?: boolean,
   isLoading?: boolean,
   data?: Task,
   contentByScreen: { xs: number, sm: number },
   validationGroup?: string,
 }>(), {
   isLoading: false,
+  isCreateMode: false,
   data: () => ({ ...newTask }),
   validationGroup: undefined,
 });
 
-const isCreateMode = computed(() => !props.data.id);
-const isEditing = ref(true);
+const isEditing = ref(props.isCreateMode);
 const data = ref(props.data);
 
 watch(
   () => props.data,
   (newValue) => {
-    isEditing.value = !newValue.id;
     data.value = newValue;
   },
 );
