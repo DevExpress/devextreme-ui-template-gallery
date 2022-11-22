@@ -54,14 +54,14 @@ jobs:
           # { project: 'react', page: 'crm-contact-details' }, # Button doesn't hide (screen width 400)
           # { project: 'react', page: 'crm-contact-list' }, # The 'Add contact' button color differs under overlay
           # { project: 'react', page: 'planning-task-details' }, # Title width is different (screen width 400). Menu stays opened
-          # { project: 'react', page: 'planning-task-list' }, # The form-item-date[label="Start Date"] selector works only for angular, rewrite test.
+          { project: 'react', page: 'planning-task-list' },
           # { project: 'react', page: 'analytics-dashboard' }, # Menu contents disappear after item click (screen width 400)
           { project: 'react', page: 'analytics-sales-report' },
           # { project: 'react', page: 'analytics-geography' }, # Menu contents disappear after item click (screen width 400)
           # { project: 'vue', page: 'crm-contact-details' }, # Wrong status color
           { project: 'vue', page: 'crm-contact-list' },
           # { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)
-          # { project: 'vue', page: 'planning-task-list' }, # The form-item-date[label="Start Date"] selector works only for angular, rewrite test
+          { project: 'vue', page: 'planning-task-list' },
           { project: 'vue', page: 'analytics-dashboard' },
           { project: 'vue', page: 'analytics-sales-report' },
           { project: 'vue', page: 'analytics-geography' },
