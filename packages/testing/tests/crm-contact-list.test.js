@@ -34,7 +34,7 @@ fixture`Contact List`;
       }
       await t.click(Selector('[aria-label="Add Contact"]'));
       await takeScreenshot(`crm-contact-list-add-contact-popup-embed=${getPostfix(embedded, screenMode)}`, 'body');
-      await t.click(Selector('.dx-popup-content .dx-toolbar-button').nth(0));
+      await t.click(Selector('.dx-popup-normal .dx-button[aria-label=Save]'));
       await takeScreenshot(`crm-contact-list-add-contact-popup-validate-embed=${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
