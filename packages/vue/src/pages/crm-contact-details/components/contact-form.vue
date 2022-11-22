@@ -27,7 +27,7 @@
           text="Save"
           styling-mode="outlined"
           type="default"
-          @click="saveEdit()"
+          @click="handleSaveClick"
         />
       </dx-toolbar-item>
       <dx-toolbar-item
@@ -279,8 +279,10 @@ function startEdit() {
   isEditing.value = true;
 }
 
-function saveEdit() {
-  isEditing.value = false;
+function handleSaveClick({ validationGroup }: {validationGroup: Record<string, any>}) {
+  if (validationGroup.validate().isValid) {
+    isEditing.value = false;
+  }
 }
 
 function cancelEdit() {

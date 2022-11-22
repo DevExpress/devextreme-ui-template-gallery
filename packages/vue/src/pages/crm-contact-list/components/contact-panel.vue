@@ -131,7 +131,7 @@
                     icon="save"
                     styling-mode="outlined"
                     type="default"
-                    @click="toggleEdit()"
+                    @click="handleSaveClick"
                   />
                 </dx-item>
 
@@ -238,7 +238,7 @@ const isPinEnabled = ref(true);
 const panelData = ref<Contact | null>(null);
 const props = withDefaults(defineProps<{
   isPanelOpened: boolean,
-  contactId: number | null
+  contactId: number | null,
 }>(), { isPanelOpened: false, contactId: null });
 
 const toggleEdit = () => {
@@ -280,6 +280,12 @@ const loadContact = async (contactId: number) => {
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 function accordionPlusClick(/* e : Event */) {
+}
+
+function handleSaveClick({ validationGroup }: {validationGroup: Record<string, any>}) {
+  if (validationGroup.validate().isValid) {
+    isEditing.value = false;
+  }
 }
 
 watch(
