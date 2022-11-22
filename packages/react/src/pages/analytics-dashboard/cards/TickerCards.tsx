@@ -2,7 +2,9 @@ import React from 'react';
 import { formatNumber } from 'devextreme/localization';
 import { TickerCard } from '../../../components/card-analytics/TickerCard';
 
-type TickerProps = { value: number};
+interface TickerProps {
+  value: number
+}
 
 const formatCurrency = (value: number) => formatNumber(value, { type: 'currency' });
 
