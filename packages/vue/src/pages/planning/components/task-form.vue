@@ -95,7 +95,7 @@
               :read-only="!isEditing"
               field-template="field"
               item-template="item"
-              v-bind="formEditorSelectBoxProps"
+              v-bind="formSelectBoxProps"
             >
               <template #field>
                 <div class="task-editor-field">
@@ -123,7 +123,7 @@
               :read-only="!isEditing"
               field-template="field"
               item-template="item"
-              v-bind="formEditorSelectBoxProps"
+              v-bind="formSelectBoxProps"
             >
               <template #field>
                 <div class="task-editor-field">
@@ -190,7 +190,7 @@ import { DxSelectBox } from 'devextreme-vue/select-box';
 import LoadComponent from '@/components/load-component.vue';
 import FormTextbox from '@/components/form-textbox.vue';
 import FormDatebox from '@/components/form-datebox.vue';
-import { formEditorSelectBoxProps } from '@/shared/form-editor-config';
+import { formSelectBoxProps } from '@/shared/form-editor-config';
 
 const props = withDefaults(defineProps<{
   isLoading?: boolean,
