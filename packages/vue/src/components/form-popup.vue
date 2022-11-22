@@ -9,7 +9,7 @@
     height="auto"
     @option-changed="() => popup?.instance?.repaint()"
   >
-    <dx-toolbar-item
+    <dx-popup-item
       widget="dxButton"
       toolbar="bottom"
       location="after"
@@ -17,11 +17,10 @@
         text: 'Save',
         stylingMode: 'outlined',
         type: 'default',
-        onClick: save
+        onClick: save,
       }"
     />
-
-    <dx-toolbar-item
+    <dx-popup-item
       widget="dxButton"
       toolbar="bottom"
       location="after"
@@ -32,14 +31,18 @@
         onClick: close
       }"
     />
-    <slot />
+    <dx-validation-group ref="validationGroup">
+      <slot />
+    </dx-validation-group>
   </dx-popup>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { DxPopup, DxToolbarItem } from 'devextreme-vue/popup';
+import { DxPopup, DxToolbarItem as DxPopupItem } from 'devextreme-vue/popup';
 import { screenInfo } from '@/utils/media-query';
+import { DxValidationGroup } from 'devextreme-vue';
+import validationEngine from 'devextreme/ui/validation_engine';
 
 const props = withDefaults(
   defineProps<{
@@ -50,6 +53,7 @@ const props = withDefaults(
     isVisible: false,
   },
 );
+const validationGroup = ref<InstanceType<typeof DxValidationGroup>>();
 
 const emit = defineEmits(['save', 'update:isVisible']);
 
@@ -64,7 +68,9 @@ watch(
 );
 
 const save = () => {
-  emit('save');
+  if (validationEngine.validateGroup(validationGroup.value?.instance).isValid) {
+    emit('save');
+  }
 };
 
 const close = () => {
@@ -72,6 +78,3 @@ const close = () => {
   emit('update:isVisible', false);
 };
 </script>
-<style scoped lang="scss">
-
-</style>
