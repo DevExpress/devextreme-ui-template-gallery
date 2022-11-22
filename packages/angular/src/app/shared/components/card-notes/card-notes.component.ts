@@ -6,6 +6,9 @@ import {
   DxTextAreaModule,
   DxToolbarModule,
   DxButtonModule,
+  DxValidationGroupModule,
+  DxValidatorModule,
+  DxScrollViewModule
 } from 'devextreme-angular';
 import { Notes, Note } from 'src/app/shared/types/notes';
 
@@ -21,12 +24,8 @@ export class CardNotesComponent {
 
   nodeText = '';
 
-  defaultText = () => {
-    this.nodeText = '';
-  };
-
-  add = () => {
-    if (this.nodeText === '') {
+  add = (e) => {
+    if (!e.validationGroup.validate().isValid) {
       return;
     }
 
@@ -38,7 +37,7 @@ export class CardNotesComponent {
 
     this.items.push(newNote);
 
-    this.defaultText();
+    e.validationGroup.reset();
   };
 }
 
@@ -47,6 +46,9 @@ export class CardNotesComponent {
     DxTextAreaModule,
     DxToolbarModule,
     DxButtonModule,
+    DxValidationGroupModule,
+    DxValidatorModule,
+    DxScrollViewModule,
     CommonModule,
   ],
   declarations: [CardNotesComponent],

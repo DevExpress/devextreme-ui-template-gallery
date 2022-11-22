@@ -24,6 +24,7 @@ import { onMounted, ref } from 'vue';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { formatDate } from 'devextreme/localization';
+
 import {
   getSalesByOrderDate,
   getSalesByCategory,

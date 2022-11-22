@@ -245,6 +245,10 @@ body {
   &.item-high {
     @include item-field(#ff5722);
   }
+
+  span {
+    font-size: 13px;
+  }
 }
 
 .item-editor-field {

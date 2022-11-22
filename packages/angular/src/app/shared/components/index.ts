@@ -6,6 +6,7 @@ export * from './create-account-form/create-account-form.component';
 export * from './change-password-form/change-password-form.component';
 export * from './side-navigation-menu/side-navigation-menu.component';
 export * from './user-panel/user-panel.component';
+export * from './card-menu/card-menu.component';
 
 export * from './contact-status/contact-status.component';
 
