@@ -150,11 +150,16 @@
 
         <dxi-item>
           <div *dxTemplate>
-            <form-textbox label="Zip Code"
-                        [(value)]="contactData.zipCode"
-                        [isEditing]="isEditing"
-                        [validators]="zipCodeValidator"
-            ></form-textbox>
+            <dx-number-box  label="Zip Code"
+              [(value)]="contactData.zipCode"
+              [readOnly]="!isEditing"
+              [elementAttr]="{class: 'form-editor'}"
+              [inputAttr]="{class: 'form-editor-input'}"
+              stylingMode="filled"
+              valueChangeEvent="keyup input change"
+            >
+              <dx-validator [validationRules]="[zipCodeValidator]"></dx-validator>
+            </dx-number-box>
           </div>
         </dxi-item>
       </dxi-item>

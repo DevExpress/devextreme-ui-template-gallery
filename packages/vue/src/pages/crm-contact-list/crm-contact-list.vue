@@ -171,7 +171,7 @@
     <!--  Contact panel  -->
     <contact-panel
       :contact-id="panelData?.id"
-      :is-panel-open="isPanelOpened"
+      :is-panel-opened="isPanelOpened"
       @close="isPanelOpened = false"
     />
   </div>

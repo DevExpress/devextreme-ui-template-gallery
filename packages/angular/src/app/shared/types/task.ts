@@ -1,4 +1,4 @@
-import { Activities } from './activities';
+import { Activity } from './activities';
 import { Notes } from './notes';
 import { Messages } from './messages';
 
@@ -20,7 +20,7 @@ export type TaskPriority = (typeof taskPriorityList)[number];
 export type TaskStatus = (typeof taskStatusList)[number];
 
 export type Task = {
-  activities: Activities,
+  activities: Activity[],
   description: string,
   id: number
   text: string,

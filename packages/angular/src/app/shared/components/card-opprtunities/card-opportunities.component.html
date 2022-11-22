@@ -14,7 +14,7 @@
     <div class="opportunities-block">
       <div class="dx-form-group-caption">Active</div>
       <div class="opportunities-container">
-        <div class="opportunities" *ngFor="let data of active">
+        <div class="opportunities" *ngFor="let data of openedActivities">
           <ng-conteiner
             [ngTemplateOutlet]="opportunity"
             [ngTemplateOutletContext]="{ item: data }"
@@ -26,7 +26,7 @@
     <div class="opportunities-block">
       <div class="dx-form-group-caption">Closed</div>
       <div class="opportunities-container">
-        <div class="opportunities" *ngFor="let data of closed">
+        <div class="opportunities" *ngFor="let data of closedActivities">
           <ng-conteiner
             [ngTemplateOutlet]="opportunity"
             [ngTemplateOutletContext]="{ item: data }"

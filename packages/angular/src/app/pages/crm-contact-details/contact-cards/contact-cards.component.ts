@@ -14,7 +14,7 @@ import {
   CardOpportunitiesModule,
   CardTasksModule,
 } from 'src/app/shared/components';
-import { Activities } from 'src/app/shared/types/activities';
+import { Activity } from 'src/app/shared/types/activities';
 import { Messages } from 'src/app/shared/types/messages';
 import { Notes } from 'src/app/shared/types/notes';
 import { Opportunities } from 'src/app/shared/types/opportunities';
@@ -28,7 +28,7 @@ import { Task } from 'src/app/shared/types/task';
 export class ContactCardsComponent {
     @Input() tasks: Task[];
 
-    @Input() activities: Activities;
+    @Input() activities: Activity[];
 
     @Input() activeOpportunities: Opportunities;
 

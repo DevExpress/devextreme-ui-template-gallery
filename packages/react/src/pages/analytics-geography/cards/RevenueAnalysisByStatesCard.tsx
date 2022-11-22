@@ -1,13 +1,14 @@
+
+import React from 'react';
 import Bullet, { Size, Tooltip } from 'devextreme-react/bullet';
 import DataGrid, { Column } from 'devextreme-react/data-grid';
-import React from 'react';
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
+import { SaleByStateAndCity } from '../../../shared/types/analytics';
 
-export const RevenueAnalysisByStatesCard = ({ datasource }) => (
+export const RevenueAnalysisByStatesCard = ({ datasource }: { datasource: SaleByStateAndCity[] }) => (
   <CardAnalytics
     title='Revenue Analysis by States'
     contentClass='sales-by-state-and-city grid'
-    isLoading={!datasource.length}
   >
     <DataGrid dataSource={datasource} height={290}>
       <Column caption='State' dataField='stateName' hidingPriority={2} />

@@ -6,6 +6,7 @@ import {
   DxButtonModule,
   DxFormModule,
   DxLoadPanelModule,
+  DxNumberBoxModule,
   DxSelectBoxModule,
   DxTextBoxModule,
   DxToolbarModule,
@@ -32,7 +33,7 @@ export class ContactFormComponent {
 
   isEditing = false;
 
-  zipCodeValidator: ValidationRule[] = [{ type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' }];
+  zipCodeValidator: ValidationRule = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
 
   handleEditClick() {
     this.isEditing = true;
@@ -55,6 +56,7 @@ export class ContactFormComponent {
     DxSelectBoxModule,
     DxButtonModule,
     DxTextBoxModule,
+    DxNumberBoxModule,
     DxLoadPanelModule,
     DxValidationGroupModule,
 

@@ -6,7 +6,7 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { CardMenuModule } from '../card-menu/card-menu.component';
-import { Activities } from 'src/app/shared/types/activities';
+import { Activity } from 'src/app/shared/types/activities';
 
 @Component({
   selector: 'card-activities',
@@ -14,7 +14,7 @@ import { Activities } from 'src/app/shared/types/activities';
   styleUrls: ['./card-activities.component.scss'],
 })
 export class CardActivitiesComponent implements OnInit, OnChanges {
-  @Input() activities: Activities;
+  @Input() activities: Activity[];
 
   @Input() showBy? = false;
 

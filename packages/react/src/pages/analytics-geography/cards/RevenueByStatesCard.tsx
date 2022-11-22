@@ -28,7 +28,6 @@ export const RevenueByStatesCard = ({ datasource, mapsData }) => (
   <CardAnalytics
     title='Revenue by States'
     contentClass='sales-by-state-map'
-    isLoading={!datasource}
   >
     <VectorMap id='vector-map' bounds={[-118, 50, -80, 25]}>
       <Layer dataSource={mapsData.usa} hoverEnabled={false} />
