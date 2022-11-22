@@ -1,16 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
+
 import { Dashboard } from '../../components/dashboard/Dashboard';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
+import { RevenueByStatesCard } from './cards/RevenueByStatesCard';
+import { RevenueAnalysisByStatesCard } from './cards/RevenueAnalysisByStatesCard';
+import { RevenueSnapshotByStatesCard } from './cards/RevenueSnapshotByStates';
+import { SaleByStateAndCity, SaleByState } from '../../shared/types/analytics';
+
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 import {
   ANALYTICS_PERIODS,
   DEFAULT_ANALYTICS_PERIOD_KEY,
 } from '../../shared/constants';
+
 import { Item } from 'devextreme-react/toolbar';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
-import { RevenueByStatesCard } from './cards/RevenueByStatesCard';
-import { RevenueAnalysisByStatesCard } from './cards/RevenueAnalysisByStatesCard';
-import { RevenueSnapshotByStatesCard } from './cards/RevenueSnapshotByStates';
+import LoadPanel from 'devextreme-react/load-panel';
 
 const createMapCoords = (coords: string) => coords.split(', ').map(parseFloat);
 
@@ -37,9 +42,10 @@ export const AnalyticsGeography = () => {
   const [dateRange, setDateRange] = useState(
     ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/')
   );
-  const [salesByStateAndCity, setSalesByStateAndCity] = useState([]);
-  const [salesByState, setSalesByState] = useState([]);
+  const [salesByStateAndCity, setSalesByStateAndCity] = useState<SaleByStateAndCity[]>([]);
+  const [salesByState, setSalesByState] = useState<SaleByState[]>([]);
   const [salesByStateMarkers, setSalesByStateMarkers] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getSalesByStateAndCity(...dateRange).then((data) => {
@@ -48,6 +54,7 @@ export const AnalyticsGeography = () => {
       setSalesByStateAndCity(data);
       setSalesByState(salesByStateResult);
       setSalesByStateMarkers(getSalesByStateMarkers(salesByStateResult));
+      setIsLoading(false);
     });
   }, [dateRange]);
 
@@ -55,34 +62,38 @@ export const AnalyticsGeography = () => {
     const { index, period } = ANALYTICS_PERIODS[e.itemData];
     setTabIndex(index);
     setDateRange(period.split('/'));
+    setIsLoading(true);
   }, []);
 
   return (
-    <Dashboard
-      title='Geography'
-      additionalToolbarContent={
-        <Item
-          location='before'
-          widget='dxTabs'
-          locateInMenu='auto'
-          options={{
-            dataSource: Object.keys(ANALYTICS_PERIODS),
-            selectedIndex: tabIndex,
-            onItemClick: onTabClick,
-          }}
-        />
-      }
-    >
-      <DashboardCardsGroup kind='wide'>
-        <RevenueByStatesCard
-          datasource={salesByStateMarkers}
-          mapsData={mapsData}
-        />
-      </DashboardCardsGroup>
-      <DashboardCardsGroup>
-        <RevenueAnalysisByStatesCard datasource={salesByStateAndCity} />
-        <RevenueSnapshotByStatesCard datasource={salesByState} />
-      </DashboardCardsGroup>
-    </Dashboard>
+    <>
+      <Dashboard
+        title='Geography'
+        additionalToolbarContent={
+          <Item
+            location='before'
+            widget='dxTabs'
+            locateInMenu='auto'
+            options={{
+              dataSource: Object.keys(ANALYTICS_PERIODS),
+              selectedIndex: tabIndex,
+              onItemClick: onTabClick,
+            }}
+          />
+        }
+      >
+        <DashboardCardsGroup kind='wide'>
+          <RevenueByStatesCard
+            datasource={salesByStateMarkers}
+            mapsData={mapsData}
+          />
+        </DashboardCardsGroup>
+        <DashboardCardsGroup>
+          <RevenueAnalysisByStatesCard datasource={salesByStateAndCity} />
+          <RevenueSnapshotByStatesCard datasource={salesByState} />
+        </DashboardCardsGroup>
+      </Dashboard>
+      <LoadPanel container='.view-wrapper-dashboard' visible={isLoading} position={{ of: '.layout-body' }} />
+    </>
   );
 };
