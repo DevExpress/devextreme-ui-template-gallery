@@ -232,7 +232,6 @@ const dataSource = new DataSource({
 });
 
 const rowClick = (e: RowClickEvent) => {
-  console.log('rowClick', e.data.id);
   if (e.data.id) {
     panelData.value = e.data;
     isPanelOpened.value = true;

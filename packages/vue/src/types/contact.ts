@@ -14,44 +14,39 @@ interface State {
     stateShort: string;
 }
 
-export interface Contact {
-  name: string,
+export interface ContactBase {
   address: string,
   firstName: string,
   lastName: string,
-  status: ContactStatus,
   position: string,
   manager: string,
   company: string,
-  city: string,
-  state: State,
   phone: string,
   email: string,
   image: string,
+}
+
+export interface Contact extends ContactBase {
+  id: number,
+  name: string,
+  status: ContactStatus,
+  company: string,
+  city: string,
+  state: State,
   activities: Activity[],
-  zipCode: number | null
+  zipCode: number
   opportunities: Opportunities,
   tasks: Task[],
 }
 
-export const newContact: Contact = {
-  name: '',
+export const newContact: ContactBase = {
   firstName: '',
   lastName: '',
-  status: 'Salaried',
   position: '',
   manager: '',
   company: '',
-  city: '',
-  state: {
-    stateShort: '',
-  },
   phone: '',
   email: '',
   image: '',
   address: '',
-  zipCode: null,
-  activities: [],
-  opportunities: [],
-  tasks: [],
 };

@@ -1,4 +1,4 @@
-import { Activities } from './activities';
+import { Activity } from './activities';
 import { Task } from './task';
 import { Opportunities } from './opportunities';
 
@@ -14,44 +14,39 @@ type State = {
     stateShort: string;
 };
 
-export type Contact = {
-    name: string,
-    address: string,
-    firstName: string,
-    lastName: string,
-    status: ContactStatus,
-    position: string,
-    manager: string,
-    opportunities: Opportunities,
-    company: string,
-    city: string,
-    state: State,
-    tasks: Task[],
-    phone: string,
-    email: string,
-    image: string,
-    zipCode: number,
-    activities: Activities,
-};
+export interface ContactBase {
+  address: string,
+  firstName: string,
+  lastName: string,
+  position: string,
+  manager: string,
+  company: string,
+  phone: string,
+  email: string,
+  image: string,
+}
 
-export const newContact: Contact = {
-  name: '',
+export interface Contact extends ContactBase {
+  id: number,
+  name: string,
+  status: ContactStatus,
+  company: string,
+  city: string,
+  state: State,
+  activities: Activity[],
+  zipCode: number
+  opportunities: Opportunities,
+  tasks: Task[],
+}
+
+export const newContact: ContactBase = {
   firstName: '',
   lastName: '',
-  status: 'Salaried',
   position: '',
   manager: '',
   company: '',
-  city: '',
-  state: {
-    stateShort: '',
-  },
   phone: '',
   email: '',
   image: '',
   address: '',
-  zipCode: null,
-  activities: [],
-  opportunities: [],
-  tasks: [],
 }

@@ -7,6 +7,7 @@ import SelectBox from 'devextreme-react/select-box';
 import Button from 'devextreme-react/button';
 import TextBox from 'devextreme-react/text-box';
 import Validator, { PatternRule, EmailRule } from 'devextreme-react/validator';
+import NumberBox from 'devextreme-react/number-box';
 
 import { FormPhoto } from '../form-photo/FormPhoto';
 import { ContactStatus } from '../contact-status/ContactStatus';
@@ -14,7 +15,6 @@ import { FormTextbox } from '../form-textbox/FormTextbox';
 
 import { Contact } from '../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
-import { NumberBox } from 'devextreme-react';
 
 const PHOTO_SIZE = 184;
 

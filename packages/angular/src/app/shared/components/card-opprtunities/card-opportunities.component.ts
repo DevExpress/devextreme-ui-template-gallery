@@ -7,7 +7,7 @@ import {
   DxLoadPanelModule,
 } from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
-import { Activities } from 'src/app/shared/types/activities';
+import { Activity } from 'src/app/shared/types/activities';
 
 @Component({
   selector: 'card-opportunities',
@@ -15,9 +15,9 @@ import { Activities } from 'src/app/shared/types/activities';
   styleUrls: ['./card-opportunities.component.scss'],
 })
 export class CardOpportunitiesComponent implements OnChanges {
-  @Input() active: Activities;
+  @Input() active: Activity[];
 
-  @Input() closed: Activities;
+  @Input() closed: Activity[];
 
   messageToast = '';
 
