@@ -19,7 +19,7 @@
                 </div>
               </dx-item>
               <dx-item location="before">
-                <contact-status :status="panelData?.status" />
+                <contact-status :value="panelData?.status" />
               </dx-item>
 
               <dx-item
