@@ -15,9 +15,7 @@ export const Content = () => {
         <Route path='*' element={<Navigate to='/crm-contact-list' />} />
       </Routes>
       <Footer>
-        Copyright © 2011-{new Date().getFullYear()} {appInfo.title} Inc.
-        <br />
-        All trademarks or registered trademarks are property of their respective owners.
+        Copyright © {new Date().getFullYear()} Developer Express Inc.
       </Footer>
     </SideNavBarLayout>
   );

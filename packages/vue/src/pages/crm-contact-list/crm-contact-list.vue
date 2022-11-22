@@ -28,6 +28,7 @@
       <dx-export
         :enabled="true"
         :allow-export-selected-data="true"
+        :formats="['xlsx', 'pdf']"
       />
 
       <!-- Toolbar -->
@@ -55,15 +56,17 @@
         <dx-grid-toolbar-item
           location="after"
           locate-in-menu="auto"
-          widget="dxButton"
-          :options="{
-            icon: 'plus',
-            text: 'Add Contact',
-            type: 'default',
-            stylingMode: 'contained',
-            onClick: addContact
-          }"
-        />
+        >
+          <div>
+            <dx-button
+              text="Add Contact"
+              icon="plus"
+              type="default"
+              styling-mode="contained"
+              @click="addContact"
+            />
+          </div>
+        </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item
           location="after"
@@ -77,7 +80,9 @@
           location="after"
           locate-in-menu="auto"
         >
-          <div class="separator" />
+          <div>
+            <div class="separator" />
+          </div>
         </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item name="exportButton" />
@@ -86,7 +91,9 @@
           location="after"
           locate-in-menu="auto"
         >
-          <div class="separator" />
+          <div>
+            <div class="separator" />
+          </div>
         </dx-grid-toolbar-item>
 
         <dx-grid-toolbar-item
@@ -174,13 +181,14 @@
     v-model:is-visible="isAddContactPopupOpened"
     @save="onSaveContactNewForm"
   >
-    <contact-new-form :validation-group="newContactValidationGroup" />
+    <contact-new-form/>
   </form-popup>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import DxDropDownButton from 'devextreme-vue/drop-down-button';
+import { DxButton } from 'devextreme-vue/button';
 import DxDataGrid, {
   DxColumn,
   DxColumnChooser,
@@ -212,7 +220,6 @@ import ContactPanel from './components/contact-panel.vue';
 const filterStatusList = ['All', ...contactStatusList];
 type FilterContactStatus = typeof filterStatusList[number];
 
-const newContactValidationGroup = 'new-contact';
 const panelData = ref<Array<Contact> | null>(null);
 const isPanelOpened = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
@@ -260,14 +267,14 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
 };
 
 const onSaveContactNewForm = () => {
-  if (validationEngine.validateGroup(newContactValidationGroup).isValid) {
-    isAddContactPopupOpened.value = false;
-  }
+  isAddContactPopupOpened.value = false;
 };
 </script>
 
 <style scoped lang="scss">
 @use "@/variables" as *;
+
+@include separator();
 
 .view-wrapper {
   position: absolute;
@@ -277,8 +284,6 @@ const onSaveContactNewForm = () => {
   right: 0;
 
   .grid  {
-    @include separator();
-
     .name-template {
 
       .position {
