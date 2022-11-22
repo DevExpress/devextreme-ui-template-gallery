@@ -15,19 +15,15 @@ import { Activity } from 'src/app/shared/types/activities';
   styleUrls: ['./card-opportunities.component.scss'],
 })
 export class CardOpportunitiesComponent implements OnChanges {
-  @Input() active: Activity[];
+  @Input() openedActivities: Activity[];
 
-  @Input() closed: Activity[];
-
-  messageToast = '';
+  @Input() closedActivities: Activity[];
 
   isLoading = true;
 
-  isVisibleToast = false;
-
   ngOnChanges(changes: SimpleChanges) {
-    const isLoadActive = !changes.active?.currentValue;
-    const isLoadClosed = !changes.closed?.currentValue;
+    const isLoadActive = !changes.openedActivities?.currentValue;
+    const isLoadClosed = !changes.closedActivities?.currentValue;
 
     this.isLoading = isLoadActive || isLoadClosed;
   }

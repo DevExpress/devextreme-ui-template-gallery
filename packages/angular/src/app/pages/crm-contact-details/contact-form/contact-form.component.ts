@@ -5,7 +5,8 @@ import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
   DxFormModule,
-  DxLoadPanelModule, DxNumberBoxModule,
+  DxLoadPanelModule,
+  DxNumberBoxModule,
   DxSelectBoxModule,
   DxTextBoxModule,
   DxToolbarModule,
