@@ -71,13 +71,12 @@ const loadData = async (groupBy: string) => {
   loading.value = true;
   const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
 
-  const results = await Promise.all([
-    getSales(startDate, endDate), getSalesByOrderDate(groupBy),
-  ]);
-  results.forEach((result, index) => {
-    data[index].value = result;
-  });
-  loading.value = false;
+  await Promise.all([
+    getSales(startDate, endDate)
+      .then((result: Sales) => { data[0].value = result; }),
+    getSalesByOrderDate(groupBy)
+      .then((result: Sales) => { data[1].value = result; }),
+  ]).then(() => { loading.value = false; });
 };
 
 onMounted(() => {

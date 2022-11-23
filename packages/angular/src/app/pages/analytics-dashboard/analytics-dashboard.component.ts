@@ -23,6 +23,9 @@ import { ApplyPipeModule } from "src/app/shared/apply.pipe";
 import { map } from "rxjs/operators";
 import { Observable, forkJoin } from "rxjs";
 
+type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
+type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
+
 @Component({
   templateUrl: './analytics-dashboard.component.html',
   styleUrls: ['./analytics-dashboard.component.scss'],
@@ -55,22 +58,22 @@ export class AnalyticsDashboardComponent implements OnInit {
   loadData = (startDate: string, endDate: string) => {
     const tasks: Observable<any>[] = [];
     this.isLoading = true;
-    const loaders = {
-      'opportunities': this.service.getOpportunitiesByCategory(startDate, endDate),
-      'sales': this.service.getSales(startDate, endDate),
-      'salesByCategory': this.service.getSalesByCategory(startDate, endDate),
-      'salesByState': this.service.getSalesByStateAndCity(startDate, endDate).pipe(
+    [
+      ['opportunities', this.service.getOpportunitiesByCategory],
+      ['sales', this.service.getSales],
+      ['salesByCategory', this.service.getSalesByCategory],
+      ['salesByState', (startDate: string, endDate: string) => this.service.getSalesByStateAndCity(startDate, endDate).pipe(
         map((data) => this.service.getSalesByState(data))
       )
-    };
-    for(let loader in loaders) {
-      tasks.push(loaders[loader]);
-    }
-    forkJoin(tasks).subscribe((results) => {
-      const keys = Object.keys(loaders);
-      results.forEach((result, index) => {
-        this[keys[index]] = result;
+      ]
+    ].forEach(async ([dataName, loader]: [string, DataLoader]) => {
+      const loaderObservable = loader(startDate, endDate);
+      tasks.push(loaderObservable);
+      loaderObservable.subscribe((result: DashboardData) => {
+        this[dataName] = result;
       });
+    });
+    forkJoin(tasks).subscribe(() => {
       this.isLoading = false;
     });
   };

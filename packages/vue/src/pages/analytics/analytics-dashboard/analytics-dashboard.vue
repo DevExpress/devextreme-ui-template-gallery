@@ -80,18 +80,16 @@ const data = [opportunities, salesByCategory, sales, salesByState];
 const loadData = async (startDate: string, endDate: string) => {
   loading.value = true;
 
-  const results = await Promise.all([
-    getOpportunitiesByCategory(startDate, endDate),
-    getSalesByCategory(startDate, endDate),
-    getSales(startDate, endDate),
-    getSalesByState(startDate, endDate),
-  ]);
-
-  results.forEach((result, index) => {
-    data[index].value = result;
-  });
-
-  loading.value = false;
+  await Promise.all([
+    getOpportunitiesByCategory(startDate, endDate)
+      .then((result: SalesOrOpportunitiesByCategory) => { data[0].value = result; }),
+    getSalesByCategory(startDate, endDate)
+      .then((result: SalesByStateAndCity) => { data[1].value = result; }),
+    getSales(startDate, endDate)
+      .then((result: Sales) => { data[2].value = result; }),
+    getSalesByState(startDate, endDate)
+      .then((result: SalesByState) => { data[3].value = result; }),
+  ]).then(() => { loading.value = false; });
 };
 
 const tabChange = ([startDate, endDate]: string[]) => {

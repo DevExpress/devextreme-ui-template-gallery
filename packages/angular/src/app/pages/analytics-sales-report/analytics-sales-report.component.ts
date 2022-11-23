@@ -68,19 +68,16 @@ export class AnalyticsSalesReportComponent implements OnInit {
   loadData = (groupBy: string) => {
     const tasks: Observable<any>[] = [];
     const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
-    const loaders = {
-      'sales': this.service.getSales(startDate, endDate),
-      'salesByDateAndCategory': this.service.getSalesByOrderDate(groupBy),
-    };
-    for(let loader in loaders) {
-      tasks.push(loaders[loader]);
-    }
-    forkJoin(tasks).subscribe((results) => {
-      const keys = Object.keys(loaders);
-      results.forEach((result, index) => {
-        this[keys[index]] = result;
-      });
-      this.isLoading = false
+    [
+      ['sales', this.service.getSales(startDate, endDate)],
+      ['salesByDateAndCategory', this.service.getSalesByOrderDate(groupBy)],
+    ].forEach(([dataName, loader]: [string, Observable<any>]) => {
+        tasks.push(loader);
+        loader.subscribe((data) => this[dataName] = data);
+      }
+    );
+    forkJoin(tasks).subscribe(() => {
+      this.isLoading = false;
     });
   };
 
