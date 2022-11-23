@@ -11,18 +11,23 @@ import DropDownButton from 'devextreme-react/drop-down-button';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
 import LoadPanel from 'devextreme-react/load-panel';
+import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
+import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
-import { ColumnCellTemplateData, RowClickEvent } from 'devextreme/ui/data_grid';
+import { ColumnCellTemplateData, RowClickEvent, ExportingEvent } from 'devextreme/ui/data_grid';
 
 import { ContactStatus } from '../../components';
 
 import { getContacts } from 'dx-template-gallery-data';
+import { saveAs } from 'file-saver-es';
+import { Workbook } from 'exceljs';
 
 import { ContactStatus as ContactStatusType } from '../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
 import { FormPopup, ContactNewForm } from '../../components';
 import { ContactPanel } from './contact-panel/ContactPanel';
+import { jsPDF as JsPdf } from 'jspdf';
 
 type FilterContactStatus = ContactStatusType | 'All';
 
@@ -104,6 +109,32 @@ export const CRMContactList = () => {
     changePanelOpened();
   }, []);
 
+  const onExporting = useCallback((e: ExportingEvent) => {
+    if (e.format === 'pdf') {
+      const doc = new JsPdf();
+      exportDataGridToPdf({
+        jsPDFDocument: doc,
+        component: e.component,
+      }).then(() => {
+        doc.save('Contacts.pdf');
+      });
+    } else {
+      const workbook = new Workbook();
+      const worksheet = workbook.addWorksheet('Contacts');
+
+      exportDataGridToXLSX({
+        component: e.component,
+        worksheet,
+        autoFilterEnabled: true,
+      }).then(() => {
+        workbook.xlsx.writeBuffer().then((buffer) => {
+          saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Contacts.xlsx');
+        });
+      });
+      e.cancel = true;
+    }
+  }, []);
+
   return (
     <div className='view crm-contact-list'>
       {!loading ? (
@@ -113,6 +144,7 @@ export const CRMContactList = () => {
             noDataText=''
             dataSource={gridData}
             onRowClick={onRowClick}
+            onExporting={onExporting}
             allowColumnReordering
             ref={grid}
           >
