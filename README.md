@@ -1,21 +1,40 @@
-# Devextreme UI Template Gallery
+# DevExtreme UI Template Gallery
 
-This repository includes responsive UI Templates for the most pupular UI/UX patterns in web LOB applications. Currently, this project is in the 'preview' stage and contains the following CRM and Project Management UI templates:
+This repository includes responsive UI Templates for the most popular UI/UX patterns in web LOB applications. These templates are available for Angular, React, and Vue.
 
-* [CRM. Contact List](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/crm-contact-list)
-* [CRM. Contact Details](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/crm-contact-details)
-* [Planning. Task List](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/planning-task-list)
-* [Planning. Task Details](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/planning-task-details)
+![DevExtreme UI Template Gallery](/images/ui-template-gallery.png)
+
+Take a look at the gallery **online** here:
+
+- [Angular](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/crm-contact-list)
+- [React](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/react/default/#/crm-contact-list)
+- [Vue](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/vue/default/#/crm-contact-list)
+
+Use the left menu to navigate through the CRM, Planning and Analytics views.
 
 The UI Templates have responsive layouts with DevExtreme UI components. Note that the components use sample data entities without any business logic. You can use these UI Templates in your project and adapt them to your specific business requirements.
 
-> The repository is in preview mode. Only Angular version is available for use. Vue and React projects are still under development.
+## Get Started
 
-![Devextreme UI Template Gallery](/images/ui-template-gallery.png)
+To run these UI templates on your machine, clone this repository and follow the instructions below.
 
-## How It Organized
+1. Run the `npm i` command in the framework folder to install packages to the project and prepare the repository. 
 
-UI Template sources for Angular are in the [packages/angular](packages/angular) folder. Navigate to the following folders to get the code for each template:
+2. Start the project with one of the following commands depending on the framework of your choice:
+
+    - `ng serve` for Angular
+
+    - `nmp run serve` for Vue
+
+    - `npm start` for React
+
+3. Open the application on the local server.
+
+## How It is Organized
+
+Navigate to the folders linked below to get the code for each template.
+
+### Angular 
 
 **CRM**
 
@@ -27,28 +46,44 @@ UI Template sources for Angular are in the [packages/angular](packages/angular) 
 * [Task List](packages/angular/src/app/pages/planning-task-list/) 
 * [Task Details](packages/angular/src/app/pages/planning-task-details/)
 
-## Get Started
+**Analytics**
 
-### Angular
+* [Dashboard](packages/angular/src/app/pages/analytics-dashboard/) 
+* [Sales Report](packages/angular/src/app/pages/analytics-sales-report/) 
+* [Geography](packages/angular/src/app/pages/analytics-geography/) 
 
-To run these UI templates on your machine, clone this repository and follow the instructions below.
+### React
 
-1. Run the npm command below to install packages to an Angular project and prepare the repository:  
+**CRM**
 
-    ```
-    npm i
-    ```
+* [Contact List](packages/react/src/pages/crm-contact-list/) 
+* [Contact Details](packages/react/src/pages/crm-contact-details/)
 
-2. Move to the Angular folder and run the following command to start the project:
+**Planning**
 
-    ```
-    cd packages/angular
+* [Task List](packages/react/src/pages/planning-task-list/) 
+* [Task Details](packages/react/src/pages/planning-task-details/)
 
-    npm run start
-    ```
+**Analytics**
 
-3. Navigate to [http://localhost:4200/](http://localhost:4200/). 
-    
-### React and Vue
+* [Dashboard](packages/react/src/pages/analytics-dashboard/) 
+* [Sales Report](packages/react/src/pages/analytics-sales-report/) 
+* [Geography](packages/react/src/pages/analytics-geography/) 
 
-DevExtreme UI Templates for React and Vue will be available soon. 
+### Vue
+
+**CRM**
+
+* [Contact List](packages/vue/src/pages/crm-contact-list/) 
+* [Contact Details](packages/vue/src/pages/crm-contact-details/)
+
+**Planning**
+
+* [Task List](packages/vue/src/pages/planning/planning-task-list/) 
+* [Task Details](packages/vue/src/pages/planning/)
+
+**Analytics**
+
+* [Dashboard](packages/vue/src/pages/analytics/analytics-dashboard/) 
+* [Sales Report](packages/vue/src/pages/analytics/analytics-sales-report/) 
+* [Geography](packages/vue/src/pages/analytics/analytics-geography/) 
