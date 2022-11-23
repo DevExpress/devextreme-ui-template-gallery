@@ -221,7 +221,7 @@ function handleEditClick() {
   isEditing.value = true;
 }
 
-function handleSaveClick({ validationGroup }: {validationGroup: Record<string, any>}) {
+function handleSaveClick({ validationGroup }: { validationGroup: Record<string, any> }) {
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }

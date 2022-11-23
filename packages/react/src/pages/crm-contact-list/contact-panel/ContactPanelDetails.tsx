@@ -87,29 +87,29 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
   }, [contact]);
 
   return (
-    <ValidationGroup>
-      <div id='contact-panel' className={classNames({ 'panel': true, 'open': isOpened, 'pin': isPinned && (isLarge || isMedium) })}>
-        <div className='data-wrapper'>
-          <div className='data-part'>
-            <Toolbar className='panel-toolbar'>
-              <ToolbarItem location='before'>
-                <span className='contact-name value'>{contact.name}</span>
-              </ToolbarItem>
-              <ToolbarItem location='before'>
-                <ContactStatus text={contact.status} />
-              </ToolbarItem>
-              <ToolbarItem
-                location='after'
-                visible={isLarge || isMedium}
-              >
-                <Button icon={isPinned ? 'pin' : 'unpin'} onClick={onPinClick} />
-              </ToolbarItem>
-              <ToolbarItem location='after'>
-                <Button icon='close' onClick={onClosePanelClick} />
-              </ToolbarItem>
-            </Toolbar>
-          </div>
-          <ScrollView className='panel-scroll'>
+    <div id='contact-panel' className={classNames({ 'panel': true, 'open': isOpened, 'pin': isPinned && (isLarge || isMedium) })}>
+      <div className='data-wrapper'>
+        <div className='data-part'>
+          <Toolbar className='panel-toolbar'>
+            <ToolbarItem location='before'>
+              <span className='contact-name value'>{contact.name}</span>
+            </ToolbarItem>
+            <ToolbarItem location='before'>
+              <ContactStatus text={contact.status} />
+            </ToolbarItem>
+            <ToolbarItem
+              location='after'
+              visible={isLarge || isMedium}
+            >
+              <Button icon={isPinned ? 'pin' : 'unpin'} onClick={onPinClick} />
+            </ToolbarItem>
+            <ToolbarItem location='after'>
+              <Button icon='close' onClick={onClosePanelClick} />
+            </ToolbarItem>
+          </Toolbar>
+        </div>
+        <ScrollView className='panel-scroll'>
+          <ValidationGroup>
             <div className='data-part border'>
               <Form
                 className={classNames({ 'plain-styled-form': true, 'view-mode': !isEditing })}
@@ -196,15 +196,15 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                 </ToolbarItem>
               </Toolbar>
             </div>
-            <div className='data-part'>
-              <Accordion multiple collapsible itemTitleRender={renderCustomTitle}>
-                <AccordionItem title='Opportunities' render={renderCustomOpportunities} />
-                <AccordionItem title='Activities' render={renderCustomActivities} />
-              </Accordion>
-            </div>
-          </ScrollView>
-        </div>
+          </ValidationGroup>
+          <div className='data-part'>
+            <Accordion multiple collapsible itemTitleRender={renderCustomTitle}>
+              <AccordionItem title='Opportunities' render={renderCustomOpportunities} />
+              <AccordionItem title='Activities' render={renderCustomActivities} />
+            </Accordion>
+          </div>
+        </ScrollView>
       </div>
-    </ValidationGroup>
+    </div>
   );
 };
