@@ -17,7 +17,7 @@
     "http-server": "^14.1.0"
   },
   "dependencies": {
-    "testcafe": "^1.18.1",
-    "minimist": "^1.2.6"
+    "minimist": "^1.2.6",
+    "testcafe": "^2.1.0"
   }
 }
