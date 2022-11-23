@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   isLoading: false,
   containerSelector: '',
+  width: null,
 });
 </script>
 

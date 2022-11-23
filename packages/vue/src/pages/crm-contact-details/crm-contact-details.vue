@@ -11,13 +11,14 @@
       <dx-toolbar-item
         location="after"
         locate-in-menu="auto"
-      ><div>
-        <dx-button
-          text="Terminate"
-          type="default"
-          styling-mode="contained"
-        />
-      </div>
+      >
+        <div>
+          <dx-button
+            text="Terminate"
+            type="default"
+            styling-mode="contained"
+          />
+        </div>
       </dx-toolbar-item>
       <dx-toolbar-item
         location="after"

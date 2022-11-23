@@ -35,15 +35,15 @@
         data-field="percentage"
         name="percentB"
         cell-template="salesBullet"
-        cssClass="sales-bullet"
+        css-class="sales-bullet"
         :width="200"
       />
 
-      <template #salesBullet="{ data }">
+      <template #salesBullet="sales">
         <dx-bullet
           :show-target="false"
           :show-zero-level="false"
-          :value="data.data?.percentage * 100"
+          :value="sales.data.data?.percentage * 100"
           :start-scale-value="0"
           :end-scale-value="100"
         >

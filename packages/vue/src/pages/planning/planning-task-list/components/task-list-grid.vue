@@ -180,7 +180,6 @@ import {
   DxEditing,
 } from 'devextreme-vue/data-grid';
 import 'jspdf-autotable';
-import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxSelectBox } from 'devextreme-vue/select-box';
 import { jsPDF as JsPDF } from 'jspdf';
 import { saveAs } from 'file-saver-es';
@@ -224,13 +223,13 @@ const toogleUseNavigation = () => {
 };
 
 const addRow = () => dxDataGridCmp.value?.instance.addRow();
-const onPrioritySelectChange = (value: string, cellData: Record<string, any>) => {
+const onPrioritySelectChange = (value: string, cellData: Record<string, unknown>) => {
   cellData.setValue(value);
   cellData.component.refresh();
   cellData.component.focus();
 };
 
-const onStatusSelectChange = (value: string, cellInfo: Record<string, any>) => {
+const onStatusSelectChange = (value: string, cellInfo: Record<string, unknown>) => {
   cellInfo.setValue(value);
   cellInfo.component.refresh();
 };

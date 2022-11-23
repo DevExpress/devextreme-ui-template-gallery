@@ -16,7 +16,7 @@
     </template>
 
     <dx-chart :data-source="data">
-      <dx-argument-axis :visual-range="props.visualRange"/>
+      <dx-argument-axis :visual-range="props.visualRange" />
       <dx-tooltip
         :enabled="true"
         :customize-tooltip="seriesName => ({ text: seriesName })"
