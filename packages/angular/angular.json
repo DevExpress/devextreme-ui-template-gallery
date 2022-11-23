@@ -36,6 +36,19 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "jspdf-autotable",
+              "exceljs",
+              "devextreme/dist/js/vectormap-data/usa.js",
+              "luxon",
+              "devextreme-quill",
+              "devexpress-gantt",
+              "devexpress-diagram",
+              "core-js",
+              "raf",
+              "rgbcolor",
+              "jszip"
+            ],
             "outputPath": "build",
             "index": "src/index.html",
             "main": "src/main.ts",
