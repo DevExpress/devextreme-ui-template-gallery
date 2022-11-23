@@ -67,11 +67,9 @@
                 v-model="contactData.status"
                 :items="contactStatusList"
                 :read-only="!isEditing"
-                :element-attr="{class: 'form-editor'}"
-                :input-attr="{class: 'form-editor-input'}"
-                styling-mode="filled"
                 field-template="field"
                 item-template="item"
+                v-bind="formSelectBoxProps"
               >
                 <template #field="{ data }">
                   <div class="status-editor-field">
@@ -170,12 +168,14 @@
             />
           </dx-form-item>
           <dx-form-item>
-            <form-textbox
+            <dx-number-box
               label="Zip Code"
               v-model.number="contactData.zipCode"
               :is-editing="isEditing"
-              :validators="[zipCodeValidator]"
-            />
+              v-bind="formEditorProps"
+            >
+              <dx-validator :validation-rules="[zipCodeValidator]" />
+            </dx-number-box>
           </dx-form-item>
         </dx-form-group-item>
         <dx-form-group-item
@@ -241,7 +241,10 @@ import {
   DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxTextBox } from 'devextreme-vue/text-box';
+import { DxNumberBox } from 'devextreme-vue/number-box';
+import { DxValidator } from 'devextreme-vue/validator';
 import { DxSelectBox } from 'devextreme-vue';
+import { formEditorProps, formSelectBoxProps } from '@/shared/form-editor-config';
 import LoadComponent from '@/components/load-component.vue';
 import { Contact, contactStatusList } from '@/types/contact';
 import FormPhoto from '@/components/form-photo.vue';

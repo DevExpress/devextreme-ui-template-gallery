@@ -135,7 +135,8 @@
     v-model:is-visible="isNewTaskPopupOpened"
     @save="onSaveNewTask"
   >
-    <task-form :content-by-screen="{ xs: 1, sm: 1 }" />
+    <task-form :content-by-screen="{ xs: 1, sm: 1 }"
+               :is-create-mode="true"/>
   </form-popup>
 </template>
 

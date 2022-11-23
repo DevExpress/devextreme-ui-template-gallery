@@ -1,9 +1,10 @@
 import React from 'react';
 import Chart, { ArgumentAxis, Border, CommonSeriesSettings, Format, Label, Legend, Series, Size, ValueAxis } from 'devextreme-react/chart';
 import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
+import { Sale } from '../../../shared/types/analytics';
 
-export const RevenueCard = ({ datasource }) => (
-  <CardAnalytics title='Revenue' contentClass='sales' isLoading={!datasource.length}>
+export const RevenueCard = ({ datasource }: { datasource: Sale[]}) => (
+  <CardAnalytics title='Revenue' contentClass='sales'>
     <Chart dataSource={datasource}>
       <Series valueField='total' />
       <CommonSeriesSettings argumentField='date' type='splinearea'>
