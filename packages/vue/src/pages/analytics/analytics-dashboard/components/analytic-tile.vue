@@ -7,8 +7,10 @@
     <div class="total">
       {{ props.total === null ? formatPrice(totalCount) : props.total }}
     </div>
-    <div class="percentage"
-         v-if="props.percentage !== 0">
+    <div
+      class="percentage"
+      v-if="props.percentage !== 0"
+    >
       <i :class="[`dx-icon-${props.percentage > 0 ? 'spinup' : 'spindown'}`]" />
       <span>{{ Math.abs(props.percentage) }}%</span>
     </div>

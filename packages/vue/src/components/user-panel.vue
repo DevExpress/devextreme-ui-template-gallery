@@ -35,11 +35,16 @@
 import DxContextMenu, { DxPosition } from 'devextreme-vue/context-menu';
 import DxList from 'devextreme-vue/list';
 
-defineProps({
-  menuMode: String,
+withDefaults(defineProps<{
+  menuMode: string,
   menuItems: Array,
-  user: Object,
+  user: object,
+}>(), {
+  menuMode: '',
+  menuItems: [],
+  user: {},
 });
+
 </script>
 <style scoped lang="scss">
 @use '@/variables.scss' as *;

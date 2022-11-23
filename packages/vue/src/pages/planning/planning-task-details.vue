@@ -115,7 +115,7 @@ import TaskForm from './components/task-form.vue';
 
 const taskId = 1;
 const taskName = ref('');
-const taskData = ref<Task | Record<string, any>>({ notes: [] });
+const taskData = ref<Task | Record<string, unknown>>({ notes: [] });
 const isLoading = ref(false);
 
 const messageBadge = computed(() => {

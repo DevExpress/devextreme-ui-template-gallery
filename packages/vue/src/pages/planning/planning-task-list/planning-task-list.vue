@@ -135,8 +135,10 @@
     v-model:is-visible="isNewTaskPopupOpened"
     @save="onSaveNewTask"
   >
-    <task-form :content-by-screen="{ xs: 1, sm: 1 }"
-               :is-create-mode="true"/>
+    <task-form
+      :content-by-screen="{ xs: 1, sm: 1 }"
+      :is-create-mode="true"
+    />
   </form-popup>
 </template>
 
@@ -150,7 +152,6 @@ import {
   DxToolbar,
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
-import validationEngine from 'devextreme/ui/validation_engine';
 
 // eslint-disable-next-line import/no-unresolved
 import { getTasks, getFilteredTasks } from 'dx-template-gallery-data';
@@ -173,7 +174,6 @@ const gridData = ref<Task[]>([]);
 const kanbanData = ref<Task[]>([]);
 const ganttData = ref<Task[]>([]);
 const isNewTaskPopupOpened = ref(false);
-const newTaskValidationGroup = 'new-task';
 
 const addTask = () => {
   isNewTaskPopupOpened.value = true;

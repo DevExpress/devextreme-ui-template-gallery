@@ -30,7 +30,7 @@ import RevenueSnapshotCard from './components/revenue-snapshot-card.vue';
 
 const salesByState = ref<SalesByState | null>(null);
 const salesByStateAndCity = ref<SalesByStateAndCity | null>(null);
-const salesByStateMarkers = ref<Record<string, any> | null>(null);
+const salesByStateMarkers = ref<Record<string, unknown> | null>(null);
 
 const data = [salesByStateAndCity, salesByState, salesByStateMarkers];
 
@@ -38,7 +38,7 @@ const createMapCoords = (coords: string) => coords.split(', ').map((coord) => pa
 
 const getSalesByStateMarkers = () => ({
   type: 'StateCollection',
-  features: salesByState.value?.map((item: Record<string, any>) => ({
+  features: salesByState.value?.map((item: Record<string, unknown>) => ({
     type: 'State',
     geometry: {
       type: 'Point',

@@ -96,6 +96,9 @@ import { DxFileUploader } from 'devextreme-vue/file-uploader';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
 import DxValidator, { DxRequiredRule } from 'devextreme-vue/validator';
+
+import { ClickEvent } from 'devextreme/ui/button';
+
 import { formatDate } from '@/utils/formatters';
 import LoadComponent from '@/components/load-component.vue';
 
@@ -130,7 +133,7 @@ function setUserName(text: string) {
   return text.replace('{username}', props.user);
 }
 
-function send(e: any) {
+function send(e: ClickEvent) {
   if (!e.validationGroup.validate().isValid) {
     return;
   }
