@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
 import ValidationGroup from 'devextreme-react/validation-group';
@@ -12,15 +12,16 @@ type PopupProps = {
 
 export const FormPopup = ({ title, visible, changeVisibility, children }: React.PropsWithChildren<PopupProps>) => {
   const { isXSmall, isSmall } = useScreenSize();
+  const validationGroup = useRef<ValidationGroup>(null);
 
-  const onSaveClick = (e) => {
-    if (!e.validationGroup.validate().isValid) return;
+  const onSaveClick = () => {
+    if (!validationGroup.current?.instance.validate().isValid) return;
 
     changeVisibility();
   };
 
   return (
-    <ValidationGroup>
+    <ValidationGroup ref={validationGroup}>
       <Popup
         title={title}
         visible={visible}
