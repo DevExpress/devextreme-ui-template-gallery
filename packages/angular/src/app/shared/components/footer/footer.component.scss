@@ -3,7 +3,10 @@
 :host {
   display: block;
   color: rgba($base-text-color, alpha($base-text-color) * 0.7);
-  border-top: 1px solid $base-border-color;
-  padding-top: 20px;
-  padding-bottom: 24px;
+  padding: 20px 0 24px 21px;
+  background-color: $side-panel-background;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
