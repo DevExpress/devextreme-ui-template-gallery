@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunkvue_ui_teplate_gallery"]=self["webpackChunkvue_ui_teplate_gallery"]||[]).push([[1794],{57361:function(n,u,e){e.d(u,{T:function(){return f},m:function(){return i}});var t=e(79264),r=e(56901),i=function(n){if((0,r.Ym)())return(0,t.Y_)(n)},f=function(n){return null===n&&(n=void 0),"function"===typeof n&&(n=n()),n}}}]);
