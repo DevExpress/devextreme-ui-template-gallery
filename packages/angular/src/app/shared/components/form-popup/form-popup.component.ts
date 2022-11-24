@@ -31,17 +31,12 @@ import validationEngine from 'devextreme/ui/validation_engine';
     @Input() titleText = '';
 
     popupVisible = false;
-
-    validationEngine = validationEngine;
   
     popupFullScreen = false;
   
     screenSubscription: Subscription;
   
-    constructor(private screen: ScreenService) {
-      this.closePopup = this.closePopup.bind(this);
-      this.onSaveClick = this.onSaveClick.bind(this); 
-    }
+    constructor(private screen: ScreenService) { }
   
     ngOnInit(): void {
       this.popupFullScreen = this.screen.isSmallScreen();
@@ -56,12 +51,12 @@ import validationEngine from 'devextreme/ui/validation_engine';
       this.popupFullScreen = this.screen.isSmallScreen();
     }
   
-    closePopup() {
+    closePopup = () => {
       this.popupVisible = false;
     }
 
-    onSaveClick() {
-      if(!this.validationEngine.validateGroup(this.validationGroup.instance).isValid) return;
+    onSaveClick = () => {
+      if(!validationEngine.validateGroup(this.validationGroup.instance).isValid) return;
   
       this.popupVisible = false;
     }
