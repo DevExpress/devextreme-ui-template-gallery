@@ -30,11 +30,10 @@ export const authInfo: AuthInfo = {
   loggedIn() {
     return !!this._user;
   },
-
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   async logIn(email: string, password: string) {
     try {
       // Send request
-      console.log(email, password);
       this._user = { ...defaultUser, email };
 
       return {
@@ -71,8 +70,6 @@ export const authInfo: AuthInfo = {
   async resetPassword(email: string) {
     try {
       // Send request
-      console.log(email);
-
       return {
         isOk: true,
       };
@@ -87,8 +84,6 @@ export const authInfo: AuthInfo = {
   async changePassword(email: string, recoveryCode: string) {
     try {
       // Send request
-      console.log(email, recoveryCode);
-
       return {
         isOk: true,
       };
@@ -103,8 +98,6 @@ export const authInfo: AuthInfo = {
   async createAccount(email: string, password: string) {
     try {
       // Send request
-      console.log(email, password);
-
       return {
         isOk: true,
       };
