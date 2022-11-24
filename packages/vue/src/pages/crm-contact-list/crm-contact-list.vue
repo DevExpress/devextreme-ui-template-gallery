@@ -1,6 +1,7 @@
 <template>
   <div class="view-wrapper">
     <dx-data-grid
+      ref="dataGrid"
       :data-source="dataSource"
       :allow-column-reordering="true"
       height="100%"
@@ -204,7 +205,6 @@ import DxDataGrid, {
   DxItem as DxGridToolbarItem,
   DxSearchPanel,
 } from 'devextreme-vue/data-grid';
-// eslint-disable-next-line import/no-unresolved
 import { getContacts } from 'dx-template-gallery-data';
 import { saveAs } from 'file-saver-es';
 import { Workbook } from 'exceljs';
