@@ -20,9 +20,4 @@ const props = withDefaults(defineProps<{
 });
 </script>
 <style lang="scss">
-.dx-dropdownbutton-content {
-  .dx-list-item {
-    display: block;
-  }
-}
 </style>

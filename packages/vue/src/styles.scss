@@ -20,6 +20,12 @@
   }
 }
 
+.dx-dropdownbutton-content {
+  .dx-list-item {
+    display: block;
+  }
+}
+
 .container {
   height: 100%;
   flex-direction: column;
@@ -152,20 +158,6 @@ $side-panel-min-width: 60px;
         opacity: 1;
       }
     }
-  }
-}
-
-@mixin status($status-color) {
-  color: $status-color;
-
-  &.dx-texteditor {
-    .status-input.status-editor-input {
-      color: $status-color;
-    }
-  }
-
-  &::before {
-    background: $status-color;
   }
 }
 

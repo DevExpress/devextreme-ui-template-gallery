@@ -2,7 +2,9 @@
   <div class="view-wrapper">
     <dx-data-grid
       ref="dataGrid"
+      key-expr="id"
       :data-source="dataSource"
+      :focused-row-enabled="true"
       :allow-column-reordering="true"
       height="100%"
       class="grid"
@@ -47,10 +49,10 @@
         >
           <dx-drop-down-button
             styling-mode="text"
-            :width="160"
             :use-select-mode="true"
             :items="filterStatusList"
             :selected-item-key="filterStatusList[0]"
+            :drop-down-options="{ width: 'auto' }"
             @selection-changed="filterByStatus"
           />
         </dx-grid-toolbar-item>
@@ -320,6 +322,19 @@ const onSaveContactNewForm = () => {
       .position {
         font-size: 12px;
         color: $texteditor-label-color;
+      }
+    }
+
+    :deep(.dx-row-focused) {
+      .name-template {
+
+        .position {
+          color: lighten($texteditor-label-color, 50);
+        }
+      }
+
+      .status {
+        @include status(#fff);
       }
     }
 

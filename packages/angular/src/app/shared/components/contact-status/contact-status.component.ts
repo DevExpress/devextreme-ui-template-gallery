@@ -7,7 +7,11 @@ import { ContactStatus } from 'src/app/shared/types/contact';
 @Component({
   selector: 'contact-status',
   template: `
-  <span class="status status-{{ value | lowercase }}">{{ showText ? value : '' }}</span>
+  <span
+    class="status status-{{ value | lowercase }} {{showText ? 'status-text' : ''}}"
+  >
+    {{ showText ? value : '' }}
+  </span>
 `,
   styleUrls: ['./contact-status.component.scss'],
 })

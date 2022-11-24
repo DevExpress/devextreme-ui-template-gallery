@@ -2,7 +2,7 @@
   <div class="view-wrapper">
     <dx-toolbar>
       <dx-toolbar-item location="before">
-        <span class="toolbar-header">Task</span>
+        <span class="toolbar-header">Tasks</span>
       </dx-toolbar-item>
       <dx-toolbar-item location="before">
         <dx-tabs
@@ -262,10 +262,6 @@ loadTasksAsync();
 
   .toolbar-header {
     @include header();
-  }
-
-  .dx-tabs .dx-tab {
-    background-color: $background-color;
   }
 }
 

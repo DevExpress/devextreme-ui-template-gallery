@@ -3,6 +3,11 @@
 span.status {
   font-size: 13px;
 
+  &.status-text {
+    display: flex;
+    align-items: center;
+  }
+
   &::before {
     $diameter: 10px;
 

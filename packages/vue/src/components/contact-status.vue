@@ -1,9 +1,12 @@
 <template>
-  <span :class="'contact-status status-' + props.value?.toLowerCase()">
+  <span
+    :class="statusClass"
+  >
     {{ (props.showText ? props.value : '') }}</span>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { ContactStatus } from '@/types/contact';
 
 const props = withDefaults(defineProps<{
@@ -12,6 +15,9 @@ const props = withDefaults(defineProps<{
   }>(), {
   showText: true,
 });
+
+const statusClass = computed(() => (
+  `status contact-status status-${props.value?.toLowerCase()} ${props.showText ? 'status-text' : ''}`));
 </script>
 <style lang="scss">
 .contact-status {
@@ -45,6 +51,11 @@ const props = withDefaults(defineProps<{
 
 .contact-status {
   font-size: 13px;
+
+  &.status-text {
+    display: flex;
+    align-items: center;
+  }
 
   &::before {
     $diameter: 10px;

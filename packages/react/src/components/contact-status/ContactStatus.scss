@@ -2,6 +2,12 @@
 @use "sass:math";
 
 .status-contact {
+  &.status-text {
+    span {
+      display: flex;
+      align-items: center;
+    }
+  }
   span {
     font-size: 13px;
 
