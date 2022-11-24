@@ -262,6 +262,7 @@ loadTasksAsync();
 
   .toolbar-header {
     @include header();
+    padding-right: 20px;
   }
 }
 
