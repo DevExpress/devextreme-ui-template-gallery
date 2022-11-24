@@ -75,20 +75,18 @@ const salesByCategory = ref<SalesByStateAndCity | null>(null);
 
 const loading = ref<boolean>(true);
 
-const data = [opportunities, salesByCategory, sales, salesByState];
-
 const loadData = async (startDate: string, endDate: string) => {
   loading.value = true;
 
   await Promise.all([
     getOpportunitiesByCategory(startDate, endDate)
-      .then((result: SalesOrOpportunitiesByCategory) => { data[0].value = result; }),
+      .then((result: SalesOrOpportunitiesByCategory) => { opportunities.value = result; }),
     getSalesByCategory(startDate, endDate)
-      .then((result: SalesByStateAndCity) => { data[1].value = result; }),
+      .then((result: SalesByStateAndCity) => { salesByCategory.value = result; }),
     getSales(startDate, endDate)
-      .then((result: Sales) => { data[2].value = result; }),
+      .then((result: Sales) => { sales.value = result; }),
     getSalesByState(startDate, endDate)
-      .then((result: SalesByState) => { data[3].value = result; }),
+      .then((result: SalesByState) => { salesByState.value = result; }),
   ]).then(() => { loading.value = false; });
 };
 

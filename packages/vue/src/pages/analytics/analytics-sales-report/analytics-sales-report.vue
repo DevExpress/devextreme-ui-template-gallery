@@ -47,7 +47,6 @@ const salesByCategory = ref<SalesByStateAndCity | null>(null);
 
 const visualRange = ref<[Date, Date]>([]);
 
-const data = [sales, salesByDateAndCategory, salesByCategory];
 const groupByPeriods = ['Day', 'Month'];
 
 const loading = ref<boolean>(true);
@@ -73,9 +72,9 @@ const loadData = async (groupBy: string) => {
 
   await Promise.all([
     getSales(startDate, endDate)
-      .then((result: Sales) => { data[0].value = result; }),
+      .then((result: Sales) => { sales.value = result; }),
     getSalesByOrderDate(groupBy)
-      .then((result: Sales) => { data[1].value = result; }),
+      .then((result: Sales) => { salesByDateAndCategory.value = result; }),
   ]).then(() => { loading.value = false; });
 };
 
