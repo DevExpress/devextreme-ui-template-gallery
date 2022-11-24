@@ -50,7 +50,6 @@
         :form-data="data"
         class="plain-styled-form"
         :class="{'view-mode': !isEditing}"
-        label-mode="floating"
       >
         <dx-form-item
           :visible="isCreateMode"
@@ -75,7 +74,6 @@
               label="Company"
               v-model="data.company"
               :is-editing="isEditing"
-              :validators="[]"
             />
           </dx-form-item>
 
@@ -187,6 +185,7 @@ import {
   DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxSelectBox } from 'devextreme-vue/select-box';
+import { ClickEvent } from 'devextreme/ui/button';
 import LoadComponent from '@/components/load-component.vue';
 import FormTextbox from '@/components/form-textbox.vue';
 import FormDatebox from '@/components/form-datebox.vue';
@@ -222,7 +221,7 @@ function handleEditClick() {
   isEditing.value = true;
 }
 
-function handleSaveClick({ validationGroup }: {validationGroup: Record<string, unknown>}) {
+function handleSaveClick({ validationGroup }: ClickEvent) {
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }

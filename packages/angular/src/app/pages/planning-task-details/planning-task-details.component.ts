@@ -7,6 +7,7 @@ import {
   DxDropDownButtonModule,
   DxTabPanelModule,
   DxToolbarModule,
+  DxValidationGroupModule,
 } from 'devextreme-angular';
 import {
   CardActivitiesModule,
@@ -60,6 +61,7 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
     DxDropDownButtonModule,
     DxTabPanelModule,
     DxToolbarModule,
+    DxValidationGroupModule,
 
     CardActivitiesModule,
     CardNotesModule,

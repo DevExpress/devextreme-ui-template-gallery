@@ -37,7 +37,9 @@
 
   <div class="panels">
     <div class="left">
-      <task-form [task]="task" [contentByScreen]="{ xs: 2, sm: 2 }"></task-form>
+      <dx-validation-group> 
+        <task-form [task]="task" [contentByScreen]="{ xs: 2, sm: 2 }"></task-form>
+      </dx-validation-group> 
     </div>
 
     <div class="right">
