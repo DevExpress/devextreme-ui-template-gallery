@@ -21,39 +21,38 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
   };
 
   return (
-    <ValidationGroup ref={validationGroup}>
-      <Popup
-        title={title}
-        visible={visible}
-        fullScreen={isXSmall || isSmall}
-        width='auto'
-        height='auto'
-      >
-        <ToolbarItem
-          widget='dxButton'
-          toolbar='bottom'
-          location='after'
-          options={{
-            text: 'Save',
-            stylingMode: 'outlined',
-            type: 'default',
-            onClick: onSaveClick,
-          }}
-        />
-        <ToolbarItem
-          widget='dxButton'
-          toolbar='bottom'
-          location='after'
-          options={{
-            text: 'Cancel',
-            stylingMode: 'text',
-            type: 'default',
-            onClick: changeVisibility,
-          }}
-        />
-
+    <Popup
+      title={title}
+      visible={visible}
+      fullScreen={isXSmall || isSmall}
+      width='auto'
+      height='auto'
+    >
+      <ToolbarItem
+        widget='dxButton'
+        toolbar='bottom'
+        location='after'
+        options={{
+          text: 'Save',
+          stylingMode: 'outlined',
+          type: 'default',
+          onClick: onSaveClick,
+        }}
+      />
+      <ToolbarItem
+        widget='dxButton'
+        toolbar='bottom'
+        location='after'
+        options={{
+          text: 'Cancel',
+          stylingMode: 'text',
+          type: 'default',
+          onClick: changeVisibility,
+        }}
+      />
+      <ValidationGroup ref={validationGroup}>
         {children}
-      </Popup>
-    </ValidationGroup>
+      </ValidationGroup>
+    </Popup>
   );
 };

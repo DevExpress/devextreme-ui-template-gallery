@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import ValidationGroup from 'devextreme-react/validation-group';
 import { withLoadPanel } from '../../shared/utils/withLoadPanel';
 import { TaskFormDetails } from './TaskFormDetails';
 import { ToolbarForm } from '../toolbar-form/ToolbarForm';
@@ -30,23 +29,21 @@ export const TaskForm = ({ task }: { task?: Task }) => {
 
   return (
     <div className='task-form'>
-      <ValidationGroup>
-        <ToolbarForm toggleEditing={toggleEditing} editing={editing} />
-        <TaskFormWithLoadPanel
-          loading={!data}
-          data={data}
-          editing={editing}
-          onDataChanged={onDataChanged}
-          colCountByScreen={{
-            xs: 2,
-            sm: 2,
-          }}
-          panelProps={{
-            container: '.task-form',
-            position: { of: '.task-form' },
-          }}
-        />
-      </ValidationGroup>
+      <ToolbarForm toggleEditing={toggleEditing} editing={editing} />
+      <TaskFormWithLoadPanel
+        loading={!data}
+        data={data}
+        editing={editing}
+        onDataChanged={onDataChanged}
+        colCountByScreen={{
+          xs: 2,
+          sm: 2,
+        }}
+        panelProps={{
+          container: '.task-form',
+          position: { of: '.task-form' },
+        }}
+      />
     </div>
   );
 };

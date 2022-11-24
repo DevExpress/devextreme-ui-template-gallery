@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
+import ValidationGroup from 'devextreme-react/validation-group';
 
 import { TaskForm, CardActivities, CardNotes, CardMessages, ToolbarDetails } from '../../components';
 
@@ -70,7 +71,11 @@ export const PlanningTaskDetails = () => {
         />
       </ToolbarDetails>
       <div className='panels'>
-        <div className='left'><TaskForm task={task} /></div>
+        <div className='left'>
+          <ValidationGroup>
+            <TaskForm task={task} />
+          </ValidationGroup>
+        </div>
         <div className='right'>
           <div className='dx-card details-card'>
             <TabPanel showNavButtons deferRendering={false}>
