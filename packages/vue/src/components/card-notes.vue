@@ -66,7 +66,9 @@ import { DxValidationGroup } from 'devextreme-vue/validation-group';
 import DxValidator, { DxRequiredRule } from 'devextreme-vue/validator';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { formatDate } from '@/utils/formatters';
-// eslint-disable-next-line import/no-unresolved
+
+import { ClickEvent } from 'devextreme/ui/button';
+
 import { getContactNotes } from 'dx-template-gallery-data';
 import type { Note } from '@/types/notes';
 import LoadComponent from '@/components/load-component.vue';
@@ -78,6 +80,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   contactId: null,
   user: '',
+  items: [],
 });
 
 const isLoading = ref(true);
@@ -95,7 +98,7 @@ watch(
   },
 );
 
-function addNote(e: any) {
+function addNote(e: ClickEvent) {
   if (!e.validationGroup.validate().isValid) {
     return;
   }

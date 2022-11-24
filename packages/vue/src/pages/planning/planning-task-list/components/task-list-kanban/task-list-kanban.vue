@@ -27,7 +27,7 @@
             class="sortable-cards"
             group="cardsGroup"
             :data="board"
-            @dragStart="onTaskDragStart"
+            @drag-start="onTaskDragStart"
             @reorder="onTaskDrop"
             @add="onTaskDrop"
           >
@@ -122,7 +122,7 @@ function onTaskDrop(e: ReorderEvent | AddEvent) {
   toData.cards.splice(toIndex, 0, itemData);
 }
 
-const addTask = (text: string) => {
+const addTask = () => {
   emit('add-task');
 };
 </script>

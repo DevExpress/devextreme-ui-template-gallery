@@ -53,8 +53,8 @@
         label-mode="floating"
       >
         <dx-form-item
-            :visible="isCreateMode"
-            :col-span="2"
+          :visible="isCreateMode"
+          :col-span="2"
         >
           <form-textbox
             label="Subject"
@@ -106,10 +106,10 @@
                   />
                 </div>
               </template>
-              <template #item="{ data }">
+              <template #item="item">
                 <status-indicator
                   :show-bar="true"
-                  :value="data"
+                  :value="item.data"
                 />
               </template>
             </dx-select-box>
@@ -133,9 +133,9 @@
                   />
                 </div>
               </template>
-              <template #item="{ data }">
+              <template #item="item">
                 <status-indicator
-                  :value="data"
+                  :value="item.data"
                 />
               </template>
             </dx-select-box>
@@ -222,7 +222,7 @@ function handleEditClick() {
   isEditing.value = true;
 }
 
-function handleSaveClick({ validationGroup }: {validationGroup: Record<string, any>}) {
+function handleSaveClick({ validationGroup }: {validationGroup: Record<string, unknown>}) {
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }

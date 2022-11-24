@@ -48,10 +48,12 @@ import SideNavMenu from '../components/side-nav-menu.vue';
 // eslint-disable-next-line no-undef
 import ToolbarItemClickEvent = DevExpress.ui.dxFileManager.ToolbarItemClickEvent;
 
-const props = defineProps({
-  title: String,
-  isXSmall: Boolean,
-  isLarge: Boolean,
+const props = withDefaults(defineProps<{
+  title: string,
+  isXSmall: boolean,
+  isLarge: boolean,
+}>(), {
+  title: '',
 });
 
 const route = useRoute();
