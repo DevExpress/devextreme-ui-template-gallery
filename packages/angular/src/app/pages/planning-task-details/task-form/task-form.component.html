@@ -1,5 +1,5 @@
 <div id="task-form">
-  <dx-toolbar [visible]="!!task?.text">
+  <dx-toolbar *ngIf="!!task?.text">
     <dxi-item location="before"
       ><span class="dx-form-group-caption">Details</span>
     </dxi-item>
