@@ -22,7 +22,7 @@ To run these UI templates on your machine, clone this repository and follow the 
 
 2. Start the project with one of the following commands depending on the framework of your choice:
 
-    - `ng serve` for Angular
+    - `npm start` for Angular
 
     - `nmp run serve` for Vue
 
