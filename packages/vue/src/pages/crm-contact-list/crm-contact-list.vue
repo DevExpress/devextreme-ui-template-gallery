@@ -1,11 +1,13 @@
 <template>
   <div class="view-wrapper">
     <dx-data-grid
+      ref="dataGrid"
       :data-source="dataSource"
       :allow-column-reordering="true"
       height="100%"
       class="grid"
       @row-click="rowClick"
+      @exporting="onExporting"
     >
       <!-- Options -->
       <dx-scrolling :mode="'virtual'" />
@@ -181,7 +183,7 @@
     v-model:is-visible="isAddContactPopupOpened"
     @save="onSaveContactNewForm"
   >
-    <contact-new-form/>
+    <contact-new-form />
   </form-popup>
 </template>
 
@@ -203,17 +205,20 @@ import DxDataGrid, {
   DxItem as DxGridToolbarItem,
   DxSearchPanel,
 } from 'devextreme-vue/data-grid';
-// eslint-disable-next-line import/no-unresolved
 import { getContacts } from 'dx-template-gallery-data';
+import { saveAs } from 'file-saver-es';
+import { Workbook } from 'exceljs';
 
+import { jsPDF as JsPdf } from 'jspdf';
 import { contactStatusList, Contact } from '@/types/contact';
-import { RowClickEvent } from 'devextreme/ui/data_grid';
+import { ExportingEvent, RowClickEvent } from 'devextreme/ui/data_grid';
 import DataSource from 'devextreme/data/data_source';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
+import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
 import { formatPhone } from '@/utils/formatters';
 import ContactStatus from '@/components/contact-status.vue';
 import FormPopup from '@/components/form-popup.vue';
-import validationEngine from 'devextreme/ui/validation_engine';
 import ContactNewForm from './components/contact-new-form.vue';
 import ContactPanel from './components/contact-panel.vue';
 
@@ -249,6 +254,32 @@ const filterByStatus = (e: SelectionChangedEvent) => {
     dataGrid.value?.instance.clearFilter();
   } else {
     dataGrid.value?.instance.filter(['status', '=', status]);
+  }
+};
+
+const onExporting = (e: ExportingEvent) => {
+  if (e.format === 'pdf') {
+    const doc = new JsPdf();
+    exportDataGridToPdf({
+      jsPDFDocument: doc,
+      component: e.component,
+    }).then(() => {
+      doc.save('Contacts.pdf');
+    });
+  } else {
+    const workbook = new Workbook();
+    const worksheet = workbook.addWorksheet('Contacts');
+
+    exportDataGridToXLSX({
+      component: e.component,
+      worksheet,
+      autoFilterEnabled: true,
+    }).then(() => {
+      workbook.xlsx.writeBuffer().then((buffer) => {
+        saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Contacts.xlsx');
+      });
+    });
+    e.cancel = true;
   }
 };
 

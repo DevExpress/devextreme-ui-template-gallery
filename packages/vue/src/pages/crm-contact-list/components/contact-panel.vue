@@ -225,6 +225,7 @@ import {
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
+import { ClickEvent } from 'devextreme/ui/button';
 import FormPhoto from '@/components/form-photo.vue';
 import ContactStatus from '@/components/contact-status.vue';
 import { screenInfo } from '@/utils/media-query';
@@ -285,7 +286,7 @@ const loadContact = async (contactId: number) => {
 function accordionPlusClick(/* e : Event */) {
 }
 
-function handleSaveClick({ validationGroup }: {validationGroup: Record<string, any>}) {
+function handleSaveClick({ validationGroup }: ClickEvent) {
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }

@@ -52,6 +52,16 @@
         :class="{'view-mode': !isEditing}"
         label-mode="floating"
       >
+        <dx-form-item
+          :visible="isCreateMode"
+          :col-span="2"
+        >
+          <form-textbox
+            label="Subject"
+            v-model="data.text"
+            :is-editing="isEditing"
+          />
+        </dx-form-item>
         <dx-form-group-item :col-count="2">
           <dx-col-count-by-screen
             :xs="props.contentByScreen.xs"
@@ -59,16 +69,6 @@
             :md="2"
             :lg="2"
           />
-          <dx-form-item
-            :visible="isCreateMode"
-            :col-span="2"
-          >
-            <form-textbox
-              label="Subject"
-              v-model="data.text"
-              :is-editing="isEditing"
-            />
-          </dx-form-item>
 
           <dx-form-item css-class="accent">
             <form-textbox
@@ -105,10 +105,10 @@
                   />
                 </div>
               </template>
-              <template #item="{ data }">
+              <template #item="item">
                 <status-indicator
                   :show-bar="true"
-                  :value="data"
+                  :value="item.data"
                 />
               </template>
             </dx-select-box>
@@ -132,9 +132,9 @@
                   />
                 </div>
               </template>
-              <template #item="{ data }">
+              <template #item="item">
                 <status-indicator
-                  :value="data"
+                  :value="item.data"
                 />
               </template>
             </dx-select-box>
@@ -186,6 +186,7 @@ import {
   DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxSelectBox } from 'devextreme-vue/select-box';
+import { ClickEvent } from 'devextreme/ui/button';
 import LoadComponent from '@/components/load-component.vue';
 import FormTextbox from '@/components/form-textbox.vue';
 import FormDatebox from '@/components/form-datebox.vue';
@@ -221,7 +222,7 @@ function handleEditClick() {
   isEditing.value = true;
 }
 
-function handleSaveClick({ validationGroup }: { validationGroup: Record<string, any> }) {
+function handleSaveClick({ validationGroup }: ClickEvent) {
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }

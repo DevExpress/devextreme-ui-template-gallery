@@ -247,6 +247,7 @@ import { DxNumberBox } from 'devextreme-vue/number-box';
 import { DxValidator } from 'devextreme-vue/validator';
 import { DxSelectBox } from 'devextreme-vue/select-box';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
+import { ClickEvent } from 'devextreme/ui/button';
 import { formEditorProps, formSelectBoxProps } from '@/shared/form-editor-config';
 import LoadComponent from '@/components/load-component.vue';
 import { Contact, contactStatusList } from '@/types/contact';
@@ -282,7 +283,7 @@ function startEdit() {
   isEditing.value = true;
 }
 
-function handleSaveClick({ validationGroup }: {validationGroup: Record<string, any>}) {
+function handleSaveClick({ validationGroup }: ClickEvent) {
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }

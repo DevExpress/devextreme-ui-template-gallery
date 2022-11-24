@@ -12,7 +12,8 @@
         />
         <div
           v-if="props.title"
-          class="title">
+          class="title"
+        >
           {{ props.title }}
         </div>
         <slot name="filter" />
@@ -41,6 +42,7 @@ const props = withDefaults(defineProps<{
   showData?: boolean,
   isMenuVisible?: boolean,
 }>(), {
+  title: '',
   showData: true,
   contentClass: '',
   isMenuVisible: true,

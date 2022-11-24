@@ -30,9 +30,8 @@ fixture`Planning List`;
         await t.click('.view-wrapper .dx-icon-overflow');
       }
       await t.click(Selector('[aria-label="Add Task"]'));
-      // TODO: works only in angular, replace form-item-date with another selector
-      await t.typeText(Selector('form-item-date[label="Start Date"] .dx-datebox'), '10/26/2022', { replace: true });
-      await t.typeText(Selector('form-item-date[label="Due Date"] .dx-datebox'), '10/26/2022', { replace: true });
+      await t.typeText(Selector('.form-editor-input.dx-texteditor-input').nth(3), '10/26/2022', { replace: true });
+      await t.typeText(Selector('.form-editor-input.dx-texteditor-input').nth(4), '10/26/2022', { replace: true });
       await takeScreenshot(`planning-task-add-task-popup-embed=${getPostfix(embedded, screenMode)}`, 'body');
       await t.click(Selector('[aria-label=Save]').nth(1));
       await takeScreenshot(`planning-task-add-task-popup-validate-embed=${getPostfix(embedded, screenMode)}`, 'body');
