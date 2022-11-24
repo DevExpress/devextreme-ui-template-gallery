@@ -1,11 +1,12 @@
 import { defaultUser } from '../utils/default-user';
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export async function signIn(email: string, password: string) {
   try {
     // Send request
     return {
       isOk: true,
-      data: { ...defaultUser, email, password },
+      data: { ...defaultUser, email },
     };
   } catch {
     return {
@@ -35,7 +36,6 @@ export async function createAccount(email: string, password: string) {
     // Send request
     return {
       isOk: true,
-      data: { email, password },
     };
   } catch {
     return {
@@ -50,7 +50,7 @@ export async function changePassword(email: string, recoveryCode?: string) {
     // Send request
     return {
       isOk: true,
-      data: { email, recoveryCode },
+      data: { email },
     };
   } catch {
     return {
@@ -65,7 +65,6 @@ export async function resetPassword(email: string) {
     // Send request
     return {
       isOk: true,
-      data: { email },
     };
   } catch {
     return {

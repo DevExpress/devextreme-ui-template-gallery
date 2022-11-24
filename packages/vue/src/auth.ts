@@ -30,7 +30,7 @@ export const authInfo: AuthInfo = {
   loggedIn() {
     return !!this._user;
   },
-
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   async logIn(email: string, password: string) {
     try {
       // Send request
