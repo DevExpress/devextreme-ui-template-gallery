@@ -50,7 +50,6 @@
         :form-data="data"
         class="plain-styled-form"
         :class="{'view-mode': !isEditing}"
-        label-mode="floating"
       >
         <dx-form-item
           :visible="isCreateMode"

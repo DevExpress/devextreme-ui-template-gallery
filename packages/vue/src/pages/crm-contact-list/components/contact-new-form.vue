@@ -1,7 +1,6 @@
 <template>
   <dx-form
     class="plain-styled-form"
-    label-mode="floating"
   >
     <dx-form-item item-type="group">
       <dx-col-count-by-screen

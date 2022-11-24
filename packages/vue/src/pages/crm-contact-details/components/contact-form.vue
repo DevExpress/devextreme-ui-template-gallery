@@ -50,7 +50,6 @@
         <dx-form
           class="plain-styled-form"
           :class="{'view-mode': !isEditing}"
-          label-mode="floating"
         >
           <dx-form-group-item :col-count="2">
             <dx-col-count-by-screen :xs="2" />
