@@ -12,8 +12,8 @@ import { DxScrollViewModule, DxScrollViewComponent } from 'devextreme-angular/ui
 import { CommonModule } from '@angular/common';
 
 import { Router, NavigationEnd } from '@angular/router';
-import { ScreenService } from '../../shared/services';
-import { SideNavigationMenuModule, HeaderModule } from '../../shared/components';
+import { ScreenService, AppInfoService } from '../../shared/services';
+import { SideNavigationMenuModule, HeaderModule, FooterModule } from '../../shared/components';
 
 import { Subscription } from 'rxjs';
 
@@ -46,7 +46,7 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
 
   screenSubscription: Subscription;
 
-  constructor(private screen: ScreenService, private router: Router) { }
+  constructor(private screen: ScreenService, private router: Router, public appInfo: AppInfoService) { }
 
   ngOnInit() {
     this.menuOpened = this.screen.sizes['screen-large'];
@@ -116,7 +116,7 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
 }
 
 @NgModule({
-  imports: [SideNavigationMenuModule, DxDrawerModule, HeaderModule, DxScrollViewModule, CommonModule],
+  imports: [SideNavigationMenuModule, DxDrawerModule, HeaderModule, DxScrollViewModule, CommonModule, FooterModule],
   exports: [SideNavOuterToolbarComponent],
   declarations: [SideNavOuterToolbarComponent],
 })

@@ -24,13 +24,12 @@
     (selectedItemChanged)="navigationChanged($event)"
     (openMenu)="navigationClick()"
   >
-    <ng-content *ngIf="menuOpened" select="app-footer"></ng-content>
+    <app-footer>Copyright © {{ appInfo.currentYear }} <br> Developer Express Inc.</app-footer>
   </app-side-navigation-menu>
 
   <dx-scroll-view class="with-footer app-content-wrapper">
     <div class="content">
       <ng-content></ng-content>
     </div>
-    <div class="content-block"></div>
   </dx-scroll-view>
 </dx-drawer>

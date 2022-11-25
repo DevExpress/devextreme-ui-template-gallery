@@ -76,17 +76,10 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
                 return React.isValidElement(item) && item.type !== Footer && item;
               })}
             </div>
-            <div className='content-block' />
           </ScrollView>
         </div>
         <Template name='menu'>
-          <SideNavigationMenu compactMode={menuStatus === MenuStatus.Closed} selectedItemChanged={onNavigationChanged} openMenu={temporaryOpenMenu} onMenuReady={onMenuReady}>
-            {(menuStatus === MenuStatus.Opened) && (
-              <Footer>
-                Copyright © {new Date().getFullYear()} <br /> Developer Express Inc.
-              </Footer>
-            )}
-          </SideNavigationMenu>
+          <SideNavigationMenu compactMode={menuStatus === MenuStatus.Closed} selectedItemChanged={onNavigationChanged} openMenu={temporaryOpenMenu} onMenuReady={onMenuReady} />
         </Template>
       </Drawer>
     </div>

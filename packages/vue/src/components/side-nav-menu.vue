@@ -16,7 +16,7 @@
         width="100%"
       />
     </div>
-    <app-footer v-if="!compactMode" />
+    <app-footer />
   </div>
 </template>
 
@@ -108,6 +108,7 @@ watch(
     display: flex;
     flex: 1;
     background-color: $side-panel-background;
+    padding-bottom: $footer-height;
     .dx-treeview {
       // ## Long text positioning
       white-space: nowrap;

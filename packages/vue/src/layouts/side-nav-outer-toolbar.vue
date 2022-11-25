@@ -23,7 +23,6 @@
         class="with-footer app-content-wrapper"
       >
         <slot />
-        <div class="content-block" />
       </dx-scroll-view>
       <template #menuTemplate>
         <side-nav-menu

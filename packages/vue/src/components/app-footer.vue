@@ -14,9 +14,16 @@
   color: rgba($base-text-color, alpha($base-text-color) * 0.7);
   padding: 20px 0 16px 21px;
   background-color: $side-panel-background;
+  height: $footer-height;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
+  opacity: 0;
+
+  .dx-drawer-opened & {
+    opacity: 1;
+    transition-delay: 400ms;
+  }
 }
 </style>
