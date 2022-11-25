@@ -18,17 +18,25 @@ The UI Templates have responsive layouts with DevExtreme UI components. Note tha
 
 To run these UI templates on your machine, clone this repository and follow the instructions below.
 
-1. Run the `npm i` command in the framework folder to install packages to the project and prepare the repository. 
+1. Choose a framework and go to a corresponding folder:
 
-2. Start the project with one of the following commands depending on the framework of your choice:
+    - `cd packages\angular` for Angular
+
+    - `cd packages\react` for React
+
+    - `cd packages\vue` for Vue
+
+2. Run the `npm i` command to install packages to the project and prepare the repository. 
+
+3. Start the project with one of the following commands depending on the framework of your choice:
 
     - `npm start` for Angular
 
-    - `nmp run serve` for Vue
-
     - `npm start` for React
 
-3. Open the application on the local server.
+    - `nmp run serve` for Vue
+
+4. Open the application on the local server.
 
 ## How It is Organized
 
