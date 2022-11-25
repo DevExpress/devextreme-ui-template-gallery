@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    Copyright © {{ new Date().getFullYear() }} <br/> Developer Express Inc.
+    Copyright © {{ new Date().getFullYear() }} <br> Developer Express Inc.
   </footer>
 </template>
 <script setup lang="ts">
