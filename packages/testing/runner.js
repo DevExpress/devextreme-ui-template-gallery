@@ -1,7 +1,7 @@
 import createTestCafe from 'testcafe';
 import { argv, env, exit } from 'process';
 import parseArgs from 'minimist';
-import dashboardReporter from '@vasily.strelyaev/testcafe-reporter-dashboard-devextreme';
+import dashboardReporter from 'testcafe-reporter-dashboard-devextreme';
 import { packages } from './config.js';
 
 const args = parseArgs(argv.slice(1), {
