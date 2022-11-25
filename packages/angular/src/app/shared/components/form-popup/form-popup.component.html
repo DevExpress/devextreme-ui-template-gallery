@@ -1,35 +1,21 @@
 
-<dx-popup
-    [title]="titleText"
-    [(visible)]="popupVisible"
-    [fullScreen]="popupFullScreen"
-    width="auto"
-    height="auto"
-    >
-    <dxi-toolbar-item
-        widget="dxButton"
-        toolbar="bottom"
-        location="after"
-        [options]="{
-            text: 'Save',
-            stylingMode: 'outlined',
-            type: 'default',
-            onClick: closePopup
-        }"
-    >
-    </dxi-toolbar-item>
+<dx-popup [title]="titleText" [(visible)]="popupVisible" [fullScreen]="popupFullScreen" width="auto" height="auto">
+  <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="after" [options]="{
+                    text: 'Save',
+                    stylingMode: 'outlined',
+                    type: 'default',
+                    onClick: onSaveClick
+                }">
+  </dxi-toolbar-item>
 
-    <dxi-toolbar-item
-        widget="dxButton"
-        toolbar="bottom"
-        location="after"
-        [options]="{
-            text: 'Cancel',
-            stylingMode: 'text',
-            type: 'default',
-            onClick: closePopup
-        }"
-    >
-    </dxi-toolbar-item>
+  <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="after" [options]="{
+                    text: 'Cancel',
+                    stylingMode: 'text',
+                    type: 'default',
+                    onClick: closePopup
+                }">
+  </dxi-toolbar-item>
+  <dx-validation-group #validationGroup>
     <ng-content></ng-content>
+  </dx-validation-group>
 </dx-popup>

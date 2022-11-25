@@ -1,5 +1,5 @@
 <div id="task-form">
-  <dx-toolbar [visible]="!!task?.text">
+  <dx-toolbar *ngIf="!!task?.text">
     <dxi-item location="before"
       ><span class="dx-form-group-caption">Details</span>
     </dxi-item>
@@ -17,7 +17,7 @@
         text="Save"
         stylingMode="outlined"
         type="default"
-        (onClick)="handleSaveClick()"
+        (onClick)="handleSaveClick($event)"
       ></dx-button>
     </dxi-item>
     <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
@@ -30,9 +30,8 @@
   </dx-toolbar>
 
   <dx-form *ngIf="!isLoading"
-           class="plain-styled-form"
-           [class.view-mode]="!isEditing"
-           labelMode="floating"
+          class="plain-styled-form"
+          [class.view-mode]="!isEditing"
   >
     <dxi-item [visible]="!task.text">
       <div *dxTemplate>

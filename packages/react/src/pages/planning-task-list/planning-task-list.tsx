@@ -72,10 +72,6 @@ export const PlanningTaskList = () => {
     setPopupVisible(!popupVisible);
   };
 
-  const onSavePopupClick = () => {
-    changePopupVisibility();
-  };
-
   const refresh = useCallback(() => {
     if(isDataGrid) {
       gridRef.current?.instance.refresh();
@@ -221,7 +217,7 @@ export const PlanningTaskList = () => {
       {!loading && isDataGrid && <PlanningGrid dataSource={gridData} ref={gridRef} />}
       {!loading && isKanban && <PlanningKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
       {!loading && view === ganttView && <PlanningGantt dataSource={filteredData} ref={ganttRef} />}
-      <FormPopup title='New Task' visible={popupVisible} changeVisibility={changePopupVisibility} onSaveClick={onSavePopupClick}>
+      <FormPopup title='New Task' visible={popupVisible} changeVisibility={changePopupVisibility}>
         <TaskFormDetails colCountByScreen={{ xs: 1, sm: 1 }} data={newTaskData} editing onDataChanged={onDataChanged} />
       </FormPopup>
     </div>

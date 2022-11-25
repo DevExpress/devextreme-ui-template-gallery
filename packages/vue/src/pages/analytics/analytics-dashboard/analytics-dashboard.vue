@@ -40,7 +40,7 @@
       <revenue-snapshot-card :data="salesByCategory" />
     </div>
   </div>
-  <loading-panel :data="data" />
+  <loading-panel :loading="loading" />
 </template>
 
 <script setup lang="ts">
@@ -73,14 +73,21 @@ const sales = ref<Sales | null>(null);
 const salesByState = ref<SalesByState | null>(null);
 const salesByCategory = ref<SalesByStateAndCity | null>(null);
 
-const data = [opportunities, salesByCategory, sales, salesByState];
+const loading = ref<boolean>(true);
 
-const loadData = (startDate: string, endDate: string) => {
-  [getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByState]
-    .forEach(async (loader, i) => {
-      data[i].value = null;
-      data[i].value = await loader(startDate, endDate);
-    });
+const loadData = async (startDate: string, endDate: string) => {
+  loading.value = true;
+
+  await Promise.all([
+    getOpportunitiesByCategory(startDate, endDate)
+      .then((result: SalesOrOpportunitiesByCategory) => { opportunities.value = result; }),
+    getSalesByCategory(startDate, endDate)
+      .then((result: SalesByStateAndCity) => { salesByCategory.value = result; }),
+    getSales(startDate, endDate)
+      .then((result: Sales) => { sales.value = result; }),
+    getSalesByState(startDate, endDate)
+      .then((result: SalesByState) => { salesByState.value = result; }),
+  ]).then(() => { loading.value = false; });
 };
 
 const tabChange = ([startDate, endDate]: string[]) => {

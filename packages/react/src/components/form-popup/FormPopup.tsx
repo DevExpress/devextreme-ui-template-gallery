@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
+import ValidationGroup from 'devextreme-react/validation-group';
 import { useScreenSize } from './../../utils/media-query';
 
 type PopupProps = {
   title: string,
   visible: boolean,
   changeVisibility: () => void,
-  onSaveClick: () => void,
 }
 
-export const FormPopup = ({ title, visible, changeVisibility, onSaveClick, children } : React.PropsWithChildren<PopupProps>) => {
+export const FormPopup = ({ title, visible, changeVisibility, children }: React.PropsWithChildren<PopupProps>) => {
   const { isXSmall, isSmall } = useScreenSize();
+  const validationGroup = useRef<ValidationGroup>(null);
+
+  const onSaveClick = () => {
+    if (!validationGroup.current?.instance.validate().isValid) return;
+
+    changeVisibility();
+  };
 
   return (
     <Popup
@@ -43,8 +50,9 @@ export const FormPopup = ({ title, visible, changeVisibility, onSaveClick, child
           onClick: changeVisibility,
         }}
       />
-
-      {children}
+      <ValidationGroup ref={validationGroup}>
+        {children}
+      </ValidationGroup>
     </Popup>
   );
 };

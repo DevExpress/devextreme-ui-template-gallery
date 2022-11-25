@@ -1,6 +1,5 @@
 <dx-form 
-        class="plain-styled-form" 
-        labelMode="floating"
+        class="plain-styled-form"
 >
   <dxi-item itemType="group">
     <dxo-col-count-by-screen [xs]="1" [sm]="1" [md]="1" [lg]="1"></dxo-col-count-by-screen>
@@ -83,7 +82,7 @@
         <form-textbox 
                 [(value)]="newUser.email"  
                 icon="email" 
-                [validators]="[{type: 'email'}]"
+                [validators]="[{type: 'email'}, {type: 'required'}]"
                 [isEditing]="true"
         >
         </form-textbox>
@@ -94,7 +93,6 @@
           <form-textbox 
                   [(value)]="newUser.address" 
                   icon="home" 
-                  [validators]="[]"
                   [isEditing]="true"
           >
           </form-textbox>

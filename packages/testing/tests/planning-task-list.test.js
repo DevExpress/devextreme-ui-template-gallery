@@ -33,6 +33,8 @@ fixture`Planning List`;
       await t.typeText(Selector('.form-editor-input.dx-texteditor-input').nth(3), '10/26/2022', { replace: true });
       await t.typeText(Selector('.form-editor-input.dx-texteditor-input').nth(4), '10/26/2022', { replace: true });
       await takeScreenshot(`planning-task-add-task-popup-embed=${getPostfix(embedded, screenMode)}`, 'body');
+      await t.doubleClick(Selector('[aria-label="Save"]'));
+      await takeScreenshot(`planning-task-add-task-popup-validate-embed=${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
         .expect(compareResults.isValid())

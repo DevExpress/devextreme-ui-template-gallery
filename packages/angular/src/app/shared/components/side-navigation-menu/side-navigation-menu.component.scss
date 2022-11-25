@@ -19,14 +19,6 @@
       // ## Long text positioning
       white-space: nowrap;
 
-      // ##
-
-      > .dx-treeview-node:first-child {
-        > .dx-treeview-item:not(.screen-large &) {
-          box-shadow: inset 0 4px 8px rgb(0, 0, 0, 0.05);
-        }
-      }
-
       // ## Icon width customization
       .dx-treeview-item {
         padding-left: 0;

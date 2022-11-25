@@ -20,6 +20,7 @@ import {
   DxScrollViewModule,
   DxFormModule,
   DxValidatorModule,
+  DxValidationGroupModule,
 } from 'devextreme-angular';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
 import {
@@ -95,6 +96,11 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     this.isPinned = !this.isPinned;
   };
 
+  onSaveClick = ({ validationGroup } : ButtonClickEvent) => {
+    if (!validationGroup.validate().isValid) return;
+    this.isEditing = !this.isEditing;
+  }
+
   calculatePin = () => {
     this.isPinEnabled = this.screen.sizes['screen-large'] || this.screen.sizes['screen-medium'];
     if (this.isPinned && !this.isPinEnabled) {
@@ -125,6 +131,7 @@ export class UserPanelComponent implements OnInit, OnChanges, OnDestroy {
     DxScrollViewModule,
     DxFormModule,
     DxValidatorModule,
+    DxValidationGroupModule,
 
     FormTextboxModule,
     FormPhotoModule,
