@@ -12,7 +12,7 @@
 .footer {
   display: block;
   color: rgba($base-text-color, alpha($base-text-color) * 0.7);
-  padding: 20px 0 24px 21px;
+  padding: 20px 0 16px 21px;
   background-color: $side-panel-background;
   position: absolute;
   bottom: 0;

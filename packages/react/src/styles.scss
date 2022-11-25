@@ -34,15 +34,16 @@
   }
 }
 
-.app .content-block {
+.content-block {
   margin-left: 40px;
   margin-right: 40px;
   margin-top: 20px;
-}
+  display: none;
 
-.screen-x-small .content-block {
-  margin-left: 20px;
-  margin-right: 20px;
+  .screen-x-small & {
+    margin-left: 20px;
+    margin-right: 20px;
+  }  
 }
 
 .responsive-paddings {
