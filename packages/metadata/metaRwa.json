@@ -25,7 +25,9 @@
                         "Name": "crm-contact-details",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
-                            "Angular"
+                            "Angular",
+                            "React",
+                            "Vue"
                         ]
                     }
                 ]
@@ -43,7 +45,9 @@
                         "Name": "planning-task-list",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
-                            "Angular"
+                            "Angular",
+                            "React",
+                            "Vue"
                         ]
                     }
                 ]
@@ -56,7 +60,9 @@
                         "Name": "planning-task-details",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
-                            "Angular"
+                            "Angular",
+                            "React",
+                            "Vue"
                         ]
                     }
                 ]
@@ -74,7 +80,9 @@
                         "Name": "analytics-dashboard",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
-                            "Angular"
+                            "Angular",
+                            "React",
+                            "Vue"
                         ]
                     }
                 ]
@@ -87,7 +95,9 @@
                         "Name": "analytics-sales-report",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
-                            "Angular"
+                            "Angular",
+                            "React",
+                            "Vue"
                         ]
                     }
                 ]
@@ -100,7 +110,9 @@
                         "Name": "analytics-geography",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
-                            "Angular"
+                            "Angular",
+                            "React",
+                            "Vue"
                         ]
                     }
                 ]
