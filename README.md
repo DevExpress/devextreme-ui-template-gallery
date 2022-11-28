@@ -20,27 +20,21 @@ To run these UI templates on your machine, clone this repository and run the fol
 
 ### Angular
 
-    ```
     npm install
     cd packages\angular
     npm run start
-    ```
 
 ### React
 
-    ```
     npm install
     cd packages\react
     npm start
-    ```
 
 ### Vue
 
-    ```
     npm install
     cd packages\vue
     npm run serve
-    ```
 
 Open the application on the local server.
 
