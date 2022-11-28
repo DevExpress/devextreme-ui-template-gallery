@@ -2,10 +2,8 @@
   <div class="view-wrapper">
     <dx-data-grid
       ref="dataGrid"
-      key-expr="id"
       :data-source="dataSource"
       :allow-column-reordering="true"
-      :focused-row-enabled="true"
       height="100%"
       class="grid"
       @row-click="rowClick"
@@ -322,17 +320,6 @@ const onSaveContactNewForm = () => {
       .position {
         font-size: 12px;
         color: $texteditor-label-color;
-      }
-    }
-
-    :deep(.dx-row-focused) {
-      .name-template {
-        .position {
-          color: lighten($texteditor-label-color, 50);
-        }
-      }
-      .status {
-        @include status(#fff);
       }
     }
 

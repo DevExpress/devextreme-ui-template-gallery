@@ -138,8 +138,6 @@ export const CRMContactList = () => {
           <DataGrid
             className='grid'
             noDataText=''
-            keyExpr='id'
-            focusedRowEnabled
             dataSource={gridData}
             onRowClick={onRowClick}
             onExporting={onExporting}

@@ -2,10 +2,8 @@
   <dx-data-grid
     class="grid"
     noDataText=""
-    keyExpr="id"
     [dataSource]="dataSource"
     [allowColumnReordering]="true"
-    [focusedRowEnabled]="true"
     (onRowClick)="rowClick($event)"
     (onRowPrepared)="rowPrepared($event)"
     (onExporting)="onExporting($event)"

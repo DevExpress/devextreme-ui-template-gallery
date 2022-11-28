@@ -143,6 +143,20 @@ $side-panel-min-width: 60px;
   }
 }
 
+@mixin status($status-color) {
+  color: $status-color;
+
+  &.dx-texteditor {
+    .status-input.status-editor-input {
+      color: $status-color;
+    }
+  }
+
+  &::before {
+    background: $status-color;
+  }
+}
+
 .status-indicator-open {
   @include status(#505ed9);
 }

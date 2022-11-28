@@ -101,20 +101,3 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
   padding-top: 5px;
   line-height: 21px;
 }
-
-@mixin status-contact($status-color) {
-  color: $status-color;
-
-  &.dx-texteditor {
-    .status-editor-input {
-      color: $status-color;
-      padding-left: 0;
-    }
-  }
-
-  span {
-    &::before {
-      background-color: $status-color;
-    }
-  }
-}
