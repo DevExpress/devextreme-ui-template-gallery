@@ -8,10 +8,9 @@
   <div class="cards wide">
     <card-analytics
       contentClass="sales-range"
-      [component]="range"
       [isMenuVisible]="false"
     >
-    <dx-range-selector #range [dataSource]="sales" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
+    <dx-range-selector [dataSource]="sales" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
       <dxo-scale
         minorTickInterval="day"
         tickInterval="month"
@@ -35,10 +34,8 @@
     <card-analytics
       titleText="Product Sale by Range"
       contentClass="sales-by-category"
-      [component]="bar"
     >
       <dx-pie-chart
-        #pie
         class="sales-pie"
         [dataSource]="salesByCategory"
         type="doughnut"
@@ -60,7 +57,7 @@
         <dxo-legend [visible]="false"></dxo-legend>
       </dx-pie-chart>
 
-      <dx-chart #bar class="sales-bars" [dataSource]="salesByCategory" [rotated]="true">
+      <dx-chart class="sales-bars" [dataSource]="salesByCategory" [rotated]="true">
         <dxo-common-axis-settings [visible]="false">
           <dxo-tick [visible]="false"></dxo-tick>
         </dxo-common-axis-settings>
@@ -80,14 +77,14 @@
       </dx-chart>
     </card-analytics>
 
-    <card-analytics titleText="Sales Performance" className="sales" [component]="chart">
+    <card-analytics titleText="Sales Performance" className="sales">
       <div filter class="sales-filter" >
       <dx-drop-down-button stylingMode="text" [useSelectMode]="true"
         [items]="groupByPeriods" [selectedItemKey]="groupByPeriods[1]" (onSelectionChanged)="selectionChange($event)">
       </dx-drop-down-button>
       </div>
 
-      <dx-chart #chart [dataSource]="salesByDateAndCategory">
+      <dx-chart [dataSource]="salesByDateAndCategory">
         <dxo-argument-axis [visualRange]="visualRange"> </dxo-argument-axis>
         <dxo-tooltip [enabled]="true" [customizeTooltip]="customiseToolip"></dxo-tooltip>
         <dxo-series-template nameField="category"> </dxo-series-template>

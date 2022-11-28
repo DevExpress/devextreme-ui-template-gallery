@@ -11,9 +11,8 @@
     <card-analytics
       titleText="Revenue by States"
       contentClass="sales-by-state-map"
-      [component]="map"
     >
-      <dx-vector-map id="vector-map" #map [bounds]="[-118, 50, -80, 25]">
+      <dx-vector-map id="vector-map" [bounds]="[-118, 50, -80, 25]">
         <dxi-layer [dataSource]="usaMap" [hoverEnabled]="false"></dxi-layer>
         <dxi-layer
           [dataSource]="salesByStateMarkers"
@@ -95,10 +94,8 @@
     <card-analytics
       titleText="Revenue Snapshot by States"
       contentClass="sales-by-state"
-      [component]="pie"
     >
       <dx-pie-chart
-        #pie
         [dataSource]="salesByState"
         type="doughnut"
         [diameter]="0.8"
