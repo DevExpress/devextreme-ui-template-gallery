@@ -48,56 +48,8 @@ Open the application on the local server.
 
 Navigate to the folders linked below to get the code for each template.
 
-### Angular 
+- [Angular](packages/angular/src/app/pages/)
 
-**CRM**
+- [React](packages/react/src/pages/) 
 
-* [Contact List](packages/angular/src/app/pages/crm-contact-list/) 
-* [Contact Details](packages/angular/src/app/pages/crm-contact-details/)
-
-**Planning**
-
-* [Task List](packages/angular/src/app/pages/planning-task-list/) 
-* [Task Details](packages/angular/src/app/pages/planning-task-details/)
-
-**Analytics**
-
-* [Dashboard](packages/angular/src/app/pages/analytics-dashboard/) 
-* [Sales Report](packages/angular/src/app/pages/analytics-sales-report/) 
-* [Geography](packages/angular/src/app/pages/analytics-geography/) 
-
-### React
-
-**CRM**
-
-* [Contact List](packages/react/src/pages/crm-contact-list/) 
-* [Contact Details](packages/react/src/pages/crm-contact-details/)
-
-**Planning**
-
-* [Task List](packages/react/src/pages/planning-task-list/) 
-* [Task Details](packages/react/src/pages/planning-task-details/)
-
-**Analytics**
-
-* [Dashboard](packages/react/src/pages/analytics-dashboard/) 
-* [Sales Report](packages/react/src/pages/analytics-sales-report/) 
-* [Geography](packages/react/src/pages/analytics-geography/) 
-
-### Vue
-
-**CRM**
-
-* [Contact List](packages/vue/src/pages/crm-contact-list/) 
-* [Contact Details](packages/vue/src/pages/crm-contact-details/)
-
-**Planning**
-
-* [Task List](packages/vue/src/pages/planning/planning-task-list/) 
-* [Task Details](packages/vue/src/pages/planning/)
-
-**Analytics**
-
-* [Dashboard](packages/vue/src/pages/analytics/analytics-dashboard/) 
-* [Sales Report](packages/vue/src/pages/analytics/analytics-sales-report/) 
-* [Geography](packages/vue/src/pages/analytics/analytics-geography/) 
+- [Vue](packages/vue/src/pages/)
