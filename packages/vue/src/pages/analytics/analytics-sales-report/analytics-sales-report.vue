@@ -17,7 +17,7 @@
       />
     </div>
   </div>
-  <loading-panel :data="data" />
+  <loading-panel :loading="loading" />
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
@@ -47,27 +47,35 @@ const salesByCategory = ref<SalesByStateAndCity | null>(null);
 
 const visualRange = ref<[Date, Date]>([]);
 
-const data = [sales, salesByDateAndCategory, salesByCategory];
 const groupByPeriods = ['Day', 'Month'];
 
+const loading = ref<boolean>(true);
+
 const performancePeriodChange = async ({ item: period }: SelectionChangedEvent) => {
+  loading.value = true;
   salesByDateAndCategory.value = await getSalesByOrderDate(period.toLowerCase());
+  loading.value = false;
 };
 
 const onRangeChanged = async (dates: [Date, Date]) => {
   visualRange.value = dates;
+  loading.value = true;
   salesByCategory.value = await getSalesByCategory(
     ...dates.map((date) => formatDate(date, 'yyyy-MM-dd')),
   );
+  loading.value = false;
 };
 
-const loadData = (groupBy: string) => {
+const loadData = async (groupBy: string) => {
+  loading.value = true;
   const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
 
-  [getSales(startDate, endDate), getSalesByOrderDate(groupBy)].forEach(async (loader, i) => {
-    data[i].value = null;
-    data[i].value = await loader;
-  });
+  await Promise.all([
+    getSales(startDate, endDate)
+      .then((result: Sales) => { sales.value = result; }),
+    getSalesByOrderDate(groupBy)
+      .then((result: Sales) => { salesByDateAndCategory.value = result; }),
+  ]).then(() => { loading.value = false; });
 };
 
 onMounted(() => {

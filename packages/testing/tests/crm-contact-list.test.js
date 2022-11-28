@@ -21,19 +21,20 @@ fixture`Contact List`;
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`crm-contact-list${getPostfix(embedded, screenMode)}`, 'body');
 
-      if (project === 'angular') { // TODO: remove `if` when this react functionality will be ready
-        await t.click('tr.dx-data-row:first-child');
-        await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
-        await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
-        await t.click(Selector('.dx-button[aria-label=Edit]'));
-        await takeScreenshot(`crm-contact-list-form-edit${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
-        await t.click(Selector('[aria-label="Close"]'));
-      }
+      await t.click('tr.dx-data-row:first-child');
+      await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
+      await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
+      await t.click(Selector('.dx-button[aria-label=Edit]'));
+      await takeScreenshot(`crm-contact-list-form-edit${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
+      await t.click(Selector('[aria-label="Close"]'));
+
       if (screenMode[0] === 400) {
         await t.click('.view-wrapper .dx-icon-overflow');
       }
       await t.click(Selector('[aria-label="Add Contact"]'));
       await takeScreenshot(`crm-contact-list-add-contact-popup-embed=${getPostfix(embedded, screenMode)}`, 'body');
+      await t.click(Selector('[aria-label=Save]').nth(1));
+      await takeScreenshot(`crm-contact-list-add-contact-popup-validate-embed=${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
         .expect(compareResults.isValid())

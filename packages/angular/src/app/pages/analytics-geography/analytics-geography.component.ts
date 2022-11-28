@@ -91,9 +91,6 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
 
   loadData = (startDate: string, endDate: string) => {
     this.isLoading = true;
-    this.salesByStateAndCity = null;
-    this.salesByState = null;
-    this.salesByStateMarkers = null;
 
     this.service.getSalesByStateAndCity(startDate, endDate).subscribe((data: SalesByStateAndCity) => {
       this.salesByStateAndCity = data;

@@ -21,10 +21,9 @@ import {
 import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
 import { ApplyPipeModule } from "src/app/shared/apply.pipe";
 import { map } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { Observable, forkJoin } from "rxjs";
 
 type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
-
 type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
 
 @Component({
@@ -39,6 +38,8 @@ export class AnalyticsDashboardComponent implements OnInit {
   sales: Sales = null;
   salesByState: SalesByState = null;
   salesByCategory: SalesByStateAndCity = null;
+
+  isLoading: boolean = true;
 
   constructor(private service: DataService) {}
 
@@ -55,6 +56,8 @@ export class AnalyticsDashboardComponent implements OnInit {
   }
 
   loadData = (startDate: string, endDate: string) => {
+    const tasks: Observable<any>[] = [];
+    this.isLoading = true;
     [
       ['opportunities', this.service.getOpportunitiesByCategory],
       ['sales', this.service.getSales],
@@ -64,16 +67,16 @@ export class AnalyticsDashboardComponent implements OnInit {
       )
       ]
     ].forEach(async ([dataName, loader]: [string, DataLoader]) => {
-      this[dataName] = null;
-      loader(startDate, endDate).subscribe((result: DashboardData) => {
+      const loaderObservable = loader(startDate, endDate);
+      tasks.push(loaderObservable);
+      loaderObservable.subscribe((result: DashboardData) => {
         this[dataName] = result;
       });
     });
+    forkJoin(tasks).subscribe(() => {
+      this.isLoading = false;
+    });
   };
-
-  isLoading = (data: DashboardData[]) => {
-    return data.includes(null);
-  }
 
   getTotal(data: Array<{value?: number, total?: number}> ): number {
     return (data || []).reduce((total, item) => total + (item.value || item.total), 0);

@@ -19,6 +19,7 @@ import {
 } from 'src/app/shared/components';
 import { taskPriorityList, taskStatusList } from 'src/app/shared/types/task';
 import { Task } from 'src/app/shared/types/task';
+import { ClickEvent } from 'devextreme/ui/button';
 
 @Component({
   selector: 'task-form',
@@ -50,7 +51,8 @@ export class TaskFormComponent implements OnChanges {
     this.isEditing = true;
   };
 
-  handleSaveClick = () => {
+  handleSaveClick = ({ validationGroup }: ClickEvent) => {
+    if(!validationGroup.validate().isValid) return;
     this.isEditing = false;
   };
 

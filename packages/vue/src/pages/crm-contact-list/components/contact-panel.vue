@@ -38,127 +38,129 @@
           </div>
 
           <dx-scroll-view class="panel-scroll">
-            <div class="data-part border">
-              <dx-form
-                :class="{'view-mode': !isEditing}"
-                class="plain-styled-form"
-              >
-                <dx-form-group-item
-                  :col-count="2"
-                  css-class="photo-row"
+            <dx-validation-group>
+              <div class="data-part border">
+                <dx-form
+                  :class="{'view-mode': !isEditing, 'plain-styled-form dx-form': true}"
                 >
-                  <dx-form-item css-class="photo-box">
-                    <form-photo :link="panelData.image" />
-                  </dx-form-item>
-
-                  <dx-form-group-item>
-                    <dx-form-item css-class="accent">
-                      <form-textbox
-                        :label="'Company'"
-                        v-model="panelData['company']"
-                        :is-editing="isEditing"
-                      />
+                  <dx-form-group-item
+                    :col-count="2"
+                    css-class="photo-row"
+                  >
+                    <DxColCountByScreen :xs="2" />
+                    <dx-form-item css-class="photo-box">
+                      <form-photo :link="panelData.image" />
                     </dx-form-item>
 
-                    <dx-form-item>
-                      <form-textbox
-                        v-model="panelData['position']"
-                        :label="'Position'"
-                        :is-editing="isEditing"
-                      />
-                    </dx-form-item>
+                    <dx-form-group-item>
+                      <dx-form-item css-class="accent">
+                        <form-textbox
+                          :label="'Company'"
+                          v-model="panelData['company']"
+                          :is-editing="isEditing"
+                        />
+                      </dx-form-item>
 
-                    <dx-form-item css-class="accent">
+                      <dx-form-item>
+                        <form-textbox
+                          v-model="panelData['position']"
+                          :label="'Position'"
+                          :is-editing="isEditing"
+                        />
+                      </dx-form-item>
+
+                      <dx-form-item css-class="accent">
+                        <form-textbox
+                          :label="'Assigned to'"
+                          v-model="panelData['manager']"
+                          :is-editing="isEditing"
+                        />
+                      </dx-form-item>
+                    </dx-form-group-item>
+                  </dx-form-group-item>
+
+                  <dx-form-group-item css-class="contact-fields-group">
+                    <dx-form-item
+                      v-for="(item, index) in underContactFields"
+                      :key="index"
+                    >
                       <form-textbox
-                        :label="'Assigned to'"
-                        v-model="panelData['manager']"
+                        :icon="item.icon"
+                        v-model="panelData[item.name]"
                         :is-editing="isEditing"
+                        :mask="item.mask"
                       />
                     </dx-form-item>
                   </dx-form-group-item>
-                </dx-form-group-item>
+                </dx-form>
+              </div>
 
-                <dx-form-group-item css-class="contact-fields-group">
-                  <dx-form-item
-                    v-for="(item, index) in underContactFields"
-                    :key="index"
+              <div class="data-part data-part-toolbar border">
+                <dx-toolbar>
+                  <dx-item
+                    location="before"
+                    :visible="!isEditing"
                   >
-                    <form-textbox
-                      :icon="item.icon"
-                      v-model="panelData[item.name]"
-                      :is-editing="isEditing"
-                      :mask="item.mask"
+                    <dx-button
+                      text="Edit"
+                      icon="edit"
+                      styling-mode="outlined"
+                      type="default"
+                      @click="toggleEdit()"
                     />
-                  </dx-form-item>
-                </dx-form-group-item>
-              </dx-form>
-            </div>
+                  </dx-item>
 
-            <div class="data-part data-part-toolbar border">
-              <dx-toolbar>
-                <dx-item
-                  location="before"
-                  :visible="!isEditing"
-                >
-                  <dx-button
-                    text="Edit"
-                    icon="edit"
-                    styling-mode="outlined"
-                    type="default"
-                    @click="toggleEdit()"
+                  <dx-item
+                    location="before"
+                    :visible="!isEditing"
+                  >
+                    <dx-button
+                      text="Details"
+                      styling-mode="outlined"
+                      type="default"
+                      @click="navigateToDetails()"
+                    />
+                  </dx-item>
+
+                  <dx-item
+                    location="before"
+                    locate-in-menu="before"
+                    :visible="isEditing"
+                  >
+                    <dx-button
+                      text="Save"
+                      icon="save"
+                      styling-mode="outlined"
+                      type="default"
+                      @click="handleSaveClick"
+                    />
+                  </dx-item>
+
+                  <dx-item
+                    location="before"
+                    locate-in-menu="before"
+                    :visible="isEditing"
+                  >
+                    <dx-button
+                      text="Cancel"
+                      @click="toggleEdit()"
+                      styling-mode="text"
+                    />
+                  </dx-item>
+
+                  <dx-item
+                    location="after"
+                    widget="dxDropDownButton"
+                    :options="{
+                      width: 120,
+                      text: 'Actions',
+                      stylingMode: 'contained',
+                      items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                    }"
                   />
-                </dx-item>
-
-                <dx-item
-                  location="before"
-                  :visible="!isEditing"
-                >
-                  <dx-button
-                    text="Details"
-                    styling-mode="outlined"
-                    type="default"
-                    @click="navigateToDetails()"
-                  />
-                </dx-item>
-
-                <dx-item
-                  location="before"
-                  locate-in-menu="before"
-                  :visible="isEditing"
-                >
-                  <dx-button
-                    text="Save"
-                    icon="save"
-                    styling-mode="outlined"
-                    type="default"
-                    @click="toggleEdit()"
-                  />
-                </dx-item>
-
-                <dx-item
-                  location="before"
-                  locate-in-menu="before"
-                  :visible="isEditing"
-                >
-                  <dx-button
-                    text="Cancel"
-                    @click="toggleEdit()"
-                    styling-mode="text"
-                  />
-                </dx-item>
-
-                <dx-item
-                  location="after"
-                  widget="dxDropDownButton"
-                  :options="{
-                    width: 120,
-                    text: 'Actions',
-                    stylingMode: 'contained',
-                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
-                  }"
-                />
-              </dx-toolbar>
-            </div>
+                </dx-toolbar>
+              </div>
+            </dx-validation-group>
 
             <div class="data-part">
               <dx-accordion
@@ -218,9 +220,12 @@ import {
   DxForm,
   DxItem as DxFormItem,
   DxGroupItem as DxFormGroupItem,
+  DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
+import { DxValidationGroup } from 'devextreme-vue/validation-group';
+import { ClickEvent } from 'devextreme/ui/button';
 import FormPhoto from '@/components/form-photo.vue';
 import ContactStatus from '@/components/contact-status.vue';
 import { screenInfo } from '@/utils/media-query';
@@ -279,6 +284,12 @@ const loadContact = async (contactId: number) => {
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 function accordionPlusClick(/* e : Event */) {
+}
+
+function handleSaveClick({ validationGroup }: ClickEvent) {
+  if (validationGroup.validate().isValid) {
+    isEditing.value = false;
+  }
 }
 
 watch(

@@ -29,7 +29,7 @@ import { UserNewFormModule } from './user-new-form/user-new-form.component';
 import {
   FormPopupModule,
   FormPopupComponent,
-} from 'src/app/shared/components/'
+} from 'src/app/shared/components/';
 
 type FilterContactStatus = ContactStatus | 'All';
 

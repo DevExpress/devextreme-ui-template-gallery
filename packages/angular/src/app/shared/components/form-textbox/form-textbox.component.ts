@@ -25,8 +25,6 @@ export class FormTextboxComponent {
 
   @Input() validators: ValidationRule[] = [{ type: 'required' }];
 
-  @Input() validationGroup: string = undefined;
-
   @Input() value!: string;
 
   @Output() valueChange: EventEmitter<string> = new EventEmitter();
