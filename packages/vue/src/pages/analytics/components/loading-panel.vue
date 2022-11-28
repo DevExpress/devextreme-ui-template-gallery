@@ -2,25 +2,20 @@
   <dx-load-panel
     container=".view-wrapper"
     :position="{of: '.app-content-wrapper'}"
-    :visible="isLoading"
+    :visible="props.loading"
     :show-pane="true"
   />
 </template>
 
 <script setup lang="ts">
 import { DxLoadPanel } from 'devextreme-vue/load-panel';
-import { computed, Ref } from 'vue';
 
 const props = withDefaults(
   defineProps<{
-    data: Ref[]
+    loading: boolean
   }>(),
   {
-    data: () => [],
+    loading: true,
   },
-);
-
-const isLoading = computed(
-  () => !!props.data.find((item) => !item || item.value === null),
 );
 </script>
