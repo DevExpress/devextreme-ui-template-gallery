@@ -163,23 +163,6 @@ body {
   border: none;
 }
 
-@mixin status-contact($status-color) {
-  color: $status-color;
-
-  &.dx-texteditor {
-    .status-editor-input {
-      color: $status-color;
-      padding-left: 0;
-    }
-  }
-
-  span {
-    &::before {
-      background-color: $status-color;
-    }
-  }
-}
-
 .status-contact {
   &.status-commission {
     @include status-contact(#03a9f4);
