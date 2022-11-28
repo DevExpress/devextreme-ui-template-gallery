@@ -27,9 +27,6 @@ export class CardAnalytticsComponent {
   ];
 
   position: PositionConfig;
-
-  constructor() {
-  }
 }
 
 @NgModule({
