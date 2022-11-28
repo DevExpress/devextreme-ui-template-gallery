@@ -63,7 +63,7 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
         closeOnOutsideClick={onOutsideClick}
         openedStateMode={isLarge ? 'shrink' : 'overlap'}
         revealMode={isXSmall ? 'slide' : 'expand'}
-        minSize={isXSmall ? 0 : 60}
+        minSize={isXSmall ? 0 : 48}
         maxSize={250}
         shading={isLarge ? false : true}
         opened={menuStatus === MenuStatus.Closed ? false : true}
