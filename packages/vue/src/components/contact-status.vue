@@ -1,5 +1,5 @@
 <template>
-  <span :class="'contact-status status-' + props.value?.toLowerCase()">
+  <span :class="'status contact-status status-' + props.value?.toLowerCase()">
     {{ (props.showText ? props.value : '') }}</span>
 </template>
 

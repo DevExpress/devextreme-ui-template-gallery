@@ -25,6 +25,18 @@ $side-panel-toolbar-height: 76px;
       }
     }
 
+    ::ng-deep .dx-row-focused {
+      .name-template {
+        .position.position {
+          color: lighten($texteditor-label-color, 50);
+        }
+      }
+
+      .status {
+        @include status(#fff);
+      }
+    }
+
     ::ng-deep & {
       .dx-datagrid-header-panel {
         padding: 0 $content-padding;
