@@ -128,7 +128,7 @@ export const PlanningTaskList = () => {
     <div className='view-wrapper view-wrapper-list'>
       <Toolbar className='toolbar-common'>
         <Item location='before'>
-          <span className='toolbar-header'>Task</span>
+          <span className='toolbar-header'>Tasks</span>
         </Item>
         <Item
           location='before'

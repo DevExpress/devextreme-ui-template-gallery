@@ -2,7 +2,7 @@
   <div class="view-wrapper">
     <dx-toolbar>
       <dx-toolbar-item location="before">
-        <span class="toolbar-header">Task</span>
+        <span class="toolbar-header">Tasks</span>
       </dx-toolbar-item>
       <dx-toolbar-item location="before">
         <dx-tabs
