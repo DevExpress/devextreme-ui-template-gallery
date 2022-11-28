@@ -21,17 +21,6 @@ body {
   }
 }
 
-.content-block {
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-top: 20px;
-
-  .screen-x-small & {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-}
-
 .responsive-paddings {
   padding: 20px;
 
@@ -61,7 +50,6 @@ body {
 .embedded.embedded {
   .layout-header,
   .dx-swatch-additional,
-  .with-footer .content-block,
   .dx-drawer-shader {
     display: none;
   }

@@ -76,11 +76,6 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
                 return React.isValidElement(item) && item.type !== Footer && item;
               })}
             </div>
-            <div className='content-block'>
-              {React.Children.map(children, (item) => {
-                return React.isValidElement(item) && item.type === Footer && item;
-              })}
-            </div>
           </ScrollView>
         </div>
         <Template name='menu'>

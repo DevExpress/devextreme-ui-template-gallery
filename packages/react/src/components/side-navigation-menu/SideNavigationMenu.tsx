@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 
 import TreeView from 'devextreme-react/tree-view';
 
+import { Footer } from '../../components';
 import { navigation } from '../../app-navigation';
 import { useNavigation } from '../../contexts/navigation';
 import { useScreenSize } from '../../utils/media-query';
@@ -78,6 +79,9 @@ export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigation
           width='100%'
         />
       </div>
+      <Footer>
+        Copyright © {new Date().getFullYear()} <br /> Developer Express Inc.
+      </Footer>
     </div>
   );
 };

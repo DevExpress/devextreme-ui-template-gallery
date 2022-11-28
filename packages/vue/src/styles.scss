@@ -35,17 +35,6 @@
   height: calc(100% - 56px)
 }
 
-.content-block {
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-top: 20px;
-
-  .screen-x-small & {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-}
-
 .responsive-paddings {
   padding: 20px;
 
@@ -91,7 +80,6 @@ $side-panel-min-width: 60px;
 .embedded {
   .layout-header,
   .dx-swatch-additional,
-  .with-footer .content-block,
   .dx-drawer-shader {
     display: none !important;
   }
