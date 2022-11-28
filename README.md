@@ -4,7 +4,7 @@ This repository includes responsive UI Templates for the most popular UI/UX patt
 
 ![DevExtreme UI Template Gallery](/images/ui-template-gallery.png)
 
-Take a look at the gallery **online** here:
+Take a look at the **online** gallery here:
 
 - [Angular](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/crm-contact-list)
 - [React](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/react/default/#/crm-contact-list)
