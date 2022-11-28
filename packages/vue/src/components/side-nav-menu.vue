@@ -16,6 +16,7 @@
         width="100%"
       />
     </div>
+    <app-footer />
   </div>
 </template>
 
@@ -25,6 +26,7 @@ import { sizes } from '@/utils/media-query';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { navigation } from '@/app-navigation';
+import AppFooter from '@/components/app-footer.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -106,6 +108,7 @@ watch(
     display: flex;
     flex: 1;
     background-color: $side-panel-background;
+    padding-bottom: $footer-height;
     .dx-treeview {
       // ## Long text positioning
       white-space: nowrap;

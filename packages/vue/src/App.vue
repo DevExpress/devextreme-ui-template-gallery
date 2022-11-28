@@ -3,8 +3,6 @@ import {
   computed, inject,
 } from 'vue';
 import { AppInfo, appInfoInjectKey } from '@/types/app-info';
-import simpleLayout from '@/layouts/single-card.vue';
-import AppFooter from './components/app-footer.vue';
 import { screenInfo } from './utils/media-query';
 
 const appInfo = inject<AppInfo>(appInfoInjectKey);
@@ -24,7 +22,6 @@ document.title = appInfo?.title || '';
         <div class="content">
           <router-view />
         </div>
-        <app-footer v-if="$route.meta.layout !== simpleLayout" />
       </component>
     </div>
   </div>
