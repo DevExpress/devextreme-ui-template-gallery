@@ -23,6 +23,7 @@ $texteditor-edit-color: $texteditor-color;
 $filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
 $list-padding-left: $material-list-item-horizontal-padding;
 $footer-height: 70px;
+$footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 
 @mixin separator() {
   .separator {

@@ -29,6 +29,7 @@ $filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-pa
 $list-padding-left: $material-list-item-horizontal-padding;
 $toolbar-items-container-height: 38px;
 $footer-height: 70px;
+$footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 
 $main-container-padding-top: 20px;
 $main-container-padding-left: 16px;
