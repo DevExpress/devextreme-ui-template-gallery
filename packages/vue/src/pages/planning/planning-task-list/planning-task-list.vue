@@ -264,10 +264,6 @@ loadTasksAsync();
     @include header();
     padding-right: 20px;
   }
-
-  .dx-tabs .dx-tab {
-    background-color: $background-color;
-  }
 }
 
 .view-wrapper {
