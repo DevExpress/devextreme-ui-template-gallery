@@ -10,7 +10,7 @@ Take a look at the gallery **online** here:
 - [React](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/react/default/#/crm-contact-list)
 - [Vue](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/vue/default/#/crm-contact-list)
 
-Use the left menu to navigate through the CRM, Planning and Analytics views.
+Use the left menu to navigate through the views.
 
 The UI Templates have responsive layouts with DevExtreme UI components. Note that the components use sample data entities without any business logic. You can use these UI Templates in your project and adapt them to your specific business requirements.
 
