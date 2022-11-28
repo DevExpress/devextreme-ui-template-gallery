@@ -156,7 +156,13 @@ export const CRMContactList = () => {
                 <div className='grid-header'>Contacts</div>
               </Item>
               <Item location='before' locateInMenu='auto'>
-                <DropDownButton dataSource={filterStatusList} stylingMode='text' width={160} selectedItemKey={status} useSelectMode onSelectionChanged={filterByStatus} />
+                <DropDownButton
+                  dataSource={filterStatusList}
+                  stylingMode='text'
+                  selectedItemKey={status}
+                  dropDownOptions={{ width: 'auto' }}
+                  useSelectMode
+                  onSelectionChanged={filterByStatus} />
               </Item>
               <Item location='after' locateInMenu='auto'>
                 <Button icon='plus' text='Add Contact' type='default' stylingMode='contained' onClick={changePopupVisibility} />

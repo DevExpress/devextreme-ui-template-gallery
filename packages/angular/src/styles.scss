@@ -29,6 +29,12 @@ body {
   }
 }
 
+.dx-dropdownbutton-content {
+  .dx-list-item {
+    display: block;
+  }
+}
+
 .dx-card.wide-card {
   border-radius: 0;
   margin-left: 0;
