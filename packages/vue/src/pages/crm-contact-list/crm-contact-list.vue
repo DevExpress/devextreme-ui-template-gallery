@@ -47,10 +47,10 @@
         >
           <dx-drop-down-button
             styling-mode="text"
-            :width="160"
             :use-select-mode="true"
             :items="filterStatusList"
             :selected-item-key="filterStatusList[0]"
+            :drop-down-options="{ width: 'auto' }"
             @selection-changed="filterByStatus"
           />
         </dx-grid-toolbar-item>
