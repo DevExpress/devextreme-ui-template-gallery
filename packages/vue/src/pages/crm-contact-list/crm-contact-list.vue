@@ -334,7 +334,9 @@ const onClose = () => {
     }
 
     :deep(.dx-row-focused) {
-      .name-template {
+      .name-template.name-template {
+        color: lighten($texteditor-label-color, 50);
+
         .position {
           color: lighten($texteditor-label-color, 50);
         }
