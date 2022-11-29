@@ -6,6 +6,7 @@
     [dataSource]="dataSource"
     [allowColumnReordering]="true"
     [focusedRowEnabled]="true"
+    [(focusedRowKey)]="userId"
     (onRowClick)="rowClick($event)"
     (onRowPrepared)="rowPrepared($event)"
     (onExporting)="onExporting($event)"
@@ -140,7 +141,12 @@
     </div>
   </dx-data-grid>
 
-  <user-panel [userId]="userId" [(isOpened)]="isPanelOpened"></user-panel>
+  <user-panel
+    [userId]="userId"
+    [(isOpened)]="isPanelOpened"
+    (isOpenedChange)="onOpenedChange($event)"
+  >
+  </user-panel>
 
   <form-popup
     #userPopup

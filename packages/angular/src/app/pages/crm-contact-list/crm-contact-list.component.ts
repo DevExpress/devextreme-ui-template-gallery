@@ -89,6 +89,12 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     rowElement.classList.add('clickable-row');
   };
 
+  onOpenedChange = (value: boolean) => {
+    if (!value) {
+      this.userId = null;
+    }
+  };
+
   filterByStatus = (e: SelectionChangedEvent) => {
     const { item: status }: { item: FilterContactStatus } = e;
 

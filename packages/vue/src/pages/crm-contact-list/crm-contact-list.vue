@@ -6,6 +6,7 @@
       :data-source="dataSource"
       :allow-column-reordering="true"
       :focused-row-enabled="true"
+      :focused-row-key="focusedRowKey"
       height="100%"
       class="grid"
       @row-click="rowClick"
@@ -176,7 +177,7 @@
     <contact-panel
       :contact-id="panelData?.id"
       :is-panel-opened="isPanelOpened"
-      @close="isPanelOpened = false"
+      @close="onClose"
     />
   </div>
 
@@ -232,6 +233,7 @@ const isPanelOpened = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
 
 const isAddContactPopupOpened = ref(false);
+const focusedRowKey = ref(null);
 
 const dataSource = new DataSource({
   key: 'id',
@@ -242,6 +244,7 @@ const rowClick = (e: RowClickEvent) => {
   if (e.data.id) {
     panelData.value = e.data;
     isPanelOpened.value = true;
+    focusedRowKey.value = e.data.id;
   }
 };
 
@@ -301,6 +304,11 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
 
 const onSaveContactNewForm = () => {
   isAddContactPopupOpened.value = false;
+};
+
+const onClose = () => {
+  isPanelOpened.value = false;
+  focusedRowKey.value = null;
 };
 </script>
 

@@ -11,11 +11,13 @@ import { ContactPanelDetails } from './ContactPanelDetails';
 
 const ContactPanelWithLoadPanel = withLoadPanel(ContactPanelDetails);
 
-export const ContactPanel = ({ contactId, isOpened, changePanelOpened } : { contactId: number, isOpened: boolean, changePanelOpened:()=> void }) => {
+export const ContactPanel = ({ contactId, isOpened, changePanelOpened } : { contactId: number | null, isOpened: boolean, changePanelOpened:(value: boolean)=> void }) => {
 
   const [data, setData] = useState<Contact>();
 
   const loadData = useCallback(() => {
+    if (!contactId) return;
+
     getContact(contactId)
       .then((data) => {
         setData(data);
