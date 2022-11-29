@@ -22,7 +22,7 @@ fixture`Contact List`;
       await takeScreenshot(`crm-contact-list${getPostfix(embedded, screenMode)}`, 'body');
 
       await t.click('tr.dx-data-row:first-child');
-      await takeScreenshot(`crm-contact-list${getPostfix(embedded, screenMode)}`, 'body');
+      await takeScreenshot(`crm-contact-list-full${getPostfix(embedded, screenMode)}`, 'body');
       await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
       await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
       await t.click(Selector('.dx-button[aria-label=Edit]'));
