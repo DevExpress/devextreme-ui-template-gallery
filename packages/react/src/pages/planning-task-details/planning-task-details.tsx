@@ -42,7 +42,7 @@ export const PlanningTaskDetails = () => {
     <div className='view-wrapper view-wrapper-details'>
       <ToolbarDetails name={task?.text}>
         <ToolbarItem location='after' locateInMenu='auto'>
-          <DropDownButton text='ACTIONS' stylingMode='contained'>
+          <DropDownButton text='Actions' stylingMode='contained'>
             <DropDownItem text='Duplicate' />
             <DropDownItem text='Close' />
             <DropDownItem text='Delete' />
