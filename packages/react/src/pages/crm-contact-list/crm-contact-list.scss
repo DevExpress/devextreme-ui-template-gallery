@@ -27,15 +27,15 @@
 
     .dx-row-focused {
       .name-template.name-template {
-        color: lighten($texteditor-label-color, 50);
+        color: $base-focus-color;
 
         .position.position {
-          color: lighten($texteditor-label-color, 50);
+          color: $base-focus-color;
         }
       }
 
       .status {
-        @include status-contact(#fff);
+        @include status-contact($base-focus-color);
       }
     }
 
