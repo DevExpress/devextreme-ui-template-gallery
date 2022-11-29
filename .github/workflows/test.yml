@@ -51,7 +51,7 @@ jobs:
           { project: 'angular', page: 'analytics-dashboard' },
           { project: 'angular', page: 'analytics-sales-report' },
           { project: 'angular', page: 'analytics-geography' },
-          # { project: 'react', page: 'crm-contact-details' }, # Button doesn't hide (screen width 400)
+          { project: 'react', page: 'crm-contact-details' },
           # { project: 'react', page: 'crm-contact-list' }, # The 'Add contact' button color differs under overlay
           # { project: 'react', page: 'planning-task-details' }, # Title width is different (screen width 400). Menu stays opened
           { project: 'react', page: 'planning-task-list' },
