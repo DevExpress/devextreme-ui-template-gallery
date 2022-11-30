@@ -15,7 +15,7 @@ import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporte
 import { saveAs } from 'file-saver-es';
 import { Workbook } from 'exceljs';
 
-import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
+import { ColumnCellTemplateData, RowPreparedEvent } from 'devextreme/ui/data_grid';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { ExportingEvent, RowClickEvent } from 'devextreme/ui/data_grid';
 
@@ -49,6 +49,10 @@ const fieldRender = (text: string) => (
     <TextBox readOnly />
   </>
 );
+
+const onRowPrepared = ({ rowElement }: RowPreparedEvent) => {
+  rowElement.classList.add('clickable-row');
+};
 
 const onExporting = (e: ExportingEvent) => {
   if (e.format === 'pdf') {
@@ -109,6 +113,7 @@ export const ContactDataGrid = React.memo(({
       dataSource={data}
       onRowClick={onRowClick}
       onExporting={onExporting}
+      onRowPrepared={onRowPrepared}
       allowColumnReordering
       ref={grid}
     >

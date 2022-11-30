@@ -18,6 +18,10 @@
   .grid {
     height: 100%;
 
+    .clickable-row {
+      cursor: pointer;
+    }
+
     .name-template {
       .position {
         font-size: 12px;
