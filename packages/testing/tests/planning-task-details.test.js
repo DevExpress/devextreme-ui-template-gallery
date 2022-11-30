@@ -12,8 +12,12 @@ const BASE_URL = `http://localhost:${process.env.port}/#/planning-task-details`;
 fixture`Planning Details`;
 
 const setEmbedded = async (t, embed, screenMode) => {
-  if (embed && screenMode[0] === 400) {
-    await t.click('.view-wrapper .dx-icon-overflow');
+  if (embed) {
+    if (screenMode[0] === 400) {
+      await t.click('.view-wrapper .dx-icon-overflow');
+    }
+
+    await t.click(Selector('.dx-button[aria-label=Refresh]'));
   }
 };
 
