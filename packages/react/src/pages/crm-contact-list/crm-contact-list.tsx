@@ -6,6 +6,8 @@ import { getContacts } from 'dx-template-gallery-data';
 
 import { RowClickEvent } from 'devextreme/ui/data_grid';
 
+import LoadPanel from 'devextreme-react/load-panel';
+
 import { Contact } from '../../shared/types/crm-contact';
 
 import { FormPopup, ContactNewForm } from '../../components';
@@ -17,11 +19,15 @@ export const CRMContactList = () => {
   const [isPanelOpened, setPanelOpened] = useState(false);
   const [contactId, setContactId] = useState<number|null>(null);
   const [popupVisible, setPopupVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getContacts()
       .then((data) => {
         setGridData(data);
+        if (data.length) {
+          setLoading(false);
+        }
       })
       .catch((error) => console.log(error));
   }, []);
@@ -46,18 +52,22 @@ export const CRMContactList = () => {
 
   return (
     <div className='view crm-contact-list'>
-      <div className='view-wrapper'>
-        <ContactDataGrid
-          data={gridData}
-          contactId={contactId}
-          onAddContactClick={onAddContactClick}
-          onRowClick={onRowClick}
-        />
-        <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} />
-        <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility}>
-          <ContactNewForm />
-        </FormPopup>
-      </div>
+      {!loading ? (
+        <div className='view-wrapper'>
+          <ContactDataGrid
+            data={gridData}
+            contactId={contactId}
+            onAddContactClick={onAddContactClick}
+            onRowClick={onRowClick}
+          />
+          <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} />
+          <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility}>
+            <ContactNewForm />
+          </FormPopup>
+        </div>
+      ) : (
+        <LoadPanel visible />
+      )}
     </div>
   );
 };
