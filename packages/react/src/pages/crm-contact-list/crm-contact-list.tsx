@@ -60,7 +60,7 @@ export const CRMContactList = () => {
   const [gridData, setGridData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isPanelOpened, setPanelOpened] = useState(false);
-  const [contactId, setContactId] = useState(0);
+  const [contactId, setContactId] = useState(null);
   const [popupVisible, setPopupVisible] = useState(false);
 
   const grid = useRef<DataGrid>(null);
@@ -92,8 +92,11 @@ export const CRMContactList = () => {
     setPopupVisible(!popupVisible);
   };
 
-  const changePanelOpened = useCallback(() => {
+  const changePanelOpened = useCallback((value: boolean) => {
     setPanelOpened(!isPanelOpened);
+    if (!value) {
+      setContactId(null);
+    }
   }, [isPanelOpened]);
 
   const refresh = useCallback(() => {
@@ -102,7 +105,7 @@ export const CRMContactList = () => {
 
   const onRowClick = useCallback(({ data }: RowClickEvent) => {
     setContactId(data.id);
-    changePanelOpened();
+    changePanelOpened(true);
   }, []);
 
   const onExporting = useCallback((e: ExportingEvent) => {
@@ -138,7 +141,10 @@ export const CRMContactList = () => {
           <DataGrid
             className='grid'
             noDataText=''
+            keyExpr='id'
+            focusedRowEnabled
             dataSource={gridData}
+            focusedRowKey={contactId}
             onRowClick={onRowClick}
             onExporting={onExporting}
             allowColumnReordering
@@ -187,7 +193,11 @@ export const CRMContactList = () => {
             <Column dataField='phone' caption='Phone' hidingPriority={2} cellRender={cellPhoneRender} />
             <Column dataField='email' caption='Email' hidingPriority={1} />
           </DataGrid>
-          <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} />
+          <ContactPanel
+            contactId={contactId}
+            isOpened={isPanelOpened}
+            changePanelOpened={changePanelOpened}
+          />
           <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility}>
             <ContactNewForm />
           </FormPopup>
