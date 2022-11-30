@@ -17,9 +17,9 @@ import { Workbook } from 'exceljs';
 
 import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
-import { ExportingEvent } from 'devextreme/ui/data_grid';
+import { ExportingEvent, RowClickEvent } from 'devextreme/ui/data_grid';
 
-import { ContactStatus as ContactStatusType } from '../../../shared/types/crm-contact';
+import { ContactStatus as ContactStatusType, Contact } from '../../../shared/types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../../shared/constants';
 
 import { ContactStatus } from '../../../components';
@@ -76,7 +76,9 @@ const onExporting = (e: ExportingEvent) => {
   }
 };
 
-export const ContactDataGrid = React.memo(({ data, onRowClick, onAddContactClick }: any) => {
+export const ContactDataGrid = React.memo(({
+  data, onRowClick, onAddContactClick
+}: { data?: Contact[], onAddContactClick: () => void, onRowClick: (e: RowClickEvent) => void}) => {
   const [status, setStatus] = useState(filterStatusList[0]);
   const grid = useRef<DataGrid>(null);
 

@@ -6,12 +6,14 @@ import { getContacts } from 'dx-template-gallery-data';
 
 import { RowClickEvent } from 'devextreme/ui/data_grid';
 
+import { Contact } from '../../shared/types/crm-contact';
+
 import { FormPopup, ContactNewForm } from '../../components';
 import { ContactPanel } from './contact-panel/ContactPanel';
 import { ContactDataGrid } from './contact-data-grid/ContactDataGrid';
 
 export const CRMContactList = () => {
-  const [gridData, setGridData] = useState([]);
+  const [gridData, setGridData] = useState<Contact[]>();
   const [isPanelOpened, setPanelOpened] = useState(false);
   const [contactId, setContactId] = useState(null);
   const [popupVisible, setPopupVisible] = useState(false);
@@ -50,7 +52,6 @@ export const CRMContactList = () => {
       <div className='view-wrapper'>
         <ContactDataGrid
           data={gridData}
-          changeContactId={changeContactId}
           onAddContactClick={onAddContactClick}
           onRowClick={onRowClick}
         />
