@@ -77,8 +77,10 @@ const onExporting = (e: ExportingEvent) => {
 };
 
 export const ContactDataGrid = React.memo(({
-  data, onRowClick, onAddContactClick
-}: { data?: Contact[], onAddContactClick: () => void, onRowClick: (e: RowClickEvent) => void}) => {
+  data, onRowClick, onAddContactClick, contactId
+}: {
+    data?: Contact[], onAddContactClick: () => void, onRowClick: (e: RowClickEvent) => void, contactId: number|null
+}) => {
   const [status, setStatus] = useState(filterStatusList[0]);
   const grid = useRef<DataGrid>(null);
 
@@ -101,6 +103,9 @@ export const ContactDataGrid = React.memo(({
     <DataGrid
       className='grid'
       noDataText=''
+      keyExpr='id'
+      focusedRowEnabled
+      focusedRowKey={contactId}
       dataSource={data}
       onRowClick={onRowClick}
       onExporting={onExporting}

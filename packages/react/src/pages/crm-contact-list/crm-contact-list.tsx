@@ -15,7 +15,7 @@ import { ContactDataGrid } from './contact-data-grid/ContactDataGrid';
 export const CRMContactList = () => {
   const [gridData, setGridData] = useState<Contact[]>();
   const [isPanelOpened, setPanelOpened] = useState(false);
-  const [contactId, setContactId] = useState(null);
+  const [contactId, setContactId] = useState<number|null>(null);
   const [popupVisible, setPopupVisible] = useState(false);
 
   useEffect(() => {
@@ -32,18 +32,15 @@ export const CRMContactList = () => {
 
   const changePanelOpened = () => {
     setPanelOpened(!isPanelOpened);
+    setContactId(null);
   };
-
-  const changeContactId = useCallback((id) => {
-    setContactId(id);
-  }, []);
 
   const onAddContactClick = useCallback(() => {
     setPopupVisible(true);
   }, []);
 
   const onRowClick = useCallback(({ data }: RowClickEvent) => {
-    changeContactId(data.id);
+    setContactId(data.id);
     setPanelOpened(true);
   }, []);
 
@@ -52,6 +49,7 @@ export const CRMContactList = () => {
       <div className='view-wrapper'>
         <ContactDataGrid
           data={gridData}
+          contactId={contactId}
           onAddContactClick={onAddContactClick}
           onRowClick={onRowClick}
         />
