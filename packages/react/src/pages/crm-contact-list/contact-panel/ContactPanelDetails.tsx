@@ -22,10 +22,10 @@ const accordionTitleClick = (e: ButtonClickEvent) => {
 
 const renderCustomTitle = (item) => {
   return (
-    <div>
+    <>
       <span>{item.title}</span>
       <Button icon='add' type='default' stylingMode='text' onClick={accordionTitleClick} />
-    </div>
+    </>
   );
 };
 
@@ -186,12 +186,12 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                   <Button text='Details' stylingMode='outlined' type='default' onClick={navigateToDetails} />
                 </ToolbarItem>
                 <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
-                  <Button text='Save' stylingMode='outlined' type='default' onClick={onSaveClick} />
+                  <Button text='Save' icon='save' stylingMode='outlined' type='default' onClick={onSaveClick} />
                 </ToolbarItem>
                 <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
                   <Button text='Cancel' stylingMode='text' onClick={toggleEditHandler} />
                 </ToolbarItem>
-                <ToolbarItem location='after' visible={!isEditing}>
+                <ToolbarItem location='after'>
                   <DropDownButton text='Actions' width={120} stylingMode='contained' items={['Call', 'Send Fax', 'Send Email', 'Make a Meeting']} />
                 </ToolbarItem>
               </Toolbar>

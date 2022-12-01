@@ -9,19 +9,7 @@ interface State {
     stateShort: string;
 }
 
-export interface ContactBase {
-    address: string,
-    firstName: string,
-    lastName: string,
-    position: string,
-    manager: string,
-    company: string,
-    phone: string,
-    email: string,
-    image: string,
-}
-
-export interface Contact extends ContactBase {
+export interface Contact {
     id: number,
     name: string,
     status: ContactStatus,
@@ -31,4 +19,13 @@ export interface Contact extends ContactBase {
     activities: Activities,
     opportunities: Opportunities,
     tasks: Task[],
+    address: string,
+    firstName: string,
+    lastName: string,
+    position: string,
+    manager: string,
+    company: string,
+    phone: string,
+    email: string,
+    image: string,
 }
