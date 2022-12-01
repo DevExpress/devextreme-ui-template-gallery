@@ -5,6 +5,9 @@
     </dxi-item>
     <dxi-item location="before">
       <dx-tabs
+        [width]="getTabWidth()"
+        [showNavButtons]="false"
+        [scrollByContent]="true"
         [selectedIndex]="0"
         [items]="taskPanelItems"
         (onItemClick)="tabValueChange($event)"

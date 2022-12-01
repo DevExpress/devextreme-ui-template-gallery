@@ -16,6 +16,7 @@ import dxTextBox from 'devextreme/ui/text_box';
 import { PlanningGrid, PlanningKanban, PlanningGantt, FormPopup, TaskFormDetails } from '../../components';
 
 import { newTask } from '../../shared/constants';
+import { useScreenSize } from '../../utils/media-query';
 
 import { getTasks, getFilteredTasks } from 'dx-template-gallery-data';
 
@@ -40,6 +41,8 @@ export const PlanningTaskList = () => {
   const [loading, setLoading] = useState(true);
   const [newTaskData, setNewTaskData] = useState(newTask);
   const [popupVisible, setPopupVisible] = useState(false);
+
+  const { isXSmall } = useScreenSize();
 
   const isDataGrid = view === listView;
   const isKanban = view === kanbanView;
@@ -124,6 +127,10 @@ export const PlanningTaskList = () => {
     gridRef.current?.instance.searchByText(e.component.option('text') ?? '');
   }, []);
 
+  const getTabsWidth = useCallback(() => {
+    return isXSmall ? 220 : 'auto';
+  }, []);
+
   return (
     <div className='view-wrapper view-wrapper-list'>
       <Toolbar className='toolbar-common'>
@@ -135,7 +142,10 @@ export const PlanningTaskList = () => {
           widget='dxTabs'
           options={{
             dataSource: listsData,
+            width: getTabsWidth(),
             selectedIndex: index,
+            scrollByContent: true,
+            showNavButtons: false,
             onItemClick: onTabClick,
           }}
         />

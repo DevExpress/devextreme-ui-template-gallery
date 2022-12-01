@@ -10,7 +10,7 @@ import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
 import { taskPanelItems } from 'src/app/shared/types/resource';
 import { Task, newTask } from 'src/app/shared/types/task';
-import { DataService } from 'src/app/shared/services';
+import { DataService, ScreenService } from 'src/app/shared/services';
 import { forkJoin, map, Observable } from 'rxjs';
 import { TaskFormModule } from '../planning-task-details/task-form/task-form.component';
 import { FormPopupModule, FormPopupComponent} from 'src/app/shared/components';
@@ -45,7 +45,8 @@ export class PlanningTaskListComponent implements OnInit {
 
   taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
-  constructor(private service: DataService) { }
+  constructor(private service: DataService, private screen: ScreenService) {
+  }
 
   ngOnInit(): void {
     this.taskCollections$ = forkJoin([
@@ -67,6 +68,10 @@ export class PlanningTaskListComponent implements OnInit {
 
   addTask = () => {
     this.taskPopup.popupVisible = true;
+  };
+
+  getTabWidth = () => {
+    return this.screen.isXSmallScreen() ? 220 : 'auto';
   };
 
   refresh = () => {
