@@ -14,7 +14,7 @@ fixture`Contact Details`;
 const setEmbedded = async (t, embed, screenMode) => {
   if (embed) {
     if (screenMode[0] === 400) {
-      await t.click('.view-wrapper .dx-icon-overflow');
+      await t.click('.view-wrapper .toolbar-details .dx-icon-overflow');
     }
 
     await t.click(Selector('.dx-button[aria-label=Refresh]'));
