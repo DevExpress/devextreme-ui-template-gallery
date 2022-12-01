@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { jsPDF as JsPdf } from 'jspdf';
 
 import DataGrid, {
@@ -25,6 +25,12 @@ import { CONTACT_STATUS_LIST } from '../../../shared/constants';
 import { ContactStatus } from '../../../components';
 
 type FilterContactStatus = ContactStatusType | 'All';
+interface ContactDataGridPprops {
+    data?: Contact[],
+    onAddContactClick: () => void,
+    onRowClick: (e: RowClickEvent) => void,
+    gridRef: React.RefObject<DataGrid>
+}
 
 const filterStatusList = ['All', ...CONTACT_STATUS_LIST];
 
@@ -81,26 +87,23 @@ const onExporting = (e: ExportingEvent) => {
 };
 
 export const ContactDataGrid = React.memo(({
-  data, onRowClick, onAddContactClick, contactId
-}: {
-    data?: Contact[], onAddContactClick: () => void, onRowClick: (e: RowClickEvent) => void, contactId: number|null
-}) => {
+  data, onRowClick, onAddContactClick, gridRef
+}: ContactDataGridPprops) => {
   const [status, setStatus] = useState(filterStatusList[0]);
-  const grid = useRef<DataGrid>(null);
 
   const filterByStatus = useCallback((e: SelectionChangedEvent) => {
     const { item: status }: { item: FilterContactStatus } = e;
     if (status === 'All') {
-      grid.current?.instance.clearFilter();
+      gridRef.current?.instance.clearFilter();
     } else {
-      grid.current?.instance.filter(['status', '=', status]);
+      gridRef.current?.instance.filter(['status', '=', status]);
     }
 
     setStatus(status);
   }, []);
 
   const refresh = useCallback(() => {
-    grid.current?.instance.refresh();
+    gridRef.current?.instance.refresh();
   }, []);
 
   return (
@@ -109,13 +112,12 @@ export const ContactDataGrid = React.memo(({
       noDataText=''
       keyExpr='id'
       focusedRowEnabled
-      focusedRowKey={contactId}
       dataSource={data}
       onRowClick={onRowClick}
       onExporting={onExporting}
       onRowPrepared={onRowPrepared}
       allowColumnReordering
-      ref={grid}
+      ref={gridRef}
     >
       <SearchPanel visible placeholder='Contact Search' />
       <ColumnChooser enabled />

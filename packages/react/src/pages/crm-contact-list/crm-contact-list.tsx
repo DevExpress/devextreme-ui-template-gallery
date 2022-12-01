@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 import './crm-contact-list.scss';
 
 import { getContacts } from 'dx-template-gallery-data';
+import DataGrid from 'devextreme-react/data-grid';
 
 import { RowClickEvent } from 'devextreme/ui/data_grid';
 
@@ -17,9 +18,10 @@ import { ContactDataGrid } from './contact-data-grid/ContactDataGrid';
 export const CRMContactList = () => {
   const [gridData, setGridData] = useState<Contact[]>();
   const [isPanelOpened, setPanelOpened] = useState(false);
-  const [contactId, setContactId] = useState<number|null>(null);
+  const [contactId, setContactId] = useState<number>(0);
   const [popupVisible, setPopupVisible] = useState(false);
   const [loading, setLoading] = useState(true);
+  const gridRef = useRef<DataGrid>(null);
 
   useEffect(() => {
     getContacts()
@@ -38,7 +40,7 @@ export const CRMContactList = () => {
 
   const changePanelOpened = () => {
     setPanelOpened(!isPanelOpened);
-    setContactId(null);
+    gridRef.current?.instance.option('focusedRowIndex', -1);
   };
 
   const onAddContactClick = useCallback(() => {
@@ -56,7 +58,7 @@ export const CRMContactList = () => {
         <div className='view-wrapper'>
           <ContactDataGrid
             data={gridData}
-            contactId={contactId}
+            gridRef={gridRef}
             onAddContactClick={onAddContactClick}
             onRowClick={onRowClick}
           />
