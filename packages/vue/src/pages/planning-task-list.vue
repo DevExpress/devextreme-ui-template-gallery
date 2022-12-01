@@ -167,7 +167,7 @@ import TaskListGrid from '@/components/task-list-grid.vue';
 import TaskListKanban from '@/components/task-list-kanban.vue';
 import TaskListGantt from '@/components/task-list-gantt.vue';
 
-import { screenInfo } from '../../../utils/media-query';
+import { screenInfo } from '@/utils/media-query';
 
 const isLoading = ref(true);
 const displayTaskComponent = ref(taskPanelItems[0].text);
