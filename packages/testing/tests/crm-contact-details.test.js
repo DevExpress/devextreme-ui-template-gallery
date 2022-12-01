@@ -27,7 +27,7 @@ const setEmbedded = async (t, embed, screenMode) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
       // eslint-disable-next-line max-len
-      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
+      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond, true);
 
       await t.click(Selector('.dx-drawer-content'));
       await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
