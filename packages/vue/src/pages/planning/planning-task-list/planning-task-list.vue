@@ -1,6 +1,6 @@
 <template>
   <div class="view-wrapper">
-    <dx-toolbar>
+    <dx-toolbar class="toolbar-details">
       <dx-toolbar-item location="before">
         <span class="toolbar-header">Tasks</span>
       </dx-toolbar-item>
