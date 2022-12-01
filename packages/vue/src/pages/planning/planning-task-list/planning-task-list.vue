@@ -1,11 +1,14 @@
 <template>
   <div class="view-wrapper">
-    <dx-toolbar>
+    <dx-toolbar class="toolbar-details">
       <dx-toolbar-item location="before">
-        <span class="toolbar-header">Task</span>
+        <span class="toolbar-header">Tasks</span>
       </dx-toolbar-item>
       <dx-toolbar-item location="before">
         <dx-tabs
+          :width="screenInfo.isXSmall ? 220 : 'auto'"
+          :show-nav-buttons="false"
+          :scroll-by-content="true"
           :selected-index="0"
           :items="taskPanelItems"
           @item-click="tabValueChange"
@@ -163,6 +166,8 @@ import TaskForm from '../components/task-form.vue';
 import TaskListGrid from './components/task-list-grid.vue';
 import TaskListKanban from './components/task-list-kanban/task-list-kanban.vue';
 import TaskListGantt from './components/task-list-gantt.vue';
+
+import { screenInfo } from '../../../utils/media-query';
 
 const isLoading = ref(true);
 const displayTaskComponent = ref(taskPanelItems[0].text);

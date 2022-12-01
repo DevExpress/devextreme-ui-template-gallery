@@ -32,6 +32,10 @@ export class ScreenService {
   }
 
   public isSmallScreen() {
-    return this.sizes['screen-small'] || this.sizes['screen-x-small'];
+    return this.sizes['screen-small'] || this.isXSmallScreen();
+  }
+
+  public isXSmallScreen() {
+    return this.sizes['screen-x-small'];
   }
 }
