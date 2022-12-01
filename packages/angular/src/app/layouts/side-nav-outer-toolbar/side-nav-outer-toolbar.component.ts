@@ -12,8 +12,8 @@ import { DxScrollViewModule, DxScrollViewComponent } from 'devextreme-angular/ui
 import { CommonModule } from '@angular/common';
 
 import { Router, NavigationEnd } from '@angular/router';
-import { ScreenService, AppInfoService } from '../../shared/services';
-import { SideNavigationMenuModule, HeaderModule, FooterModule } from '../../shared/components';
+import { ScreenService, AppInfoService } from '../../services';
+import { SideNavigationMenuModule, HeaderModule, FooterModule } from '../../components';
 
 import { Subscription } from 'rxjs';
 
