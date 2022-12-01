@@ -2,8 +2,11 @@
   <dx-data-grid
     class="grid"
     noDataText=""
+    keyExpr="id"
     [dataSource]="dataSource"
     [allowColumnReordering]="true"
+    [focusedRowEnabled]="true"
+    [(focusedRowKey)]="userId"
     (onRowClick)="rowClick($event)"
     (onRowPrepared)="rowPrepared($event)"
     (onExporting)="onExporting($event)"
@@ -34,9 +37,9 @@
       <dxi-item location="before" locateInMenu="auto">
         <dx-drop-down-button
           stylingMode="text"
-          [width]="160"
           [useSelectMode]="true"
           [items]="filterStatusList"
+          [dropDownOptions]="{ width: 'auto' }"
           [selectedItemKey]="filterStatusList[0]"
           (onSelectionChanged)="filterByStatus($event)"
         ></dx-drop-down-button>
@@ -138,7 +141,12 @@
     </div>
   </dx-data-grid>
 
-  <user-panel [userId]="userId" [(isOpened)]="isPanelOpened"></user-panel>
+  <user-panel
+    [userId]="userId"
+    [(isOpened)]="isPanelOpened"
+    (isOpenedChange)="onOpenedChange($event)"
+  >
+  </user-panel>
 
   <form-popup
     #userPopup

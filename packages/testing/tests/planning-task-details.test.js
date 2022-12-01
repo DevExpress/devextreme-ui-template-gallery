@@ -17,7 +17,7 @@ const setEmbedded = async (t, embed, screenMode) => {
       await t.click('.view-wrapper .dx-icon-overflow');
     }
 
-    await t.click('.dx-icon-refresh');
+    await t.click(Selector('.dx-button[aria-label=Refresh]'));
   }
 };
 

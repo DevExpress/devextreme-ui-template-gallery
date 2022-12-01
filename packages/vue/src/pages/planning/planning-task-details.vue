@@ -13,7 +13,7 @@
         locate-in-menu="auto"
       >
         <dx-drop-down-button
-          text="ACTIONS"
+          text="Actions"
           styling-mode="contained"
         >
           <dx-drop-down-item text="Duplicate" />

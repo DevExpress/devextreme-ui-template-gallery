@@ -25,6 +25,20 @@
       }
     }
 
+    .dx-row-focused {
+      .name-template.name-template {
+        color: $base-focus-color;
+
+        .position.position {
+          color: $base-focus-color;
+        }
+      }
+
+      .status {
+        @include status-contact($base-focus-color);
+      }
+    }
+
     .dx-datagrid-header-panel {
       padding: 0 $content-padding;
     }
