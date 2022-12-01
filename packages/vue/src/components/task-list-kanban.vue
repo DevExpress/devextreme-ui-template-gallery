@@ -64,7 +64,7 @@ import { DxSortable } from 'devextreme-vue/sortable';
 import { DxButton } from 'devextreme-vue/button';
 
 import CardMenu from '@/components/card-menu.vue';
-import TaskKanbanCard from './components/task-kanban-card.vue';
+import TaskKanbanCard from '@/components/task-kanban-card.vue';
 
 interface Board {
   name: TaskStatus

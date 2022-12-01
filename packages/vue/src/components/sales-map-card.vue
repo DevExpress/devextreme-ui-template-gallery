@@ -47,7 +47,7 @@ import {
 } from 'devextreme-vue/vector-map';
 import { SalesByStateAndCity } from '@/types/analytics';
 import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
-import CardAnalytics from '../../components/card-analytics.vue';
+import CardAnalytics from '@/components/card-analytics.vue';
 
 const props = defineProps<{
   data: SalesByStateAndCity

@@ -59,7 +59,7 @@
 import { DxBullet, DxTooltip as DxBulletTooltip, DxSize as DxBulletSize } from 'devextreme-vue/bullet';
 import { SalesByStateAndCity } from '@/types/analytics';
 import { DxDataGrid, DxColumn } from 'devextreme-vue/data-grid';
-import CardAnalytics from '../../components/card-analytics.vue';
+import CardAnalytics from '@/components/card-analytics.vue';
 
 const props = defineProps<{
   data: SalesByStateAndCity

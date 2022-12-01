@@ -86,7 +86,7 @@ import {
 } from 'devextreme-vue/chart';
 
 import { SalesByState } from '@/types/analytics';
-import CardAnalytics from '../../components/card-analytics.vue';
+import CardAnalytics from '@/components/card-analytics.vue';
 
 const props = defineProps<{
   data: SalesByState

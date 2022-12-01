@@ -59,14 +59,14 @@ import {
   SalesOrOpportunitiesByCategory,
 } from '@/types/analytics';
 
-import LoadingPanel from '../components/loading-panel.vue';
-import AnalyticsToolbar from '../components/analytics-toolbar.vue';
+import LoadingPanel from '@/components/loading-panel.vue';
+import AnalyticsToolbar from '@/components/analytics-toolbar.vue';
 
-import RevenueSnapshotCard from './components/revenue-snapshot-card.vue';
-import AnalyticTile from './components/analytic-tile.vue';
-import ConversionCard from './components/conversion-card.vue';
-import RevenueCard from './components/revenue-card.vue';
-import RevenueAnalysisCard from './components/revenue-analysis-card.vue';
+import RevenueSnapshotCard from '@/components/revenue-snapshot-card.vue';
+import AnalyticTile from '@/components/analytic-tile.vue';
+import ConversionCard from '@/components/conversion-card.vue';
+import RevenueCard from '@/components/revenue-card.vue';
+import RevenueAnalysisCard from '@/components/revenue-analysis-card.vue';
 
 const opportunities = ref<SalesOrOpportunitiesByCategory | null>(null);
 const sales = ref<Sales | null>(null);
@@ -98,9 +98,13 @@ const tabChange = ([startDate, endDate]: string[]) => {
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
 @use "sass:math";
-@use "../analytics";
 
 .view-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+
   .cards, .tiles {
     display: grid;
     width: 100%;

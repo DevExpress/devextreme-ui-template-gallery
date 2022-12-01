@@ -41,7 +41,7 @@ import {
 } from 'devextreme-vue/funnel';
 
 import { SalesOrOpportunitiesByCategory } from '@/types/analytics';
-import CardAnalytics from '../../components/card-analytics.vue';
+import CardAnalytics from '@/components/card-analytics.vue';
 
 const props = defineProps<{
   data: SalesOrOpportunitiesByCategory

@@ -159,10 +159,10 @@ import { taskPanelItems, TaskPanelItemsIds } from '@/types/resource';
 import type { Task } from '@/types/task';
 import FormPopup from '@/components/form-popup.vue';
 import LoadComponent from '@/components/load-component.vue';
-import TaskForm from '../components/task-form.vue';
-import TaskListGrid from './components/task-list-grid.vue';
-import TaskListKanban from './components/task-list-kanban/task-list-kanban.vue';
-import TaskListGantt from './components/task-list-gantt.vue';
+import TaskForm from '@/components/task-form.vue';
+import TaskListGrid from '@/components/task-list-grid.vue';
+import TaskListKanban from '@/components/task-list-kanban.vue';
+import TaskListGantt from '@/components/task-list-gantt.vue';
 
 const isLoading = ref(true);
 const displayTaskComponent = ref(taskPanelItems[0].text);

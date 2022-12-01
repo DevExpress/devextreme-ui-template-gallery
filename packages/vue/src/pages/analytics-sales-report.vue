@@ -35,11 +35,11 @@ import {
   SalesByStateAndCity,
 } from '@/types/analytics';
 import { analyticsPanelItems } from '@/types/resource';
-import LoadingPanel from '@/pages/analytics/components/loading-panel.vue';
-import AnalyticsToolbar from '../components/analytics-toolbar.vue';
-import SalesRangeCard from './components/sales-range-card.vue';
-import SalesByRangeCard from './components/sales-by-range-card.vue';
-import SalesPerformanceCard from './components/sales-performance-card.vue';
+import LoadingPanel from '@/components/loading-panel.vue';
+import AnalyticsToolbar from '@/components/analytics-toolbar.vue';
+import SalesRangeCard from '@/components/sales-range-card.vue';
+import SalesByRangeCard from '@/components/sales-by-range-card.vue';
+import SalesPerformanceCard from '@/components/sales-performance-card.vue';
 
 const sales = ref<Sales | null>(null);
 const salesByDateAndCategory = ref<Sales | null>(null);
@@ -84,7 +84,12 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@use "../analytics";
+.view-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+}
 
 .cards  {
   display: grid;
@@ -95,6 +100,12 @@ onMounted(() => {
 
   .sales-range-card :deep(.content) {
     height: auto;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .view-wrapper .cards {
+    grid-template-columns: repeat(1, 100%);
   }
 }
 
