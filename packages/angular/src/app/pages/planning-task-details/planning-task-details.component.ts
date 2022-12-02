@@ -14,11 +14,11 @@ import {
   CardNotesModule,
   CardMessagesModule,
   StatusIndicatorModule,
-} from 'src/app/shared/components';
-import { Task } from 'src/app/shared/types/task';
-import { DataService } from 'src/app/shared/services';
+} from 'src/app/components';
+import { Task } from 'src/app/types/task';
+import { DataService } from 'src/app/services';
 import { Subscription } from 'rxjs';
-import { TaskFormModule } from './task-form/task-form.component';
+import { TaskFormModule } from '../../components/task-form/task-form.component';
 
 @Component({
   templateUrl: './planning-task-details.component.html',

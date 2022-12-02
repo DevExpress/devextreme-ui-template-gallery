@@ -11,15 +11,15 @@ import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
 
 import { CommonModule } from '@angular/common';
-import { DataService } from 'src/app/shared/services';
+import { DataService } from 'src/app/services';
 import { Subscription } from 'rxjs';
 
-import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analytics/toolbar-analytics.component';
+import { CardAnalyticsModule } from 'src/app/components/card-analytics/card-analytics.component';
+import { ToolbarAnalyticsModule } from 'src/app/components/toolbar-analytics/toolbar-analytics.component';
 
-import { analyticsPanelItems, Dates } from 'src/app/shared/types/resource';
+import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
-import { SalesByState, SalesByStateAndCity } from 'src/app/shared/types/analytics';
+import { SalesByState, SalesByStateAndCity } from 'src/app/types/analytics';
 import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
 
 @Component({

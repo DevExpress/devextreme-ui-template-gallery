@@ -15,21 +15,21 @@ import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporte
 import {
   CardActivitiesModule,
   ContactStatusModule,
-} from 'src/app/shared/components';
-import { Contact, contactStatusList, ContactStatus, } from 'src/app/shared/types/contact';
+} from 'src/app/components';
+import { Contact, contactStatusList, ContactStatus, } from 'src/app/types/contact';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { CommonModule } from '@angular/common';
-import { DataService } from 'src/app/shared/services';
+import { DataService } from 'src/app/services';
 import { Subscription } from 'rxjs';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { jsPDF } from 'jspdf';
-import { UserPanelModule } from './user-panel/user-panel.component';
-import { UserNewFormModule } from './user-new-form/user-new-form.component';
+import { ContactUserPanelModule } from '../../components/contact-user-panel/contact-user-panel.component';
+import { ContactNewUserFormModule } from '../../components/contact-new-user-form/contact-new-user-form.component';
 import {
   FormPopupModule,
   FormPopupComponent,
-} from 'src/app/shared/components/';
+} from 'src/app/components';
 
 type FilterContactStatus = ContactStatus | 'All';
 
@@ -152,8 +152,8 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     DxSelectBoxModule,
     DxTextBoxModule,
 
-    UserPanelModule,
-    UserNewFormModule,
+    ContactUserPanelModule,
+    ContactNewUserFormModule,
     FormPopupModule,
     CardActivitiesModule,
     ContactStatusModule,

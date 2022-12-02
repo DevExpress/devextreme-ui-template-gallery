@@ -9,17 +9,17 @@ import { DxFunnelModule } from 'devextreme-angular/ui/funnel';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 
 import { CommonModule } from '@angular/common';
-import { DataService } from 'src/app/shared/services';
+import { DataService } from 'src/app/services';
 
-import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analytics/toolbar-analytics.component';
+import { CardAnalyticsModule } from 'src/app/components/card-analytics/card-analytics.component';
+import { ToolbarAnalyticsModule } from 'src/app/components/toolbar-analytics/toolbar-analytics.component';
 
-import { analyticsPanelItems, Dates } from 'src/app/shared/types/resource';
+import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import {
   Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory,
-} from 'src/app/shared/types/analytics';
+} from 'src/app/types/analytics';
 import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
-import { ApplyPipeModule } from "src/app/shared/apply.pipe";
+import { ApplyPipeModule } from "src/app/pipes/apply.pipe";
 import { map } from "rxjs/operators";
 import { Observable, forkJoin } from "rxjs";
 

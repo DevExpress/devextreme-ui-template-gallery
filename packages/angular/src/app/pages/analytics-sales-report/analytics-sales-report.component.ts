@@ -12,17 +12,17 @@ import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
 import { CommonModule, formatDate } from '@angular/common';
-import { DataService } from 'src/app/shared/services';
+import { DataService } from 'src/app/services';
 import { Observable, forkJoin } from 'rxjs';
 
-import { CardAnalyticsModule } from 'src/app/shared/components/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/shared/components/toolbar-analytics/toolbar-analytics.component';
+import { CardAnalyticsModule } from 'src/app/components/card-analytics/card-analytics.component';
+import { ToolbarAnalyticsModule } from 'src/app/components/toolbar-analytics/toolbar-analytics.component';
 
-import { analyticsPanelItems } from 'src/app/shared/types/resource';
+import { analyticsPanelItems } from 'src/app/types/resource';
 
-import { Sales, SalesOrOpportunitiesByCategory } from 'src/app/shared/types/analytics';
+import { Sales, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
-import { ApplyPipeModule } from "../../shared/apply.pipe";
+import { ApplyPipeModule } from "../../pipes/apply.pipe";
 
 @Component({
   templateUrl: './analytics-sales-report.component.html',

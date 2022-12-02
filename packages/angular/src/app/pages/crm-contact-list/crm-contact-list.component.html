@@ -141,18 +141,18 @@
     </div>
   </dx-data-grid>
 
-  <user-panel
+  <contact-user-panel
     [userId]="userId"
     [(isOpened)]="isPanelOpened"
     (isOpenedChange)="onOpenedChange($event)"
   >
-  </user-panel>
+  </contact-user-panel>
 
   <form-popup
     #userPopup
     titleText="New Contact"
     >
 
-    <user-new-form></user-new-form>
+    <contact-new-user-form></contact-new-user-form>
   </form-popup>
 </div>

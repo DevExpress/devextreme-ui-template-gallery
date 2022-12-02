@@ -6,8 +6,8 @@ import {
   ResetPasswordFormComponent,
   CreateAccountFormComponent,
   ChangePasswordFormComponent,
-} from './shared/components';
-import { AuthGuardService } from './shared/services';
+} from './components';
+import { AuthGuardService } from './services';
 
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactDetailsComponent } from './pages/crm-contact-details/crm-contact-details.component';
