@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'devextreme-react/button';
 import { formatDate } from 'devextreme/localization';
 
-import { Task } from '../../../shared/types/task';
+import { Task } from '../../../types/task';
 
 import { Avatar } from '../../avatar/Avatar';
 

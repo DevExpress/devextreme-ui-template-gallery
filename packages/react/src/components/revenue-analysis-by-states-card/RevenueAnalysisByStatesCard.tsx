@@ -2,8 +2,8 @@
 import React from 'react';
 import Bullet, { Size, Tooltip } from 'devextreme-react/bullet';
 import DataGrid, { Column } from 'devextreme-react/data-grid';
-import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
-import { SaleByStateAndCity } from '../../../shared/types/analytics';
+import { CardAnalytics } from '../card-analytics/CardAnalytics';
+import { SaleByStateAndCity } from '../../types/analytics';
 
 export const RevenueAnalysisByStatesCard = ({ datasource }: { datasource: SaleByStateAndCity[] }) => (
   <CardAnalytics

@@ -1,7 +1,7 @@
 import { Activities } from './card-activities';
 import { Task } from './task';
 import { Opportunities } from './card-opportunities';
-import { CONTACT_STATUS_LIST } from '../constants';
+import { CONTACT_STATUS_LIST } from '../shared/constants';
 
 export type ContactStatus = (typeof CONTACT_STATUS_LIST)[number];
 

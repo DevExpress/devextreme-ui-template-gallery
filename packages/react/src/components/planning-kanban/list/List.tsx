@@ -6,7 +6,7 @@ import { DragStartEvent, ReorderEvent } from 'devextreme/ui/sortable';
 
 import { CardMenu } from '../../card-menu/CardMenu';
 
-import { Task } from '../../../shared/types/task';
+import { Task } from '../../../types/task';
 
 import { Card } from '../card/Card';
 

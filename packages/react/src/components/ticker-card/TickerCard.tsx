@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardAnalytics } from './CardAnalytics';
+import { CardAnalytics } from '../card-analytics/CardAnalytics';
 import './TickerCard.scss';
 
 export const TickerCard = ({ title, contentClass, value, percentage, formatValue = (value) => `${value}` }: {

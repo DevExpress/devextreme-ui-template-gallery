@@ -13,7 +13,7 @@ import { FormTextbox } from '../form-textbox/FormTextbox';
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../shared/itemFieldRenderMethods';
 
-import { Task } from '../../shared/types/task';
+import { Task } from '../../types/task';
 
 export const TaskFormDetails = ({ editing, data, colCountByScreen, onDataChanged }: { editing: boolean, data: Task, colCountByScreen: {xs: number, sm: number}, onDataChanged: (data) => void }) => {
   const updateField = (field: string) => (value) => {

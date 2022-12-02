@@ -9,11 +9,9 @@ import { RowClickEvent } from 'devextreme/ui/data_grid';
 
 import LoadPanel from 'devextreme-react/load-panel';
 
-import { Contact } from '../../shared/types/crm-contact';
+import { Contact } from '../../types/crm-contact';
 
-import { FormPopup, ContactNewForm } from '../../components';
-import { ContactPanel } from './contact-panel/ContactPanel';
-import { ContactDataGrid } from './contact-data-grid/ContactDataGrid';
+import { FormPopup, ContactNewForm, ContactPanel, ContactDataGrid } from '../../components';
 
 export const CRMContactList = () => {
   const [gridData, setGridData] = useState<Contact[]>();

@@ -5,7 +5,7 @@ import VectorMap, {
   Source,
   Tooltip,
 } from 'devextreme-react/vector-map';
-import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
+import { CardAnalytics } from '../card-analytics/CardAnalytics';
 import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
 
 const customizeLegendText = (arg) => {

@@ -10,10 +10,10 @@ import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-
 import Accordion, { Item as AccordionItem } from 'devextreme-react/accordion';
 import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
 import { formatNumber } from 'devextreme/localization';
-import { Contact } from '../../../shared/types/crm-contact';
-import { CardActivities } from '../../../components/card-activities/CardActivities';
-import { FormTextbox, FormPhoto, ContactStatus } from '../../../components';
-import { useScreenSize } from '../../../utils/media-query';
+import { Contact } from '../../types/crm-contact';
+import { CardActivities } from '../card-activities/CardActivities';
+import { FormTextbox, FormPhoto, ContactStatus } from '..';
+import { useScreenSize } from '../../utils/media-query';
 import ValidationGroup from 'devextreme-react/validation-group';
 
 const accordionTitleClick = (e: ButtonClickEvent) => {

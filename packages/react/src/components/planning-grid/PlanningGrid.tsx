@@ -14,8 +14,8 @@ import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRen
 
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 
-import { Task, PlanningProps } from '../../shared/types/task';
-import { GridEdit } from '../../shared/types/planning-grid';
+import { Task, PlanningProps } from '../../types/task';
+import { GridEdit } from '../../types/planning-grid';
 
 import './PlanningGrid.scss';
 

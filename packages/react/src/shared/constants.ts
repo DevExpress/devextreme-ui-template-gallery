@@ -1,5 +1,5 @@
-import { Task } from './types/task';
-import { Contact } from './types/crm-contact';
+import { Task } from '../types/task';
+import { Contact } from '../types/crm-contact';
 
 export const PRIORITY_ITEMS = ['Low', 'Normal', 'High'];
 export const STATUS_ITEMS = ['Open', 'In Progress', 'Deferred', 'Completed'];

@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { ToolbarForm } from '../toolbar-form/ToolbarForm';
 import { ContactFromDetails } from './ContactFormDetails';
 
-import { withLoadPanel } from '../../shared/utils/withLoadPanel';
+import { withLoadPanel } from '../../utils/withLoadPanel';
 
-import { Contact } from '../../shared/types/crm-contact';
+import { Contact } from '../../types/crm-contact';
 
 import ValidationGroup from 'devextreme-react/validation-group';
 

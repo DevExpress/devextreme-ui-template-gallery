@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { Dashboard } from '../../components/dashboard/Dashboard';
+import { Dashboard, RevenueByStatesCard, RevenueAnalysisByStatesCard, RevenueSnapshotByStatesCard } from '../../components';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
-import { RevenueByStatesCard } from './cards/RevenueByStatesCard';
-import { RevenueAnalysisByStatesCard } from './cards/RevenueAnalysisByStatesCard';
-import { RevenueSnapshotByStatesCard } from './cards/RevenueSnapshotByStates';
-import { SaleByStateAndCity, SaleByState } from '../../shared/types/analytics';
+import { SaleByStateAndCity, SaleByState } from '../../types/analytics';
 
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 import {

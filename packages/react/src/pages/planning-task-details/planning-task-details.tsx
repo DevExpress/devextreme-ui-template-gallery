@@ -7,7 +7,7 @@ import ValidationGroup from 'devextreme-react/validation-group';
 
 import { TaskForm, CardActivities, CardNotes, CardMessages, ToolbarDetails } from '../../components';
 
-import { Task } from '../../shared/types/task';
+import { Task } from '../../types/task';
 
 import { getTask } from 'dx-template-gallery-data';
 
