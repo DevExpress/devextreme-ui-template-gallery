@@ -4,9 +4,9 @@ import Button from 'devextreme-react/button';
 import notify from 'devextreme/ui/notify';
 import { formatNumber } from 'devextreme/localization';
 
-import { Opportunities } from '../../shared/types/card-opportunities';
+import { Opportunities } from '../../types/card-opportunities';
 
-import { withLoadPanel } from '../../shared/utils/withLoadPanel';
+import { withLoadPanel } from '../../utils/withLoadPanel';
 
 import './CardOpportunities.scss';
 

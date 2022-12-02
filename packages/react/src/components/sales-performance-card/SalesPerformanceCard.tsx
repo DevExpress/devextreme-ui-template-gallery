@@ -3,8 +3,8 @@ import Chart, { ArgumentAxis, CommonSeriesSettings, Legend, Point, SeriesTemplat
 import DropDownButton from 'devextreme-react/drop-down-button';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 
-import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
-import { Sale } from '../../../shared/types/analytics';
+import { CardAnalytics } from '../card-analytics/CardAnalytics';
+import { Sale } from '../../types/analytics';
 
 export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPeriodChanged, range }: {
   datasource: Sale[], periods: string[], selectedPeriod: string, onPeriodChanged: (e: SelectionChangedEvent) => void,

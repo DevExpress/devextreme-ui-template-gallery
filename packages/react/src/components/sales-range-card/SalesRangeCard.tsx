@@ -1,7 +1,7 @@
 import RangeSelector, { Chart, Label, LoadingIndicator, Marker, MinorTick, Scale, Series, Size } from 'devextreme-react/range-selector';
 import React from 'react';
-import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
-import { Sale } from '../../../shared/types/analytics';
+import { CardAnalytics } from '../card-analytics/CardAnalytics';
+import { Sale } from '../../types/analytics';
 import { ValueChangedEvent } from 'devextreme/viz/range_selector';
 
 export const SalesRangeCard = ({ datasource, range, onRangeChanged }: {

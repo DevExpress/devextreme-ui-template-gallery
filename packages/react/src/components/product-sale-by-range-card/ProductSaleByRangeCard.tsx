@@ -1,8 +1,8 @@
 import React from 'react';
 import PieChart, { Font, Label, Legend, Margin, Series, Size } from 'devextreme-react/pie-chart';
 import Chart, { CommonAxisSettings, Tick, Legend as ChartLegend, CommonSeriesSettings, SeriesTemplate, ValueAxis, Label as ChartLabel, Format } from 'devextreme-react/chart';
-import { CardAnalytics } from '../../../components/card-analytics/CardAnalytics';
-import { SaleOrOpportunityByCategory } from '../../../shared/types/analytics';
+import { CardAnalytics } from '../card-analytics/CardAnalytics';
+import { SaleOrOpportunityByCategory } from '../../types/analytics';
 
 type ProductSaleByRangeCardProps = { datasource: SaleOrOpportunityByCategory[] };
 

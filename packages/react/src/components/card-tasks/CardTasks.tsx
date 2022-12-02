@@ -4,9 +4,9 @@ import DataGrid, { Selection, RowDragging, Column } from 'devextreme-react/data-
 
 import { RowDraggingReorderEvent } from 'devextreme/ui/data_grid';
 
-import { withLoadPanel } from '../../shared/utils/withLoadPanel';
+import { withLoadPanel } from '../../utils/withLoadPanel';
 
-import { Task } from '../../shared/types/task';
+import { Task } from '../../types/task';
 
 import './CardTasks.scss';
 

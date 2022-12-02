@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { withLoadPanel } from '../../shared/utils/withLoadPanel';
+import { withLoadPanel } from '../../utils/withLoadPanel';
 import { TaskFormDetails } from './TaskFormDetails';
 import { ToolbarForm } from '../toolbar-form/ToolbarForm';
 
-import { Task } from '../../shared/types/task';
+import { Task } from '../../types/task';
 
 import './TaskForm.scss';
 

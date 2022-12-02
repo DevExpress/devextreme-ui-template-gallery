@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatNumber } from 'devextreme/localization';
-import { TickerCard } from '../../../components/card-analytics/TickerCard';
+import { TickerCard } from '../ticker-card/TickerCard';
 
 interface TickerProps {
   value: number

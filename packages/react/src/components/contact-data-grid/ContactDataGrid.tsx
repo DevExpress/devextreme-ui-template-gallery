@@ -19,10 +19,10 @@ import { ColumnCellTemplateData, RowPreparedEvent } from 'devextreme/ui/data_gri
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { ExportingEvent, RowClickEvent } from 'devextreme/ui/data_grid';
 
-import { ContactStatus as ContactStatusType, Contact } from '../../../shared/types/crm-contact';
-import { CONTACT_STATUS_LIST } from '../../../shared/constants';
+import { ContactStatus as ContactStatusType, Contact } from '../../types/crm-contact';
+import { CONTACT_STATUS_LIST } from '../../shared/constants';
 
-import { ContactStatus } from '../../../components';
+import { ContactStatus } from '../../components';
 
 type FilterContactStatus = ContactStatusType | 'All';
 interface ContactDataGridPprops {

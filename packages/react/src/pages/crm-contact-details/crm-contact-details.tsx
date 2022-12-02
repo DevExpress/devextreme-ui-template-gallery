@@ -15,7 +15,7 @@ import {
   CardOpportunities
 } from '../../components';
 
-import { Contact } from '../../shared/types/crm-contact';
+import { Contact } from '../../types/crm-contact';
 
 import {
   getContact,

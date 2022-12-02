@@ -4,10 +4,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import './ContactPanel.scss';
 
 import { getContact } from 'dx-template-gallery-data';
-import { Contact } from '../../../shared/types/crm-contact';
-import { withLoadPanel } from '../../../shared/utils/withLoadPanel';
+import { Contact } from '../../types/crm-contact';
+import { withLoadPanel } from '../../utils/withLoadPanel';
 
-import { ContactPanelDetails } from './ContactPanelDetails';
+import { ContactPanelDetails } from '../contact-panel-details/ContactPanelDetails';
 
 const ContactPanelWithLoadPanel = withLoadPanel(ContactPanelDetails);
 

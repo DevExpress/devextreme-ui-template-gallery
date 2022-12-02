@@ -5,15 +5,19 @@ import { LoadPanel } from 'devextreme-react/load-panel';
 
 import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 
-import { RevenueSnapshotCard } from './cards/RevenueSnapshotCard';
-import { RevenueAnalysisCard } from './cards/RevenueAnalysisCard';
-import { ConversionFunnelCard } from './cards/ConversionFunnelCard';
-import { RevenueCard } from './cards/RevenueCard';
-import { ConversionTicker, LeadsTicker, OpportunitiesTicker, RevenueTotalTicker } from './cards/TickerCards';
-import { Dashboard } from '../../components/dashboard/Dashboard';
+import {
+  Dashboard,
+  RevenueSnapshotCard,
+  RevenueAnalysisCard,
+  ConversionFunnelCard,
+  RevenueCard,
+  ConversionTicker,
+  LeadsTicker,
+  OpportunitiesTicker,
+  RevenueTotalTicker } from '../../components';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
-import { Sale, SaleOrOpportunityByCategory, SaleByState } from '../../shared/types/analytics';
+import { Sale, SaleOrOpportunityByCategory, SaleByState } from '../../types/analytics';
 
 import './analytics-dashboard.scss';
 

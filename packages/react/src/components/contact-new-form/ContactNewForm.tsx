@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
-import { Contact } from '../../shared/types/crm-contact';
+import { Contact } from '../../types/crm-contact';
 import { newContact } from '../../shared/constants';
 import { FormTextbox, FormPhotoUploader } from '../../components';
 
