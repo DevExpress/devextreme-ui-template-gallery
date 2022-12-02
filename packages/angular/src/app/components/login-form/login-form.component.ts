@@ -31,7 +31,7 @@ export class LoginFormComponent {
   }
 
   onCreateAccountClick = () => {
-    this.router.navigate(['/create-account']);
+    this.router.navigate(['/auth/create-account']);
   };
 }
 @NgModule({

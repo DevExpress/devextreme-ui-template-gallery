@@ -1,5 +1,13 @@
 import {
-  Component, NgModule, Output, Input, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnDestroy,
+  Component,
+  NgModule,
+  Output,
+  Input,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
 } from '@angular/core';
 import { ItemClickEvent } from 'devextreme/ui/tree_view';
 import { DxTreeViewModule, DxTreeViewComponent } from 'devextreme-angular/ui/tree-view';
@@ -26,6 +34,16 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
     return this._compactMode;
   }
 
+  @Input()
+  set selectedItem(value: String) {
+    this._selectedItem = value;
+    this.setSelectedItem();
+  }
+
+  get selectedItem(): String {
+    return this._selectedItem;
+  }
+
   set compactMode(val) {
     this._compactMode = val;
 
@@ -38,16 +56,6 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
     } else {
       this.menu.instance.expandItem(this._selectedItem);
     }
-  }
-
-  @Input()
-  set selectedItem(value: String) {
-    this._selectedItem = value;
-    if (!this.menu.instance) {
-      return;
-    }
-
-    this.menu.instance.selectItem(value);
   }
 
   private _selectedItem!: String;
@@ -71,11 +79,20 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
 
   constructor(private elementRef: ElementRef) { }
 
+  setSelectedItem() {
+    if (!this.menu.instance) {
+      return;
+    }
+
+    this.menu.instance.selectItem(this.selectedItem);
+  }
+
   onItemClick(event: ItemClickEvent) {
     this.selectedItemChanged.emit(event);
   }
 
   ngAfterViewInit() {
+    this.setSelectedItem();
     events.on(this.elementRef.nativeElement, 'dxclick', (e: Event) => {
       this.openMenu.next(e);
     });

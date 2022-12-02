@@ -2,7 +2,7 @@
   class="layout-header"
   [menuToggleEnabled]="true"
   (menuToggle)="menuOpened = !menuOpened"
-  [title]="title"
+  [title]="appInfo.title"
 >
 </app-header>
 
@@ -29,7 +29,7 @@
 
   <dx-scroll-view class="with-footer app-content-wrapper">
     <div class="content">
-      <ng-content></ng-content>
+      <router-outlet></router-outlet>
     </div>
   </dx-scroll-view>
 </dx-drawer>

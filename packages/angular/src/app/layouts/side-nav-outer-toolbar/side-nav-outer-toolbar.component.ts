@@ -11,7 +11,7 @@ import { DxDrawerModule } from 'devextreme-angular/ui/drawer';
 import { DxScrollViewModule, DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
 import { CommonModule } from '@angular/common';
 
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, RouterModule, NavigationEnd, Event } from '@angular/router';
 import { ScreenService, AppInfoService } from '../../services';
 import { SideNavigationMenuModule, HeaderModule, FooterModule } from '../../components';
 
@@ -46,16 +46,16 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
 
   screenSubscription: Subscription;
 
-  constructor(private screen: ScreenService, private router: Router, public appInfo: AppInfoService) { }
+  constructor(private screen: ScreenService, private router: Router, public appInfo: AppInfoService) {
+    this.routerSubscription = this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        this.selectedRoute = event.urlAfterRedirects.split('?')[0];
+      }
+    });
+  }
 
   ngOnInit() {
     this.menuOpened = this.screen.sizes['screen-large'];
-
-    this.routerSubscription = this.router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        this.selectedRoute = val.urlAfterRedirects.split('?')[0];
-      }
-    });
 
     this.screenSubscription = this.screen.changed.subscribe(() => this.updateDrawer());
 
@@ -116,7 +116,15 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
 }
 
 @NgModule({
-  imports: [SideNavigationMenuModule, DxDrawerModule, HeaderModule, DxScrollViewModule, CommonModule, FooterModule],
+  imports: [
+    RouterModule,
+    SideNavigationMenuModule,
+    DxDrawerModule,
+    HeaderModule,
+    DxScrollViewModule,
+    CommonModule,
+    FooterModule
+  ],
   exports: [SideNavOuterToolbarComponent],
   declarations: [SideNavOuterToolbarComponent],
 })
