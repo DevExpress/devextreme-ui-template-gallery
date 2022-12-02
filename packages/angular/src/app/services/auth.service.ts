@@ -68,7 +68,7 @@ export class AuthService {
     try {
       // Send request
 
-      this.router.navigate(['/create-account']);
+      this.router.navigate(['/auth/create-account']);
       return {
         isOk: true,
       };
@@ -112,7 +112,7 @@ export class AuthService {
 
   async logOut() {
     this._user = null;
-    this.router.navigate(['/login-form']);
+    this.router.navigate(['/auth/login-form']);
   }
 }
 
@@ -136,7 +136,7 @@ export class AuthGuardService implements CanActivate {
     }
 
     if (!isLoggedIn && !isAuthForm) {
-      this.router.navigate(['/login-form']);
+      this.router.navigate(['/auth/login-form']);
     }
 
     if (isLoggedIn) {
