@@ -46,7 +46,7 @@ import {
   DxSize as DxPieSize,
 } from 'devextreme-vue/pie-chart';
 import { Sales } from '@/types/analytics';
-import CardAnalytics from '../../components/card-analytics.vue';
+import CardAnalytics from '@/components/card-analytics.vue';
 
 const props = defineProps<{
   data: Sales

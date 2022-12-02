@@ -56,7 +56,7 @@ import {
 import { DxDropDownButton } from 'devextreme-vue/drop-down-button';
 
 import { Sales } from '@/types/analytics';
-import CardAnalytics from '../../components/card-analytics.vue';
+import CardAnalytics from '@/components/card-analytics.vue';
 
 const emit = defineEmits(['performance-period-changed']);
 

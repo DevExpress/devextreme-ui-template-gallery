@@ -54,8 +54,8 @@ import CardNotes from '@/components/card-notes.vue';
 import CardMessages from '@/components/card-messages.vue';
 // eslint-disable-next-line import/no-unresolved
 import { getContactMessages } from 'dx-template-gallery-data';
-import CardTasks from './components/card-tasks.vue';
-import CardOpportunities from './components/card-opportunities.vue';
+import CardTasks from '@/components/card-tasks.vue';
+import CardOpportunities from '@/components/card-opportunities.vue';
 
 const props = withDefaults(defineProps<{
   contactId: number | null,

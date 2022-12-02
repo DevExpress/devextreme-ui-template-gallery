@@ -97,8 +97,8 @@ import {
 import { getContact } from 'dx-template-gallery-data';
 import type { Contact } from '@/types/contact';
 
-import ContactForm from './components/contact-form.vue';
-import ContactCards from './components/contact-cards/contact-cards.vue';
+import ContactForm from '@/components/contact-form.vue';
+import ContactCards from '@/components/contact-cards.vue';
 
 const contactId = 12;
 const contactName = ref('');

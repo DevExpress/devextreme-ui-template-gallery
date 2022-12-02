@@ -46,7 +46,7 @@ import {
 } from 'devextreme-vue/range-selector';
 
 import { SalesByState } from '@/types/analytics';
-import CardAnalytics from '../../components/card-analytics.vue';
+import CardAnalytics from '@/components/card-analytics.vue';
 
 const emit = defineEmits(['range-changed']);
 

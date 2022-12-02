@@ -222,8 +222,8 @@ import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporte
 import { formatPhone } from '@/utils/formatters';
 import ContactStatus from '@/components/contact-status.vue';
 import FormPopup from '@/components/form-popup.vue';
-import ContactNewForm from './components/contact-new-form.vue';
-import ContactPanel from './components/contact-panel.vue';
+import ContactNewForm from '@/components/contact-new-form.vue';
+import ContactPanel from '@/components/contact-panel.vue';
 
 const filterStatusList = ['All', ...contactStatusList];
 type FilterContactStatus = typeof filterStatusList[number];

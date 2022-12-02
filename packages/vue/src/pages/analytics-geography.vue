@@ -22,11 +22,11 @@ import { ref } from 'vue';
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 
 import { SalesByState, SalesByStateAndCity } from '@/types/analytics';
-import AnalyticsToolbar from '@/pages/analytics/components/analytics-toolbar.vue';
-import LoadingPanel from '../components/loading-panel.vue';
-import SalesMapCard from './components/sales-map-card.vue';
-import RevenueAnalysisCard from './components/revenue-analysis-card.vue';
-import RevenueSnapshotCard from './components/revenue-snapshot-card.vue';
+import AnalyticsToolbar from '@/components/analytics-toolbar.vue';
+import LoadingPanel from '@/components/loading-panel.vue';
+import SalesMapCard from '@/components/sales-map-card.vue';
+import RevenueAnalysisCard from '@/components/revenue-analysis-by-states-card.vue';
+import RevenueSnapshotCard from '@/components/revenue-snapshot-by-states-card.vue';
 
 const salesByState = ref<SalesByState | null>(null);
 const salesByStateAndCity = ref<SalesByStateAndCity | null>(null);
@@ -64,7 +64,12 @@ const tabChange = ([startDate, endDate]: string[]) => loadData(startDate, endDat
 </script>
 
 <style scoped lang="scss">
-@use "../analytics";
+.view-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 16px 0 16px;
+}
 
 .cards {
   display: grid;
@@ -72,5 +77,11 @@ const tabChange = ([startDate, endDate]: string[]) => loadData(startDate, endDat
   grid-gap: 20px;
   gap: 20px;
   grid-template-columns: repeat(2, calc(50% - 10px));
+}
+
+@media only screen and (max-width: 900px) {
+  .view-wrapper .cards {
+    grid-template-columns: repeat(1, 100%);
+  }
 }
 </style>
