@@ -268,10 +268,6 @@ loadTasksAsync();
   .toolbar-header {
     @include header();
   }
-
-  .dx-tabs .dx-tab {
-    background-color: $background-color;
-  }
 }
 
 .view-wrapper {
