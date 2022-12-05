@@ -355,8 +355,8 @@ const onClose = () => {
       }
     }
 
-    .clickable-row {
-      cursor: pointer;
+    :deep(.dx-datagrid-content .dx-row) {
+        cursor: pointer;
     }
 
     .grid-header {

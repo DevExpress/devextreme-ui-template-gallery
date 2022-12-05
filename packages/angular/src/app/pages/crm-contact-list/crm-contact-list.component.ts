@@ -9,7 +9,7 @@ import {
   DxSelectBoxModule,
   DxTextBoxModule,
 } from 'devextreme-angular';
-import { RowClickEvent, RowPreparedEvent, ColumnCustomizeTextArg } from 'devextreme/ui/data_grid';
+import { RowClickEvent, ColumnCustomizeTextArg } from 'devextreme/ui/data_grid';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
 import {
@@ -82,12 +82,6 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     this.userId = data.id;
     this.isPanelOpened = true;
   }
-
-  rowPrepared = (e: RowPreparedEvent) => {
-    const { rowElement } = e;
-
-    rowElement.classList.add('clickable-row');
-  };
 
   onOpenedChange = (value: boolean) => {
     if (!value) {
