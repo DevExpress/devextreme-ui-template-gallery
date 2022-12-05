@@ -79,7 +79,9 @@ export const AnalyticsDashboard = () => {
             location='before'
             widget='dxTabs'
             options={{
-              width: getTabsWidth,
+              width: getTabsWidth(),
+              scrollByContent: true,
+              showNavButtons: false,
               dataSource: Object.keys(ANALYTICS_PERIODS),
               selectedIndex: tabIndex,
               onItemClick: onTabClick,

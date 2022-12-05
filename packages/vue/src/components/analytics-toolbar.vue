@@ -12,6 +12,8 @@
     >
       <dx-tabs
         :width="screenInfo.isXSmall ? 150 : 'auto'"
+        :show-nav-buttons="false"
+        :scroll-by-content="true"
         :selected-item-keys="[5]"
         key-expr="key"
         :items="analyticsPanelItems"
