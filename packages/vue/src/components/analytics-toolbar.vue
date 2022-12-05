@@ -9,9 +9,9 @@
     <dx-item
       v-if="props.showTabs"
       location="before"
-      locate-in-menu="auto"
     >
       <dx-tabs
+        :width="screenInfo.isXSmall ? 150 : 'auto'"
         :selected-item-keys="[5]"
         key-expr="key"
         :items="analyticsPanelItems"
@@ -77,6 +77,8 @@ import { DxTabs } from 'devextreme-vue/tabs';
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { onMounted } from 'vue';
 import { analyticsPanelItems } from '@/types/resource';
+
+import { screenInfo } from '@/utils/media-query';
 
 const props = withDefaults(defineProps<{
   showTabs?: boolean

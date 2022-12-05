@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Item } from 'devextreme-react/toolbar';
 import { LoadPanel } from 'devextreme-react/load-panel';
 
+import { useScreenSize } from '../../utils/media-query';
+
 import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 
 import {
@@ -36,6 +38,8 @@ export const AnalyticsDashboard = () => {
   const [opportunitiesTotal, setOpportunitiesTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
+  const { isXSmall } = useScreenSize();
+
   useEffect(() => {
     Promise.all([
       getOpportunitiesByCategory(...dateRange).then((data) => {
@@ -62,6 +66,10 @@ export const AnalyticsDashboard = () => {
     setIsLoading(true);
   }, []);
 
+  const getTabsWidth = useCallback(() => {
+    return isXSmall ? 150 : 'auto';
+  }, []);
+
   return (
     <>
       <Dashboard
@@ -70,8 +78,8 @@ export const AnalyticsDashboard = () => {
           <Item
             location='before'
             widget='dxTabs'
-            locateInMenu='auto'
             options={{
+              width: getTabsWidth,
               dataSource: Object.keys(ANALYTICS_PERIODS),
               selectedIndex: tabIndex,
               onItemClick: onTabClick,

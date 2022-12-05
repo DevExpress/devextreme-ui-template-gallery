@@ -55,7 +55,7 @@ jobs:
           { project: 'react', page: 'crm-contact-list' },
           # { project: 'react', page: 'planning-task-details' }, # Title width is different (screen width 400). Menu stays opened
           { project: 'react', page: 'planning-task-list' },
-          # { project: 'react', page: 'analytics-dashboard' }, # Menu contents disappear after item click (screen width 400)
+          { project: 'react', page: 'analytics-dashboard' },
           { project: 'react', page: 'analytics-sales-report' },
           # { project: 'react', page: 'analytics-geography' }, # Menu contents disappear after item click (screen width 400)
           # { project: 'vue', page: 'crm-contact-details' }, # Wrong status color

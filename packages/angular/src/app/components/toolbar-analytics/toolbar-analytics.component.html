@@ -5,9 +5,9 @@
 
   <dxi-item
     *ngIf="panelItems"
-    location="before"
-    locateInMenu="auto">
+    location="before">
     <dx-tabs
+      [width]="getTabWidth()"
       [selectedItemKeys]="selectedItems"
       keyExpr="key"
       [items]="panelItems"
