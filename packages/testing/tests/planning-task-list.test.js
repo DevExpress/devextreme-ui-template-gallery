@@ -25,6 +25,7 @@ fixture`Planning List`;
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
       await takeScreenshot(`planning-task-kanban${getPostfix(embedded, screenMode)}`, 'body');
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
+      await t.wait(100);
       await takeScreenshot(`planning-task-gantt${getPostfix(embedded, screenMode)}`, 'body');
       if (screenMode[0] === 400) {
         await t.click('.view-wrapper .dx-icon-overflow');
