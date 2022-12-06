@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 
 import { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
-import DropDowmButton from 'devextreme-react/drop-down-button';
+import DropDownButton from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 
 import {
@@ -71,6 +71,19 @@ export const CRMContactDetails = () => {
     loadData();
   }, []);
 
+  const opt1 = useMemo(()=>({
+    text: 'Copy',
+    icon: 'copy'
+  }), []);
+
+  const opt2 = useMemo(()=>(
+    {
+      text: 'Refresh',
+      icon: 'refresh',
+      onClick: refresh
+    }
+  ), [refresh]);
+
   const onMessagesCountChanged = useCallback((count) => {
     setMessagesCount(count);
   }, []);
@@ -86,7 +99,7 @@ export const CRMContactDetails = () => {
           />
         </Item>
         <Item location='after'>
-          <DropDowmButton
+          <DropDownButton
             text='Actions'
             stylingMode='text'
             width={120}
@@ -101,21 +114,14 @@ export const CRMContactDetails = () => {
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={{
-            text: 'Copy',
-            icon: 'copy'
-          }}
+          options={opt1}
         />
         <Item
           location='after'
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={{
-            text: 'Refresh',
-            icon: 'refresh',
-            onClick: refresh
-          }}
+          options={opt2}
         />
       </ToolbarDetails>
 
