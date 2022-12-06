@@ -39,10 +39,7 @@
       locate-in-menu="auto"
       widget="dxButton"
       show-text="inMenu"
-      :options="{
-        text: 'Refresh',
-        icon: 'refresh'
-      }"
+      :options="refreshOptions"
     />
 
     <dx-item
@@ -59,10 +56,7 @@
       locate-in-menu="auto"
       widget="dxButton"
       show-text="inMenu"
-      :options="{
-        icon: 'export',
-        text: 'Export'
-      }"
+      :options="exportOptions"
     />
   </dx-toolbar>
 </template>
@@ -93,6 +87,16 @@ const selectionChange = (e: TabsItemClickEvent) => {
 onMounted(() => {
   emit('tab-change', [initialStartDate, initialEndDate]);
 });
+
+const refreshOptions = {
+  text: 'Refresh',
+  icon: 'refresh',
+};
+
+const exportOptions = {
+  icon: 'export',
+  text: 'Export',
+};
 </script>
 
 <style lang="scss">

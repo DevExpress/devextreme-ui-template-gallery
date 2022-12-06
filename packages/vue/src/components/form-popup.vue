@@ -13,23 +13,13 @@
       widget="dxButton"
       toolbar="bottom"
       location="after"
-      :options="{
-        text: 'Save',
-        stylingMode: 'outlined',
-        type: 'default',
-        onClick: save,
-      }"
+      :options="saveOptions"
     />
     <dx-popup-item
       widget="dxButton"
       toolbar="bottom"
       location="after"
-      :options="{
-        text: 'Cancel',
-        stylingMode: 'text',
-        type: 'default',
-        onClick: close
-      }"
+      :options="cancelOptions"
     />
     <dx-validation-group ref="validationGroup">
       <slot />
@@ -76,5 +66,19 @@ const save = () => {
 const close = () => {
   isVisible.value = false;
   emit('update:isVisible', false);
+};
+
+const saveOptions = {
+  text: 'Save',
+  stylingMode: 'outlined',
+  type: 'default',
+  onClick: save,
+};
+
+const cancelOptions = {
+  text: 'Cancel',
+  stylingMode: 'text',
+  type: 'default',
+  onClick: close,
 };
 </script>

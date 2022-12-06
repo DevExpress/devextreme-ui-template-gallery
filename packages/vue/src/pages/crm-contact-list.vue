@@ -78,7 +78,7 @@
           locate-in-menu="auto"
           show-text="inMenu"
           widget="dxButton"
-          :options="{ text: 'Refresh', icon: 'refresh', onClick: refresh }"
+          :options="refreshOptions"
         />
 
         <dx-grid-toolbar-item
@@ -310,6 +310,8 @@ const onClose = () => {
   isPanelOpened.value = false;
   focusedRowKey.value = null;
 };
+
+const refreshOptions = { text: 'Refresh', icon: 'refresh', onClick: refresh };
 </script>
 
 <style scoped lang="scss">

@@ -71,12 +71,12 @@ export const CRMContactDetails = () => {
     loadData();
   }, []);
 
-  const opt1 = useMemo(()=>({
+  const ToolbarItemCopy = useMemo(()=>({
     text: 'Copy',
     icon: 'copy'
   }), []);
 
-  const opt2 = useMemo(()=>(
+  const ToolbarItemRefresh = useMemo(()=>(
     {
       text: 'Refresh',
       icon: 'refresh',
@@ -114,14 +114,14 @@ export const CRMContactDetails = () => {
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={opt1}
+          options={ToolbarItemCopy}
         />
         <Item
           location='after'
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={opt2}
+          options={ToolbarItemRefresh}
         />
       </ToolbarDetails>
 

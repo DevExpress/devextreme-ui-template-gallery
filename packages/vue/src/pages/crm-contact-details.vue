@@ -45,21 +45,14 @@
         locate-in-menu="auto"
         widget="dxButton"
         show-text="inMenu"
-        :options="{
-          text: 'Copy',
-          icon: 'copy'
-        }"
+        :options="copyOptions"
       />
       <dx-toolbar-item
         location="after"
         locate-in-menu="auto"
         widget="dxButton"
         show-text="inMenu"
-        :options="{
-          text: 'Refresh',
-          icon: 'refresh',
-          onClick: refresh
-        }"
+        :options="refreshOptions"
       />
     </dx-toolbar>
 
@@ -121,6 +114,17 @@ const refresh = () => {
 onMounted(() => {
   loadData();
 });
+
+const copyOptions = {
+  text: 'Copy',
+  icon: 'copy',
+};
+
+const refreshOptions = {
+  text: 'Refresh',
+  icon: 'refresh',
+  onClick: refresh,
+};
 </script>
 
 <style scoped lang="scss">
