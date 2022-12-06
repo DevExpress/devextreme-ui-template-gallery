@@ -36,8 +36,9 @@
     >
       <div *dxTemplate>
         <div class="messages">
-          <div class="dx-icon-bell">
-            <div class="dx-badge">4</div>
+          <dx-button icon="bell"></dx-button>
+          <div class="dx-badge">
+            4
           </div>
         </div>
       </div>
@@ -50,7 +51,7 @@
       <div *dxTemplate="let data of 'item'">
         <dx-button
           class="user-button authorization"
-          width="160px"
+          width="150px"
           height="38px"
           stylingMode="text"
         >
