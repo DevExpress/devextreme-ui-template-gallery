@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { Item } from 'devextreme-react/toolbar';
+import Tabs from 'devextreme-react/tabs';
 import { LoadPanel } from 'devextreme-react/load-panel';
 
 import { useScreenSize } from '../../utils/media-query';
@@ -26,6 +27,8 @@ import './analytics-dashboard.scss';
 const calculateTotal = (data: (SaleOrOpportunityByCategory & Sale)[]) => {
   return data.reduce((acc, item) => acc + (item.value || item.total), 0);
 };
+
+const items = Object.keys(ANALYTICS_PERIODS);
 
 export const AnalyticsDashboard = () => {
   const [tabIndex, setTabIndex] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].index);
@@ -59,7 +62,7 @@ export const AnalyticsDashboard = () => {
       .catch((error) => console.log(error));
   }, [dateRange]);
 
-  const onTabClick = useCallback((e: { itemData: string }) => {
+  const onTabClick = useCallback((e) => {
     const { index, period } = ANALYTICS_PERIODS[e.itemData];
     setTabIndex(index);
     setDateRange(period.split('/'));
@@ -77,16 +80,16 @@ export const AnalyticsDashboard = () => {
         additionalToolbarContent={
           <Item
             location='before'
-            widget='dxTabs'
-            options={{
-              width: getTabsWidth(),
-              scrollByContent: true,
-              showNavButtons: false,
-              dataSource: Object.keys(ANALYTICS_PERIODS),
-              selectedIndex: tabIndex,
-              onItemClick: onTabClick,
-            }}
-          />
+          >
+            <Tabs
+              width={getTabsWidth}
+              scrollByContent
+              showNavButtons={false}
+              dataSource={items}
+              selectedIndex={tabIndex}
+              onItemClick={onTabClick}
+            />
+          </Item>
         }
       >
         <DashboardCardsGroup kind='compact'>

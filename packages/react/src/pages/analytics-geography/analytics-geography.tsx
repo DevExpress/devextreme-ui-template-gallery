@@ -13,8 +13,11 @@ import {
 } from '../../shared/constants';
 
 import { Item } from 'devextreme-react/toolbar';
+import Tabs from 'devextreme-react/tabs';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 import LoadPanel from 'devextreme-react/load-panel';
+
+const items = Object.keys(ANALYTICS_PERIODS);
 
 const createMapCoords = (coords: string) => coords.split(', ').map(parseFloat);
 
@@ -59,7 +62,7 @@ export const AnalyticsGeography = () => {
     });
   }, [dateRange]);
 
-  const onTabClick = useCallback((e: { itemData: string }) => {
+  const onTabClick = useCallback((e) => {
     const { index, period } = ANALYTICS_PERIODS[e.itemData];
     setTabIndex(index);
     setDateRange(period.split('/'));
@@ -77,16 +80,16 @@ export const AnalyticsGeography = () => {
         additionalToolbarContent={
           <Item
             location='before'
-            widget='dxTabs'
-            options={{
-              width: getTabsWidth(),
-              scrollByContent: true,
-              showNavButtons: false,
-              dataSource: Object.keys(ANALYTICS_PERIODS),
-              selectedIndex: tabIndex,
-              onItemClick: onTabClick,
-            }}
-          />
+          >
+            <Tabs
+              width={getTabsWidth}
+              scrollByContent
+              showNavButtons={false}
+              dataSource={items}
+              selectedIndex={tabIndex}
+              onItemClick={onTabClick}
+            />
+          </Item>
         }
       >
         <DashboardCardsGroup kind='wide'>
