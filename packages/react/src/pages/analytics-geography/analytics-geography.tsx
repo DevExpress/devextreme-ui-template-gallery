@@ -4,6 +4,8 @@ import { Dashboard, RevenueByStatesCard, RevenueAnalysisByStatesCard, RevenueSna
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { SaleByStateAndCity, SaleByState } from '../../types/analytics';
 
+import { useScreenSize } from '../../utils/media-query';
+
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 import {
   ANALYTICS_PERIODS,
@@ -44,6 +46,8 @@ export const AnalyticsGeography = () => {
   const [salesByStateMarkers, setSalesByStateMarkers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
+  const { isXSmall } = useScreenSize();
+
   useEffect(() => {
     getSalesByStateAndCity(...dateRange).then((data) => {
       const salesByStateResult = calcSalesByState(data);
@@ -62,6 +66,10 @@ export const AnalyticsGeography = () => {
     setIsLoading(true);
   }, []);
 
+  const getTabsWidth = useCallback(() => {
+    return isXSmall ? 150 : 'auto';
+  }, []);
+
   return (
     <>
       <Dashboard
@@ -70,8 +78,10 @@ export const AnalyticsGeography = () => {
           <Item
             location='before'
             widget='dxTabs'
-            locateInMenu='auto'
             options={{
+              width: getTabsWidth(),
+              scrollByContent: true,
+              showNavButtons: false,
               dataSource: Object.keys(ANALYTICS_PERIODS),
               selectedIndex: tabIndex,
               onItemClick: onTabClick,
