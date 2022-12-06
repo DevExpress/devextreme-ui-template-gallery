@@ -105,7 +105,6 @@ onMounted(() => {
 }
 
 .dx-tabs .dx-tab {
-  background-color: $background-color;
   text-align: center;
 }
 
