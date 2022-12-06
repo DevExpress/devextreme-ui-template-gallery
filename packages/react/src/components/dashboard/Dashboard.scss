@@ -80,7 +80,7 @@
     .toolbar-header {
       @include header();
     }
-  
+
     @media only screen and (max-width: 400px) {
       .dx-tab {
         min-width: 70px;
