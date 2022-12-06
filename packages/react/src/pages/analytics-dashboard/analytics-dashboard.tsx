@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Item } from 'devextreme-react/toolbar';
 import { LoadPanel } from 'devextreme-react/load-panel';
@@ -62,6 +62,12 @@ export const AnalyticsDashboard = () => {
     setIsLoading(true);
   }, []);
 
+  const DashboardItemOptions = useMemo(()=>({
+    dataSource: Object.keys(ANALYTICS_PERIODS),
+    selectedIndex: tabIndex,
+    onItemClick: onTabClick,
+  }), [onTabClick]);
+
   return (
     <>
       <Dashboard
@@ -71,11 +77,7 @@ export const AnalyticsDashboard = () => {
             location='before'
             widget='dxTabs'
             locateInMenu='auto'
-            options={{
-              dataSource: Object.keys(ANALYTICS_PERIODS),
-              selectedIndex: tabIndex,
-              onItemClick: onTabClick,
-            }}
+            options={DashboardItemOptions}
           />
         }
       >

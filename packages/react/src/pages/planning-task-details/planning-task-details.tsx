@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
@@ -34,6 +34,17 @@ export const PlanningTaskDetails = () => {
 
   const refresh = useCallback(() => loadData(), [loadData]);
 
+  const ToolbarItemAttach = useMemo(()=>({
+    text: 'Attach',
+    icon: 'attach',
+  }), []);
+
+  const ToolbarItemRefresh = useMemo(()=>({
+    text: 'Refresh',
+    icon: 'refresh',
+    onClick: refresh,
+  }), [refresh]);
+
   useEffect(() => {
     loadData();
   }, [loadData]);
@@ -53,21 +64,14 @@ export const PlanningTaskDetails = () => {
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={{
-            text: 'Attach',
-            icon: 'attach',
-          }}
+          options={ToolbarItemAttach}
         />
         <ToolbarItem
           location='after'
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={{
-            text: 'Refresh',
-            icon: 'refresh',
-            onClick: refresh,
-          }}
+          options={ToolbarItemRefresh}
         />
       </ToolbarDetails>
       <div className='panels'>

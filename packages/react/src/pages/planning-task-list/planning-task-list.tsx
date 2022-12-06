@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 
@@ -71,9 +71,9 @@ export const PlanningTaskList = () => {
     setIndex(listsData.findIndex((d) => d === e.itemData));
   }, []);
 
-  const changePopupVisibility = () => {
+  const changePopupVisibility = useCallback(() => {
     setPopupVisible(!popupVisible);
-  };
+  }, []);
 
   const refresh = useCallback(() => {
     if(isDataGrid) {
@@ -131,6 +131,53 @@ export const PlanningTaskList = () => {
     return isXSmall ? 220 : 'auto';
   }, []);
 
+  const ToolBarItemList = useMemo(()=>({
+    dataSource: listsData,
+    width: getTabsWidth(),
+    selectedIndex: index,
+    scrollByContent: true,
+    showNavButtons: false,
+    onItemClick: onTabClick,
+  }), [onTabClick, isXSmall]);
+
+  const ToolBarItemAddTask = useMemo(()=>({
+    icon: 'plus',
+    text: 'Add Task',
+    type: 'default',
+    stylingMode: 'contained',
+    onClick: changePopupVisibility,
+  }), [changePopupVisibility]);
+
+  const ToolBarItemRefresh = useMemo(()=>({
+    icon: 'refresh',
+    text: 'Refresh',
+    onClick: refresh,
+  }), [refresh]);
+
+  const ToolBarItemColumnChooser = useMemo(()=>({
+    icon: 'columnchooser',
+    text: 'Column Chooser',
+    onClick: showColumnChooser,
+  }), [showColumnChooser]);
+
+  const ToolBarItemExportPDF = useMemo(()=>({
+    icon: 'exportpdf',
+    text: 'Export To PDF',
+    onClick: exportToPDF,
+  }), [exportToPDF]);
+
+  const ToolBarItemExportXSLX = useMemo(()=>({
+    icon: 'exportxlsx',
+    text: 'Export To XSLX',
+    onClick: exportToXSLX,
+  }), [exportToXSLX]);
+
+  const ToolBarItemTaskSearch = useMemo(()=>({
+    mode: 'search',
+    placeholder: 'Task Search',
+    onInput: search,
+  }), [search]);
+
   return (
     <div className='view-wrapper view-wrapper-list'>
       <Toolbar className='toolbar-common'>
@@ -140,37 +187,20 @@ export const PlanningTaskList = () => {
         <Item
           location='before'
           widget='dxTabs'
-          options={{
-            dataSource: listsData,
-            width: getTabsWidth(),
-            selectedIndex: index,
-            scrollByContent: true,
-            showNavButtons: false,
-            onItemClick: onTabClick,
-          }}
+          options={ToolBarItemList}
         />
         <Item
           location='after'
           widget='dxButton'
           locateInMenu='auto'
-          options={{
-            icon: 'plus',
-            text: 'Add Task',
-            type: 'default',
-            stylingMode: 'contained',
-            onClick: changePopupVisibility,
-          }}
+          options={ToolBarItemAddTask}
         />
         <Item
           location='after'
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
-          options={{
-            icon: 'refresh',
-            text: 'Refresh',
-            onClick: refresh,
-          }}
+          options={ToolBarItemRefresh}
         />
         <Item
           location='after'
@@ -178,11 +208,7 @@ export const PlanningTaskList = () => {
           showText='inMenu'
           locateInMenu='auto'
           disabled={view !== listView}
-          options={{
-            icon: 'columnchooser',
-            text: 'Column Chooser',
-            onClick: showColumnChooser,
-          }}
+          options={ToolBarItemColumnChooser}
         />
         <Item location='after' locateInMenu='auto'>
           <div className='separator' />
@@ -193,11 +219,7 @@ export const PlanningTaskList = () => {
           showText='inMenu'
           locateInMenu='auto'
           disabled={isKanban}
-          options={{
-            icon: 'exportpdf',
-            text: 'Export To PDF',
-            onClick: exportToPDF,
-          }}
+          options={ToolBarItemExportPDF}
         />
         <Item
           location='after'
@@ -205,22 +227,14 @@ export const PlanningTaskList = () => {
           showText='inMenu'
           locateInMenu='auto'
           disabled={view !== listView}
-          options={{
-            icon: 'exportxlsx',
-            text: 'Export To XSLX',
-            onClick: exportToXSLX,
-          }}
+          options={ToolBarItemExportXSLX}
         />
         <Item
           location='after'
           widget='dxTextBox'
           locateInMenu='auto'
           disabled={view !== listView}
-          options={{
-            mode: 'search',
-            placeholder: 'Task Search',
-            onInput: search,
-          }}
+          options={ToolBarItemTaskSearch}
         />
       </Toolbar>
       {loading && <LoadPanel container='.content' visible position={{ of: '.content' }} />}

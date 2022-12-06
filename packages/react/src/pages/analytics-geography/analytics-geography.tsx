@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { Dashboard, RevenueByStatesCard, RevenueAnalysisByStatesCard, RevenueSnapshotByStatesCard } from '../../components';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
@@ -62,6 +62,12 @@ export const AnalyticsGeography = () => {
     setIsLoading(true);
   }, []);
 
+  const ToolbarItemTabs = useMemo(()=>({
+    dataSource: Object.keys(ANALYTICS_PERIODS),
+    selectedIndex: tabIndex,
+    onItemClick: onTabClick,
+  }), []);
+
   return (
     <>
       <Dashboard
@@ -71,11 +77,7 @@ export const AnalyticsGeography = () => {
             location='before'
             widget='dxTabs'
             locateInMenu='auto'
-            options={{
-              dataSource: Object.keys(ANALYTICS_PERIODS),
-              selectedIndex: tabIndex,
-              onItemClick: onTabClick,
-            }}
+            options={ToolbarItemTabs}
           />
         }
       >
