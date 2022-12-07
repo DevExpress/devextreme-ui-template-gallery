@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 
@@ -25,6 +25,8 @@ import 'jspdf-autotable';
 
 import './planning-task-list.scss';
 import Button from 'devextreme-react/button';
+import TextBox from 'devextreme-react/text-box';
+import Tabs from 'devextreme-react/tabs';
 
 const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
@@ -67,8 +69,8 @@ export const PlanningTaskList = () => {
     setNewTaskData(data);
   }, []);
 
-  const onTabClick = useCallback((e: { itemData: string }) => {
-    setView(e.itemData);
+  const onTabClick = useCallback((e: { itemData?: string }) => {
+    setView(e.itemData || '');
     setIndex(listsData.findIndex((d) => d === e.itemData));
   }, []);
 
@@ -132,21 +134,6 @@ export const PlanningTaskList = () => {
     return isXSmall ? 220 : 'auto';
   }, []);
 
-  const ToolBarItemList = useMemo(() => ({
-    dataSource: listsData,
-    width: getTabsWidth(),
-    selectedIndex: index,
-    scrollByContent: true,
-    showNavButtons: false,
-    onItemClick: onTabClick,
-  }), [onTabClick, isXSmall]);
-
-  const ToolBarItemTaskSearch = useMemo(() => ({
-    mode: 'search',
-    placeholder: 'Task Search',
-    onInput: search,
-  }), [search]);
-
   return (
     <div className='view-wrapper view-wrapper-list'>
       <Toolbar className='toolbar-common'>
@@ -156,8 +143,16 @@ export const PlanningTaskList = () => {
         <Item
           location='before'
           widget='dxTabs'
-          options={ToolBarItemList}
-        />
+        >
+          <Tabs
+            dataSource={listsData}
+            width={getTabsWidth()}
+            selectedIndex={index}
+            scrollByContent
+            showNavButtons={false}
+            onItemClick={onTabClick}
+          />
+        </Item>
         <Item
           location='after'
           widget='dxButton'
@@ -231,8 +226,13 @@ export const PlanningTaskList = () => {
           widget='dxTextBox'
           locateInMenu='auto'
           disabled={view !== listView}
-          options={ToolBarItemTaskSearch}
-        />
+        >
+          <TextBox
+            mode='search'
+            placeholder='Task Search'
+            onInput={search}
+          />
+        </Item>
       </Toolbar>
       {loading && <LoadPanel container='.content' visible position={{ of: '.content' }} />}
       {!loading && isDataGrid && <PlanningGrid dataSource={gridData} ref={gridRef} />}
