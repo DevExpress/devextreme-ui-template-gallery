@@ -1,5 +1,5 @@
 import {
-  Component, ViewChild, OnInit, NgModule, OnDestroy,
+  Component, ViewChild, OnInit, NgModule,
 } from '@angular/core';
 import {
   DxButtonModule,
@@ -20,7 +20,6 @@ import { Contact, contactStatusList, ContactStatus, } from 'src/app/types/contac
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/services';
-import { Subscription } from 'rxjs';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { jsPDF } from 'jspdf';
@@ -38,7 +37,7 @@ type FilterContactStatus = ContactStatus | 'All';
   styleUrls: ['./crm-contact-list.component.scss'],
   providers: [DataService],
 })
-export class CrmContactListComponent implements OnInit, OnDestroy {
+export class CrmContactListComponent implements OnInit {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
 
   @ViewChild('userPopup', { static: true }) userPopup: FormPopupComponent;
@@ -53,19 +52,13 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
 
   dataSource: Contact[];
 
-  dataSubscription: Subscription = new Subscription();
-
   constructor(private service: DataService) {
   }
 
   ngOnInit(): void {
-    this.dataSubscription = this.service.getContacts().subscribe((data) => {
+    this.service.getContacts().subscribe((data) => {
       this.dataSource = data;
     });
-  }
-
-  ngOnDestroy(): void {
-    this.dataSubscription.unsubscribe();
   }
 
   addContact() {
