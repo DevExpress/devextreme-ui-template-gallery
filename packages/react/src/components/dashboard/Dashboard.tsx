@@ -38,6 +38,7 @@ export const Dashboard = ({
           <Button
             text='Refresh'
             icon='refresh'
+            stylingMode='text'
           />
         </Item>
         <Item location='after' locateInMenu='auto'>
@@ -48,11 +49,11 @@ export const Dashboard = ({
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-
         >
           <Button
             icon='export'
             text='Export'
+            stylingMode='text'
           />
         </Item>
       </Toolbar>

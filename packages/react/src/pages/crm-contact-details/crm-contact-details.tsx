@@ -105,6 +105,7 @@ export const CRMContactDetails = () => {
           <Button
             text='Copy'
             icon='copy'
+            stylingMode='text'
           />
         </Item>
         <Item
@@ -116,6 +117,7 @@ export const CRMContactDetails = () => {
           <Button
             text='Refresh'
             icon='refresh'
+            stylingMode='text'
             onClick={refresh}
           />
         </Item>

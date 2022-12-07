@@ -58,6 +58,7 @@ export const PlanningTaskDetails = () => {
           <Button
             text='Attach'
             icon='attach'
+            stylingMode='text'
           />
         </ToolbarItem>
         <ToolbarItem
@@ -69,6 +70,7 @@ export const PlanningTaskDetails = () => {
           <Button
             text='Refresh'
             icon='refresh'
+            stylingMode='text'
             onClick={refresh}
           />
         </ToolbarItem>

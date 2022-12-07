@@ -175,6 +175,7 @@ export const PlanningTaskList = () => {
           <Button
             icon='refresh'
             text='Refresh'
+            stylingMode='text'
             onClick={refresh}
           />
         </Item>
@@ -188,6 +189,7 @@ export const PlanningTaskList = () => {
           <Button
             icon='columnchooser'
             text='Column Chooser'
+            stylingMode='text'
             onClick={showColumnChooser}
           />
         </Item>
@@ -205,6 +207,7 @@ export const PlanningTaskList = () => {
           <Button
             icon='exportpdf'
             text='Export To PDF'
+            stylingMode='text'
             onClick={exportToPDF}
           />
         </Item>
@@ -218,6 +221,7 @@ export const PlanningTaskList = () => {
           <Button
             icon='exportxlsx'
             text='Export To XSLX'
+            stylingMode='text'
             onClick={exportToXSLX}
           />
         </Item>
