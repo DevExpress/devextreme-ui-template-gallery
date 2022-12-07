@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { Item } from 'devextreme-react/toolbar';
+import Tabs from 'devextreme-react/tabs';
 import { LoadPanel } from 'devextreme-react/load-panel';
+
+import { useScreenSize } from '../../utils/media-query';
 
 import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 
@@ -25,6 +28,8 @@ const calculateTotal = (data: (SaleOrOpportunityByCategory & Sale)[]) => {
   return data.reduce((acc, item) => acc + (item.value || item.total), 0);
 };
 
+const items = Object.keys(ANALYTICS_PERIODS);
+
 export const AnalyticsDashboard = () => {
   const [tabIndex, setTabIndex] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].index);
   const [dateRange, setDateRange] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/'));
@@ -35,6 +40,8 @@ export const AnalyticsDashboard = () => {
   const [salesTotal, setSalesTotal] = useState(0);
   const [opportunitiesTotal, setOpportunitiesTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { isXSmall } = useScreenSize();
 
   useEffect(() => {
     Promise.all([
@@ -55,11 +62,15 @@ export const AnalyticsDashboard = () => {
       .catch((error) => console.log(error));
   }, [dateRange]);
 
-  const onTabClick = useCallback((e: { itemData: string }) => {
+  const onTabClick = useCallback((e) => {
     const { index, period } = ANALYTICS_PERIODS[e.itemData];
     setTabIndex(index);
     setDateRange(period.split('/'));
     setIsLoading(true);
+  }, []);
+
+  const getTabsWidth = useCallback(() => {
+    return isXSmall ? 150 : 'auto';
   }, []);
 
   return (
@@ -69,14 +80,16 @@ export const AnalyticsDashboard = () => {
         additionalToolbarContent={
           <Item
             location='before'
-            widget='dxTabs'
-            locateInMenu='auto'
-            options={{
-              dataSource: Object.keys(ANALYTICS_PERIODS),
-              selectedIndex: tabIndex,
-              onItemClick: onTabClick,
-            }}
-          />
+          >
+            <Tabs
+              width={getTabsWidth}
+              scrollByContent
+              showNavButtons={false}
+              dataSource={items}
+              selectedIndex={tabIndex}
+              onItemClick={onTabClick}
+            />
+          </Item>
         }
       >
         <DashboardCardsGroup kind='compact'>

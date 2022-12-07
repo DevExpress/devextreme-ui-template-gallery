@@ -3,12 +3,6 @@
 
 @include separator();
 
-.dx-toolbar {
-  .toolbar-header {
-    @include header();
-  }
-}
-
 .view-wrapper-dashboard {
   display: flex;
   flex-direction: column;
@@ -78,6 +72,18 @@
     .cards {
       &.compact {
         grid-template-columns: repeat(1, 100%);
+      }
+    }
+  }
+
+  .dx-toolbar {
+    .toolbar-header {
+      @include header();
+    }
+
+    @media only screen and (max-width: 400px) {
+      .dx-tab {
+        min-width: 70px;
       }
     }
   }
