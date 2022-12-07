@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { Dashboard, RevenueByStatesCard, RevenueAnalysisByStatesCard, RevenueSnapshotByStatesCard } from '../../components';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { SaleByStateAndCity, SaleByState } from '../../types/analytics';
+
+import { useScreenSize } from '../../utils/media-query';
 
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 import {
@@ -11,8 +13,11 @@ import {
 } from '../../shared/constants';
 
 import { Item } from 'devextreme-react/toolbar';
+import Tabs from 'devextreme-react/tabs';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 import LoadPanel from 'devextreme-react/load-panel';
+
+const items = Object.keys(ANALYTICS_PERIODS);
 
 const createMapCoords = (coords: string) => coords.split(', ').map(parseFloat);
 
@@ -44,6 +49,8 @@ export const AnalyticsGeography = () => {
   const [salesByStateMarkers, setSalesByStateMarkers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
+  const { isXSmall } = useScreenSize();
+
   useEffect(() => {
     getSalesByStateAndCity(...dateRange).then((data) => {
       const salesByStateResult = calcSalesByState(data);
@@ -55,18 +62,16 @@ export const AnalyticsGeography = () => {
     });
   }, [dateRange]);
 
-  const onTabClick = useCallback((e: { itemData: string }) => {
+  const onTabClick = useCallback((e) => {
     const { index, period } = ANALYTICS_PERIODS[e.itemData];
     setTabIndex(index);
     setDateRange(period.split('/'));
     setIsLoading(true);
   }, []);
 
-  const ToolbarItemTabs = useMemo(()=>({
-    dataSource: Object.keys(ANALYTICS_PERIODS),
-    selectedIndex: tabIndex,
-    onItemClick: onTabClick,
-  }), []);
+  const getTabsWidth = useCallback(() => {
+    return isXSmall ? 150 : 'auto';
+  }, []);
 
   return (
     <>
@@ -75,10 +80,16 @@ export const AnalyticsGeography = () => {
         additionalToolbarContent={
           <Item
             location='before'
-            widget='dxTabs'
-            locateInMenu='auto'
-            options={ToolbarItemTabs}
-          />
+          >
+            <Tabs
+              width={getTabsWidth}
+              scrollByContent
+              showNavButtons={false}
+              dataSource={items}
+              selectedIndex={tabIndex}
+              onItemClick={onTabClick}
+            />
+          </Item>
         }
       >
         <DashboardCardsGroup kind='wide'>

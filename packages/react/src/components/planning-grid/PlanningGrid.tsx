@@ -85,7 +85,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       onSaved={toogleUseNavigation}
       onRowPrepared={onRowPrepared}
       onRowClick={navigateToDetails}>
-      <Paging pageSize={15} />
+      <Paging defaultPageSize={15} />
       <Pager visible showPageSizeSelector />
       <Editing mode='row' allowUpdating />
       <Selection selectAllMode='allPages' showCheckBoxesMode='always' mode='multiple' />

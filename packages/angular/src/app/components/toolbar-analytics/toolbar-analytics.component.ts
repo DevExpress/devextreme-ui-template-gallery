@@ -1,6 +1,8 @@
 import { Component, NgModule, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ScreenService } from 'src/app/services';
+
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
@@ -24,13 +26,17 @@ export class ToolbarAnalyticsComponent {
 
   @Output() selectionChanged = new EventEmitter<Dates>();
 
-  constructor() { }
+  constructor(private screen: ScreenService) { }
 
   selectionChange(e: TabsItemClickEvent) {
     const dates = e.itemData.value.split('/');
 
     this.selectionChanged.emit({ startDate: dates[0], endDate: dates[1] });
   }
+
+  getTabWidth = () => {
+    return this.screen.isXSmallScreen() ? 150 : 'auto';
+  };
 }
 
 @NgModule({
