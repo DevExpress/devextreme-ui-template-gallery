@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
@@ -12,6 +12,7 @@ import { Task } from '../../types/task';
 import { getTask } from 'dx-template-gallery-data';
 
 import './planning-task-details.scss';
+import Button from 'devextreme-react/button';
 
 const TASK_ID = 1;
 
@@ -32,22 +33,11 @@ export const PlanningTaskDetails = () => {
     setMessagesCount(count);
   }, []);
 
-  const refresh = useCallback(() => loadData(), [loadData]);
-
-  const ToolbarItemAttach = useMemo(()=>({
-    text: 'Attach',
-    icon: 'attach',
-  }), []);
-
-  const ToolbarItemRefresh = useMemo(()=>({
-    text: 'Refresh',
-    icon: 'refresh',
-    onClick: refresh,
-  }), [refresh]);
+  const refresh = useCallback(() => loadData(), []);
 
   useEffect(() => {
     loadData();
-  }, [loadData]);
+  }, []);
 
   return (
     <div className='view-wrapper view-wrapper-details'>
@@ -64,15 +54,24 @@ export const PlanningTaskDetails = () => {
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={ToolbarItemAttach}
-        />
+        >
+          <Button
+            text='Attach'
+            icon='attach'
+          />
+        </ToolbarItem>
         <ToolbarItem
           location='after'
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={ToolbarItemRefresh}
-        />
+        >
+          <Button
+            text='Refresh'
+            icon='refresh'
+            onClick={refresh}
+          />
+        </ToolbarItem>
       </ToolbarDetails>
       <div className='panels'>
         <div className='left'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
@@ -71,19 +71,6 @@ export const CRMContactDetails = () => {
     loadData();
   }, []);
 
-  const ToolbarItemCopy = useMemo(()=>({
-    text: 'Copy',
-    icon: 'copy'
-  }), []);
-
-  const ToolbarItemRefresh = useMemo(()=>(
-    {
-      text: 'Refresh',
-      icon: 'refresh',
-      onClick: refresh
-    }
-  ), [refresh]);
-
   const onMessagesCountChanged = useCallback((count) => {
     setMessagesCount(count);
   }, []);
@@ -114,15 +101,24 @@ export const CRMContactDetails = () => {
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={ToolbarItemCopy}
-        />
+        >
+          <Button
+            text='Copy'
+            icon='copy'
+          />
+        </Item>
         <Item
           location='after'
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={ToolbarItemRefresh}
-        />
+        >
+          <Button
+            text='Refresh'
+            icon='refresh'
+            onClick={refresh}
+          />
+        </Item>
       </ToolbarDetails>
 
       <div className='panels'>

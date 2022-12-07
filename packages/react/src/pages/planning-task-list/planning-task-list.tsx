@@ -24,6 +24,7 @@ import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 
 import './planning-task-list.scss';
+import Button from 'devextreme-react/button';
 
 const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
@@ -57,7 +58,7 @@ export const PlanningTaskList = () => {
   }, []);
 
   useEffect(() => {
-    if(filteredData.length && gridData.length) {
+    if (filteredData.length && gridData.length) {
       setLoading(false);
     }
   }, [filteredData, gridData]);
@@ -76,9 +77,9 @@ export const PlanningTaskList = () => {
   }, []);
 
   const refresh = useCallback(() => {
-    if(isDataGrid) {
+    if (isDataGrid) {
       gridRef.current?.instance.refresh();
-    } else if(isKanban) {
+    } else if (isKanban) {
       kanbanRef.current?.instance.update();
     } else {
       ganttRef.current?.instance.refresh();
@@ -90,7 +91,7 @@ export const PlanningTaskList = () => {
   }, []);
 
   const exportToPDF = useCallback(() => {
-    if(isDataGrid) {
+    if (isDataGrid) {
       const doc = new jsPDF();
       exportDataGrid({
         jsPDFDocument: doc,
@@ -131,7 +132,7 @@ export const PlanningTaskList = () => {
     return isXSmall ? 220 : 'auto';
   }, []);
 
-  const ToolBarItemList = useMemo(()=>({
+  const ToolBarItemList = useMemo(() => ({
     dataSource: listsData,
     width: getTabsWidth(),
     selectedIndex: index,
@@ -140,39 +141,7 @@ export const PlanningTaskList = () => {
     onItemClick: onTabClick,
   }), [onTabClick, isXSmall]);
 
-  const ToolBarItemAddTask = useMemo(()=>({
-    icon: 'plus',
-    text: 'Add Task',
-    type: 'default',
-    stylingMode: 'contained',
-    onClick: changePopupVisibility,
-  }), [changePopupVisibility]);
-
-  const ToolBarItemRefresh = useMemo(()=>({
-    icon: 'refresh',
-    text: 'Refresh',
-    onClick: refresh,
-  }), [refresh]);
-
-  const ToolBarItemColumnChooser = useMemo(()=>({
-    icon: 'columnchooser',
-    text: 'Column Chooser',
-    onClick: showColumnChooser,
-  }), [showColumnChooser]);
-
-  const ToolBarItemExportPDF = useMemo(()=>({
-    icon: 'exportpdf',
-    text: 'Export To PDF',
-    onClick: exportToPDF,
-  }), [exportToPDF]);
-
-  const ToolBarItemExportXSLX = useMemo(()=>({
-    icon: 'exportxlsx',
-    text: 'Export To XSLX',
-    onClick: exportToXSLX,
-  }), [exportToXSLX]);
-
-  const ToolBarItemTaskSearch = useMemo(()=>({
+  const ToolBarItemTaskSearch = useMemo(() => ({
     mode: 'search',
     placeholder: 'Task Search',
     onInput: search,
@@ -193,23 +162,40 @@ export const PlanningTaskList = () => {
           location='after'
           widget='dxButton'
           locateInMenu='auto'
-          options={ToolBarItemAddTask}
-        />
+        >
+          <Button
+            icon='plus'
+            text='Add Task'
+            type='default'
+            stylingMode='contained'
+            onClick={changePopupVisibility}
+          />
+        </Item>
         <Item
           location='after'
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
-          options={ToolBarItemRefresh}
-        />
+        >
+          <Button
+            icon='refresh'
+            text='Refresh'
+            onClick={refresh}
+          />
+        </Item>
         <Item
           location='after'
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
           disabled={view !== listView}
-          options={ToolBarItemColumnChooser}
-        />
+        >
+          <Button
+            icon='columnchooser'
+            text='Column Chooser'
+            onClick={showColumnChooser}
+          />
+        </Item>
         <Item location='after' locateInMenu='auto'>
           <div className='separator' />
         </Item>
@@ -219,16 +205,27 @@ export const PlanningTaskList = () => {
           showText='inMenu'
           locateInMenu='auto'
           disabled={isKanban}
-          options={ToolBarItemExportPDF}
-        />
+
+        >
+          <Button
+            icon='exportpdf'
+            text='Export To PDF'
+            onClick={exportToPDF}
+          />
+        </Item>
         <Item
           location='after'
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
           disabled={view !== listView}
-          options={ToolBarItemExportXSLX}
-        />
+        >
+          <Button
+            icon='exportxlsx'
+            text='Export To XSLX'
+            onClick={exportToXSLX}
+          />
+        </Item>
         <Item
           location='after'
           widget='dxTextBox'
