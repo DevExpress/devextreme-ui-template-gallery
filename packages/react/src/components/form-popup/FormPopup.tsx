@@ -14,8 +14,14 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
   const { isXSmall, isSmall } = useScreenSize();
   const validationGroup = useRef<ValidationGroup>(null);
 
+  const onCancelClick = () => {
+    validationGroup.current?.instance.reset();
+    changeVisibility();
+  };
+
   const onSaveClick = () => {
     if (!validationGroup.current?.instance.validate().isValid) return;
+    validationGroup.current?.instance.reset();
 
     changeVisibility();
   };
@@ -47,7 +53,7 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
           text: 'Cancel',
           stylingMode: 'text',
           type: 'default',
-          onClick: changeVisibility,
+          onClick: onCancelClick,
         }}
       />
       <ValidationGroup ref={validationGroup}>

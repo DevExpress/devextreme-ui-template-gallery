@@ -10,7 +10,7 @@ export const ContactNewForm = () => {
   const [newContactData, setNewContactData] = useState<Contact>(newContact);
 
   const updateField = (field: string) => (value) => {
-    return setNewContactData({ ...newContactData, ...{ [field]: value } });
+    return setNewContactData((prevState) => ({ ...prevState, ...{ [field]: value } }));
   };
 
   return (
