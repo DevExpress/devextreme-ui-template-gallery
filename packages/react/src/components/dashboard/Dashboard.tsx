@@ -34,11 +34,13 @@ export const Dashboard = ({
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={{
-            text: 'Refresh',
-            icon: 'refresh',
-          }}
-        />
+        >
+          <Button
+            text='Refresh'
+            icon='refresh'
+            stylingMode='text'
+          />
+        </Item>
         <Item location='after' locateInMenu='auto'>
           <div className='separator' />
         </Item>
@@ -47,11 +49,13 @@ export const Dashboard = ({
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={{
-            icon: 'export',
-            text: 'Export',
-          }}
-        />
+        >
+          <Button
+            icon='export'
+            text='Export'
+            stylingMode='text'
+          />
+        </Item>
       </Toolbar>
       {children}
     </div>

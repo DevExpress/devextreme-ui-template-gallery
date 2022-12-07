@@ -17,7 +17,8 @@ import {
   ConversionTicker,
   LeadsTicker,
   OpportunitiesTicker,
-  RevenueTotalTicker } from '../../components';
+  RevenueTotalTicker
+} from '../../components';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 import { Sale, SaleOrOpportunityByCategory, SaleByState } from '../../types/analytics';

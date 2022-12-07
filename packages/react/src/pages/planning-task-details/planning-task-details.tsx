@@ -12,6 +12,7 @@ import { Task } from '../../types/task';
 import { getTask } from 'dx-template-gallery-data';
 
 import './planning-task-details.scss';
+import Button from 'devextreme-react/button';
 
 const TASK_ID = 1;
 
@@ -32,11 +33,11 @@ export const PlanningTaskDetails = () => {
     setMessagesCount(count);
   }, []);
 
-  const refresh = useCallback(() => loadData(), [loadData]);
+  const refresh = useCallback(() => loadData(), []);
 
   useEffect(() => {
     loadData();
-  }, [loadData]);
+  }, []);
 
   return (
     <div className='view-wrapper view-wrapper-details'>
@@ -53,22 +54,26 @@ export const PlanningTaskDetails = () => {
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={{
-            text: 'Attach',
-            icon: 'attach',
-          }}
-        />
+        >
+          <Button
+            text='Attach'
+            icon='attach'
+            stylingMode='text'
+          />
+        </ToolbarItem>
         <ToolbarItem
           location='after'
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={{
-            text: 'Refresh',
-            icon: 'refresh',
-            onClick: refresh,
-          }}
-        />
+        >
+          <Button
+            text='Refresh'
+            icon='refresh'
+            stylingMode='text'
+            onClick={refresh}
+          />
+        </ToolbarItem>
       </ToolbarDetails>
       <div className='panels'>
         <div className='left'>

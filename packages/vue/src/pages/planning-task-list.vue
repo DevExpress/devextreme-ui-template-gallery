@@ -35,11 +35,7 @@
         locate-in-menu="auto"
         widget="dxButton"
         show-text="inMenu"
-        :options="{
-          text: 'Refresh',
-          icon: 'refresh',
-          onClick: reload
-        }"
+        :options="refreshOptions"
       />
 
       <dx-toolbar-item
@@ -48,11 +44,7 @@
         locate-in-menu="auto"
         widget="dxButton"
         show-text="inMenu"
-        :options="{
-          text: 'Column Chooser',
-          icon: 'columnchooser',
-          onClick: chooseColumnDataGrid
-        }"
+        :options="columnChooserOptions"
       />
 
       <dx-toolbar-item
@@ -70,11 +62,7 @@
         locate-in-menu="auto"
         widget="dxButton"
         show-text="inMenu"
-        :options="{
-          text: 'Export to PDF',
-          icon: 'exportpdf',
-          onClick: exportToPdf
-        }"
+        :options="exportToPdfOptions"
       />
 
       <dx-toolbar-item
@@ -83,22 +71,14 @@
         locate-in-menu="auto"
         widget="dxButton"
         show-text="inMenu"
-        :options="{
-          text: 'Export to Exel',
-          icon: 'exportxlsx',
-          onClick: exportToXlsx
-        }"
+        :options="exportToXlsxOptions"
       />
       <dx-toolbar-item
         :disabled="!['grid'].includes(activeTabId)"
         location="after"
         locate-in-menu="auto"
         widget="dxTextBox"
-        :options="{
-          placeholder: 'Task Search',
-          mode: 'search',
-          onInput: searchDataGrid
-        }"
+        :options="taskSearchOptions"
       />
     </dx-toolbar>
     <load-component :is-loading="isLoading">
@@ -245,6 +225,36 @@ const onSaveNewTask = () => {
 };
 
 loadTasksAsync();
+
+const refreshOptions = {
+  text: 'Refresh',
+  icon: 'refresh',
+  onClick: reload,
+};
+
+const columnChooserOptions = {
+  text: 'Column Chooser',
+  icon: 'columnchooser',
+  onClick: chooseColumnDataGrid,
+};
+
+const exportToPdfOptions = {
+  text: 'Export to PDF',
+  icon: 'exportpdf',
+  onClick: exportToPdf,
+};
+
+const exportToXlsxOptions = {
+  text: 'Export to Exel',
+  icon: 'exportxlsx',
+  onClick: exportToXlsx,
+};
+
+const taskSearchOptions = {
+  placeholder: 'Task Search',
+  mode: 'search',
+  onInput: searchDataGrid,
+};
 </script>
 
 <style scoped lang="scss">
