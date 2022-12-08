@@ -1,7 +1,6 @@
 <template>
   <dx-popup
     ref="popup"
-    v-if="isVisible"
     :title="props.title"
     :visible="isVisible"
     :full-screen="screenInfo.isSmall || screenInfo.isXSmall"
@@ -58,13 +57,15 @@ watch(
 );
 
 const save = () => {
-  if (validationEngine.validateGroup(validationGroup.value?.instance).isValid) {
+  if (validationGroup.value?.instance.validate().isValid) {
+    validationGroup.value?.instance.reset();
     emit('save');
   }
 };
 
-const close = () => {
+const cancel = () => {
   isVisible.value = false;
+  validationGroup.value?.instance.reset();
   emit('update:isVisible', false);
 };
 
@@ -79,6 +80,6 @@ const cancelOptions = {
   text: 'Cancel',
   stylingMode: 'text',
   type: 'default',
-  onClick: close,
+  onClick: cancel,
 };
 </script>
