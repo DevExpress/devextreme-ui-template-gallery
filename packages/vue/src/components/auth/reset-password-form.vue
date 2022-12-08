@@ -92,7 +92,7 @@ async function onSubmit() {
 </script>
 
 <style scoped lang="scss">
-@use "../variables" as *;
+@use "@/variables" as *;
 
 .reset-password-form {
   .submit-button {

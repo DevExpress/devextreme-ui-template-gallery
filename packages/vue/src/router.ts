@@ -3,9 +3,9 @@ import defaultLayout from '@/layouts/side-nav-outer-toolbar.vue';
 import simpleLayout from '@/layouts/single-card.vue';
 import { authInfo } from '@/auth';
 
-function loadComponent(ComponentFileName: string) {
+function loadAuthComponent(ComponentFileName: string) {
   // eslint-disable-next-line func-call-spacing
-  return () => import (/* webpackChunkName: "login" */ `@/pages/${ComponentFileName}.vue`);
+  return () => import (/* webpackChunkName: "auth" */ `@/components/auth/${ComponentFileName}.vue`);
 }
 
 export const router = createRouter({
@@ -23,7 +23,7 @@ export const router = createRouter({
         layout: simpleLayout,
         title: 'Sign In',
       },
-      component: loadComponent('login-form'),
+      component: loadAuthComponent('login-form'),
     },
     {
       path: '/reset-password',
@@ -34,7 +34,7 @@ export const router = createRouter({
         title: 'Reset Password',
         description: 'Please enter the email address that you used to register, and we will send you a link to reset your password via Email.',
       },
-      component: loadComponent('reset-password-form'),
+      component: loadAuthComponent('reset-password-form'),
     },
     {
       path: '/create-account',
@@ -44,7 +44,7 @@ export const router = createRouter({
         layout: simpleLayout,
         title: 'Sign Up',
       },
-      component: loadComponent('create-account-form'),
+      component: loadAuthComponent('create-account-form'),
     },
     {
       path: '/change-password/:recoveryCode',
@@ -54,7 +54,7 @@ export const router = createRouter({
         layout: simpleLayout,
         title: 'Change Password',
       },
-      component: loadComponent('change-password-form'),
+      component: loadAuthComponent('@/pages/change-password-form.vue'),
     },
     ...[
       'crm-contact-list',
@@ -70,7 +70,8 @@ export const router = createRouter({
         requiresAuth: true,
         layout: defaultLayout,
       },
-      component: loadComponent(name),
+      // eslint-disable-next-line func-call-spacing
+      component: import (/* webpackChunkName: "pages" */ `@/pages/${name}.vue`),
     })),
   ],
 });
