@@ -3,6 +3,7 @@
     class="grid"
     noDataText=""
     keyExpr="id"
+    height="100%"
     [dataSource]="dataSource"
     [allowColumnReordering]="true"
     [focusedRowEnabled]="true"
@@ -150,8 +151,7 @@
   <form-popup
     #userPopup
     titleText="New Contact"
-    >
-
+  >
     <contact-new-user-form></contact-new-user-form>
   </form-popup>
 </div>

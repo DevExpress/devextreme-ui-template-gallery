@@ -27,10 +27,7 @@
         locate-in-menu="auto"
         widget="dxButton"
         show-text="inMenu"
-        :options="{
-          text: 'Attach',
-          icon: 'attach'
-        }"
+        :options="attachOptions"
       />
 
       <dx-toolbar-item
@@ -38,11 +35,7 @@
         locate-in-menu="auto"
         widget="dxButton"
         show-text="inMenu"
-        :options="{
-          text: 'Refresh',
-          icon: 'refresh',
-          onClick: refresh
-        }"
+        :options="refreshOptions"
       />
     </dx-toolbar>
 
@@ -141,6 +134,17 @@ const refresh = () => {
 onMounted(() => {
   loadData();
 });
+
+const attachOptions = {
+  text: 'Attach',
+  icon: 'attach',
+};
+
+const refreshOptions = {
+  text: 'Refresh',
+  icon: 'refresh',
+  onClick: refresh,
+};
 </script>
 
 <style scoped lang="scss">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -33,17 +33,9 @@ const statusRender = (text: string) => (
 
 const statusItemRender = (text: string) => <ContactStatus text={text} />;
 
-export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: boolean }) => {
-  const [formData, setFormData] = useState(data);
-
-  const updateField = (field: string) => (value) => {
-    if(field === 'state') {
-      setFormData({ ...formData, ...{ [field]: { stateShort: value } } });
-    } else {
-      setFormData({ ...formData, ...{ [field]: value } });
-    }
-  };
-
+export const ContactFromDetails = ({ data, editing, updateField }: {
+  data: Contact, editing: boolean, updateField: (field: string) => (value: string) => void
+}) => {
   return (
     <From
       className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}
@@ -52,14 +44,14 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
       <GroupItem colCount={2}>
         <ColCountByScreen xs={2} />
         <ItemForm>
-          <FormPhoto link={formData.image} size={PHOTO_SIZE} />
+          <FormPhoto link={data.image} size={PHOTO_SIZE} />
         </ItemForm>
 
         <GroupItem>
           <ItemForm>
             <SelectBox
               label='Status'
-              value={formData.status}
+              value={data.status}
               readOnly={!editing}
               stylingMode='filled'
               items={CONTACT_STATUS_LIST}
@@ -73,7 +65,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
           <ItemForm>
             <FormTextbox
               label='First Name'
-              value={formData.firstName}
+              value={data.firstName}
               isEditing={!editing}
               onValueChange={updateField('firstName')}
             />
@@ -82,7 +74,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
           <ItemForm>
             <FormTextbox
               label='Last Name'
-              value={formData.lastName}
+              value={data.lastName}
               isEditing={!editing}
               onValueChange={updateField('lastName')}
             />
@@ -92,7 +84,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         <ItemForm>
           <FormTextbox
             label='Position'
-            value={formData.position}
+            value={data.position}
             isEditing={!editing}
             onValueChange={updateField('position')}
           />
@@ -101,7 +93,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         <ItemForm cssClass='accent'>
           <FormTextbox
             label='Assigned to'
-            value={formData.manager}
+            value={data.manager}
             isEditing={!editing}
             onValueChange={updateField('manager')}
           />
@@ -110,7 +102,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         <ItemForm cssClass='accent' colSpan={2}>
           <FormTextbox
             label='Company'
-            value={formData.company}
+            value={data.company}
             isEditing={!editing}
             onValueChange={updateField('company')}
           />
@@ -122,7 +114,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         <ItemForm colSpan={4}>
           <FormTextbox
             label='Address'
-            value={formData.address}
+            value={data.address}
             isEditing={!editing}
             onValueChange={updateField('address')}
           />
@@ -131,7 +123,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         <ItemForm colSpan={2}>
           <FormTextbox
             label='City'
-            value={formData.city}
+            value={data.city}
             isEditing={!editing}
             onValueChange={updateField('city')}
           />
@@ -140,7 +132,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         <ItemForm>
           <FormTextbox
             label='State'
-            value={formData.state.stateShort}
+            value={data.state.stateShort}
             isEditing={!editing}
             onValueChange={updateField('state')}
           />
@@ -149,7 +141,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         <ItemForm>
           <NumberBox
             label='Zip Code'
-            value={formData.zipCode}
+            value={data.zipCode}
             readOnly={!editing}
             elementAttr={{ class: 'form-editor' }}
             inputAttr={{ class: 'form-editor-input' }}
@@ -158,7 +150,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
           >
             <Validator>
               <PatternRule
-                pattern='/^\d{5}$/'
+                pattern={/^\d{5}$/}
                 message='Zip is invalid'
               />
             </Validator>
@@ -171,7 +163,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         <ItemForm>
           <FormTextbox
             label='Phone'
-            value={formData.phone}
+            value={data.phone}
             mask='+1(000)000-0000'
             isEditing={!editing}
             onValueChange={updateField('phone')}
@@ -189,7 +181,7 @@ export const ContactFromDetails = ({ data, editing }: { data: Contact, editing: 
         <ItemForm>
           <FormTextbox
             label='Email'
-            value={formData.email}
+            value={data.email}
             isEditing={!editing}
             onValueChange={updateField('email')}
           >
