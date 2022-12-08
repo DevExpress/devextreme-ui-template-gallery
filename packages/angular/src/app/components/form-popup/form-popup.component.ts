@@ -51,13 +51,14 @@ import validationEngine from 'devextreme/ui/validation_engine';
       this.popupFullScreen = this.screen.isSmallScreen();
     }
 
-    closePopup = () => {
+    onCancelClick = () => {
+      this.validationGroup.instance.reset();
       this.popupVisible = false;
     }
 
     onSaveClick = () => {
-      if(!validationEngine.validateGroup(this.validationGroup.instance).isValid) return;
-
+      if(!this.validationGroup.instance.validate().isValid) return;
+      this.validationGroup.instance.reset();
       this.popupVisible = false;
     }
   }

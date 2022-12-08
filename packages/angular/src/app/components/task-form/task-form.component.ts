@@ -31,6 +31,8 @@ export class TaskFormComponent implements OnChanges {
 
   @Input() contentByScreen: { xs: number, sm: number }
 
+  savedData: Task = null;
+
   isEditing = false;
 
   statusList = taskStatusList;
@@ -48,15 +50,18 @@ export class TaskFormComponent implements OnChanges {
   }
 
   handleEditClick = () => {
+    this.savedData = { ...this.task }
     this.isEditing = true;
   };
 
   handleSaveClick = ({ validationGroup }: ClickEvent) => {
     if(!validationGroup.validate().isValid) return;
+    this.savedData = null;
     this.isEditing = false;
   };
 
   handleCancelClick = () => {
+    this.task = { ...this.savedData };
     this.isEditing = false;
   };
 }

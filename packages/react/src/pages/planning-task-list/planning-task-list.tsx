@@ -243,7 +243,7 @@ export const PlanningTaskList = () => {
       {!loading && isKanban && <PlanningKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
       {!loading && view === ganttView && <PlanningGantt dataSource={filteredData} ref={ganttRef} />}
       <FormPopup title='New Task' visible={popupVisible} changeVisibility={changePopupVisibility}>
-        <TaskFormDetails colCountByScreen={{ xs: 1, sm: 1 }} data={newTaskData} editing onDataChanged={onDataChanged} />
+        <TaskFormDetails colCountByScreen={{ xs: 1, sm: 1 }} subjectField data={newTaskData} editing onDataChanged={onDataChanged} />
       </FormPopup>
     </div>
   );
