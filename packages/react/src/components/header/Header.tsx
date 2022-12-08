@@ -24,13 +24,14 @@ export const Header = ({ menuToggleEnabled, title, toggleMenu, className }: Head
         </Item>
         <Item location='after'>
           <div className='messages'>
-            <div className='dx-icon-bell'>
-              <div className='dx-badge'>4</div>
+            <Button icon='bell' />
+            <div className='dx-badge'>
+              4
             </div>
           </div>
         </Item>
         <Item location='after' locateInMenu='auto' menuItemTemplate='userPanelTemplate'>
-          <Button className='user-button authorization' width={160} height={38} stylingMode='text'>
+          <Button className='user-button authorization' width={150} height={38} stylingMode='text'>
             <UserPanel menuMode='context' />
           </Button>
         </Item>

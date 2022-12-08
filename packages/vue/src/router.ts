@@ -57,20 +57,20 @@ export const router = createRouter({
       component: loadComponent('change-password-form'),
     },
     ...[
-      { name: 'crm-contact-list' },
-      { name: 'crm-contact-details' },
-      { folder: 'planning', name: 'planning-task-list' },
-      { folder: 'planning', file: 'planning-task-details' },
-      { folder: 'analytics', name: 'analytics-dashboard' },
-      { folder: 'analytics', name: 'analytics-sales-report' },
-      { folder: 'analytics', name: 'analytics-geography' },
-    ].map(({ folder, name, file }) => ({
-      path: `/${name || file}`,
+      'crm-contact-list',
+      'crm-contact-details',
+      'planning-task-list',
+      'planning-task-details',
+      'analytics-dashboard',
+      'analytics-sales-report',
+      'analytics-geography',
+    ].map((name) => ({
+      path: `/${name}`,
       meta: {
         requiresAuth: true,
         layout: defaultLayout,
       },
-      component: loadComponent([folder, name, name, file].filter(Boolean).join('/')),
+      component: loadComponent(name),
     })),
   ],
 });

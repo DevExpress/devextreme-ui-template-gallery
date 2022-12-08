@@ -11,7 +11,7 @@ import ValidationGroup from 'devextreme-react/validation-group';
 
 import { formatDate } from 'devextreme/localization';
 
-import { Message, Messages } from '../../shared/types/card-messages';
+import { Message, Messages } from '../../types/card-messages';
 
 import { Avatar } from '../avatar/Avatar';
 

@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { Dashboard } from '../../components/dashboard/Dashboard';
+import { Dashboard, SalesRangeCard, ProductSaleByRangeCard, SalesPerformanceCard } from '../../components';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
-import { SalesRangeCard } from './cards/SalesRangeCard';
-import { ProductSaleByRangeCard } from './cards/ProductSaleByRangeCard';
-import { SalesPerformanceCard } from './cards/SalesPerformanceCard';
-import { Sale, SaleOrOpportunityByCategory } from '../../shared/types/analytics';
+import { Sale, SaleOrOpportunityByCategory } from '../../types/analytics';
 
 import { getSalesByCategory, getSales, getSalesByOrderDate } from 'dx-template-gallery-data';
 

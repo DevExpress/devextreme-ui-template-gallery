@@ -35,10 +35,9 @@
       />
       <dx-item location="after">
         <div class="messages">
-          <div class="dx-icon-bell">
-            <div class="dx-badge">
-              4
-            </div>
+          <dx-button icon="bell" />
+          <div class="dx-badge">
+            4
           </div>
         </div>
       </dx-item>
@@ -51,7 +50,7 @@
           <div>
             <dx-button
               class="user-button authorization"
-              :width="160"
+              :width="150"
               :height="38"
               styling-mode="text"
             >
@@ -148,7 +147,7 @@ header {
     }
 
     .user-button.authorization {
-      margin-left: 10px;
+      margin-left: 5px;
 
       :deep(.dx-button-content) {
         padding: 0;
@@ -157,20 +156,16 @@ header {
     }
 
     .messages {
-      padding-left: 10px;
+      padding-left: 5px;
       position: relative;
-
-      .dx-icon-bell {
-        font-size: 24px;
-      }
 
       .dx-badge {
         display: block;
         position: absolute;
         background-color: red;
         color: white;
-        right: -15%;
-        top: -15%;
+        right: -10%;
+        top: -10%;
         font-size: 12px;
         padding: 0 4px;
       }

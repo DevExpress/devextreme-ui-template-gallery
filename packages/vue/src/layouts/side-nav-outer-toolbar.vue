@@ -23,7 +23,6 @@
         class="with-footer app-content-wrapper"
       >
         <slot />
-        <slot name="footer" />
       </dx-scroll-view>
       <template #menuTemplate>
         <side-nav-menu
@@ -104,7 +103,7 @@ const drawerOptions = computed(() => {
   return {
     menuMode: props.isLarge ? 'shrink' : 'overlap',
     menuRevealMode: props.isXSmall ? 'slide' : 'expand',
-    minMenuSize: props.isXSmall ? 0 : 60,
+    minMenuSize: props.isXSmall ? 0 : 48,
     maxMenuSize: props.isXSmall ? 250 : undefined,
     closeOnOutsideClick: shaderEnabled,
     shaderEnabled,

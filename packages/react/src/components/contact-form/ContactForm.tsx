@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { ToolbarForm } from '../toolbar-form/ToolbarForm';
 import { ContactFromDetails } from './ContactFormDetails';
 
-import { withLoadPanel } from '../../shared/utils/withLoadPanel';
+import { withLoadPanel } from '../../utils/withLoadPanel';
 
-import { Contact } from '../../shared/types/crm-contact';
+import { Contact } from '../../types/crm-contact';
 
 import ValidationGroup from 'devextreme-react/validation-group';
+import { ClickEvent } from 'devextreme/ui/button';
 
 import './ContactForm.scss';
 
@@ -15,19 +16,51 @@ const ContactFromDetailsWithLoadPanel = withLoadPanel(ContactFromDetails);
 
 export const ContactForm = ({ data }: { data?: Contact }) => {
   const [editing, setEditing] = useState(false);
+  const [formData, setFormData] = useState(data);
+  const dataRef = useRef<Contact>();
+
+  useEffect(() => {
+    setFormData(data);
+  }, [data]);
 
   const handleEditClick = () => {
+    if(editing === false && formData) {
+      dataRef.current = formData;
+    } else {
+      dataRef.current = undefined;
+    }
     setEditing(!editing);
+  };
+
+  const onSaveClick = ({ validationGroup }: ClickEvent) => {
+    if (!validationGroup.validate().isValid) return;
+
+    handleEditClick();
+  };
+
+  const onCancelClick = () => {
+    setFormData(dataRef.current);
+    handleEditClick();
+  };
+
+  const updateField = (field: string) => (value: string) => {
+    if(!formData) return;
+    if(field === 'state') {
+      setFormData({ ...formData, ...{ [field]: { stateShort: value } } });
+    } else {
+      setFormData({ ...formData, ...{ [field]: value } });
+    }
   };
 
   return (
     <div className='contact-form'>
       <ValidationGroup>
-        <ToolbarForm toggleEditing={handleEditClick} editing={editing} />
+        <ToolbarForm toggleEditing={handleEditClick} onSaveClick={onSaveClick} editing={editing} onCancelClick={onCancelClick} />
         <ContactFromDetailsWithLoadPanel
-          loading={!data}
-          data={data}
+          loading={!formData}
+          data={formData}
           editing={editing}
+          updateField={updateField}
           panelProps={{
             container: '.contact-form',
             position: { of: '.contact-form' },

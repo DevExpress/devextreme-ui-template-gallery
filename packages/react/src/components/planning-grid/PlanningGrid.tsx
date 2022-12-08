@@ -14,8 +14,8 @@ import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRen
 
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 
-import { Task, PlanningProps } from '../../shared/types/task';
-import { GridEdit } from '../../shared/types/planning-grid';
+import { Task, PlanningProps } from '../../types/task';
+import { GridEdit } from '../../types/planning-grid';
 
 import './PlanningGrid.scss';
 
@@ -85,7 +85,7 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       onSaved={toogleUseNavigation}
       onRowPrepared={onRowPrepared}
       onRowClick={navigateToDetails}>
-      <Paging pageSize={15} />
+      <Paging defaultPageSize={15} />
       <Pager visible showPageSizeSelector />
       <Editing mode='row' allowUpdating />
       <Selection selectAllMode='allPages' showCheckBoxesMode='always' mode='multiple' />

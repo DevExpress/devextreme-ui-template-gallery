@@ -27,7 +27,7 @@ class MetadataChecker {
         viewPath = join(viewPath, 'app', 'pages', viewName, `${viewName}.component.html`);
         break;
       case 'vue':
-        viewPath = join(viewPath, 'pages', viewName, `${viewName}.vue`);
+        viewPath = join(viewPath, 'pages', '', `${viewName}.vue`);
         break;
       case 'react':
         viewPath = join(viewPath, 'pages', viewName, `${viewName}.tsx`);

@@ -1,0 +1,10 @@
+@use "../../../variables.scss" as *;
+
+span.status {
+  font-size: 14px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+}

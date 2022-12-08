@@ -2,15 +2,16 @@
 import React, { useState } from 'react';
 
 import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
-import { Contact } from '../../shared/types/crm-contact';
+import { Contact } from '../../types/crm-contact';
 import { newContact } from '../../shared/constants';
 import { FormTextbox, FormPhotoUploader } from '../../components';
+import { EmailRule } from 'devextreme-react/validator';
 
 export const ContactNewForm = () => {
   const [newContactData, setNewContactData] = useState<Contact>(newContact);
 
   const updateField = (field: string) => (value) => {
-    return setNewContactData({ ...newContactData, ...{ [field]: value } });
+    setNewContactData((prevState) => ({ ...prevState, ...{ [field]: value } }));
   };
 
   return (
@@ -85,7 +86,9 @@ export const ContactNewForm = () => {
             onValueChange={updateField('email')}
             isEditing={false}
             icon='email'
-          />
+          >
+            <EmailRule />
+          </FormTextbox>
         </FormItem>
         <FormItem>
           <FormTextbox

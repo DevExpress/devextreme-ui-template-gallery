@@ -1,0 +1,17 @@
+<dx-text-box [label]="label"
+             [(value)]="value"
+             [readOnly]="!isEditing"
+             [mask]="mask"
+             [elementAttr]="{class: 'form-editor'}"
+             [inputAttr]="{class: 'form-editor-input'}"
+             stylingMode="filled"
+             (onValueChanged)="valueChanged($event)"
+             valueChangeEvent="keyup input change"
+>
+  <dx-validator [validationRules]="validators"></dx-validator>
+  <dxi-button *ngIf="icon"
+              [options]="{icon: icon, type: 'back', elementAttr: { class: 'form-editor-icon' }}"
+              name="icon"
+              location="before"
+  ></dxi-button>
+</dx-text-box>

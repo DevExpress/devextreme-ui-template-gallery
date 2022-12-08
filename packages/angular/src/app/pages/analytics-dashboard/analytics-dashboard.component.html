@@ -67,8 +67,8 @@
   </div>
 
   <div class="cards">
-    <card-analytics titleText="Revenue" contentClass="sales" [component]="chart">
-      <dx-chart #chart [dataSource]="sales">
+    <card-analytics titleText="Revenue" contentClass="sales">
+      <dx-chart [dataSource]="sales">
         <dxi-series valueField="total"></dxi-series>
         <dxo-common-series-settings argumentField="date" type="splinearea">
           <dxo-border [visible]="true"></dxo-border>
@@ -86,10 +86,8 @@
     <card-analytics
       titleText="Conversion Funnel (All Products)"
       contentClass="opportunities"
-      [component]="funnel"
     >
       <dx-funnel
-        #funnel
         [dataSource]="opportunities"
         argumentField="name"
         valueField="value"
@@ -170,10 +168,8 @@
     <card-analytics
       titleText="Revenue Snapshot (All Products)"
       contentClass="sales-by-category"
-      [component]="pie"
     >
       <dx-pie-chart
-        #pie
         [dataSource]="salesByCategory"
         type="doughnut"
         [diameter]="0.8"

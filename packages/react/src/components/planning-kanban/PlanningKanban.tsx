@@ -5,7 +5,7 @@ import Sortable from 'devextreme-react/sortable';
 
 import { DragStartEvent, ReorderEvent } from 'devextreme/ui/sortable';
 
-import { PlanningProps, Task } from '../../shared/types/task';
+import { PlanningProps, Task } from '../../types/task';
 
 import { STATUS_ITEMS } from '../../shared/constants';
 

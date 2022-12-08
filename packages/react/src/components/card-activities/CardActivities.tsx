@@ -7,8 +7,8 @@ import { formatDate } from 'devextreme/localization';
 
 import classNames from 'classnames';
 
-import { Activities, Activity } from '../../shared/types/card-activities';
-import { withLoadPanel } from '../../shared/utils/withLoadPanel';
+import { Activities, Activity } from '../../types/card-activities';
+import { withLoadPanel } from '../../utils/withLoadPanel';
 
 import './CardActivities.scss';
 

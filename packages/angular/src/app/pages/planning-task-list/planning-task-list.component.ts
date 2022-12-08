@@ -8,15 +8,15 @@ import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
 import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
-import { taskPanelItems } from 'src/app/shared/types/resource';
-import { Task, newTask } from 'src/app/shared/types/task';
-import { DataService } from 'src/app/shared/services';
+import { taskPanelItems } from 'src/app/types/resource';
+import { Task, newTask } from 'src/app/types/task';
+import { DataService, ScreenService } from 'src/app/services';
 import { forkJoin, map, Observable } from 'rxjs';
-import { TaskFormModule } from '../planning-task-details/task-form/task-form.component';
-import { FormPopupModule, FormPopupComponent} from 'src/app/shared/components';
-import { TaskListGridComponent, TaskListModule } from './task-list-grid/task-list-grid.component';
-import { TaskListKanbanModule, TaskListKanbanComponent } from './task-list-kanban/task-list-kanban.component';
-import { TaskListGanttComponent, TaskListGanttModule } from './task-list-gantt/task-list-gantt.component';
+import { TaskFormModule } from '../../components/task-form/task-form.component';
+import { FormPopupModule, FormPopupComponent} from 'src/app/components';
+import { TaskListGridComponent, TaskListModule } from '../../components/task-list-grid/task-list-grid.component';
+import { TaskListKanbanModule, TaskListKanbanComponent } from '../../components/task-list-kanban/task-list-kanban.component';
+import { TaskListGanttComponent, TaskListGanttModule } from '../../components/task-list-gantt/task-list-gantt.component';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 
 @Component({
@@ -45,7 +45,8 @@ export class PlanningTaskListComponent implements OnInit {
 
   taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
-  constructor(private service: DataService) { }
+  constructor(private service: DataService, private screen: ScreenService) {
+  }
 
   ngOnInit(): void {
     this.taskCollections$ = forkJoin([
@@ -67,6 +68,10 @@ export class PlanningTaskListComponent implements OnInit {
 
   addTask = () => {
     this.taskPopup.popupVisible = true;
+  };
+
+  getTabWidth = () => {
+    return this.screen.isXSmallScreen() ? 220 : 'auto';
   };
 
   refresh = () => {

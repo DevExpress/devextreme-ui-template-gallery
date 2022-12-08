@@ -35,7 +35,7 @@ export const SideNavInnerToolbar = ({ title, children }: React.PropsWithChildren
 
   const onOutsideClick = useCallback(() => {
     setMenuStatus((prevMenuStatus) => (prevMenuStatus !== MenuStatus.Closed && !isLarge ? MenuStatus.Closed : prevMenuStatus));
-    return true;
+    return !isLarge;
   }, [isLarge]);
 
   const onNavigationChanged = useCallback(

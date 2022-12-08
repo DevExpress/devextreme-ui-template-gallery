@@ -1,5 +1,5 @@
 import {
-  Component, ViewChild, OnInit, NgModule, OnDestroy,
+  Component, ViewChild, OnInit, NgModule,
 } from '@angular/core';
 import {
   DxButtonModule,
@@ -9,27 +9,26 @@ import {
   DxSelectBoxModule,
   DxTextBoxModule,
 } from 'devextreme-angular';
-import { RowClickEvent, RowPreparedEvent, ColumnCustomizeTextArg } from 'devextreme/ui/data_grid';
+import { RowClickEvent, ColumnCustomizeTextArg } from 'devextreme/ui/data_grid';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
 import {
   CardActivitiesModule,
   ContactStatusModule,
-} from 'src/app/shared/components';
-import { Contact, contactStatusList, ContactStatus, } from 'src/app/shared/types/contact';
+} from 'src/app/components';
+import { Contact, contactStatusList, ContactStatus, } from 'src/app/types/contact';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { CommonModule } from '@angular/common';
-import { DataService } from 'src/app/shared/services';
-import { Subscription } from 'rxjs';
+import { DataService } from 'src/app/services';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { jsPDF } from 'jspdf';
-import { UserPanelModule } from './user-panel/user-panel.component';
-import { UserNewFormModule } from './user-new-form/user-new-form.component';
+import { ContactUserPanelModule } from '../../components/contact-user-panel/contact-user-panel.component';
+import { ContactNewUserFormModule } from '../../components/contact-new-user-form/contact-new-user-form.component';
 import {
   FormPopupModule,
   FormPopupComponent,
-} from 'src/app/shared/components/';
+} from 'src/app/components';
 
 type FilterContactStatus = ContactStatus | 'All';
 
@@ -38,7 +37,7 @@ type FilterContactStatus = ContactStatus | 'All';
   styleUrls: ['./crm-contact-list.component.scss'],
   providers: [DataService],
 })
-export class CrmContactListComponent implements OnInit, OnDestroy {
+export class CrmContactListComponent implements OnInit {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
 
   @ViewChild('userPopup', { static: true }) userPopup: FormPopupComponent;
@@ -53,19 +52,13 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
 
   dataSource: Contact[];
 
-  dataSubscription: Subscription = new Subscription();
-
   constructor(private service: DataService) {
   }
 
   ngOnInit(): void {
-    this.dataSubscription = this.service.getContacts().subscribe((data) => {
+    this.service.getContacts().subscribe((data) => {
       this.dataSource = data;
     });
-  }
-
-  ngOnDestroy(): void {
-    this.dataSubscription.unsubscribe();
   }
 
   addContact() {
@@ -83,10 +76,10 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     this.isPanelOpened = true;
   }
 
-  rowPrepared = (e: RowPreparedEvent) => {
-    const { rowElement } = e;
-
-    rowElement.classList.add('clickable-row');
+  onOpenedChange = (value: boolean) => {
+    if (!value) {
+      this.userId = null;
+    }
   };
 
   filterByStatus = (e: SelectionChangedEvent) => {
@@ -146,8 +139,8 @@ export class CrmContactListComponent implements OnInit, OnDestroy {
     DxSelectBoxModule,
     DxTextBoxModule,
 
-    UserPanelModule,
-    UserNewFormModule,
+    ContactUserPanelModule,
+    ContactNewUserFormModule,
     FormPopupModule,
     CardActivitiesModule,
     ContactStatusModule,

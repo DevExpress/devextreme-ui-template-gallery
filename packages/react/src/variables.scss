@@ -12,7 +12,7 @@
 @use "sass:color";
 
 $content-padding: 16px;
-$side-panel-min-width: 60px;
+$side-panel-min-width: 48px;
 $side-panel-background: darken($base-bg, 5);
 $background-color: $base-bg;
 $accent-color: $base-accent;
@@ -22,6 +22,8 @@ $toolbar-margin-bottom: $content-padding;
 $texteditor-edit-color: $texteditor-color;
 $toolbar-items-container-height: 38px;
 $list-padding-left: $material-list-item-horizontal-padding;
+$footer-height: 70px;
+$footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 
 @mixin separator() {
   .separator {
@@ -98,4 +100,21 @@ $list-padding-left: $material-list-item-horizontal-padding;
 @mixin message-text {
   padding-top: 5px;
   line-height: 21px;
+}
+
+@mixin status-contact($status-color) {
+  color: $status-color;
+
+  &.dx-texteditor {
+    .status-editor-input {
+      color: $status-color;
+      padding-left: 0;
+    }
+  }
+
+  span {
+    &::before {
+      background-color: $status-color;
+    }
+  }
 }

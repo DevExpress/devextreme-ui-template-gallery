@@ -14,10 +14,11 @@ fixture`Contact Details`;
 const setEmbedded = async (t, embed, screenMode) => {
   if (embed) {
     if (screenMode[0] === 400) {
-      await t.click('.view-wrapper .dx-icon-overflow');
+      await t.click('.view-wrapper .toolbar-details .dx-icon-overflow');
+      await t.click(Selector('.dx-popup-content .dx-button[aria-label=Refresh]'));
+    } else {
+      await t.click(Selector('.dx-button[aria-label=Refresh]'));
     }
-
-    await t.click('.dx-icon-refresh');
   }
 };
 
@@ -27,7 +28,7 @@ const setEmbedded = async (t, embed, screenMode) => {
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
       // eslint-disable-next-line max-len
-      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
+      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond, true);
 
       await t.click(Selector('.dx-drawer-content'));
       await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
@@ -56,6 +57,7 @@ const setEmbedded = async (t, embed, screenMode) => {
     });
 
     test(`Crm contact details tabpanel (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
+      const nameTabs = ['Tasks', 'Activities', 'Opportunities', 'Notes', 'Messages'];
       if (screenMode[0] === 400) return;
       const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
@@ -63,15 +65,12 @@ const setEmbedded = async (t, embed, screenMode) => {
       await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
-      const tabPanels = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel]');
 
-      const tabsCount = await tabs.count;
-      for (let indexTab = 0; indexTab < tabsCount; indexTab += 1) {
-        const tab = tabs.nth(indexTab);
-        const tabName = (await tab.innerText).toLowerCase();
+      for (let i = 0; i < nameTabs.count; i += 1) {
+        await t.click(tabs.withText(nameTabs[i]));
+        const tabPanel = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel].dx-item-selected');
 
-        await t.click(tab);
-        await takeScreenshot(`crm-form-tab-${tabName}${getPostfix(embedded, screenMode)}`, tabPanels.nth(indexTab));
+        await takeScreenshot(`crm-form-tab-${nameTabs[i]}${getPostfix(embedded, screenMode)}`, tabPanel);
       }
 
       await t

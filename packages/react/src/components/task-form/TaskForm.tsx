@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 
-import { withLoadPanel } from '../../shared/utils/withLoadPanel';
+import { withLoadPanel } from '../../utils/withLoadPanel';
 import { TaskFormDetails } from './TaskFormDetails';
 import { ToolbarForm } from '../toolbar-form/ToolbarForm';
 
-import { Task } from '../../shared/types/task';
+import { Task } from '../../types/task';
+
+import { ClickEvent } from 'devextreme/ui/button';
 
 import './TaskForm.scss';
 
@@ -13,6 +15,7 @@ const TaskFormWithLoadPanel = withLoadPanel(TaskFormDetails);
 export const TaskForm = ({ task }: { task?: Task }) => {
   const [data, setData] = useState(task);
   const [editing, setEditing] = useState(false);
+  const dataRef = useRef<Task>();
 
   useEffect(() => {
     if (task) {
@@ -23,13 +26,29 @@ export const TaskForm = ({ task }: { task?: Task }) => {
   const onDataChanged = useCallback(data => {
     setData(data);
   }, []);
-  const toggleEditing = useCallback(() => {
+  const handleEditClick = () => {
+    if(editing === false && data) {
+      dataRef.current = data;
+    } else {
+      dataRef.current = undefined;
+    }
     setEditing(!editing);
-  }, [editing]);
+  };
+
+  const onSaveClick = ({ validationGroup }: ClickEvent) => {
+    if (!validationGroup.validate().isValid) return;
+
+    handleEditClick();
+  };
+
+  const onCancelClick = () => {
+    setData(dataRef.current);
+    handleEditClick();
+  };
 
   return (
     <div className='task-form'>
-      <ToolbarForm toggleEditing={toggleEditing} editing={editing} />
+      <ToolbarForm toggleEditing={handleEditClick} onCancelClick={onCancelClick} onSaveClick={onSaveClick} editing={editing} />
       <TaskFormWithLoadPanel
         loading={!data}
         data={data}

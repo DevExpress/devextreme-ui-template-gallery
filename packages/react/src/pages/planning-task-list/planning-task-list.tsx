@@ -16,6 +16,7 @@ import dxTextBox from 'devextreme/ui/text_box';
 import { PlanningGrid, PlanningKanban, PlanningGantt, FormPopup, TaskFormDetails } from '../../components';
 
 import { newTask } from '../../shared/constants';
+import { useScreenSize } from '../../utils/media-query';
 
 import { getTasks, getFilteredTasks } from 'dx-template-gallery-data';
 
@@ -23,6 +24,9 @@ import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 
 import './planning-task-list.scss';
+import Button from 'devextreme-react/button';
+import TextBox from 'devextreme-react/text-box';
+import Tabs from 'devextreme-react/tabs';
 
 const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
 
@@ -41,6 +45,8 @@ export const PlanningTaskList = () => {
   const [newTaskData, setNewTaskData] = useState(newTask);
   const [popupVisible, setPopupVisible] = useState(false);
 
+  const { isXSmall } = useScreenSize();
+
   const isDataGrid = view === listView;
   const isKanban = view === kanbanView;
 
@@ -54,7 +60,7 @@ export const PlanningTaskList = () => {
   }, []);
 
   useEffect(() => {
-    if(filteredData.length && gridData.length) {
+    if (filteredData.length && gridData.length) {
       setLoading(false);
     }
   }, [filteredData, gridData]);
@@ -63,19 +69,19 @@ export const PlanningTaskList = () => {
     setNewTaskData(data);
   }, []);
 
-  const onTabClick = useCallback((e: { itemData: string }) => {
-    setView(e.itemData);
+  const onTabClick = useCallback((e: { itemData?: string }) => {
+    setView(e.itemData || '');
     setIndex(listsData.findIndex((d) => d === e.itemData));
   }, []);
 
-  const changePopupVisibility = () => {
+  const changePopupVisibility = useCallback(() => {
     setPopupVisible(!popupVisible);
-  };
+  }, []);
 
   const refresh = useCallback(() => {
-    if(isDataGrid) {
+    if (isDataGrid) {
       gridRef.current?.instance.refresh();
-    } else if(isKanban) {
+    } else if (isKanban) {
       kanbanRef.current?.instance.update();
     } else {
       ganttRef.current?.instance.refresh();
@@ -87,7 +93,7 @@ export const PlanningTaskList = () => {
   }, []);
 
   const exportToPDF = useCallback(() => {
-    if(isDataGrid) {
+    if (isDataGrid) {
       const doc = new jsPDF();
       exportDataGrid({
         jsPDFDocument: doc,
@@ -124,56 +130,69 @@ export const PlanningTaskList = () => {
     gridRef.current?.instance.searchByText(e.component.option('text') ?? '');
   }, []);
 
+  const getTabsWidth = useCallback(() => {
+    return isXSmall ? 220 : 'auto';
+  }, []);
+
   return (
     <div className='view-wrapper view-wrapper-list'>
       <Toolbar className='toolbar-common'>
         <Item location='before'>
-          <span className='toolbar-header'>Task</span>
+          <span className='toolbar-header'>Tasks</span>
         </Item>
         <Item
           location='before'
           widget='dxTabs'
-          options={{
-            dataSource: listsData,
-            selectedIndex: index,
-            onItemClick: onTabClick,
-          }}
-        />
+        >
+          <Tabs
+            dataSource={listsData}
+            width={getTabsWidth()}
+            selectedIndex={index}
+            scrollByContent
+            showNavButtons={false}
+            onItemClick={onTabClick}
+          />
+        </Item>
         <Item
           location='after'
           widget='dxButton'
           locateInMenu='auto'
-          options={{
-            icon: 'plus',
-            text: 'Add Task',
-            type: 'default',
-            stylingMode: 'contained',
-            onClick: changePopupVisibility,
-          }}
-        />
+        >
+          <Button
+            icon='plus'
+            text='Add Task'
+            type='default'
+            stylingMode='contained'
+            onClick={changePopupVisibility}
+          />
+        </Item>
         <Item
           location='after'
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
-          options={{
-            icon: 'refresh',
-            text: 'Refresh',
-            onClick: refresh,
-          }}
-        />
+        >
+          <Button
+            icon='refresh'
+            text='Refresh'
+            stylingMode='text'
+            onClick={refresh}
+          />
+        </Item>
         <Item
           location='after'
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
           disabled={view !== listView}
-          options={{
-            icon: 'columnchooser',
-            text: 'Column Chooser',
-            onClick: showColumnChooser,
-          }}
-        />
+        >
+          <Button
+            icon='columnchooser'
+            text='Column Chooser'
+            stylingMode='text'
+            onClick={showColumnChooser}
+          />
+        </Item>
         <Item location='after' locateInMenu='auto'>
           <div className='separator' />
         </Item>
@@ -183,42 +202,48 @@ export const PlanningTaskList = () => {
           showText='inMenu'
           locateInMenu='auto'
           disabled={isKanban}
-          options={{
-            icon: 'exportpdf',
-            text: 'Export To PDF',
-            onClick: exportToPDF,
-          }}
-        />
+
+        >
+          <Button
+            icon='exportpdf'
+            text='Export To PDF'
+            stylingMode='text'
+            onClick={exportToPDF}
+          />
+        </Item>
         <Item
           location='after'
           widget='dxButton'
           showText='inMenu'
           locateInMenu='auto'
           disabled={view !== listView}
-          options={{
-            icon: 'exportxlsx',
-            text: 'Export To XSLX',
-            onClick: exportToXSLX,
-          }}
-        />
+        >
+          <Button
+            icon='exportxlsx'
+            text='Export To XSLX'
+            stylingMode='text'
+            onClick={exportToXSLX}
+          />
+        </Item>
         <Item
           location='after'
           widget='dxTextBox'
           locateInMenu='auto'
           disabled={view !== listView}
-          options={{
-            mode: 'search',
-            placeholder: 'Task Search',
-            onInput: search,
-          }}
-        />
+        >
+          <TextBox
+            mode='search'
+            placeholder='Task Search'
+            onInput={search}
+          />
+        </Item>
       </Toolbar>
       {loading && <LoadPanel container='.content' visible position={{ of: '.content' }} />}
       {!loading && isDataGrid && <PlanningGrid dataSource={gridData} ref={gridRef} />}
       {!loading && isKanban && <PlanningKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
       {!loading && view === ganttView && <PlanningGantt dataSource={filteredData} ref={ganttRef} />}
       <FormPopup title='New Task' visible={popupVisible} changeVisibility={changePopupVisibility}>
-        <TaskFormDetails colCountByScreen={{ xs: 1, sm: 1 }} data={newTaskData} editing onDataChanged={onDataChanged} />
+        <TaskFormDetails colCountByScreen={{ xs: 1, sm: 1 }} subjectField data={newTaskData} editing onDataChanged={onDataChanged} />
       </FormPopup>
     </div>
   );

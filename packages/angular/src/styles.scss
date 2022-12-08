@@ -21,22 +21,17 @@ body {
   }
 }
 
-.content-block {
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-top: 20px;
-
-  .screen-x-small & {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-}
-
 .responsive-paddings {
   padding: 20px;
 
   .screen-large & {
     padding: 40px;
+  }
+}
+
+.dx-dropdownbutton-content {
+  .dx-list-item {
+    display: block;
   }
 }
 
@@ -48,20 +43,19 @@ body {
   border-left: 0;
 }
 
-.with-footer > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+.app-content-wrapper > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
   height: 100%;
 
   & > .dx-scrollview-content {
     display: flex;
     flex-direction: column;
-    min-height: 100%;
+    height: 100%;
   }
 }
 
 .embedded.embedded {
   .layout-header,
   .dx-swatch-additional,
-  .with-footer .content-block,
   .dx-drawer-shader {
     display: none;
   }

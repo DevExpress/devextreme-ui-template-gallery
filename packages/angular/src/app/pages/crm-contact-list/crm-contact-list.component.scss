@@ -25,6 +25,20 @@ $side-panel-toolbar-height: 76px;
       }
     }
 
+    ::ng-deep .dx-row-focused {
+      .name-template {
+        color: $base-focus-color;
+
+        .position.position {
+          color: $base-focus-color;
+        }
+      }
+
+      .status {
+        @include status($base-focus-color);
+      }
+    }
+
     ::ng-deep & {
       .dx-datagrid-header-panel {
         padding: 0 $content-padding;
@@ -35,7 +49,7 @@ $side-panel-toolbar-height: 76px;
         padding: $toolbar-margin-bottom 0;
       }
 
-      .clickable-row {
+      .dx-datagrid-content .dx-row {
         cursor: pointer;
       }
     }

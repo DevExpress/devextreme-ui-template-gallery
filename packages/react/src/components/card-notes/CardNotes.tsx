@@ -8,7 +8,7 @@ import Validator, { RequiredRule } from 'devextreme-react/validator';
 import ValidationGroup from 'devextreme-react/validation-group';
 import ScrollView from 'devextreme-react/scroll-view';
 
-import { Notes, Note } from '../../shared/types/card-notes';
+import { Notes, Note } from '../../types/card-notes';
 
 import './CardNotes.scss';
 

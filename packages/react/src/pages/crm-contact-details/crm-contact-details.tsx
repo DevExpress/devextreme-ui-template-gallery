@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 
 import { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
-import DropDowmButton from 'devextreme-react/drop-down-button';
+import DropDownButton from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 
 import {
@@ -15,7 +15,7 @@ import {
   CardOpportunities
 } from '../../components';
 
-import { Contact } from '../../shared/types/crm-contact';
+import { Contact } from '../../types/crm-contact';
 
 import {
   getContact,
@@ -86,7 +86,7 @@ export const CRMContactDetails = () => {
           />
         </Item>
         <Item location='after'>
-          <DropDowmButton
+          <DropDownButton
             text='Actions'
             stylingMode='text'
             width={120}
@@ -101,22 +101,26 @@ export const CRMContactDetails = () => {
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={{
-            text: 'Copy',
-            icon: 'copy'
-          }}
-        />
+        >
+          <Button
+            text='Copy'
+            icon='copy'
+            stylingMode='text'
+          />
+        </Item>
         <Item
           location='after'
           locateInMenu='auto'
           widget='dxButton'
           showText='inMenu'
-          options={{
-            text: 'Refresh',
-            icon: 'refresh',
-            onClick: refresh
-          }}
-        />
+        >
+          <Button
+            text='Refresh'
+            icon='refresh'
+            stylingMode='text'
+            onClick={refresh}
+          />
+        </Item>
       </ToolbarDetails>
 
       <div className='panels'>

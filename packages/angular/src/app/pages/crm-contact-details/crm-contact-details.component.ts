@@ -11,15 +11,15 @@ import {
   CardActivitiesModule,
   CardNotesModule,
   CardMessagesModule,
-} from 'src/app/shared/components';
-import { DataService } from 'src/app/shared/services';
+} from 'src/app/components';
+import { DataService } from 'src/app/services';
 import { forkJoin, Observable, map, Subscription } from 'rxjs';
-import { Contact } from 'src/app/shared/types/contact';
-import { Messages } from 'src/app/shared/types/messages';
-import { Notes } from 'src/app/shared/types/notes';
-import { Opportunities } from 'src/app/shared/types/opportunities';
-import { ContactFormModule } from './contact-form/contact-form.component';
-import { ContactCardsModule } from './contact-cards/contact-cards.component';
+import { Contact } from 'src/app/types/contact';
+import { Messages } from 'src/app/types/messages';
+import { Notes } from 'src/app/types/notes';
+import { Opportunities } from 'src/app/types/opportunities';
+import { ContactFormModule } from '../../components/contact-form/contact-form.component';
+import { ContactCardsModule } from '../../components/contact-cards/contact-cards.component';
 
 @Component({
   templateUrl: './crm-contact-details.component.html',

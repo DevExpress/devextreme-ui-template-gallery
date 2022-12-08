@@ -1,12 +1,1 @@
-<ng-container *ngIf="isAuthenticated(); else unauthenticated">
-  <app-side-nav-outer-toolbar title="{{ appInfo.title }}">
-    <router-outlet></router-outlet>
-    <app-footer>
-      Copyright © {{ appInfo.currentYear }} Developer Express Inc.
-    </app-footer>
-  </app-side-nav-outer-toolbar>
-</ng-container>
-
-<ng-template #unauthenticated>
-  <app-unauthenticated-content></app-unauthenticated-content>
-</ng-template>
+<router-outlet></router-outlet>

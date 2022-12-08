@@ -33,7 +33,7 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
 
   const onOutsideClick = useCallback(() => {
     setMenuStatus((prevMenuStatus) => (prevMenuStatus !== MenuStatus.Closed && !isLarge ? MenuStatus.Closed : prevMenuStatus));
-    return true;
+    return !isLarge;
   }, [isLarge]);
 
   const onNavigationChanged = useCallback(
@@ -63,7 +63,7 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
         closeOnOutsideClick={onOutsideClick}
         openedStateMode={isLarge ? 'shrink' : 'overlap'}
         revealMode={isXSmall ? 'slide' : 'expand'}
-        minSize={isXSmall ? 0 : 60}
+        minSize={isXSmall ? 0 : 48}
         maxSize={250}
         shading={isLarge ? false : true}
         opened={menuStatus === MenuStatus.Closed ? false : true}
@@ -74,11 +74,6 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
             <div className='content'>
               {React.Children.map(children, (item) => {
                 return React.isValidElement(item) && item.type !== Footer && item;
-              })}
-            </div>
-            <div className='content-block'>
-              {React.Children.map(children, (item) => {
-                return React.isValidElement(item) && item.type === Footer && item;
               })}
             </div>
           </ScrollView>

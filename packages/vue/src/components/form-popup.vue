@@ -1,7 +1,6 @@
 <template>
   <dx-popup
     ref="popup"
-    v-if="isVisible"
     :title="props.title"
     :visible="isVisible"
     :full-screen="screenInfo.isSmall || screenInfo.isXSmall"
@@ -13,23 +12,13 @@
       widget="dxButton"
       toolbar="bottom"
       location="after"
-      :options="{
-        text: 'Save',
-        stylingMode: 'outlined',
-        type: 'default',
-        onClick: save,
-      }"
+      :options="saveOptions"
     />
     <dx-popup-item
       widget="dxButton"
       toolbar="bottom"
       location="after"
-      :options="{
-        text: 'Cancel',
-        stylingMode: 'text',
-        type: 'default',
-        onClick: close
-      }"
+      :options="cancelOptions"
     />
     <dx-validation-group ref="validationGroup">
       <slot />
@@ -68,13 +57,29 @@ watch(
 );
 
 const save = () => {
-  if (validationEngine.validateGroup(validationGroup.value?.instance).isValid) {
+  if (validationGroup.value?.instance.validate().isValid) {
+    validationGroup.value?.instance.reset();
     emit('save');
   }
 };
 
-const close = () => {
+const cancel = () => {
   isVisible.value = false;
+  validationGroup.value?.instance.reset();
   emit('update:isVisible', false);
+};
+
+const saveOptions = {
+  text: 'Save',
+  stylingMode: 'outlined',
+  type: 'default',
+  onClick: save,
+};
+
+const cancelOptions = {
+  text: 'Cancel',
+  stylingMode: 'text',
+  type: 'default',
+  onClick: cancel,
 };
 </script>

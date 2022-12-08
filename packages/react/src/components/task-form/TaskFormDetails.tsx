@@ -13,25 +13,27 @@ import { FormTextbox } from '../form-textbox/FormTextbox';
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../shared/itemFieldRenderMethods';
 
-import { Task } from '../../shared/types/task';
+import { Task } from '../../types/task';
 
-export const TaskFormDetails = ({ editing, data, colCountByScreen, onDataChanged }: { editing: boolean, data: Task, colCountByScreen: {xs: number, sm: number}, onDataChanged: (data) => void }) => {
-  const updateField = (field: string) => (value) => {
-    onDataChanged({ ...data, ...{ [field]: value } });
+export const TaskFormDetails = ({ editing, data, subjectField, colCountByScreen, onDataChanged }: {
+  editing: boolean, data: Task, subjectField: boolean, colCountByScreen: {xs: number, sm: number}, onDataChanged: (data) => void
+}) => {
+  const updateField = (field: string) => (value: string) => {
+    onDataChanged((prevState) => ({ ...prevState, ...{ [field]: value } }));
   };
 
   return (
     <Form
       className={classNames({ 'plain-styled-form task-form-details': true, 'view-mode': !editing })}
     >
-      <SimpleItem visible={!data.text} colSpan={2}>
+      {subjectField && <SimpleItem colSpan={2}>
         <FormTextbox
           label='Subject'
           value={data.text}
           isEditing={!editing}
           onValueChange={updateField('text')}
         />
-      </SimpleItem>
+      </SimpleItem>}
       <GroupItem itemType='group'>
         <ColCountByScreen xs={colCountByScreen.xs} sm={colCountByScreen.sm} md={2} lg={2} />
         <SimpleItem cssClass='accent'>

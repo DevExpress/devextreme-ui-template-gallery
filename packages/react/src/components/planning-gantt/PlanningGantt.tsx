@@ -2,7 +2,7 @@ import React from 'react';
 
 import Gantt, { Tasks, Column, Toolbar, Item, Validation, Editing } from 'devextreme-react/gantt';
 
-import { PlanningProps } from '../../shared/types/task';
+import { PlanningProps } from '../../types/task';
 
 import './PlanningGantt.scss';
 
