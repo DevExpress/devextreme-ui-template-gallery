@@ -27,7 +27,11 @@ export class FormTextboxComponent {
 
   @Input() value!: string;
 
-  @Output() valueChange: EventEmitter<string> = new EventEmitter();
+  @Output() valueChange = new EventEmitter<string>();
+
+  valueChanged(e) {
+    this.valueChange.emit(e.value);
+  }
 
 }
 

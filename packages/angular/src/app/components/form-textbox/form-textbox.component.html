@@ -5,6 +5,7 @@
              [elementAttr]="{class: 'form-editor'}"
              [inputAttr]="{class: 'form-editor-input'}"
              stylingMode="filled"
+             (onValueChanged)="valueChanged($event)"
              valueChangeEvent="keyup input change"
 >
   <dx-validator [validationRules]="validators"></dx-validator>

@@ -30,6 +30,8 @@ import { ClickEvent } from 'devextreme/ui/button';
 export class ContactFormComponent {
   @Input() contactData: Contact;
 
+  savedData: Contact = null;
+
   statusList = contactStatusList;
 
   isEditing = false;
@@ -37,15 +39,18 @@ export class ContactFormComponent {
   zipCodeValidator: ValidationRule = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
 
   handleEditClick() {
+    this.savedData = { ...this.contactData };
     this.isEditing = true;
   }
 
   handleSaveClick({ validationGroup }: ClickEvent) {
     if(!validationGroup.validate().isValid) return;
     this.isEditing = false;
+    this.savedData = null;
   }
 
   handleCancelClick() {
+    this.contactData = { ...this.savedData };
     this.isEditing = false;
   }
 }
