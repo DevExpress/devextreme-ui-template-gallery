@@ -54,7 +54,7 @@ export const router = createRouter({
         layout: simpleLayout,
         title: 'Change Password',
       },
-      component: loadAuthComponent('@/pages/change-password-form.vue'),
+      component: loadAuthComponent('change-password-form'),
     },
     ...[
       'crm-contact-list',
@@ -71,7 +71,7 @@ export const router = createRouter({
         layout: defaultLayout,
       },
       // eslint-disable-next-line func-call-spacing
-      component: import (/* webpackChunkName: "pages" */ `@/pages/${name}.vue`),
+      component: () => import (/* webpackChunkName: "pages" */ `@/pages/${name}.vue`),
     })),
   ],
 });
