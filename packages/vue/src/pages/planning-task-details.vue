@@ -155,6 +155,9 @@ $left-panel-width: 400px;
 .dx-toolbar {
   margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
 
+  :deep(.dx-toolbar-before){
+    width: 300px;
+  }
   :deep(.dx-toolbar-label > div) {
     @include header();
   }

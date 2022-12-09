@@ -12,6 +12,10 @@ $left-panel-width: 400px;
 .dx-toolbar ::ng-deep {
   margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
 
+  .dx-toolbar-before {
+    width: 300px;
+  }
+
   .dx-toolbar-label > div {
     @include header();
   }

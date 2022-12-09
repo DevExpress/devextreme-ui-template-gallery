@@ -8,6 +8,10 @@
   flex-grow: 1;
   padding: 20px 16px 0 16px;
 
+  .dx-toolbar-before {
+    width: 300px;
+  }
+
   .panels {
     display: flex;
     flex-wrap: wrap;
