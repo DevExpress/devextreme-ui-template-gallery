@@ -68,7 +68,7 @@ export const CardOpportunities = ({ active, closed }: { active?: Opportunities, 
       <CardsWithLoadPanel
         active={active}
         closed={closed}
-        loading={!active || !closed}
+        isData={!!(active && closed)}
         panelProps={{
           container: '.card-opportunies',
           position: { of: '.card-opportunies' }

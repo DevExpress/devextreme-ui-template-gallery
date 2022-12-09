@@ -36,6 +36,7 @@ export const CRMContactDetails = () => {
   const [messages, setMessages] = useState([]);
   const [activeOpportunities, setActiveOpportunities] = useState();
   const [closedOpportunities, setClosedOpportunities] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -64,10 +65,11 @@ export const CRMContactDetails = () => {
         .then((data) => {
           setClosedOpportunities(data);
         }),
-    ]).catch((error) => console.log(error));
+    ]).then(() => { setIsLoading(false); }).catch((error) => console.log(error));
   }, []);
 
   const refresh = useCallback(() => {
+    setIsLoading(true);
     loadData();
   }, []);
 
@@ -127,6 +129,7 @@ export const CRMContactDetails = () => {
         <div className='left'>
           <ContactForm
             data={data}
+            isLoading={isLoading}
           />
         </div>
 
@@ -135,11 +138,12 @@ export const CRMContactDetails = () => {
             <TabPanel showNavButtons deferRendering={false}>
               <TabPanelItem title='Tasks'>
                 <CardTasks
+                  isLoading={isLoading}
                   tasks={data?.tasks}
                 />
               </TabPanelItem>
               <TabPanelItem title='Activities'>
-                <CardActivities activities={data?.activities} />
+                <CardActivities activities={data?.activities} isLoading={isLoading} />
               </TabPanelItem>
               <TabPanelItem title='Opportunities'>
                 <CardOpportunities
