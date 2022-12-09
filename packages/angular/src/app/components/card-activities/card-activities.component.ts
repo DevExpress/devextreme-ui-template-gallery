@@ -13,25 +13,17 @@ import { Activity } from 'src/app/types/activities';
   templateUrl: './card-activities.component.html',
   styleUrls: ['./card-activities.component.scss'],
 })
-export class CardActivitiesComponent implements OnInit, OnChanges {
+export class CardActivitiesComponent {
   @Input() activities: Activity[];
 
   @Input() showBy? = false;
 
-  isLoading = true;
+  @Input() isLoading: boolean = false;
 
   activityMenuItems: Array<{ text: string }> = [
     { text: 'View details' },
     { text: 'Delete' },
   ];
-
-  ngOnInit() {
-    this.isLoading = !this.activities;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.isLoading = !changes.activities.currentValue;
-  }
 }
 
 @NgModule({

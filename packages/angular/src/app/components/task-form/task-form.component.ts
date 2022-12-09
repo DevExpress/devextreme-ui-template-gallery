@@ -31,6 +31,10 @@ export class TaskFormComponent implements OnChanges {
 
   @Input() contentByScreen: { xs: number, sm: number }
 
+  @Input() isLoading: boolean = false;
+
+  @Input() isPopup: boolean = false;
+
   savedData: Task = null;
 
   isEditing = false;
@@ -39,16 +43,9 @@ export class TaskFormComponent implements OnChanges {
 
   priorityList = taskPriorityList;
 
-  isLoading = true;
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.isLoading = !changes.task.currentValue;
-
-    if (!this.isLoading) {
-      this.isEditing = !this.task?.text;
-    }
+  ngOnChanges() {
+    this.isEditing = this.isPopup;
   }
-
   handleEditClick = () => {
     this.savedData = { ...this.task }
     this.isEditing = true;

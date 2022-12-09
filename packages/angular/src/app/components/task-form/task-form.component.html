@@ -1,5 +1,5 @@
 <div id="task-form">
-  <dx-toolbar *ngIf="!!task?.text">
+  <dx-toolbar *ngIf="!isPopup">
     <dxi-item location="before"
       ><span class="dx-form-group-caption">Details</span>
     </dxi-item>
@@ -29,11 +29,11 @@
     </dxi-item>
   </dx-toolbar>
 
-  <dx-form *ngIf="!isLoading"
+  <dx-form *ngIf="task"
           class="plain-styled-form"
           [class.view-mode]="!isEditing"
   >
-    <dxi-item [visible]="!task.text">
+    <dxi-item [visible]="isPopup">
       <div *dxTemplate>
         <form-textbox label="Subject"
             [(value)]="task.text"
@@ -148,7 +148,7 @@
   </dx-form>
 
   <dx-load-panel
-    [visible]="isLoading"
+    [visible]="!task || isLoading"
     [showPane]="false"
     content="#task-form"
     [position]="{ of: '#task-form' }"
