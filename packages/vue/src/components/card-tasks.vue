@@ -3,9 +3,9 @@
     <load-component
       :is-loading="props.isLoading"
       :container-selector="'#card-tasks'"
+      :is-data="!!props.tasks.length"
     >
       <dx-data-grid
-        v-if="!props.isLoading"
         class="grid-tasks"
         :data-source="filteredTasks"
         :column-auto-width="true"

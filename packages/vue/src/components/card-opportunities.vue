@@ -3,6 +3,7 @@
     <load-component
       :is-loading="isLoading"
       :container-selector="'#card-opportunies'"
+      :is-data="!!props.contactId"
     >
       <dx-button
         text="Add Opportunity"
@@ -59,9 +60,9 @@ import type { Opportunity } from '@/types/opportunities';
 import OpportunityTile from './opportunity-tile.vue';
 
 const props = withDefaults(defineProps<{
-  contactId: number | null,
+  contactId?: number,
 }>(), {
-  contactId: null,
+  contactId: undefined,
 });
 
 const activeItems = ref<Opportunity[]>([]);

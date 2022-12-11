@@ -7,6 +7,7 @@
       <load-component
         :is-loading="isLoading"
         :container-selector="'#card-notes'"
+        :is-data="!!props.items"
       >
         <div class="input-content">
           <dx-text-area
@@ -80,11 +81,11 @@ const props = withDefaults(defineProps<{
 }>(), {
   contactId: null,
   user: '',
-  items: [],
+  items: undefined,
 });
 
 const isLoading = ref(true);
-const items = ref<Note[]>([]);
+const items = ref<Note[]>(props.items);
 
 const nodeText = ref<string>('');
 

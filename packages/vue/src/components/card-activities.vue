@@ -1,11 +1,12 @@
 <template>
   <div
     id="activities-list"
-    :class="{load: !isLoading}"
+    :class="{load: props.items}"
   >
     <load-component
       :is-loading="props.isLoading"
       container-selector="#activities-list"
+      :is-data="!!props.items"
     >
       <dx-list
         class="activities-list"
@@ -50,10 +51,11 @@ import CardMenu from '@/components/card-menu.vue';
 const props = withDefaults(defineProps<{
   isLoading: boolean,
   showBy?: boolean,
-  items: Activity[]
+  items?: Activity[]
 }>(), {
   isLoading: true,
   showBy: false,
+  items: undefined,
 });
 
 const activityMenuItems: Array<{ text: string }> = [
