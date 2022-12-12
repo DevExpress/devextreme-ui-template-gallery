@@ -20,18 +20,16 @@ export class CardTasksComponent implements OnChanges {
 
   @Input() tasks: Task[];
 
-  currentTasks: Task[];
+  @Input() isLoading: boolean = false;
 
-  isLoading = true;
+  currentTasks: Task[];
 
   constructor() {
     this.onReorder = this.onReorder.bind(this);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.isLoading = !changes.tasks?.currentValue;
-
-    if (!this.isLoading) {
+    if(changes.tasks?.currentValue) {
       this.currentTasks = changes.tasks.currentValue.filter((item) => !!item.status && !!item.priority);
     }
   }

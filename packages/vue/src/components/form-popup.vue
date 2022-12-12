@@ -31,12 +31,11 @@ import { ref, watch } from 'vue';
 import { DxPopup, DxToolbarItem as DxPopupItem } from 'devextreme-vue/popup';
 import { screenInfo } from '@/utils/media-query';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
-import validationEngine from 'devextreme/ui/validation_engine';
 
 const props = withDefaults(
   defineProps<{
     title: string,
-  isVisible: boolean,
+    isVisible: boolean,
 }>(),
   {
     isVisible: false,

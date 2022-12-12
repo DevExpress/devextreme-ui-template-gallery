@@ -1,6 +1,6 @@
 <div id="card-tasks">
   <dx-data-grid
-    *ngIf="!isLoading"
+    *ngIf="currentTasks"
     #dataGrid
     [dataSource]="currentTasks"
     [columnAutoWidth]="true"
@@ -32,7 +32,7 @@
   </dx-data-grid>
 
   <dx-load-panel
-    [visible]="isLoading"
+    [visible]="!currentTasks || isLoading"
     [showPane]="false"
     container="#card-tasks"
     [position]="{ of: '#card-tasks' }"

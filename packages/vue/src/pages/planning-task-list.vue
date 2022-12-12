@@ -81,7 +81,10 @@
         :options="taskSearchOptions"
       />
     </dx-toolbar>
-    <load-component :is-loading="isLoading">
+    <load-component
+      :is-loading="isLoading"
+      :has-data="!!gridData.length"
+    >
       <div class="task-list">
         <div
           v-if="taskPanelItems[0].text === displayTaskComponent"
@@ -121,6 +124,7 @@
     <task-form
       :content-by-screen="{ xs: 1, sm: 1 }"
       :is-create-mode="true"
+      :data="popupTask"
     />
   </form-popup>
 </template>
@@ -146,6 +150,7 @@ import TaskForm from '@/components/task-form.vue';
 import TaskListGrid from '@/components/task-list-grid.vue';
 import TaskListKanban from '@/components/task-list-kanban.vue';
 import TaskListGantt from '@/components/task-list-gantt.vue';
+import { newTask } from '@/types/task';
 
 import { screenInfo } from '@/utils/media-query';
 
@@ -154,6 +159,7 @@ const displayTaskComponent = ref(taskPanelItems[0].text);
 const activeTabId = ref<TaskPanelItemsIds>('grid');
 const tasksGridCmp = ref<InstanceType<typeof TaskListGrid> | null>(null);
 const tasksGanttCmp = ref<InstanceType<typeof TaskListGantt> | null>(null);
+const popupTask = ref<Task>(newTask);
 
 const gridData = ref<Task[]>([]);
 const kanbanData = ref<Task[]>([]);

@@ -14,7 +14,6 @@
           icon="edit"
           styling-mode="outlined"
           type="default"
-          :visible="!props.isLoading"
           @click="handleEditClick"
         />
       </dx-toolbar-item>
@@ -45,6 +44,7 @@
     <load-component
       :is-loading="isLoading"
       :container-selector="'#task-form'"
+      :has-data="!!props.data"
     >
       <dx-form
         :form-data="data"
@@ -52,7 +52,7 @@
         :class="{'view-mode': !isEditing}"
       >
         <dx-form-item
-          :visible="isCreateMode"
+          v-if="isCreateMode"
           :col-span="2"
         >
           <form-textbox
@@ -172,7 +172,7 @@ import StatusIndicator from '@/components/status-indicator.vue';
 import { DxButton } from 'devextreme-vue/button';
 import { DxTextArea } from 'devextreme-vue/text-area';
 import {
-  taskPriorityList, Task, taskStatusList, newTask,
+  taskPriorityList, Task, taskStatusList,
 } from '@/types/task';
 import {
   DxToolbar,
@@ -198,9 +198,9 @@ const props = withDefaults(defineProps<{
   contentByScreen: { xs: number, sm: number },
   validationGroup?: string,
 }>(), {
+  data: undefined,
   isLoading: false,
   isCreateMode: false,
-  data: () => ({ ...newTask }),
   validationGroup: undefined,
 });
 
@@ -214,7 +214,7 @@ watch(
   },
 );
 
-let dataSaved: Task | null = null;
+let dataSaved: Task;
 
 function handleEditClick() {
   dataSaved = { ...data.value };

@@ -29,7 +29,7 @@ import { ContactCardsModule } from '../../components/contact-cards/contact-cards
 export class CrmContactDetailsComponent implements OnInit, OnDestroy {
   contactId = 12;
 
-  contactData$: Observable<Contact>;
+  contactData: Contact;
 
   contactNotes: Notes;
 
@@ -40,6 +40,8 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
   closedOpportunities: Opportunities;
 
   contactName = 'Loading...';
+
+  isLoading = false;
 
   subscriptions: Subscription[] = [];
 
@@ -55,8 +57,6 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   loadData = () => {
-    this.contactData$ = this.service.getContact(this.contactId);
-
     const observable$ = forkJoin([
       this.service.getContactNotes(this.contactId),
       this.service.getContactMessages(this.contactId),
@@ -77,8 +77,10 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
         }))
       );
 
-    this.subscriptions.push(this.contactData$.subscribe((data) => {
+    this.subscriptions.push(this.service.getContact(this.contactId).subscribe((data) => {
       this.contactName = data.name;
+      this.contactData = data;
+      this.isLoading = false;
     }));
 
     this.subscriptions.push(observable$.subscribe((data) => {
@@ -87,6 +89,7 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
   };
 
   refresh = () => {
+    this.isLoading = true;
     this.loadData();
   };
 }

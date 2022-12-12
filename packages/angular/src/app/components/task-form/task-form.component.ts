@@ -1,5 +1,5 @@
 import {
-  Component, NgModule, Input, SimpleChanges, OnChanges,
+  Component, NgModule, Input, OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -26,10 +26,14 @@ import { ClickEvent } from 'devextreme/ui/button';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss'],
 })
-export class TaskFormComponent implements OnChanges {
+export class TaskFormComponent implements OnInit {
   @Input() task: Task;
 
   @Input() contentByScreen: { xs: number, sm: number }
+
+  @Input() isLoading: boolean = false;
+
+  @Input() isCreateMode: boolean = false;
 
   savedData: Task = null;
 
@@ -39,16 +43,9 @@ export class TaskFormComponent implements OnChanges {
 
   priorityList = taskPriorityList;
 
-  isLoading = true;
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.isLoading = !changes.task.currentValue;
-
-    if (!this.isLoading) {
-      this.isEditing = !this.task?.text;
-    }
+  ngOnInit() {
+    this.isEditing = this.isCreateMode;
   }
-
   handleEditClick = () => {
     this.savedData = { ...this.task }
     this.isEditing = true;

@@ -39,6 +39,8 @@ export class ContactCardsComponent {
     @Input() messages: Messages;
 
     @Input() contactName: string;
+
+    @Input() isLoading: boolean;
 }
 
 @NgModule({
