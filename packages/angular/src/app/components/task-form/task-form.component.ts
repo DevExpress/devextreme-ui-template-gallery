@@ -33,7 +33,7 @@ export class TaskFormComponent implements OnInit {
 
   @Input() isLoading: boolean = false;
 
-  @Input() isPopup: boolean = false;
+  @Input() isCreateMode: boolean = false;
 
   savedData: Task = null;
 
@@ -44,7 +44,7 @@ export class TaskFormComponent implements OnInit {
   priorityList = taskPriorityList;
 
   ngOnInit() {
-    this.isEditing = this.isPopup;
+    this.isEditing = this.isCreateMode;
   }
   handleEditClick = () => {
     this.savedData = { ...this.task }

@@ -45,7 +45,7 @@
       <load-component
         :is-loading="isLoading"
         :container-selector="'#contact-form'"
-        :is-data="!!props.contactData"
+        :has-data="!!props.contactData"
       >
         <dx-form
           class="plain-styled-form"

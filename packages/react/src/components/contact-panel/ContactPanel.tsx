@@ -36,7 +36,7 @@ export const ContactPanel = ({ contactId, isOpened, changePanelOpened } : { cont
   return (
     <ContactPanelWithLoadPanel
       contact={data}
-      isData={!!data}
+      hasData={!!data}
       isOpened={isOpened}
       onDataChanged={onDataChanged}
       changePanelOpened={changePanelOpened}

@@ -58,7 +58,7 @@ export const ContactForm = ({ data, isLoading = false }: { data?: Contact, isLoa
         <ToolbarForm toggleEditing={handleEditClick} onSaveClick={onSaveClick} editing={editing} onCancelClick={onCancelClick} />
         <ContactFromDetailsWithLoadPanel
           loading={isLoading}
-          isData={!!formData}
+          hasData={!!formData}
           data={formData}
           editing={editing}
           updateField={updateField}

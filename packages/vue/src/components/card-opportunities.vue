@@ -3,7 +3,7 @@
     <load-component
       :is-loading="isLoading"
       :container-selector="'#card-opportunies'"
-      :is-data="!!props.contactId"
+      :has-data="!!props.contactId"
     >
       <dx-button
         text="Add Opportunity"

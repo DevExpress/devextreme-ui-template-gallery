@@ -43,7 +43,7 @@ export const CardActivities = ({ activities, isLoading }: { activities?: Activit
   <div className={classNames({ 'card-activities': true, load: !activities })}>
     <ActivitiesWithLoadPanel
       activities={activities}
-      isData={!!activities}
+      hasData={!!activities}
       loading={isLoading}
       panelProps={{
         container: '.card-activities',

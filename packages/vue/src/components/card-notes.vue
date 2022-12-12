@@ -7,7 +7,7 @@
       <load-component
         :is-loading="isLoading"
         :container-selector="'#card-notes'"
-        :is-data="!!props.items"
+        :has-data="!!props.items"
       >
         <div class="input-content">
           <dx-text-area

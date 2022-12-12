@@ -6,7 +6,7 @@
     :container="props.containerSelector"
     :position="{ of: props.containerSelector }"
   />
-  <slot v-if="props.isData" />
+  <slot v-if="props.hasData" />
 </template>
 
 <script setup lang="ts">
@@ -16,12 +16,12 @@ const props = withDefaults(defineProps<{
   isLoading: boolean,
   containerSelector?: string,
   width?: number,
-  isData: boolean,
+  hasData: boolean,
 }>(), {
   isLoading: false,
   containerSelector: '',
   width: null,
-  isData: true,
+  hasData: true,
 });
 </script>
 

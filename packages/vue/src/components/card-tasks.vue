@@ -3,7 +3,7 @@
     <load-component
       :is-loading="props.isLoading"
       :container-selector="'#card-tasks'"
-      :is-data="!!props.tasks.length"
+      :has-data="!!props.tasks.length"
     >
       <dx-data-grid
         class="grid-tasks"

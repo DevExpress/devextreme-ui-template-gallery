@@ -51,7 +51,7 @@ export const TaskForm = ({ task, isLoading }: { task?: Task, isLoading: boolean 
       <ToolbarForm toggleEditing={handleEditClick} onCancelClick={onCancelClick} onSaveClick={onSaveClick} editing={editing} />
       <TaskFormWithLoadPanel
         loading={isLoading}
-        isData={!!data}
+        hasData={!!data}
         data={data}
         editing={editing}
         onDataChanged={onDataChanged}

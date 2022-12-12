@@ -6,7 +6,7 @@
     <load-component
       :is-loading="props.isLoading"
       container-selector="#activities-list"
-      :is-data="!!props.items"
+      :has-data="!!props.items"
     >
       <dx-list
         class="activities-list"

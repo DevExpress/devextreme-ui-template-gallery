@@ -67,7 +67,7 @@ export const CardTasks = ({ tasks, isLoading }: { tasks?: Task[], isLoading: boo
     <div className='card-tasks'>
       <GridWithLoadPanel
         tasks={tasks?.filter((item) => !!item.status && !!item.priority)}
-        isData={!!tasks}
+        hasData={!!tasks}
         loading={isLoading}
         panelProps={{
           container: '.card-tasks',

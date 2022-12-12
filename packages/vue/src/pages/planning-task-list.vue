@@ -83,7 +83,7 @@
     </dx-toolbar>
     <load-component
       :is-loading="isLoading"
-      :is-data="!!gridData.length"
+      :has-data="!!gridData.length"
     >
       <div class="task-list">
         <div
