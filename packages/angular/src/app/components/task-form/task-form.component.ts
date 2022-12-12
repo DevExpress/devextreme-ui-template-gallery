@@ -1,5 +1,5 @@
 import {
-  Component, NgModule, Input, SimpleChanges, OnChanges,
+  Component, NgModule, Input, OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -26,7 +26,7 @@ import { ClickEvent } from 'devextreme/ui/button';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss'],
 })
-export class TaskFormComponent implements OnChanges {
+export class TaskFormComponent implements OnInit {
   @Input() task: Task;
 
   @Input() contentByScreen: { xs: number, sm: number }
@@ -43,7 +43,7 @@ export class TaskFormComponent implements OnChanges {
 
   priorityList = taskPriorityList;
 
-  ngOnChanges() {
+  ngOnInit() {
     this.isEditing = this.isPopup;
   }
   handleEditClick = () => {
