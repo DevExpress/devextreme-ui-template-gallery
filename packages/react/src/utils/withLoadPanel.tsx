@@ -10,11 +10,11 @@ type WithLoadProps = {
 export const withLoadPanel = <T extends object>(WrappedComponent: React.ComponentType<T>) => {
   return ({ panelProps, loading = false, hasData, ...props }: WithLoadProps & Partial<T>): React.ReactElement => {
     if(!hasData) {
-      return <LoadPanel visible {...panelProps} />;
+      return <LoadPanel showPane={false} visible {...panelProps} />;
     } else {
       return (
         <>
-          {loading && <LoadPanel visible {...panelProps} />}
+          {loading && <LoadPanel showPane={false} visible {...panelProps} />}
           <WrappedComponent {...(props as T)} />
         </>
       );

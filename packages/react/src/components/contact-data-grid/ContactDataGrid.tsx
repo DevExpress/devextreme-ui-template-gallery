@@ -3,7 +3,7 @@ import { jsPDF as JsPdf } from 'jspdf';
 
 import DataGrid, {
   Sorting, Selection, HeaderFilter, Scrolling, SearchPanel,
-  ColumnChooser, Export, Column, Toolbar, Item
+  ColumnChooser, Export, Column, Toolbar, Item, LoadPanel
 } from 'devextreme-react/data-grid';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
@@ -18,15 +18,16 @@ import { Workbook } from 'exceljs';
 import { ColumnCellTemplateData } from 'devextreme/ui/data_grid';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { ExportingEvent, RowClickEvent } from 'devextreme/ui/data_grid';
+import DataSource from 'devextreme/data/data_source';
 
-import { ContactStatus as ContactStatusType, Contact } from '../../types/crm-contact';
+import { Contact, ContactStatus as ContactStatusType } from '../../types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
 
 import { ContactStatus } from '../../components';
 
 type FilterContactStatus = ContactStatusType | 'All';
 interface ContactDataGridPprops {
-    data?: Contact[],
+    dataSource?: DataSource<Contact[], string>,
     onAddContactClick: () => void,
     onRowClick: (e: RowClickEvent) => void,
     gridRef: React.RefObject<DataGrid>
@@ -83,7 +84,7 @@ const onExporting = (e: ExportingEvent) => {
 };
 
 export const ContactDataGrid = React.memo(({
-  data, onRowClick, onAddContactClick, gridRef
+  dataSource, onRowClick, onAddContactClick, gridRef
 }: ContactDataGridPprops) => {
   const [status, setStatus] = useState(filterStatusList[0]);
 
@@ -108,13 +109,14 @@ export const ContactDataGrid = React.memo(({
       noDataText=''
       keyExpr='id'
       focusedRowEnabled
-      dataSource={data}
+      dataSource={dataSource}
       onRowClick={onRowClick}
       onExporting={onExporting}
       allowColumnReordering
       ref={gridRef}
     >
       <SearchPanel visible placeholder='Contact Search' />
+      <LoadPanel showPane={false} />
       <ColumnChooser enabled />
       <Export enabled allowExportSelectedData formats={['xlsx', 'pdf']} />
       <Selection

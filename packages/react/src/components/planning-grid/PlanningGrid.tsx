@@ -47,9 +47,8 @@ const editPriorityRender = ({ setValue, value }: GridEdit) => (
     onValueChange={(value) => setValue(value)}
   />
 );
-
 export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
-  const [data, setData] = useState<Task[]>();
+  const [data, setData] = useState<Task[]>([]);
 
   const navigate = useNavigate();
 

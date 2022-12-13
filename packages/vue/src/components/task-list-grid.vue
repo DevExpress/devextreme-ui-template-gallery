@@ -3,7 +3,7 @@
     ref="dxDataGridCmp"
     id="tasks-grid"
     height="100%"
-    :data-source="dataSource"
+    :data-source="props.dataSource"
     @row-click="navigateToDetails($event)"
     @row-prepared="onRowPreparedGrid"
     @editing-start="toogleUseNavigation"
@@ -12,10 +12,6 @@
     :hover-state-enabled="true"
     :column-auto-width="true"
   >
-    <dx-load-panel
-      :enabled="true"
-      :show-pane="false"
-    />
     <dx-scrolling mode="virtual" />
     <dx-paging :page-size="15" />
     <dx-pager
@@ -156,11 +152,6 @@
       </dx-select-box>
     </template>
   </dx-data-grid>
-  <dx-load-panel
-    :visible="props.isLoading"
-    container=".content"
-    :position="{ of: '.content' }"
-  />
 </template>
 
 <script setup lang="ts">
@@ -169,7 +160,6 @@ import {
   DxDataGrid,
   DxColumn,
   DxHeaderFilter,
-  DxLoadPanel,
   DxRequiredRule,
   DxSelection,
   DxScrolling,
