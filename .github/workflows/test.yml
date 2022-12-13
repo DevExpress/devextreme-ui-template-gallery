@@ -103,7 +103,7 @@ jobs:
       run: npm run start-apps -- --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme.name }}
       working-directory: packages/testing
 
-    - name: Run tests
+    - name: Run tests desktop
       run: |
         all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true  --theme ${{ matrix.theme.name }}"
         echo "$all_args"
@@ -112,6 +112,13 @@ jobs:
         export TESTCAFE_DASHBOARD_DEVEXTREME_URL=https://devextreme.resolve.sh
         export TESTCAFE_DASHBOARD_BUILD_ID=${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
         npm run test-testcafe -- $all_args
+      working-directory: packages/testing
+
+    - name: Run tests mobile
+      run: |
+        all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true  --theme ${{ matrix.theme.name }} --mobile iphone X"
+        echo "$all_args"
+        npm run test-testcafe  -- $all_args
       working-directory: packages/testing
 
     - name: Copy screenshots artifacts

@@ -1,5 +1,4 @@
 import { ClientFunction } from 'testcafe';
-import { fakeScreenSize } from '../config';
 
 const WAIT_ATTEMPTS = 10;
 
@@ -23,33 +22,27 @@ async function awaitFontsLoaded(t, requestLogger, timeout = 1000) {
   }
 }
 
-export async function forceResizeRecalculation(t, screenMode) {
-  await t.resizeWindow(...fakeScreenSize);
-  await t.resizeWindow(...screenMode);
-}
-
 export const toogleEmbeddedClass = ClientFunction((embed) => {
   if (!embed) return;
   window.document.getElementsByTagName('body')[0].classList.add('embedded');
 });
 
-export const getPostfix = (embedded, screenMode) => {
+export const getPostfix = (embedded) => {
   const theme = process.env.theme;
-  return `-embed=${embedded}-${theme}-${screenMode[0]}`;
+  const device = process.env.device;
+
+  return `-embed=${embedded}-${theme}-${device}`;
 };
 
 export const toggleCommonConfiguration = async (
-  t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize, requestLogger,
+  t, url, embedded, setEmbedded, timeout, requestLogger,
 ) => {
-  await t.resizeWindow(...screenMode);
 
   await t.navigateTo(url);
   await awaitFontsLoaded(t, requestLogger);
   await toogleEmbeddedClass(embedded);
-  if (embedded && isDoubleResize) {
-    await forceResizeRecalculation(t, screenMode);
-  }
-  setEmbedded(t, embedded, screenMode);
+
+  setEmbedded(t, embedded);
 
   await t.wait(timeout);
 };

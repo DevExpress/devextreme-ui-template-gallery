@@ -9,11 +9,4 @@ export const packages = [{
   port: 8080,
 }];
 
-export const fakeScreenSize = [900, 900];
-
-export const screenModes = [
-  [1280, 800],
-  [400, 800],
-];
-
 export const timeoutSecond = 10000;
