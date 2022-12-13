@@ -82,7 +82,10 @@ const onExporting = (e: ExportingEvent) => {
   }
 };
 
-export const ContactDataGrid = React.memo(({
+const dropDownOptions = { width: 'auto' };
+const exportFormats = ['xlsx', 'pdf'];
+
+export const ContactDataGrid = ({
   data, onRowClick, onAddContactClick, gridRef
 }: ContactDataGridPprops) => {
   const [status, setStatus] = useState(filterStatusList[0]);
@@ -116,7 +119,7 @@ export const ContactDataGrid = React.memo(({
     >
       <SearchPanel visible placeholder='Contact Search' />
       <ColumnChooser enabled />
-      <Export enabled allowExportSelectedData formats={['xlsx', 'pdf']} />
+      <Export enabled allowExportSelectedData formats={exportFormats} />
       <Selection
         selectAllMode='allPages'
         showCheckBoxesMode='always'
@@ -134,7 +137,7 @@ export const ContactDataGrid = React.memo(({
             dataSource={filterStatusList}
             stylingMode='text'
             selectedItemKey={status}
-            dropDownOptions={{ width: 'auto' }}
+            dropDownOptions={dropDownOptions}
             useSelectMode
             onSelectionChanged={filterByStatus}
           />
@@ -204,4 +207,4 @@ export const ContactDataGrid = React.memo(({
       <Column dataField='email' caption='Email' hidingPriority={1} />
     </DataGrid>
   );
-});
+};

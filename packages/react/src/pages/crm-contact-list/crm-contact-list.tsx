@@ -32,14 +32,14 @@ export const CRMContactList = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const changePopupVisibility = () => {
+  const changePopupVisibility = useCallback(() => {
     setPopupVisible(!popupVisible);
-  };
+  }, [popupVisible]);
 
-  const changePanelOpened = () => {
+  const changePanelOpened = useCallback(() => {
     setPanelOpened(!isPanelOpened);
     gridRef.current?.instance.option('focusedRowIndex', -1);
-  };
+  }, [isPanelOpened]);
 
   const onAddContactClick = useCallback(() => {
     setPopupVisible(true);
