@@ -54,32 +54,30 @@
           </dx-toolbar>
         </div>
         <div class="messages-content">
-          <dx-scroll-view>
-            <div class="message-list">
-              <div
-                class="message-container"
-                v-for="data in items"
-              >
-                <div class="avatar">
-                  {{ getAvatarText(data.manager) }}
-                </div>
-                <div class="message dx-card">
-                  <div class="message-title">
-                    <div>
-                      <div class="subject">
-                        {{ data.subject }}
-                      </div>
-                      <div>{{ formatDate(new Date(data.date)) }} - {{ data.manager }}</div>
+          <div class="message-list">
+            <div
+              class="message-container"
+              v-for="data in items"
+            >
+              <div class="avatar">
+                {{ getAvatarText(data.manager) }}
+              </div>
+              <div class="message dx-card">
+                <div class="message-title">
+                  <div>
+                    <div class="subject">
+                      {{ data.subject }}
                     </div>
-                    <dx-button icon="overflow" />
+                    <div>{{ formatDate(new Date(data.date)) }} - {{ data.manager }}</div>
                   </div>
-                  <div class="message-text">
-                    {{ setUserName(data.text) }}
-                  </div>
+                  <dx-button icon="overflow" />
+                </div>
+                <div class="message-text">
+                  {{ setUserName(data) }}
                 </div>
               </div>
             </div>
-          </dx-scroll-view>
+          </div>
         </div>
       </load-component>
     </div>
@@ -88,12 +86,12 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { defaultUser } from '@/auth';
 import { DxTextArea } from 'devextreme-vue/text-area';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { DxFileUploader } from 'devextreme-vue/file-uploader';
-import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
 import DxValidator, { DxRequiredRule } from 'devextreme-vue/validator';
 
@@ -129,8 +127,8 @@ function getAvatarText(name: string) {
   return name.split(' ').map((namePart) => namePart[0]).join('');
 }
 
-function setUserName(text: string) {
-  return text.replace('{username}', props.user);
+function setUserName(data: Message) {
+  return data.text.replace('{username}', data.manager === props.user ? defaultUser.fullName : props.user);
 }
 
 function send(e: ClickEvent) {

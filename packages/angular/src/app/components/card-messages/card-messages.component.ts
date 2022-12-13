@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import {
   Component, Input, NgModule,
 } from '@angular/core';
+import { defaultUser } from 'src/app/services';
 import {
   DxTextAreaModule,
   DxTextBoxModule,
   DxButtonModule,
   DxToolbarModule,
   DxFileUploaderModule,
-  DxScrollViewModule,
   DxValidationGroupModule,
   DxValidatorModule,
 } from 'devextreme-angular';
@@ -32,8 +32,8 @@ export class CardMessagesComponent {
     return name.split(' ').map((name) => name[0]).join('');
   }
 
-  setUserName(text: string) {
-    return text.replace('{username}', this.user);
+  setUserName(data: Message) {
+    return data.text.replace('{username}',  data.manager === this.user ? defaultUser.name : this.user);
   }
 
   send = (e) => {
@@ -60,7 +60,6 @@ export class CardMessagesComponent {
     DxTextBoxModule,
     DxToolbarModule,
     DxFileUploaderModule,
-    DxScrollViewModule,
     DxButtonModule,
     DxValidationGroupModule,
     DxValidatorModule,

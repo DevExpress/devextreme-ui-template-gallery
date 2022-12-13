@@ -231,13 +231,8 @@ body {
   }
 }
 
-.message-list {
-  max-height: 280px;
-  padding-right: 20px;
-}
-
 .messages-content {
-  padding: 20px 0 20px 20px;
+  padding: 20px;
   border-top: 1px solid $base-border-color;
   background-color: $side-panel-background;
 }

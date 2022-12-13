@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
+import { defaultUser } from '../../utils/default-user';
+
 import TextBox from 'devextreme-react/text-box';
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import FileUploder from 'devextreme-react/file-uploader';
-import ScrollView from 'devextreme-react/scroll-view';
 import Validator, { RequiredRule } from 'devextreme-react/validator';
 import ValidationGroup from 'devextreme-react/validation-group';
 
@@ -17,8 +18,8 @@ import { Avatar } from '../avatar/Avatar';
 
 import './CardMessages.scss';
 
-const getText = (text: string, user: string) => {
-  return text.replace('{username}', user);
+const getText = (data: Message, user: string) => {
+  return data.text.replace('{username}', data.manager === user ? defaultUser.name : user);
 };
 
 const Card = ({ data, user }: { data: Message; user: string }) => (
@@ -36,7 +37,7 @@ const Card = ({ data, user }: { data: Message; user: string }) => (
           <Button icon='overflow' />
         </div>
       </div>
-      <div className='message-text'>{getText(data.text, user)}</div>
+      <div className='message-text'>{getText(data, user)}</div>
     </div>
   </div>
 );
@@ -102,13 +103,11 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
           </Toolbar>
         </div>
         <div className='messages-content'>
-          <ScrollView>
-            <div className='message-list'>
-              {user && messages?.map((message, index) => (
-                <Card key={index} data={message} user={user} />
-              ))}
-            </div>
-          </ScrollView>
+          <div className='message-list'>
+            {user && messages?.map((message, index) => (
+              <Card key={index} data={message} user={user} />
+            ))}
+          </div>
         </div>
       </div>
     </ValidationGroup>
