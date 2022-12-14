@@ -65,7 +65,7 @@ export const PlanningKanban = React.forwardRef<Sortable, PlanningProps>(({ dataS
 
   return (
     <div id='kanban' className='kanban'>
-      <ScrollView direction='horizontal' showScrollbar='always'>
+      <ScrollView direction='both' showScrollbar='always'>
         <Sortable ref={ref} itemOrientation='horizontal' handle='.list-title' onReorder={onListReorder}>
           {lists.map((tasks, listIndex) => {
             const status = statuses[listIndex];

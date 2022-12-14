@@ -1,8 +1,8 @@
 <template>
   <dx-data-grid
     ref="dxDataGridCmp"
-    height="100%"
     id="tasks-grid"
+    height="100%"
     :data-source="dataSource"
     @row-click="navigateToDetails($event)"
     @row-prepared="onRowPreparedGrid"
@@ -16,7 +16,7 @@
       :enabled="true"
       :show-pane="false"
     />
-    <dx-scrolling row-rendering-mode="virtual" />
+    <dx-scrolling mode="virtual" />
     <dx-paging :page-size="15" />
     <dx-pager
       :visible="true"
@@ -274,7 +274,6 @@ defineExpose({
 
 <style scoped lang="scss">
 @use "@/variables" as *;
-@use "sass:math";
 
 #tasks-grid {
   min-height: 300px;
@@ -291,6 +290,5 @@ defineExpose({
 
 :deep(.edit-cell) {
   position: relative;
-
 }
 </style>

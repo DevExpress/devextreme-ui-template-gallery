@@ -25,7 +25,7 @@ fixture`Planning List`;
       await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
       await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
       await takeScreenshot(`planning-task-kanban${getPostfix(embedded, screenMode)}`, 'body');
-      await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
+      await t.doubleClick(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
       await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
       await takeScreenshot(`planning-task-gantt${getPostfix(embedded, screenMode)}`, 'body');
       if (screenMode[0] === 400) {
