@@ -2,7 +2,6 @@ interface UserInfo {
   email: string;
   name: string;
   lastName: string;
-  fullName: string;
   avatarUrl: string;
 }
 
@@ -10,7 +9,6 @@ export const defaultUser: UserInfo = {
   email: 'jheart@dx-email.com',
   name: 'John',
   lastName: 'Heart',
-  fullName: 'John Heart',
   avatarUrl: 'https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png',
 };
 

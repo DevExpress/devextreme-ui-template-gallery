@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   Component, Input, NgModule,
 } from '@angular/core';
-import { defaultUser } from 'src/app/services';
 import {
   DxTextAreaModule,
   DxTextBoxModule,
@@ -33,7 +32,7 @@ export class CardMessagesComponent {
   }
 
   setUserName(data: Message) {
-    return data.text.replace('{username}',  data.manager === this.user ? defaultUser.name : this.user);
+    return data.text.replace('{username}',  data.manager !== this.items[0].manager ? this.items[0].manager : this.items[1].manager);
   }
 
   send = (e) => {

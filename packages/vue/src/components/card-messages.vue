@@ -86,7 +86,6 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { defaultUser } from '@/auth';
 import { DxTextArea } from 'devextreme-vue/text-area';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxButton } from 'devextreme-vue/button';
@@ -128,7 +127,7 @@ function getAvatarText(name: string) {
 }
 
 function setUserName(data: Message) {
-  return data.text.replace('{username}', data.manager === props.user ? defaultUser.fullName : props.user);
+  return data.text.replace('{username}', data.manager !== items.value[0].manager ? items.value[0].manager : items.value[1].manager);
 }
 
 function send(e: ClickEvent) {

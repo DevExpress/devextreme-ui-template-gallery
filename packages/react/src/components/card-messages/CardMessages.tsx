@@ -1,7 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-import { defaultUser } from '../../utils/default-user';
-
 import TextBox from 'devextreme-react/text-box';
 import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
@@ -18,11 +16,11 @@ import { Avatar } from '../avatar/Avatar';
 
 import './CardMessages.scss';
 
-const getText = (data: Message, user: string) => {
-  return data.text.replace('{username}', data.manager === user ? defaultUser.name : user);
+const getText = (data: Message, user: string, manager: string) => {
+  return data.text.replace('{username}', data.manager !== manager ? manager : user);
 };
 
-const Card = ({ data, user }: { data: Message; user: string }) => (
+const Card = ({ data, user, manager }: { data: Message; user: string, manager: string }) => (
   <div className='message-container'>
     <Avatar owner={data.manager} />
     <div className='message dx-card'>
@@ -37,7 +35,7 @@ const Card = ({ data, user }: { data: Message; user: string }) => (
           <Button icon='overflow' />
         </div>
       </div>
-      <div className='message-text'>{getText(data, user)}</div>
+      <div className='message-text'>{getText(data, user, manager)}</div>
     </div>
   </div>
 );
@@ -105,7 +103,7 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
         <div className='messages-content'>
           <div className='message-list'>
             {user && messages?.map((message, index) => (
-              <Card key={index} data={message} user={user} />
+              <Card key={index} data={message} user={messages[1].manager} manager={messages[0].manager} />
             ))}
           </div>
         </div>
