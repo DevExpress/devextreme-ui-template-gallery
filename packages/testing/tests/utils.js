@@ -37,7 +37,6 @@ export const getPostfix = (embedded) => {
 export const toggleCommonConfiguration = async (
   t, url, embedded, setEmbedded, timeout, requestLogger,
 ) => {
-
   await t.navigateTo(url);
   await awaitFontsLoaded(t, requestLogger);
   await toogleEmbeddedClass(embedded);
