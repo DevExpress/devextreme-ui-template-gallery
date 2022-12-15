@@ -164,7 +164,7 @@ $left-panel-width: 400px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 16px 0 16px;
+  padding: $content-padding $content-padding 0 $content-padding;
 
   .panels {
     display: flex;

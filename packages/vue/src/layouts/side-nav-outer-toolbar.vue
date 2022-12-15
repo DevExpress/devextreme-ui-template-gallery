@@ -20,7 +20,7 @@
     >
       <dx-scroll-view
         ref="scrollViewRef"
-        class="with-footer app-content-wrapper"
+        class="app-content-wrapper"
       >
         <slot />
       </dx-scroll-view>

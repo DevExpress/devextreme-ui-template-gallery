@@ -1,4 +1,5 @@
 <dx-data-grid
+  height="100%"
   [dataSource]="tasks"
   (onRowPrepared)="onRowPreparedGrid($event)"
   (onRowClick)="navigateToDetails($event)"
@@ -8,14 +9,15 @@
   [hoverStateEnabled]="true"
   [columnAutoWidth]="true"
 >
-  <dxo-paging [pageSize]="15"> </dxo-paging>
-  <dxo-pager [visible]="true" [showPageSizeSelector]="true"> </dxo-pager>
+  <dxo-paging [pageSize]="15"></dxo-paging>
+  <dxo-pager [visible]="true" [showPageSizeSelector]="true"></dxo-pager>
   <dxo-editing mode="row" [allowUpdating]="true"> </dxo-editing>
   <dxo-selection
     selectAllMode="allPages"
     showCheckBoxesMode="always"
     mode="multiple"
   ></dxo-selection>
+  <dxo-scrolling mode="virtual"></dxo-scrolling>
   <dxo-sorting mode="multiple"></dxo-sorting>
   <dxo-header-filter [visible]="true"></dxo-header-filter>
 

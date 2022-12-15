@@ -64,11 +64,12 @@ const tabChange = ([startDate, endDate]: string[]) => loadData(startDate, endDat
 </script>
 
 <style scoped lang="scss">
+@use "@/variables" as *;
 .view-wrapper {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 16px 0 16px;
+  padding: $content-padding;
 }
 
 .cards {
