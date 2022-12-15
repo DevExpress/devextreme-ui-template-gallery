@@ -31,7 +31,7 @@ export class CardMessagesComponent {
     return name.split(' ').map((name) => name[0]).join('');
   }
 
-  setUserName(data: Message) {
+  getText(data: Message) {
     return data.text.replace('{username}',  data.manager !== this.items[0].manager ? this.items[0].manager : this.items[1].manager);
   }
 

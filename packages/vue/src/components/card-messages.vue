@@ -73,7 +73,7 @@
                   <dx-button icon="overflow" />
                 </div>
                 <div class="message-text">
-                  {{ setUserName(data) }}
+                  {{ getText(data) }}
                 </div>
               </div>
             </div>
@@ -126,7 +126,7 @@ function getAvatarText(name: string) {
   return name.split(' ').map((namePart) => namePart[0]).join('');
 }
 
-function setUserName(data: Message) {
+function getText(data: Message) {
   return data.text.replace('{username}', data.manager !== items.value[0].manager ? items.value[0].manager : items.value[1].manager);
 }
 
