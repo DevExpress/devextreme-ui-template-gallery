@@ -69,10 +69,6 @@ $main-container-padding-right: 16px;
 }
 
 @mixin messages-content {
-  .message-list {
-    max-height: 320px;
-  }
-  
   .messages-content {
     padding: 20px;
     border-top: 1px solid $base-border-color;
