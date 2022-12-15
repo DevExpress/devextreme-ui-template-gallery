@@ -1,24 +1,44 @@
 @use "../../variables.scss" as *;
-@use "sass:math";
 
 @include separator();
 
 .view-wrapper-list {
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 
   .dx-toolbar.toolbar-common {
-    padding: 20px $content-padding $content-padding;
+    padding: $content-padding;
 
     .toolbar-header {
       @include header();
     }
   }
 
-  .gantt,
+  .planning-grid,
+  .kanban,
+  .gantt {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    max-height: calc(100% - $toolbar-items-container-height - $content-padding * 2);
+  }
+
+  .planning-grid {
+    & > .dx-datagrid {
+      min-height: 100%;
+    }
+  }
+
+  .gantt {
+    padding: 0 $content-padding $content-padding;
+  }
+
   .kanban {
-    margin: 0 $content-padding;
+    padding: 0 0 $content-padding calc($content-padding / 2);
   }
 }

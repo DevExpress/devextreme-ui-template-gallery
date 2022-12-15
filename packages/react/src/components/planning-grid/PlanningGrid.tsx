@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import DataGrid, {
   Column, Selection, Sorting, HeaderFilter,
-  RequiredRule, Paging, Pager, Editing
+  RequiredRule, Paging, Pager, Editing, Scrolling
 } from 'devextreme-react/data-grid';
 import SelectBox from 'devextreme-react/select-box';
 
@@ -80,11 +80,13 @@ export const PlanningGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
       dataSource={data}
       columnAutoWidth
       hoverStateEnabled
+      height='100%'
       onEditingStart={toogleUseNavigation}
       onEditCanceled={toogleUseNavigation}
       onSaved={toogleUseNavigation}
       onRowPrepared={onRowPrepared}
       onRowClick={navigateToDetails}>
+      <Scrolling mode='virtual' />
       <Paging defaultPageSize={15} />
       <Pager visible showPageSizeSelector />
       <Editing mode='row' allowUpdating />

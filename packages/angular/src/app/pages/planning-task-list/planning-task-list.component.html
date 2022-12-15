@@ -94,8 +94,7 @@
   <ng-container
     *ngIf="taskCollections$ | async as taskCollections; else loading"
   >
-    <div
-      class="task-list"
+    <ng-container
       *ngIf="taskCollections"
       [ngSwitch]="displayTaskComponent"
     >
@@ -120,7 +119,7 @@
           [dataSource]="taskCollections.filteredTasks"
         ></task-list-gantt>
       </div>
-    </div>
+    </ng-container>
   </ng-container>
   <ng-template #loading>
     <dx-load-panel
