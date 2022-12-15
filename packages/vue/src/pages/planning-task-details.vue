@@ -46,7 +46,7 @@
             :data="taskData"
             :is-editing="false"
             :content-by-screen="{ xs: 2, sm: 2 }"
-            :is-loading="isLoading && !taskData.name"
+            :is-loading="isLoading"
           />
         </dx-validation-group>
       </div>
@@ -59,14 +59,14 @@
           >
             <dx-item title="Activities">
               <card-activities
-                :items="taskData.activities || []"
-                :is-loading="false"
+                :items="taskData?.activities"
+                :is-loading="isLoading"
                 :show-by="true"
               />
             </dx-item>
             <dx-item title="Notes">
               <card-notes
-                :user="taskData.owner"
+                :user="taskData?.owner"
                 :items="notes"
               />
             </dx-item>
@@ -76,8 +76,8 @@
               :badge="messageBadge"
             >
               <card-messages
-                :user="taskData.owner"
-                :messages="taskData.messages"
+                :user="taskData?.owner"
+                :messages="taskData?.messages"
                 :is-loading="false"
               />
             </dx-item>
@@ -108,15 +108,15 @@ import TaskForm from '@/components/task-form.vue';
 
 const taskId = 1;
 const taskName = ref('');
-const taskData = ref<Task | Record<string, unknown>>({ notes: [] });
+const taskData = ref<Task>();
 const isLoading = ref(false);
 
 const messageBadge = computed(() => {
-  const length = taskData.value.messages?.length;
+  const length = taskData.value ? taskData.value.messages?.length : 0;
   return (length >= 0) ? `${length}` : '...';
 });
 
-const notes = computed(() => taskData.value.notes || []);
+const notes = computed(() => taskData.value?.notes);
 
 async function loadData() {
   isLoading.value = true;
@@ -164,7 +164,7 @@ $left-panel-width: 400px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 16px 0 16px;
+  padding: $content-padding $content-padding 0 $content-padding;
 
   .panels {
     display: flex;

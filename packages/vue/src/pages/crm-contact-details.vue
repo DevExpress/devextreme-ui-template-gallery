@@ -61,7 +61,7 @@
         <contact-form
           :contact-data="contactData"
           :is-editing="false"
-          :is-loading="isLoading && !contactData.name"
+          :is-loading="isLoading"
         />
       </div>
 
@@ -95,7 +95,7 @@ import ContactCards from '@/components/contact-cards.vue';
 
 const contactId = 12;
 const contactName = ref('');
-const contactData = ref<Contact | Record<string, unknown>>({});
+const contactData = ref<Contact>();
 const isLoading = ref(false);
 
 async function loadData() {
@@ -152,7 +152,7 @@ $right-panel-width: 360px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 16px 0 16px;
+  padding: $content-padding $content-padding 0 $content-padding;
 
   .panels {
     display: flex;

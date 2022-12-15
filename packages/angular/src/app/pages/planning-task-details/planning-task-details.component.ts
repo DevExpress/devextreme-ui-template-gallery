@@ -32,6 +32,8 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
 
   taskName = 'Loading...';
 
+  isLoading = false;
+
   dataSubscription: Subscription = new Subscription();
 
   constructor(private service: DataService) {
@@ -41,6 +43,7 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
     this.dataSubscription = this.service.getTask(this.taskId).subscribe((data) => {
       this.task = data;
       this.taskName = data.text;
+      this.isLoading = false;
     });
   };
 
@@ -52,7 +55,10 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
     this.dataSubscription.unsubscribe();
   }
 
-  refresh = () => this.loadData();
+  refresh = () => {
+    this.isLoading = true;
+    this.loadData();
+  }
 }
 
 @NgModule({

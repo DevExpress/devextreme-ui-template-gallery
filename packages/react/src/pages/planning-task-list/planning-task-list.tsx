@@ -76,7 +76,7 @@ export const PlanningTaskList = () => {
 
   const changePopupVisibility = useCallback(() => {
     setPopupVisible(!popupVisible);
-  }, []);
+  }, [popupVisible]);
 
   const refresh = useCallback(() => {
     if (isDataGrid) {

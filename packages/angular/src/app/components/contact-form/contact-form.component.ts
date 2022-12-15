@@ -30,6 +30,8 @@ import { ClickEvent } from 'devextreme/ui/button';
 export class ContactFormComponent {
   @Input() contactData: Contact;
 
+  @Input() isLoading: boolean;
+
   savedData: Contact = null;
 
   statusList = contactStatusList;

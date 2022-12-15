@@ -39,11 +39,12 @@ const ActivitiesList = ({ activities }) => {
 
 const ActivitiesWithLoadPanel = withLoadPanel(ActivitiesList);
 
-export const CardActivities = ({ activities }: { activities?: Activities }) => (
+export const CardActivities = ({ activities, isLoading }: { activities?: Activities, isLoading?: boolean }) => (
   <div className={classNames({ 'card-activities': true, load: !activities })}>
     <ActivitiesWithLoadPanel
       activities={activities}
-      loading={!activities}
+      hasData={!!activities}
+      loading={isLoading}
       panelProps={{
         container: '.card-activities',
         position: { of: '.card-activities' }

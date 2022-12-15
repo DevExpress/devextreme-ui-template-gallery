@@ -35,7 +35,7 @@ import { DxValidationGroup } from 'devextreme-vue/validation-group';
 const props = withDefaults(
   defineProps<{
     title: string,
-  isVisible: boolean,
+    isVisible: boolean,
 }>(),
   {
     isVisible: false,

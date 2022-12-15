@@ -12,7 +12,7 @@ import './TaskForm.scss';
 
 const TaskFormWithLoadPanel = withLoadPanel(TaskFormDetails);
 
-export const TaskForm = ({ task }: { task?: Task }) => {
+export const TaskForm = ({ task, isLoading }: { task?: Task, isLoading: boolean }) => {
   const [data, setData] = useState(task);
   const [editing, setEditing] = useState(false);
   const dataRef = useRef<Task>();
@@ -50,7 +50,8 @@ export const TaskForm = ({ task }: { task?: Task }) => {
     <div className='task-form'>
       <ToolbarForm toggleEditing={handleEditClick} onCancelClick={onCancelClick} onSaveClick={onSaveClick} editing={editing} />
       <TaskFormWithLoadPanel
-        loading={!data}
+        loading={isLoading}
+        hasData={!!data}
         data={data}
         editing={editing}
         onDataChanged={onDataChanged}

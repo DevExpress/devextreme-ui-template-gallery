@@ -1,6 +1,6 @@
-<div id="activities-list" [ngClass]="!isLoading ? 'load' : null">
+<div id="activities-list" [ngClass]="activities ? 'load' : null">
   <dx-list
-    *ngIf="!isLoading"
+    *ngIf="activities"
     class="activities-list"
     [items]="activities"
     [scrollingEnabled]="false"
@@ -24,7 +24,7 @@
   <dx-load-panel
     container="#activities-list"
     [position]="{ of: '#activities-list' }"
-    [visible]="isLoading"
+    [visible]="!activities || isLoading"
     [showPane]="false"
   ></dx-load-panel>
 </div>

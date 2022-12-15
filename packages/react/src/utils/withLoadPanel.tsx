@@ -2,12 +2,22 @@ import React from 'react';
 import LoadPanel from 'devextreme-react/load-panel';
 
 type WithLoadProps = {
-    loading: boolean;
+    loading?: boolean;
+    hasData: boolean;
     panelProps: { container: string; position: { of: string } };
 }
 
 export const withLoadPanel = <T extends object>(WrappedComponent: React.ComponentType<T>) => {
-  return ({ panelProps, loading, ...props }: WithLoadProps & Partial<T>): React.ReactElement => {
-    return loading ? <LoadPanel visible {...panelProps} /> : <WrappedComponent {...(props as T)} />;
+  return ({ panelProps, loading = false, hasData, ...props }: WithLoadProps & Partial<T>): React.ReactElement => {
+    if(!hasData) {
+      return <LoadPanel visible {...panelProps} />;
+    } else {
+      return (
+        <>
+          {loading && <LoadPanel visible {...panelProps} />}
+          <WrappedComponent {...(props as T)} />
+        </>
+      );
+    }
   };
 };

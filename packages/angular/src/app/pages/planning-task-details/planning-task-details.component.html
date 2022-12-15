@@ -38,7 +38,7 @@
   <div class="panels">
     <div class="left">
       <dx-validation-group>
-        <task-form [task]="task" [contentByScreen]="{ xs: 2, sm: 2 }"></task-form>
+        <task-form [task]="task" [isLoading]="isLoading" [contentByScreen]="{ xs: 2, sm: 2 }"></task-form>
       </dx-validation-group>
     </div>
 
@@ -47,6 +47,7 @@
         <dx-tab-panel [showNavButtons]="true" [deferRendering]="false">
           <dxi-item title="Activities">
             <card-activities
+              [isLoading]="isLoading"
               [activities]="task?.activities"
               [showBy]="true"
             ></card-activities>

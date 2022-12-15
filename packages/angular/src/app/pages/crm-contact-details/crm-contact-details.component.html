@@ -47,14 +47,15 @@
 
   <div class="panels">
     <div class="left">
-      <contact-form [contactData]="contactData$ | async"></contact-form>
+      <contact-form [contactData]="contactData" [isLoading]="isLoading"></contact-form>
     </div>
 
     <div class="right">
       <contact-cards
-        [contactName]="(contactData$ | async)?.name"
-        [tasks]="(contactData$ | async)?.tasks"
-        [activities]="(contactData$ | async)?.activities"
+        [isLoading]="isLoading"
+        [contactName]="contactData?.name"
+        [tasks]="contactData?.tasks"
+        [activities]="contactData?.activities"
         [activeOpportunities]="activeOpportunities"
         [closedOpportunities]="closedOpportunities"
         [notes]="contactNotes"

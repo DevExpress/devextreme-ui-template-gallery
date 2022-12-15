@@ -15,7 +15,6 @@
             icon="edit"
             styling-mode="outlined"
             type="default"
-            :visible="!isLoading"
             @click="startEdit()"
           />
         </dx-toolbar-item>
@@ -46,6 +45,7 @@
       <load-component
         :is-loading="isLoading"
         :container-selector="'#contact-form'"
+        :has-data="!!props.contactData"
       >
         <dx-form
           class="plain-styled-form"

@@ -86,7 +86,7 @@ import notify from 'devextreme/ui/notify';
 
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { authInfo as auth } from '../auth';
+import { authInfo as auth } from '../../auth';
 
 const router = useRouter();
 

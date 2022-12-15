@@ -206,7 +206,7 @@
   <dx-load-panel
     container="#contact-form"
     [position]="{ of: '#contact-form' }"
-    [visible]="!contactData"
+    [visible]="!contactData || isLoading"
     [showPane]="false"
   ></dx-load-panel>
 </div>

@@ -81,35 +81,36 @@
         :options="taskSearchOptions"
       />
     </dx-toolbar>
-    <load-component :is-loading="isLoading">
-      <div class="task-list">
-        <div
-          v-if="taskPanelItems[0].text === displayTaskComponent"
-          class="grid"
-        >
-          <task-list-grid
-            ref="tasksGridCmp"
-            :data-source="gridData"
-          />
-        </div>
-        <div
-          v-else-if="taskPanelItems[1].text === displayTaskComponent"
-          class="kanban"
-        >
-          <task-list-kanban
-            :tasks="kanbanData"
-            @add-task="addTask"
-          />
-        </div>
-        <div
-          v-else-if="taskPanelItems[2].text === displayTaskComponent"
-          class="gantt"
-        >
-          <task-list-gantt
-            ref="tasksGanttCmp"
-            :tasks="ganttData"
-          />
-        </div>
+    <load-component
+      :is-loading="isLoading"
+      :has-data="!!gridData.length"
+    >
+      <div
+        v-if="taskPanelItems[0].text === displayTaskComponent"
+        class="grid"
+      >
+        <task-list-grid
+          ref="tasksGridCmp"
+          :data-source="gridData"
+        />
+      </div>
+      <div
+        v-else-if="taskPanelItems[1].text === displayTaskComponent"
+        class="kanban"
+      >
+        <task-list-kanban
+          :tasks="kanbanData"
+          @add-task="addTask"
+        />
+      </div>
+      <div
+        v-else-if="taskPanelItems[2].text === displayTaskComponent"
+        class="gantt"
+      >
+        <task-list-gantt
+          ref="tasksGanttCmp"
+          :tasks="ganttData"
+        />
       </div>
     </load-component>
   </div>
@@ -121,6 +122,7 @@
     <task-form
       :content-by-screen="{ xs: 1, sm: 1 }"
       :is-create-mode="true"
+      :data="popupTask"
     />
   </form-popup>
 </template>
@@ -146,6 +148,7 @@ import TaskForm from '@/components/task-form.vue';
 import TaskListGrid from '@/components/task-list-grid.vue';
 import TaskListKanban from '@/components/task-list-kanban.vue';
 import TaskListGantt from '@/components/task-list-gantt.vue';
+import { newTask } from '@/types/task';
 
 import { screenInfo } from '@/utils/media-query';
 
@@ -154,6 +157,7 @@ const displayTaskComponent = ref(taskPanelItems[0].text);
 const activeTabId = ref<TaskPanelItemsIds>('grid');
 const tasksGridCmp = ref<InstanceType<typeof TaskListGrid> | null>(null);
 const tasksGanttCmp = ref<InstanceType<typeof TaskListGantt> | null>(null);
+const popupTask = ref<Task>(newTask);
 
 const gridData = ref<Task[]>([]);
 const kanbanData = ref<Task[]>([]);
@@ -259,33 +263,41 @@ const taskSearchOptions = {
 
 <style scoped lang="scss">
 @use "@/variables" as *;
-@use "sass:math";
 
 @include separator();
 
 .view-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 
   .dx-toolbar {
-    padding: 20px $content-padding $content-padding;
+    padding: $content-padding;
   }
-}
 
-:deep(.dx-toolbar) {
-
-  .toolbar-header {
-    @include header();
+  :deep(.dx-toolbar) {
+    .toolbar-header {
+      @include header();
+    }
   }
-}
 
-.view-wrapper {
-  flex-direction: column;
-}
+  .grid, .kanban, .gantt {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    max-height: calc(100% - $toolbar-items-container-height - $content-padding * 2);
+  }
 
-.gantt,
-.kanban {
-  padding: 0 $content-padding;
+  .gantt {
+    padding: 0 $content-padding $content-padding;
+  }
+
+  .kanban {
+    padding: 0 0 $content-padding calc($content-padding / 2);
+  }
 }
 </style>
