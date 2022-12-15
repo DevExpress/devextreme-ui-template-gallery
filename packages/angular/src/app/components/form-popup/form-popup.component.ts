@@ -17,8 +17,6 @@ import {
   import { ScreenService } from '../../services';
   import { Subscription } from 'rxjs';
 
-import validationEngine from 'devextreme/ui/validation_engine';
-
   @Component({
     selector: 'form-popup',
     templateUrl: './form-popup.component.html',

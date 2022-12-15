@@ -8,7 +8,6 @@ import {
   DxButtonModule,
   DxToolbarModule,
   DxFileUploaderModule,
-  DxScrollViewModule,
   DxValidationGroupModule,
   DxValidatorModule,
 } from 'devextreme-angular';
@@ -32,8 +31,8 @@ export class CardMessagesComponent {
     return name.split(' ').map((name) => name[0]).join('');
   }
 
-  setUserName(text: string) {
-    return text.replace('{username}', this.user);
+  getText(data: Message) {
+    return data.text.replace('{username}',  data.manager !== this.items[0].manager ? this.items[0].manager : this.items[1].manager);
   }
 
   send = (e) => {
@@ -60,7 +59,6 @@ export class CardMessagesComponent {
     DxTextBoxModule,
     DxToolbarModule,
     DxFileUploaderModule,
-    DxScrollViewModule,
     DxButtonModule,
     DxValidationGroupModule,
     DxValidatorModule,
