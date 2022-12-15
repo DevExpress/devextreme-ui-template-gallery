@@ -27,7 +27,7 @@ createTestCafe('localhost', 1437, 1438)
     testCafe = tc;
 
     const runner = testCafe.createRunner()
-      .browsers(args.mobile ? 'chrome:emulation:device=iphone X' : 'chrome:headless')
+      .browsers(args.mobile ? 'chrome:headless:emulation:device=iphone X' : 'chrome:headless')
       .reporter(reporters)
       .src([
         `tests/${args.page}.test.js`,
