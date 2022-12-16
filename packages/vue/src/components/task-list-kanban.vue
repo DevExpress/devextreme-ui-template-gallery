@@ -1,8 +1,8 @@
 <template>
   <dx-scroll-view
     class="scrollable-board"
-    direction="horizontal"
     show-scrollbar="always"
+    direction="both"
   >
     <dx-sortable
       class="sortable-lists"

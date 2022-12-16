@@ -13,11 +13,11 @@ import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
     class="
       status
       status-indicator
-      status-indicator-{{ value | lowercase }}">
-      <span *ngIf="!isField" class="status-indicator-{{ value | lowercase }}">{{ getValue(value) }}</span>
+      status-indicator-{{ dashValue }}">
+      <span *ngIf="!isField" class="status-indicator-{{ dashValue }}">{{ getValue(value) }}</span>
       <dx-text-box
         *ngIf="isField"
-        class="status-indicator-{{value.replace(' ', '-') | lowercase}}"
+        class="status-indicator-{{ dashValue }}"
         [inputAttr]="{class: 'status-input status-editor-input'}"
         [hoverStateEnabled]="false"
         [readOnly]="true"
@@ -34,17 +34,17 @@ export class StatusIndicatorComponent implements OnInit {
 
   @Input() showBar = false;
 
-  undescoreValue = '';
+  dashValue = '';
 
   ngOnInit() {
-    this.undescoreValue = this.spaceToUnderscore(this.value);
+    this.dashValue = this.spaceToDash(this.value).toLowerCase();
   }
 
   getValue(value: string): string {
     return (this.showBar ? '| ' : '') + value;
   }
 
-  spaceToUnderscore = (value: TaskStatus) =>
+  spaceToDash = (value: TaskStatus) =>
     (value?.replace(/ /g, '-') || '');
 }
 

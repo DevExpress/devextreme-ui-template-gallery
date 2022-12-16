@@ -46,7 +46,6 @@
       </dx-toolbar>
     </div>
     <div class="messages-content">
-      <dx-scroll-view>
         <div class="message-list">
           <div class="message-container" *ngFor="let data of items">
             <div class="avatar">
@@ -62,11 +61,10 @@
                   <dx-button icon="overflow"></dx-button>
                 </div>
               </div>
-              <div class="message-text">{{ setUserName(data.text) }}</div>
+              <div class="message-text">{{ getText(data) }}</div>
             </div>
           </div>
         </div>
-      </dx-scroll-view>
     </div>
   </div>
 </dx-validation-group>

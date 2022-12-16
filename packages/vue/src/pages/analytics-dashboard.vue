@@ -97,13 +97,12 @@ const tabChange = ([startDate, endDate]: string[]) => {
 
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
-@use "sass:math";
 
 .view-wrapper {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 16px 0 16px;
+  padding: $content-padding;
 
   .cards, .tiles {
     display: grid;

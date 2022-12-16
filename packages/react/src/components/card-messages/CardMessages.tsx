@@ -5,7 +5,6 @@ import TextArea from 'devextreme-react/text-area';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import FileUploder from 'devextreme-react/file-uploader';
-import ScrollView from 'devextreme-react/scroll-view';
 import Validator, { RequiredRule } from 'devextreme-react/validator';
 import ValidationGroup from 'devextreme-react/validation-group';
 
@@ -17,11 +16,11 @@ import { Avatar } from '../avatar/Avatar';
 
 import './CardMessages.scss';
 
-const getText = (text: string, user: string) => {
-  return text.replace('{username}', user);
+const getText = (data: Message, user: string, manager: string) => {
+  return data.text.replace('{username}', data.manager !== manager ? manager : user);
 };
 
-const Card = ({ data, user }: { data: Message; user: string }) => (
+const Card = ({ data, user, manager }: { data: Message; user: string, manager: string }) => (
   <div className='message-container'>
     <Avatar owner={data.manager} />
     <div className='message dx-card'>
@@ -36,7 +35,7 @@ const Card = ({ data, user }: { data: Message; user: string }) => (
           <Button icon='overflow' />
         </div>
       </div>
-      <div className='message-text'>{getText(data.text, user)}</div>
+      <div className='message-text'>{getText(data, user, manager)}</div>
     </div>
   </div>
 );
@@ -102,13 +101,11 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
           </Toolbar>
         </div>
         <div className='messages-content'>
-          <ScrollView>
-            <div className='message-list'>
-              {user && messages?.map((message, index) => (
-                <Card key={index} data={message} user={user} />
-              ))}
-            </div>
-          </ScrollView>
+          <div className='message-list'>
+            {user && messages?.map((message, index) => (
+              <Card key={index} data={message} user={messages[1].manager} manager={messages[0].manager} />
+            ))}
+          </div>
         </div>
       </div>
     </ValidationGroup>
