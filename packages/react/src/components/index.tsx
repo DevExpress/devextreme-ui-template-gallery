@@ -17,7 +17,6 @@ export { Avatar } from './avatar/Avatar';
 export { PlanningGantt } from './planning-gantt/PlanningGantt';
 export { ContactForm } from './contact-form/ContactForm';
 export { ContactNewForm } from './contact-new-form/ContactNewForm';
-export { ContactDataGrid } from './contact-data-grid/ContactDataGrid';
 export { ContactPanel } from './contact-panel/ContactPanel';
 export { ContactPanelDetails } from './contact-panel-details/ContactPanelDetails';
 export { ContactStatus } from './contact-status/ContactStatus';
