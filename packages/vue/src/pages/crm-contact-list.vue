@@ -17,10 +17,7 @@
       <dx-column-chooser :enabled="true" />
       <dx-sorting mode="multiple" />
       <dx-header-filter :visible="true" />
-      <dx-load-panel
-        :enabled="true"
-        :show-pane="false"
-      />
+      <dx-load-panel :show-pane="false" />
       <dx-selection
         select-all-mode="allPages"
         show-check-boxes-mode="always"

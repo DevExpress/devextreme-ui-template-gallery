@@ -13,8 +13,7 @@
     :column-auto-width="true"
   >
     <dx-load-panel
-      :enabled="true"
-      :show-pane="false"
+      :enabled="false"
     />
     <dx-scrolling mode="virtual" />
     <dx-paging :page-size="15" />
@@ -268,6 +267,9 @@ defineExpose({
   },
   search(text: string) {
     dxDataGridCmp.value.instance.searchByText(text);
+  },
+  refresh() {
+    dxDataGridCmp.value.instance.refresh();
   },
 });
 </script>
