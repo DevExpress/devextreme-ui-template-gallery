@@ -14,7 +14,6 @@
       [isLoading]="!opportunities"
       contentClass="opportunities-total"
     >
-      <div>
         <div class="total">
           {{ getTotal | apply: opportunities | currency: "USD":"$":"1.0-0" }}
         </div>
@@ -22,7 +21,6 @@
           <i class="dx-icon-spinup"></i>
           <span>20.3%</span>
         </div>
-      </div>
     </card-analytics>
     <card-analytics
       class="grey"
@@ -30,15 +28,13 @@
       [isLoading]="!sales"
       contentClass="revenue-total"
     >
-    <div>
-      <div class="total">
-        {{ getTotal | apply: sales | currency: "USD":"$":"1.0-0" }}
-      </div>
-      <div class="percentage">
-        <i class="dx-icon-spinup"></i>
-        <span>14.7%</span>
-      </div>
-    </div>
+        <div class="total">
+          {{ getTotal | apply: sales | currency: "USD":"$":"1.0-0" }}
+        </div>
+        <div class="percentage">
+          <i class="dx-icon-spinup"></i>
+          <span>14.7%</span>
+        </div>
     </card-analytics>
     <card-analytics
       class="grey"
@@ -75,9 +71,9 @@
         </dxo-common-series-settings>
         <dxo-argument-axis argumentType="datetime"></dxo-argument-axis>
         <dxi-value-axis>
-            <dxo-label>
-              <dxo-format type="currency" currency="USD"></dxo-format>
-            </dxo-label>
+          <dxo-label>
+            <dxo-format type="currency" currency="USD"></dxo-format>
+          </dxo-label>
         </dxi-value-axis>
         <dxo-legend [visible]="false"> </dxo-legend>
         <dxo-size [height]="270"></dxo-size>

@@ -6,7 +6,7 @@ import {
 } from 'rxjs/operators';
 import { Task } from 'src/app/types/task';
 import { Contact } from 'src/app/types/contact';
-import { SalesOrOpportunitiesByCategory } from '../types/analytics';
+import {Sale, SalesOrOpportunitiesByCategory} from '../types/analytics';
 
 const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
 // const API_URL = 'https://localhost:5001/api';
@@ -84,14 +84,14 @@ export class DataService {
   };
 
   public getOpportunitiesByCategory = (startDate: string, endDate: string) => this.http
-    .get(`${API_URL}/Analytics/OpportunitiesByCategory/${startDate}/${endDate}`);
+    .get<SalesOrOpportunitiesByCategory>(`${API_URL}/Analytics/OpportunitiesByCategory/${startDate}/${endDate}`);
 
   public getSalesByCategory = (startDate: string, endDate: string) => this.http
     .get<SalesOrOpportunitiesByCategory>(`${API_URL}/Analytics/SalesByCategory/${startDate}/${endDate}`);
 
   public getSalesByOrderDate = (groupByPeriod: string) => this.http
-    .get<any>(`${API_URL}/Analytics/SalesByOrderDate/${groupByPeriod}`);
+    .get<Sale[]>(`${API_URL}/Analytics/SalesByOrderDate/${groupByPeriod}`);
 
   public getSales = (startDate: string, endDate: string) => this.http
-    .get<any>(`${API_URL}/Analytics/Sales/${startDate}/${endDate}`);
+    .get<Sale[]>(`${API_URL}/Analytics/Sales/${startDate}/${endDate}`);
 }
