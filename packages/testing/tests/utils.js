@@ -29,9 +29,10 @@ export const toogleEmbeddedClass = ClientFunction((embed) => {
 
 export const getPostfix = (embedded) => {
   const theme = process.env.theme;
-  const device = process.env.device;
+  const screenMode = process.env.screenMode;
+  // TO DO const device = process.env.device;
 
-  return `-embed=${embedded}-${theme}-${device}`;
+  return `-embed=${embedded}-${theme}-${screenMode}`;
 };
 
 export const toggleCommonConfiguration = async (

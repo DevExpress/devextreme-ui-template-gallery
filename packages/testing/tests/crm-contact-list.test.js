@@ -6,19 +6,19 @@ import { getPostfix, toggleCommonConfiguration } from './utils';
 import { timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const device = process.env.device;
+const screenMode = process.env.screenMode;
 const BASE_URL = `http://localhost:${process.env.port}/#/crm-contact-list`;
 
 fixture`Contact List`;
 
 [false, true].forEach((embedded) => {
-  test(`Crm contact list (${project}, embed=${embedded}, ${device})`, async (t) => {
+  test(`Crm contact list (${project}, embed=${embedded}, ${screenMode})`, async (t) => {
     const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
     // eslint-disable-next-line max-len
     await toggleCommonConfiguration(t, BASE_URL, embedded, () => { }, timeoutSecond);
 
-    await t.expect(Selector(`body.dx-device-${device}`).count).eql(1);
+    await t.expect(Selector(`body.dx-screenMode-${screenMode}`).count).eql(1);
     await takeScreenshot(`crm-contact-list${getPostfix(embedded)}`, 'body');
 
     await t.click('tr.dx-data-row:first-child');
@@ -29,7 +29,7 @@ fixture`Contact List`;
     await takeScreenshot(`crm-contact-list-form-edit${getPostfix(embedded)}`, Selector('.data-wrapper'));
     await t.click(Selector('[aria-label="Close"]'));
 
-    if (device === 'mobile') {
+    if (screenMode === 'mobile') {
       await t.click('.view-wrapper .dx-icon-overflow');
     }
     await t.click(Selector('[aria-label="Add Contact"]'));

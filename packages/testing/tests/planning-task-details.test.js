@@ -7,14 +7,14 @@ import { getPostfix, toggleCommonConfiguration } from './utils';
 import { timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const device = process.env.device;
+const screenMode = process.env.screenMode;
 const BASE_URL = `http://localhost:${process.env.port}/#/planning-task-details`;
 
 fixture`Planning Details`;
 
 const setEmbedded = async (t, embed) => {
   if (embed) {
-    if (device === 'mobile') {
+    if (screenMode === 'mobile') {
       await t.click('.view-wrapper .dx-icon-overflow');
     }
 
@@ -23,7 +23,7 @@ const setEmbedded = async (t, embed) => {
 };
 
 [false, true].forEach((embedded) => {
-  test(`Planning task details form (${project}, embed=${embedded}, ${device})`, async (t) => {
+  test(`Planning task details form (${project}, embed=${embedded}, ${screenMode})`, async (t) => {
     const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
     // eslint-disable-next-line max-len
     await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, timeoutSecond);
@@ -36,7 +36,7 @@ const setEmbedded = async (t, embed) => {
       .ok(compareResults.errorMessages());
   });
 
-  test(`Planning task details Form (${project}, embed=${embedded}, ${device})`, async (t) => {
+  test(`Planning task details Form (${project}, embed=${embedded}, ${screenMode})`, async (t) => {
     const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
     // eslint-disable-next-line max-len
@@ -53,8 +53,8 @@ const setEmbedded = async (t, embed) => {
       .ok(compareResults.errorMessages());
   });
 
-  test(`Planning task details tabpanel (embed=${embedded}, ${device})`, async (t) => {
-    if (device === 'mobile') return;
+  test(`Planning task details tabpanel (embed=${embedded}, ${screenMode})`, async (t) => {
+    if (screenMode === 'mobile') return;
     const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
     // eslint-disable-next-line max-len

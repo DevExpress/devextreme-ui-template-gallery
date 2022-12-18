@@ -6,20 +6,20 @@ import { getPostfix, toggleCommonConfiguration } from './utils';
 import { timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const device = process.env.device;
+const screenMode = process.env.screenMode;
 const BASE_URL = `http://localhost:${process.env.port}/#/planning-task-list`;
 const requestLogger = RequestLogger();
 
 fixture`Planning List`;
 
 [false, true].forEach((embedded) => {
-  test(`Planning task list (${project}, embed=${embedded}, ${device})`, async (t) => {
+  test(`Planning task list (${project}, embed=${embedded}, ${screenMode})`, async (t) => {
     const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
     // eslint-disable-next-line max-len
     await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, timeoutSecond, requestLogger);
 
-    await t.expect(Selector(`body.dx-device-${device}`).count).eql(1);
+    await t.expect(Selector(`body.dx-screenMode-${screenMode}`).count).eql(1);
     await takeScreenshot(`planning-task-grid${getPostfix(embedded)}`, 'body');
     await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
     await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(0));
@@ -29,7 +29,7 @@ fixture`Planning List`;
     await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
     await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
     await takeScreenshot(`planning-task-gantt${getPostfix(embedded)}`, 'body');
-    if (device === 'mobile') {
+    if (screenMode === 'mobile') {
       await t.click('.view-wrapper .dx-icon-overflow');
     }
     await t.click(Selector('[aria-label="Add Task"]'));

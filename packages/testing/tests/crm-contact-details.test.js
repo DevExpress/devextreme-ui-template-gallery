@@ -7,14 +7,14 @@ import { getPostfix, toggleCommonConfiguration } from './utils';
 import { timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const device = process.env.device;
+const screenMode = process.env.screenMode;
 const BASE_URL = `http://localhost:${process.env.port}/#/crm-contact-details`;
 
 fixture`Contact Details`;
 
 const setEmbedded = async (t, embed) => {
   if (embed) {
-    if (device === 'mobile') {
+    if (screenMode === 'mobile') {
       await t.click('.view-wrapper .toolbar-details .dx-icon-overflow');
       await t.click(Selector('.dx-popup-content .dx-button[aria-label=Refresh]'));
     } else {
@@ -24,7 +24,7 @@ const setEmbedded = async (t, embed) => {
 };
 
 [false, true].forEach((embedded) => {
-  test(`Crm contact details (${project}, embed=${embedded}, ${device})`, async (t) => {
+  test(`Crm contact details (${project}, embed=${embedded}, ${screenMode})`, async (t) => {
     const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
     // eslint-disable-next-line max-len
@@ -39,7 +39,7 @@ const setEmbedded = async (t, embed) => {
       .ok(compareResults.errorMessages());
   });
 
-  test(`Crm contact details Form (${project}, embed=${embedded}, ${device})`, async (t) => {
+  test(`Crm contact details Form (${project}, embed=${embedded}, ${screenMode})`, async (t) => {
     const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
     // eslint-disable-next-line max-len
@@ -56,9 +56,9 @@ const setEmbedded = async (t, embed) => {
       .ok(compareResults.errorMessages());
   });
 
-  test(`Crm contact details tabpanel (${project}, embed=${embedded}, ${device})`, async (t) => {
+  test(`Crm contact details tabpanel (${project}, embed=${embedded}, ${screenMode})`, async (t) => {
     const nameTabs = ['Tasks', 'Activities', 'Opportunities', 'Notes', 'Messages'];
-    if (device === 400) return;
+    if (screenMode === 400) return;
     const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
     // eslint-disable-next-line max-len
