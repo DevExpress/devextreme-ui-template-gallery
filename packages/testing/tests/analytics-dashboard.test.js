@@ -23,9 +23,8 @@ const checkDevice = async (t) => {
 
     await toggleCommonConfiguration(t, BASE_URL, embedded, () => { },
       timeoutSecond, requestLogger);
-    await forceResizeRecalculation(t);
 
-    await t.expect(Selector('body.dx-device-generic').count).eql(1);
+    await t.expect(Selector(`body.dx-device-${device}`).count).eql(1);
     await takeScreenshot(`analytics-dashboard-all${getPostfix(embedded)}`, 'body');
     await checkDevice(t);
     await t.click(Selector('.dx-tabs .dx-item').nth(3));

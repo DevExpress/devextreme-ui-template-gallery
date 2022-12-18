@@ -19,7 +19,7 @@ fixture`Planning List`;
     // eslint-disable-next-line max-len
     await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, timeoutSecond, requestLogger);
 
-    await t.expect(Selector('body.dx-device-generic').count).eql(1);
+    await t.expect(Selector(`body.dx-device-${device}`).count).eql(1);
     await takeScreenshot(`planning-task-grid${getPostfix(embedded)}`, 'body');
     await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
     await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(0));
