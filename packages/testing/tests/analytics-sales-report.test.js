@@ -17,7 +17,7 @@ fixture`Analytics Sales Report`;
     const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
     await toggleCommonConfiguration(t, BASE_URL, embedded, () => { },
       timeoutSecond, requestLogger);
-    await t.expect(Selector(`body.dx-screenMode-${screenMode}`).count).eql(1);
+    await t.expect(Selector(`body.dx-device-${screenMode}`).count).eql(1);
     await takeScreenshot(`analytics-sales-report-month${getPostfix(embedded)}`, 'body');
 
     const isPeriodSelectorBoxVisible = screenMode === 'desktop';

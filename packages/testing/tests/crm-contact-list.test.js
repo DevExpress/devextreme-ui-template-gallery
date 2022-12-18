@@ -18,7 +18,7 @@ fixture`Contact List`;
     // eslint-disable-next-line max-len
     await toggleCommonConfiguration(t, BASE_URL, embedded, () => { }, timeoutSecond);
 
-    await t.expect(Selector(`body.dx-screenMode-${screenMode}`).count).eql(1);
+    await t.expect(Selector(`body.dx-device-${screenMode}`).count).eql(1);
     await takeScreenshot(`crm-contact-list${getPostfix(embedded)}`, 'body');
 
     await t.click('tr.dx-data-row:first-child');

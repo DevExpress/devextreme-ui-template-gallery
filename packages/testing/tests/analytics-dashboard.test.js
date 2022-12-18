@@ -24,7 +24,7 @@ const checkScreenMode = async (t) => {
     await toggleCommonConfiguration(t, BASE_URL, embedded, () => { },
       timeoutSecond, requestLogger);
 
-    await t.expect(Selector(`body.dx-screenMode-${screenMode}`).count).eql(1);
+    await t.expect(Selector(`body.dx-device-${screenMode}`).count).eql(1);
     await takeScreenshot(`analytics-dashboard-all${getPostfix(embedded)}`, 'body');
     await checkScreenMode(t);
     await t.click(Selector('.dx-tabs .dx-item').nth(3));
