@@ -67,7 +67,7 @@ jobs:
           { project: 'vue', page: 'analytics-geography' },
         ]
         device: [
-          { name: 'iphone SE'}
+          { name: 'iphone X'}
         ]
     runs-on: ubuntu-latest
     timeout-minutes: 30
