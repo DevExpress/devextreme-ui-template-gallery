@@ -11,6 +11,7 @@
     (onRowClick)="rowClick($event)"
     (onExporting)="onExporting($event)"
   >
+    <dxo-load-panel [showPane]="false"></dxo-load-panel>
     <dxo-scrolling mode="virtual"></dxo-scrolling>
     <dxo-selection
       selectAllMode="allPages"

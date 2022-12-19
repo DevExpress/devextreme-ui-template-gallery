@@ -238,7 +238,7 @@ export const PlanningTaskList = () => {
           />
         </Item>
       </Toolbar>
-      {loading && <LoadPanel container='.content' visible position={{ of: '.content' }} />}
+      {loading && <LoadPanel container='.content' showPane={false} visible position={{ of: '.content' }} />}
       {!loading && isDataGrid && <PlanningGrid dataSource={gridData} ref={gridRef} />}
       {!loading && isKanban && <PlanningKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
       {!loading && view === ganttView && <PlanningGantt dataSource={filteredData} ref={ganttRef} />}

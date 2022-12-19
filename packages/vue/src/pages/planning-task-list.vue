@@ -213,15 +213,7 @@ const tabValueChange = (e: TabsItemClickEvent) => {
 };
 
 const reload = () => {
-  isLoading.value = true;
-  if (activeTabId.value === 'grid') {
-    loadTasksAsync();
-    ganttData.value = [];
-    kanbanData.value = [];
-  } else {
-    gridData.value = [];
-    loadFilteredTasksAsync();
-  }
+  tasksGridCmp.value.refresh();
 };
 
 const onSaveNewTask = () => {
