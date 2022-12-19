@@ -1,4 +1,4 @@
-import { ClientFunction, location } from 'testcafe';
+import { ClientFunction } from 'testcafe';
 
 const WAIT_ATTEMPTS = 10;
 
@@ -39,9 +39,6 @@ export const toggleCommonConfiguration = async (
   t, url, embedded, setEmbedded, timeout, requestLogger,
 ) => {
   await t.navigateTo(url);
-  if(process.env.screenMode === 'mobile') {
-    await t.eval(() => location.reload(true));
-  }
   await awaitFontsLoaded(t, requestLogger);
   await toogleEmbeddedClass(embedded);
 
