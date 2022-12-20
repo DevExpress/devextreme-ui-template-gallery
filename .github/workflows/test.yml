@@ -117,14 +117,6 @@ jobs:
         npm run test-testcafe -- $all_args
       working-directory: packages/testing
 
-      - name: Copy screenshots artifacts
-      if: ${{ failure() }}
-      uses: actions/upload-artifact@v3
-      with:
-        name: screenshots-${{ matrix.ARGS.project }}
-        path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
-        if-no-files-found: ignore
-
     - name: Run tests mobile
       run: |
         all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true  --theme ${{ matrix.theme.name }} --device ${{ matrix.device.name }}"
@@ -140,6 +132,6 @@ jobs:
       if: ${{ failure() }}
       uses: actions/upload-artifact@v3
       with:
-        name: screenshots-${{ matrix.ARGS.project }}-${{ matrix.device.name }}
+        name: screenshots-${{ matrix.ARGS.project }}
         path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
         if-no-files-found: ignore
