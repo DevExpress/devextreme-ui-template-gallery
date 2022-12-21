@@ -1,9 +1,21 @@
 <template>
-  <form @submit.prevent="onSubmit">
+  <form
+    class="create-account-form"
+    @submit.prevent="onSubmit"
+  >
     <dx-form
       :form-data="formData"
       :disabled="loading"
     >
+      <dx-item
+        data-field="email"
+        editor-type="dxTextBox"
+        :editor-options="{ stylingMode: 'filled', placeholder: 'Email', mode: 'email' }"
+      >
+        <dx-required-rule message="Email is required" />
+        <dx-email-rule message="Email is invalid" />
+        <dx-label :visible="false" />
+      </dx-item>
       <dx-item
         data-field="password"
         editor-type="dxTextBox"
@@ -18,7 +30,8 @@
         :editor-options="{
           stylingMode: 'filled',
           placeholder: 'Confirm Password',
-          mode: 'password' }"
+          mode: 'password'
+        }"
       >
         <dx-required-rule message="Password is required" />
         <dx-custom-rule
@@ -27,16 +40,35 @@
         />
         <dx-label :visible="false" />
       </dx-item>
+      <dx-item>
+        <template #default>
+          <div class="policy-info">
+            By creating an account, you agree to the
+            <router-link to="#">Terms of Service</router-link> and
+            <router-link to="#">
+              Privacy Policy
+            </router-link>
+          </div>
+        </template>
+      </dx-item>
       <dx-button-item>
         <dx-button-options
           width="100%"
           type="default"
-          template="changePassword"
+          template="createAccount"
           :use-submit-behavior="true"
         />
       </dx-button-item>
-
-      <template #changePassword>
+      <dx-item>
+        <template #default>
+          <div class="login-link">
+            Have an account? <router-link to="/login">
+              Sign In
+            </router-link>
+          </div>
+        </template>
+      </dx-item>
+      <template #createAccount>
         <div>
           <span class="dx-button-text">
             <dx-load-indicator
@@ -45,7 +77,7 @@
               height="24px"
               :visible="true"
             />
-            <span v-if="!loading">Continue</span>
+            <span v-if="!loading">Create a new account</span>
           </span>
         </div>
       </template>
@@ -61,41 +93,59 @@ import DxForm, {
   DxButtonOptions,
   DxCustomRule,
   DxRequiredRule,
+  DxEmailRule,
 } from 'devextreme-vue/form';
 import DxLoadIndicator from 'devextreme-vue/load-indicator';
 import notify from 'devextreme/ui/notify';
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { ref, reactive } from 'vue';
-
-import { authInfo } from '@/auth';
+import { authInfo as auth } from '@/auth';
 
 const router = useRouter();
-const route = useRoute();
 
-const recoveryCode = ref<typeof route.params.recoveryCode>('');
 const loading = ref(false);
 const formData = reactive({
+  email: '',
   password: '',
 });
 
-recoveryCode.value = route.params.recoveryCode;
-
-async function onSubmit() {
-  const { password } = formData;
+const onSubmit = async () => {
+  const { email, password } = formData;
   loading.value = true;
 
-  const result = await authInfo.changePassword(password, recoveryCode.value);
+  const result = await auth.createAccount(email, password);
   loading.value = false;
 
   if (result.isOk) {
-    router.push('/login-form');
+    router.push('/login');
   } else {
     notify(result.message, 'error', 2000);
   }
-}
+};
 
 function confirmPassword(e: {value: ''}) {
   return e.value === formData.password;
 }</script>
 
-<style></style>
+<style scoped lang="scss">
+@use "@/variables" as *;
+
+.create-account-form {
+  .policy-info {
+    margin: 10px 0;
+    color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+    font-size: 14px;
+    font-style: normal;
+
+    a {
+      color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+    }
+  }
+
+  .login-link {
+    color: $base-accent;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+</style>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HashRouter as Router } from 'react-router-dom';
+import { HashRouter as Router, useLocation } from 'react-router-dom';
 
 import LoadPanel from 'devextreme-react/load-panel';
 
@@ -16,12 +16,17 @@ import './styles.scss';
 
 function RootApp() {
   const { user, loading } = useAuth();
+  const isLoginForm = [
+    'login',
+    'reset-password',
+    'create-account',
+  ].includes(useLocation().pathname.substring(1));
 
   if (loading) {
     return <LoadPanel visible />;
   }
 
-  if (user) {
+  if (user && !isLoginForm) {
     return <Content />;
   }
 

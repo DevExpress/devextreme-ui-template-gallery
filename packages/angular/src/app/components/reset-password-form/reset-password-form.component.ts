@@ -29,7 +29,7 @@ export class ResetPasswordFormComponent {
     this.loading = false;
 
     if (result.isOk) {
-      this.router.navigate(['/auth/login-form']);
+      this.router.navigate(['/auth/login']);
       notify(notificationText, 'success', 2500);
     } else {
       notify(result.message, 'error', 2000);

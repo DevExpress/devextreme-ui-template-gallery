@@ -2,7 +2,7 @@
   <dx-scroll-view
     height="100%"
     width="100%"
-    class="with-footer single-card"
+    class="app-content-wrapper single-card"
   >
     <div class="dx-card content">
       <div class="header">
@@ -26,7 +26,7 @@ import { ref, watch } from 'vue';
 const route = useRoute();
 
 const title = ref(route.meta.title);
-const description = ref<string>('');
+const description = ref<string>(route.meta.description as string);
 
 watch(
   () => route.path,

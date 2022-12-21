@@ -7,11 +7,10 @@
   width: 100%;
 }
 
-.app .content {
+.app-content-wrapper .content {
   line-height: 1.5;
   position: relative;
   flex-grow: 1;
-  width: 100%;
 
   .view {
     display: contents;
@@ -50,7 +49,7 @@
   border-left: 0;
 }
 
-.with-footer > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+.app-content-wrapper > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
   height: 100%;
 
   & > .dx-scrollview-content {

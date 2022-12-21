@@ -39,7 +39,7 @@ export class ChangePasswordFormComponent implements OnInit, OnDestroy {
     this.loading = false;
 
     if (result.isOk) {
-      this.router.navigate(['/auth/login-form']);
+      this.router.navigate(['/auth/login']);
     } else {
       notify(result.message, 'error', 2000);
     }

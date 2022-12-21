@@ -49,7 +49,7 @@ export const authInfo: AuthInfo = {
   },
 
   async logOut() {
-    this._user = null;
+    /* this._user = null; */
   },
 
   async getUser() {

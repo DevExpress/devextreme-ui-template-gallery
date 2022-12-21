@@ -26,7 +26,7 @@ const routes: Routes = [
     component: UnauthenticatedContentComponent,
     children: [
       {
-        path: 'login-form',
+        path: 'login',
         component: LoginFormComponent,
         canActivate: [AuthGuardService],
       },
@@ -44,6 +44,11 @@ const routes: Routes = [
         path: 'change-password/:recoveryCode',
         component: ChangePasswordFormComponent,
         canActivate: [AuthGuardService],
+      },
+      {
+        path: '**',
+        redirectTo: 'login',
+        pathMatch: 'full',
       },
     ]
   },

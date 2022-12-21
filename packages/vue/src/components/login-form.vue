@@ -1,6 +1,6 @@
 <template>
   <form
-    class="create-account-form"
+    class="login-form"
     @submit.prevent="onSubmit"
   >
     <dx-form
@@ -25,52 +25,37 @@
         <dx-label :visible="false" />
       </dx-item>
       <dx-item
-        data-field="confirmedPassword"
-        editor-type="dxTextBox"
-        :editor-options="{
-          stylingMode: 'filled',
-          placeholder: 'Confirm Password',
-          mode: 'password'
-        }"
+        data-field="rememberMe"
+        editor-type="dxCheckBox"
+        :editor-options="{ text: 'Remember me', elementAttr: { class: 'form-text' } }"
       >
-        <dx-required-rule message="Password is required" />
-        <dx-custom-rule
-          message="Passwords do not match"
-          :validation-callback="confirmPassword"
-        />
         <dx-label :visible="false" />
       </dx-item>
+      <dx-button-item>
+        <dx-button-options
+          width="100%"
+          type="default"
+          template="signInTemplate"
+          :use-submit-behavior="true"
+        />
+      </dx-button-item>
       <dx-item>
         <template #default>
-          <div class="policy-info">
-            By creating an account, you agree to the
-            <router-link to="#">
-              Terms of Service
-            </router-link> and
-            <router-link to="#">
-              Privacy Policy
+          <div class="link">
+            <router-link to="/reset-password">
+              Forgot password?
             </router-link>
           </div>
         </template>
       </dx-item>
       <dx-button-item>
         <dx-button-options
+          text="Create an account"
           width="100%"
-          type="default"
-          template="createAccount"
-          :use-submit-behavior="true"
+          :on-click="onCreateAccountClick"
         />
       </dx-button-item>
-      <dx-item>
-        <template #default>
-          <div class="login-link">
-            Have an account? <router-link to="/login-form">
-              Sign In
-            </router-link>
-          </div>
-        </template>
-      </dx-item>
-      <template #createAccount>
+      <template #signInTemplate>
         <div>
           <span class="dx-button-text">
             <dx-load-indicator
@@ -79,7 +64,7 @@
               height="24px"
               :visible="true"
             />
-            <span v-if="!loading">Create a new account</span>
+            <span v-if="!loading">Sign In</span>
           </span>
         </div>
       </template>
@@ -88,66 +73,63 @@
 </template>
 
 <script setup lang="ts">
+import DxLoadIndicator from 'devextreme-vue/load-indicator';
 import DxForm, {
   DxItem,
+  DxEmailRule,
+  DxRequiredRule,
   DxLabel,
   DxButtonItem,
   DxButtonOptions,
-  DxCustomRule,
-  DxRequiredRule,
-  DxEmailRule,
 } from 'devextreme-vue/form';
-import DxLoadIndicator from 'devextreme-vue/load-indicator';
 import notify from 'devextreme/ui/notify';
+
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { ref, reactive } from 'vue';
 import { authInfo as auth } from '@/auth';
 
 const router = useRouter();
 
-const loading = ref(false);
 const formData = reactive({
   email: '',
   password: '',
 });
+const loading = ref(false);
 
-const onSubmit = async () => {
+function onCreateAccountClick() {
+  router.push('/create-account');
+}
+
+async function onSubmit() {
   const { email, password } = formData;
   loading.value = true;
-
-  const result = await auth.createAccount(email, password);
-  loading.value = false;
-
-  if (result.isOk) {
-    router.push('/login-form');
-  } else {
+  const result = await auth.logIn(email, password);
+  if (!result.isOk) {
+    loading.value = false;
     notify(result.message, 'error', 2000);
+  } else {
+    router.push('/');
   }
-};
-
-function confirmPassword(e: {value: ''}) {
-  return e.value === formData.password;
-}</script>
+}
+</script>
 
 <style scoped lang="scss">
 @use "@/variables" as *;
 
-.create-account-form {
-  .policy-info {
-    margin: 10px 0;
-    color: rgba($base-text-color, alpha($base-text-color) * 0.7);
-    font-size: 14px;
+.login-form {
+  .link {
+    text-align: center;
+    font-size: 16px;
     font-style: normal;
 
     a {
-      color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+      text-decoration: none;
     }
   }
 
-  .login-link {
-    color: $base-accent;
-    font-size: 16px;
-    text-align: center;
+  :deep(.form-text) {
+    margin: 10px 0;
+    color: rgba($base-text-color, alpha($base-text-color) * 0.7);
   }
 }
 </style>

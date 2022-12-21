@@ -7,6 +7,10 @@
     padding: 40px;
     flex-grow: 0;
 
+    &.content {
+      flex-grow: 0;
+    }
+
     .screen-x-small & {
       width: 100%;
       height: 100%;
