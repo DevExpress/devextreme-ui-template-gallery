@@ -127,7 +127,7 @@ async function onSubmit() {
     }
   }
 
-  .form-text {
+  :deep(.form-text) {
     margin: 10px 0;
     color: rgba($base-text-color, alpha($base-text-color) * 0.7);
   }

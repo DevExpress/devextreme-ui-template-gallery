@@ -2,7 +2,7 @@
   <dx-scroll-view
     height="100%"
     width="100%"
-    class="with-footer single-card"
+    class="app-content-wrapper single-card"
   >
     <div class="dx-card content">
       <div class="header">

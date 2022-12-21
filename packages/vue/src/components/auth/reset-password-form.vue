@@ -28,7 +28,7 @@
       <dx-item>
         <template #default>
           <div class="login-link">
-            Return to <router-link to="/login-form">
+            Return to <router-link to="/login">
               Sign In
             </router-link>
           </div>
@@ -83,7 +83,7 @@ async function onSubmit() {
   loading.value = false;
 
   if (result.isOk) {
-    router.push('/login-form');
+    router.push('/login');
     notify(notificationText, 'success', 2500);
   } else {
     notify(result.message, 'error', 2000);
@@ -95,7 +95,7 @@ async function onSubmit() {
 @use "@/variables" as *;
 
 .reset-password-form {
-  .submit-button {
+  :deep(.submit-button) {
     margin-top: 10px;
   }
 

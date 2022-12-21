@@ -88,7 +88,7 @@ async function onSubmit() {
   loading.value = false;
 
   if (result.isOk) {
-    router.push('/login-form');
+    router.push('/login');
   } else {
     notify(result.message, 'error', 2000);
   }

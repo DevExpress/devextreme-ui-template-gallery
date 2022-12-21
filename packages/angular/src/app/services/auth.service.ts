@@ -16,7 +16,7 @@ const defaultUser = {
 
 @Injectable()
 export class AuthService {
-  private _user: IUser | null = defaultUser;
+  private _user: IUser | null = null;
 
   get loggedIn(): boolean {
     return !!this._user;
@@ -112,7 +112,7 @@ export class AuthService {
 
   async logOut() {
     this._user = null;
-    this.router.navigate(['/auth/login-form']);
+    this.router.navigate(['/auth/login']);
   }
 }
 
@@ -123,7 +123,7 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const isLoggedIn = this.authService.loggedIn;
     const isAuthForm = [
-      'login-form',
+      'login',
       'reset-password',
       'create-account',
       'change-password/:recoveryCode',
@@ -136,7 +136,8 @@ export class AuthGuardService implements CanActivate {
     }
 
     if (!isLoggedIn && !isAuthForm) {
-      this.router.navigate(['/auth/login-form']);
+      this.authService.logIn('default@default.org', 'default');
+      this.router.navigate(['/']);
     }
 
     if (isLoggedIn) {

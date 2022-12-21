@@ -64,7 +64,7 @@
       <dx-item>
         <template #default>
           <div class="login-link">
-            Have an account? <router-link to="/login-form">
+            Have an account? <router-link to="/login">
               Sign In
             </router-link>
           </div>
@@ -119,7 +119,7 @@ const onSubmit = async () => {
   loading.value = false;
 
   if (result.isOk) {
-    router.push('/login-form');
+    router.push('/login');
   } else {
     notify(result.message, 'error', 2000);
   }
