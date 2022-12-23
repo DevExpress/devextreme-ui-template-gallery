@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, OnDestroy,
+  Component, OnInit, NgModule
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -17,7 +17,6 @@ import {
 } from 'src/app/components';
 import { Task } from 'src/app/types/task';
 import { DataService } from 'src/app/services';
-import { Subscription } from 'rxjs';
 import { TaskFormModule } from '../../components/task-form/task-form.component';
 
 @Component({
@@ -25,7 +24,7 @@ import { TaskFormModule } from '../../components/task-form/task-form.component';
   styleUrls: ['./planning-task-details.component.scss'],
   providers: [DataService],
 })
-export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
+export class PlanningTaskDetailsComponent implements OnInit {
   task: Task;
 
   taskId = 1;
@@ -34,13 +33,11 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
 
   isLoading = false;
 
-  dataSubscription: Subscription = new Subscription();
-
   constructor(private service: DataService) {
   }
 
   loadData = () => {
-    this.dataSubscription = this.service.getTask(this.taskId).subscribe((data) => {
+    this.service.getTask(this.taskId).subscribe((data) => {
       this.task = data;
       this.taskName = data.text;
       this.isLoading = false;
@@ -49,10 +46,6 @@ export class PlanningTaskDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadData();
-  }
-
-  ngOnDestroy(): void {
-    this.dataSubscription.unsubscribe();
   }
 
   refresh = () => {

@@ -80,11 +80,12 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   loadUserById = (id: number) => {
     this.isLoading = true;
-    this.userPanelSubscriptions.push(this.service.getContact(id).subscribe((data) => {
+
+    this.service.getContact(id).subscribe((data) => {
       this.user = data;
       this.isLoading = false;
       this.isEditing = false;
-    }));
+    })
   };
 
   onClosePanel = () => {

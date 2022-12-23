@@ -1,27 +1,25 @@
 import {
   Component, OnInit, NgModule,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { map, share } from "rxjs/operators";
+import { Observable, forkJoin } from "rxjs";
 
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxFunnelModule } from 'devextreme-angular/ui/funnel';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
+import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
 
-import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/services';
-
 import { CardAnalyticsModule } from 'src/app/components/card-analytics/card-analytics.component';
 import { ToolbarAnalyticsModule } from 'src/app/components/toolbar-analytics/toolbar-analytics.component';
-
 import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import {
   Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory,
 } from 'src/app/types/analytics';
-import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
 import { ApplyPipeModule } from "src/app/pipes/apply.pipe";
-import { map } from "rxjs/operators";
-import { Observable, forkJoin } from "rxjs";
 
 type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
 type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
@@ -56,9 +54,8 @@ export class AnalyticsDashboardComponent implements OnInit {
   }
 
   loadData = (startDate: string, endDate: string) => {
-    const tasks: Observable<any>[] = [];
     this.isLoading = true;
-    [
+    const tasks: Observable<object>[] = [
       ['opportunities', this.service.getOpportunitiesByCategory],
       ['sales', this.service.getSales],
       ['salesByCategory', this.service.getSalesByCategory],
@@ -66,13 +63,16 @@ export class AnalyticsDashboardComponent implements OnInit {
         map((data) => this.service.getSalesByState(data))
       )
       ]
-    ].forEach(async ([dataName, loader]: [string, DataLoader]) => {
-      const loaderObservable = loader(startDate, endDate);
-      tasks.push(loaderObservable);
+    ].map(([dataName, loader]: [string, DataLoader]) => {
+      const loaderObservable = loader(startDate, endDate).pipe(share());
+
       loaderObservable.subscribe((result: DashboardData) => {
         this[dataName] = result;
       });
+
+      return loaderObservable;
     });
+
     forkJoin(tasks).subscribe(() => {
       this.isLoading = false;
     });

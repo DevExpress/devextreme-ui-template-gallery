@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, OnDestroy,
+  Component, OnInit, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -13,7 +13,7 @@ import {
   CardMessagesModule,
 } from 'src/app/components';
 import { DataService } from 'src/app/services';
-import { forkJoin, Observable, map, Subscription } from 'rxjs';
+import { forkJoin, map } from 'rxjs';
 import { Contact } from 'src/app/types/contact';
 import { Messages } from 'src/app/types/messages';
 import { Notes } from 'src/app/types/notes';
@@ -26,7 +26,7 @@ import { ContactCardsModule } from '../../components/contact-cards/contact-cards
   styleUrls: ['./crm-contact-details.component.scss'],
   providers: [DataService],
 })
-export class CrmContactDetailsComponent implements OnInit, OnDestroy {
+export class CrmContactDetailsComponent implements OnInit {
   contactId = 12;
 
   contactData: Contact;
@@ -43,8 +43,6 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
 
   isLoading = false;
 
-  subscriptions: Subscription[] = [];
-
   constructor(private service: DataService) {
   }
 
@@ -52,12 +50,8 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
     this.loadData();
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
-  }
-
   loadData = () => {
-    const observable$ = forkJoin([
+    forkJoin([
       this.service.getContactNotes(this.contactId),
       this.service.getContactMessages(this.contactId),
       this.service.getActiveContactOpportunities(this.contactId),
@@ -75,17 +69,15 @@ export class CrmContactDetailsComponent implements OnInit, OnDestroy {
           activeOpportunities,
           closedOpportunities
         }))
-      );
+      ).subscribe(
+        (data) => Object.keys(data).forEach((key) => this[key] = data[key])
+    );
 
-    this.subscriptions.push(this.service.getContact(this.contactId).subscribe((data) => {
+    this.service.getContact(this.contactId).subscribe((data) => {
       this.contactName = data.name;
       this.contactData = data;
       this.isLoading = false;
-    }));
-
-    this.subscriptions.push(observable$.subscribe((data) => {
-      Object.keys(data).forEach((key) => this[key] = data[key]);
-    }));
+    })
   };
 
   refresh = () => {
