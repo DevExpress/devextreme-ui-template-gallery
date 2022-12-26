@@ -23,7 +23,9 @@ export const LoginForm = () => {
       setLoading(true);
 
       const result = await signIn(email, password);
-      if (!result.isOk) {
+      if (result.isOk) {
+        navigate('/');
+      } else {
         setLoading(false);
         notify(result.message, 'error', 2000);
       }

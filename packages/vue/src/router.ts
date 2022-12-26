@@ -5,7 +5,7 @@ import { authInfo } from '@/auth';
 
 function loadAuthComponent(ComponentFileName: string) {
   // eslint-disable-next-line func-call-spacing
-  return () => import (/* webpackChunkName: "auth" */ `@/components/auth/${ComponentFileName}.vue`);
+  return () => import (/* webpackChunkName: "auth" */ `@/components/${ComponentFileName}.vue`);
 }
 
 export const router = createRouter({
@@ -16,8 +16,8 @@ export const router = createRouter({
       redirect: '/crm-contact-list',
     },
     {
-      path: '/login-form',
-      name: 'login-form',
+      path: '/login',
+      name: 'login',
       meta: {
         requiresAuth: false,
         layout: simpleLayout,

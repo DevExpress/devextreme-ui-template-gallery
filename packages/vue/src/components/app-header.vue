@@ -102,7 +102,7 @@ auth.getUser().then((e: AuthUser) => {
 function onLogoutClick() {
   auth.logOut();
   router.push({
-    path: '/login-form',
+    path: '/login',
     query: { redirect: route.path },
   });
 }
