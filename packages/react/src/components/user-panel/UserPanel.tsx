@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import ContextMenu, { Position } from 'devextreme-react/context-menu';
 import List from 'devextreme-react/list';
 
@@ -13,19 +11,9 @@ import './UserPanel.scss';
 
 export const UserPanel = ({ menuMode }: UserPanelProps) => {
   const { user, signOut } = useAuth();
-  const navigate = useNavigate();
-
-  function navigateToProfile() {
-    navigate('/profile');
-  }
 
   const menuItems = useMemo(
     () => [
-      {
-        text: 'Profile',
-        icon: 'user',
-        onClick: navigateToProfile,
-      },
       {
         text: 'Logout',
         icon: 'runner',
