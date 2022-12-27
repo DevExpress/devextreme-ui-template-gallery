@@ -1,68 +1,70 @@
-<div class="view-wrapper">
-  <dx-toolbar>
-    <dxi-item location="before">
-      <dx-button icon="arrowleft"></dx-button>
-    </dxi-item>
-    <dxi-item location="before" [text]="taskName"></dxi-item>
+<dx-scroll-view class="view-wrapper-scroll">
+  <div class="view-wrapper">
+    <dx-toolbar>
+      <dxi-item location="before">
+        <dx-button icon="arrowleft"></dx-button>
+      </dxi-item>
+      <dxi-item location="before" [text]="taskName"></dxi-item>
 
-    <dxi-item location="after" locateInMenu="auto">
-      <dx-drop-down-button text="Actions" stylingMode="contained">
-        <dxi-item text="Duplicate"></dxi-item>
-        <dxi-item text="Close"></dxi-item>
-        <dxi-item text="Delete"></dxi-item>
-      </dx-drop-down-button>
-    </dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      widget="dxButton"
-      showText="inMenu"
-      [options]="{
+      <dxi-item location="after" locateInMenu="auto">
+        <dx-drop-down-button text="Actions" stylingMode="contained">
+          <dxi-item text="Duplicate"></dxi-item>
+          <dxi-item text="Close"></dxi-item>
+          <dxi-item text="Delete"></dxi-item>
+        </dx-drop-down-button>
+      </dxi-item>
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        widget="dxButton"
+        showText="inMenu"
+        [options]="{
         text: 'Attach',
         icon: 'attach'
       }"
-    ></dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      widget="dxButton"
-      showText="inMenu"
-      [options]="{
+      ></dxi-item>
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        widget="dxButton"
+        showText="inMenu"
+        [options]="{
         text: 'Refresh',
         icon: 'refresh',
         onClick: refresh
       }"
-    ></dxi-item>
-  </dx-toolbar>
+      ></dxi-item>
+    </dx-toolbar>
 
-  <div class="panels">
-    <div class="left">
-      <dx-validation-group>
-        <task-form [task]="task" [isLoading]="isLoading" [contentByScreen]="{ xs: 2, sm: 2 }"></task-form>
-      </dx-validation-group>
-    </div>
+    <div class="panels">
+      <div class="left">
+        <dx-validation-group>
+          <task-form [task]="task" [isLoading]="isLoading" [contentByScreen]="{ xs: 2, sm: 2 }"></task-form>
+        </dx-validation-group>
+      </div>
 
-    <div class="right">
-      <div class="dx-card details-card">
-        <dx-tab-panel [showNavButtons]="true" [deferRendering]="false">
-          <dxi-item title="Activities">
-            <card-activities
-              [isLoading]="isLoading"
-              [activities]="task?.activities"
-              [showBy]="true"
-            ></card-activities>
-          </dxi-item>
-          <dxi-item title="Notes">
-            <card-notes [items]="task?.notes" [user]="task?.owner"></card-notes>
-          </dxi-item>
-          <dxi-item title="Messages" [badge]="task?.messages.length">
-            <card-messages
-              [items]="task?.messages"
-              [user]="task?.owner"
-            ></card-messages>
-          </dxi-item>
-        </dx-tab-panel>
+      <div class="right">
+        <div class="dx-card details-card">
+          <dx-tab-panel [showNavButtons]="true" [deferRendering]="false">
+            <dxi-item title="Activities">
+              <card-activities
+                [isLoading]="isLoading"
+                [activities]="task?.activities"
+                [showBy]="true"
+              ></card-activities>
+            </dxi-item>
+            <dxi-item title="Notes">
+              <card-notes [items]="task?.notes" [user]="task?.owner"></card-notes>
+            </dxi-item>
+            <dxi-item title="Messages" [badge]="task?.messages.length">
+              <card-messages
+                [items]="task?.messages"
+                [user]="task?.owner"
+              ></card-messages>
+            </dxi-item>
+          </dx-tab-panel>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</dx-scroll-view>

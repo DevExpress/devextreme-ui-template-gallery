@@ -1,9 +1,9 @@
 <template>
-  <div id="card-opportunies">
+  <div id="card-opportunities">
     <load-component
       :is-loading="isLoading"
-      :container-selector="'#card-opportunies'"
-      :has-data="!!props.contactId"
+      :container-selector="'#card-opportunities'"
+      :show-content="!isLoading"
     >
       <dx-button
         text="Add Opportunity"
@@ -95,7 +95,7 @@ function addOpportunity() {
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
 
-#card-opportunies {
+#card-opportunities {
   min-height: 300px;
   padding: 20px;
 

@@ -83,7 +83,7 @@
     </dx-toolbar>
     <load-component
       :is-loading="isLoading"
-      :has-data="!!gridData.length"
+      :show-content="!!gridData.length"
     >
       <div
         v-if="taskPanelItems[0].text === displayTaskComponent"
@@ -264,8 +264,6 @@ const taskSearchOptions = {
   bottom: 0;
   left: 0;
   right: 0;
-  display: flex;
-  flex-direction: column;
 
   .dx-toolbar {
     padding: $content-padding;

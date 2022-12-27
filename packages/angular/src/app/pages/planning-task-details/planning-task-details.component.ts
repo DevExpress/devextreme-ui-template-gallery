@@ -8,6 +8,7 @@ import {
   DxTabPanelModule,
   DxToolbarModule,
   DxValidationGroupModule,
+  DxScrollViewModule,
 } from 'devextreme-angular';
 import {
   CardActivitiesModule,
@@ -67,7 +68,7 @@ export class PlanningTaskDetailsComponent implements OnInit {
     CardMessagesModule,
     TaskFormModule,
     StatusIndicatorModule,
-
+    DxScrollViewModule,
     CommonModule,
   ],
   providers: [],

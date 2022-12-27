@@ -1,28 +1,31 @@
 <template>
-  <div class="view-wrapper">
-    <analytics-toolbar>Sales Report</analytics-toolbar>
+  <dx-scroll-view class="view-wrapper-scroll">
+    <div class="view-wrapper">
+      <analytics-toolbar>Sales Report</analytics-toolbar>
 
-    <div class="cards">
-      <sales-range-card
-        :data="sales"
-        class="sales-range-card"
-        @range-changed="onRangeChanged"
-      />
-      <sales-by-range-card :data="salesByCategory" />
-      <sales-performance-card
-        :data="salesByDateAndCategory"
-        :group-by-periods="groupByPeriods"
-        :visual-range="visualRange"
-        @performance-period-changed="performancePeriodChange"
-      />
+      <div class="cards">
+        <sales-range-card
+          :data="sales"
+          class="sales-range-card"
+          @range-changed="onRangeChanged"
+        />
+        <sales-by-range-card :data="salesByCategory" />
+        <sales-performance-card
+          :data="salesByDateAndCategory"
+          :group-by-periods="groupByPeriods"
+          :visual-range="visualRange"
+          @performance-period-changed="performancePeriodChange"
+        />
+      </div>
     </div>
-  </div>
+  </dx-scroll-view>
   <loading-panel :loading="loading" />
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { formatDate } from 'devextreme/localization';
 
 import {
@@ -86,9 +89,6 @@ onMounted(() => {
 <style scoped lang="scss">
 @use "@/variables" as *;
 .view-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
   padding: $content-padding;
 }
 

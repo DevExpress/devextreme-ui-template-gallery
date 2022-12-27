@@ -13,6 +13,7 @@ body {
 
 .content {
   line-height: 1.5;
+  height: 100%;
 
   h2 {
     font-size: 30px;
@@ -43,13 +44,13 @@ body {
   border-left: 0;
 }
 
-.app-content-wrapper > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+.view-wrapper-scroll > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
   height: 100%;
 
   & > .dx-scrollview-content {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;
   }
 }
 
@@ -72,6 +73,7 @@ body {
 
 .view-wrapper {
   display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 

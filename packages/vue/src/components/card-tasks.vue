@@ -3,7 +3,7 @@
     <load-component
       :is-loading="props.isLoading"
       :container-selector="'#card-tasks'"
-      :has-data="!!props.tasks.length"
+      :show-content="!props.isLoading"
     >
       <dx-data-grid
         class="grid-tasks"
@@ -95,7 +95,7 @@ const onReorder = (e: RowDraggingReorderEvent) => {
   padding: 20px 0 0;
 }
 
-.tasks-grid {
+.grid-tasks {
   border-top: 1px solid $base-border-color;
 }
 </style>

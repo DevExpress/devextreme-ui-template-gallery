@@ -44,7 +44,7 @@
     <load-component
       :is-loading="isLoading"
       :container-selector="'#task-form'"
-      :has-data="!!props.data"
+      :show-content="!!props.data"
     >
       <dx-form
         :form-data="data"

@@ -1,85 +1,88 @@
 <template>
-  <div class="view-wrapper">
-    <dx-toolbar>
-      <dx-toolbar-item location="before">
-        <dx-button icon="arrowleft" />
-      </dx-toolbar-item>
-      <dx-toolbar-item
-        location="before"
-        :text="contactName"
-      />
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto"
-      >
-        <div>
-          <dx-button
-            text="Terminate"
-            type="default"
-            styling-mode="contained"
+  <dx-scroll-view class="view-wrapper-scroll">
+    <div class="view-wrapper">
+      <dx-toolbar class="toolbar-details">
+        <dx-toolbar-item location="before">
+          <dx-button icon="arrowleft" />
+        </dx-toolbar-item>
+        <dx-toolbar-item
+          location="before"
+          :text="contactName"
+        />
+        <dx-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+        >
+          <div>
+            <dx-button
+              text="Terminate"
+              type="default"
+              styling-mode="contained"
+            />
+          </div>
+        </dx-toolbar-item>
+        <dx-toolbar-item
+          location="after"
+        >
+          <dx-drop-down-button
+            text="Actions"
+            :width="120"
+            styling-mode="text"
+          >
+            <dx-drop-down-item text="Assign to Me" />
+            <dx-drop-down-item text="Archive" />
+          </dx-drop-down-button>
+        </dx-toolbar-item>
+        <dx-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+        >
+          <div>
+            <div class="separator" />
+          </div>
+        </dx-toolbar-item>
+        <dx-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+          widget="dxButton"
+          show-text="inMenu"
+          :options="copyOptions"
+        />
+        <dx-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+          widget="dxButton"
+          show-text="inMenu"
+          :options="refreshOptions"
+        />
+      </dx-toolbar>
+
+      <div class="panels">
+        <div class="left">
+          <contact-form
+            :contact-data="contactData"
+            :is-editing="false"
+            :is-loading="isLoading"
           />
         </div>
-      </dx-toolbar-item>
-      <dx-toolbar-item
-        location="after"
-      >
-        <dx-drop-down-button
-          text="Actions"
-          :width="120"
-          styling-mode="text"
-        >
-          <dx-drop-down-item text="Assign to Me" />
-          <dx-drop-down-item text="Archive" />
-        </dx-drop-down-button>
-      </dx-toolbar-item>
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto"
-      >
-        <div>
-          <div class="separator" />
+
+        <div class="right">
+          <contact-cards
+            :is-loading="isLoading"
+            :contact-name="contactData?.name"
+            :contact-id="contactId"
+            :tasks="contactData?.tasks"
+            :activities="contactData?.activities"
+          />
         </div>
-      </dx-toolbar-item>
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto"
-        widget="dxButton"
-        show-text="inMenu"
-        :options="copyOptions"
-      />
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto"
-        widget="dxButton"
-        show-text="inMenu"
-        :options="refreshOptions"
-      />
-    </dx-toolbar>
-
-    <div class="panels">
-      <div class="left">
-        <contact-form
-          :contact-data="contactData"
-          :is-editing="false"
-          :is-loading="isLoading"
-        />
-      </div>
-
-      <div class="right">
-        <contact-cards
-          :is-loading="isLoading"
-          :contact-name="contactData?.name"
-          :contact-id="contactId"
-          :tasks="contactData?.tasks"
-          :activities="contactData?.activities"
-        />
       </div>
     </div>
-  </div>
+  </dx-scroll-view>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxButton } from 'devextreme-vue/button';
 import { DxDropDownButton, DxItem as DxDropDownItem } from 'devextreme-vue/drop-down-button';
 import {
@@ -149,9 +152,6 @@ $right-panel-width: 360px;
 }
 
 .view-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
   padding: $content-padding $content-padding 0 $content-padding;
 
   .panels {

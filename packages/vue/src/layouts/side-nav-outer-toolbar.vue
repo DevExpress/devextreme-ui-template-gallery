@@ -18,12 +18,7 @@
       :shading="drawerOptions.shaderEnabled"
       :close-on-outside-click="drawerOptions.closeOnOutsideClick"
     >
-      <dx-scroll-view
-        ref="scrollViewRef"
-        class="app-content-wrapper"
-      >
-        <slot />
-      </dx-scroll-view>
+      <slot />
       <template #menuTemplate>
         <side-nav-menu
           :compact-mode="!menuOpened"
@@ -36,7 +31,6 @@
 
 <script setup lang="ts">
 import DxDrawer from 'devextreme-vue/drawer';
-import DxScrollView from 'devextreme-vue/scroll-view';
 
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
@@ -57,7 +51,6 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute();
 
-const scrollViewRef = ref<DxScrollView | null>(null);
 const menuOpened = ref(props.isLarge);
 const menuTemporaryOpened = ref(false);
 
@@ -77,7 +70,6 @@ watch(
       menuOpened.value = false;
       menuTemporaryOpened.value = false;
     }
-    scrollViewRef.value?.instance?.scrollTo(0);
   },
 );
 

@@ -21,6 +21,7 @@ import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 import { SalesByState, SalesByStateAndCity } from 'src/app/types/analytics';
 import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
+import {DxScrollViewModule} from "devextreme-angular";
 
 @Component({
   templateUrl: './analytics-geography.component.html',
@@ -118,6 +119,7 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [
+    DxScrollViewModule,
     DxDataGridModule,
     DxBulletModule,
     DxPieChartModule,

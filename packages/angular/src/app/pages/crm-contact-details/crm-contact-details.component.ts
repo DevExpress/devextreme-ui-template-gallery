@@ -6,6 +6,7 @@ import {
   DxButtonModule,
   DxDropDownButtonModule,
   DxToolbarModule,
+  DxScrollViewModule,
 } from 'devextreme-angular';
 import {
   CardActivitiesModule,
@@ -91,6 +92,7 @@ export class CrmContactDetailsComponent implements OnInit {
     DxToolbarModule,
     DxButtonModule,
     DxDropDownButtonModule,
+    DxScrollViewModule,
 
     ContactFormModule,
     ContactCardsModule,

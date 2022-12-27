@@ -1,23 +1,27 @@
 <template>
-  <div class="view-wrapper">
-    <analytics-toolbar
-      :show-tabs="true"
-      @tab-change="tabChange($event)"
-    >
-      Geography
-    </analytics-toolbar>
+  <dx-scroll-view class="view-wrapper-scroll">
+    <div class="view-wrapper">
+      <analytics-toolbar
+        :show-tabs="true"
+        @tab-change="tabChange($event)"
+      >
+        Geography
+      </analytics-toolbar>
 
-    <sales-map-card :data="salesByStateMarkers" />
+      <sales-map-card :data="salesByStateMarkers" />
 
-    <div class="cards">
-      <revenue-analysis-card :data="salesByStateAndCity" />
-      <revenue-snapshot-card :data="salesByState" />
+      <div class="cards">
+        <revenue-analysis-card :data="salesByStateAndCity" />
+        <revenue-snapshot-card :data="salesByState" />
+      </div>
     </div>
-  </div>
+  </dx-scroll-view>
   <loading-panel :loading="loading" />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
+import { DxScrollView } from 'devextreme-vue/scroll-view';
+
 // eslint-disable-next-line import/no-unresolved
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 
@@ -65,10 +69,8 @@ const tabChange = ([startDate, endDate]: string[]) => loadData(startDate, endDat
 
 <style scoped lang="scss">
 @use "@/variables" as *;
+
 .view-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
   padding: $content-padding;
 }
 

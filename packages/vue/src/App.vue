@@ -56,6 +56,7 @@ body {
     flex-grow: 1;
     width: 100%;
     background: $base-bg;
+    height: 100%;
 
     .view-wrapper {
       display: flex;

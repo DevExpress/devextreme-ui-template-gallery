@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { ItemClickEvent } from 'devextreme/ui/tree_view';
 import { DxDrawerModule } from 'devextreme-angular/ui/drawer';
-import { DxScrollViewModule, DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
+import { DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
 import { CommonModule } from '@angular/common';
 
 import { Router, RouterModule, NavigationEnd, Event } from '@angular/router';
@@ -94,7 +94,6 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
         pointerEvent?.preventDefault();
       } else {
         this.router.navigate([path]);
-        this.scrollView.instance.scrollTo(0);
       }
 
       if (this.hideMenuAfterNavigation) {
@@ -121,7 +120,6 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
     SideNavigationMenuModule,
     DxDrawerModule,
     HeaderModule,
-    DxScrollViewModule,
     CommonModule,
     FooterModule
   ],

@@ -7,7 +7,7 @@
       <load-component
         :is-loading="props.isLoading"
         :container-selector="'#card-messages'"
-        :has-data="!!props.messages.length"
+        :show-content="!!props.messages.length"
       >
         <div class="input-content">
           <dx-text-box

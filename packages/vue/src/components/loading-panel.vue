@@ -1,7 +1,7 @@
 <template>
   <dx-load-panel
     container=".view-wrapper"
-    :position="{of: '.app-content-wrapper'}"
+    :position="{of: '.dx-drawer-content'}"
     :visible="props.loading"
     :show-pane="true"
   />

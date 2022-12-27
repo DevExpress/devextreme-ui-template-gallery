@@ -1,21 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Item } from 'devextreme-react/toolbar';
+import Tabs from 'devextreme-react/tabs';
+import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
+import LoadPanel from 'devextreme-react/load-panel';
+import ScrollView from 'devextreme-react/scroll-view';
 
 import { Dashboard, RevenueByStatesCard, RevenueAnalysisByStatesCard, RevenueSnapshotByStatesCard } from '../../components';
 import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { SaleByStateAndCity, SaleByState } from '../../types/analytics';
-
 import { useScreenSize } from '../../utils/media-query';
-
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 import {
   ANALYTICS_PERIODS,
   DEFAULT_ANALYTICS_PERIOD_KEY,
 } from '../../shared/constants';
-
-import { Item } from 'devextreme-react/toolbar';
-import Tabs from 'devextreme-react/tabs';
-import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
-import LoadPanel from 'devextreme-react/load-panel';
 
 const items = Object.keys(ANALYTICS_PERIODS);
 
@@ -48,7 +46,7 @@ export const AnalyticsGeography = () => {
   const [salesByState, setSalesByState] = useState<SaleByState[]>([]);
   const [salesByStateMarkers, setSalesByStateMarkers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
+  const [tabsWidth, setTabsWidth] = useState<number | string>('auto');
   const { isXSmall } = useScreenSize();
 
   useEffect(() => {
@@ -69,12 +67,12 @@ export const AnalyticsGeography = () => {
     setIsLoading(true);
   }, []);
 
-  const getTabsWidth = useCallback(() => {
-    return isXSmall ? 150 : 'auto';
+  useEffect(() => {
+    setTabsWidth(isXSmall ? 150 : 'auto');
   }, []);
 
   return (
-    <>
+    <ScrollView className='view-wrapper-scroll'>
       <Dashboard
         title='Geography'
         additionalToolbarContent={
@@ -82,7 +80,7 @@ export const AnalyticsGeography = () => {
             location='before'
           >
             <Tabs
-              width={getTabsWidth}
+              width={tabsWidth}
               scrollByContent
               showNavButtons={false}
               dataSource={items}
@@ -103,7 +101,7 @@ export const AnalyticsGeography = () => {
           <RevenueSnapshotByStatesCard datasource={salesByState} />
         </DashboardCardsGroup>
       </Dashboard>
-      <LoadPanel container='.view-wrapper-dashboard' visible={isLoading} position={{ of: '.layout-body' }} />
-    </>
+      <LoadPanel container='.content' visible={isLoading} position={{ of: '.layout-body' }} />
+    </ScrollView>
   );
 };

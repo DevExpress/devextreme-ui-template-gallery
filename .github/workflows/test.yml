@@ -59,7 +59,7 @@ jobs:
           { project: 'react', page: 'analytics-dashboard' },
           { project: 'react', page: 'auth-forms' },
           # { project: 'react', page: 'analytics-geography' }, # Menu contents disappear after item click (screen width 400)
-          # { project: 'vue', page: 'crm-contact-details' }, # Wrong status color
+          { project: 'vue', page: 'crm-contact-details' },
           { project: 'react', page: 'analytics-sales-report' },
           { project: 'vue', page: 'crm-contact-list' },
           # { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)

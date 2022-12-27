@@ -1,96 +1,99 @@
 <template>
-  <div class="view-wrapper">
-    <dx-toolbar>
-      <dx-toolbar-item location="before">
-        <dx-button icon="arrowleft" />
-      </dx-toolbar-item>
-      <dx-toolbar-item
-        location="before"
-        :text="taskName"
-      />
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto"
-      >
-        <dx-drop-down-button
-          text="Actions"
-          styling-mode="contained"
+  <dx-scroll-view class="view-wrapper-scroll">
+    <div class="view-wrapper">
+      <dx-toolbar>
+        <dx-toolbar-item location="before">
+          <dx-button icon="arrowleft" />
+        </dx-toolbar-item>
+        <dx-toolbar-item
+          location="before"
+          :text="taskName"
+        />
+        <dx-toolbar-item
+          location="after"
+          locate-in-menu="auto"
         >
-          <dx-drop-down-item text="Duplicate" />
-          <dx-drop-down-item text="Close" />
-          <dx-drop-down-item text="Delete" />
-        </dx-drop-down-button>
-      </dx-toolbar-item>
-
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto"
-        widget="dxButton"
-        show-text="inMenu"
-        :options="attachOptions"
-      />
-
-      <dx-toolbar-item
-        location="after"
-        locate-in-menu="auto"
-        widget="dxButton"
-        show-text="inMenu"
-        :options="refreshOptions"
-      />
-    </dx-toolbar>
-
-    <div class="panels">
-      <div class="left">
-        <dx-validation-group>
-          <task-form
-            :data="taskData"
-            :is-editing="false"
-            :content-by-screen="{ xs: 2, sm: 2 }"
-            :is-loading="isLoading"
-          />
-        </dx-validation-group>
-      </div>
-
-      <div class="right">
-        <div class="dx-card details-card">
-          <dx-tab-panel
-            :show-nav-buttons="true"
-            :defer-rendering="false"
+          <dx-drop-down-button
+            text="Actions"
+            styling-mode="contained"
           >
-            <dx-item title="Activities">
-              <card-activities
-                :items="taskData?.activities"
-                :is-loading="isLoading"
-                :show-by="true"
-              />
-            </dx-item>
-            <dx-item title="Notes">
-              <card-notes
-                :user="taskData?.owner"
-                :items="notes"
-              />
-            </dx-item>
+            <dx-drop-down-item text="Duplicate" />
+            <dx-drop-down-item text="Close" />
+            <dx-drop-down-item text="Delete" />
+          </dx-drop-down-button>
+        </dx-toolbar-item>
 
-            <dx-item
-              title="Messages"
-              :badge="messageBadge"
+        <dx-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+          widget="dxButton"
+          show-text="inMenu"
+          :options="attachOptions"
+        />
+
+        <dx-toolbar-item
+          location="after"
+          locate-in-menu="auto"
+          widget="dxButton"
+          show-text="inMenu"
+          :options="refreshOptions"
+        />
+      </dx-toolbar>
+
+      <div class="panels">
+        <div class="left">
+          <dx-validation-group>
+            <task-form
+              :data="taskData"
+              :is-editing="false"
+              :content-by-screen="{ xs: 2, sm: 2 }"
+              :is-loading="isLoading"
+            />
+          </dx-validation-group>
+        </div>
+
+        <div class="right">
+          <div class="dx-card details-card">
+            <dx-tab-panel
+              :show-nav-buttons="true"
+              :defer-rendering="false"
             >
-              <card-messages
-                :user="taskData?.owner"
-                :messages="taskData?.messages"
-                :is-loading="false"
-              />
-            </dx-item>
-          </dx-tab-panel>
+              <dx-item title="Activities">
+                <card-activities
+                  :items="taskData?.activities"
+                  :is-loading="isLoading"
+                  :show-by="true"
+                />
+              </dx-item>
+              <dx-item title="Notes">
+                <card-notes
+                  :user="taskData?.owner"
+                  :items="notes"
+                />
+              </dx-item>
+
+              <dx-item
+                title="Messages"
+                :badge="messageBadge"
+              >
+                <card-messages
+                  :user="taskData?.owner"
+                  :messages="taskData?.messages"
+                  :is-loading="false"
+                />
+              </dx-item>
+            </dx-tab-panel>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </dx-scroll-view>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { DxButton } from 'devextreme-vue/button';
+import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxDropDownButton, DxItem as DxDropDownItem } from 'devextreme-vue/drop-down-button';
 import {
   DxToolbar,
@@ -161,9 +164,6 @@ $left-panel-width: 400px;
 }
 
 .view-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
   padding: $content-padding $content-padding 0 $content-padding;
 
   .panels {

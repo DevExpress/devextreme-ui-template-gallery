@@ -137,11 +137,10 @@ export const CRMContactList = () => {
 
   return (
     <div className='view crm-contact-list'>
-      <div className='view-wrapper'>
+      <div className='view-wrapper view-wrapper-contact-list'>
         <DataGrid
           className='grid'
           noDataText=''
-          keyExpr='id'
           focusedRowEnabled
           height='100%'
           dataSource={gridDataSource}
