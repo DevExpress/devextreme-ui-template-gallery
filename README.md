@@ -14,6 +14,13 @@ Use the left menu to navigate through the views.
 
 The UI Templates have responsive layouts with DevExtreme UI components. Note that the components use sample data entities without any business logic. You can use these UI Templates in your project and adapt them to your specific business requirements.
 
+## License ##
+
+**DevExtreme UI Template Gallery is released as a MIT-licensed (free and open-source) add-on to DevExtreme.**
+
+Familiarize yourself with the [DevExtreme License](https://js.devexpress.com/Licensing/). [Free trial is available!](http://js.devexpress.com/Buy/)
+
+
 ## Get Started
 
 To run these UI templates on your machine, clone this repository and run the following commands in the root folder:
