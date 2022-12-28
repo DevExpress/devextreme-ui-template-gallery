@@ -44,7 +44,8 @@
         <template #default>
           <div class="policy-info">
             By creating an account, you agree to the
-            <router-link to="#">Terms of Service
+            <router-link to="#">
+              Terms of Service
             </router-link> and
             <router-link to="#">
               Privacy Policy
