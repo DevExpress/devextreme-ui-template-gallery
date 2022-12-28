@@ -47,9 +47,11 @@ const setEmbedded = async (t, embed, screenMode) => {
       // eslint-disable-next-line max-len
       await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
-      await takeScreenshot(`crm-form-readonly${getPostfix(embedded, screenMode)}`, Selector('.dx-form'));
+      const form = Selector('.plain-styled-form');
+
+      await takeScreenshot(`crm-form-readonly${getPostfix(embedded, screenMode)}`, form);
       await t.click(Selector('.dx-button[aria-label=Edit]'));
-      await takeScreenshot(`crm-form-edit${getPostfix(embedded, screenMode)}`, Selector('.plain-styled-form'));
+      await takeScreenshot(`crm-form-edit${getPostfix(embedded, screenMode)}`, form);
 
       await t
         .expect(compareResults.isValid())
