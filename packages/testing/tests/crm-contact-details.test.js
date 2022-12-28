@@ -12,14 +12,14 @@ const BASE_URL = `http://localhost:${process.env.port}/#/crm-contact-details`;
 fixture`Contact Details`;
 
 const setEmbedded = async (t, embed, screenMode) => {
-  if (embed) {
+
+/*  if (embed) {
     if (screenMode[0] === 400) {
-      await t.click('.view-wrapper .toolbar-details .dx-icon-overflow');
-      await t.click(Selector('.dx-popup-content .dx-button[aria-label=Refresh]'));
+      await t.click('.view-wrapper .dx-icon-overflow');
     } else {
       await t.click(Selector('.dx-button[aria-label=Refresh]'));
     }
-  }
+  } */
 };
 
 [false, true].forEach((embedded) => {
@@ -48,10 +48,11 @@ const setEmbedded = async (t, embed, screenMode) => {
       await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
 
       // const form = Selector('.plain-styled-form');
+      const form = Selector('.left');
 
-      await takeScreenshot(`crm-form-readonly${getPostfix(embedded, screenMode)}`, 'body');
+      await takeScreenshot(`crm-form-readonly${getPostfix(embedded, screenMode)}`, form);
       await t.click(Selector('.dx-button[aria-label=Edit]'));
-      await takeScreenshot(`crm-form-edit${getPostfix(embedded, screenMode)}`, 'body');
+      await takeScreenshot(`crm-form-edit${getPostfix(embedded, screenMode)}`, form);
 
       await t
         .expect(compareResults.isValid())
