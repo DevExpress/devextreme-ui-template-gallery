@@ -107,23 +107,12 @@ function onLogoutClick() {
   });
 }
 
-function onProfileClick() {
-  /* router.push({
-    path: "/profile",
-    query: { redirect: route.path }
-  }); */
-}
-
-const userMenuItems = [{
-  text: 'Profile',
-  icon: 'user',
-  onClick: onProfileClick,
-},
-{
-  text: 'Logout',
-  icon: 'runner',
-  onClick: onLogoutClick,
-}];
+const userMenuItems = [
+  {
+    text: 'Logout',
+    icon: 'runner',
+    onClick: onLogoutClick,
+  }];
 </script>
 <style scoped lang="scss">
 @use "../variables" as *;

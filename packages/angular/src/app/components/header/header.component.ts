@@ -28,13 +28,7 @@ export class HeaderComponent implements OnInit {
 
   user: IUser | null = { email: '' };
 
-  userMenuItems = [{
-    text: 'Profile',
-    icon: 'user',
-    onClick: () => {
-      this.router.navigate(['/profile']);
-    },
-  },
+  userMenuItems = [
   {
     text: 'Logout',
     icon: 'runner',
