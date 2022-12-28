@@ -30,6 +30,8 @@ const setEmbedded = async (t, embed, screenMode) => {
       // eslint-disable-next-line max-len
       await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond, true);
 
+      await t.resizeWindow(...[1285, 810]);
+      await t.resizeWindow(...screenMode);
       await t.click(Selector('.dx-drawer-content'));
       await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
       await takeScreenshot(`crm-contact-details${getPostfix(embedded, screenMode)}`, 'body');
