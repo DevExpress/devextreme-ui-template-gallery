@@ -114,9 +114,9 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
               <Form
                 className={classNames({ 'plain-styled-form': true, 'view-mode': !isEditing })}
               >
-                <GroupItem colCount={2}>
+                <GroupItem colCount={2} cssClass='photo-row'>
                   <ColCountByScreen xs={2} />
-                  <FormItem cssClass='photo'>
+                  <FormItem cssClass='photo-box'>
                     <FormPhoto link={contact.image} size={124} />
                   </FormItem>
                   <GroupItem>

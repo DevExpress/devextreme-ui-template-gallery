@@ -327,6 +327,16 @@ const navigateToDetails = () => {
   background: $base-bg;
   transition: right 400ms;
 
+  :deep(.dx-layout-manager-one-col) .dx-box-item {
+    .dx-single-column-item-content .contact-fields-group {
+      padding-top: 20px;
+    }
+  }
+
+  :deep(.photo-row) .dx-item .dx-item:has(.photo-box)  {
+    max-width: 144px;
+  }
+
   .embedded.dx-viewport & {
     top: 0;
   }

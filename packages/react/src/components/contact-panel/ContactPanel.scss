@@ -38,6 +38,16 @@
     }
   }
 
+  .dx-layout-manager.dx-layout-manager-one-col .dx-item.dx-box-item {
+    .dx-single-column-item-content .contact-fields-group {
+      padding-top: 20px;
+    }
+  }
+
+  .photo-row .dx-item .dx-item:has(.photo-box) {
+    max-width: 144px;
+  }
+
   .data-wrapper {
     padding-bottom: 16px;
     height: 100%;
