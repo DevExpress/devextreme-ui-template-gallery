@@ -48,7 +48,7 @@
         :show-content="!!props.contactData"
       >
         <dx-form
-          class="plain-styled-form"
+          class="plain-styled-form dx-form"
           :class="{'view-mode': !isEditing}"
         >
           <dx-form-group-item :col-count="2">

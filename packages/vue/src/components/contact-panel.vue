@@ -238,7 +238,7 @@ import FormTextbox from '@/components/form-textbox.vue';
 const isEditing = ref(false);
 const isLoading = ref(false);
 const isPinned = ref(false);
-const isPinEnabled = ref(true);
+const isPinEnabled = ref(screenInfo.value.isLarge || screenInfo.value.isMedium);
 const panelData = ref<Contact | null>(null);
 const props = withDefaults(defineProps<{
   isPanelOpened: boolean,

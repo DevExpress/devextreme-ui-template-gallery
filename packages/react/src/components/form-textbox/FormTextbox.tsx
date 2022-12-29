@@ -2,6 +2,7 @@ import React from 'react';
 
 import TextBox, { Button as TextBoxButton } from 'devextreme-react/text-box';
 import Validator, { RequiredRule } from 'devextreme-react/validator';
+import './FormTextbox.scss';
 
 type TextboxProps = {
   value: string,

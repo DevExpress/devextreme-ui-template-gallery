@@ -63,27 +63,5 @@ body {
       overflow: hidden;
     }
   }
-
-  &:deep(.form-compact) {
-    .dx-layout-manager .dx-field-item:not(.dx-first-col) {
-      padding-left: 0;
-    }
-
-    .dx-box-item-content {
-      gap: 10px;
-    }
-
-    .dx-field-item {
-      padding: 0;
-
-      &:not(.dx-first-row):not(.dx-field-item-has-group) {
-        padding-top: 15px;
-      }
-
-      &.dx-field-item-has-group.dx-first-col.dx-last-row {
-        padding: 15px 0;
-      }
-    }
-  }
 }
 </style>
