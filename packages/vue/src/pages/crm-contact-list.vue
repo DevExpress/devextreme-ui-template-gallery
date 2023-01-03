@@ -2,7 +2,6 @@
   <div class="view-wrapper">
     <dx-data-grid
       ref="dataGrid"
-      key-expr="id"
       :data-source="dataSource"
       :allow-column-reordering="true"
       :focused-row-enabled="true"

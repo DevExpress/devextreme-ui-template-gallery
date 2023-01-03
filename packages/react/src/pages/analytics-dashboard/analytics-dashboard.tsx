@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Item } from 'devextreme-react/toolbar';
 import Tabs from 'devextreme-react/tabs';
 import { LoadPanel } from 'devextreme-react/load-panel';
+import ScrollView from 'devextreme-react/scroll-view';
 
 import { useScreenSize } from '../../utils/media-query';
 
@@ -41,6 +42,7 @@ export const AnalyticsDashboard = () => {
   const [salesTotal, setSalesTotal] = useState(0);
   const [opportunitiesTotal, setOpportunitiesTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [tabsWidth, setTabsWidth] = useState<number | string>('auto');
 
   const { isXSmall } = useScreenSize();
 
@@ -70,12 +72,12 @@ export const AnalyticsDashboard = () => {
     setIsLoading(true);
   }, []);
 
-  const getTabsWidth = useCallback(() => {
-    return isXSmall ? 150 : 'auto';
+  useEffect(() => {
+    setTabsWidth(isXSmall ? 150 : 'auto');
   }, []);
 
   return (
-    <>
+    <ScrollView className='view-wrapper-scroll'>
       <Dashboard
         title='Dashboard'
         additionalToolbarContent={
@@ -83,7 +85,7 @@ export const AnalyticsDashboard = () => {
             location='before'
           >
             <Tabs
-              width={getTabsWidth}
+              width={tabsWidth}
               scrollByContent
               showNavButtons={false}
               dataSource={items}
@@ -106,7 +108,7 @@ export const AnalyticsDashboard = () => {
           <RevenueSnapshotCard datasource={salesByCategory} />
         </DashboardCardsGroup>
       </Dashboard>
-      <LoadPanel container='.view-wrapper-dashboard' visible={isLoading} position={{ of: '.layout-body' }} />
-    </>
+      <LoadPanel container='.content' visible={isLoading} position={{ of: '.layout-body' }} />
+    </ScrollView>
   );
 };

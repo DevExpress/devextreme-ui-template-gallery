@@ -1,17 +1,34 @@
 @use "variables.scss" as *;
 
+.view-wrapper-scroll > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+  height: 100%;
+
+  & > .dx-scrollview-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+}
+
+.content {
+  line-height: 1.5;
+}
+
 .view-wrapper {
-  display: flex;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .details-card {
   border: none;
 }
 
-.app-content-wrapper .content {
+.view-wrapper-scroll .content {
   line-height: 1.5;
   flex-grow: 1;
+  height: 100%;
 
   h2 {
     font-size: 30px;
@@ -51,16 +68,6 @@
   border-left: 0;
 }
 
-.app-content-wrapper > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
-  height: 100%;
-
-  & > .dx-scrollview-content {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-  }
-}
-
 #app {
   height: 100%;
 }
@@ -95,12 +102,16 @@ $side-panel-min-width: 60px;
 }
 
 .plain-styled-form {
-  .dx-layout-manager .dx-field-item:not(.dx-first-col) {
-    padding-left: 0;
+  &.dx-form > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
+    padding-bottom: 0;
   }
 
-  .dx-field-item {
-    padding: 0;
+  .dx-layout-manager .dx-field-item {
+    padding-bottom: 0;
+
+    &:not(.dx-first-col) {
+      padding-left: 0;
+    }
 
     &.contact-fields-group {
       padding: 15px 0;

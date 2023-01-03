@@ -1,28 +1,49 @@
 @use "./variables.scss" as *;
 
+.view-wrapper-scroll > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+  height: 100%;
+
+  & > .dx-scrollview-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
 .app {
   background-color: $side-panel-background;
   display: flex;
   height: 100%;
   width: 100%;
-}
 
-.app-content-wrapper .content {
-  line-height: 1.5;
-  position: relative;
-  flex-grow: 1;
+  .content {
+    line-height: 1.5;
+    position: relative;
+    background: $base-bg;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
 
-  .view {
-    display: contents;
+    .view {
+      display: contents;
 
-    .view-wrapper {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      overflow: hidden;
+      .view-wrapper {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
     }
   }
 
@@ -47,27 +68,6 @@
   margin-right: 0;
   border-right: 0;
   border-left: 0;
-}
-
-.app-content-wrapper > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
-  height: 100%;
-
-  & > .dx-scrollview-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-}
-
-html,
-body {
-  margin: 0;
-  min-height: 100%;
-  height: 100%;
-}
-
-#root {
-  height: 100%;
 }
 
 * {
@@ -102,29 +102,25 @@ body {
 }
 
 .plain-styled-form {
-  .dx-layout-manager .dx-field-item:not(.dx-first-col) {
-    padding-left: 0;
+  &.dx-form > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
+    padding-bottom: 0;
   }
 
-  .dx-field-item {
-    padding: 0;
+  .dx-layout-manager .dx-field-item {
+    padding-bottom: 0;
+
+    &:not(.dx-first-col) {
+      padding-left: 0;
+    }
 
     &.contact-fields-group {
       padding: 15px 0;
     }
 
-    .item-field {
+    .task-priority,
+    .status {
       line-height: 18px;
       font-size: 13px;
-    }
-
-    .dx-texteditor.form-editor {
-      .form-editor-icon:first-child {
-        margin-left: 0;
-        pointer-events: none;
-        border-color: transparent;
-        background-color: transparent;
-      }
     }
   }
 
@@ -136,7 +132,7 @@ body {
     }
 
     .dx-texteditor,
-    .dx-texteditor.form-editor {
+    .dx-texteditor.form-editor, {
       pointer-events: none;
 
       .form-editor-input {

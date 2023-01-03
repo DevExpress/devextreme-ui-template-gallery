@@ -2,13 +2,13 @@
 
 .single-card {
   .dx-card {
-    width: 330px;
     margin: auto auto;
     padding: 40px;
     flex-grow: 0;
 
     &.content {
       flex-grow: 0;
+      width: 330px;
     }
 
     .screen-x-small & {

@@ -238,7 +238,7 @@ import FormTextbox from '@/components/form-textbox.vue';
 const isEditing = ref(false);
 const isLoading = ref(false);
 const isPinned = ref(false);
-const isPinEnabled = ref(true);
+const isPinEnabled = ref(screenInfo.value.isLarge || screenInfo.value.isMedium);
 const panelData = ref<Contact | null>(null);
 const props = withDefaults(defineProps<{
   isPanelOpened: boolean,
@@ -326,6 +326,16 @@ const navigateToDetails = () => {
   bottom: 0;
   background: $base-bg;
   transition: right 400ms;
+
+  :deep(.dx-layout-manager-one-col) .dx-box-item {
+    .dx-single-column-item-content .contact-fields-group {
+      padding-top: 20px;
+    }
+  }
+
+  :deep(.photo-row) .dx-item .dx-item:has(.photo-box)  {
+    max-width: 144px;
+  }
 
   .embedded.dx-viewport & {
     top: 0;

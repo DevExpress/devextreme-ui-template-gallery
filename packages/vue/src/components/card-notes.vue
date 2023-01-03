@@ -1,13 +1,10 @@
 <template>
   <dx-validation-group>
-    <div
-      class="notes"
-      id="card-notes"
-    >
+    <div id="card-notes">
       <load-component
         :is-loading="isLoading"
         :container-selector="'#card-notes'"
-        :has-data="!!props.items"
+        :show-content="!isLoading"
       >
         <div class="input-content">
           <dx-text-area
@@ -135,6 +132,10 @@ onMounted(() => {
 @use "@/variables" as *;
 
 @include messages-content();
+
+#card-notes {
+  min-height: 300px;
+}
 
 .input-content {
   display: flex;

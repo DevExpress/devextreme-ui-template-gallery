@@ -13,6 +13,7 @@ body {
 
 .content {
   line-height: 1.5;
+  height: 100%;
 
   h2 {
     font-size: 30px;
@@ -43,13 +44,13 @@ body {
   border-left: 0;
 }
 
-.app-content-wrapper > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+.view-wrapper-scroll > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
   height: 100%;
 
   & > .dx-scrollview-content {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;
   }
 }
 
@@ -72,6 +73,7 @@ body {
 
 .view-wrapper {
   display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
@@ -90,21 +92,19 @@ body {
 }
 
 .plain-styled-form {
-  .dx-layout-manager .dx-field-item:not(.dx-first-col) {
-    padding-left: 0;
+  &.dx-form > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
+    padding-bottom: 0;
   }
 
-  .dx-field-item {
-    padding: 0;
+  .dx-layout-manager .dx-field-item {
+    padding-bottom: 0;
+
+    &:not(.dx-first-col) {
+      padding-left: 0;
+    }
 
     &.contact-fields-group {
       padding: 15px 0;
-    }
-
-    .status-indicator,
-    .status {
-      line-height: 18px;
-      font-size: 13px;
     }
   }
 

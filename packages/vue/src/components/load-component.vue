@@ -6,7 +6,7 @@
     :container="props.containerSelector"
     :position="{ of: props.containerSelector }"
   />
-  <slot v-if="props.hasData" />
+  <slot v-if="props.showContent" />
 </template>
 
 <script setup lang="ts">
@@ -15,13 +15,13 @@ import DxLoadPanel from 'devextreme-vue/load-panel';
 const props = withDefaults(defineProps<{
   isLoading: boolean,
   containerSelector?: string,
-  width?: number,
-  hasData: boolean,
+  width?: number | string,
+  showContent?: boolean,
 }>(), {
   isLoading: false,
   containerSelector: '',
-  width: null,
-  hasData: true,
+  width: 'auto',
+  showContent: true,
 });
 </script>
 

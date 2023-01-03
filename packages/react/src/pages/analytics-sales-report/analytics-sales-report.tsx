@@ -10,6 +10,7 @@ import { formatDate } from 'devextreme/localization';
 import LoadPanel from 'devextreme-react/load-panel';
 import { ValueChangedEvent } from 'devextreme/viz/range_selector';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import ScrollView from 'devextreme-react/scroll-view';
 
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 
@@ -65,7 +66,7 @@ export const AnalyticsSalesReport = () => {
   }, [groupByPeriod]);
 
   return (
-    <>
+    <ScrollView className='view-wrapper-scroll'>
       <Dashboard title='Sales Report'>
         <DashboardCardsGroup kind='wide'>
           <SalesRangeCard datasource={sales} range={dateRange} onRangeChanged={onRangeChanged} />
@@ -79,7 +80,7 @@ export const AnalyticsSalesReport = () => {
           />
         </DashboardCardsGroup>
       </Dashboard>
-      <LoadPanel container='.view-wrapper-dashboard' visible={isLoading} position={{ of: '.layout-body' }} />
-    </>
+      <LoadPanel container='.content' visible={isLoading} position={{ of: '.layout-body' }} />
+    </ScrollView>
   );
 };

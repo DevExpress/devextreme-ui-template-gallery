@@ -11,6 +11,7 @@ import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxFunnelModule } from 'devextreme-angular/ui/funnel';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
+import { DxScrollViewModule } from "devextreme-angular/ui/scroll-view";
 
 import { DataService } from 'src/app/services';
 import { CardAnalyticsModule } from 'src/app/components/card-analytics/card-analytics.component';
@@ -91,6 +92,7 @@ export class AnalyticsDashboardComponent implements OnInit {
 
 @NgModule({
   imports: [
+    DxScrollViewModule,
     DxDataGridModule,
     DxBulletModule,
     DxFunnelModule,

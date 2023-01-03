@@ -1,50 +1,53 @@
 <template>
-  <div class="view-wrapper">
-    <analytics-toolbar
-      :show-tabs="true"
-      @tab-change="tabChange($event)"
-    >
-      Dashboard
-    </analytics-toolbar>
+  <dx-scroll-view class="view-wrapper-scroll">
+    <div class="view-wrapper">
+      <analytics-toolbar
+        :show-tabs="true"
+        @tab-change="tabChange($event)"
+      >
+        Dashboard
+      </analytics-toolbar>
 
-    <div class="tiles">
-      <analytic-tile
-        title="Opportunities"
-        :data="opportunities"
-        :percentage="20.3"
-      />
+      <div class="tiles">
+        <analytic-tile
+          title="Opportunities"
+          :data="opportunities"
+          :percentage="20.3"
+        />
 
-      <analytic-tile
-        title="Revenue Total"
-        :data="sales"
-        :percentage="14.7"
-      />
+        <analytic-tile
+          title="Revenue Total"
+          :data="sales"
+          :percentage="14.7"
+        />
 
-      <analytic-tile
-        title="Conversion"
-        total="16%"
-        :percentage="-2.3"
-      />
+        <analytic-tile
+          title="Conversion"
+          total="16%"
+          :percentage="-2.3"
+        />
 
-      <analytic-tile
-        title="Leads"
-        total="51"
-        :percentage="8.5"
-      />
+        <analytic-tile
+          title="Leads"
+          total="51"
+          :percentage="8.5"
+        />
+      </div>
+
+      <div class="cards">
+        <revenue-card :data="sales" />
+        <conversion-card :data="opportunities" />
+        <revenue-analysis-card :data="salesByState" />
+        <revenue-snapshot-card :data="salesByCategory" />
+      </div>
     </div>
-
-    <div class="cards">
-      <revenue-card :data="sales" />
-      <conversion-card :data="opportunities" />
-      <revenue-analysis-card :data="salesByState" />
-      <revenue-snapshot-card :data="salesByCategory" />
-    </div>
-  </div>
+  </dx-scroll-view>
   <loading-panel :loading="loading" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { DxScrollView } from 'devextreme-vue/scroll-view';
 
 import {
   getOpportunitiesByCategory,
@@ -99,9 +102,6 @@ const tabChange = ([startDate, endDate]: string[]) => {
 @use "@/variables.scss" as *;
 
 .view-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
   padding: $content-padding;
 
   .cards, .tiles {

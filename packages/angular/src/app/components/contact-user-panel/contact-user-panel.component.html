@@ -25,9 +25,9 @@
         <dx-validation-group>
           <div class="data-part border">
               <dx-form class="plain-styled-form" labelMode="floating" [class.view-mode]="!isEditing">
-                <dxi-item itemType="group" [colCount]="2">
+                <dxi-item itemType="group" [colCount]="2" cssClass="photo-row">
                   <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
-                  <dxi-item cssClass="photo">
+                  <dxi-item cssClass="photo-box">
                     <div *dxTemplate>
                       <form-photo [link]="user.image"></form-photo>
                     </div>

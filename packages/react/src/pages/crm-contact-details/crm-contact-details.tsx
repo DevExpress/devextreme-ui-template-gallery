@@ -26,6 +26,7 @@ import {
 } from 'dx-template-gallery-data';
 
 import './crm-contact-details.scss';
+import ScrollView from 'devextreme-react/scroll-view';
 
 const CONTACT_ID = 12;
 
@@ -78,89 +79,91 @@ export const CRMContactDetails = () => {
   }, []);
 
   return (
-    <div className='view-wrapper view-wrapper-contact-details'>
-      <ToolbarDetails name={data?.name}>
-        <Item location='after' locateInMenu='auto'>
-          <Button
-            text='Terminate'
-            type='default'
-            stylingMode='contained'
-          />
-        </Item>
-        <Item location='after'>
-          <DropDownButton
-            text='Actions'
-            stylingMode='text'
-            width={120}
-            items={['Assign to Me', 'Archive']}
-          />
-        </Item>
-        <Item location='after' locateInMenu='auto'>
-          <div className='separator' />
-        </Item>
-        <Item
-          location='after'
-          locateInMenu='auto'
-          widget='dxButton'
-          showText='inMenu'
-        >
-          <Button
-            text='Copy'
-            icon='copy'
-            stylingMode='text'
-          />
-        </Item>
-        <Item
-          location='after'
-          locateInMenu='auto'
-          widget='dxButton'
-          showText='inMenu'
-        >
-          <Button
-            text='Refresh'
-            icon='refresh'
-            stylingMode='text'
-            onClick={refresh}
-          />
-        </Item>
-      </ToolbarDetails>
+    <ScrollView className='view-wrapper-scroll'>
+      <div className='view-wrapper view-wrapper-contact-details'>
+        <ToolbarDetails name={data?.name}>
+          <Item location='after' locateInMenu='auto'>
+            <Button
+              text='Terminate'
+              type='default'
+              stylingMode='contained'
+            />
+          </Item>
+          <Item location='after'>
+            <DropDownButton
+              text='Actions'
+              stylingMode='text'
+              width={120}
+              items={['Assign to Me', 'Archive']}
+            />
+          </Item>
+          <Item location='after' locateInMenu='auto'>
+            <div className='separator' />
+          </Item>
+          <Item
+            location='after'
+            locateInMenu='auto'
+            widget='dxButton'
+            showText='inMenu'
+          >
+            <Button
+              text='Copy'
+              icon='copy'
+              stylingMode='text'
+            />
+          </Item>
+          <Item
+            location='after'
+            locateInMenu='auto'
+            widget='dxButton'
+            showText='inMenu'
+          >
+            <Button
+              text='Refresh'
+              icon='refresh'
+              stylingMode='text'
+              onClick={refresh}
+            />
+          </Item>
+        </ToolbarDetails>
 
-      <div className='panels'>
-        <div className='left'>
-          <ContactForm
-            data={data}
-            isLoading={isLoading}
-          />
-        </div>
+        <div className='panels'>
+          <div className='left'>
+            <ContactForm
+              data={data}
+              isLoading={isLoading}
+            />
+          </div>
 
-        <div className='right'>
-          <div className='dx-card'>
-            <TabPanel showNavButtons deferRendering={false}>
-              <TabPanelItem title='Tasks'>
-                <CardTasks
-                  isLoading={isLoading}
-                  tasks={data?.tasks}
-                />
-              </TabPanelItem>
-              <TabPanelItem title='Activities'>
-                <CardActivities activities={data?.activities} isLoading={isLoading} />
-              </TabPanelItem>
-              <TabPanelItem title='Opportunities'>
-                <CardOpportunities
-                  active={activeOpportunities}
-                  closed={closedOpportunities}
-                />
-              </TabPanelItem>
-              <TabPanelItem title='Notes'>
-                <CardNotes items={notes} user={data?.name} />
-              </TabPanelItem>
-              <TabPanelItem title='Messages' badge={messagesCount}>
-                <CardMessages items={messages} user={data?.name} onMessagesCountChanged={onMessagesCountChanged} />
-              </TabPanelItem>
-            </TabPanel>
+          <div className='right'>
+            <div className='dx-card'>
+              <TabPanel showNavButtons deferRendering={false}>
+                <TabPanelItem title='Tasks'>
+                  <CardTasks
+                    isLoading={isLoading}
+                    tasks={data?.tasks}
+                  />
+                </TabPanelItem>
+                <TabPanelItem title='Activities'>
+                  <CardActivities activities={data?.activities} isLoading={isLoading} />
+                </TabPanelItem>
+                <TabPanelItem title='Opportunities'>
+                  <CardOpportunities
+                    active={activeOpportunities}
+                    closed={closedOpportunities}
+                  />
+                </TabPanelItem>
+                <TabPanelItem title='Notes'>
+                  <CardNotes items={notes} user={data?.name} />
+                </TabPanelItem>
+                <TabPanelItem title='Messages' badge={messagesCount}>
+                  <CardMessages items={messages} user={data?.name} onMessagesCountChanged={onMessagesCountChanged} />
+                </TabPanelItem>
+              </TabPanel>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ScrollView>
   );
 };

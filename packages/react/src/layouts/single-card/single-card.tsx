@@ -8,7 +8,7 @@ import './single-card.scss';
 
 export const SingleCard = ({ title, description, children }: React.PropsWithChildren<SingleCardProps>) => {
   return (
-    <ScrollView height='100%' width='100%' className='app-content-wrapper single-card'>
+    <ScrollView height='100%' width='100%' className='view-wrapper-scroll single-card'>
       <div className='dx-card content'>
         <div className='header'>
           <div className='title'>{title}</div>

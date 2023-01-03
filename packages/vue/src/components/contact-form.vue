@@ -45,10 +45,10 @@
       <load-component
         :is-loading="isLoading"
         :container-selector="'#contact-form'"
-        :has-data="!!props.contactData"
+        :show-content="!!props.contactData"
       >
         <dx-form
-          class="plain-styled-form"
+          class="plain-styled-form dx-form"
           :class="{'view-mode': !isEditing}"
         >
           <dx-form-group-item :col-count="2">

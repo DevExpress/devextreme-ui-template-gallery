@@ -1,8 +1,7 @@
 
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Drawer from 'devextreme-react/drawer';
-import ScrollView from 'devextreme-react/scroll-view';
 import { Template } from 'devextreme-react/core/template';
 
 import { useNavigate } from 'react-router';
@@ -16,7 +15,6 @@ import type { SideNavToolbarProps } from '../../types';
 import './side-nav-outer-toolbar.scss';
 
 export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren<SideNavToolbarProps>) => {
-  const scrollViewRef = useRef<ScrollView>(null);
   const navigate = useNavigate();
   const { isXSmall, isLarge } = useScreenSize();
   const [patchCssClass, onMenuReady] = useMenuPatch();
@@ -44,8 +42,6 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
       }
 
       navigate(path);
-      scrollViewRef.current?.instance.scrollTo(0);
-
       if (!isLarge || menuStatus === MenuStatus.TemporaryOpened) {
         setMenuStatus(MenuStatus.Closed);
         event.stopPropagation();
@@ -58,7 +54,7 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
     <div className='side-nav-outer-toolbar'>
       <Header className='layout-header' menuToggleEnabled toggleMenu={toggleMenu} title={title} />
       <Drawer
-        className={['drawer', patchCssClass].join(' ')}
+        className={['drawer layout-body', patchCssClass].join(' ')}
         position='before'
         closeOnOutsideClick={onOutsideClick}
         openedStateMode={isLarge ? 'shrink' : 'overlap'}
@@ -69,14 +65,10 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
         opened={menuStatus === MenuStatus.Closed ? false : true}
         template='menu'
       >
-        <div className='container'>
-          <ScrollView ref={scrollViewRef} className='layout-body app-content-wrapper'>
-            <div className='content'>
-              {React.Children.map(children, (item) => {
-                return React.isValidElement(item) && item.type !== Footer && item;
-              })}
-            </div>
-          </ScrollView>
+        <div className='content'>
+          {React.Children.map(children, (item) => {
+            return React.isValidElement(item) && item.type !== Footer && item;
+          })}
         </div>
         <Template name='menu'>
           <SideNavigationMenu compactMode={menuStatus === MenuStatus.Closed} selectedItemChanged={onNavigationChanged} openMenu={temporaryOpenMenu} onMenuReady={onMenuReady} />

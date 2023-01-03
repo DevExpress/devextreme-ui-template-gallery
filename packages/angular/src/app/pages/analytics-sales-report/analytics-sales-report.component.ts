@@ -6,6 +6,7 @@ import { CommonModule, formatDate } from '@angular/common';
 import { Observable, forkJoin } from 'rxjs';
 import { share } from "rxjs/operators";
 
+import {DxScrollViewModule} from 'devextreme-angular/ui/scroll-view';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
@@ -94,6 +95,7 @@ export class AnalyticsSalesReportComponent implements OnInit {
 
 @NgModule({
   imports: [
+    DxScrollViewModule,
     DxLoadPanelModule,
     DxButtonModule,
     DxToolbarModule,
