@@ -147,7 +147,7 @@ $high-priorety-color: #d9534f;
         text-align: center;
         border-radius: 50%;
         background: $base-accent;
-        color: white;
+        color: $base-bg;
       }
     }
   }
