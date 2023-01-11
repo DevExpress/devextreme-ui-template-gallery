@@ -4,7 +4,7 @@
     :title="props.title"
     :visible="isVisible"
     :full-screen="screenInfo.isSmall || screenInfo.isXSmall"
-    width="auto"
+    :width="450"
     height="auto"
     @option-changed="() => popup?.instance?.repaint()"
   >

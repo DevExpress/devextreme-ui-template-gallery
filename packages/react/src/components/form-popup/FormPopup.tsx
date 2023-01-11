@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
 import ValidationGroup from 'devextreme-react/validation-group';
-import { useScreenSize } from './../../utils/media-query';
+import { useScreenSize } from '../../utils/media-query';
 
 type PopupProps = {
   title: string,
@@ -31,7 +31,7 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
       title={title}
       visible={visible}
       fullScreen={isXSmall || isSmall}
-      width='auto'
+      width={450}
       height='auto'
     >
       <ToolbarItem
