@@ -293,7 +293,7 @@ module.exports = {
     'prefer-destructuring': 0,
     'no-param-reassign': ['error', { props: false }],
     'no-only-tests/no-only-tests': 'error',
-    'linebreak-style': 'unix',
+    'linebreak-style': 0,
     'import/no-anonymous-default-export': [
       'error',
       {
@@ -369,7 +369,6 @@ module.exports = {
         'implicit-arrow-linebreak': 0,
         'import/no-duplicates': 0,
         'no-return-await': 0,
-        'linebreak-style': 0,
         indent: [
           'error',
           2,
