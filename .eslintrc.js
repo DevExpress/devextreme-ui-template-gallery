@@ -369,6 +369,7 @@ module.exports = {
         'implicit-arrow-linebreak': 0,
         'import/no-duplicates': 0,
         'no-return-await': 0,
+        'linebreak-style': 0,
         indent: [
           'error',
           2,
