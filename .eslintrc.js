@@ -293,6 +293,7 @@ module.exports = {
     'prefer-destructuring': 0,
     'no-param-reassign': ['error', { props: false }],
     'no-only-tests/no-only-tests': 'error',
+    'linebreak-style': 'unix',
     'import/no-anonymous-default-export': [
       'error',
       {

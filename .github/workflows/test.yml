@@ -41,7 +41,9 @@ jobs:
       matrix:
         theme: [
           { fullName: 'material.blue.light.compact', name: 'material.light' },
-          { fullName: 'material.blue.dark.compact', name: 'material.dark' }
+          { fullName: 'material.blue.dark.compact', name: 'material.dark' },
+          { fullName: 'generic.light.compact', name: 'generic.light'},
+          { fullName: 'generic.dark.compact', name: 'generic.dark'}
         ]
         ARGS: [
           { project: 'angular', page: 'crm-contact-details' },
