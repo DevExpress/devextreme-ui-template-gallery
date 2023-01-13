@@ -32,7 +32,7 @@ const Grid = ({ tasks }: { tasks: Task[] }) => {
       dataSource={gridData}
       columnAutoWidth
     >
-      <Selection mode='multiple' />
+      <Selection mode='multiple' showCheckBoxesMode='always' />
 
       <RowDragging
         allowReordering
