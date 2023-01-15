@@ -95,13 +95,13 @@ onMounted(() => {
 const refreshOptions = {
   text: 'Refresh',
   icon: 'refresh',
-  stylingMode: 'text'
+  stylingMode: 'text',
 };
 
 const exportOptions = {
   icon: 'export',
   text: 'Export',
-  stylingMode: 'text'
+  stylingMode: 'text',
 };
 </script>
 
