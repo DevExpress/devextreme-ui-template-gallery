@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo, useCallback } from 'react';
 
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
 import ValidationGroup from 'devextreme-react/validation-group';
@@ -14,17 +14,31 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
   const { isXSmall, isSmall } = useScreenSize();
   const validationGroup = useRef<ValidationGroup>(null);
 
-  const onCancelClick = () => {
+  const onCancelClick = useCallback(() => {
     validationGroup.current?.instance.reset();
     changeVisibility();
-  };
+  }, []);
 
-  const onSaveClick = () => {
+  const onSaveClick = useCallback(() => {
     if (!validationGroup.current?.instance.validate().isValid) return;
     validationGroup.current?.instance.reset();
 
     changeVisibility();
-  };
+  }, []);
+
+  const ToolbarSaveOptions = useMemo(() => ({
+    text: 'Save',
+    stylingMode: 'outlined',
+    type: 'default',
+    onClick: onSaveClick,
+  }), []);
+
+  const ToolbarCancelOptions = useMemo(()=>({
+    text: 'Cancel',
+    stylingMode: 'text',
+    type: 'default',
+    onClick: onCancelClick,
+  }), []);
 
   return (
     <Popup
@@ -38,23 +52,13 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
         widget='dxButton'
         toolbar='bottom'
         location='after'
-        options={{
-          text: 'Save',
-          stylingMode: 'outlined',
-          type: 'default',
-          onClick: onSaveClick,
-        }}
+        options={ToolbarSaveOptions}
       />
       <ToolbarItem
         widget='dxButton'
         toolbar='bottom'
         location='after'
-        options={{
-          text: 'Cancel',
-          stylingMode: 'text',
-          type: 'default',
-          onClick: onCancelClick,
-        }}
+        options={ToolbarCancelOptions}
       />
       <ValidationGroup ref={validationGroup}>
         {children}

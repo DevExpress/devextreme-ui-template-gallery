@@ -117,8 +117,7 @@ body {
       padding: 15px 0;
     }
 
-    .task-priority,
-    .status {
+    .task-priority {
       line-height: 18px;
       font-size: 13px;
     }
@@ -132,7 +131,7 @@ body {
     }
 
     .dx-texteditor,
-    .dx-texteditor.form-editor, {
+    .dx-texteditor.form-editor {
       pointer-events: none;
 
       .form-editor-input {
