@@ -141,14 +141,14 @@ onMounted(() => {
 const attachOptions = {
   text: 'Attach',
   icon: 'attach',
-  stylingMode: "text",
+  stylingMode: 'text',
 };
 
 const refreshOptions = {
   text: 'Refresh',
   icon: 'refresh',
   onClick: refresh,
-  stylingMode: "text",
+  stylingMode: 'text',
 };
 </script>
 
