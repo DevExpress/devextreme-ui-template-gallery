@@ -121,12 +121,14 @@ onMounted(() => {
 const copyOptions = {
   text: 'Copy',
   icon: 'copy',
+  stylingMode: 'text',
 };
 
 const refreshOptions = {
   text: 'Refresh',
   icon: 'refresh',
   onClick: refresh,
+  stylingMode: 'text',
 };
 </script>
 
