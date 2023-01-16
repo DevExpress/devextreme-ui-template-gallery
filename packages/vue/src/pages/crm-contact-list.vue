@@ -307,7 +307,7 @@ const onClose = () => {
   focusedRowKey.value = null;
 };
 
-const refreshOptions = { 
+const refreshOptions = {
   text: 'Refresh',
   icon: 'refresh',
   onClick: refresh,
