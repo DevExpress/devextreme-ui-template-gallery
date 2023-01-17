@@ -42,12 +42,12 @@ function getValue(): string {
 }
 </script>
 <style scoped lang="scss">
-span.status {
-  font-size: 14px;
-}
 
 .status {
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // align-items: center;
+  span {
+    font-size: 13px;
+  }
 }
 </style>
