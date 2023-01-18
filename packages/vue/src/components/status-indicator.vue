@@ -44,8 +44,6 @@ function getValue(): string {
 <style scoped lang="scss">
 
 .status {
-  // display: flex;
-  // align-items: center;
   span {
     font-size: 13px;
   }
