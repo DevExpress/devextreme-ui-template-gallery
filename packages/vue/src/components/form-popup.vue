@@ -7,6 +7,7 @@
     width="auto"
     height="auto"
     @option-changed="() => popup?.instance?.repaint()"
+    :showCloseButton="false"
   >
     <dx-popup-item
       widget="dxButton"

@@ -1,8 +1,9 @@
-import React, { useRef, useMemo, useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
 import ValidationGroup from 'devextreme-react/validation-group';
 import { useScreenSize } from './../../utils/media-query';
+import { Button } from 'devextreme-react';
 
 type PopupProps = {
   title: string,
@@ -17,28 +18,14 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
   const onCancelClick = useCallback(() => {
     validationGroup.current?.instance.reset();
     changeVisibility();
-  }, []);
+  }, [changeVisibility]);
 
   const onSaveClick = useCallback(() => {
     if (!validationGroup.current?.instance.validate().isValid) return;
     validationGroup.current?.instance.reset();
 
     changeVisibility();
-  }, []);
-
-  const ToolbarSaveOptions = useMemo(() => ({
-    text: 'Save',
-    stylingMode: 'outlined',
-    type: 'default',
-    onClick: onSaveClick,
-  }), []);
-
-  const ToolbarCancelOptions = useMemo(()=>({
-    text: 'Cancel',
-    stylingMode: 'text',
-    type: 'default',
-    onClick: onCancelClick,
-  }), []);
+  }, [changeVisibility]);
 
   return (
     <Popup
@@ -47,19 +34,32 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
       fullScreen={isXSmall || isSmall}
       width='auto'
       height='auto'
+      showCloseButton={false}
     >
       <ToolbarItem
         widget='dxButton'
         toolbar='bottom'
         location='after'
-        options={ToolbarSaveOptions}
-      />
+      >
+        <Button
+          text= 'Save'
+          stylingMode= 'outlined'
+          type= 'default'
+          onClick={onSaveClick}
+        />
+      </ToolbarItem>
       <ToolbarItem
         widget='dxButton'
         toolbar='bottom'
         location='after'
-        options={ToolbarCancelOptions}
-      />
+      >
+        <Button
+          text='Cancel'
+          stylingMode='text'
+          type='default'
+          onClick={onCancelClick}
+        />
+      </ToolbarItem>
       <ValidationGroup ref={validationGroup}>
         {children}
       </ValidationGroup>
