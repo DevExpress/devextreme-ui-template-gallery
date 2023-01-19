@@ -34,7 +34,6 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
       fullScreen={isXSmall || isSmall}
       width='auto'
       height='auto'
-      showCloseButton={false}
     >
       <ToolbarItem
         widget='dxButton'
