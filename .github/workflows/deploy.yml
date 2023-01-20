@@ -1,9 +1,7 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   set-matrix:
@@ -41,7 +39,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '16'
-        
+
     - name: Set NPM version
       run: npm i npm@7 -g
 
@@ -87,7 +85,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '16'
-        
+
     - name: Set NPM version
       run: npm i npm@7 -g
 
