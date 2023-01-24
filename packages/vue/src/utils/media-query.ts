@@ -2,20 +2,22 @@ import { ref } from 'vue';
 
 interface ScreenSizeInfo {
   cssClasses: string[],
+  isSmallMobileMedia: boolean,
   isXSmall: boolean,
   isSmall: boolean,
   isMedium: boolean
   isLarge: boolean
 }
 type Handler = (arg?: unknown) => void;
-
 const Breakpoints = {
-  XSmall: '(max-width: 599.99px)',
-  Small: '(min-width: 600px) and (max-width: 959.99px)',
-  Medium: '(min-width: 960px) and (max-width: 1279.99px)',
-  Large: '(min-width: 1280px)',
+  smallMobileMedia: '(max-width: 420px)',
+  XSmall: '(max-width: 575.98px)',
+  Small: '(min-width: 576px) and (max-width: 991.98px)',
+  Medium: '(min-width: 992px) and (max-width: 1199.98px)',
+  Large: '(min-width: 1200px)',
 };
 
+const smallMobileMedia = window.matchMedia(Breakpoints.smallMobileMedia);
 const xSmallMedia = window.matchMedia(Breakpoints.XSmall);
 const smallMedia = window.matchMedia(Breakpoints.Small);
 const mediumMedia = window.matchMedia(Breakpoints.Medium);
@@ -23,13 +25,16 @@ const largeMedia = window.matchMedia(Breakpoints.Large);
 
 const handlers = new Set<Handler>();
 
-[xSmallMedia, smallMedia, mediumMedia, largeMedia].forEach((media) => {
-  media.addEventListener('change', () => {
-    handlers.forEach((handler) => handler());
+[smallMobileMedia, xSmallMedia, smallMedia, mediumMedia, largeMedia].forEach((media) => {
+  media.addEventListener('change', (e) => {
+    if (e.matches || (media === smallMobileMedia)) {
+      handlers.forEach((handler) => handler());
+    }
   });
 });
 
 export const sizes = () => ({
+  'screen-small-mobile': smallMobileMedia.matches,
   'screen-x-small': xSmallMedia.matches,
   'screen-small': smallMedia.matches,
   'screen-medium': mediumMedia.matches,
@@ -39,6 +44,7 @@ export const sizes = () => ({
 function getScreenSizeInfo(): ScreenSizeInfo {
   const screenSizes: {[key: string]: boolean} = sizes();
   return {
+    isSmallMobileMedia: screenSizes['screen-small-mobile'],
     isXSmall: screenSizes['screen-x-small'],
     isSmall: screenSizes['screen-small'],
     isMedium: screenSizes['screen-medium'],

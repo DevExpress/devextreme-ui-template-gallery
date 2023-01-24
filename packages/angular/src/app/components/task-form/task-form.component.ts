@@ -20,6 +20,7 @@ import {
 import { taskPriorityList, taskStatusList } from 'src/app/types/task';
 import { Task } from 'src/app/types/task';
 import { ClickEvent } from 'devextreme/ui/button';
+import {ScreenService} from "../../services";
 
 @Component({
   selector: 'task-form',
@@ -28,8 +29,6 @@ import { ClickEvent } from 'devextreme/ui/button';
 })
 export class TaskFormComponent implements OnInit {
   @Input() task: Task;
-
-  @Input() contentByScreen: { xs: number, sm: number }
 
   @Input() isLoading: boolean = false;
 
@@ -42,6 +41,8 @@ export class TaskFormComponent implements OnInit {
   statusList = taskStatusList;
 
   priorityList = taskPriorityList;
+
+  constructor(protected screen: ScreenService) {}
 
   ngOnInit() {
     this.isEditing = this.isCreateMode;

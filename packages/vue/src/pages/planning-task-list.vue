@@ -120,7 +120,7 @@
     @save="onSaveNewTask"
   >
     <task-form
-      :content-by-screen="{ xs: 1, sm: 1 }"
+      :content-by-screen="{ xs: screenInfo.isSmallMobileMedia ? 1 : 2, sm: 2 }"
       :is-create-mode="true"
       :data="popupTask"
     />

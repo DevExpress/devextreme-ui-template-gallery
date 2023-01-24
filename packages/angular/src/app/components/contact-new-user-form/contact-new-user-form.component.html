@@ -1,4 +1,4 @@
-<dx-form 
+<dx-form
         class="plain-styled-form"
 >
   <dxi-item itemType="group">
@@ -10,11 +10,10 @@
     </dxi-item>
   </dxi-item>
 
-  <dxi-item itemType="group">
-    <dxo-col-count-by-screen [xs]="1" [sm]="1" [md]="2" [lg]="2"></dxo-col-count-by-screen>
+  <dxi-item itemType="group" [colCountByScreen]="{xs: (screen.smallMobileScreenChanged | async) ? 1 : 2, sm: 2, md: 2, lg: 2}">
     <dxi-item>
       <div *dxTemplate>
-        <form-textbox 
+        <form-textbox
                 label="First Name"
                 [(value)]="newUser.firstName"
                 [isEditing]="true">
@@ -23,8 +22,8 @@
     </dxi-item>
     <dxi-item>
       <div *dxTemplate>
-        <form-textbox 
-                label="Last Name" 
+        <form-textbox
+                label="Last Name"
                 [(value)]="newUser.lastName"
                 [isEditing]="true"
         >
@@ -33,8 +32,8 @@
     </dxi-item>
     <dxi-item>
       <div *dxTemplate>
-        <form-textbox 
-                label="Company" 
+        <form-textbox
+                label="Company"
                 [(value)]="newUser.company"
                 [isEditing]="true"
         >
@@ -43,9 +42,9 @@
     </dxi-item>
     <dxi-item>
       <div *dxTemplate>
-        <form-textbox 
-                label="Position" 
-                [(value)]="newUser.position" 
+        <form-textbox
+                label="Position"
+                [(value)]="newUser.position"
                 [isEditing]="true"
         >
         </form-textbox>
@@ -53,13 +52,14 @@
     </dxi-item>
   </dxi-item>
 
-  <dxi-item itemType="group" cssClass="contact-fields-group">
-    <dxo-col-count-by-screen [xs]="1" [sm]="1" [md]="2" [lg]="2"></dxo-col-count-by-screen>
-
+  <dxi-item itemType="group"
+            cssClass="contact-fields-group"
+            [colCountByScreen]="{xs: (screen.smallMobileScreenChanged | async) ? 1 : 2, sm: 2, md: 2, lg: 2}"
+  >
     <dxi-item>
       <div *dxTemplate>
-        <form-textbox 
-                label="Assigned to" 
+        <form-textbox
+                label="Assigned to"
                 [(value)]="newUser.manager"
                 [isEditing]="true"
         >
@@ -68,9 +68,9 @@
     </dxi-item>
     <dxi-item>
       <div *dxTemplate>
-        <form-textbox 
-                [(value)]="newUser.phone" 
-                icon="tel" 
+        <form-textbox
+                [(value)]="newUser.phone"
+                icon="tel"
                 mask="+1(000)000-0000"
                 [isEditing]="true"
         >
@@ -79,9 +79,9 @@
     </dxi-item>
     <dxi-item>
       <div *dxTemplate>
-        <form-textbox 
-                [(value)]="newUser.email"  
-                icon="email" 
+        <form-textbox
+                [(value)]="newUser.email"
+                icon="email"
                 [validators]="[{type: 'email'}, {type: 'required'}]"
                 [isEditing]="true"
         >
@@ -90,9 +90,9 @@
     </dxi-item>
       <dxi-item>
         <div *dxTemplate>
-          <form-textbox 
-                  [(value)]="newUser.address" 
-                  icon="home" 
+          <form-textbox
+                  [(value)]="newUser.address"
+                  icon="home"
                   [isEditing]="true"
           >
           </form-textbox>

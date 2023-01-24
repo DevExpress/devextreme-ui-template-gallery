@@ -3,8 +3,8 @@
     ref="popup"
     :title="props.title"
     :visible="isVisible"
-    :full-screen="screenInfo.isSmall || screenInfo.isXSmall"
-    width="auto"
+    :full-screen="screenInfo.isXSmall"
+    width="480px"
     height="auto"
     @option-changed="() => popup?.instance?.repaint()"
   >

@@ -16,13 +16,15 @@
       </dx-form-item>
     </dx-form-item>
 
-    <dx-form-item item-type="group">
-      <dx-col-count-by-screen
-        :xs="1"
-        :sm="1"
-        :md="2"
-        :lg="2"
-      />
+    <dx-form-item
+      item-type="group"
+      :col-count-by-screen="{
+        xs: screenInfo.isSmallMobileMedia ? 1 : 2,
+        sm: 2,
+        md: 2,
+        lg: 2,
+      }"
+    >
       <dx-form-item>
         <form-textbox
           label="First Name"
@@ -56,14 +58,8 @@
     <dx-form-item
       item-type="group"
       css-class="contact-fields-group"
+      :col-count-by-screen="colCountByScreen"
     >
-      <dx-col-count-by-screen
-        :xs="1"
-        :sm="1"
-        :md="2"
-        :lg="2"
-      />
-
       <dx-form-item css-class="accent">
         <form-textbox
           label="Assigned to"
@@ -99,15 +95,22 @@
 </template>
 
 <script setup lang="ts">
+import { screenInfo } from '@/utils/media-query';
 import {
   DxForm,
   DxItem as DxFormItem,
   DxColCountByScreen,
 } from 'devextreme-vue/form';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { newContact } from '@/types/contact';
 import FormTextbox from '@/components/form-textbox.vue';
 import FormPhotoUploader from './form-photo-uploader.vue';
 
 const contact = ref({ ...newContact });
+const colCountByScreen = computed(() => ({
+  xs: screenInfo.value.isSmallMobileMedia ? 1 : 2,
+  sm: 2,
+  md: 2,
+  lg: 2,
+}));
 </script>

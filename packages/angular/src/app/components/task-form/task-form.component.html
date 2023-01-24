@@ -41,8 +41,7 @@
         ></form-textbox>
       </div>
     </dxi-item>
-    <dxi-item itemType="group">
-      <dxo-col-count-by-screen [xs]="contentByScreen.xs" [sm]="contentByScreen.sm" [md]="2" [lg]="2"></dxo-col-count-by-screen>
+    <dxi-item itemType="group" [colCountByScreen]="{xs: (screen.smallMobileScreenChanged | async) && isCreateMode ? 1 : 2, sm: 2, md: 2, lg: 2}">
       <dxi-item cssClass="accent">
         <div *dxTemplate>
           <form-textbox label="Company"

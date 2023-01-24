@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import Form, { SimpleItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
+import Form, { SimpleItem, GroupItem } from 'devextreme-react/form';
 
 import SelectBox from 'devextreme-react/select-box';
 import DateBox from 'devextreme-react/date-box';
@@ -35,8 +35,12 @@ export const TaskFormDetails = ({ editing, data, subjectField, colCountByScreen,
           onValueChange={updateField('text')}
         />
       </SimpleItem>}
-      <GroupItem itemType='group'>
-        <ColCountByScreen xs={colCountByScreen.xs} sm={colCountByScreen.sm} md={2} lg={2} />
+      <GroupItem itemType='group' colCountByScreen={
+        { xs: colCountByScreen.xs,
+          sm: colCountByScreen.sm,
+          md: 2,
+          lg: 2,
+        }}>
         <SimpleItem cssClass='accent'>
           <FormTextbox
             label='Company'

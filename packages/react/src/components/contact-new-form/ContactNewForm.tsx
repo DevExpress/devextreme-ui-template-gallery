@@ -6,9 +6,11 @@ import { Contact } from '../../types/crm-contact';
 import { newContact } from '../../shared/constants';
 import { FormTextbox, FormPhotoUploader } from '../../components';
 import { EmailRule } from 'devextreme-react/validator';
+import { useScreenSize } from '../../utils/media-query';
 
 export const ContactNewForm = () => {
   const [newContactData, setNewContactData] = useState<Contact>(newContact);
+  const { isSmallMobileMedia } = useScreenSize();
 
   const updateField = (field: string) => (value) => {
     setNewContactData((prevState) => ({ ...prevState, ...{ [field]: value } }));
@@ -25,8 +27,12 @@ export const ContactNewForm = () => {
         </FormItem>
       </GroupItem>
 
-      <GroupItem>
-        <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
+      <GroupItem colCountByScreen={{
+        xs: isSmallMobileMedia ? 1 : 2,
+        sm: 2,
+        md: 2,
+        lg: 2,
+      }}>
         <FormItem>
           <FormTextbox
             label='First Name'
@@ -61,8 +67,12 @@ export const ContactNewForm = () => {
         </FormItem>
       </GroupItem>
 
-      <GroupItem cssClass='contact-fields-group'>
-        <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
+      <GroupItem cssClass='contact-fields-group' colCountByScreen={{
+        xs: isSmallMobileMedia ? 1 : 2,
+        sm: 2,
+        md: 2,
+        lg: 2,
+      }}>
         <FormItem>
           <FormTextbox
             value={newContactData.manager}
