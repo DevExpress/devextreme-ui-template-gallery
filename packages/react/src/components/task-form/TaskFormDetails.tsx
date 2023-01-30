@@ -14,6 +14,7 @@ import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../shared/constants';
 import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../shared/itemFieldRenderMethods';
 
 import { Task } from '../../types/task';
+import './TaskFormDetails.scss';
 
 export const TaskFormDetails = ({ editing, data, subjectField, colCountByScreen, onDataChanged }: {
   editing: boolean, data: Task, subjectField: boolean, colCountByScreen: {xs: number, sm: number}, onDataChanged: (data) => void

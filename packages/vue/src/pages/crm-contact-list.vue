@@ -307,7 +307,12 @@ const onClose = () => {
   focusedRowKey.value = null;
 };
 
-const refreshOptions = { text: 'Refresh', icon: 'refresh', onClick: refresh };
+const refreshOptions = {
+  text: 'Refresh',
+  icon: 'refresh',
+  onClick: refresh,
+  stylingMode: 'text',
+};
 </script>
 
 <style scoped lang="scss">

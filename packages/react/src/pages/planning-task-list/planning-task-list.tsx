@@ -28,7 +28,7 @@ import Button from 'devextreme-react/button';
 import TextBox from 'devextreme-react/text-box';
 import Tabs from 'devextreme-react/tabs';
 
-const listsData = ['LIST', 'KANBAN BOARD', 'GANTT'];
+const listsData = ['List', 'Kanban Board', 'Gantt'];
 
 export const PlanningTaskList = () => {
   const gridRef = useRef<DataGrid>(null);

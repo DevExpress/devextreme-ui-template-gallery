@@ -226,24 +226,28 @@ const refreshOptions = {
   text: 'Refresh',
   icon: 'refresh',
   onClick: reload,
+  stylingMode: 'text',
 };
 
 const columnChooserOptions = {
   text: 'Column Chooser',
   icon: 'columnchooser',
   onClick: chooseColumnDataGrid,
+  stylingMode: 'text',
 };
 
 const exportToPdfOptions = {
   text: 'Export to PDF',
   icon: 'exportpdf',
   onClick: exportToPdf,
+  stylingMode: 'text',
 };
 
 const exportToXlsxOptions = {
   text: 'Export to Exel',
   icon: 'exportxlsx',
   onClick: exportToXlsx,
+  stylingMode: 'text',
 };
 
 const taskSearchOptions = {
