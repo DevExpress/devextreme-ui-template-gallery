@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { getPostfix, toggleCommonConfiguration } from './utils';
+import { forceResizeRecalculation, getPostfix, toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
@@ -22,6 +22,7 @@ fixture`Contact List`;
       await takeScreenshot(`crm-contact-list${getPostfix(embedded, screenMode)}`, 'body');
 
       await t.click('tr.dx-data-row:first-child');
+      await forceResizeRecalculation(t, screenMode);
       await takeScreenshot(`crm-contact-list-full${getPostfix(embedded, screenMode)}`, 'body');
       await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
       await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));

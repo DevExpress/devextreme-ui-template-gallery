@@ -51,7 +51,6 @@
             <dx-button
               class="user-button authorization"
               :width="150"
-              :height="38"
               styling-mode="text"
             >
               <user-panel
@@ -121,7 +120,7 @@ header {
   flex: 0 0 auto;
   z-index: 1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 0 4px rgba(0, 0, 0, 0.15);
-  padding: 10px 0;
+  padding: $header-toolbar-vertical-padding 0;
   background-color: $base-bg;
 
   :deep(.header-title) {
@@ -130,10 +129,6 @@ header {
 
   .header-toolbar {
     padding-right: $content-padding;
-
-    :deep(.dx-toolbar-items-container) {
-      height: $toolbar-items-container-height;
-    }
 
     .user-button.authorization {
       margin-left: 5px;

@@ -15,6 +15,8 @@
 
 $base-font-size: $material-base-font-size;
 $toolbar-height: toolbar_sizes.$material-toolbar-height;
+$header-toolbar-vertical-padding: 10px;
+$toolbar-vertical-padding: 16px;
 
 $content-padding: 16px;
 $side-panel-min-width: 48px;
@@ -27,7 +29,6 @@ $toolbar-margin-bottom: $content-padding;
 $texteditor-edit-color: $texteditor-color;
 $filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
 $list-padding-left: $material-list-item-horizontal-padding;
-$toolbar-items-container-height: 38px;
 $footer-height: 70px;
 $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 

@@ -270,7 +270,7 @@ const taskSearchOptions = {
   right: 0;
 
   .dx-toolbar {
-    padding: $content-padding;
+    padding: $toolbar-vertical-padding $content-padding;
   }
 
   :deep(.dx-toolbar) {
@@ -283,7 +283,7 @@ const taskSearchOptions = {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-    max-height: calc(100% - $toolbar-items-container-height - $content-padding * 2);
+    max-height: calc(100% - $toolbar-height - $content-padding * 2);
   }
 
   .gantt {
