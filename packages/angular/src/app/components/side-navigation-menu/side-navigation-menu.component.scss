@@ -13,6 +13,7 @@
     width: 250px;
     display: flex;
     flex: 1;
+    padding-top: $toolbar-vertical-padding;
     padding-bottom: $footer-height;
 
     ::ng-deep .dx-treeview {

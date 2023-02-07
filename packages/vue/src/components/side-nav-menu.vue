@@ -108,6 +108,7 @@ watch(
     display: flex;
     flex: 1;
     background-color: $side-panel-background;
+    padding-top: $toolbar-vertical-padding;
     padding-bottom: $footer-height;
     .dx-treeview {
       // ## Long text positioning
