@@ -20,7 +20,7 @@ import {
 import { taskPriorityList, taskStatusList } from 'src/app/types/task';
 import { Task } from 'src/app/types/task';
 import { ClickEvent } from 'devextreme/ui/button';
-import {ScreenService} from "../../services";
+import { ScreenService } from '../../services';
 
 @Component({
   selector: 'task-form',

@@ -13,7 +13,7 @@ import {
   FormPhotoUploaderModule,
 } from 'src/app/components';
 import { newContact } from 'src/app/types/contact';
-import {ScreenService} from "../../services";
+import { ScreenService } from '../../services';
 
 @Component({
   selector: 'contact-new-user-form',
