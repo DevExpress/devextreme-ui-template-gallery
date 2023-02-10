@@ -7,7 +7,7 @@
 }
 
 header {
-  padding: 10px 0;
+  padding: $header-toolbar-vertical-padding 0;
   background-color: $base-bg;
 
   ::ng-deep .header-title {
@@ -16,10 +16,6 @@ header {
 
   .header-toolbar {
     padding-right: $content-padding;
-
-    ::ng-deep .dx-toolbar-items-container {
-      height: $toolbar-items-container-height;
-    }
 
     .user-button.authorization {
       margin-left: 5px;

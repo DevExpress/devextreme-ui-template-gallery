@@ -25,7 +25,7 @@
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-    max-height: calc(100% - $toolbar-items-container-height - $content-padding * 2);
+    max-height: calc(100% - $toolbar-height - $content-padding * 2);
   }
 
   .planning-grid {

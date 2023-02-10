@@ -2,7 +2,6 @@
 @use "devextreme/scss/widgets/material/textEditor/sizes" as *;
 
 :host {
-  --contact-side-panel-toolbar-top: 58px;
   --contact-side-panel-width: 350px;
 }
 
@@ -11,9 +10,9 @@
 }
 
 :host .panel {
-  position: fixed;
+  position: absolute;
   right: calc(-1 * var(--contact-side-panel-width));
-  top: var(--contact-side-panel-toolbar-top);
+  top: 0;
   bottom: 0;
   background: $base-bg;
   transition: right 400ms;
@@ -50,17 +49,17 @@
   }
 
   .data-wrapper {
-    padding-bottom: 16px;
+    padding-bottom: $toolbar-vertical-padding;
     height: 100%;
     width: var(--contact-side-panel-width);
 
     .data-part {
       padding: 0 16px;
 
-      .panel-toolbar {
-        ::ng-deep .dx-toolbar-items-container {
-          height: $toolbar-items-container-height;
-        }
+      &:has(.panel-toolbar) {
+        $padding: calc($toolbar-vertical-padding / 2);
+
+        padding: $padding $padding $padding $toolbar-vertical-padding;
       }
 
       &.border {

@@ -30,7 +30,7 @@ const checkScreenMode = async (t, screenMode) => {
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
       await takeScreenshot(`analytics-dashboard-all${getPostfix(embedded, screenMode)}`, 'body');
       await checkScreenMode(t, screenMode);
-      await t.click(Selector('.dx-tabs .dx-item').nth(3));
+      await t.doubleClick(Selector('.dx-tabs .dx-item').nth(3));
       await t.wait(timeoutSecond);
       await takeScreenshot(`analytics-dashboard-year${getPostfix(embedded, screenMode)}`, 'body');
 

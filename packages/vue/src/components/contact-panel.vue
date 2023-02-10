@@ -307,8 +307,9 @@ const navigateToDetails = () => {
 </script>
 
 <style lang="scss">
+@use '../variables' as *;
+
 #contact-panel {
-  --contact-side-panel-toolbar-top: 58px;
   --contact-side-panel-width: 350px;
 }
 
@@ -320,10 +321,10 @@ const navigateToDetails = () => {
 @use "@/variables" as *;
 
 .panel {
-  position: fixed;
-  right: calc(-1 * var(--contact-side-panel-width));
-  top: var(--contact-side-panel-toolbar-top);
+  position: absolute;
+  top: 0;
   bottom: 0;
+  right: calc(-1 * var(--contact-side-panel-width));
   background: $base-bg;
   transition: right 400ms;
 
@@ -339,12 +340,6 @@ const navigateToDetails = () => {
 
   .embedded.dx-viewport & {
     top: 0;
-  }
-
-  .panel-toolbar {
-    :deep(.dx-toolbar-items-container) {
-      height: $toolbar-items-container-height;
-    }
   }
 
   &.open {
@@ -365,12 +360,18 @@ const navigateToDetails = () => {
   }
 
   .data-wrapper {
-    padding-bottom: 16px;
+    padding-bottom: $toolbar-vertical-padding;
     height: 100%;
     width: var(--contact-side-panel-width);
 
     .data-part {
       padding: 0 16px;
+
+      &:has(.panel-toolbar) {
+        $padding: calc($toolbar-vertical-padding / 2);
+
+        padding: $padding $padding $padding $toolbar-vertical-padding;
+      }
 
       &.border {
         border-bottom: 1px solid $base-border-color;
