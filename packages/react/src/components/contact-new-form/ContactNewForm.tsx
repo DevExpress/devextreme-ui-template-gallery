@@ -6,17 +6,10 @@ import { Contact } from '../../types/crm-contact';
 import { newContact } from '../../shared/constants';
 import { FormTextbox, FormPhotoUploader } from '../../components';
 import { EmailRule } from 'devextreme-react/validator';
-import { useScreenSize } from '../../utils/media-query';
+import { getSizeQualifier } from '../../utils/media-query';
 
 export const ContactNewForm = () => {
-  const { isSmallMobileMedia } = useScreenSize();
   const [newContactData, setNewContactData] = useState<Contact>(newContact);
-  const colCountByScreen = {
-    xs: isSmallMobileMedia ? 1 : 2,
-    sm: 2,
-    md: 2,
-    lg: 2,
-  };
 
   const updateField = (field: string) => (value) => {
     setNewContactData((prevState) => ({ ...prevState, ...{ [field]: value } }));
@@ -25,6 +18,7 @@ export const ContactNewForm = () => {
   return (
     <Form
       className='plain-styled-form'
+      screenByWidth={getSizeQualifier}
     >
       <GroupItem>
         <ColCountByScreen xs={1} sm={1} md={1} lg={1} />
@@ -33,7 +27,8 @@ export const ContactNewForm = () => {
         </FormItem>
       </GroupItem>
 
-      <GroupItem colCountByScreen={colCountByScreen}>
+      <GroupItem>
+        <ColCountByScreen xs={1} sm={2} md={2} lg={2} />
         <FormItem>
           <FormTextbox
             label='First Name'
@@ -68,7 +63,8 @@ export const ContactNewForm = () => {
         </FormItem>
       </GroupItem>
 
-      <GroupItem cssClass='contact-fields-group' colCountByScreen={colCountByScreen}>
+      <GroupItem cssClass='contact-fields-group'>
+        <ColCountByScreen xs={1} sm={2} md={2} lg={2} />
         <FormItem>
           <FormTextbox
             value={newContactData.manager}

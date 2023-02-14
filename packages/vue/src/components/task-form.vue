@@ -50,6 +50,7 @@
         :form-data="data"
         class="plain-styled-form"
         :class="{'view-mode': !isEditing}"
+        :screen-by-width="getSizeQualifier"
       >
         <dx-form-item
           v-if="isCreateMode"
@@ -61,10 +62,13 @@
             :is-editing="isEditing"
           />
         </dx-form-item>
-        <dx-form-group-item
-          :col-count="2"
-          :col-count-by-screen="colCountByScreen"
-        >
+        <dx-form-group-item :col-count="2">
+          <dx-col-count-by-screen
+            :xs="1"
+            :sm="2"
+            :md="2"
+            :lg="2"
+          />
           <dx-form-item css-class="accent">
             <form-textbox
               label="Company"
@@ -163,7 +167,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
+import { getSizeQualifier } from '@/utils/media-query';
 import StatusIndicator from '@/components/status-indicator.vue';
 import { DxButton } from 'devextreme-vue/button';
 import { DxTextArea } from 'devextreme-vue/text-area';
@@ -178,6 +183,7 @@ import {
   DxForm,
   DxItem as DxFormItem,
   DxGroupItem as DxFormGroupItem,
+  DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxSelectBox } from 'devextreme-vue/select-box';
 import { ClickEvent } from 'devextreme/ui/button';
@@ -201,12 +207,6 @@ const props = withDefaults(defineProps<{
 
 const isEditing = ref(props.isCreateMode);
 const data = ref(props.data);
-const colCountByScreen = computed(() => ({
-  xs: props.contentByScreen.xs,
-  sm: props.contentByScreen.sm,
-  md: 2,
-  lg: 2,
-}));
 
 watch(
   () => props.data,

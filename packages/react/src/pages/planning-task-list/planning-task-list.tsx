@@ -45,7 +45,7 @@ export const PlanningTaskList = () => {
   const [newTaskData, setNewTaskData] = useState(newTask);
   const [popupVisible, setPopupVisible] = useState(false);
 
-  const { isXSmall, isSmallMobileMedia } = useScreenSize();
+  const { isXSmall } = useScreenSize();
 
   const isDataGrid = view === listView;
   const isKanban = view === kanbanView;
@@ -243,7 +243,7 @@ export const PlanningTaskList = () => {
       {!loading && isKanban && <PlanningKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
       {!loading && view === ganttView && <PlanningGantt dataSource={filteredData} ref={ganttRef} />}
       <FormPopup title='New Task' visible={popupVisible} changeVisibility={changePopupVisibility}>
-        <TaskFormDetails colCountByScreen={{ xs: isSmallMobileMedia ? 1 : 2, sm: 2 }} subjectField data={newTaskData} editing onDataChanged={onDataChanged} />
+        <TaskFormDetails subjectField data={newTaskData} editing onDataChanged={onDataChanged} />
       </FormPopup>
     </div>
   );

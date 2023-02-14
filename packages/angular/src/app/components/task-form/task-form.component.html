@@ -32,6 +32,7 @@
   <dx-form *ngIf="task"
           class="plain-styled-form"
           [class.view-mode]="!isEditing"
+          [screenByWidth]="getSizeQualifier"
   >
     <dxi-item [visible]="isCreateMode">
       <div *dxTemplate>
@@ -41,7 +42,8 @@
         ></form-textbox>
       </div>
     </dxi-item>
-    <dxi-item itemType="group" [colCountByScreen]="{xs: (screen.smallMobileScreenChanged | async) && isCreateMode ? 1 : 2, sm: 2, md: 2, lg: 2}">
+    <dxi-item itemType="group">
+      <dxo-col-count-by-screen [xs]="1" [sm]="2" [md]="2" [lg]="2"></dxo-col-count-by-screen>
       <dxi-item cssClass="accent">
         <div *dxTemplate>
           <form-textbox label="Company"

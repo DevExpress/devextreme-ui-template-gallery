@@ -13,7 +13,7 @@ import {
   FormPhotoUploaderModule,
 } from 'src/app/components';
 import { newContact } from 'src/app/types/contact';
-import { ScreenService } from '../../services';
+import { getSizeQualifier } from 'src/app/services/screen.service';
 
 @Component({
   selector: 'contact-new-user-form',
@@ -23,8 +23,8 @@ import { ScreenService } from '../../services';
 
 export class ContactNewUserFormComponent {
   newUser = newContact;
-
-  constructor(protected screen: ScreenService) { }
+  getSizeQualifier = getSizeQualifier;
+  constructor() { }
 }
 
 @NgModule({

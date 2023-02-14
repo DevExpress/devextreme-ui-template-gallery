@@ -19,6 +19,7 @@ import {
 } from 'src/app/components';
 import { taskPriorityList, taskStatusList } from 'src/app/types/task';
 import { Task } from 'src/app/types/task';
+import { getSizeQualifier } from 'src/app/services/screen.service';
 import { ClickEvent } from 'devextreme/ui/button';
 import { ScreenService } from '../../services';
 
@@ -41,6 +42,8 @@ export class TaskFormComponent implements OnInit {
   statusList = taskStatusList;
 
   priorityList = taskPriorityList;
+
+  getSizeQualifier = getSizeQualifier;
 
   constructor(protected screen: ScreenService) {}
 
