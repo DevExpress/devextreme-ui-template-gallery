@@ -1,6 +1,7 @@
 <template>
   <dx-form
     class="plain-styled-form"
+    :screen-by-width="getSizeQualifier"
   >
     <dx-form-item item-type="group">
       <dx-col-count-by-screen
@@ -16,10 +17,12 @@
       </dx-form-item>
     </dx-form-item>
 
-    <dx-form-item item-type="group">
+    <dx-form-item
+      item-type="group"
+    >
       <dx-col-count-by-screen
         :xs="1"
-        :sm="1"
+        :sm="2"
         :md="2"
         :lg="2"
       />
@@ -59,11 +62,10 @@
     >
       <dx-col-count-by-screen
         :xs="1"
-        :sm="1"
+        :sm="2"
         :md="2"
         :lg="2"
       />
-
       <dx-form-item css-class="accent">
         <form-textbox
           label="Assigned to"
@@ -99,6 +101,7 @@
 </template>
 
 <script setup lang="ts">
+import { getSizeQualifier } from '@/utils/media-query';
 import {
   DxForm,
   DxItem as DxFormItem,

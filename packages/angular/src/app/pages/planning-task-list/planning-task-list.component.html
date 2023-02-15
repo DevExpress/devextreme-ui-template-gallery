@@ -5,7 +5,7 @@
     </dxi-item>
     <dxi-item location="before">
       <dx-tabs
-        [width]="getTabWidth()"
+        [width]="(screen.xSmallScreenChanged | async) ? 220 : 'auto'"
         [showNavButtons]="false"
         [scrollByContent]="true"
         [selectedIndex]="0"
@@ -138,7 +138,7 @@
     #taskPopup
     titleText="New Task"
     >
-      <task-form [task]="newTask" [isCreateMode]="true" [contentByScreen]="{ xs: 1, sm: 1 }"></task-form>
+      <task-form [task]="newTask" [isCreateMode]="true"></task-form>
   </form-popup>
 </div>
 

@@ -6,6 +6,7 @@ import { Contact } from '../../types/crm-contact';
 import { newContact } from '../../shared/constants';
 import { FormTextbox, FormPhotoUploader } from '../../components';
 import { EmailRule } from 'devextreme-react/validator';
+import { getSizeQualifier } from '../../utils/media-query';
 
 export const ContactNewForm = () => {
   const [newContactData, setNewContactData] = useState<Contact>(newContact);
@@ -17,6 +18,7 @@ export const ContactNewForm = () => {
   return (
     <Form
       className='plain-styled-form'
+      screenByWidth={getSizeQualifier}
     >
       <GroupItem>
         <ColCountByScreen xs={1} sm={1} md={1} lg={1} />
@@ -26,7 +28,7 @@ export const ContactNewForm = () => {
       </GroupItem>
 
       <GroupItem>
-        <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
+        <ColCountByScreen xs={1} sm={2} md={2} lg={2} />
         <FormItem>
           <FormTextbox
             label='First Name'
@@ -62,7 +64,7 @@ export const ContactNewForm = () => {
       </GroupItem>
 
       <GroupItem cssClass='contact-fields-group'>
-        <ColCountByScreen xs={1} sm={1} md={2} lg={2} />
+        <ColCountByScreen xs={1} sm={2} md={2} lg={2} />
         <FormItem>
           <FormTextbox
             value={newContactData.manager}

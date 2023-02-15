@@ -50,6 +50,7 @@
         :form-data="data"
         class="plain-styled-form"
         :class="{'view-mode': !isEditing}"
+        :screen-by-width="getSizeQualifier"
       >
         <dx-form-item
           v-if="isCreateMode"
@@ -63,12 +64,11 @@
         </dx-form-item>
         <dx-form-group-item :col-count="2">
           <dx-col-count-by-screen
-            :xs="props.contentByScreen.xs"
-            :sm="props.contentByScreen.sm"
+            :xs="1"
+            :sm="2"
             :md="2"
             :lg="2"
           />
-
           <dx-form-item css-class="accent">
             <form-textbox
               label="Company"
@@ -168,6 +168,7 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { getSizeQualifier } from '@/utils/media-query';
 import StatusIndicator from '@/components/status-indicator.vue';
 import { DxButton } from 'devextreme-vue/button';
 import { DxTextArea } from 'devextreme-vue/text-area';

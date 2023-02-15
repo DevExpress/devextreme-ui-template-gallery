@@ -30,15 +30,38 @@ fixture`Planning List`;
       await t.doubleClick(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
       await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
       await takeScreenshot(`planning-task-gantt${getPostfix(embedded, screenMode)}`, 'body');
+
+      await t
+        .expect(compareResults.isValid())
+        .ok(compareResults.errorMessages());
+    }).requestHooks(requestLogger);
+
+    test(`Add task popup (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
+      const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+
+      // eslint-disable-next-line max-len
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
+      await forceResizeRecalculation(t, screenMode);
+
       if (screenMode[0] === 400) {
         await t.click('.view-wrapper .dx-icon-overflow');
       }
       await t.click(Selector('[aria-label="Add Task"]'));
-      await t.typeText(Selector('.form-editor-input.dx-texteditor-input').nth(3), '10/26/2022', { replace: true });
-      await t.typeText(Selector('.form-editor-input.dx-texteditor-input').nth(4), '10/26/2022', { replace: true });
-      await takeScreenshot(`planning-task-add-task-popup-embed=${getPostfix(embedded, screenMode)}`, 'body');
+      await t.wait(1000);
+      const inputFields = Selector('.form-editor-input.dx-texteditor-input');
+
+      await t.typeText(inputFields.nth(3), '01/26/2023', { replace: true });
+      await t.click(inputFields.nth(4));
+      await t.typeText(inputFields.nth(4), '12/26/2023', { replace: true });
+      await t.click(Selector('.dx-toolbar.dx-popup-title')); // to remove focus from input
+
+      if (project === 'react') {
+        await forceResizeRecalculation(t, screenMode);
+      }
+
+      await takeScreenshot(`planning-task-add-task-popup${getPostfix(embedded, screenMode)}`, 'body');
       await t.doubleClick(Selector('[aria-label="Save"]'));
-      await takeScreenshot(`planning-task-add-task-popup-validate-embed=${getPostfix(embedded, screenMode)}`, 'body');
+      await takeScreenshot(`planning-task-add-task-popup-validate${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
         .expect(compareResults.isValid())

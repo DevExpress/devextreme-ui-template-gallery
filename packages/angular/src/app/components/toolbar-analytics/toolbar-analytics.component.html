@@ -7,7 +7,7 @@
     *ngIf="panelItems"
     location="before">
     <dx-tabs
-      [width]="getTabWidth()"
+      [width]="(screen.xSmallScreenChanged | async) ? 150 : 'auto'"
       [showNavButtons]="false"
       [scrollByContent]="true"
       [selectedItemKeys]="selectedItems"

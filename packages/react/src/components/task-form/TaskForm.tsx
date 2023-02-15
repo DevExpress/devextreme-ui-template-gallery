@@ -55,10 +55,6 @@ export const TaskForm = ({ task, isLoading }: { task?: Task, isLoading: boolean 
         data={data}
         editing={editing}
         onDataChanged={onDataChanged}
-        colCountByScreen={{
-          xs: 2,
-          sm: 2,
-        }}
         panelProps={{
           container: '.task-form',
           position: { of: '.task-form' },

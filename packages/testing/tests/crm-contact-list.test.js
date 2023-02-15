@@ -30,13 +30,28 @@ fixture`Contact List`;
       await takeScreenshot(`crm-contact-list-form-edit${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
       await t.click(Selector('[aria-label="Close"]'));
 
+      await t
+        .expect(compareResults.isValid())
+        .ok(compareResults.errorMessages());
+    });
+
+    test(`Add contact popup (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
+      const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+
+      // eslint-disable-next-line max-len
+      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
+      await forceResizeRecalculation(t, screenMode);
+
       if (screenMode[0] === 400) {
         await t.click('.view-wrapper .dx-icon-overflow');
       }
+
       await t.click(Selector('[aria-label="Add Contact"]'));
-      await takeScreenshot(`crm-contact-list-add-contact-popup-embed=${getPostfix(embedded, screenMode)}`, 'body');
-      await t.click(Selector('[aria-label=Save]').nth(1));
-      await takeScreenshot(`crm-contact-list-add-contact-popup-validate-embed=${getPostfix(embedded, screenMode)}`, 'body');
+      await t.wait(1000);
+      await takeScreenshot(`crm-contact-list-add-contact-popup${getPostfix(embedded, screenMode)}`, 'body');
+
+      await t.click(Selector('[aria-label=Save]'));
+      await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
         .expect(compareResults.isValid())

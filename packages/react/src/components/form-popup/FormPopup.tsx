@@ -12,7 +12,7 @@ type PopupProps = {
 }
 
 export const FormPopup = ({ title, visible, changeVisibility, children }: React.PropsWithChildren<PopupProps>) => {
-  const { isXSmall, isSmall } = useScreenSize();
+  const { isXSmall } = useScreenSize();
   const validationGroup = useRef<ValidationGroup>(null);
 
   const onCancelClick = useCallback(() => {
@@ -31,8 +31,8 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
     <Popup
       title={title}
       visible={visible}
-      fullScreen={isXSmall || isSmall}
-      width='auto'
+      fullScreen={isXSmall}
+      width='480px'
       height='auto'
     >
       <ToolbarItem

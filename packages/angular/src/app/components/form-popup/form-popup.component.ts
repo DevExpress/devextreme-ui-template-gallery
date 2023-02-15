@@ -1,8 +1,6 @@
 import {
     Component,
     NgModule,
-    OnDestroy,
-    OnInit,
     Input,
     ViewChild,
   } from '@angular/core';
@@ -15,7 +13,6 @@ import {
     DxValidationGroupComponent,
   } from 'devextreme-angular';
   import { ScreenService } from '../../services';
-  import { Subscription } from 'rxjs';
 
   @Component({
     selector: 'form-popup',
@@ -23,31 +20,14 @@ import {
     providers: [],
   })
 
-  export class FormPopupComponent implements OnInit, OnDestroy {
+  export class FormPopupComponent {
     @ViewChild('validationGroup', { static: true }) validationGroup: DxValidationGroupComponent;
 
     @Input() titleText = '';
 
     popupVisible = false;
 
-    popupFullScreen = false;
-
-    screenSubscription: Subscription;
-
-    constructor(private screen: ScreenService) { }
-
-    ngOnInit(): void {
-      this.popupFullScreen = this.screen.isSmallScreen();
-      this.screenSubscription = this.screen.changed.subscribe(() => this.updatePopupByScreenSize());
-    }
-
-    ngOnDestroy(): void {
-      this.screenSubscription.unsubscribe();
-    }
-
-    updatePopupByScreenSize() {
-      this.popupFullScreen = this.screen.isSmallScreen();
-    }
+    constructor(protected screen: ScreenService) { }
 
     onCancelClick = () => {
       this.validationGroup.instance.reset();
@@ -67,7 +47,6 @@ import {
       DxToolbarModule,
       DxPopupModule,
       DxValidationGroupModule,
-
       CommonModule,
     ],
     declarations: [FormPopupComponent],

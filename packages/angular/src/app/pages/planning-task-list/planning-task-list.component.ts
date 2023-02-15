@@ -45,7 +45,7 @@ export class PlanningTaskListComponent implements OnInit {
 
   taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
-  constructor(private service: DataService, private screen: ScreenService) {
+  constructor(private service: DataService, protected screen: ScreenService) {
   }
 
   ngOnInit(): void {
@@ -68,10 +68,6 @@ export class PlanningTaskListComponent implements OnInit {
 
   addTask = () => {
     this.taskPopup.popupVisible = true;
-  };
-
-  getTabWidth = () => {
-    return this.screen.isXSmallScreen() ? 220 : 'auto';
   };
 
   refresh = () => {

@@ -13,6 +13,7 @@ import {
   FormPhotoUploaderModule,
 } from 'src/app/components';
 import { newContact } from 'src/app/types/contact';
+import { getSizeQualifier } from 'src/app/services/screen.service';
 
 @Component({
   selector: 'contact-new-user-form',
@@ -22,7 +23,7 @@ import { newContact } from 'src/app/types/contact';
 
 export class ContactNewUserFormComponent {
   newUser = newContact;
-
+  getSizeQualifier = getSizeQualifier;
   constructor() { }
 }
 

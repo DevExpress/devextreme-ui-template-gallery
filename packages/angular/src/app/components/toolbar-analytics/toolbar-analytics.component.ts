@@ -26,17 +26,13 @@ export class ToolbarAnalyticsComponent {
 
   @Output() selectionChanged = new EventEmitter<Dates>();
 
-  constructor(private screen: ScreenService) { }
+  constructor(protected screen: ScreenService) { }
 
   selectionChange(e: TabsItemClickEvent) {
     const dates = e.itemData.value.split('/');
 
     this.selectionChanged.emit({ startDate: dates[0], endDate: dates[1] });
   }
-
-  getTabWidth = () => {
-    return this.screen.isXSmallScreen() ? 150 : 'auto';
-  };
 }
 
 @NgModule({

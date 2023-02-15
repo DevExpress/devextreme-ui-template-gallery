@@ -15,9 +15,10 @@ import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRen
 
 import { Task } from '../../types/task';
 import './TaskFormDetails.scss';
+import { getSizeQualifier } from '../../utils/media-query';
 
-export const TaskFormDetails = ({ editing, data, subjectField, colCountByScreen, onDataChanged }: {
-  editing: boolean, data: Task, subjectField: boolean, colCountByScreen: {xs: number, sm: number}, onDataChanged: (data) => void
+export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: {
+  editing: boolean, data: Task, subjectField: boolean, onDataChanged: (data) => void
 }) => {
   const updateField = (field: string) => (value: string) => {
     onDataChanged((prevState) => ({ ...prevState, ...{ [field]: value } }));
@@ -26,6 +27,7 @@ export const TaskFormDetails = ({ editing, data, subjectField, colCountByScreen,
   return (
     <Form
       className={classNames({ 'plain-styled-form task-form-details': true, 'view-mode': !editing })}
+      screenByWidth={getSizeQualifier}
     >
       {subjectField && <SimpleItem colSpan={2}>
         <FormTextbox
@@ -36,7 +38,7 @@ export const TaskFormDetails = ({ editing, data, subjectField, colCountByScreen,
         />
       </SimpleItem>}
       <GroupItem itemType='group'>
-        <ColCountByScreen xs={colCountByScreen.xs} sm={colCountByScreen.sm} md={2} lg={2} />
+        <ColCountByScreen xs={1} sm={2} md={2} lg={2} />
         <SimpleItem cssClass='accent'>
           <FormTextbox
             label='Company'

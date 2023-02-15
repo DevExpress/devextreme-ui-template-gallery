@@ -8,12 +8,11 @@ interface ScreenSizeInfo {
   isLarge: boolean
 }
 type Handler = (arg?: unknown) => void;
-
 const Breakpoints = {
-  XSmall: '(max-width: 599.99px)',
-  Small: '(min-width: 600px) and (max-width: 959.99px)',
-  Medium: '(min-width: 960px) and (max-width: 1279.99px)',
-  Large: '(min-width: 1280px)',
+  XSmall: '(max-width: 575.99px)',
+  Small: '(min-width: 576px) and (max-width: 991.98px)',
+  Medium: '(min-width: 992px) and (max-width: 1199.98px)',
+  Large: '(min-width: 1200px)',
 };
 
 const xSmallMedia = window.matchMedia(Breakpoints.XSmall);
@@ -24,8 +23,10 @@ const largeMedia = window.matchMedia(Breakpoints.Large);
 const handlers = new Set<Handler>();
 
 [xSmallMedia, smallMedia, mediumMedia, largeMedia].forEach((media) => {
-  media.addEventListener('change', () => {
-    handlers.forEach((handler) => handler());
+  media.addEventListener('change', (e) => {
+    if (e.matches) {
+      handlers.forEach((handler) => handler());
+    }
   });
 });
 
@@ -45,6 +46,13 @@ function getScreenSizeInfo(): ScreenSizeInfo {
     isLarge: screenSizes['screen-large'],
     cssClasses: Object.keys(screenSizes).filter((cl: string) => screenSizes[cl]),
   };
+}
+
+export function getSizeQualifier(width: number) {
+  if (width <= 420) return 'xs';
+  if (width <= 992) return 'sm';
+  if (width < 1200) return 'md';
+  return 'lg';
 }
 
 export const screenInfo = ref(getScreenSizeInfo());

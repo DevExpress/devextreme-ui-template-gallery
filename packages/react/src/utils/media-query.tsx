@@ -38,15 +38,16 @@ export const useScreenSizeClass = () => {
 
 let handlers: Handle[] = [];
 
-const xSmallMedia = window.matchMedia('(max-width: 599.98px)');
-
-const smallMedia = window.matchMedia('(min-width: 600px) and (max-width: 959.98px)');
-const mediumMedia = window.matchMedia('(min-width: 960px) and (max-width: 1279.98px)');
-const largeMedia = window.matchMedia('(min-width: 1280px)');
+const xSmallMedia = window.matchMedia('(max-width: 575.98px)');
+const smallMedia = window.matchMedia('(min-width: 576px) and (max-width: 991.98px)');
+const mediumMedia = window.matchMedia('(min-width: 992px) and (max-width: 1199.98px)');
+const largeMedia = window.matchMedia('(min-width: 1200px)');
 
 [xSmallMedia, smallMedia, mediumMedia, largeMedia].forEach((media) => {
   media.addEventListener('change', (e) => {
-    e.matches && handlers.forEach((handler) => handler());
+    if (e.matches) {
+      handlers.forEach((handler) => handler());
+    }
   });
 });
 
@@ -63,4 +64,11 @@ function getScreenSize() {
     isMedium: mediumMedia.matches,
     isLarge: largeMedia.matches,
   };
+}
+
+export function getSizeQualifier(width: number) {
+  if (width <= 420) return 'xs';
+  if (width <= 992) return 'sm';
+  if (width < 1200) return 'md';
+  return 'lg';
 }
