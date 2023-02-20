@@ -190,7 +190,7 @@ function send(e: ClickEvent) {
     border-radius: 16px;
     flex-shrink: 0;
     margin: 2px 5px;
-    background: $base-accent;
+    background: $accent-color;
     font-size: 12px;
     font-weight: 500;
     display: flex;

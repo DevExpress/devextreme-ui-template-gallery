@@ -91,7 +91,7 @@ const activityMenuItems: Array<{ text: string }> = [
 
   .activity {
     box-shadow: 0 1px 4px 0 #00000026;
-    border-left: 2px solid $base-accent;
+    border-left: 2px solid $accent-color;
     margin-right: 4px;
     padding: 8px 2px 8px 16px;
     display: grid;
