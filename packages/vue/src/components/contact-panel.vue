@@ -344,14 +344,14 @@ const navigateToDetails = () => {
 
   &.open {
     right: 0;
-    box-shadow: 0 0 16px $base-border-color;
+    box-shadow: 0 0 16px $border-color;
   }
 
   &.pin {
     position: absolute;
     transition: none;
     box-shadow: none;
-    border-left: 1px solid $base-border-color;
+    border-left: 1px solid $border-color;
 
     &.open {
       top: 0;
@@ -374,7 +374,7 @@ const navigateToDetails = () => {
       }
 
       &.border {
-        border-bottom: 1px solid $base-border-color;
+        border-bottom: 1px solid $border-color;
       }
 
       &-toolbar {

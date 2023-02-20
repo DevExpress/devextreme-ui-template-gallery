@@ -46,7 +46,7 @@ body {
 <style scoped lang="scss">
 @use "@/variables" as *;
 .app {
-  background-color: darken($base-bg, 5);
+  background-color: $base-bg-darken-5;
   display: flex;
   height: 100%;
   width: 100%;
