@@ -125,12 +125,16 @@ $side-panel-min-width: 60px;
 
   &.view-mode {
     .accent {
-      .dx-texteditor.form-editor .form-editor-input {
-        color: $accent-color;
+      .dx-texteditor.form-editor,
+      .dx-texteditor.form-editor.dx-editor-filled {
+        .form-editor-input {
+          color: $accent-color;
+        }
       }
     }
 
     .dx-texteditor,
+    .dx-texteditor.form-editor.dx-editor-filled,
     .dx-texteditor.form-editor {
       pointer-events: none;
 

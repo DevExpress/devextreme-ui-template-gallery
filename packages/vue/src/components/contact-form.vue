@@ -329,9 +329,5 @@ function cancelEdit() {
     align-self: flex-end;
     padding-left: $list-padding-left;
   }
-
-  :deep(.status-editor-input) {
-    padding-left: 0;
-  }
 }
 </style>

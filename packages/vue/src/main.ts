@@ -5,8 +5,7 @@ import App from './App.vue';
 import { router } from './router';
 import 'devexpress-gantt/dist/dx-gantt.css';
 import './styles.scss';
-import './themes/theme-dark';
-import './themes/theme-light';
+import './themes/theme';
 
 const app = createApp(App);
 app.use(router);

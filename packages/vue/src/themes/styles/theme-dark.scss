@@ -1,1 +1,1 @@
-@import "devextreme/scss/bundles/dx.material.blue.dark.compact";
+@use "theme-mixin" as * with ($theme: "dark");

@@ -41,6 +41,11 @@
           </div>
         </div>
       </dx-item>
+
+      <dx-item location="after">
+        <theme-switcher />
+      </dx-item>
+
       <dx-item
         location="after"
         locate-in-menu="auto"
@@ -70,9 +75,6 @@
           menu-mode="list"
         />
       </template>
-      <dx-item location="after">
-        <theme-switcher/>
-      </dx-item>
     </dx-toolbar>
   </header>
 </template>

@@ -7,15 +7,16 @@ export function getCurrentTheme(): 'dark' | 'light' {
 }
 
 export function switchTheme(themeName?: string) {
-  const themeMarker = 'theme-';
+  const themePrefix = 'theme-';
+  const body = document.querySelector('body');
+
+  if (!body) {
+    return;
+  }
 
   themeName = themeName || getCurrentTheme();
 
-  [...document.styleSheets]
-    .filter((styleSheet) => styleSheet?.href?.includes(themeMarker))
-    .forEach((styleSheet) => {
-      styleSheet.disabled = !styleSheet?.href?.includes(`${themeMarker}${themeName}`);
-    });
+  body.className = `${body.className.replace(/\s*theme-((light)|(dark))\s*/, ' ')} ${themePrefix + themeName}`;
 
   window.localStorage[storageKey] = themeName;
   currentTheme(`material.${themeName}`);

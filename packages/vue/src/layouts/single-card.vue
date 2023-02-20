@@ -48,6 +48,7 @@ watch(
     margin: auto auto;
     padding: 40px;
     flex-grow: 0;
+    background-color: $base-bg;
 
     .screen-x-small & {
       width: 100%;

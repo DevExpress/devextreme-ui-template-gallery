@@ -18,8 +18,9 @@ const props = withDefaults(defineProps<{
   @mixin status($status-color) {
     color: $status-color;
 
-    &.dx-texteditor-input.status-editor-input {
+    &[readonly].dx-texteditor-input.status-editor-input {
       color: $status-color;
+      padding-left: 0;
     }
 
     &::before {
