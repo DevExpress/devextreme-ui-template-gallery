@@ -1,15 +1,19 @@
 import { createApp } from 'vue';
 import { AppInfo, appInfoInjectKey } from '@/types/app-info';
+import { switchTheme } from '@/utils/theme-switch';
 import App from './App.vue';
 import { router } from './router';
-import 'devextreme/scss/bundles/dx.material.blue.light.compact.scss';
 import 'devexpress-gantt/dist/dx-gantt.css';
 import './styles.scss';
+import './themes/theme-dark';
+import './themes/theme-light';
 
 const app = createApp(App);
 app.use(router);
 app.provide<AppInfo>(appInfoInjectKey, {
   title: 'UI Template Gallery',
 });
+
+switchTheme();
 
 app.mount('#app');

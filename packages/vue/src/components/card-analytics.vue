@@ -93,7 +93,7 @@ const props = withDefaults(defineProps<{
 
   &.grid {
     .content {
-      border-top: 1px solid $base-border-color;
+      border-top: 1px solid $border-color;
       padding-left: 0;
       padding-right: 0;
     }
