@@ -9,7 +9,11 @@ const filesForChange = {
   react: 'src/App.tsx',
 };
 
-const variablesPath = 'src/variables.scss';
+const variablesPath = {
+  angular: 'src/app/theme/styles/variables-mixin.scss',
+  vue: 'src/variables.scss',
+  react: 'src/variables.scss',
+};
 
 const changeThemesMeta = (theme) => {
   const baseTheme = theme.split('.')[0];
@@ -20,22 +24,35 @@ const changeThemesMeta = (theme) => {
 
   packages.forEach((packageName) => {
     const appPath = join(cwd(), 'packages', packageName);
-    const appVariablesPath = join(appPath, variablesPath);
+    const appVariablesPath = join(appPath, variablesPath[packageName]);
     const fileForChange = join(appPath, filesForChange[packageName]);
 
     // main import
     const contentForChange = readFileSync(fileForChange, 'utf8');
-    writeFileSync(fileForChange, contentForChange.replace(/material\.blue\..+?(?=\.scss)/, bundleName));
+    if (baseTheme === 'generic') {
+      if (packageName === 'angular') {
+        writeFileSync(fileForChange, contentForChange.replace(/material\.blue\./g, ''));
+      } else {
+        writeFileSync(fileForChange, contentForChange.replace(/material\.blue\..+?(?=\.scss)/g, bundleName));
+      }
+    }
 
     // variables.scss
     const variablesContentForChange = readFileSync(appVariablesPath, 'utf8');
-    let newVariablesContent = variablesContentForChange.replace('blue', color);
+    let newVariablesContent = variablesContentForChange;
     if (baseTheme === 'generic') {
+      if (packageName === 'angular') {
+        newVariablesContent = variablesContentForChange.replace('"blue"', '$theme');
+        newVariablesContent = newVariablesContent.replace(', $mode: $theme', '');
+      } else {
+        newVariablesContent = variablesContentForChange.replace('blue', color);
+        newVariablesContent = newVariablesContent.replace(', $mode: "light"', '');
+      }
       newVariablesContent = newVariablesContent.replace(/material/g, baseTheme);
-      newVariablesContent = newVariablesContent.replace(', $mode: "light"', '');
     } else {
       newVariablesContent = newVariablesContent.replace('light', mode);
     }
+
     writeFileSync(appVariablesPath, newVariablesContent);
   });
 };

@@ -3,17 +3,17 @@
 .create-account-form {
   .policy-info {
     margin: 10px 0;
-    color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+    color: $base-text-color-alpha;
     font-size: 14px;
     font-style: normal;
 
     a {
-      color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+      color: $base-text-color-alpha;
     }
   }
 
   .login-link {
-    color: $base-accent;
+    color: $accent-color;
     font-size: 16px;
     text-align: center;
   }

@@ -19,6 +19,7 @@
       [text]="title"
     >
     </dxi-item>
+
     <dxi-item
       location="after"
       widget="dxTextBox"
@@ -33,6 +34,15 @@
     </dxi-item>
     <dxi-item
       location="after"
+      locateInMenu="auto"
+    >
+      <div *dxTemplate>
+        <theme-switcher></theme-switcher>
+      </div>
+    </dxi-item>
+
+    <dxi-item
+      location="after"
     >
       <div *dxTemplate>
         <div class="messages">
@@ -43,6 +53,7 @@
         </div>
       </div>
     </dxi-item>
+
     <dxi-item
       location="after"
       locateInMenu="auto"
