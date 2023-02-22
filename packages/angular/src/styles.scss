@@ -116,6 +116,7 @@ body {
     }
 
     .dx-texteditor,
+    .dx-texteditor.dx-editor-filled,
     .dx-texteditor.form-editor, {
       pointer-events: none;
 
@@ -141,7 +142,8 @@ body {
 @mixin status($status-color) {
   color: $status-color;
 
-  &.dx-texteditor {
+  &.dx-texteditor,
+  &.dx-texteditor.dx-editor-filled {
     .status-input.status-editor-input {
       color: $status-color;
     }
