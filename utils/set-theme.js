@@ -9,7 +9,11 @@ const filesForChange = {
   react: 'src/App.tsx',
 };
 
-const variablesPath = 'src/variables.scss';
+const variablesPath = {
+  angular: 'src/app/theme/styles/variables-mixin.scss',
+  vue: 'src/variables.scss',
+  react: 'src/variables.scss',
+}
 
 const changeThemesMeta = (theme) => {
   const baseTheme = theme.split('.')[0];
@@ -20,7 +24,7 @@ const changeThemesMeta = (theme) => {
 
   packages.forEach((packageName) => {
     const appPath = join(cwd(), 'packages', packageName);
-    const appVariablesPath = join(appPath, variablesPath);
+    const appVariablesPath = join(appPath, variablesPath[packageName]);
     const fileForChange = join(appPath, filesForChange[packageName]);
 
     // main import

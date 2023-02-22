@@ -9,6 +9,7 @@ import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { Router } from '@angular/router';
 import { UserPanelModule } from '../user-panel/user-panel.component';
 import { AuthService, IUser } from '../../services';
+import {ThemeSwitcherModule} from "../theme-switcher/theme-switcher.component";
 
 @Component({
   selector: 'app-header',
@@ -54,6 +55,7 @@ export class HeaderComponent implements OnInit {
     DxButtonModule,
     UserPanelModule,
     DxToolbarModule,
+    ThemeSwitcherModule,
   ],
   declarations: [HeaderComponent],
   exports: [HeaderComponent],
