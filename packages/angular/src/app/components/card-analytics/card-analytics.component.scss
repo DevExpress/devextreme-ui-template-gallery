@@ -5,7 +5,7 @@
     border-radius: 4px;
     box-shadow: none;
     position: relative;
-    border: 1px solid $base-border-color;
+    border: 1px solid $border-color;
     overflow: hidden;
 
     .header {
@@ -37,7 +37,7 @@
 
     &.grid {
       .content {
-        border-top: 1px solid $base-border-color;
+        border-top: 1px solid $border-color;
         padding-left: 0;
         padding-right: 0;
       }
