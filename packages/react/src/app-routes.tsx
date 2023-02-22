@@ -1,4 +1,4 @@
-import { CRMContactDetails, CRMContactList, PlanningTaskList, PlanningTaskDetails, AnalyticsDashboard, AnalyticsSalesReport, AnalyticsGeography } from './pages';
+import { CRMContactDetails, CRMContactList, PlanningTaskList, PlanningTaskDetails, PlanningCalendar, AnalyticsDashboard, AnalyticsSalesReport, AnalyticsGeography } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -17,6 +17,10 @@ const routes = [
   {
     path: '/planning-task-details',
     element: PlanningTaskDetails,
+  },
+  {
+    path: '/planning-calendar',
+    element: PlanningCalendar,
   },
   {
     path: '/analytics-dashboard',

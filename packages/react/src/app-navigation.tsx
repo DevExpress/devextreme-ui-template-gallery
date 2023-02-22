@@ -27,6 +27,10 @@ export const navigation = [
         text: 'Task Details',
         path: '/planning-task-details',
       },
+      {
+        text: 'Calendar',
+        path: '/planning-calendar'
+      },
     ],
   },
   {
