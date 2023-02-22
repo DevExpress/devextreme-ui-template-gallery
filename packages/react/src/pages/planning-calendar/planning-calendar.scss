@@ -1,0 +1,27 @@
+@use "../../variables.scss" as *;
+@use "sass:math";
+.view-wrapper-calendar{
+    position: relative;
+    flex-direction: column;
+    display: flex;
+    flex-grow: 1;
+    padding: $content-padding;
+
+    .panels {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    
+        .left {
+          flex: 1 400px;
+          margin-top: 8px;
+        }
+    
+        .right {
+          flex: 1 calc(100% - 400px - 20px);
+          margin-top: 8px;
+          min-width: 340px;
+        }
+      }
+}
