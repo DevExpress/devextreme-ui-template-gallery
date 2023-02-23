@@ -101,7 +101,7 @@ body {
   }
 }
 
-.plain-styled-form {
+.dx-form.plain-styled-form {
   &.dx-form > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
     padding-bottom: 0;
   }
@@ -125,12 +125,16 @@ body {
 
   &.view-mode {
     .accent {
-      .dx-texteditor.form-editor .form-editor-input {
-        color: $accent-color;
+      .dx-texteditor.form-editor.dx-editor-filled,
+      .dx-texteditor.form-editor {
+        .form-editor-input {
+          color: $accent-color;
+        }
       }
     }
 
     .dx-texteditor,
+    .dx-texteditor.form-editor.dx-editor-filled,
     .dx-texteditor.form-editor {
       pointer-events: none;
 
@@ -139,6 +143,7 @@ body {
       }
 
       &,
+      &.dx-state-readonly,
       & > * {
         background-color: transparent;
       }
@@ -227,6 +232,6 @@ body {
 
 .messages-content {
   padding: 20px;
-  border-top: 1px solid $base-border-color;
+  border-top: 1px solid $border-color;
   background-color: $side-panel-background;
 }
