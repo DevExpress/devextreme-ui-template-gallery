@@ -6,6 +6,7 @@ import Button from 'devextreme-react/button';
 import { Template } from 'devextreme-react/core/template';
 
 import { UserPanel } from '../user-panel/UserPanel';
+import { ThemeSwitcher } from '../theme-switcher/ThemeSwitcher';
 
 import type { HeaderProps } from '../../types';
 
@@ -28,6 +29,11 @@ export const Header = ({ menuToggleEnabled, title, toggleMenu, className }: Head
             <div className='dx-badge'>
               4
             </div>
+          </div>
+        </Item>
+        <Item location='after'>
+          <div className='messages'>
+            <ThemeSwitcher />
           </div>
         </Item>
         <Item location='after' locateInMenu='auto' menuItemTemplate='userPanelTemplate'>
