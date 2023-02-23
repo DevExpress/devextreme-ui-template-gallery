@@ -10,9 +10,9 @@ import { useScreenSizeClass } from './utils/media-query';
 import { Content } from './Content';
 import { UnauthenticatedContent } from './UnauthenticatedContent';
 
-import 'devextreme/scss/bundles/dx.material.blue.light.compact.scss';
 import 'devexpress-gantt/dist/dx-gantt.css';
 import './styles.scss';
+import './theme/theme';
 
 function RootApp() {
   const { user, loading } = useAuth();
