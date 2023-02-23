@@ -91,7 +91,7 @@ body {
   }
 }
 
-.plain-styled-form {
+.dx-form.plain-styled-form {
   &.dx-form > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
     padding-bottom: 0;
   }
@@ -144,7 +144,7 @@ body {
 
   &.dx-texteditor,
   &.dx-texteditor.dx-editor-filled {
-    .status-input.status-editor-input {
+    .status-input.status-editor-input[readonly] {
       color: $status-color;
     }
   }

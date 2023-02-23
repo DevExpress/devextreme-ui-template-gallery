@@ -62,22 +62,9 @@
             "styles": [
               "src/styles.scss",
               "node_modules/devexpress-gantt/dist/dx-gantt.css",
-              {
-                "input": "node_modules/devextreme/scss/bundles/dx.material.blue.light.compact.scss",
-                "bundleName": "theme-light"
-              },
-              {
-                "input": "node_modules/devextreme/scss/bundles/dx.material.blue.dark.compact.scss",
-                "bundleName": "theme-dark"
-              },
-              {
-                "input": "src/app/theme/styles/variables-light.scss",
-                "bundleName": "theme-light"
-              },
-              {
-                "input": "src/app/theme/styles/variables-dark.scss",
-                "bundleName": "theme-dark"
-              }
+              "src/app/theme/styles/theme-common.scss",
+              "src/app/theme/styles/theme-light.scss",
+              "src/app/theme/styles/theme-dark.scss"
             ],
             "scripts": []
           },
