@@ -4,24 +4,108 @@
     position: relative;
     flex-direction: column;
     display: flex;
-    flex-grow: 1;
-    padding: $content-padding;
-
+    height: inherit;
+    
     .panels {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 20px;
-    
+        height: inherit;
+        gap: 16px;
+        padding: $content-padding;
+        
         .left {
-          flex: 1 400px;
-          margin-top: 8px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+          padding-top: $content-padding;
+          
+          .buttons{
+            display: flex;
+            width: 100%;
+            gap: 16px;
+            padding: 0px 16px;
+            .dx-button {
+              width: calc((100% - 16px)/2);
+              font-size: 13px;
+              border-radius: 4px;
+            }
+          }
+
+          .calendar {
+            align-self: center;
+            padding: 16px;
+          }
+
+          .dx-calendar {
+            width: 292px;
+          }
+
+          .dx-accordion {
+            width: 100%;
+            .dx-accordion-item {
+              box-shadow: none;
+            }
+            .dx-accordion-item-title-caption{
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 18px;
+              // top: 8px;
+              // left: 8px;
+            }
+
+            .dx-accordion-item-title{
+
+              padding: 8px 8px 8px 16px;
+              display: flex;
+              vertical-align: middle;
+              align-items: center;
+            }
+
+            .accordion-item{
+              padding: 6px 8px 6px 16px;
+              display: flex;
+              vertical-align: middle;
+              align-items: center;
+            }
+            
+            .dx-accordion-item-body{
+              padding: 0px;
+            }
+            // .accordion-item{
+            //   padding: 0px 8px;
+            // }
+            .dx-checkbox-container {
+              padding: 4px;
+            }
+            .item-text{
+              padding: 0px 8px;
+
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 16px;
+            }
+          }
         }
     
         .right {
-          flex: 1 calc(100% - 400px - 20px);
-          margin-top: 8px;
-          min-width: 340px;
+          flex: 1;
+          // flex: 0 calc(100% - 248px - (4*16px));
+          height: inherit;
+          border: 1px grey;
+          border-radius: 8px;
         }
+    }
+    
+    .dx-scheduler-header{
+      border-radius: 8px 8px 0px 0px;
+      
+      .dx-toolbar-items-container{
+        padding: $content-padding;
       }
+    }
+    .dx-scheduler-work-space{
+      border-radius: 0px 0px 8px 8px;
+    }
 }
+
