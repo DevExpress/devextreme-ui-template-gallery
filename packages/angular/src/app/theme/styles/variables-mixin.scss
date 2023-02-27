@@ -1,8 +1,10 @@
 $theme: null !default;
+$theme-type: 'material';
 
 @use "/node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: $theme);
 @use "/node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
 @use "/node_modules/devextreme/scss/widgets/material/button/mixins" as *;
+@use "/node_modules/devextreme/scss/widgets/material/button/sizes" as *;
 @use "/node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
 @use "/node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
 @use '/node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
@@ -20,6 +22,7 @@ $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 $base-text-color-alpha: rgba($base-text-color, alpha($base-text-color) * 0.7);
 $side-panel-min-width: 48px;
 $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
+
 
 :root {
   --base-bg: #{$base-bg};
@@ -40,4 +43,12 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
   --filled-texteditor-input-horizontal-padding: #{$material-field-value-horizontal-padding};
   --list-padding-left: #{$material-list-item-horizontal-padding};
   --footer-left-padding: #{$footer-left-padding};
+
+  @if $theme-type == 'generic' {
+    --theme-button-size: #{$material-button-icon-size};
+  }
+
+  @else {
+    --theme-button-size: 24px;
+  }
 }

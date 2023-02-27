@@ -95,6 +95,9 @@ jobs:
     - name: Run npm install
       run: npm install --no-audit --no-fund
 
+    - name: Set theme
+      run: npm run set-theme -- ${{ matrix.theme.fullName }}
+
     - name: Build
       run: npm run build
       working-directory: packages/${{ matrix.ARGS.project }}
