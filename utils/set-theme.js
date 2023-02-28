@@ -29,10 +29,12 @@ const changeThemesMeta = (theme) => {
 
     // main import
     const contentForChange = readFileSync(fileForChange, 'utf8');
-    if (packageName === 'angular') {
-      writeFileSync(fileForChange, contentForChange.replace(/material\.blue\./g, ''));
-    } else {
-      writeFileSync(fileForChange, contentForChange.replace(/material\.blue\..+?(?=\.scss)/g, bundleName));
+    if (baseTheme === 'generic') {
+      if (packageName === 'angular') {
+        writeFileSync(fileForChange, contentForChange.replace(/material\.blue\./g, ''));
+      } else {
+        writeFileSync(fileForChange, contentForChange.replace(/material\.blue\..+?(?=\.scss)/g, bundleName));
+      }
     }
 
     // variables.scss
