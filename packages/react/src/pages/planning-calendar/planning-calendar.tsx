@@ -5,20 +5,20 @@ import Calendar from 'devextreme-react/calendar';
 import Scheduler, { View } from 'devextreme-react/scheduler';
 import Button from 'devextreme-react/button';
 
-import Accordion from 'devextreme-react/accordion';
+// import Accordion from 'devextreme-react/accordion';
+import List from 'devextreme-react/list';
 import CheckBox from 'devextreme-react/check-box';
 
 import './planning-calendar.scss';
 
-const accordionDS = [
+const listDS = [
   {
-    title: 'My Calendars',
-    calendarList: ['Johnson', 'Tasks', 'Reminder', 'Contacts']
+    key: 'My calendars',
+    items: ['Brett Johnson', 'Tasks', 'Reminder', 'Contacts']
   },
   {
-    title: 'Other Calendars',
-    lol: 'add',
-    calendarList: ['Holidays']
+    key: 'Other calendars',
+    items: ['Holidays']
   }
 ];
 const processTasks = (tasks) => {
@@ -31,32 +31,28 @@ const processTasks = (tasks) => {
 
 const views = ['week', 'month'];
 
-export const accordionItemsRender = (item) => {
-  return (<>
-    {item.calendarList.map((item, index) => {
-      return <div key={index} className='accordion-item'>
-        <CheckBox value />
-        <span className='item-text'>{item}</span>
-      </div>;
-    })}
-  </>);
+export const listItemsRender = (item) => {
+  return (
+    <div className='list-item'>
+      <CheckBox />
+      <span className='list-item-text'>{item.text}</span>
+    </div>
+  );
 };
 
-export const accordionTitleRender = (item) => {
-  return <>
-    {item.title}
-    <div>
-      <Button icon='add' stylingMode='contained' />
-    </div>
-  </>;
+export const listTitleRender = (item) => {
+  return <div className='list-header'>
+    {item.key}
+    <Button icon='add' stylingMode='contained' />
+  </div>;
 };
 export const PlanningCalendar = () => {
   const [selectedDay] = useState(0);
   const [tasks, setTasks] = useState(null);
-  // useEffect(()=>{
+  // useEffect(() => {
   //   getTasks().then(tasksList => {
-  //     console.log(tasksList.filter(task=>task.dueDate !== null && new Date(task.dueDate).getDate() === new Date(task.startDate).getDate())
-  //     // .map(task => )
+  //     console.log(tasksList
+  //       // .map(task => )
   //     );
   //     setTasks(processTasks(tasksList));
   //   });
@@ -71,12 +67,24 @@ export const PlanningCalendar = () => {
         <div className='calendar'>
           <Calendar />
         </div>
-        <Accordion
+        {/* <Accordion
           dataSource={accordionDS}
           multiple
           collapsible
           itemRender={accordionItemsRender}
           itemTitleRender={accordionTitleRender}
+        // hoverStateEnabled={false}
+        // focusStateEnabled={false}
+        /> */}
+        <List
+          dataSource={listDS}
+          groupRender={listTitleRender}
+          itemRender={listItemsRender}
+          grouped
+          collapsibleGroups
+          scrollingEnabled={false}
+          // showSelectionControls
+          activeStateEnabled={false}
         />
       </div>
       <div className='right'>

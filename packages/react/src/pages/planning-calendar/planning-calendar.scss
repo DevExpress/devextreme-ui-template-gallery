@@ -1,6 +1,7 @@
 @use "../../variables.scss" as *;
 @use "sass:math";
-.view-wrapper-calendar{
+
+.view-wrapper-calendar {
     position: relative;
     flex-direction: column;
     display: flex;
@@ -19,6 +20,7 @@
           align-items: flex-start;
           gap: 16px;
           padding-top: $content-padding;
+          width: calc(292px + 16px);
           
           .buttons{
             display: flex;
@@ -41,56 +43,60 @@
             width: 292px;
           }
 
-          .dx-accordion {
+          .dx-list {
             width: 100%;
-            .dx-accordion-item {
-              box-shadow: none;
-            }
-            .dx-accordion-item-title-caption{
-              font-weight: 500;
-              font-size: 16px;
-              line-height: 18px;
-              // top: 8px;
-              // left: 8px;
-            }
+            padding: 16px;
 
-            .dx-accordion-item-title{
-
+            .dx-list-group-header{
               padding: 8px 8px 8px 16px;
               display: flex;
               vertical-align: middle;
               align-items: center;
+              justify-content: space-between;
+              color: rgba(0, 0, 0, 0.87);
             }
 
-            .accordion-item{
+            .list-header{
+              display: flex;
+              vertical-align: middle;
+              align-items: center;
+              gap: 8px;
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 18px;
+            }
+
+            .dx-list-group-header-indicator{
+              order: 3;
+            }
+
+            .list-item {
               padding: 6px 8px 6px 16px;
               display: flex;
               vertical-align: middle;
               align-items: center;
             }
-            
-            .dx-accordion-item-body{
+
+            .dx-list-item-content{
               padding: 0px;
             }
-            // .accordion-item{
-            //   padding: 0px 8px;
-            // }
+            
             .dx-checkbox-container {
-              padding: 4px;
+              padding: 6px;
             }
-            .item-text{
-              padding: 0px 8px;
+            .list-item-text{
+              // padding: 0px 8px;
 
               font-weight: 400;
               font-size: 14px;
               line-height: 16px;
             }
+            
           }
         }
     
         .right {
           flex: 1;
-          // flex: 0 calc(100% - 248px - (4*16px));
           height: inherit;
           border: 1px grey;
           border-radius: 8px;
@@ -99,8 +105,8 @@
     
     .dx-scheduler-header{
       border-radius: 8px 8px 0px 0px;
-      
-      .dx-toolbar-items-container{
+      height: 60px;
+      .dx-toolbar{
         padding: $content-padding;
       }
     }
