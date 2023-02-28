@@ -43,56 +43,7 @@
             width: 292px;
           }
 
-          .dx-list {
-            width: 100%;
-            padding: 16px;
-
-            .dx-list-group-header{
-              padding: 8px 8px 8px 16px;
-              display: flex;
-              vertical-align: middle;
-              align-items: center;
-              justify-content: space-between;
-              color: rgba(0, 0, 0, 0.87);
-            }
-
-            .list-header{
-              display: flex;
-              vertical-align: middle;
-              align-items: center;
-              gap: 8px;
-              font-weight: 500;
-              font-size: 16px;
-              line-height: 18px;
-            }
-
-            .dx-list-group-header-indicator{
-              order: 3;
-            }
-
-            .list-item {
-              padding: 6px 8px 6px 16px;
-              display: flex;
-              vertical-align: middle;
-              align-items: center;
-            }
-
-            .dx-list-item-content{
-              padding: 0px;
-            }
-            
-            .dx-checkbox-container {
-              padding: 6px;
-            }
-            .list-item-text{
-              // padding: 0px 8px;
-
-              font-weight: 400;
-              font-size: 14px;
-              line-height: 16px;
-            }
-            
-          }
+          
         }
     
         .right {

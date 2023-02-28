@@ -1,26 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { getTasks } from 'dx-template-gallery-data';
+
 import Calendar from 'devextreme-react/calendar';
 import Scheduler, { View } from 'devextreme-react/scheduler';
 import Button from 'devextreme-react/button';
 
+import { CalendarList } from '../../components/calendar-list/calendar-list';
+
 // import Accordion from 'devextreme-react/accordion';
 import List from 'devextreme-react/list';
-import CheckBox from 'devextreme-react/check-box';
 
 import './planning-calendar.scss';
 
-const listDS = [
-  {
-    key: 'My calendars',
-    items: ['Brett Johnson', 'Tasks', 'Reminder', 'Contacts']
-  },
-  {
-    key: 'Other calendars',
-    items: ['Holidays']
-  }
-];
 const processTasks = (tasks) => {
   return tasks.map((task) => ({
     text: task.text,
@@ -31,21 +23,6 @@ const processTasks = (tasks) => {
 
 const views = ['week', 'month'];
 
-export const listItemsRender = (item) => {
-  return (
-    <div className='list-item'>
-      <CheckBox />
-      <span className='list-item-text'>{item.text}</span>
-    </div>
-  );
-};
-
-export const listTitleRender = (item) => {
-  return <div className='list-header'>
-    {item.key}
-    <Button icon='add' stylingMode='contained' />
-  </div>;
-};
 export const PlanningCalendar = () => {
   const [selectedDay] = useState(0);
   const [tasks, setTasks] = useState(null);
@@ -67,25 +44,7 @@ export const PlanningCalendar = () => {
         <div className='calendar'>
           <Calendar />
         </div>
-        {/* <Accordion
-          dataSource={accordionDS}
-          multiple
-          collapsible
-          itemRender={accordionItemsRender}
-          itemTitleRender={accordionTitleRender}
-        // hoverStateEnabled={false}
-        // focusStateEnabled={false}
-        /> */}
-        <List
-          dataSource={listDS}
-          groupRender={listTitleRender}
-          itemRender={listItemsRender}
-          grouped
-          collapsibleGroups
-          scrollingEnabled={false}
-          // showSelectionControls
-          activeStateEnabled={false}
-        />
+        <CalendarList />
       </div>
       <div className='right'>
         <Scheduler
