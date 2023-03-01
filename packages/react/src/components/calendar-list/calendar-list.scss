@@ -9,6 +9,9 @@
       align-items: center;
       justify-content: space-between;
       color: rgba(0, 0, 0, 0.87);
+      .dx-inkripple{
+        border-radius: 4px;
+      }
     }
 
     .list-header{
@@ -25,11 +28,12 @@
       order: 3;
     }
 
-    .list-item {
+    .dx-list-item {
       padding: 6px 8px 6px 0px;
       display: flex;
       vertical-align: middle;
       align-items: center;
+      border-radius: 4px;
     }
 
     .dx-list-item-content{
