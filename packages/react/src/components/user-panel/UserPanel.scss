@@ -20,8 +20,6 @@
     .user-image {
       width: 100%;
       height: 100%;
-      background: url("https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png") no-repeat #fff;
-      background-size: cover;
     }
   }
 
@@ -43,25 +41,38 @@
     margin-right: 0;
     margin-left: 16px;
   }
-}
 
-.dx-context-menu.user-menu.dx-menu-base {
-  &.dx-rtl {
-    .dx-submenu .dx-menu-items-container .dx-icon {
-      margin-left: 16px;
+  .dx-dropdownbutton:not(.dx-dropdownbutton-has-arrow) {
+    margin-left: 5px;
+    height: 100%;
+
+    img.dx-icon {
+      border-radius: 50%;
+      margin: 0 4px;
+      height: 26px;
+      width: 26px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+      object-position: top;
+      background: rgb(255, 255, 255);
+    }
+
+    .dx-button-has-icon.dx-button-has-text {
+      justify-content: center;
+
+      .dx-button-content {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .dx-button-text {
+        text-transform: none;
+        font-size: 16px;
+        color: $base-text-color;
+        font-weight: 400;
+        letter-spacing: normal;
+        margin: 0 9px;
+      }
     }
   }
-
-  .dx-submenu .dx-menu-items-container .dx-icon {
-    margin-right: 16px;
-  }
-
-  .dx-menu-item .dx-menu-item-content {
-    padding: 3px 15px 4px;
-  }
-}
-
-.dx-theme-generic .user-menu .dx-menu-item-content .dx-menu-item-text {
-  padding-left: 4px;
-  padding-right: 4px;
 }

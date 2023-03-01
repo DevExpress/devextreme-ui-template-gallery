@@ -1,38 +1,37 @@
 <template>
   <div class="user-panel">
-    <div class="user-info">
-      <div class="image-container">
-        <div class="user-image" />
-      </div>
-      <div class="user-name">
-        {{ user?.name }} {{ user?.lastName }}
-      </div>
-    </div>
-
-    <dx-context-menu
+    <dx-drop-down-button
       v-if="menuMode === 'context'"
-      target=".user-button"
       :items="menuItems"
-      :width="210"
-      show-event="dxclick"
-      css-class="user-menu"
-    >
-      <dx-position
-        my="top center"
-        at="bottom center"
-      />
-    </dx-context-menu>
-
-    <dx-list
-      v-if="menuMode === 'list'"
-      class="dx-toolbar-menu-action"
-      :items="menuItems"
+      styling-mode="text"
+      width="150"
+      :icon="user?.avatarUrl"
+      :text="`${user?.name} ${user?.lastName}`"
+      :show-arrow-icon="false"
     />
+
+    <div v-if="menuMode === 'list'">
+      <div class="user-info">
+        <div class="image-container">
+          <div
+            :style="{
+              background: `url(${user?.avatarUrl}) no-repeat #fff`,
+              backgroundSize: 'cover',
+            }"
+            class="user-image"
+          />
+        </div>
+        <div class="user-name">
+          {{ user?.name }} {{ user?.lastName }}
+        </div>
+      </div>
+      <dx-list :items="menuItems" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import DxContextMenu, { DxPosition } from 'devextreme-vue/context-menu';
+import { DxDropDownButton } from 'devextreme-vue/drop-down-button';
 import DxList from 'devextreme-vue/list';
 
 withDefaults(defineProps<{
@@ -73,8 +72,6 @@ $user-image-height: $toolbar-height;
     .user-image {
       width: 100%;
       height: 100%;
-      background: url("https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png") no-repeat #fff;
-      background-size: cover;
     }
   }
 
@@ -96,26 +93,40 @@ $user-image-height: $toolbar-height;
     margin-right: 0;
     margin-left: 16px;
   }
-}
 
-:deep(.dx-context-menu.user-menu) {
-  &.dx-rtl {
-    .dx-submenu .dx-menu-items-container .dx-icon {
-      margin-left: 16px;
+  :deep(.dx-dropdownbutton:not(.dx-dropdownbutton-has-arrow)) {
+    margin-left: 5px;
+    height: 100%;
+
+    img.dx-icon {
+      border-radius: 50%;
+      margin: 0 4px;
+      height: 26px;
+      width: 26px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+      object-position: top;
+      background: rgb(255, 255, 255);
+    }
+
+    .dx-button-has-icon.dx-button-has-text {
+      justify-content: center;
+
+      .dx-button-content {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .dx-button-text {
+        text-transform: none;
+        font-size: 16px;
+        color: $base-text-color;
+        font-weight: 400;
+        letter-spacing: normal;
+        margin: 0 9px;
+      }
     }
   }
-
-  .dx-submenu .dx-menu-items-container .dx-icon {
-    margin-right: 16px;
-  }
-
-  .dx-menu-item .dx-menu-item-content {
-    padding: 3px 15px 4px;
-  }
 }
 
-.dx-theme-generic .user-menu .dx-menu-item-content .dx-menu-item-text {
-  padding-left: 4px;
-  padding-right: 4px;
-}
 </style>

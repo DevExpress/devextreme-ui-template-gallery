@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
-import ContextMenu, { Position } from 'devextreme-react/context-menu';
 import List from 'devextreme-react/list';
+import DropDownButton from 'devextreme-react/drop-down-button';
 
 import { useAuth } from '../../contexts/auth';
 
@@ -24,25 +24,28 @@ export const UserPanel = ({ menuMode }: UserPanelProps) => {
   );
   return (
     <div className='user-panel'>
-      <div className='user-info'>
-        <div className='image-container'>
-          <div
-            style={{
-              background: `url(${user?.avatarUrl}) no-repeat #fff`,
-              backgroundSize: 'cover',
-            }}
-            className='user-image'
-          />
-        </div>
-        <div className='user-name'>{user?.name}</div>
-      </div>
-
       {menuMode === 'context' && (
-        <ContextMenu items={menuItems} target='.user-button' showEvent='dxclick' width={160} cssClass='user-menu'>
-          <Position my='top center' at='bottom center' />
-        </ContextMenu>
+        <DropDownButton items={menuItems} stylingMode='text'
+          width={150} icon={user?.avatarUrl}
+          text={user?.name} showArrowIcon={false} />
       )}
-      {menuMode === 'list' && <List className='dx-toolbar-menu-action' items={menuItems} />}
+      {menuMode === 'list' && (
+        <div>
+          <div className='user-info'>
+            <div className='image-container'>
+              <div
+                style={{
+                  background: `url(${user?.avatarUrl}) no-repeat #fff`,
+                  backgroundSize: 'cover',
+                }}
+                className='user-image'
+              />
+            </div>
+            <div className='user-name'>{user?.name}</div>
+          </div>
+          <List items={menuItems} />
+        </div>
+      )}
     </div>
   );
 };

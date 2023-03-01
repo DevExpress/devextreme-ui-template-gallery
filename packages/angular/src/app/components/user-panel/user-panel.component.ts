@@ -2,7 +2,7 @@ import { Component, NgModule, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DxListModule } from 'devextreme-angular/ui/list';
-import { DxContextMenuModule } from 'devextreme-angular/ui/context-menu';
+import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 import { IUser } from '../../services/auth.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class UserPanelComponent {
 @NgModule({
   imports: [
     DxListModule,
-    DxContextMenuModule,
+    DxDropDownButtonModule,
     CommonModule,
   ],
   declarations: [UserPanelComponent],
