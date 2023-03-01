@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
 import './calendar-list.scss';
@@ -16,15 +16,6 @@ const listDS = [
   }
 ];
 
-export const listItemsRender = (item) => {
-  return (
-    <div className='list-item'>
-      <CheckBox />
-      <span className='list-item-text'>{item.text}</span>
-    </div>
-  );
-};
-
 export const listTitleRender = (item) => {
   return <div className='list-header'>
     {item.key}
@@ -33,6 +24,20 @@ export const listTitleRender = (item) => {
 };
 
 export const CalendarList = () => {
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+
+  const onSelectedItemKeysChange = useCallback((selectedItems) => {
+    setSelectedItems(selectedItems);
+  }, []);
+
+  const listItemsRender = useCallback((item) => {
+    return (
+      <div className='list-item'>
+        <CheckBox value={selectedItems.includes(item)} />
+        <span className='list-item-text'>{item.text}</span>
+      </div>
+    );
+  }, [selectedItems]);
   return (
     <List
       dataSource={listDS}
@@ -42,6 +47,6 @@ export const CalendarList = () => {
       collapsibleGroups
       scrollingEnabled={false}
       selectionMode='multiple'
-      activeStateEnabled={false}
+      onSelectedItemKeysChange={onSelectedItemKeysChange}
     />);
 };

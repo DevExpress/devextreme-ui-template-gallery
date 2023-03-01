@@ -8,6 +8,7 @@
       vertical-align: middle;
       align-items: center;
       justify-content: space-between;
+      border-style: none;
     //   color: rgba(0, 0, 0, 0.87);
       .dx-inkripple{
         border-radius: 4px;
@@ -34,6 +35,14 @@
 
     .dx-item-content{
       padding: 0px;
+    }
+
+    .dx-list-item{
+      border-style: none;
+    }
+
+    .dx-list-group{
+      border-style: none !important;
     }
 
     .list-item {
