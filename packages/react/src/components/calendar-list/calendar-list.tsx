@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
 import './calendar-list.scss';
+import { CheckBox } from 'devextreme-react';
 
 const listDS = [
   {
@@ -18,6 +19,7 @@ const listDS = [
 export const listItemsRender = (item) => {
   return (
     <div className='list-item'>
+      <CheckBox />
       <span className='list-item-text'>{item.text}</span>
     </div>
   );
@@ -40,7 +42,6 @@ export const CalendarList = () => {
       collapsibleGroups
       scrollingEnabled={false}
       selectionMode='multiple'
-      showSelectionControls
       activeStateEnabled={false}
     />);
 };

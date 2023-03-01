@@ -8,7 +8,7 @@
       vertical-align: middle;
       align-items: center;
       justify-content: space-between;
-      color: rgba(0, 0, 0, 0.87);
+    //   color: rgba(0, 0, 0, 0.87);
       .dx-inkripple{
         border-radius: 4px;
       }
@@ -24,31 +24,34 @@
       line-height: 18px;
     }
 
-    .dx-list-group-header-indicator{
+    .dx-list-group-header::before{
       order: 3;
     }
 
-    .dx-list-item {
-      padding: 6px 8px 6px 0px;
+    .dx-list-group-header-indicator{
+        order: 3;
+    }
+
+    .dx-item-content{
+      padding: 0px;
+    }
+
+    .list-item {
+      padding: 6px 8px 6px 16px;
       display: flex;
       vertical-align: middle;
       align-items: center;
       border-radius: 4px;
-    }
-
-    .dx-list-item-content{
-      padding: 0px;
     }
     
     .dx-checkbox-container {
       padding: 6px;
     }
     .list-item-text{
-      // padding: 0px 8px;
+      padding: 0px 4px;
 
       font-weight: 400;
       font-size: 14px;
       line-height: 16px;
     }
-    
   }

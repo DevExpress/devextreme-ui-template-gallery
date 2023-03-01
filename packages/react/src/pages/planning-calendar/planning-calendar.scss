@@ -42,9 +42,7 @@
 
           .dx-calendar {
             width: 292px;
-          }
-
-          
+          }          
         }
     
         .right {
@@ -56,12 +54,9 @@
         }
     }
     
-    .dx-scheduler-header{
+    .dx-scheduler-header {
       border-radius: 8px 8px 0px 0px;
       height: 60px;
-      .dx-toolbar{
-        padding: $content-padding;
-      }
     }
     .dx-scheduler-work-space{
       border-radius: 0px 0px 8px 8px;
