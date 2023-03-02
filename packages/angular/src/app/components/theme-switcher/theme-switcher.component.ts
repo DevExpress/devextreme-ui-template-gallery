@@ -39,7 +39,7 @@ export function switchTheme(themeName?: Theme) {
                (click)="onClickButton()">
     </dx-button>
 `,
-  styleUrls: ['./theme-switcher.component.scss'],
+  styleUrls: [],
 })
 export class ThemeSwitcherComponent {
   theme = getCurrentTheme();
