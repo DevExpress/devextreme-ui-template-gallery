@@ -12,7 +12,6 @@ import { UnauthenticatedContent } from './UnauthenticatedContent';
 
 import 'devexpress-gantt/dist/dx-gantt.css';
 import './styles.scss';
-import { switchTheme } from './components/theme-switcher/ThemeSwitcher';
 import './theme/theme';
 
 function RootApp() {
@@ -36,8 +35,6 @@ function RootApp() {
 
 export const App = () => {
   const screenSizeClass = useScreenSizeClass();
-
-  switchTheme();
 
   return (
     <Router>
