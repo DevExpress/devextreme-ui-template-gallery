@@ -1,3 +1,5 @@
+@use "../../variables.scss" as *;
+@use "sass:math";
 .dx-list {
     width: 100%;
     padding: 16px;
@@ -9,6 +11,7 @@
       align-items: center;
       justify-content: space-between;
       border-style: none;
+      color: $base-text-color;
     //   color: rgba(0, 0, 0, 0.87);
       .dx-inkripple{
         border-radius: 4px;
