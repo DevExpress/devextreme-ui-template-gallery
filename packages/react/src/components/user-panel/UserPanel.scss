@@ -57,21 +57,24 @@
       background: rgb(255, 255, 255);
     }
 
-    .dx-button-has-icon.dx-button-has-text {
-      justify-content: center;
+    .dx-buttongroup {
+      vertical-align: middle;
 
-      .dx-button-content {
-        padding-left: 0;
-        padding-right: 0;
-      }
+      .dx-button-has-icon.dx-button-has-text {
+        justify-content: center;
 
-      .dx-button-text {
-        text-transform: none;
-        font-size: 16px;
-        color: $base-text-color;
-        font-weight: 400;
-        letter-spacing: normal;
-        margin: 0 9px;
+        .dx-button-content {
+          padding: 0;
+        }
+
+        .dx-button-text {
+          text-transform: none;
+          font-size: 16px;
+          color: $base-text-color;
+          font-weight: 400;
+          letter-spacing: normal;
+          margin: 0 9px;
+        }
       }
     }
   }
