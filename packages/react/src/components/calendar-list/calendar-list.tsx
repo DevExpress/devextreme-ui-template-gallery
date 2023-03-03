@@ -40,6 +40,7 @@ export const CalendarList = () => {
   }, [selectedItems]);
   return (
     <List
+      className='calendar-list'
       dataSource={listDS}
       groupRender={listTitleRender}
       itemRender={listItemsRender}
