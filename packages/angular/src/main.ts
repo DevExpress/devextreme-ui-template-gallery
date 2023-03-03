@@ -4,7 +4,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { switchTheme } from "./app/components/theme-switcher/theme-switcher.component";
 
 if (environment.production) {
   enableProdMode();
@@ -14,6 +13,5 @@ themes.initialized(() => {
   platformBrowserDynamic().bootstrapModule(AppModule)
     .catch((err) => console.error(err));
 
-  switchTheme();
 });
 

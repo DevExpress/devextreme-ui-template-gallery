@@ -9,19 +9,21 @@ import { currentTheme, refreshTheme } from 'devextreme/viz/themes';
 type Theme = 'dark'| 'light';
 
 const storageKey = 'themeViewer';
+const themeMarker = 'theme-';
 
 function getCurrentTheme(): Theme {
   return window.localStorage[storageKey] || 'light';
 }
 
-export function switchTheme(themeName?: Theme) {
-  const themeMarker = 'theme-';
+function getThemeStyleSheets() {
+  return   [...(document.styleSheets as unknown as any[])]
+    .filter((styleSheet) => styleSheet?.href?.includes(themeMarker));
+}
 
+function switchTheme(themeName?: Theme) {
   themeName = themeName || getCurrentTheme();
 
-  [...(document.styleSheets as unknown as any[])]
-    .filter((styleSheet) => styleSheet?.href?.includes(themeMarker))
-    .forEach((styleSheet) => {
+  getThemeStyleSheets().forEach((styleSheet) => {
       styleSheet.disabled = !styleSheet?.href?.includes(`${themeMarker}${themeName}`);
     });
 
@@ -30,6 +32,8 @@ export function switchTheme(themeName?: Theme) {
   currentTheme(`material.${themeName}`);
   refreshTheme();
 }
+
+switchTheme();
 
 @Component({
   selector: 'theme-switcher',
