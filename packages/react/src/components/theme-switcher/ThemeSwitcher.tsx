@@ -28,7 +28,7 @@ function getThemeStyleSheets() {
     const themeCssSelectorRegExp = new RegExp(themeCssSelector);
 
     const themeStyleSheets = [...document.styleSheets as unknown as CSSStyleSheet[]]
-      .filter(({ rules })=> !![...rules as unknown as any[]]
+      .filter(({ rules })=> !![...rules as unknown as CSSStyleRule[]]
         .find((rule) => rule.selectorText?.startsWith(themeCssSelector)));
 
     themeStyleSheets.forEach((styleSheet) => {
