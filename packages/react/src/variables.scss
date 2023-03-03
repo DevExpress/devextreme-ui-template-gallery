@@ -5,6 +5,7 @@
 @use "../node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
 @use "../node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
 @use "../node_modules/devextreme/scss/widgets/material/list/sizes" as *;
+@use "../node_modules/devextreme/scss/widgets/material/button/sizes" as *;
 
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
 @forward "../node_modules/devextreme/scss/widgets/material/textEditor/colors";
@@ -28,7 +29,12 @@ $list-padding-left: $material-list-item-horizontal-padding;
 $footer-height: 70px;
 $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 
-$scheduler-toolbar-height: 60px;
+$theme-padding: $material-button-horizontal-padding;
+// WA for no button-height in generic theme, remove when design-system is released
+$button-height: calc(26px + ($theme-padding - 10px)/3);
+
+
+$scheduler-toolbar-height: calc($button-height + 2 * $theme-padding);
 
 @mixin separator() {
   .separator {
