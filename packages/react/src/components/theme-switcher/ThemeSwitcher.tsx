@@ -2,54 +2,56 @@ import React, { useEffect, useState } from 'react';
 import Button from 'devextreme-react/button';
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 
-type Theme = 'dark'| 'light';
-
-const stylesSheetsByThemes = {};
+const themeNames = ['dark', 'light'] as const;
+const themeStylesSheets = {};
 const storageKey = 'themeViewer';
+
+type Theme = typeof themeNames[number];
 
 function getCurrentTheme(): Theme {
   return window.localStorage[storageKey] || 'light';
 }
 
-async function getThemeStyleSheets(themeName: Theme) {
+function getThemeStyleSheets() {
   const themePrefix = 'app-theme-';
 
-  if (stylesSheetsByThemes[themeName]) {
-    return stylesSheetsByThemes[themeName];
+  if (Object.keys(themeStylesSheets).length == themeNames.length) {
+    return themeNames.flatMap((theme) => themeStylesSheets[theme]);
   }
-  const themeCssSelector = `:root, .${themePrefix + themeName}`;
-  const themeCssSelectorRegExp = new RegExp(themeCssSelector);
 
-  const themeStyleSheets = [...document.styleSheets as unknown as CSSStyleSheet[]]
-    .filter(({ rules })=> !![...rules as unknown as any[]]
-      .find((rule) => rule.selectorText?.startsWith(themeCssSelector)));
+  themeNames.forEach((themeName) => {
+    if (themeStylesSheets[themeName]) {
+      return;
+    }
 
-  themeStyleSheets.forEach((styleSheet) => {
-    [...styleSheet.cssRules as unknown as CSSStyleRule[]].forEach((rule) => {
+    const themeCssSelector = `:root, .${themePrefix + themeName}`;
+    const themeCssSelectorRegExp = new RegExp(themeCssSelector);
 
-      if (rule.selectorText?.startsWith(themeCssSelector)) {
-        rule.selectorText = rule.selectorText.replace(themeCssSelectorRegExp, '');
-      }
+    const themeStyleSheets = [...document.styleSheets as unknown as CSSStyleSheet[]]
+      .filter(({ rules })=> !![...rules as unknown as any[]]
+        .find((rule) => rule.selectorText?.startsWith(themeCssSelector)));
+
+    themeStyleSheets.forEach((styleSheet) => {
+      [...styleSheet.cssRules as unknown as CSSStyleRule[]].forEach((rule) => {
+
+        if (rule.selectorText?.startsWith(themeCssSelector)) {
+          rule.selectorText = rule.selectorText.replace(themeCssSelectorRegExp, '');
+        }
+      });
     });
+
+    themeStylesSheets[themeName] = themeStyleSheets;
   });
 
-  stylesSheetsByThemes[themeName] = themeStyleSheets;
-
-  return themeStyleSheets;
+  return themeNames.flatMap((theme) => themeStylesSheets[theme]);
 }
 
-export async function switchTheme(themeName?: Theme) {
-  const previousTheme = themeName == 'dark' ? 'light' : 'dark';
+export async function switchTheme(newTheme?: Theme) {
+  const themeName = newTheme || getCurrentTheme();
 
-  themeName = themeName || getCurrentTheme();
+  const stylesSheets = getThemeStyleSheets();
 
-  const stylesSheets = await getThemeStyleSheets(themeName);
-
-  stylesSheets.forEach((stylesSheet) => stylesSheet.disabled = false);
-
-  const previousStylesSheets = await getThemeStyleSheets(previousTheme);
-
-  previousStylesSheets.forEach((stylesSheet) => stylesSheet.disabled = true);
+  stylesSheets.forEach((stylesSheet) => stylesSheet.disabled = themeStylesSheets[themeName].includes(stylesSheet));
 
   window.localStorage[storageKey] = themeName;
 
