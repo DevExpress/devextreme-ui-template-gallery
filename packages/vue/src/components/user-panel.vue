@@ -107,6 +107,7 @@ $user-image-height: $toolbar-height;
       object-fit: cover;
       object-position: top;
       background: rgb(255, 255, 255);
+      background-clip: padding-box;
     }
 
     .dx-buttongroup {
