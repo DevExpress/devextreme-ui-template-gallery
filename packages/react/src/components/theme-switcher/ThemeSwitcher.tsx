@@ -51,11 +51,11 @@ export async function switchTheme(newTheme?: Theme) {
 
   const stylesSheets = getThemeStyleSheets();
 
-  stylesSheets.forEach((stylesSheet) => stylesSheet.disabled = themeStylesSheets[themeName].includes(stylesSheet));
+  stylesSheets.forEach((stylesSheet) => stylesSheet.disabled = !themeStylesSheets[themeName].includes(stylesSheet));
 
   window.localStorage[storageKey] = themeName;
 
-  currentVizTheme(`material.${themeName}`);
+  currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${themeName}.compact`));
   refreshTheme();
 }
 
