@@ -1,2 +1,2 @@
-import './styles/theme-light.scss';
+import './styles/theme-dx-light.scss';
 import './styles/variables-light.scss';
