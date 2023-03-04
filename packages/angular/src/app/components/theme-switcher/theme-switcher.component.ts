@@ -4,7 +4,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from "devextreme-angular";
 
-import { currentTheme, refreshTheme } from 'devextreme/viz/themes';
+import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 
 type Theme = 'dark'| 'light';
 
@@ -29,7 +29,7 @@ function switchTheme(themeName?: Theme) {
 
   window.localStorage[storageKey] = themeName;
 
-  currentTheme(`material.${themeName}`);
+  currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${themeName}.compact`));
   refreshTheme();
 }
 
