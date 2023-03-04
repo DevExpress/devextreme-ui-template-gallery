@@ -5,49 +5,44 @@ const packages = require('./packages');
 
 const filesForChange = {
   angular: 'angular.json',
-  vue: 'src/main.ts',
-  react: 'src/App.tsx',
+  vue: ['src/theme/styles/theme-dx-dark.scss', 'src/theme/styles/theme-dx-light.scss'],
+  react: ['src/theme/styles/theme-dx-dark.scss', 'src/theme/styles/theme-dx-light.scss'],
 };
 
 const variablesPath = {
   angular: 'src/app/theme/styles/variables-mixin.scss',
-  vue: 'src/variables.scss',
-  react: 'src/variables.scss',
+  vue: 'src/theme/styles/variables-mixin.scss',
+  react: 'src/theme/styles/variables-mixin.scss',
 };
 
 const changeThemesMeta = (theme) => {
   const baseTheme = theme.split('.')[0];
   const bundleName = theme.replace('generic.', '');
   const themeParts = bundleName.replace('material.', '').split('.');
-  const color = themeParts[0];
   const mode = themeParts[1];
 
   packages.forEach((packageName) => {
     const appPath = join(cwd(), 'packages', packageName);
     const appVariablesPath = join(appPath, variablesPath[packageName]);
-    const fileForChange = join(appPath, filesForChange[packageName]);
 
-    // main import
-    const contentForChange = readFileSync(fileForChange, 'utf8');
-    if (baseTheme === 'generic') {
-      if (packageName === 'angular') {
-        writeFileSync(fileForChange, contentForChange.replace(/material\.blue\./g, ''));
-      } else {
-        writeFileSync(fileForChange, contentForChange.replace(/material\.blue\..+?(?=\.scss)/g, bundleName));
-      }
-    }
+    [].concat(filesForChange[packageName]).forEach(
+      (file) => {
+        const fileForChange = join(appPath, file);
+
+        // main import
+        const contentForChange = readFileSync(fileForChange, 'utf8');
+        if (baseTheme === 'generic') {
+          writeFileSync(fileForChange, contentForChange.replace(/material\.blue\./g, ''));
+        }
+      },
+    );
 
     // variables.scss
     const variablesContentForChange = readFileSync(appVariablesPath, 'utf8');
     let newVariablesContent = variablesContentForChange;
     if (baseTheme === 'generic') {
-      if (packageName === 'angular') {
-        newVariablesContent = variablesContentForChange.replace('"blue"', '$theme');
-        newVariablesContent = newVariablesContent.replace(', $mode: $theme', '');
-      } else {
-        newVariablesContent = variablesContentForChange.replace('blue', color);
-        newVariablesContent = newVariablesContent.replace(', $mode: "light"', '');
-      }
+      newVariablesContent = variablesContentForChange.replace('"blue"', '$theme');
+      newVariablesContent = newVariablesContent.replace(', $mode: $theme', '');
       newVariablesContent = newVariablesContent.replace(/material/g, baseTheme);
     } else {
       newVariablesContent = newVariablesContent.replace('light', mode);
