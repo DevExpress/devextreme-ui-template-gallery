@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { DxButton } from 'devextreme-vue/button';
 import { ref } from 'vue';
-import { currentTheme, refreshTheme } from 'devextreme/viz/themes';
+import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 
 const storageKey = 'themeViewer';
 const themeMarker = 'theme-';
@@ -30,7 +30,7 @@ function switchTheme(themeName?: string) {
   });
 
   window.localStorage[storageKey] = themeName;
-  currentTheme(`material.${themeName}`);
+  currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${themeName}.compact`));
   refreshTheme();
 }
 
