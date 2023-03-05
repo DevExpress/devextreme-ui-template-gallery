@@ -336,6 +336,10 @@ const navigateToDetails = () => {
 
   :deep(.photo-row) .dx-item .dx-item:has(.photo-box)  {
     max-width: 144px;
+
+    .photo-box {
+      padding-bottom: 0;
+    }
   }
 
   .embedded.dx-viewport & {
