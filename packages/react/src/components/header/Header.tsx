@@ -23,10 +23,8 @@ export const Header = ({ menuToggleEnabled, title, toggleMenu, className }: Head
         <Item location='after' locateInMenu='auto'>
           <TextBox placeholder='Search' width={180} mode='search' stylingMode='outlined' />
         </Item>
-        <Item location='after'>
-          <div className='messages'>
-            <ThemeSwitcher />
-          </div>
+        <Item location='after' locateInMenu='auto'>
+          <ThemeSwitcher />
         </Item>
         <Item location='after'>
           <div className='messages'>
