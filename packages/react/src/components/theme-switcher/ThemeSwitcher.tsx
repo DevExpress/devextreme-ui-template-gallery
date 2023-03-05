@@ -24,16 +24,15 @@ function getThemeStyleSheets() {
       return;
     }
 
-    const themeCssSelector = `:root, .${themePrefix + themeName}`;
-    const themeCssSelectorRegExp = new RegExp(`(${themeCssSelector})|(:root\\s+)`);
+    const themeCssSelector = `.${themePrefix + themeName}`;
+    const themeCssSelectorRegExp = new RegExp(`(${themeCssSelector})|(:root\\s+)`, 'g');
 
     const themeStyleSheets = [...document.styleSheets as unknown as CSSStyleSheet[]]
       .filter(({ rules })=> !![...rules as unknown as CSSStyleRule[]]
-        .find((rule) => rule.selectorText?.startsWith(themeCssSelector)));
+        .find((rule) => rule.selectorText?.includes(themeCssSelector)));
 
     themeStyleSheets.forEach((styleSheet) => {
       [...styleSheet.cssRules as unknown as CSSStyleRule[]].forEach((rule) => {
-
         rule.selectorText = rule.selectorText?.replace(themeCssSelectorRegExp, '');
       });
     });
