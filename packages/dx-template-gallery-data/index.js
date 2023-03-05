@@ -58,3 +58,30 @@ export const getSalesByState = async (startDate, endDate) => {
 
   return calcSalesByState(data);
 };
+
+function getSecondsToday() {
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  return now - today;
+}
+
+const DAY_TIME_IN_MS = 24 * 60 * 60 * 1000;
+
+export const patchTasksForScheduler = (tasks) => {
+  const today = new Date();
+  const mondayMidnight = today - getSecondsToday();
+  const uniqueTasks = tasks.slice(0, 11);
+  return uniqueTasks.map((task, index) => {
+    const weekDay = (index % 4) + 1;
+    // const weekDay = Math.random() * 5;
+
+    const weekIndex = Math.ceil(index / 4) - 1;
+    const taskDate = mondayMidnight + weekDay * DAY_TIME_IN_MS + weekIndex * 7 * DAY_TIME_IN_MS;
+    const taskStart = taskDate + (10 + weekDay) * 3600 * 1000;
+    return {
+      ...task,
+      startDate: new Date(taskStart),
+      endDate: new Date(taskStart + 3 * 3600 * 1000),
+    };
+  });
+};
