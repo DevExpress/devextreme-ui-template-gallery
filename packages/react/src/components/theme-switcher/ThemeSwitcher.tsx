@@ -25,7 +25,7 @@ function getThemeStyleSheets() {
     }
 
     const themeCssSelector = `:root, .${themePrefix + themeName}`;
-    const themeCssSelectorRegExp = new RegExp(themeCssSelector);
+    const themeCssSelectorRegExp = new RegExp(`(${themeCssSelector})|(:root\\s+)`);
 
     const themeStyleSheets = [...document.styleSheets as unknown as CSSStyleSheet[]]
       .filter(({ rules })=> !![...rules as unknown as CSSStyleRule[]]
@@ -34,9 +34,7 @@ function getThemeStyleSheets() {
     themeStyleSheets.forEach((styleSheet) => {
       [...styleSheet.cssRules as unknown as CSSStyleRule[]].forEach((rule) => {
 
-        if (rule.selectorText?.startsWith(themeCssSelector)) {
-          rule.selectorText = rule.selectorText.replace(themeCssSelectorRegExp, '');
-        }
+        rule.selectorText = rule.selectorText?.replace(themeCssSelectorRegExp, '');
       });
     });
 
