@@ -33,7 +33,8 @@
           width: 180
         }"
       />
-      <dx-item location="after">
+      <dx-item location="after"
+               locate-in-menu="auto">
         <theme-switcher/>
       </dx-item>
       <dx-item location="after">
