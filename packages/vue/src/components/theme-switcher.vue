@@ -1,8 +1,9 @@
 <template>
-  <dx-button class="theme-button"
-             :icon="`icons/${theme === 'dark' ? 'sun' : 'moon'}.svg`"
-             @click="onClickButton">
-  </dx-button>
+  <dx-button
+    class="theme-button"
+    :icon="`icons/${theme === 'dark' ? 'sun' : 'moon'}.svg`"
+    @click="onClickButton"
+  />
 </template>
 
 <script setup lang="ts">
@@ -25,8 +26,17 @@ function getThemeStyleSheets() {
 function switchTheme(themeName?: string) {
   themeName = themeName || getCurrentTheme();
 
+  const enabledStyleSheet: CSSStyleSheet[] = [];
   getThemeStyleSheets().forEach((styleSheet) => {
-    styleSheet.disabled = !styleSheet?.href?.includes(`${themeMarker}${themeName}`);
+    if (styleSheet?.href?.includes(`${themeMarker}${themeName}`)) {
+      enabledStyleSheet.push(styleSheet);
+    } else {
+      styleSheet.disabled = true;
+    }
+  });
+
+  enabledStyleSheet.forEach((styleSheet) => {
+    styleSheet.disabled = false;
   });
 
   window.localStorage[storageKey] = themeName;
