@@ -34,7 +34,7 @@
         }"
       />
       <dx-item location="after"
-               locate-in-menu="auto">
+               locate-in-menu="never">
         <theme-switcher/>
       </dx-item>
       <dx-item location="after">

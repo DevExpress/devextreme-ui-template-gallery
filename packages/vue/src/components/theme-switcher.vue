@@ -9,50 +9,13 @@
 <script setup lang="ts">
 import { DxButton } from 'devextreme-vue/button';
 import { ref } from 'vue';
-import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
+import { getCurrentTheme, setAppTheme } from '@/theme/theme';
+import type { Theme } from '@/theme/theme';
 
-const storageKey = 'themeViewer';
-const themeMarker = 'theme-';
-
-function getCurrentTheme(): 'dark' | 'light' {
-  return window.localStorage[storageKey] || 'light';
-}
-
-function getThemeStyleSheets() {
-  return [...document.styleSheets]
-    .filter((styleSheet) => styleSheet?.href?.includes(themeMarker));
-}
-
-function switchTheme(themeName?: string) {
-  themeName = themeName || getCurrentTheme();
-
-  const enabledStyleSheet: CSSStyleSheet[] = [];
-  getThemeStyleSheets().forEach((styleSheet) => {
-    if (styleSheet?.href?.includes(`${themeMarker}${themeName}`)) {
-      enabledStyleSheet.push(styleSheet);
-    } else {
-      styleSheet.disabled = true;
-    }
-  });
-
-  enabledStyleSheet.forEach((styleSheet) => {
-    styleSheet.disabled = false;
-  });
-
-  window.localStorage[storageKey] = themeName;
-  currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${themeName}.compact`));
-  refreshTheme();
-}
-
-switchTheme();
-
-const theme = ref(getCurrentTheme());
+const theme = ref<Theme>(getCurrentTheme());
 
 function onClickButton() {
   theme.value = theme.value === 'dark' ? 'light' : 'dark';
-  switchTheme(theme.value);
+  setAppTheme(theme.value);
 }
 </script>
-
-<style scoped lang="scss">
-</style>
