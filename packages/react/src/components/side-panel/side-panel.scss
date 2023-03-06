@@ -1,0 +1,40 @@
+@use "../../variables.scss" as *;
+@use "sass:math";
+
+#contact-panel {
+  // --contact-side-panel-width: 350px;
+  --contact-side-panel-width: calc(292px + 16px);
+
+}
+
+.screen-x-small #contact-panel {
+  --contact-side-panel-width: 100vw;
+}
+
+.side-panel {
+  &.active{
+    position: absolute;
+    padding-top: 16px;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    background: $base-bg;
+    transition: left 400ms;
+    &.side-right{
+        right: calc(-1 * var(--contact-side-panel-width));
+    }
+    &.side-left{
+      left: calc(-1 * var(--contact-side-panel-width));
+    }
+    &.open {
+      left: calc( 32px + 28px);
+      box-shadow: 0 0 16px $base-border-color;
+    }
+  }
+  
+}
+.open-button {
+  margin-top: 16px;
+  z-index: 10;
+}
+
