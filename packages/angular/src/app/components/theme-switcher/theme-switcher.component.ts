@@ -3,37 +3,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from "devextreme-angular";
-
-import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
-
-type Theme = 'dark'| 'light';
-
-const storageKey = 'themeViewer';
-const themeMarker = 'theme-';
-
-function getCurrentTheme(): Theme {
-  return window.localStorage[storageKey] || 'light';
-}
-
-function getThemeStyleSheets() {
-  return   [...(document.styleSheets as unknown as any[])]
-    .filter((styleSheet) => styleSheet?.href?.includes(themeMarker));
-}
-
-function switchTheme(themeName?: Theme) {
-  themeName = themeName || getCurrentTheme();
-
-  getThemeStyleSheets().forEach((styleSheet) => {
-      styleSheet.disabled = !styleSheet?.href?.includes(`${themeMarker}${themeName}`);
-    });
-
-  window.localStorage[storageKey] = themeName;
-
-  currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${themeName}.compact`));
-  refreshTheme();
-}
-
-switchTheme();
+import { getCurrentTheme, setAppTheme } from 'src/app/theme/theme';
+import type { Theme } from 'src/app/theme/theme';
 
 @Component({
   selector: 'theme-switcher',
@@ -46,12 +17,12 @@ switchTheme();
   styleUrls: [],
 })
 export class ThemeSwitcherComponent {
-  theme = getCurrentTheme();
+  theme: Theme = getCurrentTheme();
 
   onClickButton() {
     this.theme = this.theme === 'dark' ? 'light' : 'dark';
 
-    switchTheme(this.theme)
+    setAppTheme(this.theme)
   }
 }
 
