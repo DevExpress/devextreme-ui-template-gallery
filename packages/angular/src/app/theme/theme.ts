@@ -10,7 +10,7 @@ export function getCurrentTheme(): Theme {
 }
 
 function getThemeStyleSheets() {
-  return   [...(document.styleSheets as unknown as any[])]
+  return   [...(document.styleSheets as unknown as CSSStyleSheet[])]
     .filter((styleSheet) => styleSheet?.href?.includes(themeMarker));
 }
 
