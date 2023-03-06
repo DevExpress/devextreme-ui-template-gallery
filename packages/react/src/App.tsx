@@ -13,6 +13,7 @@ import { UnauthenticatedContent } from './UnauthenticatedContent';
 import 'devexpress-gantt/dist/dx-gantt.css';
 import './styles.scss';
 import './theme/theme';
+import { setAppTheme } from './theme/theme';
 
 function RootApp() {
   const { user, loading } = useAuth();
@@ -21,6 +22,8 @@ function RootApp() {
     'reset-password',
     'create-account',
   ].includes(useLocation().pathname.substring(1));
+
+  setAppTheme();
 
   if (loading) {
     return <LoadPanel visible />;
