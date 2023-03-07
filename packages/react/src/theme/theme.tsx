@@ -3,6 +3,7 @@ import './styles/variables-dark.scss';
 import './styles/variables-light.scss';
 import './styles/theme-dx-light.scss';
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 const themeNames = ['dark', 'light'] as const;
 const themeStylesSheets = {};
@@ -10,7 +11,7 @@ const storageKey = 'themeViewer';
 
 export type Theme = typeof themeNames[number];
 
-export function getCurrentTheme(): Theme {
+function getCurrentTheme(): Theme {
   return window.localStorage[storageKey] || 'light';
 }
 
@@ -39,9 +40,8 @@ function getThemeStyleSheets(): CSSStyleSheet[] {
   return Object.values<CSSStyleSheet>(themeStylesSheets).flat();
 }
 
-export function setAppTheme(newTheme?: Theme) {
+function setAppTheme(newTheme?: Theme) {
   const themeName = newTheme || getCurrentTheme();
-
   const stylesSheets = getThemeStyleSheets();
 
   stylesSheets.forEach((stylesSheet) => stylesSheet.disabled = !themeStylesSheets[themeName].includes(stylesSheet));
@@ -51,3 +51,16 @@ export function setAppTheme(newTheme?: Theme) {
   currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${themeName}.compact`));
   refreshTheme();
 }
+
+export function useThemeContext() {
+  const [theme, setTheme] = useState(getCurrentTheme());
+  const switchTheme = useCallback(() => {
+    setTheme(getCurrentTheme() === 'dark' ? 'light' : 'dark');
+  }, []);
+
+  useEffect(() => setAppTheme(theme), [theme]);
+
+  return useMemo(()=> ({ theme, switchTheme }), [theme]);
+}
+
+export const ThemeContext = React.createContext<{theme: Theme, switchTheme: ()=>void} | null>(null);

@@ -1,21 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 import Button from 'devextreme-react/button';
-import { getCurrentTheme, setAppTheme } from '../../theme/theme';
-import type { Theme } from '../../theme/theme';
+import { ThemeContext } from '../../theme/theme';
 
 export const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState<Theme>(getCurrentTheme());
+  const themeContext = useContext(ThemeContext);
 
-  const onClickButton = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
-  useEffect(() => {
-    setAppTheme(theme);
-  }, [theme]);
+  const onButtonClick = useCallback(() => {
+    themeContext?.switchTheme();
+  }, []);
 
   return <div>
-    <Button icon={`icons/${theme !== 'dark' ? 'moon' : 'sun'}.svg`}
-      onClick={onClickButton} />
+    <Button icon={`icons/${themeContext?.theme !== 'dark' ? 'moon' : 'sun'}.svg`}
+      onClick={onButtonClick} />
   </div>;
 };

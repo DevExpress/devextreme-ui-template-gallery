@@ -13,7 +13,7 @@ import { UnauthenticatedContent } from './UnauthenticatedContent';
 import 'devexpress-gantt/dist/dx-gantt.css';
 import './styles.scss';
 import './theme/theme';
-import { setAppTheme } from './theme/theme';
+import { useThemeContext, ThemeContext } from './theme/theme';
 
 function RootApp() {
   const { user, loading } = useAuth();
@@ -22,8 +22,6 @@ function RootApp() {
     'reset-password',
     'create-account',
   ].includes(useLocation().pathname.substring(1));
-
-  setAppTheme();
 
   if (loading) {
     return <LoadPanel visible />;
@@ -38,16 +36,19 @@ function RootApp() {
 
 export const App = () => {
   const screenSizeClass = useScreenSizeClass();
+  const themeContext = useThemeContext();
 
   return (
     <Router>
-      <AuthProvider>
-        <NavigationProvider>
-          <div className={`app ${screenSizeClass}`}>
-            <RootApp />
-          </div>
-        </NavigationProvider>
-      </AuthProvider>
+      <ThemeContext.Provider value={themeContext}>
+        <AuthProvider>
+          <NavigationProvider>
+            <div className={`app ${screenSizeClass}`}>
+              <RootApp />
+            </div>
+          </NavigationProvider>
+        </AuthProvider>
+      </ThemeContext.Provider>
     </Router>
   );
 };

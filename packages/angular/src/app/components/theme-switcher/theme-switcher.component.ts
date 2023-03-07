@@ -11,7 +11,7 @@ import type { Theme } from 'src/app/theme/theme';
   template: `
     <dx-button class="theme-button"
                [icon]="'assets/icons/' + (theme !== 'dark' ? 'moon' : 'sun') +'.svg'"
-               (click)="onClickButton()">
+               (click)="onButtonClick()">
     </dx-button>
 `,
   styleUrls: [],
@@ -19,7 +19,7 @@ import type { Theme } from 'src/app/theme/theme';
 export class ThemeSwitcherComponent {
   theme: Theme = getCurrentTheme();
 
-  onClickButton() {
+  onButtonClick () {
     this.theme = this.theme === 'dark' ? 'light' : 'dark';
 
     setAppTheme(this.theme)
