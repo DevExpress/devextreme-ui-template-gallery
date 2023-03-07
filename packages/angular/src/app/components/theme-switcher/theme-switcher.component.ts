@@ -3,26 +3,23 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from "devextreme-angular";
-import { getCurrentTheme, setAppTheme } from 'src/app/theme/theme';
-import type { Theme } from 'src/app/theme/theme';
+import { ThemeService } from 'src/app/theme/theme.service';
 
 @Component({
   selector: 'theme-switcher',
   template: `
     <dx-button class="theme-button"
-               [icon]="'assets/icons/' + (theme !== 'dark' ? 'moon' : 'sun') +'.svg'"
+               [icon]="'assets/icons/' + (themeService.currentTheme !== 'dark' ? 'moon' : 'sun') +'.svg'"
                (click)="onButtonClick()">
     </dx-button>
 `,
   styleUrls: [],
 })
 export class ThemeSwitcherComponent {
-  theme: Theme = getCurrentTheme();
+  constructor(public themeService: ThemeService) {}
 
   onButtonClick () {
-    this.theme = this.theme === 'dark' ? 'light' : 'dark';
-
-    setAppTheme(this.theme)
+    this.themeService.switchTheme();
   }
 }
 

@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnDestroy, } from '@angular/core';
 import { AuthService, ScreenService, AppInfoService } from './services';
-import { setAppTheme } from './theme/theme';
+import { ThemeService } from './theme/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +12,11 @@ export class AppComponent implements OnDestroy {
     return Object.keys(this.screen.sizes).filter((cl) => this.screen.sizes[cl]).join(' ');
   }
 
-  constructor(private authService: AuthService, private screen: ScreenService, public appInfo: AppInfoService) {
-    setAppTheme();
+  constructor(private authService: AuthService,
+              private themeService: ThemeService,
+              private screen: ScreenService,
+              public appInfo: AppInfoService) {
+    themeService.setAppTheme();
   }
 
   isAuthenticated() {
