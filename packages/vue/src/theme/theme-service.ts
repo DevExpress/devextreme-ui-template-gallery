@@ -22,18 +22,8 @@ class ThemeService {
   }
 
   setAppTheme(themeName = this.currentTheme.value) {
-    const enabledStyleSheet: CSSStyleSheet[] = [];
-
     this.getThemeStyleSheets().forEach((styleSheet) => {
-      if (styleSheet?.href?.includes(`${this.themeMarker}${themeName}`)) {
-        enabledStyleSheet.push(styleSheet);
-      } else {
-        styleSheet.disabled = true;
-      }
-    });
-
-    enabledStyleSheet.forEach((styleSheet) => {
-      styleSheet.disabled = false;
+      styleSheet.disabled = !styleSheet?.href?.includes(`${this.themeMarker}${themeName}`);
     });
 
     this.currentTheme.value = themeName;
