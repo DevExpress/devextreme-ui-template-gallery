@@ -55,7 +55,7 @@ function setAppTheme(newTheme?: Theme) {
 export function useThemeContext() {
   const [theme, setTheme] = useState(getCurrentTheme());
   const switchTheme = useCallback(() => {
-    setTheme(getCurrentTheme() === 'dark' ? 'light' : 'dark');
+    setTheme((currentTheme: Theme) => currentTheme === 'dark' ? 'light' : 'dark');
   }, []);
 
   useEffect(() => setAppTheme(theme), [theme]);
@@ -63,4 +63,4 @@ export function useThemeContext() {
   return useMemo(()=> ({ theme, switchTheme }), [theme]);
 }
 
-export const ThemeContext = React.createContext<{theme: Theme, switchTheme: ()=>void} | null>(null);
+export const ThemeContext = React.createContext<ReturnType<typeof useThemeContext> | null>(null);
