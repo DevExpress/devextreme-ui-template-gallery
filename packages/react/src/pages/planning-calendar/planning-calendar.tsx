@@ -14,6 +14,10 @@ import './planning-calendar.scss';
 import { ViewType } from 'devextreme/ui/scheduler';
 
 const views = ['week', 'month'];
+interface ListDSItem {
+  key: 'My Calendars' | 'Other Calendars',
+  items: Array<string>
+}
 
 export const PlanningCalendar = () => {
   const [selectedDay] = useState(0);
@@ -22,6 +26,16 @@ export const PlanningCalendar = () => {
   const [currentView, setCurrentView] = useState<ViewType>('week');
   const [leftPanelOpen, setLeftPanelOpen] = useState(true);
   const [rightPanelOpen, setRightPanelOpen] = useState(false);
+  const [listDS, setListDS] = useState<ListDSItem[]>([
+    {
+      key: 'My Calendars',
+      items: ['Brett Johnson', 'Tasks', 'Reminder', 'Contacts']
+    },
+    {
+      key: 'Other Calendars',
+      items: ['Holidays']
+    }
+  ]);
 
   useEffect(() => {
     getTasks().then(tasksList => {
@@ -40,6 +54,12 @@ export const PlanningCalendar = () => {
 
   const onCurrentViewChange = useCallback((e) => { setCurrentView(e); }, []);
 
+  const onAppointmentClick = useCallback((e) => {
+    if (currentView === 'month') {
+      toggleRightPanelOpen();
+    }
+  }, [currentView]);
+
   return <div className='view-wrapper-calendar'>
     <div className='panels'>
       <SidePanel
@@ -55,7 +75,7 @@ export const PlanningCalendar = () => {
           <div className='calendar'>
             <Calendar value={date} onValueChange={onSetDate} />
           </div>
-          <CalendarList />
+          <CalendarList listDS={listDS} />
         </div>
       </SidePanel>
       <div className='right'>
@@ -66,6 +86,7 @@ export const PlanningCalendar = () => {
           currentDate={date}
           currentView={currentView}
           onCurrentViewChange={onCurrentViewChange}
+          onAppointmentClick={onAppointmentClick}
         >
           <View type='day' />
           <View type='week' />

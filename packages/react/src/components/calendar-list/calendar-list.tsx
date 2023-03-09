@@ -5,17 +5,6 @@ import Button from 'devextreme-react/button';
 import './calendar-list.scss';
 import { CheckBox } from 'devextreme-react';
 
-const listDS = [
-  {
-    key: 'My calendars',
-    items: ['Brett Johnson', 'Tasks', 'Reminder', 'Contacts']
-  },
-  {
-    key: 'Other calendars',
-    items: ['Holidays']
-  }
-];
-
 export const listTitleRender = (item) => {
   return <div className='list-header'>
     {item.key}
@@ -23,7 +12,7 @@ export const listTitleRender = (item) => {
   </div>;
 };
 
-export const CalendarList = () => {
+export const CalendarList = ({ listDS }) => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const onSelectedItemKeysChange = useCallback((selectedItems) => {
