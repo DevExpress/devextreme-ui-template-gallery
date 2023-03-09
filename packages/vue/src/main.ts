@@ -1,10 +1,10 @@
 import { createApp } from 'vue';
 import { AppInfo, appInfoInjectKey } from '@/types/app-info';
-import 'devexpress-gantt/dist/dx-gantt.css';
 import { themeService } from '@/theme/theme-service';
 import App from './App.vue';
 import { router } from './router';
 
+import 'devexpress-gantt/dist/dx-gantt.css';
 import './styles.scss';
 
 themeService.setAppTheme();

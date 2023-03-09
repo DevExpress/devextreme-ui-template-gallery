@@ -33,9 +33,11 @@
           width: 180
         }"
       />
-      <dx-item location="after"
-               locate-in-menu="never">
-        <theme-switcher/>
+      <dx-item
+        location="after"
+        locate-in-menu="never"
+      >
+        <theme-switcher />
       </dx-item>
       <dx-item location="after">
         <div class="messages">
@@ -84,8 +86,8 @@ import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
 
-import ThemeSwitcher from '@/components/theme-switcher.vue';
 import { authInfo as auth, AuthUser } from '../auth';
+import ThemeSwitcher from './theme-switcher.vue';
 import UserPanel from './user-panel.vue';
 
 const router = useRouter();
