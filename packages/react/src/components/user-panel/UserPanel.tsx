@@ -22,12 +22,22 @@ export const UserPanel = ({ menuMode }: UserPanelProps) => {
     ],
     [signOut]
   );
+
+  const dropDownButtonAttributes = {
+    class: 'user-button'
+  };
+
+  const buttonDropDownOptions = {
+    width: '150'
+  };
+
   return (
     <div className='user-panel'>
       {menuMode === 'context' && (
-        <DropDownButton items={menuItems} stylingMode='text'
-          width={150} icon={user?.avatarUrl}
-          text={user?.name} showArrowIcon={false} />
+        <DropDownButton items={menuItems} stylingMode='text' focusStateEnabled={false}
+          icon={user?.avatarUrl} showArrowIcon={false}
+          elementAttr={dropDownButtonAttributes}
+          dropDownOptions={buttonDropDownOptions} />
       )}
       {menuMode === 'list' && (
         <div>

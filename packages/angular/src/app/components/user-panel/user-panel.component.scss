@@ -31,6 +31,8 @@
 }
 
 .user-panel ::ng-deep {
+  display: flex;
+
   .dx-list-item .dx-icon {
     vertical-align: middle;
     color: $base-text-color;
@@ -42,40 +44,41 @@
     margin-left: 16px;
   }
 
-  .dx-dropdownbutton:not(.dx-dropdownbutton-has-arrow) {
+  .user-button {
     margin-left: 5px;
-    height: 100%;
 
     img.dx-icon {
       border-radius: 50%;
-      margin: 0 4px;
-      height: 26px;
-      width: 26px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      margin: 0;
+      width: auto;
+      aspect-ratio: 1 / 1;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.1);
       object-fit: cover;
       object-position: top;
       background: rgb(255, 255, 255);
       background-clip: padding-box;
+
+      ::ng-deep .dx-theme-generic & {
+        height: $drop-down-gnrc-button-height;
+      }
+  
+      ::ng-deep .dx-theme-material & {
+        height: 100%;
+      }
     }
 
-    .dx-buttongroup {
-      vertical-align: middle;
+    &.dx-state-hover img.dx-icon {
+      border-color: $accent-color;
+    }
 
-      .dx-button-has-icon.dx-button-has-text {
-        justify-content: center;
+    .dx-buttongroup .dx-button.dx-button-has-icon:not(.dx-button-has-text) {
+      .dx-button-content {
+        padding: 0;
+      }
 
-        .dx-button-content {
-          padding: 0;
-        }
-
-        .dx-button-text {
-          text-transform: none;
-          font-size: 16px;
-          color: $base-text-color;
-          font-weight: 400;
-          letter-spacing: normal;
-          margin: 0 9px;
-        }
+      &.dx-state-hover {
+        background-color: transparent;
       }
     }
   }

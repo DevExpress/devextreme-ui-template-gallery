@@ -4,10 +4,15 @@
       v-if="menuMode === 'context'"
       :items="menuItems"
       styling-mode="text"
-      width="150"
       :icon="user?.avatarUrl"
-      :text="`${user?.name} ${user?.lastName}`"
       :show-arrow-icon="false"
+      :focus-state-enabled="false"
+      :element-attr="{
+        class: 'user-button'
+      }"
+      :drop-down-options="{
+        width: '150'
+      }"
     />
 
     <div v-if="menuMode === 'list'">
@@ -83,6 +88,7 @@ $user-image-height: $toolbar-height;
 }
 
 .user-panel  {
+  display: flex;
   :deep(.dx-list-item) .dx-icon {
     vertical-align: middle;
     color: $base-text-color;
@@ -94,40 +100,40 @@ $user-image-height: $toolbar-height;
     margin-left: 16px;
   }
 
-  :deep(.dx-dropdownbutton:not(.dx-dropdownbutton-has-arrow)) {
+  :deep(.user-button) {
     margin-left: 5px;
-    height: 100%;
 
     img.dx-icon {
       border-radius: 50%;
-      margin: 0 4px;
-      height: 26px;
-      width: 26px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      margin: 0;
+      width: auto;
+      aspect-ratio: 1 / 1;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.1);
       object-fit: cover;
       object-position: top;
       background: rgb(255, 255, 255);
       background-clip: padding-box;
+
+      .dx-theme-generic & {
+        height: $drop-down-gnrc-button-height;
+      }
+
+      .dx-theme-material & {
+        height: 100%;
+      }
     }
 
-    .dx-buttongroup {
-      vertical-align: middle;
+    &.dx-state-hover img.dx-icon {
+      border-color: $accent-color;
+    }
+    .dx-buttongroup .dx-button.dx-button-has-icon:not(.dx-button-has-text) {
+      .dx-button-content {
+        padding: 0;
+      }
 
-      .dx-button-has-icon.dx-button-has-text {
-        justify-content: center;
-
-        .dx-button-content {
-          padding: 0;
-        }
-
-        .dx-button-text {
-          text-transform: none;
-          font-size: 16px;
-          color: $base-text-color;
-          font-weight: 400;
-          letter-spacing: normal;
-          margin: 0 9px;
-        }
+      &.dx-state-hover {
+        background-color: transparent;
       }
     }
   }

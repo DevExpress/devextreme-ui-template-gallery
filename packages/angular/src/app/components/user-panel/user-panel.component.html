@@ -3,10 +3,15 @@
     *ngIf="menuMode === 'context'"
     [items]="menuItems"
     stylingMode="text"
-    width="150px"
     [icon]="user?.avatarUrl"
-    [text]="user?.name"
     [showArrowIcon]="false"
+    [focusStateEnabled]="false"
+    [elementAttr]="{
+      class: 'user-button'
+    }"
+    [dropDownOptions]="{
+      width: '150'
+    }"
   >
   </dx-drop-down-button>
   <div *ngIf="menuMode === 'list'">
