@@ -1,8 +1,8 @@
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
+import { Injectable } from '@angular/core';
 
 type Theme = 'dark'| 'light';
 
-import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })

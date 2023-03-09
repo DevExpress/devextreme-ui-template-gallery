@@ -1,6 +1,5 @@
 import { Component, HostBinding, OnDestroy, } from '@angular/core';
-import { AuthService, ScreenService, AppInfoService } from './services';
-import { ThemeService } from './theme/theme.service';
+import { AppInfoService, AuthService, ScreenService, ThemeService } from './services';
 
 @Component({
   selector: 'app-root',

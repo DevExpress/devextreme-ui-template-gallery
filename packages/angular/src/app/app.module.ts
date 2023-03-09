@@ -21,7 +21,7 @@ import { PlanningTaskDetailsModule } from './pages/planning-task-details/plannin
 import { AnalyticsDashboardModule } from './pages/analytics-dashboard/analytics-dashboard.component';
 import { AnalyticsSalesReportModule } from './pages/analytics-sales-report/analytics-sales-report.component';
 import { AnalyticsGeographyModule } from './pages/analytics-geography/analytics-geography.component';
-import { ThemeService } from './theme/theme.service';
+import { ThemeService } from './services';
 
 @NgModule({
   declarations: [
