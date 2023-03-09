@@ -66,6 +66,9 @@ function getSecondsToday() {
 }
 
 const DAY_TIME_IN_MS = 24 * 60 * 60 * 1000;
+const promptDescription = `The HtmlEditor component is a client-side WYSIWYG text editor. 
+The editor allows users to format text and integrate media elements into documents. 
+The result can be exported to HTML or Markdown.`;
 
 export const patchTasksForScheduler = (tasks) => {
   const today = new Date();
@@ -82,6 +85,7 @@ export const patchTasksForScheduler = (tasks) => {
       ...task,
       startDate: new Date(taskStart),
       endDate: new Date(taskStart + 3 * 3600 * 1000),
+      description: promptDescription,
     };
   });
 };

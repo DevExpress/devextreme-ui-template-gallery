@@ -5,19 +5,29 @@ import { useScreenSize } from '../../utils/media-query';
 import Button from 'devextreme-react/button';
 import './side-panel.scss';
 interface SidePanelProps {
-  side: 'left' | 'right'
-  icon?: string
+  side: 'left' | 'right',
+  isOverlapping?: boolean,
+  icon?: string,
+  toggleOpen: () => void,
+  isOpened: boolean,
 }
-export const SidePanel = ({ side, icon, children }: React.PropsWithChildren<SidePanelProps>) => {
+export const SidePanel = ({ side, icon, isOverlapping = true, isOpened, toggleOpen, children }: React.PropsWithChildren<SidePanelProps>) => {
   const { isXSmall, isSmall } = useScreenSize();
-  const [isOpened, setIsOpened] = useState(true);
   return <>
-    {(isXSmall || isSmall) && <Button className='open-button' icon={icon || 'hidepanel'} onClick={() => setIsOpened(!isOpened)} />}
+    {(isXSmall || isSmall) &&
+      isOverlapping &&
+      <Button
+        className='open-button'
+        icon={icon || 'hidepanel'}
+        onClick={toggleOpen} />
+    }
     <div
       id='contact-panel'
       className={classNames({
         'side-panel': true,
-        'active': isXSmall || isSmall,
+        'resize': !isOverlapping,
+        'overlap': isXSmall || isSmall || isOverlapping,
+        'small': isXSmall || isSmall,
         'open': isOpened,
         'side-left': side === 'left',
         'side-right': side === 'right'
@@ -25,5 +35,13 @@ export const SidePanel = ({ side, icon, children }: React.PropsWithChildren<Side
     >
       {children}
     </div>
+    {!isOverlapping && !(isXSmall || isSmall) &&
+      <Button
+        className={classNames({
+          'open-button': true,
+          'relative': !isOpened,
+        })}
+        icon={icon || 'hidepanel'}
+        onClick={toggleOpen} />}
   </>;
 };

@@ -18,17 +18,31 @@ export const PlanningCalendar = () => {
   const [selectedDay] = useState(0);
   const [tasks, setTasks] = useState(null);
   const [date, setDate] = useState(new Date());
+  const [leftPanelOpen, setLeftPanelOpen] = useState(true);
+  const [rightPanelOpen, setRightPanelOpen] = useState(false);
 
   useEffect(() => {
     getTasks().then(tasksList => {
+      // console.log(patchTasksForScheduler(tasksList));
       setTasks(patchTasksForScheduler(tasksList));
     });
   }, []);
   const onSetDate = useCallback((e) => { setDate(e); }, []);
+  const toggleLeftPanelOpen = useCallback(() => {
+    setLeftPanelOpen(!leftPanelOpen);
+  }, [leftPanelOpen]);
+
+  const toggleRightPanelOpen = useCallback(() => {
+    setRightPanelOpen(!rightPanelOpen);
+  }, [rightPanelOpen]);
 
   return <div className='view-wrapper-calendar'>
     <div className='panels'>
-      <SidePanel side='left'>
+      <SidePanel
+        side='left'
+        isOpened={leftPanelOpen}
+        toggleOpen={toggleLeftPanelOpen}
+      >
         <div className='left'>
           <div className='buttons'>
             <Button text='Today' />
@@ -53,6 +67,14 @@ export const PlanningCalendar = () => {
           <View type='agenda' />
         </Scheduler>
       </div>
+      <SidePanel
+        side='right'
+        isOverlapping={false}
+        isOpened={rightPanelOpen}
+        toggleOpen={toggleRightPanelOpen}
+      >
+        <div>Its a new panel</div>
+      </SidePanel>
     </div>
   </div>;
 };
