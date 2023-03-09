@@ -50,14 +50,12 @@
           height: inherit;
           border: 1px grey;
           border-radius: 8px;
-          min-width: 300px;
         }
     }
     
     .dx-scheduler-header {
       border-radius: 8px 8px 0px 0px;
       height: $scheduler-toolbar-height;
-      // padding-left: 10px;
     }
     .dx-scheduler-work-space{
       border-radius: 0px 0px 8px 8px;

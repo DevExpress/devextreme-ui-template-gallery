@@ -11,6 +11,7 @@ import { CalendarList } from '../../components/calendar-list/calendar-list';
 import { SidePanel } from '../../components/side-panel/side-panel';
 
 import './planning-calendar.scss';
+import { ViewType } from 'devextreme/ui/scheduler';
 
 const views = ['week', 'month'];
 
@@ -18,6 +19,7 @@ export const PlanningCalendar = () => {
   const [selectedDay] = useState(0);
   const [tasks, setTasks] = useState(null);
   const [date, setDate] = useState(new Date());
+  const [currentView, setCurrentView] = useState<ViewType>('week');
   const [leftPanelOpen, setLeftPanelOpen] = useState(true);
   const [rightPanelOpen, setRightPanelOpen] = useState(false);
 
@@ -35,6 +37,8 @@ export const PlanningCalendar = () => {
   const toggleRightPanelOpen = useCallback(() => {
     setRightPanelOpen(!rightPanelOpen);
   }, [rightPanelOpen]);
+
+  const onCurrentViewChange = useCallback((e) => { setCurrentView(e); }, []);
 
   return <div className='view-wrapper-calendar'>
     <div className='panels'>
@@ -60,6 +64,8 @@ export const PlanningCalendar = () => {
           dataSource={tasks}
           height='inherit'
           currentDate={date}
+          currentView={currentView}
+          onCurrentViewChange={onCurrentViewChange}
         >
           <View type='day' />
           <View type='week' />
@@ -67,14 +73,16 @@ export const PlanningCalendar = () => {
           <View type='agenda' />
         </Scheduler>
       </div>
-      <SidePanel
-        side='right'
-        isOverlapping={false}
-        isOpened={rightPanelOpen}
-        toggleOpen={toggleRightPanelOpen}
-      >
-        <div>Its a new panel</div>
-      </SidePanel>
+      {currentView === 'month' &&
+        <SidePanel
+          side='right'
+          isOverlapping={false}
+          isOpened={rightPanelOpen}
+          toggleOpen={toggleRightPanelOpen}
+        >
+          <div onClick={() => { console.log(currentView); }}>Its a new panel</div>
+        </SidePanel>
+      }
     </div>
   </div>;
 };
