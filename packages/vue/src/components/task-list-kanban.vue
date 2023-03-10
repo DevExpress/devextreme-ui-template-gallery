@@ -180,7 +180,7 @@ const addTask = () => {
 :deep(.add-task) {
   .dx-icon,
   .dx-button-text {
-    color: $base-accent;
+    color: $accent-color;
   }
 }
 </style>

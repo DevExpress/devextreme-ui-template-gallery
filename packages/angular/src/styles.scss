@@ -77,7 +77,7 @@ body {
   overflow: hidden;
 }
 
-.details-card {
+.dx-card.details-card {
   border: none;
 }
 
@@ -91,7 +91,7 @@ body {
   }
 }
 
-.plain-styled-form {
+.dx-form.plain-styled-form {
   &.dx-form > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
     padding-bottom: 0;
   }
@@ -116,6 +116,7 @@ body {
     }
 
     .dx-texteditor,
+    .dx-texteditor.dx-editor-filled,
     .dx-texteditor.form-editor, {
       pointer-events: none;
 
@@ -141,7 +142,8 @@ body {
 @mixin status($status-color) {
   color: $status-color;
 
-  &.dx-texteditor {
+  &.dx-texteditor,
+  &.dx-texteditor.dx-editor-filled {
     .status-input.status-editor-input {
       color: $status-color;
     }

@@ -146,7 +146,7 @@ $high-priorety-color: #d9534f;
         line-height: 24px;
         text-align: center;
         border-radius: 50%;
-        background: $base-accent;
+        background: $accent-color;
         color: $base-bg;
       }
     }

@@ -129,7 +129,7 @@ async function onSubmit() {
 
   :deep(.form-text) {
     margin: 10px 0;
-    color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+    color: $base-text-color-alpha;
   }
 }
 </style>

@@ -1,38 +1,34 @@
-@use "../node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: "light");
-@use "../node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
-@use "../node_modules/devextreme/scss/widgets/material/button/mixins" as *;
-@use "../node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
-@use "../node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
-@use "../node_modules/devextreme/scss/widgets/material/list/sizes" as *;
-@use '../node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
+$base-bg: var(--base-bg);
+$base-bg-darken-5: var(--base-bg-darken-5);
+$base-bg-darken-4: var(--base-bg-darken-4);
+$base-text-color: var(--base-text-color);
+$base-focus-color: var(--base-focus-color);
+$side-panel-background: $base-bg-darken-5;
+$background-color: $base-bg;
+$border-color: var(--border-color);
+$accent-color: var(--accent-color);
+$background-gray-color: var(--background-gray-color);
+$texteditor-edit-color: var(--texteditor-edit-color);
+$texteditor-label-color: var(--texteditor-label-color);
+$base-text-color-alpha: var(--base-text-color-alpha);
+$toolbar-height: var(--toolbar-height);
+$filled-texteditor-input-horizontal-padding: var(--filled-texteditor-input-horizontal-padding);
+$list-padding-left: var(--list-padding-left);
+$footer-left-padding: var(--footer-left-padding);
 
-@forward "../node_modules/devextreme/scss/widgets/material/colors";
-@forward "../node_modules/devextreme/scss/widgets/material/textEditor/colors";
-
-@use "sass:math";
-@use "sass:color";
-
-$toolbar-height: toolbar_sizes.$material-toolbar-height;
 $header-toolbar-vertical-padding: 10px;
 $toolbar-vertical-padding: 16px;
 $content-padding: 16px;
-$side-panel-min-width: 48px;
-$side-panel-background: darken($base-bg, 5);
-$background-color: $base-bg;
-$accent-color: $base-accent;
-$background-gray-color: color.change($base-text-color, $alpha: 0.04);
+$side-panel-min-width: var(--side-panel-min-width);
 $toolbar-margin-bottom: $content-padding;
-$texteditor-edit-color: $texteditor-color;
-$filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
-$list-padding-left: $material-list-item-horizontal-padding;
+
 $footer-height: 70px;
-$footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 
 @mixin separator() {
   .separator {
     height: 24px;
     width: 1px;
-    background: $base-border-color;
+    background: $border-color;
 
     ::ng-deep .dx-toolbar-menu-section & {
       height: 1px;
@@ -63,7 +59,7 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
 @mixin messages-content {
   .messages-content {
     padding: 20px;
-    border-top: 1px solid $base-border-color;
+    border-top: 1px solid $border-color;
     background-color: $side-panel-background;
   }
 }

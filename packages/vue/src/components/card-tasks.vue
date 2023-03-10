@@ -96,6 +96,6 @@ const onReorder = (e: RowDraggingReorderEvent) => {
 }
 
 .grid-tasks {
-  border-top: 1px solid $base-border-color;
+  border-top: 1px solid $border-color;
 }
 </style>

@@ -6,9 +6,9 @@ import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
-import { Router } from '@angular/router';
 import { UserPanelModule } from '../user-panel/user-panel.component';
 import { AuthService, IUser } from '../../services';
+import { ThemeSwitcherModule } from "../theme-switcher/theme-switcher.component";
 
 @Component({
   selector: 'app-header',
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
     },
   }];
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.authService.getUser().then((e) => this.user = e.data);
@@ -52,8 +52,9 @@ export class HeaderComponent implements OnInit {
   imports: [
     CommonModule,
     DxButtonModule,
-    UserPanelModule,
     DxToolbarModule,
+    ThemeSwitcherModule,
+    UserPanelModule,
   ],
   declarations: [HeaderComponent],
   exports: [HeaderComponent],

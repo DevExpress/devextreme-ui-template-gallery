@@ -1,0 +1,39 @@
+$theme: null !default;
+
+@use "/node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: $theme);
+@use "/node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
+@use "/node_modules/devextreme/scss/widgets/material/button/mixins" as *;
+@use "/node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
+@use "/node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
+@use '/node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
+@use "/node_modules/devextreme/scss/widgets/material/list/sizes" as *;
+@use "sass:math";
+@use "sass:color";
+
+:root, .app-theme-#{$theme} {
+  $base-bg-darken-5: darken($base-bg, 5);
+  $base-bg-darken-4: darken($base-bg, 4);
+  $background-gray-color: color.change($base-text-color, $alpha: 0.04);
+  $base-text-color-alpha: rgba($base-text-color, alpha($base-text-color) * 0.7);
+  $side-panel-min-width: 48px;
+  $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
+
+  --base-bg: #{$base-bg};
+  --base-bg-darken-5: #{$base-bg-darken-5};
+  --base-bg-darken-4: #{$base-bg-darken-4};
+  --background-color: var(--base-bg);
+  --side-panel-background: var(--base-bg-darken-5);
+  --border-color: #{$base-border-color};
+  --accent-color: #{$base-accent};
+  --base-text-color: #{$base-text-color};
+  --base-focus-color: #{$base-focus-color};
+  --background-gray-color: #{$background-gray-color};
+  --texteditor-edit-color: #{$texteditor-color};
+  --texteditor-label-color: #{$texteditor-label-color};
+  --base-text-color-alpha: #{$base-text-color-alpha};
+  --side-panel-min-width: #{$side-panel-min-width};
+  --toolbar-height: #{toolbar_sizes.$material-toolbar-height};
+  --filled-texteditor-input-horizontal-padding: #{$material-field-value-horizontal-padding};
+  --list-padding-left: #{$material-list-item-horizontal-padding};
+  --footer-left-padding: #{$footer-left-padding};
+}

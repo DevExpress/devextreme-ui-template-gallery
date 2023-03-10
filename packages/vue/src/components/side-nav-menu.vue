@@ -141,7 +141,7 @@ watch(
       .dx-treeview-node {
         &[aria-level="1"] {
           font-weight: bold;
-          border-bottom: 1px solid $base-border-color;
+          border-bottom: 1px solid $border-color;
         }
         &[aria-level="2"] .dx-treeview-item-content {
           font-weight: normal;
@@ -158,10 +158,10 @@ watch(
             background: transparent;
           }
           &.dx-state-selected > .dx-treeview-item * {
-            color: $base-accent;
+            color: $accent-color;
           }
           &:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
-            background-color: darken($base-bg, 4);
+            background-color: $base-bg-darken-4;
           }
         }
       }

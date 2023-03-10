@@ -33,6 +33,12 @@
           width: 180
         }"
       />
+      <dx-item
+        location="after"
+        locate-in-menu="never"
+      >
+        <theme-switcher />
+      </dx-item>
       <dx-item location="after">
         <div class="messages">
           <dx-button icon="bell" />
@@ -79,8 +85,9 @@ import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
-import { authInfo as auth, AuthUser } from '../auth';
 
+import { authInfo as auth, AuthUser } from '../auth';
+import ThemeSwitcher from './theme-switcher.vue';
 import UserPanel from './user-panel.vue';
 
 const router = useRouter();
@@ -140,7 +147,6 @@ header {
     }
 
     .messages {
-      padding-left: 5px;
       position: relative;
 
       .dx-badge {
