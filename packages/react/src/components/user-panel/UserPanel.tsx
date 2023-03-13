@@ -40,7 +40,7 @@ export const UserPanel = ({ menuMode }: UserPanelProps) => {
           dropDownOptions={buttonDropDownOptions} />
       )}
       {menuMode === 'list' && (
-        <div>
+        <>
           <div className='user-info'>
             <div className='image-container'>
               <div
@@ -54,7 +54,7 @@ export const UserPanel = ({ menuMode }: UserPanelProps) => {
             <div className='user-name'>{user?.name}</div>
           </div>
           <List items={menuItems} />
-        </div>
+        </>
       )}
     </div>
   );

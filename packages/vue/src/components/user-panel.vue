@@ -89,6 +89,8 @@ $user-image-height: $toolbar-height;
 
 .user-panel  {
   display: flex;
+  flex-direction: column;
+
   :deep(.dx-list-item) .dx-icon {
     vertical-align: middle;
     color: $base-text-color;
@@ -127,13 +129,17 @@ $user-image-height: $toolbar-height;
     &.dx-state-hover img.dx-icon {
       border-color: $accent-color;
     }
-    .dx-buttongroup .dx-button.dx-button-has-icon:not(.dx-button-has-text) {
-      .dx-button-content {
-        padding: 0;
-      }
+    .dx-buttongroup {
+        vertical-align: middle;
 
-      &.dx-state-hover {
-        background-color: transparent;
+        .dx-button.dx-button-has-icon:not(.dx-button-has-text) {
+        .dx-button-content {
+          padding: 0;
+        }
+
+        &.dx-state-hover {
+          background-color: transparent;
+        }
       }
     }
   }

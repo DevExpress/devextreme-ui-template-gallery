@@ -32,6 +32,7 @@
 
 .user-panel {
   display: flex;
+  flex-direction: column;
 
   .dx-list-item .dx-icon {
     vertical-align: middle;
@@ -72,13 +73,17 @@
       border-color: $accent-color;
     }
 
-    .dx-buttongroup .dx-button.dx-button-has-icon:not(.dx-button-has-text) {
-      .dx-button-content {
-        padding: 0;
-      }
+    .dx-buttongroup {
+      vertical-align: middle;
 
-      &.dx-state-hover {
-        background-color: transparent;
+      .dx-button.dx-button-has-icon:not(.dx-button-has-text) {
+        .dx-button-content {
+          padding: 0;
+        }
+
+        &.dx-state-hover {
+          background-color: transparent;
+        }
       }
     }
   }
