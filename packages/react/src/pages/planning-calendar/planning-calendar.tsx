@@ -9,6 +9,7 @@ import List from 'devextreme-react/list';
 
 import { CalendarList } from '../../components/calendar-list/calendar-list';
 import { SidePanel } from '../../components/side-panel/side-panel';
+import { SchedulerMonthAgenda } from '../../components/scheduler-month-agenda/scheduler-month-agenda';
 
 import './planning-calendar.scss';
 import { ViewType } from 'devextreme/ui/scheduler';
@@ -22,7 +23,7 @@ const colors = ['#E1F5FE', '#C8E6C9', '#FFCDD2', '#FFE0B2', '#7b49d3', '#2a7ee4'
 export const PlanningCalendar = () => {
   const { isMedium, isLarge } = useScreenSize();
   const schedulerRef = useRef<Scheduler>(null);
-  const [selectedDay] = useState(0);
+  const [selectedAppointment, setSelectedAppointment] = useState();
   const [tasks, setTasks] = useState<DataSource>();
   const [date, setDate] = useState(new Date());
   const [currentView, setCurrentView] = useState<ViewType>('week');
@@ -57,19 +58,17 @@ export const PlanningCalendar = () => {
 
   const onAppointmentClick = useCallback((e) => {
     if (currentView === 'month') {
+      setSelectedAppointment(e.appointmentData);
       toggleRightPanelOpen();
     }
   }, [currentView, rightPanelOpen]);
-
-  const filterTasks = useCallback(() => {
-    console.log(tasks);
-  }, [tasks]);
 
   const onSelectedCalendarsChange = useCallback((seletedCalendars) => {
     const removedResourceFilters = seletedCalendars
       .map((calendar) => calendar.id)
       .map(resource => ['calendarId', '<>', resource]);
     const filters: any[] = [];
+    // refactor to predicate logic
     removedResourceFilters.forEach(filter => {
       filters.push(filter, 'and');
     });
@@ -81,6 +80,27 @@ export const PlanningCalendar = () => {
 
     tasks?.load();
   }, [tasks]);
+
+  const renderAppointmentTooltip = useCallback(({ appointmentData, targetedAppointmentData, isButtonClicked }) => {
+    const timeString = `${targetedAppointmentData.startDate.toLocaleString()} - ${targetedAppointmentData.endDate.toLocaleTimeString()}`;
+    return (<div className='appointment-tooltip'>
+      <div className='title'>{targetedAppointmentData.text}</div>
+      <div className='content'>
+        <div className='date'>
+          <Button icon='clock' />
+          {timeString}
+        </div>
+        <div className='description'>
+          <Button icon='textdocument' />
+          {targetedAppointmentData.description}
+        </div>
+      </div>
+      <div className='buttons'>
+        <Button text='Delete' type='danger' />
+        <Button text='Edit' type='success' />
+      </div>
+    </div>);
+  }, []);
 
   return <div className='view-wrapper-calendar'>
     <div className='panels'>
@@ -110,6 +130,7 @@ export const PlanningCalendar = () => {
           currentView={currentView}
           onCurrentViewChange={onCurrentViewChange}
           onAppointmentClick={onAppointmentClick}
+          appointmentTooltipRender={renderAppointmentTooltip}
         >
           <Resource
             dataSource={resourcesList}
@@ -129,7 +150,7 @@ export const PlanningCalendar = () => {
           isOpened={rightPanelOpen}
           toggleOpen={toggleRightPanelOpen}
         >
-          <div onClick={() => { console.log(currentView); }}>Its a new panel</div>
+          <SchedulerMonthAgenda selectedAppointment={selectedAppointment} />
         </SidePanel>
       }
     </div>
