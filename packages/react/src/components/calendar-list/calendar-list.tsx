@@ -12,17 +12,18 @@ export const listTitleRender = (item) => {
   </div>;
 };
 
-export const CalendarList = ({ listDS }) => {
+export const CalendarList = ({ listDS, onSelectedCalendarsChange }) => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const onSelectedItemKeysChange = useCallback((selectedItems) => {
     setSelectedItems(selectedItems);
-  }, []);
+    onSelectedCalendarsChange(selectedItems);
+  }, [onSelectedCalendarsChange]);
 
   const listItemsRender = useCallback((item) => {
     return (
       <div className='list-item'>
-        <CheckBox value={selectedItems.includes(item)} />
+        <CheckBox value={!selectedItems.includes(item)} />
         <span className='list-item-text'>{item.text}</span>
       </div>
     );

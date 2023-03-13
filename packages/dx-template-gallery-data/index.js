@@ -72,7 +72,7 @@ The result can be exported to HTML or Markdown.`;
 
 export const patchTasksForScheduler = (tasks) => {
   const today = new Date();
-  const mondayMidnight = today - getSecondsToday();
+  const mondayMidnight = today - getSecondsToday() - today.getDay() * DAY_TIME_IN_MS;
   const uniqueTasks = tasks.slice(0, 11);
   return uniqueTasks.map((task, index) => {
     const weekDay = (index % 4) + 1;
@@ -86,6 +86,53 @@ export const patchTasksForScheduler = (tasks) => {
       startDate: new Date(taskStart),
       endDate: new Date(taskStart + 3 * 3600 * 1000),
       description: promptDescription,
+      calendarId: weekDay,
     };
   });
 };
+
+export const getTasksForScheduler = async () => patchTasksForScheduler(await getTasks());
+
+export const listDS = [
+  {
+    key: 'id',
+    items: ['Brett Johnson', 'Tasks', 'Reminder', 'Contacts']
+      .map((text) => ({ list: 'My Calendars', text }))
+      .concat({ list: 'Other Calendars', text: 'Holidays' }),
+  },
+];
+
+export const defaultListDS = [
+  {
+    key: 'My Calendars',
+    items: [
+      {
+        id: 0,
+        text: 'Brett Johnson',
+        color: '#E1F5FE',
+      },
+      {
+        id: 1,
+        text: 'Tasks',
+        color: '#C8E6C9',
+      },
+      {
+        id: 2,
+        text: 'Reminder',
+        color: '#FFCDD2',
+      },
+      {
+        id: 3,
+        text: 'Contacts',
+        color: '#FFE0B2',
+      }],
+  },
+  {
+    key: 'Other Calendars',
+    items: [{
+      id: 4,
+      text: 'Holidays',
+      color: '#7b49d3',
+    }],
+  },
+];
