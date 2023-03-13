@@ -24,7 +24,7 @@ $side-panel-min-width: var(--side-panel-min-width);
 $toolbar-margin-bottom: $content-padding;
 
 $footer-height: 70px;
-$drop-down-gnrc-button-height: var(--material-base-inline-widget-height);
+$drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 
 @mixin header {
   font-size: 22px;
