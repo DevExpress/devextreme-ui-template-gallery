@@ -77,7 +77,8 @@
           padding: 0;
         }
 
-        &.dx-state-hover, &.dx-state-focused {
+        &.dx-state-hover,
+        &.dx-state-focused {
           background-color: transparent;
 
           img.dx-icon {
