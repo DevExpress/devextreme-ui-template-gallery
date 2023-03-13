@@ -69,10 +69,6 @@
       }
     }
 
-    &.dx-state-hover img.dx-icon {
-      border-color: $accent-color;
-    }
-
     .dx-buttongroup {
       vertical-align: middle;
 
@@ -81,8 +77,12 @@
           padding: 0;
         }
 
-        &.dx-state-hover {
+        &.dx-state-hover, &.dx-state-focused {
           background-color: transparent;
+
+          img.dx-icon {
+            border-color: $accent-color;
+          }
         }
       }
     }

@@ -6,7 +6,6 @@
       styling-mode="text"
       :icon="user?.avatarUrl"
       :show-arrow-icon="false"
-      :focus-state-enabled="false"
       :element-attr="{
         class: 'user-button'
       }"
@@ -126,19 +125,20 @@ $user-image-height: $toolbar-height;
       }
     }
 
-    &.dx-state-hover img.dx-icon {
-      border-color: $accent-color;
-    }
     .dx-buttongroup {
-        vertical-align: middle;
+      vertical-align: middle;
 
-        .dx-button.dx-button-has-icon:not(.dx-button-has-text) {
+      .dx-button.dx-button-has-icon:not(.dx-button-has-text) {
         .dx-button-content {
           padding: 0;
         }
 
-        &.dx-state-hover {
+        &.dx-state-hover, &.dx-state-focused {
           background-color: transparent;
+
+          img.dx-icon {
+            border-color: $accent-color;
+          }
         }
       }
     }

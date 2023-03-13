@@ -34,7 +34,7 @@ export const UserPanel = ({ menuMode }: UserPanelProps) => {
   return (
     <div className='user-panel'>
       {menuMode === 'context' && (
-        <DropDownButton items={menuItems} stylingMode='text' focusStateEnabled={false}
+        <DropDownButton items={menuItems} stylingMode='text'
           icon={user?.avatarUrl} showArrowIcon={false}
           elementAttr={dropDownButtonAttributes}
           dropDownOptions={buttonDropDownOptions} />
