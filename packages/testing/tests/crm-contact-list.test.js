@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
+import { checkForViolations } from '@testcafe-community/axe';
 import { forceResizeRecalculation, getPostfix, toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
@@ -19,14 +20,18 @@ fixture`Contact List`;
       await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
 
       await t.expect(Selector('body.dx-device-generic').count).eql(1);
+      await checkForViolations(t);
       await takeScreenshot(`crm-contact-list${getPostfix(embedded, screenMode)}`, 'body');
 
       await t.click('tr.dx-data-row:first-child');
       await forceResizeRecalculation(t, screenMode);
+      await checkForViolations(t);
       await takeScreenshot(`crm-contact-list-full${getPostfix(embedded, screenMode)}`, 'body');
       await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
+      await checkForViolations(t);
       await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
       await t.click(Selector('.dx-button[aria-label=Edit]'));
+      await checkForViolations(t);
       await takeScreenshot(`crm-contact-list-form-edit${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
       await t.click(Selector('[aria-label="Close"]'));
 
@@ -48,9 +53,11 @@ fixture`Contact List`;
 
       await t.click(Selector('[aria-label="Add Contact"]'));
       await t.wait(1000);
+      await checkForViolations(t);
       await takeScreenshot(`crm-contact-list-add-contact-popup${getPostfix(embedded, screenMode)}`, 'body');
 
       await t.click(Selector('[aria-label=Save]'));
+      await checkForViolations(t);
       await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${getPostfix(embedded, screenMode)}`, 'body');
 
       await t

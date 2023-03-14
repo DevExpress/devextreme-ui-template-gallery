@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
+import { checkForViolations } from '@testcafe-community/axe';
 import { getPostfix, toggleCommonConfiguration } from './utils';
 import { screenModes, timeoutSecond } from '../config.js';
 
@@ -34,6 +35,7 @@ const setEmbedded = async (t, embed, screenMode) => {
       await t.resizeWindow(...screenMode);
       await t.click(Selector('.dx-drawer-content'));
       await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
+      await checkForViolations(t);
       await takeScreenshot(`crm-contact-details${getPostfix(embedded, screenMode)}`, 'body');
 
       await t
@@ -50,8 +52,10 @@ const setEmbedded = async (t, embed, screenMode) => {
       // const form = Selector('.plain-styled-form');
       const form = Selector('.left');
 
+      await checkForViolations(t);
       await takeScreenshot(`crm-form-readonly${getPostfix(embedded, screenMode)}`, form);
       await t.click(Selector('.dx-button[aria-label=Edit]'));
+      await checkForViolations(t);
       await takeScreenshot(`crm-form-edit${getPostfix(embedded, screenMode)}`, form);
 
       await t
@@ -73,6 +77,7 @@ const setEmbedded = async (t, embed, screenMode) => {
         await t.click(tabs.withText(nameTabs[i]));
         const tabPanel = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel].dx-item-selected');
 
+        await checkForViolations(t);
         await takeScreenshot(`crm-form-tab-${nameTabs[i]}${getPostfix(embedded, screenMode)}`, tabPanel);
       }
 
