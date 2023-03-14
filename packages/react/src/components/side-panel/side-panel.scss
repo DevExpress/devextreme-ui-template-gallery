@@ -31,13 +31,17 @@
       &.open {
         &.side-left{
           left: 0px;
-          padding-left: calc(2*$theme-padding + $button-height);
+          //change this to padding for the correct shadow cast and modify contact panel width
+          margin-left: calc(2*$theme-padding + $button-height);
           transition: left 400ms ease;
+          width: var(--contact-side-panel-width);
         }
         &.side-right{
           right: 0px;
-          padding-right: calc(2*$theme-padding + $button-height);
           transition: right 400ms ease;
+          border: 2px $base-border-color;
+          width: var(--contact-side-panel-width);
+          z-index: 7;
         }
         box-shadow: 0px 0 8px $base-border-color;
       }
@@ -49,18 +53,20 @@
     flex: 0.0001 1 0px;
     display: none;
     &.open{
-      flex: 0.0001 1 150px;
+      flex: 0.0001 1 300px;
       display: block;
+      border: solid 1px $base-border-color;
+      border-radius: 8px;
     }
   }
   
 }
 .open-button {
   margin-top: $theme-padding;
-  z-index: 10;
+  z-index: 6;
   height: $button-height;
-  &.relative{
-    position: relative;
+  &.hidden{
+    display: none;
   }
   // &.absolute{
   //   position: absolute;

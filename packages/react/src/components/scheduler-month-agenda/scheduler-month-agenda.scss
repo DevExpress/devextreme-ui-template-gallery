@@ -1,2 +1,20 @@
 @use "../../variables.scss" as *;
 @use "sass:math";
+
+.agenda{
+  border: 1px $base-border-color;
+  border-radius: 8px;
+  .agenda-header {
+    padding: $theme-padding;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .dx-list-item{
+    padding: calc($theme-padding / 2) $theme-padding;
+    .dx-list-item-content{
+      padding: 0px;
+    }
+  }
+}

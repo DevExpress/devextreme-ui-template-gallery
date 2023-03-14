@@ -13,12 +13,15 @@ interface SidePanelProps {
 }
 export const SidePanel = ({ side, icon, isOverlapping = true, isOpened, toggleOpen, children }: React.PropsWithChildren<SidePanelProps>) => {
   const { isXSmall, isSmall, isMedium, isLarge } = useScreenSize();
+  const defaultIcon = side === 'left' ?
+    isOpened ? 'hidepanel' : 'showpanel' :
+    isOpened ? 'showpanel' : 'hidepanel';
   return <>
     {(isXSmall || isSmall) &&
       isOverlapping &&
       <Button
         className='open-button'
-        icon={icon || 'hidepanel'}
+        icon={icon || defaultIcon}
         onClick={toggleOpen} />
     }
     <div
@@ -39,7 +42,7 @@ export const SidePanel = ({ side, icon, isOverlapping = true, isOpened, toggleOp
       <Button
         className={classNames({
           'open-button': true,
-          'relative': !isOpened,
+          'hidden': isOpened,
         })}
         icon={icon || 'hidepanel'}
         onClick={toggleOpen} />}

@@ -59,7 +59,9 @@ export const PlanningCalendar = () => {
   const onAppointmentClick = useCallback((e) => {
     if (currentView === 'month') {
       setSelectedAppointment(e.appointmentData);
-      toggleRightPanelOpen();
+      if (!rightPanelOpen) {
+        toggleRightPanelOpen();
+      }
     }
   }, [currentView, rightPanelOpen]);
 
@@ -150,7 +152,10 @@ export const PlanningCalendar = () => {
           isOpened={rightPanelOpen}
           toggleOpen={toggleRightPanelOpen}
         >
-          <SchedulerMonthAgenda selectedAppointment={selectedAppointment} />
+          <SchedulerMonthAgenda
+            selectedAppointment={selectedAppointment}
+            toggleOpen={toggleRightPanelOpen}
+          />
         </SidePanel>
       }
     </div>
