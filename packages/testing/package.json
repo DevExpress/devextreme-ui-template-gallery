@@ -14,6 +14,8 @@
   "license": "MIT",
   "devDependencies": {
     "@vasily.strelyaev/tcd-screenshot-updater": "^0.3.0",
+    "@testcafe-community/axe": "3.5.0",
+    "axe-core": "4.6.3",
     "devextreme-screenshot-comparer": "^2.0.14",
     "fs-extra": "^10.0.0",
     "http-server": "^14.1.0"
