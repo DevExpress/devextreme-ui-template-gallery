@@ -58,6 +58,7 @@ export const PlanningCalendar = () => {
 
   const onAppointmentClick = useCallback((e) => {
     if (currentView === 'month') {
+      e.event.stopImmediatePropagation();
       setSelectedAppointment(e.appointmentData);
       if (!rightPanelOpen) {
         toggleRightPanelOpen();
@@ -85,6 +86,10 @@ export const PlanningCalendar = () => {
 
   const renderAppointmentTooltip = useCallback(({ appointmentData, targetedAppointmentData, isButtonClicked }) => {
     const timeString = `${targetedAppointmentData.startDate.toLocaleString()} - ${targetedAppointmentData.endDate.toLocaleTimeString()}`;
+    const deleteCurrentAppointment = (e) => {
+      e.event.stopPropagation();
+      schedulerRef.current?.instance.deleteAppointment(appointmentData);
+    };
     return (<div className='appointment-tooltip'>
       <div className='title'>{targetedAppointmentData.text}</div>
       <div className='content'>
@@ -98,7 +103,7 @@ export const PlanningCalendar = () => {
         </div>
       </div>
       <div className='buttons'>
-        <Button text='Delete' type='danger' />
+        <Button text='Delete' type='danger' onClick={deleteCurrentAppointment} />
         <Button text='Edit' type='success' />
       </div>
     </div>);
@@ -124,6 +129,7 @@ export const PlanningCalendar = () => {
       </SidePanel>
       <div className='right'>
         <Scheduler
+          allDayPanelMode='hidden'
           ref={schedulerRef}
           defaultCurrentView='week'
           dataSource={tasks}
@@ -155,6 +161,7 @@ export const PlanningCalendar = () => {
           <SchedulerMonthAgenda
             selectedAppointment={selectedAppointment}
             toggleOpen={toggleRightPanelOpen}
+            dataSource={tasks}
           />
         </SidePanel>
       }

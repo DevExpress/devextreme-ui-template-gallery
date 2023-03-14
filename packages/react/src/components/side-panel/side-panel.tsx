@@ -43,6 +43,7 @@ export const SidePanel = ({ side, icon, isOverlapping = true, isOpened, toggleOp
         className={classNames({
           'open-button': true,
           'hidden': isOpened,
+          'side-right': side === 'right'
         })}
         icon={icon || 'hidepanel'}
         onClick={toggleOpen} />}

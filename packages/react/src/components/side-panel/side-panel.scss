@@ -65,6 +65,11 @@
   margin-top: $theme-padding;
   z-index: 6;
   height: $button-height;
+  &.side-right{
+    .dx-icon{
+      color: $base-accent;
+    }
+  }
   &.hidden{
     display: none;
   }

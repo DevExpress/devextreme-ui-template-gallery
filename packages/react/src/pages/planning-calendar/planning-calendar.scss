@@ -111,11 +111,11 @@
     }
   }
 }
-.dx-popup-content  {
-  max-height: 2000px !important;
-  border-radius: 16px;
+.dx-tooltip-wrapper .dx-popup-content  {
+  max-height: 600px !important;
+  border-radius: 8px;
 }
-.dx-overlay-content.dx-popup-normal {
-  max-height: 2000px !important;
-  border-radius: 16px !important;
+.dx-tooltip-wrapper .dx-popup-normal {
+  max-height: 600px !important;
+  border-radius: 8px !important;
 }

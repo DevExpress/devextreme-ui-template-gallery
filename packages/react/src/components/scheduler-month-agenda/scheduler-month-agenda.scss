@@ -2,19 +2,57 @@
 @use "sass:math";
 
 .agenda{
-  border: 1px $base-border-color;
-  border-radius: 8px;
   .agenda-header {
     padding: $theme-padding;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    color: $base-accent;
+    .dx-button .dx-icon{
+      color: $base-accent;
+    }
+    .date {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+    }
+  }
+  .dx-list-item:first-of-type{
+    border-top: solid 1px $base-border-color;
+    margin-top: 0px;
+  }
+  .dx-list-item:last-of-type{
+    border-bottom: solid 1px $base-border-color;
+    margin-bottom: 0px;
   }
   .dx-list-item{
     padding: calc($theme-padding / 2) $theme-padding;
+    border-top: solid 1px $base-border-color;
+    border-bottom: solid 1px $base-border-color;
     .dx-list-item-content{
       padding: 0px;
+    }
+    .list-item{
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 32px;
+
+      .time{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 36px;
+        // overflow: hidden;
+      }
+      .description{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+      }
     }
   }
 }

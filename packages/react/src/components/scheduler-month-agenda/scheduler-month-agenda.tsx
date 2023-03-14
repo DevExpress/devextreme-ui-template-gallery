@@ -6,11 +6,12 @@ import List from 'devextreme-react/list';
 import { getTasksForScheduler } from 'dx-template-gallery-data';
 import Button from 'devextreme-react/button';
 
-const findAllAppointmentsForDay = (selectedAppointment, tasks) => {
-  if (tasks.length === 0 || !selectedAppointment) {
+const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
+  const items = dataSource.items();
+  if (items.length === 0 || !selectedAppointment) {
     return [];
   }
-  return Query(tasks)
+  return Query(items)
     .filter((appointment) => {
       return appointment.startDate.getDate() === selectedAppointment.startDate.getDate()
         && appointment.startDate.getMonth() === selectedAppointment.startDate.getMonth();
@@ -18,18 +19,31 @@ const findAllAppointmentsForDay = (selectedAppointment, tasks) => {
     .toArray();
 };
 const formatTime = (appointment) => {
-  const start = `${appointment.startDate.getHours()}:${appointment.startDate.getMinutes()}`;
+  const start = appointment.startDate.toLocaleTimeString(undefined, {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false
+  });
   const duration = appointment.endDate - appointment.startDate;
   const durationHours = Math.floor(duration / (60 * 60 * 1000));
   const durationMinutes = Math.floor((duration % (60 * 60 * 1000)) / 60000);
-  return <div>
-    <div>{start}</div>
-    <div>{durationHours > 0 && `${durationHours} h`}</div>
-    <div>{durationMinutes > 0 && `${durationMinutes} m`}</div>
+  let durationStr = '';
+  if (durationHours > 0 && durationMinutes > 0) {
+    durationStr = `${durationHours}:${durationMinutes} m`;
+  }
+  else if (durationHours > 0) {
+    durationStr = `${durationHours} h`;
+  }
+  else {
+    durationStr = `${durationMinutes} m`;
+  }
+  return <div className='time'>
+    <div className='start'>{start}</div>
+    <div className='duration'>{durationStr}</div>
   </div>;
 };
 const renderListItem = (item) => {
-  return <div>
+  return <div className='list-item'>
     <div className='time'>
       {formatTime(item)}
     </div>
@@ -39,15 +53,14 @@ const renderListItem = (item) => {
   </div>;
 };
 
-export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen }) => {
-  const [tasks, setTasks] = useState([]);
-  const appointmentList = findAllAppointmentsForDay(selectedAppointment, tasks);
-  useEffect(() => {
-    getTasksForScheduler().then(res => { setTasks(res); });
-  }, []);
+export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, dataSource }) => {
+  const appointmentList = findAllAppointmentsForDay(selectedAppointment, dataSource);
+
   return <div className='agenda'>
     <div className='agenda-header'>
-      {selectedAppointment.startDate.toDateString()}
+      <div className='date'>
+        {selectedAppointment.startDate.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' })}
+      </div>
       <Button icon='showpanel' onClick={toggleOpen} />
     </div>
     <List dataSource={appointmentList} itemRender={renderListItem} />
