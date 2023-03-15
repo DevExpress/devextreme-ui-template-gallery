@@ -40,7 +40,6 @@ withDefaults(defineProps<{
   display: flex;
   align-items: center;
   cursor: default;
-
   padding: $list-padding-vertical $list-padding-left;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
