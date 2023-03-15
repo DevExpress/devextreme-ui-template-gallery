@@ -41,7 +41,7 @@ withDefaults(defineProps<{
   align-items: center;
   cursor: default;
   padding: $list-padding-vertical $list-padding-left;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid $border-color;
 
   .user-name {
     font-size: 16px;
@@ -54,7 +54,7 @@ withDefaults(defineProps<{
     height: 28px;
     width: 28px;
     margin-right: $list-padding-left;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid $border-color;
 
     .user-image {
       width: 100%;

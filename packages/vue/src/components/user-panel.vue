@@ -62,7 +62,7 @@ withDefaults(defineProps<{
       width: auto;
       aspect-ratio: 1 / 1;
       box-sizing: border-box;
-      border: 2px solid rgba(0, 0, 0, 0.1);
+      border: 2px solid $border-color;
       object-fit: cover;
       object-position: top;
       background: rgb(255, 255, 255);
