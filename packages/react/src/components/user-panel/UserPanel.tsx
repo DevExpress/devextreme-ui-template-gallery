@@ -1,27 +1,13 @@
-import React, { useMemo } from 'react';
-
-import List from 'devextreme-react/list';
+import React from 'react';
 import DropDownButton from 'devextreme-react/drop-down-button';
-
-import { useAuth } from '../../contexts/auth';
-
+import { Template } from 'devextreme-react/core/template';
+import { UserMenuSection } from '../user-menu-section/UserMenuSection';
 import type { UserPanelProps } from '../../types';
-
+import { useAuth } from '../../contexts/auth';
 import './UserPanel.scss';
 
 export const UserPanel = ({ menuMode }: UserPanelProps) => {
-  const { user, signOut } = useAuth();
-
-  const menuItems = useMemo(
-    () => [
-      {
-        text: 'Logout',
-        icon: 'runner',
-        onClick: signOut,
-      },
-    ],
-    [signOut]
-  );
+  const { user } = useAuth();
 
   const dropDownButtonAttributes = {
     class: 'user-button'
@@ -34,27 +20,18 @@ export const UserPanel = ({ menuMode }: UserPanelProps) => {
   return (
     <div className='user-panel'>
       {menuMode === 'context' && (
-        <DropDownButton items={menuItems} stylingMode='text'
+        <DropDownButton stylingMode='text'
           icon={user?.avatarUrl} showArrowIcon={false}
           elementAttr={dropDownButtonAttributes}
-          dropDownOptions={buttonDropDownOptions} />
+          dropDownOptions={buttonDropDownOptions}
+          dropDownContentTemplate='dropDownTemplate'>
+          <Template name='dropDownTemplate'>
+            <UserMenuSection />
+          </Template>
+        </DropDownButton>
       )}
       {menuMode === 'list' && (
-        <>
-          <div className='user-info'>
-            <div className='image-container'>
-              <div
-                style={{
-                  background: `url(${user?.avatarUrl}) no-repeat #fff`,
-                  backgroundSize: 'cover',
-                }}
-                className='user-image'
-              />
-            </div>
-            <div className='user-name'>{user?.name}</div>
-          </div>
-          <List items={menuItems} />
-        </>
+        <UserMenuSection showAvatar />
       )}
     </div>
   );

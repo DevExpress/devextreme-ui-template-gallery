@@ -21,6 +21,10 @@ export interface UserPanelProps {
   menuMode: 'context' | 'list';
 }
 
+export interface UserMenuSectionProps {
+  showAvatar?: boolean;
+}
+
 export interface User {
   name: string;
   email: string;

@@ -1,49 +1,8 @@
 @use "../../variables.scss" as *;
 
-.user-info {
-  display: flex;
-  align-items: center;
-
-  .dx-toolbar-menu-section & {
-    padding: 10px 6px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .image-container {
-    overflow: hidden;
-    border-radius: 50%;
-    height: 28px;
-    width: 28px;
-    margin: 0 4px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-
-    .user-image {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  .user-name {
-    font-size: 16px;
-    color: $base-text-color;
-    margin: 0 9px;
-  }
-}
-
 .user-panel {
   display: flex;
   flex-direction: column;
-
-  .dx-list-item .dx-icon {
-    vertical-align: middle;
-    color: $base-text-color;
-    margin-right: 16px;
-  }
-
-  .dx-rtl .dx-list-item .dx-icon {
-    margin-right: 0;
-    margin-left: 16px;
-  }
 
   .user-button {
     margin-left: 5px;

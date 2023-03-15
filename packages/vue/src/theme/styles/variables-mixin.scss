@@ -39,6 +39,7 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
   --toolbar-height: #{toolbar_sizes.$material-toolbar-height};
   --filled-texteditor-input-horizontal-padding: #{$material-field-value-horizontal-padding};
   --list-padding-left: #{$material-list-item-horizontal-padding};
+  --list-padding-vertical: #{$material-list-item-vertical-padding};
   --footer-left-padding: #{$footer-left-padding};
   --drop-down-gnrc-button-height: #{$material-base-inline-widget-height};
 }

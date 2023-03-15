@@ -2,7 +2,6 @@
   <div class="user-panel">
     <dx-drop-down-button
       v-if="menuMode === 'context'"
-      :items="menuItems"
       styling-mode="text"
       :icon="user?.avatarUrl"
       :show-arrow-icon="false"
@@ -12,31 +11,29 @@
       :drop-down-options="{
         width: '150'
       }"
-    />
+      drop-down-content-template="dropDownContentTemplate"
+    >
+      <template #dropDownContentTemplate="{ }">
+        <user-menu-section
+          :menu-items="menuItems"
+          :user="user"
+        />
+      </template>
+    </dx-drop-down-button>
 
     <div v-if="menuMode === 'list'">
-      <div class="user-info">
-        <div class="image-container">
-          <div
-            :style="{
-              background: `url(${user?.avatarUrl}) no-repeat #fff`,
-              backgroundSize: 'cover',
-            }"
-            class="user-image"
-          />
-        </div>
-        <div class="user-name">
-          {{ user?.name }} {{ user?.lastName }}
-        </div>
-      </div>
-      <dx-list :items="menuItems" />
+      <user-menu-section
+        :menu-items="menuItems"
+        :user="user"
+        :show-avatar="true"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { DxDropDownButton } from 'devextreme-vue/drop-down-button';
-import DxList from 'devextreme-vue/list';
+import UserMenuSection from './user-menu-section.vue';
 
 withDefaults(defineProps<{
   menuMode: string,
@@ -52,54 +49,9 @@ withDefaults(defineProps<{
 <style scoped lang="scss">
 @use '@/variables.scss' as *;
 
-$user-image-height: $toolbar-height;
-
-.dx-toolbar-menu-section .user-panel {
-  .user-info {
-    padding: 10px 6px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-
-  .image-container {
-    overflow: hidden;
-    border-radius: 50%;
-    height: 28px;
-    width: 28px;
-    margin: 0 4px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-
-    .user-image {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  .user-name {
-    font-size: 16px;
-    color: $base-text-color;
-    margin: 0 9px;
-  }
-}
-
 .user-panel  {
   display: flex;
   flex-direction: column;
-
-  :deep(.dx-list-item) .dx-icon {
-    vertical-align: middle;
-    color: $base-text-color;
-    margin-right: 16px;
-  }
-
-  :deep(.dx-rtl) .dx-list-item .dx-icon {
-    margin-right: 0;
-    margin-left: 16px;
-  }
 
   :deep(.user-button) {
     margin-left: 5px;

@@ -1,8 +1,8 @@
 import { Component, NgModule, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
+import { UserMenuSectionModule } from '../user-menu-section/user-menu-section.component';
 import { IUser } from '../../services/auth.service';
 
 @Component({
@@ -26,8 +26,8 @@ export class UserPanelComponent {
 
 @NgModule({
   imports: [
-    DxListModule,
     DxDropDownButtonModule,
+    UserMenuSectionModule,
     CommonModule,
   ],
   declarations: [UserPanelComponent],
