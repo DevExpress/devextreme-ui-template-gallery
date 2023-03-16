@@ -33,8 +33,8 @@ export const toogleEmbeddedClass = ClientFunction((embed) => {
   window.document.getElementsByTagName('body')[0].classList.add('embedded');
 });
 
-export const getPostfix = (embedded, screenMode) => {
-  const theme = process.env.theme;
+export const getPostfix = (embedded, screenMode, themeMode = 'light') => {
+  const theme = process.env.theme.replace(/\.(light|dark)$/, `.${themeMode}`);
   return `-embed=${embedded}-${theme}-${screenMode[0]}`;
 };
 

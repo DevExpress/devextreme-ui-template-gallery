@@ -9,30 +9,38 @@ const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/crm-contact-list`;
 
 fixture`Contact List`;
+const themeModes = ['light', 'dark'];
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
-    test(`Crm contact list (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
-      const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+    themeModes.forEach((themeMode) => {
+      test(`Crm contact list (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
+        const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      // eslint-disable-next-line max-len
-      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
+        // eslint-disable-next-line max-len
+        await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
 
-      await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`crm-contact-list${getPostfix(embedded, screenMode)}`, 'body');
+        if (themeMode === 'dark') {
+          await t.click('theme-button');
+          await t.wait(2000);
+        }
 
-      await t.click('tr.dx-data-row:first-child');
-      await forceResizeRecalculation(t, screenMode);
-      await takeScreenshot(`crm-contact-list-full${getPostfix(embedded, screenMode)}`, 'body');
-      await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
-      await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
-      await t.click(Selector('.dx-button[aria-label=Edit]'));
-      await takeScreenshot(`crm-contact-list-form-edit${getPostfix(embedded, screenMode)}`, Selector('.data-wrapper'));
-      await t.click(Selector('[aria-label="Close"]'));
+        await t.expect(Selector('body.dx-device-generic').count).eql(1);
+        await takeScreenshot(`crm-contact-list${getPostfix(embedded, screenMode, themeMode)}`, 'body');
 
-      await t
-        .expect(compareResults.isValid())
-        .ok(compareResults.errorMessages());
+        await t.click('tr.dx-data-row:first-child');
+        await forceResizeRecalculation(t, screenMode);
+        await takeScreenshot(`crm-contact-list-full${getPostfix(embedded, screenMode, themeMode)}`, 'body');
+        await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
+        await takeScreenshot(`crm-contact-list-form${getPostfix(embedded, screenMode, themeMode)}`, Selector('.data-wrapper'));
+        await t.click(Selector('.dx-button[aria-label=Edit]'));
+        await takeScreenshot(`crm-contact-list-form-edit${getPostfix(embedded, screenMode, themeMode)}`, Selector('.data-wrapper'));
+        await t.click(Selector('[aria-label="Close"]'));
+
+        await t
+          .expect(compareResults.isValid())
+          .ok(compareResults.errorMessages());
+      });
     });
 
     test(`Add contact popup (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
