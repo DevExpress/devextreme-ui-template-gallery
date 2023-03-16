@@ -61,7 +61,7 @@ defineExpose({ focusList });
   border-bottom: 1px solid $border-color;
 
   .user-name {
-    font-size: 16px;
+    font-size: 14px;
     color: $base-text-color;
   }
 
