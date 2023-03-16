@@ -1,4 +1,4 @@
-import { Component, NgModule, Input } from '@angular/core';
+import { Component, NgModule, Input, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DxListModule } from 'devextreme-angular/ui/list';
@@ -20,7 +20,13 @@ export class UserMenuSectionComponent {
   @Input()
   user!: IUser | null;
 
+  @ViewChild('userInfoList', { read: ElementRef }) userInfoList: ElementRef<HTMLElement>;
+
   constructor() {}
+
+  handleListItemClick({ itemData }) {
+    itemData.onClick();
+  }
 }
 
 @NgModule({

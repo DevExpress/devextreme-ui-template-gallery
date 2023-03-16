@@ -16,11 +16,19 @@
       {{ user?.name }} {{ user?.lastName }}
     </div>
   </div>
-  <dx-list :items="menuItems" />
+  <dx-list
+    ref="userInfoListRef"
+    :items="menuItems"
+    @item-click="onItemClick"
+    :element-attr="{
+      class: 'user-info-list'
+    }"
+  />
 </template>
 
 <script setup lang="ts">
 import DxList from 'devextreme-vue/list';
+import { ref } from 'vue';
 
 withDefaults(defineProps<{
   showAvatar: boolean,
@@ -31,6 +39,15 @@ withDefaults(defineProps<{
   menuItems: [],
   user: {},
 });
+
+const userInfoListRef = ref(null);
+const onItemClick = ({ itemData }) => itemData.onClick();
+
+function focusList() {
+  userInfoListRef.value.instance.focus();
+}
+
+defineExpose({ focusList });
 
 </script>
 <style scoped lang="scss">
@@ -61,6 +78,10 @@ withDefaults(defineProps<{
       height: 100%;
     }
   }
+}
+
+.dx-list.user-info-list.dx-scrollable.dx-widget {
+  height: auto;
 }
 
 :deep(.dx-list-item) .dx-icon {

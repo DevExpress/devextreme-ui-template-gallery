@@ -12,5 +12,12 @@
     </div>
     <div class='user-name'>{{ user?.name }}</div>
   </div>
-  <dx-list [items]="menuItems"></dx-list>
+  <dx-list
+    #userInfoList
+    [items]="menuItems"
+    [elementAttr]="{
+      class: 'user-info-list'
+    }"
+    (onItemClick)="handleListItemClick($event)"
+  ></dx-list>
 </div>

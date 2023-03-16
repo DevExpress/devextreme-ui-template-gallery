@@ -1,6 +1,7 @@
 import dxTreeView, { ItemClickEvent } from 'devextreme/ui/tree_view';
 import { ClickEvent } from 'devextreme/ui/button';
 import { EventInfo } from 'devextreme/events';
+import List from 'devextreme-react/list';
 import React from 'react';
 
 export interface HeaderProps {
@@ -23,6 +24,7 @@ export interface UserPanelProps {
 
 export interface UserMenuSectionProps {
   showAvatar?: boolean;
+  listRef?: React.RefObject<List>;
 }
 
 export interface User {

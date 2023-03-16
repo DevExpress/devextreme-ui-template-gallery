@@ -12,11 +12,14 @@
         width: '150'
       }"
       drop-down-content-template="dropDownContentTemplate"
+      @content-ready="handleDropDownButtonContentReady"
     >
       <template #dropDownContentTemplate="{ }">
         <user-menu-section
           :menu-items="menuItems"
           :user="user"
+          :show-avatar="false"
+          ref="userMenuSection"
         />
       </template>
     </dx-drop-down-button>
@@ -33,6 +36,7 @@
 
 <script setup lang="ts">
 import { DxDropDownButton } from 'devextreme-vue/drop-down-button';
+import { ref } from 'vue';
 import UserMenuSection from './user-menu-section.vue';
 
 withDefaults(defineProps<{
@@ -44,6 +48,14 @@ withDefaults(defineProps<{
   menuItems: [],
   user: {},
 });
+
+const userMenuSection = ref(null);
+
+function handleDropDownButtonContentReady({ component }) {
+  component.registerKeyHandler('downArrow', () => {
+    userMenuSection.value.focusList();
+  });
+}
 
 </script>
 <style scoped lang="scss">
