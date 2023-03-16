@@ -5,7 +5,7 @@ import { getTasksForScheduler, defaultListDS } from 'dx-template-gallery-data';
 import Calendar from 'devextreme-react/calendar';
 import Scheduler, { Resource, View } from 'devextreme-react/scheduler';
 import Button from 'devextreme-react/button';
-import List from 'devextreme-react/list';
+import SpeedDialAction from 'devextreme-react/speed-dial-action';
 
 import { CalendarList } from '../../components/calendar-list/calendar-list';
 import { SidePanel } from '../../components/side-panel/side-panel';
@@ -14,14 +14,13 @@ import { SchedulerMonthAgenda } from '../../components/scheduler-month-agenda/sc
 import './planning-calendar.scss';
 import { ViewType } from 'devextreme/ui/scheduler';
 import DataSource from 'devextreme/data/data_source';
-import ArrayStore from 'devextreme/data/array_store';
 import { useScreenSize } from '../../utils/media-query';
 
 const views = ['week', 'month'];
 const colors = ['#E1F5FE', '#C8E6C9', '#FFCDD2', '#FFE0B2', '#7b49d3', '#2a7ee4'];
 
 export const PlanningCalendar = () => {
-  const { isMedium, isLarge } = useScreenSize();
+  const { isXSmall, isMedium, isLarge } = useScreenSize();
   const schedulerRef = useRef<Scheduler>(null);
   const [selectedAppointment, setSelectedAppointment] = useState();
   const [tasks, setTasks] = useState<DataSource>();
@@ -85,7 +84,19 @@ export const PlanningCalendar = () => {
   }, [tasks]);
 
   const renderAppointmentTooltip = useCallback(({ appointmentData, targetedAppointmentData, isButtonClicked }) => {
-    const timeString = `${targetedAppointmentData.startDate.toLocaleString()} - ${targetedAppointmentData.endDate.toLocaleTimeString()}`;
+    const timeOptions = {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false
+    };
+    const dateOptions = {
+      ...timeOptions,
+      weekday: 'short',
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric'
+    };
+    const timeString = `${targetedAppointmentData.startDate.toLocaleString(undefined, dateOptions)} - ${targetedAppointmentData.endDate.toLocaleTimeString(undefined, timeOptions)}`;
     const deleteCurrentAppointment = (e) => {
       e.event.stopPropagation();
       schedulerRef.current?.instance.deleteAppointment(appointmentData);
@@ -94,20 +105,49 @@ export const PlanningCalendar = () => {
       <div className='title'>{targetedAppointmentData.text}</div>
       <div className='content'>
         <div className='date'>
-          <Button icon='clock' />
+          <Button icon='clock'
+            hoverStateEnabled={false}
+            activeStateEnabled={false}
+          />
           {timeString}
         </div>
         <div className='description'>
-          <Button icon='textdocument' />
+          <Button icon='textdocument'
+            hoverStateEnabled={false}
+            activeStateEnabled={false}
+          />
           {targetedAppointmentData.description}
         </div>
       </div>
       <div className='buttons'>
-        <Button text='Delete' type='danger' onClick={deleteCurrentAppointment} />
-        <Button text='Edit' type='success' />
+        <Button
+          text='Delete'
+          type='danger'
+          stylingMode='outlined'
+          onClick={deleteCurrentAppointment}
+        />
+        <Button
+          text='Edit'
+          type='success'
+          stylingMode='outlined'
+        />
       </div>
     </div>);
   }, []);
+
+  const createAppointment = useCallback(() => {
+    schedulerRef.current?.instance.showAppointmentPopup();
+  }, []);
+
+  const onTodayClick = () => {
+    setDate(new Date());
+  };
+
+  const onAppointmentTooltipShowing = useCallback((e) => {
+    if (currentView === 'month' && e.targetElement?.classList.contains('dx-scheduler')) {
+      e.cancel = true;
+    }
+  }, [currentView]);
 
   return <div className='view-wrapper-calendar'>
     <div className='panels'>
@@ -118,8 +158,8 @@ export const PlanningCalendar = () => {
       >
         <div className='left'>
           <div className='buttons'>
-            <Button text='Today' />
-            <Button text='Create event' type='default' />
+            <Button text='Today' onClick={onTodayClick} />
+            <Button text='Create event' type='default' onClick={createAppointment} />
           </div>
           <div className='calendar'>
             <Calendar value={date} onValueChange={onSetDate} />
@@ -138,7 +178,9 @@ export const PlanningCalendar = () => {
           currentView={currentView}
           onCurrentViewChange={onCurrentViewChange}
           onAppointmentClick={onAppointmentClick}
+          onAppointmentTooltipShowing={onAppointmentTooltipShowing}
           appointmentTooltipRender={renderAppointmentTooltip}
+          adaptivityEnabled={isXSmall}
         >
           <Resource
             dataSource={resourcesList}
@@ -149,6 +191,11 @@ export const PlanningCalendar = () => {
           <View type='week' />
           <View type='month' />
           <View type='agenda' />
+          <SpeedDialAction
+            icon='add'
+            visible={isXSmall}
+            onClick={createAppointment}
+          />
         </Scheduler>
       </div>
       {currentView === 'month' &&
@@ -161,7 +208,8 @@ export const PlanningCalendar = () => {
           <SchedulerMonthAgenda
             selectedAppointment={selectedAppointment}
             toggleOpen={toggleRightPanelOpen}
-            dataSource={tasks}
+            appointments={tasks?.items()}
+            schedulerRef={schedulerRef}
           />
         </SidePanel>
       }

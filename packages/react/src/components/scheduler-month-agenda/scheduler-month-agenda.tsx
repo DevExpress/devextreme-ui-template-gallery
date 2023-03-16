@@ -6,12 +6,11 @@ import List from 'devextreme-react/list';
 import { getTasksForScheduler } from 'dx-template-gallery-data';
 import Button from 'devextreme-react/button';
 
-const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
-  const items = dataSource.items();
-  if (items.length === 0 || !selectedAppointment) {
+const findAllAppointmentsForDay = (selectedAppointment, appointments) => {
+  if (appointments.length === 0 || !selectedAppointment) {
     return [];
   }
-  return Query(items)
+  return Query(appointments)
     .filter((appointment) => {
       return appointment.startDate.getDate() === selectedAppointment.startDate.getDate()
         && appointment.startDate.getMonth() === selectedAppointment.startDate.getMonth();
@@ -53,8 +52,8 @@ const renderListItem = (item) => {
   </div>;
 };
 
-export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, dataSource }) => {
-  const appointmentList = findAllAppointmentsForDay(selectedAppointment, dataSource);
+export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, appointments, schedulerRef }) => {
+  const appointmentList = findAllAppointmentsForDay(selectedAppointment, appointments);
 
   return <div className='agenda'>
     <div className='agenda-header'>
@@ -63,6 +62,6 @@ export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Da
       </div>
       <Button icon='showpanel' onClick={toggleOpen} />
     </div>
-    <List dataSource={appointmentList} itemRender={renderListItem} />
+    <List dataSource={appointmentList} itemRender={renderListItem} onItemClick={(e) => { schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.itemElement, e.itemData); }} />
   </div>;
 };

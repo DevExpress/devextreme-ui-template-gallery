@@ -2,7 +2,6 @@
 @use "sass:math";
 .calendar-list {
     width: 100%;
-    padding: $content-padding !important;
 
     .dx-list-group-header{
       padding: 8px 8px 8px $theme-padding;

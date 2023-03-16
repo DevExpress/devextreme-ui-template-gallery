@@ -52,6 +52,11 @@
           border-radius: 8px;
         }
     }
+
+    .dx-scheduler-appointment-content{
+      // color: $base-text-color;
+      color: #333333;
+    }
     
     .dx-scheduler-header {
       border-radius: 8px 8px 0px 0px;
@@ -96,7 +101,7 @@
     padding: 8px 16px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     gap: 16px;
   }
   .buttons{
@@ -111,11 +116,15 @@
     }
   }
 }
-.dx-tooltip-wrapper .dx-popup-content  {
-  max-height: 600px !important;
-  border-radius: 8px;
-}
-.dx-tooltip-wrapper .dx-popup-normal {
-  max-height: 600px !important;
-  border-radius: 8px !important;
+.dx-scheduler-appointment-tooltip-wrapper{ 
+  .dx-popup-content, .dx-popup-normal  {
+    max-height: 600px !important;
+    border-radius: 8px !important;
+  }
+
+  .dx-scrollable-wrapper .dx-list-item {
+    &.dx-state-hover, &.dx-state-focused{
+      background-color: $base-bg;
+    }
+  }
 }
