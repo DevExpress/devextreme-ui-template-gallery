@@ -6,7 +6,8 @@ import List from 'devextreme-react/list';
 import { getTasksForScheduler } from 'dx-template-gallery-data';
 import Button from 'devextreme-react/button';
 
-const findAllAppointmentsForDay = (selectedAppointment, appointments) => {
+const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
+  const appointments = dataSource.items();
   if (appointments.length === 0 || !selectedAppointment) {
     return [];
   }
@@ -52,8 +53,8 @@ const renderListItem = (item) => {
   </div>;
 };
 
-export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, appointments, schedulerRef }) => {
-  const appointmentList = findAllAppointmentsForDay(selectedAppointment, appointments);
+export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, dataSource, schedulerRef }) => {
+  const appointmentList = findAllAppointmentsForDay(selectedAppointment, dataSource);
 
   return <div className='agenda'>
     <div className='agenda-header'>

@@ -208,7 +208,7 @@ export const PlanningCalendar = () => {
           <SchedulerMonthAgenda
             selectedAppointment={selectedAppointment}
             toggleOpen={toggleRightPanelOpen}
-            appointments={tasks?.items()}
+            dataSource={tasks}
             schedulerRef={schedulerRef}
           />
         </SidePanel>
