@@ -16,4 +16,6 @@ export const screenModes = [
   [400, 800],
 ];
 
+export const themeModes = ['light', 'dark'];
+
 export const timeoutSecond = 10000;

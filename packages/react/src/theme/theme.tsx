@@ -34,7 +34,10 @@ function getThemeStyleSheets(): CSSStyleSheet[] {
     const themeCssSelector = `.${themePrefix + themeName}`;
 
     themeStylesSheets[themeName] = toArray<CSSStyleSheet>(document.styleSheets).filter(
-      ({ cssRules })=> !!toArray<CSSStyleRule>(cssRules).find(({ selectorText }) => selectorText?.includes(themeCssSelector)));
+      (styleSheets)=> {
+        console.log('-----styleSheets----->', styleSheets);
+        return !!toArray<CSSStyleRule>(styleSheets.cssRules).find(({ selectorText }) => selectorText?.includes(themeCssSelector));
+      });
   });
 
   return Object.values<CSSStyleSheet>(themeStylesSheets).flat();

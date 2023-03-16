@@ -18,12 +18,17 @@ class ThemeService {
 
   private getThemeStyleSheets() {
     return [...document.styleSheets as unknown as CSSStyleSheet[]]
-      .filter((styleSheet) => styleSheet?.href?.includes(this.themeMarker));
+      .filter((styleSheet) => {
+        console.log('-----getThemeStyleSheets .styleSheet?.href----->', styleSheet?.href);
+        return styleSheet?.href?.includes(this.themeMarker);
+      });
   }
 
   setAppTheme(themeName = this.currentTheme.value) {
+    console.log('-----document.styleSheets----->', [document.styleSheets, this.themeMarker]);
     this.getThemeStyleSheets().forEach((styleSheet) => {
-      styleSheet.disabled = !styleSheet?.href?.includes(`${this.themeMarker}${themeName}`);
+      styleSheet.disabled = !styleSheet?.href?.includes(`${this.themeMarker}${themeName}.`);
+      console.log('-----styleSheet.disabled----->', [styleSheet?.href, styleSheet.disabled]);
     });
 
     this.currentTheme.value = themeName;

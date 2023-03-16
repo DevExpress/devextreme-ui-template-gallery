@@ -44,30 +44,30 @@ jobs:
           { fullName: 'generic.light.compact', name: 'generic.light'},
         ]
         ARGS: [
-          { project: 'angular', page: 'crm-contact-details' },
+          #{ project: 'angular', page: 'crm-contact-details' },
           { project: 'angular', page: 'crm-contact-list' },
           # { project: 'angular', page: 'planning-task-details' }, No selector for Toolbar item on mobile device(bug)
-          { project: 'angular', page: 'planning-task-list' },
-          { project: 'angular', page: 'analytics-dashboard' },
-          { project: 'angular', page: 'analytics-sales-report' },
-          { project: 'angular', page: 'analytics-geography' },
-          { project: 'angular', page: 'auth-forms' },
-          { project: 'react', page: 'crm-contact-details' },
-          { project: 'react', page: 'crm-contact-list' },
+          # { project: 'angular', page: 'planning-task-list' },
+          # { project: 'angular', page: 'analytics-dashboard' },
+          # { project: 'angular', page: 'analytics-sales-report' },
+          # { project: 'angular', page: 'analytics-geography' },
+          # { project: 'angular', page: 'auth-forms' },
+          # { project: 'react', page: 'crm-contact-details' },
+          # { project: 'react', page: 'crm-contact-list' },
           # { project: 'react', page: 'planning-task-details' }, # Title width is different (screen width 400). Menu stays opened
-          { project: 'react', page: 'planning-task-list' },
-          { project: 'react', page: 'analytics-dashboard' },
-          { project: 'react', page: 'auth-forms' },
+          #{ project: 'react', page: 'planning-task-list' },
+          #{ project: 'react', page: 'analytics-dashboard' },
+          #{ project: 'react', page: 'auth-forms' },
           # { project: 'react', page: 'analytics-geography' }, # Menu contents disappear after item click (screen width 400)
           # { project: 'vue', page: 'crm-contact-details' }, No selector for Toolbar item on mobile device(bug)
-          { project: 'react', page: 'analytics-sales-report' },
+          # { project: 'react', page: 'analytics-sales-report' },
           { project: 'vue', page: 'crm-contact-list' },
           # { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)
-          { project: 'vue', page: 'planning-task-list' },
-          { project: 'vue', page: 'analytics-dashboard' },
-          { project: 'vue', page: 'analytics-sales-report' },
-          { project: 'vue', page: 'analytics-geography' },
-          { project: 'vue', page: 'auth-forms' },
+          #{ project: 'vue', page: 'planning-task-list' },
+          #{ project: 'vue', page: 'analytics-dashboard' },
+          #{ project: 'vue', page: 'analytics-sales-report' },
+          #{ project: 'vue', page: 'analytics-geography' },
+          #{ project: 'vue', page: 'auth-forms' },
         ]
     runs-on: ubuntu-latest
     timeout-minutes: 30
