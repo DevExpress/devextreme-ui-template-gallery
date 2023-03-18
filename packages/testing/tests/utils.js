@@ -40,6 +40,18 @@ export const getPostfix = (embedded, screenMode, themeMode) => {
   return `-embed=${embedded}-${theme}-${screenMode[0]}`;
 };
 
+export async function setTheme(t, theme) {
+  const currentTheme = await ClientFunction(
+    () => localStorage.getItem('app-theme'),
+  )();
+
+  if (currentTheme !== theme) {
+    await t.click('.theme-button');
+    await t.click('.header-title'); // for remove focus from theme-button
+    await t.wait(1000);
+  }
+}
+
 export const toggleCommonConfiguration = async (
   t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize, requestLogger,
 ) => {

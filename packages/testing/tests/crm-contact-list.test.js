@@ -1,26 +1,19 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector, ClientFunction } from 'testcafe';
+import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { forceResizeRecalculation, getPostfix, toggleCommonConfiguration } from './utils';
+import {
+  forceResizeRecalculation,
+  getPostfix,
+  toggleCommonConfiguration,
+  setTheme,
+} from './utils';
 import { screenModes, themeModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/crm-contact-list`;
 
 fixture`Contact List`;
-
-async function setTheme(t, themeMode) {
-  const currentTheme = await ClientFunction(
-    () => localStorage.getItem('themeViewer'),
-  )();
-
-  if (themeMode === 'dark' && currentTheme !== 'dark') {
-    await t.click('.theme-button');
-    await t.wait(1000);
-    await t.click('.header-title');
-  }
-}
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
@@ -36,8 +29,6 @@ async function setTheme(t, themeMode) {
 
         // eslint-disable-next-line max-len
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
-        const { log } = await t.getBrowserConsoleMessages();
-        console.log('LOG------------------------------>', log);
         await setTheme(t, themeMode);
 
         await t.expect(Selector('body.dx-device-generic').count).eql(1);
