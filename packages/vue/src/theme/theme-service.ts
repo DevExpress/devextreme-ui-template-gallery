@@ -6,7 +6,7 @@ import { ref } from 'vue';
 type Theme = 'dark' | 'light';
 
 class ThemeService {
-  private readonly storageKey = 'themeViewer';
+  private readonly storageKey = 'app-theme';
 
   private readonly themeMarker = 'theme-';
 
@@ -18,24 +18,19 @@ class ThemeService {
 
   private getThemeStyleSheets() {
     return [...document.styleSheets as unknown as CSSStyleSheet[]]
-      .filter((styleSheet) => {
-        console.log('-----getThemeStyleSheets .styleSheet?.href----->', styleSheet?.href);
-        return styleSheet?.href?.includes(this.themeMarker);
-      });
+      .filter((styleSheet) => styleSheet?.href?.includes(this.themeMarker));
   }
 
-  setAppTheme(themeName = this.currentTheme.value) {
-    console.log('-----document.styleSheets----->', [document.styleSheets, this.themeMarker]);
+  setAppTheme(theme = this.currentTheme.value) {
     this.getThemeStyleSheets().forEach((styleSheet) => {
-      styleSheet.disabled = !styleSheet?.href?.includes(`${this.themeMarker}${themeName}.`);
-      console.log('-----styleSheet.disabled----->', [styleSheet?.href, styleSheet.disabled]);
+      styleSheet.disabled = !styleSheet?.href?.includes(`${this.themeMarker}${theme}.`);
     });
 
-    this.currentTheme.value = themeName;
+    this.currentTheme.value = theme;
 
-    window.localStorage[this.storageKey] = themeName;
+    window.localStorage[this.storageKey] = theme;
 
-    currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${themeName}.compact`));
+    currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${theme}.compact`));
     refreshTheme();
   }
 
