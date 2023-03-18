@@ -7,7 +7,7 @@ type Theme = 'dark'| 'light';
   providedIn: 'root'
 })
 export class ThemeService {
-  private storageKey = 'themeViewer';
+  private storageKey = 'app-theme';
   private themeMarker = 'theme-';
 
   currentTheme: Theme = window.localStorage[this.storageKey] || 'light';
@@ -17,15 +17,15 @@ export class ThemeService {
       .filter((styleSheet) => styleSheet?.href?.includes(this.themeMarker));
   }
 
-  setAppTheme(themeName = this.currentTheme) {
+  setAppTheme(theme = this.currentTheme) {
 
     this.getThemeStyleSheets().forEach((styleSheet) => {
-      styleSheet.disabled = !styleSheet?.href?.includes(`${this.themeMarker}${themeName}`);
+      styleSheet.disabled = !styleSheet?.href?.includes(`${this.themeMarker}${theme}`);
     });
 
-    this.currentTheme = window.localStorage[this.storageKey] = themeName;
+    this.currentTheme = window.localStorage[this.storageKey] = theme;
 
-    currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${themeName}.compact`));
+    currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${theme}.compact`));
     refreshTheme();
   }
 
