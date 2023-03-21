@@ -27,9 +27,13 @@ function getCurrentTheme(): Theme {
 }
 
 function isThemeStyleSheet(styleSheet, theme: Theme) {
-  return styleSheet?.href?.includes(`${themePrefix}${theme}`) ||
-      !!toArray<CSSStyleRule>(styleSheet.cssRules).find( // for dev mode
-        ({ selectorText }) => selectorText?.includes(`.${themePrefix}${theme}`));
+  const themeMarker = `${themePrefix}${theme}`;
+  // eslint-disable-next-line no-undef
+  return process.env.NODE_ENV === 'production' ?
+    styleSheet?.href?.includes(`${themeMarker}`)
+    : -1 !== [0, -1].findIndex(
+      (i) => toArray<CSSStyleRule>(styleSheet.cssRules).at(i)?.selectorText?.includes(`.${themeMarker}`)
+    );
 }
 
 function switchThemeStyleSheets(enabledTheme: Theme) {
