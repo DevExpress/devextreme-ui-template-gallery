@@ -65,7 +65,7 @@ export class CrmContactListComponent {
   }
 
   addContact() {
-    this.userPopup.popupVisible = true;
+    this.userPopup.visible = true;
   };
 
   refresh = () => {

@@ -1,0 +1,105 @@
+@use "../../../variables.scss" as *;
+@use "sass:math";
+
+:host {
+  width: 100%;
+  display: contents;
+
+  .view-wrapper-scroll {
+    height: 100%;
+  }
+}
+
+$gap-padding: 24px;
+
+profile-card {
+  flex: 0.5;
+}
+
+:host-context(.screen-small, .screen-x-small)  profile-card {
+  min-width: 100%;
+  flex: 1;
+}
+
+.view-wrapper {
+  padding: $content-padding calc($content-padding * 2);
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: $content-padding;
+    gap: 24px;
+  }
+
+  profile-card {
+    .image-wrapper {
+      flex: 0 0 44px;
+      height: 44px;
+      border-radius: 50%;
+      margin-right: $gap-padding;
+
+      img {
+        height: 20px;
+        width: 20px;
+        margin: auto;
+      }
+    }
+
+    .with-clipboard-copy {
+      display: flex;
+
+      dx-button {
+        max-width: 18px;
+        min-width: 18px;
+        height: 18px;
+        margin-left: 8px;
+
+        &::ng-deep .dx-icon:active {
+          color: red;
+        }
+      }
+    }
+
+    .copy-clipboard-button::ng-deep {
+      .dx-icon {
+        color: $subtitle-text-color;
+      }
+    }
+  }
+
+  .contacts-card .image-wrapper {
+    background-color: #FFEBEE;
+  }
+
+  .address-card .image-wrapper {
+    background-color: #E1F5FE;
+  }
+
+  .basic-info-card {
+    flex: 1;
+    min-width: 100%;
+
+    .basic-info-top-item {
+      form-photo {
+        margin-right: $content-padding;
+
+        &::ng-deep .photo {
+          border-radius: 50%;
+        }
+      }
+
+      .change-password-button {
+        margin-top: calc($content-padding / 2);
+      }
+    }
+  }
+}
+
+::ng-deep .change-profile-password-popup .dx-popup-normal {
+  border-radius: 8px;
+  padding: 8px 0;
+
+  .dx-toolbar {
+    padding: 0 24px 8px;
+  }
+}

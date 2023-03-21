@@ -67,7 +67,7 @@ export class PlanningTaskListComponent implements OnInit {
   };
 
   addTask = () => {
-    this.taskPopup.popupVisible = true;
+    this.taskPopup.visible = true;
   };
 
   refresh = () => {

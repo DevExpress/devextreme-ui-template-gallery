@@ -1,9 +1,9 @@
 import {
-    Component,
-    NgModule,
-    Input,
-    ViewChild,
-  } from '@angular/core';
+  Component,
+  NgModule,
+  Input,
+  ViewChild, Output, EventEmitter,
+} from '@angular/core';
   import { CommonModule } from '@angular/common';
   import {
     DxButtonModule,
@@ -25,19 +25,32 @@ import {
 
     @Input() titleText = '';
 
-    popupVisible = false;
+    @Input() width = 480;
+
+    @Input() wrapperAttr: Record<string, string> = {};
+
+    @Input() visible = false;
+
+    @Output() save = new EventEmitter();
+
+    @Output() hide = new EventEmitter();
+
+
 
     constructor(protected screen: ScreenService) { }
 
     onCancelClick = () => {
       this.validationGroup.instance.reset();
-      this.popupVisible = false;
+      this.visible = false;
+      this.hide.emit();
     }
 
     onSaveClick = () => {
       if(!this.validationGroup.instance.validate().isValid) return;
+      this.visible = false;
+      this.save.emit();
+      this.hide.emit();
       this.validationGroup.instance.reset();
-      this.popupVisible = false;
     }
   }
 

@@ -11,6 +11,21 @@ body {
   box-sizing: border-box;
 }
 
+.header-text {
+  @include header();
+}
+
+.title-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.subtitle-text {
+  color: $subtitle-text-color;
+  font-size: 14px;
+  font-weight: 500;
+}
+
 .content {
   line-height: 1.5;
   height: 100%;

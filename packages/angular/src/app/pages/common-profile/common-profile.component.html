@@ -1,0 +1,104 @@
+<dx-scroll-view class="view-wrapper-scroll">
+  <div class="view-wrapper">
+    <dx-toolbar>
+      <dxi-item location="before">
+        <div class="header-text">User Profile</div>
+      </dxi-item>
+      <dxi-item location="after" locateInMenu="never">
+        <dx-button
+          text="Cancel"
+          stylingMode="contained"
+        ></dx-button>
+      </dxi-item>
+      <dxi-item location="after" locateInMenu="never">
+        <dx-button
+          text="Save"
+          icon="save"
+          type="default"
+          stylingMode="contained"
+        ></dx-button>
+      </dxi-item>
+    </dx-toolbar>
+    <dx-load-panel
+      [visible]="isLoading"
+      [showPane]="false"
+      container=".view-wrapper-scroll"
+      [position]="{ of: 'common-profile' }"
+    ></dx-load-panel>
+    <div *ngIf="!isLoading" class="cards-container">
+      <profile-card class="basic-info-card"
+                    title="Basic Info"
+                    [colCount]="4"
+                    [cardData]="profileData"
+                    [items]="basicInfoItems">
+        <div class="basic-info-top-item" top-item>
+          <form-photo
+            [link]="profileData?.image"
+            [editable]="true"
+            [size]="80"
+          ></form-photo>
+          <div>
+            <div class="title-text">{{profileData.name}}</div>
+            <div class="subtitle-text with-clipboard-copy">ID: {{profileData.id}}
+              <dx-button icon="copy"
+                         class="copy-clipboard-button"
+                         (click)="copyToClipboard(profileData.id)"
+                         [activeStateEnabled]="false"
+                         [focusStateEnabled]="false"
+                         [hoverStateEnabled]="false"
+              ></dx-button>
+            </div>
+            <dx-button
+              text="Change Password"
+              icon="lock"
+              class="change-password-button"
+              stylingMode="contained"
+              (click)="changePassword()"
+            ></dx-button>
+          </div>
+        </div>
+      </profile-card>
+
+      <profile-card class="contacts-card"
+                    title="Contacts"
+                    [cardData]="profileData"
+                    [items]="contactItems">
+        <div top-item>
+          <div class="image-wrapper">
+            <img alt="" src="assets/icons/at.svg"/>
+          </div>
+          <div>
+            <div class="title-text">{{ formatPhone | apply: profileData.phone }}</div>
+            <div class="subtitle-text with-clipboard-copy">{{ profileData.email }}
+              <dx-button icon="copy"
+                         class="copy-clipboard-button"
+                         (click)="copyToClipboard(profileData.email)"
+                         [activeStateEnabled]="false"
+                         [focusStateEnabled]="false"
+                         [hoverStateEnabled]="false"
+              ></dx-button>
+            </div>
+          </div>
+        </div>
+      </profile-card>
+
+      <profile-card class="address-card"
+                    title="Address"
+                    [cardData]="profileData"
+                    [items]="addressItems">
+        <div top-item>
+          <div class="image-wrapper">
+            <img alt="" src="assets/icons/geo-position.svg"/>
+          </div>
+          <div>
+            <div class="title-text">
+              {{profileData.address}}, {{profileData.city}}, {{profileData.state}}, {{profileData.country}}
+            </div>
+          </div>
+        </div>
+      </profile-card>
+    </div>
+  </div>
+</dx-scroll-view>
+
+<change-profile-password-form [opener]="changePasswordPopupOpener"></change-profile-password-form>

@@ -1,22 +1,22 @@
-
 <dx-popup [title]="titleText"
-          [(visible)]="popupVisible"
-          [fullScreen]="(screen.xSmallScreenChanged | async)"
-          width="480px"
+          [(visible)]="visible"
+          [fullScreen]="!!(screen.xSmallScreenChanged | async)"
+          [width]="width"
+          [wrapperAttr]="wrapperAttr"
           height="auto">
-  <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="after" [options]="{
-                    text: 'Save',
-                    stylingMode: 'outlined',
-                    type: 'default',
-                    onClick: onSaveClick
-                }">
+  <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="after">
+    <dx-button
+      text="Cancel"
+      stylingMode="contained"
+      (click)="onCancelClick()"
+    ></dx-button>
   </dxi-toolbar-item>
 
   <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="after" [options]="{
-                    text: 'Cancel',
-                    stylingMode: 'text',
+                    text: 'Save',
+                    stylingMode: 'contained',
                     type: 'default',
-                    onClick: onCancelClick
+                    onClick: onSaveClick
                 }">
   </dxi-toolbar-item>
   <dx-validation-group #validationGroup>
