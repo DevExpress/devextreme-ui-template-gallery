@@ -5,8 +5,7 @@
       *ngIf="showAvatar"
     >
       <div
-        [style.background]="'url(' + user?.avatarUrl + ') no-repeat #fff'"
-        [style.backgroundSize]="'cover'"
+        [style.backgroundImage]="'url(' + user?.avatarUrl + ')'"
         class="user-image"
       ></div>
     </div>

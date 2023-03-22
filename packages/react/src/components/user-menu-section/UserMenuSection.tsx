@@ -32,8 +32,7 @@ export const UserMenuSection = ({ showAvatar, listRef }: UserMenuSectionProps) =
           <div className='image-container'>
             <div
               style={{
-                background: `url(${user?.avatarUrl}) no-repeat #fff`,
-                backgroundSize: 'cover',
+                backgroundImage: `url(${user?.avatarUrl})`,
               }}
               className='user-image'
             />

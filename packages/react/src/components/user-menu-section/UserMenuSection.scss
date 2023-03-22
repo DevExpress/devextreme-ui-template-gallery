@@ -23,6 +23,9 @@
     .user-image {
       width: 100%;
       height: 100%;
+      background-repeat: no-repeat;
+      background-color: #fff;
+      background-size: cover;
     }
   }
 }

@@ -6,8 +6,7 @@
     >
       <div
         :style="{
-          background: `url(${user?.avatarUrl}) no-repeat #fff`,
-          backgroundSize: 'cover',
+          backgroundImage: `url(${user?.avatarUrl})`,
         }"
         class="user-image"
       />
@@ -76,6 +75,9 @@ defineExpose({ focusList });
     .user-image {
       width: 100%;
       height: 100%;
+      background-repeat: no-repeat;
+      background-color: #fff;
+      background-size: cover;
     }
   }
 }
