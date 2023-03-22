@@ -31,6 +31,7 @@ export const SidePanel = ({ side, icon, isOverlapping = true, isOpened, toggleOp
         'resize': !isOverlapping,
         'overlap': !isLarge || isOverlapping,
         'small': !isLarge,
+        'x-small': isXSmall,
         'open': isOpened,
         'side-left': side === 'left',
         'side-right': side === 'right'

@@ -2,6 +2,7 @@
 import React, { } from 'react';
 import Button from 'devextreme-react/button';
 import Tooltip from 'devextreme-react/tooltip';
+import './scheduler-tooltip.scss';
 
 export const TooltipContentTemplate = ({ appointmentData, deleteCurrentAppointment, editCurrentAppointment }) => {
   if (!appointmentData) {
@@ -43,15 +44,17 @@ export const TooltipContentTemplate = ({ appointmentData, deleteCurrentAppointme
     </div>
     <div className='buttons'>
       <Button
+        className='button-danger'
         text='Delete'
         type='danger'
-        stylingMode='outlined'
+        stylingMode='text'
         onClick={deleteCurrentAppointment}
       />
       <Button
+        className='button-success'
         text='Edit'
         type='success'
-        stylingMode='outlined'
+        stylingMode='text'
         onClick={editCurrentAppointment}
       />
     </div>

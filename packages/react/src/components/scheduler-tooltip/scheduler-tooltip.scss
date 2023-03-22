@@ -1,0 +1,12 @@
+@use "../../variables.scss" as *;
+@use "sass:math";
+.appointment-tooltip{
+    .buttons{
+        .button-danger{
+            background-color: $tooltip-danger-button-color;
+        }
+        .button-success{
+            background-color: $tooltip-success-button-color;
+        }
+    }
+}

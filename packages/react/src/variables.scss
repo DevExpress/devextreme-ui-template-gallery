@@ -6,6 +6,7 @@
 @use "../node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
 @use "../node_modules/devextreme/scss/widgets/material/list/sizes" as *;
 @use "../node_modules/devextreme/scss/widgets/material/button/sizes" as *;
+@use "../node_modules/devextreme/scss/widgets/material/button/colors" as button_colors;
 
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
 @forward "../node_modules/devextreme/scss/widgets/material/textEditor/colors";
@@ -28,6 +29,8 @@ $texteditor-edit-color: $texteditor-color;
 $list-padding-left: $material-list-item-horizontal-padding;
 $footer-height: 70px;
 $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
+$tooltip-danger-button-color: button_colors.$button-danger-text-hover-bg;
+$tooltip-success-button-color: button_colors.$button-success-text-hover-bg;
 
 $theme-padding: $material-button-horizontal-padding;
 // WA for no button-height in generic theme, remove when design-system is released
