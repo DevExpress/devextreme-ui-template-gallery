@@ -9,7 +9,11 @@ import SpeedDialAction from 'devextreme-react/speed-dial-action';
 
 import { CalendarList } from '../../components/calendar-list/calendar-list';
 import { SidePanel } from '../../components/side-panel/side-panel';
-import { SchedulerMonthAgenda } from '../../components/scheduler-month-agenda/scheduler-month-agenda';
+import { LeftSidePanel } from '../../components/side-panel/left-side-panel';
+import { RightSidePanel } from '../../components/side-panel/right-side-panel';
+import { SchedulerMonthAgenda, findAllAppointmentsForDay } from '../../components/scheduler-month-agenda/scheduler-month-agenda';
+import { TooltipContentTemplate } from '../../components/scheduler-tooltip/scheduler-tooltip';
+import Tooltip from 'devextreme-react/tooltip';
 
 import './planning-calendar.scss';
 import { ViewType } from 'devextreme/ui/scheduler';
@@ -22,7 +26,8 @@ const colors = ['#E1F5FE', '#C8E6C9', '#FFCDD2', '#FFE0B2', '#7b49d3', '#2a7ee4'
 export const PlanningCalendar = () => {
   const { isXSmall, isMedium, isLarge } = useScreenSize();
   const schedulerRef = useRef<Scheduler>(null);
-  const [selectedAppointment, setSelectedAppointment] = useState();
+  const tooltipRef = useRef<Tooltip>(null);
+  const [selectedAppointment, setSelectedAppointment] = useState<{ data, target }>();
   const [tasks, setTasks] = useState<DataSource>();
   const [date, setDate] = useState(new Date());
   const [currentView, setCurrentView] = useState<ViewType>('week');
@@ -48,28 +53,18 @@ export const PlanningCalendar = () => {
 
   const toggleRightPanelOpen = useCallback(() => {
     setRightPanelOpen(!rightPanelOpen);
-    if (isMedium || isLarge) {
+    if (isLarge) {
       schedulerRef.current?.instance.repaint();
     }
   }, [rightPanelOpen]);
 
   const onCurrentViewChange = useCallback((view) => { setCurrentView(view); }, []);
 
-  const onAppointmentClick = useCallback((e) => {
-    if (currentView === 'month') {
-      e.event.stopImmediatePropagation();
-      setSelectedAppointment(e.appointmentData);
-      if (!rightPanelOpen) {
-        toggleRightPanelOpen();
-      }
-    }
-  }, [currentView, rightPanelOpen]);
-
   const onSelectedCalendarsChange = useCallback((seletedCalendars) => {
     const removedResourceFilters = seletedCalendars
       .map((calendar) => calendar.id)
       .map(resource => ['calendarId', '<>', resource]);
-    const filters: any[] = [];
+    const filters: unknown[] = [];
     // refactor to predicate logic
     removedResourceFilters.forEach(filter => {
       filters.push(filter, 'and');
@@ -83,58 +78,6 @@ export const PlanningCalendar = () => {
     tasks?.load();
   }, [tasks]);
 
-  const renderAppointmentTooltip = useCallback(({ appointmentData, targetedAppointmentData, isButtonClicked }) => {
-    const timeOptions = {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: false
-    };
-    const dateOptions = {
-      ...timeOptions,
-      weekday: 'short',
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric'
-    };
-    const timeString = `${targetedAppointmentData.startDate.toLocaleString(undefined, dateOptions)} - ${targetedAppointmentData.endDate.toLocaleTimeString(undefined, timeOptions)}`;
-    const deleteCurrentAppointment = (e) => {
-      e.event.stopPropagation();
-      schedulerRef.current?.instance.deleteAppointment(appointmentData);
-    };
-    return (<div className='appointment-tooltip'>
-      <div className='title'>{targetedAppointmentData.text}</div>
-      <div className='content'>
-        <div className='date'>
-          <Button icon='clock'
-            hoverStateEnabled={false}
-            activeStateEnabled={false}
-          />
-          {timeString}
-        </div>
-        <div className='description'>
-          <Button icon='textdocument'
-            hoverStateEnabled={false}
-            activeStateEnabled={false}
-          />
-          {targetedAppointmentData.description}
-        </div>
-      </div>
-      <div className='buttons'>
-        <Button
-          text='Delete'
-          type='danger'
-          stylingMode='outlined'
-          onClick={deleteCurrentAppointment}
-        />
-        <Button
-          text='Edit'
-          type='success'
-          stylingMode='outlined'
-        />
-      </div>
-    </div>);
-  }, []);
-
   const createAppointment = useCallback(() => {
     schedulerRef.current?.instance.showAppointmentPopup();
   }, []);
@@ -143,19 +86,59 @@ export const PlanningCalendar = () => {
     setDate(new Date());
   };
 
-  const onAppointmentTooltipShowing = useCallback((e) => {
-    if (currentView === 'month' && e.targetElement?.classList.contains('dx-scheduler')) {
-      e.cancel = true;
+  const deleteCurrentAppointment = useCallback(() => {
+    schedulerRef.current?.instance.deleteAppointment(selectedAppointment?.data);
+    tooltipRef.current?.instance.hide();
+  }, [selectedAppointment]);
+
+  const editCurrentAppointment = useCallback(() => {
+    schedulerRef.current?.instance.showAppointmentPopup(selectedAppointment?.data, false);
+    tooltipRef.current?.instance.hide();
+  }, [selectedAppointment]);
+
+  const onAppointmentClick = useCallback((e) => {
+    if (currentView === 'month') {
+      if (!rightPanelOpen) {
+        toggleRightPanelOpen();
+      }
     }
+  }, [currentView, rightPanelOpen]);
+
+  const onAppointmentTooltipShowing = useCallback((e) => {
+    e.cancel = true;
+    const classList = e.targetElement?.classList || e.targetElement[0]?.classList;
+
+    setSelectedAppointment({ data: e.appointments[0].appointmentData, target: e.targetElement });
+    if (currentView === 'month' && isXSmall && !rightPanelOpen) {
+      toggleRightPanelOpen();
+    }
+    else {
+      tooltipRef.current?.instance.show();
+    }
+
   }, [currentView]);
+
+  const tooltipPosition = useMemo(() => {
+    if (isXSmall) {
+      return 'bottom';
+    }
+    const classList = selectedAppointment?.target?.classList || selectedAppointment?.target?.[0]?.classList;
+    return classList?.contains('dx-list') && rightPanelOpen ? 'left' : 'top';
+  }, [selectedAppointment, rightPanelOpen, isXSmall]);
+
+  const onCellClick = useCallback((e) => {
+    if (currentView === 'month' && e.cellData) {
+      const cellAppointments = findAllAppointmentsForDay(e.cellData, tasks);
+      if (cellAppointments.length > 1 && !rightPanelOpen) {
+        setSelectedAppointment({ data: e.cellData, target: null });
+        toggleRightPanelOpen();
+      }
+    }
+  }, [currentView, rightPanelOpen, tasks, selectedAppointment]);
 
   return <div className='view-wrapper-calendar'>
     <div className='panels'>
-      <SidePanel
-        side='left'
-        isOpened={leftPanelOpen}
-        toggleOpen={toggleLeftPanelOpen}
-      >
+      <LeftSidePanel>
         <div className='left'>
           <div className='buttons'>
             <Button text='Today' onClick={onTodayClick} />
@@ -166,7 +149,7 @@ export const PlanningCalendar = () => {
           </div>
           <CalendarList listDS={listDS} onSelectedCalendarsChange={onSelectedCalendarsChange} />
         </div>
-      </SidePanel>
+      </LeftSidePanel>
       <div className='right'>
         <Scheduler
           allDayPanelMode='hidden'
@@ -179,7 +162,7 @@ export const PlanningCalendar = () => {
           onCurrentViewChange={onCurrentViewChange}
           onAppointmentClick={onAppointmentClick}
           onAppointmentTooltipShowing={onAppointmentTooltipShowing}
-          appointmentTooltipRender={renderAppointmentTooltip}
+          onCellClick={onCellClick}
           adaptivityEnabled={isXSmall}
         >
           <Resource
@@ -197,6 +180,18 @@ export const PlanningCalendar = () => {
             onClick={createAppointment}
           />
         </Scheduler>
+        <Tooltip
+          ref={tooltipRef}
+          target={selectedAppointment?.target}
+          showEvent='click'
+          position={tooltipPosition}
+        // container={schedulerRef.current?.instance.element()}
+        >
+          <TooltipContentTemplate
+            deleteCurrentAppointment={deleteCurrentAppointment}
+            editCurrentAppointment={editCurrentAppointment}
+            appointmentData={selectedAppointment?.data} />
+        </Tooltip>
       </div>
       {currentView === 'month' &&
         <SidePanel
@@ -206,7 +201,7 @@ export const PlanningCalendar = () => {
           toggleOpen={toggleRightPanelOpen}
         >
           <SchedulerMonthAgenda
-            selectedAppointment={selectedAppointment}
+            selectedAppointment={selectedAppointment?.data}
             toggleOpen={toggleRightPanelOpen}
             dataSource={tasks}
             schedulerRef={schedulerRef}

@@ -29,8 +29,8 @@ export const SidePanel = ({ side, icon, isOverlapping = true, isOpened, toggleOp
       className={classNames({
         'side-panel': true,
         'resize': !isOverlapping,
-        'overlap': isXSmall || isSmall || isOverlapping,
-        'small': isXSmall || isSmall,
+        'overlap': !isLarge || isOverlapping,
+        'small': !isLarge,
         'open': isOpened,
         'side-left': side === 'left',
         'side-right': side === 'right'
@@ -42,7 +42,7 @@ export const SidePanel = ({ side, icon, isOverlapping = true, isOpened, toggleOp
       <Button
         className={classNames({
           'open-button': true,
-          'hidden': isOpened,
+          'hidden': isOpened && !(!isLarge || isOverlapping),
           'side-right': side === 'right'
         })}
         icon={icon || 'hidepanel'}

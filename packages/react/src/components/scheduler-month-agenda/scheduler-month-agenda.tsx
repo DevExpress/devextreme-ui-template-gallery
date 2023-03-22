@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './scheduler-month-agenda.scss';
 import Query from 'devextreme/data/query';
 import List from 'devextreme-react/list';
 import { getTasksForScheduler } from 'dx-template-gallery-data';
 import Button from 'devextreme-react/button';
 
-const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
+export const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
   const appointments = dataSource.items();
   if (appointments.length === 0 || !selectedAppointment) {
     return [];
@@ -54,6 +54,9 @@ const renderListItem = (item) => {
 };
 
 export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, dataSource, schedulerRef }) => {
+  const showAppointmentPopup = useCallback((e) => {
+    schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
+  }, [schedulerRef]);
   const appointmentList = findAllAppointmentsForDay(selectedAppointment, dataSource);
 
   return <div className='agenda'>
@@ -63,6 +66,6 @@ export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Da
       </div>
       <Button icon='showpanel' onClick={toggleOpen} />
     </div>
-    <List dataSource={appointmentList} itemRender={renderListItem} onItemClick={(e) => { schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.itemElement, e.itemData); }} />
+    <List dataSource={appointmentList} itemRender={renderListItem} onItemClick={showAppointmentPopup} />
   </div>;
 };

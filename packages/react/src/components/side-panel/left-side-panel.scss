@@ -1,0 +1,67 @@
+@use "../../variables.scss" as *;
+@use "sass:math";
+
+#left-side-panel {
+  --left-side-panel-width: 320px;
+  --transition: 400ms;
+}
+
+// .screen-x-small #left-side-panel {
+//   --left-side-panel-width: 100vw;
+// }
+
+.left-side-panel {
+  position: relative;
+  border: 1px solid transparent;
+  height: 100%;
+
+  .side-panel-container {
+    display: flex;
+
+    .side-panel-content-wrapper {
+      padding-top: $theme-padding;
+
+      .side-panel-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+
+  .side-panel-content-wrapper {
+    width: 0;
+    transition: width var(--transition);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &.open {
+    .side-panel-content-wrapper {
+      width: var(--left-side-panel-width);
+      padding-left: 0;
+    }
+  }
+
+  &.overlapping {
+    .button-container {
+    //   margin-top: $content-padding;
+      // padding: 0 $content-padding;
+      display: flex;
+      flex-direction: row;
+    //   align-items: center;
+      align-items: flex-start;
+      height: $button-height + calc($theme-padding * 2);
+    }
+
+    .side-panel-content-wrapper {
+      position: absolute;
+      top: -16px;
+      background-color: $base-bg;
+      z-index: 3;
+      height: 100vh;
+      left: calc(2 * $content-padding);
+      box-shadow: 8px 0 16px -8px $base-border-color;
+    }
+  }
+}

@@ -101,7 +101,7 @@
     padding: 8px 16px;
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: flex-start;
     gap: 16px;
   }
   .buttons{
@@ -127,4 +127,12 @@
       background-color: $base-bg;
     }
   }
+}
+
+
+.dx-tooltip-wrapper > .dx-popup-normal {
+  background-color: $base-bg !important;
+  color: $base-text-color !important;
+  max-width: 360px ;
+  filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.24));
 }
