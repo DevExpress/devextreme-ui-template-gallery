@@ -116,7 +116,7 @@ export const PlanningCalendar = () => {
       tooltipRef.current?.instance.show();
     }
 
-  }, [currentView]);
+  }, [currentView, isXSmall, rightPanelOpen]);
 
   const tooltipPosition = useMemo(() => {
     if (isXSmall) {
