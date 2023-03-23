@@ -1,7 +1,16 @@
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import { Injectable } from '@angular/core';
 
-type Theme = 'dark'| 'light';
+const themes = ['light', 'dark'] as const;
+
+type Theme = typeof themes[number];
+
+function getNextTheme(theme?: Theme) {
+  const index = !theme ? 0 : (themes.indexOf(theme) + 1);
+  return themes[
+    themes.length === index ? 0 : index
+    ];
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +19,12 @@ export class ThemeService {
   private storageKey = 'app-theme';
   private themeMarker = 'theme-';
 
-  currentTheme: Theme = window.localStorage[this.storageKey] || 'light';
+  currentTheme: Theme = window.localStorage[this.storageKey] || getNextTheme();
 
   private getThemeStyleSheets() {
-    return   [...(document.styleSheets as unknown as CSSStyleSheet[])]
-      .filter((styleSheet) => styleSheet?.href?.includes(this.themeMarker));
+    return   Array.from(document.styleSheets).filter(
+      (styleSheet) => styleSheet?.href?.includes(this.themeMarker)
+    );
   }
 
   setAppTheme(theme = this.currentTheme) {
@@ -30,6 +40,6 @@ export class ThemeService {
   }
 
   switchTheme() {
-    this.setAppTheme(this.currentTheme === 'dark' ? 'light' : 'dark');
+    this.setAppTheme(getNextTheme(this.currentTheme));
   }
 }

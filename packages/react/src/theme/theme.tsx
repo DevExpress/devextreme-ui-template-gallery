@@ -1,7 +1,7 @@
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-const themeNames = ['dark', 'light'] as const;
+const themes = ['light', 'dark'] as const;
 const storageKey = 'app-theme';
 const themePrefix = 'app-theme-';
 
@@ -16,14 +16,17 @@ const loadStylesImports = async() => {
   ]);
 };
 
-export type Theme = typeof themeNames[number];
+export type Theme = typeof themes[number];
 
-function toArray<T>(arrayLikeObject) {
-  return [...arrayLikeObject as unknown as T[]];
+function getNextTheme(theme?: Theme) {
+  const index = !theme ? 0 : (themes.indexOf(theme) + 1);
+  return themes[
+    themes.length === index ? 0 : index
+  ];
 }
 
 function getCurrentTheme(): Theme {
-  return window.localStorage[storageKey] || themeNames[1];
+  return window.localStorage[storageKey] || getNextTheme();
 }
 
 function isThemeStyleSheet(styleSheet, theme: Theme) {
@@ -32,14 +35,14 @@ function isThemeStyleSheet(styleSheet, theme: Theme) {
   return process.env.NODE_ENV === 'production' ?
     styleSheet?.href?.includes(`${themeMarker}`)
     : -1 !== [0, -1].findIndex(
-      (i) => toArray<CSSStyleRule>(styleSheet.cssRules).at(i)?.selectorText?.includes(`.${themeMarker}`)
+      (i) => Array.from<CSSStyleRule>(styleSheet.cssRules).at(i)?.selectorText?.includes(`.${themeMarker}`)
     );
 }
 
 function switchThemeStyleSheets(enabledTheme: Theme) {
-  const disabledTheme = themeNames[enabledTheme === themeNames[0] ? 1 : 0];
+  const disabledTheme = getNextTheme(enabledTheme);
 
-  return toArray<CSSStyleSheet>(document.styleSheets).forEach((styleSheet) => {
+  return Array.from<CSSStyleSheet>(document.styleSheets).forEach((styleSheet) => {
     styleSheet.disabled = isThemeStyleSheet(styleSheet, disabledTheme);
   });
 }
@@ -65,9 +68,7 @@ export function useThemeContext() {
     });
   }, []);
 
-  const switchTheme = useCallback(() => {
-    setTheme((currentTheme: Theme) => themeNames[currentTheme === themeNames[0] ? 1 : 0]);
-  }, []);
+  const switchTheme = useCallback(() => setTheme((currentTheme: Theme) => getNextTheme(currentTheme)), []);
 
   useEffect(() => {
     isLoaded && setAppTheme(theme);

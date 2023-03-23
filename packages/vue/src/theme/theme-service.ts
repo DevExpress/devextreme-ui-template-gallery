@@ -3,7 +3,16 @@ import './theme-light';
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import { ref } from 'vue';
 
-type Theme = 'dark' | 'light';
+const themes = ['light', 'dark'] as const;
+
+type Theme = typeof themes[number];
+
+function getNextTheme(theme?: Theme) {
+  const index = !theme ? 0 : (themes.indexOf(theme) + 1);
+  return themes[
+    themes.length === index ? 0 : index
+  ];
+}
 
 class ThemeService {
   private readonly storageKey = 'app-theme';
@@ -13,12 +22,13 @@ class ThemeService {
   currentTheme = ref<Theme>(this.getCurrentTheme());
 
   getCurrentTheme(): Theme {
-    return window.localStorage[this.storageKey] || 'light';
+    return window.localStorage[this.storageKey] || getNextTheme();
   }
 
   private getThemeStyleSheets() {
-    return [...document.styleSheets as unknown as CSSStyleSheet[]]
-      .filter((styleSheet) => styleSheet?.href?.includes(this.themeMarker));
+    return Array.from(document.styleSheets).filter(
+      (styleSheet) => styleSheet?.href?.includes(this.themeMarker),
+    );
   }
 
   setAppTheme(theme = this.currentTheme.value) {
@@ -35,7 +45,7 @@ class ThemeService {
   }
 
   switchAppTheme() {
-    this.setAppTheme(this.currentTheme.value === 'dark' ? 'light' : 'dark');
+    this.setAppTheme(getNextTheme(this.currentTheme.value));
   }
 }
 
