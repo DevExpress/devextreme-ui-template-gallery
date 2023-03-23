@@ -326,6 +326,7 @@ const refreshOptions = {
   bottom: 0;
   left: 0;
   right: 0;
+  flex-direction: row;
 
   .grid  {
     .name-template {

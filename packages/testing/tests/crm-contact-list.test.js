@@ -38,6 +38,13 @@ fixture`Contact List`;
         await forceResizeRecalculation(t, screenMode);
         await takeScreenshot(`crm-contact-list-full${postfix}`, 'body');
         await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
+
+        if (screenMode[0] === 1280) {
+          await t.click(Selector('.dx-icon-pin'));
+          await takeScreenshot(`crm-contact-list-full-form-pinned${getPostfix(embedded, screenMode)}`, 'body');
+          await t.click(Selector('.dx-icon-unpin'));
+        }
+
         await takeScreenshot(`crm-contact-list-form${postfix}`, Selector('.data-wrapper'));
         await t.click(Selector('.dx-button[aria-label=Edit]'));
         await takeScreenshot(`crm-contact-list-form-edit${postfix}`, Selector('.data-wrapper'));
