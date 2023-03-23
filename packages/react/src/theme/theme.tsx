@@ -23,7 +23,7 @@ function toArray<T>(arrayLikeObject) {
 }
 
 function getCurrentTheme(): Theme {
-  return window.localStorage[storageKey] || 'light';
+  return window.localStorage[storageKey] || themeNames[1];
 }
 
 function isThemeStyleSheet(styleSheet, theme: Theme) {
@@ -37,7 +37,7 @@ function isThemeStyleSheet(styleSheet, theme: Theme) {
 }
 
 function switchThemeStyleSheets(enabledTheme: Theme) {
-  const disabledTheme = enabledTheme === 'dark' ? 'light' : 'dark';
+  const disabledTheme = themeNames[enabledTheme === themeNames[0] ? 1 : 0];
 
   return toArray<CSSStyleSheet>(document.styleSheets).forEach((styleSheet) => {
     styleSheet.disabled = isThemeStyleSheet(styleSheet, disabledTheme);
@@ -66,7 +66,7 @@ export function useThemeContext() {
   }, []);
 
   const switchTheme = useCallback(() => {
-    setTheme((currentTheme: Theme) => currentTheme === 'dark' ? 'light' : 'dark');
+    setTheme((currentTheme: Theme) => themeNames[currentTheme === themeNames[0] ? 1 : 0]);
   }, []);
 
   useEffect(() => {
