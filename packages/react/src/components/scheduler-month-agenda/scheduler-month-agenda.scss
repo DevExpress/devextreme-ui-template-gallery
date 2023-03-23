@@ -13,9 +13,7 @@
       color: $base-accent;
     }
     .date {
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 16px;
+      @include h2-header-text()
     }
   }
   .dx-list-item:first-of-type{
@@ -48,9 +46,7 @@
       .description{
         overflow: hidden;
         text-overflow: ellipsis;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 16px;
+        @include description-text();
       }
     }
   }
