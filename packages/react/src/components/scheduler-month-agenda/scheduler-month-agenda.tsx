@@ -1,23 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
 import './scheduler-month-agenda.scss';
-import Query from 'devextreme/data/query';
 import List from 'devextreme-react/list';
 import { getTasksForScheduler } from 'dx-template-gallery-data';
 import Button from 'devextreme-react/button';
 
-export const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
-  const appointments = dataSource.items();
-  if (appointments.length === 0 || !selectedAppointment) {
-    return [];
-  }
-  return Query(appointments)
-    .filter((appointment) => {
-      return appointment.startDate.getDate() === selectedAppointment.startDate.getDate()
-        && appointment.startDate.getMonth() === selectedAppointment.startDate.getMonth();
-    })
-    .toArray();
-};
 const formatTime = (appointment) => {
   const start = appointment.startDate.toLocaleTimeString(undefined, {
     hour: 'numeric',
@@ -53,11 +40,10 @@ const renderListItem = (item) => {
   </div>;
 };
 
-export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, dataSource, schedulerRef }) => {
+export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, items, schedulerRef }) => {
   const showAppointmentPopup = useCallback((e) => {
     schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
   }, [schedulerRef]);
-  const appointmentList = findAllAppointmentsForDay(selectedAppointment, dataSource);
 
   return <div className='agenda'>
     <div className='agenda-header'>
@@ -66,6 +52,6 @@ export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Da
       </div>
       <Button icon='showpanel' onClick={toggleOpen} />
     </div>
-    <List dataSource={appointmentList} itemRender={renderListItem} onItemClick={showAppointmentPopup} />
+    <List dataSource={items} itemRender={renderListItem} onItemClick={showAppointmentPopup} />
   </div>;
 };

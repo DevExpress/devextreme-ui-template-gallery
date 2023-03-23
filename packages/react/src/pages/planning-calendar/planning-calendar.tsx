@@ -6,22 +6,37 @@ import Calendar from 'devextreme-react/calendar';
 import Scheduler, { Resource, View } from 'devextreme-react/scheduler';
 import Button from 'devextreme-react/button';
 import SpeedDialAction from 'devextreme-react/speed-dial-action';
+import Tooltip from 'devextreme-react/tooltip';
+
+import { ViewType } from 'devextreme/ui/scheduler';
+import DataSource from 'devextreme/data/data_source';
+import Query from 'devextreme/data/query';
+import { useScreenSize } from '../../utils/media-query';
 
 import { CalendarList } from '../../components/calendar-list/calendar-list';
 import { SidePanel } from '../../components/side-panel/side-panel';
 import { LeftSidePanel } from '../../components/side-panel/left-side-panel';
 import { RightSidePanel } from '../../components/side-panel/right-side-panel';
-import { SchedulerMonthAgenda, findAllAppointmentsForDay } from '../../components/scheduler-month-agenda/scheduler-month-agenda';
+import { SchedulerMonthAgenda } from '../../components/scheduler-month-agenda/scheduler-month-agenda';
 import { TooltipContentTemplate } from '../../components/scheduler-tooltip/scheduler-tooltip';
-import Tooltip from 'devextreme-react/tooltip';
 
 import './planning-calendar.scss';
-import { ViewType } from 'devextreme/ui/scheduler';
-import DataSource from 'devextreme/data/data_source';
-import { useScreenSize } from '../../utils/media-query';
 
 const views = ['week', 'month'];
 const colors = ['#E1F5FE', '#C8E6C9', '#FFCDD2', '#FFE0B2', '#7b49d3', '#2a7ee4'];
+
+export const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
+  const appointments = dataSource.items();
+  if (appointments.length === 0 || !selectedAppointment) {
+    return [];
+  }
+  return Query(appointments)
+    .filter((appointment) => {
+      return appointment.startDate.getDate() === selectedAppointment.startDate.getDate()
+        && appointment.startDate.getMonth() === selectedAppointment.startDate.getMonth();
+    })
+    .toArray();
+};
 
 export const PlanningCalendar = () => {
   const { isXSmall, isMedium, isLarge } = useScreenSize();
@@ -34,6 +49,7 @@ export const PlanningCalendar = () => {
   const [leftPanelOpen, setLeftPanelOpen] = useState(true);
   const [rightPanelOpen, setRightPanelOpen] = useState(false);
   const [listDS, setListDS] = useState(defaultListDS);
+  const [agendaItems, setAgendaItems] = useState<any[]>();
 
   const resourcesList = useMemo(() => {
     return listDS
@@ -99,6 +115,9 @@ export const PlanningCalendar = () => {
   const onAppointmentClick = useCallback((e) => {
     if (currentView === 'month') {
       if (!rightPanelOpen) {
+        const appointmentData = e.appointmentData;
+        setSelectedAppointment({ data: appointmentData, target: e.targetElement });
+        setAgendaItems(findAllAppointmentsForDay(appointmentData, tasks));
         toggleRightPanelOpen();
       }
     }
@@ -106,9 +125,13 @@ export const PlanningCalendar = () => {
 
   const onAppointmentTooltipShowing = useCallback((e) => {
     e.cancel = true;
-    const classList = e.targetElement?.classList || e.targetElement[0]?.classList;
+    const appointmentData = e.appointments[0].appointmentData;
 
-    setSelectedAppointment({ data: e.appointments[0].appointmentData, target: e.targetElement });
+    setSelectedAppointment({ data: appointmentData, target: e.targetElement });
+
+    if (currentView === 'month') {
+      setAgendaItems(findAllAppointmentsForDay(appointmentData, tasks));
+    }
     if (currentView === 'month' && isXSmall && !rightPanelOpen) {
       toggleRightPanelOpen();
     }
@@ -117,6 +140,12 @@ export const PlanningCalendar = () => {
     }
 
   }, [currentView, isXSmall, rightPanelOpen]);
+
+  const onCellModified = useCallback((e) => {
+    if (e.appointmentData.startDate.toDateString() === selectedAppointment?.data.startDate.toDateString()) {
+      setAgendaItems(findAllAppointmentsForDay(e.appointmentData, tasks));
+    }
+  }, [selectedAppointment, tasks]);
 
   const tooltipPosition = useMemo(() => {
     if (isXSmall) {
@@ -129,9 +158,12 @@ export const PlanningCalendar = () => {
   const onCellClick = useCallback((e) => {
     if (currentView === 'month' && e.cellData) {
       const cellAppointments = findAllAppointmentsForDay(e.cellData, tasks);
-      if (cellAppointments.length > 1 && !rightPanelOpen) {
+      if (cellAppointments.length > 1) {
         setSelectedAppointment({ data: e.cellData, target: null });
-        toggleRightPanelOpen();
+        setAgendaItems(cellAppointments);
+        if (!rightPanelOpen) {
+          toggleRightPanelOpen();
+        }
       }
     }
   }, [currentView, rightPanelOpen, tasks, selectedAppointment]);
@@ -161,6 +193,8 @@ export const PlanningCalendar = () => {
           currentView={currentView}
           onCurrentViewChange={onCurrentViewChange}
           onAppointmentClick={onAppointmentClick}
+          onAppointmentAdded={onCellModified}
+          onAppointmentDeleted={onCellModified}
           onAppointmentTooltipShowing={onAppointmentTooltipShowing}
           onCellClick={onCellClick}
           adaptivityEnabled={isXSmall}
@@ -203,7 +237,7 @@ export const PlanningCalendar = () => {
           <SchedulerMonthAgenda
             selectedAppointment={selectedAppointment?.data}
             toggleOpen={toggleRightPanelOpen}
-            dataSource={tasks}
+            items={agendaItems}
             schedulerRef={schedulerRef}
           />
         </SidePanel>
