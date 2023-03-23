@@ -4,15 +4,17 @@ import {
   DxButtonModule, DxDateBoxModule, DxFormModule, DxNumberBoxModule, DxSelectBoxModule,
   DxTextBoxModule, DxToolbarModule,
   DxValidatorModule
-} from "devextreme-angular";
+} from 'devextreme-angular';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 import { FormTextboxModule } from '../form-textbox/form-textbox.component';
 import { FormPhotoModule } from '../form-photo/form-photo.component';
-import { ContactStatusModule } from '../contact-status/contact-status.component';
-import { contactStatusList } from '../../types/contact';
 import { ApplyPipeModule } from '../../pipes/apply.pipe';
 import { PicturedItemSelectBoxModule } from '../pictured-item-select-box/pictured-item-select-box.component';
-import {ScreenService} from "../../services";
+import { ScreenService } from '../../services';
+import { StatusSelectBoxModule } from '../status-select-box/status-select-box.component';
+import { getSizeQualifier } from 'src/app/services/screen.service';
+
+type CardData = Record<string, any>;
 
 @Component({
   selector: 'profile-card',
@@ -20,25 +22,21 @@ import {ScreenService} from "../../services";
   styleUrls: ['profile-card.component.scss'],
 })
 export class ProfileCardComponent {
-  @Input() cardData: Record<string, any>;
-
   @Input() items: Record<string, any>[] = [];
 
   @Input() colCount: number = 2;
 
   @Input() title: string = '';
 
-  @Output() valueChange = new EventEmitter<string>();
+  @Output() dataChanged = new EventEmitter<any>();
 
-  statusList = contactStatusList;
+  @Input() cardData: CardData;
 
-  constructor(public screen: ScreenService) {
-  }
-  valueChanged(e) {
-    this.valueChange.emit(e.value);
-  }
+  getSizeQualifier = getSizeQualifier;
 
-  extendEditorOptions = (itemEditorOptions) => ({stylingMode: 'outlined', ...itemEditorOptions})
+  assign = Object.assign;
+
+  constructor(public screen: ScreenService) {}
 }
 
 @NgModule({
@@ -52,12 +50,12 @@ export class ProfileCardComponent {
     DxSelectBoxModule,
     DxScrollViewModule,
     DxTextBoxModule,
-    ContactStatusModule,
     FormTextboxModule,
     FormPhotoModule,
     DxValidatorModule,
     CommonModule,
     PicturedItemSelectBoxModule,
+    StatusSelectBoxModule,
   ],
   declarations: [ProfileCardComponent],
   exports: [ProfileCardComponent],

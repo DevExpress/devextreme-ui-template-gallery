@@ -1,0 +1,25 @@
+@use "../../../variables.scss" as *;
+
+.status-editor-field {
+  display: flex;
+
+  .status-indicator {
+    display: flex;
+    align-self: center;
+    padding-left: $list-padding-left;
+  }
+
+  ::ng-deep {
+    .status {
+      display: flex;
+
+      &::before {
+        display: flex;
+      }
+    }
+
+    .status-input.status-input {
+      padding-left: 0;
+    }
+  }
+}

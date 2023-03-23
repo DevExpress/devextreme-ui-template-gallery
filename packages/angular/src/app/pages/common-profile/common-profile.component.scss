@@ -16,13 +16,17 @@ profile-card {
   flex: 0.5;
 }
 
-:host-context(.screen-small, .screen-x-small)  profile-card {
+:host-context(.screen-small, .screen-x-small) profile-card {
   min-width: 100%;
   flex: 1;
 }
 
 .view-wrapper {
   padding: $content-padding calc($content-padding * 2);
+
+  dx-button[text="Cancel"] {
+    margin-right: 5px;
+  }
 
   .cards-container {
     display: flex;
@@ -68,11 +72,11 @@ profile-card {
   }
 
   .contacts-card .image-wrapper {
-    background-color: #FFEBEE;
+    background-color: #ffebee;
   }
 
   .address-card .image-wrapper {
-    background-color: #E1F5FE;
+    background-color: #e1f5fe;
   }
 
   .basic-info-card {

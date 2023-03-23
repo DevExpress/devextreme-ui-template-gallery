@@ -18,7 +18,7 @@ import {
 } from 'src/app/components';
 import { Contact, contactStatusList, ContactStatus, } from 'src/app/types/contact';
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
-import DataSource from "devextreme/data/data_source";
+import DataSource from 'devextreme/data/data_source';
 import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/services';
 import { Workbook } from 'exceljs';

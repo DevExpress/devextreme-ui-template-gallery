@@ -21,4 +21,5 @@ export * from './pictured-item-select-box/pictured-item-select-box.component';
 export * from './profile-card/profile-card.component';
 export * from './status-indicator/status-indicator.component';
 export * from './side-navigation-menu/side-navigation-menu.component';
+export * from './status-select-box/status-select-box.component';
 export * from './user-panel/user-panel.component';

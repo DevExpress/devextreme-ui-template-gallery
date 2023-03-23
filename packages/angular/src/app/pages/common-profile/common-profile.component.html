@@ -12,13 +12,16 @@
       </dxi-item>
       <dxi-item location="after" locateInMenu="never">
         <dx-button
+          [disabled]="!isDataChanged"
           text="Save"
           icon="save"
           type="default"
           stylingMode="contained"
+          (click)="save()"
         ></dx-button>
       </dxi-item>
     </dx-toolbar>
+
     <dx-load-panel
       [visible]="isLoading"
       [showPane]="false"
@@ -30,7 +33,9 @@
                     title="Basic Info"
                     [colCount]="4"
                     [cardData]="profileData"
-                    [items]="basicInfoItems">
+                    [items]="basicInfoItems"
+                    (dataChanged)="dataChanged()"
+      >
         <div class="basic-info-top-item" top-item>
           <form-photo
             [link]="profileData?.image"

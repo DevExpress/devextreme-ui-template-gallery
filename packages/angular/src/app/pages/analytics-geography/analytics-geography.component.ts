@@ -7,21 +7,18 @@ import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxVectorMapModule } from 'devextreme-angular/ui/vector-map';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
-
 import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
-
 import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/services';
 import { Subscription } from 'rxjs';
-
 import { CardAnalyticsModule } from 'src/app/components/card-analytics/card-analytics.component';
 import { ToolbarAnalyticsModule } from 'src/app/components/toolbar-analytics/toolbar-analytics.component';
 
 import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 import { SalesByState, SalesByStateAndCity } from 'src/app/types/analytics';
-import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
-import {DxScrollViewModule} from "devextreme-angular";
+import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
+import { DxScrollViewModule } from 'devextreme-angular';
 
 @Component({
   templateUrl: './analytics-geography.component.html',

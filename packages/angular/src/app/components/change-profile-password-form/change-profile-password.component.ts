@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import {Component, EventEmitter, Input, NgModule, OnInit, Output, ViewChild} from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ValidationCallbackData, ValidationRule } from 'devextreme/ui/validation_rules';
+import { ValidationCallbackData } from 'devextreme/ui/validation_rules';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
-import { DxTextBoxModule, DxValidatorModule } from "devextreme-angular";
-import { ApplyPipeModule } from "../../pipes/apply.pipe";
-import {FormPopupComponent, FormPopupModule} from "../form-popup/form-popup.component";
-import notify from "devextreme/ui/notify";
+import { DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
+import { ApplyPipeModule } from '../../pipes/apply.pipe';
+import { FormPopupComponent, FormPopupModule } from '../form-popup/form-popup.component';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'change-profile-password-form',
@@ -32,10 +32,11 @@ export class ChangeProfilePasswordComponent implements OnInit {
 
   visible = false;
 
-  fields = [
+  fields:Record<string, any>[] = [
     {
       label: 'Current Password',
-      name: 'currentPassword'
+      name: 'currentPassword',
+      mode: 'password'
     },
     {
       label: 'Password',
@@ -57,11 +58,13 @@ export class ChangeProfilePasswordComponent implements OnInit {
     })
   }
 
+  getPasswordModeSwitcher = (field) => () => {
+    field.mode = field.mode === 'text' ? 'password' : 'text';
+  }
+
   saveNewPassword() {
     notify('Password Changed', 'success');
   }
-
-  concat = (target: ValidationRule[], other: ValidationRule[] = []) => target.concat(other);
 }
 @NgModule({
   imports: [

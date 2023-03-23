@@ -2,16 +2,21 @@ import {
   Component, EventEmitter, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import notify from 'devextreme/ui/notify';
 import {
   DxButtonModule,
   DxSelectBoxModule,
-  DxTextBoxModule, DxToolbarModule, DxFormModule, DxNumberBoxModule, DxDateBoxModule,
+  DxTextBoxModule,
+  DxToolbarModule,
+  DxFormModule,
+  DxNumberBoxModule,
+  DxDateBoxModule,
 } from 'devextreme-angular';
-import {forkJoin} from "rxjs";
-import {DxLoadPanelModule} from 'devextreme-angular/ui/load-panel';
-import {DxFileUploaderModule} from 'devextreme-angular/ui/file-uploader';
+import { forkJoin } from 'rxjs';
+import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
+import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
-import { ApplyPipeModule } from "src/app/pipes/apply.pipe";
+import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import {
   FormPhotoModule,
   FormTextboxModule,
@@ -19,7 +24,6 @@ import {
   ProfileCardModule,
   FormPopupModule,
 } from 'src/app/components';
-import { contactStatusList } from 'src/app/types/contact';
 import { DataService } from 'src/app/services';
 
 @Component({
@@ -28,8 +32,6 @@ import { DataService } from 'src/app/services';
   providers: [DataService],
 })
 export class CommonProfileComponent {
-  statusList = contactStatusList;
-
   profileId = 22;
 
   profileData: Record<string, any>;
@@ -40,91 +42,13 @@ export class CommonProfileComponent {
 
   changePasswordPopupOpener = new EventEmitter<boolean>();
 
-  basicInfoItems: Record<string, any>[] = [
-    { dataField: 'firstName', colSpan: 2 },
-    { dataField: 'lastName', colSpan: 2 },
-    {
-      dataField: 'gender',
-      editorType: 'dxSelectBox',
-      colSpan: 2,
-      editorOptions: {
-        items:['male', 'female'],
-      }
-    },
-    {
-      dataField: 'birthDate',
-      colSpan: 2,
-      editorType: 'dxDateBox',
-    },
-    {
-      dataField: 'department',
-      editorType: 'dxSelectBox',
-      colSpan: 1,
-      editorOptions: {
-        items: ['UI/UX', 'Backend Developers'],
-      }
-    },
-    {
-      dataField: 'position',
-      editorType: 'dxSelectBox',
-      colSpan: 1,
-      editorOptions: {
-        items: ['Designer', 'Developer', 'Technical Writer'],
-      }
-    },
-    {
-      dataField: 'hiredDate',
-      editorType: 'dxDateBox',
-      colSpan: 2,
-    },
-  ];
+  isDataChanged = false;
 
-  contactItems: Record<string, any>[] = [
-    {dataField: 'phone',
-      editorOptions: {
-        mask: '+1(000)000-0000',
-      }},
-    { dataField: 'email' },
-    {
-      dataField: 'domainUsername',
-      colSpan: 2, },
-    {
-      dataField: 'status',
-      editorType: 'dxSelectBox',
-      colSpan: 2,
-      editorOptions: {
-        items: ['Salaried'],
-      }
-    },
-    {
-      dataField: 'supervisor',
-      label: 'Supervisor',
-      colSpan: 2,
-      itemsList: this.supervisorsList,
-      editorType: 'dxSelectBox',
-    },
-  ];
+  basicInfoItems: Record<string, any>[] = this.getBasicInfoItems();
 
-  addressItems: Record<string, any>[] = [
-    { dataField: 'country' },
-    { dataField: 'city' },
-    {
-      dataField: 'state',
-      colSpan: 2,
-      label: 'State/province/area',
-      editorOptions: {
-        label: 'State/province/area',
-      }},
-    {
-      dataField: 'address',
-      colSpan: 2,
-    },
-    {
-      dataField: 'zipCode',
-      editorType: 'dxNumberBox',
-      colSpan: 2,
-    },
-  ];
+  contactItems: Record<string, any>[] = this.getContactItems();
+
+  addressItems: Record<string, any>[] = this.getAddressItems();
 
   constructor(private service: DataService) {
     forkJoin([
@@ -138,6 +62,102 @@ export class CommonProfileComponent {
     });
   }
 
+  getBasicInfoItems(){
+    return [
+      { dataField: 'firstName', colSpan: 2 },
+      { dataField: 'lastName', colSpan: 2 },
+      {
+        dataField: 'gender',
+        editorType: 'dxSelectBox',
+        colSpan: 2,
+        editorOptions: {
+          items:['male', 'female'],
+        }
+      },
+      {
+        dataField: 'birthDate',
+        colSpan: 2,
+        editorType: 'dxDateBox',
+      },
+      {
+        dataField: 'department',
+        editorType: 'dxSelectBox',
+        colSpan: 1,
+        editorOptions: {
+          items: ['UI/UX', 'Backend Developers'],
+        }
+      },
+      {
+        dataField: 'position',
+        editorType: 'dxSelectBox',
+        colSpan: 1,
+        editorOptions: {
+          items: ['Designer', 'Developer', 'Technical Writer'],
+        }
+      },
+      {
+        dataField: 'hiredDate',
+        editorType: 'dxDateBox',
+        colSpan: 2,
+      },
+    ]
+  }
+
+  getContactItems() {
+    return [
+      {dataField: 'phone',
+        editorOptions: {
+          mask: '+1(000)000-0000',
+        }},
+      { dataField: 'email' },
+      {
+        dataField: 'domainUsername',
+        colSpan: 2, },
+      {
+        dataField: 'status',
+        editorType: 'dxSelectBox',
+        colSpan: 2,
+        editorOptions: {
+          items: ['Salaried'],
+        }
+      },
+      {
+        dataField: 'supervisor',
+        label: 'Supervisor',
+        colSpan: 2,
+        itemsList: this.supervisorsList,
+        editorType: 'dxSelectBox',
+      },
+    ];
+  }
+
+  getAddressItems() {
+    return   [
+      { dataField: 'country' },
+      { dataField: 'city' },
+      {
+        dataField: 'state',
+        colSpan: 2,
+        label: 'State/province/area',
+        editorOptions: {
+          label: 'State/province/area',
+        }},
+      {
+        dataField: 'address',
+        colSpan: 2,
+      },
+      {
+        dataField: 'zipCode',
+        editorType: 'dxNumberBox',
+        colSpan: 2,
+      },
+    ];
+  }
+
+  dataChanged() {
+    this.isDataChanged = true;
+  }
+
   copyToClipboard(text) {
     window.navigator.clipboard?.writeText(text)
   };
@@ -145,6 +165,10 @@ export class CommonProfileComponent {
   changePassword() {
     this.changePasswordPopupOpener.emit(true);
   };
+
+  save() {
+    notify('Data saved', 'success');
+  }
 
   formatPhone = (number: string | number): string => String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
 }

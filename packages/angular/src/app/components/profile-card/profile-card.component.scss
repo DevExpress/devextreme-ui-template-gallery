@@ -2,7 +2,8 @@
 @use "sass:math";
 
 .panel {
-  @include shadow;
+  @include shadow();
+
   width: 100%;
   padding: 0 0 $content-padding 0;
   border-radius: 8px;
@@ -17,7 +18,7 @@
   }
 
   &::ng-deep {
-    [top-item]  {
+    [top-item] {
       display: flex;
       min-height: 50px;
 
@@ -36,27 +37,5 @@
 
   .form-container {
     margin: calc($content-padding * 2) $content-padding 0;
-  }
-
-  .status-editor-field {
-    display: flex;
-
-    .status-indicator {
-      display: flex;
-      align-self: center;
-      padding-left: $list-padding-left;
-    }
-
-    ::ng-deep {
-      .status {
-        display: flex;
-        &:before {
-          display: flex;
-        }
-      }
-      .status-input.status-input {
-        padding-left: 0;
-      }
-    }
   }
 }

@@ -1,5 +1,5 @@
 import {
-  Component, Input, NgModule,
+  Component, EventEmitter, Input, NgModule, Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
@@ -17,6 +17,7 @@ export class PicturedItemSelectBoxComponent {
 
   @Input() items: Record<string, any>[] = [];
 
+  @Output() valueChange = new EventEmitter<string>();
 }
 
 @NgModule({

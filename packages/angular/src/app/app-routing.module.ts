@@ -19,7 +19,7 @@ import { PlanningTaskDetailsComponent } from './pages/planning-task-details/plan
 import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analytics-dashboard.component';
 import { AnalyticsSalesReportComponent } from './pages/analytics-sales-report/analytics-sales-report.component';
 import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
-import {CommonProfileComponent} from "./pages/common-profile/common-profile.component";
+import { CommonProfileComponent } from './pages/common-profile/common-profile.component';
 
 const routes: Routes = [
   {

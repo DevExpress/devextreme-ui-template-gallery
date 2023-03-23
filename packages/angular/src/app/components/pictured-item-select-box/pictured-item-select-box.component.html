@@ -1,7 +1,8 @@
 <dx-select-box
   class="pictured-item-select-box"
   [label]="label"
-  [(value)]="value"
+  [value]="value"
+  (valueChange)="valueChange.emit($event)"
   [items]="items"
   valueExpr="name"
   stylingMode="outlined"
