@@ -1,70 +1,71 @@
 @use '../../variables.scss' as *;
 @use 'sass:math';
 
+@include separator();
+
 .view.crm-contact-list {
   width: 100%;
   display: contents;
-}
 
-@include separator();
+  .view-wrapper-contact-list {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-direction: row;
 
-.view-wrapper-contact-list {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+    .grid {
+      height: 100%;
 
-  .grid {
-    height: 100%;
-
-    .name-template {
-      .position {
-        font-size: 12px;
-        color: $texteditor-label-color;
-      }
-    }
-
-    .dx-row-focused {
-      .name-template.name-template {
-        color: $base-focus-color;
-
-        .position.position {
-          color: $base-focus-color;
+      .name-template {
+        .position {
+          font-size: 12px;
+          color: $texteditor-label-color;
         }
       }
 
-      .status {
-        @include status-contact($base-focus-color);
+      .dx-row-focused {
+        .name-template.name-template {
+          color: $base-focus-color;
+
+          .position.position {
+            color: $base-focus-color;
+          }
+        }
+
+        .status {
+          @include status-contact($base-focus-color);
+        }
+      }
+
+      .dx-datagrid-header-panel {
+        padding: 0 $content-padding;
+      }
+
+      .dx-toolbar {
+        margin-bottom: 0;
+        padding: $toolbar-margin-bottom 0;
+      }
+
+      .dx-datagrid-content .dx-row {
+        cursor: pointer;
+      }
+
+      .grid-header {
+        @include header();
       }
     }
 
-    .dx-datagrid-header-panel {
-      padding: 0 $content-padding;
-    }
+    .cell-info {
+      position: relative;
 
-    .dx-toolbar {
-      margin-bottom: 0;
-      padding: $toolbar-margin-bottom 0;
-    }
-
-    .dx-datagrid-content .dx-row {
-      cursor: pointer;
-    }
-
-    .grid-header {
-      @include header();
-    }
-  }
-
-  .cell-info {
-    position: relative;
-
-    .status {
-      font-size: 13px;
-      position: absolute;
-      margin-top: 10px;
-      margin-left: 11px;
+      .status {
+        font-size: 13px;
+        position: absolute;
+        margin-top: 10px;
+        margin-left: 11px;
+      }
     }
   }
 }

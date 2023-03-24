@@ -38,16 +38,6 @@ body {
     flex-grow: 1;
     width: 100%;
     height: 100%;
-
-    .view {
-      display: contents;
-
-      .view-wrapper {
-        overflow: hidden;
-        display: flex;
-        flex-grow: 1;
-      }
-    }
   }
 
   h2 {
@@ -55,6 +45,13 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
   }
+}
+
+.view-wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
 .responsive-paddings {
