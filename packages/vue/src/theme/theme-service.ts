@@ -8,10 +8,7 @@ const themes = ['light', 'dark'] as const;
 type Theme = typeof themes[number];
 
 function getNextTheme(theme?: Theme) {
-  const index = !theme ? 0 : (themes.indexOf(theme) + 1);
-  return themes[
-    themes.length === index ? 0 : index
-  ];
+  return themes[themes.indexOf(theme as Theme) + 1] || themes[0];
 }
 
 class ThemeService {

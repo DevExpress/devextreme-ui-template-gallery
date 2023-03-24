@@ -19,10 +19,7 @@ const loadStylesImports = async() => {
 export type Theme = typeof themes[number];
 
 function getNextTheme(theme?: Theme) {
-  const index = !theme ? 0 : (themes.indexOf(theme) + 1);
-  return themes[
-    themes.length === index ? 0 : index
-  ];
+  return themes[themes.indexOf(theme as Theme) + 1] || themes[0];
 }
 
 function getCurrentTheme(): Theme {
@@ -32,11 +29,13 @@ function getCurrentTheme(): Theme {
 function isThemeStyleSheet(styleSheet, theme: Theme) {
   const themeMarker = `${themePrefix}${theme}`;
   // eslint-disable-next-line no-undef
-  return process.env.NODE_ENV === 'production' ?
-    styleSheet?.href?.includes(`${themeMarker}`)
-    : -1 !== [0, -1].findIndex(
-      (i) => Array.from<CSSStyleRule>(styleSheet.cssRules).at(i)?.selectorText?.includes(`.${themeMarker}`)
-    );
+  if(process.env.NODE_ENV === 'production') {
+    return styleSheet?.href?.includes(`${themeMarker}`);
+  } else {
+    const rules = Array.from<CSSStyleRule>(styleSheet.cssRules);
+    return !![rules[0], rules.at(-1)].find(
+      (rule) => rule?.selectorText?.includes(`.${themeMarker}`));
+  }
 }
 
 function switchThemeStyleSheets(enabledTheme: Theme) {
