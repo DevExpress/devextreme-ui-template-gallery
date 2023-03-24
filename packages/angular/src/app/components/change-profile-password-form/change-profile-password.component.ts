@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
-import {Component, EventEmitter, Input, NgModule, OnInit, Output, ViewChild} from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, EventEmitter, Input, NgModule, OnInit, Output, ViewChild } from '@angular/core';
 import { ValidationCallbackData } from 'devextreme/ui/validation_rules';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
-import { DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
-import { ApplyPipeModule } from '../../pipes/apply.pipe';
 import { FormPopupComponent, FormPopupModule } from '../form-popup/form-popup.component';
 import notify from 'devextreme/ui/notify';
+import { PasswordTextBoxModule } from "../password-text-box/password-text-box.component";
 
 @Component({
   selector: 'change-profile-password-form',
@@ -36,7 +34,6 @@ export class ChangeProfilePasswordComponent implements OnInit {
     {
       label: 'Current Password',
       name: 'currentPassword',
-      mode: 'password'
     },
     {
       label: 'Password',
@@ -58,23 +55,16 @@ export class ChangeProfilePasswordComponent implements OnInit {
     })
   }
 
-  getPasswordModeSwitcher = (field) => () => {
-    field.mode = field.mode === 'text' ? 'password' : 'text';
-  }
-
   saveNewPassword() {
     notify('Password Changed', 'success');
   }
 }
 @NgModule({
   imports: [
-    ApplyPipeModule,
     CommonModule,
-    RouterModule,
     DxFormModule,
     DxLoadIndicatorModule,
-    DxTextBoxModule,
-    DxValidatorModule,
+    PasswordTextBoxModule,
     FormPopupModule,
   ],
   declarations: [ChangeProfilePasswordComponent],
