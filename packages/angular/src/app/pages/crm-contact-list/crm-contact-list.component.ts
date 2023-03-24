@@ -9,7 +9,7 @@ import {
   DxSelectBoxModule,
   DxTextBoxModule,
 } from 'devextreme-angular';
-import { RowClickEvent, ColumnCustomizeTextArg } from 'devextreme/ui/data_grid';
+import { RowClickEvent } from 'devextreme/ui/data_grid';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
 import {
@@ -26,6 +26,7 @@ import { saveAs } from 'file-saver-es';
 import { jsPDF } from 'jspdf';
 import { ContactUserPanelModule } from '../../components/contact-user-panel/contact-user-panel.component';
 import { ContactNewUserFormModule } from '../../components/contact-new-user-form/contact-new-user-form.component';
+import { formatPhone } from 'src/app/pipes/phone.pipe';
 import {
   FormPopupModule,
   FormPopupComponent,
@@ -61,8 +62,7 @@ export class CrmContactListComponent {
     }),
   });
 
-  constructor(private service: DataService) {
-  }
+  constructor(private service: DataService) {}
 
   addContact() {
     this.userPopup.visible = true;
@@ -95,17 +95,7 @@ export class CrmContactListComponent {
     }
   };
 
-  formatPhone = (number: string | number): string => String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
-
-  customizePhoneCell = (cellInfo: ColumnCustomizeTextArg) => {
-    const { value } = cellInfo;
-
-    if (!value) {
-      return undefined;
-    }
-
-    return this.formatPhone(value.toString());
-  };
+  customizePhoneCell = ({ value }) => value ? formatPhone(value) : undefined;
 
   onExporting(e) {
     if (e.format === 'pdf') {

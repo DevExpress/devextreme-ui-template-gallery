@@ -16,7 +16,7 @@ import { forkJoin } from 'rxjs';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
-import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
+import { PhonePipeModule } from 'src/app/pipes/phone.pipe';
 import {
   FormPhotoModule,
   FormTextboxModule,
@@ -168,14 +168,13 @@ export class CommonProfileComponent {
 
   save() {
     notify('Data saved', 'success');
+    this.isDataChanged = false;
   }
 
-  formatPhone = (number: string | number): string => String(number).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
 }
 
 @NgModule({
   imports: [
-    ApplyPipeModule,
     DxButtonModule,
     DxDateBoxModule,
     DxFormModule,
@@ -192,6 +191,7 @@ export class CommonProfileComponent {
     ProfileCardModule,
     ChangeProfilePasswordFormModule,
     CommonModule,
+    PhonePipeModule,
   ],
   providers: [],
   exports: [],

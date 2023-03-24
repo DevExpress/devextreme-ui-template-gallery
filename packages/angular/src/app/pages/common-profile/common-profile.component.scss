@@ -59,7 +59,7 @@ profile-card {
         margin-left: 8px;
 
         &::ng-deep .dx-icon:active {
-          color: red;
+          color: $accent-color;
         }
       }
     }

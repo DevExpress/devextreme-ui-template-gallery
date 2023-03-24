@@ -73,7 +73,7 @@
             <img alt="" src="assets/icons/at.svg"/>
           </div>
           <div>
-            <div class="title-text">{{ formatPhone | apply: profileData.phone }}</div>
+            <div class="title-text">{{ profileData.phone | phone }}</div>
             <div class="subtitle-text with-clipboard-copy">{{ profileData.email }}
               <dx-button icon="copy"
                          class="copy-clipboard-button"
