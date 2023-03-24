@@ -238,6 +238,7 @@ export const PlanningCalendar = () => {
             selectedAppointment={selectedAppointment?.data}
             toggleOpen={toggleRightPanelOpen}
             items={agendaItems}
+            resources={resourcesList}
             schedulerRef={schedulerRef}
           />
         </SidePanel>

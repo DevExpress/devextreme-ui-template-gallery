@@ -41,12 +41,16 @@
         flex-direction: column;
         align-items: flex-start;
         width: 36px;
+        @include subtext();
         // overflow: hidden;
       }
       .description{
         overflow: hidden;
         text-overflow: ellipsis;
         @include description-text();
+        .description-resouce{
+          @include subtext();
+        }
       }
     }
   }

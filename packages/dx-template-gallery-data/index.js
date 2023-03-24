@@ -132,7 +132,7 @@ export const defaultListDS = [
     items: [{
       id: 4,
       text: 'Holidays',
-      color: '#7b49d3',
+      color: '#F3E5F5',
     }],
   },
 ];

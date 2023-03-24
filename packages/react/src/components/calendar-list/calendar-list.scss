@@ -1,5 +1,6 @@
 @use "../../variables.scss" as *;
 @use "sass:math";
+@use "sass:color";
 .calendar-list {
     width: 100%;
 
@@ -22,9 +23,7 @@
       vertical-align: middle;
       align-items: center;
       gap: 8px;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 18px;
+      @include h1-header-text();
     }
 
     .dx-list-group-header::before{
@@ -41,6 +40,9 @@
 
     .dx-list-item{
       border-style: none;
+    }
+    .dx-list-item.dx-list-item-selected {
+      background-color: $base-bg !important;
     }
 
     .dx-list-group{
@@ -61,8 +63,17 @@
     .list-item-text{
       padding: 0px 4px;
 
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 16px;
+      @include calendar-items-text()
+    }
+
+    --checkbox-color: $base-accent;
+    .dx-checkbox-container .dx-checkbox-icon{
+      background-color: var(--checkbox-color)
+    }
+    .dx-checkbox.dx-state-focused .dx-checkbox-icon::after {
+      background-color: var(--checkbox-color);
+    }
+    .dx-checkbox.dx-checkbox-checked.dx-state-focused .dx-checkbox-icon::after {
+      background-color: var(--checkbox-color);
     }
   }

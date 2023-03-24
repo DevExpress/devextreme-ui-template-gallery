@@ -29,21 +29,25 @@ const formatTime = (appointment) => {
     <div className='duration'>{durationStr}</div>
   </div>;
 };
-const renderListItem = (item) => {
-  return <div className='list-item'>
-    <div className='time'>
-      {formatTime(item)}
-    </div>
-    <div className='description'>
-      {item.text}
-    </div>
-  </div>;
-};
 
-export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, items, schedulerRef }) => {
+export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, resources, items, schedulerRef }) => {
   const showAppointmentPopup = useCallback((e) => {
     schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
   }, [schedulerRef]);
+
+  const renderListItem = useCallback((item) => {
+    return <div className='list-item'>
+      <div className='time'>
+        {formatTime(item)}
+      </div>
+      <div className='description'>
+        {item.text}
+        <div className='description-resouce'>
+          {resources[item.calendarId]?.text}
+        </div>
+      </div>
+    </div>;
+  }, [resources]);
 
   return <div className='agenda'>
     <div className='agenda-header'>

@@ -21,8 +21,6 @@ export const CalendarList = ({ listDS, onSelectedCalendarsChange }) => {
   const [selectedItems, setSelectedItems] = useState<string[]>(listDS || []);
 
   const onSelectedItemKeysChange = useCallback((checkedItems) => {
-    console.log('selected', selectedItems);
-    console.log('checked', checkedItems);
     setSelectedItems(checkedItems);
     onSelectedCalendarsChange(checkedItems);
   }, [onSelectedCalendarsChange]);
@@ -30,7 +28,7 @@ export const CalendarList = ({ listDS, onSelectedCalendarsChange }) => {
   const listItemsRender = useCallback((item) => {
     return (
       <div className='list-item'>
-        <CheckBox value={!selectedItems.includes(item)} />
+        <CheckBox value={!selectedItems.includes(item)} style={{ '--checkbox-color': item.color }} />
         <span className='list-item-text'>{item.text}</span>
       </div>
     );
@@ -39,6 +37,7 @@ export const CalendarList = ({ listDS, onSelectedCalendarsChange }) => {
     <List
       className='calendar-list'
       dataSource={listDS}
+      activeStateEnabled={false}
       groupRender={listTitleRender}
       itemRender={listItemsRender}
       grouped
