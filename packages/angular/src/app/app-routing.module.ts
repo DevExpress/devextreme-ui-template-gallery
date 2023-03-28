@@ -19,6 +19,9 @@ import { PlanningTaskDetailsComponent } from './pages/planning-task-details/plan
 import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analytics-dashboard.component';
 import { AnalyticsSalesReportComponent } from './pages/analytics-sales-report/analytics-sales-report.component';
 import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
+import { AuthSigninComponent } from './pages/auth-login/auth-signin.component';
+import { AuthCreateAccountComponent } from './pages/auth-create-account/auth-create-account.component';
+import { AuthResetPasswordComponent } from './pages/auth-reset-password/auth-reset-password.component';
 
 const routes: Routes = [
   {
@@ -88,6 +91,21 @@ const routes: Routes = [
       {
         path: 'analytics-geography',
         component: AnalyticsGeographyComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'signin-form-page',
+        component: AuthSigninComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'signup-form-page',
+        component: AuthCreateAccountComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'reset-password-form-page',
+        component: AuthResetPasswordComponent,
         canActivate: [AuthGuardService],
       },
       {

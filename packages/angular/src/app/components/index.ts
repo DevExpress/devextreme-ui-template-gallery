@@ -12,6 +12,7 @@ export * from './contact-status/contact-status.component';
 
 export * from './status-indicator/status-indicator.component';
 
+export * from './card-auth/card-auth.component';
 export * from './card-activities/card-activities.component';
 export * from './card-notes/card-notes.component';
 export * from './card-messages/card-messages.component';

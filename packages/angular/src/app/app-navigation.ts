@@ -48,4 +48,23 @@ export const navigation = [
       },
     ],
   },
+  {
+    text: 'Authentication',
+    icon: 'card',
+    path: '',
+    items: [
+      {
+        text: 'Sign In Form',
+        path: '/signin-form-page',
+      },
+      {
+        text: 'Sign Up Form',
+        path: '/signup-form-page',
+      },
+      {
+        text: 'Reset Password Form',
+        path: '/reset-password-form-page',
+      },
+    ],
+  },
 ];

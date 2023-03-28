@@ -6,40 +6,5 @@
 }
 
 .single-card {
-  .dx-card {
-    width: 330px;
-    margin: auto auto;
-    padding: 40px;
-    flex-grow: 0;
-
-    &.content {
-      height: auto;
-    }
-
-    :host-context(.screen-x-small) & {
-      width: 100%;
-      height: 100%;
-      border-radius: 0;
-      box-shadow: none;
-      margin: 0;
-      border: 0;
-      flex-grow: 1;
-    }
-
-    .header {
-      margin-bottom: 30px;
-
-      .title {
-        color: $base-text-color;
-        line-height: 28px;
-        font-weight: 500;
-        font-size: 24px;
-      }
-
-      .description {
-        color: $base-text-color-alpha;
-        line-height: 18px;
-      }
-    }
-  }
+  height: 100%;
 }

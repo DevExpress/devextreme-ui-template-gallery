@@ -1,12 +1,18 @@
-<form class="create-account-form" (submit)="onSubmit($event)">
-  <dx-form [formData]="formData" [disabled]="loading">
+<form class="create-account-form auth-form" (submit)="onSubmit($event)">
+  <dx-form
+    [formData]="formData"
+    [showColonAfterLabel]="true"
+    [showRequiredMark]="false"
+    [disabled]="loading"
+  >
     <dxi-item
       dataField="email"
       editorType="dxTextBox"
       [editorOptions]="{
-        stylingMode: 'filled',
         placeholder: 'Email',
-        mode: 'email'
+        stylingMode: 'filled',
+        mode: 'email',
+        value: defaultAuthData?.data?.email
       }"
     >
       <dxi-validation-rule
@@ -26,6 +32,7 @@
       [editorOptions]="{
         stylingMode: 'filled',
         placeholder: 'Password',
+        value: 'password',
         mode: 'password'
       }"
     >
@@ -42,6 +49,7 @@
       [editorOptions]="{
         stylingMode: 'filled',
         placeholder: 'Confirm Password',
+        value: 'password',
         mode: 'password'
       }"
     >
@@ -61,8 +69,8 @@
     <dxi-item>
       <div class="policy-info">
         By creating an account, you agree to the
-        <a routerLink="#">Terms of Service</a> and
-        <a routerLink="#">Privacy Policy</a>
+        <a [routerLink]="redirectLink">Terms of Service</a> and
+        <a [routerLink]="redirectLink">Privacy Policy</a>
       </div>
     </dxi-item>
 
@@ -74,12 +82,6 @@
         [template]="'createAccountTemplate'"
       >
       </dxo-button-options>
-    </dxi-item>
-
-    <dxi-item>
-      <div class="login-link">
-        Have an account? <a routerLink="/auth/login">Sign In</a>
-      </div>
     </dxi-item>
 
     <ng-container *dxTemplate="let item of 'createAccountTemplate'">
@@ -96,4 +98,8 @@
       </span>
     </ng-container>
   </dx-form>
+  <div class="login-link">
+    Have an account? <a [routerLink]="redirectLink">Sign In</a>
+  </div>
+  <app-login-oauth></app-login-oauth>
 </form>
