@@ -109,7 +109,6 @@ const exportOptions = {
 @use "@/variables.scss" as *;
 @use "sass:math";
 
-@include separator();
 .toolbar-header {
   @include header();
 }

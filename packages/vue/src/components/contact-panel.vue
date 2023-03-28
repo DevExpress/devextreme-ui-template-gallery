@@ -32,7 +32,7 @@
               <dx-item
                 location="after"
                 widget="dxButton"
-                :options="{ icon: 'close', onClick: () => emit('close') }"
+                :options="{ icon: 'close', onClick: onClose }"
               />
             </dx-toolbar>
           </div>
@@ -249,7 +249,7 @@ const toggleEdit = () => {
   isEditing.value = !isEditing.value;
 };
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'pinChanged']);
 
 const underContactFields = [
   {
@@ -292,6 +292,11 @@ function handleSaveClick({ validationGroup }: ClickEvent) {
   }
 }
 
+function onClose() {
+  isPinned.value = false;
+  emit('close');
+}
+
 watch(
   () => props.contactId,
   (newId) => {
@@ -300,6 +305,12 @@ watch(
     }
   },
 );
+
+watch([isPinned, () => props.isPanelOpened], () => {
+  emit('pinChanged');
+}, {
+  flush: 'post',
+});
 
 const navigateToDetails = () => {
   router.push('/crm-contact-details');

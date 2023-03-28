@@ -25,19 +25,6 @@ $toolbar-margin-bottom: $content-padding;
 
 $footer-height: 70px;
 
-@mixin separator() {
-  .separator {
-    height: 24px;
-    width: 1px;
-    background: $border-color;
-
-    .dx-toolbar-menu-section & {
-      height: 1px;
-      width: auto;
-    }
-  }
-}
-
 @mixin header {
   font-size: 22px;
   font-weight: 500;

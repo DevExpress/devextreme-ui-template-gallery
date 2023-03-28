@@ -47,6 +47,17 @@ body {
   }
 }
 
+.separator {
+  height: 24px;
+  width: 1px;
+  background: $border-color;
+
+  .dx-toolbar-menu-section & {
+    height: 1px;
+    width: auto;
+  }
+}
+
 .view-wrapper {
   overflow: hidden;
   display: flex;

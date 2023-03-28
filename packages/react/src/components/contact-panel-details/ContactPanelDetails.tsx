@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { Button } from 'devextreme-react/button';
@@ -36,7 +36,7 @@ const formatPrice = (price) => {
   });
 };
 
-export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDataChanged } : { contact: Contact, isOpened: boolean, changePanelOpened:(value: boolean)=> void, onDataChanged:(data)=> void }) => {
+export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDataChanged, changePanelPinned } : { contact: Contact, isOpened: boolean, changePanelOpened:(value: boolean)=> void, onDataChanged:(data)=> void, changePanelPinned:() => void }) => {
   const [isPinned, setIsPinned] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const { isLarge, isMedium } = useScreenSize();
@@ -46,6 +46,10 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
   const updateField = (field: string) => (value) => {
     onDataChanged({ ...contact, ...{ [field]: value } });
   };
+
+  useEffect(() => {
+    changePanelPinned();
+  }, [isPinned]);
 
   const onPinClick = useCallback(() => {
     setIsPinned(!isPinned);

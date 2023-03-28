@@ -8,6 +8,7 @@ import {
   Input,
   SimpleChanges,
   EventEmitter,
+  AfterViewChecked,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -39,20 +40,24 @@ import { Contact } from 'src/app/types/contact';
   styleUrls: ['./contact-user-panel.component.scss'],
   providers: [DataService],
 })
-export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy {
+export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy, AfterViewChecked {
   @Input() isOpened = false;
 
   @Input() userId: number;
 
   @Output() isOpenedChange = new EventEmitter<boolean>();
 
+  @Output() isPinnedChange = new EventEmitter<void>();
+
   user: Contact;
+
+  pinChanged = false;
+
+  pinned = false;
 
   isLoading = true;
 
   isEditing = false;
-
-  isPinned = false;
 
   isPinEnabled = false;
 
@@ -60,6 +65,17 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(private screen: ScreenService, private service: DataService, private router: Router) {
     this.userPanelSubscriptions.push(this.screen.changed.subscribe(this.calculatePin.bind(this)));
+  }
+
+  get isPinned() {
+    return this.pinned;
+  }
+
+  set isPinned(value) {
+    if (value !== this.pinned) {
+      this.pinned = value;
+      this.pinChanged = true;
+    }
   }
 
   ngOnInit(): void {
@@ -74,8 +90,19 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  ngAfterViewChecked(): void {
+    if (this.pinChanged) {
+      this.emitPinChanged();
+    }
+  }
+
   ngOnDestroy(): void {
     this.userPanelSubscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
+  emitPinChanged(): void {
+    this.pinChanged = false;
+    this.isPinnedChange.emit();
   }
 
   loadUserById = (id: number) => {
@@ -90,11 +117,13 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   onClosePanel = () => {
     this.isOpened = false;
+    this.isPinned = false;
     this.isOpenedChange.emit(this.isOpened);
   };
 
   onPinClick = () => {
     this.isPinned = !this.isPinned;
+    this.pinChanged = true;
   };
 
   onSaveClick = ({ validationGroup } : ButtonClickEvent) => {

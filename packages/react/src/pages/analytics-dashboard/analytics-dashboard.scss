@@ -1,8 +1,6 @@
 @use "../../variables.scss" as *;
 @use "sass:math";
 
-@include separator();
-
 .view-wrapper-dashboard {
   td.dx-command-adaptive.dx-command-adaptive,
   td.sales-bullet.sales-bullet {
