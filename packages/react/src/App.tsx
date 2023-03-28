@@ -44,7 +44,9 @@ export const App = () => {
         <AuthProvider>
           <NavigationProvider>
             <div className={`app ${screenSizeClass}`}>
-              <RootApp />
+              {
+                themeContext.isLoaded ? <RootApp /> : ''
+              }
             </div>
           </NavigationProvider>
         </AuthProvider>

@@ -1,50 +1,55 @@
-import './styles/theme-dx-dark.scss';
-import './styles/variables-dark.scss';
-import './styles/variables-light.scss';
-import './styles/theme-dx-light.scss';
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-const themeNames = ['dark', 'light'] as const;
-const themeStylesSheets = {};
-const storageKey = 'themeViewer';
+const themes = ['light', 'dark'] as const;
+const storageKey = 'app-theme';
+const themePrefix = 'app-theme-';
 
-export type Theme = typeof themeNames[number];
+const prefixes = ['./styles/theme-dx-', './styles/variables-'];
+
+const loadStylesImports = async() => {
+  await Promise.all([
+    ...prefixes.flatMap((prefix) => [
+      import(/* webpackChunkName: "app-theme-dark" */ `${prefix}dark.scss`),
+      import(/* webpackChunkName: "app-theme-light" */ `${prefix}light.scss`)
+    ]),
+  ]);
+};
+
+export type Theme = typeof themes[number];
+
+function getNextTheme(theme?: Theme) {
+  return themes[themes.indexOf(theme as Theme) + 1] || themes[0];
+}
 
 function getCurrentTheme(): Theme {
-  return window.localStorage[storageKey] || 'light';
+  return window.localStorage[storageKey] || getNextTheme();
 }
 
-function toArray<T>(arrayLikeObject) {
-  return [...arrayLikeObject as unknown as T[]];
-}
-
-function getThemeStyleSheets(): CSSStyleSheet[] {
-  const themePrefix = 'app-theme-';
-
-  if (Object.keys(themeStylesSheets).length == themeNames.length) {
-    return Object.values<CSSStyleSheet>(themeStylesSheets).flat();
+function isThemeStyleSheet(styleSheet, theme: Theme) {
+  const themeMarker = `${themePrefix}${theme}`;
+  // eslint-disable-next-line no-undef
+  if(process.env.NODE_ENV === 'production') {
+    return styleSheet?.href?.includes(`${themeMarker}`);
+  } else {
+    const rules = Array.from<CSSStyleRule>(styleSheet.cssRules);
+    return !![rules[0], rules.at(-1)].find(
+      (rule) => rule?.selectorText?.includes(`.${themeMarker}`));
   }
-
-  themeNames.forEach((themeName) => {
-    if (themeStylesSheets[themeName]) {
-      return;
-    }
-
-    const themeCssSelector = `.${themePrefix + themeName}`;
-
-    themeStylesSheets[themeName] = toArray<CSSStyleSheet>(document.styleSheets).filter(
-      ({ cssRules })=> !!toArray<CSSStyleRule>(cssRules).find(({ selectorText }) => selectorText?.includes(themeCssSelector)));
-  });
-
-  return Object.values<CSSStyleSheet>(themeStylesSheets).flat();
 }
 
-function setAppTheme(newTheme?: Theme) {
-  const themeName = newTheme || getCurrentTheme();
-  const stylesSheets = getThemeStyleSheets();
+function switchThemeStyleSheets(enabledTheme: Theme) {
+  const disabledTheme = getNextTheme(enabledTheme);
 
-  stylesSheets.forEach((stylesSheet) => stylesSheet.disabled = !themeStylesSheets[themeName].includes(stylesSheet));
+  Array.from<CSSStyleSheet>(document.styleSheets).forEach((styleSheet) => {
+    styleSheet.disabled = isThemeStyleSheet(styleSheet, disabledTheme);
+  });
+}
+
+async function setAppTheme(newTheme?: Theme) {
+  const themeName = newTheme || getCurrentTheme();
+
+  switchThemeStyleSheets(themeName);
 
   window.localStorage[storageKey] = themeName;
 
@@ -54,13 +59,21 @@ function setAppTheme(newTheme?: Theme) {
 
 export function useThemeContext() {
   const [theme, setTheme] = useState(getCurrentTheme());
-  const switchTheme = useCallback(() => {
-    setTheme((currentTheme: Theme) => currentTheme === 'dark' ? 'light' : 'dark');
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    loadStylesImports().then(() => {
+      setIsLoaded(true);
+    });
   }, []);
 
-  useEffect(() => setAppTheme(theme), [theme]);
+  const switchTheme = useCallback(() => setTheme((currentTheme: Theme) => getNextTheme(currentTheme)), []);
 
-  return useMemo(()=> ({ theme, switchTheme }), [theme]);
+  useEffect(() => {
+    isLoaded && setAppTheme(theme);
+  }, [theme, isLoaded]);
+
+  return useMemo(()=> ({ theme, switchTheme, isLoaded }), [theme, isLoaded]);
 }
 
 export const ThemeContext = React.createContext<ReturnType<typeof useThemeContext> | null>(null);

@@ -26,7 +26,7 @@ module.exports = defineConfig({
           },
           stylesLight: {
             name: 'styles',
-            test: /\.s?css$/,
+            test: /[^(\-dark|\-light)]\.s?css$/,
             chunks: 'all',
             enforce: true,
           },
