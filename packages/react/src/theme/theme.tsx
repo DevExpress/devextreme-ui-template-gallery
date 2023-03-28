@@ -41,7 +41,7 @@ function isThemeStyleSheet(styleSheet, theme: Theme) {
 function switchThemeStyleSheets(enabledTheme: Theme) {
   const disabledTheme = getNextTheme(enabledTheme);
 
-  return Array.from<CSSStyleSheet>(document.styleSheets).forEach((styleSheet) => {
+  Array.from<CSSStyleSheet>(document.styleSheets).forEach((styleSheet) => {
     styleSheet.disabled = isThemeStyleSheet(styleSheet, disabledTheme);
   });
 }
