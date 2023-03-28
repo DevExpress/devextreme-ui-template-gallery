@@ -10,7 +10,8 @@ export const ThemeSwitcher = () => {
   }, []);
 
   return <div>
-    <Button icon={`icons/${themeContext?.theme !== 'dark' ? 'moon' : 'sun'}.svg`}
+    <Button className='theme-button'
+      icon={`icons/${themeContext?.theme !== 'dark' ? 'moon' : 'sun'}.svg`}
       onClick={onButtonClick} />
   </div>;
 };
