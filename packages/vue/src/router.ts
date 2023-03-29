@@ -70,6 +70,7 @@ export const router = createRouter({
       'sign-in-form',
       'sign-up-form',
       'reset-password-form',
+      'user-profile',
     ].map((name) => ({
       path: `/${name}`,
       meta: {

@@ -4,6 +4,7 @@ $theme: null !default;
 @use "/node_modules/devextreme/scss/widgets/material/button/mixins" as *;
 @use "/node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
 @use "/node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
+@use "/node_modules/devextreme/scss/widgets/material/popup/sizes" as *;
 @use '/node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
 @use "/node_modules/devextreme/scss/widgets/material/list/sizes" as *;
 
@@ -21,6 +22,12 @@ $side-panel-min-width: 48px;
 $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 
 :root {
+  --card-background: #{$base-bg};
+
+  @if $theme == dark {
+    --card-background: #2a2a32;
+  }
+
   --base-bg: #{$base-bg};
   --base-bg-darken-5: #{$base-bg-darken-5};
   --base-bg-darken-4: #{$base-bg-darken-4};
@@ -41,5 +48,6 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
   --list-padding-left: #{$material-list-item-horizontal-padding};
   --list-padding-vertical: #{$material-list-item-vertical-padding};
   --footer-left-padding: #{$footer-left-padding};
+  --popup-toolbar-item-spacing: #{$material-popup-toolbar-item-spacing};
   --drop-down-gnrc-button-height: #{$material-base-inline-widget-height};
 }

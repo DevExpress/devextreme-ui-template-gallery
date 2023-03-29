@@ -180,7 +180,7 @@
 
   <form-popup
     title="New Contact"
-    v-model:is-visible="isAddContactPopupOpened"
+    v-model:visible="isAddContactPopupOpened"
     @save="onSaveContactNewForm"
   >
     <contact-new-form />

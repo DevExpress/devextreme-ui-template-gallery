@@ -10,6 +10,21 @@
   }
 }
 
+.header-text {
+  @include header();
+}
+
+.title-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.subtitle-text {
+  color: $subtitle-text-color;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .content {
   line-height: 1.5;
 }
@@ -83,17 +98,13 @@
   height: 100%;
 }
 
-.dx-form {
-  .dx-texteditor-label {
-    height: auto;
-  }
+.dx-texteditor-label {
+  height: auto;
 
-  .dx-texteditor-with-label .dx-label {
+  .dx-label {
     line-height: 1;
   }
 }
-
-$side-panel-min-width: 60px;
 
 .embedded {
   .layout-header,
@@ -132,6 +143,11 @@ $side-panel-min-width: 60px;
       line-height: 18px;
       font-size: 13px;
     }
+  }
+
+  .form-item-button {
+    margin-left: 10px;
+    margin-top: 5px;
   }
 
   &.view-mode {
