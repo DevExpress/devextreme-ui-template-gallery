@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector } from 'testcafe';
+import { ClientFunction, Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import {
   forceResizeRecalculation,
@@ -42,6 +42,7 @@ fixture`Contact List`;
 
         if (screenMode[0] === 1280) {
           await t.click(Selector('.dx-icon-unpin'));
+          await ClientFunction(() => document.activeElement.blur())();
           await takeScreenshot(`crm-contact-list-full-form-pinned${postfix}`, 'body');
           await t.click(Selector('.dx-icon-pin'));
         }
