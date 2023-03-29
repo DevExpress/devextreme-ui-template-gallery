@@ -115,11 +115,7 @@ export class CommonProfileComponent {
         colSpan: 2, },
       {
         dataField: 'status',
-        editorType: 'dxSelectBox',
         colSpan: 2,
-        editorOptions: {
-          items: ['Salaried'],
-        }
       },
       {
         dataField: 'supervisor',

@@ -17,6 +17,15 @@ import { PasswordTextBoxModule } from "../password-text-box/password-text-box.co
     dx-form {
       padding: 0 8px;
     }
+
+    ::ng-deep .change-profile-password-popup .dx-popup-normal {
+      border-radius: 8px;
+      padding: 8px 0;
+
+      .dx-toolbar {
+        padding: 0 24px 8px;
+      }
+    }
   `]
 })
 export class ChangeProfilePasswordComponent implements OnInit {

@@ -20,6 +20,7 @@
           <ng-container [ngSwitch]="item.dataField">
             <ng-container *ngSwitchCase="'status'">
               <status-select-box *dxTemplate
+                                 labelMode="hidden"
                                  [(value)]="cardData[item.dataField]"></status-select-box>
             </ng-container>
 

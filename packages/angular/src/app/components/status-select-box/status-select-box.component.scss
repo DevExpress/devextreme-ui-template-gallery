@@ -1,5 +1,9 @@
 @use "../../../variables.scss" as *;
 
+::ng-deep .dx-texteditor-with-floating-label .status-indicator {
+  margin-top: 12px;
+}
+
 .status-editor-field {
   display: flex;
 

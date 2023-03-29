@@ -23,6 +23,8 @@ export class StatusSelectBoxComponent {
 
   @Input() stylingMode = 'outlined';
 
+  @Input() labelMode = 'floating';
+
   @Output() valueChange = new EventEmitter<string>();
 }
 
