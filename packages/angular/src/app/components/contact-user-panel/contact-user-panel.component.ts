@@ -31,7 +31,7 @@ import {
   ContactStatusModule,
 } from 'src/app/components';
 import { ScreenService, DataService } from 'src/app/services';
-import { Subscription } from 'rxjs';
+import { distinctUntilChanged, Subject, Subscription} from 'rxjs';
 import { Contact } from 'src/app/types/contact';
 
 @Component({
@@ -40,18 +40,19 @@ import { Contact } from 'src/app/types/contact';
   styleUrls: ['./contact-user-panel.component.scss'],
   providers: [DataService],
 })
-export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy, AfterViewChecked {
+export class ContactUserPanelComponent implements OnInit, OnChanges, AfterViewChecked, OnDestroy {
   @Input() isOpened = false;
 
   @Input() userId: number;
 
   @Output() isOpenedChange = new EventEmitter<boolean>();
 
-  @Output() isPinnedChange = new EventEmitter<void>();
+  private pinEventSubject = new Subject<boolean>();
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  @Output() isPinnedChange = (this.pinEventSubject).pipe(distinctUntilChanged());
 
   user: Contact;
-
-  pinChanged = false;
 
   pinned = false;
 
@@ -64,22 +65,16 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy, 
   userPanelSubscriptions: Subscription[] = [];
 
   constructor(private screen: ScreenService, private service: DataService, private router: Router) {
-    this.userPanelSubscriptions.push(this.screen.changed.subscribe(this.calculatePin.bind(this)));
-  }
-
-  get isPinned() {
-    return this.pinned;
-  }
-
-  set isPinned(value) {
-    if (value !== this.pinned) {
-      this.pinned = value;
-      this.pinChanged = true;
-    }
+    this.userPanelSubscriptions.push(
+      this.screen.changed.subscribe(this.calculatePin));
   }
 
   ngOnInit(): void {
     this.calculatePin();
+  }
+
+  ngAfterViewChecked(): void {
+    this.pinEventSubject.next(this.pinned);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -90,19 +85,8 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy, 
     }
   }
 
-  ngAfterViewChecked(): void {
-    if (this.pinChanged) {
-      this.emitPinChanged();
-    }
-  }
-
   ngOnDestroy(): void {
     this.userPanelSubscriptions.forEach((sub) => sub.unsubscribe());
-  }
-
-  emitPinChanged(): void {
-    this.pinChanged = false;
-    this.isPinnedChange.emit();
   }
 
   loadUserById = (id: number) => {
@@ -117,13 +101,11 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy, 
 
   onClosePanel = () => {
     this.isOpened = false;
-    this.isPinned = false;
     this.isOpenedChange.emit(this.isOpened);
   };
 
   onPinClick = () => {
-    this.isPinned = !this.isPinned;
-    this.pinChanged = true;
+    this.pinned = !this.pinned;
   };
 
   onSaveClick = ({ validationGroup } : ButtonClickEvent) => {
@@ -133,8 +115,8 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, OnDestroy, 
 
   calculatePin = () => {
     this.isPinEnabled = this.screen.sizes['screen-large'] || this.screen.sizes['screen-medium'];
-    if (this.isPinned && !this.isPinEnabled) {
-      this.isPinned = false;
+    if (this.pinned && !this.isPinEnabled) {
+      this.pinned = false;
     }
   };
 
