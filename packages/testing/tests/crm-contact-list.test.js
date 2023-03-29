@@ -42,7 +42,7 @@ fixture`Contact List`;
 
         if (screenMode[0] === 1280) {
           await t.click(Selector('.dx-icon-unpin'));
-          await t.click('.header-title'); // to remove focus from the pin button
+          await t.click('.contact-name'); // to remove focus from the pin button
           await takeScreenshot(`crm-contact-list-full-form-pinned${postfix}`, 'body');
           await t.click(Selector('.dx-icon-pin'));
         }
