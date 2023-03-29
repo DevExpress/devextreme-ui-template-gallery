@@ -2,24 +2,31 @@
   <dx-popup
     ref="popup"
     :title="props.title"
-    :visible="isVisible"
+    :visible="visibleState"
     :full-screen="screenInfo.isXSmall"
-    width="480px"
+    :width="width"
+    :wrapper-attr="wrapperAttrState"
     height="auto"
     @option-changed="() => popup?.instance?.repaint()"
   >
     <dx-popup-item
-      widget="dxButton"
       toolbar="bottom"
-      location="after"
-      :options="saveOptions"
-    />
-    <dx-popup-item
-      widget="dxButton"
-      toolbar="bottom"
-      location="after"
-      :options="cancelOptions"
-    />
+      location="center"
+    >
+      <div :class="{'form-popup-buttons-container': true, 'flex-buttons': width <= 360}">
+        <dx-button
+          text="Cancel"
+          styling-mode="contained"
+          @click="cancel()"
+        />
+        <dx-button
+          text="Save"
+          styling-mode="contained"
+          type="default"
+          @click="save()"
+        />
+      </div>
+    </dx-popup-item>
     <dx-validation-group ref="validationGroup">
       <slot />
     </dx-validation-group>
@@ -29,56 +36,80 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { DxPopup, DxToolbarItem as DxPopupItem } from 'devextreme-vue/popup';
+import { DxButton } from 'devextreme-vue/button';
 import { screenInfo } from '@/utils/media-query';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
+import { SimpleObject } from '@/types';
 
 const props = withDefaults(
   defineProps<{
     title: string,
-    isVisible: boolean,
+    visible: boolean,
+    width?: number,
+    wrapperAttr?: SimpleObject,
 }>(),
   {
-    isVisible: false,
+    width: 480,
+    visible: false,
+    wrapperAttr: () => ({}),
   },
 );
 const validationGroup = ref<InstanceType<typeof DxValidationGroup>>();
 
-const emit = defineEmits(['save', 'update:isVisible']);
+const emit = defineEmits(['save', 'update:visible']);
 
-const isVisible = ref(props.isVisible);
+const visibleState = ref(props.visible);
+const wrapperAttrState = ref(props.wrapperAttr);
+
 const popup = ref<InstanceType<typeof DxPopup>>();
 
 watch(
-  () => props.isVisible,
+  () => props.visible,
   (newValue) => {
-    isVisible.value = newValue;
+    visibleState.value = newValue;
   },
 );
 
+watch(
+  () => props.wrapperAttr,
+  (newValue) => {
+    const wrapperAttr = { class: '', ...newValue };
+    wrapperAttr.class += ' form-popup';
+    wrapperAttrState.value = wrapperAttr;
+  },
+);
+
+const close = () => {
+  visibleState.value = false;
+  emit('update:visible', false);
+};
+
 const save = () => {
   if (validationGroup.value?.instance.validate().isValid) {
-    validationGroup.value?.instance.reset();
+    close();
     emit('save');
   }
 };
 
 const cancel = () => {
-  isVisible.value = false;
-  validationGroup.value?.instance.reset();
-  emit('update:isVisible', false);
-};
-
-const saveOptions = {
-  text: 'Save',
-  stylingMode: 'outlined',
-  type: 'default',
-  onClick: save,
-};
-
-const cancelOptions = {
-  text: 'Cancel',
-  stylingMode: 'text',
-  type: 'default',
-  onClick: cancel,
+  close();
 };
 </script>
+<style scoped lang="scss">
+:global(.form-popup .dx-toolbar-center) {
+  width: 100%;
+}
+
+.form-popup-buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--popup-toolbar-item-spacing);
+
+  &.flex-buttons {
+    :deep(.dx-button) {
+      flex: 1;
+    }
+  }
+}
+</style>

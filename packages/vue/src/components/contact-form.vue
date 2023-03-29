@@ -62,37 +62,12 @@
 
             <dx-form-group-item>
               <dx-form-item>
-                <dx-select-box
-                  label="Status"
+                <status-select-box
                   v-model="contactData.status"
                   :items="contactStatusList"
                   :read-only="!isEditing"
-                  field-template="field"
-                  item-template="item"
-                  v-bind="formSelectBoxProps"
-                >
-                  <template #field="{ data }">
-                    <div class="status-editor-field">
-                      <span class="status-indicator">
-                        <contact-status
-                          :value="contactData?.status"
-                          :show-text="false"
-                        />
-                      </span>
-                      <dx-text-box
-                        :read-only="true"
-                        :hover-state-enabled="false"
-                        :input-attr="{
-                          // eslint-disable-next-line max-len
-                          class: `status-editor-input contact-status status-${data?.toLowerCase()}`}"
-                        :value="data"
-                      />
-                    </div>
-                  </template>
-                  <template #item="{ data }">
-                    <contact-status :value="data" />
-                  </template>
-                </dx-select-box>
+                  styling-mode="filled"
+                />
               </dx-form-item>
 
               <dx-form-item>
@@ -241,18 +216,16 @@ import {
   DxGroupItem as DxFormGroupItem,
   DxColCountByScreen,
 } from 'devextreme-vue/form';
-import { DxTextBox } from 'devextreme-vue/text-box';
 import { DxNumberBox } from 'devextreme-vue/number-box';
 import { DxValidator } from 'devextreme-vue/validator';
-import { DxSelectBox } from 'devextreme-vue/select-box';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
 import { ClickEvent } from 'devextreme/ui/button';
-import { formEditorProps, formSelectBoxProps } from '@/shared/form-editor-config';
+import { formEditorProps } from '@/shared/form-editor-config';
 import LoadComponent from '@/components/load-component.vue';
 import { Contact, contactStatusList } from '@/types/contact';
 import FormPhoto from '@/components/form-photo.vue';
-import ContactStatus from '@/components/contact-status.vue';
 import FormTextbox from '@/components/form-textbox.vue';
+import StatusSelectBox from '@/components/status-select-box.vue';
 
 const emptyContact = { state: { stateShort: '' } } as Contact;
 
@@ -309,29 +282,8 @@ function cancelEdit() {
   }
 }
 
-.plain-styled-form {
-  .form-item-button {
-    margin-left: 10px;
-    margin-top: 5px;
-  }
-}
-
 .info {
   position: relative;
   padding-bottom: 30px;
-}
-
-.status-editor-field {
-  display: flex;
-
-  :deep(.status-indicator) {
-    display: flex;
-    align-self: flex-end;
-    padding-left: $list-padding-left;
-  }
-
-  :deep(.status-editor-input) {
-    padding-left: 0;
-  }
 }
 </style>

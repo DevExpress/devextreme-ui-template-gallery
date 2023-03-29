@@ -4,6 +4,7 @@ $theme: null !default;
 @use "/node_modules/devextreme/scss/widgets/material/button/mixins" as *;
 @use "/node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
 @use "/node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
+@use "/node_modules/devextreme/scss/widgets/material/popup/sizes" as *;
 @use '/node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
 @use "/node_modules/devextreme/scss/widgets/material/list/sizes" as *;
 
@@ -40,4 +41,5 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
   --filled-texteditor-input-horizontal-padding: #{$material-field-value-horizontal-padding};
   --list-padding-left: #{$material-list-item-horizontal-padding};
   --footer-left-padding: #{$footer-left-padding};
+  --popup-toolbar-item-spacing: #{$material-popup-toolbar-item-spacing}
 }

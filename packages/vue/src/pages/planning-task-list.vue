@@ -116,7 +116,7 @@
   </div>
   <form-popup
     title="New Task"
-    v-model:is-visible="isNewTaskPopupOpened"
+    v-model:visible="isNewTaskPopupOpened"
     @save="onSaveNewTask"
   >
     <task-form

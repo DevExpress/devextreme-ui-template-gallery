@@ -64,6 +64,7 @@ export const router = createRouter({
       'analytics-dashboard',
       'analytics-sales-report',
       'analytics-geography',
+      'common-profile',
     ].map((name) => ({
       path: `/${name}`,
       meta: {
