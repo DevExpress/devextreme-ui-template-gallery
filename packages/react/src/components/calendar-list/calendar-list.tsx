@@ -7,7 +7,7 @@ import './calendar-list.scss';
 import { CheckBox } from 'devextreme-react';
 
 const onAddClick = (e) => {
-  e.stopPropagation();
+  e.event.stopImmediatePropagation();
 };
 
 export const listTitleRender = (item) => {

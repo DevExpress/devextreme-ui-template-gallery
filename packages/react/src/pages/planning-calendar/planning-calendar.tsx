@@ -46,7 +46,6 @@ export const PlanningCalendar = () => {
   const [tasks, setTasks] = useState<DataSource>();
   const [date, setDate] = useState(new Date());
   const [currentView, setCurrentView] = useState<ViewType>('week');
-  const [leftPanelOpen, setLeftPanelOpen] = useState(true);
   const [rightPanelOpen, setRightPanelOpen] = useState(false);
   const [listDS, setListDS] = useState(defaultListDS);
   const [agendaItems, setAgendaItems] = useState<any[]>();
@@ -63,9 +62,6 @@ export const PlanningCalendar = () => {
   }, []);
 
   const onSetDate = useCallback((e) => { setDate(e); }, []);
-  const toggleLeftPanelOpen = useCallback(() => {
-    setLeftPanelOpen(!leftPanelOpen);
-  }, [leftPanelOpen]);
 
   const toggleRightPanelOpen = useCallback(() => {
     setRightPanelOpen(!rightPanelOpen);

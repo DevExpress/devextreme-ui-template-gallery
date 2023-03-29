@@ -7,6 +7,7 @@
 @use "../node_modules/devextreme/scss/widgets/material/list/sizes" as *;
 @use "../node_modules/devextreme/scss/widgets/material/button/sizes" as *;
 @use "../node_modules/devextreme/scss/widgets/material/button/colors" as button_colors;
+@use "../node_modules/devextreme/scss/widgets/material/scheduler/colors" as *;
 
 @forward "../node_modules/devextreme/scss/widgets/material/colors";
 @forward "../node_modules/devextreme/scss/widgets/material/textEditor/colors";
@@ -141,12 +142,13 @@ $scheduler-toolbar-height: calc($button-height + 2 * $theme-padding);
   line-height: 16px;
 }
 
-@mixin description-text {
+@mixin description-text($opacity) {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
+  opacity: $opacity;
 }
 
 @mixin h1-header-text {
@@ -163,14 +165,13 @@ $scheduler-toolbar-height: calc($button-height + 2 * $theme-padding);
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-
-  color: #000000;
 }
 
-@mixin subtext {
+@mixin subtext($opacity: 1) {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
+  opacity: $opacity;
 }

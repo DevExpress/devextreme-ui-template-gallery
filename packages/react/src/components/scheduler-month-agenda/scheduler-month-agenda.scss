@@ -9,6 +9,7 @@
     justify-content: space-between;
     align-items: center;
     color: $base-accent;
+    border-bottom: solid 1px $base-border-color;
     .dx-button .dx-icon{
       color: $base-accent;
     }
@@ -17,7 +18,6 @@
     }
   }
   .dx-list-item:first-of-type{
-    border-top: solid 1px $base-border-color;
     margin-top: 0px;
   }
   .dx-list-item:last-of-type{
@@ -42,14 +42,19 @@
         align-items: flex-start;
         width: 36px;
         @include subtext();
-        // overflow: hidden;
+        .duration{
+          @include subtext(0.7);
+        }
       }
       .description{
         overflow: hidden;
-        text-overflow: ellipsis;
-        @include description-text();
-        .description-resouce{
-          @include subtext();
+        .description-title{
+          @include h2-header-text();
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .description-resource{
+          @include description-text(0.7)
         }
       }
     }

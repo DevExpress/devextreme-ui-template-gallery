@@ -1,14 +1,14 @@
 @use "../../variables.scss" as *;
 @use "sass:math";
 
-#contact-panel {
+#side-panel {
   // --contact-side-panel-width: 350px;
-  --contact-side-panel-width: calc(292px + 16px);
+  --side-panel-width: calc(292px + 16px);
 
 }
 
-.screen-x-small #contact-panel {
-  --contact-side-panel-width: 100vw;
+.screen-x-small #side-panel {
+  --side-panel-width: 100vw;
 }
 
 .side-panel {
@@ -16,34 +16,24 @@
     &.overlap{
       position: absolute;
       padding-top: 16px;
-      &.x-small{
-        padding-top: 0px;
-      }
       top: 0;
       bottom: 0;
       z-index: 5;
       background: $base-bg;
+      &.x-small{
+        padding-top: 0px;
+      }
       &.side-right{
-          right: calc(-1 * var(--contact-side-panel-width));
+          right: calc(-1 * var(--side-panel-width));
           transition: right 400ms;
       }
-      &.side-left{
-        left: calc(-1 * var(--contact-side-panel-width));
-        transition: left 400ms;
-      }
       &.open {
-        &.side-left{
-          left: 0px;
-          //change this to padding for the correct shadow cast and modify contact panel width
-          margin-left: calc(2*$theme-padding + $button-height);
-          transition: left 400ms ease;
-          width: var(--contact-side-panel-width);
-        }
         &.side-right{
           right: 0px;
           transition: right 400ms ease;
           border: 2px $base-border-color;
-          width: var(--contact-side-panel-width);
+          border-radius: 0px;
+          width: var(--side-panel-width);
           z-index: 7;
         }
         box-shadow: 0px 0 8px $base-border-color;
@@ -76,8 +66,5 @@
   &.hidden{
     display: none;
   }
-  // &.absolute{
-  //   position: absolute;
-  // }
 }
 

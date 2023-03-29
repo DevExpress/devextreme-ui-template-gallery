@@ -2,8 +2,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './scheduler-month-agenda.scss';
 import List from 'devextreme-react/list';
-import { getTasksForScheduler } from 'dx-template-gallery-data';
 import Button from 'devextreme-react/button';
+import { useScreenSize } from '../../utils/media-query';
 
 const formatTime = (appointment) => {
   const start = appointment.startDate.toLocaleTimeString(undefined, {
@@ -31,6 +31,7 @@ const formatTime = (appointment) => {
 };
 
 export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, resources, items, schedulerRef }) => {
+  const { isLarge } = useScreenSize();
   const showAppointmentPopup = useCallback((e) => {
     schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
   }, [schedulerRef]);
@@ -41,8 +42,10 @@ export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Da
         {formatTime(item)}
       </div>
       <div className='description'>
-        {item.text}
-        <div className='description-resouce'>
+        <div className='description-title'>
+          {item.text}
+        </div>
+        <div className='description-resource'>
           {resources[item.calendarId]?.text}
         </div>
       </div>
@@ -54,7 +57,7 @@ export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Da
       <div className='date'>
         {selectedAppointment.startDate.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' })}
       </div>
-      <Button icon='showpanel' onClick={toggleOpen} />
+      <Button icon={isLarge ? 'showpanel' : 'close'} onClick={toggleOpen} />
     </div>
     <List dataSource={items} itemRender={renderListItem} onItemClick={showAppointmentPopup} />
   </div>;
