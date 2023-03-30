@@ -5,11 +5,12 @@ import { useScreenSize } from '../../utils/media-query';
 import Button from 'devextreme-react/button';
 import './right-side-panel.scss';
 interface SidePanelProps {
+  showOpenButton?: boolean,
   icon?: string,
   toggleOpen: () => void,
   isOpened: boolean,
 }
-export const RightSidePanel = ({ isOpened, toggleOpen, children }: React.PropsWithChildren<SidePanelProps>) => {
+export const RightSidePanel = ({ showOpenButton = true, isOpened, toggleOpen, children }: React.PropsWithChildren<SidePanelProps>) => {
   const { isXSmall, isSmall, isMedium, isLarge } = useScreenSize();
   return <>
     <div
@@ -23,7 +24,7 @@ export const RightSidePanel = ({ isOpened, toggleOpen, children }: React.PropsWi
     >
       {children}
     </div>
-    {isLarge &&
+    {isLarge && showOpenButton &&
       <Button
         className={classNames({
           'open-button': true,

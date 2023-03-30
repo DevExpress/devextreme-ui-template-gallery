@@ -234,6 +234,7 @@ export const PlanningCalendar = () => {
       </div>
       {/* {currentView === 'month' && */}
       <RightSidePanel
+        showOpenButton={currentView === 'month'}
         isOpened={rightPanelOpen}
         toggleOpen={toggleRightPanelOpen}
       >
