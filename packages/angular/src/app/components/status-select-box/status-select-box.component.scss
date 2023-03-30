@@ -1,7 +1,11 @@
 @use "../../../variables.scss" as *;
 
-::ng-deep .dx-texteditor-with-floating-label .status-indicator {
-  margin-top: 12px;
+.dx-texteditor-with-floating-label .status-editor-field .status-indicator {
+  align-self: flex-end;
+
+  &::ng-deep .status {
+    display: inline;
+  }
 }
 
 .status-editor-field {
@@ -16,10 +20,6 @@
   ::ng-deep {
     .status {
       display: flex;
-
-      &::before {
-        display: flex;
-      }
     }
 
     .status-input.status-input {

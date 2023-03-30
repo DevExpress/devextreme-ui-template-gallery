@@ -96,12 +96,10 @@ body {
   border: none;
 }
 
-.dx-form {
-  .dx-texteditor-label {
-    height: auto;
-  }
+.dx-texteditor-label {
+  height: auto;
 
-  .dx-texteditor-with-label .dx-label {
+  .dx-label {
     line-height: 1;
   }
 }
