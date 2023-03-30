@@ -5,28 +5,28 @@ import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
 import { useScreenSize } from '../../utils/media-query';
 
-const formatTime = (appointment) => {
-  const start = appointment.startDate.toLocaleTimeString(undefined, {
+const getDurationString = (appointment) => {
+  const duration = appointment.endDate - appointment.startDate;
+  const durationHours = Math.floor(duration / (60 * 60 * 1000));
+  const durationMinutes = Math.floor((duration % (60 * 60 * 1000)) / 60000);
+  if (durationHours > 0 && durationMinutes > 0) {
+    return `${durationHours}:${durationMinutes} m`;
+  }
+  if (durationHours > 0) {
+    return `${durationHours} h`;
+  }
+  return `${durationMinutes} m`;
+};
+
+const TimeContent = ({ appointment }) => {
+  const start = appointment.startDate?.toLocaleTimeString(undefined, {
     hour: 'numeric',
     minute: 'numeric',
     hour12: false
   });
-  const duration = appointment.endDate - appointment.startDate;
-  const durationHours = Math.floor(duration / (60 * 60 * 1000));
-  const durationMinutes = Math.floor((duration % (60 * 60 * 1000)) / 60000);
-  let durationStr = '';
-  if (durationHours > 0 && durationMinutes > 0) {
-    durationStr = `${durationHours}:${durationMinutes} m`;
-  }
-  else if (durationHours > 0) {
-    durationStr = `${durationHours} h`;
-  }
-  else {
-    durationStr = `${durationMinutes} m`;
-  }
   return <div className='time'>
     <div className='start'>{start}</div>
-    <div className='duration'>{durationStr}</div>
+    <div className='duration'>{getDurationString(appointment)}</div>
   </div>;
 };
 
@@ -39,7 +39,7 @@ export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Da
   const renderListItem = useCallback((item) => {
     return <div className='list-item'>
       <div className='time'>
-        {formatTime(item)}
+        <TimeContent appointment={item} />
       </div>
       <div className='description'>
         <div className='description-title'>
