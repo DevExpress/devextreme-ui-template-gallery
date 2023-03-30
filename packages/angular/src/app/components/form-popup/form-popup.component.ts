@@ -33,23 +33,23 @@ import {
 
     @Output() save = new EventEmitter();
 
-    @Output() hide = new EventEmitter();
-
-
+    @Output() visibleChange = new EventEmitter();
 
     constructor(protected screen: ScreenService) { }
 
     onCancelClick = () => {
-      this.validationGroup.instance.reset();
-      this.visible = false;
-      this.hide.emit();
+      this.close();
     }
 
     onSaveClick = () => {
       if(!this.validationGroup.instance.validate().isValid) return;
-      this.visible = false;
       this.save.emit();
-      this.hide.emit();
+      this.close();
+    }
+
+    close = () => {
+      this.visible = false;
+      this.visibleChange.emit(this.visible);
       this.validationGroup.instance.reset();
     }
   }

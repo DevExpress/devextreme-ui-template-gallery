@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, NgModule, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, NgModule, Output, ViewChild } from '@angular/core';
 import { ValidationCallbackData } from 'devextreme/ui/validation_rules';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
@@ -28,16 +28,15 @@ import { PasswordTextBoxModule } from "../password-text-box/password-text-box.co
     }
   `]
 })
-export class ChangeProfilePasswordComponent implements OnInit {
+export class ChangeProfilePasswordComponent {
   @ViewChild('popup', { static: true }) popup: FormPopupComponent;
 
-  @Input() opener = new EventEmitter();
+  @Input() visible = false;
 
-  @Output() hide = new EventEmitter();
+  @Output() visibleChange = new EventEmitter();
 
   formData: Record<string, any> = {};
 
-  visible = false;
 
   fields:Record<string, any>[] = [
     {
@@ -58,14 +57,13 @@ export class ChangeProfilePasswordComponent implements OnInit {
         }]
     }];
 
-  ngOnInit() {
-    this.opener.subscribe((isOpen) => {
-      this.visible = isOpen
-    })
-  }
-
   saveNewPassword() {
     notify('Password Changed', 'success');
+  }
+
+  changeVisible(visible) {
+    this.visible = visible;
+    this.visibleChange.emit(this.visible);
   }
 }
 @NgModule({

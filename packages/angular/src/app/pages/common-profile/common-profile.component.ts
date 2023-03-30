@@ -1,5 +1,5 @@
 import {
-  Component, EventEmitter, NgModule,
+  Component, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import notify from 'devextreme/ui/notify';
@@ -40,7 +40,7 @@ export class CommonProfileComponent {
 
   supervisorsList = [];
 
-  changePasswordPopupOpener = new EventEmitter<boolean>();
+  isChangePasswordPopupOpened = false;
 
   isDataChanged = false;
 
@@ -159,7 +159,7 @@ export class CommonProfileComponent {
   };
 
   changePassword() {
-    this.changePasswordPopupOpener.emit(true);
+    this.isChangePasswordPopupOpened = true;
   };
 
   save() {

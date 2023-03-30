@@ -13,7 +13,7 @@ import { Task, newTask } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
 import { forkJoin, map, Observable } from 'rxjs';
 import { TaskFormModule } from '../../components/task-form/task-form.component';
-import { FormPopupModule, FormPopupComponent} from 'src/app/components';
+import { FormPopupModule } from 'src/app/components';
 import { TaskListGridComponent, TaskListModule } from '../../components/task-list-grid/task-list-grid.component';
 import { TaskListKanbanModule, TaskListKanbanComponent } from '../../components/task-list-kanban/task-list-kanban.component';
 import { TaskListGanttComponent, TaskListGanttModule } from '../../components/task-list-gantt/task-list-gantt.component';
@@ -31,13 +31,13 @@ export class PlanningTaskListComponent implements OnInit {
 
   @ViewChild('planningKanban', { static: false }) kanban: TaskListKanbanComponent;
 
-  @ViewChild('taskPopup', { static: true }) taskPopup: FormPopupComponent;
-
   newTask = newTask;
 
   taskPanelItems = taskPanelItems;
 
   displayTaskComponent = this.taskPanelItems[0].text;
+
+  isAddTaskPopupOpened = false;
 
   displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
 
@@ -67,7 +67,7 @@ export class PlanningTaskListComponent implements OnInit {
   };
 
   addTask = () => {
-    this.taskPopup.visible = true;
+    this.isAddTaskPopupOpened = true;
   };
 
   refresh = () => {

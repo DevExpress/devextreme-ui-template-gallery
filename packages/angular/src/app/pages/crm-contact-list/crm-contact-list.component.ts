@@ -27,10 +27,7 @@ import { jsPDF } from 'jspdf';
 import { ContactUserPanelModule } from '../../components/contact-user-panel/contact-user-panel.component';
 import { ContactNewUserFormModule } from '../../components/contact-new-user-form/contact-new-user-form.component';
 import { formatPhone } from 'src/app/pipes/phone.pipe';
-import {
-  FormPopupModule,
-  FormPopupComponent,
-} from 'src/app/components';
+import { FormPopupModule } from 'src/app/components';
 
 type FilterContactStatus = ContactStatus | 'All';
 
@@ -42,13 +39,13 @@ type FilterContactStatus = ContactStatus | 'All';
 export class CrmContactListComponent {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
 
-  @ViewChild('userPopup', { static: true }) userPopup: FormPopupComponent;
-
   statusList = contactStatusList;
 
   filterStatusList = ['All', ...contactStatusList];
 
   isPanelOpened = false;
+
+  isAddContactPopupOpened = false
 
   userId: number;
 
@@ -65,7 +62,7 @@ export class CrmContactListComponent {
   constructor(private service: DataService) {}
 
   addContact() {
-    this.userPopup.visible = true;
+    this.isAddContactPopupOpened = true;
   };
 
   refresh = () => {
