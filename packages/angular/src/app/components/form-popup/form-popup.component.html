@@ -2,7 +2,7 @@
           [(visible)]="visible"
           [fullScreen]="!!(screen.xSmallScreenChanged | async)"
           [width]="width"
-          [wrapperAttr]="wrapperAttr"
+          [wrapperAttr]="getWrapperAttrs | apply: wrapperAttr"
           height="auto">
   <dxi-toolbar-item  toolbar="bottom" location="center">
     <div class="form-popup-buttons-container" [class.flex-buttons]="width <= 360">

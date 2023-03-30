@@ -54,6 +54,12 @@ import {ApplyPipeModule} from "../../pipes/apply.pipe";
       this.visibleChange.emit(this.visible);
       this.validationGroup.instance.reset();
     }
+
+    getWrapperAttrs = (inputWrapperAttr) => {
+      const wrapperAttr = { class: '', ...inputWrapperAttr };
+      wrapperAttr.class += ' form-popup';
+      return wrapperAttr;
+    }
   }
 
   @NgModule({
