@@ -1,42 +1,35 @@
-import React, { } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState } from 'react';
 import classNames from 'classnames';
-import Button from 'devextreme-react/button';
 import { useScreenSize } from '../../utils/media-query';
+import Button from 'devextreme-react/button';
 import './right-side-panel.scss';
-
-export const RightSidePanel = ({ isOpened, title, toggleOpen, children }) => {
-
-  const { isLarge } = useScreenSize();
+interface SidePanelProps {
+  icon?: string,
+  toggleOpen: () => void,
+  isOpened: boolean,
+}
+export const RightSidePanel = ({ isOpened, toggleOpen, children }: React.PropsWithChildren<SidePanelProps>) => {
+  const { isXSmall, isSmall, isMedium, isLarge } = useScreenSize();
   return <>
-    <div id='right-panel'>
-      <div
-        className={classNames({
-          'right-sight-panel': true,
-          'overlapping': !isLarge,
-          'open': isOpened
-        })}
-      >
-        <div className='side-panel-container'>
-          <div className='side-panel-header'>
-            {title &&
-              <div className='side-panel-title'>
-                <div className='side-panel-title-text'>
-                  {{ title }}
-                </div>
-              </div>
-            }
-          </div>
-
-          <div className='side-panel-content-wrapper'>
-            {children}
-          </div>
-        </div>
-      </div>
+    <div
+      id='side-panel'
+      className={classNames({
+        'side-panel': true,
+        'overlap': !isLarge,
+        'x-small': isXSmall,
+        'open': isOpened,
+      })}
+    >
+      {children}
     </div>
-    {!isOpened && isLarge && <Button
-      className='open-button'
-      icon={isOpened ? 'showpanel' : 'hidepanel'}
-      onClick={toggleOpen} />
-    }
+    {isLarge &&
+      <Button
+        className={classNames({
+          'open-button': true,
+          'hidden': isOpened,
+        })}
+        icon='hidepanel'
+        onClick={toggleOpen} />}
   </>;
 };

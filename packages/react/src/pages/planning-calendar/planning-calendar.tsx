@@ -14,7 +14,6 @@ import Query from 'devextreme/data/query';
 import { useScreenSize } from '../../utils/media-query';
 
 import { CalendarList } from '../../components/calendar-list/calendar-list';
-import { SidePanel } from '../../components/side-panel/side-panel';
 import { LeftSidePanel } from '../../components/side-panel/left-side-panel';
 import { RightSidePanel } from '../../components/side-panel/right-side-panel';
 import { SchedulerMonthAgenda } from '../../components/scheduler-month-agenda/scheduler-month-agenda';
@@ -38,6 +37,9 @@ export const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
     .toArray();
 };
 
+const isAppointmentCollectorClicked = (e) => {
+  return e.targetElement?.[0]?.classList.contains('dx-scheduler-appointment-collector');
+};
 export const PlanningCalendar = () => {
   const { isXSmall, isMedium, isLarge } = useScreenSize();
   const schedulerRef = useRef<Scheduler>(null);
@@ -60,6 +62,11 @@ export const PlanningCalendar = () => {
       setTasks(new DataSource(tasksList));
     });
   }, []);
+  useEffect(() => {
+    if (tasks) {
+      setAgendaItems(findAllAppointmentsForDay({ startDate: date }, tasks));
+    }
+  }, [tasks]);
 
   const onSetDate = useCallback((e) => { setDate(e); }, []);
 
@@ -125,17 +132,19 @@ export const PlanningCalendar = () => {
 
     setSelectedAppointment({ data: appointmentData, target: e.targetElement });
 
-    if (currentView === 'month') {
+    if (currentView === 'month' || isAppointmentCollectorClicked(e)) {
       setAgendaItems(findAllAppointmentsForDay(appointmentData, tasks));
     }
-    if (currentView === 'month' && isXSmall && !rightPanelOpen) {
+    if ((currentView === 'month' && isXSmall ||
+      isAppointmentCollectorClicked(e)) &&
+      !rightPanelOpen) {
       toggleRightPanelOpen();
     }
     else {
       tooltipRef.current?.instance.show();
     }
 
-  }, [currentView, isXSmall, rightPanelOpen]);
+  }, [currentView, isXSmall, rightPanelOpen, tasks]);
 
   const onCellModified = useCallback((e) => {
     if (e.appointmentData.startDate.toDateString() === selectedAppointment?.data.startDate.toDateString()) {
@@ -223,22 +232,20 @@ export const PlanningCalendar = () => {
             appointmentData={selectedAppointment?.data} />
         </Tooltip>
       </div>
-      {currentView === 'month' &&
-        <SidePanel
-          side='right'
-          isOverlapping={false}
-          isOpened={rightPanelOpen}
+      {/* {currentView === 'month' && */}
+      <RightSidePanel
+        isOpened={rightPanelOpen}
+        toggleOpen={toggleRightPanelOpen}
+      >
+        <SchedulerMonthAgenda
+          selectedAppointment={selectedAppointment?.data}
           toggleOpen={toggleRightPanelOpen}
-        >
-          <SchedulerMonthAgenda
-            selectedAppointment={selectedAppointment?.data}
-            toggleOpen={toggleRightPanelOpen}
-            items={agendaItems}
-            resources={resourcesList}
-            schedulerRef={schedulerRef}
-          />
-        </SidePanel>
-      }
+          items={agendaItems}
+          resources={resourcesList}
+          schedulerRef={schedulerRef}
+        />
+      </RightSidePanel>
+      {/* } */}
     </div>
   </div>;
 };
