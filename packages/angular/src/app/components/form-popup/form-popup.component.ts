@@ -13,11 +13,13 @@ import {
     DxValidationGroupComponent,
   } from 'devextreme-angular';
   import { ScreenService } from '../../services';
+import {ApplyPipeModule} from "../../pipes/apply.pipe";
 
   @Component({
     selector: 'form-popup',
     templateUrl: './form-popup.component.html',
     providers: [],
+    styleUrls: ['./form-popup.component.scss']
   })
 
   export class FormPopupComponent {
@@ -56,6 +58,7 @@ import {
 
   @NgModule({
     imports: [
+      ApplyPipeModule,
       DxButtonModule,
       DxToolbarModule,
       DxPopupModule,

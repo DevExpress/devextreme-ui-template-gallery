@@ -4,20 +4,21 @@
           [width]="width"
           [wrapperAttr]="wrapperAttr"
           height="auto">
-  <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="after">
-    <dx-button
+  <dxi-toolbar-item  toolbar="bottom" location="center">
+    <div class="form-popup-buttons-container" [class.flex-buttons]="width <= 360">
+      <dx-button
       text="Cancel"
       stylingMode="contained"
       (click)="onCancelClick()"
     ></dx-button>
-  </dxi-toolbar-item>
+      <dx-button
+        text="Save"
+        stylingMode="contained"
+        type="default"
+        (click)="onSaveClick()"
+      ></dx-button>
+    </div>
 
-  <dxi-toolbar-item widget="dxButton" toolbar="bottom" location="after" [options]="{
-                    text: 'Save',
-                    stylingMode: 'contained',
-                    type: 'default',
-                    onClick: onSaveClick
-                }">
   </dxi-toolbar-item>
   <dx-validation-group #validationGroup>
     <ng-content></ng-content>
