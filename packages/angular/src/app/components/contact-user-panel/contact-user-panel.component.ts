@@ -51,8 +51,6 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, AfterViewCh
 
   private pinEventSubject = new Subject<boolean>();
 
-  private pinEventSubjectDistinct = this.pinEventSubject.pipe(distinctUntilChanged());
-
   user: Contact;
 
   pinned = false;
@@ -68,7 +66,10 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, AfterViewCh
   constructor(private screen: ScreenService, private service: DataService, private router: Router) {
     this.userPanelSubscriptions.push(
       this.screen.changed.subscribe(this.calculatePin),
-      this.pinEventSubjectDistinct.subscribe(this.pinnedChange)
+      this
+        .pinEventSubject
+        .pipe(distinctUntilChanged())
+        .subscribe(this.pinnedChange)
     );
   }
 
