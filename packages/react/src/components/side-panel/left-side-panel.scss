@@ -58,8 +58,11 @@
       background-color: $base-bg;
       z-index: 3;
       height: 100vh;
-      left: calc(2 * $content-padding);
+      left: $button-height;
       box-shadow: 8px 0 16px -8px $base-border-color;
+      &.open{
+        padding-right: $content-padding;
+      }
     }
   }
 }

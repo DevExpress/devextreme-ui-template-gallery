@@ -21,7 +21,9 @@
           align-items: flex-start;
           gap: $theme-padding;
           // padding-top: $theme-padding;
-          width: calc(292px + 16px);
+          &.small{
+            width: calc(292px + 16px);
+          }
           
           .buttons{
             display: flex;
@@ -68,23 +70,10 @@
     
 }
 
-.dx-scheduler-appointment-tooltip-wrapper{ 
-  .dx-popup-content, .dx-popup-normal  {
-    max-height: 600px !important;
-    border-radius: 8px !important;
-  }
-
-  .dx-scrollable-wrapper .dx-list-item {
-    &.dx-state-hover, &.dx-state-focused{
-      background-color: $base-bg;
-    }
-  }
-}
-
-
 .dx-tooltip-wrapper > .dx-popup-normal {
   background-color: $base-bg !important;
   color: $base-text-color !important;
+  border-radius: 8px !important;
   max-width: 360px ;
   filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.24));
 }

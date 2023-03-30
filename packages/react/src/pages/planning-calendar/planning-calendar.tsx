@@ -41,7 +41,7 @@ const isAppointmentCollectorClicked = (e) => {
   return e.targetElement?.[0]?.classList.contains('dx-scheduler-appointment-collector');
 };
 export const PlanningCalendar = () => {
-  const { isXSmall, isMedium, isLarge } = useScreenSize();
+  const { isXSmall, isSmall, isMedium, isLarge } = useScreenSize();
   const schedulerRef = useRef<Scheduler>(null);
   const tooltipRef = useRef<Tooltip>(null);
   const [selectedAppointment, setSelectedAppointment] = useState<{ data, target }>();
@@ -81,18 +81,11 @@ export const PlanningCalendar = () => {
 
   const onSelectedCalendarsChange = useCallback((seletedCalendars) => {
     const removedResourceFilters = seletedCalendars
-      .map((calendar) => calendar.id)
-      .map(resource => ['calendarId', '<>', resource]);
-    const filters: unknown[] = [];
-    // refactor to predicate logic
-    removedResourceFilters.forEach(filter => {
-      filters.push(filter, 'and');
+      .map((calendar) => calendar.id);
+
+    tasks?.filter((task) => {
+      return !removedResourceFilters.includes(task.calendarId);
     });
-    filters.pop();
-    if (filters.length > 0) {
-      tasks?.filter(filters);
-    }
-    else { tasks?.filter(null); }
 
     tasks?.load();
   }, [tasks]);
@@ -176,7 +169,7 @@ export const PlanningCalendar = () => {
   return <div className='view-wrapper-calendar'>
     <div className='panels'>
       <LeftSidePanel>
-        <div className='left'>
+        <div className={isXSmall || isSmall ? 'left small' : 'left'}>
           <div className='buttons'>
             <Button text='Today' onClick={onTodayClick} />
             <Button text='Create event' type='default' onClick={createAppointment} />

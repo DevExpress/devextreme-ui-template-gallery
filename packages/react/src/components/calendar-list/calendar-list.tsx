@@ -28,22 +28,29 @@ export const CalendarList = ({ listDS, onSelectedCalendarsChange }) => {
   const listItemsRender = useCallback((item) => {
     return (
       <div className='list-item'>
-        <CheckBox value={!selectedItems.includes(item)} style={{ '--checkbox-color': item.checkboxColor }} />
+        <CheckBox value={!selectedItems.includes(item)}
+          style={{
+            '--checkbox-color': item.checkboxColor,
+            // '--checkbox-secondary-color': item.color
+          }} />
         <span className='list-item-text'>{item.text}</span>
       </div>
     );
   }, [selectedItems]);
   return (
-    <List
-      className='calendar-list'
-      dataSource={listDS}
-      activeStateEnabled={false}
-      groupRender={listTitleRender}
-      itemRender={listItemsRender}
-      grouped
-      collapsibleGroups
-      scrollingEnabled={false}
-      selectionMode='multiple'
-      onSelectedItemKeysChange={onSelectedItemKeysChange}
-    />);
+    <div className='calendar-list'>
+      <List
+        className='calendar-list'
+        dataSource={listDS}
+        activeStateEnabled={false}
+        groupRender={listTitleRender}
+        itemRender={listItemsRender}
+        grouped
+        collapsibleGroups
+        scrollingEnabled={false}
+        selectionMode='multiple'
+        onSelectedItemKeysChange={onSelectedItemKeysChange}
+      />
+    </div>
+  );
 };
