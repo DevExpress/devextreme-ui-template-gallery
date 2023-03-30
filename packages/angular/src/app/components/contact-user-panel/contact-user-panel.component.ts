@@ -101,6 +101,7 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, AfterViewCh
 
   onClosePanel = () => {
     this.isOpened = false;
+    this.pinned = false;
     this.isOpenedChange.emit(this.isOpened);
   };
 
