@@ -232,7 +232,6 @@ export const PlanningCalendar = () => {
             appointmentData={selectedAppointment?.data} />
         </Tooltip>
       </div>
-      {/* {currentView === 'month' && */}
       <RightSidePanel
         showOpenButton={currentView === 'month'}
         isOpened={rightPanelOpen}
@@ -246,7 +245,6 @@ export const PlanningCalendar = () => {
           schedulerRef={schedulerRef}
         />
       </RightSidePanel>
-      {/* } */}
     </div>
   </div>;
 };
