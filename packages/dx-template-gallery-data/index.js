@@ -110,21 +110,25 @@ export const defaultListDS = [
         id: 0,
         text: 'Brett Johnson',
         color: '#E1F5FE',
+        checkboxColor: '#29B6F6',
       },
       {
         id: 1,
         text: 'Tasks',
         color: '#C8E6C9',
+        checkboxColor: '#66BB6A',
       },
       {
         id: 2,
         text: 'Reminder',
         color: '#FFCDD2',
+        checkboxColor: '#EF5350',
       },
       {
         id: 3,
         text: 'Contacts',
         color: '#FFE0B2',
+        checkboxColor: '#FFA726',
       }],
   },
   {
@@ -133,6 +137,7 @@ export const defaultListDS = [
       id: 4,
       text: 'Holidays',
       color: '#F3E5F5',
+      checkboxColor: '#AB47BC',
     }],
   },
 ];

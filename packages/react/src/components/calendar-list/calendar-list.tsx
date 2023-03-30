@@ -28,7 +28,7 @@ export const CalendarList = ({ listDS, onSelectedCalendarsChange }) => {
   const listItemsRender = useCallback((item) => {
     return (
       <div className='list-item'>
-        <CheckBox value={!selectedItems.includes(item)} style={{ '--checkbox-color': item.color }} />
+        <CheckBox value={!selectedItems.includes(item)} style={{ '--checkbox-color': item.checkboxColor }} />
         <span className='list-item-text'>{item.text}</span>
       </div>
     );
