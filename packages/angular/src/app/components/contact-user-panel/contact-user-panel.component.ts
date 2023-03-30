@@ -47,10 +47,11 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, AfterViewCh
 
   @Output() isOpenedChange = new EventEmitter<boolean>();
 
+  @Output() pinnedChange = new EventEmitter<boolean>();
+
   private pinEventSubject = new Subject<boolean>();
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  @Output() isPinnedChange = (this.pinEventSubject).pipe(distinctUntilChanged());
+  private pinEventSubjectDistinct = this.pinEventSubject.pipe(distinctUntilChanged());
 
   user: Contact;
 
@@ -66,7 +67,9 @@ export class ContactUserPanelComponent implements OnInit, OnChanges, AfterViewCh
 
   constructor(private screen: ScreenService, private service: DataService, private router: Router) {
     this.userPanelSubscriptions.push(
-      this.screen.changed.subscribe(this.calculatePin));
+      this.screen.changed.subscribe(this.calculatePin),
+      this.pinEventSubjectDistinct.subscribe(this.pinnedChange)
+    );
   }
 
   ngOnInit(): void {
