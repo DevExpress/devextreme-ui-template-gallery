@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { getTasksForScheduler, defaultListDS } from 'dx-template-gallery-data';
+import { getTasksForScheduler, defaultCalendarListItems } from 'dx-template-gallery-data';
 
 import Calendar from 'devextreme-react/calendar';
 import Scheduler, { Resource, View } from 'devextreme-react/scheduler';
@@ -21,8 +21,7 @@ import { TooltipContentTemplate } from '../../components/scheduler-tooltip/sched
 
 import './planning-calendar.scss';
 
-const views = ['week', 'month'];
-const colors = ['#E1F5FE', '#C8E6C9', '#FFCDD2', '#FFE0B2', '#7b49d3', '#2a7ee4'];
+const views: ViewType[] = ['day', 'week', 'month', 'agenda'];
 
 export const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
   const appointments = dataSource.items();
@@ -49,13 +48,13 @@ export const PlanningCalendar = () => {
   const [date, setDate] = useState(new Date());
   const [currentView, setCurrentView] = useState<ViewType>('week');
   const [rightPanelOpen, setRightPanelOpen] = useState(false);
-  const [listDS, setListDS] = useState(defaultListDS);
+  const [calendarListItems, setCalendarListItems] = useState(defaultCalendarListItems);
   const [agendaItems, setAgendaItems] = useState<any[]>();
 
   const resourcesList = useMemo(() => {
-    return listDS
+    return calendarListItems
       .reduce((res: string[], calendarList) => { return res.concat(calendarList.items); }, []);
-  }, [listDS]);
+  }, [calendarListItems]);
 
   useEffect(() => {
     getTasksForScheduler().then(tasksList => {
@@ -177,7 +176,7 @@ export const PlanningCalendar = () => {
           <div className='calendar'>
             <Calendar value={date} onValueChange={onSetDate} />
           </div>
-          <CalendarList listDS={listDS} onSelectedCalendarsChange={onSelectedCalendarsChange} />
+          <CalendarList calendarItems={calendarListItems} onSelectedCalendarsChange={onSelectedCalendarsChange} />
         </div>
       </LeftSidePanel>
       <div className='right'>
@@ -196,22 +195,19 @@ export const PlanningCalendar = () => {
           onAppointmentTooltipShowing={onAppointmentTooltipShowing}
           onCellClick={onCellClick}
           adaptivityEnabled={isXSmall}
+          views={views}
         >
           <Resource
             dataSource={resourcesList}
             fieldExpr='calendarId'
             label='Calendar'
           />
-          <View type='day' />
-          <View type='week' />
-          <View type='month' />
-          <View type='agenda' />
-          <SpeedDialAction
-            icon='add'
-            visible={isXSmall}
-            onClick={createAppointment}
-          />
         </Scheduler>
+        <SpeedDialAction
+          icon='add'
+          visible={isXSmall}
+          onClick={createAppointment}
+        />
         <Tooltip
           ref={tooltipRef}
           target={selectedAppointment?.target}

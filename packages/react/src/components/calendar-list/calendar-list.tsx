@@ -2,7 +2,6 @@
 import React, { useState, useCallback } from 'react';
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
-import DropDownButton from 'devextreme-react/drop-down-button';
 import './calendar-list.scss';
 import { CheckBox } from 'devextreme-react';
 
@@ -10,15 +9,15 @@ const onAddClick = (e) => {
   e.event.stopImmediatePropagation();
 };
 
-export const listTitleRender = (item) => {
+const listTitleRender = (item) => {
   return <div className='list-header'>
     {item.key}
     <Button icon='add' stylingMode='contained' onClick={onAddClick} />
   </div>;
 };
 
-export const CalendarList = ({ listDS, onSelectedCalendarsChange }) => {
-  const [selectedItems, setSelectedItems] = useState<string[]>(listDS || []);
+export const CalendarList = ({ calendarItems, onSelectedCalendarsChange }) => {
+  const [selectedItems, setSelectedItems] = useState<string[]>(calendarItems || []);
 
   const onSelectedItemKeysChange = useCallback((checkedItems) => {
     setSelectedItems(checkedItems);
@@ -41,7 +40,7 @@ export const CalendarList = ({ listDS, onSelectedCalendarsChange }) => {
     <div className='calendar-list'>
       <List
         className='calendar-list'
-        dataSource={listDS}
+        dataSource={calendarItems}
         activeStateEnabled={false}
         groupRender={listTitleRender}
         itemRender={listItemsRender}

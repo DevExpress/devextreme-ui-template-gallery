@@ -93,16 +93,7 @@ export const patchTasksForScheduler = (tasks) => {
 
 export const getTasksForScheduler = async () => patchTasksForScheduler(await getTasks());
 
-export const listDS = [
-  {
-    key: 'id',
-    items: ['Brett Johnson', 'Tasks', 'Reminder', 'Contacts']
-      .map((text) => ({ list: 'My Calendars', text }))
-      .concat({ list: 'Other Calendars', text: 'Holidays' }),
-  },
-];
-
-export const defaultListDS = [
+export const defaultCalendarListItems = [
   {
     key: 'My Calendars',
     items: [
