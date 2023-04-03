@@ -1,4 +1,4 @@
-<div class="panel" [ngClass]="{ pin: isPinned, open: isOpened }">
+<div class="panel" [ngClass]="{ pin: pinned, open: isOpened }">
   <div class="data-wrapper">
     <ng-container *ngIf="!isLoading">
       <div class="data-part">
@@ -11,7 +11,7 @@
           </dxi-item>
           <dxi-item location="after" [visible]="isPinEnabled">
             <dx-button
-              [icon]="isPinned ? 'pin' : 'unpin'"
+              [icon]="pinned ? 'pin' : 'unpin'"
               (onClick)="onPinClick()"
             ></dx-button>
           </dxi-item>

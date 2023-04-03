@@ -71,6 +71,17 @@ body {
   }
 }
 
+.separator {
+  height: 24px;
+  width: 1px;
+  background: $border-color;
+
+  ::ng-deep .dx-toolbar-menu-section & {
+    height: 1px;
+    width: auto;
+  }
+}
+
 .view-wrapper {
   display: flex;
   flex-direction: column;

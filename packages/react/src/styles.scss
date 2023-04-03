@@ -38,17 +38,6 @@ body {
     flex-grow: 1;
     width: 100%;
     height: 100%;
-
-    .view {
-      display: contents;
-
-      .view-wrapper {
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-      }
-    }
   }
 
   h2 {
@@ -56,6 +45,24 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
   }
+}
+
+.separator {
+  height: 24px;
+  width: 1px;
+  background: $border-color;
+
+  .dx-toolbar-menu-section & {
+    height: 1px;
+    width: auto;
+  }
+}
+
+.view-wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
 .responsive-paddings {

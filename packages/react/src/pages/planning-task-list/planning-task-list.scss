@@ -1,7 +1,5 @@
 @use "../../variables.scss" as *;
 
-@include separator();
-
 .view-wrapper-task-list {
   position: absolute;
   top: 0;

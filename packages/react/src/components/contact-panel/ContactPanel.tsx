@@ -11,7 +11,7 @@ import { ContactPanelDetails } from '../contact-panel-details/ContactPanelDetail
 
 const ContactPanelWithLoadPanel = withLoadPanel(ContactPanelDetails);
 
-export const ContactPanel = ({ contactId, isOpened, changePanelOpened } : { contactId: number | null, isOpened: boolean, changePanelOpened:(value: boolean)=> void }) => {
+export const ContactPanel = ({ contactId, isOpened, changePanelOpened, changePanelPinned } : { contactId: number | null, isOpened: boolean, changePanelOpened:(value: boolean)=> void, changePanelPinned: () => void }) => {
 
   const [data, setData] = useState<Contact>();
 
@@ -40,6 +40,7 @@ export const ContactPanel = ({ contactId, isOpened, changePanelOpened } : { cont
       isOpened={isOpened}
       onDataChanged={onDataChanged}
       changePanelOpened={changePanelOpened}
+      changePanelPinned={changePanelPinned}
       panelProps={{
         position: { of: '.panel' },
         container: '.panel'
