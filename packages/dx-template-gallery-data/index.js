@@ -1,4 +1,6 @@
+/* eslint-disable spellcheck/spell-checker */
 const axios = require('axios');
+const luxon = require('luxon');
 
 const baseUrl = 'https://js.devexpress.com/Demos/RwaService/api';
 
@@ -59,32 +61,30 @@ export const getSalesByState = async (startDate, endDate) => {
   return calcSalesByState(data);
 };
 
-function getSecondsToday() {
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  return now - today;
-}
-
-const DAY_TIME_IN_MS = 24 * 60 * 60 * 1000;
+const DateTime = luxon.DateTime;
 const promptDescription = `The HtmlEditor component is a client-side WYSIWYG text editor. 
 The editor allows users to format text and integrate media elements into documents. 
 The result can be exported to HTML or Markdown.`;
 
 export const patchTasksForScheduler = (tasks) => {
-  const today = new Date();
-  const mondayMidnight = today - getSecondsToday() - today.getDay() * DAY_TIME_IN_MS;
+  const today = DateTime.now();
+  const mondayMidnight = today.set({
+    weekday: 1, hour: 0, minute: 0, millisecond: 0,
+  });
+
   const uniqueTasks = tasks.slice(0, 11);
   return uniqueTasks.map((task, index) => {
-    const weekDay = (index % 4) + 1;
-    // const weekDay = Math.random() * 5;
+    const weekDay = (index % 4);
 
     const weekIndex = Math.ceil(index / 4) - 1;
-    const taskDate = mondayMidnight + weekDay * DAY_TIME_IN_MS + weekIndex * 7 * DAY_TIME_IN_MS;
-    const taskStart = taskDate + (10 + weekDay) * 3600 * 1000;
+    const taskStart = mondayMidnight.plus({
+      days: weekDay + weekIndex * 7,
+      hours: 10 + weekDay,
+    });
     return {
       ...task,
-      startDate: new Date(taskStart),
-      endDate: new Date(taskStart + 3 * 3600 * 1000),
+      startDate: taskStart.toJSDate(),
+      endDate: taskStart.plus({ hours: 3 }).toJSDate(),
       description: promptDescription,
       calendarId: weekDay,
     };

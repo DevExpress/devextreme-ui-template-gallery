@@ -1,21 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
+import { Duration } from 'luxon';
 import './scheduler-month-agenda.scss';
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
 import { useScreenSize } from '../../utils/media-query';
 
 const getDurationString = (appointment) => {
-  const duration = appointment.endDate - appointment.startDate;
-  const durationHours = Math.floor(duration / (60 * 60 * 1000));
-  const durationMinutes = Math.floor((duration % (60 * 60 * 1000)) / 60000);
-  if (durationHours > 0 && durationMinutes > 0) {
-    return `${durationHours}:${durationMinutes} m`;
-  }
-  if (durationHours > 0) {
-    return `${durationHours} h`;
-  }
-  return `${durationMinutes} m`;
+  const duration = Duration.fromMillis(appointment.endDate - appointment.startDate).rescale();
+  return duration.toFormat("h'h' m'm'");
 };
 
 const TimeContent = ({ appointment }) => {
