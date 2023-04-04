@@ -35,7 +35,8 @@ $tooltip-success-button-color: button_colors.$button-success-text-hover-bg;
 
 $theme-padding: $material-button-horizontal-padding;
 // WA for no button-height in generic theme, remove when design-system is released
-$button-height: calc(26px + ($theme-padding - 10px)/3);
+$button-height-theme-difference: calc($theme-padding - 10px)/3;
+$button-height: calc(26px + $button-height-theme-difference);
 
 
 $scheduler-toolbar-height: calc($button-height + 2 * $theme-padding);

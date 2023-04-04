@@ -7,7 +7,7 @@
     display: flex;
     height: inherit;
     
-    .panels {
+    .content {
         display: flex;
         flex-wrap: wrap;
         height: inherit;
@@ -15,12 +15,11 @@
         padding: $content-padding $content-padding $content-padding $theme-padding;
         justify-content: center;
         
-        .left {
+        .left-content {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           gap: $theme-padding;
-          // padding-top: $theme-padding;
           &.small{
             width: calc(292px + 16px);
           }
@@ -29,7 +28,7 @@
             display: flex;
             width: 100%;
             gap: 16px;
-            padding: 0px $theme-padding;
+            padding: 0 $theme-padding;
             .dx-button {
               width: calc((100% - $theme-padding)/2);
               font-size: 13px;
@@ -47,7 +46,7 @@
           }          
         }
     
-        .right {
+        .main-content {
           flex: 1;
           height: inherit;
           border: 1px grey;
@@ -55,19 +54,17 @@
         }
     }
 
-    .dx-scheduler-appointment-content{
-      // color: $base-text-color;
-      color: #333333;
-    }
-    
-    .dx-scheduler-header {
-      border-radius: 8px 8px 0px 0px;
-      height: $scheduler-toolbar-height;
-    }
-    .dx-scheduler-work-space{
-      border-radius: 0px 0px 8px 8px;
-    }
-    
+  .dx-scheduler-appointment-content{
+    color: #333333;
+  }
+  
+  .dx-scheduler-header {
+    border-radius: 8px 8px 0 0;
+    height: $scheduler-toolbar-height;
+  }
+  .dx-scheduler-work-space{
+    border-radius: 0 0 8px 8px;
+  }
 }
 
 .dx-tooltip-wrapper > .dx-popup-normal {
@@ -75,5 +72,5 @@
   color: $base-text-color !important;
   border-radius: 8px !important;
   max-width: 360px ;
-  filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.24));
+  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.24));
 }

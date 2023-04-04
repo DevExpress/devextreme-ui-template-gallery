@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useCallback, useEffect, useState } from 'react';
+import './scheduler-agenda.scss';
+
+import React, { useCallback } from 'react';
 import { Duration } from 'luxon';
-import './scheduler-month-agenda.scss';
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
 import { useScreenSize } from '../../utils/media-query';
@@ -23,11 +23,8 @@ const TimeContent = ({ appointment }) => {
   </div>;
 };
 
-export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, resources, items, schedulerRef }) => {
+export const SchedulerAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, resources, items, showAppointmentPopup }) => {
   const { isLarge } = useScreenSize();
-  const showAppointmentPopup = useCallback((e) => {
-    schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
-  }, [schedulerRef]);
 
   const renderListItem = useCallback((item) => {
     return <div className='list-item'>
@@ -50,8 +47,15 @@ export const SchedulerMonthAgenda = ({ selectedAppointment = { startDate: new Da
       <div className='date'>
         {selectedAppointment.startDate.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' })}
       </div>
-      <Button icon={isLarge ? 'showpanel' : 'close'} onClick={toggleOpen} />
+      <Button
+        icon={isLarge ? 'showpanel' : 'close'}
+        onClick={toggleOpen}
+      />
     </div>
-    <List dataSource={items} itemRender={renderListItem} onItemClick={showAppointmentPopup} />
+    <List
+      dataSource={items}
+      itemRender={renderListItem}
+      onItemClick={showAppointmentPopup}
+    />
   </div>;
 };

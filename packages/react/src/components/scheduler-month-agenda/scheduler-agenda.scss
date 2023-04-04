@@ -1,0 +1,51 @@
+@use "../../variables.scss" as *;
+@use "sass:math";
+
+.agenda{
+  .agenda-header {
+    padding: $theme-padding;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: $base-accent;
+    border-bottom: solid 1px $base-border-color;
+    .dx-button .dx-icon{
+      color: $base-accent;
+    }
+    .date {
+      @include h2-header-text()
+    }
+  }
+  .dx-list-item{
+    border-bottom: solid 1px $base-border-color;
+  }
+  .list-item{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+
+    .time{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 36px;
+      @include subtext();
+      .duration{
+        @include subtext(0.7);
+      }
+    }
+    .description{
+      overflow: hidden;
+      .description-title{
+        @include h2-header-text();
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .description-resource{
+        @include description-text(0.7)
+      }
+    }
+  }
+}

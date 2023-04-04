@@ -5,12 +5,11 @@
     width: 100%;
 
     .dx-list-group-header{
-      padding: 8px 8px 8px $theme-padding;
       display: flex;
-      vertical-align: middle;
       align-items: center;
       justify-content: space-between;
       border-style: none;
+      flex-direction: row-reverse;
       .dx-inkripple{
         border-radius: 4px;
       }
@@ -25,18 +24,6 @@
       @include h1-header-text();
     }
 
-    .dx-list-group-header::before{
-      order: 3;
-    }
-
-    .dx-list-group-header-indicator{
-        order: 3;
-    }
-
-    .dx-item-content{
-      padding: 0px;
-    }
-
     .dx-list {
       .dx-list-group-body .dx-list-item.dx-list-item-selected {
         background-color: $base-bg;
@@ -45,36 +32,22 @@
         border-style: none;
       }
     }
-    .dx-list-item{
-      border-style: none;
-    }
 
     .list-item {
-      padding: 6px 8px 6px $theme-padding;
       display: flex;
       vertical-align: middle;
       align-items: center;
       border-radius: 4px;
     }
-    
-    .dx-checkbox-container {
-      padding: 6px;
-    }
+
     .list-item-text{
-      padding: 0px 4px;
+      padding: 0 8px;
 
       @include calendar-items-text()
     }
 
     --checkbox-color: $base-accent;
-    --checkbox-secondary-color: $base-accent;
     .dx-checkbox-container .dx-checkbox-icon{
       background-color: var(--checkbox-color)
     }
-    // .dx-checkbox.dx-state-focused .dx-checkbox-icon::after {
-    //   background-color: var(--checkbox-secondary-color);
-    // }
-    // .dx-checkbox.dx-checkbox-checked.dx-state-focused .dx-checkbox-icon::after {
-    //   background-color: var(--checkbox-secondary-color);
-    // }
   }

@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import './calendar-list.scss';
+
 import React, { useState, useCallback } from 'react';
+
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
-import './calendar-list.scss';
-import { CheckBox } from 'devextreme-react';
+import CheckBox from 'devextreme-react/check-box';
 
 const onAddClick = (e) => {
   e.event.stopImmediatePropagation();
@@ -27,11 +28,13 @@ export const CalendarList = ({ calendarItems, onSelectedCalendarsChange }) => {
   const listItemsRender = useCallback((item) => {
     return (
       <div className='list-item'>
-        <CheckBox value={!selectedItems.includes(item)}
+        <CheckBox
+          value={!selectedItems.includes(item)}
           style={{
             '--checkbox-color': item.checkboxColor,
-            // '--checkbox-secondary-color': item.color
-          }} />
+          }}
+          focusStateEnabled={false}
+        />
         <span className='list-item-text'>{item.text}</span>
       </div>
     );
@@ -39,9 +42,10 @@ export const CalendarList = ({ calendarItems, onSelectedCalendarsChange }) => {
   return (
     <div className='calendar-list'>
       <List
-        className='calendar-list'
         dataSource={calendarItems}
         activeStateEnabled={false}
+        focusStateEnabled={false}
+        hoverStateEnabled={false}
         groupRender={listTitleRender}
         itemRender={listItemsRender}
         grouped
