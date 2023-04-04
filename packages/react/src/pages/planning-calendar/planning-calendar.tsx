@@ -179,13 +179,26 @@ export const PlanningCalendar = () => {
       <LeftSidePanel>
         <div className={isXSmall || isSmall ? 'left-content small' : 'left-content'}>
           <div className='buttons'>
-            <Button text='Today' onClick={onTodayClick} />
-            <Button text='Create event' type='default' onClick={createAppointment} />
+            <Button
+              text='Today'
+              onClick={onTodayClick}
+            />
+            <Button
+              text='Create event'
+              type='default'
+              onClick={createAppointment}
+            />
           </div>
           <div className='calendar'>
-            <Calendar value={date} onValueChange={onSetDate} />
+            <Calendar
+              value={date}
+              onValueChange={onSetDate}
+            />
           </div>
-          <CalendarList calendarItems={calendarListItems} onSelectedCalendarsChange={onSelectedCalendarsChange} />
+          <CalendarList
+            calendarItems={calendarListItems}
+            onSelectedCalendarsChange={onSelectedCalendarsChange}
+          />
         </div>
       </LeftSidePanel>
       <div className='main-content'>

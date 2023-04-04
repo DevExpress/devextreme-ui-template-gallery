@@ -31,6 +31,8 @@ export const RightSidePanel = ({ showOpenButton = true, isOpened, toggleOpen, ch
           'hidden': isOpened,
         })}
         icon='hidepanel'
-        onClick={toggleOpen} />}
+        onClick={toggleOpen}
+      />
+    }
   </>;
 };

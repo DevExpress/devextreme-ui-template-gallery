@@ -18,12 +18,12 @@ export const LeftSidePanel = ({ children }) => {
   >
     <div className='side-panel-container'>
       {(isXSmall || isSmall) &&
-        <div
-          className='button-container'>
-          <Button className='open-button'
+        <div className='button-container'>
+          <Button
+            className='open-button'
             icon={isOpened ? 'hidepanel' : 'showpanel'}
-            onClick={() => { setIsOpened(!isOpened); }} />
-
+            onClick={() => { setIsOpened(!isOpened); }}
+          />
         </div>
       }
       <div className='side-panel-content-wrapper'>
