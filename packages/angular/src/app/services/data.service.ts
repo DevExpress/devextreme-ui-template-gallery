@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import {
-  map, groupBy, mergeMap, toArray,
+  map,
+  groupBy,
+  mergeMap,
+  toArray,
 } from 'rxjs/operators';
 import { Task } from 'src/app/types/task';
 import { Contact } from 'src/app/types/contact';
-import {Sale, SalesOrOpportunitiesByCategory} from '../types/analytics';
+import { Sale, SalesOrOpportunitiesByCategory } from '../types/analytics';
 
 const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
-// const API_URL = 'https://localhost:5001/api';
 
 @Injectable()
 export class DataService {
