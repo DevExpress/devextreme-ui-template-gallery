@@ -17,7 +17,7 @@ import { useScreenSize } from '../../utils/media-query';
 import { CalendarList } from '../../components/calendar-list/calendar-list';
 import { LeftSidePanel } from '../../components/side-panel/left-side-panel';
 import { RightSidePanel } from '../../components/side-panel/right-side-panel';
-import { SchedulerAgenda } from '../../components/scheduler-month-agenda/scheduler-agenda';
+import { SchedulerAgenda } from '../../components/scheduler-agenda/scheduler-agenda';
 import { TooltipContentTemplate } from '../../components/scheduler-tooltip/scheduler-tooltip';
 
 const views: ViewType[] = ['day', 'week', 'month', 'agenda'];
