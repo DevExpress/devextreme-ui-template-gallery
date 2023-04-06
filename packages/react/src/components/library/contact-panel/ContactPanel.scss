@@ -1,0 +1,105 @@
+@use "../../../variables.scss" as *;
+
+#contact-panel {
+  --contact-side-panel-width: 350px;
+}
+
+.screen-x-small #contact-panel {
+  --contact-side-panel-width: 100vw;
+}
+
+.panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: calc(-1 * var(--contact-side-panel-width));
+  background: $base-bg;
+  transition: right 400ms;
+
+  .embedded.dx-viewport & {
+    top: 0;
+  }
+
+  &.open {
+    right: 0;
+    box-shadow: 0 0 16px $border-color;
+  }
+
+  &.pin {
+    position: absolute;
+    transition: none;
+    box-shadow: none;
+    border-left: 1px solid $border-color;
+
+    &.open {
+      top: 0;
+      position: relative;
+    }
+  }
+
+  .dx-layout-manager.dx-layout-manager-one-col .dx-item.dx-box-item {
+    .dx-single-column-item-content .contact-fields-group {
+      padding-top: 20px;
+    }
+  }
+
+  .photo-row .dx-item .dx-item:has(.photo-box) {
+    max-width: 144px;
+  }
+
+  .data-wrapper {
+    padding-bottom: $toolbar-vertical-padding;
+    height: 100%;
+    width: var(--contact-side-panel-width);
+
+    .data-part {
+      padding: 0 16px;
+
+      &:has(.panel-toolbar) {
+        $padding: calc($toolbar-vertical-padding / 2);
+
+        padding: $padding $padding $padding $toolbar-vertical-padding;
+      }
+
+      &.border {
+        border-bottom: 1px solid $border-color;
+      }
+
+      &-toolbar {
+        padding: 10px 16px;
+        margin-bottom: $toolbar-margin-bottom;
+
+        .dx-button {
+          min-width: 90px;
+        }
+      }
+    }
+
+    .panel-scroll {
+      height: calc(100% - 20px);
+    }
+
+    .contact-name {
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .opportunities {
+      padding: 0 0 10px 0;
+      background-color: transparent;
+    }
+
+    .dx-accordion {
+      .dx-accordion-item-title {
+        vertical-align: middle;
+        padding-right: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .by-span {
+        display: none;
+      }
+    }
+  }
+}

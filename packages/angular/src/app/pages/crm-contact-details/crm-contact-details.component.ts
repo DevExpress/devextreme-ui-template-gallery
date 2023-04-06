@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
   DxDropDownButtonModule,
-  DxToolbarModule,
   DxScrollViewModule,
 } from 'devextreme-angular';
 import {
@@ -19,8 +18,9 @@ import { Contact } from 'src/app/types/contact';
 import { Messages } from 'src/app/types/messages';
 import { Notes } from 'src/app/types/notes';
 import { Opportunities } from 'src/app/types/opportunities';
-import { ContactFormModule } from '../../components/contact-form/contact-form.component';
-import { ContactCardsModule } from '../../components/contact-cards/contact-cards.component';
+import { ContactFormModule } from 'src/app/components/library/contact-form/contact-form.component';
+import { ContactCardsModule } from 'src/app/components/utils/contact-cards/contact-cards.component';
+import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 @Component({
   templateUrl: './crm-contact-details.component.html',
@@ -89,10 +89,10 @@ export class CrmContactDetailsComponent implements OnInit {
 
 @NgModule({
   imports: [
-    DxToolbarModule,
     DxButtonModule,
     DxDropDownButtonModule,
     DxScrollViewModule,
+    DxToolbarModule,
 
     ContactFormModule,
     ContactCardsModule,

@@ -1,18 +1,18 @@
 <template>
-  <CardAuth
+  <card-auth
     title="Reset Password"
     :description="desc"
   >
-    <ResetPasswordForm
-      signInLink="/sign-in-form"
-      buttonLink="/reset-password-form"
-    ></ResetPasswordForm>
-  </CardAuth>
+    <reset-password-form
+      sign-in-link="/sign-in-form"
+      button-link="/reset-password-form"
+    />
+  </card-auth>
 </template>
 
 <script setup lang="ts">
-import CardAuth from '@/components/card-auth.vue';
-import ResetPasswordForm from '@/components/reset-password-form.vue';
+import CardAuth from '@/components/library/card-auth.vue';
+import ResetPasswordForm from '@/components/library/reset-password-form.vue';
 
 const desc = 'Please enter the email address that you used to register, and we will send you a link to reset your password via Email.';
 </script>

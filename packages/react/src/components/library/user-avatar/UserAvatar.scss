@@ -1,0 +1,12 @@
+@use "../../../variables.scss" as *;
+
+.circle {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 50%;
+  background: $accent-color;
+  color: $base-bg;
+}

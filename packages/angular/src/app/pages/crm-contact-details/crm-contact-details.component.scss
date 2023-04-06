@@ -4,19 +4,19 @@
 $left-panel-width: 400px;
 $right-panel-width: 360px;
 
-:host {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  height: 100%;
-}
-
 .dx-toolbar ::ng-deep {
   margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
 
   .dx-toolbar-label > div {
     @include header();
   }
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
 }
 
 .view-wrapper {

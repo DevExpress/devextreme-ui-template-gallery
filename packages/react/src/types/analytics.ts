@@ -23,3 +23,7 @@ export interface SaleByStateAndCity {
     total: number,
     percentage: number,
 }
+
+export interface TickerProps {
+    value: number
+}

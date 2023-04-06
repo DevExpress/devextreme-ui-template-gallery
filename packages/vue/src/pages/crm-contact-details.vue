@@ -8,6 +8,7 @@
         <dx-toolbar-item
           location="before"
           :text="contactName"
+          class="contact-name-toolbar-item"
         />
         <dx-toolbar-item
           location="after"
@@ -93,8 +94,8 @@ import {
 import { getContact } from 'dx-template-gallery-data';
 import type { Contact } from '@/types/contact';
 
-import ContactForm from '@/components/contact-form.vue';
-import ContactCards from '@/components/contact-cards.vue';
+import ContactForm from '@/components/library/contact-form.vue';
+import ContactCards from '@/components/utils/contact-cards.vue';
 
 const contactId = 12;
 const contactName = ref('');
@@ -134,6 +135,7 @@ const refreshOptions = {
 
 <style scoped lang="scss">
 @use "@/variables" as *;
+@use "sass:math";
 
 $left-panel-width: 400px;
 $right-panel-width: 360px;

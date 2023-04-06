@@ -2,23 +2,24 @@ import {
   Component, OnInit, NgModule, OnDestroy,
 } from '@angular/core';
 
+import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
+import { DxChartModule } from 'devextreme-angular/ui/chart';
+import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
+import { DxVectorMapModule } from 'devextreme-angular/ui/vector-map';
+import { DxBulletModule } from 'devextreme-angular/ui/bullet';
+import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
+import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel'
+
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import {
-  DxPieChartModule,
-  DxScrollViewModule,
-  DxChartModule,
-  DxDataGridModule,
-  DxVectorMapModule,
-  DxBulletModule,
-  DxLoadPanelModule,
-} from 'devextreme-angular';
-import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
-import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
 
 import { DataService } from 'src/app/services';
-import { CardAnalyticsModule } from 'src/app/components/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/components/toolbar-analytics/toolbar-analytics.component';
+import { CardAnalyticsModule } from 'src/app/components/library/card-analytics/card-analytics.component';
+import { ToolbarAnalyticsModule } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
+import { RevenueAnalysisByStatesCardModule } from 'src/app/components/utils/revenue-analysis-by-states-card/revenue-analysis-by-states-card.component';
+import { SalesMapCardModule } from 'src/app/components/utils/sales-map-card/sales-map-card.component';
+import { RevenueSnapshotByStatesCardModule } from 'src/app/components/utils/revenue-snapshot-by-states-card/revenue-snapshot-by-states-card.component';
+
 import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import { SalesByState, SalesByStateAndCity } from 'src/app/types/analytics';
 
@@ -28,8 +29,6 @@ import { SalesByState, SalesByStateAndCity } from 'src/app/types/analytics';
   providers: [DataService],
 })
 export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
-  usaMap: any = mapsData.usa;
-
   analyticsPanelItems = analyticsPanelItems;
 
   salesByStateAndCity: SalesByStateAndCity;
@@ -57,26 +56,6 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
 
   selectionChange(e: Dates) {
     this.loadData(e.startDate, e.endDate);
-  }
-
-  customizeSaleText(arg: { percentText: string }) {
-    return arg.percentText;
-  }
-
-  customizeLegendText(arg: { index: number }) {
-    return ['< 80000$', '80000$ to 100000$', '100000$ to 400000$', '> 400000$'][arg.index];
-  }
-
-  customizeItems(items: Array<LegendItem>) {
-    return items.reverse();
-  }
-
-  customizeTooltip(arg: MapLayerElement) {
-    if (arg.layer.type === 'marker') {
-      return {
-        text: arg.attribute('tooltip'),
-      };
-    }
   }
 
   createMapCoords(coords: string) {
@@ -127,6 +106,9 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     CardAnalyticsModule,
     ToolbarAnalyticsModule,
     DxLoadPanelModule,
+    RevenueAnalysisByStatesCardModule,
+    SalesMapCardModule,
+    RevenueSnapshotByStatesCardModule,
     CommonModule,
   ],
   providers: [],

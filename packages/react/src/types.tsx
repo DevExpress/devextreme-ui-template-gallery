@@ -4,7 +4,7 @@ import { EventInfo } from 'devextreme/events';
 import List from 'devextreme-react/list';
 import React from 'react';
 
-export interface HeaderProps {
+export interface AppHeaderProps {
   menuToggleEnabled: boolean;
   title?: string;
   toggleMenu: (e: ClickEvent) => void;

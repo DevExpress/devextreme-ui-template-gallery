@@ -1,0 +1,21 @@
+@use "../../../../variables.scss" as *;
+
+#contact-form {
+  min-height: 250px;
+
+  ::ng-deep .form-title {
+    font-size: 16px;
+  }
+}
+
+.dx-form {
+  .form-item-button {
+    margin-left: 10px;
+    margin-top: 5px;
+  }
+}
+
+.info {
+  position: relative;
+  padding-bottom: 30px;
+}

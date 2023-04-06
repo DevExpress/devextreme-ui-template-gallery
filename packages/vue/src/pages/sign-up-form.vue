@@ -1,15 +1,15 @@
 <template>
-  <CardAuth title="Sign Up">
-    <CreateAccountForm
-      redirectLink="/sign-in-form"
-      buttonLink="/sign-up-form"
-    ></CreateAccountForm>
-  </CardAuth>
+  <card-auth title="Sign Up">
+    <create-account-form
+      redirect-link="/sign-in-form"
+      button-link="/sign-up-form"
+    />
+  </card-auth>
 </template>
 
 <script setup lang="ts">
-import CardAuth from '@/components/card-auth.vue';
-import CreateAccountForm from '@/components/create-account-form.vue';
+import CardAuth from '@/components/library/card-auth.vue';
+import CreateAccountForm from '@/components/library/create-account-form.vue';
 
 </script>
 

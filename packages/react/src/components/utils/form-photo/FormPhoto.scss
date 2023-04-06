@@ -1,0 +1,13 @@
+@use "../../../variables.scss" as *;
+
+.form-photo-view {
+  position: relative;
+  display: flex;
+
+  .form-photo {
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1px solid $border-color;
+  }
+}

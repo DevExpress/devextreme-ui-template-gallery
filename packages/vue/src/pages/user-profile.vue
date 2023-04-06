@@ -159,10 +159,10 @@ import {
 } from 'devextreme-vue/toolbar';
 import { DxButton } from 'devextreme-vue/button';
 import { screenInfo } from '@/utils/media-query';
-import FormPhoto from '@/components/form-photo.vue';
+import FormPhoto from '@/components/utils/form-photo.vue';
 import notify from 'devextreme/ui/notify';
-import ProfileCard from '@/components/profile-card.vue';
-import ChangeProfilePasswordForm from '@/components/change-profile-password-form.vue';
+import ProfileCard from '@/components/library/profile-card.vue';
+import ChangeProfilePasswordForm from '@/components/library/change-profile-password-form.vue';
 import { getProfile, getSupervisors } from 'dx-template-gallery-data';
 import { formatPhone } from '@/utils/formatters';
 import { Profile } from '@/types/profile';
