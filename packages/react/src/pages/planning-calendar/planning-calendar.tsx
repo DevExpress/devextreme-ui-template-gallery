@@ -28,7 +28,7 @@ interface CalendarListItem {
   checkboxColor: string,
 }
 
-export const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
+const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
   const appointments = dataSource.items();
   if (appointments.length === 0 || !selectedAppointment) {
     return [];
@@ -41,9 +41,6 @@ export const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
     .toArray();
 };
 
-const isAppointmentCollectorClicked = (e) => {
-  return e.targetElement?.[0]?.classList.contains('dx-scheduler-appointment-collector');
-};
 export const PlanningCalendar = () => {
   const { isXSmall, isSmall, isLarge } = useScreenSize();
   const schedulerRef = useRef<Scheduler>(null);
@@ -132,6 +129,10 @@ export const PlanningCalendar = () => {
   const onAppointmentTooltipShowing = useCallback((e) => {
     e.cancel = true;
     const appointmentData = e.appointments[0].appointmentData;
+
+    const isAppointmentCollectorClicked = (e) => {
+      return e.targetElement?.[0]?.classList.contains('dx-scheduler-appointment-collector');
+    };
 
     setSelectedAppointment({ data: appointmentData, target: e.targetElement });
 

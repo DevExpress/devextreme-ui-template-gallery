@@ -6,7 +6,7 @@ import './scheduler-tooltip.scss';
 
 export const TooltipContentTemplate = ({ appointmentData, deleteCurrentAppointment, editCurrentAppointment }) => {
   if (!appointmentData) {
-    return <></>;
+    return null;
   }
   const timeOptions = {
     hour: 'numeric',
