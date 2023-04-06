@@ -1,4 +1,4 @@
-import './scheduler-agenda.scss';
+import './agenda.scss';
 
 import React, { useCallback } from 'react';
 import { Duration } from 'luxon';
@@ -7,28 +7,31 @@ import Button from 'devextreme-react/button';
 import { useScreenSize } from '../../utils/media-query';
 
 const getFormatedDuration = ({ startDate, endDate }) => {
-   return Duration.fromMillis(endDate - startDate)
+  return Duration.fromMillis(endDate - startDate)
     .rescale()
     .toFormat("h'h' m'm'");
 };
-  const duration = Duration.fromMillis(appointment.endDate - appointment.startDate).rescale();
-  return duration.toFormat("h'h' m'm'");
-};
 
 const TimeContent = ({ appointment }) => {
-  const start = appointment.startDate?.toLocaleTimeString(undefined, {
+  const start = appointment.startDate.toLocaleTimeString(undefined, {
     hour: 'numeric',
     minute: 'numeric',
     hour12: false
   });
   return <div className='time'>
     <div className='start'>{start}</div>
-    <div className='duration'>{getDurationString(appointment)}</div>
+    <div className='duration'>{getFormatedDuration(appointment)}</div>
   </div>;
 };
 
-export const SchedulerAgenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, resources, items, showAppointmentPopup }) => {
+export const Agenda = ({ selectedAppointment = { startDate: new Date() }, toggleOpen, resources, items, showAppointmentTooltip }) => {
   const { isLarge } = useScreenSize();
+
+  const formattedStartDate = selectedAppointment.startDate.toLocaleDateString(undefined, {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short'
+  });
 
   const renderListItem = useCallback((item) => {
     return <div className='list-item'>
@@ -49,7 +52,7 @@ export const SchedulerAgenda = ({ selectedAppointment = { startDate: new Date() 
   return <div className='agenda'>
     <div className='agenda-header'>
       <div className='date'>
-        {selectedAppointment.startDate.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' })}
+        {formattedStartDate}
       </div>
       <Button
         icon={isLarge ? 'showpanel' : 'close'}
@@ -59,7 +62,7 @@ export const SchedulerAgenda = ({ selectedAppointment = { startDate: new Date() 
     <List
       dataSource={items}
       itemRender={renderListItem}
-      onItemClick={showAppointmentPopup}
+      onItemClick={showAppointmentTooltip}
     />
   </div>;
 };

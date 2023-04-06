@@ -17,7 +17,7 @@ import { useScreenSize } from '../../utils/media-query';
 import { CalendarList } from '../../components/calendar-list/calendar-list';
 import { LeftSidePanel } from '../../components/side-panel/left-side-panel';
 import { RightSidePanel } from '../../components/side-panel/right-side-panel';
-import { SchedulerAgenda } from '../../components/scheduler-agenda/scheduler-agenda';
+import { Agenda } from '../../components/agenda/agenda';
 import { TooltipContentTemplate } from '../../components/scheduler-tooltip/scheduler-tooltip';
 
 const views: ViewType[] = ['day', 'week', 'month', 'agenda'];
@@ -84,7 +84,7 @@ export const PlanningCalendar = () => {
     return classList?.contains('dx-list') && rightPanelOpen ? 'left' : 'top';
   }, [selectedAppointment, rightPanelOpen, isXSmall]);
 
-  const onSetDate = useCallback((e) => { setDate(e); }, []);
+  const onSetDate = useCallback((e) => { setDate(e); }, [setDate]);
 
   const toggleRightPanelOpen = useCallback(() => {
     setRightPanelOpen(!rightPanelOpen);
@@ -93,7 +93,7 @@ export const PlanningCalendar = () => {
     }
   }, [rightPanelOpen]);
 
-  const onCurrentViewChange = useCallback((view) => { setCurrentView(view); }, []);
+  const onCurrentViewChange = useCallback((view) => { setCurrentView(view); }, [setCurrentView]);
 
   const onSelectedCalendarsChange = useCallback((seletedCalendars) => {
     const removedResourceFilters = seletedCalendars
@@ -108,7 +108,7 @@ export const PlanningCalendar = () => {
 
   const createAppointment = useCallback(() => {
     schedulerRef.current?.instance.showAppointmentPopup();
-  }, []);
+  }, [schedulerRef]);
 
   const deleteCurrentAppointment = useCallback(() => {
     schedulerRef.current?.instance.deleteAppointment(selectedAppointment?.data);
@@ -121,13 +121,11 @@ export const PlanningCalendar = () => {
   }, [selectedAppointment]);
 
   const onAppointmentClick = useCallback((e) => {
-    if (currentView === 'month') {
-      if (!rightPanelOpen) {
-        const appointmentData = e.appointmentData;
-        setSelectedAppointment({ data: appointmentData, target: e.targetElement });
-        setAgendaItems(findAllAppointmentsForDay(appointmentData, tasks));
-        toggleRightPanelOpen();
-      }
+    if (currentView === 'month' && !rightPanelOpen) {
+      const appointmentData = e.appointmentData;
+      setSelectedAppointment({ data: appointmentData, target: e.targetElement });
+      setAgendaItems(findAllAppointmentsForDay(appointmentData, tasks));
+      toggleRightPanelOpen();
     }
   }, [currentView, rightPanelOpen]);
 
@@ -170,7 +168,7 @@ export const PlanningCalendar = () => {
     }
   }, [currentView, rightPanelOpen, tasks, selectedAppointment]);
 
-  const showAppointmentPopup = useCallback((e) => {
+  const showAppointmentTooltip = useCallback((e) => {
     schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
   }, [schedulerRef]);
 
@@ -203,8 +201,9 @@ export const PlanningCalendar = () => {
       </LeftSidePanel>
       <div className='main-content'>
         <Scheduler
-          allDayPanelMode='hidden'
           ref={schedulerRef}
+          adaptivityEnabled={isXSmall}
+          allDayPanelMode='hidden'
           defaultCurrentView='week'
           dataSource={tasks}
           height='inherit'
@@ -216,7 +215,7 @@ export const PlanningCalendar = () => {
           onAppointmentDeleted={onCellModified}
           onAppointmentTooltipShowing={onAppointmentTooltipShowing}
           onCellClick={onCellClick}
-          adaptivityEnabled={isXSmall}
+          startDayHour={6}
           views={views}
         >
           <Resource
@@ -247,12 +246,12 @@ export const PlanningCalendar = () => {
         isOpened={rightPanelOpen}
         toggleOpen={toggleRightPanelOpen}
       >
-        <SchedulerAgenda
+        <Agenda
           selectedAppointment={selectedAppointment?.data}
           toggleOpen={toggleRightPanelOpen}
           items={agendaItems}
           resources={resourcesList}
-          showAppointmentPopup={showAppointmentPopup}
+          showAppointmentTooltip={showAppointmentTooltip}
         />
       </RightSidePanel>
     </div>

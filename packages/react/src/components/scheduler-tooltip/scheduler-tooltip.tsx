@@ -33,14 +33,16 @@ export const TooltipContentTemplate = ({ appointmentData, deleteCurrentAppointme
         />
         {timeString}
       </div>
-      <div className='description'>
-        <Button icon='textdocument'
-          focusStateEnabled={false}
-          activeStateEnabled={false}
-          hoverStateEnabled={false}
-        />
-        {appointmentData.description}
-      </div>
+      {appointmentData.description &&
+        <div className='description'>
+          <Button icon='textdocument'
+            focusStateEnabled={false}
+            activeStateEnabled={false}
+            hoverStateEnabled={false}
+          />
+          {appointmentData.description}
+        </div>
+      }
     </div>
     <div className='buttons'>
       <Button

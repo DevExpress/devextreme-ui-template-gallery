@@ -4,6 +4,11 @@ const luxon = require('luxon');
 
 const baseUrl = 'https://js.devexpress.com/Demos/RwaService/api';
 
+const DateTime = luxon.DateTime;
+const promptDescription = `The HtmlEditor component is a client-side WYSIWYG text editor. 
+The editor allows users to format text and integrate media elements into documents. 
+The result can be exported to HTML or Markdown.`;
+
 const getData = async (url) => (await axios.get(`${baseUrl}/${url}`)).data;
 const getContactOpportunities = async (id, active) => {
   const opportunities = await getData(`Users/Contacts/${id}/Opportunities`);
@@ -61,11 +66,6 @@ export const getSalesByState = async (startDate, endDate) => {
   return calcSalesByState(data);
 };
 
-const DateTime = luxon.DateTime;
-const promptDescription = `The HtmlEditor component is a client-side WYSIWYG text editor. 
-The editor allows users to format text and integrate media elements into documents. 
-The result can be exported to HTML or Markdown.`;
-
 export const patchTasksForScheduler = (tasks) => {
   const today = DateTime.now();
   const mondayMidnight = today.set({
@@ -79,7 +79,7 @@ export const patchTasksForScheduler = (tasks) => {
     const weekIndex = Math.ceil(index / 4) - 1;
     const taskStart = mondayMidnight.plus({
       days: weekDay + weekIndex * 7,
-      hours: 10 + weekDay,
+      hours: 7 + weekDay,
     });
     return {
       ...task,
