@@ -6,7 +6,11 @@ import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
 import { useScreenSize } from '../../utils/media-query';
 
-const getDurationString = (appointment) => {
+const getFormatedDuration = ({ startDate, endDate }) => {
+   return Duration.fromMillis(endDate - startDate)
+    .rescale()
+    .toFormat("h'h' m'm'");
+};
   const duration = Duration.fromMillis(appointment.endDate - appointment.startDate).rescale();
   return duration.toFormat("h'h' m'm'");
 };
