@@ -41,6 +41,13 @@ const findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
     .toArray();
 };
 
+const onAppointmentFormOpening = (e) => {
+  const editor = e.form.getEditor('calendarId');
+  if (e.appointmentData.calendarId === undefined) {
+    editor.option('value', 0);
+  }
+};
+
 export const PlanningCalendar = () => {
   const { isXSmall, isSmall, isLarge } = useScreenSize();
   const schedulerRef = useRef<Scheduler>(null);
@@ -215,12 +222,13 @@ export const PlanningCalendar = () => {
           currentDate={date}
           currentView={currentView}
           onCurrentViewChange={onCurrentViewChange}
-          onAppointmentClick={onAppointmentClick}
           onAppointmentAdded={onCellModified}
+          onAppointmentClick={onAppointmentClick}
           onAppointmentDeleted={onCellModified}
+          onAppointmentFormOpening={onAppointmentFormOpening}
           onAppointmentTooltipShowing={onAppointmentTooltipShowing}
           onCellClick={onCellClick}
-          startDayHour={6}
+          startDayHour={4}
           views={views}
         >
           <Resource
