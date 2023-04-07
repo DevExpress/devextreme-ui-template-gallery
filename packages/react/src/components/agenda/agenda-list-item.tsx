@@ -1,3 +1,4 @@
+import './agenda-list-item.scss';
 import React from 'react';
 import { Duration } from 'luxon';
 

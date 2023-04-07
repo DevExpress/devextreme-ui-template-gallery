@@ -100,8 +100,8 @@ export const PlanningCalendar = () => {
       return !removedResourceFilters.includes(task.calendarId);
     });
 
-    tasks?.load();
-  }, [tasks]);
+    tasks?.load().then(() => { updateAgenda(selectedAppointment?.data); });
+  }, [tasks, selectedAppointment]);
 
   const createAppointment = useCallback(() => {
     schedulerRef.current?.instance.showAppointmentPopup();
@@ -117,14 +117,18 @@ export const PlanningCalendar = () => {
     tooltipRef.current?.instance.hide();
   }, [selectedAppointment]);
 
+  const updateAgenda = useCallback((appointmentData) => {
+    setAgendaItems(findAllAppointmentsForDay(appointmentData, tasks));
+  }, [tasks]);
+
   const onAppointmentClick = useCallback((e) => {
     if (currentView === 'month' && !rightPanelOpen) {
       const appointmentData = e.appointmentData;
       setSelectedAppointment({ data: appointmentData, target: e.targetElement });
-      setAgendaItems(findAllAppointmentsForDay(appointmentData, tasks));
+      updateAgenda(appointmentData);
       toggleRightPanelOpen();
     }
-  }, [currentView, rightPanelOpen]);
+  }, [currentView, rightPanelOpen, updateAgenda]);
 
   const onAppointmentTooltipShowing = useCallback((e) => {
     e.cancel = true;
@@ -137,7 +141,7 @@ export const PlanningCalendar = () => {
     setSelectedAppointment({ data: appointmentData, target: e.targetElement });
 
     if (currentView === 'month' || isAppointmentCollectorClicked(e)) {
-      setAgendaItems(findAllAppointmentsForDay(appointmentData, tasks));
+      updateAgenda(appointmentData);
     }
     if ((currentView === 'month' && isXSmall ||
       isAppointmentCollectorClicked(e)) &&
@@ -152,7 +156,7 @@ export const PlanningCalendar = () => {
 
   const onCellModified = useCallback((e) => {
     if (e.appointmentData.startDate.toDateString() === selectedAppointment?.data.startDate.toDateString()) {
-      setAgendaItems(findAllAppointmentsForDay(e.appointmentData, tasks));
+      updateAgenda(e.appointmentData);
     }
   }, [selectedAppointment, tasks]);
 
