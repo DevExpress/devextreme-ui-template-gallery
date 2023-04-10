@@ -2,7 +2,7 @@ import './agenda-list-item.scss';
 import React from 'react';
 import { Duration } from 'luxon';
 
-const getFormatedDuration = ({ startDate, endDate }) => {
+const getFormattedDuration = ({ startDate, endDate }) => {
   return Duration.fromMillis(endDate - startDate)
     .rescale()
     .toFormat("h'h' m'm'");
@@ -16,7 +16,7 @@ const TimeContent = ({ appointment }) => {
   });
   return <div className='time'>
     <div className='start'>{start}</div>
-    <div className='duration'>{getFormatedDuration(appointment)}</div>
+    <div className='duration'>{getFormattedDuration(appointment)}</div>
   </div>;
 };
 
