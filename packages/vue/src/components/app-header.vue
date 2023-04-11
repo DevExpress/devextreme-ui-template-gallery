@@ -54,17 +54,11 @@
       >
         <template #default>
           <div>
-            <dx-button
-              class="user-button authorization"
-              :width="150"
-              styling-mode="text"
-            >
-              <user-panel
-                :user="user"
-                :menu-items="userMenuItems"
-                menu-mode="context"
-              />
-            </dx-button>
+            <user-panel
+              :user="user"
+              :menu-items="userMenuItems"
+              menu-mode="context"
+            />
           </div>
         </template>
       </dx-item>
@@ -136,15 +130,6 @@ header {
 
   .header-toolbar {
     padding-right: $content-padding;
-
-    .user-button.authorization {
-      margin-left: 5px;
-
-      :deep(.dx-button-content) {
-        padding: 0;
-        height: 100%;
-      }
-    }
 
     .messages {
       position: relative;

@@ -35,9 +35,7 @@ export const Header = ({ menuToggleEnabled, title, toggleMenu, className }: Head
           </div>
         </Item>
         <Item location='after' locateInMenu='auto' menuItemTemplate='userPanelTemplate'>
-          <Button className='user-button authorization' width={150} stylingMode='text'>
-            <UserPanel menuMode='context' />
-          </Button>
+          <UserPanel menuMode='context' />
         </Item>
         <Template name='userPanelTemplate'>
           <UserPanel menuMode='list' />

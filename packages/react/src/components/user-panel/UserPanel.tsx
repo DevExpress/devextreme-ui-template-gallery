@@ -1,48 +1,47 @@
-import React, { useMemo } from 'react';
-
-import ContextMenu, { Position } from 'devextreme-react/context-menu';
-import List from 'devextreme-react/list';
-
-import { useAuth } from '../../contexts/auth';
-
+import React, { useRef, useCallback } from 'react';
+import DropDownButton from 'devextreme-react/drop-down-button';
+import { Template } from 'devextreme-react/core/template';
+import { UserMenuSection } from '../user-menu-section/UserMenuSection';
 import type { UserPanelProps } from '../../types';
-
+import { useAuth } from '../../contexts/auth';
+import List from 'devextreme-react/list';
 import './UserPanel.scss';
 
 export const UserPanel = ({ menuMode }: UserPanelProps) => {
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
+  const listRef = useRef<List>(null);
 
-  const menuItems = useMemo(
-    () => [
-      {
-        text: 'Logout',
-        icon: 'runner',
-        onClick: signOut,
-      },
-    ],
-    [signOut]
-  );
+  const dropDownButtonAttributes = {
+    class: 'user-button'
+  };
+
+  const buttonDropDownOptions = {
+    width: '150'
+  };
+
+  const dropDownButtonContentReady = useCallback(({ component }) => {
+    component.registerKeyHandler('downArrow', () => {
+      listRef.current?.instance.focus();
+    });
+  }, [listRef]);
+
   return (
     <div className='user-panel'>
-      <div className='user-info'>
-        <div className='image-container'>
-          <div
-            style={{
-              background: `url(${user?.avatarUrl}) no-repeat #fff`,
-              backgroundSize: 'cover',
-            }}
-            className='user-image'
-          />
-        </div>
-        <div className='user-name'>{user?.name}</div>
-      </div>
-
       {menuMode === 'context' && (
-        <ContextMenu items={menuItems} target='.user-button' showEvent='dxclick' width={160} cssClass='user-menu'>
-          <Position my='top center' at='bottom center' />
-        </ContextMenu>
+        <DropDownButton stylingMode='text'
+          icon={user?.avatarUrl} showArrowIcon={false}
+          elementAttr={dropDownButtonAttributes}
+          dropDownOptions={buttonDropDownOptions}
+          dropDownContentTemplate='dropDownTemplate'
+          onContentReady={dropDownButtonContentReady}>
+          <Template name='dropDownTemplate'>
+            <UserMenuSection listRef={listRef} />
+          </Template>
+        </DropDownButton>
       )}
-      {menuMode === 'list' && <List className='dx-toolbar-menu-action' items={menuItems} />}
+      {menuMode === 'list' && (
+        <UserMenuSection showAvatar />
+      )}
     </div>
   );
 };
