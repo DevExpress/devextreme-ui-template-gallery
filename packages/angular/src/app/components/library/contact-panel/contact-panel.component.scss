@@ -44,7 +44,7 @@
     }
   }
 
-  ::ng-deep .photo-row .dx-item .dx-item .photo-box {
+  ::ng-deep .photo-row .dx-item .dx-item:first-child {
     max-width: 144px;
   }
 
