@@ -43,7 +43,7 @@
     }
   }
 
-  .photo-row .dx-item .dx-item:first-child {
+  .photo-row .dx-item > .dx-item-content > .dx-item:first-child {
     max-width: 144px;
   }
 
