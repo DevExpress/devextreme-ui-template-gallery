@@ -9,11 +9,10 @@
 .left-side-panel {
   position: relative;
   border: 1px solid transparent;
-  height: 100%;
 
   .side-panel-container {
     display: flex;
-
+    
     .side-panel-content-wrapper {
       padding-top: $theme-padding;
 
@@ -28,6 +27,7 @@
   .side-panel-content-wrapper {
     width: 0;
     transition: width var(--transition);
+    height: calc(100vh - 60px - $theme-padding);
     overflow: hidden;
     white-space: nowrap;
   }
@@ -50,11 +50,11 @@
     .side-panel-content-wrapper {
       position: absolute;
       top: -$theme-padding;
+      left: $button-height;
+      height: calc(100vh - 60px);
       padding-top: calc(2*$theme-padding);
       background-color: $base-bg;
       z-index: 3;
-      height: 100vh;
-      left: $button-height;
       box-shadow: 8px 0 16px -8px $base-border-color;
       &.open{
         padding-right: $content-padding;

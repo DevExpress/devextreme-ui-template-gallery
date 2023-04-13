@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Button from 'devextreme-react/button';
 import { useScreenSize } from '../../utils/media-query';
 import './left-side-panel.scss';
+import { ScrollView } from 'devextreme-react';
 
 export const LeftSidePanel = ({ children }) => {
   const { isXSmall, isSmall, isMedium, isLarge } = useScreenSize();
@@ -27,7 +28,9 @@ export const LeftSidePanel = ({ children }) => {
         </div>
       }
       <div className='side-panel-content-wrapper'>
-        {children}
+        <ScrollView>
+          {children}
+        </ScrollView>
       </div>
     </div>
   </div>;

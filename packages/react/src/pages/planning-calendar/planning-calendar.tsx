@@ -1,19 +1,17 @@
 import './planning-calendar.scss';
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { getTasksForScheduler, defaultCalendarListItems } from 'dx-template-gallery-data';
+import React, { useState, useCallback, useMemo } from 'react';
+import { defaultCalendarListItems } from 'dx-template-gallery-data';
 
+import Button from 'devextreme-react/button';
 import Calendar from 'devextreme-react/calendar';
 import Scheduler, { Resource } from 'devextreme-react/scheduler';
-import Button from 'devextreme-react/button';
 import SpeedDialAction from 'devextreme-react/speed-dial-action';
 import Tooltip from 'devextreme-react/tooltip';
 
 import { ViewType } from 'devextreme/ui/scheduler';
-import DataSource from 'devextreme/data/data_source';
 import { useScreenSize } from '../../utils/media-query';
 
-import { findAllAppointmentsForDay } from './utils';
 import { useSchedulerLogic } from './use-scheduler-logic';
 
 import { CalendarList } from '../../components/calendar-list/calendar-list';
@@ -22,7 +20,7 @@ import { RightSidePanel } from '../../components/side-panel/right-side-panel';
 import { Agenda } from '../../components/agenda/agenda';
 import { TooltipContentTemplate } from '../../components/scheduler-tooltip/scheduler-tooltip';
 
-const views: ViewType[] = ['day', 'week', 'month', 'agenda'];
+const views: ViewType[] = ['day', 'workWeek', 'month', 'agenda'];
 interface CalendarListItem {
   id: number,
   text: string,
@@ -39,12 +37,11 @@ const onAppointmentFormOpening = (e) => {
 
 export const PlanningCalendar = () => {
   const { isXSmall, isSmall } = useScreenSize();
-
-  const [date, setDate] = useState(new Date());
   const [calendarListItems] = useState(defaultCalendarListItems);
   const {
     agendaItems,
     currentView,
+    date,
     rightPanelOpen,
     schedulerRef,
     selectedAppointment,
@@ -60,21 +57,9 @@ export const PlanningCalendar = () => {
     onCellModified,
     onCellClick,
     updateAgenda,
-    setAgendaItems,
-    setTasks,
+    setDate,
     toggleRightPanelOpen,
   } = useSchedulerLogic();
-
-  useEffect(() => {
-    getTasksForScheduler().then(tasksList => {
-      setTasks(new DataSource(tasksList));
-    });
-  }, []);
-  useEffect(() => {
-    if (tasks) {
-      setAgendaItems(findAllAppointmentsForDay({ startDate: date }, tasks));
-    }
-  }, [tasks]);
 
   const onTodayClick = () => {
     setDate(new Date());
@@ -84,8 +69,6 @@ export const PlanningCalendar = () => {
     return calendarListItems
       .reduce((res: CalendarListItem[], calendarList) => { return res.concat(calendarList.items); }, []);
   }, [calendarListItems]);
-
-  const onSetDate = useCallback((e) => { setDate(e); }, [setDate]);
 
   const onSelectedCalendarsChange = useCallback((seletedCalendars) => {
     const removedResourceFilters = seletedCalendars
@@ -120,7 +103,7 @@ export const PlanningCalendar = () => {
           <div className='calendar'>
             <Calendar
               value={date}
-              onValueChange={onSetDate}
+              onValueChange={setDate}
             />
           </div>
           <CalendarList
@@ -134,7 +117,7 @@ export const PlanningCalendar = () => {
           ref={schedulerRef}
           adaptivityEnabled={isXSmall}
           allDayPanelMode='hidden'
-          defaultCurrentView='week'
+          defaultCurrentView='workWeek'
           dataSource={tasks}
           height='inherit'
           currentDate={date}

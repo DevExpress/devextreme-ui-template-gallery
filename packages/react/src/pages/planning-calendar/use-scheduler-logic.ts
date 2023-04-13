@@ -1,8 +1,11 @@
-import { useRef, useState, useCallback, useMemo } from 'react';
-import Tooltip, { Position } from 'devextreme-react/tooltip';
+import { useRef, useState, useCallback, useMemo, useEffect } from 'react';
+
+import Tooltip from 'devextreme-react/tooltip';
 import Scheduler from 'devextreme-react/scheduler';
 import { ViewType } from 'devextreme/ui/scheduler';
 import DataSource from 'devextreme/data/data_source';
+
+import { getTasksForScheduler } from 'dx-template-gallery-data';
 import { useScreenSize } from '../../utils/media-query';
 import { findAllAppointmentsForDay } from './utils';
 
@@ -12,10 +15,22 @@ export const useSchedulerLogic = () => {
   const schedulerRef = useRef<Scheduler>(null);
 
   const [agendaItems, setAgendaItems] = useState<{ startDate: Date }[]>();
-  const [currentView, setCurrentView] = useState<ViewType>('week');
+  const [currentView, setCurrentView] = useState<ViewType>('workWeek');
+  const [date, setDate] = useState(new Date());
   const [rightPanelOpen, setRightPanelOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState<{ data, target }>();
   const [tasks, setTasks] = useState<DataSource>();
+
+  useEffect(() => {
+    getTasksForScheduler().then(tasksList => {
+      setTasks(new DataSource(tasksList));
+    });
+  }, []);
+  useEffect(() => {
+    if (tasks) {
+      setAgendaItems(findAllAppointmentsForDay({ startDate: date }, tasks));
+    }
+  }, [tasks]);
 
   const tooltipPosition: 'left' | 'right' | 'top' | 'bottom' = useMemo(() => {
     if (isXSmall) {
@@ -107,6 +122,7 @@ export const useSchedulerLogic = () => {
   return {
     agendaItems,
     currentView,
+    date,
     rightPanelOpen,
     schedulerRef,
     selectedAppointment,
@@ -123,6 +139,7 @@ export const useSchedulerLogic = () => {
     onCellClick,
     updateAgenda,
     setAgendaItems,
+    setDate,
     setTasks,
     toggleRightPanelOpen,
   };
