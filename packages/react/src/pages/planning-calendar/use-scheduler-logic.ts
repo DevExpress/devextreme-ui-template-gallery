@@ -140,6 +140,7 @@ export const useSchedulerLogic = () => {
     updateAgenda,
     setAgendaItems,
     setDate,
+    setSelectedAppointment,
     setTasks,
     toggleRightPanelOpen,
   };

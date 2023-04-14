@@ -7,13 +7,11 @@
     display: flex;
     height: inherit;
     
-    .content {
+    .calendar-content {
         display: flex;
-        flex-wrap: wrap;
         height: inherit;
         gap: 16px;
         padding: $content-padding $content-padding $content-padding $theme-padding;
-        justify-content: center;
         
         .left-content {
           display: flex;

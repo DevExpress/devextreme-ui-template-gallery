@@ -58,6 +58,7 @@ export const PlanningCalendar = () => {
     onCellClick,
     updateAgenda,
     setDate,
+    setSelectedAppointment,
     toggleRightPanelOpen,
   } = useSchedulerLogic();
 
@@ -81,12 +82,18 @@ export const PlanningCalendar = () => {
     tasks?.load().then(() => { updateAgenda(selectedAppointment?.data); });
   }, [tasks, selectedAppointment]);
 
+  const onSelectedDateChange = useCallback((e) => {
+    setDate(e);
+    setSelectedAppointment({ data: { startDate: e }, target: undefined });
+    updateAgenda({ startDate: e });
+  }, [rightPanelOpen, updateAgenda, setSelectedAppointment]);
+
   const showAppointmentTooltip = useCallback((e) => {
     schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
   }, [schedulerRef]);
 
   return <div className='view-wrapper-calendar'>
-    <div className='content'>
+    <div className='calendar-content'>
       <LeftSidePanel>
         <div className={isXSmall || isSmall ? 'left-content small' : 'left-content'}>
           <div className='buttons'>
@@ -103,7 +110,7 @@ export const PlanningCalendar = () => {
           <div className='calendar'>
             <Calendar
               value={date}
-              onValueChange={setDate}
+              onValueChange={onSelectedDateChange}
             />
           </div>
           <CalendarList
@@ -143,17 +150,19 @@ export const PlanningCalendar = () => {
           visible={isXSmall}
           onClick={createAppointment}
         />
-        <Tooltip
-          ref={tooltipRef}
-          target={selectedAppointment?.target}
-          showEvent='click'
-          position={tooltipPosition}
-        >
-          <TooltipContentTemplate
-            deleteCurrentAppointment={deleteCurrentAppointment}
-            editCurrentAppointment={editCurrentAppointment}
-            appointmentData={selectedAppointment?.data} />
-        </Tooltip>
+        {selectedAppointment?.target &&
+          <Tooltip
+            ref={tooltipRef}
+            target={selectedAppointment?.target}
+            showEvent='click'
+            position={tooltipPosition}
+          >
+            <TooltipContentTemplate
+              deleteCurrentAppointment={deleteCurrentAppointment}
+              editCurrentAppointment={editCurrentAppointment}
+              appointmentData={selectedAppointment?.data} />
+          </Tooltip>
+        }
       </div>
       <RightSidePanel
         showOpenButton={currentView === 'month'}
