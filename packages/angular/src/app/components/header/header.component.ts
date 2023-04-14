@@ -8,7 +8,7 @@ import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 import { UserPanelModule } from '../user-panel/user-panel.component';
 import { AuthService, IUser } from '../../services';
-import { ThemeSwitcherModule } from "../theme-switcher/theme-switcher.component";
+import { ThemeSwitcherModule } from '../theme-switcher/theme-switcher.component';
 
 @Component({
   selector: 'app-header',

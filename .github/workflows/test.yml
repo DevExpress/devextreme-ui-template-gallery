@@ -68,6 +68,7 @@ jobs:
           { project: 'vue', page: 'analytics-sales-report' },
           { project: 'vue', page: 'analytics-geography' },
           { project: 'vue', page: 'auth-forms' },
+          { project: 'angular', page: 'common-profile' },
         ]
     runs-on: ubuntu-latest
     timeout-minutes: 30

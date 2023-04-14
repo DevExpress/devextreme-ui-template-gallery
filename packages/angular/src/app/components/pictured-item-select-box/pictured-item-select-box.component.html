@@ -1,0 +1,32 @@
+<dx-select-box
+  class="pictured-item-select-box"
+  [label]="label"
+  [value]="value"
+  (valueChange)="valueChange.emit($event)"
+  [items]="items"
+  valueExpr="name"
+  stylingMode="outlined"
+  labelMode="hidden"
+  width="100%"
+  fieldTemplate="field"
+  [dropDownOptions]="{wrapperAttr: {class: 'pictured-item-select-box-dropdown'}}"
+>
+  <div *dxTemplate="let data of 'field'" class="pictured-item-select-field">
+    <img [alt]="data.name"
+         class="pictured-item-image"
+         src="data:image/png;base64,{{data.image}}"/>
+    <dx-text-box
+      [hoverStateEnabled]="false"
+      [inputAttr]="{class: 'pictured-item-editor-input'}"
+      [readOnly]="true"
+      [value]="data.name">
+    </dx-text-box>
+  </div>
+  <div *dxTemplate="let data of 'item'">
+    <img [alt]="data.name"
+         class="pictured-item-image"
+         height="20px"
+         src="data:image/png;base64,{{data.image}}"/>
+    {{data.name}}
+  </div>
+</dx-select-box>

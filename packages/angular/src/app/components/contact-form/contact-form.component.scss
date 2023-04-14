@@ -23,17 +23,3 @@
   position: relative;
   padding-bottom: 30px;
 }
-
-.status-editor-field {
-  display: flex;
-
-  .status-indicator {
-    display: flex;
-    align-self: flex-end;
-    padding-left: $list-padding-left;
-  }
-
-  ::ng-deep .status-input.status-input {
-    padding-left: 0;
-  }
-}
