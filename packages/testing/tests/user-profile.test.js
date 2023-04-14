@@ -6,7 +6,7 @@ import { getPostfix, toggleCommonConfiguration, forceResizeRecalculation } from 
 import { screenModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const BASE_URL = `http://localhost:${process.env.port}/#/common-profile`;
+const BASE_URL = `http://localhost:${process.env.port}/#/user-profile`;
 const requestLogger = RequestLogger();
 
 fixture`User Profile`;
