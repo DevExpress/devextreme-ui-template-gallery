@@ -1,9 +1,10 @@
 @use "../../../variables.scss" as *;
 
-:host{
+:host {
   position: relative;
   display: flex;
 }
+
 .photo {
   border-radius: 8px;
   background-repeat: no-repeat;
@@ -13,7 +14,8 @@
 
 :host:hover {
   .editable {
-    &:before, .edit-icon {
+    &::before,
+    .edit-icon {
       opacity: 1;
       transition: opacity 400ms;
     }
@@ -27,12 +29,12 @@
   align-items: center;
   justify-content: center;
 
-  &:before {
+  &::before {
     content: '';
     opacity: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   .edit-icon {
