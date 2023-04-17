@@ -85,6 +85,10 @@ export class CrmContactListComponent {
     }
   };
 
+  onPinnedChange = () => {
+    this.dataGrid.instance.updateDimensions();
+  };
+
   filterByStatus = (e: SelectionChangedEvent) => {
     const { item: status }: { item: FilterContactStatus } = e;
 

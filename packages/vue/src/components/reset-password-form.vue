@@ -100,7 +100,7 @@ async function onSubmit() {
   }
 
   .login-link {
-    color: $base-accent;
+    color: $accent-color;
     font-size: 16px;
     text-align: center;
   }

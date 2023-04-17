@@ -19,6 +19,7 @@
       [text]="title"
     >
     </dxi-item>
+
     <dxi-item
       location="after"
       widget="dxTextBox"
@@ -33,6 +34,15 @@
     </dxi-item>
     <dxi-item
       location="after"
+      locateInMenu="never"
+    >
+      <ng-container *dxTemplate>
+        <theme-switcher></theme-switcher>
+      </ng-container>
+    </dxi-item>
+
+    <dxi-item
+      location="after"
     >
       <div *dxTemplate>
         <div class="messages">
@@ -43,25 +53,18 @@
         </div>
       </div>
     </dxi-item>
+
     <dxi-item
       location="after"
       locateInMenu="auto"
       menuItemTemplate="menuItem"
     >
       <div *dxTemplate="let data of 'item'">
-        <dx-button
-          class="user-button authorization"
-          width="150px"
-          stylingMode="text"
-        >
-          <div *dxTemplate="let data of 'content'">
-            <app-user-panel
-              [user]="user"
-              [menuItems]="userMenuItems"
-              menuMode="context"
-            ></app-user-panel>
-          </div>
-        </dx-button>
+        <app-user-panel
+          [user]="user"
+          [menuItems]="userMenuItems"
+          menuMode="context"
+        ></app-user-panel>
       </div>
     </dxi-item>
     <div *dxTemplate="let data of 'menuItem'">

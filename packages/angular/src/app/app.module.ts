@@ -21,6 +21,7 @@ import { PlanningTaskDetailsModule } from './pages/planning-task-details/plannin
 import { AnalyticsDashboardModule } from './pages/analytics-dashboard/analytics-dashboard.component';
 import { AnalyticsSalesReportModule } from './pages/analytics-sales-report/analytics-sales-report.component';
 import { AnalyticsGeographyModule } from './pages/analytics-geography/analytics-geography.component';
+import { ThemeService } from './services';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { AnalyticsGeographyModule } from './pages/analytics-geography/analytics-
 
     AppRoutingModule,
   ],
-  providers: [AuthService, ScreenService, AppInfoService],
+  providers: [AuthService, ScreenService, AppInfoService, ThemeService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

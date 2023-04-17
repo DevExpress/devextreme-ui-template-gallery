@@ -7,11 +7,11 @@
 </script>
 
 <style scoped lang="scss">
-@import "../variables.scss";
+@use "@/variables" as *;
 
 .footer {
   display: block;
-  color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+  color: $base-text-color-alpha;
   padding: 20px 0 16px $footer-left-padding;
   background-color: $side-panel-background;
   height: $footer-height;

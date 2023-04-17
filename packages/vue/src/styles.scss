@@ -14,6 +14,17 @@
   line-height: 1.5;
 }
 
+.separator {
+  height: 24px;
+  width: 1px;
+  background: $border-color;
+
+  .dx-toolbar-menu-section & {
+    height: 1px;
+    width: auto;
+  }
+}
+
 .view-wrapper {
   overflow: hidden;
   display: flex;
@@ -101,8 +112,8 @@ $side-panel-min-width: 60px;
   }
 }
 
-.plain-styled-form {
-  &.dx-form > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
+.dx-form.plain-styled-form {
+  & > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
     padding-bottom: 0;
   }
 

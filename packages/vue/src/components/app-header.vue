@@ -33,6 +33,12 @@
           width: 180
         }"
       />
+      <dx-item
+        location="after"
+        locate-in-menu="never"
+      >
+        <theme-switcher />
+      </dx-item>
       <dx-item location="after">
         <div class="messages">
           <dx-button icon="bell" />
@@ -48,17 +54,11 @@
       >
         <template #default>
           <div>
-            <dx-button
-              class="user-button authorization"
-              :width="150"
-              styling-mode="text"
-            >
-              <user-panel
-                :user="user"
-                :menu-items="userMenuItems"
-                menu-mode="context"
-              />
-            </dx-button>
+            <user-panel
+              :user="user"
+              :menu-items="userMenuItems"
+              menu-mode="context"
+            />
           </div>
         </template>
       </dx-item>
@@ -79,8 +79,9 @@ import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
-import { authInfo as auth, AuthUser } from '../auth';
 
+import { authInfo as auth, AuthUser } from '../auth';
+import ThemeSwitcher from './theme-switcher.vue';
 import UserPanel from './user-panel.vue';
 
 const router = useRouter();
@@ -130,17 +131,7 @@ header {
   .header-toolbar {
     padding-right: $content-padding;
 
-    .user-button.authorization {
-      margin-left: 5px;
-
-      :deep(.dx-button-content) {
-        padding: 0;
-        height: 100%;
-      }
-    }
-
     .messages {
-      padding-left: 5px;
       position: relative;
 
       .dx-badge {

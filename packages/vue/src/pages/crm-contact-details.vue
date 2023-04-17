@@ -134,7 +134,6 @@ const refreshOptions = {
 
 <style scoped lang="scss">
 @use "@/variables" as *;
-@include separator();
 
 $left-panel-width: 400px;
 $right-panel-width: 360px;

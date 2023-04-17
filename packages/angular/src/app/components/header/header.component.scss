@@ -17,17 +17,7 @@ header {
   .header-toolbar {
     padding-right: $content-padding;
 
-    .user-button.authorization {
-      margin-left: 5px;
-
-      .dx-button-content {
-        padding: 0;
-        height: 100%;
-      }
-    }
-
     .messages {
-      padding-left: 5px;
       position: relative;
 
       .dx-badge {

@@ -32,7 +32,7 @@
               <dx-item
                 location="after"
                 widget="dxButton"
-                :options="{ icon: 'close', onClick: () => emit('close') }"
+                :options="{ icon: 'close', onClick: onClose }"
               />
             </dx-toolbar>
           </div>
@@ -249,7 +249,7 @@ const toggleEdit = () => {
   isEditing.value = !isEditing.value;
 };
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'pinChanged']);
 
 const underContactFields = [
   {
@@ -292,6 +292,11 @@ function handleSaveClick({ validationGroup }: ClickEvent) {
   }
 }
 
+function onClose() {
+  isPinned.value = false;
+  emit('close');
+}
+
 watch(
   () => props.contactId,
   (newId) => {
@@ -300,6 +305,12 @@ watch(
     }
   },
 );
+
+watch([isPinned, () => props.isPanelOpened], () => {
+  emit('pinChanged');
+}, {
+  flush: 'post',
+});
 
 const navigateToDetails = () => {
   router.push('/crm-contact-details');
@@ -336,6 +347,10 @@ const navigateToDetails = () => {
 
   :deep(.photo-row) .dx-item .dx-item:has(.photo-box)  {
     max-width: 144px;
+
+    .photo-box {
+      padding-bottom: 0;
+    }
   }
 
   .embedded.dx-viewport & {
@@ -344,14 +359,14 @@ const navigateToDetails = () => {
 
   &.open {
     right: 0;
-    box-shadow: 0 0 16px $base-border-color;
+    box-shadow: 0 0 16px $border-color;
   }
 
   &.pin {
     position: absolute;
     transition: none;
     box-shadow: none;
-    border-left: 1px solid $base-border-color;
+    border-left: 1px solid $border-color;
 
     &.open {
       top: 0;
@@ -374,7 +389,7 @@ const navigateToDetails = () => {
       }
 
       &.border {
-        border-bottom: 1px solid $base-border-color;
+        border-bottom: 1px solid $border-color;
       }
 
       &-toolbar {

@@ -1,8 +1,6 @@
 @use '../../variables.scss' as *;
 @use 'sass:math';
 
-@include separator();
-
 .view-wrapper-dashboard {
   display: flex;
   flex-direction: column;

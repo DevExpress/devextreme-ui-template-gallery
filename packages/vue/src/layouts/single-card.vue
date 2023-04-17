@@ -70,7 +70,7 @@ watch(
       }
 
       .description {
-        color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+        color: $base-text-color-alpha;
         line-height: 18px;
       }
     }

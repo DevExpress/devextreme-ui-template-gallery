@@ -260,8 +260,6 @@ const taskSearchOptions = {
 <style scoped lang="scss">
 @use "@/variables" as *;
 
-@include separator();
-
 .view-wrapper {
   position: absolute;
   top: 0;

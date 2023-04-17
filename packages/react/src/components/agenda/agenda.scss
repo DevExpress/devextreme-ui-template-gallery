@@ -8,10 +8,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    color: $base-accent;
+    color: $accent-color;
     border-bottom: solid 1px $base-border-color;
     .dx-button .dx-icon{
-      color: $base-accent;
+      color: $accent-color;
     }
     .date {
       @include h2-header-text()
