@@ -49,7 +49,7 @@
 
     .side-panel-content-wrapper {
       position: absolute;
-      top: -$theme-padding;
+      top: calc(-1 * $theme-padding);
       left: $button-height;
       height: calc(100vh - 60px);
       padding-top: calc(2*$theme-padding);
