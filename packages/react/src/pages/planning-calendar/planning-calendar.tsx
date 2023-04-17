@@ -1,6 +1,6 @@
 import './planning-calendar.scss';
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { defaultCalendarListItems } from 'dx-template-gallery-data';
 
 import Button from 'devextreme-react/button';
@@ -54,43 +54,18 @@ export const PlanningCalendar = () => {
     onCurrentViewChange,
     onAppointmentClick,
     onAppointmentTooltipShowing,
-    onCellModified,
+    onAppointmentModified,
     onCellClick,
-    updateAgenda,
-    setDate,
-    setSelectedAppointment,
+    onSelectedDateChange,
+    onSelectedCalendarsChange,
+    showAppointmentTooltip,
     toggleRightPanelOpen,
   } = useSchedulerLogic();
-
-  const onTodayClick = () => {
-    setDate(new Date());
-  };
 
   const resourcesList = useMemo(() => {
     return calendarListItems
       .reduce((res: CalendarListItem[], calendarList) => { return res.concat(calendarList.items); }, []);
   }, [calendarListItems]);
-
-  const onSelectedCalendarsChange = useCallback((seletedCalendars) => {
-    const removedResourceFilters = seletedCalendars
-      .map((calendar) => calendar.id);
-
-    tasks?.filter((task) => {
-      return !removedResourceFilters.includes(task.calendarId);
-    });
-
-    tasks?.load().then(() => { updateAgenda(selectedAppointment?.data); });
-  }, [tasks, selectedAppointment]);
-
-  const onSelectedDateChange = useCallback((e) => {
-    setDate(e);
-    setSelectedAppointment({ data: { startDate: e }, target: undefined });
-    updateAgenda({ startDate: e });
-  }, [rightPanelOpen, updateAgenda, setSelectedAppointment]);
-
-  const showAppointmentTooltip = useCallback((e) => {
-    schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
-  }, [schedulerRef]);
 
   return <div className='view-wrapper-calendar'>
     <div className='calendar-content'>
@@ -99,7 +74,7 @@ export const PlanningCalendar = () => {
           <div className='buttons'>
             <Button
               text='Today'
-              onClick={onTodayClick}
+              onClick={onSelectedDateChange}
             />
             <Button
               text='Create event'
@@ -130,9 +105,9 @@ export const PlanningCalendar = () => {
           currentDate={date}
           currentView={currentView}
           onCurrentViewChange={onCurrentViewChange}
-          onAppointmentAdded={onCellModified}
+          onAppointmentAdded={onAppointmentModified}
           onAppointmentClick={onAppointmentClick}
-          onAppointmentDeleted={onCellModified}
+          onAppointmentDeleted={onAppointmentModified}
           onAppointmentFormOpening={onAppointmentFormOpening}
           onAppointmentTooltipShowing={onAppointmentTooltipShowing}
           onCellClick={onCellClick}

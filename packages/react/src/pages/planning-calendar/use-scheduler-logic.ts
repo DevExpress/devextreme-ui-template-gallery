@@ -74,7 +74,7 @@ export const useSchedulerLogic = () => {
       updateAgenda(appointmentData);
       toggleRightPanelOpen();
     }
-  }, [currentView, rightPanelOpen, updateAgenda]);
+  }, [currentView, rightPanelOpen, updateAgenda, toggleRightPanelOpen]);
 
   const onAppointmentTooltipShowing = useCallback((e) => {
     e.cancel = true;
@@ -98,13 +98,35 @@ export const useSchedulerLogic = () => {
       tooltipRef.current?.instance.show();
     }
 
-  }, [currentView, isXSmall, rightPanelOpen, tasks]);
+  }, [currentView, isXSmall, rightPanelOpen, updateAgenda, toggleRightPanelOpen]);
 
-  const onCellModified = useCallback((e) => {
+  const onSelectedCalendarsChange = useCallback((seletedCalendars) => {
+    const removedResourceFilters = seletedCalendars
+      .map((calendar) => calendar.id);
+
+    tasks?.filter((task) => {
+      return !removedResourceFilters.includes(task.calendarId);
+    });
+
+    tasks?.load().then(() => { updateAgenda(selectedAppointment?.data); });
+  }, [tasks, selectedAppointment, updateAgenda]);
+
+  const onSelectedDateChange = useCallback((e) => {
+    const date = e instanceof Date ? e : new Date();
+    setDate(date);
+    setSelectedAppointment({ data: { startDate: date }, target: undefined });
+    updateAgenda({ startDate: date });
+  }, [rightPanelOpen, updateAgenda, setSelectedAppointment]);
+
+  const onAppointmentModified = useCallback((e) => {
     if (e.appointmentData.startDate.toDateString() === selectedAppointment?.data.startDate.toDateString()) {
       updateAgenda(e.appointmentData);
     }
-  }, [selectedAppointment, tasks]);
+  }, [selectedAppointment, updateAgenda]);
+
+  const showAppointmentTooltip = useCallback((e) => {
+    schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
+  }, [schedulerRef]);
 
   const onCellClick = useCallback((e) => {
     if (currentView === 'month' && e.cellData) {
@@ -117,7 +139,7 @@ export const useSchedulerLogic = () => {
         }
       }
     }
-  }, [currentView, rightPanelOpen, tasks, selectedAppointment]);
+  }, [currentView, rightPanelOpen, tasks, selectedAppointment, toggleRightPanelOpen]);
 
   return {
     agendaItems,
@@ -135,13 +157,11 @@ export const useSchedulerLogic = () => {
     onCurrentViewChange,
     onAppointmentClick,
     onAppointmentTooltipShowing,
-    onCellModified,
+    onAppointmentModified,
     onCellClick,
-    updateAgenda,
-    setAgendaItems,
-    setDate,
-    setSelectedAppointment,
-    setTasks,
+    onSelectedDateChange,
+    onSelectedCalendarsChange,
+    showAppointmentTooltip,
     toggleRightPanelOpen,
   };
 };
