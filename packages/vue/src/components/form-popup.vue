@@ -78,6 +78,7 @@ const saveOptions = {
 const cancelOptions = {
   text: 'Cancel',
   stylingMode: 'contained',
+  type: 'normal',
   onClick: cancel,
 };
 </script>
