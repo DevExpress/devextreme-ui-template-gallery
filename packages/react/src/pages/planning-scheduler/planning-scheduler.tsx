@@ -1,4 +1,4 @@
-import './planning-calendar.scss';
+import './planning-scheduler.scss';
 
 import React, { useState, useMemo } from 'react';
 import { defaultCalendarListItems } from 'dx-template-gallery-data';
@@ -35,9 +35,10 @@ const onAppointmentFormOpening = (e) => {
   }
 };
 
-export const PlanningCalendar = () => {
+export const PlanningScheduler = () => {
   const { isXSmall, isSmall } = useScreenSize();
   const [calendarListItems] = useState(defaultCalendarListItems);
+
   const {
     agendaItems,
     currentView,

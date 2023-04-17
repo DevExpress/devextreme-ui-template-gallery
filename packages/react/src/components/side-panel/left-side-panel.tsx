@@ -14,7 +14,7 @@ export const LeftSidePanel = ({ children }) => {
     className={classNames({
       'left-side-panel': true,
       'overlapping': isXSmall || isSmall,
-      'open': isOpened,
+      'open': isOpened || isMedium || isLarge,
     })}
   >
     <div className='side-panel-container'>

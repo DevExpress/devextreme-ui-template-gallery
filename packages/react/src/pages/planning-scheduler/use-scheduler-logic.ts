@@ -17,7 +17,7 @@ export const useSchedulerLogic = () => {
   const [agendaItems, setAgendaItems] = useState<{ startDate: Date }[]>();
   const [currentView, setCurrentView] = useState<ViewType>('workWeek');
   const [date, setDate] = useState(new Date());
-  const [rightPanelOpen, setRightPanelOpen] = useState(false);
+  const [rightPanelOpen, setRightPanelOpen] = useState<boolean>(false);
   const [selectedAppointment, setSelectedAppointment] = useState<{ data, target }>();
   const [tasks, setTasks] = useState<DataSource>();
 
@@ -47,7 +47,12 @@ export const useSchedulerLogic = () => {
     }
   }, [rightPanelOpen]);
 
-  const onCurrentViewChange = useCallback((view) => { setCurrentView(view); }, [setCurrentView]);
+  const onCurrentViewChange = useCallback((view) => {
+    if (view === 'month' && !isXSmall) {
+      setRightPanelOpen(true);
+    }
+    setCurrentView(view);
+  }, [setCurrentView]);
 
   const createAppointment = useCallback(() => {
     schedulerRef.current?.instance.showAppointmentPopup();

@@ -28,8 +28,8 @@ export const navigation = [
         path: '/planning-task-details',
       },
       {
-        text: 'Calendar',
-        path: '/planning-calendar'
+        text: 'Scheduler',
+        path: '/planning-scheduler'
       },
     ],
   },
