@@ -9,7 +9,6 @@ $theme: null !default;
 @use "/node_modules/devextreme/scss/widgets/material/list/sizes" as *;
 @use "/node_modules/devextreme/scss/widgets/material/button/sizes" as *;
 @use "/node_modules/devextreme/scss/widgets/material/button/colors" as button_colors;
-
 @use "sass:math";
 @use "sass:color";
 
@@ -22,9 +21,8 @@ $theme: null !default;
   $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 
   $theme-padding: $material-button-horizontal-padding;
-  // WA for no button-height in generic theme, remove when design-system is released
-  $button-height-theme-difference: calc($theme-padding - 10px)/3;
-  $button-height: calc(26px + $button-height-theme-difference);
+  $button-height-theme-difference: calc($theme-padding - 10px) / 3; // WA for no button-height in generic theme
+  $button-height: calc(26px + $button-height-theme-difference); // remove when design-system is released
   $scheduler-toolbar-height: calc($button-height + 2 * $theme-padding);
   $tooltip-danger-button-color: button_colors.$button-danger-text-hover-bg;
   $tooltip-success-button-color: button_colors.$button-success-text-hover-bg;

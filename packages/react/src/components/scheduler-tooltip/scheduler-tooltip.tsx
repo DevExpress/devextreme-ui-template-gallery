@@ -4,8 +4,8 @@ import Button from 'devextreme-react/button';
 import Tooltip from 'devextreme-react/tooltip';
 import './scheduler-tooltip.scss';
 
-export const TooltipContentTemplate = ({ appointmentData, deleteCurrentAppointment, editCurrentAppointment }) => {
-  if (!appointmentData) {
+export const TooltipContentTemplate = ({ selectedAppointmentData, deleteCurrentAppointment, editCurrentAppointment }) => {
+  if (!selectedAppointmentData || !selectedAppointmentData.endDate) {
     return null;
   }
   const timeOptions = {
@@ -20,10 +20,10 @@ export const TooltipContentTemplate = ({ appointmentData, deleteCurrentAppointme
     month: 'numeric',
     year: 'numeric'
   };
-  const timeString = `${appointmentData.startDate.toLocaleString(undefined, dateOptions)} - ${appointmentData.endDate.toLocaleTimeString(undefined, timeOptions)}`;
+  const timeString = `${selectedAppointmentData.startDate.toLocaleString(undefined, dateOptions)} - ${selectedAppointmentData.endDate.toLocaleTimeString(undefined, timeOptions)}`;
 
   return (<div className='appointment-tooltip'>
-    <div className='title'>{appointmentData.text}</div>
+    <div className='title'>{selectedAppointmentData.text}</div>
     <div className='content'>
       <div className='date'>
         <Button icon='clock'
@@ -33,14 +33,14 @@ export const TooltipContentTemplate = ({ appointmentData, deleteCurrentAppointme
         />
         {timeString}
       </div>
-      {appointmentData.description &&
+      {selectedAppointmentData.description &&
         <div className='description'>
           <Button icon='textdocument'
             focusStateEnabled={false}
             activeStateEnabled={false}
             hoverStateEnabled={false}
           />
-          {appointmentData.description}
+          {selectedAppointmentData.description}
         </div>
       }
     </div>

@@ -45,18 +45,21 @@ export const useSchedulerLogic = () => {
     if (isLarge) {
       schedulerRef.current?.instance.repaint();
     }
-  }, [rightPanelOpen]);
+  }, [rightPanelOpen, isLarge]);
 
   const onCurrentViewChange = useCallback((view) => {
     if (view === 'month' && !isXSmall) {
       setRightPanelOpen(true);
     }
+    if (currentView === 'month' && view !== 'month') {
+      setRightPanelOpen(false);
+    }
     setCurrentView(view);
-  }, [setCurrentView]);
+  }, [isXSmall, currentView]);
 
   const createAppointment = useCallback(() => {
     schedulerRef.current?.instance.showAppointmentPopup();
-  }, [schedulerRef]);
+  }, []);
 
   const deleteCurrentAppointment = useCallback(() => {
     schedulerRef.current?.instance.deleteAppointment(selectedAppointment?.data);
@@ -121,7 +124,7 @@ export const useSchedulerLogic = () => {
     setDate(date);
     setSelectedAppointment({ data: { startDate: date }, target: undefined });
     updateAgenda({ startDate: date });
-  }, [rightPanelOpen, updateAgenda, setSelectedAppointment]);
+  }, [updateAgenda]);
 
   const onAppointmentModified = useCallback((e) => {
     if (e.appointmentData.startDate.toDateString() === selectedAppointment?.data.startDate.toDateString()) {
@@ -131,7 +134,7 @@ export const useSchedulerLogic = () => {
 
   const showAppointmentTooltip = useCallback((e) => {
     schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
-  }, [schedulerRef]);
+  }, []);
 
   const onCellClick = useCallback((e) => {
     if (currentView === 'month' && e.cellData) {
@@ -144,7 +147,7 @@ export const useSchedulerLogic = () => {
         }
       }
     }
-  }, [currentView, rightPanelOpen, tasks, selectedAppointment, toggleRightPanelOpen]);
+  }, [currentView, rightPanelOpen, tasks, toggleRightPanelOpen]);
 
   return {
     agendaItems,

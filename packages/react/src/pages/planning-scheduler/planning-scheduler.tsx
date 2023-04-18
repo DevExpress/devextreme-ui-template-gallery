@@ -126,19 +126,18 @@ export const PlanningScheduler = () => {
           visible={isXSmall}
           onClick={createAppointment}
         />
-        {selectedAppointment?.target &&
-          <Tooltip
-            ref={tooltipRef}
-            target={selectedAppointment?.target}
-            showEvent='click'
-            position={tooltipPosition}
-          >
-            <TooltipContentTemplate
-              deleteCurrentAppointment={deleteCurrentAppointment}
-              editCurrentAppointment={editCurrentAppointment}
-              appointmentData={selectedAppointment?.data} />
-          </Tooltip>
-        }
+
+        <Tooltip
+          ref={tooltipRef}
+          target={selectedAppointment?.target}
+          showEvent='click'
+          position={tooltipPosition}
+        >
+          <TooltipContentTemplate
+            deleteCurrentAppointment={deleteCurrentAppointment}
+            editCurrentAppointment={editCurrentAppointment}
+            selectedAppointmentData={selectedAppointment?.data} />
+        </Tooltip>
       </div>
       <RightSidePanel
         showOpenButton={currentView === 'month'}
@@ -146,7 +145,7 @@ export const PlanningScheduler = () => {
         toggleOpen={toggleRightPanelOpen}
       >
         <Agenda
-          selectedAppointment={selectedAppointment?.data}
+          selectedAppointmentData={selectedAppointment?.data}
           toggleOpen={toggleRightPanelOpen}
           items={agendaItems}
           resources={resourcesList}
