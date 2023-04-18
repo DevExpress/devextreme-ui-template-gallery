@@ -4,7 +4,7 @@ import {
   DxButtonModule,
   DxTextBoxModule,
   DxValidatorModule
-} from "devextreme-angular";
+} from 'devextreme-angular';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
 
 @Component({
