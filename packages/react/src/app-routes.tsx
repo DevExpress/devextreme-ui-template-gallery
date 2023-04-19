@@ -9,7 +9,8 @@ import {
   AnalyticsGeography,
   SignInPage,
   SignUpPage,
-  ResetPasswordPage
+  ResetPasswordPage,
+  UserProfile
 } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
@@ -57,7 +58,11 @@ const routes = [
   {
     path: '/reset-password-form-page',
     element: ResetPasswordPage,
-  }
+  },
+  {
+    path: 'user-profile',
+    element: UserProfile,
+  },
 ];
 
 export const appRoutes = routes.map((route) => {
