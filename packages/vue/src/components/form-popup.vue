@@ -12,13 +12,13 @@
       widget="dxButton"
       toolbar="bottom"
       location="after"
-      :options="saveOptions"
+      :options="cancelOptions"
     />
     <dx-popup-item
       widget="dxButton"
       toolbar="bottom"
       location="after"
-      :options="cancelOptions"
+      :options="saveOptions"
     />
     <dx-validation-group ref="validationGroup">
       <slot />
@@ -70,15 +70,15 @@ const cancel = () => {
 
 const saveOptions = {
   text: 'Save',
-  stylingMode: 'outlined',
+  stylingMode: 'contained',
   type: 'default',
   onClick: save,
 };
 
 const cancelOptions = {
   text: 'Cancel',
-  stylingMode: 'text',
-  type: 'default',
+  stylingMode: 'contained',
+  type: 'normal',
   onClick: cancel,
 };
 </script>

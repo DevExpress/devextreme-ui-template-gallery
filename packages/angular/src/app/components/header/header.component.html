@@ -60,19 +60,11 @@
       menuItemTemplate="menuItem"
     >
       <div *dxTemplate="let data of 'item'">
-        <dx-button
-          class="user-button authorization"
-          width="150px"
-          stylingMode="text"
-        >
-          <div *dxTemplate="let data of 'content'">
-            <app-user-panel
-              [user]="user"
-              [menuItems]="userMenuItems"
-              menuMode="context"
-            ></app-user-panel>
-          </div>
-        </dx-button>
+        <app-user-panel
+          [user]="user"
+          [menuItems]="userMenuItems"
+          menuMode="context"
+        ></app-user-panel>
       </div>
     </dxi-item>
     <div *dxTemplate="let data of 'menuItem'">

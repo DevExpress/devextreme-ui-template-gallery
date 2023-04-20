@@ -17,8 +17,6 @@ $right-panel-width: 360px;
     }
   }
 
-  @include separator();
-
   .panels {
     display: flex;
     flex-wrap: wrap;

@@ -9,8 +9,7 @@ import {
 } from './components';
 import { AuthGuardService } from './services';
 
-import { SideNavOuterToolbarComponent } from './layouts/side-nav-outer-toolbar/side-nav-outer-toolbar.component';
-import { UnauthenticatedContentComponent } from './layouts/unauthenticated-content/unauthenticated-content';
+import { SideNavOuterToolbarComponent, UnauthenticatedContentComponent } from './layouts';
 
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactDetailsComponent } from './pages/crm-contact-details/crm-contact-details.component';
@@ -22,6 +21,7 @@ import { AnalyticsGeographyComponent } from './pages/analytics-geography/analyti
 import { AuthSignInComponent } from './pages/auth-sign-in/auth-sign-in.component';
 import { AuthCreateAccountComponent } from './pages/auth-create-account/auth-create-account.component';
 import { AuthResetPasswordComponent } from './pages/auth-reset-password/auth-reset-password.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -107,6 +107,10 @@ const routes: Routes = [
         path: 'reset-password-form',
         component: AuthResetPasswordComponent,
         canActivate: [AuthGuardService],
+      },
+      {
+        path: 'user-profile',
+        component: UserProfileComponent
       },
       {
         path: '**',

@@ -39,6 +39,14 @@ fixture`Contact List`;
         await takeScreenshot(`crm-contact-list-full${postfix}`, 'body');
         await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
         await takeScreenshot(`crm-contact-list-form${postfix}`, Selector('.data-wrapper'));
+
+        if (screenMode[0] === 1280) {
+          await t.click(Selector('.dx-icon-unpin'));
+          await t.click('.contact-name'); // to remove focus from the pin button
+          await takeScreenshot(`crm-contact-list-full-form-pinned${postfix}`, 'body');
+          await t.click(Selector('.dx-icon-pin'));
+        }
+
         await t.click(Selector('.dx-button[aria-label=Edit]'));
         await takeScreenshot(`crm-contact-list-form-edit${postfix}`, Selector('.data-wrapper'));
         await t.click(Selector('[aria-label="Close"]'));

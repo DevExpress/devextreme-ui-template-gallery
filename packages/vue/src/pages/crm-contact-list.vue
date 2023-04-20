@@ -174,6 +174,7 @@
       :contact-id="panelData?.id"
       :is-panel-opened="isPanelOpened"
       @close="onClose"
+      @pin-changed="onPanelPinChanged"
     />
   </div>
 
@@ -284,6 +285,10 @@ const onExporting = (e: ExportingEvent) => {
   }
 };
 
+const onPanelPinChanged = () => {
+  dataGrid.value?.instance.updateDimensions();
+};
+
 const refresh = () => {
   dataSource.reload();
 };
@@ -318,14 +323,13 @@ const refreshOptions = {
 <style scoped lang="scss">
 @use "@/variables" as *;
 
-@include separator();
-
 .view-wrapper {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  flex-direction: row;
 
   .grid  {
     .name-template {

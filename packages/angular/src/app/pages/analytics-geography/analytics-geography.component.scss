@@ -1,8 +1,6 @@
 @use "../../../variables.scss" as *;
 @use "sass:math";
 
-@include separator();
-
 :host {
   display: flex;
   flex-direction: column;

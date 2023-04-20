@@ -51,6 +51,7 @@ jobs:
           { project: 'angular', page: 'analytics-dashboard' },
           { project: 'angular', page: 'analytics-sales-report' },
           { project: 'angular', page: 'analytics-geography' },
+          { project: 'angular', page: 'user-profile' },
           { project: 'angular', page: 'auth-forms' },
           { project: 'react', page: 'crm-contact-details' },
           { project: 'react', page: 'crm-contact-list' },

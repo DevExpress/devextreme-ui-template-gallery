@@ -17,8 +17,9 @@ import {
   ContactStatusModule,
   FormTextboxModule,
   FormPhotoModule,
+  StatusSelectBoxModule,
 } from 'src/app/components';
-import { Contact, contactStatusList } from 'src/app/types/contact';
+import { Contact } from 'src/app/types/contact';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
 import { ClickEvent } from 'devextreme/ui/button';
 
@@ -33,8 +34,6 @@ export class ContactFormComponent {
   @Input() isLoading: boolean;
 
   savedData: Contact = null;
-
-  statusList = contactStatusList;
 
   isEditing = false;
 
@@ -73,6 +72,7 @@ export class ContactFormComponent {
     FormPhotoModule,
     DxValidatorModule,
     CommonModule,
+    StatusSelectBoxModule,
   ],
   providers: [],
   exports: [ContactFormComponent],

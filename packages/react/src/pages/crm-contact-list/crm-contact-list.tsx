@@ -109,6 +109,10 @@ export const CRMContactList = () => {
     gridRef.current?.instance.option('focusedRowIndex', -1);
   }, [isPanelOpened]);
 
+  const changePanelPinned = useCallback(() => {
+    gridRef.current?.instance.updateDimensions();
+  }, []);
+
   const onAddContactClick = useCallback(() => {
     setPopupVisible(true);
   }, []);
@@ -239,7 +243,7 @@ export const CRMContactList = () => {
           />
           <Column dataField='email' caption='Email' hidingPriority={1} />
         </DataGrid>
-        <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} />
+        <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} changePanelPinned={changePanelPinned} />
         <FormPopup title='New Contact' visible={popupVisible} changeVisibility={changePopupVisibility}>
           <ContactNewForm />
         </FormPopup>
