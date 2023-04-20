@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from 'react';
 
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
 import ValidationGroup from 'devextreme-react/validation-group';
-import { useScreenSize } from './../../utils/media-query';
+import { useScreenSize } from '../../utils/media-query';
 import { Button } from 'devextreme-react';
 
 type PopupProps = {
@@ -41,10 +41,9 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
         location='after'
       >
         <Button
-          text= 'Save'
-          stylingMode= 'outlined'
-          type= 'default'
-          onClick={onSaveClick}
+          text='Cancel'
+          stylingMode='contained'
+          onClick={onCancelClick}
         />
       </ToolbarItem>
       <ToolbarItem
@@ -53,10 +52,10 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
         location='after'
       >
         <Button
-          text='Cancel'
-          stylingMode='text'
-          type='default'
-          onClick={onCancelClick}
+          text= 'Save'
+          stylingMode= 'contained'
+          type= 'default'
+          onClick={onSaveClick}
         />
       </ToolbarItem>
       <ValidationGroup ref={validationGroup}>

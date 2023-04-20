@@ -145,11 +145,12 @@
     [userId]="userId"
     [(isOpened)]="isPanelOpened"
     (isOpenedChange)="onOpenedChange($event)"
+    (pinnedChange)="onPinnedChange()"
   >
   </contact-user-panel>
 
   <form-popup
-    #userPopup
+    [(visible)] = "isAddContactPopupOpened"
     titleText="New Contact"
   >
     <contact-new-user-form></contact-new-user-form>

@@ -1,0 +1,127 @@
+<div class="view-wrapper">
+  <dx-toolbar
+    [class.scrolled]="isContentScrolled">
+    <dxi-item location="before">
+      <div class="header-text">User Profile</div>
+    </dxi-item>
+    <dxi-item location="after"
+              locateInMenu="never">
+      <dx-button
+        text="Cancel"
+        [disabled]="!isDataChanged"
+        stylingMode="contained"
+        (click)="cancel()"
+      ></dx-button>
+    </dxi-item>
+    <dxi-item location="after"
+              locateInMenu="never">
+      <dx-button
+        [disabled]="!isDataChanged"
+        text="Save"
+        icon="save"
+        type="default"
+        stylingMode="contained"
+        (click)="save()"
+      ></dx-button>
+    </dxi-item>
+  </dx-toolbar>
+
+  <dx-load-panel
+    [visible]="isLoading"
+    [showPane]="false"
+    container=".view-wrapper-scroll"
+    [position]="{ of: 'user-profile' }"
+  ></dx-load-panel>
+  <dx-scroll-view
+    class="view-wrapper-scroll"
+    (onScroll)="scroll($event)"
+  >
+    <div *ngIf="!isLoading"
+         class="cards-container"
+    >
+
+      <profile-card class="profile-card basic-info-card"
+                    title="Basic Info"
+                    [colCount]="4"
+                    [cardData]="profileData"
+                    [items]="basicInfoItems"
+                    (dataChanged)="dataChanged()"
+      >
+        <div class="basic-info-top-item"
+             top-item>
+          <form-photo
+            [link]="profileData?.image"
+            [editable]="true"
+            [size]="80"
+          ></form-photo>
+          <div>
+            <div class="title-text">{{profileData.name}}</div>
+            <div class="subtitle-text with-clipboard-copy">
+              <span>ID: {{profileData.id}}</span>
+              <dx-button icon="copy"
+                         class="copy-clipboard-button"
+                         (click)="copyToClipboard(profileData.id, $event)"
+                         [activeStateEnabled]="false"
+                         [focusStateEnabled]="false"
+                         [hoverStateEnabled]="false"
+              ></dx-button>
+            </div>
+            <dx-button
+              text="Change Password"
+              [icon]="(screen.xSmallScreenChanged | async) ? null : 'lock'"
+              class="change-password-button"
+              stylingMode="contained"
+              (click)="changePassword()"
+            ></dx-button>
+          </div>
+        </div> :
+      </profile-card>
+
+      <profile-card class="profile-card contacts-card"
+                    title="Contacts"
+                    [cardData]="profileData"
+                    [items]="contactItems"
+                    (dataChanged)="dataChanged()"
+      >
+        <div top-item>
+          <div class="image-wrapper">
+            <img alt="" src="assets/icons/at.svg"/>
+          </div>
+          <div>
+            <div class="title-text">{{ profileData.phone | phone }}</div>
+            <div class="subtitle-text with-clipboard-copy">
+              {{ profileData.email }}
+              <dx-button icon="copy"
+                         class="copy-clipboard-button"
+                         (click)="copyToClipboard(profileData.email, $event)"
+                         [activeStateEnabled]="false"
+                         [focusStateEnabled]="false"
+                         [hoverStateEnabled]="false"
+              ></dx-button>
+            </div>
+          </div>
+        </div>
+      </profile-card>
+
+      <profile-card class="profile-card address-card"
+                    title="Address"
+                    [cardData]="profileData"
+                    [items]="addressItems"
+                    (dataChanged)="dataChanged()"
+      >
+        <div top-item>
+          <div class="image-wrapper">
+            <img alt="" src="assets/icons/geo-position.svg"/>
+          </div>
+          <div>
+            <div class="title-text">
+              {{profileData.address}}, {{profileData.city}}, {{profileData.state}}, {{profileData.country}}
+            </div>
+          </div>
+        </div>
+      </profile-card>
+    </div>
+  </dx-scroll-view>
+</div>
+
+<change-profile-password-form [(visible)]="isChangePasswordPopupOpened"></change-profile-password-form>

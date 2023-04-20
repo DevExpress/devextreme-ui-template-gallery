@@ -2,16 +2,16 @@ import {
   Component, OnInit, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { map, share } from "rxjs/operators";
-import { Observable, forkJoin } from "rxjs";
+import { map, share } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
 
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxFunnelModule } from 'devextreme-angular/ui/funnel';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
-import { DxLoadPanelModule } from "devextreme-angular/ui/load-panel";
-import { DxScrollViewModule } from "devextreme-angular/ui/scroll-view";
+import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
+import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 
 import { DataService } from 'src/app/services';
 import { CardAnalyticsModule } from 'src/app/components/card-analytics/card-analytics.component';
@@ -20,7 +20,7 @@ import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import {
   Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory,
 } from 'src/app/types/analytics';
-import { ApplyPipeModule } from "src/app/pipes/apply.pipe";
+import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 
 type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
 type DataLoader = (startDate: string, endDate: string) => Observable<Object>;

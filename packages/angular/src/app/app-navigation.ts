@@ -64,7 +64,18 @@ export const navigation = [
       {
         text: 'Reset Password Form',
         path: '/reset-password-form',
-      },
+      }
     ],
   },
+  {
+    text: 'Common',
+    icon: 'box',
+    path: '',
+    items: [
+      {
+        text: 'User Profile',
+        path: '/user-profile',
+      },
+    ]
+  }
 ];
