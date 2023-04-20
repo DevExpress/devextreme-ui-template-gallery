@@ -100,7 +100,7 @@ export const defaultCalendarListItems = [
       {
         id: 0,
         text: 'Brett Johnson',
-        color: '#E1F5FE',
+        color: '#B3E5FC',
         checkboxColor: '#29B6F6',
       },
       {
