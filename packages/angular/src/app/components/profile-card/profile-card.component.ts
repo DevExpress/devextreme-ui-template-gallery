@@ -55,7 +55,6 @@ export class ProfileCardComponent {
   }
 
   getFieldValue(cardData, fieldName) {
-    console.log('----getFieldValue------>', cardData, cardData[fieldName]);
     return cardData[fieldName];
   }
 }

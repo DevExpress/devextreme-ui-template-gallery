@@ -86,6 +86,8 @@ $gap-padding: 24px;
     }
 
     .copy-clipboard-button::ng-deep {
+      background-color: transparent;
+
       .dx-icon {
         color: $subtitle-text-color;
       }
@@ -112,10 +114,10 @@ $gap-padding: 24px;
   }
 
   .contacts-card .image-wrapper {
-    background-color: #ffebee;
+    background-color: rgba(244, 67, 54, 0.2);
   }
 
   .address-card .image-wrapper {
-    background-color: #e1f5fe;
+    background-color: rgba(3, 169, 244, 0.2);
   }
 }
