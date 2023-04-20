@@ -10,7 +10,12 @@
       <dx-item
         data-field="email"
         editor-type="dxTextBox"
-        :editor-options="{ stylingMode: 'filled', placeholder: 'Email', mode: 'email' }"
+        :editor-options="{
+          stylingMode: 'filled',
+          placeholder: 'Email',
+          mode: 'email',
+          value: 'jheart@corp.com'
+        }"
       >
         <dx-required-rule message="Email is required" />
         <dx-email-rule message="Email is invalid" />
@@ -25,15 +30,6 @@
           :use-submit-behavior="true"
         />
       </dx-button-item>
-      <dx-item>
-        <template #default>
-          <div class="login-link">
-            Return to <router-link to="/login">
-              Sign In
-            </router-link>
-          </div>
-        </template>
-      </dx-item>
       <template #resetTemplate>
         <div>
           <span class="dx-button-text">
@@ -48,6 +44,9 @@
         </div>
       </template>
     </dx-form>
+    <div class="login-link">
+      Return to <router-link :to="props.signInLink">Sign In</router-link>
+    </div>
   </form>
 </template>
 
@@ -67,6 +66,11 @@ import { useRouter } from 'vue-router';
 
 import { authInfo as auth } from '@/auth';
 
+const props = defineProps<{
+  signInLink?: string,
+  buttonLink?: string
+}>();
+
 const notificationText = 'We\'ve sent a link to reset your password. Check your inbox.';
 const router = useRouter();
 
@@ -83,7 +87,7 @@ async function onSubmit() {
   loading.value = false;
 
   if (result.isOk) {
-    router.push('/login');
+    router.push(props.buttonLink);
     notify(notificationText, 'success', 2500);
   } else {
     notify(result.message, 'error', 2000);
@@ -96,13 +100,14 @@ async function onSubmit() {
 
 .reset-password-form {
   :deep(.submit-button) {
-    margin-top: 10px;
+    margin-top: 18px;
   }
 
   .login-link {
     color: $accent-color;
-    font-size: 16px;
+    font-size: 12px;
     text-align: center;
+    margin-top: 6px;
   }
 }
 </style>

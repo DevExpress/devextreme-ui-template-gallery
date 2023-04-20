@@ -9,9 +9,9 @@ import { CardAuthModule, CreateAccountFormModule } from 'src/app/components';
 })
 export class AuthCreateAccountComponent {
 
-  defaultLink = '/signin-form-page';
+  defaultLink = '/sign-in-form';
 
-  buttonLink = '/signup-form-page';
+  buttonLink = '/sign-up-form';
 
   constructor() { }
 }

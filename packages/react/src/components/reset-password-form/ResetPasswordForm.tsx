@@ -49,12 +49,10 @@ export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
             <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Reset my password'}</span>
           </ButtonOptions>
         </ButtonItem>
-        <Item>
-          <div className='login-link'>
-            Return to <Link to={signInLink}>Sign In</Link>
-          </div>
-        </Item>
       </Form>
+      <div className='login-link'>
+        Return to <Link to={signInLink}>Sign In</Link>
+      </div>
     </form>
   );
 };

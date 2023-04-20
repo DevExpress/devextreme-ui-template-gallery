@@ -10,7 +10,12 @@
       <dx-item
         data-field="email"
         editor-type="dxTextBox"
-        :editor-options="{ stylingMode: 'filled', placeholder: 'Email', mode: 'email' }"
+        :editor-options="{
+          stylingMode: 'filled',
+          placeholder: 'Email',
+          mode: 'email',
+          value: 'jheart@corp.com'
+        }"
       >
         <dx-required-rule message="Email is required" />
         <dx-email-rule message="Email is invalid" />
@@ -19,7 +24,12 @@
       <dx-item
         data-field="password"
         editor-type="dxTextBox"
-        :editor-options="{ stylingMode: 'filled', placeholder: 'Password', mode: 'password' }"
+        :editor-options="{
+          stylingMode: 'filled',
+          placeholder: 'Password',
+          mode: 'password',
+          value: 'password'
+        }"
       >
         <dx-required-rule message="Password is required" />
         <dx-label :visible="false" />
@@ -39,22 +49,6 @@
           :use-submit-behavior="true"
         />
       </dx-button-item>
-      <dx-item>
-        <template #default>
-          <div class="link">
-            <router-link to="/reset-password">
-              Forgot password?
-            </router-link>
-          </div>
-        </template>
-      </dx-item>
-      <dx-button-item>
-        <dx-button-options
-          text="Create an account"
-          width="100%"
-          :on-click="onCreateAccountClick"
-        />
-      </dx-button-item>
       <template #signInTemplate>
         <div>
           <span class="dx-button-text">
@@ -69,6 +63,17 @@
         </div>
       </template>
     </dx-form>
+    <div class="reset-link">
+      <router-link :to="props.resetLink">
+        Forgot password?
+      </router-link>
+    </div>
+    <dx-button
+      text="Create an account"
+      width="100%"
+      @click="onCreateAccountClick"
+    />
+    <oauth-component />
   </form>
 </template>
 
@@ -82,11 +87,18 @@ import DxForm, {
   DxButtonItem,
   DxButtonOptions,
 } from 'devextreme-vue/form';
+import DxButton from 'devextreme-vue/button';
 import notify from 'devextreme/ui/notify';
 
-import { reactive, ref } from 'vue';
+import { reactive, ref, defineProps } from 'vue';
 import { useRouter } from 'vue-router';
 import { authInfo as auth } from '@/auth';
+import OauthComponent from './oauth-component.vue';
+
+const props = defineProps<{
+  resetLink?: string,
+  createAccountLink?: string
+}>();
 
 const router = useRouter();
 
@@ -97,7 +109,7 @@ const formData = reactive({
 const loading = ref(false);
 
 function onCreateAccountClick() {
-  router.push('/create-account');
+  router.push(props.createAccountLink);
 }
 
 async function onSubmit() {
@@ -117,19 +129,19 @@ async function onSubmit() {
 @use "@/variables" as *;
 
 .login-form {
-  .link {
-    text-align: center;
-    font-size: 16px;
-    font-style: normal;
-
-    a {
-      text-decoration: none;
-    }
-  }
-
   :deep(.form-text) {
-    margin: 10px 0;
     color: $base-text-color-alpha;
+  }
+}
+
+.reset-link {
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  margin: 6px 0 50px 0;
+
+  a {
+    cursor: pointer;
   }
 }
 </style>

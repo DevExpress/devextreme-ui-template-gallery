@@ -19,7 +19,7 @@ import { PlanningTaskDetailsComponent } from './pages/planning-task-details/plan
 import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analytics-dashboard.component';
 import { AnalyticsSalesReportComponent } from './pages/analytics-sales-report/analytics-sales-report.component';
 import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
-import { AuthSigninComponent } from './pages/auth-login/auth-signin.component';
+import { AuthSignInComponent } from './pages/auth-sign-in/auth-sign-in.component';
 import { AuthCreateAccountComponent } from './pages/auth-create-account/auth-create-account.component';
 import { AuthResetPasswordComponent } from './pages/auth-reset-password/auth-reset-password.component';
 
@@ -94,17 +94,17 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'signin-form-page',
-        component: AuthSigninComponent,
+        path: 'sign-in-form',
+        component: AuthSignInComponent,
         canActivate: [AuthGuardService],
       },
       {
-        path: 'signup-form-page',
+        path: 'sign-up-form',
         component: AuthCreateAccountComponent,
         canActivate: [AuthGuardService],
       },
       {
-        path: 'reset-password-form-page',
+        path: 'reset-password-form',
         component: AuthResetPasswordComponent,
         canActivate: [AuthGuardService],
       },

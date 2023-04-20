@@ -5,10 +5,10 @@ import { CardAuthModule, LoginFormModule } from 'src/app/components';
 
 @Component({
   selector: 'app-auth-login',
-  templateUrl: './auth-signin.component.html',
-  styleUrls: ['./auth-signin.component.scss']
+  templateUrl: './auth-sign-in.component.html',
+  styleUrls: ['./auth-sign-in.component.scss']
 })
-export class AuthSigninComponent {
+export class AuthSignInComponent {
   constructor() { }
 }
 
@@ -19,7 +19,7 @@ export class AuthSigninComponent {
     CardAuthModule,
   ],
   providers: [],
-  exports: [AuthSigninComponent],
-  declarations: [AuthSigninComponent],
+  exports: [AuthSignInComponent],
+  declarations: [AuthSignInComponent],
 })
 export class AuthLoginModule { }

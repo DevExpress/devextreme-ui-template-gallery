@@ -55,15 +55,15 @@ export const navigation = [
     items: [
       {
         text: 'Sign In Form',
-        path: '/signin-form-page',
+        path: '/sign-in-form',
       },
       {
         text: 'Sign Up Form',
-        path: '/signup-form-page',
+        path: '/sign-up-form',
       },
       {
         text: 'Reset Password Form',
-        path: '/reset-password-form-page',
+        path: '/reset-password-form',
       },
     ],
   },
