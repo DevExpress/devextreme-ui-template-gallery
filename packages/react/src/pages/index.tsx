@@ -5,3 +5,6 @@ export { PlanningTaskDetails } from './planning-task-details/planning-task-detai
 export { AnalyticsDashboard } from './analytics-dashboard/analytics-dashboard';
 export { AnalyticsSalesReport } from './analytics-sales-report/analytics-sales-report';
 export { AnalyticsGeography } from './analytics-geography/analytics-geography';
+export { SignInPage } from './auth-sign-in/auth-sign-in';
+export { SignUpPage } from './auth-sign-up/auth-sign-up';
+export { ResetPasswordPage } from './auth-reset-password/auth-reset-password';
