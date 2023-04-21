@@ -35,25 +35,25 @@
 </template>
 
 <script setup lang="ts">
-import { DxDropDownButton } from 'devextreme-vue/drop-down-button';
+import { DxDropDownButton, DxDropDownBox } from 'devextreme-vue';
 import { ref } from 'vue';
 import UserMenuSection from './user-menu-section.vue';
 
 withDefaults(defineProps<{
   menuMode: string,
-  menuItems: Array,
+  menuItems: Array<unknown>,
   user: object,
 }>(), {
   menuMode: '',
-  menuItems: [],
-  user: {},
+  menuItems: () => [],
+  user: () => ({}),
 });
 
-const userMenuSection = ref(null);
+const userMenuSection = ref<InstanceType<typeof UserMenuSection>>(null);
 
-function handleDropDownButtonContentReady({ component }) {
+function handleDropDownButtonContentReady({ component }: {component: typeof DxDropDownBox}) {
   component.registerKeyHandler('downArrow', () => {
-    userMenuSection.value.focusList();
+    userMenuSection.value?.focusList();
   });
 }
 

@@ -88,7 +88,7 @@ function onFieldChanged() {
   const formValues = Object.entries(formData);
 
   isSaveDisabled.value = !formPopup.value?.isValid() || formValues.length !== 3
-    || !!formValues.find(([_, value]) => !value);
+    || !!formValues.find(([, value]) => !value);
 }
 
 function close() {
