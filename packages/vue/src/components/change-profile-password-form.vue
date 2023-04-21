@@ -101,20 +101,18 @@ function saveNewPassword() {
 }
 </script>
 <style lang="scss">
-.change-profile-password-popup .dx-popup-normal {
-  border-radius: 8px;
-  padding: 8px 0;
+.change-profile-password-popup {
+  .dx-form {
+    padding: 0 8px;
+  }
 
-.dx-toolbar {
-  padding: 0 24px 8px;
-}
-}
-</style>
-<style scoped lang="scss">
-@use "@/variables" as *;
-@include separator();
+  .dx-popup-normal {
+    border-radius: 8px;
+    padding: 8px 0;
 
-.dx-form {
-  padding: 0 8px;
+    .dx-toolbar {
+      padding: 0 24px 8px;
+    }
+  }
 }
 </style>

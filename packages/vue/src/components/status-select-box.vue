@@ -21,9 +21,8 @@
           class="status-{{data.toLowerCase()}}"
           :hover-state-enabled="false"
           :input-attr="{
-            // eslint-disable-next-line max-len
-            class: `status-editor-input status-input contact-status status-${data?.toLowerCase()}`}"
-
+            class: `status-editor-input contact-status status-${data?.toLowerCase()}`
+          }"
           :read-only="true"
           :value="data"
         />
@@ -81,7 +80,7 @@ function emitChangedValue(changedData: SimpleObject) {
     padding-left: $list-padding-left;
   }
 
-  :deep(.status-input.status-input) {
+  :deep(.status-editor-input) {
     padding-left: 0;
   }
 }

@@ -386,19 +386,21 @@ $gap-padding: 24px;
           max-width: 18px;
           min-width: 18px;
           height: 18px;
-          margin-left: 8px;
+          margin: 0 0 2px 5px;
 
           :deep(.dx-icon:active) {
             color: $accent-color;
           }
-        }
-      }
 
-      :deep(.copy-clipboard-button) {
-        background-color: transparent;
+          &:deep(.copy-clipboard-button) {
+            background-color: transparent;
+            border-radius: unset;
+            border-color: transparent;
 
-        .dx-icon {
-          color: $subtitle-text-color;
+            .dx-icon {
+              color: $subtitle-text-color;
+            }
+          }
         }
       }
     }
