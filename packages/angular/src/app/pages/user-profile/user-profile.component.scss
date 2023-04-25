@@ -72,12 +72,13 @@ $gap-padding: 24px;
 
     .with-clipboard-copy {
       display: flex;
+      align-items: flex-end;
 
-      dx-button {
+      .dx-button {
         max-width: 18px;
         min-width: 18px;
         height: 18px;
-        margin-left: 8px;
+        margin: 0 0 2px 5px;
 
         &::ng-deep .dx-icon:active {
           color: $accent-color;
@@ -86,6 +87,14 @@ $gap-padding: 24px;
     }
 
     .copy-clipboard-button::ng-deep {
+      background-color: transparent;
+      border-radius: unset;
+      border-color: transparent;
+
+      .dx-button-content {
+        padding: 0;
+      }
+
       .dx-icon {
         color: $subtitle-text-color;
       }
@@ -112,10 +121,10 @@ $gap-padding: 24px;
   }
 
   .contacts-card .image-wrapper {
-    background-color: #ffebee;
+    background-color: rgba(244, 67, 54, 0.2);
   }
 
   .address-card .image-wrapper {
-    background-color: #e1f5fe;
+    background-color: rgba(3, 169, 244, 0.2);
   }
 }
