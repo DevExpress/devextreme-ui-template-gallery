@@ -22,9 +22,11 @@
           @value-changed="onFieldChanged()"
         />
       </dx-item>
+
       <dx-item>
         <div class="h-separator" />
       </dx-item>
+
       <dx-item>
         <dx-label text="Password" />
         <password-text-box
@@ -101,6 +103,10 @@ function saveNewPassword() {
 }
 </script>
 <style lang="scss">
+@use "@/variables.scss" as *;
+
+@include separator();
+
 .change-profile-password-popup {
   .dx-form {
     padding: 0 8px;

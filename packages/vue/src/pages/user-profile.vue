@@ -381,6 +381,7 @@ $gap-padding: 24px;
 
       .with-clipboard-copy {
         display: flex;
+        align-items: flex-end;
 
         .dx-button {
           max-width: 18px;
@@ -388,18 +389,22 @@ $gap-padding: 24px;
           height: 18px;
           margin: 0 0 2px 5px;
 
+          :deep(.dx-button-content) {
+            padding: 0;
+          }
+
           :deep(.dx-icon:active) {
             color: $accent-color;
           }
+        }
 
-          &:deep(.copy-clipboard-button) {
-            background-color: transparent;
-            border-radius: unset;
-            border-color: transparent;
+        :deep(.copy-clipboard-button) {
+          background-color: transparent;
+          border-radius: unset;
+          border-color: transparent;
 
-            .dx-icon {
-              color: $subtitle-text-color;
-            }
+          .dx-icon {
+            color: $subtitle-text-color;
           }
         }
       }
