@@ -72,12 +72,13 @@ $gap-padding: 24px;
 
     .with-clipboard-copy {
       display: flex;
+      align-items: flex-end;
 
-      dx-button {
+      .dx-button {
         max-width: 18px;
         min-width: 18px;
         height: 18px;
-        margin-left: 8px;
+        margin: 0 0 2px 5px;
 
         &::ng-deep .dx-icon:active {
           color: $accent-color;
@@ -87,6 +88,12 @@ $gap-padding: 24px;
 
     .copy-clipboard-button::ng-deep {
       background-color: transparent;
+      border-radius: unset;
+      border-color: transparent;
+
+      .dx-button-content {
+        padding: 0;
+      }
 
       .dx-icon {
         color: $subtitle-text-color;
