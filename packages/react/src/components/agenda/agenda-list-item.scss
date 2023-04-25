@@ -30,6 +30,7 @@
     }
 
     .description-resource {
-      @include description-text(0.7); }
+      @include description-text(0.7); 
+    }
   }
 }

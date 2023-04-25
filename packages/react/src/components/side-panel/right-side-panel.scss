@@ -10,12 +10,10 @@
 }
 
 .side-panel {
-  display: flex;
-  flex: 0.0001 1 0;
   display: none;
 
   &.open {
-    flex: 0.0001 1 300px;
+    flex: 0 1 300px;
     display: block;
     border: solid 1px $base-border-color;
     border-radius: 8px;

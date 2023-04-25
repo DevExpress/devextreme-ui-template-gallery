@@ -25,7 +25,8 @@
     align-items: center;
     gap: 16px;
 
-    @include description-text(0.7); }
+    @include description-text(0.7); 
+  }
 
   .description {
     padding: 8px 0;
@@ -34,7 +35,8 @@
     align-items: flex-start;
     gap: 16px;
 
-    @include description-text(0.7); }
+    @include description-text(0.7); 
+  }
 
   .buttons {
     display: flex;
@@ -43,12 +45,10 @@
     padding: $theme-padding;
 
     .dx-button {
-      width: calc((100% - $theme-padding)/2);
+      width: calc((100% - $theme-padding) / 2);
       border-radius: 4px;
     }
-  }
 
-  .buttons {
     .button-danger {
       background-color: $tooltip-danger-button-color;
     }

@@ -47,7 +47,8 @@
   .list-item-text {
     padding: 0 8px;
 
-    @include calendar-items-text(); }
+    @include calendar-items-text(); 
+  }
 
   --checkbox-color: $base-accent;
 

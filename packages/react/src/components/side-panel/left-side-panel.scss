@@ -52,7 +52,7 @@
       top: calc(-1 * $theme-padding);
       left: $button-height;
       height: calc(100vh - 60px);
-      padding-top: calc(2*$theme-padding);
+      padding-top: calc(2 * $theme-padding);
       background-color: $base-bg;
       z-index: 3;
       box-shadow: 8px 0 16px -8px $base-border-color;
