@@ -45,6 +45,7 @@ export const PlanningScheduler = () => {
     date,
     rightPanelOpen,
     schedulerRef,
+    schedulerCurrentDate,
     selectedAppointment,
     tasks,
     tooltipPosition,
@@ -103,7 +104,7 @@ export const PlanningScheduler = () => {
           defaultCurrentView='workWeek'
           dataSource={tasks}
           height='inherit'
-          currentDate={date}
+          currentDate={schedulerCurrentDate}
           currentView={currentView}
           onCurrentViewChange={onCurrentViewChange}
           onAppointmentAdded={onAppointmentModified}

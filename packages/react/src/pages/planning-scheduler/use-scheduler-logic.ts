@@ -16,7 +16,8 @@ export const useSchedulerLogic = () => {
 
   const [agendaItems, setAgendaItems] = useState<{ startDate: Date }[]>();
   const [currentView, setCurrentView] = useState<ViewType>('workWeek');
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date>(new Date());
+  const [schedulerCurrentDate, setSchedulerCurrentDate] = useState<Date>(new Date());
   const [rightPanelOpen, setRightPanelOpen] = useState<boolean>(false);
   const [selectedAppointment, setSelectedAppointment] = useState<{ data, target }>();
   const [tasks, setTasks] = useState<DataSource>();
@@ -119,12 +120,27 @@ export const useSchedulerLogic = () => {
     tasks?.load().then(() => { updateAgenda(selectedAppointment?.data); });
   }, [tasks, selectedAppointment, updateAgenda]);
 
+  const setCurrentDate = useCallback((selectedDate: Date)=>{
+    const schedulerInstance = schedulerRef.current?.instance;
+    const startViewDate = schedulerInstance?.getStartViewDate();
+    const endViewDate = schedulerInstance?.getEndViewDate();
+
+    if (schedulerCurrentDate.getMonth() !== selectedDate.getMonth() ||
+        startViewDate && startViewDate > selectedDate ||
+        endViewDate && endViewDate < selectedDate
+    ) {
+      setSchedulerCurrentDate(selectedDate);
+    }
+    setDate(selectedDate);
+  }, [schedulerCurrentDate]);
+
   const onSelectedDateChange = useCallback((e) => {
     const date = e instanceof Date ? e : new Date();
     setDate(date);
+    setCurrentDate(date);
     setSelectedAppointment({ data: { startDate: date }, target: undefined });
     updateAgenda({ startDate: date });
-  }, [updateAgenda]);
+  }, [updateAgenda, setCurrentDate]);
 
   const onAppointmentModified = useCallback((e) => {
     if (e.appointmentData.startDate.toDateString() === selectedAppointment?.data.startDate.toDateString()) {
@@ -137,6 +153,7 @@ export const useSchedulerLogic = () => {
   }, []);
 
   const onCellClick = useCallback((e) => {
+    onSelectedDateChange(e.cellData.startDate);
     if (currentView === 'month' && e.cellData) {
       const cellAppointments = findAllAppointmentsForDay(e.cellData, tasks);
       if (cellAppointments.length > 1) {
@@ -147,7 +164,7 @@ export const useSchedulerLogic = () => {
         }
       }
     }
-  }, [currentView, rightPanelOpen, tasks, toggleRightPanelOpen]);
+  }, [currentView, rightPanelOpen, tasks, toggleRightPanelOpen, onSelectedDateChange]);
 
   return {
     agendaItems,
@@ -155,6 +172,7 @@ export const useSchedulerLogic = () => {
     date,
     rightPanelOpen,
     schedulerRef,
+    schedulerCurrentDate,
     selectedAppointment,
     tasks,
     tooltipPosition,
