@@ -90,7 +90,7 @@ import DxForm, {
 import DxButton from 'devextreme-vue/button';
 import notify from 'devextreme/ui/notify';
 
-import { reactive, ref, defineProps } from 'vue';
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { authInfo as auth } from '@/auth';
 import OauthComponent from './oauth-component.vue';

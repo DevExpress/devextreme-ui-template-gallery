@@ -107,6 +107,7 @@ const cancel = () => {
 
 function onHidden() {
   validationGroup.value?.instance.reset();
+  close();
 }
 
 function isValid() {

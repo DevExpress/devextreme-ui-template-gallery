@@ -2,17 +2,19 @@
   <div class="auth-card">
     <div class="dx-card content">
       <div class="header">
-        <div class="title">{{ props.title }}</div>
-        <div class="description">{{ props.description }}</div>
+        <div class="title">
+          {{ props.title }}
+        </div>
+        <div class="description">
+          {{ props.description }}
+        </div>
       </div>
       <slot />
     </div>
   </div>
-
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 
 const props = defineProps<{
   title?: string,
