@@ -1,7 +1,7 @@
 @use "../../variables.scss" as *;
 @use "sass:math";
 
-.agenda{
+.agenda {
   .agenda-header {
     padding: $theme-padding;
     display: flex;
@@ -10,14 +10,16 @@
     align-items: center;
     color: $accent-color;
     border-bottom: solid 1px $base-border-color;
-    .dx-button .dx-icon{
+
+    .dx-button .dx-icon {
       color: $accent-color;
     }
+
     .date {
-      @include h2-header-text()
-    }
+      @include h2-header-text(); }
   }
-  .dx-list-item{
+
+  .dx-list-item {
     border-bottom: solid 1px $base-border-color;
   }
 }

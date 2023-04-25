@@ -12,7 +12,7 @@
 
   .side-panel-container {
     display: flex;
-    
+
     .side-panel-content-wrapper {
       padding-top: $theme-padding;
 
@@ -56,7 +56,8 @@
       background-color: $base-bg;
       z-index: 3;
       box-shadow: 8px 0 16px -8px $base-border-color;
-      &.open{
+
+      &.open {
         padding-right: $content-padding;
       }
     }
