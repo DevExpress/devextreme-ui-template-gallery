@@ -1,19 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, Input, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+
+import { LoginOauthModule } from '../login-oauth/login-oauth.component';
 import { ValidationCallbackData } from 'devextreme/ui/validation_rules';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import notify from 'devextreme/ui/notify';
-import { AuthService } from '../../services';
+import { AuthService, IResponse } from '../../services';
 
 @Component({
   selector: 'app-create-account-form',
   templateUrl: './create-account-form.component.html',
   styleUrls: ['./create-account-form.component.scss'],
 })
-export class CreateAccountFormComponent {
+export class CreateAccountFormComponent implements OnInit {
+  @Input() redirectLink = '/auth/login';
+  @Input() buttonLink = '/auth/login';
   loading = false;
+
+  defaultAuthData: IResponse;
 
   formData: any = {};
 
@@ -28,18 +34,23 @@ export class CreateAccountFormComponent {
     this.loading = false;
 
     if (result.isOk) {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate([this.buttonLink]);
     } else {
       notify(result.message, 'error', 2000);
     }
   }
 
   confirmPassword = (e: ValidationCallbackData) => e.value === this.formData.password;
+
+  async ngOnInit(): Promise<void> {
+    this.defaultAuthData = await this.authService.getUser();
+  }
 }
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    LoginOauthModule,
     DxFormModule,
     DxLoadIndicatorModule,
   ],

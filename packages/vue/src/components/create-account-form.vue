@@ -10,7 +10,12 @@
       <dx-item
         data-field="email"
         editor-type="dxTextBox"
-        :editor-options="{ stylingMode: 'filled', placeholder: 'Email', mode: 'email' }"
+        :editor-options="{
+          stylingMode: 'filled',
+          placeholder: 'Email',
+          mode: 'email',
+          value: 'jheart@corp.com'
+        }"
       >
         <dx-required-rule message="Email is required" />
         <dx-email-rule message="Email is invalid" />
@@ -19,7 +24,12 @@
       <dx-item
         data-field="password"
         editor-type="dxTextBox"
-        :editor-options="{ stylingMode: 'filled', placeholder: 'Password', mode: 'password' }"
+        :editor-options="{
+          stylingMode: 'filled',
+          placeholder: 'Password',
+          mode: 'password',
+          value: 'password'
+        }"
       >
         <dx-required-rule message="Password is required" />
         <dx-label :visible="false" />
@@ -30,7 +40,8 @@
         :editor-options="{
           stylingMode: 'filled',
           placeholder: 'Confirm Password',
-          mode: 'password'
+          mode: 'password',
+          value: 'password',
         }"
       >
         <dx-required-rule message="Password is required" />
@@ -44,10 +55,10 @@
         <template #default>
           <div class="policy-info">
             By creating an account, you agree to the
-            <router-link to="#">
+            <router-link :to="props.redirectLink">
               Terms of Service
             </router-link> and
-            <router-link to="#">
+            <router-link :to="props.redirectLink">
               Privacy Policy
             </router-link>
           </div>
@@ -61,15 +72,6 @@
           :use-submit-behavior="true"
         />
       </dx-button-item>
-      <dx-item>
-        <template #default>
-          <div class="login-link">
-            Have an account? <router-link to="/login">
-              Sign In
-            </router-link>
-          </div>
-        </template>
-      </dx-item>
       <template #createAccount>
         <div>
           <span class="dx-button-text">
@@ -84,6 +86,12 @@
         </div>
       </template>
     </dx-form>
+    <div class="login-link">
+        Have an account? <router-link :to="props.redirectLink">
+        Sign In
+      </router-link>
+    </div>
+    <oauth-component />
   </form>
 </template>
 
@@ -100,8 +108,14 @@ import DxForm, {
 import DxLoadIndicator from 'devextreme-vue/load-indicator';
 import notify from 'devextreme/ui/notify';
 import { useRouter } from 'vue-router';
-import { ref, reactive } from 'vue';
+import { ref, reactive, defineProps } from 'vue';
 import { authInfo as auth } from '@/auth';
+import OauthComponent from './oauth-component.vue';
+
+const props = defineProps<{
+  redirectLink?: string,
+  buttonLink?: string
+}>();
 
 const router = useRouter();
 
@@ -119,7 +133,7 @@ const onSubmit = async () => {
   loading.value = false;
 
   if (result.isOk) {
-    router.push('/login');
+    router.push(props.buttonLink);
   } else {
     notify(result.message, 'error', 2000);
   }
@@ -134,9 +148,8 @@ function confirmPassword(e: {value: ''}) {
 
 .create-account-form {
   .policy-info {
-    margin: 10px 0;
     color: $base-text-color-alpha;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
 
     a {
@@ -146,8 +159,10 @@ function confirmPassword(e: {value: ''}) {
 
   .login-link {
     color: $accent-color;
-    font-size: 16px;
+    font-size: 12px;
     text-align: center;
+    padding: 6px 0 32px 0;
+    border-bottom: 1px solid $border-color;
   }
 }
 </style>
