@@ -52,9 +52,9 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
         location='after'
       >
         <Button
-          text= 'Save'
-          stylingMode= 'contained'
-          type= 'default'
+          text='Save'
+          stylingMode='contained'
+          type='default'
           onClick={onSaveClick}
         />
       </ToolbarItem>

@@ -1,0 +1,121 @@
+@use "../../../variables.scss" as *;
+
+$gap-padding: 24px;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .view-wrapper-scroll {
+    width: 100%;
+    margin-top: calc($content-padding / 2);
+    max-height: calc(100% - var(--toolbar-height));
+  }
+}
+
+.profile-card {
+  flex: 0.5;
+}
+
+:host-context(.screen-small, .screen-x-small) .profile-card {
+  min-width: 100%;
+  flex: 1;
+}
+
+.view-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: $content-padding;
+
+  & > .dx-toolbar {
+    padding: 0 calc($content-padding * 2);
+    width: auto;
+    position: relative;
+
+    &.scrolled {
+      padding-bottom: 8px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    dx-button[text="Cancel"] {
+      margin-right: 5px;
+    }
+  }
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 calc($content-padding * 2);
+    padding: calc($content-padding / 2) 0 $content-padding;
+    gap: 24px;
+  }
+
+  .profile-card {
+    .image-wrapper {
+      flex: 0 0 44px;
+      height: 44px;
+      border-radius: 50%;
+      margin-right: $gap-padding;
+
+      img {
+        height: 20px;
+        width: 20px;
+        margin: auto;
+      }
+    }
+
+    .with-clipboard-copy {
+      display: flex;
+
+      dx-button {
+        max-width: 18px;
+        min-width: 18px;
+        height: 18px;
+        margin-left: 8px;
+
+        &::ng-deep .dx-icon:active {
+          color: $accent-color;
+        }
+      }
+    }
+
+    .copy-clipboard-button::ng-deep {
+      .dx-icon {
+        color: $subtitle-text-color;
+      }
+    }
+  }
+
+  .basic-info-card {
+    flex: 1;
+    min-width: 100%;
+
+    .basic-info-top-item {
+      form-photo {
+        margin-right: $content-padding;
+
+        &::ng-deep .photo {
+          border-radius: 50%;
+        }
+      }
+
+      .change-password-button {
+        margin-top: calc($content-padding / 2);
+      }
+    }
+  }
+
+  .contacts-card .image-wrapper {
+    background-color: #ffebee;
+  }
+
+  .address-card .image-wrapper {
+    background-color: #e1f5fe;
+  }
+}
