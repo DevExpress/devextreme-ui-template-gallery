@@ -1,9 +1,5 @@
 <dx-scroll-view height="100%" width="100%" class="view-wrapper-scroll single-card">
-  <div class="dx-card content">
-    <div class="header">
-      <div class="title">{{ title }}</div>
-      <div class="description">{{ description }}</div>
-    </div>
+  <app-card-auth [title]="title" [description]="description">
     <ng-content></ng-content>
-  </div>
+  </app-card-auth>
 </dx-scroll-view>

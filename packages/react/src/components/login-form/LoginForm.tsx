@@ -2,6 +2,8 @@ import React, { useState, useRef, useCallback } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
+import { OauthComponent } from '../oauth-component/OauthComponent';
+import Button from 'devextreme-react/button';
 import Form, { Item, Label, ButtonItem, ButtonOptions, RequiredRule, EmailRule } from 'devextreme-react/form';
 import LoadIndicator from 'devextreme-react/load-indicator';
 import notify from 'devextreme/ui/notify';
@@ -10,7 +12,7 @@ import { useAuth } from '../../contexts/auth';
 
 import './LoginForm.scss';
 
-export const LoginForm = () => {
+export const LoginForm = ({ resetLink, createAccountLink }) => {
   const navigate = useNavigate();
   const { signIn } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -34,12 +36,17 @@ export const LoginForm = () => {
   );
 
   const onCreateAccountClick = useCallback(() => {
-    navigate('/create-account');
+    navigate(createAccountLink);
   }, [navigate]);
 
   return (
     <form className='login-form' onSubmit={onSubmit}>
-      <Form formData={formData.current} disabled={loading}>
+      <Form
+        formData={formData.current}
+        disabled={loading}
+        showColonAfterLabel
+        showRequiredMark={false}
+      >
         <Item dataField='email' editorType='dxTextBox' editorOptions={emailEditorOptions}>
           <RequiredRule message='Email is required' />
           <EmailRule message='Email is invalid' />
@@ -57,19 +64,23 @@ export const LoginForm = () => {
             <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Sign In'}</span>
           </ButtonOptions>
         </ButtonItem>
-        <Item>
-          <div className='link'>
-            <Link to='/reset-password'>Forgot password?</Link>
-          </div>
-        </Item>
-        <ButtonItem>
-          <ButtonOptions text='Create an account' width='100%' onClick={onCreateAccountClick} />
-        </ButtonItem>
       </Form>
+      <div className='reset-link'>
+        <Link to={resetLink}>Forgot password?</Link>
+      </div>
+
+      <Button
+        className='btn-create-account'
+        text='Create an account'
+        width='100%'
+        onClick={onCreateAccountClick}
+      />
+
+      <OauthComponent />
     </form>
   );
 };
 
-const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email' };
-const passwordEditorOptions = { stylingMode: 'filled', placeholder: 'Password', mode: 'password' };
+const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email', value: 'jheart@corp.com' };
+const passwordEditorOptions = { stylingMode: 'filled', placeholder: 'Password', mode: 'password', value: 'password' };
 const rememberMeEditorOptions = { text: 'Remember me', elementAttr: { class: 'form-text' } };

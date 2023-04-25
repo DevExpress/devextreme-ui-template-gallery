@@ -2,9 +2,8 @@
 
 .create-account-form {
   .policy-info {
-    margin: 10px 0;
     color: $base-text-color-alpha;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
 
     a {
@@ -14,7 +13,9 @@
 
   .login-link {
     color: $accent-color;
-    font-size: 16px;
+    font-size: 12px;
     text-align: center;
+    padding: 6px 0 32px 0;
+    border-bottom: 1px solid $border-color;
   }
 }

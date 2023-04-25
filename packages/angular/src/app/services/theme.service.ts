@@ -1,5 +1,6 @@
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 const themes = ['light', 'dark'] as const;
 
@@ -18,6 +19,8 @@ export class ThemeService {
 
   currentTheme: Theme = window.localStorage[this.storageKey] || getNextTheme();
 
+  public isDark = new BehaviorSubject<boolean>(this.currentTheme === 'dark');
+
   private getThemeStyleSheets() {
     return   Array.from(document.styleSheets).filter(
       (styleSheet) => styleSheet?.href?.includes(this.themeMarker)
@@ -31,9 +34,14 @@ export class ThemeService {
     });
 
     this.currentTheme = window.localStorage[this.storageKey] = theme;
+    this.isDark.next(this.currentTheme === 'dark');
 
     currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${theme}.compact`));
     refreshTheme();
+  }
+
+  getCurrentTheme() {
+    return this.currentTheme;
   }
 
   switchTheme() {

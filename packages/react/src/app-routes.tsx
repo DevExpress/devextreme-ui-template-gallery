@@ -1,4 +1,15 @@
-import { CRMContactDetails, CRMContactList, PlanningTaskList, PlanningTaskDetails, AnalyticsDashboard, AnalyticsSalesReport, AnalyticsGeography } from './pages';
+import {
+  CRMContactDetails,
+  CRMContactList,
+  PlanningTaskList,
+  PlanningTaskDetails,
+  AnalyticsDashboard,
+  AnalyticsSalesReport,
+  AnalyticsGeography,
+  SignInPage,
+  SignUpPage,
+  ResetPasswordPage
+} from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -30,6 +41,18 @@ const routes = [
     path: '/analytics-geography',
     element: AnalyticsGeography,
   },
+  {
+    path: '/signin-form-page',
+    element: SignInPage,
+  },
+  {
+    path: '/signup-form-page',
+    element: SignUpPage,
+  },
+  {
+    path: '/reset-password-form-page',
+    element: ResetPasswordPage,
+  }
 ];
 
 export const appRoutes = routes.map((route) => {

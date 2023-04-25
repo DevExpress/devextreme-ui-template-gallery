@@ -12,7 +12,7 @@ import './ResetPasswordForm.scss';
 
 const notificationText = "We've sent a link to reset your password. Check your inbox.";
 
-export const ResetPasswordForm = () => {
+export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const formData = useRef({ email: '', password: '' });
@@ -27,7 +27,7 @@ export const ResetPasswordForm = () => {
       setLoading(false);
 
       if (result.isOk) {
-        navigate('/login');
+        navigate(buttonLink);
         notify(notificationText, 'success', 2500);
       } else {
         notify(result.message, 'error', 2000);
@@ -49,15 +49,13 @@ export const ResetPasswordForm = () => {
             <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Reset my password'}</span>
           </ButtonOptions>
         </ButtonItem>
-        <Item>
-          <div className='login-link'>
-            Return to <Link to='/login'>Sign In</Link>
-          </div>
-        </Item>
       </Form>
+      <div className='login-link'>
+        Return to <Link to={signInLink}>Sign In</Link>
+      </div>
     </form>
   );
 };
 
-const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email' };
+const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email', value: 'jheart@corp.com' };
 const submitButtonAttributes = { class: 'submit-button' };

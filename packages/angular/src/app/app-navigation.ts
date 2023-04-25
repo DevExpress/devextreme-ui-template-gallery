@@ -49,6 +49,25 @@ export const navigation = [
     ],
   },
   {
+    text: 'Authentication',
+    icon: 'card',
+    path: '',
+    items: [
+      {
+        text: 'Sign In Form',
+        path: '/sign-in-form',
+      },
+      {
+        text: 'Sign Up Form',
+        path: '/sign-up-form',
+      },
+      {
+        text: 'Reset Password Form',
+        path: '/reset-password-form',
+      }
+    ],
+  },
+  {
     text: 'Common',
     icon: 'box',
     path: '',
@@ -57,6 +76,6 @@ export const navigation = [
         text: 'User Profile',
         path: '/user-profile',
       },
-    ],
-  },
+    ]
+  }
 ];
