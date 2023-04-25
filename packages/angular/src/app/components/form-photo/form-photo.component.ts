@@ -1,39 +1,26 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, Input, NgModule, OnInit,
+  Component, ElementRef, Input, NgModule, OnInit,
 } from '@angular/core';
+import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
 
 @Component({
   selector: 'form-photo',
-  template: `
-  <div
-    [ngStyle]="{
-      'width.px': size,
-      'height.px': size,
-      'background-image': imageUrl
-    }"
-    class="photo dx-card"
-    [style.backgroundImage]="imageUrl"
-  ></div>
-`,
-  styles: [`
-    :host{
-      position: relative;
-      display: flex;
-    }
-    .photo {
-      border-radius: 8px;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-  `],
+  templateUrl: './form-photo.component.html',
+  styleUrls: ['./form-photo.component.scss'],
 })
 export class FormPhotoComponent implements OnInit {
   @Input() link: string;
 
-  @Input() size?: number = 124;
+  @Input() editable = false;
+
+  @Input() size = 124;
 
   imageUrl: string;
+
+  hostRef = this.elRef.nativeElement;
+
+  constructor(private elRef:ElementRef) {}
 
   ngOnInit() {
     this.imageUrl = `url('data:image/png;base64,${this.link}')`;
@@ -41,7 +28,10 @@ export class FormPhotoComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [
+    DxFileUploaderModule,
+    CommonModule
+  ],
   declarations: [FormPhotoComponent],
   exports: [FormPhotoComponent],
 })

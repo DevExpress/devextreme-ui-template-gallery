@@ -1,0 +1,52 @@
+<div class="panel">
+  <div class="title-text panel-header">
+    {{title}}
+  </div>
+  <div class="form-container">
+    <ng-content select="[top-item]"></ng-content>
+    <dx-form #form
+             [formData]="cardData"
+             [showColonAfterLabel]="true"
+             [colCount]="(screen.xSmallScreenChanged | async) ? 2 : colCount"
+             [screenByWidth]="getSizeQualifier"
+             labelLocation="top"
+             labelMode="outside"
+             (onFieldDataChanged)="onFieldChange()"
+    >
+      <ng-container *ngFor="let item of items">
+        <dxi-item [dataField]="item.dataField"
+                  [editorType]="item.editorType"
+                  [editorOptions]="assign | apply:{stylingMode: 'outlined'}: item.editorOptions"
+                  [colSpan]="item.colSpan">
+          <dxo-label *ngIf="item.label"
+                     [text]="item.label">
+          </dxo-label>
+          <dxi-validation-rule *ngFor="let rule of item.validators"
+                               [type]="rule.type"
+          ></dxi-validation-rule>
+          <ng-container [ngSwitch]="item.dataField">
+            <ng-container *ngSwitchCase="'status'">
+              <div *dxTemplate>
+                <status-select-box
+                  labelMode="hidden"
+                  [value]="cardData[item.dataField]"
+                  (valueChange)="onFieldChange(item.dataField, $event)"
+                >
+                </status-select-box>
+              </div>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'supervisor'">
+            <pictured-item-select-box *dxTemplate
+                                      [label]="item.label"
+                                      [value]="cardData[item.dataField]"
+                                      [items]="item.itemsList"
+                                      (valueChange)="onFieldChange(item.dataField, $event)"
+            ></pictured-item-select-box>
+          </ng-container>
+          </ng-container>
+        </dxi-item>
+      </ng-container>
+    </dx-form>
+  </div>
+</div>

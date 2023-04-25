@@ -11,6 +11,21 @@ body {
   box-sizing: border-box;
 }
 
+.header-text {
+  @include header();
+}
+
+.title-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.subtitle-text {
+  color: $subtitle-text-color;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .content {
   line-height: 1.5;
   height: 100%;
@@ -92,12 +107,10 @@ body {
   border: none;
 }
 
-.dx-form {
-  .dx-texteditor-label {
-    height: auto;
-  }
+.dx-texteditor-label {
+  height: auto;
 
-  .dx-texteditor-with-label .dx-label {
+  .dx-label {
     line-height: 1;
   }
 }
