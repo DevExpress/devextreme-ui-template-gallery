@@ -24,14 +24,11 @@ export const useSchedulerLogic = () => {
 
   useEffect(() => {
     getTasksForScheduler().then(tasksList => {
-      setTasks(new DataSource(tasksList));
+      const tasks = new DataSource(tasksList);
+      setTasks(tasks);
+      setAgendaItems(findAllAppointmentsForDay({ startDate: date }, tasks));
     });
   }, []);
-  useEffect(() => {
-    if (tasks) {
-      setAgendaItems(findAllAppointmentsForDay({ startDate: date }, tasks));
-    }
-  }, [tasks]);
 
   const tooltipPosition: 'left' | 'right' | 'top' | 'bottom' = useMemo(() => {
     if (isXSmall) {
