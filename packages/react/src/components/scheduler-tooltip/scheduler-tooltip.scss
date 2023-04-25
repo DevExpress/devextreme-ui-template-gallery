@@ -25,7 +25,7 @@
     align-items: center;
     gap: 16px;
 
-    @include description-text(0.7); 
+    @include description-text(0.7);
   }
 
   .description {
@@ -35,7 +35,7 @@
     align-items: flex-start;
     gap: 16px;
 
-    @include description-text(0.7); 
+    @include description-text(0.7);
   }
 
   .buttons {
