@@ -14,34 +14,34 @@
       label-location="top"
       :show-colon-after-label="true"
     >
-      <dxi-item>
-        <dxo-label text="Current Password" />
+      <dx-item>
+        <dx-label text="Current Password" />
         <password-text-box
           v-model="formData['currentPassword']"
           placeholder="Current Password"
           @value-changed="onFieldChanged()"
         />
-      </dxi-item>
-      <dxi-item>
+      </dx-item>
+      <dx-item>
         <div class="h-separator" />
-      </dxi-item>
-      <dxi-item>
-        <dxo-label text="Password" />
+      </dx-item>
+      <dx-item>
+        <dx-label text="Password" />
         <password-text-box
           v-model="formData['password']"
           placeholder="Password"
           @value-changed="onFieldChanged()"
         />
-      </dxi-item>
-      <dxi-item>
-        <dxo-label text="Confirm Password" />
+      </dx-item>
+      <dx-item>
+        <dx-label text="Confirm Password" />
         <password-text-box
           v-model="formData['confirmedPassword']"
           placeholder="Confirm Password"
           :validators="confirmPasswordValidators"
           @value-changed="onFieldChanged()"
         />
-      </dxi-item>
+      </dx-item>
     </dx-form>
   </form-popup>
 </template>
@@ -49,7 +49,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import notify from 'devextreme/ui/notify';
-import { DxForm, DxItem as DxiItem, DxLabel as DxoLabel } from 'devextreme-vue/form';
+import { DxForm, DxItem, DxLabel } from 'devextreme-vue/form';
 import FormPopup from '@/components/form-popup.vue';
 import PasswordTextBox from '@/components/password-text-box.vue';
 import { SimpleObject } from '@/types';

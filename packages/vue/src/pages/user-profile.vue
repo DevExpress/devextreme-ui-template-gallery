@@ -2,12 +2,12 @@
   <div class="view-wrapper">
     <div :class="{scrolled: isContentScrolled, 'toolbar-wrapper': true}">
       <dx-toolbar>
-        <dxi-item location="before">
+        <dx-item location="before">
           <div class="header-text">
             User Profile
           </div>
-        </dxi-item>
-        <dxi-item
+        </dx-item>
+        <dx-item
           location="after"
           locate-in-menu="never"
         >
@@ -17,8 +17,8 @@
             styling-mode="contained"
             @click="cancel()"
           />
-        </dxi-item>
-        <dxi-item
+        </dx-item>
+        <dx-item
           location="after"
           locate-in-menu="never"
         >
@@ -30,7 +30,7 @@
             styling-mode="contained"
             @click="save()"
           />
-        </dxi-item>
+        </dx-item>
       </dx-toolbar>
     </div>
     <dx-load-panel
@@ -155,7 +155,7 @@ import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxLoadPanel } from 'devextreme-vue/load-panel';
 import {
   DxToolbar,
-  DxItem as DxiItem,
+  DxItem,
 } from 'devextreme-vue/toolbar';
 import { DxButton } from 'devextreme-vue/button';
 import FormPhoto from '@/components/form-photo.vue';

@@ -15,7 +15,7 @@
         label-mode="outside"
         :on-field-data-changed="evt => onFieldChange(evt.dataField, evt.value)"
       >
-        <dxi-item
+        <dx-item
           v-for="item in items"
           :key="item.dataField"
           :data-field="item.dataField"
@@ -23,7 +23,7 @@
           :editor-options="{ stylingMode: 'outlined', ...item.editorOptions } "
           :col-span="item.colSpan"
         >
-          <dxo-label
+          <dx-label
             v-if="item.label"
             :text="item.label"
           />
@@ -46,7 +46,7 @@
             :items="item.itemsList"
             @update:model-value="onFieldChange()"
           />
-        </dxi-item>
+        </dx-item>
       </dx-form>
     </div>
   </div>
@@ -55,8 +55,8 @@
 <script setup lang="ts">
 import {
   DxForm,
-  DxItem as DxiItem,
-  DxLabel as DxoLabel,
+  DxItem,
+  DxLabel,
   DxValidationRule,
 } from 'devextreme-vue/form';
 import { screenInfo, getSizeQualifier } from '@/utils/media-query';
