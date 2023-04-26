@@ -20,7 +20,7 @@
       gap: $theme-padding;
 
       &.small {
-        width: calc(292px + 16px);
+        width: calc($calendar-width + $content-padding);
       }
 
       .buttons {
@@ -42,7 +42,7 @@
       }
 
       .dx-calendar {
-        width: 292px;
+        width: $calendar-width;
       }
     }
 

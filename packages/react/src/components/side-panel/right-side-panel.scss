@@ -2,7 +2,7 @@
 @use "sass:math";
 
 #side-panel {
-  --side-panel-width: calc(292px + 16px);
+  --side-panel-width: calc($calendar-width + $content-padding);
 }
 
 .screen-x-small #side-panel {
