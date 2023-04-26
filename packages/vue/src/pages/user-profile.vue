@@ -77,7 +77,7 @@
               </div>
               <dx-button
                 text="Change Password"
-                icon="lock"
+                :icon="screenInfo.isXSmall ? null : 'lock'"
                 class="change-password-button"
                 styling-mode="contained"
                 @click="changePassword()"
@@ -158,6 +158,7 @@ import {
   DxItem,
 } from 'devextreme-vue/toolbar';
 import { DxButton } from 'devextreme-vue/button';
+import { screenInfo } from '@/utils/media-query';
 import FormPhoto from '@/components/form-photo.vue';
 import notify from 'devextreme/ui/notify';
 import ProfileCard from '@/components/profile-card.vue';
