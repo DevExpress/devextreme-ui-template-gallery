@@ -76,10 +76,10 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits(['data-changed']);
 
-const cardValue = reactive(props.cardData);
+const cardValue = reactive<Profile>(props.cardData);
 const form = ref<InstanceType<typeof DxForm> | null>(null);
 
-function onFieldChange(fieldName: string, value: unknown) {
+function onFieldChange<T extends keyof Profile>(fieldName: T, value: Profile[T]) {
   const { isValid } = form.value?.instance.validate() || {};
 
   if (!isValid) {
@@ -87,7 +87,7 @@ function onFieldChange(fieldName: string, value: unknown) {
   }
 
   if (fieldName) {
-    (cardValue as Record<string, unknown>)[fieldName] = value;
+    cardValue[fieldName] = value;
   }
 
   emit('data-changed', cardValue);
