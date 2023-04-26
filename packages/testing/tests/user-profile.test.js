@@ -2,8 +2,13 @@
 /* eslint-disable no-undef */
 import { Selector, RequestLogger } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { getPostfix, toggleCommonConfiguration, forceResizeRecalculation } from './utils';
-import { screenModes, timeoutSecond } from '../config.js';
+import {
+  getPostfix,
+  toggleCommonConfiguration,
+  forceResizeRecalculation,
+  setTheme,
+} from './utils';
+import { screenModes, themeModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/user-profile`;
@@ -13,21 +18,30 @@ fixture`User Profile`;
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
-    test(`User Profile (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
-      const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+    themeModes.forEach((themeMode) => {
+      const postfix = getPostfix(embedded, screenMode, themeMode);
 
-      // eslint-disable-next-line max-len
-      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
-      await forceResizeRecalculation(t, screenMode);
+      if (embedded && themeMode === 'dark') {
+        return;
+      }
 
-      await takeScreenshot(`user-profile${getPostfix(embedded, screenMode)}`, 'body');
-      await t.click(Selector('.change-password-button'));
-      await t.wait(1000);
-      await takeScreenshot(`user-profile-change-password${getPostfix(embedded, screenMode)}`, 'body');
+      test(`User Profile (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
+        const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await t
-        .expect(compareResults.isValid())
-        .ok(compareResults.errorMessages());
-    }).requestHooks(requestLogger);
+        // eslint-disable-next-line max-len
+        await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
+        await forceResizeRecalculation(t, screenMode);
+        await setTheme(t, themeMode);
+
+        await takeScreenshot(`user-profile${postfix}`, 'body');
+        await t.click(Selector('.change-password-button'));
+        await t.wait(1000);
+        await takeScreenshot(`user-profile-change-password${postfix}`, 'body');
+
+        await t
+          .expect(compareResults.isValid())
+          .ok(compareResults.errorMessages());
+      }).requestHooks(requestLogger);
+    });
   });
 });
