@@ -35,13 +35,13 @@ jobs:
       working-directory: packages/metadata
 
   testcafe:
-    name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }} - ${{ matrix.theme.name }}
+    name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }} - ${{ matrix.theme.type }}
     strategy:
       fail-fast: false
       matrix:
         theme: [
-          { fullName: 'material.blue.light.compact', name: 'material' },
-          { fullName: 'generic.light.compact', name: 'generic'},
+          { fullName: 'material.blue.light.compact', type: 'material', name: 'material.light' },
+          { fullName: 'generic.light.compact', type: 'generic',  name: 'generic.light'},
         ]
         ARGS: [
           { project: 'angular', page: 'crm-contact-details' },
