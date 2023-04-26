@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { } from 'react';
+import React from 'react';
 import Button from 'devextreme-react/button';
-import Tooltip from 'devextreme-react/tooltip';
 import './scheduler-tooltip.scss';
 
 export const TooltipContentTemplate = ({ selectedAppointmentData, deleteCurrentAppointment, editCurrentAppointment }) => {

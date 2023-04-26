@@ -22,9 +22,7 @@ const TimeContent = ({ appointment }) => {
 
 export const AgendaListItem = ({ item, resources }) => {
   return <div className='agenda-list-item'>
-    <div className='time'>
-      <TimeContent appointment={item} />
-    </div>
+    <TimeContent appointment={item} />
     <div className='description'>
       <div className='description-title'>
         {item.text}
