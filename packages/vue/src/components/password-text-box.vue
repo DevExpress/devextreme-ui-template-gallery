@@ -7,7 +7,7 @@
     value-change-event="keyup input change"
     @update:model-value="changeValue"
   >
-    <dxi-button
+    <dx-button
       name="today"
       location="after"
       :options="{
@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { DxTextBox, DxButton as DxiButton } from 'devextreme-vue/text-box';
+import { DxTextBox, DxButton } from 'devextreme-vue/text-box';
 import { DxValidationRule, DxValidator } from 'devextreme-vue/validator';
 
 const props = withDefaults(defineProps<{
