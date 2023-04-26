@@ -40,8 +40,8 @@ jobs:
       fail-fast: false
       matrix:
         theme: [
-          { fullName: 'material.blue.light.compact', name: 'material.light' },
-          { fullName: 'generic.light.compact', name: 'generic.light'},
+          { fullName: 'material.blue.light.compact', name: 'material' },
+          { fullName: 'generic.light.compact', name: 'generic'},
         ]
         ARGS: [
           { project: 'angular', page: 'crm-contact-details' },
