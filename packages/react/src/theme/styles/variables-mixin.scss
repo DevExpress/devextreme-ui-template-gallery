@@ -25,6 +25,7 @@ $theme: null !default;
   $scheduler-toolbar-height: calc($button-height + 2 * $theme-padding);
   $tooltip-danger-button-color: color.change($base-danger, $alpha: 0.1);
   $tooltip-success-button-color: color.change($base-success, $alpha: 0.1);
+  $calendar-width: 292px;
 
   --base-bg: #{$base-bg};
   --base-bg-darken-5: #{$base-bg-darken-5};
@@ -38,6 +39,7 @@ $theme: null !default;
   --side-panel-background: var(--base-bg-darken-5);
   --border-color: #{$base-border-color};
   --accent-color: #{$base-accent};
+  --calendar-width: #{$calendar-width};
   --base-text-color: #{$base-text-color};
   --base-focus-color: #{$base-focus-color};
   --background-gray-color: #{$background-gray-color};
