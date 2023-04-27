@@ -3,6 +3,8 @@ export type Opportunity = {
     date: string | Date,
     manager: string,
     price: number,
+    products: number,
+    total: number
 };
 
 export type Opportunities = Opportunity[];

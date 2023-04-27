@@ -1,0 +1,50 @@
+@use "../../../variables.scss" as *;
+
+.user-panel {
+  display: flex;
+  flex-direction: column;
+
+  .user-button {
+    margin-left: 5px;
+
+    img.dx-icon {
+      border-radius: 50%;
+      margin: 0;
+      width: auto;
+      aspect-ratio: 1 / 1;
+      box-sizing: border-box;
+      border: 2px solid $border-color;
+      object-fit: cover;
+      object-position: top;
+      background: rgb(255, 255, 255);
+      background-clip: padding-box;
+
+      .dx-theme-generic & {
+        height: $drop-down-gnrc-button-height;
+      }
+
+      .dx-theme-material & {
+        height: 100%;
+      }
+    }
+
+    .dx-buttongroup {
+      vertical-align: middle;
+
+      .dx-button.dx-button-has-icon:not(.dx-button-has-text) {
+        .dx-button-content {
+          padding: 0;
+        }
+
+        &.dx-state-hover,
+        &.dx-state-focused {
+          background-color: transparent;
+
+          img.dx-icon {
+            border-color: $accent-color;
+          }
+        }
+      }
+    }
+  }
+}

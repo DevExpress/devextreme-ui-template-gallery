@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { SideNavOuterToolbarModule, SingleCardModule } from './layouts';
 import {
-  FooterModule,
+  AppFooterModule,
   ResetPasswordFormModule,
   CreateAccountFormModule,
   ChangePasswordFormModule,
@@ -31,7 +31,7 @@ import { ThemeService } from './services';
     BrowserModule,
     SideNavOuterToolbarModule,
     SingleCardModule,
-    FooterModule,
+    AppFooterModule,
     ResetPasswordFormModule,
     CreateAccountFormModule,
     ChangePasswordFormModule,

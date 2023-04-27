@@ -1,0 +1,24 @@
+<card-analytics
+  contentClass="sales-range"
+  [isMenuVisible]="false"
+>
+  <dx-range-selector [dataSource]="data" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
+    <dxo-scale
+      minorTickInterval="day"
+      tickInterval="month"
+      valueType="datetime"
+    >
+      <dxo-minor-tick [visible]="false"></dxo-minor-tick>
+      <dxo-marker [visible]="false"></dxo-marker>
+      <dxo-label format="MMM yyyy"></dxo-label>
+    </dxo-scale>
+    <dxo-size [height]="90"></dxo-size>
+
+    <dxo-loading-indicator [show]="true"></dxo-loading-indicator>
+
+    <dxo-chart>
+      <dxi-series type="line" argumentField="date" valueField="total">
+      </dxi-series>
+    </dxo-chart>
+  </dx-range-selector>
+</card-analytics>

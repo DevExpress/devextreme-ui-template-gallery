@@ -10,6 +10,24 @@
 
 .view-wrapper {
   padding: $content-padding;
+
+  .cards {
+    display: grid;
+    width: 100%;
+    gap: 20px;
+    grid-template-columns: repeat(2, calc(50% - 10px));
+
+    &.wide {
+      grid-template-columns: repeat(1, 100%);
+      margin-right: 0;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .cards {
+      grid-template-columns: repeat(1, 100%);
+    }
+  }
 }
 
 ::ng-deep {
@@ -17,38 +35,5 @@
     .toolbar-header {
       @include header();
     }
-  }
-}
-
-.sales-pie,
-.sales-bars {
-  display: inline-block;
-  height: 100%;
-}
-
-.sales-pie {
-  width: 400px;
-}
-
-.sales-bars {
-  width: calc(100% - 600px);
-}
-
-.sales-filter {
-  display: inline-block;
-}
-
-@media only screen and (max-width: 600px) {
-  .sales-pie,
-  .sales-bars {
-    display: block;
-  }
-
-  .sales-pie {
-    width: 320px;
-  }
-
-  .sales-bars {
-    width: 320px;
   }
 }

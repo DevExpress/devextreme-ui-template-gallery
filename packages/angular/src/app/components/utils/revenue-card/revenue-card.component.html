@@ -1,0 +1,16 @@
+<card-analytics titleText="Revenue" contentClass="sales">
+  <dx-chart [dataSource]="data">
+    <dxi-series valueField="total"></dxi-series>
+    <dxo-common-series-settings argumentField="date" type="splinearea">
+      <dxo-border [visible]="true"></dxo-border>
+    </dxo-common-series-settings>
+    <dxo-argument-axis argumentType="datetime"></dxo-argument-axis>
+    <dxi-value-axis>
+      <dxo-label>
+        <dxo-format type="currency" currency="USD"></dxo-format>
+      </dxo-label>
+    </dxi-value-axis>
+    <dxo-legend [visible]="false"> </dxo-legend>
+    <dxo-size [height]="270"></dxo-size>
+  </dx-chart>
+</card-analytics>

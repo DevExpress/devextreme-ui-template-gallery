@@ -1,18 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import { Item } from 'devextreme-react/toolbar';
+import { Item, Toolbar } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import DropDownButton from 'devextreme-react/drop-down-button';
-import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 
 import {
+  ContactCards,
   ContactForm,
-  ToolbarDetails,
-  CardActivities,
-  CardNotes,
-  CardMessages,
-  CardTasks,
-  CardOpportunities
 } from '../../components';
 
 import { Contact } from '../../types/crm-contact';
@@ -22,7 +16,7 @@ import {
   getContactNotes,
   getContactMessages,
   getActiveContactOpportunities,
-  getClosedContactOpportunities
+  getClosedContactOpportunities,
 } from 'dx-template-gallery-data';
 
 import './crm-contact-details.scss';
@@ -38,6 +32,10 @@ export const CRMContactDetails = () => {
   const [activeOpportunities, setActiveOpportunities] = useState();
   const [closedOpportunities, setClosedOpportunities] = useState();
   const [isLoading, setIsLoading] = useState(false);
+
+  const onMessagesCountChanged = useCallback((count) => {
+    setMessagesCount(count);
+  }, []);
 
   useEffect(() => {
     loadData();
@@ -74,14 +72,14 @@ export const CRMContactDetails = () => {
     loadData();
   }, []);
 
-  const onMessagesCountChanged = useCallback((count) => {
-    setMessagesCount(count);
-  }, []);
-
   return (
     <ScrollView className='view-wrapper-scroll'>
       <div className='view-wrapper view-wrapper-contact-details'>
-        <ToolbarDetails name={data?.name}>
+        <Toolbar className='toolbar-details'>
+          <Item location='before'>
+            <Button icon='arrowleft' />
+          </Item>
+          <Item location='before' text={ data?.name ?? 'Loading...' } />
           <Item location='after' locateInMenu='auto'>
             <Button
               text='Terminate'
@@ -125,7 +123,7 @@ export const CRMContactDetails = () => {
               onClick={refresh}
             />
           </Item>
-        </ToolbarDetails>
+        </Toolbar>
 
         <div className='panels'>
           <div className='left'>
@@ -136,31 +134,17 @@ export const CRMContactDetails = () => {
           </div>
 
           <div className='right'>
-            <div className='dx-card details-card'>
-              <TabPanel showNavButtons deferRendering={false}>
-                <TabPanelItem title='Tasks'>
-                  <CardTasks
-                    isLoading={isLoading}
-                    tasks={data?.tasks}
-                  />
-                </TabPanelItem>
-                <TabPanelItem title='Activities'>
-                  <CardActivities activities={data?.activities} isLoading={isLoading} />
-                </TabPanelItem>
-                <TabPanelItem title='Opportunities'>
-                  <CardOpportunities
-                    active={activeOpportunities}
-                    closed={closedOpportunities}
-                  />
-                </TabPanelItem>
-                <TabPanelItem title='Notes'>
-                  <CardNotes items={notes} user={data?.name} />
-                </TabPanelItem>
-                <TabPanelItem title='Messages' badge={messagesCount}>
-                  <CardMessages items={messages} user={data?.name} onMessagesCountChanged={onMessagesCountChanged} />
-                </TabPanelItem>
-              </TabPanel>
-            </div>
+            <ContactCards
+              isLoading={isLoading}
+              activeOpportunities={activeOpportunities}
+              closedOpportunities={closedOpportunities}
+              notes={notes}
+              messages={messages}
+              messagesCount={messagesCount}
+              onMessagesCountChanged={onMessagesCountChanged}
+              tasks={data?.tasks}
+              activities={data?.activities}
+              name={data?.name} />
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@
   [shading]="shaderEnabled"
   [(opened)]="menuOpened"
 >
-  <app-side-navigation-menu
+  <side-navigation-menu
     [compactMode]="!menuOpened"
     [selectedItem]="selectedRoute"
     class="dx-swatch-additional"
@@ -25,7 +25,7 @@
     (openMenu)="navigationClick()"
   >
     <app-footer>Copyright © {{ appInfo.currentYear }} <br> Developer Express Inc.</app-footer>
-  </app-side-navigation-menu>
+  </side-navigation-menu>
 
     <div class="content">
       <router-outlet></router-outlet>

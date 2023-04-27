@@ -1,0 +1,29 @@
+<card-analytics
+  titleText="Revenue by States"
+  contentClass="sales-by-state-map"
+>
+  <dx-vector-map id="vector-map" [bounds]="[-118, 50, -80, 25]">
+    <dxi-layer [dataSource]="usaMap" [hoverEnabled]="false"></dxi-layer>
+    <dxi-layer
+      [dataSource]="data"
+      [minSize]="20"
+      [maxSize]="40"
+      [sizeGroups]="[0, 80000, 100000, 400000, 500000]"
+      [opacity]="0.8"
+      name="bubbles"
+      elementType="bubble"
+      dataField="value"
+    ></dxi-layer>
+    <dxo-tooltip
+      [enabled]="true"
+      [customizeTooltip]="customizeTooltip"
+    ></dxo-tooltip>
+    <dxi-legend
+      markerShape="circle"
+      [customizeText]="customizeLegendText"
+      [customizeItems]="customizeItems"
+    >
+      <dxo-source layer="bubbles" grouping="size"></dxo-source>
+    </dxi-legend>
+  </dx-vector-map>
+</card-analytics>

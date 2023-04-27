@@ -180,7 +180,7 @@
 
   <form-popup
     title="New Contact"
-    v-model:is-visible="isAddContactPopupOpened"
+    v-model:visible="isAddContactPopupOpened"
     @save="onSaveContactNewForm"
   >
     <contact-new-form />
@@ -217,10 +217,10 @@ import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
 import { formatPhone } from '@/utils/formatters';
-import ContactStatus from '@/components/contact-status.vue';
-import FormPopup from '@/components/form-popup.vue';
-import ContactNewForm from '@/components/contact-new-form.vue';
-import ContactPanel from '@/components/contact-panel.vue';
+import ContactStatus from '@/components/utils/contact-status.vue';
+import FormPopup from '@/components/utils/form-popup.vue';
+import ContactNewForm from '@/components/library/contact-new-form.vue';
+import ContactPanel from '@/components/library/contact-panel.vue';
 
 const filterStatusList = ['All', ...contactStatusList];
 type FilterContactStatus = typeof filterStatusList[number];

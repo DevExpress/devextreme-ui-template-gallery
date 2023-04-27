@@ -24,10 +24,10 @@ import { DataService } from 'src/app/services';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { jsPDF } from 'jspdf';
-import { ContactUserPanelModule } from '../../components/contact-user-panel/contact-user-panel.component';
-import { ContactNewUserFormModule } from '../../components/contact-new-user-form/contact-new-user-form.component';
 import { formatPhone } from 'src/app/pipes/phone.pipe';
 import { FormPopupModule } from 'src/app/components';
+import { ContactPanelModule } from 'src/app/components/library/contact-panel/contact-panel.component';
+import { ContactNewFormModule } from 'src/app/components/library/contact-new-form/contact-new-form.component';
 
 type FilterContactStatus = ContactStatus | 'All';
 
@@ -133,8 +133,8 @@ export class CrmContactListComponent {
     DxSelectBoxModule,
     DxTextBoxModule,
 
-    ContactUserPanelModule,
-    ContactNewUserFormModule,
+    ContactPanelModule,
+    ContactNewFormModule,
     FormPopupModule,
     CardActivitiesModule,
     ContactStatusModule,

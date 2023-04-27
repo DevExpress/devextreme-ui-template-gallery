@@ -1,0 +1,17 @@
+@use "../../../variables.scss" as *;
+
+.card-opportunies {
+  min-height: 300px;
+  padding: 20px;
+}
+
+.opportunities-block {
+  padding: 10px 0;
+}
+
+.opportunities-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  grid-gap: 20px;
+}

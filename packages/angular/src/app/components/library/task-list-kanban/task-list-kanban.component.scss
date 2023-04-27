@@ -1,0 +1,53 @@
+@use "../../../../variables.scss" as *;
+
+:host {
+  white-space: nowrap;
+}
+
+.list {
+  border-radius: 4px;
+  margin: 10px;
+  background-color: $background-gray-color;
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.list-title {
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: -10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.scrollable-list {
+  width: 260px;
+}
+
+.sortable-cards {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 100px;
+}
+
+.add-task {
+  padding: 10px;
+}
+
+::ng-deep {
+  .dx-sortable {
+    display: block;
+  }
+
+  .add-task {
+    .dx-icon,
+    .dx-button-text {
+      color: $accent-color;
+    }
+  }
+}

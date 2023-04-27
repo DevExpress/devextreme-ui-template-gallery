@@ -1,0 +1,39 @@
+<div id="card-opportunies">
+  <ng-container *ngIf="!isLoading">
+    <dx-button
+      text="Add Opportunity"
+      icon="add"
+      width="300"
+      height="115"
+      stylingMode="outlined"
+      type="default"
+      class="add-tile"
+      (onClick)="addOpportunity()"
+    ></dx-button>
+
+    <div class="opportunities-block">
+      <div class="dx-form-group-caption">Active</div>
+      <div class="opportunities-container">
+        <div class="opportunities" *ngFor="let data of openedOpportunities">
+          <opportunity-tile [data]="data"></opportunity-tile>
+        </div>
+      </div>
+    </div>
+
+    <div class="opportunities-block">
+      <div class="dx-form-group-caption">Closed</div>
+      <div class="opportunities-container">
+        <div class="opportunities" *ngFor="let data of closedOpportunities">
+          <opportunity-tile [data]="data"></opportunity-tile>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <dx-load-panel
+    [visible]="isLoading"
+    [showPane]="false"
+    container="#card-opportunies"
+    [position]="{ of: '#card-opportunies' }"
+  ></dx-load-panel>
+</div>

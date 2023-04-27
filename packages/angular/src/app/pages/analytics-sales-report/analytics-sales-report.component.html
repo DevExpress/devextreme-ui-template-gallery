@@ -7,101 +7,20 @@
     </toolbar-analytics>
 
     <div class="cards wide">
-      <card-analytics
-        contentClass="sales-range"
-        [isMenuVisible]="false"
-      >
-        <dx-range-selector [dataSource]="sales" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
-          <dxo-scale
-            minorTickInterval="day"
-            tickInterval="month"
-            valueType="datetime"
-          >
-            <dxo-minor-tick [visible]="false"></dxo-minor-tick>
-            <dxo-marker [visible]="false"></dxo-marker>
-            <dxo-label format="MMM yyyy"></dxo-label>
-          </dxo-scale>
-          <dxo-size [height]="90"></dxo-size>
+      <sales-range-card
+        [data]="sales"
+        [(visualRange)]="visualRange"
+        (salesRangeChanged)="onRangeChanged($event)"
+      ></sales-range-card>
 
-          <dxo-loading-indicator [show]="true"></dxo-loading-indicator>
+      <sales-by-range-card [data]="salesByCategory"></sales-by-range-card>
 
-          <dxo-chart>
-            <dxi-series type="line" argumentField="date" valueField="total">
-            </dxi-series>
-          </dxo-chart>
-        </dx-range-selector>
-      </card-analytics>
-
-      <card-analytics
-        titleText="Product Sale by Range"
-        contentClass="sales-by-category"
-      >
-        <dx-pie-chart
-          class="sales-pie"
-          [dataSource]="salesByCategory"
-          type="doughnut"
-          [diameter]="0.8"
-          [innerRadius]="0.6"
-        >
-          <dxi-series argumentField="name" valueField="value">
-            <dxo-label backgroundColor="none" [radialOffset]="-20" [visible]="true" [customizeText]="customizeSaleText">
-              <dxo-font color="#757575" [size]="15"></dxo-font>
-            </dxo-label>
-          </dxi-series>
-
-          <dxo-legend>
-            <dxo-margin [top]="70"></dxo-margin>
-          </dxo-legend>
-
-          <dxo-size [height]="270"></dxo-size>
-
-          <dxo-legend [visible]="false"></dxo-legend>
-        </dx-pie-chart>
-
-        <dx-chart class="sales-bars" [dataSource]="salesByCategory" [rotated]="true">
-          <dxo-common-axis-settings [visible]="false">
-            <dxo-tick [visible]="false"></dxo-tick>
-          </dxo-common-axis-settings>
-
-          <dxo-legend [visible]="false"></dxo-legend>
-
-          <dxo-common-series-settings argumentField="name" valueField="value" type="bar" [ignoreEmptyPoints]="true">
-          </dxo-common-series-settings>
-
-          <dxo-series-template nameField="name"> </dxo-series-template>
-
-          <dxo-value-axis>
-            <dxo-label>
-              <dxo-format type="largeNumber"></dxo-format>
-            </dxo-label>
-          </dxo-value-axis>
-        </dx-chart>
-      </card-analytics>
-
-      <card-analytics titleText="Sales Performance">
-        <div filter class="sales-filter" >
-          <dx-drop-down-button stylingMode="text" [useSelectMode]="true"
-                               [items]="groupByPeriods" [selectedItemKey]="groupByPeriods[1]" (onSelectionChanged)="selectionChange($event)">
-          </dx-drop-down-button>
-        </div>
-
-        <dx-chart [dataSource]="salesByDateAndCategory">
-          <dxo-argument-axis [visualRange]="visualRange"> </dxo-argument-axis>
-          <dxo-tooltip [enabled]="true" [customizeTooltip]="customiseToolip"></dxo-tooltip>
-          <dxo-series-template nameField="category"> </dxo-series-template>
-
-          <dxo-common-series-settings argumentField="date" valueField="total" hoverMode="includePoints">
-            <dxo-point hoverMode="allArgumentPoints"></dxo-point>
-          </dxo-common-series-settings>
-
-          <dxo-argument-axis argumentType="datetime" [valueMarginsEnabled]="false">
-          </dxo-argument-axis>
-
-          <dxo-legend [visible]="false"></dxo-legend>
-
-          <dxo-size [height]="270"></dxo-size>
-        </dx-chart>
-      </card-analytics>
+      <sales-performance-card
+        [groupByPeriods]="groupByPeriods"
+        [salesByDateAndCategory]="salesByDateAndCategory"
+        [visualRange]="visualRange"
+        (performancePeriodChanged)="selectionChange($event)"
+      ></sales-performance-card>
     </div>
   </div>
 </dx-scroll-view>

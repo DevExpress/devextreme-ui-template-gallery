@@ -81,10 +81,12 @@
         :options="taskSearchOptions"
       />
     </dx-toolbar>
-    <load-component
-      :is-loading="isLoading"
-      :show-content="!!gridData.length"
-    >
+    <dx-load-panel
+      :visible="isLoading"
+      :show-pane="false"
+      width="auto"
+    />
+    <template v-if="!!gridData.length">
       <div
         v-if="taskPanelItems[0].text === displayTaskComponent"
         class="grid"
@@ -112,11 +114,11 @@
           :tasks="ganttData"
         />
       </div>
-    </load-component>
+    </template>
   </div>
   <form-popup
     title="New Task"
-    v-model:is-visible="isNewTaskPopupOpened"
+    v-model:visible="isNewTaskPopupOpened"
     @save="onSaveNewTask"
   >
     <task-form
@@ -142,12 +144,12 @@ import {
 import { getTasks, getFilteredTasks } from 'dx-template-gallery-data';
 import { taskPanelItems, TaskPanelItemsIds } from '@/types/resource';
 import type { Task } from '@/types/task';
-import FormPopup from '@/components/form-popup.vue';
-import LoadComponent from '@/components/load-component.vue';
-import TaskForm from '@/components/task-form.vue';
-import TaskListGrid from '@/components/task-list-grid.vue';
-import TaskListKanban from '@/components/task-list-kanban.vue';
-import TaskListGantt from '@/components/task-list-gantt.vue';
+import FormPopup from '@/components/utils/form-popup.vue';
+import DxLoadPanel from 'devextreme-vue/load-panel';
+import TaskForm from '@/components/library/task-form.vue';
+import TaskListGrid from '@/components/library/task-list-grid.vue';
+import TaskListKanban from '@/components/library/task-list-kanban.vue';
+import TaskListGantt from '@/components/library/task-list-gantt.vue';
 import { newTask } from '@/types/task';
 
 import { screenInfo } from '@/utils/media-query';

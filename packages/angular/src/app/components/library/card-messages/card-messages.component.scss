@@ -1,0 +1,47 @@
+@use "../../../../variables.scss" as *;
+
+@include messages-content();
+
+.input-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+::ng-deep .file-uploader {
+  .dx-fileuploader-wrapper {
+    padding: 0;
+
+    .dx-fileuploader-input-wrapper {
+      padding: 0;
+    }
+  }
+}
+
+.message-container {
+  display: flex;
+
+  &:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+
+  .message {
+    background-color: $base-bg;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    .message-title {
+      @include message-title();
+
+      .subject {
+        color: $base-text-color;
+        font-weight: 700;
+      }
+    }
+
+    .message-text {
+      @include message-text();
+    }
+  }
+}

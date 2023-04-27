@@ -5,7 +5,7 @@ import { authInfo } from '@/auth';
 
 function loadAuthComponent(ComponentFileName: string) {
   // eslint-disable-next-line func-call-spacing
-  return () => import (/* webpackChunkName: "auth" */ `@/components/${ComponentFileName}.vue`);
+  return () => import (/* webpackChunkName: "auth" */ `@/components/library/${ComponentFileName}.vue`);
 }
 
 export const router = createRouter({
@@ -70,6 +70,7 @@ export const router = createRouter({
       'sign-in-form',
       'sign-up-form',
       'reset-password-form',
+      'user-profile',
     ].map((name) => ({
       path: `/${name}`,
       meta: {

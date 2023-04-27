@@ -1,37 +1,18 @@
 <template>
   <dx-scroll-view class="view-wrapper-scroll">
     <div class="view-wrapper">
-      <analytics-toolbar
+      <toolbar-analytics
         :show-tabs="true"
         @tab-change="tabChange($event)"
       >
         Dashboard
-      </analytics-toolbar>
+      </toolbar-analytics>
 
       <div class="tiles">
-        <analytic-tile
-          title="Opportunities"
-          :data="opportunities"
-          :percentage="20.3"
-        />
-
-        <analytic-tile
-          title="Revenue Total"
-          :data="sales"
-          :percentage="14.7"
-        />
-
-        <analytic-tile
-          title="Conversion"
-          total="16%"
-          :percentage="-2.3"
-        />
-
-        <analytic-tile
-          title="Leads"
-          total="51"
-          :percentage="8.5"
-        />
+        <opportunities-ticker :data="opportunities" />
+        <revenue-total-ticker :data="sales" />
+        <conversion-ticker />
+        <leads-ticker />
       </div>
 
       <div class="cards">
@@ -42,12 +23,18 @@
       </div>
     </div>
   </dx-scroll-view>
-  <loading-panel :loading="loading" />
+  <dx-load-panel
+    container=".view-wrapper"
+    :position="{of: '.dx-drawer-content'}"
+    :visible="loading"
+    :show-pane="true"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
+import { DxLoadPanel } from 'devextreme-vue/load-panel';
 
 import {
   getOpportunitiesByCategory,
@@ -62,14 +49,16 @@ import {
   SalesOrOpportunitiesByCategory,
 } from '@/types/analytics';
 
-import LoadingPanel from '@/components/loading-panel.vue';
-import AnalyticsToolbar from '@/components/analytics-toolbar.vue';
+import ToolbarAnalytics from '@/components/utils/toolbar-analytics.vue';
 
-import RevenueSnapshotCard from '@/components/revenue-snapshot-card.vue';
-import AnalyticTile from '@/components/analytic-tile.vue';
-import ConversionCard from '@/components/conversion-card.vue';
-import RevenueCard from '@/components/revenue-card.vue';
-import RevenueAnalysisCard from '@/components/revenue-analysis-card.vue';
+import RevenueSnapshotCard from '@/components/utils/revenue-snapshot-card.vue';
+import ConversionCard from '@/components/utils/conversion-card.vue';
+import RevenueCard from '@/components/utils/revenue-card.vue';
+import RevenueAnalysisCard from '@/components/utils/revenue-analysis-card.vue';
+import OpportunitiesTicker from '@/components/utils/opportunities-ticker.vue';
+import RevenueTotalTicker from '@/components/utils/revenue-total-ticker.vue';
+import ConversionTicker from '@/components/utils/conversion-ticker.vue';
+import LeadsTicker from '@/components/utils/leads-ticker.vue';
 
 const opportunities = ref<SalesOrOpportunitiesByCategory | null>(null);
 const sales = ref<Sales | null>(null);

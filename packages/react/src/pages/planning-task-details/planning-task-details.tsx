@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { Item as ToolbarItem } from 'devextreme-react/toolbar';
+import { Toolbar, Item as ToolbarItem } from 'devextreme-react/toolbar';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 import ValidationGroup from 'devextreme-react/validation-group';
 import Button from 'devextreme-react/button';
 import ScrollView from 'devextreme-react/scroll-view';
 
-import { TaskForm, CardActivities, CardNotes, CardMessages, ToolbarDetails } from '../../components';
+import { TaskForm, CardActivities, CardNotes, CardMessages } from '../../components';
 
 import { Task } from '../../types/task';
 
@@ -48,7 +48,11 @@ export const PlanningTaskDetails = () => {
   return (
     <ScrollView className='view-wrapper-scroll'>
       <div className='view-wrapper view-wrapper-details'>
-        <ToolbarDetails name={task?.text}>
+        <Toolbar className='toolbar-details'>
+          <ToolbarItem location='before'>
+            <Button icon='arrowleft' />
+          </ToolbarItem>
+          <ToolbarItem location='before' text={ task?.text ?? 'Loading...' } />
           <ToolbarItem location='after' locateInMenu='auto'>
             <DropDownButton text='Actions' stylingMode='contained'>
               <DropDownItem text='Duplicate' />
@@ -81,7 +85,7 @@ export const PlanningTaskDetails = () => {
               onClick={refresh}
             />
           </ToolbarItem>
-        </ToolbarDetails>
+        </Toolbar>
         <div className='panels'>
           <div className='left'>
             <ValidationGroup>

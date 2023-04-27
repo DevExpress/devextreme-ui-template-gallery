@@ -1,0 +1,10 @@
+<div (click)="opportunityClick()" class="opportunity">
+  <div class="name">{{ data.name }}</div>
+  <div class="product-info"
+    >Products: {{ data.products }}, total:
+    <span class="total">{{ data.total | currency }}</span>
+  </div>
+  <div class="owner">
+    Owner: <span class="owner-name">{{ data.manager }}</span>
+  </div>
+</div>

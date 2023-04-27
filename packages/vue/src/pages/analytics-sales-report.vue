@@ -1,7 +1,7 @@
 <template>
   <dx-scroll-view class="view-wrapper-scroll">
     <div class="view-wrapper">
-      <analytics-toolbar>Sales Report</analytics-toolbar>
+      <toolbar-analytics>Sales Report</toolbar-analytics>
 
       <div class="cards">
         <sales-range-card
@@ -19,13 +19,19 @@
       </div>
     </div>
   </dx-scroll-view>
-  <loading-panel :loading="loading" />
+  <dx-load-panel
+    container=".view-wrapper"
+    :position="{of: '.dx-drawer-content'}"
+    :visible="loading"
+    :show-pane="true"
+  />
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
 import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
+import { DxLoadPanel } from 'devextreme-vue/load-panel';
 import { formatDate } from 'devextreme/localization';
 
 import {
@@ -38,11 +44,10 @@ import {
   SalesByStateAndCity,
 } from '@/types/analytics';
 import { analyticsPanelItems } from '@/types/resource';
-import LoadingPanel from '@/components/loading-panel.vue';
-import AnalyticsToolbar from '@/components/analytics-toolbar.vue';
-import SalesRangeCard from '@/components/sales-range-card.vue';
-import SalesByRangeCard from '@/components/sales-by-range-card.vue';
-import SalesPerformanceCard from '@/components/sales-performance-card.vue';
+import ToolbarAnalytics from '@/components/utils/toolbar-analytics.vue';
+import SalesRangeCard from '@/components/utils/sales-range-card.vue';
+import SalesByRangeCard from '@/components/utils/sales-by-range-card.vue';
+import SalesPerformanceCard from '@/components/utils/sales-performance-card.vue';
 
 const sales = ref<Sales | null>(null);
 const salesByDateAndCategory = ref<Sales | null>(null);
