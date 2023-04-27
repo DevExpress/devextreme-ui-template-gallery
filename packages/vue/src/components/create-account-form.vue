@@ -87,7 +87,7 @@
       </template>
     </dx-form>
     <div class="login-link">
-        Have an account? <router-link :to="props.redirectLink">
+      Have an account? <router-link :to="props.redirectLink">
         Sign In
       </router-link>
     </div>
@@ -108,7 +108,7 @@ import DxForm, {
 import DxLoadIndicator from 'devextreme-vue/load-indicator';
 import notify from 'devextreme/ui/notify';
 import { useRouter } from 'vue-router';
-import { ref, reactive, defineProps } from 'vue';
+import { ref, reactive } from 'vue';
 import { authInfo as auth } from '@/auth';
 import OauthComponent from './oauth-component.vue';
 
