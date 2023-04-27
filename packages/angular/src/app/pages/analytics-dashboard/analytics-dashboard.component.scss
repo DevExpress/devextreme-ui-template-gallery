@@ -1,5 +1,4 @@
 @use "../../../variables.scss" as *;
-@use "sass:math";
 
 :host {
   display: flex;
@@ -12,10 +11,51 @@
   padding: $content-padding;
 }
 
-::ng-deep {
-  td.dx-command-adaptive.dx-command-adaptive,
-  td.sales-bullet.sales-bullet {
-    border-left: none;
-    border-right: none;
+.cards {
+  display: grid;
+  width: 100%;
+  gap: 20px;
+  grid-template-columns: repeat(2, calc(50% - 10px));
+
+  &.grey {
+    margin: 20px 0;
+    grid-template-columns: repeat(4, calc(25% - 15px));
+
+    ::ng-deep .card {
+      background-color: $side-panel-background;
+      border: none;
+      height: 120px;
+
+      ::ng-deep {
+        .dx-button {
+          background-color: $side-panel-background;
+        }
+
+        .content {
+          height: auto;
+        }
+      }
+    }
+
+    ::ng-deep .dx-loadpanel-indicator {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(1, 100%);
+
+    &.grey {
+      grid-template-columns: repeat(2, calc(50% - 10px));
+    }
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .cards.grey {
+    grid-template-columns: repeat(1, 100%);
   }
 }

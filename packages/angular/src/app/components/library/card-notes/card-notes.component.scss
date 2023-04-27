@@ -1,0 +1,24 @@
+@use "../../../../variables.scss" as *;
+
+@include messages-content();
+
+.input-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.note {
+  background-color: $base-bg;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  .note-title {
+    @include message-title();
+  }
+
+  .note-text {
+    @include message-text();
+  }
+}

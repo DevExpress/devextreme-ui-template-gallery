@@ -1,0 +1,21 @@
+@use "../../variables.scss" as *;
+@use "sass:math";
+
+.cards {
+  display: grid;
+  width: 100%;
+  margin-top: 20px;
+  gap: 20px;
+  grid-template-columns: repeat(2, calc(50% - 10px));
+
+  &.wide {
+    margin-right: 0;
+    grid-template-columns: repeat(1, 100%);
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(1, 100%);
+  }
+}

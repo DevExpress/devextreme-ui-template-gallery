@@ -1,0 +1,28 @@
+<card-analytics
+  titleText="Revenue Snapshot by States"
+  contentClass="sales-by-state"
+>
+  <dx-pie-chart
+    [dataSource]="data"
+    type="doughnut"
+    [diameter]="0.8"
+    [innerRadius]="0.6"
+  >
+    <dxi-series argumentField="stateName" valueField="total">
+      <dxo-label
+        backgroundColor="none"
+        [radialOffset]="-20"
+        [visible]="true"
+        [customizeText]="customizeSaleText"
+      >
+        <dxo-font color="#757575" [size]="15"></dxo-font>
+      </dxo-label>
+    </dxi-series>
+
+    <dxo-legend>
+      <dxo-margin [top]="70"></dxo-margin>
+    </dxo-legend>
+
+    <dxo-size [height]="270"> </dxo-size>
+  </dx-pie-chart>
+</card-analytics>

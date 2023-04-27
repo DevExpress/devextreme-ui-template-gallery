@@ -1,0 +1,38 @@
+@use '../../../variables.scss' as *;
+
+.card-contents {
+  height: auto;
+
+  .total {
+    display: inline-block;
+    font-size: 26px;
+    font-weight: 700;
+    color: $base-text-color;
+    margin-right: 27px;
+  }
+
+  .percentage {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 400;
+    color: $base-text-color;
+    line-height: 24px;
+
+    span {
+      display: inline-block;
+      vertical-align: text-bottom;
+    }
+
+    .dx-icon-spindown {
+      font-size: 24px;
+      color: #ff5722;
+      display: inline-block;
+    }
+
+    .dx-icon-spinup {
+      font-size: 24px;
+      color: #2eb52c;
+      display: inline-block;
+    }
+  }
+}

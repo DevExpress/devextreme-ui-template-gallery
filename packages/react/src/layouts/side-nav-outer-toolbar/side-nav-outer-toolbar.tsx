@@ -6,7 +6,7 @@ import { Template } from 'devextreme-react/core/template';
 
 import { useNavigate } from 'react-router';
 
-import { Header, SideNavigationMenu, Footer } from '../../components';
+import { AppHeader, SideNavigationMenu, AppFooter } from '../../components';
 import { useScreenSize } from '../../utils/media-query';
 import { useMenuPatch } from '../../utils/patches';
 
@@ -52,7 +52,7 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
 
   return (
     <div className='side-nav-outer-toolbar'>
-      <Header className='layout-header' menuToggleEnabled toggleMenu={toggleMenu} title={title} />
+      <AppHeader className='layout-header' menuToggleEnabled toggleMenu={toggleMenu} title={title} />
       <Drawer
         className={['drawer layout-body', patchCssClass].join(' ')}
         position='before'
@@ -67,7 +67,7 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
       >
         <div className='content'>
           {React.Children.map(children, (item) => {
-            return React.isValidElement(item) && item.type !== Footer && item;
+            return React.isValidElement(item) && item.type !== AppFooter && item;
           })}
         </div>
         <Template name='menu'>

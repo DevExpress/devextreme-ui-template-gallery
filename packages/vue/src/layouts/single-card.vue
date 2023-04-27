@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import DxScrollView from 'devextreme-vue/scroll-view';
-import CardAuth from '@/components/card-auth.vue';
+import CardAuth from '@/components/library/card-auth.vue';
 import { useRoute } from 'vue-router';
 import { ref, watch } from 'vue';
 

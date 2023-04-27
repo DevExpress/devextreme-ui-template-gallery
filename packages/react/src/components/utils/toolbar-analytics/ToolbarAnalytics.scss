@@ -1,0 +1,30 @@
+@use '../../../variables.scss' as *;
+@use 'sass:math';
+
+.view-wrapper-dashboard {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: $content-padding;
+  position: relative;
+
+  @media only screen and (max-width: 900px) {
+    .card {
+      .card-contents {
+        height: auto;
+      }
+    }
+  }
+
+  .dx-toolbar {
+    .toolbar-header {
+      @include header();
+    }
+
+    @media only screen and (max-width: 400px) {
+      .dx-tab {
+        min-width: 70px;
+      }
+    }
+  }
+}

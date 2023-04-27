@@ -1,0 +1,6 @@
+@use "../../../../variables.scss" as *;
+@use "sass:math";
+
+:host ::ng-deep .card.sales-by-state-map .content {
+  height: 400px;
+}

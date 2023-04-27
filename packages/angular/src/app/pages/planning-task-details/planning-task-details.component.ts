@@ -6,7 +6,6 @@ import {
   DxButtonModule,
   DxDropDownButtonModule,
   DxTabPanelModule,
-  DxToolbarModule,
   DxValidationGroupModule,
   DxScrollViewModule,
 } from 'devextreme-angular';
@@ -18,7 +17,8 @@ import {
 } from 'src/app/components';
 import { Task } from 'src/app/types/task';
 import { DataService } from 'src/app/services';
-import { TaskFormModule } from '../../components/task-form/task-form.component';
+import { TaskFormModule } from 'src/app/components/library/task-form/task-form.component';
+import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 @Component({
   templateUrl: './planning-task-details.component.html',
@@ -60,8 +60,8 @@ export class PlanningTaskDetailsComponent implements OnInit {
     DxButtonModule,
     DxDropDownButtonModule,
     DxTabPanelModule,
-    DxToolbarModule,
     DxValidationGroupModule,
+    DxToolbarModule,
 
     CardActivitiesModule,
     CardNotesModule,

@@ -1,7 +1,7 @@
 <template>
   <dx-scroll-view class="view-wrapper-scroll">
     <div class="view-wrapper">
-      <dx-toolbar>
+      <dx-toolbar class="toolbar-details">
         <dx-toolbar-item location="before">
           <dx-button icon="arrowleft" />
         </dx-toolbar-item>
@@ -92,7 +92,6 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { DxButton } from 'devextreme-vue/button';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxDropDownButton, DxItem as DxDropDownItem } from 'devextreme-vue/drop-down-button';
 import {
@@ -104,10 +103,10 @@ import { DxValidationGroup } from 'devextreme-vue';
 // eslint-disable-next-line import/no-unresolved
 import { getTask } from 'dx-template-gallery-data';
 import type { Task } from '@/types/task';
-import CardNotes from '@/components/card-notes.vue';
-import CardActivities from '@/components/card-activities.vue';
-import CardMessages from '@/components/card-messages.vue';
-import TaskForm from '@/components/task-form.vue';
+import CardNotes from '@/components/library/card-notes.vue';
+import CardActivities from '@/components/library/card-activities.vue';
+import CardMessages from '@/components/library/card-messages.vue';
+import TaskForm from '@/components/library/task-form.vue';
 
 const taskId = 1;
 const taskName = ref('');
@@ -154,8 +153,16 @@ const refreshOptions = {
 
 <style scoped lang="scss">
 @use "@/variables" as *;
+@use "sass:math";
 
 $left-panel-width: 400px;
+$right-panel-width: 360px;
+
+@media only screen and (max-width: 875px) {
+  :deep(.contact-name-toolbar-item) {
+    min-width: calc(#{$left-panel-width} + #{$right-panel-width} - 145px);
+  }
+}
 
 .dx-toolbar {
   margin-bottom: calc(#{$toolbar-margin-bottom} / 2);

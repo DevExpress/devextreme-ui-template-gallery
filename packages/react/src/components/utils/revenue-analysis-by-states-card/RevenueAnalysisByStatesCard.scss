@@ -1,0 +1,6 @@
+@use '../../../variables.scss' as *;
+
+.card.grid .card-contents {
+  border-top: 1px solid $border-color;
+  padding: 0 0 $content-padding;
+}

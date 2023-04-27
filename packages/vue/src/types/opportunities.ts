@@ -1,7 +1,9 @@
 export interface Opportunity {
     name: string,
-    date: string | Date,
     manager: string,
+    products: number,
+    total: number,
+    price: number
 }
 
 export type Opportunities = Opportunity[];

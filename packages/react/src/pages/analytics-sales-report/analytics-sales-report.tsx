@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { Dashboard, SalesRangeCard, ProductSaleByRangeCard, SalesPerformanceCard } from '../../components';
-import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
+import { ToolbarAnalytics, SalesRangeCard, SalesByRangeCard, SalesPerformanceCard } from '../../components';
 import { Sale, SaleOrOpportunityByCategory } from '../../types/analytics';
 
 import { getSalesByCategory, getSales, getSalesByOrderDate } from 'dx-template-gallery-data';
@@ -67,10 +66,10 @@ export const AnalyticsSalesReport = () => {
 
   return (
     <ScrollView className='view-wrapper-scroll'>
-      <Dashboard title='Sales Report'>
-        <DashboardCardsGroup kind='wide'>
+      <ToolbarAnalytics title='Sales Report'>
+        <div className='cards wide'>
           <SalesRangeCard datasource={sales} range={dateRange} onRangeChanged={onRangeChanged} />
-          <ProductSaleByRangeCard datasource={salesByCategory} />
+          <SalesByRangeCard datasource={salesByCategory} />
           <SalesPerformanceCard
             datasource={salesByDateAndCategory}
             periods={groupByPeriods}
@@ -78,8 +77,8 @@ export const AnalyticsSalesReport = () => {
             onPeriodChanged={onPeriodChanged}
             range={dateRange}
           />
-        </DashboardCardsGroup>
-      </Dashboard>
+        </div>
+      </ToolbarAnalytics>
       <LoadPanel container='.content' visible={isLoading} position={{ of: '.layout-body' }} />
     </ScrollView>
   );

@@ -11,7 +11,21 @@
 .view-wrapper {
   padding: $content-padding;
 
-  .wide {
-    margin: 20px 0;
+  .cards {
+    display: grid;
+    width: 100%;
+    gap: 20px;
+    grid-template-columns: repeat(2, calc(50% - 10px));
+
+    &.wide {
+      grid-template-columns: repeat(1, 100%);
+      margin: 20px 0;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .cards {
+      grid-template-columns: repeat(1, 100%);
+    }
   }
 }

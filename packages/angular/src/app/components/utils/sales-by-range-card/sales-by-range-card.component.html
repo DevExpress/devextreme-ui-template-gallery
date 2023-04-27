@@ -1,0 +1,45 @@
+<card-analytics
+  titleText="Product Sale by Range"
+  contentClass="sales-by-category"
+>
+  <dx-pie-chart
+    class="sales-pie"
+    [dataSource]="data"
+    type="doughnut"
+    [diameter]="0.8"
+    [innerRadius]="0.6"
+  >
+    <dxi-series argumentField="name" valueField="value">
+      <dxo-label backgroundColor="none" [radialOffset]="-20" [visible]="true" [customizeText]="customizeSaleText">
+        <dxo-font color="#757575" [size]="15"></dxo-font>
+      </dxo-label>
+    </dxi-series>
+
+    <dxo-legend>
+      <dxo-margin [top]="70"></dxo-margin>
+    </dxo-legend>
+
+    <dxo-size [height]="270"></dxo-size>
+
+    <dxo-legend [visible]="false"></dxo-legend>
+  </dx-pie-chart>
+
+  <dx-chart class="sales-bars" [dataSource]="data" [rotated]="true">
+    <dxo-common-axis-settings [visible]="false">
+      <dxo-tick [visible]="false"></dxo-tick>
+    </dxo-common-axis-settings>
+
+    <dxo-legend [visible]="false"></dxo-legend>
+
+    <dxo-common-series-settings argumentField="name" valueField="value" type="bar" [ignoreEmptyPoints]="true">
+    </dxo-common-series-settings>
+
+    <dxo-series-template nameField="name"> </dxo-series-template>
+
+    <dxo-value-axis>
+      <dxo-label>
+        <dxo-format type="largeNumber"></dxo-format>
+      </dxo-label>
+    </dxo-value-axis>
+  </dx-chart>
+</card-analytics>

@@ -1,0 +1,16 @@
+<card-analytics
+  [titleText]="titleText"
+  [isLoading]="data === null && total === null"
+  [contentClass]="contentClass"
+>
+  <div class="total">
+    {{ total === null ? (getTotal | apply: data | currency: "USD":"$":"1.0-0") : total }}
+  </div>
+  <div
+    class="percentage"
+    *ngIf="percentage !== 0"
+  >
+    <i [class]="'dx-icon-' + (percentage > 0 ? 'spinup' : 'spindown')"></i>
+    <span>{{ abs(percentage) }}%</span>
+  </div>
+</card-analytics>

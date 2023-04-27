@@ -1,0 +1,21 @@
+@use "../../../../variables.scss" as *;
+
+.create-account-form {
+  .policy-info {
+    color: $base-text-color-alpha;
+    font-size: 12px;
+    font-style: normal;
+
+    a {
+      color: $base-text-color-alpha;
+    }
+  }
+
+  .login-link {
+    color: $accent-color;
+    font-size: 12px;
+    text-align: center;
+    padding: 6px 0 32px 0;
+    border-bottom: 1px solid $border-color;
+  }
+}

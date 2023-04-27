@@ -13,7 +13,7 @@ import LoadPanel from 'devextreme-react/load-panel';
 
 import dxTextBox from 'devextreme/ui/text_box';
 
-import { PlanningGrid, PlanningKanban, PlanningGantt, FormPopup, TaskFormDetails } from '../../components';
+import { TaskListGrid, TaskListKanban, TaskListGantt, FormPopup, TaskFormDetails } from '../../components';
 
 import { newTask } from '../../shared/constants';
 import { useScreenSize } from '../../utils/media-query';
@@ -239,9 +239,9 @@ export const PlanningTaskList = () => {
         </Item>
       </Toolbar>
       {loading && <LoadPanel container='.content' showPane={false} visible position={{ of: '.content' }} />}
-      {!loading && isDataGrid && <PlanningGrid dataSource={gridData} ref={gridRef} />}
-      {!loading && isKanban && <PlanningKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
-      {!loading && view === ganttView && <PlanningGantt dataSource={filteredData} ref={ganttRef} />}
+      {!loading && isDataGrid && <TaskListGrid dataSource={gridData} ref={gridRef} />}
+      {!loading && isKanban && <TaskListKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
+      {!loading && view === ganttView && <TaskListGantt dataSource={filteredData} ref={ganttRef} />}
       <FormPopup title='New Task' visible={popupVisible} changeVisibility={changePopupVisibility}>
         <TaskFormDetails subjectField data={newTaskData} editing onDataChanged={onDataChanged} />
       </FormPopup>
