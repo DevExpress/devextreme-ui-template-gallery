@@ -57,7 +57,7 @@ export const useSchedulerLogic = () => {
     setCurrentView(view);
   }, [isXSmall, currentView]);
 
-  const createAppointment = useCallback(() => {
+  const showAppointmentCreationForm = useCallback(() => {
     schedulerRef.current?.instance.showAppointmentPopup();
   }, []);
 
@@ -176,7 +176,7 @@ export const useSchedulerLogic = () => {
     tasks,
     tooltipPosition,
     tooltipRef,
-    createAppointment,
+    showAppointmentCreationForm,
     deleteCurrentAppointment,
     editCurrentAppointment,
     onCurrentViewChange,

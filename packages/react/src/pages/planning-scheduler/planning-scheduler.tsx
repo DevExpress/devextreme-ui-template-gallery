@@ -50,7 +50,6 @@ export const PlanningScheduler = () => {
     tasks,
     tooltipPosition,
     tooltipRef,
-    createAppointment,
     deleteCurrentAppointment,
     editCurrentAppointment,
     onCurrentViewChange,
@@ -61,6 +60,7 @@ export const PlanningScheduler = () => {
     onSelectedDateChange,
     onSelectedCalendarsChange,
     showAppointmentTooltip,
+    showAppointmentCreationForm,
     toggleRightPanelOpen,
   } = useSchedulerLogic();
 
@@ -81,7 +81,7 @@ export const PlanningScheduler = () => {
             <Button
               text='Create event'
               type='default'
-              onClick={createAppointment}
+              onClick={showAppointmentCreationForm}
             />
           </div>
           <div className='calendar'>
@@ -125,7 +125,7 @@ export const PlanningScheduler = () => {
         <SpeedDialAction
           icon='add'
           visible={isXSmall}
-          onClick={createAppointment}
+          onClick={showAppointmentCreationForm}
         />
 
         <Tooltip
