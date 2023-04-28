@@ -3,14 +3,14 @@ import React, { useState, useCallback, useMemo, useRef } from 'react';
 import notify from 'devextreme/ui/notify';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
 import Form, { Item, Label } from 'devextreme-react/form';
-import { FormPopup } from '../form-popup/FormPopup';
+import { FormPopup } from '../../utils/form-popup/FormPopup';
 
 const saveNewPassword = (): void => {
   notify({ message: 'Password Changed', position: { at: 'bottom center', my: 'bottom center' } }, 'success');
 };
 
 export const ChangeProfilePasswordForm = ({ visible }) => {
-  const formPopupRef = useRef<FormPopup>();
+  const formPopupRef = useRef();
   const confirmField = useRef();
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [formData, setFormData] = useState<Record<string, any>>({});

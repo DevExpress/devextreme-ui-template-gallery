@@ -1,0 +1,29 @@
+@use "../../../variables.scss" as *;
+
+::ng-deep .pictured-item-select-box-dropdown,
+.pictured-item-select-box {
+  .pictured-item-image {
+    flex: 0 0 2em;
+    width: 2em;
+    height: 2em;
+    border: 1px solid $border-color;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+}
+
+::ng-deep .pictured-item-select-box-dropdown .dx-list-item-content,
+.pictured-item-select-field {
+  display: flex;
+  align-items: center;
+}
+
+.pictured-item-select-field {
+  &::ng-deep .pictured-item-editor-input {
+    padding-left: 0;
+  }
+
+  .pictured-item-image {
+    margin-left: var(--list-padding-left);
+  }
+}

@@ -197,7 +197,7 @@ export const UserProfile = () => {
               </div>
               <div>
                 <div className='title-text'>
-                  {profileData.address}, {profileData.city}, {profileData.state}, {profileData.country}
+                  {profileData?.address}, {profileData?.city}, {profileData?.state}, {profileData?.country}
                 </div>
               </div>
             </div>
