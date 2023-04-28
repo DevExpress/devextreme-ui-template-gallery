@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import List from 'devextreme-react/list';
 import Button from 'devextreme-react/button';
 
-import { useScreenSize } from '../../utils/media-query';
+import { useScreenSize } from '../../../utils/media-query';
 import { AgendaListItem } from './agenda-list-item';
 
 export const Agenda = ({ selectedAppointmentData = { startDate: new Date() }, toggleOpen, resources, items, showAppointmentTooltip }) => {

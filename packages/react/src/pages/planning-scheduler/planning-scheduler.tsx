@@ -14,11 +14,11 @@ import { useScreenSize } from '../../utils/media-query';
 
 import { useSchedulerLogic } from './use-scheduler-logic';
 
-import { CalendarList } from '../../components/calendar-list/calendar-list';
-import { LeftSidePanel } from '../../components/side-panel/left-side-panel';
-import { RightSidePanel } from '../../components/side-panel/right-side-panel';
-import { Agenda } from '../../components/agenda/agenda';
-import { TooltipContentTemplate } from '../../components/scheduler-tooltip/scheduler-tooltip';
+import { CalendarList } from '../../components/utils/calendar-list/calendar-list';
+import { LeftSidePanel } from '../../components/library/left-side-panel/left-side-panel';
+import { RightSidePanel } from '../../components/utils/right-side-panel/right-side-panel';
+import { Agenda } from '../../components/utils/agenda/agenda';
+import { TooltipContentTemplate } from '../../components/library/scheduler-tooltip/scheduler-tooltip';
 
 const views: ViewType[] = ['day', 'workWeek', 'month', 'agenda'];
 interface CalendarListItem {

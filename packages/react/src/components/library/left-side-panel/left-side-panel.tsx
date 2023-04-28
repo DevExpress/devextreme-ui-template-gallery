@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import Button from 'devextreme-react/button';
-import { useScreenSize } from '../../utils/media-query';
+import { useScreenSize } from '../../../utils/media-query';
 import './left-side-panel.scss';
 import { ScrollView } from 'devextreme-react';
 
