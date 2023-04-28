@@ -22,16 +22,16 @@ $side-panel-min-width: 48px;
 $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 
 :root {
-  --card-background: #{$base-bg};
-
-  @if $theme == dark {
-    --card-background: #2a2a32;
-  }
-
   --base-bg: #{$base-bg};
   --base-bg-darken-5: #{$base-bg-darken-5};
   --base-bg-darken-4: #{$base-bg-darken-4};
   --background-color: var(--base-bg);
+  --card-background: #{$base-bg};
+
+  @if $theme == dark {
+    --card-background: var(--base-bg-darken-5);
+  }
+
   --side-panel-background: var(--base-bg-darken-5);
   --border-color: #{$base-border-color};
   --accent-color: #{$base-accent};
