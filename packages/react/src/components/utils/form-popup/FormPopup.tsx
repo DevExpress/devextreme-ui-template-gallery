@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, forwardRef } from 'react';
 
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
 import ValidationGroup from 'devextreme-react/validation-group';
@@ -8,10 +8,21 @@ import { Button } from 'devextreme-react';
 type PopupProps = {
   title: string,
   visible: boolean,
+  width: number,
+  wrapperAttr: { className: string },
+  isSaveDisabled: boolean,
   changeVisibility: () => void,
 }
 
-export const FormPopup = ({ title, visible, changeVisibility, children }: React.PropsWithChildren<PopupProps>) => {
+export const FormPopup = forwardRef<unknown, React.PropsWithChildren<PopupProps>>(({
+  title,
+  visible,
+  width = 480,
+  changeVisibility,
+  wrapperAttr,
+  isSaveDisabled,
+  children
+}) => {
   const { isXSmall } = useScreenSize();
   const validationGroup = useRef<ValidationGroup>(null);
 
@@ -32,35 +43,33 @@ export const FormPopup = ({ title, visible, changeVisibility, children }: React.
       title={title}
       visible={visible}
       fullScreen={isXSmall}
-      width='480px'
+      width={width}
+      wrapperAttr={{ ...wrapperAttr, class: `${wrapperAttr.className} form-popup` }}
       height='auto'
     >
       <ToolbarItem
-        widget='dxButton'
         toolbar='bottom'
-        location='after'
+        location='center'
       >
-        <Button
-          text='Cancel'
-          stylingMode='contained'
-          onClick={onCancelClick}
-        />
+        <div className={`form-popup-buttons-container ${width <= 360 ? 'flex-buttons' : ''}`}>
+          <Button
+            text='Cancel'
+            stylingMode='contained'
+            onClick={onCancelClick}
+          />
+          <Button
+            text='Save'
+            stylingMode='contained'
+            type='default'
+            disabled={isSaveDisabled}
+            onClick={onSaveClick}
+          />
+        </div>
       </ToolbarItem>
-      <ToolbarItem
-        widget='dxButton'
-        toolbar='bottom'
-        location='after'
-      >
-        <Button
-          text='Save'
-          stylingMode='contained'
-          type='default'
-          onClick={onSaveClick}
-        />
-      </ToolbarItem>
+
       <ValidationGroup ref={validationGroup}>
         {children}
       </ValidationGroup>
     </Popup>
   );
-};
+});

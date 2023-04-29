@@ -4,14 +4,15 @@ import notify from 'devextreme/ui/notify';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
 import Form, { Item, Label } from 'devextreme-react/form';
 import { FormPopup } from '../../utils/form-popup/FormPopup';
+import { PasswordTextBox } from '../../password-text-box/PasswordTextBox';
 
 const saveNewPassword = (): void => {
   notify({ message: 'Password Changed', position: { at: 'bottom center', my: 'bottom center' } }, 'success');
 };
 
-export const ChangeProfilePasswordForm = ({ visible }) => {
-  const formPopupRef = useRef();
-  const confirmField = useRef();
+export const ChangeProfilePasswordForm = ({ visible, onVisibleChange }) => {
+  const formPopupRef = useRef(null);
+  const confirmField = useRef(null);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [formData, setFormData] = useState<Record<string, any>>({});
   // figure out onvisiblechange event emitters
@@ -24,18 +25,21 @@ export const ChangeProfilePasswordForm = ({ visible }) => {
     }];
   }, [formData]);
 
-  const onFieldChanged = useCallback(async () => {
-    const formValues = Object.entries(formData);
-    setIsSaveDisabled(await (formValues.length != 3 || !!formValues.find(([key, value]) => !value) || !formPopupRef.current?.isValid()));
-  }, [formData]);
+  const onFieldChanged = useCallback(
+    // eslint-disable-next-line space-before-function-paren
+    async () => {
+      const formValues = Object.entries(formData);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      setIsSaveDisabled(await (formValues.length != 3 || !!formValues.find(([_, value]) => !value) || !formPopupRef.current?.isValid()));
+    }, [formData]);
 
   return <FormPopup
     ref={formPopupRef}
-    titleText='Change Password'
+    title='Change Password'
     visible={visible}
     width={360}
-    wrapperAttr="{class: 'change-profile-password-popup'}"
-    isSaveDisabled='isSaveDisabled'
+    wrapperAttr={{ className: 'change-profile-password-popup' }}
+    isSaveDisabled={isSaveDisabled}
     onSave={saveNewPassword}
     onVisibleChange={onVisibleChange}
   >
