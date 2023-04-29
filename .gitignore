@@ -27,3 +27,5 @@ packages/service/.vs
 packages/testing/pids.json
 packages/testing/screenshots
 packages/testing/testing
+.env
+swa-cli.config.json

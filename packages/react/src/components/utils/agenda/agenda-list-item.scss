@@ -1,0 +1,36 @@
+@use "../../../variables.scss" as *;
+
+.agenda-list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+
+  .time {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 36px;
+
+    @include subtext();
+
+    .duration {
+      @include subtext(0.7);
+    }
+  }
+
+  .description {
+    overflow: hidden;
+
+    .description-title {
+      @include h2-header-text();
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .description-resource {
+      @include description-text(0.7);
+    }
+  }
+}

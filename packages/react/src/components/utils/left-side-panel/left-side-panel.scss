@@ -1,0 +1,65 @@
+@use "../../../variables.scss" as *;
+@use "sass:math";
+
+#left-side-panel {
+  --left-side-panel-width: 320px;
+  --transition: 400ms;
+}
+
+.left-side-panel {
+  position: relative;
+  border: 1px solid transparent;
+
+  .side-panel-container {
+    display: flex;
+
+    .side-panel-content-wrapper {
+      padding-top: $theme-padding;
+
+      .side-panel-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+
+  .side-panel-content-wrapper {
+    width: 0;
+    transition: width var(--transition);
+    height: calc(100vh - 60px - $theme-padding);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &.open {
+    .side-panel-content-wrapper {
+      width: var(--left-side-panel-width);
+      padding-left: 0;
+    }
+  }
+
+  &.overlapping {
+    .button-container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      height: $button-height + calc($theme-padding * 2);
+    }
+
+    .side-panel-content-wrapper {
+      position: absolute;
+      top: calc(-1 * $theme-padding);
+      left: $button-height;
+      height: calc(100vh - 60px);
+      padding-top: calc(2 * $theme-padding);
+      background-color: $base-bg;
+      z-index: 3;
+      box-shadow: 8px 0 16px -8px $base-border-color;
+
+      &.open {
+        padding-right: $content-padding;
+      }
+    }
+  }
+}

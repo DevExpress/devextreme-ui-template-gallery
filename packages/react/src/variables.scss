@@ -11,8 +11,15 @@ $background-gray-color: var(--background-gray-color);
 $texteditor-edit-color: var(--texteditor-edit-color);
 $texteditor-label-color: var(--texteditor-label-color);
 $base-text-color-alpha: var(--base-text-color-alpha);
+$base-border-color: var(--border-color);
+$scheduler-toolbar-height: var(--scheduler-toolbar-height);
+$tooltip-danger-button-color: var(--tooltip-danger-button-color);
+$tooltip-success-button-color: var(--tooltip-success-button-color);
+$button-height: var(--button-height);
+$theme-padding: var(--theme-padding);
 
 $toolbar-height: var(--toolbar-height);
+$calendar-width: var(--calendar-width);
 $filled-texteditor-input-horizontal-padding: var(--filled-texteditor-input-horizontal-padding);
 $list-padding-left: var(--list-padding-left);
 $list-padding-vertical: var(--list-padding-vertical);
@@ -25,6 +32,19 @@ $side-panel-min-width: var(--side-panel-min-width);
 $toolbar-margin-bottom: $content-padding;
 
 $footer-height: 70px;
+
+@mixin separator() {
+  .separator {
+    height: 24px;
+    width: 1px;
+    background: $base-border-color;
+
+    .dx-toolbar-menu-section & {
+      height: 1px;
+      width: auto;
+    }
+  }
+}
 $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 
 @mixin header {
@@ -107,4 +127,46 @@ $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
       background-color: $status-color;
     }
   }
+}
+
+@mixin calendar-items-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+@mixin description-text($opacity) {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  opacity: $opacity;
+}
+
+@mixin h1-header-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+@mixin h2-header-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+@mixin subtext($opacity: 1) {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  opacity: $opacity;
 }

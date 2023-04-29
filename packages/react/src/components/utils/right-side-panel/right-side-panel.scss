@@ -1,0 +1,63 @@
+@use "../../../variables.scss" as *;
+@use "sass:math";
+
+#side-panel {
+  --side-panel-width: #{calc($calendar-width + $content-padding)};
+}
+
+.screen-x-small #side-panel {
+  --side-panel-width: 100vw;
+}
+
+.side-panel {
+  display: none;
+
+  &.open {
+    flex: 0 1 300px;
+    display: block;
+    border: solid 1px $base-border-color;
+    border-radius: 8px;
+  }
+
+  &.overlap {
+    position: absolute;
+    padding-top: $content-padding;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    background: $base-bg;
+
+    &.x-small {
+      padding-top: 0;
+    }
+
+    &.side-right {
+      right: calc(-1 * var(--side-panel-width));
+      transition: right 400ms;
+    }
+
+    &.open {
+      right: 0;
+      transition: right 400ms ease;
+      border: 2px $base-border-color;
+      border-radius: 0;
+      width: var(--side-panel-width);
+      z-index: 7;
+      box-shadow: 0 0 8px $base-border-color;
+    }
+  }
+}
+
+.open-button {
+  margin-top: $theme-padding;
+  z-index: 6;
+  height: $button-height;
+
+  .dx-icon {
+    color: $accent-color;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}

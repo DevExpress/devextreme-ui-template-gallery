@@ -1,6 +1,7 @@
 import {
   CRMContactDetails,
   CRMContactList,
+  PlanningScheduler,
   PlanningTaskList,
   PlanningTaskDetails,
   AnalyticsDashboard,
@@ -28,6 +29,10 @@ const routes = [
   {
     path: '/planning-task-details',
     element: PlanningTaskDetails,
+  },
+  {
+    path: '/planning-scheduler',
+    element: PlanningScheduler,
   },
   {
     path: '/analytics-dashboard',
