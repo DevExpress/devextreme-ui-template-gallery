@@ -11,14 +11,16 @@ type PopupProps = {
   width: number,
   wrapperAttr: { className: string },
   isSaveDisabled: boolean,
-  changeVisibility: () => void,
+  setVisible: (visible: boolean) => void,
+  onSave: () => void,
 }
 
 export const FormPopup = forwardRef<unknown, React.PropsWithChildren<PopupProps>>(({
   title,
   visible,
   width = 480,
-  changeVisibility,
+  setVisible,
+  onSave,
   wrapperAttr,
   isSaveDisabled,
   children
@@ -26,17 +28,14 @@ export const FormPopup = forwardRef<unknown, React.PropsWithChildren<PopupProps>
   const { isXSmall } = useScreenSize();
   const validationGroup = useRef<ValidationGroup>(null);
 
+  const close = () => {
+    validationGroup.current?.instance.reset();
+    setVisible(false);
+  };
+
   const onCancelClick = useCallback(() => {
-    validationGroup.current?.instance.reset();
-    changeVisibility();
-  }, [changeVisibility]);
-
-  const onSaveClick = useCallback(() => {
-    if (!validationGroup.current?.instance.validate().isValid) return;
-    validationGroup.current?.instance.reset();
-
-    changeVisibility();
-  }, [changeVisibility]);
+    close();
+  }, [close]);
 
   return (
     <Popup
@@ -62,7 +61,7 @@ export const FormPopup = forwardRef<unknown, React.PropsWithChildren<PopupProps>
             stylingMode='contained'
             type='default'
             disabled={isSaveDisabled}
-            onClick={onSaveClick}
+            onClick={onSave}
           />
         </div>
       </ToolbarItem>

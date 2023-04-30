@@ -3,14 +3,14 @@ import TextBox, { Button } from 'devextreme-react/text-box';
 import Validator from 'devextreme-react/validator';
 
 interface PasswordTextBoxProps {
-  value: string,
+  value?: string,
   onValueChange: () => void,
   placeholder?: string,
   stylingMode?: 'outlined' | 'underlined' | 'filled',
   validators?: any[]
 }
 
-export const PasswordTextBox = forwardRef(({ value, onValueChange, placeholder, stylingMode, validators }: PasswordTextBoxProps) => {
+export const PasswordTextBox = forwardRef(({ value = '', onValueChange, placeholder, stylingMode, validators }: PasswordTextBoxProps) => {
   const [isPasswordMode, setIsPasswordMode] = useState(true);
 
   const switchMode = () => {

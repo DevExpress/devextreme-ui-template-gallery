@@ -6,15 +6,21 @@ import Form, { Item, Label } from 'devextreme-react/form';
 import { FormPopup } from '../../utils/form-popup/FormPopup';
 import { PasswordTextBox } from '../../password-text-box/PasswordTextBox';
 
+interface FormData {
+  currentPassword?: string,
+  password?: string,
+  confirmedPassword?: string
+}
+
 const saveNewPassword = (): void => {
   notify({ message: 'Password Changed', position: { at: 'bottom center', my: 'bottom center' } }, 'success');
 };
 
-export const ChangeProfilePasswordForm = ({ visible, onVisibleChange }) => {
+export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
   const formPopupRef = useRef(null);
   const confirmField = useRef(null);
+  const [formData, setFormData] = useState<FormData>({});
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
-  const [formData, setFormData] = useState<Record<string, any>>({});
   // figure out onvisiblechange event emitters
 
   const confirmPasswordValidators = useMemo((): ValidationRule[] => {
@@ -25,13 +31,25 @@ export const ChangeProfilePasswordForm = ({ visible, onVisibleChange }) => {
     }];
   }, [formData]);
 
-  const onFieldChanged = useCallback(
-    // eslint-disable-next-line space-before-function-paren
-    async () => {
+  const onFieldChange = useCallback(
+    () => {
       const formValues = Object.entries(formData);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      setIsSaveDisabled(await (formValues.length != 3 || !!formValues.find(([_, value]) => !value) || !formPopupRef.current?.isValid()));
+      setIsSaveDisabled(
+        formValues.length != 3 ||
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        !!formValues.find(([_, value]) => !value) ||
+        !formPopupRef.current?.isValid()
+      );
     }, [formData]);
+
+  const checkConfirm = useCallback(() => {
+    confirmField.current?.revalidate();
+  }, []);
+
+  const onNewPasswordChange = useCallback(() => {
+    checkConfirm();
+    onFieldChange();
+  }, [checkConfirm, onFieldChange]);
 
   return <FormPopup
     ref={formPopupRef}
@@ -41,7 +59,7 @@ export const ChangeProfilePasswordForm = ({ visible, onVisibleChange }) => {
     wrapperAttr={{ className: 'change-profile-password-popup' }}
     isSaveDisabled={isSaveDisabled}
     onSave={saveNewPassword}
-    onVisibleChange={onVisibleChange}
+    setVisible={setVisible}
   >
     <Form id='form' // #form is id?
       labelMode='outside'

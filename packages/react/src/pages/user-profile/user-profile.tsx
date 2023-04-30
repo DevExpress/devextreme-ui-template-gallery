@@ -8,7 +8,10 @@ import Button from 'devextreme-react/button';
 import ScrollView from 'devextreme-react/scroll-view';
 import { service } from './user-profile-service';
 import { FormPhoto } from '../../components';
+import { ProfileCard } from '../../components/profile-card/ProfileCard';
 import { withLoadPanel } from '../../utils/withLoadPanel';
+import { useScreenSize } from '../../utils/media-query';
+import { ChangeProfilePasswordForm } from '../../components/library/change-profile-password-form/ChangeProfilePasswordForm';
 
 const copyToClipboard = (text) => (evt) => {
   window.navigator.clipboard?.writeText(text);
@@ -37,6 +40,8 @@ export const UserProfile = () => {
   const [basicInfoItems, setBasicInfoItems] = useState(service.getBasicInfoItems());
   const [contactItems, setContactItems] = useState(service.getContactItems(supervisorsList)); //probably move to useEffect
   const [addressItems, setAddressItems] = useState(service.getAddressItems());
+
+  const { isXSmall } = useScreenSize();
 
   const dataChanged = useCallback(() => {
     setIsDataChanged(true);
@@ -129,7 +134,7 @@ export const UserProfile = () => {
             <div className='basic-info-top-item'>
               <FormPhoto
                 link={profileData?.image}
-                // editable
+                editable
                 size={80}
               />
               <div>
@@ -148,12 +153,12 @@ export const UserProfile = () => {
                   text='Change Password'
                   className='change-password-button'
                   stylingMode='contained'
-                  icon={(screen.xSmallScreenChanged | async) ? null : 'lock'} // pipe here
+                  icon={isXSmall ? null : 'lock'} // pipe here
                   onClick={changePassword}
                 />
               </div>
             </div> :
-          </ProfileCard >
+          </ProfileCard>
 
           <ProfileCard className='profile-card contacts-card'
             title='Contacts'
@@ -183,7 +188,7 @@ export const UserProfile = () => {
                 </div>
               </div>
             </div>
-          </ProfileCard >
+          </ProfileCard>
 
           <ProfileCard class='profile-card address-card'
             title='Address'
@@ -206,6 +211,9 @@ export const UserProfile = () => {
       </ScrollView>
     </div>
 
-    <ChangeProfilePasswordForm visible={isChangePasswordPopupOpened}></ChangeProfilePasswordForm >
+    <ChangeProfilePasswordForm
+      visible={isChangePasswordPopupOpened}
+      setVisible={setIsChangedPasswordPopupOpened}
+    />
   </>;
 };
