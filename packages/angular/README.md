@@ -1,27 +1,31 @@
-# Angular
+# DevExtreme UI Template Gallery
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.0.
+This repository includes responsive UI Templates for the most popular UI/UX patterns in web LOB applications.
 
-## Development server
+![DevExtreme UI Template Gallery](/images/ui-template-gallery.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Take a look at the **online** gallery here: [UI Template Gallery](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/crm-contact-list).
 
-## Code scaffolding
+Use the left menu to navigate through the views.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The UI Templates have responsive layouts with DevExtreme UI components. Note that the components use sample data entities without any business logic. You can use these UI Templates in your project and adapt them to your specific business requirements.
 
-## Build
+## License ##
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**DevExtreme UI Template Gallery is released as a MIT-licensed (free and open-source) add-on to DevExtreme.**
 
-## Running unit tests
+Familiarize yourself with the [DevExtreme License](https://js.devexpress.com/Licensing/). [Free trial is available!](http://js.devexpress.com/Buy/)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Get Started
 
-## Running end-to-end tests
+To run these UI templates on your machine, clone this repository and run the following commands in the root folder:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    npm install
+    cd packages/angular
+    npm run start
 
-## Further help
+Open the application on the local server.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## How It is Organized
+
+Navigate to the [Pages](src/app/pages/) folder to get the code for each template.
