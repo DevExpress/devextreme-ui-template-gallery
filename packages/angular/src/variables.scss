@@ -3,6 +3,8 @@ $base-bg-darken-5: var(--base-bg-darken-5);
 $base-bg-darken-4: var(--base-bg-darken-4);
 $base-text-color: var(--base-text-color);
 $base-focus-color: var(--base-focus-color);
+$toolbar-vertical-padding: 16px;
+$content-padding: 16px;
 $side-panel-background: $base-bg-darken-5;
 $background-color: $base-bg;
 $border-color: var(--border-color);
@@ -22,10 +24,12 @@ $toolbar-vertical-padding: 16px;
 $content-padding: 16px;
 $side-panel-min-width: var(--side-panel-min-width);
 $toolbar-margin-bottom: $content-padding;
+$theme-padding: var(--theme-padding);
 $subtitle-text-color: $texteditor-label-color;
 $footer-height: 70px;
 $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 
+$scheduler-toolbar-height: 60px;
 
 @mixin separator() {
   .h-separator {
@@ -89,4 +93,20 @@ $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
   &::before {
     background: $status-color;
   }
+}
+
+@mixin calendar-items-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+@mixin h1-header-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
 }

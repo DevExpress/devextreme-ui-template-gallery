@@ -1,0 +1,19 @@
+<div class='appointment-tooltip planning-calendar-appointment-tooltip'>
+  <div class='title'>{{data.text}}</div>
+  <div class='content'>
+    <div class='date'>
+      <dx-button icon='clock'></dx-button>
+      {{timeString}}
+    </div>
+    <div class='description'>
+      <dx-button icon='textdocument'></dx-button>
+      {{data.description}}
+    </div>
+  </div>
+  <div class='buttons'>
+    <dx-button text='Delete' type='danger'
+               (click)="clickDeleteAppointment.emit($event)"></dx-button>
+    <dx-button text='Edit'
+               type='success'></dx-button>
+  </div>
+</div>

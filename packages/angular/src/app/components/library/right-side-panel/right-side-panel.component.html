@@ -1,0 +1,22 @@
+<div class="right-side-panel"
+     [class.overlapping]="screen.smallScreenChanged | async"
+     [class.open]="isOpened">
+  <div class="side-panel-container">
+    <div class="side-panel-header">
+      <div *ngIf="title" class="side-panel-title">
+        <div class="side-panel-title-text">
+          {{ title }}
+        </div>
+        </div>
+      <dx-button class="open-button"
+                 [icon]="'assets/icons/dock-'+ (isOpened ? 'off' : 'on') + '.svg'"
+                 (click)="toggleOpen()">
+      </dx-button>
+    </div>
+
+    <div class="side-panel-content-wrapper">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,98 @@
+@use "../../../variables.scss" as *;
+@use "sass:math";
+
+@include separator();
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+
+  .view-wrapper {
+    position: relative;
+    flex-direction: column;
+    display: flex;
+    height: inherit;
+
+    .panels {
+      display: flex;
+      flex-wrap: wrap;
+      height: inherit;
+      justify-content: center;
+
+      $calendar-width: 292px;
+
+      left-side-panel {
+        --left-side-panel-width: calc(#{$calendar-width} + #{$content-padding} * 4 );
+
+        &:has(.left-side-panel.overlapping) {
+          --left-side-panel-width: calc(#{$calendar-width} + #{$content-padding} * 2 );
+
+          .left-side-panel-content {
+            padding: 0;
+          }
+        }
+      }
+
+      .left-side-panel-content {
+        padding: 0 $content-padding;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $theme-padding;
+
+        .buttons {
+          display: flex;
+          width: 100%;
+          gap: 16px;
+          margin-top: $theme-padding;
+          padding: 0 $theme-padding;
+
+          .dx-button {
+            width: calc((100% - $theme-padding)/2);
+            font-size: 13px;
+            border-radius: 4px;
+          }
+        }
+
+        .calendar {
+          align-self: center;
+          padding: $content-padding;
+
+          .dx-calendar {
+            width: $calendar-width;
+          }
+        }
+      }
+
+      .scheduler-container {
+        flex: 1;
+        height: inherit;
+        border: 1px grey;
+        border-radius: 8px;
+        min-width: 300px;
+        padding: $content-padding $content-padding $content-padding 0;
+
+        ::ng-deep {
+          .dx-scheduler-header {
+            border-radius: 8px 8px 0 0;
+            height: $scheduler-toolbar-height;
+          }
+
+          .dx-scheduler-appointment-content {
+            color: #333;
+          }
+
+          .dx-scheduler-work-space{
+            border-radius: 0 0 8px 8px;
+          }
+        }
+      }
+
+      .tasks-side-panel-content {
+        min-width: 300px;
+      }
+    }
+  }
+}

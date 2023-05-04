@@ -1,0 +1,63 @@
+@use "../../../../variables.scss" as *;
+@use "sass:math";
+
+:host {
+  --left-side-panel-width: 300px;
+  --transition: 400ms;
+  height: 100%;
+}
+
+.left-side-panel {
+  position: relative;
+  border: 1px solid transparent;
+  height: 100%;
+
+  .side-panel-container {
+    display: flex;
+    height: 100%;
+
+    .side-panel-content-wrapper {
+      padding-top: $content-padding;
+
+      .side-panel-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+
+  .side-panel-content-wrapper {
+    width: 0;
+    transition: width var(--transition);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &.open {
+    .side-panel-content-wrapper {
+      width: var(--left-side-panel-width);
+      padding-left: 0;
+    }
+  }
+
+  &.overlapping {
+    .button-container {
+      margin-top: $content-padding;
+      padding: 0 $content-padding;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 28px + calc($content-padding * 2);
+    }
+
+    .side-panel-content-wrapper {
+      position: absolute;
+      background-color: $base-bg;
+      z-index: 3;
+      height: 100%;
+      left: calc(100% - $content-padding);
+      box-shadow: 8px 0 16px -8px $border-color;
+    }
+  }
+}

@@ -22,6 +22,7 @@ export function getSizeQualifier(width: number) {
 export class ScreenService {
   @Output() changed = new EventEmitter();
   @Output() xSmallScreenChanged = new ReplaySubject<boolean>();
+  @Output() smallScreenChanged = new ReplaySubject<boolean>();
 
   breakpointSubscription: Subscription;
 
@@ -30,6 +31,7 @@ export class ScreenService {
       .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large])
       .subscribe((data) => {
         this.xSmallScreenChanged.next(data.breakpoints[Breakpoints.XSmall]);
+        this.smallScreenChanged.next(data.breakpoints[Breakpoints.Small] || data.breakpoints[Breakpoints.XSmall]);
         this.changed.next(data);
       }
       );

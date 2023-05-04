@@ -22,6 +22,8 @@ export type TaskStatus = (typeof taskStatusList)[number];
 export type Task = {
   activities: Activity[],
   description: string,
+  calendarId?: number,
+  endDate?: Date,
   id: number
   text: string,
   company: string,
@@ -35,6 +37,7 @@ export type Task = {
   parentId: number,
   progress: number,
 };
+
 
 export const newTask: Task = {
   id: null,

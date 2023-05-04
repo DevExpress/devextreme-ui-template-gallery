@@ -1,0 +1,21 @@
+@use "../../../../variables.scss" as *;
+@use "sass:math";
+
+.task-agenda {
+  white-space: normal;
+
+  &:first-child {
+    border-top: solid 1px $border-color;
+  }
+
+  display: flex;
+  border-bottom: solid 1px $border-color;
+
+  .task-content {
+    padding: 0 $content-padding;
+
+    .task-title {
+      font-weight: bold;
+    }
+  }
+}
