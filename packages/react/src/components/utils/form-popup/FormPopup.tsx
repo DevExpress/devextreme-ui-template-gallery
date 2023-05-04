@@ -1,4 +1,5 @@
-import React, { useCallback, useRef, forwardRef } from 'react';
+import './FormPopup.scss';
+import React, { useCallback, useRef, PropsWithChildren, RefObject } from 'react';
 
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
 import ValidationGroup from 'devextreme-react/validation-group';
@@ -8,25 +9,26 @@ import { Button } from 'devextreme-react';
 type PopupProps = {
   title: string,
   visible: boolean,
-  width: number,
-  wrapperAttr: { className: string },
-  isSaveDisabled: boolean,
+  width?: number,
+  wrapperAttr?: { class: string },
+  isSaveDisabled?: boolean,
   setVisible: (visible: boolean) => void,
   onSave: () => void,
+  validationGroup?: RefObject<ValidationGroup>,
 }
 
-export const FormPopup = forwardRef<unknown, React.PropsWithChildren<PopupProps>>(({
+export const FormPopup = ({
   title,
   visible,
   width = 480,
   setVisible,
   onSave,
-  wrapperAttr,
-  isSaveDisabled,
+  wrapperAttr = { class: '' },
+  isSaveDisabled = false,
+  validationGroup = useRef<ValidationGroup>(null),
   children
-}) => {
+}: PropsWithChildren<PopupProps>) => {
   const { isXSmall } = useScreenSize();
-  const validationGroup = useRef<ValidationGroup>(null);
 
   const close = () => {
     validationGroup.current?.instance.reset();
@@ -43,7 +45,7 @@ export const FormPopup = forwardRef<unknown, React.PropsWithChildren<PopupProps>
       visible={visible}
       fullScreen={isXSmall}
       width={width}
-      wrapperAttr={{ ...wrapperAttr, class: `${wrapperAttr.className} form-popup` }}
+      wrapperAttr={{ ...wrapperAttr, class: `${wrapperAttr?.class} form-popup` }}
       height='auto'
     >
       <ToolbarItem
@@ -71,4 +73,4 @@ export const FormPopup = forwardRef<unknown, React.PropsWithChildren<PopupProps>
       </ValidationGroup>
     </Popup>
   );
-});
+};

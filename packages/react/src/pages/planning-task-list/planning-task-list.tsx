@@ -242,7 +242,7 @@ export const PlanningTaskList = () => {
       {!loading && isDataGrid && <TaskListGrid dataSource={gridData} ref={gridRef} />}
       {!loading && isKanban && <TaskListKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
       {!loading && view === ganttView && <TaskListGantt dataSource={filteredData} ref={ganttRef} />}
-      <FormPopup title='New Task' visible={popupVisible} changeVisibility={changePopupVisibility}>
+      <FormPopup title='New Task' visible={popupVisible} setVisible={changePopupVisibility} onSave={changePopupVisibility}>
         <TaskFormDetails subjectField data={newTaskData} editing onDataChanged={onDataChanged} />
       </FormPopup>
     </div>

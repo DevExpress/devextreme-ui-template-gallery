@@ -37,6 +37,7 @@ $theme: null !default;
   --tooltip-danger-button-color: #{$tooltip-danger-button-color};
   --tooltip-success-button-color: #{$tooltip-success-button-color};
   --theme-padding: #{$theme-padding};
+  --card-background: #{$base-bg};
   --side-panel-background: var(--base-bg-darken-5);
   --border-color: #{$base-border-color};
   --accent-color: #{$base-accent};
@@ -55,4 +56,8 @@ $theme: null !default;
   --footer-left-padding: #{$footer-left-padding};
   --popup-toolbar-item-spacing: #{$material-popup-toolbar-item-spacing};
   --drop-down-gnrc-button-height: #{$material-base-inline-widget-height};
+
+  @if $theme == dark {
+    --card-background: var(--base-bg-darken-5);
+  }
 }

@@ -8,11 +8,11 @@ const fieldRender = (data) => {
     className='pictured-item-select-field'>
     <img alt={data.name}
       className='pictured-item-image'
-      src='data:image/png;base64,{{data.image}}'
+      src={`data:image/png;base64,${data.image}`}
     />
     <TextBox
       hoverStateEnabled={false}
-      inputAttr={{ class: 'pictured-item-editor-input' }}
+      inputAttr={{ picturedItemEditorInput: '' }}
       readOnly
       value={data.name}
     />
@@ -20,13 +20,14 @@ const fieldRender = (data) => {
 };
 
 const ItemRender = (data) => {
-  return <div>
-    <img alt='data.name'
+  return <>
+    <img alt={data.name}
       className='pictured-item-image'
       height='20px'
-      src='data:image/png;base64,{{data.image}}' />
+      src={`data:image/png;base64,${data.image}`}
+    />
     {data.name}
-  </div>;
+  </>;
 };
 
 export const PicturedItemSelectBox = ({ value, label = '', items = [], onValueChange }) => {
@@ -41,7 +42,7 @@ export const PicturedItemSelectBox = ({ value, label = '', items = [], onValueCh
     stylingMode='outlined'
     labelMode='hidden'
     width='100%'
-    fieldTemplate={fieldRender}
+    fieldRender={fieldRender}
     dropDownOptions={{ wrapperAttr: { class: 'pictured-item-select-box-dropdown' } }}
   />;
 };

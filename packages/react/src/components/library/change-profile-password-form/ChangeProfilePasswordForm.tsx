@@ -3,8 +3,10 @@ import React, { useState, useCallback, useMemo, useRef } from 'react';
 import notify from 'devextreme/ui/notify';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
 import Form, { Item, Label } from 'devextreme-react/form';
+import Validator from 'devextreme-react/validator';
 import { FormPopup } from '../../utils/form-popup/FormPopup';
-import { PasswordTextBox } from '../../password-text-box/PasswordTextBox';
+import { PasswordTextBox } from '../password-text-box/PasswordTextBox';
+import { ValidationGroup } from 'devextreme-react';
 
 interface FormData {
   currentPassword?: string,
@@ -17,11 +19,10 @@ const saveNewPassword = (): void => {
 };
 
 export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
-  const formPopupRef = useRef(null);
-  const confirmField = useRef(null);
+  const validationGroup = useRef<ValidationGroup>(null);
+  const confirmField = useRef<Validator>(null);
   const [formData, setFormData] = useState<FormData>({});
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
-  // figure out onvisiblechange event emitters
 
   const confirmPasswordValidators = useMemo((): ValidationRule[] => {
     return [{
@@ -36,41 +37,63 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
       const formValues = Object.entries(formData);
       setIsSaveDisabled(
         formValues.length != 3 ||
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        !!formValues.find(([_, value]) => !value) ||
-        !formPopupRef.current?.isValid()
+        !!formValues.find(([, value]) => !value) ||
+        !validationGroup.current?.instance.validate().isValid
       );
     }, [formData]);
 
   const checkConfirm = useCallback(() => {
-    confirmField.current?.revalidate();
+    confirmField.current?.instance.validate();
   }, []);
 
-  const onNewPasswordChange = useCallback(() => {
+  const onCurrentPasswordChange = useCallback((value) => {
+    setFormData({
+      ...formData,
+      currentPassword: value
+    });
+
+    onFieldChange();
+  }, []);
+
+  const onConfirmPasswordChange = useCallback((value) => {
+    setFormData({
+      ...formData,
+      confirmedPassword: value
+    });
+
+    onFieldChange();
+  }, []);
+
+  const onNewPasswordChange = useCallback((value) => {
+    setFormData({
+      ...formData,
+      password: value
+    });
+
     checkConfirm();
     onFieldChange();
   }, [checkConfirm, onFieldChange]);
 
   return <FormPopup
-    ref={formPopupRef}
+    validationGroup={validationGroup}
     title='Change Password'
     visible={visible}
     width={360}
-    wrapperAttr={{ className: 'change-profile-password-popup' }}
+    wrapperAttr={{ class: 'change-profile-password-popup' }}
     isSaveDisabled={isSaveDisabled}
     onSave={saveNewPassword}
     setVisible={setVisible}
   >
-    <Form id='form' // #form is id?
+    <Form id='form'
       labelMode='outside'
       showColonAfterLabel
       labelLocation='top'>
       <Item>
         <Label text='Current Password' />
         <PasswordTextBox
-          value={formData['currentPassword']} // double binding
+          value={formData['currentPassword']}
           placeholder='Current Password'
-          onValueChange={onFieldChange}
+          onValueChange={onCurrentPasswordChange}
         />
       </Item>
 
@@ -81,7 +104,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
       <Item>
         <Label text='Password' />
         <PasswordTextBox
-          value={formData['password']} // double binding
+          value={formData['password']}
           placeholder='Password'
           onValueChange={onNewPasswordChange}
         />
@@ -94,7 +117,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
           value={formData['confirmedPassword']}
           placeholder='Confirm Password'
           validators={confirmPasswordValidators}
-          onValueChange={onFieldChange}
+          onValueChange={onConfirmPasswordChange}
         />
       </Item>
     </Form>

@@ -3,7 +3,7 @@
 .dx-texteditor-with-floating-label .status-editor-field .status-indicator {
   align-self: flex-end;
 
-  &::ng-deep .status {
+  .status {
     display: inline;
   }
 }
@@ -17,13 +17,11 @@
     padding-left: $list-padding-left;
   }
 
-  ::ng-deep {
-    .status {
-      display: flex;
-    }
+  .status {
+    display: flex;
+  }
 
-    .status-input.status-input {
-      padding-left: 0;
-    }
+  .status-input[statuseditorinput][readonly] {
+    padding-left: 0;
   }
 }

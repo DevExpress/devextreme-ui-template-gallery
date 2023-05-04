@@ -75,6 +75,8 @@ function emitChangedValue(changedData: SimpleObject) {
   border: 1px solid $border-color;
   border-radius: 50%;
   margin-right: 8px;
+  object-fit: cover;
+  object-position: top;
 }
 
 :global(.pictured-item-select-box-dropdown .dx-list-item-content),
@@ -84,8 +86,9 @@ function emitChangedValue(changedData: SimpleObject) {
 }
 
 .pictured-item-select-field {
-  :deep(.pictured-item-editor-input) {
+  :deep(.pictured-item-editor-input.dx-texteditor-input) {
     padding-left: 0;
+    color: $base-text-color;
   }
 
   .pictured-item-image {

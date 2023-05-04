@@ -1,14 +1,15 @@
 @use "../../../variables.scss" as *;
 @use "sass:math";
 
-.panel {
+.profile-card-panel {
   @include shadow();
 
   width: 100%;
   padding: 0 0 $content-padding 0;
   border-radius: 8px;
+  background-color: var(--card-background);
 
-  .panel-header {
+  .profile-card-panel-header {
     padding: $content-padding;
     border-bottom: 1px solid $border-color;
   }
@@ -17,24 +18,22 @@
     display: flex;
   }
 
-  &::ng-deep {
-    [top-item] {
+  .profile-card-top-item {
+    display: flex;
+    min-height: 50px;
+
+    & > div {
       display: flex;
-      min-height: 50px;
-
-      & > div {
-        display: flex;
-        flex-flow: column;
-        gap: 5px;
-      }
-    }
-
-    .dx-field-item {
-      padding-top: calc($content-padding / 2);
-      padding-right: 0;
+      flex-flow: column;
+      gap: 5px;
     }
   }
 
+  .form-container .dx-form .dx-field-item {
+    padding-top: calc($content-padding / 2);
+    padding-right: 0;
+  }
+  
   .form-container {
     margin: calc($content-padding * 2) $content-padding 0;
   }

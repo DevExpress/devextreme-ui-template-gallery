@@ -82,4 +82,15 @@ export const navigation = [
       },
     ],
   },
+  {
+    text: 'Common',
+    icon: 'box',
+    path: '',
+    items: [
+      {
+        text: 'User Profile',
+        path: '/user-profile',
+      }
+    ]
+  },
 ];

@@ -141,7 +141,7 @@ $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 
   &.dx-texteditor,
   &.dx-texteditor.dx-editor-filled {
-    .status-editor-input[readonly] {
+    input[statuseditorinput][readonly] {
       color: $status-color;
       padding-left: 0;
     }

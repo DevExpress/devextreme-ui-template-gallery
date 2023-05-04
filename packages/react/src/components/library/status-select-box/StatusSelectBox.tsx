@@ -3,29 +3,29 @@ import React from 'react';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
 import type { EditorStyle, LabelMode } from 'devextreme/common';
-import { ContactStatus } from '../utils/contact-status/ContactStatus';
+import { ContactStatus } from '../../utils/contact-status/ContactStatus';
+import { CONTACT_STATUS_LIST } from '../../../shared/constants';
 
 interface StatusSelectBoxProps {
-  value: any,
-  items?: any[],
+  value: string,
   readOnly?: boolean,
   stylingMode?: EditorStyle,
   labelMode?: LabelMode,
-  onValueChange: () => void,
+  onValueChange: (value) => void,
 }
 
 const FieldRender = (data) => {
   return <div className='status-editor-field'>
     <ContactStatus
-      value={data}
-      text='indicator'
+      text={data}
       showText={false}
+      contentClass='status-indicator'
     />
     <TextBox
-      className='status-{{data | lowercase}}'
+      className={`status-${data?.toLowerCase()}`}
       value={data}
       hoverStateEnabled={false}
-      inputAttr={{ class: 'status-input status-editor-input' }}
+      inputAttr={{ class: 'status-input', statusEditorInput: '' }}
       readOnly
     />
   </div>;
@@ -33,13 +33,12 @@ const FieldRender = (data) => {
 
 const ItemRender = (item) => {
   return <div>
-    <ContactStatus value={item} />
+    <ContactStatus text={item} />
   </div>;
 };
 
 export const StatusSelectBox = ({
   value,
-  items = [],
   readOnly,
   stylingMode = 'outlined',
   labelMode = 'floating',
@@ -48,8 +47,8 @@ export const StatusSelectBox = ({
   return <SelectBox
     label='Status'
     value={value}
+    items={CONTACT_STATUS_LIST}
     onValueChange={onValueChange}
-    items={items}
     itemRender={ItemRender}
     readOnly={readOnly}
     stylingMode={stylingMode}

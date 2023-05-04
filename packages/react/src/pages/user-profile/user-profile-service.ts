@@ -1,3 +1,5 @@
+import { ValidationRule } from 'devextreme/ui/validation_rules';
+
 export const service = {
   getBasicInfoItems() {
     return [
@@ -49,7 +51,7 @@ export const service = {
         dataField: 'email',
         validators: [
           { type: 'email' }
-        ]
+        ] as ValidationRule[]
       },
       {
         dataField: 'domainUsername',

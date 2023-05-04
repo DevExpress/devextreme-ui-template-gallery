@@ -2,7 +2,7 @@
 
 $gap-padding: 24px;
 
-:host {
+.view-host {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -18,9 +18,11 @@ $gap-padding: 24px;
   flex: 0.5;
 }
 
-:host-context(.screen-small, .screen-x-small) .profile-card {
-  min-width: 100%;
-  flex: 1;
+.screen-small, .screen-x-small {
+  .profile-card {
+    min-width: 100%;
+    flex: 1;
+  }
 }
 
 .view-wrapper {
@@ -43,7 +45,7 @@ $gap-padding: 24px;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
-    dx-button[text="Cancel"] {
+    .dx-button.cancel-button {
       margin-right: 5px;
     }
   }
@@ -73,19 +75,19 @@ $gap-padding: 24px;
     .with-clipboard-copy {
       display: flex;
 
-      dx-button {
+      .dx-button {
         max-width: 18px;
         min-width: 18px;
         height: 18px;
-        margin-left: 8px;
+        margin-left: 5px;
 
-        &::ng-deep .dx-icon:active {
+        .dx-icon:active {
           color: $accent-color;
         }
       }
     }
 
-    .copy-clipboard-button::ng-deep {
+    .copy-clipboard-button {
       .dx-icon {
         color: $subtitle-text-color;
       }
@@ -97,10 +99,10 @@ $gap-padding: 24px;
     min-width: 100%;
 
     .basic-info-top-item {
-      form-photo {
+      .form-photo-view {
         margin-right: $content-padding;
 
-        &::ng-deep .photo {
+        .form-photo {
           border-radius: 50%;
         }
       }
@@ -112,10 +114,10 @@ $gap-padding: 24px;
   }
 
   .contacts-card .image-wrapper {
-    background-color: #ffebee;
+    background-color: rgba(244, 67, 54, 0.2);
   }
 
   .address-card .image-wrapper {
-    background-color: #e1f5fe;
+    background-color: rgba(3, 169, 244, 0.2);
   }
 }

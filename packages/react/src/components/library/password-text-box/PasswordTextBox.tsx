@@ -1,16 +1,17 @@
 import React, { useState, forwardRef } from 'react';
 import TextBox, { Button } from 'devextreme-react/text-box';
 import Validator from 'devextreme-react/validator';
+import { ValidationRule } from 'devextreme/ui/validation_rules';
 
 interface PasswordTextBoxProps {
   value?: string,
-  onValueChange: () => void,
+  onValueChange: (value) => void,
   placeholder?: string,
   stylingMode?: 'outlined' | 'underlined' | 'filled',
-  validators?: any[]
+  validators?: ValidationRule[]
 }
 
-export const PasswordTextBox = forwardRef(({ value = '', onValueChange, placeholder, stylingMode, validators }: PasswordTextBoxProps) => {
+export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({ value = '', onValueChange, placeholder, stylingMode = 'outlined', validators }, ref) => {
   const [isPasswordMode, setIsPasswordMode] = useState(true);
 
   const switchMode = () => {
@@ -33,7 +34,7 @@ export const PasswordTextBox = forwardRef(({ value = '', onValueChange, placehol
         onClick: switchMode
       }}
     />
-    <Validator validationRules={
+    <Validator ref={ref} validationRules={
       validators ||
       [{
         type: 'required',
