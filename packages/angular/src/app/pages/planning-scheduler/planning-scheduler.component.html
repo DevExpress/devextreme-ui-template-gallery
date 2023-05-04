@@ -4,7 +4,10 @@
       <div class="left-side-panel-content">
         <div class='buttons'>
           <dx-button text='Today'></dx-button>
-          <dx-button text='Create event' type='default'></dx-button>
+          <dx-button text='Create event'
+                     type='default'
+                     (click)="showAppointmentCreationForm()"
+          ></dx-button>
         </div>
         <div class='calendar'>
           <dx-calendar [value]="currentDate" (valueChange)="onSetDate" ></dx-calendar>
@@ -48,12 +51,10 @@
     <right-side-panel *ngIf="currentView === 'month'"
       class="right-side-panel"
       [isOpened]="isRightPanelOpen"
-      [title]="selectedDate | date: 'EE, d MMMM'"
+      [title]="selectedDate | date: 'EE, MMMM d'"
       (openedChange)="toggleRightPanelOpen($event)"
     >
-      <div class="tasks-side-panel-content">
-        <tasks-agenda-list [tasks]="selectedDateTasks"></tasks-agenda-list>
-      </div>
+      <agenda [tasks]="selectedDateTasks" [resources]="resourcesList"></agenda>
     </right-side-panel>
   </div>
 </div>

@@ -3,7 +3,7 @@ import {
   NgModule,
   Output,
   Input,
-  EventEmitter,
+  EventEmitter, HostBinding,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -25,7 +25,17 @@ export class RightSidePanelComponent {
 
   @Output() openedChange = new EventEmitter<boolean>();
 
-  constructor(protected screen: ScreenService) {}
+  @HostBinding('class.overlapping') get overlapping() { return !this.isLarge; };
+
+  @HostBinding('class.open') get open() { return this.isOpened; };
+
+  isLarge = this.screen.sizes['screen-large'];
+
+  constructor(protected screen: ScreenService) {
+    screen.screenChanged.subscribe(({isLarge, isXLarge}) => {
+      this.isLarge = isLarge || isXLarge;
+    });
+  }
 
 
   toggleOpen = () => {

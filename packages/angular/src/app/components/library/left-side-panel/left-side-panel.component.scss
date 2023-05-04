@@ -2,7 +2,7 @@
 @use "sass:math";
 
 :host {
-  --left-side-panel-width: 300px;
+  --left-side-panel-width: 320px;
   --transition: 400ms;
   height: 100%;
 }
@@ -17,8 +17,6 @@
     height: 100%;
 
     .side-panel-content-wrapper {
-      padding-top: $content-padding;
-
       .side-panel-content {
         display: flex;
         flex-direction: column;
@@ -42,21 +40,23 @@
   }
 
   &.overlapping {
+    --button-height: 28px;
+
     .button-container {
-      margin-top: $content-padding;
-      padding: 0 $content-padding;
       display: flex;
       flex-direction: row;
       align-items: center;
-      height: 28px + calc($content-padding * 2);
+      height: calc(var(--button-height) + $content-padding * 2);
     }
 
     .side-panel-content-wrapper {
       position: absolute;
       background-color: $base-bg;
       z-index: 3;
-      height: 100%;
-      left: calc(100% - $content-padding);
+      top: calc(-1 * var(--theme-padding));
+      left: var(--button-height);
+      padding-top: var(--theme-padding);
+      height: calc(100% + $content-padding * 2);
       box-shadow: 8px 0 16px -8px $border-color;
     }
   }

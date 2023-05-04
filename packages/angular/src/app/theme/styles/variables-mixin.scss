@@ -31,6 +31,7 @@ $theme-padding: $material-button-horizontal-padding;
   --base-bg-darken-4: #{$base-bg-darken-4};
   --background-color: var(--base-bg);
   --card-background: #{$base-bg};
+  --calendar-width: 292px;
 
   @if $theme == dark {
     --card-background: var(--base-bg-darken-5);

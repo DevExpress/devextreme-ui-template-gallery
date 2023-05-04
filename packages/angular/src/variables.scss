@@ -21,7 +21,6 @@ $footer-left-padding: var(--footer-left-padding);
 $list-item-horizontal-padding: var(--list-item-horizontal-padding);
 $header-toolbar-vertical-padding: 10px;
 $toolbar-vertical-padding: 16px;
-$content-padding: 16px;
 $side-panel-min-width: var(--side-panel-min-width);
 $toolbar-margin-bottom: $content-padding;
 $theme-padding: var(--theme-padding);
@@ -103,10 +102,36 @@ $scheduler-toolbar-height: 60px;
   line-height: 16px;
 }
 
+@mixin description-text($opacity) {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  opacity: $opacity;
+}
+
 @mixin h1-header-text {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 18px;
+}
+
+@mixin h2-header-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+@mixin subtext($opacity: 1) {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  opacity: $opacity;
 }

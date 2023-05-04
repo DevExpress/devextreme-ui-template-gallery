@@ -1,18 +1,18 @@
 import {
   Component, OnInit, NgModule, ViewChild
 } from '@angular/core';
+import DataSource from 'devextreme/data/data_source';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
-import {DxSchedulerComponent, DxSchedulerModule} from 'devextreme-angular/ui/scheduler';
+import { DxSchedulerComponent, DxSchedulerModule } from 'devextreme-angular/ui/scheduler';
 import { DxCalendarModule } from 'devextreme-angular/ui/calendar';
 import { Task } from 'src/app/types/task';
-import {DataService, ScreenService} from 'src/app/services';
+import { DataService, ScreenService } from 'src/app/services';
 import { CalendarListModule } from 'src/app/components/library/calendar-list/calendar-list.component';
 import { LeftSidePanelModule } from 'src/app/components/library/left-side-panel/left-side-panel.component';
 import { RightSidePanelModule } from 'src/app/components/library/right-side-panel/right-side-panel.component';
-import { TasksAgendaListModule } from 'src/app/components/library/tasks-agenda-list/tasks-agenda-list.component';
-import DataSource from 'devextreme/data/data_source';
-import {AppointmentTooltipModule} from "../../components/library/appointment-tooltip/appointment-tooltip.component";
+import { AppointmentTooltipModule } from "../../components/library/appointment-tooltip/appointment-tooltip.component";
+import { AgendaModule } from "../../components/library/agenda/agenda.component";
 
 @Component({
   templateUrl: './planning-scheduler.component.html',
@@ -48,11 +48,13 @@ export class PlanningSchedulerComponent implements OnInit {
   ngOnInit(): void {
     this.service.getSchedulerTasks().subscribe((data) => {
       this.tasks = new DataSource(data);
+      this.repaintScheduler();
     })
   }
 
   openRightPanelOpen() {
-        this.isRightPanelOpen = true;
+    this.isRightPanelOpen = true;
+    this.repaintScheduler();
   }
 
   onSetDate = (date) => {
@@ -68,7 +70,9 @@ export class PlanningSchedulerComponent implements OnInit {
     if (this.currentView === 'month') {
       this.selectedDate = startDate;
       this.selectedDateTasks = this.tasks.items().filter((task) => task.startDate >= startDate && task.startDate < endDate);
-      this.openRightPanelOpen();
+      if(this.selectedDateTasks.length > 1) {
+        this.openRightPanelOpen();
+      }
     }
   };
 
@@ -81,10 +85,19 @@ export class PlanningSchedulerComponent implements OnInit {
     this.tasks?.load();
   }
 
+  repaintScheduler() {
+    setTimeout(() => this.schedulerRef?.instance.repaint(), 0);
+  }
+
   toggleRightPanelOpen(event: boolean) {
     this.isRightPanelOpen = event;
-    setTimeout(() => this.schedulerRef?.instance.repaint(), 400);
+    this.repaintScheduler();
   }
+
+  showAppointmentCreationForm() {
+    this.schedulerRef?.instance.showAppointmentPopup();
+  }
+
 }
 
 @NgModule({
@@ -97,7 +110,7 @@ export class PlanningSchedulerComponent implements OnInit {
     CalendarListModule,
     LeftSidePanelModule,
     RightSidePanelModule,
-    TasksAgendaListModule,
+    AgendaModule,
   ],
   providers: [],
   exports: [],

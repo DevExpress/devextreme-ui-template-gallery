@@ -23,15 +23,23 @@ export class ScreenService {
   @Output() changed = new EventEmitter();
   @Output() xSmallScreenChanged = new ReplaySubject<boolean>();
   @Output() smallScreenChanged = new ReplaySubject<boolean>();
+  @Output() screenChanged = new ReplaySubject<{ isXSmall: boolean, isSmall: boolean, isMedium: boolean, isLarge: boolean, isXLarge: boolean }>();
 
   breakpointSubscription: Subscription;
 
   constructor(private breakpointObserver$: BreakpointObserver) {
     this.breakpointSubscription = this.breakpointObserver$
-      .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large])
+      .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
       .subscribe((data) => {
         this.xSmallScreenChanged.next(data.breakpoints[Breakpoints.XSmall]);
         this.smallScreenChanged.next(data.breakpoints[Breakpoints.Small] || data.breakpoints[Breakpoints.XSmall]);
+        this.screenChanged.next({
+          isXSmall: data.breakpoints[Breakpoints.XSmall],
+          isSmall: data.breakpoints[Breakpoints.Small],
+          isMedium: data.breakpoints[Breakpoints.Medium],
+          isLarge: data.breakpoints[Breakpoints.Large],
+          isXLarge: data.breakpoints[Breakpoints.XLarge]
+        });
         this.changed.next(data);
       }
       );
