@@ -210,6 +210,7 @@ body {
   }
 }
 
+.item-editor-field .item-field,
 .item-field {
   &.item-open {
     @include item-field(#505ed9);

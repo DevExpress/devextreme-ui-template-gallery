@@ -90,6 +90,14 @@ $gap-padding: 24px;
     }
 
     .copy-clipboard-button {
+      background-color: transparent;
+      border-radius: unset;
+      border-color: transparent;
+
+      .dx-button-content {
+        padding: 0;
+      }
+      
       .dx-icon {
         color: $subtitle-text-color;
       }
