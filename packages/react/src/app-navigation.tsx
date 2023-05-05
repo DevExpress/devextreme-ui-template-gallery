@@ -79,17 +79,6 @@ export const navigation = [
       {
         text: 'User Profile',
         path: '/user-profile',
-      },
-    ],
-  },
-  {
-    text: 'Common',
-    icon: 'box',
-    path: '',
-    items: [
-      {
-        text: 'User Profile',
-        path: '/user-profile',
       }
     ]
   },
