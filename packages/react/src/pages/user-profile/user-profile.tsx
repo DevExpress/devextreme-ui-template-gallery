@@ -232,7 +232,7 @@ export const UserProfile = () => {
     setAddressItems(service.getAddressItems());
   }, []);
 
-  return <div className='view-host'>
+  return <div className='view-host user-profile'>
     <div className='view-wrapper'>
       <Toolbar className={isContentScrolled ? 'scrolled' : ''}>
         <Item location='before'>
