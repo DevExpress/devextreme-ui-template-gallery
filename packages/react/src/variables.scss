@@ -34,34 +34,21 @@ $toolbar-margin-bottom: $content-padding;
 
 $subtitle-text-color: $texteditor-label-color;
 $footer-height: 70px;
-
-@mixin separator() {
-  .separator {
-    height: 24px;
-    width: 1px;
-    background: $base-border-color;
-
-    .dx-toolbar-menu-section & {
-      height: 1px;
-      width: auto;
-    }
-  }
-}
 $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 
 @mixin separator() {
   .h-separator {
     height: 1px;
     width: auto;
-    background: $border-color;
+    background: $base-border-color;
   }
 
   .separator {
     height: 24px;
     width: 1px;
-    background: $border-color;
+    background: $base-border-color;
 
-    ::ng-deep .dx-toolbar-menu-section & {
+    .dx-toolbar-menu-section & {
       height: 1px;
       width: auto;
     }
