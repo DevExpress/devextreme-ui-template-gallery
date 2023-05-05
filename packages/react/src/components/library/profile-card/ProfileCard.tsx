@@ -10,11 +10,11 @@ import { FieldDataChangedEvent } from 'devextreme/ui/form';
 export interface ProfileCardItem {
   dataField: string,
   editorType?: string,
-  editorOptions?: Record<string, any>,
+  editorOptions?: Record<string, string | string[] | Date | undefined>,
   colSpan?: number,
   label?: string,
   validators?: ValidationRule[],
-  itemsList?: any,
+  itemsList?: Record<string, string>[],
 }
 
 interface ProfileCardProps {

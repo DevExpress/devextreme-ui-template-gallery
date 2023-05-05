@@ -3,6 +3,13 @@ import React from 'react';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
 
+interface PictureItemSelectBoxProps {
+  value: string;
+  label?: string;
+  items?: Record<string, string>[];
+  onValueChange?: (value) => void;
+}
+
 const fieldRender = (data) => {
   return <div
     className='pictured-item-select-field'>
@@ -30,7 +37,7 @@ const ItemRender = (data) => {
   </>;
 };
 
-export const PicturedItemSelectBox = ({ value, label = '', items = [], onValueChange }) => {
+export const PicturedItemSelectBox = ({ value, label = '', items = [], onValueChange }: PictureItemSelectBoxProps) => {
   return <SelectBox
     className='pictured-item-select-box'
     value={value}
