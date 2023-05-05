@@ -13,7 +13,7 @@ type PopupProps = {
   wrapperAttr?: { class: string },
   isSaveDisabled?: boolean,
   setVisible: (visible: boolean) => void,
-  onSave: () => void,
+  onSave?: () => void,
   validationGroup?: RefObject<ValidationGroup>,
 }
 
@@ -37,7 +37,14 @@ export const FormPopup = ({
 
   const onCancelClick = useCallback(() => {
     close();
-  }, [close]);
+  }, [close, validationGroup]);
+
+  const onSaveClick = useCallback(() => {
+    if (!validationGroup.current?.instance.validate().isValid) return;
+
+    onSave && onSave();
+    close();
+  }, [validationGroup]);
 
   return (
     <Popup
@@ -63,7 +70,7 @@ export const FormPopup = ({
             stylingMode='contained'
             type='default'
             disabled={isSaveDisabled}
-            onClick={onSave}
+            onClick={onSaveClick}
           />
         </div>
       </ToolbarItem>
