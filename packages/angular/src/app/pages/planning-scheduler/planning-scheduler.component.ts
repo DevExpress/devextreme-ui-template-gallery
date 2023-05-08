@@ -3,16 +3,20 @@ import {
 } from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import { CommonModule } from '@angular/common';
-import { DxButtonModule } from 'devextreme-angular/ui/button';
-import { DxSchedulerComponent, DxSchedulerModule } from 'devextreme-angular/ui/scheduler';
-import { DxCalendarModule } from 'devextreme-angular/ui/calendar';
+import {
+  DxCalendarModule,
+  DxButtonModule,
+  DxTooltipComponent,
+  DxTooltipModule,
+  DxSchedulerModule,
+  DxSchedulerComponent
+} from "devextreme-angular";
 import { Task } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
-import { CalendarListModule } from 'src/app/components/library/calendar-list/calendar-list.component';
-import { LeftSidePanelModule } from 'src/app/components/library/left-side-panel/left-side-panel.component';
-import { RightSidePanelModule } from 'src/app/components/library/right-side-panel/right-side-panel.component';
-import { AgendaItem, AgendaModule } from "../../components/library/agenda/agenda.component";
-import { DxTooltipComponent, DxTooltipModule } from "devextreme-angular";
+import { CalendarListModule } from 'src/app/components/utils/calendar-list/calendar-list.component';
+import { LeftSidePanelModule } from 'src/app/components/utils/left-side-panel/left-side-panel.component';
+import { RightSidePanelModule } from 'src/app/components/utils/right-side-panel/right-side-panel.component';
+import { AgendaItem, AgendaModule } from "../../components/utils/agenda/agenda.component";
 import { ApplyPipeModule } from "../../pipes/apply.pipe";
 import { SchedulerTooltipModule } from "../../components/library/scheduler-tooltip/scheduler-tooltip.component";
 
