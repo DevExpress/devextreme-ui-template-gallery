@@ -3,21 +3,20 @@
 
 .calendar-list::ng-deep {
   width: 100%;
-  // padding: 16px;
 
-  .dx-list-group-header{
+  .dx-list-group-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-style: none;
     flex-direction: row-reverse;
 
-    .dx-inkripple{
+    .dx-inkripple {
       border-radius: 4px;
     }
   }
 
-  .list-header{
+  .list-header {
     display: flex;
     vertical-align: middle;
     align-items: center;

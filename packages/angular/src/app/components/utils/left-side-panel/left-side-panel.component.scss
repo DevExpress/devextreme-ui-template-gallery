@@ -1,9 +1,9 @@
 @use "../../../../variables.scss" as *;
-@use "sass:math";
 
 :host {
   --left-side-panel-width: 320px;
   --transition: 400ms;
+
   height: 100%;
 }
 

@@ -32,7 +32,6 @@
     z-index: 3;
     right: 0;
     top: 0;
-
     width: var(--contact-side-panel-width);
 
     &:not(.open) {
@@ -96,8 +95,3 @@
     padding-left: $toolbar-vertical-padding;
   }
 }
-
-
-
-
-

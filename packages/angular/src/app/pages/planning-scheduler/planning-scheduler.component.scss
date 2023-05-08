@@ -36,7 +36,7 @@
           padding: 0 $theme-padding;
 
           .dx-button {
-            width: calc((100% - $theme-padding)/2);
+            width: calc((100% - $theme-padding) / 2);
             font-size: 13px;
             border-radius: 4px;
           }
@@ -72,10 +72,6 @@
             border-radius: 0 0 8px 8px;
           }
         }
-      }
-
-      .tasks-side-panel-content {
-        // min-width: 300px;
       }
     }
   }
