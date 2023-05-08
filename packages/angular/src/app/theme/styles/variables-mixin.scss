@@ -24,6 +24,8 @@ $base-text-color-alpha: rgba($base-text-color, alpha($base-text-color) * 0.7);
 $side-panel-min-width: 48px;
 $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 $theme-padding: $material-button-horizontal-padding;
+$tooltip-danger-button-color: color.change($base-danger, $alpha: 0.1);
+$tooltip-success-button-color: color.change($base-success, $alpha: 0.1);
 
 :root {
   --base-bg: #{$base-bg};
@@ -55,4 +57,6 @@ $theme-padding: $material-button-horizontal-padding;
   --popup-toolbar-item-spacing: #{$material-popup-toolbar-item-spacing};
   --drop-down-gnrc-button-height: #{$material-base-inline-widget-height};
   --theme-padding: #{$theme-padding};
+  --tooltip-danger-button-color: #{$tooltip-danger-button-color};
+  --tooltip-success-button-color: #{$tooltip-success-button-color};
 }

@@ -7,9 +7,23 @@
   flex-direction: column;
   height: 100%;
 
-  &:not(.overlapping).open .right-side-panel {
-    border: 1px solid $border-color;
-    border-radius: 8px;
+  &:not(.overlapping) {
+    .right-side-panel {
+      .side-panel-content-wrapper,
+      .side-panel-title {
+        display: none;
+      }
+    }
+
+    &.open .right-side-panel {
+      border: 1px solid $border-color;
+      border-radius: 8px;
+
+      .side-panel-content-wrapper,
+      .side-panel-title {
+        display: initial;
+      }
+    }
   }
 
   &.overlapping {
@@ -30,7 +44,7 @@
     }
 
     &.open .right-side-panel {
-      box-shadow: -8px 0 16px -8px $border-color;
+      box-shadow: 0 0 8px $border-color;
     }
   }
 

@@ -11,8 +11,12 @@ import { DataService, ScreenService } from 'src/app/services';
 import { CalendarListModule } from 'src/app/components/library/calendar-list/calendar-list.component';
 import { LeftSidePanelModule } from 'src/app/components/library/left-side-panel/left-side-panel.component';
 import { RightSidePanelModule } from 'src/app/components/library/right-side-panel/right-side-panel.component';
-import { AppointmentTooltipModule } from "../../components/library/appointment-tooltip/appointment-tooltip.component";
-import { AgendaModule } from "../../components/library/agenda/agenda.component";
+import { AgendaItem, AgendaModule } from "../../components/library/agenda/agenda.component";
+import { DxTooltipComponent, DxTooltipModule } from "devextreme-angular";
+import { ApplyPipeModule } from "../../pipes/apply.pipe";
+import { SchedulerTooltipModule } from "../../components/library/scheduler-tooltip/scheduler-tooltip.component";
+
+type SelectedAppointment = { data: Record<string, any>, target: any };
 
 @Component({
   templateUrl: './planning-scheduler.component.html',
@@ -21,13 +25,11 @@ import { AgendaModule } from "../../components/library/agenda/agenda.component";
 })
 export class PlanningSchedulerComponent implements OnInit {
   @ViewChild('schedulerRef', { static: false }) schedulerRef: DxSchedulerComponent;
+
+  @ViewChild('tooltipRef', { static: false }) tooltipRef: DxTooltipComponent;
   tasks: DataSource<Task> = new DataSource([]);
 
   currentDate = new Date();
-
-  selectedDate = new Date();
-
-  selectedDateTasks: Task[] = [];
 
   currentView = 'workWeek';
 
@@ -37,12 +39,20 @@ export class PlanningSchedulerComponent implements OnInit {
 
   resourcesList = [];
 
+  selectedAppointment: SelectedAppointment = null;
+
+  agendaItems: AgendaItem[] = [];
+
+  isXSmall = this.screen.sizes['screen-small']
+
   constructor(private service: DataService, protected screen: ScreenService) {
     this.service.getDefaultListDS().subscribe(
    (data) => {
      this.listDataSource = data;
      this.resourcesList = data.reduce((res: Record<string,any>[], calendarList) => res.concat(calendarList.items), []);
       });
+
+    screen.screenChanged.subscribe(({isXSmall}) => this.isXSmall = isXSmall);
   }
 
   ngOnInit(): void {
@@ -57,21 +67,42 @@ export class PlanningSchedulerComponent implements OnInit {
     this.repaintScheduler();
   }
 
-  onSetDate = (date) => {
+  setCurrentDate = (date) => {
     this.currentDate = date;
   };
 
-  onAppointmentClick = () => {
-  };
+  onCurrentViewChange = (view) => {
+    this.currentView = view;
 
-  onCellClick = (event) => {
-    const {startDate, endDate} = event.cellData;
+    if (view === 'month' && !this.screen.sizes['screen-x-small']) {
+      this.isRightPanelOpen = true;
+      this.updateAgenda({ startDate: this.currentDate });
+    }
 
-    if (this.currentView === 'month') {
-      this.selectedDate = startDate;
-      this.selectedDateTasks = this.tasks.items().filter((task) => task.startDate >= startDate && task.startDate < endDate);
-      if(this.selectedDateTasks.length > 1) {
-        this.openRightPanelOpen();
+    if (this.currentView === 'month' && view !== 'month') {
+      this.isRightPanelOpen = false;
+    }
+
+    this.repaintScheduler();
+  }
+
+  onSelectedDateChange = (e?: Date) => {
+    const date = e instanceof Date ? e : new Date();
+    this.currentDate = date;
+    this.selectedAppointment = { data: { startDate: date }, target: undefined };
+    this.updateAgenda({ startDate: date });
+  }
+
+  onCellClick = ({cellData}) => {
+    this.onSelectedDateChange(cellData.startDate);
+
+    if (this.currentView === 'month' && cellData) {
+      const cellAppointments = this.findAllAppointmentsForDay(cellData, this.tasks);
+
+      if (cellAppointments.length > 1) {
+        this.selectedAppointment = { data: cellData, target: null };
+        this.agendaItems = cellAppointments;
+        this.toggleRightPanelOpen(true);
       }
     }
   };
@@ -89,28 +120,103 @@ export class PlanningSchedulerComponent implements OnInit {
     setTimeout(() => this.schedulerRef?.instance.repaint(), 0);
   }
 
-  toggleRightPanelOpen(event: boolean) {
-    this.isRightPanelOpen = event;
+  getTooltipPosition = (selectedAppointment: SelectedAppointment, rightPanelOpen: boolean, isXSmall: boolean) => {
+    if (isXSmall) {
+      return 'bottom';
+    }
+    const classList = selectedAppointment?.target?.classList || selectedAppointment?.target?.[0]?.classList;
+    return classList?.contains('dx-list') && rightPanelOpen ? 'left' : 'top';
+  }
+
+  toggleRightPanelOpen(isOpen?) {
+    this.isRightPanelOpen = isOpen || !this.isRightPanelOpen;
     this.repaintScheduler();
   }
 
-  showAppointmentCreationForm() {
-    this.schedulerRef?.instance.showAppointmentPopup();
+  showAppointmentCreationForm(appointment?) {
+    this.schedulerRef?.instance.showAppointmentPopup(appointment?.data, !appointment);
   }
+
+  findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
+    if (!dataSource) {
+      return [];
+    }
+    const appointments = dataSource.items();
+    if (appointments.length === 0 || !selectedAppointment) {
+      return [];
+    }
+    return appointments
+      .filter((appointment) => {
+        return appointment.startDate.getDate() === selectedAppointment.startDate.getDate()
+          && appointment.startDate.getMonth() === selectedAppointment.startDate.getMonth();
+      });
+  }
+
+  updateAgenda = (appointmentData?) => {
+    this.agendaItems = this.findAllAppointmentsForDay(appointmentData, this.tasks);
+  }
+
+  onAppointmentClick(e) {
+    if (this.currentView === 'month') {
+      const appointmentData = e.appointmentData;
+      this.selectedAppointment = { data: appointmentData, target: e.targetElement };
+      this.updateAgenda(appointmentData);
+      this.toggleRightPanelOpen(true);
+    }
+  }
+
+  onAppointmentTooltipShowing = (e) => {
+    e.cancel = true;
+    const appointmentData = e.appointments[0].appointmentData;
+    const isAppointmentCollectorClicked = (e) => {
+      return e.targetElement?.[0]?.classList.contains('dx-scheduler-appointment-collector');
+    };
+
+    this.selectedAppointment = { data: appointmentData, target: e.targetElement };
+
+    if (this.currentView === 'month' || isAppointmentCollectorClicked(e)) {
+      this.updateAgenda(appointmentData);
+    }
+    if (this.currentView === 'month' && this.screen.sizes['screen-small'] ||
+        isAppointmentCollectorClicked(e)) {
+      this.toggleRightPanelOpen(true);
+    }
+    else {
+      this.tooltipRef?.instance.show();
+    }
+  }
+
+  showAppointmentTooltip = (e) => {
+    this.schedulerRef?.instance.showAppointmentTooltip(e.itemData, e.element);
+  };
+
+  editSelectedAppointment() {
+    this.showAppointmentCreationForm(this.selectedAppointment);
+    this.tooltipRef?.instance.hide();
+  }
+
+  deleteSelectedAppointment(appointmentData) {
+    this.schedulerRef?.instance.deleteAppointment(this.selectedAppointment?.data);
+    this.tooltipRef?.instance.hide();
+    this.agendaItems = this.findAllAppointmentsForDay(appointmentData, this.tasks)
+  }
+
 
 }
 
 @NgModule({
   imports: [
+    ApplyPipeModule,
     DxCalendarModule,
     DxButtonModule,
     DxSchedulerModule,
+    DxTooltipModule,
     CommonModule,
-    AppointmentTooltipModule,
     CalendarListModule,
     LeftSidePanelModule,
     RightSidePanelModule,
     AgendaModule,
+    SchedulerTooltipModule,
   ],
   providers: [],
   exports: [],

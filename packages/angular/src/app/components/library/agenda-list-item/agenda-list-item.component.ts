@@ -1,5 +1,5 @@
 import {
-  Component, Input, NgModule, OnInit,
+  Component, Input, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxListModule } from 'devextreme-angular/ui/list';
@@ -26,14 +26,10 @@ import { ApplyPipeModule } from "../../../pipes/apply.pipe";
 `,
   styleUrls: ['./agenda-list-item.component.scss'],
 })
-export class AgendaListItemComponent implements OnInit {
+export class AgendaListItemComponent {
   @Input() appointment: Record<string, any> = {};
 
   @Input() resources: Record<string, any> = [];
-
-  ngOnInit(): void {
-    console.log('----appointment------>', this.appointment)
-  }
 
   getFormattedDuration = ({ startDate, endDate }) => {
     return Duration.fromMillis(endDate - startDate)
