@@ -185,7 +185,7 @@ export const UserProfile = () => {
 
   const setSavedData = useCallback((data = profileData) => {
     setSavedProfileData(JSON.parse(JSON.stringify(data)));
-  }, []);
+  }, [profileData]);
 
   const onCancel = useCallback(() => {
     setProfileData(savedProfileData);
@@ -216,6 +216,7 @@ export const UserProfile = () => {
     });
     profileDataPromise.then((data) => {
       setProfileData(data);
+      setSavedData(data);
     });
 
     Promise.all([
