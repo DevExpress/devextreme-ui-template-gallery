@@ -43,17 +43,17 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
 
   const onCurrentPasswordChange = useCallback((value) => {
     setCurrentPassword(value);
-  }, [currentPassword]);
+  }, []);
 
   const onConfirmPasswordChange = useCallback((value) => {
     setConfirmedPassword(value);
-  }, [confirmedPassword]);
+  }, []);
 
   const onNewPasswordChange = useCallback((value) => {
     setNewPassword(value);
 
     checkConfirm();
-  }, [newPassword, checkConfirm]);
+  }, [checkConfirm]);
 
   return <FormPopup
     validationGroup={validationGroup}
