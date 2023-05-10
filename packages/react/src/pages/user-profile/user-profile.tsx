@@ -269,8 +269,8 @@ export const UserProfile = () => {
         hasData={!isLoading}
         loading={isLoading}
         panelProps={{
-          container: '.view-wrapper-scroll',
-          position: { of: 'user-profile' },
+          container: '.view-wrapper',
+          position: { of: '.content' },
         }}
       />
     </div>
