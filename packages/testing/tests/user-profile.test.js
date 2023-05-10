@@ -59,8 +59,9 @@ fixture`User Profile`;
         await takeScreenshot(`user-profile-change-password-ready-to-save${postfix}`, popupSelector);
 
         await t
-          .click(Selector(popupSelector).find('.dx-button').withText('Save'))
-          .expect(Selector(popupSelector).visible).notOk()
+          .click(Selector(popupSelector).find('.form-popup-buttons-container').find('.dx-button').nth(1)) // Save button
+          .expect(Selector(popupSelector).visible)
+          .notOk()
           .click(Selector('.change-password-button'))
           .wait(1000);
 
@@ -69,7 +70,10 @@ fixture`User Profile`;
         await t
           .typeText(getFormInput(CURRENT_PASSWORD_PLACEHOLDER), 'oldpassword')
           .typeText(getFormInput(NEW_PASSWORD_PLACEHOLDER), 'newpassword')
-          .click(Selector(popupSelector).find('.dx-button').withText('Cancel'))
+          .click(Selector(popupSelector).find('.form-popup-buttons-container').find('.dx-button').nth(0)) // Cancel button
+          .expect(Selector(popupSelector).visible)
+          .notOk()
+          .click(Selector('.change-password-button'))
           .wait(1000);
 
         await takeScreenshot(`user-profile-change-password-after-cancel${postfix}`, popupSelector);
