@@ -75,7 +75,7 @@ export class PlanningSchedulerComponent implements OnInit {
 
   onCalendarDateChange = (date) => {
     this.currentDate = date;
-
+    this.updateAgenda({ startDate: this.currentDate });
     this.updateRightPanel();
   };
 
