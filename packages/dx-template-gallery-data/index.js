@@ -74,13 +74,11 @@ export const patchTasksForScheduler = (tasks) => {
 
   const uniqueTasks = tasks.slice(0, 11);
   return uniqueTasks.map((task, index) => {
-    const weekDay = (index % 4);
-
-    const weekIndex = Math.ceil(index / 4) - 1;
+    const { weekDay, weekIndex, defaultTime } = appointmentsDefaultTime[index];
     const taskStart = mondayMidnight.plus({
-      days: weekDay + weekIndex * 7,
-      hours: 7 + weekDay,
-    });
+      weeks: weekIndex,
+      days: weekDay,
+    }).plus(defaultTime);
     return {
       ...task,
       startDate: taskStart.toJSDate(),
@@ -132,6 +130,92 @@ export const defaultCalendarListItems = [
     }],
   },
 ];
+
+const appointmentsDefaultTime = [{
+  weekDay: 1,
+  weekIndex: -1,
+  defaultTime: {
+    hours: 8,
+    minutes: 30,
+  },
+},
+{
+  weekDay: 0,
+  weekIndex: 0,
+  defaultTime: {
+    hours: 7,
+    minutes: 30,
+  },
+},
+{
+  weekDay: 1,
+  weekIndex: 0,
+  defaultTime: {
+    hours: 10,
+  },
+},
+{
+  weekDay: 2,
+  weekIndex: 0,
+  defaultTime: {
+    hours: 8,
+    minutes: 30,
+  },
+},
+{
+  weekDay: 3,
+  weekIndex: 0,
+  defaultTime: {
+    hours: 7,
+  },
+},
+{
+  weekDay: 0,
+  weekIndex: 1,
+  defaultTime: {
+    hours: 9,
+  },
+},
+{
+  weekDay: 1,
+  weekIndex: 1,
+  defaultTime: {
+    hours: 7,
+  },
+},
+{
+  weekDay: 2,
+  weekIndex: 1,
+  defaultTime: {
+    hours: 8,
+    minutes: 30,
+  },
+},
+{
+  weekDay: 3,
+  weekIndex: 1,
+  defaultTime: {
+    hours: 9,
+    minutes: 30,
+  },
+},
+{
+  weekDay: 1,
+  weekIndex: 2,
+  defaultTime: {
+    hours: 8,
+    minutes: 20,
+  },
+},
+{
+  weekDay: 2,
+  weekIndex: 2,
+  defaultTime: {
+    hours: 9,
+    minutes: 40,
+  },
+}];
+
 export const getProfile = async (id) => {
   const data = await getContact(id);
 
