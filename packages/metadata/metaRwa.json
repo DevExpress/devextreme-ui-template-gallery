@@ -118,5 +118,75 @@
                 ]
             }
         ]
+    },
+    {
+        "Name": "Authentication",
+        "Groups": [
+            {
+                "Name": "Sign In Form",
+                "Demos": [
+                    {
+                        "Title": "Sign In Form",
+                        "Name": "auth-sign-in",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular",
+                            "React",
+                            "Vue"
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "Sign Up Form",
+                "Demos": [
+                    {
+                        "Title": "Sign Up Form",
+                        "Name": "auth-sign-up",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular",
+                            "React",
+                            "Vue"
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "Reset Password Form",
+                "Demos": [
+                    {
+                        "Title": "Reset Password Form",
+                        "Name": "auth-reset-password",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular",
+                            "React",
+                            "Vue"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Name": "Common",
+        "Groups": [
+            {
+                "Name": "User Profile",
+                "Demos": [
+                    {
+                        "Title": "User Profile",
+                        "Name": "common-user-profile",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular",
+                            "React",
+                            "Vue"
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 ]
