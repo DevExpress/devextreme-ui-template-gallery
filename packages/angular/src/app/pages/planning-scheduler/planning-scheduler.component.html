@@ -12,7 +12,7 @@
           ></dx-button>
         </div>
         <div class='calendar'>
-          <dx-calendar [value]="currentDate" (valueChange)="setCurrentDate" ></dx-calendar>
+          <dx-calendar [value]="currentDate" (valueChange)="onCalendarDateChange($event)" ></dx-calendar>
         </div>
         <calendar-list [dataSource]="listDataSource"
                        (listSelectionChanged)="calendarListChanged($event)"></calendar-list>
@@ -25,7 +25,7 @@
                     [allDayPanelMode]="'hidden'"
                     [dataSource]="tasks"
                     [currentView]="currentView"
-                    [currentDate]="currentDate"
+                    [currentDate]="getSchedulerCurrentDate | apply: currentDate"
                     (currentViewChange)="onCurrentViewChange($event)"
                     height='inherit'
                     (onAppointmentClick)="onAppointmentClick($event)"
@@ -56,11 +56,17 @@
           (clickDeleteAppointment)="deleteSelectedAppointment($event)"
         ></scheduler-tooltip>
       </dx-tooltip>
+      <dx-speed-dial-action
+        icon='add'
+        [visible]="(screen.screenChanged | async)?.isXSmall"
+        (onClick)="showAppointmentCreationForm()"
+      ></dx-speed-dial-action>
     </div>
 
-    <right-side-panel *ngIf="currentView === 'month'"
+    <right-side-panel
       class="right-side-panel"
       [isOpened]="isRightPanelOpen"
+      [showOpenButton]="currentView === 'month'"
       [title]="(selectedAppointment?.data.startDate || currentDate) | date: 'EE, MMMM d'"
       (openedChange)="toggleRightPanelOpen($event)"
     >

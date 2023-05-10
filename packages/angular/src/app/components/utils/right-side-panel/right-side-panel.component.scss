@@ -8,6 +8,10 @@
   height: 100%;
 
   &:not(.overlapping) {
+    &:not(.open).closed-state-hidden {
+      display: none;
+    }
+
     .right-side-panel {
       .side-panel-content-wrapper,
       .side-panel-title {
@@ -77,6 +81,10 @@
     align-items: center;
     padding: $content-padding 0;
     border-bottom: solid 1px transparent;
+
+    &.hide-open-button {
+      display: none;
+    }
   }
 
   .side-panel-title {

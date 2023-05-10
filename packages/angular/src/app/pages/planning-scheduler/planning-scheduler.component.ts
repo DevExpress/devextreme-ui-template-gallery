@@ -9,7 +9,7 @@ import {
   DxTooltipComponent,
   DxTooltipModule,
   DxSchedulerModule,
-  DxSchedulerComponent
+  DxSchedulerComponent, DxSpeedDialActionModule
 } from "devextreme-angular";
 import { Task } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
@@ -47,7 +47,9 @@ export class PlanningSchedulerComponent implements OnInit {
 
   agendaItems: AgendaItem[] = [];
 
-  isXSmall = this.screen.sizes['screen-small']
+  isXSmall = this.screen.sizes['screen-small'];
+
+  schedulerCurrentDate: Date = this.currentDate;
 
   constructor(private service: DataService, protected screen: ScreenService) {
     this.service.getDefaultListDS().subscribe(
@@ -71,19 +73,40 @@ export class PlanningSchedulerComponent implements OnInit {
     this.repaintScheduler();
   }
 
-  setCurrentDate = (date) => {
+  onCalendarDateChange = (date) => {
     this.currentDate = date;
+
+    this.updateRightPanel();
   };
+
+  getSchedulerCurrentDate = (currentDate) => {
+    const schedulerInstance = this.schedulerRef?.instance;
+    const startViewDate = schedulerInstance?.getStartViewDate();
+    const endViewDate = schedulerInstance?.getEndViewDate();
+
+    if (this.schedulerCurrentDate.getMonth() !== currentDate.getMonth() ||
+      startViewDate && startViewDate > currentDate ||
+      endViewDate && endViewDate < currentDate
+    ) {
+      this.schedulerCurrentDate = currentDate;
+    }
+
+    return this.schedulerCurrentDate;
+  }
 
   onCurrentViewChange = (view) => {
     this.currentView = view;
 
-    if (view === 'month' && !this.screen.sizes['screen-x-small']) {
+    if (this.currentView === 'month' && !this.screen.sizes['screen-x-small']) {
       this.isRightPanelOpen = true;
       this.updateAgenda({ startDate: this.currentDate });
     }
 
-    if (this.currentView === 'month' && view !== 'month') {
+    this.updateRightPanel();
+  }
+
+  updateRightPanel() {
+    if (this.currentView === 'month' && this.currentView !== 'month') {
       this.isRightPanelOpen = false;
     }
 
@@ -161,9 +184,10 @@ export class PlanningSchedulerComponent implements OnInit {
   }
 
   onAppointmentClick(e) {
+    const appointmentData = e.appointmentData;
+    this.selectedAppointment = { data: appointmentData, target: e.targetElement };
+
     if (this.currentView === 'month') {
-      const appointmentData = e.appointmentData;
-      this.selectedAppointment = { data: appointmentData, target: e.targetElement };
       this.updateAgenda(appointmentData);
       this.toggleRightPanelOpen(true);
     }
@@ -181,6 +205,7 @@ export class PlanningSchedulerComponent implements OnInit {
     if (this.currentView === 'month' || isAppointmentCollectorClicked(e)) {
       this.updateAgenda(appointmentData);
     }
+
     if (this.currentView === 'month' && this.screen.sizes['screen-small'] ||
         isAppointmentCollectorClicked(e)) {
       this.toggleRightPanelOpen(true);
@@ -214,6 +239,7 @@ export class PlanningSchedulerComponent implements OnInit {
     DxCalendarModule,
     DxButtonModule,
     DxSchedulerModule,
+    DxSpeedDialActionModule,
     DxTooltipModule,
     CommonModule,
     CalendarListModule,

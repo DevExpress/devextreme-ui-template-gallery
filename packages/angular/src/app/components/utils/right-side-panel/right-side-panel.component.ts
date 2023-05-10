@@ -21,11 +21,15 @@ import {DataService, ScreenService} from 'src/app/services';
 export class RightSidePanelComponent {
   @Input() isOpened = false;
 
+  @Input() showOpenButton = true;
+
   @Input() title = '';
 
   @Output() openedChange = new EventEmitter<boolean>();
 
   @HostBinding('class.overlapping') get overlapping() { return !this.isLarge; };
+
+  @HostBinding('class.closed-state-hidden') get closedStateHidden() { return !this.showOpenButton; };
 
   @HostBinding('class.open') get open() { return this.isOpened; };
 

@@ -31,6 +31,10 @@
     height: calc(100vh - 60px - $theme-padding);
     overflow: hidden;
     white-space: nowrap;
+
+    .dx-scrollview {
+      min-width: var(--left-side-panel-width);
+    }
   }
 
   &.open {
