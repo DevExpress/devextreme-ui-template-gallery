@@ -60,17 +60,14 @@ const UserProfileContent = ({
 
   const onScroll = useCallback((reachedTop) => {
     handleContentScrolled(reachedTop);
-  }, []);
+  }, [handleContentScrolled]);
 
   return (
     <ScrollView
       className='view-wrapper-scroll'
       onScroll={onScroll}
     >
-      <div
-        className='cards-container'
-      >
-
+      <div className='cards-container'>
         <ProfileCard
           wrapperCssClass='profile-card basic-info-card'
           title='Basic Info'
@@ -182,19 +179,19 @@ export const UserProfile = () => {
     setIsChangedPasswordPopupOpened(true);
   }, []);
 
-  const handleContentScrolled = (reachedTop) => {
+  const handleContentScrolled = useCallback((reachedTop) => {
     setIsContentScrolled(!reachedTop);
-  };
+  }, []);
 
-  const setSavedData = (data = profileData) => {
+  const setSavedData = useCallback((data = profileData) => {
     setSavedProfileData(JSON.parse(JSON.stringify(data)));
-  };
+  }, []);
 
   const onCancel = useCallback(() => {
     setProfileData(savedProfileData);
     setSavedData();
     setIsDataChanged(false);
-  }, [savedProfileData]);
+  }, [savedProfileData, setSavedData]);
 
   const onSave = useCallback(() => {
     notify(
@@ -208,7 +205,7 @@ export const UserProfile = () => {
       'success');
     setIsDataChanged(false);
     setSavedData();
-  }, [profileData]);
+  }, [profileData, setSavedData]);
 
   useEffect(() => {
     const supervisorsPromise = getSupervisors();
