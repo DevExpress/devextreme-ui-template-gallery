@@ -43,10 +43,10 @@ export const ContactForm = ({ data, isLoading = false }: { data?: Contact, isLoa
     handleEditClick();
   };
 
-  const updateField = (field: string) => (value: string) => {
+  const updateField = (field: string | number) => (value: string | number) => {
     if(!formData) return;
     if(field === 'state') {
-      setFormData({ ...formData, ...{ [field]: { stateShort: value } } });
+      setFormData({ ...formData, ...{ [field]: { stateShort: value.toString() } } });
     } else {
       setFormData({ ...formData, ...{ [field]: value } });
     }

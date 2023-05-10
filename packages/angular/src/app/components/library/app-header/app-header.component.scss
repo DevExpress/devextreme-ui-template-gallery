@@ -17,6 +17,10 @@ header {
   .header-toolbar {
     padding-right: $content-padding;
 
+    ::ng-deep .global-search-box {
+      padding-right: 11px;
+    }
+
     .messages {
       position: relative;
 

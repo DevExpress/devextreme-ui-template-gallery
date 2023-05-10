@@ -9,7 +9,7 @@ import { ThemeService } from 'src/app/services';
   selector: 'theme-switcher',
   template: `
     <dx-button class="theme-button"
-               [icon]="'assets/icons/' + (themeService.currentTheme !== 'dark' ? 'moon' : 'sun') +'.svg'"
+               [icon]="themeService.currentTheme !== 'dark' ? 'moon' : 'sun'"
                (click)="onButtonClick()">
     </dx-button>
 `,

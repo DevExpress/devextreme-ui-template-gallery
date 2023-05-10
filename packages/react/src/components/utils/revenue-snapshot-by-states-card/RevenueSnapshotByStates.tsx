@@ -25,8 +25,8 @@ export const RevenueSnapshotByStatesCard = ({ datasource }: { datasource: SaleBy
         <Label
           backgroundColor='none'
           radialOffset={-20}
-          visible='true'
-          customizeText={({ percentText }) => percentText}
+          visible
+          customizeText={(pointInfo) => pointInfo['percentText']}
         >
           <Font color='#757575' size={15} />
         </Label>
