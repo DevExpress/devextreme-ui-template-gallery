@@ -46,31 +46,33 @@ fixture`User Profile`;
           .withAttribute('data-dx_placeholder', placeholder)
           .prevSibling('input');
 
+        const popupSelector = screenMode[0] === 400 ? '.dx-popup-fullscreen' : '.dx-popup-normal';
+
         await t
           .typeText(getFormInput(CURRENT_PASSWORD_PLACEHOLDER), 'oldpassword')
           .typeText(getFormInput(NEW_PASSWORD_PLACEHOLDER), 'newpassword');
 
-        await takeScreenshot(`user-profile-change-password-old-new${postfix}`, '.dx-popup-normal');
+        await takeScreenshot(`user-profile-change-password-old-new${postfix}`, popupSelector);
 
         await t.typeText(getFormInput(CONFIRMED_PASSWORD_PLACEHOLDER), 'newpassword');
 
-        await takeScreenshot(`user-profile-change-password-ready-to-save${postfix}`, '.dx-popup-normal');
+        await takeScreenshot(`user-profile-change-password-ready-to-save${postfix}`, popupSelector);
 
         await t
-          .click(Selector('.dx-popup-normal').find('.dx-button').withText('Save'))
-          .expect(Selector('.dx-popup-normal').visible).notOk()
+          .click(Selector(popupSelector).find('.dx-button').withText('Save'))
+          .expect(Selector(popupSelector).visible).notOk()
           .click(Selector('.change-password-button'))
           .wait(1000);
 
-        await takeScreenshot(`user-profile-change-password-after-save${postfix}`, '.dx-popup-normal');
+        await takeScreenshot(`user-profile-change-password-after-save${postfix}`, popupSelector);
 
         await t
           .typeText(getFormInput(CURRENT_PASSWORD_PLACEHOLDER), 'oldpassword')
           .typeText(getFormInput(NEW_PASSWORD_PLACEHOLDER), 'newpassword')
-          .click(Selector('.dx-popup-normal').find('.dx-button').withText('Cancel'))
+          .click(Selector(popupSelector).find('.dx-button').withText('Cancel'))
           .wait(1000);
 
-        await takeScreenshot(`user-profile-change-password-after-cancel${postfix}`, '.dx-popup-normal');
+        await takeScreenshot(`user-profile-change-password-after-cancel${postfix}`, popupSelector);
 
         await t
           .expect(compareResults.isValid())
