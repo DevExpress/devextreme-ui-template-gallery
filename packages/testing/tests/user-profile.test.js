@@ -42,7 +42,7 @@ fixture`User Profile`;
         await t.wait(1000);
         await takeScreenshot(`user-profile-change-password${postfix}`, 'body');
 
-        const getFormInput = (placeholder) => Selector('.dx-placeholoder')
+        const getFormInput = (placeholder) => Selector('.dx-placeholder')
           .withAttribute('data-dx_placeholder', placeholder)
           .prevSibling('input');
 
