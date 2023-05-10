@@ -1,5 +1,5 @@
 import './FormPopup.scss';
-import React, { useCallback, useRef, PropsWithChildren, RefObject } from 'react';
+import React, { useCallback, useRef, PropsWithChildren } from 'react';
 
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
 import ValidationGroup from 'devextreme-react/validation-group';
@@ -14,7 +14,6 @@ type PopupProps = {
   isSaveDisabled?: boolean,
   setVisible: (visible: boolean) => void,
   onSave?: () => void,
-  validationGroup?: RefObject<ValidationGroup>,
 }
 
 export const FormPopup = ({
@@ -25,10 +24,10 @@ export const FormPopup = ({
   onSave,
   wrapperAttr = { class: '' },
   isSaveDisabled = false,
-  validationGroup = useRef<ValidationGroup>(null),
   children
 }: PropsWithChildren<PopupProps>) => {
   const { isXSmall } = useScreenSize();
+  const validationGroup = useRef<ValidationGroup>(null);
 
   const close = () => {
     validationGroup.current?.instance.reset();

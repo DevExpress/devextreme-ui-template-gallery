@@ -6,7 +6,6 @@ import Form, { Item, Label } from 'devextreme-react/form';
 import Validator from 'devextreme-react/validator';
 import { FormPopup } from '../../utils/form-popup/FormPopup';
 import { PasswordTextBox } from '../password-text-box/PasswordTextBox';
-import { ValidationGroup } from 'devextreme-react';
 import { ValidatedEvent } from 'devextreme/ui/validator';
 
 const saveNewPassword = (): void => {
@@ -14,7 +13,6 @@ const saveNewPassword = (): void => {
 };
 
 export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
-  const validationGroup = useRef<ValidationGroup>(null);
   const confirmField = useRef<Validator>(null);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -46,8 +44,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
     confirmedPassword,
     currentPasswordValid,
     newPasswordValid,
-    confirmedPasswordValid,
-    validationGroup
+    confirmedPasswordValid
   ]);
 
   const checkConfirm = useCallback(() => {
@@ -81,7 +78,6 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
   }, [checkConfirm]);
 
   return <FormPopup
-    validationGroup={validationGroup}
     title='Change Password'
     visible={visible}
     width={360}
