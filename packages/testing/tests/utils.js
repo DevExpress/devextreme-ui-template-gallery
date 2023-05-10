@@ -1,4 +1,5 @@
 import { ClientFunction } from 'testcafe';
+import { DateTime } from 'luxon';
 import { fakeScreenSize } from '../config';
 
 const WAIT_ATTEMPTS = 10;
@@ -66,4 +67,12 @@ export const toggleCommonConfiguration = async (
   setEmbedded(t, embedded, screenMode);
 
   await t.wait(timeout);
+};
+
+export const compileDateValue = () => {
+  const today = DateTime.now();
+  const monday = today.set({
+    weekday: 1,
+  });
+  return monday.toFormat('yyyy/MM/dd');
 };

@@ -3,6 +3,7 @@
 import { Selector, RequestLogger } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import {
+  compileDateValue,
   getPostfix,
   toggleCommonConfiguration,
   forceResizeRecalculation,
@@ -37,6 +38,8 @@ fixture`Planning Scheduler`;
         await t.click(Selector('.dx-scheduler-view-switcher-dropdown-button'));
         await t.wait(100);
         await t.click(Selector('.dx-list-item').withAttribute('title', 'Month'));
+        await t.wait(100);
+        await t.click(Selector('.dx-calendar-cell').withAttribute('data-value', compileDateValue()));
         await t.wait(1000);
         await takeScreenshot(`planning-scheduler-month-view${postfix}`, 'body');
 
