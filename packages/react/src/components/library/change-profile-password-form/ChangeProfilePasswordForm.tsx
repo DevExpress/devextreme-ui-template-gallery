@@ -1,5 +1,5 @@
 import './ChangeProfilePasswordForm.scss';
-import React, { useState, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import notify from 'devextreme/ui/notify';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
 import Form, { Item, Label } from 'devextreme-react/form';
@@ -8,12 +8,6 @@ import { FormPopup } from '../../utils/form-popup/FormPopup';
 import { PasswordTextBox } from '../password-text-box/PasswordTextBox';
 import { ValidationGroup } from 'devextreme-react';
 
-interface FormData {
-  currentPassword?: string,
-  password?: string,
-  confirmedPassword?: string
-}
-
 const saveNewPassword = (): void => {
   notify({ message: 'Password Changed', position: { at: 'bottom center', my: 'bottom center' } }, 'success');
 };
@@ -21,58 +15,45 @@ const saveNewPassword = (): void => {
 export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
   const validationGroup = useRef<ValidationGroup>(null);
   const confirmField = useRef<Validator>(null);
-  const [formData, setFormData] = useState<FormData>({});
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmedPassword, setConfirmedPassword] = useState('');
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
   const confirmPasswordValidators = useMemo((): ValidationRule[] => {
     return [{
       type: 'compare',
       message: 'Passwords do not match',
-      comparisonTarget: () => formData.password,
+      comparisonTarget: () => newPassword,
     }];
-  }, [formData]);
+  }, [newPassword]);
 
-  const onFieldChange = useCallback(
-    () => {
-      const formValues = Object.entries(formData);
-      setIsSaveDisabled(
-        formValues.length != 3 ||
-        !!formValues.find(([, value]) => !value) ||
-        !validationGroup.current?.instance.validate().isValid
-      );
-    }, [formData]);
+  useEffect(() => {
+    const formValues = [currentPassword, newPassword, confirmedPassword];
+
+    setIsSaveDisabled(
+      formValues.some((value) => !value) ||
+      !validationGroup.current?.instance.validate().isValid
+    );
+  }, [currentPassword, newPassword, confirmedPassword, validationGroup]);
 
   const checkConfirm = useCallback(() => {
     confirmField.current?.instance.validate();
   }, []);
 
   const onCurrentPasswordChange = useCallback((value) => {
-    setFormData({
-      ...formData,
-      currentPassword: value
-    });
-
-    onFieldChange();
-  }, []);
+    setCurrentPassword(value);
+  }, [currentPassword]);
 
   const onConfirmPasswordChange = useCallback((value) => {
-    setFormData({
-      ...formData,
-      confirmedPassword: value
-    });
-
-    onFieldChange();
-  }, []);
+    setConfirmedPassword(value);
+  }, [confirmedPassword]);
 
   const onNewPasswordChange = useCallback((value) => {
-    setFormData({
-      ...formData,
-      password: value
-    });
+    setNewPassword(value);
 
     checkConfirm();
-    onFieldChange();
-  }, [checkConfirm, onFieldChange]);
+  }, [newPassword, checkConfirm]);
 
   return <FormPopup
     validationGroup={validationGroup}
@@ -91,7 +72,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
       <Item>
         <Label text='Current Password' />
         <PasswordTextBox
-          value={formData['currentPassword']}
+          value={currentPassword}
           placeholder='Current Password'
           onValueChange={onCurrentPasswordChange}
         />
@@ -104,7 +85,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
       <Item>
         <Label text='Password' />
         <PasswordTextBox
-          value={formData['password']}
+          value={newPassword}
           placeholder='Password'
           onValueChange={onNewPasswordChange}
         />
@@ -114,7 +95,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
         <Label text='Confirm Password' />
         <PasswordTextBox
           ref={confirmField}
-          value={formData['confirmedPassword']}
+          value={confirmedPassword}
           placeholder='Confirm Password'
           validators={confirmPasswordValidators}
           onValueChange={onConfirmPasswordChange}

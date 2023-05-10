@@ -25,7 +25,7 @@ const copyToClipboard = (text) => (evt) => {
       message: tipText,
       minWidth: `${tipText.length + 2}ch`,
       width: 'auto',
-      position: { of: evt.target, offset: '0 -30' }
+      position: { of: evt.element, offset: '0 -30' }
     },
     'info',
     500
