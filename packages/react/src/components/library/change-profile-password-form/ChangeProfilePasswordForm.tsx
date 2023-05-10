@@ -7,6 +7,7 @@ import Validator from 'devextreme-react/validator';
 import { FormPopup } from '../../utils/form-popup/FormPopup';
 import { PasswordTextBox } from '../password-text-box/PasswordTextBox';
 import { ValidationGroup } from 'devextreme-react';
+import { ValidatedEvent } from 'devextreme/ui/validator';
 
 const saveNewPassword = (): void => {
   notify({ message: 'Password Changed', position: { at: 'bottom center', my: 'bottom center' } }, 'success');
@@ -18,6 +19,9 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');
+  const [currentPasswordValid, setCurrentPasswordValid] = useState(false);
+  const [newPasswordValid, setNewPasswordValid] = useState(false);
+  const [confirmedPasswordValid, setConfirmedPasswordValid] = useState(false);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
   const confirmPasswordValidators = useMemo((): ValidationRule[] => {
@@ -30,23 +34,44 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
 
   useEffect(() => {
     const formValues = [currentPassword, newPassword, confirmedPassword];
+    const validity = [currentPasswordValid, newPasswordValid, confirmedPasswordValid];
 
     setIsSaveDisabled(
       formValues.some((value) => !value) ||
-      !validationGroup.current?.instance.validate().isValid
+      validity.some((value) => !value)
     );
-  }, [currentPassword, newPassword, confirmedPassword, validationGroup]);
+  }, [
+    currentPassword,
+    newPassword,
+    confirmedPassword,
+    currentPasswordValid,
+    newPasswordValid,
+    confirmedPasswordValid,
+    validationGroup
+  ]);
 
   const checkConfirm = useCallback(() => {
     confirmField.current?.instance.validate();
+  }, []);
+
+  const onCurrentPasswordValidated = useCallback((e: ValidatedEvent) => {
+    setCurrentPasswordValid(!!e.isValid);
   }, []);
 
   const onCurrentPasswordChange = useCallback((value) => {
     setCurrentPassword(value);
   }, []);
 
+  const onConfirmedPasswordValidated = useCallback((e: ValidatedEvent) => {
+    setConfirmedPasswordValid(!!e.isValid);
+  }, []);
+
   const onConfirmPasswordChange = useCallback((value) => {
     setConfirmedPassword(value);
+  }, []);
+
+  const onNewPasswordValidated = useCallback((e: ValidatedEvent) => {
+    setNewPasswordValid(!!e.isValid);
   }, []);
 
   const onNewPasswordChange = useCallback((value) => {
@@ -75,6 +100,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
           value={currentPassword}
           placeholder='Current Password'
           onValueChange={onCurrentPasswordChange}
+          onValueValidated={onCurrentPasswordValidated}
         />
       </Item>
 
@@ -88,6 +114,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
           value={newPassword}
           placeholder='Password'
           onValueChange={onNewPasswordChange}
+          onValueValidated={onNewPasswordValidated}
         />
       </Item>
 
@@ -99,6 +126,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
           placeholder='Confirm Password'
           validators={confirmPasswordValidators}
           onValueChange={onConfirmPasswordChange}
+          onValueValidated={onConfirmedPasswordValidated}
         />
       </Item>
     </Form>
