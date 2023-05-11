@@ -1,17 +1,17 @@
 $theme: null !default;
-$theme-type: 'generic';
+$theme-type: 'material';
 
-@use "/node_modules/devextreme/scss/widgets/generic/colors" as * with ($color: $theme);
-@use "/node_modules/devextreme/scss/widgets/generic/sizes" as * with ($size: "compact");
-@use "/node_modules/devextreme/scss/widgets/generic/button/mixins" as *;
-@use "/node_modules/devextreme/scss/widgets/generic/popup/sizes" as *;
-@use "/node_modules/devextreme/scss/widgets/generic/textEditor/colors" as *;
-@use "/node_modules/devextreme/scss/widgets/generic/fieldset/sizes" as *;
-@use '/node_modules/devextreme/scss/widgets/generic/toolbar/sizes' as toolbar_sizes;
-@use "/node_modules/devextreme/scss/widgets/generic/list/sizes" as *;
+@use "/node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: $theme);
+@use "/node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
+@use "/node_modules/devextreme/scss/widgets/material/button/mixins" as *;
+@use "/node_modules/devextreme/scss/widgets/material/popup/sizes" as *;
+@use "/node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
+@use "/node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
+@use '/node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
+@use "/node_modules/devextreme/scss/widgets/material/list/sizes" as *;
 
-@forward "/node_modules/devextreme/scss/widgets/generic/colors";
-@forward "/node_modules/devextreme/scss/widgets/generic/textEditor/colors";
+@forward "/node_modules/devextreme/scss/widgets/material/colors";
+@forward "/node_modules/devextreme/scss/widgets/material/textEditor/colors";
 
 @use "sass:math";
 @use "sass:color";
@@ -21,7 +21,7 @@ $base-bg-darken-4: darken($base-bg, 4);
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 $base-text-color-alpha: rgba($base-text-color, alpha($base-text-color) * 0.7);
 $side-panel-min-width: 48px;
-$footer-left-padding: math.div(($side-panel-min-width - $generic-base-icon-size), 2);
+$footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 
 :root {
   --base-bg: #{$base-bg};
@@ -44,11 +44,11 @@ $footer-left-padding: math.div(($side-panel-min-width - $generic-base-icon-size)
   --texteditor-label-color: #{$texteditor-label-color};
   --base-text-color-alpha: #{$base-text-color-alpha};
   --side-panel-min-width: #{$side-panel-min-width};
-  --toolbar-height: #{toolbar_sizes.$generic-toolbar-height};
-  --filled-texteditor-input-horizontal-padding: #{$generic-field-value-horizontal-padding};
-  --list-padding-left: #{$generic-list-item-horizontal-padding};
-  --list-padding-vertical: #{$generic-list-item-vertical-padding};
+  --toolbar-height: #{toolbar_sizes.$material-toolbar-height};
+  --filled-texteditor-input-horizontal-padding: #{$material-field-value-horizontal-padding};
+  --list-padding-left: #{$material-list-item-horizontal-padding};
+  --list-padding-vertical: #{$material-list-item-vertical-padding};
   --footer-left-padding: #{$footer-left-padding};
-  --popup-toolbar-item-spacing: #{$generic-popup-toolbar-item-spacing};
-  --drop-down-gnrc-button-height: #{$generic-base-inline-widget-height};
+  --popup-toolbar-item-spacing: #{$material-popup-toolbar-item-spacing};
+  --drop-down-gnrc-button-height: #{$material-base-inline-widget-height};
 }
