@@ -9,7 +9,8 @@ import {
   DxTooltipComponent,
   DxTooltipModule,
   DxSchedulerModule,
-  DxSchedulerComponent, DxSpeedDialActionModule
+  DxSchedulerComponent,
+  DxSpeedDialActionModule,
 } from "devextreme-angular";
 import { Task } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
