@@ -73,8 +73,8 @@ test.only(`Planning Scheduler (${project}, embed=${embedded}, ${screenMode[0]}, 
   // await t.click(Selector('.dx-scheduler-view-switcher-dropdown-button'));
   // await t.click(Selector('.dx-list-item').withAttribute('title', 'Month'));
   // await t.click(Selector('.dx-calendar-cell').withAttribute('data-value', compileDateValue()));
-  await t.wait(5000);
-  await takeScreenshot(`planning-scheduler-month-view${postfix}`, 'body');
+
+  // await takeScreenshot(`planning-scheduler-month-view${postfix}`, 'body');
 
   await t
     .expect(compareResults.isValid())
