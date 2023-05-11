@@ -132,14 +132,6 @@ export const defaultCalendarListItems = [
 ];
 
 const appointmentsDefaultTime = [{
-  weekDay: 1,
-  weekIndex: -1,
-  defaultTime: {
-    hours: 8,
-    minutes: 30,
-  },
-},
-{
   weekDay: 0,
   weekIndex: 0,
   defaultTime: {
@@ -213,6 +205,14 @@ const appointmentsDefaultTime = [{
   defaultTime: {
     hours: 9,
     minutes: 40,
+  },
+},
+{
+  weekDay: 3,
+  weekIndex: 2,
+  defaultTime: {
+    hours: 8,
+    minutes: 30,
   },
 }];
 
