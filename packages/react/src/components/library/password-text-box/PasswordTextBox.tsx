@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useMemo } from 'react';
+import React, { useState, forwardRef, useMemo, useCallback } from 'react';
 import TextBox, { Button } from 'devextreme-react/text-box';
 import Validator from 'devextreme-react/validator';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
@@ -30,11 +30,20 @@ export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({
     }],
   [validators]);
 
-  const switchMode = () => {
+  const switchMode = useCallback(() => {
     setIsPasswordMode(!isPasswordMode);
-  };
+  }, [isPasswordMode]);
 
-  return <TextBox value={value}
+  const buttonOptions = useMemo(() =>
+    ({
+      visible: value?.length > 0,
+      icon: 'icons/eye.svg',
+      onClick: switchMode
+    }),
+  [value, switchMode]);
+
+  return <TextBox
+    value={value}
     stylingMode={stylingMode}
     valueChangeEvent='keyup input change'
     placeholder={placeholder}
@@ -44,11 +53,7 @@ export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({
     <Button
       name='today'
       location='after'
-      options={{
-        visible: value?.length > 0,
-        icon: 'icons/eye.svg',
-        onClick: switchMode
-      }}
+      options={buttonOptions}
     />
     <Validator ref={ref} validationRules={validationRules} onValidated={onValueValidated} />
   </TextBox>;

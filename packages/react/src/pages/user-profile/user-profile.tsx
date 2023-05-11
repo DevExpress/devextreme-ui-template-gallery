@@ -6,7 +6,7 @@ import notify from 'devextreme/ui/notify';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import ScrollView from 'devextreme-react/scroll-view';
-import { service } from './user-profile-service';
+import { service } from '../../data/user-profile-service';
 import { FormPhoto } from '../../components';
 import { ProfileCard, ProfileCardItem } from '../../components/library/profile-card/ProfileCard';
 import { withLoadPanel } from '../../utils/withLoadPanel';
