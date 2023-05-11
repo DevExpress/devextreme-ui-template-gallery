@@ -56,7 +56,7 @@ fixture.only`Planning Scheduler`;
 // });
 
 const embedded = false;
-const screenMode = '1280';
+const screenMode = 1280;
 const themeMode = 'light';
 const postfix = getPostfix(embedded, screenMode, themeMode);
 
