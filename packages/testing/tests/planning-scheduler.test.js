@@ -39,9 +39,13 @@ fixture`Planning Scheduler`;
         await setTheme(t, themeMode);
 
         await takeScreenshot(`planning-scheduler${postfix}`, 'body');
-        // rewrite as theme dependant
-        await t.click(Selector('.dx-scheduler-view-switcher-dropdown-button'));
-        await t.click(Selector('.dx-list-item').withAttribute('title', 'Month'));
+
+        if (themeMode.includes('material')) {
+          await t.click(Selector('.dx-scheduler-view-switcher-dropdown-button'));
+          await t.click(Selector('.dx-list-item').withAttribute('title', 'Month'));
+        } else {
+          await t.click(Selector('.dx-button').withAttribute('aria-label', 'Month'));
+        }
         await t.click(Selector('.dx-calendar-cell').withAttribute('data-value', compileDateValue()));
         await t.wait(1000);
         await takeScreenshot(`planning-scheduler-month-view${postfix}`, 'body');
