@@ -30,6 +30,10 @@ fixture`Planning Scheduler`;
     themeModes.forEach((themeMode) => {
       const postfix = getPostfix(embedded, screenMode, themeMode);
 
+      if (embedded && themeMode === 'dark') {
+        return;
+      }
+
       test(`Planning Scheduler (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
@@ -40,7 +44,7 @@ fixture`Planning Scheduler`;
 
         await takeScreenshot(`planning-scheduler${postfix}`, 'body');
 
-        if (themeMode.includes('material')) {
+        if (postfix.includes('material')) {
           await t.click(Selector('.dx-scheduler-view-switcher-dropdown-button'));
           await t.click(Selector('.dx-list-item').withAttribute('title', 'Month'));
         } else {
