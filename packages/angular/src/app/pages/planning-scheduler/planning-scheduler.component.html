@@ -21,17 +21,17 @@
 
     <div class='scheduler-container'>
       <dx-scheduler #schedulerRef
+                    height='inherit'
                     [adaptivityEnabled]="!!((screen.screenChanged | async)?.isXSmall)"
                     [allDayPanelMode]="'hidden'"
                     [dataSource]="tasks"
                     [currentView]="currentView"
                     [currentDate]="getSchedulerCurrentDate | apply: currentDate"
+                    [startDayHour]="4"
                     (currentViewChange)="onCurrentViewChange($event)"
-                    height='inherit'
                     (onAppointmentClick)="onAppointmentClick($event)"
                     (onAppointmentTooltipShowing)="onAppointmentTooltipShowing($event)"
                     (onCellClick)="onCellClick($event)"
-                    [startDayHour]="4"
       >
         <dxi-resource
           fieldExpr="calendarId"
@@ -46,8 +46,8 @@
       </dx-scheduler>
       <dx-tooltip #tooltipRef
                   *ngIf="selectedAppointment"
-                  [target]="selectedAppointment?.target"
                   showEvent='click'
+                  [target]="selectedAppointment?.target"
                   [position]="getTooltipPosition | apply: selectedAppointment: isRightPanelOpen: (screen.screenChanged | async)?.isSmall"
       >
         <scheduler-tooltip

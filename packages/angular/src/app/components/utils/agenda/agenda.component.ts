@@ -16,7 +16,10 @@ export type AgendaItem = { startDate: Date };
     <div *dxTemplate="let task of 'item'"
          class="agenda-item"
     >
-      <agenda-list-item class="" [appointment]="task" [resources]="resources"></agenda-list-item>
+      <agenda-list-item
+        [appointment]="task"
+        [resources]="resources">
+      </agenda-list-item>
     </div>
   </dx-list>
 `,
