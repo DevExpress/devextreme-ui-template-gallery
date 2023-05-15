@@ -60,7 +60,7 @@ const routes = [
     element: ResetPasswordPage,
   },
   {
-    path: 'user-profile',
+    path: '/user-profile',
     element: UserProfile,
   },
 ];
