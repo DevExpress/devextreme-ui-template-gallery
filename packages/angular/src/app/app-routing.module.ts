@@ -18,6 +18,7 @@ import { PlanningTaskDetailsComponent } from './pages/planning-task-details/plan
 import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analytics-dashboard.component';
 import { AnalyticsSalesReportComponent } from './pages/analytics-sales-report/analytics-sales-report.component';
 import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
+import { PlanningSchedulerComponent } from './pages/planning-scheduler/planning-scheduler.component';
 import { AuthSignInComponent } from './pages/auth-sign-in/auth-sign-in.component';
 import { AuthCreateAccountComponent } from './pages/auth-create-account/auth-create-account.component';
 import { AuthResetPasswordComponent } from './pages/auth-reset-password/auth-reset-password.component';
@@ -77,6 +78,10 @@ const routes: Routes = [
       {
         path: 'planning-task-details',
         component: PlanningTaskDetailsComponent
+      },
+      {
+        path: 'planning-scheduler',
+        component: PlanningSchedulerComponent
       },
       {
         path: 'analytics-dashboard',
