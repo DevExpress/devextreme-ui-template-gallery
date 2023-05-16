@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Gantt, { Tasks, Column, Toolbar, Item, Validation, Editing } from 'devextreme-react/gantt';
+import Gantt, { Tasks, Column, Toolbar, ToolbarItem, Validation, Editing } from 'devextreme-react/gantt';
 
 import { PlanningProps } from '../../../types/task';
 
@@ -16,17 +16,17 @@ export const TaskListGantt = React.forwardRef<Gantt, PlanningProps>(({ dataSourc
         <Column dataField='dueDate' caption='Due Date' dataType='date' />
 
         <Toolbar>
-          <Item name='undo' />
-          <Item name='redo' />
-          <Item name='separator' />
-          <Item name='collapseAll' />
-          <Item name='expandAll' />
-          <Item name='separator' />
-          <Item name='addTask' />
-          <Item name='deleteTask' />
-          <Item name='separator' />
-          <Item name='zoomIn' />
-          <Item name='zoomOut' />
+          <ToolbarItem name='undo' />
+          <ToolbarItem name='redo' />
+          <ToolbarItem name='separator' />
+          <ToolbarItem name='collapseAll' />
+          <ToolbarItem name='expandAll' />
+          <ToolbarItem name='separator' />
+          <ToolbarItem name='addTask' />
+          <ToolbarItem name='deleteTask' />
+          <ToolbarItem name='separator' />
+          <ToolbarItem name='zoomIn' />
+          <ToolbarItem name='zoomOut' />
         </Toolbar>
 
         <Validation autoUpdateParentTasks />
