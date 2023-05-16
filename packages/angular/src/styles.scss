@@ -163,6 +163,14 @@ body {
   }
 }
 
+.dx-tooltip-wrapper:has(.planning-calendar-appointment-tooltip) {
+  .dx-popup-content,
+  .dx-popup-normal {
+    max-height: 600px !important;
+    border-radius: 8px;
+  }
+}
+
 @mixin status($status-color) {
   color: $status-color;
 
