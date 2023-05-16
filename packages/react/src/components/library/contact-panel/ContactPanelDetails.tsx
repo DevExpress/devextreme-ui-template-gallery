@@ -93,25 +93,23 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
   return (
     <div id='contact-panel' className={classNames({ 'panel': true, 'open': isOpened, 'pin': isPinned && (isLarge || isMedium) })}>
       <div className='data-wrapper'>
-        <div className='data-part'>
-          <Toolbar className='panel-toolbar'>
-            <ToolbarItem location='before'>
-              <span className='contact-name value'>{contact.name}</span>
-            </ToolbarItem>
-            <ToolbarItem location='before'>
-              <ContactStatus text={contact.status} />
-            </ToolbarItem>
-            <ToolbarItem
-              location='after'
-              visible={isLarge || isMedium}
-            >
-              <Button icon={isPinned ? 'pin' : 'unpin'} onClick={onPinClick} />
-            </ToolbarItem>
-            <ToolbarItem location='after'>
-              <Button icon='close' onClick={onClosePanelClick} />
-            </ToolbarItem>
-          </Toolbar>
-        </div>
+        <Toolbar className='panel-toolbar'>
+          <ToolbarItem location='before'>
+            <span className='contact-name value'>{contact.name}</span>
+          </ToolbarItem>
+          <ToolbarItem location='before'>
+            <ContactStatus text={contact.status} />
+          </ToolbarItem>
+          <ToolbarItem
+            location='after'
+            visible={isLarge || isMedium}
+          >
+            <Button icon={isPinned ? 'pin' : 'unpin'} onClick={onPinClick} />
+          </ToolbarItem>
+          <ToolbarItem location='after'>
+            <Button icon='close' onClick={onClosePanelClick} />
+          </ToolbarItem>
+        </Toolbar>
         <ScrollView className='panel-scroll'>
           <ValidationGroup>
             <div className='data-part border'>

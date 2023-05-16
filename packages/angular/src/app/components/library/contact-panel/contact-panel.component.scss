@@ -44,7 +44,7 @@
     }
   }
 
-  ::ng-deep .photo-row .dx-item .dx-item:has(.photo-box) {
+  ::ng-deep .photo-row .dx-item > .dx-item-content > .dx-item:first-child {
     max-width: 144px;
   }
 
@@ -53,14 +53,14 @@
     height: 100%;
     width: var(--contact-side-panel-width);
 
+    .panel-toolbar {
+      $padding: calc($toolbar-vertical-padding / 2);
+
+      padding: $padding $padding $padding $toolbar-vertical-padding;
+    }
+
     .data-part {
       padding: 0 16px;
-
-      &:has(.panel-toolbar) {
-        $padding: calc($toolbar-vertical-padding / 2);
-
-        padding: $padding $padding $padding $toolbar-vertical-padding;
-      }
 
       &.border {
         border-bottom: 1px solid $border-color;
