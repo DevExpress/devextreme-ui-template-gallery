@@ -55,16 +55,8 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
     setCurrentPasswordValid(!!e.isValid);
   }, []);
 
-  const onCurrentPasswordChange = useCallback((value) => {
-    setCurrentPassword(value);
-  }, []);
-
   const onConfirmedPasswordValidated = useCallback((e: ValidatedEvent) => {
     setConfirmedPasswordValid(!!e.isValid);
-  }, []);
-
-  const onConfirmPasswordChange = useCallback((value) => {
-    setConfirmedPassword(value);
   }, []);
 
   const onNewPasswordValidated = useCallback((e: ValidatedEvent) => {
@@ -95,7 +87,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
         <PasswordTextBox
           value={currentPassword}
           placeholder='Current Password'
-          onValueChange={onCurrentPasswordChange}
+          onValueChange={setCurrentPassword}
           onValueValidated={onCurrentPasswordValidated}
         />
       </Item>
@@ -121,7 +113,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
           value={confirmedPassword}
           placeholder='Confirm Password'
           validators={confirmPasswordValidators}
-          onValueChange={onConfirmPasswordChange}
+          onValueChange={setConfirmedPassword}
           onValueValidated={onConfirmedPasswordValidated}
         />
       </Item>
