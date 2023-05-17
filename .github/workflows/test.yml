@@ -67,6 +67,7 @@ jobs:
           { project: 'vue', page: 'crm-contact-list' },
           # { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)
           { project: 'vue', page: 'planning-task-list' },
+          { project: 'vue', page: 'planning-scheduler' },
           { project: 'vue', page: 'analytics-dashboard' },
           { project: 'vue', page: 'analytics-sales-report' },
           { project: 'vue', page: 'analytics-geography' },
