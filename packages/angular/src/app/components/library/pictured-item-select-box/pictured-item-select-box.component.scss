@@ -9,6 +9,8 @@
     border: 1px solid $border-color;
     border-radius: 50%;
     margin-right: 8px;
+    object-fit: cover;
+    object-position: top;
   }
 }
 
@@ -19,8 +21,9 @@
 }
 
 .pictured-item-select-field {
-  &::ng-deep .pictured-item-editor-input {
+  &::ng-deep .pictured-item-editor-input.dx-texteditor-input {
     padding-left: 0;
+    color: $base-text-color;
   }
 
   .pictured-item-image {

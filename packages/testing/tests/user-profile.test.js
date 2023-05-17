@@ -14,6 +14,10 @@ const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/user-profile`;
 const requestLogger = RequestLogger();
 
+const CURRENT_PASSWORD_PLACEHOLDER = 'Current Password';
+const NEW_PASSWORD_PLACEHOLDER = 'Password';
+const CONFIRMED_PASSWORD_PLACEHOLDER = 'Confirm Password';
+
 fixture`User Profile`;
 
 [false, true].forEach((embedded) => {
@@ -37,6 +41,42 @@ fixture`User Profile`;
         await t.click(Selector('.change-password-button'));
         await t.wait(1000);
         await takeScreenshot(`user-profile-change-password${postfix}`, 'body');
+
+        const getFormInput = (placeholder) => Selector('.dx-placeholder')
+          .withAttribute('data-dx_placeholder', placeholder)
+          .prevSibling('input');
+
+        const popupSelector = screenMode[0] === 400 ? '.dx-popup-fullscreen' : '.dx-popup-normal';
+
+        await t
+          .typeText(getFormInput(CURRENT_PASSWORD_PLACEHOLDER), 'oldpassword')
+          .typeText(getFormInput(NEW_PASSWORD_PLACEHOLDER), 'newpassword');
+
+        await takeScreenshot(`user-profile-change-password-old-new${postfix}`, popupSelector);
+
+        await t.typeText(getFormInput(CONFIRMED_PASSWORD_PLACEHOLDER), 'newpassword');
+
+        await takeScreenshot(`user-profile-change-password-ready-to-save${postfix}`, popupSelector);
+
+        await t
+          .click(Selector(popupSelector).find('.form-popup-buttons-container').find('.dx-button').nth(1)) // Save button
+          .expect(Selector(popupSelector).visible)
+          .notOk()
+          .click(Selector('.change-password-button'))
+          .wait(1000);
+
+        await takeScreenshot(`user-profile-change-password-after-save${postfix}`, popupSelector);
+
+        await t
+          .typeText(getFormInput(CURRENT_PASSWORD_PLACEHOLDER), 'oldpassword')
+          .typeText(getFormInput(NEW_PASSWORD_PLACEHOLDER), 'newpassword')
+          .click(Selector(popupSelector).find('.form-popup-buttons-container').find('.dx-button').nth(0)) // Cancel button
+          .expect(Selector(popupSelector).visible)
+          .notOk()
+          .click(Selector('.change-password-button'))
+          .wait(1000);
+
+        await takeScreenshot(`user-profile-change-password-after-cancel${postfix}`, popupSelector);
 
         await t
           .expect(compareResults.isValid())
