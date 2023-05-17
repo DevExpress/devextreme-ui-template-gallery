@@ -9,3 +9,4 @@ export { AnalyticsGeography } from './analytics-geography/analytics-geography';
 export { SignInPage } from './auth-sign-in/auth-sign-in';
 export { SignUpPage } from './auth-sign-up/auth-sign-up';
 export { ResetPasswordPage } from './auth-reset-password/auth-reset-password';
+export { UserProfile } from './user-profile/user-profile';

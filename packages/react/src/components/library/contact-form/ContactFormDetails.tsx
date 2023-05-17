@@ -23,7 +23,7 @@ const statusRender = (text: string) => (
     <ContactStatus text={text} showText={false} />
     <TextBox
       className={`status-contact status-${text.toLowerCase()}`}
-      inputAttr={{ class: 'status-editor-input' }}
+      inputAttr={{ statusEditorInput: '' }}
       readOnly
       text={text}
       hoverStateEnabled={false}

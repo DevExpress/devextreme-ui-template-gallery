@@ -19,14 +19,11 @@
       align-items: flex-start;
       gap: $theme-padding;
 
-      &.small {
-        width: calc($calendar-width + $content-padding);
-      }
-
       .buttons {
         display: flex;
         width: 100%;
         gap: 16px;
+        margin-top: $theme-padding;
         padding: 0 $theme-padding;
 
         .dx-button {

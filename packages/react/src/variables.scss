@@ -25,15 +25,24 @@ $list-padding-left: var(--list-padding-left);
 $list-padding-vertical: var(--list-padding-vertical);
 $footer-left-padding: var(--footer-left-padding);
 
+$list-item-horizontal-padding: var(--list-item-horizontal-padding);
 $header-toolbar-vertical-padding: 10px;
 $toolbar-vertical-padding: 16px;
 $content-padding: 16px;
 $side-panel-min-width: var(--side-panel-min-width);
 $toolbar-margin-bottom: $content-padding;
 
+$subtitle-text-color: $texteditor-label-color;
 $footer-height: 70px;
+$drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 
 @mixin separator() {
+  .h-separator {
+    height: 1px;
+    width: auto;
+    background: $base-border-color;
+  }
+
   .separator {
     height: 24px;
     width: 1px;
@@ -45,7 +54,10 @@ $footer-height: 70px;
     }
   }
 }
-$drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
+
+@mixin shadow() {
+  box-shadow: 0 1px 4px 0 #00000026;
+}
 
 @mixin header {
   font-size: 22px;
@@ -116,7 +128,7 @@ $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 
   &.dx-texteditor,
   &.dx-texteditor.dx-editor-filled {
-    .status-editor-input[readonly] {
+    input[statuseditorinput][readonly] {
       color: $status-color;
       padding-left: 0;
     }
