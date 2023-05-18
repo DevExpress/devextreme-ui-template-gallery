@@ -174,7 +174,6 @@ getTasksForScheduler().then((data: Task[]) => {
 
 function toggleRightPanelOpen(isOpen?: boolean) {
   isRightPanelOpen.value = isOpen || !isRightPanelOpen.value;
-  console.log('------toggleRightPanelOpen---->', isRightPanelOpen.value);
 }
 
 function findAllAppointmentsForDay(selectedAppointmentData?: AppointmentData) {

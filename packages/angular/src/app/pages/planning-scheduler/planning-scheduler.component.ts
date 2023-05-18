@@ -59,7 +59,10 @@ export class PlanningSchedulerComponent implements OnInit {
      this.resourcesList = data.reduce((res: Record<string,any>[], calendarList) => res.concat(calendarList.items), []);
       });
 
-    screen.screenChanged.subscribe(({isXSmall}) => this.isXSmall = isXSmall);
+    screen.screenChanged.subscribe(({isXSmall}) => {
+      this.isXSmall = isXSmall;
+      this.repaintScheduler();
+    });
   }
 
   ngOnInit(): void {

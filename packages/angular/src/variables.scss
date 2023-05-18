@@ -27,8 +27,6 @@ $subtitle-text-color: $texteditor-label-color;
 $footer-height: 70px;
 $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 
-$scheduler-toolbar-height: 60px;
-
 @mixin separator() {
   .h-separator {
     height: 1px;
