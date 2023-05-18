@@ -66,6 +66,20 @@
                         ]
                     }
                 ]
+            },
+            {
+                "Name": "Scheduler",
+                "Demos": [
+                    {
+                        "Title": "Scheduler",
+                        "Name": "planning-scheduler",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular",
+                            "React"
+                        ]
+                    }
+                ]
             }
         ]
     },
@@ -108,6 +122,76 @@
                     {
                         "Title": "Geography",
                         "Name": "analytics-geography",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular",
+                            "React",
+                            "Vue"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Name": "Authentication",
+        "Groups": [
+            {
+                "Name": "Sign In Form",
+                "Demos": [
+                    {
+                        "Title": "Sign In Form",
+                        "Name": "sign-in-form",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular",
+                            "React",
+                            "Vue"
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "Sign Up Form",
+                "Demos": [
+                    {
+                        "Title": "Sign Up Form",
+                        "Name": "sign-up-form",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular",
+                            "React",
+                            "Vue"
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "Reset Password Form",
+                "Demos": [
+                    {
+                        "Title": "Reset Password Form",
+                        "Name": "reset-password-form",
+                        "DemoType": "Rwa",
+                        "AvailableApproaches": [
+                            "Angular",
+                            "React",
+                            "Vue"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Name": "Common",
+        "Groups": [
+            {
+                "Name": "User Profile",
+                "Demos": [
+                    {
+                        "Title": "User Profile",
+                        "Name": "user-profile",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
                             "Angular",

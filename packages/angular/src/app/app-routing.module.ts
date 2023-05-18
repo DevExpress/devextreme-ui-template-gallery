@@ -19,9 +19,9 @@ import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analyti
 import { AnalyticsSalesReportComponent } from './pages/analytics-sales-report/analytics-sales-report.component';
 import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
 import { PlanningSchedulerComponent } from './pages/planning-scheduler/planning-scheduler.component';
-import { AuthSignInComponent } from './pages/auth-sign-in/auth-sign-in.component';
-import { AuthCreateAccountComponent } from './pages/auth-create-account/auth-create-account.component';
-import { AuthResetPasswordComponent } from './pages/auth-reset-password/auth-reset-password.component';
+import { AppSignInComponent } from './pages/sign-in-form/sign-in-form.component';
+import { AppSignUpComponent } from './pages/sign-up-form/sign-up-form.component';
+import { AppResetPasswordComponent } from './pages/reset-password-form/reset-password-form.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 const routes: Routes = [
@@ -100,17 +100,17 @@ const routes: Routes = [
       },
       {
         path: 'sign-in-form',
-        component: AuthSignInComponent,
+        component: AppSignInComponent,
         canActivate: [AuthGuardService],
       },
       {
         path: 'sign-up-form',
-        component: AuthCreateAccountComponent,
+        component: AppSignUpComponent,
         canActivate: [AuthGuardService],
       },
       {
         path: 'reset-password-form',
-        component: AuthResetPasswordComponent,
+        component: AppResetPasswordComponent,
         canActivate: [AuthGuardService],
       },
       {
