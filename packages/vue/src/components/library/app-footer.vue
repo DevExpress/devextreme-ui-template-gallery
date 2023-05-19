@@ -23,7 +23,7 @@
 
   .dx-drawer-opened & {
     opacity: 1;
-    transition: opacity .4s;
+    transition: opacity 0.4s;
   }
 }
 </style>
