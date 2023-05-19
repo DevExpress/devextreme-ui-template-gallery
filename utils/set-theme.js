@@ -15,11 +15,18 @@ const variablesPath = {
   react: 'src/theme/styles/variables-mixin.scss',
 };
 
+const themeJsFiles = {
+  angular: ['src/app/services/theme.service.ts'],
+  vue: ['src/theme/theme-service.ts'],
+  react: ['src/theme/theme.tsx'],
+};
+
 const changeThemesMeta = (theme) => {
   const baseTheme = theme.split('.')[0];
   const bundleName = theme.replace('generic.', '');
   const themeParts = bundleName.replace('material.', '').split('.');
   const mode = themeParts[1];
+  const isDarkTheme = theme.includes('.dark.');
 
   packages.forEach((packageName) => {
     const appPath = join(cwd(), 'packages', packageName);
@@ -33,6 +40,17 @@ const changeThemesMeta = (theme) => {
         const contentForChange = readFileSync(fileForChange, 'utf8');
         if (baseTheme === 'generic') {
           writeFileSync(fileForChange, contentForChange.replace(/material\.blue\./g, ''));
+        }
+      },
+    );
+
+    [].concat(themeJsFiles[packageName]).forEach(
+      (file) => {
+        const fileForChange = join(appPath, file);
+
+        const contentForChange = readFileSync(fileForChange, 'utf8');
+        if (isDarkTheme) {
+          writeFileSync(fileForChange, contentForChange.replace(/const themes = \['light', 'dark']/g, "const themes = ['dark', 'light']"));
         }
       },
     );
