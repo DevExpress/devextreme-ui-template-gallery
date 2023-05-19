@@ -77,7 +77,7 @@
           class="right-side-panel"
           :is-opened="isRightPanelOpen"
           :show-open-button="currentView === 'month'"
-          :title="formatDate(selectedAppointment?.data.startDate || currentDate, 'EE, MMMM d')"
+          :title="formatDate(agendaItems[0]?.startDate || currentDate, 'EE, MMMM d')"
           @opened-change="toggleRightPanelOpen($event)"
         >
           <agenda-list
@@ -128,18 +128,7 @@ const tasks = ref<DataSource | null>(null);
 
 const agendaItems = ref<AgendaItem[]>([]);
 
-const schedulerCurrentDate = computed((): Date => {
-  const schedulerInstance = schedulerRef?.value?.instance;
-  const startViewDate = schedulerInstance?.getStartViewDate();
-  const endViewDate = schedulerInstance?.getEndViewDate();
-
-  return (schedulerCurrentDate.value?.getMonth() !== currentDate.value?.getMonth()
-    || (startViewDate && startViewDate > currentDate.value)
-    || (endViewDate && endViewDate < currentDate.value)
-  )
-    ? currentDate.value
-    : schedulerCurrentDate.value;
-});
+const schedulerCurrentDate = ref(new Date());
 
 const resourcesList: Record<string, unknown>[] = defaultCalendarListItems.reduce(
   (res: Record<string, unknown>[], calendarList: {items: []}) => res.concat(calendarList.items),
@@ -162,9 +151,22 @@ const tooltipPosition = computed(() => {
 });
 
 watchEffect(() => {
-  const deps = [tasks.value, currentView.value, currentDate.value, isRightPanelOpen.value];
+  const deps = [tasks.value, currentView.value, schedulerCurrentDate.value, isRightPanelOpen.value];
   if (deps.length) {
     setTimeout(() => schedulerRef.value?.instance?.repaint());
+  }
+});
+
+watchEffect(() => {
+  const schedulerInstance = schedulerRef?.value?.instance;
+  const startViewDate = schedulerInstance?.getStartViewDate();
+  const endViewDate = schedulerInstance?.getEndViewDate();
+
+  if (schedulerCurrentDate.value?.getMonth() !== currentDate.value?.getMonth()
+    || (startViewDate && startViewDate > currentDate.value)
+    || (endViewDate && endViewDate < currentDate.value)
+  ) {
+    schedulerCurrentDate.value = currentDate.value;
   }
 });
 
@@ -225,6 +227,8 @@ function onCurrentViewChange(view: string) {
   if (currentView.value === 'month' && !screenInfo.value.isSmall) {
     isRightPanelOpen.value = true;
     updateAgenda({ startDate: currentDate.value });
+  } else if (view !== 'month' && screenInfo.value.isLarge) {
+    isRightPanelOpen.value = false;
   }
 }
 
