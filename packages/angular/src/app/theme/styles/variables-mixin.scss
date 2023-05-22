@@ -24,6 +24,8 @@ $base-text-color-alpha: rgba($base-text-color, alpha($base-text-color) * 0.7);
 $side-panel-min-width: 48px;
 $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
 $theme-padding: $material-button-horizontal-padding;
+$button-height-theme-difference: calc(($theme-padding - 10px) / 3); // WA for no button-height in generic theme
+$button-height: calc(26px + $button-height-theme-difference); // remove when design-system is released
 $tooltip-danger-button-color: color.change($base-danger, $alpha: 0.1);
 $tooltip-success-button-color: color.change($base-success, $alpha: 0.1);
 
@@ -59,4 +61,5 @@ $tooltip-success-button-color: color.change($base-success, $alpha: 0.1);
   --theme-padding: #{$theme-padding};
   --tooltip-danger-button-color: #{$tooltip-danger-button-color};
   --tooltip-success-button-color: #{$tooltip-success-button-color};
+  --scheduler-toolbar-height: calc(#{$button-height} + 2 * #{$theme-padding});
 }

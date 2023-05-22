@@ -1,4 +1,6 @@
 [
     "material.blue.light.compact",
-    "generic.light.compact"
+    "material.blue.dark.compact",
+    "generic.light.compact",
+    "generic.dark.compact"
 ]
