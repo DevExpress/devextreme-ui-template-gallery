@@ -171,9 +171,9 @@ export const CRMContactList = () => {
             </Item>
             <Item location='before' locateInMenu='auto'>
               <DropDownButton
-                dataSource={filterStatusList}
+                items={filterStatusList}
                 stylingMode='text'
-                selectedItemKey={status}
+                text={status}
                 dropDownOptions={dropDownOptions}
                 useSelectMode
                 onSelectionChanged={filterByStatus}
