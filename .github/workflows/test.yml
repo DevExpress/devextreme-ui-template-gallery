@@ -48,6 +48,7 @@ jobs:
           { project: 'angular', page: 'crm-contact-list' },
           # { project: 'angular', page: 'planning-task-details' }, No selector for Toolbar item on mobile device(bug)
           { project: 'angular', page: 'planning-task-list' },
+          # { project: 'angular', page: 'planning-scheduler' },
           { project: 'angular', page: 'analytics-dashboard' },
           { project: 'angular', page: 'analytics-sales-report' },
           { project: 'angular', page: 'analytics-geography' },
@@ -67,6 +68,7 @@ jobs:
           { project: 'vue', page: 'crm-contact-list' },
           # { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)
           { project: 'vue', page: 'planning-task-list' },
+          { project: 'vue', page: 'planning-scheduler' },
           { project: 'vue', page: 'analytics-dashboard' },
           { project: 'vue', page: 'analytics-sales-report' },
           { project: 'vue', page: 'analytics-geography' },

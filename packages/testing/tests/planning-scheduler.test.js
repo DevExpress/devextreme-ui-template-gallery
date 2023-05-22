@@ -41,6 +41,7 @@ fixture`Planning Scheduler`;
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
         await forceResizeRecalculation(t, screenMode);
         await setTheme(t, themeMode);
+        await t.wait(1000);
 
         await takeScreenshot(`planning-scheduler${postfix}`, 'body');
 

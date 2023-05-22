@@ -27,6 +27,10 @@ $subtitle-text-color: $texteditor-label-color;
 $footer-height: 70px;
 $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 
+:root {
+  --content-padding: 16px;
+  --toolbar-vertical-padding: 16px;
+}
 
 @mixin separator() {
   .h-separator {
@@ -78,6 +82,40 @@ $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
   }
 }
 
+
+@mixin calendar-items-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+@mixin description-text($opacity) {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  opacity: $opacity;
+}
+
+@mixin h1-header-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+@mixin h2-header-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
 @mixin status($status-color) {
   color: $status-color;
 
@@ -90,4 +128,13 @@ $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
   &::before {
     background: $status-color;
   }
+}
+
+@mixin subtext($opacity: 1) {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  opacity: $opacity;
 }

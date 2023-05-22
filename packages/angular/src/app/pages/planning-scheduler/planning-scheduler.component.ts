@@ -59,7 +59,10 @@ export class PlanningSchedulerComponent implements OnInit {
      this.resourcesList = data.reduce((res: Record<string,any>[], calendarList) => res.concat(calendarList.items), []);
       });
 
-    screen.screenChanged.subscribe(({isXSmall}) => this.isXSmall = isXSmall);
+    screen.screenChanged.subscribe(({isXSmall}) => {
+      this.isXSmall = isXSmall;
+      this.repaintScheduler();
+    });
   }
 
   ngOnInit(): void {
@@ -77,7 +80,7 @@ export class PlanningSchedulerComponent implements OnInit {
   onCalendarDateChange = (date) => {
     this.currentDate = date;
     this.updateAgenda({ startDate: this.currentDate });
-    this.updateRightPanel();
+    this.repaintScheduler();
   };
 
   getSchedulerCurrentDate = (currentDate) => {
@@ -103,14 +106,6 @@ export class PlanningSchedulerComponent implements OnInit {
       this.updateAgenda({ startDate: this.currentDate });
     }
 
-    this.updateRightPanel();
-  }
-
-  updateRightPanel() {
-    if (this.currentView === 'month' && this.currentView !== 'month') {
-      this.isRightPanelOpen = false;
-    }
-
     this.repaintScheduler();
   }
 
@@ -125,7 +120,7 @@ export class PlanningSchedulerComponent implements OnInit {
     this.onSelectedDateChange(cellData.startDate);
 
     if (this.currentView === 'month' && cellData) {
-      const cellAppointments = this.findAllAppointmentsForDay(cellData, this.tasks);
+      const cellAppointments = this.findAllAppointmentsForDay(cellData);
 
       if (cellAppointments.length > 1) {
         this.selectedAppointment = { data: cellData, target: null };
@@ -142,6 +137,7 @@ export class PlanningSchedulerComponent implements OnInit {
     this.tasks?.filter(filters.length > 0 ? filters : null);
 
     this.tasks?.load();
+    this.updateAgenda({ startDate: this.currentDate });
   }
 
   repaintScheduler() {
@@ -165,11 +161,11 @@ export class PlanningSchedulerComponent implements OnInit {
     this.schedulerRef?.instance.showAppointmentPopup(appointment?.data, !appointment);
   }
 
-  findAllAppointmentsForDay = (selectedAppointment, dataSource) => {
-    if (!dataSource) {
+  findAllAppointmentsForDay = (selectedAppointment) => {
+    if (!this.tasks) {
       return [];
     }
-    const appointments = dataSource.items();
+    const appointments = this.tasks.items();
     if (appointments.length === 0 || !selectedAppointment) {
       return [];
     }
@@ -181,7 +177,7 @@ export class PlanningSchedulerComponent implements OnInit {
   }
 
   updateAgenda = (appointmentData?) => {
-    this.agendaItems = this.findAllAppointmentsForDay(appointmentData, this.tasks);
+    this.agendaItems = this.findAllAppointmentsForDay(appointmentData);
   }
 
   onAppointmentClick(e) {
@@ -228,7 +224,7 @@ export class PlanningSchedulerComponent implements OnInit {
   deleteSelectedAppointment(appointmentData) {
     this.schedulerRef?.instance.deleteAppointment(this.selectedAppointment?.data);
     this.tooltipRef?.instance.hide();
-    this.agendaItems = this.findAllAppointmentsForDay(appointmentData, this.tasks)
+    this.agendaItems = this.findAllAppointmentsForDay(appointmentData)
   }
 
 

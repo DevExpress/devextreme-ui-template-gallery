@@ -7,6 +7,7 @@ $theme: null !default;
 @use "/node_modules/devextreme/scss/widgets/material/popup/sizes" as *;
 @use '/node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
 @use "/node_modules/devextreme/scss/widgets/material/list/sizes" as *;
+@use "/node_modules/devextreme/scss/widgets/material/button/sizes" as *;
 
 @forward "/node_modules/devextreme/scss/widgets/material/colors";
 @forward "/node_modules/devextreme/scss/widgets/material/textEditor/colors";
@@ -18,8 +19,12 @@ $base-bg-darken-5: darken($base-bg, 5);
 $base-bg-darken-4: darken($base-bg, 4);
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 $base-text-color-alpha: rgba($base-text-color, alpha($base-text-color) * 0.7);
+$theme-padding: $material-button-horizontal-padding;
+$button-height-theme-difference: calc(($theme-padding - 10px) / 3); // WA for no button-height in generic theme
+$button-height: calc(26px + $button-height-theme-difference); // remove when design-system is released
 $side-panel-min-width: 48px;
 $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
+$tooltip-danger-button-color: color.change($base-danger, $alpha: 0.1);
 
 :root {
   --base-bg: #{$base-bg};
@@ -27,6 +32,7 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
   --base-bg-darken-4: #{$base-bg-darken-4};
   --background-color: var(--base-bg);
   --card-background: #{$base-bg};
+  --calendar-width: 292px;
 
   @if $theme == dark {
     --card-background: var(--base-bg-darken-5);
@@ -50,4 +56,8 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
   --footer-left-padding: #{$footer-left-padding};
   --popup-toolbar-item-spacing: #{$material-popup-toolbar-item-spacing};
   --drop-down-gnrc-button-height: #{$material-base-inline-widget-height};
+  --theme-padding: #{$theme-padding};
+  --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
+  --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
+  --scheduler-toolbar-height: calc(#{$button-height} + 2 * #{$theme-padding});
 }
