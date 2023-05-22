@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { CardAuthModule, LoginFormModule } from 'src/app/components';
 
 @Component({
-  selector: 'app-auth-login',
-  templateUrl: './auth-sign-in.component.html',
-  styleUrls: ['./auth-sign-in.component.scss']
+  selector: 'app-sign-in-form',
+  templateUrl: './sign-in-form.component.html',
+  styleUrls: ['./sign-in-form.component.scss']
 })
-export class AuthSignInComponent {
+export class AppSignInComponent {
   constructor() { }
 }
 
@@ -19,7 +19,7 @@ export class AuthSignInComponent {
     CardAuthModule,
   ],
   providers: [],
-  exports: [AuthSignInComponent],
-  declarations: [AuthSignInComponent],
+  exports: [AppSignInComponent],
+  declarations: [AppSignInComponent],
 })
-export class AuthLoginModule { }
+export class AppSignInModule { }

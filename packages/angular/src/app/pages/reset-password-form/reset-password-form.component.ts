@@ -4,11 +4,11 @@ import { Component, NgModule } from '@angular/core';
 import { CardAuthModule, ResetPasswordFormModule } from 'src/app/components';
 
 @Component({
-  selector: 'app-auth-reset-password',
-  templateUrl: './auth-reset-password.component.html',
-  styleUrls: ['./auth-reset-password.component.scss']
+  selector: 'app-reset-password-form',
+  templateUrl: './reset-password-form.component.html',
+  styleUrls: ['./reset-password-form.component.scss']
 })
-export class AuthResetPasswordComponent {
+export class AppResetPasswordComponent {
 
   defaultLink = '/sign-in-form';
 
@@ -24,8 +24,8 @@ export class AuthResetPasswordComponent {
     ResetPasswordFormModule,
   ],
   providers: [],
-  exports: [AuthResetPasswordComponent],
-  declarations: [AuthResetPasswordComponent],
+  exports: [AppResetPasswordComponent],
+  declarations: [AppResetPasswordComponent],
 })
-export class AuthResetPasswordModule { }
+export class AppResetPasswordModule { }
 
