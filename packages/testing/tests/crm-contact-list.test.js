@@ -51,7 +51,7 @@ fixture`Contact List`;
         await takeScreenshot(`crm-contact-list-form-edit${postfix}`, Selector('.data-wrapper'));
         await t.click(Selector('[aria-label="Close"]'));
 
-        await t.click(Selector('.dx-button-text[aria-label=All]'));
+        await t.click(Selector('.dx-button[aria-label=All]'));
         await t.click(Selector('.dx-list-item-content').withText('Terminated'));
         await takeScreenshot(`crm-contact-list-grid-filtering-terminated=${postfix}`, 'body');
 
