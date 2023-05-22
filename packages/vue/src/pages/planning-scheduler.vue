@@ -12,7 +12,7 @@
               <dx-button
                 text="Create event"
                 type="default"
-                @click="showAppointmentCreationForm"
+                @click="() => showAppointmentCreationForm()"
               />
             </div>
             <div class="calendar">
@@ -41,7 +41,10 @@
             :show-current-time-indicator="false"
             @option-changed="onSchedulerOptionChange"
             @appointment-click="onAppointmentClick"
+            @appointment-added="onAppointmentModified"
+            @appointment-deleted="onAppointmentModified"
             @appointment-tooltip-showing="onAppointmentTooltipShowing"
+            @appointment-form-opening="onAppointmentFormOpening"
             @cell-click="onCellClick"
           >
             <dx-resource
@@ -69,7 +72,7 @@
           <dx-speed-dial-action
             icon="add"
             :visible="screenInfo.isXSmall"
-            @click="showAppointmentCreationForm"
+            @click="() => showAppointmentCreationForm()"
           />
         </div>
 
@@ -112,8 +115,9 @@ import { defaultCalendarListItems, getTasksForScheduler } from 'dx-template-gall
 import DataSource from 'devextreme/data/data_source';
 import { Task } from '@/types';
 import AgendaList, { AgendaItem } from '@/components/utils/agenda-list.vue';
+import { DxForm } from 'devextreme-vue/form';
 
-type AppointmentData = {startDate: Date};
+type AppointmentData = {startDate: Date, calendarId?: string};
 type SelectedAppointment = {
   data: AppointmentData,
   target: HTMLElement | undefined };
@@ -219,6 +223,20 @@ function calendarListChanged(selectedCalendars: {id: string}[]) {
   tasks.value?.filter(filters.length > 0 ? filters : null);
   tasks.value?.load();
   updateAgenda({ startDate: currentDate.value });
+}
+
+function onAppointmentFormOpening(e: {form: typeof DxForm, appointmentData: AppointmentData}) {
+  const editor = e.form.getEditor('calendarId');
+  if (e.appointmentData.calendarId === undefined) {
+    editor.option('value', 0);
+  }
+}
+
+function onAppointmentModified(e: {appointmentData: AppointmentData}) {
+  if (e.appointmentData.startDate.toDateString()
+    === selectedAppointment.value?.data.startDate.toDateString()) {
+    updateAgenda(e.appointmentData);
+  }
 }
 
 function onCurrentViewChange(view: string) {

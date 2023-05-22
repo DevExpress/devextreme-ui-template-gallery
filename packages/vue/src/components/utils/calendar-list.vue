@@ -15,6 +15,7 @@
         <dx-button
           icon="add"
           styling-mode="contained"
+          @click="onAddClick"
         />
       </div>
     </template>
@@ -38,6 +39,7 @@
 <script setup lang="ts">
 import { DxList, DxCheckBox, DxButton } from 'devextreme-vue';
 import { watchEffect } from 'vue';
+import { EventObject } from 'devextreme/events';
 
 const props = withDefaults(defineProps<{
   dataSource: {items: Record<string, unknown>[]}[],
@@ -56,6 +58,10 @@ const emit = defineEmits(['listSelectionChanged']);
 function selectionChanged(item: Record<string, unknown>, { value }: { value: boolean }) {
   selectedItems = value ? [...selectedItems, item] : selectedItems.filter((el) => el !== item);
   emit('listSelectionChanged', selectedItems);
+}
+
+function onAddClick({ event }: {event: EventObject}) {
+  event.stopImmediatePropagation();
 }
 </script>
 

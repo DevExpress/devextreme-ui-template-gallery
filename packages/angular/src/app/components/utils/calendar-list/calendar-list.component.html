@@ -11,7 +11,10 @@
   <div *dxTemplate="let item of 'group'">
     <div class='list-header'>
       {{ item.key }}
-      <dx-button icon='add' stylingMode='contained'></dx-button>
+      <dx-button icon='add'
+                 stylingMode='contained'
+                 (onClick)="onAddClick($event)"
+      ></dx-button>
     </div>
   </div>
 
