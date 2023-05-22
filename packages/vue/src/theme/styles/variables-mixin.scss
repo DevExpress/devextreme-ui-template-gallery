@@ -20,7 +20,7 @@ $base-bg-darken-4: darken($base-bg, 4);
 $background-gray-color: color.change($base-text-color, $alpha: 0.04);
 $base-text-color-alpha: rgba($base-text-color, alpha($base-text-color) * 0.7);
 $theme-padding: $material-button-horizontal-padding;
-$button-height-theme-difference: calc($theme-padding - 10px) / 3; // WA for no button-height in generic theme
+$button-height-theme-difference: calc(($theme-padding - 10px) / 3); // WA for no button-height in generic theme
 $button-height: calc(26px + $button-height-theme-difference); // remove when design-system is released
 $side-panel-min-width: 48px;
 $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
