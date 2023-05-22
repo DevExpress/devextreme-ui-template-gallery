@@ -182,6 +182,93 @@ export class DataService {
     },
   ]]);
 
+  public getAppointmentsDefaultTime = (index) => [
+    {
+      weekDay: 0,
+      weekIndex: 0,
+      defaultTime: {
+        hours: 7,
+        minutes: 30,
+      },
+    },
+    {
+      weekDay: 1,
+      weekIndex: 0,
+      defaultTime: {
+        hours: 10,
+      },
+    },
+    {
+      weekDay: 2,
+      weekIndex: 0,
+      defaultTime: {
+        hours: 8,
+        minutes: 30,
+      },
+    },
+    {
+      weekDay: 3,
+      weekIndex: 0,
+      defaultTime: {
+        hours: 7,
+      },
+    },
+    {
+      weekDay: 0,
+      weekIndex: 1,
+      defaultTime: {
+        hours: 9,
+      },
+    },
+    {
+      weekDay: 1,
+      weekIndex: 1,
+      defaultTime: {
+        hours: 7,
+      },
+    },
+    {
+      weekDay: 2,
+      weekIndex: 1,
+      defaultTime: {
+        hours: 8,
+        minutes: 30,
+      },
+    },
+    {
+      weekDay: 3,
+      weekIndex: 1,
+      defaultTime: {
+        hours: 9,
+        minutes: 30,
+      },
+    },
+    {
+      weekDay: 1,
+      weekIndex: 2,
+      defaultTime: {
+        hours: 8,
+        minutes: 20,
+      },
+    },
+    {
+      weekDay: 2,
+      weekIndex: 2,
+      defaultTime: {
+        hours: 9,
+        minutes: 40,
+      },
+    },
+    {
+      weekDay: 3,
+      weekIndex: 2,
+      defaultTime: {
+        hours: 8,
+        minutes: 30,
+      },
+    },
+  ][index];
+
   public getSchedulerTasks = () => {
     const promptDescription = `The HtmlEditor component is a client-side WYSIWYG text editor.
 The editor allows users to format text and integrate media elements into documents.
@@ -194,23 +281,21 @@ The result can be exported to HTML or Markdown.`;
           weekday: 1, hour: 0, minute: 0, millisecond: 0,
         });
         const uniqueTasks = tasks.slice(0, 11);
-        return uniqueTasks.map((task, index) => {
-          const weekDay = (index % 4);
 
-          const weekIndex = Math.ceil(index / 4) - 1;
+        return uniqueTasks.map((task, index) => {
+          const { weekDay, weekIndex, defaultTime } = this.getAppointmentsDefaultTime(index);
           const taskStart = mondayMidnight.plus({
-            days: weekDay + weekIndex * 7,
-            hours: 7 + weekDay,
-          });
+            weeks: weekIndex,
+            days: weekDay,
+          }).plus(defaultTime);
           return {
             ...task,
             startDate: taskStart.toJSDate(),
             endDate: taskStart.plus({ hours: 3 }).toJSDate(),
             description: promptDescription,
             calendarId: weekDay,
-          } as Task;
+          };
         });
       }))
   };
-
 }
