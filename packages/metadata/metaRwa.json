@@ -76,7 +76,8 @@
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
                             "Angular",
-                            "React"
+                            "React",
+                            "Vue"
                         ]
                     }
                 ]
