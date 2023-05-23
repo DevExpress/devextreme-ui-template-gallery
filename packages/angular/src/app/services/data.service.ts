@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
+import { DateTime } from 'luxon';
 import {
   map,
   groupBy,
@@ -131,4 +132,85 @@ export class DataService {
 
     return from([items])
   };
+
+  public getListDS = () => from([[
+    {
+      key: 'id',
+      items: ['Brett Johnson', 'Tasks', 'Reminder', 'Contacts']
+        .map((text) => ({ list: 'My Calendars', text }))
+        .concat({ list: 'Other Calendars', text: 'Holidays' }),
+    },
+  ]]);
+
+  public getDefaultListDS = () => from([[
+    {
+      key: 'My Calendars',
+      items: [
+        {
+          id: 0,
+          text: 'Brett Johnson',
+          color: '#B3E5FC',
+          checkboxColor: '#29B6F6',
+        },
+        {
+          id: 1,
+          text: 'Tasks',
+          color: '#C8E6C9',
+          checkboxColor: '#66BB6A',
+        },
+        {
+          id: 2,
+          text: 'Reminder',
+          color: '#FFCDD2',
+          checkboxColor: '#EF5350',
+        },
+        {
+          id: 3,
+          text: 'Contacts',
+          color: '#FFE0B2',
+          checkboxColor: '#FFA726',
+        }],
+    },
+    {
+      key: 'Other Calendars',
+      items: [{
+        id: 4,
+        text: 'Holidays',
+        color: '#F3E5F5',
+        checkboxColor: '#AB47BC',
+      }],
+    },
+  ]]);
+
+  public getSchedulerTasks = () => {
+    const promptDescription = `The HtmlEditor component is a client-side WYSIWYG text editor.
+The editor allows users to format text and integrate media elements into documents.
+The result can be exported to HTML or Markdown.`;
+
+    return this.getTasks().pipe(
+      map((tasks) => {
+        const today = DateTime.now();
+        const mondayMidnight = today.set({
+          weekday: 1, hour: 0, minute: 0, millisecond: 0,
+        });
+        const uniqueTasks = tasks.slice(0, 11);
+        return uniqueTasks.map((task, index) => {
+          const weekDay = (index % 4);
+
+          const weekIndex = Math.ceil(index / 4) - 1;
+          const taskStart = mondayMidnight.plus({
+            days: weekDay + weekIndex * 7,
+            hours: 7 + weekDay,
+          });
+          return {
+            ...task,
+            startDate: taskStart.toJSDate(),
+            endDate: taskStart.plus({ hours: 3 }).toJSDate(),
+            description: promptDescription,
+            calendarId: weekDay,
+          } as Task;
+        });
+      }))
+  };
+
 }

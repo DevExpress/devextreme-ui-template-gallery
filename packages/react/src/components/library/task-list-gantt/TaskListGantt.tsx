@@ -18,13 +18,13 @@ export const TaskListGantt = React.forwardRef<Gantt, PlanningProps>(({ dataSourc
         <Toolbar>
           <Item name='undo' />
           <Item name='redo' />
-          <Item name='separator' />
+          <Item name={'separator' as any} />
           <Item name='collapseAll' />
           <Item name='expandAll' />
-          <Item name='separator' />
+          <Item name={'separator' as any} />
           <Item name='addTask' />
           <Item name='deleteTask' />
-          <Item name='separator' />
+          <Item name={'separator' as any} />
           <Item name='zoomIn' />
           <Item name='zoomOut' />
         </Toolbar>

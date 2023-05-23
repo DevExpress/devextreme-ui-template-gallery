@@ -113,6 +113,7 @@ export const PlanningScheduler = () => {
           onAppointmentFormOpening={onAppointmentFormOpening}
           onAppointmentTooltipShowing={onAppointmentTooltipShowing}
           onCellClick={onCellClick}
+          showCurrentTimeIndicator={false}
           startDayHour={4}
           views={views}
         >

@@ -1,25 +1,23 @@
 <div class="panel" [ngClass]="{ pin: pinned, open: isOpened }">
   <div class="data-wrapper">
     <ng-container *ngIf="!isLoading">
-      <div class="data-part">
-        <dx-toolbar class="panel-toolbar">
-          <dxi-item location="before">
-            <span class="contact-name value">{{ user.name }}</span>
-          </dxi-item>
-          <dxi-item location="before">
-            <contact-status [value]="user.status"></contact-status>
-          </dxi-item>
-          <dxi-item location="after" [visible]="isPinEnabled">
-            <dx-button
-              [icon]="pinned ? 'pin' : 'unpin'"
-              (onClick)="onPinClick()"
-            ></dx-button>
-          </dxi-item>
-          <dxi-item location="after">
-            <dx-button icon="close" (onClick)="onClosePanel()"></dx-button>
-          </dxi-item>
-        </dx-toolbar>
-      </div>
+      <dx-toolbar class="panel-toolbar">
+        <dxi-item location="before">
+          <span class="contact-name value">{{ user.name }}</span>
+        </dxi-item>
+        <dxi-item location="before">
+          <contact-status [value]="user.status"></contact-status>
+        </dxi-item>
+        <dxi-item location="after" [visible]="isPinEnabled">
+          <dx-button
+            [icon]="pinned ? 'pin' : 'unpin'"
+            (onClick)="onPinClick()"
+          ></dx-button>
+        </dxi-item>
+        <dxi-item location="after">
+          <dx-button icon="close" (onClick)="onClosePanel()"></dx-button>
+        </dxi-item>
+      </dx-toolbar>
 
       <dx-scroll-view class="panel-scroll">
         <dx-validation-group>

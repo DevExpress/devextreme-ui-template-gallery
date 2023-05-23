@@ -21,6 +21,21 @@ body {
   }
 }
 
+.header-text {
+  @include header();
+}
+
+.title-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.subtitle-text {
+  color: $subtitle-text-color;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 #root {
   height: 100%;
 }
@@ -85,15 +100,14 @@ body {
   border-left: 0;
 }
 
-.dx-form {
-  .dx-texteditor-label {
-    height: auto;
-  }
-
-  .dx-texteditor-with-label .dx-label {
-    line-height: 1;
-  }
+.dx-texteditor-label {
+  height: auto;
 }
+
+.dx-label {
+  line-height: 1;
+}
+
 
 .embedded {
   .layout-header,
@@ -173,18 +187,16 @@ body {
   border: none;
 }
 
-.status-contact {
-  &.status-commission {
-    @include status-contact(#03a9f4);
-  }
+.status-commission {
+  @include status-contact(#03a9f4);
+}
 
-  &.status-salaried {
-    @include status-contact(#2eb52c);
-  }
+.status-salaried {
+  @include status-contact(#2eb52c);
+}
 
-  &.status-terminated {
-    @include status-contact(#de8e8c);
-  }
+.status-terminated {
+  @include status-contact(#de8e8c);
 }
 
 @mixin item-field($status-color) {
@@ -198,6 +210,7 @@ body {
   }
 }
 
+.item-editor-field .item-field,
 .item-field {
   &.item-open {
     @include item-field(#505ed9);

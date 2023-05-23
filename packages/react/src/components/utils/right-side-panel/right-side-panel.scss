@@ -13,7 +13,7 @@
   display: none;
 
   &.open {
-    flex: 0 1 300px;
+    flex: 0 1 var(--side-panel-width);
     display: block;
     border: solid 1px $base-border-color;
     border-radius: 8px;

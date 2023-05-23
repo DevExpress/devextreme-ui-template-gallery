@@ -13,31 +13,29 @@
         :position="{ of: '#contact-panel' }"
       />
       <template v-if="panelData">
-        <div class="data-part">
-          <dx-toolbar class="panel-toolbar">
-            <dx-item location="before">
-              <div class="contact-name">
-                {{ panelData?.name }}
-              </div>
-            </dx-item>
-            <dx-item location="before">
-              <contact-status :value="panelData?.status" />
-            </dx-item>
+        <dx-toolbar class="panel-toolbar">
+          <dx-item location="before">
+            <div class="contact-name">
+              {{ panelData?.name }}
+            </div>
+          </dx-item>
+          <dx-item location="before">
+            <contact-status :value="panelData?.status" />
+          </dx-item>
 
-            <dx-item
-              location="after"
-              widget="dxButton"
-              :visible="isPinEnabled"
-              :options="{ icon: isPinned ? 'pin' : 'unpin', onClick: () => isPinned = !isPinned }"
-            />
+          <dx-item
+            location="after"
+            widget="dxButton"
+            :visible="isPinEnabled"
+            :options="{ icon: isPinned ? 'pin' : 'unpin', onClick: () => isPinned = !isPinned }"
+          />
 
-            <dx-item
-              location="after"
-              widget="dxButton"
-              :options="{ icon: 'close', onClick: onClose }"
-            />
-          </dx-toolbar>
-        </div>
+          <dx-item
+            location="after"
+            widget="dxButton"
+            :options="{ icon: 'close', onClick: onClose }"
+          />
+        </dx-toolbar>
 
         <dx-scroll-view class="panel-scroll">
           <dx-validation-group>
@@ -346,7 +344,7 @@ const navigateToDetails = () => {
     }
   }
 
-  :deep(.photo-row) .dx-item .dx-item:has(.photo-box)  {
+  :deep(.photo-row) .dx-item > .dx-item-content > .dx-item:first-child  {
     max-width: 144px;
 
     .photo-box {
@@ -380,14 +378,14 @@ const navigateToDetails = () => {
     height: 100%;
     width: var(--contact-side-panel-width);
 
+    .panel-toolbar {
+      $padding: calc($toolbar-vertical-padding / 2);
+
+      padding: $padding $padding $padding $toolbar-vertical-padding;
+    }
+
     .data-part {
       padding: 0 16px;
-
-      &:has(.panel-toolbar) {
-        $padding: calc($toolbar-vertical-padding / 2);
-
-        padding: $padding $padding $padding $toolbar-vertical-padding;
-      }
 
       &.border {
         border-bottom: 1px solid $border-color;
