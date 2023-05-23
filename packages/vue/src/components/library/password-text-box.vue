@@ -13,6 +13,8 @@
       :options="{
         visible: valueState?.length > 0,
         icon: isPasswordMode ? 'eyeopen' : 'eyeclose',
+        hoverStateEnabled: false,
+        activeStateEnabled: false,
         onClick: switchMode
       }"
     />
