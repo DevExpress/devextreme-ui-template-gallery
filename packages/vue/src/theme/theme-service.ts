@@ -1,7 +1,15 @@
-import './theme-dark';
-import './theme-light';
+// import './app-themes';
+
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import { ref } from 'vue';
+
+const loadStylesImports = () => {
+  const prefix = './styles/app-theme';
+  return Promise.all([
+    import(/* webpackChunkName: "theme-light" */ `${prefix}-light.scss`),
+    import(/* webpackChunkName: "theme-dark" */ `${prefix}-dark.scss`),
+  ]);
+};
 
 const themes = ['light', 'dark'] as const;
 
@@ -16,21 +24,32 @@ class ThemeService {
 
   private readonly themeMarker = 'theme-';
 
+  isStylesLoaded = ref(false);
+
   currentTheme = ref<Theme>(this.getCurrentTheme());
+
+  constructor() {
+    loadStylesImports().then(() => {
+      this.isStylesLoaded.value = true;
+      this.setAppTheme();
+    });
+  }
 
   getCurrentTheme(): Theme {
     return window.localStorage[this.storageKey] || getNextTheme();
   }
 
+  isThemeStyleSheet = (styleSheet: CSSStyleSheet, theme: Theme | '' = '') => !!styleSheet?.href?.includes(`${this.themeMarker + theme}`);
+
   private getThemeStyleSheets() {
     return Array.from(document.styleSheets).filter(
-      (styleSheet) => styleSheet?.href?.includes(this.themeMarker),
+      (stylesheet) => this.isThemeStyleSheet(stylesheet),
     );
   }
 
   setAppTheme(theme = this.currentTheme.value) {
     this.getThemeStyleSheets().forEach((styleSheet) => {
-      styleSheet.disabled = !styleSheet?.href?.includes(`${this.themeMarker}${theme}.`);
+      styleSheet.disabled = !this.isThemeStyleSheet(styleSheet, theme);
     });
 
     this.currentTheme.value = theme;
