@@ -12,7 +12,7 @@ $theme: null !default;
 @use "sass:math";
 @use "sass:color";
 
-:root, .app-theme-#{$theme} {
+body.theme-#{$theme} {
   $base-bg-darken-5: darken($base-bg, 5);
   $base-bg-darken-4: darken($base-bg, 4);
   $background-gray-color: color.change($base-text-color, $alpha: 0.04);

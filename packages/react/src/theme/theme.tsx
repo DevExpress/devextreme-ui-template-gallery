@@ -1,15 +1,14 @@
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import './theme-variables';
 
 const themes = ['light', 'dark'] as const;
 const storageKey = 'app-theme';
-const themePrefix = 'app-theme-';
-
-const prefixes = ['./styles/theme-dx-', './styles/variables-'];
+const themePrefix = 'theme-';
 
 const loadStylesImports = async() => {
   await Promise.all([
-    ...prefixes.flatMap((prefix) => [
+    ...['./styles/theme-dx-'].flatMap((prefix) => [
       import(/* webpackChunkName: "app-theme-dark" */ `${prefix}dark.scss`),
       import(/* webpackChunkName: "app-theme-light" */ `${prefix}light.scss`)
     ]),
@@ -50,6 +49,10 @@ async function setAppTheme(newTheme?: Theme) {
   const themeName = newTheme || getCurrentTheme();
 
   switchThemeStyleSheets(themeName);
+
+  const themeClasses = themes.map((name) => themePrefix + name);
+  document.body.classList.remove(...themeClasses);
+  document.body.classList.add(`theme-${themeName}`);
 
   window.localStorage[storageKey] = themeName;
 
