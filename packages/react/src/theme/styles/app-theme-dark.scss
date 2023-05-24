@@ -1,0 +1,6 @@
+@use "./variables-mixin.scss" as * with ($theme: "dark");
+@import 'devextreme/dist/css/dx.material.blue.dark.compact';
+.theme-dark {
+  // This selector is necessary for finding this stylesheet in development mode
+  content: '';
+}

@@ -1,19 +1,18 @@
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import './theme-variables';
+
+const loadStylesImports = () => {
+  const prefix = './styles/app-theme-';
+
+  return Promise.all([
+    import(/* webpackChunkName: "app-theme-dark" */ `${prefix}dark.scss`),
+    import(/* webpackChunkName: "app-theme-light" */ `${prefix}light.scss`)
+  ]);
+};
 
 const themes = ['light', 'dark'] as const;
 const storageKey = 'app-theme';
 const themePrefix = 'theme-';
-
-const loadStylesImports = async() => {
-  await Promise.all([
-    ...['./styles/theme-dx-'].flatMap((prefix) => [
-      import(/* webpackChunkName: "app-theme-dark" */ `${prefix}dark.scss`),
-      import(/* webpackChunkName: "app-theme-light" */ `${prefix}light.scss`)
-    ]),
-  ]);
-};
 
 export type Theme = typeof themes[number];
 
@@ -27,13 +26,12 @@ function getCurrentTheme(): Theme {
 
 function isThemeStyleSheet(styleSheet, theme: Theme) {
   const themeMarker = `${themePrefix}${theme}`;
+
   // eslint-disable-next-line no-undef
   if(process.env.NODE_ENV === 'production') {
     return styleSheet?.href?.includes(`${themeMarker}`);
   } else {
-    const rules = Array.from<CSSStyleRule>(styleSheet.cssRules);
-    return !![rules[0], rules.at(-1)].find(
-      (rule) => rule?.selectorText?.includes(`.${themeMarker}`));
+    return !![...styleSheet.cssRules].pop()?.selectorText?.includes(`.${themeMarker}`);
   }
 }
 
