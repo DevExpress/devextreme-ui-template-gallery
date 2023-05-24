@@ -6,7 +6,7 @@ const packages = require('./packages');
 const filesForChange = {
   angular: 'angular.json',
   vue: ['src/theme/styles/app-theme-dark.scss', 'src/theme/styles/app-theme-light.scss'],
-  react: ['src/theme/styles/theme-dx-dark.scss', 'src/theme/styles/theme-dx-light.scss'],
+  react: ['src/theme/styles/app-theme-dark.scss', 'src/theme/styles/app-theme-light.scss'],
 };
 
 const variablesPath = {

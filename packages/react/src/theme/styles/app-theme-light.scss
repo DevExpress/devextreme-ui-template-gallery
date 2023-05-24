@@ -1,5 +1,7 @@
+/* stylelint-disable */
 @use "./variables-mixin.scss" as * with ($theme: "light");
 @import 'devextreme/dist/css/dx.material.blue.light.compact';
+
 .theme-light {
   // This selector is necessary for finding this stylesheet in development mode
   content: '';
