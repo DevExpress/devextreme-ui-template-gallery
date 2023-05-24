@@ -1,0 +1,12 @@
+@use "../../../../variables.scss" as *;
+@use "sass:math";
+
+:host {
+  ::ng-deep .card.sales-range {
+    margin-top: 20px;
+
+    .content {
+      height: auto;
+    }
+  }
+}

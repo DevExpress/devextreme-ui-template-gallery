@@ -1,0 +1,15 @@
+@use "../../../../variables.scss" as *;
+
+:host ::ng-deep {
+  td.dx-command-adaptive.dx-command-adaptive,
+  td.sales-bullet.sales-bullet {
+    border-left: none;
+    border-right: none;
+  }
+
+  .card.grid .content {
+    border-top: 1px solid $border-color;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

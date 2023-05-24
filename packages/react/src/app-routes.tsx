@@ -1,4 +1,17 @@
-import { CRMContactDetails, CRMContactList, PlanningTaskList, PlanningTaskDetails, AnalyticsDashboard, AnalyticsSalesReport, AnalyticsGeography } from './pages';
+import {
+  CRMContactDetails,
+  CRMContactList,
+  PlanningScheduler,
+  PlanningTaskList,
+  PlanningTaskDetails,
+  AnalyticsDashboard,
+  AnalyticsSalesReport,
+  AnalyticsGeography,
+  SignInPage,
+  SignUpPage,
+  ResetPasswordPage,
+  UserProfile
+} from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -19,6 +32,10 @@ const routes = [
     element: PlanningTaskDetails,
   },
   {
+    path: '/planning-scheduler',
+    element: PlanningScheduler,
+  },
+  {
     path: '/analytics-dashboard',
     element: AnalyticsDashboard,
   },
@@ -29,6 +46,22 @@ const routes = [
   {
     path: '/analytics-geography',
     element: AnalyticsGeography,
+  },
+  {
+    path: '/signin-form-page',
+    element: SignInPage,
+  },
+  {
+    path: '/signup-form-page',
+    element: SignUpPage,
+  },
+  {
+    path: '/reset-password-form-page',
+    element: ResetPasswordPage,
+  },
+  {
+    path: '/user-profile',
+    element: UserProfile,
   },
 ];
 

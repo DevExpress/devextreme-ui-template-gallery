@@ -1,0 +1,60 @@
+@use "../../../variables.scss" as *;
+@use "sass:math";
+
+.appointment-tooltip {
+  white-space: normal;
+  width: 100%;
+  text-align: left;
+
+  .title {
+    padding: 8px 8px 8px 16px;
+
+    @include h1-header-text();
+  }
+
+  .content {
+    padding: 0 10px;
+  }
+
+  .date {
+    width: 100%;
+    height: 50px;
+    padding: 8px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+
+    @include description-text(0.7);
+  }
+
+  .description {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+
+    @include description-text(0.7);
+  }
+
+  .buttons {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+    padding: $theme-padding;
+
+    .dx-button {
+      width: calc((100% - $theme-padding) / 2);
+      border-radius: 4px;
+    }
+
+    .button-danger {
+      background-color: $tooltip-danger-button-color;
+    }
+
+    .button-success {
+      background-color: $tooltip-success-button-color;
+    }
+  }
+}

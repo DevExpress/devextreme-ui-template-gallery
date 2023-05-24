@@ -1,0 +1,40 @@
+@use "../../../variables.scss" as *;
+@use "sass:math";
+
+.profile-card-panel {
+  @include shadow();
+
+  width: 100%;
+  padding: 0 0 $content-padding 0;
+  border-radius: 8px;
+  background-color: var(--card-background);
+
+  .profile-card-panel-header {
+    padding: $content-padding;
+    border-bottom: 1px solid $border-color;
+  }
+
+  .top-item-wrapper {
+    display: flex;
+  }
+
+  .profile-card-top-item {
+    display: flex;
+    min-height: 50px;
+
+    & > div {
+      display: flex;
+      flex-flow: column;
+      gap: 5px;
+    }
+  }
+
+  .form-container .dx-form .dx-field-item {
+    padding-top: calc($content-padding / 2);
+    padding-right: 0;
+  }
+
+  .form-container {
+    margin: calc($content-padding * 2) $content-padding 0;
+  }
+}

@@ -1,4 +1,5 @@
 import { ClientFunction } from 'testcafe';
+import { DateTime } from 'luxon';
 import { fakeScreenSize } from '../config';
 
 const WAIT_ATTEMPTS = 10;
@@ -33,17 +34,31 @@ export const toogleEmbeddedClass = ClientFunction((embed) => {
   window.document.getElementsByTagName('body')[0].classList.add('embedded');
 });
 
-export const getPostfix = (embedded, screenMode) => {
-  const theme = process.env.theme;
+export const getPostfix = (embedded, screenMode, themeMode) => {
+  let theme = process.env.theme;
+  theme = !themeMode ? theme : theme.replace(/\.(light|dark)$/, `.${themeMode}`);
+
   return `-embed=${embedded}-${theme}-${screenMode[0]}`;
 };
+
+export async function setTheme(t, theme) {
+  const currentTheme = await ClientFunction(
+    () => localStorage.getItem('app-theme'),
+  )();
+
+  if (currentTheme !== theme) {
+    await t.click('.theme-button');
+    await t.click('.header-title'); // for remove focus from theme-button
+    await t.wait(1000);
+  }
+}
 
 export const toggleCommonConfiguration = async (
   t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize, requestLogger,
 ) => {
   await t.resizeWindow(...screenMode);
-
   await t.navigateTo(url);
+
   await awaitFontsLoaded(t, requestLogger);
   await toogleEmbeddedClass(embedded);
   if (embedded && isDoubleResize) {
@@ -52,4 +67,12 @@ export const toggleCommonConfiguration = async (
   setEmbedded(t, embedded, screenMode);
 
   await t.wait(timeout);
+};
+
+export const compileDateValue = () => {
+  const today = DateTime.now();
+  const monday = today.set({
+    weekday: 1,
+  });
+  return monday.toFormat('yyyy/MM/dd');
 };

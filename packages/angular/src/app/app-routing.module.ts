@@ -9,8 +9,7 @@ import {
 } from './components';
 import { AuthGuardService } from './services';
 
-import { SideNavOuterToolbarComponent } from './layouts/side-nav-outer-toolbar/side-nav-outer-toolbar.component';
-import { UnauthenticatedContentComponent } from './layouts/unauthenticated-content/unauthenticated-content';
+import { SideNavOuterToolbarComponent, UnauthenticatedContentComponent } from './layouts';
 
 import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactDetailsComponent } from './pages/crm-contact-details/crm-contact-details.component';
@@ -19,6 +18,11 @@ import { PlanningTaskDetailsComponent } from './pages/planning-task-details/plan
 import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analytics-dashboard.component';
 import { AnalyticsSalesReportComponent } from './pages/analytics-sales-report/analytics-sales-report.component';
 import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
+import { PlanningSchedulerComponent } from './pages/planning-scheduler/planning-scheduler.component';
+import { AppSignInComponent } from './pages/sign-in-form/sign-in-form.component';
+import { AppSignUpComponent } from './pages/sign-up-form/sign-up-form.component';
+import { AppResetPasswordComponent } from './pages/reset-password-form/reset-password-form.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -76,6 +80,10 @@ const routes: Routes = [
         component: PlanningTaskDetailsComponent
       },
       {
+        path: 'planning-scheduler',
+        component: PlanningSchedulerComponent
+      },
+      {
         path: 'analytics-dashboard',
         component: AnalyticsDashboardComponent,
         canActivate: [AuthGuardService],
@@ -89,6 +97,25 @@ const routes: Routes = [
         path: 'analytics-geography',
         component: AnalyticsGeographyComponent,
         canActivate: [AuthGuardService],
+      },
+      {
+        path: 'sign-in-form',
+        component: AppSignInComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'sign-up-form',
+        component: AppSignUpComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'reset-password-form',
+        component: AppResetPasswordComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'user-profile',
+        component: UserProfileComponent
       },
       {
         path: '**',

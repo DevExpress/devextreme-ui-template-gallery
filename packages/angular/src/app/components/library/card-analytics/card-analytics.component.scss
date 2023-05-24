@@ -1,0 +1,51 @@
+@use "../../../../variables.scss" as *;
+
+:host ::ng-deep {
+  .card {
+    border-radius: 4px;
+    box-shadow: none;
+    position: relative;
+    border: 1px solid $border-color;
+    overflow: hidden;
+
+    .header {
+      padding: $content-padding $content-padding 0;
+    }
+
+    ::ng-deep .overflow-menu {
+      position: absolute;
+      right: 8px;
+      left: auto;
+      top: 10px;
+    }
+
+    .title {
+      color: $base-text-color;
+      line-height: 19px;
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 20px;
+      display: inline-block;
+      padding-right: 25px;
+    }
+
+    .content {
+      padding: 0 $content-padding $content-padding;
+      box-sizing: content-box;
+      color: $texteditor-label-color;
+      font-size: 14px;
+      line-height: 17px;
+      height: 270px;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  :host {
+    .card {
+      .content {
+        height: auto;
+      }
+    }
+  }
+}

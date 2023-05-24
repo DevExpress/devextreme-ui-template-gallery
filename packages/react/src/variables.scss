@@ -1,34 +1,48 @@
-@use "../node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: "light");
-@use "../node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
-@use '../node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
-@use "../node_modules/devextreme/scss/widgets/material/button/mixins" as *;
-@use "../node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
-@use "../node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
-@use "../node_modules/devextreme/scss/widgets/material/list/sizes" as *;
+$base-bg: var(--base-bg);
+$base-bg-darken-5: var(--base-bg-darken-5);
+$base-bg-darken-4: var(--base-bg-darken-4);
+$base-text-color: var(--base-text-color);
+$base-focus-color: var(--base-focus-color);
+$side-panel-background: $base-bg-darken-5;
+$background-color: $base-bg;
+$border-color: var(--border-color);
+$accent-color: var(--accent-color);
+$background-gray-color: var(--background-gray-color);
+$texteditor-edit-color: var(--texteditor-edit-color);
+$texteditor-label-color: var(--texteditor-label-color);
+$base-text-color-alpha: var(--base-text-color-alpha);
+$base-border-color: var(--border-color);
+$scheduler-toolbar-height: var(--scheduler-toolbar-height);
+$tooltip-danger-button-color: var(--tooltip-danger-button-color);
+$tooltip-success-button-color: var(--tooltip-success-button-color);
+$button-height: var(--button-height);
+$theme-padding: var(--theme-padding);
 
-@forward "../node_modules/devextreme/scss/widgets/material/colors";
-@forward "../node_modules/devextreme/scss/widgets/material/textEditor/colors";
+$toolbar-height: var(--toolbar-height);
+$calendar-width: var(--calendar-width);
+$filled-texteditor-input-horizontal-padding: var(--filled-texteditor-input-horizontal-padding);
+$list-padding-left: var(--list-padding-left);
+$list-padding-vertical: var(--list-padding-vertical);
+$footer-left-padding: var(--footer-left-padding);
 
-@use "sass:math";
-@use "sass:color";
-
-$toolbar-height: toolbar_sizes.$material-toolbar-height;
+$list-item-horizontal-padding: var(--list-item-horizontal-padding);
 $header-toolbar-vertical-padding: 10px;
 $toolbar-vertical-padding: 16px;
 $content-padding: 16px;
-$side-panel-min-width: 48px;
-$side-panel-background: darken($base-bg, 5);
-$background-color: $base-bg;
-$accent-color: $base-accent;
-$background-gray-color: color.change($base-text-color, $alpha: 0.04);
-$filled-texteditor-input-horizontal-padding: $material-field-value-horizontal-padding;
+$side-panel-min-width: var(--side-panel-min-width);
 $toolbar-margin-bottom: $content-padding;
-$texteditor-edit-color: $texteditor-color;
-$list-padding-left: $material-list-item-horizontal-padding;
+
+$subtitle-text-color: $texteditor-label-color;
 $footer-height: 70px;
-$footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
+$drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 
 @mixin separator() {
+  .h-separator {
+    height: 1px;
+    width: auto;
+    background: $base-border-color;
+  }
+
   .separator {
     height: 24px;
     width: 1px;
@@ -39,6 +53,10 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
       width: auto;
     }
   }
+}
+
+@mixin shadow() {
+  box-shadow: 0 1px 4px 0 #00000026;
 }
 
 @mixin header {
@@ -75,7 +93,7 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
 
   .value {
     font-size: 16px;
-    color: $base-accent;
+    color: $accent-color;
 
     &.black {
       color: $base-text-color;
@@ -108,8 +126,9 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
 @mixin status-contact($status-color) {
   color: $status-color;
 
-  &.dx-texteditor {
-    .status-editor-input {
+  &.dx-texteditor,
+  &.dx-texteditor.dx-editor-filled {
+    input[statuseditorinput][readonly] {
       color: $status-color;
       padding-left: 0;
     }
@@ -120,4 +139,46 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
       background-color: $status-color;
     }
   }
+}
+
+@mixin calendar-items-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+@mixin description-text($opacity) {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  opacity: $opacity;
+}
+
+@mixin h1-header-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+@mixin h2-header-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+@mixin subtext($opacity: 1) {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  opacity: $opacity;
 }

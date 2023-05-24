@@ -1,0 +1,92 @@
+<form class="login-form" (submit)="onSubmit($event)">
+  <dx-form
+    [formData]="formData"
+    [disabled]="loading"
+    [showColonAfterLabel]="true"
+    [showRequiredMark]="false"
+  >
+    <dxi-item
+      dataField="email"
+      editorType="dxTextBox"
+      [editorOptions]="{
+        placeholder: 'Email',
+        stylingMode:'filled',
+        mode: 'email',
+        value: defaultAuthData?.data?.email
+      }"
+    >
+      <dxi-validation-rule
+        type="required"
+        message="Email is required"
+      ></dxi-validation-rule>
+      <dxi-validation-rule
+        type="email"
+        message="Email is invalid"
+      ></dxi-validation-rule>
+      <dxo-label [visible]="false"></dxo-label>
+    </dxi-item>
+
+    <dxi-item
+      dataField="password"
+      editorType="dxTextBox"
+      [editorOptions]="passwordEditorOptions"
+    >
+      <dxi-validation-rule
+        type="required"
+        message="Password is required"
+      ></dxi-validation-rule>
+      <dxo-label [visible]="false"></dxo-label>
+    </dxi-item>
+
+    <dxi-item
+      dataField="rememberMe"
+      editorType="dxCheckBox"
+      [editorOptions]="{
+        text: 'Remember me',
+        elementAttr: { class: 'form-text' }
+      }"
+    >
+      <dxo-label [visible]="false"></dxo-label>
+    </dxi-item>
+
+    <dxi-item itemType="button">
+      <dxo-button-options
+        width="100%"
+        type="default"
+        cssClass="btn-sign-in"
+        [useSubmitBehavior]="true"
+        [template]="'signInTemplate'"
+      >
+      </dxo-button-options>
+    </dxi-item>
+
+    <ng-container *dxTemplate="let item of 'signInTemplate'">
+      <span class="dx-button-text">
+        <ng-container *ngIf="loading; else notLoading">
+          <dx-load-indicator
+            width="24px"
+            height="24px"
+            [visible]="true"
+          ></dx-load-indicator>
+        </ng-container>
+        <ng-template #notLoading>Sign In</ng-template>
+      </span>
+    </ng-container>
+  </dx-form>
+
+  <div class="reset-link">
+    <a [routerLink]="resetLink">Forgot password?</a>
+  </div>
+
+  <dx-button
+    class="btn-create-account"
+    text="Create an account"
+    [stylingMode]="btnStylingMode"
+    width="100%"
+    (onClick)="onCreateAccountClick()"
+  >
+  </dx-button>
+
+  <app-login-oauth></app-login-oauth>
+
+</form>

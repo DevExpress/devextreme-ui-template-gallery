@@ -11,6 +11,21 @@ body {
   box-sizing: border-box;
 }
 
+.header-text {
+  @include header();
+}
+
+.title-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.subtitle-text {
+  color: $subtitle-text-color;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .content {
   line-height: 1.5;
   height: 100%;
@@ -71,27 +86,36 @@ body {
   }
 }
 
+.separator {
+  height: 24px;
+  width: 1px;
+  background: $border-color;
+
+  ::ng-deep .dx-toolbar-menu-section & {
+    height: 1px;
+    width: auto;
+  }
+}
+
 .view-wrapper {
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.details-card {
+.dx-card.details-card {
   border: none;
 }
 
-.dx-form {
-  .dx-texteditor-label {
-    height: auto;
-  }
+.dx-texteditor-label {
+  height: auto;
 
-  .dx-texteditor-with-label .dx-label {
+  .dx-label {
     line-height: 1;
   }
 }
 
-.plain-styled-form {
+.dx-form.plain-styled-form {
   &.dx-form > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
     padding-bottom: 0;
   }
@@ -116,6 +140,7 @@ body {
     }
 
     .dx-texteditor,
+    .dx-texteditor.dx-editor-filled,
     .dx-texteditor.form-editor, {
       pointer-events: none;
 
@@ -138,10 +163,19 @@ body {
   }
 }
 
+.dx-tooltip-wrapper:has(.planning-calendar-appointment-tooltip) {
+  .dx-popup-content,
+  .dx-popup-normal {
+    max-height: 600px !important;
+    border-radius: 8px;
+  }
+}
+
 @mixin status($status-color) {
   color: $status-color;
 
-  &.dx-texteditor {
+  &.dx-texteditor,
+  &.dx-texteditor.dx-editor-filled {
     .status-input.status-editor-input {
       color: $status-color;
     }

@@ -1,0 +1,81 @@
+<div class="view-wrapper">
+  <div class='panels'>
+    <left-side-panel class="left-side-panel">
+      <div class="left-side-panel-content">
+        <div class='buttons'>
+          <dx-button text='Today'
+                     (click)="onSelectedDateChange()"
+          ></dx-button>
+          <dx-button text='Create event'
+                     type='default'
+                     (click)="showAppointmentCreationForm()"
+          ></dx-button>
+        </div>
+        <div class='calendar'>
+          <dx-calendar [value]="currentDate" (valueChange)="onCalendarDateChange($event)" ></dx-calendar>
+        </div>
+        <calendar-list [dataSource]="listDataSource"
+                       (listSelectionChanged)="calendarListChanged($event)"></calendar-list>
+      </div>
+    </left-side-panel>
+
+    <div class='scheduler-container'>
+      <dx-scheduler #schedulerRef
+                    height='inherit'
+                    [adaptivityEnabled]="!!((screen.screenChanged | async)?.isXSmall)"
+                    [allDayPanelMode]="'hidden'"
+                    [dataSource]="tasks"
+                    [currentView]="currentView"
+                    [currentDate]="getSchedulerCurrentDate | apply: currentDate"
+                    [startDayHour]="4"
+                    [showCurrentTimeIndicator]="false"
+                    (currentViewChange)="onCurrentViewChange($event)"
+                    (onAppointmentClick)="onAppointmentClick($event)"
+                    (onAppointmentTooltipShowing)="onAppointmentTooltipShowing($event)"
+                    (onCellClick)="onCellClick($event)"
+      >
+        <dxi-resource
+          fieldExpr="calendarId"
+          label="Calendar"
+          [dataSource]="resourcesList"
+        >
+        </dxi-resource>
+        <dxi-view type='day'></dxi-view>
+        <dxi-view type='workWeek'></dxi-view>
+        <dxi-view type='month'></dxi-view>
+        <dxi-view type='agenda'></dxi-view>
+      </dx-scheduler>
+      <dx-tooltip #tooltipRef
+                  *ngIf="selectedAppointment"
+                  showEvent='click'
+                  [target]="selectedAppointment?.target"
+                  [position]="getTooltipPosition | apply: selectedAppointment: isRightPanelOpen: (screen.screenChanged | async)?.isSmall"
+      >
+        <scheduler-tooltip
+          [selectedAppointmentData]="selectedAppointment?.data"
+          (clickEditAppointment)="editSelectedAppointment()"
+          (clickDeleteAppointment)="deleteSelectedAppointment($event)"
+        ></scheduler-tooltip>
+      </dx-tooltip>
+      <dx-speed-dial-action
+        icon='add'
+        [visible]="(screen.screenChanged | async)?.isXSmall"
+        (onClick)="showAppointmentCreationForm()"
+      ></dx-speed-dial-action>
+    </div>
+
+    <right-side-panel
+      class="right-side-panel"
+      [isOpened]="isRightPanelOpen"
+      [showOpenButton]="currentView === 'month'"
+      [title]="(selectedAppointment?.data.startDate || currentDate) | date: 'EE, MMMM d'"
+      (openedChange)="toggleRightPanelOpen($event)"
+    >
+      <agenda [items]="agendaItems"
+              [resources]="resourcesList"
+              (clickAppointment)="showAppointmentTooltip($event)"
+      ></agenda>
+    </right-side-panel>
+  </div>
+</div>
+

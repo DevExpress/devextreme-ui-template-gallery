@@ -7,9 +7,15 @@ export interface IUser {
   avatarUrl?: string;
 }
 
+export interface IResponse {
+  isOk: boolean;
+  data?: IUser;
+  message?: string;
+}
+
 const defaultPath = '/';
-const defaultUser = {
-  email: 'jheart@dx-email.com',
+export const defaultUser: IUser = {
+  email: 'jheart@corp.com',
   name: 'John Heart',
   avatarUrl: 'https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png',
 };

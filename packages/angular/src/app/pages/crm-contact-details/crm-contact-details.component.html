@@ -4,7 +4,7 @@
       <dxi-item location="before">
         <dx-button icon="arrowleft"></dx-button>
       </dxi-item>
-      <dxi-item location="before" cssClass="contact-name-toolbar-item" [text]="contactName"></dxi-item>
+      <dxi-item location="before" [text]="contactName"></dxi-item>
       <dxi-item location="after" locateInMenu="auto">
         <dx-button
           text="Terminate"
@@ -29,10 +29,10 @@
         widget="dxButton"
         showText="inMenu"
         [options]="{
-        text: 'Copy',
-        icon: 'copy',
-        stylingMode: 'text'
-      }"
+          text: 'Copy',
+          icon: 'copy',
+          stylingMode: 'text'
+        }"
       ></dxi-item>
       <dxi-item
         location="after"
@@ -40,11 +40,11 @@
         widget="dxButton"
         showText="inMenu"
         [options]="{
-        text: 'Refresh',
-        icon: 'refresh',
-        onClick: refresh,
-        stylingMode: 'text'
-      }"
+          text: 'Refresh',
+          icon: 'refresh',
+          onClick: refresh,
+          stylingMode: 'text'
+        }"
       ></dxi-item>
     </dx-toolbar>
 

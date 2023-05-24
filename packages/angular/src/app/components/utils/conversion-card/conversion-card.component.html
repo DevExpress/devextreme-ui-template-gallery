@@ -1,0 +1,25 @@
+<card-analytics
+  titleText="Conversion Funnel (All Products)"
+  contentClass="opportunities"
+>
+  <dx-funnel
+    [dataSource]="data"
+    argumentField="name"
+    valueField="value"
+  >
+    <dxo-label
+      [visible]="true"
+      position="inside"
+      backgroundColor="none"
+      [customizeText]="customizeOppText"
+    >
+      <dxo-format type="largeNumber" [precision]="1"> </dxo-format>
+    </dxo-label>
+
+    <dxo-legend [visible]="true">
+      <dxo-margin [top]="70"></dxo-margin>
+    </dxo-legend>
+
+    <dxo-size [height]="270"></dxo-size>
+  </dx-funnel>
+</card-analytics>

@@ -1,0 +1,17 @@
+<div
+  [ngStyle]="{
+      'width.px': size,
+      'height.px': size,
+      'max-height.px': size,
+      'background-image': imageUrl
+    }"
+  class="photo"
+  [class.editable]="editable"
+>
+  <i *ngIf="editable" class="edit-icon dx-icon-photo"></i>
+</div>
+<dx-file-uploader *ngIf="editable"
+                  [dialogTrigger]="hostRef"
+                  [visible]="false"
+                  accept="image/*"
+></dx-file-uploader>

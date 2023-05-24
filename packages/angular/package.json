@@ -27,6 +27,7 @@
     "file-saver-es": "2.0.5",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.23",
+    "luxon": "^3.3.0",
     "rxjs": "^7.0.0",
     "tslib": "^2.2.0",
     "zone.js": "^0.12.0"

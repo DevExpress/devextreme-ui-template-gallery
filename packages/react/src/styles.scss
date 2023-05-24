@@ -15,6 +15,25 @@ body {
   margin: 0;
   min-height: 100%;
   height: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.header-text {
+  @include header();
+}
+
+.title-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.subtitle-text {
+  color: $subtitle-text-color;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 #root {
@@ -34,17 +53,6 @@ body {
     flex-grow: 1;
     width: 100%;
     height: 100%;
-
-    .view {
-      display: contents;
-
-      .view-wrapper {
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-      }
-    }
   }
 
   h2 {
@@ -52,6 +60,24 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
   }
+}
+
+.separator {
+  height: 24px;
+  width: 1px;
+  background: $border-color;
+
+  .dx-toolbar-menu-section & {
+    height: 1px;
+    width: auto;
+  }
+}
+
+.view-wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
 .responsive-paddings {
@@ -62,6 +88,10 @@ body {
   }
 }
 
+.cards .card .card-contents {
+  box-sizing: content-box;
+}
+
 .dx-card.wide-card {
   border-radius: 0;
   margin-left: 0;
@@ -70,19 +100,14 @@ body {
   border-left: 0;
 }
 
-* {
-  box-sizing: border-box;
+.dx-texteditor-label {
+  height: auto;
 }
 
-.dx-form {
-  .dx-texteditor-label {
-    height: auto;
-  }
-
-  .dx-texteditor-with-label .dx-label {
-    line-height: 1;
-  }
+.dx-label {
+  line-height: 1;
 }
+
 
 .embedded {
   .layout-header,
@@ -101,7 +126,7 @@ body {
   }
 }
 
-.plain-styled-form {
+.dx-form.plain-styled-form {
   &.dx-form > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
     padding-bottom: 0;
   }
@@ -125,12 +150,16 @@ body {
 
   &.view-mode {
     .accent {
-      .dx-texteditor.form-editor .form-editor-input {
-        color: $accent-color;
+      .dx-texteditor.form-editor.dx-editor-filled,
+      .dx-texteditor.form-editor {
+        .form-editor-input {
+          color: $accent-color;
+        }
       }
     }
 
     .dx-texteditor,
+    .dx-texteditor.form-editor.dx-editor-filled,
     .dx-texteditor.form-editor {
       pointer-events: none;
 
@@ -139,6 +168,7 @@ body {
       }
 
       &,
+      &.dx-state-readonly,
       & > * {
         background-color: transparent;
       }
@@ -153,22 +183,20 @@ body {
   }
 }
 
-.details-card {
+.dx-card.details-card {
   border: none;
 }
 
-.status-contact {
-  &.status-commission {
-    @include status-contact(#03a9f4);
-  }
+.status-commission {
+  @include status-contact(#03a9f4);
+}
 
-  &.status-salaried {
-    @include status-contact(#2eb52c);
-  }
+.status-salaried {
+  @include status-contact(#2eb52c);
+}
 
-  &.status-terminated {
-    @include status-contact(#de8e8c);
-  }
+.status-terminated {
+  @include status-contact(#de8e8c);
 }
 
 @mixin item-field($status-color) {
@@ -182,6 +210,7 @@ body {
   }
 }
 
+.item-editor-field .item-field,
 .item-field {
   &.item-open {
     @include item-field(#505ed9);
@@ -227,6 +256,6 @@ body {
 
 .messages-content {
   padding: 20px;
-  border-top: 1px solid $base-border-color;
+  border-top: 1px solid $border-color;
   background-color: $side-panel-background;
 }

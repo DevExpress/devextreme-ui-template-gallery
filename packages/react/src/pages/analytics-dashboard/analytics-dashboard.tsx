@@ -10,17 +10,16 @@ import { useScreenSize } from '../../utils/media-query';
 import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 
 import {
-  Dashboard,
+  ToolbarAnalytics,
   RevenueSnapshotCard,
   RevenueAnalysisCard,
-  ConversionFunnelCard,
+  ConversionCard,
   RevenueCard,
   ConversionTicker,
   LeadsTicker,
   OpportunitiesTicker,
   RevenueTotalTicker
 } from '../../components';
-import { DashboardCardsGroup } from '../../components/dashboard/DashboardCardGroup';
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 import { Sale, SaleOrOpportunityByCategory, SaleByState } from '../../types/analytics';
 
@@ -78,7 +77,7 @@ export const AnalyticsDashboard = () => {
 
   return (
     <ScrollView className='view-wrapper-scroll'>
-      <Dashboard
+      <ToolbarAnalytics
         title='Dashboard'
         additionalToolbarContent={
           <Item
@@ -95,19 +94,19 @@ export const AnalyticsDashboard = () => {
           </Item>
         }
       >
-        <DashboardCardsGroup kind='compact'>
+        <div className='cards compact'>
           <OpportunitiesTicker value={opportunitiesTotal} />
           <RevenueTotalTicker value={salesTotal} />
           <ConversionTicker value={16} />
           <LeadsTicker value={51} />
-        </DashboardCardsGroup>
-        <DashboardCardsGroup>
+        </div>
+        <div className='cards normal'>
           <RevenueCard datasource={sales} />
-          <ConversionFunnelCard datasource={opportunities} />
+          <ConversionCard datasource={opportunities} />
           <RevenueAnalysisCard datasource={salesByState} />
           <RevenueSnapshotCard datasource={salesByCategory} />
-        </DashboardCardsGroup>
-      </Dashboard>
+        </div>
+      </ToolbarAnalytics>
       <LoadPanel container='.content' visible={isLoading} position={{ of: '.layout-body' }} />
     </ScrollView>
   );

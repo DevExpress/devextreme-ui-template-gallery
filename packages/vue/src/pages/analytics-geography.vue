@@ -1,12 +1,12 @@
 <template>
   <dx-scroll-view class="view-wrapper-scroll">
     <div class="view-wrapper">
-      <analytics-toolbar
+      <toolbar-analytics
         :show-tabs="true"
         @tab-change="tabChange($event)"
       >
         Geography
-      </analytics-toolbar>
+      </toolbar-analytics>
 
       <sales-map-card :data="salesByStateMarkers" />
 
@@ -16,21 +16,26 @@
       </div>
     </div>
   </dx-scroll-view>
-  <loading-panel :loading="loading" />
+  <dx-load-panel
+    container=".view-wrapper"
+    :position="{of: '.dx-drawer-content'}"
+    :visible="loading"
+    :show-pane="true"
+  />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
+import { DxLoadPanel } from 'devextreme-vue/load-panel';
 
 // eslint-disable-next-line import/no-unresolved
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 
 import { SalesByState, SalesByStateAndCity } from '@/types/analytics';
-import AnalyticsToolbar from '@/components/analytics-toolbar.vue';
-import LoadingPanel from '@/components/loading-panel.vue';
-import SalesMapCard from '@/components/sales-map-card.vue';
-import RevenueAnalysisCard from '@/components/revenue-analysis-by-states-card.vue';
-import RevenueSnapshotCard from '@/components/revenue-snapshot-by-states-card.vue';
+import ToolbarAnalytics from '@/components/utils/toolbar-analytics.vue';
+import SalesMapCard from '@/components/utils/sales-map-card.vue';
+import RevenueAnalysisCard from '@/components/utils/revenue-analysis-by-states-card.vue';
+import RevenueSnapshotCard from '@/components/utils/revenue-snapshot-by-states-card.vue';
 
 const salesByState = ref<SalesByState | null>(null);
 const salesByStateAndCity = ref<SalesByStateAndCity | null>(null);
