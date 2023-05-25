@@ -6,8 +6,8 @@ export const SignUpPage = () => {
   return (
     <CardAuth title='Sign Up'>
       <CreateAccountForm
-        redirectLink='/signin-form-page'
-        buttonLink='/signup-form-page'
+        redirectLink='/sign-in-form'
+        buttonLink='/sign-up-form'
       />
     </CardAuth>
   );
