@@ -14,6 +14,7 @@
     "devexpress-gantt": "^4.1.33",
     "devextreme": "23.1.2-beta",
     "devextreme-vue": "23.1.2-beta",
+    "devextreme-dist": "23.1.2-beta",
     "dx-template-gallery-data": "^1.0.0",
     "exceljs": "^3.10.0",
     "file-saver-es": "^2.0.5",
