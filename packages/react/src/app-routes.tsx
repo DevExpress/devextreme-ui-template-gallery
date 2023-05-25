@@ -56,7 +56,7 @@ const routes = [
     element: SignUpPage,
   },
   {
-    path: '/reset-password-form-page',
+    path: '/reset-password-form',
     element: ResetPasswordPage,
   },
   {
