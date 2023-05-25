@@ -9,8 +9,8 @@ export const ResetPasswordPage = () => {
       description='Please enter the email address that you used to register, and we will send you a link to reset your password via Email.'
     >
       <ResetPasswordForm
-        signInLink='/signin-form-page'
-        buttonLink='/reset-password-form-page'
+        signInLink='/sign-in-form'
+        buttonLink='/reset-password-form'
       />
     </CardAuth>
   );
