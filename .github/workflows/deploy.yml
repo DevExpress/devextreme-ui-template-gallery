@@ -133,9 +133,9 @@ jobs:
         path: devextreme-ui-template-gallery
 
     - name: Deploy in gh-pages
-      uses: JamesIves/github-pages-deploy-action@3.7.1
+      uses: JamesIves/github-pages-deploy-action@4
       with:
-        BRANCH: gh-pages
-        FOLDER: devextreme-ui-template-gallery
-        TARGET_FOLDER: .
+        branch: gh-pages
+        folder: devextreme-ui-template-gallery
+        target-folder: .
 
