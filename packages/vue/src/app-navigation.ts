@@ -27,6 +27,10 @@ export const navigation = [
         text: 'Task Details',
         path: '/planning-task-details',
       },
+      {
+        text: 'Scheduler',
+        path: '/planning-scheduler',
+      },
     ],
   },
   {

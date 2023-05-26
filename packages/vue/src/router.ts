@@ -64,6 +64,7 @@ export const router = createRouter({
       'crm-contact-details',
       'planning-task-list',
       'planning-task-details',
+      'planning-scheduler',
       'analytics-dashboard',
       'analytics-sales-report',
       'analytics-geography',

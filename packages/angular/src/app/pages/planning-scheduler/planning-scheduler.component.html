@@ -28,6 +28,7 @@
                     [currentView]="currentView"
                     [currentDate]="getSchedulerCurrentDate | apply: currentDate"
                     [startDayHour]="4"
+                    [showCurrentTimeIndicator]="false"
                     (currentViewChange)="onCurrentViewChange($event)"
                     (onAppointmentClick)="onAppointmentClick($event)"
                     (onAppointmentTooltipShowing)="onAppointmentTooltipShowing($event)"

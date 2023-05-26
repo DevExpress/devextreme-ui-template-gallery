@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { DxButtonModule, DxCheckBoxModule } from 'devextreme-angular';
 import { DxListModule } from 'devextreme-angular/ui/list';
+import { EventObject } from 'devextreme/events';
 
 @Component({
   selector: 'calendar-list',
@@ -28,6 +29,10 @@ export class CalendarListComponent implements OnInit {
     const selected = this.selectedItems;
     this.selectedItems = isSelected ? [...selected, item] :  selected.filter((el) => el !== item);
     this.listSelectionChanged.emit(this.selectedItems);
+  }
+
+  onAddClick({event}: {event: EventObject}) {
+    event.stopImmediatePropagation();
   }
 }
 

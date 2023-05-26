@@ -44,7 +44,7 @@
 
         .calendar {
           align-self: center;
-          padding: $content-padding;
+          padding: $theme-padding;
 
           .dx-calendar {
             width: var(--calendar-width);
@@ -61,7 +61,7 @@
         ::ng-deep {
           .dx-scheduler-header {
             border-radius: 8px 8px 0 0;
-            height: $scheduler-toolbar-height;
+            height: var(--scheduler-toolbar-height);
           }
 
           .dx-scheduler-appointment-content {

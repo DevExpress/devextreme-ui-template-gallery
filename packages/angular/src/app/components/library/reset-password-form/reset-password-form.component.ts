@@ -9,7 +9,7 @@ import { AuthService, IResponse } from 'src/app/services';
 const notificationText = 'We\'ve sent a link to reset your password. Check your inbox.';
 
 @Component({
-  selector: 'app-reset-password-form',
+  selector: 'reset-password-form',
   templateUrl: './reset-password-form.component.html',
   styleUrls: ['./reset-password-form.component.scss'],
 })

@@ -48,15 +48,15 @@ const routes = [
     element: AnalyticsGeography,
   },
   {
-    path: '/signin-form-page',
+    path: '/sign-in-form',
     element: SignInPage,
   },
   {
-    path: '/signup-form-page',
+    path: '/sign-up-form',
     element: SignUpPage,
   },
   {
-    path: '/reset-password-form-page',
+    path: '/reset-password-form',
     element: ResetPasswordPage,
   },
   {

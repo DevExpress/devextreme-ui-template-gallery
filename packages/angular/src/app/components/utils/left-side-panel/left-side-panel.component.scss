@@ -2,7 +2,7 @@
 
 :host {
   --left-side-panel-width: 320px;
-  --transition: 400ms;
+  --transition: 0;
 
   height: 100%;
 }
@@ -45,12 +45,13 @@
 
   &.overlapping {
     --button-height: 28px;
+    --transition: 400ms;
 
     .button-container {
       display: flex;
       flex-direction: row;
       align-items: center;
-      height: calc(var(--button-height) + $content-padding * 2);
+      height: var(--scheduler-toolbar-height);
     }
 
     .side-panel-content-wrapper {
