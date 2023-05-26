@@ -30,9 +30,6 @@ export const CalendarList = ({ calendarItems, onSelectedCalendarsChange }) => {
       <div className='list-item'>
         <CheckBox
           value={!selectedItems.includes(item)}
-          style={{
-            '--checkbox-color': item.checkboxColor,
-          }}
           focusStateEnabled={false}
         />
         <span className='list-item-text'>{item.text}</span>
