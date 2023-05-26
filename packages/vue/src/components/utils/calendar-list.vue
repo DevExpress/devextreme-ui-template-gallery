@@ -26,7 +26,6 @@
           <dx-check-box
             :value="selectedItems.includes(item)"
             :focus-state-enabled="false"
-            :style="{'--checkbox-color': item.checkboxColor}"
             @value-changed="(value) => selectionChanged(item, value)"
           />
           <span class="list-item-text">{{ item.text }}</span>
@@ -112,12 +111,6 @@ function onAddClick({ event }: {event: EventObject}) {
     padding: 0 8px;
 
     @include calendar-items-text();
-  }
-
-  --checkbox-color: var(--accent-color);
-
-  :deep(.dx-checkbox-checked) .dx-checkbox-icon {
-    background-color: var(--checkbox-color);
   }
 }
 </style>

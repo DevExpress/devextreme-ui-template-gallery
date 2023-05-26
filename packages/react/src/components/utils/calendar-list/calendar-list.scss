@@ -47,10 +47,4 @@
 
     @include calendar-items-text();
   }
-
-  --checkbox-color: $base-accent;
-
-  .dx-checkbox-checked .dx-checkbox-icon {
-    background-color: var(--checkbox-color);
-  }
 }
