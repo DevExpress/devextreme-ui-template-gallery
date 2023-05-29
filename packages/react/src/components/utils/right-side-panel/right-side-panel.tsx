@@ -24,7 +24,7 @@ export const RightSidePanel = ({ showOpenButton = true, isOpened, toggleOpen, ch
           'open-button': true,
           'hidden': isOpened,
         })}
-        icon='hidepanel'
+        icon='panelright'
         onClick={toggleOpen}
       />
     }
