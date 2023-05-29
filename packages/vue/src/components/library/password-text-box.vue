@@ -12,7 +12,9 @@
       location="after"
       :options="{
         visible: valueState?.length > 0,
-        icon: 'icons/eye.svg',
+        icon: isPasswordMode ? 'eyeopen' : 'eyeclose',
+        hoverStateEnabled: false,
+        activeStateEnabled: false,
         onClick: switchMode
       }"
     />

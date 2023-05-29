@@ -2,8 +2,6 @@ import React, { useState, useCallback } from 'react';
 
 import DataGrid, { Selection, RowDragging, Column } from 'devextreme-react/data-grid';
 
-import { RowDraggingReorderEvent } from 'devextreme/ui/data_grid';
-
 import { withLoadPanel } from '../../../utils/withLoadPanel';
 
 import { Task } from '../../../types/task';
@@ -13,7 +11,7 @@ import './CardTasks.scss';
 const Grid = ({ tasks }: { tasks: Task[] }) => {
   const [gridData, setGridData] = useState(tasks);
 
-  const onReorder = useCallback((e: RowDraggingReorderEvent) => {
+  const onReorder = useCallback((e) => {
     const visibleRows = e.component.getVisibleRows();
     const toIndex = gridData.indexOf(visibleRows[e.toIndex].data);
     const fromIndex = gridData.indexOf(e.itemData);

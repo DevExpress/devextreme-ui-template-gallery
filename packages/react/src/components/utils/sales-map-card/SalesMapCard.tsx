@@ -17,11 +17,9 @@ const customizeLegendText = (arg) => {
 const customizeItems = (items: Array<LegendItem>) => items.reverse();
 
 const customizeTooltip = (arg: MapLayerElement) => {
-  if (arg.layer.type === 'marker') {
-    return {
-      text: arg.attribute('tooltip'),
-    };
-  }
+  return arg.layer.type === 'marker' ? {
+    text: arg.attribute('tooltip'),
+  } : {};
 };
 
 export const SalesMapCard = ({ datasource, mapsData }) => (

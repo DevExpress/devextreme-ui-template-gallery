@@ -8,9 +8,10 @@ import { ThemeService } from 'src/app/services';
 @Component({
   selector: 'theme-switcher',
   template: `
-    <dx-button class="theme-button"
-               [icon]="'assets/icons/' + (themeService.currentTheme !== 'dark' ? 'moon' : 'sun') +'.svg'"
-               (click)="onButtonClick()">
+    <dx-button
+      class="theme-button"
+      [icon]="themeService.currentTheme !== 'dark' ? 'moon' : 'sun'"
+      (click)="onButtonClick()">
     </dx-button>
 `,
   styleUrls: [],

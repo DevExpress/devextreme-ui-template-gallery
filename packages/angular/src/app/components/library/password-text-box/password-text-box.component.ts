@@ -1,5 +1,10 @@
 import {
-  Component, EventEmitter, Input, NgModule, Output, ViewChild,
+  Component,
+  EventEmitter,
+  Input,
+  NgModule,
+  Output, 
+  ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -8,6 +13,7 @@ import {
   DxValidatorComponent,
   DxValidatorModule
 } from 'devextreme-angular';
+import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { ContactStatusModule } from 'src/app/components/utils/contact-status/contact-status.component';
@@ -26,13 +32,18 @@ export class PasswordTextBoxComponent {
 
   @Input() stylingMode = 'outlined';
 
-  @Input() validators: ValidationRule[];
+  @Input() validators: ValidationRule[] = [];
 
   @Output() valueChange = new EventEmitter<string>();
 
   @Output() valueChanged = new EventEmitter<string>();
 
   isPasswordMode = true;
+
+  buttonOptions: DxButtonTypes.Properties
+
+  constructor() {
+  }
 
   switchMode = () => {
     this.isPasswordMode = !this.isPasswordMode;
