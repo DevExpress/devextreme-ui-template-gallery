@@ -203,7 +203,7 @@ export class UserProfileComponent {
     this.setSavedData();
   }
 
-  scroll({reachedTop}) {
+  scroll({reachedTop = false}) {
     this.isContentScrolled = !reachedTop;
   }
 
