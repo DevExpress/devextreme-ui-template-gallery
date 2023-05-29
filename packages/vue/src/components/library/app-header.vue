@@ -42,7 +42,7 @@
       </dx-item>
       <dx-item location="after">
         <div class="messages">
-          <dx-button icon="bell" />
+          <dx-button icon="belloutline" />
           <div class="dx-badge">
             4
           </div>

@@ -15,7 +15,7 @@
     >
       <i
         v-if="editable"
-        class="edit-icon dx-icon-photo"
+        class="edit-icon dx-icon-photooutline"
       />
     </div>
     <dx-file-uploader
