@@ -133,7 +133,7 @@ jobs:
         path: devextreme-ui-template-gallery
 
     - name: Deploy in gh-pages
-      uses: JamesIves/github-pages-deploy-action@4
+      uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
       with:
         branch: gh-pages
         folder: devextreme-ui-template-gallery
