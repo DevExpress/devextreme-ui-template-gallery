@@ -7,7 +7,7 @@ import {
   DxDataGridModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
-import { RowDraggingReorderEvent } from 'devextreme/ui/data_grid';
+import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
 import { Task } from '../../../types/task';
 
 @Component({
@@ -34,7 +34,7 @@ export class CardTasksComponent implements OnChanges {
     }
   }
 
-  onReorder(e: RowDraggingReorderEvent) {
+  onReorder(e: DxDataGridTypes.RowDraggingReorderEvent) {
     const visibleRows = e.component.getVisibleRows();
     const toIndex = this.currentTasks.indexOf(visibleRows[e.toIndex].data);
     const fromIndex = this.currentTasks.indexOf(e.itemData);

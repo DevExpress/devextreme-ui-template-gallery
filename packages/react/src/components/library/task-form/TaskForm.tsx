@@ -6,7 +6,7 @@ import { ToolbarForm } from '../../utils/toolbar-form/ToolbarForm';
 
 import { Task } from '../../../types/task';
 
-import { ClickEvent } from 'devextreme/ui/button';
+import { ButtonTypes } from 'devextreme-react/button';
 
 import './TaskForm.scss';
 
@@ -35,7 +35,7 @@ export const TaskForm = ({ task, isLoading }: { task?: Task, isLoading: boolean 
     setEditing(!editing);
   };
 
-  const onSaveClick = ({ validationGroup }: ClickEvent) => {
+  const onSaveClick = ({ validationGroup }: ButtonTypes.ClickEvent) => {
     if (!validationGroup.validate().isValid) return;
 
     handleEditClick();

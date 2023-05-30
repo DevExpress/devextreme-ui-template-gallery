@@ -11,8 +11,6 @@ import { exportDataGrid } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridXSLX } from 'devextreme/excel_exporter';
 import LoadPanel from 'devextreme-react/load-panel';
 
-import dxTextBox from 'devextreme/ui/text_box';
-
 import { TaskListGrid, TaskListKanban, TaskListGantt, FormPopup, TaskFormDetails } from '../../components';
 
 import { newTask } from '../../shared/constants';
@@ -25,7 +23,7 @@ import 'jspdf-autotable';
 
 import './planning-task-list.scss';
 import Button from 'devextreme-react/button';
-import TextBox from 'devextreme-react/text-box';
+import TextBox, { TextBoxTypes } from 'devextreme-react/text-box';
 import Tabs from 'devextreme-react/tabs';
 
 const listsData = ['List', 'Kanban Board', 'Gantt'];
@@ -126,7 +124,7 @@ export const PlanningTaskList = () => {
     });
   }, []);
 
-  const search = useCallback((e: { component: dxTextBox }) => {
+  const search = useCallback((e: TextBoxTypes.InputEvent) => {
     gridRef.current?.instance.searchByText(e.component.option('text') ?? '');
   }, []);
 

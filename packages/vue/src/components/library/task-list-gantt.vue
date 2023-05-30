@@ -60,11 +60,11 @@ import {
   DxColumn as DxGanttColumn,
   DxToolbar as DxGanttToolbar,
   DxItem,
+  DxGanttTypes
 } from 'devextreme-vue/gantt';
 import { Task } from '@/types/task';
 import { jsPDF as JsPDF } from 'jspdf';
 import { exportGantt } from 'devextreme/pdf_exporter';
-import { TaskClickEvent } from 'devextreme/ui/gantt';
 
 const props = withDefaults(defineProps<{
   tasks: Task[]
@@ -88,7 +88,7 @@ const navigateToDetails = () => {
   router.push('/planning-task-details');
 };
 
-const onTaskClick = (e: TaskClickEvent) => {
+const onTaskClick = (e: DxGanttTypes.TaskClickEvent) => {
   if (!e.event?.target?.closest('.dx-treelist-expanded, .dx-treelist-collapsed')) {
     navigateToDetails();
   }

@@ -43,10 +43,10 @@
 // eslint-disable-next-line import/extensions
 import * as mapsData from 'devextreme-dist/js/vectormap-data/usa.js';
 import {
-  DxVectorMap, DxLayer, DxSource, DxLegend, DxTooltip,
+  DxVectorMap, DxLayer, DxSource, DxLegend, DxTooltip, DxVectorMapTypes,
 } from 'devextreme-vue/vector-map';
 import { SalesByStateAndCity } from '@/types/analytics';
-import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
+import { MapLayerElement } from 'devextreme/viz/vector_map';
 import CardAnalytics from '@/components/library/card-analytics.vue';
 
 const props = defineProps<{
@@ -61,7 +61,7 @@ const customizeTooltip = (arg: MapLayerElement) => ({
 
 const customizeLegendText = (arg: { index: number }) => ['< 80000$', '80000$ to 100000$', '100000$ to 400000$', '> 400000$'][arg.index];
 
-const customizeItems = (items: Array<LegendItem>) => items.reverse();
+const customizeItems = (items: Array<DxVectorMapTypes.LegendItem>) => items.reverse();
 </script>
 
 <style scoped lang="scss">

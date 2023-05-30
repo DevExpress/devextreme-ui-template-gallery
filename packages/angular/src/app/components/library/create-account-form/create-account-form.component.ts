@@ -3,7 +3,7 @@ import { Component, NgModule, Input, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 import { LoginOauthModule } from 'src/app/components/library/login-oauth/login-oauth.component';
-import { ValidationCallbackData } from 'devextreme/ui/validation_rules';
+import { ValidationCallbackData } from 'devextreme-angular/common';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import notify from 'devextreme/ui/notify';

@@ -8,7 +8,7 @@ import {
   DxDateBoxModule,
 } from 'devextreme-angular';
 
-import { ValueChangedEvent } from 'devextreme/ui/calendar';
+import { DxCalendarTypes } from 'devextreme-angular/ui/calendar';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -35,7 +35,7 @@ export class FormDateboxComponent {
 
   @Output() valueChange: EventEmitter<string | Date | number> = new EventEmitter();
 
-  onValueChanged = (e: ValueChangedEvent) => {
+  onValueChanged = (e: DxCalendarTypes.ValueChangedEvent) => {
     const { value } = e;
 
     this.value = value;
