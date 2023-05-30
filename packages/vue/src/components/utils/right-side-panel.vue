@@ -20,7 +20,7 @@
           </div>
           <dx-button
             class="open-button"
-            :icon="(isOpened ? (screenInfo.isLarge ? 'showpanel': 'close'): 'hidepanel')"
+            :icon="(isOpened ? (screenInfo.isLarge ? 'panelleft': 'close'): 'panelright')"
             @click="toggleOpen"
           />
         </div>
@@ -115,16 +115,16 @@ function toggleOpen() {
     }
   }
 
+  .open-button :deep(.dx-icon) {
+    color: var(--accent-color);
+  }
+
   &.open .right-side-panel {
     width: var(--side-panel-width);
 
     .side-panel-header {
       padding: var(--content-padding);
       border-bottom-color: var(--border-color);
-
-      .open-button :deep(.dx-icon) {
-        color: var(--accent-color);
-      }
     }
 
     .side-panel-content-wrapper {

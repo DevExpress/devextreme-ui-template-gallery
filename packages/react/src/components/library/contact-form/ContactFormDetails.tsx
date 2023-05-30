@@ -34,7 +34,7 @@ const statusRender = (text: string) => (
 const statusItemRender = (text: string) => <ContactStatus text={text} />;
 
 export const ContactFromDetails = ({ data, editing, updateField }: {
-  data: Contact, editing: boolean, updateField: (field: string) => (value: string) => void
+  data: Contact, editing: boolean, updateField: (field: string | number) => (value: string | number) => void
 }) => {
   return (
     <From

@@ -24,8 +24,9 @@
       location="after"
       widget="dxTextBox"
       locateInMenu="auto"
+      cssClass="global-search-box"
       [options]="{
-        stylingMode: 'outlined',
+        stylingMode: 'underlined',
         mode: 'search',
         placeholder: 'Search',
         width: 180
@@ -46,7 +47,7 @@
     >
       <div *dxTemplate>
         <div class="messages">
-          <dx-button icon="bell"></dx-button>
+          <dx-button icon="belloutline"></dx-button>
           <div class="dx-badge">
             4
           </div>

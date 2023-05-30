@@ -7,7 +7,7 @@ import { CardAnalyticsModule } from '../../library/card-analytics/card-analytics
 import { DxVectorMapModule } from 'devextreme-angular/ui/vector-map';
 
 import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
-import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
+import * as mapsData from 'devextreme-dist/js/vectormap-data/usa.js';
 
 @Component({
   selector: 'sales-map-card',

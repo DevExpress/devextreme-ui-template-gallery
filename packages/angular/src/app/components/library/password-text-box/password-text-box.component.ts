@@ -1,5 +1,10 @@
 import {
-  Component, EventEmitter, Input, NgModule, Output, ViewChild,
+  Component,
+  EventEmitter,
+  Input,
+  NgModule,
+  Output, 
+  ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -26,13 +31,16 @@ export class PasswordTextBoxComponent {
 
   @Input() stylingMode = 'outlined';
 
-  @Input() validators: ValidationRule[];
+  @Input() validators: ValidationRule[] = [];
 
   @Output() valueChange = new EventEmitter<string>();
 
   @Output() valueChanged = new EventEmitter<string>();
 
   isPasswordMode = true;
+
+  constructor() {
+  }
 
   switchMode = () => {
     this.isPasswordMode = !this.isPasswordMode;
