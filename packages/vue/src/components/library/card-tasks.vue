@@ -54,7 +54,6 @@ import {
 } from 'devextreme-vue/data-grid';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 import { Task } from '@/types/task';
-import { RowDraggingReorderEvent } from 'devextreme/ui/data_grid';
 
 const props = withDefaults(defineProps<{
   isLoading: boolean,
@@ -79,7 +78,7 @@ const filteredTasks = computed(
   () => tasks.value.filter((item) => !!item.status && !!item.priority),
 );
 
-const onReorder = (e: RowDraggingReorderEvent) => {
+const onReorder = (e) => {
   const visibleRows = e.component.getVisibleRows();
   const toIndex = tasks.value.indexOf(visibleRows[e.toIndex].data);
   const fromIndex = tasks.value.indexOf(e.itemData);

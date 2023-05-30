@@ -1,5 +1,5 @@
 import React from 'react';
-import { DropDownButton } from 'devextreme-react/ui/drop-down-button';
+import { DropDownButton } from 'devextreme-react/drop-down-button';
 
 import './CardMenu.scss';
 
