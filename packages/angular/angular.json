@@ -39,7 +39,7 @@
             "allowedCommonJsDependencies": [
               "jspdf-autotable",
               "exceljs",
-              "devextreme/dist/js/vectormap-data/usa.js",
+              "devextreme-dist/js/vectormap-data/usa.js",
               "luxon",
               "devextreme-quill",
               "devexpress-gantt",
