@@ -13,7 +13,6 @@ import {
   DxValidatorComponent,
   DxValidatorModule
 } from 'devextreme-angular';
-import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import { ValidationRule } from 'devextreme/ui/validation_rules';
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { ContactStatusModule } from 'src/app/components/utils/contact-status/contact-status.component';
@@ -39,8 +38,6 @@ export class PasswordTextBoxComponent {
   @Output() valueChanged = new EventEmitter<string>();
 
   isPasswordMode = true;
-
-  buttonOptions: DxButtonTypes.Properties
 
   constructor() {
   }
