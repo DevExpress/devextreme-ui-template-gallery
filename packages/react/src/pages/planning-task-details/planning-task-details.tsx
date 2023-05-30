@@ -19,14 +19,14 @@ const TASK_ID = 1;
 
 export const PlanningTaskDetails = () => {
   const [task, setTask] = useState<Task>();
-  const [messagesCount, setMessagesCount] = useState(0);
+  const [messagesCount, setMessagesCount] = useState('0');
   const [isLoading, setIsLoading] = useState(false);
 
   const loadData = useCallback(() => {
     getTask(TASK_ID)
       .then((data) => {
         setTask(data);
-        setMessagesCount(data.messages.length);
+        setMessagesCount(data.messages.length.toString());
         setIsLoading(false);
       })
       .catch((error) => console.log(error));

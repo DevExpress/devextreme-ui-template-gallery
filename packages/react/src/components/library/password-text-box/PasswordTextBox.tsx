@@ -37,7 +37,9 @@ export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({
   const buttonOptions = useMemo(() =>
     ({
       visible: value?.length > 0,
-      icon: 'icons/eye.svg',
+      icon: isPasswordMode ? 'eyeopen' : 'eyeclose',
+      hoverStateEnabled: false,
+      activeStateEnabled: false,
       onClick: switchMode
     }),
   [value, switchMode]);

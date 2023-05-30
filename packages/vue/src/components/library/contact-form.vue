@@ -181,7 +181,6 @@ import {
 import { DxNumberBox } from 'devextreme-vue/number-box';
 import { DxValidator } from 'devextreme-vue/validator';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
-import { ClickEvent } from 'devextreme/ui/button';
 import { formEditorProps } from '@/shared/form-editor-config';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 import { Contact, contactStatusList } from '@/types/contact';
@@ -218,7 +217,7 @@ function startEdit() {
   isEditing.value = true;
 }
 
-function handleSaveClick({ validationGroup }: ClickEvent) {
+function handleSaveClick({ validationGroup }) {
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }

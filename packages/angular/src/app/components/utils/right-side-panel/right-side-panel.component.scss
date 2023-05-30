@@ -57,15 +57,16 @@
     .side-panel-header {
       padding: $content-padding;
       border-bottom-color: var(--border-color);
-
-      .open-button::ng-deep .dx-icon {
-        color: $accent-color;
-      }
     }
+
 
     .side-panel-content-wrapper {
       padding-left: 0;
     }
+  }
+
+  .open-button::ng-deep .dx-icon {
+    color: $accent-color;
   }
 }
 
