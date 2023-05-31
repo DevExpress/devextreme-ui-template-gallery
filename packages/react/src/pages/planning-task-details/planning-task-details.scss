@@ -2,7 +2,7 @@
 @use "sass:math";
 
 .toolbar-details {
-  margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
+  margin-bottom: calc(var(--toolbar-margin-bottom) / 2);
 
   .dx-toolbar-label > div {
     @include header();
@@ -14,7 +14,7 @@
   flex-direction: column;
   display: flex;
   flex-grow: 1;
-  padding: $content-padding $content-padding 0 $content-padding;
+  padding: var(--content-padding) var(--content-padding) 0 var(--content-padding);
 
   .panels {
     display: flex;

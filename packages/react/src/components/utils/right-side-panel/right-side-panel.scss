@@ -2,7 +2,7 @@
 @use "sass:math";
 
 #side-panel {
-  --side-panel-width: #{calc($calendar-width + $content-padding)};
+  --side-panel-width: calc(var(--calendar-width) + var(--content-padding));
 }
 
 .screen-x-small #side-panel {
@@ -15,17 +15,17 @@
   &.open {
     flex: 0 1 var(--side-panel-width);
     display: block;
-    border: solid 1px $base-border-color;
+    border: solid 1px var(--base-border-color);
     border-radius: 8px;
   }
 
   &.overlap {
     position: absolute;
-    padding-top: $content-padding;
+    padding-top: var(--content-padding);
     top: 0;
     bottom: 0;
     z-index: 5;
-    background: $base-bg;
+    background: var(--base-bg);
 
     &.x-small {
       padding-top: 0;
@@ -39,22 +39,22 @@
     &.open {
       right: 0;
       transition: right 400ms ease;
-      border: 2px $base-border-color;
+      border: 2px var(--base-border-color);
       border-radius: 0;
       width: var(--side-panel-width);
       z-index: 7;
-      box-shadow: 0 0 8px $base-border-color;
+      box-shadow: 0 0 8px var(--base-border-color);
     }
   }
 }
 
 .open-button.dx-button {
-  margin-top: $theme-padding;
+  margin-top: var(--theme-padding);
   z-index: 6;
-  height: $button-height;
+  height: var(--button-height);
 
   .dx-icon {
-    color: $accent-color;
+    color: var(--accent-color);
   }
 
   &.hidden {

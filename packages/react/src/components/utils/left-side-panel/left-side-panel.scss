@@ -28,7 +28,7 @@
   .side-panel-content-wrapper {
     width: 0;
     transition: width var(--transition);
-    height: calc(100vh - 60px - $theme-padding);
+    height: calc(100vh - 60px - var(--theme-padding));
     overflow: hidden;
     white-space: nowrap;
 
@@ -49,21 +49,21 @@
       display: flex;
       flex-direction: row;
       align-items: flex-start;
-      height: $button-height + calc($theme-padding * 2);
+      height: var(--button-height) + calc(var(--theme-padding) * 2);
     }
 
     .side-panel-content-wrapper {
       position: absolute;
-      top: calc(-1 * $theme-padding);
-      left: $button-height;
+      top: calc(-1 * var(--theme-padding));
+      left: var(--button-height);
       height: calc(100vh - 60px);
-      padding-top: $theme-padding;
-      background-color: $base-bg;
+      padding-top: var(--theme-padding);
+      background-color: var(--base-bg);
       z-index: 3;
-      box-shadow: 8px 0 16px -8px $base-border-color;
+      box-shadow: 8px 0 16px -8px var(--base-border-color);
 
       &.open {
-        padding-right: $content-padding;
+        padding-right: var(--content-padding);
       }
     }
   }

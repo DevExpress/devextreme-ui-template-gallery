@@ -3,16 +3,16 @@
 
 .agenda {
   .agenda-header {
-    padding: $theme-padding;
+    padding: var(--theme-padding);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    color: $accent-color;
-    border-bottom: solid 1px $base-border-color;
+    color: var(--accent-color);
+    border-bottom: solid 1px var(--base-border-color);
 
     .dx-button .dx-icon {
-      color: $accent-color;
+      color: var(--accent-color);
     }
 
     .date {
@@ -21,6 +21,6 @@
   }
 
   .dx-list-item {
-    border-bottom: solid 1px $base-border-color;
+    border-bottom: solid 1px var(--base-border-color);
   }
 }

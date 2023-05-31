@@ -7,7 +7,7 @@
     display: inline-block;
     font-size: 26px;
     font-weight: 700;
-    color: $base-text-color;
+    color: var(--base-text-color);
     margin-right: 27px;
   }
 
@@ -15,7 +15,7 @@
     display: inline-block;
     font-size: 16px;
     font-weight: 400;
-    color: $base-text-color;
+    color: var(--base-text-color);
     line-height: 24px;
 
     span {
