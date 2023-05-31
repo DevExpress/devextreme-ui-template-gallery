@@ -59,9 +59,9 @@ const groupByPeriods = ['Day', 'Month'];
 
 const loading = ref<boolean>(true);
 
-const performancePeriodChange = async ({ item: period }: DxDropDownButtonTypes.SelectionChangedEvent) => {
+const performancePeriodChange = async (e: DxDropDownButtonTypes.SelectionChangedEvent) => {
   loading.value = true;
-  salesByDateAndCategory.value = await getSalesByOrderDate(period.toLowerCase());
+  salesByDateAndCategory.value = await getSalesByOrderDate(e.item.toLowerCase());
   loading.value = false;
 };
 
