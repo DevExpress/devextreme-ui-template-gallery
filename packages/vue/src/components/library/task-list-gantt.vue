@@ -60,7 +60,7 @@ import {
   DxColumn as DxGanttColumn,
   DxToolbar as DxGanttToolbar,
   DxItem,
-  DxGanttTypes
+  DxGanttTypes,
 } from 'devextreme-vue/gantt';
 import { Task } from '@/types/task';
 import { jsPDF as JsPDF } from 'jspdf';
