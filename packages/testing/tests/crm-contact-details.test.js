@@ -70,7 +70,7 @@ const setEmbedded = async (t, embed, screenMode) => {
       const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
 
       for (let i = 0; i < nameTabs.length; i += 1) {
-        await t.click(tabs.withText(new RegExp(`${nameTabs[i]}|${nameTabs[i].toUpperCase()}`)));
+        await t.click(tabs.withText(new RegExp(nameTabs[i], 'i')));
         const tabPanel = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel].dx-item-selected');
 
         await takeScreenshot(`crm-form-tab-${nameTabs[i].toLowerCase()}${getPostfix(embedded, screenMode)}`, tabPanel);
