@@ -69,7 +69,7 @@ const setEmbedded = async (t, embed, screenMode) => {
 
       const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
 
-      for (let i = 0; i < nameTabs.count; i += 1) {
+      for (let i = 0; i < nameTabs.length; i += 1) {
         await t.click(tabs.withText(nameTabs[i]));
         const tabPanel = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel].dx-item-selected');
 
