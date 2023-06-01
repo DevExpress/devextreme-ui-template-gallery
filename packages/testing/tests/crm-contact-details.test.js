@@ -73,7 +73,7 @@ const setEmbedded = async (t, embed, screenMode) => {
         await t.click(tabs.withText(nameTabs[i]));
         const tabPanel = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel].dx-item-selected');
 
-        await takeScreenshot(`crm-form-tab-${nameTabs[i]}${getPostfix(embedded, screenMode)}`, tabPanel);
+        await takeScreenshot(`crm-form-tab-${nameTabs[i].toLowerCase()}${getPostfix(embedded, screenMode)}`, tabPanel);
       }
 
       await t
