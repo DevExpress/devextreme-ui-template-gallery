@@ -1,4 +1,4 @@
-The DevExpress Angular Overview Dashboard template helps you construct a high-level dashboard UI layout in an Angular-powered BI or analytics application. 
+The DevExtreme Angular Overview Dashboard template helps you construct a high-level dashboard UI layout in an Angular-powered BI or analytics application. 
 
 ## UI Components  
 
