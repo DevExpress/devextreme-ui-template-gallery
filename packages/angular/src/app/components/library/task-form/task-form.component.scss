@@ -9,7 +9,7 @@
   task-status {
     position: absolute;
     bottom: 0;
-    padding-left: calc(#{$filled-texteditor-input-horizontal-padding} + 3px);
+    padding-left: calc(var(--filled-texteditor-input-horizontal-padding) + 3px);
 
     ::ng-deep {
       span {

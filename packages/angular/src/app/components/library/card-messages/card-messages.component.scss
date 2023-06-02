@@ -27,7 +27,7 @@
   }
 
   .message {
-    background-color: $base-bg;
+    background-color: var(--base-bg);
     padding: 10px;
     margin-bottom: 10px;
 
@@ -35,7 +35,7 @@
       @include message-title();
 
       .subject {
-        color: $base-text-color;
+        color: var(--base-text-color);
         font-weight: 700;
       }
     }

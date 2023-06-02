@@ -7,7 +7,7 @@ $theme-type: 'material';
 @use "/node_modules/devextreme/scss/widgets/material/popup/sizes" as *;
 @use "/node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
 @use "/node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
-@use '/node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
+@use "/node_modules/devextreme/scss/widgets/material/toolbar/sizes" as toolbar_sizes;
 @use "/node_modules/devextreme/scss/widgets/material/list/sizes" as *;
 @use "/node_modules/devextreme/scss/widgets/material/button/sizes" as *;
 
@@ -17,24 +17,19 @@ $theme-type: 'material';
 @use "sass:math";
 @use "sass:color";
 
-$base-bg-darken-5: darken($base-bg, 5);
-$base-bg-darken-4: darken($base-bg, 4);
-$background-gray-color: color.change($base-text-color, $alpha: 0.04);
-$base-text-color-alpha: rgba($base-text-color, alpha($base-text-color) * 0.7);
-$side-panel-min-width: 48px;
-$footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size), 2);
-$theme-padding: $material-button-horizontal-padding;
-$button-height-theme-difference: calc(($theme-padding - 10px) / 3); // WA for no button-height in generic theme
-$button-height: calc(26px + $button-height-theme-difference); // remove when design-system is released
-$tooltip-danger-button-color: color.change($base-danger, $alpha: 0.1);
-$tooltip-success-button-color: color.change($base-success, $alpha: 0.1);
-
 :root {
+  --side-panel-min-width: 48px;
+  --content-padding: 16px;
+  --header-toolbar-vertical-padding: 10px;
+  --footer-height: 70px;
+  --toolbar-vertical-padding: 16px;
+  --toolbar-margin-bottom: var(--content-padding);
   --base-bg: #{$base-bg};
-  --base-bg-darken-5: #{$base-bg-darken-5};
-  --base-bg-darken-4: #{$base-bg-darken-4};
   --background-color: var(--base-bg);
-  --card-background: #{$base-bg};
+  --base-bg-darken-5: #{darken($base-bg, 5)};
+  --base-bg-darken-4: #{darken($base-bg, 4)};
+  --side-panel-background: var(--base-bg-darken-5);
+  --card-background: var(--base-bg);
   --calendar-width: 292px;
 
   @if $theme == dark {
@@ -46,20 +41,23 @@ $tooltip-success-button-color: color.change($base-success, $alpha: 0.1);
   --accent-color: #{$base-accent};
   --base-text-color: #{$base-text-color};
   --base-focus-color: #{$base-focus-color};
-  --background-gray-color: #{$background-gray-color};
+  --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
   --texteditor-edit-color: #{$texteditor-color};
   --texteditor-label-color: #{$texteditor-label-color};
-  --base-text-color-alpha: #{$base-text-color-alpha};
+  --base-text-color-alpha: #{rgba($base-text-color, alpha($base-text-color) * 0.7)};
   --side-panel-min-width: #{$side-panel-min-width};
   --toolbar-height: #{toolbar_sizes.$material-toolbar-height};
   --filled-texteditor-input-horizontal-padding: #{$material-field-value-horizontal-padding};
   --list-padding-left: #{$material-list-item-horizontal-padding};
   --list-padding-vertical: #{$material-list-item-vertical-padding};
-  --footer-left-padding: #{$footer-left-padding};
+  --footer-left-padding: #{calc(($side-panel-min-width - $material-base-icon-size) / 2)};
   --popup-toolbar-item-spacing: #{$material-popup-toolbar-item-spacing};
   --drop-down-gnrc-button-height: #{$material-base-inline-widget-height};
-  --theme-padding: #{$theme-padding};
-  --tooltip-danger-button-color: #{$tooltip-danger-button-color};
-  --tooltip-success-button-color: #{$tooltip-success-button-color};
+  --theme-padding: #{$material-button-horizontal-padding};
+  --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
+  --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
+  --subtitle-text-color: var(--texteditor-label-color);
+  --button-height-theme-difference: calc((var(--theme-padding) - 10px) / 3); // WA for no button-height in generic theme
+  --button-height: calc(26px + var(--button-height-theme-difference)); // remove when design-system is released
   --scheduler-toolbar-height: calc(#{$button-height} + 2 * #{$theme-padding});
 }

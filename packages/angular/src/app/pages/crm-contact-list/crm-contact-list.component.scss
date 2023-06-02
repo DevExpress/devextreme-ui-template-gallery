@@ -1,7 +1,9 @@
 @use "../../../variables.scss" as *;
 @use "sass:math";
 
-$side-panel-toolbar-height: 76px;
+:root {
+  --side-panel-toolbar-height: 76px;
+}
 
 :host {
   width: 100%;
@@ -20,32 +22,32 @@ $side-panel-toolbar-height: 76px;
     .name-template {
       .position {
         font-size: 12px;
-        color: $texteditor-label-color;
+        color: var(--texteditor-label-color);
       }
     }
 
     ::ng-deep .dx-row-focused {
       .name-template {
-        color: $base-focus-color;
+        color: var(--base-focus-color);
 
         .position.position {
-          color: $base-focus-color;
+          color: var(--base-focus-color);
         }
       }
 
       .status {
-        @include status($base-focus-color);
+        @include status(var(--base-focus-color));
       }
     }
 
     ::ng-deep & {
       .dx-datagrid-header-panel {
-        padding: 0 $content-padding;
+        padding: 0 var(--content-padding);
       }
 
       .dx-toolbar {
         margin-bottom: 0;
-        padding: $toolbar-margin-bottom 0;
+        padding: var(--toolbar-margin-bottom) 0;
       }
 
       .dx-datagrid-content .dx-row {

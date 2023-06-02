@@ -4,12 +4,12 @@
   display: flex;
   align-items: center;
   cursor: default;
-  padding: $list-padding-vertical $list-padding-left;
-  border-bottom: 1px solid $border-color;
+  padding: var(--list-padding-vertical) var(--list-padding-left);
+  border-bottom: 1px solid var(--border-color);
 
   .user-name {
     font-size: 14px;
-    color: $base-text-color;
+    color: var(--base-text-color);
   }
 
   .image-container {
@@ -17,8 +17,8 @@
     border-radius: 50%;
     height: 28px;
     width: 28px;
-    margin-right: $list-padding-left;
-    border: 1px solid $border-color;
+    margin-right: var(--list-padding-left);
+    border: 1px solid var(--border-color);
 
     .user-image {
       width: 100%;

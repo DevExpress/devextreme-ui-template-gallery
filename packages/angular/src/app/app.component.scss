@@ -1,7 +1,7 @@
 @use "../variables.scss" as *;
 
 :host {
-  background-color: $side-panel-background;
+  background-color: var(--side-panel-background);
   display: flex;
   height: 100%;
   width: 100%;

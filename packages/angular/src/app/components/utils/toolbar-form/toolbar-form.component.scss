@@ -1,5 +1,5 @@
 @use "../../../../variables.scss" as *;
 
 .dx-toolbar {
-  margin-bottom: $toolbar-margin-bottom;
+  margin-bottom: var(--toolbar-margin-bottom);
 }
