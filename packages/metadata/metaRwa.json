@@ -1,6 +1,6 @@
 [
     {
-        "Name": "CRM",
+        "Name": "CRM Templates",
         "Groups": [
             {
                 "Name": "Contact List",
@@ -35,7 +35,7 @@
         ]
     },
     {
-        "Name": "Planning",
+        "Name": "Planning Templates",
         "Groups": [
             {
                 "Name": "Task List",
@@ -85,7 +85,7 @@
         ]
     },
     {
-        "Name": "Analytics",
+        "Name": "Analytics Templates",
         "Groups": [
             {
                 "Name": "Dashboard",
@@ -135,7 +135,7 @@
         ]
     },
     {
-        "Name": "Authentication",
+        "Name": "Authentication Templates",
         "Groups": [
             {
                 "Name": "Sign In Form",
@@ -185,7 +185,7 @@
         ]
     },
     {
-        "Name": "Common",
+        "Name": "Common Templates",
         "Groups": [
             {
                 "Name": "User Profile",
