@@ -2,13 +2,13 @@
   .h-separator {
     height: 1px;
     width: auto;
-    background: --base-border-color;
+    background: var(--base-border-color);
   }
 
   .separator {
     height: 24px;
     width: 1px;
-    background: --base-border-color;
+    background: var(--base-border-color);
 
     .dx-toolbar-menu-section & {
       height: 1px;
@@ -46,7 +46,7 @@
 
   .title {
     font-size: 12px;
-    color: --texteditor-label-color;
+    color: var(--texteditor-label-color);
 
     &:not(:first-child) {
       padding-top: 10px;
@@ -55,10 +55,10 @@
 
   .value {
     font-size: 16px;
-    color: --accent-color;
+    color: var(--accent-color);
 
     &.black {
-      color: --base-text-color;
+      color: var(--base-text-color);
     }
 
     &.small {
@@ -77,7 +77,7 @@
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
-  color: --texteditor-label-color;
+  color: var(--texteditor-label-color);
 }
 
 @mixin message-text {
