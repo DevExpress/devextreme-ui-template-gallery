@@ -1,4 +1,4 @@
-The DevExpress React Overview Dashboard template helps you construct a high-level dashboard UI layout in an React-powered BI or analytics application. 
+The DevExtreme React Overview Dashboard template helps you construct a high-level dashboard UI layout in an React-powered BI or analytics application. 
 
 ## UI Components  
 

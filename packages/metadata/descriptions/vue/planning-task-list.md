@@ -1,4 +1,4 @@
-Our Vue Task List View template allows you to incorporate task/project management related UI layouts within your next DevExpress-powered Vue application.  
+Our Vue Task List View template allows you to incorporate task/project management related UI layouts within your next DevExtreme-powered Vue application.  
 
 ## UI Components  
 

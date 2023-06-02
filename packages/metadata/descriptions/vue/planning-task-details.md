@@ -1,4 +1,4 @@
-The DevExpress Vue Task Detail View template can be used to manage task information in an Vue-powered application. The template includes a task edit form and a tab section for related entities such as activities, notes, and comments. 
+The DevExtreme Vue Task Detail View template can be used to manage task information in an Vue-powered application. The template includes a task edit form and a tab section for related entities such as activities, notes, and comments. 
 
 ## UI Components  
 
