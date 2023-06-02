@@ -88,10 +88,10 @@
         "Name": "Analytics Templates",
         "Groups": [
             {
-                "Name": "Dashboard",
+                "Name": "Overview Dashboard",
                 "Demos": [
                     {
-                        "Title": "Dashboard",
+                        "Title": "Overview Dashboard",
                         "Name": "analytics-dashboard",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
@@ -103,10 +103,10 @@
                 ]
             },
             {
-                "Name": "Sales Report",
+                "Name": "Sales Dashboard",
                 "Demos": [
                     {
-                        "Title": "Sales Report",
+                        "Title": "Sales Dashboard",
                         "Name": "analytics-sales-report",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
@@ -118,10 +118,10 @@
                 ]
             },
             {
-                "Name": "Geography",
+                "Name": "Geography Dashboard",
                 "Demos": [
                     {
-                        "Title": "Geography",
+                        "Title": "Geography Dashboard",
                         "Name": "analytics-geography",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
