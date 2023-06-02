@@ -9,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
     color: var(--accent-color);
-    border-bottom: solid 1px var(--base-border-color);
+    border-bottom: solid 1px var(--border-color);
 
     .dx-button .dx-icon {
       color: var(--accent-color);
@@ -21,6 +21,6 @@
   }
 
   .dx-list-item {
-    border-bottom: solid 1px var(--base-border-color);
+    border-bottom: solid 1px var(--border-color);
   }
 }

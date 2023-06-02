@@ -2,13 +2,13 @@
   .h-separator {
     height: 1px;
     width: auto;
-    background: var(--base-border-color);
+    background: var(--border-color);
   }
 
   .separator {
     height: 24px;
     width: 1px;
-    background: var(--base-border-color);
+    background: var(--border-color);
 
     .dx-toolbar-menu-section & {
       height: 1px;

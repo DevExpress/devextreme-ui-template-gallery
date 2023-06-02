@@ -60,7 +60,7 @@
       padding-top: var(--theme-padding);
       background-color: var(--base-bg);
       z-index: 3;
-      box-shadow: 8px 0 16px -8px var(--base-border-color);
+      box-shadow: 8px 0 16px -8px var(--border-color);
 
       &.open {
         padding-right: var(--content-padding);
