@@ -1,17 +1,17 @@
-The DevExtreme Angular Sign In Form template helps you incorporate an authentication form in your application.
+The DevExtreme Angular Sign In Form template helps you implement authentication workflow for registered users in your application.
 
 ## UI Components  
 
-- DevExtreme Angular Form – displays contact properties as label/value pairs.
+- DevExtreme Angular Form – displays user properties as label/value pairs.
 
-- DevExtreme Angular Button - allows users to authorize.
+- DevExtreme Angular Button - allows users to submit credentials to be authenticated.
 
 ## Usage Scenarios 
 
-- Enter credentials.
+- Enter user credentials.
 
-- Authorize.
+- User authentication.
 
-- Reset password.
+- Reset user password.
 
-- Create an account.
+- Create a new user account (register a new user).

@@ -2,13 +2,13 @@ The DevExtreme React User Profile template helps you create an editing form for 
 
 ## UI Components  
 
-- DevExtreme React Form – displays contact properties as label/value pairs.
+- DevExtreme React Form – displays user properties as label/value pairs.
 
 - DevExtreme React Button - allows users to cancel and save the changes.
 
 ## Usage Scenarios 
 
-- Change avatar.
+- Change user picture (user avatar).
 
 - Change password.
 

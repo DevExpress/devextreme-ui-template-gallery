@@ -2,13 +2,13 @@ The DevExtreme Vue User Profile template helps you create an editing form for us
 
 ## UI Components  
 
-- DevExtreme Vue Form – displays contact properties as label/value pairs.
+- DevExtreme Vue Form – displays user properties as label/value pairs.
 
 - DevExtreme Vue Button - allows users to cancel and save the changes.
 
 ## Usage Scenarios 
 
-- Change avatar.
+- Change user picture (user avatar).
 
 - Change password.
 

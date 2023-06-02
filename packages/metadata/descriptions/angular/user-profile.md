@@ -2,13 +2,13 @@ The DevExtreme Angular User Profile template helps you create an editing form fo
 
 ## UI Components  
 
-- DevExtreme Angular Form – displays contact properties as label/value pairs.
+- DevExtreme Angular Form – displays user properties as label/value pairs.
 
 - DevExtreme Angular Button - allows users to cancel and save the changes.
 
 ## Usage Scenarios 
 
-- Change avatar.
+- Change user picture (user avatar).
 
 - Change password.
 
