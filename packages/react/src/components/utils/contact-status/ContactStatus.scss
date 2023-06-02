@@ -11,8 +11,8 @@
       content: " ";
       width: var(--diameter);
       height: var(--diameter);
-      border-radius: math.div(var(--diameter), 2);
-      margin-right: math.div(var(--diameter), 2);
+      border-radius: calc(var(--diameter) / 2);
+      margin-right: calc(var(--diameter) / 2);
       display: inline-block;
     }
 
