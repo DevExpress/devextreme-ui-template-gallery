@@ -4,7 +4,7 @@ The DevExtreme React Reset Password Form template helps you implement a user pas
 
 - DevExtreme React Form – displays user properties as label/value pairs.
 
-- DevExtreme React Button - allows users to submit their credentials to authenticate.
+- DevExtreme React Button - allows users to submit credentials to be authenticated.
 
 ## Usage Scenarios 
 

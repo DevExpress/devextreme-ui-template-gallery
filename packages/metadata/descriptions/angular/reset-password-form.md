@@ -4,7 +4,7 @@ The DevExtreme Angular Reset Password Form template helps you implement a user p
 
 - DevExtreme Angular Form – displays user properties as label/value pairs.
 
-- DevExtreme Angular Button - allows users to submit their credentials to authenticate.
+- DevExtreme Angular Button - allows users to submit credentials to be authenticated.
 
 ## Usage Scenarios 
 

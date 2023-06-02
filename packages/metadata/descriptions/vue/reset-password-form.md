@@ -4,7 +4,7 @@ The DevExtreme Vue Reset Password Form template helps you implement a user passw
 
 - DevExtreme Vue Form – displays user properties as label/value pairs.
 
-- DevExtreme Vue Button - allows users to submit their credentials to authenticate.
+- DevExtreme Vue Button - allows users to submit credentials to be authenticated.
 
 ## Usage Scenarios 
 
