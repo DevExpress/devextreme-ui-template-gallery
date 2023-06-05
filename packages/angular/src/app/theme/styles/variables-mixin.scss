@@ -36,7 +36,6 @@ $theme-type: 'material';
     --card-background: var(--base-bg-darken-5);
   }
 
-  --side-panel-background: var(--base-bg-darken-5);
   --border-color: #{$base-border-color};
   --accent-color: #{$base-accent};
   --base-text-color: #{$base-text-color};
@@ -45,7 +44,6 @@ $theme-type: 'material';
   --texteditor-edit-color: #{$texteditor-color};
   --texteditor-label-color: #{$texteditor-label-color};
   --base-text-color-alpha: #{rgba($base-text-color, alpha($base-text-color) * 0.7)};
-  --side-panel-min-width: #{$side-panel-min-width};
   --toolbar-height: #{toolbar_sizes.$material-toolbar-height};
   --filled-texteditor-input-horizontal-padding: #{$material-field-value-horizontal-padding};
   --list-padding-left: #{$material-list-item-horizontal-padding};
