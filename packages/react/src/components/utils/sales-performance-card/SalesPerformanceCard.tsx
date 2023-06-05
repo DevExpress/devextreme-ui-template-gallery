@@ -21,7 +21,7 @@ export const SalesPerformanceCard = ({ datasource, periods, selectedPeriod, onPe
   >
     <Chart id='chart' dataSource={datasource}>
       <ArgumentAxis visualRange={range} argumentType='datetime' valueMarginsEnabled={false} />
-      <Tooltip enabled customizeTooltip={({ seriesName }) => ({ text: seriesName })} />
+      <Tooltip enabled customizeTooltip={(pointInfo) => ({ text: pointInfo['seriesName'] })} />
       <SeriesTemplate nameField='category' />
       <CommonSeriesSettings argumentField='date' valueField='total' hoverMode='includePoints'>
         <Point hoverMode='allArgumentPoints' />

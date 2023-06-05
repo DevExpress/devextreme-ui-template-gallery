@@ -187,10 +187,10 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                 <ToolbarItem location='before' visible={!isEditing}>
                   <Button text='Details' stylingMode='outlined' type='default' onClick={navigateToDetails} />
                 </ToolbarItem>
-                <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
+                <ToolbarItem location='before' visible={isEditing}>
                   <Button text='Save' icon='save' stylingMode='outlined' type='default' onClick={onSaveClick} />
                 </ToolbarItem>
-                <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
+                <ToolbarItem location='before' visible={isEditing}>
                   <Button text='Cancel' stylingMode='text' onClick={toggleEditHandler} />
                 </ToolbarItem>
                 <ToolbarItem location='after'>

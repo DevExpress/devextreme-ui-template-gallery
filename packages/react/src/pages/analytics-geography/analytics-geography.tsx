@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Item } from 'devextreme-react/toolbar';
 import Tabs from 'devextreme-react/tabs';
-import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
+import * as mapsData from 'devextreme-dist/js/vectormap-data/usa.js';
 import LoadPanel from 'devextreme-react/load-panel';
 import ScrollView from 'devextreme-react/scroll-view';
 

@@ -10,7 +10,7 @@ export const SalesByRangeCard = React.memo<SalesByRangeCardProps>(({ datasource 
   <CardAnalytics title='Product Sale by Range' contentClass='sales-by-category'>
     <PieChart id='pie' className='sales-pie' dataSource={datasource} type='doughnut' diameter={0.8} innerRadius={0.6}>
       <Series argumentField='name' valueField='value'>
-        <Label backgroundColor='none' radialOffset={-20} visible customizeText={({ percentText }) => percentText}>
+        <Label backgroundColor='none' radialOffset={-20} visible customizeText={(pointInfo) => pointInfo['percentText']}>
           <Font color='#757575' size={15} />
         </Label>
       </Series>
