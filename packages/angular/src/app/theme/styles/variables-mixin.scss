@@ -48,7 +48,7 @@ $theme-type: 'material';
   --filled-texteditor-input-horizontal-padding: #{$material-field-value-horizontal-padding};
   --list-padding-left: #{$material-list-item-horizontal-padding};
   --list-padding-vertical: #{$material-list-item-vertical-padding};
-  --footer-left-padding: #{calc(($side-panel-min-width - $material-base-icon-size) / 2)};
+  --footer-left-padding: #{calc((var(--side-panel-min-width) - $material-base-icon-size) / 2)};
   --popup-toolbar-item-spacing: #{$material-popup-toolbar-item-spacing};
   --drop-down-gnrc-button-height: #{$material-base-inline-widget-height};
   --theme-padding: #{$material-button-horizontal-padding};
@@ -57,5 +57,5 @@ $theme-type: 'material';
   --subtitle-text-color: var(--texteditor-label-color);
   --button-height-theme-difference: calc((var(--theme-padding) - 10px) / 3); // WA for no button-height in generic theme
   --button-height: calc(26px + var(--button-height-theme-difference)); // remove when design-system is released
-  --scheduler-toolbar-height: calc(#{$button-height} + 2 * #{$theme-padding});
+  --scheduler-toolbar-height: calc(var(--button-height)+ 2 * var(--theme-padding));
 }
