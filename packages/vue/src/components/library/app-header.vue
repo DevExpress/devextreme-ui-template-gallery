@@ -26,8 +26,9 @@
         location="after"
         locate-in-menu="auto"
         widget="dxTextBox"
+        cssClass="global-search-box"
         :options="{
-          stylingMode: 'outlined',
+          stylingMode: 'underlined',
           mode: 'search',
           placeholder: 'Search',
           width: 180
@@ -41,7 +42,7 @@
       </dx-item>
       <dx-item location="after">
         <div class="messages">
-          <dx-button icon="bell" />
+          <dx-button icon="belloutline" />
           <div class="dx-badge">
             4
           </div>
@@ -130,6 +131,10 @@ header {
 
   .header-toolbar {
     padding-right: $content-padding;
+
+    :deep(.global-search-box){
+      padding-right: 11px;
+    }
 
     .messages {
       position: relative;

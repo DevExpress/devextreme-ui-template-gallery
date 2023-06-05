@@ -28,12 +28,11 @@ export class ThemeService {
   }
 
   setAppTheme(theme = this.currentTheme) {
-
     this.getThemeStyleSheets().forEach((styleSheet) => {
       styleSheet.disabled = !styleSheet?.href?.includes(`${this.themeMarker}${theme}`);
     });
 
-    this.currentTheme = window.localStorage[this.storageKey] = theme;
+    this.currentTheme = theme;
     this.isDark.next(this.currentTheme === 'dark');
 
     currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${theme}.compact`));
@@ -45,6 +44,8 @@ export class ThemeService {
   }
 
   switchTheme() {
-    this.setAppTheme(getNextTheme(this.currentTheme));
+    const newTheme = getNextTheme(this.currentTheme);
+    this.setAppTheme(newTheme);
+    window.localStorage[this.storageKey] = newTheme;
   }
 }

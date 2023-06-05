@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import DxTreeView from 'devextreme-vue/ui/tree-view';
+import DxTreeView from 'devextreme-vue/tree-view';
 import { sizes } from '@/utils/media-query';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';

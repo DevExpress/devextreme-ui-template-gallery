@@ -1,7 +1,7 @@
 <template>
   <dx-button
     class="theme-button"
-    :icon="`icons/${currentTheme === 'dark' ? 'sun' : 'moon'}.svg`"
+    :icon="currentTheme === 'dark' ? 'sun' : 'moon'"
     @click="onClickButton"
   />
 </template>

@@ -14,6 +14,10 @@
   .dx-toolbar.header-toolbar {
     padding-right: $content-padding;
 
+    .global-search-box {
+      padding-right: 11px;
+    }
+
     .messages {
       position: relative;
 

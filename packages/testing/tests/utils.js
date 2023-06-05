@@ -43,7 +43,7 @@ export const getPostfix = (embedded, screenMode, themeMode) => {
 
 export async function setTheme(t, theme) {
   const currentTheme = await ClientFunction(
-    () => localStorage.getItem('app-theme'),
+    () => localStorage.getItem('app-theme') || 'light',
   )();
 
   if (currentTheme !== theme) {

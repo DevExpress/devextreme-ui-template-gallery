@@ -54,14 +54,14 @@ class ThemeService {
 
     this.currentTheme.value = theme;
 
-    window.localStorage[this.storageKey] = theme;
-
     currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${theme}.compact`));
     refreshTheme();
   }
 
   switchAppTheme() {
-    this.setAppTheme(getNextTheme(this.currentTheme.value));
+    const newTheme = getNextTheme(this.currentTheme.value);
+    this.setAppTheme(newTheme);
+    window.localStorage[this.storageKey] = newTheme;
   }
 }
 
