@@ -1,5 +1,3 @@
-// import './app-themes';
-
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import { ref } from 'vue';
 
