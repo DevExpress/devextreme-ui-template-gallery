@@ -60,7 +60,7 @@ const props = defineProps<{
       margin-top: 24px;
 
       .title {
-        color: $base-text-color;
+        color: var(--base-text-color);
         text-align: center;
         line-height: 24px;
         font-weight: 500;
@@ -68,7 +68,7 @@ const props = defineProps<{
       }
 
       .description {
-        color: $base-text-color-alpha;
+        color: var(--base-text-color-alpha);
         line-height: 16px;
         font-size: 12px;
         margin-top: 32px;

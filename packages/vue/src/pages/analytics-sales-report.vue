@@ -94,7 +94,7 @@ onMounted(() => {
 <style scoped lang="scss">
 @use "@/variables" as *;
 .view-wrapper {
-  padding: $content-padding;
+  padding: var(--content-padding);
 }
 
 .cards  {

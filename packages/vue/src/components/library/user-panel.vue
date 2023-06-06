@@ -74,14 +74,14 @@ function handleDropDownButtonContentReady({ component }: {component: typeof DxDr
       width: auto;
       aspect-ratio: 1 / 1;
       box-sizing: border-box;
-      border: 2px solid $border-color;
+      border: 2px solid var(--border-color);
       object-fit: cover;
       object-position: top;
       background: rgb(255, 255, 255);
       background-clip: padding-box;
 
       .dx-theme-generic & {
-        height: $drop-down-gnrc-button-height;
+        height: var(--drop-down-gnrc-button-height);
       }
 
       .dx-theme-material & {
@@ -102,7 +102,7 @@ function handleDropDownButtonContentReady({ component }: {component: typeof DxDr
           background-color: transparent;
 
           img.dx-icon {
-            border-color: $accent-color;
+            border-color: var(--accent-color);
           }
         }
       }

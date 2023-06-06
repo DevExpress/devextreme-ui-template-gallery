@@ -137,7 +137,7 @@ const addTask = () => {
 .list {
   border-radius: 4px;
   margin: 10px;
-  background-color: $background-gray-color;
+  background-color: var(--background-gray-color);
   display: inline-block;
   vertical-align: top;
   white-space: normal;
@@ -180,7 +180,7 @@ const addTask = () => {
 :deep(.add-task) {
   .dx-icon,
   .dx-button-text {
-    color: $accent-color;
+    color: var(--accent-color);
   }
 }
 </style>

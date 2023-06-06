@@ -7,13 +7,13 @@
   .h-separator {
     height: 1px;
     width: auto;
-    background: $border-color;
+    background: var(--border-color);
   }
 
   .separator {
     height: 24px;
     width: 1px;
-    background: $border-color;
+    background: var(--border-color);
 
     .dx-toolbar-menu-section & {
       height: 1px;
@@ -37,7 +37,7 @@
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
-  color: $texteditor-label-color;
+  color: var(--texteditor-label-color);
 }
 
 @mixin message-text {
@@ -48,8 +48,8 @@
 @mixin messages-content {
   .messages-content {
     padding: 20px;
-    border-top: 1px solid $border-color;
-    background-color: $side-panel-background;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--side-panel-background);
   }
 }
 

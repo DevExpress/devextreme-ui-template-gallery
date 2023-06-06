@@ -97,6 +97,6 @@ const onReorder = (e) => {
 }
 
 .grid-tasks {
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--border-color);
 }
 </style>

@@ -70,7 +70,7 @@ const props = defineProps<{
 @use '@/variables.scss' as *;
 
 :deep(.card.grid) .content {
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--border-color);
   padding-left: 0;
   padding-right: 0;
 }

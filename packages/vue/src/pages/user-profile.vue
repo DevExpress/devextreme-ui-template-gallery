@@ -326,7 +326,9 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
 @use "@/variables.scss" as *;
 @use "sass:math";
 
-$gap-padding: 24px;
+:host {
+  --gap-padding: 24px;
+}
 
 .view-wrapper {
   position: absolute;
@@ -336,11 +338,11 @@ $gap-padding: 24px;
   right: 0;
   display: flex;
   flex-direction: column;
-  padding-top: $content-padding;
+  padding-top: var(--content-padding);
 
   .view-wrapper-scroll {
     width: 100%;
-    margin-top: calc($content-padding / 2);
+    margin-top: calc(var(--content-padding) / 2);
   }
 
   .toolbar-wrapper {
@@ -350,7 +352,7 @@ $gap-padding: 24px;
     }
 
     .dx-toolbar {
-      padding: 0 calc($content-padding * 2);
+      padding: 0 calc(var(--content-padding) * 2);
       width: auto;
 
       .dx-button[aria-label="Cancel"] {
@@ -362,8 +364,8 @@ $gap-padding: 24px;
   .cards-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 calc($content-padding * 2);
-    padding: calc($content-padding / 2) 0 $content-padding;
+    margin: 0 calc(var(--content-padding) * 2);
+    padding: calc(var(--content-padding) / 2) 0 var(--content-padding);
     gap: 24px;
 
     .profile-card {
@@ -371,7 +373,7 @@ $gap-padding: 24px;
         flex: 0 0 44px;
         height: 44px;
         border-radius: 50%;
-        margin-right: $gap-padding;
+        margin-right: var(--gap-padding);
 
         img {
           height: 20px;
@@ -395,7 +397,7 @@ $gap-padding: 24px;
           }
 
           :deep(.dx-icon:active) {
-            color: $accent-color;
+            color: var(--accent-color);
           }
         }
 
@@ -405,7 +407,7 @@ $gap-padding: 24px;
           border-color: transparent;
 
           .dx-icon {
-            color: $subtitle-text-color;
+            color: var(--subtitle-text-color);
           }
         }
       }
@@ -421,7 +423,7 @@ $gap-padding: 24px;
 
     .basic-info-top-item,
     .address-top-item,
-    .contacts-top-item, {
+    .contacts-top-item {
       display: flex;
       min-height: 50px;
 
@@ -440,7 +442,7 @@ $gap-padding: 24px;
         flex: 1;
 
         .form-photo {
-          margin-right: $content-padding;
+          margin-right: var(--content-padding);
 
           :deep(.photo) {
             border-radius: 50%;
@@ -448,7 +450,7 @@ $gap-padding: 24px;
         }
 
         .change-password-button {
-          margin-top: calc($content-padding / 2);
+          margin-top: calc(var(--content-padding) / 2);
         }
       }
     }
