@@ -48,8 +48,8 @@
     .button-container {
       display: flex;
       flex-direction: row;
-      align-items: flex-start;
-      height: $button-height + calc($theme-padding * 2);
+      align-items: center;
+      height: calc($button-height + $theme-padding * 2);
     }
 
     .side-panel-content-wrapper {
