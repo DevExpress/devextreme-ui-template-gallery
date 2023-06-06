@@ -27,12 +27,18 @@ $footer-left-padding: math.div(($side-panel-min-width - $material-base-icon-size
 $tooltip-danger-button-color: color.change($base-danger, $alpha: 0.1);
 
 :root {
+  --header-toolbar-vertical-padding: 10px;
+  --toolbar-vertical-padding: 16px;
+  --content-padding: 16px;
+  --footer-height: 70px;
+  --calendar-width: 292px;
+
   --base-bg: #{$base-bg};
   --base-bg-darken-5: #{$base-bg-darken-5};
   --base-bg-darken-4: #{$base-bg-darken-4};
   --background-color: var(--base-bg);
   --card-background: #{$base-bg};
-  --calendar-width: 292px;
+  --side-panel-background: var(--base-bg-darken-5);
 
   @if $theme == dark {
     --card-background: var(--base-bg-darken-5);
@@ -47,6 +53,8 @@ $tooltip-danger-button-color: color.change($base-danger, $alpha: 0.1);
   --texteditor-edit-color: #{$texteditor-color};
   --texteditor-label-color: #{$texteditor-label-color};
   --base-text-color-alpha: #{$base-text-color-alpha};
+  --toolbar-margin-bottom: var(--content-padding);
+  --subtitle-text-color: var(--texteditor-label-color);
 
   --side-panel-min-width: #{$side-panel-min-width};
   --toolbar-height: #{toolbar_sizes.$material-toolbar-height};
