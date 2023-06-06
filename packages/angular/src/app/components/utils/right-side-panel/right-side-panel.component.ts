@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
 } from 'devextreme-angular';
-import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
+import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import {DataService, ScreenService} from 'src/app/services';
 
 @Component({
@@ -47,7 +47,7 @@ export class RightSidePanelComponent {
     this.openedChange.emit(this.isOpened);
   };
 
-  accordionTitleClick = (e: ButtonClickEvent) => {
+  accordionTitleClick = (e: DxButtonTypes.ClickEvent) => {
     e.event.stopPropagation();
   };
 

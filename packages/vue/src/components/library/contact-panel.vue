@@ -214,7 +214,7 @@ import { router } from '@/router';
 // eslint-disable-next-line import/no-unresolved
 import { getContact } from 'dx-template-gallery-data';
 import { DxAccordion, DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
-import { DxButton } from 'devextreme-vue/button';
+import { DxButton, DxButtonTypes } from 'devextreme-vue/button';
 import {
   DxForm,
   DxItem as DxFormItem,
@@ -224,7 +224,6 @@ import {
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
-import { ClickEvent } from 'devextreme/ui/button';
 import FormPhoto from '@/components/utils/form-photo.vue';
 import ContactStatus from '@/components/utils/contact-status.vue';
 import { screenInfo } from '@/utils/media-query';
@@ -285,7 +284,7 @@ const loadContact = async (contactId: number) => {
 function accordionPlusClick(/* e : Event */) {
 }
 
-function handleSaveClick({ validationGroup }: ClickEvent) {
+function handleSaveClick({ validationGroup }: DxButtonTypes.ClickEvent) {
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }
