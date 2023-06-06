@@ -3,6 +3,8 @@ import React from 'react';
 import notify from 'devextreme/ui/notify';
 import { formatNumber } from 'devextreme/localization';
 
+import './OpportunityTile.scss';
+
 export const OpportunityTile = ({ name, products, total, manager }) => {
   const opportunityClick = () => {
     notify('Click opportunity event');
