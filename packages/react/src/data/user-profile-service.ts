@@ -1,7 +1,8 @@
-import { ValidationRule } from 'devextreme/ui/validation_rules';
+import { ValidationRule } from 'devextreme-react/common';
+import { ProfileCardItem } from '../components/library/profile-card/ProfileCard';
 
 export const service = {
-  getBasicInfoItems() {
+  getBasicInfoItems(): ProfileCardItem[] {
     return [
       { dataField: 'firstName', colSpan: 2 },
       { dataField: 'lastName', colSpan: 2 },
@@ -39,7 +40,7 @@ export const service = {
       },
     ];
   },
-  getContactItems(supervisorsList) {
+  getContactItems(supervisorsList): ProfileCardItem[] {
     return [
       {
         dataField: 'phone',
@@ -70,7 +71,7 @@ export const service = {
       },
     ];
   },
-  getAddressItems() {
+  getAddressItems(): ProfileCardItem[] {
     return [
       { dataField: 'country' },
       { dataField: 'city' },

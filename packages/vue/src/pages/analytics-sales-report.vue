@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
-import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import { DxDropDownButtonTypes } from 'devextreme-vue/drop-down-button';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxLoadPanel } from 'devextreme-vue/load-panel';
 import { formatDate } from 'devextreme/localization';
@@ -59,9 +59,9 @@ const groupByPeriods = ['Day', 'Month'];
 
 const loading = ref<boolean>(true);
 
-const performancePeriodChange = async ({ item: period }: SelectionChangedEvent) => {
+const performancePeriodChange = async (e: DxDropDownButtonTypes.SelectionChangedEvent) => {
   loading.value = true;
-  salesByDateAndCategory.value = await getSalesByOrderDate(period.toLowerCase());
+  salesByDateAndCategory.value = await getSalesByOrderDate(e.item.toLowerCase());
   loading.value = false;
 };
 

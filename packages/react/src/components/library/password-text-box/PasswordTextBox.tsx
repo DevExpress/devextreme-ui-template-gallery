@@ -1,8 +1,7 @@
 import React, { useState, forwardRef, useMemo, useCallback } from 'react';
 import TextBox, { Button } from 'devextreme-react/text-box';
-import Validator from 'devextreme-react/validator';
-import { ValidationRule } from 'devextreme/ui/validation_rules';
-import { ValidatedEvent } from 'devextreme/ui/validator';
+import { ValidationRule } from 'devextreme-react/common';
+import Validator, { ValidatorTypes } from 'devextreme-react/validator';
 
 interface PasswordTextBoxProps {
   value?: string,
@@ -10,7 +9,7 @@ interface PasswordTextBoxProps {
   placeholder?: string,
   stylingMode?: 'outlined' | 'underlined' | 'filled',
   validators?: ValidationRule[],
-  onValueValidated?: (e: ValidatedEvent) => void;
+  onValueValidated?: (e: ValidatorTypes.ValidatedEvent) => void;
 }
 
 export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({
@@ -37,7 +36,9 @@ export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({
   const buttonOptions = useMemo(() =>
     ({
       visible: value?.length > 0,
-      icon: 'icons/eye.svg',
+      icon: isPasswordMode ? 'eyeopen' : 'eyeclose',
+      hoverStateEnabled: false,
+      activeStateEnabled: false,
       onClick: switchMode
     }),
   [value, switchMode]);

@@ -1,15 +1,14 @@
 import './ProfileCard.scss';
 import React, { useRef } from 'react';
-import Form, { Item, Label, ValidationRule as ValidationRuleComponent } from 'devextreme-react/form';
+import Form, { Item, Label, ValidationRule as ValidationRuleComponent, FormTypes } from 'devextreme-react/form';
 import { StatusSelectBox } from '../status-select-box/StatusSelectBox';
 import { PicturedItemSelectBox } from '../pictured-item-select-box/PicturedItemSelectBox';
 import { useScreenSize, getSizeQualifier } from '../../../utils/media-query';
-import { ValidationRule } from 'devextreme/ui/validation_rules';
-import { FieldDataChangedEvent } from 'devextreme/ui/form';
+import { ValidationRule } from 'devextreme-react/common';
 
 export interface ProfileCardItem {
-  dataField: string,
-  editorType?: string,
+  dataField?: string,
+  editorType?: FormTypes.FormItemComponent,
   editorOptions?: Record<string, string | string[] | Date | undefined>,
   colSpan?: number,
   label?: string,
@@ -50,7 +49,7 @@ export const ProfileCard = ({
 
     onDataChanged(cardData);
   };
-  const onFormFieldChange = (e: FieldDataChangedEvent) => onFieldChange(e.dataField)(e.value);
+  const onFormFieldChange = (e: FormTypes.FieldDataChangedEvent) => onFieldChange(e.dataField)(e.value);
 
   return (
     <div className={wrapperCssClass}>

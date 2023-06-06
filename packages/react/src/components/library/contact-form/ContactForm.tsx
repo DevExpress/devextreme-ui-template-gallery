@@ -8,7 +8,6 @@ import { withLoadPanel } from '../../../utils/withLoadPanel';
 import { Contact } from '../../../types/crm-contact';
 
 import ValidationGroup from 'devextreme-react/validation-group';
-import { ClickEvent } from 'devextreme/ui/button';
 
 import './ContactForm.scss';
 
@@ -32,7 +31,7 @@ export const ContactForm = ({ data, isLoading = false }: { data?: Contact, isLoa
     setEditing(!editing);
   };
 
-  const onSaveClick = ({ validationGroup }: ClickEvent) => {
+  const onSaveClick = ({ validationGroup }) => {
     if (!validationGroup.validate().isValid) return;
 
     handleEditClick();
@@ -43,10 +42,10 @@ export const ContactForm = ({ data, isLoading = false }: { data?: Contact, isLoa
     handleEditClick();
   };
 
-  const updateField = (field: string) => (value: string) => {
+  const updateField = (field: string | number) => (value: string | number) => {
     if(!formData) return;
     if(field === 'state') {
-      setFormData({ ...formData, ...{ [field]: { stateShort: value } } });
+      setFormData({ ...formData, ...{ [field]: { stateShort: value.toString() } } });
     } else {
       setFormData({ ...formData, ...{ [field]: value } });
     }

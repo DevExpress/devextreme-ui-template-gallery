@@ -20,8 +20,8 @@ import {
   StatusSelectBoxModule,
 } from 'src/app/components';
 import { Contact } from 'src/app/types/contact';
-import { ValidationRule } from 'devextreme/ui/validation_rules';
-import { ClickEvent } from 'devextreme/ui/button';
+import { ValidationRule } from 'devextreme-angular/common';
+import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
 
 @Component({
@@ -45,7 +45,7 @@ export class ContactFormComponent {
     this.isEditing = true;
   }
 
-  handleSaveClick({ validationGroup }: ClickEvent) {
+  handleSaveClick({ validationGroup }: DxButtonTypes.ClickEvent) {
     if(!validationGroup.validate().isValid) return;
     this.isEditing = false;
     this.savedData = null;

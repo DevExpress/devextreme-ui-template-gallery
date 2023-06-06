@@ -51,10 +51,14 @@ async function setAppTheme(newTheme?: Theme) {
 
   switchThemeStyleSheets(themeName);
 
-  window.localStorage[storageKey] = themeName;
-
   currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${themeName}.compact`));
   refreshTheme();
+}
+
+function toggleTeme(currentTheme: Theme): Theme {
+  const newTheme = getNextTheme(currentTheme);
+  window.localStorage[storageKey] = newTheme;
+  return newTheme;
 }
 
 export function useThemeContext() {
@@ -67,7 +71,7 @@ export function useThemeContext() {
     });
   }, []);
 
-  const switchTheme = useCallback(() => setTheme((currentTheme: Theme) => getNextTheme(currentTheme)), []);
+  const switchTheme = useCallback(() => setTheme((currentTheme: Theme) => toggleTeme(currentTheme)), []);
 
   useEffect(() => {
     isLoaded && setAppTheme(theme);

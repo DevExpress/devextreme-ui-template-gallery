@@ -2,13 +2,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-import { Button } from 'devextreme-react/button';
+import { Button, ButtonTypes } from 'devextreme-react/button';
 import { DropDownButton } from 'devextreme-react/drop-down-button';
 import { ScrollView } from 'devextreme-react/scroll-view';
 import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
 import Accordion, { Item as AccordionItem } from 'devextreme-react/accordion';
-import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
 import { formatNumber } from 'devextreme/localization';
 import { Contact } from '../../../types/crm-contact';
 import { CardActivities } from '../card-activities/CardActivities';
@@ -16,7 +15,7 @@ import { FormTextbox, FormPhoto, ContactStatus } from '../..';
 import { useScreenSize } from '../../../utils/media-query';
 import ValidationGroup from 'devextreme-react/validation-group';
 
-const accordionTitleClick = (e: ButtonClickEvent) => {
+const accordionTitleClick = (e: ButtonTypes.ClickEvent) => {
   e.event?.stopPropagation();
 };
 
@@ -64,7 +63,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
     setIsEditing(!isEditing);
   }, [isEditing]);
 
-  const onSaveClick = useCallback(({ validationGroup } : ButtonClickEvent) => {
+  const onSaveClick = useCallback(({ validationGroup } : ButtonTypes.ClickEvent) => {
     if(!validationGroup.validate().isValid) return;
     setIsEditing(!isEditing);
   }, []);
@@ -187,10 +186,10 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                 <ToolbarItem location='before' visible={!isEditing}>
                   <Button text='Details' stylingMode='outlined' type='default' onClick={navigateToDetails} />
                 </ToolbarItem>
-                <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
+                <ToolbarItem location='before' visible={isEditing}>
                   <Button text='Save' icon='save' stylingMode='outlined' type='default' onClick={onSaveClick} />
                 </ToolbarItem>
-                <ToolbarItem location='before' locateInMenu='before' visible={isEditing}>
+                <ToolbarItem location='before' visible={isEditing}>
                   <Button text='Cancel' stylingMode='text' onClick={toggleEditHandler} />
                 </ToolbarItem>
                 <ToolbarItem location='after'>

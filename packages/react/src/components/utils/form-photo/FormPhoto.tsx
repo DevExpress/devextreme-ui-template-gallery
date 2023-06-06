@@ -15,7 +15,7 @@ export const FormPhoto = ({ link, size, editable = false }: { link: string, size
           backgroundImage: `url('data:image/png;base64,${link}')`
         }}
       >
-        { editable && <i className='edit-icon dx-icon-photo' /> }
+        { editable && <i className='edit-icon dx-icon-photooutline' /> }
       </div>
       { editable &&
         <FileUploader

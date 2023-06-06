@@ -10,7 +10,7 @@ import {
   PasswordTextBoxModule,
 } from 'src/app/components/library/password-text-box/password-text-box.component';
 
-import { ValidationRule } from 'devextreme/ui/validation_rules';
+import { ValidationRule } from 'devextreme-angular/common';
 
 @Component({
   selector: 'change-profile-password-form',

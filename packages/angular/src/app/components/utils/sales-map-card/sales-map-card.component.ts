@@ -4,10 +4,10 @@ import {
   Input,
 } from '@angular/core';
 import { CardAnalyticsModule } from '../../library/card-analytics/card-analytics.component';
-import { DxVectorMapModule } from 'devextreme-angular/ui/vector-map';
+import { DxVectorMapModule, DxVectorMapTypes } from 'devextreme-angular/ui/vector-map';
 
-import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
-import * as mapsData from 'devextreme/dist/js/vectormap-data/usa.js';
+import * as mapsData from 'devextreme-dist/js/vectormap-data/usa.js';
+import { MapLayerElement } from 'devextreme/viz/vector_map';
 
 @Component({
   selector: 'sales-map-card',
@@ -23,7 +23,7 @@ export class SalesMapCardComponent {
     return ['< 80000$', '80000$ to 100000$', '100000$ to 400000$', '> 400000$'][arg.index];
   }
 
-  customizeItems(items: Array<LegendItem>) {
+  customizeItems(items: Array<DxVectorMapTypes.LegendItem>) {
     return items.reverse();
   }
 

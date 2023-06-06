@@ -8,9 +8,9 @@ export const RightSidePanel = ({ showOpenButton = true, isOpened, toggleOpen, ch
   const { isXSmall, isLarge } = useScreenSize();
   return <>
     <div
-      id='side-panel'
+      id='right-side-panel'
       className={classNames({
-        'side-panel': true,
+        'right-side-panel': true,
         'overlap': !isLarge,
         'x-small': isXSmall,
         'open': isOpened,
@@ -21,10 +21,10 @@ export const RightSidePanel = ({ showOpenButton = true, isOpened, toggleOpen, ch
     {isLarge && showOpenButton &&
       <Button
         className={classNames({
-          'open-button': true,
+          'right-panel-open-button': true,
           'hidden': isOpened,
         })}
-        icon='hidepanel'
+        icon='panelright'
         onClick={toggleOpen}
       />
     }

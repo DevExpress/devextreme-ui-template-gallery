@@ -177,6 +177,7 @@ import {
   DxPager,
   DxPaging,
   DxEditing,
+  DxDataGridTypes,
 } from 'devextreme-vue/data-grid';
 import 'jspdf-autotable';
 import { DxSelectBox } from 'devextreme-vue/select-box';
@@ -187,7 +188,6 @@ import { exportDataGrid as exportToXLSX } from 'devextreme/excel_exporter';
 
 import { router } from '@/router';
 import type { Task } from '@/types/task';
-import type { RowPreparedEvent, RowClickEvent } from 'devextreme/ui/data_grid';
 import { taskPriorityList as priorityList, taskStatusList as statusList } from '@/types/task';
 import { Workbook } from 'exceljs';
 import StatusIndicator from '@/components/library/status-indicator.vue';
@@ -201,7 +201,7 @@ const props = withDefaults(defineProps<{
 const dxDataGridCmp = ref<InstanceType<typeof DxDataGrid> | null>(null);
 let useNavigation = true;
 
-const onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
+const onRowPreparedGrid = (e: DxDataGridTypes.RowPreparedEvent<Task, number>) => {
   const { rowType, rowElement, data } = e;
 
   if (rowType === 'header') return;
@@ -211,7 +211,7 @@ const onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
   }
 };
 
-const navigateToDetails = (e: RowClickEvent) => {
+const navigateToDetails = (e: DxDataGridTypes.RowClickEvent) => {
   if (useNavigation && e.rowType !== 'detailAdaptive') {
     router.push('/planning-task-details');
   }

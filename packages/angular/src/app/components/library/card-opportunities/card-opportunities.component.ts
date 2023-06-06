@@ -23,8 +23,8 @@ export class CardOpportunitiesComponent implements OnChanges {
   isLoading = true;
 
   ngOnChanges(changes: SimpleChanges) {
-    const isLoadActive = !changes.openedActivities?.currentValue;
-    const isLoadClosed = !changes.closedActivities?.currentValue;
+    const isLoadActive = !changes.openedOpportunities?.currentValue;
+    const isLoadClosed = !changes.closedOpportunities?.currentValue;
 
     this.isLoading = isLoadActive || isLoadClosed;
   }
