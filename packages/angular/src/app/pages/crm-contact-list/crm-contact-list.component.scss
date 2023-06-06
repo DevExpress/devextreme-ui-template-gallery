@@ -2,9 +2,10 @@
 @use "sass:math";
 
 :host {
+  --side-panel-toolbar-height: 76px;
+
   width: 100%;
   display: contents;
-  --side-panel-toolbar-height: 76px;
 }
 
 .view-wrapper {

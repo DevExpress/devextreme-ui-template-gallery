@@ -1,11 +1,12 @@
 @use "../../../variables.scss" as *;
 
 :host {
+  --left-panel-width: 400px;
+
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   height: 100%;
-  --left-panel-width: 400px;
 }
 
 .dx-toolbar ::ng-deep {

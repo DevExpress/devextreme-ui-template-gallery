@@ -2,10 +2,11 @@
 
 
 :host {
+  --gap-padding: 24px;
+
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  --gap-padding: 24px;
 
   .view-wrapper-scroll {
     width: 100%;

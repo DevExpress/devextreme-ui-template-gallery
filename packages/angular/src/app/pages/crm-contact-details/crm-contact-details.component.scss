@@ -2,12 +2,13 @@
 @use "sass:math";
 
 :host {
+  --left-panel-width: 400px;
+  --right-panel-width: 360px;
+
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   height: 100%;
-  --left-panel-width: 400px;
-  --right-panel-width: 360px;
 }
 
 .dx-toolbar ::ng-deep {
