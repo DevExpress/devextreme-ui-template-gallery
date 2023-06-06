@@ -155,11 +155,6 @@ const refreshOptions = {
 @use "@/variables" as *;
 @use "sass:math";
 
-:host {
-  --left-panel-width: 400px;
-  --right-panel-width: 360px;
-}
-
 @media only screen and (max-width: 875px) {
   :deep(.contact-name-toolbar-item) {
     min-width: calc(var(--left-panel-width) + var(--right-panel-width) - 145px);
@@ -175,6 +170,9 @@ const refreshOptions = {
 }
 
 .view-wrapper {
+  --left-panel-width: 400px;
+  --right-panel-width: 360px;
+
   padding: var(--content-padding) var(--content-padding) 0 var(--content-padding);
 
   .panels {

@@ -326,11 +326,9 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
 @use "@/variables.scss" as *;
 @use "sass:math";
 
-:host {
-  --gap-padding: 24px;
-}
-
 .view-wrapper {
+  --gap-padding: 24px;
+
   position: absolute;
   top: 0;
   bottom: 0;

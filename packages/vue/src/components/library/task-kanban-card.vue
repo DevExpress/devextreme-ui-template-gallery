@@ -60,12 +60,6 @@ const navigateToDetails = () => {
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
 
-:host {
-  --low-priorety-color: #dfb32f;
-  --normal-priorety-color: #6fbaca;
-  --high-priorety-color: #d9534f;
-}
-
 @mixin priority($priorety-color) {
   .card-priority {
     background: $priorety-color;
@@ -77,6 +71,10 @@ const navigateToDetails = () => {
 }
 
 .card {
+  --low-priorety-color: #dfb32f;
+  --normal-priorety-color: #6fbaca;
+  --high-priorety-color: #d9534f;
+
   position: relative;
   box-sizing: border-box;
   cursor: pointer;
