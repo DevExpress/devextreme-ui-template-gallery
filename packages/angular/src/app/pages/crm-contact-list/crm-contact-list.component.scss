@@ -1,7 +1,7 @@
 @use "../../../variables.scss" as *;
 @use "sass:math";
 
-:root {
+:host {
   --side-panel-toolbar-height: 76px;
 }
 

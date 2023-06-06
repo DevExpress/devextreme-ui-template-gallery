@@ -57,5 +57,5 @@ $theme-type: 'material';
   --subtitle-text-color: var(--texteditor-label-color);
   --button-height-theme-difference: calc((var(--theme-padding) - 10px) / 3); // WA for no button-height in generic theme
   --button-height: calc(26px + var(--button-height-theme-difference)); // remove when design-system is released
-  --scheduler-toolbar-height: calc(var(--button-height)+ 2 * var(--theme-padding));
+  --scheduler-toolbar-height: calc(var(--button-height) + 2 * var(--theme-padding));
 }

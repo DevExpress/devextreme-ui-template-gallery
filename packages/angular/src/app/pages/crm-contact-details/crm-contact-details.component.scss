@@ -1,7 +1,7 @@
 @use "../../../variables.scss" as *;
 @use "sass:math";
 
-:root {
+:host {
   --left-panel-width: 400px;
   --right-panel-width: 360px;
 }
