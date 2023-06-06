@@ -4,6 +4,7 @@
   --low-priorety-color: #dfb32f;
   --normal-priorety-color: #6fbaca;
   --high-priorety-color: #d9534f;
+  display: block;
 }
 
 @mixin priority($priorety-color) {
@@ -14,10 +15,6 @@
   span.priority {
     color: $priorety-color;
   }
-}
-
-:host {
-  display: block;
 }
 
 .card {

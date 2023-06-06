@@ -1,13 +1,11 @@
 @use "../../../variables.scss" as *;
 
-:host {
-  --gap-padding: 24px;
-}
 
 :host {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  --gap-padding: 24px;
 
   .view-wrapper-scroll {
     width: 100%;
