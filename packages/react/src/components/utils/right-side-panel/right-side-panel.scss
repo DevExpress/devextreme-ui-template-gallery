@@ -1,7 +1,7 @@
 @use "../../../variables.scss" as *;
 @use "sass:math";
 
-#side-panel {
+#right-side-panel {
   --side-panel-width: #{calc($calendar-width + $content-padding)};
 }
 
@@ -9,7 +9,7 @@
   --side-panel-width: 100vw;
 }
 
-.side-panel {
+.right-side-panel {
   display: none;
 
   &.open {
@@ -48,7 +48,7 @@
   }
 }
 
-.open-button.dx-button {
+.right-panel-open-button.dx-button {
   margin-top: $theme-padding;
   z-index: 6;
   height: $button-height;
