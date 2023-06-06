@@ -189,7 +189,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import DxDropDownButton from 'devextreme-vue/drop-down-button';
+import DxDropDownButton, { DxDropDownButtonTypes } from 'devextreme-vue/drop-down-button';
 import { DxButton } from 'devextreme-vue/button';
 import DxDataGrid, {
   DxColumn,
@@ -204,6 +204,7 @@ import DxDataGrid, {
   DxToolbar as DxGridToolbar,
   DxItem as DxGridToolbarItem,
   DxSearchPanel,
+  DxDataGridTypes,
 } from 'devextreme-vue/data-grid';
 import { getContacts } from 'dx-template-gallery-data';
 import { saveAs } from 'file-saver-es';
@@ -211,9 +212,7 @@ import { Workbook } from 'exceljs';
 
 import { jsPDF as JsPdf } from 'jspdf';
 import { contactStatusList, Contact } from '@/types/contact';
-import { ExportingEvent, RowClickEvent } from 'devextreme/ui/data_grid';
 import DataSource from 'devextreme/data/data_source';
-import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
 import { formatPhone } from '@/utils/formatters';
@@ -237,7 +236,7 @@ const dataSource = new DataSource({
   load: () => getContacts(),
 });
 
-const rowClick = (e: RowClickEvent) => {
+const rowClick = (e: DxDataGridTypes.RowClickEvent) => {
   if (e.data.id) {
     panelData.value = e.data;
     isPanelOpened.value = true;
@@ -249,7 +248,7 @@ const addContact = () => {
   isAddContactPopupOpened.value = true;
 };
 
-const filterByStatus = (e: SelectionChangedEvent) => {
+const filterByStatus = (e: DxDropDownButtonTypes.SelectionChangedEvent) => {
   const { item: status }: { item: FilterContactStatus } = e;
 
   if (status === 'All') {
@@ -259,7 +258,7 @@ const filterByStatus = (e: SelectionChangedEvent) => {
   }
 };
 
-const onExporting = (e: ExportingEvent) => {
+const onExporting = (e: DxDataGridTypes.ExportingEvent) => {
   if (e.format === 'pdf') {
     const doc = new JsPdf();
     exportDataGridToPdf({

@@ -2,8 +2,7 @@ import React, { useCallback, useState, useRef } from 'react';
 
 import './FormPhotoUploader.scss';
 
-import { FileUploader } from 'devextreme-react/file-uploader';
-import { DropZoneEnterEvent, DropZoneLeaveEvent } from 'devextreme/ui/file_uploader';
+import { FileUploader, FileUploaderTypes } from 'devextreme-react/file-uploader';
 
 export const FormPhotoUploader = () => {
   const [isDropZoneActive, setDropZoneActive] = useState(false);
@@ -15,7 +14,7 @@ export const FormPhotoUploader = () => {
       uploaderZone.current = element;
     }, []);
 
-  const onDropZoneEvent = useCallback((e: DropZoneEnterEvent | DropZoneLeaveEvent) => {
+  const onDropZoneEvent = useCallback((e: FileUploaderTypes.DropZoneEnterEvent | FileUploaderTypes.DropZoneLeaveEvent) => {
     if (e.dropZoneElement.id === 'uploader') {
       setDropZoneActive(e.event?.type === 'dragenter');
     }

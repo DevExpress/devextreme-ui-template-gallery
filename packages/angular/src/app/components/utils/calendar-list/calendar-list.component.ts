@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { DxButtonModule, DxCheckBoxModule } from 'devextreme-angular';
 import { DxListModule } from 'devextreme-angular/ui/list';
-import { EventObject } from 'devextreme/events';
+import { DxButtonTypes } from 'devextreme-angular/ui/button';
 
 @Component({
   selector: 'calendar-list',
@@ -31,8 +31,8 @@ export class CalendarListComponent implements OnInit {
     this.listSelectionChanged.emit(this.selectedItems);
   }
 
-  onAddClick({event}: {event: EventObject}) {
-    event.stopImmediatePropagation();
+  onAddClick(e: DxButtonTypes.ClickEvent) {
+    e.event.stopImmediatePropagation();
   }
 }
 

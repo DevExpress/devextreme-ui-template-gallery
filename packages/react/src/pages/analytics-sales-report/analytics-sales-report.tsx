@@ -7,8 +7,8 @@ import { getSalesByCategory, getSales, getSalesByOrderDate } from 'dx-template-g
 
 import { formatDate } from 'devextreme/localization';
 import LoadPanel from 'devextreme-react/load-panel';
-import { ValueChangedEvent } from 'devextreme/viz/range_selector';
-import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import { RangeSelectorTypes } from 'devextreme-react/range-selector';
+import { DropDownButtonTypes } from 'devextreme-react/drop-down-button';
 import ScrollView from 'devextreme-react/scroll-view';
 
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
@@ -29,13 +29,13 @@ export const AnalyticsSalesReport = () => {
   const [groupByPeriod, setGroupByPeriod] = useState(groupByPeriods[1]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const onRangeChanged = useCallback((e: ValueChangedEvent) => {
+  const onRangeChanged = useCallback((e: RangeSelectorTypes.ValueChangedEvent) => {
     const [startDate, endDate] = e.value;
     setDateRange([startDate, endDate] as Date[]);
     setIsLoading(true);
   }, []);
 
-  const onPeriodChanged = useCallback((e: SelectionChangedEvent) => {
+  const onPeriodChanged = useCallback((e: DropDownButtonTypes.SelectionChangedEvent) => {
     setGroupByPeriod(e.item);
     setIsLoading(true);
   }, []);

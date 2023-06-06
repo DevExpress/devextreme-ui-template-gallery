@@ -1,4 +1,4 @@
-import { ValidationRule } from 'devextreme/ui/validation_rules';
+import { ValidationRule } from 'devextreme-react/common';
 import { ProfileCardItem } from '../components/library/profile-card/ProfileCard';
 
 export const service = {

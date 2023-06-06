@@ -2,7 +2,7 @@ import './StatusSelectBox.scss';
 import React from 'react';
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
-import type { EditorStyle, LabelMode } from 'devextreme/common';
+import type { EditorStyle, LabelMode } from 'devextreme-react/common';
 import { ContactStatus } from '../../utils/contact-status/ContactStatus';
 import { CONTACT_STATUS_LIST } from '../../../shared/constants';
 

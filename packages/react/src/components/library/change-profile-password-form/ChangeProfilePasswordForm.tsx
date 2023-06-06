@@ -1,12 +1,11 @@
 import './ChangeProfilePasswordForm.scss';
 import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import notify from 'devextreme/ui/notify';
-import { ValidationRule } from 'devextreme/ui/validation_rules';
+import { ValidationRule } from 'devextreme-react/common';
 import Form, { Item, Label } from 'devextreme-react/form';
-import Validator from 'devextreme-react/validator';
+import Validator, { ValidatorTypes } from 'devextreme-react/validator';
 import { FormPopup } from '../../utils/form-popup/FormPopup';
 import { PasswordTextBox } from '../password-text-box/PasswordTextBox';
-import { ValidatedEvent } from 'devextreme/ui/validator';
 
 const saveNewPassword = (): void => {
   notify({ message: 'Password Changed', position: { at: 'bottom center', my: 'bottom center' } }, 'success');
@@ -51,15 +50,15 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
     confirmField.current?.instance.validate();
   }, []);
 
-  const onCurrentPasswordValidated = useCallback((e: ValidatedEvent) => {
+  const onCurrentPasswordValidated = useCallback((e: ValidatorTypes.ValidatedEvent) => {
     setCurrentPasswordValid(!!e.isValid);
   }, []);
 
-  const onConfirmedPasswordValidated = useCallback((e: ValidatedEvent) => {
+  const onConfirmedPasswordValidated = useCallback((e: ValidatorTypes.ValidatedEvent) => {
     setConfirmedPasswordValid(!!e.isValid);
   }, []);
 
-  const onNewPasswordValidated = useCallback((e: ValidatedEvent) => {
+  const onNewPasswordValidated = useCallback((e: ValidatorTypes.ValidatedEvent) => {
     setNewPasswordValid(!!e.isValid);
   }, []);
 

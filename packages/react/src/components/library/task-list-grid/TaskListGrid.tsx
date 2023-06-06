@@ -2,12 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import DataGrid, {
-  Column, Selection, Sorting, HeaderFilter,
+  Column, Selection, Sorting, HeaderFilter, DataGridTypes,
   RequiredRule, Paging, Pager, Editing, Scrolling, LoadPanel,
 } from 'devextreme-react/data-grid';
 import SelectBox from 'devextreme-react/select-box';
-
-import { RowClickEvent } from 'devextreme/ui/data_grid';
 
 import { StatusIndicator } from '../status-indicator/StatusIndicator';
 import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../../shared/statusIndicatorRenderMethods';
@@ -63,7 +61,7 @@ export const TaskListGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
     }
   }, []);
 
-  const navigateToDetails = useCallback(({ rowType }: RowClickEvent) => {
+  const navigateToDetails = useCallback(({ rowType }: DataGridTypes.RowClickEvent) => {
     if (useNavigation && rowType !== 'detailAdaptive') {
       navigate('/planning-task-details');
     }

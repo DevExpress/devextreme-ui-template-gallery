@@ -149,7 +149,7 @@ import {
   DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxSelectBox } from 'devextreme-vue/select-box';
-import { ClickEvent } from 'devextreme/ui/button';
+import { DxButtonTypes } from 'devextreme-vue/button';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 import FormTextbox from '@/components/utils/form-textbox.vue';
 import FormDatebox from '@/components/utils/form-datebox.vue';
@@ -186,7 +186,7 @@ function handleEditClick() {
   isEditing.value = true;
 }
 
-function handleSaveClick({ validationGroup }: ClickEvent) {
+function handleSaveClick({ validationGroup }: DxButtonTypes.ClickEvent) {
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }

@@ -1,21 +1,20 @@
-import dxTreeView, { ItemClickEvent } from 'devextreme/ui/tree_view';
-import { ClickEvent } from 'devextreme/ui/button';
-import { EventInfo } from 'devextreme/events';
+import { TreeViewTypes } from 'devextreme-react/tree-view';
+import { ButtonTypes } from 'devextreme-react/button';
 import List from 'devextreme-react/list';
 import React from 'react';
 
 export interface AppHeaderProps {
   menuToggleEnabled: boolean;
   title?: string;
-  toggleMenu: (e: ClickEvent) => void;
+  toggleMenu: (e: ButtonTypes.ClickEvent) => void;
   className?: string;
 }
 
 export interface SideNavigationMenuProps {
-  selectedItemChanged: (e: ItemClickEvent) => void;
+  selectedItemChanged: (e: TreeViewTypes.ItemClickEvent) => void;
   openMenu: (e: React.PointerEvent) => void;
   compactMode: boolean;
-  onMenuReady: (e: EventInfo<dxTreeView>) => void;
+  onMenuReady: (e: TreeViewTypes.ContentReadyEvent) => void;
 }
 
 export interface UserPanelProps {

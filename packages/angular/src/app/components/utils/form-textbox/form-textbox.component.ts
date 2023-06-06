@@ -5,7 +5,7 @@ import {
   DxTextBoxModule,
   DxValidatorModule
 } from 'devextreme-angular';
-import { ValidationRule } from 'devextreme/ui/validation_rules';
+import { ValidationRule } from 'devextreme-angular/common';
 
 @Component({
   selector: 'form-textbox',
