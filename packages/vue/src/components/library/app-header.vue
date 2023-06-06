@@ -26,7 +26,7 @@
         location="after"
         locate-in-menu="auto"
         widget="dxTextBox"
-        cssClass="global-search-box"
+        css-class="global-search-box"
         :options="{
           stylingMode: 'underlined',
           mode: 'search',
