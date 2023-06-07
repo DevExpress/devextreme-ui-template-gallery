@@ -72,7 +72,6 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
     title='Change Password'
     visible={visible}
     width={360}
-    height={420}
     wrapperAttr={{ class: 'change-profile-password-popup' }}
     isSaveDisabled={isSaveDisabled}
     onSave={saveNewPassword}
