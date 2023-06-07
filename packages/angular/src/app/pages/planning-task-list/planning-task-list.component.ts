@@ -6,8 +6,8 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
-import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
+import { DxTabsTypes } from 'devextreme-angular/ui/tabs';
+import { DxTextBoxTypes } from 'devextreme-angular/ui/text-box';
 import { taskPanelItems } from 'src/app/types/resource';
 import { Task, newTask } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
@@ -58,7 +58,7 @@ export class PlanningTaskListComponent implements OnInit {
     );
   }
 
-  tabValueChange(e: TabsItemClickEvent) {
+  tabValueChange(e: DxTabsTypes.ItemClickEvent) {
     const { itemData } = e;
 
     this.displayTaskComponent = itemData.text;
@@ -82,7 +82,7 @@ export class PlanningTaskListComponent implements OnInit {
 
   chooseColumnDataGrid = () => this.dataGrid.showColumnChooser();
 
-  searchDataGrid = (e: TextBoxInputEvent) => this.dataGrid.search(e.component.option('text'));
+  searchDataGrid = (e: DxTextBoxTypes.InputEvent) => this.dataGrid.search(e.component.option('text'));
 
   exportToPdf = () => {
     if (this.displayGrid) {

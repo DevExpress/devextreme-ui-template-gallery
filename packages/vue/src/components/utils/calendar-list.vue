@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { DxList, DxCheckBox, DxButton } from 'devextreme-vue';
 import { watchEffect } from 'vue';
-import { EventObject } from 'devextreme/events';
+import { DxButtonTypes } from 'devextreme-vue/button';
 
 const props = withDefaults(defineProps<{
   dataSource: {items: Record<string, unknown>[]}[],
@@ -60,8 +60,8 @@ function selectionChanged(item: Record<string, unknown>, { value }: { value: boo
   emit('listSelectionChanged', selectedItems);
 }
 
-function onAddClick({ event }: {event: EventObject}) {
-  event.stopImmediatePropagation();
+function onAddClick(e: DxButtonTypes.ClickEvent) {
+  e.event?.stopImmediatePropagation();
 }
 </script>
 

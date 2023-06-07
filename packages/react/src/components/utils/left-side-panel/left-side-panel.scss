@@ -48,7 +48,7 @@
     .button-container {
       display: flex;
       flex-direction: row;
-      align-items: flex-start;
+      align-items: center;
       height: calc(var(--button-height) + var(--theme-padding) * 2);
     }
 

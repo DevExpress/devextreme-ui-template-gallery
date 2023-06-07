@@ -69,8 +69,7 @@ import {
   DxToolbar,
   DxItem,
 } from 'devextreme-vue/toolbar';
-import { DxTabs } from 'devextreme-vue/tabs';
-import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
+import { DxTabs, DxTabsTypes } from 'devextreme-vue/tabs';
 import { onMounted } from 'vue';
 import { analyticsPanelItems } from '@/types/resource';
 
@@ -83,7 +82,7 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits(['tab-change']);
 const [initialStartDate, initialEndDate] = analyticsPanelItems[4].value.split('/');
 
-const selectionChange = (e: TabsItemClickEvent) => {
+const selectionChange = (e: DxTabsTypes.ItemClickEvent) => {
   const [startDate, endDate] = e.itemData.value.split('/');
   emit('tab-change', [startDate, endDate]);
 };

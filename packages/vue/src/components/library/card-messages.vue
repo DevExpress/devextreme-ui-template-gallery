@@ -90,13 +90,11 @@
 import { ref, watch } from 'vue';
 import { DxTextArea } from 'devextreme-vue/text-area';
 import { DxTextBox } from 'devextreme-vue/text-box';
-import { DxButton } from 'devextreme-vue/button';
+import { DxButton, DxButtonTypes } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { DxFileUploader } from 'devextreme-vue/file-uploader';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
 import DxValidator, { DxRequiredRule } from 'devextreme-vue/validator';
-
-import { ClickEvent } from 'devextreme/ui/button';
 
 import { formatDate } from '@/utils/formatters';
 import DxLoadPanel from 'devextreme-vue/load-panel';
@@ -134,7 +132,7 @@ function getText(data: Message) {
   return data.text.replace('{username}', data.manager !== items.value[0].manager ? items.value[0].manager : items.value[1].manager);
 }
 
-function send(e: ClickEvent) {
+function send(e: DxButtonTypes.ClickEvent) {
   if (!e.validationGroup.validate().isValid) {
     return;
   }

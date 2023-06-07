@@ -50,8 +50,7 @@ const changeThemesMeta = (theme) => {
 
         const contentForChange = readFileSync(fileForChange, 'utf8');
         if (isDarkTheme) {
-          writeFileSync(fileForChange, contentForChange.replace(/const themes =/g,
-            "window.localStorage.setItem('app-theme', 'dark');\nconst themes ="));
+          writeFileSync(fileForChange, contentForChange.replace(/const themes = \['light', 'dark']/g, "const themes = ['dark', 'light']"));
         }
       },
     );

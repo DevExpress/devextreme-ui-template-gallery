@@ -7,7 +7,7 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
-import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
+import { DxTabsTypes } from 'devextreme-angular/ui/tabs';
 
 import { Dates, PanelItem } from 'src/app/types/resource';
 
@@ -28,7 +28,7 @@ export class ToolbarAnalyticsComponent {
 
   constructor(protected screen: ScreenService) { }
 
-  selectionChange(e: TabsItemClickEvent) {
+  selectionChange(e: DxTabsTypes.ItemClickEvent) {
     const dates = e.itemData.value.split('/');
 
     this.selectionChanged.emit({ startDate: dates[0], endDate: dates[1] });

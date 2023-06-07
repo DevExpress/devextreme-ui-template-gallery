@@ -20,7 +20,7 @@ import {
 import { taskPriorityList, taskStatusList } from 'src/app/types/task';
 import { Task } from 'src/app/types/task';
 import { getSizeQualifier } from 'src/app/services/screen.service';
-import { ClickEvent } from 'devextreme/ui/button';
+import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import { ScreenService } from '../../../services';
 import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
 
@@ -56,7 +56,7 @@ export class TaskFormComponent implements OnInit {
     this.isEditing = true;
   };
 
-  handleSaveClick = ({ validationGroup }: ClickEvent) => {
+  handleSaveClick = ({ validationGroup }: DxButtonTypes.ClickEvent) => {
     if(!validationGroup.validate().isValid) return;
     this.savedData = null;
     this.isEditing = false;

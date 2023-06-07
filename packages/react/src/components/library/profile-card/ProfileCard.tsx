@@ -4,8 +4,7 @@ import Form, { Item, Label, ValidationRule as ValidationRuleComponent, FormTypes
 import { StatusSelectBox } from '../status-select-box/StatusSelectBox';
 import { PicturedItemSelectBox } from '../pictured-item-select-box/PicturedItemSelectBox';
 import { useScreenSize, getSizeQualifier } from '../../../utils/media-query';
-import { ValidationRule } from 'devextreme/ui/validation_rules';
-import { FieldDataChangedEvent } from 'devextreme/ui/form';
+import { ValidationRule } from 'devextreme-react/common';
 
 export interface ProfileCardItem {
   dataField?: string,
@@ -50,7 +49,7 @@ export const ProfileCard = ({
 
     onDataChanged(cardData);
   };
-  const onFormFieldChange = (e: FieldDataChangedEvent) => onFieldChange(e.dataField)(e.value);
+  const onFormFieldChange = (e: FormTypes.FieldDataChangedEvent) => onFieldChange(e.dataField)(e.value);
 
   return (
     <div className={wrapperCssClass}>

@@ -1,8 +1,7 @@
 import { useRef, useState, useCallback, useMemo, useEffect } from 'react';
 
 import Tooltip from 'devextreme-react/tooltip';
-import Scheduler from 'devextreme-react/scheduler';
-import { ViewType } from 'devextreme/ui/scheduler';
+import Scheduler, { SchedulerTypes } from 'devextreme-react/scheduler';
 import DataSource from 'devextreme/data/data_source';
 
 import { getTasksForScheduler } from 'dx-template-gallery-data';
@@ -15,7 +14,7 @@ export const useSchedulerLogic = () => {
   const schedulerRef = useRef<Scheduler>(null);
 
   const [agendaItems, setAgendaItems] = useState<{ startDate: Date }[]>();
-  const [currentView, setCurrentView] = useState<ViewType>('workWeek');
+  const [currentView, setCurrentView] = useState<SchedulerTypes.ViewType>('workWeek');
   const [date, setDate] = useState<Date>(new Date());
   const [schedulerCurrentDate, setSchedulerCurrentDate] = useState<Date>(new Date());
   const [rightPanelOpen, setRightPanelOpen] = useState<boolean>(false);
