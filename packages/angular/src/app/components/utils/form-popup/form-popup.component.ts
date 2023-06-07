@@ -40,10 +40,6 @@ export class FormPopupComponent {
 
   constructor(protected screen: ScreenService) { }
 
-  onCancelClick() {
-    this.close();
-  }
-
   isValid() {
     return this.validationGroup.instance.validate().isValid;
   }
