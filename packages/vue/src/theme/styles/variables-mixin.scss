@@ -51,7 +51,7 @@ $theme: null !default;
   --filled-texteditor-input-horizontal-padding: #{$material-field-value-horizontal-padding};
   --list-padding-left: #{$material-list-item-horizontal-padding};
   --list-padding-vertical: #{$material-list-item-vertical-padding};
-  --footer-left-padding: calc((var(--side-panel-min-width) - $material-base-icon-size) / 2);
+  --footer-left-padding: #{calc((var(--side-panel-min-width) - $material-base-icon-size) / 2)};
   --popup-toolbar-item-spacing: #{$material-popup-toolbar-item-spacing};
   --drop-down-gnrc-button-height: #{$material-base-inline-widget-height};
   --theme-padding: #{$material-button-horizontal-padding};
