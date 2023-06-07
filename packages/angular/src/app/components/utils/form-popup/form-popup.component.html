@@ -1,20 +1,23 @@
-<dx-popup [title]="titleText"
-          [(visible)]="visible"
-          [fullScreen]="!!(screen.xSmallScreenChanged | async)"
-          [width]="width"
-          [wrapperAttr]="getWrapperAttrs | apply: wrapperAttr"
-          height="auto">
+<dx-popup
+  [title]="titleText"
+  [(visible)]="visible"
+  [fullScreen]="!!(screen.xSmallScreenChanged | async)"
+  [width]="width"
+  [wrapperAttr]="getWrapperAttrs | apply: wrapperAttr"
+  (onHidden)="close()"
+  height="auto"
+>
   <dxi-toolbar-item
     toolbar="bottom"
     location="center"
   >
     <div class="form-popup-buttons-container"
-         [class.flex-buttons]="width <= 360"
+      [class.flex-buttons]="width <= 360"
     >
       <dx-button
       text="Cancel"
       stylingMode="contained"
-      (click)="onCancelClick()"
+      (click)="close()"
     ></dx-button>
       <dx-button
         text="Save"
