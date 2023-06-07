@@ -7,7 +7,7 @@ import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 import { DxSortableModule, DxSortableComponent } from 'devextreme-angular/ui/sortable';
 
 import notify from 'devextreme/ui/notify';
-import { DragStartEvent, ReorderEvent, AddEvent } from 'devextreme/ui/sortable';
+import { DxSortableTypes } from 'devextreme-angular/ui/sortable';
 
 import { CardMenuModule } from 'src/app/components';
 import { Task } from 'src/app/types/task';
@@ -69,18 +69,18 @@ export class TaskListKanbanComponent implements OnChanges {
     return cards;
   };
 
-  onListReorder = (e: ReorderEvent) => {
+  onListReorder = (e: DxSortableTypes.ReorderEvent) => {
     const { fromIndex, toIndex } = e;
     const list = this.kanbanDataSource.splice(fromIndex, 1)[0];
     this.kanbanDataSource.splice(toIndex, 0, list);
   };
 
-  onTaskDragStart(e: DragStartEvent) {
+  onTaskDragStart(e: DxSortableTypes.DragStartEvent) {
     const { fromData, fromIndex } = e;
     e.itemData = fromData.cards[fromIndex];
   }
 
-  onTaskDrop(e: ReorderEvent | AddEvent) {
+  onTaskDrop(e: DxSortableTypes.ReorderEvent | DxSortableTypes.AddEvent) {
     const {
       fromData, toData, fromIndex, toIndex, itemData,
     } = e;

@@ -14,7 +14,7 @@ import { DxRangeSelectorModule } from 'devextreme-angular/ui/range-selector';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
-import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import { DxDropDownButtonTypes } from 'devextreme-angular/ui/drop-down-button';
 
 import { DataService } from 'src/app/services';
 import { CardAnalyticsModule } from 'src/app/components/library/card-analytics/card-analytics.component';
@@ -56,7 +56,7 @@ export class AnalyticsSalesReportComponent implements OnInit {
       });
   };
 
-  selectionChange({item: period}: SelectionChangedEvent) {
+  selectionChange({item: period}: DxDropDownButtonTypes.SelectionChangedEvent) {
     this.isLoading = true;
 
     this.service.getSalesByOrderDate(period.toLowerCase())

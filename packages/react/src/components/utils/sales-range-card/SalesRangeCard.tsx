@@ -1,11 +1,10 @@
-import RangeSelector, { Chart, Label, LoadingIndicator, Marker, MinorTick, Scale, Series, Size } from 'devextreme-react/range-selector';
+import RangeSelector, { Chart, Label, LoadingIndicator, Marker, MinorTick, Scale, Series, Size, RangeSelectorTypes } from 'devextreme-react/range-selector';
 import React from 'react';
 import { CardAnalytics } from '../../library/card-analytics/CardAnalytics';
 import { Sale } from '../../../types/analytics';
-import { ValueChangedEvent } from 'devextreme/viz/range_selector';
 
 export const SalesRangeCard = ({ datasource, range, onRangeChanged }: {
-  datasource: Sale[], range: Date[], onRangeChanged: (e: ValueChangedEvent) => void
+  datasource: Sale[], range: Date[], onRangeChanged: (e: RangeSelectorTypes.ValueChangedEvent) => void
 }) => (
   <CardAnalytics title='' contentClass='sales-range' menuVisible={false}>
     <RangeSelector id='range' dataSource={datasource} value={range} onValueChanged={onRangeChanged}>

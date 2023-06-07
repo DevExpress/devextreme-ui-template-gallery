@@ -13,8 +13,8 @@ import {
   DxTextBoxModule,
   DxToolbarModule,
 } from 'devextreme-angular';
-import { RowPreparedEvent, RowClickEvent } from 'devextreme/ui/data_grid';
-import { ItemClickEvent as TabsItemClickEvenet } from 'devextreme/ui/tabs';
+import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
+import { DxTabsTypes } from 'devextreme-angular/ui/tabs';
 import {
   StatusIndicatorModule,
 } from 'src/app/components';
@@ -95,7 +95,7 @@ export class TaskListGridComponent implements OnChanges {
     }
   }
 
-  onRowPreparedGrid = (e: RowPreparedEvent<Task, number>) => {
+  onRowPreparedGrid = (e: DxDataGridTypes.RowPreparedEvent<Task, number>) => {
     const { rowType, rowElement, data } = e;
 
     if (rowType === 'header') return;
@@ -109,11 +109,11 @@ export class TaskListGridComponent implements OnChanges {
     this.useNavigation = !this.useNavigation;
   };
 
-  tabsItemClick = (e: TabsItemClickEvenet) => {
+  tabsItemClick = (e: DxTabsTypes.ItemClickEvent) => {
     this.tabValueChanged.emit(e);
   };
 
-  navigateToDetails = (e: RowClickEvent) => {
+  navigateToDetails = (e: DxDataGridTypes.RowClickEvent) => {
     if(this.useNavigation && e.rowType !== 'detailAdaptive') {
       this.router.navigate(['/planning-task-details']);
     }

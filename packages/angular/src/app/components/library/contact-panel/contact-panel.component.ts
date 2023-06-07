@@ -23,7 +23,7 @@ import {
   DxValidatorModule,
   DxValidationGroupModule,
 } from 'devextreme-angular';
-import { ClickEvent as ButtonClickEvent } from 'devextreme/ui/button';
+import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import {
   FormTextboxModule,
   FormPhotoModule,
@@ -113,7 +113,7 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
     this.pinned = !this.pinned;
   };
 
-  onSaveClick = ({ validationGroup } : ButtonClickEvent) => {
+  onSaveClick = ({ validationGroup } : DxButtonTypes.ClickEvent) => {
     if (!validationGroup.validate().isValid) return;
     this.isEditing = !this.isEditing;
   }
@@ -125,7 +125,7 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
     }
   };
 
-  accordionTitleClick = (e: ButtonClickEvent) => {
+  accordionTitleClick = (e: DxButtonTypes.ClickEvent) => {
     e.event.stopPropagation();
   };
 
