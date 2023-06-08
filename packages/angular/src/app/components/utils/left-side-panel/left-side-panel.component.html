@@ -2,11 +2,15 @@
      [class.overlapping]="isSmallScreen"
      [class.open]="isOpened">
   <div class="side-panel-container">
-    <div *ngIf="isSmallScreen"
-         class="button-container">
-      <dx-button class="open-button"
-                 [icon]="(isOpened ? 'hidepanel' : 'showpanel')"
-                 (click)="toggleOpen()">
+    <div
+      *ngIf="isSmallScreen"
+      class="button-container"
+    >
+      <dx-button
+        class="open-button"
+        [icon]="(isOpened ? 'hidepanel' : 'showpanel')"
+        (onClick)="toggleOpen()"
+      >
       </dx-button>
     </div>
 
