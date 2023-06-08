@@ -12,7 +12,7 @@ import {
 import { screenModes, themeModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const BASE_URL = `http://localhost:${process.env.port}/#${project === 'angular' ? '/auth' : ''}/sign-in-form`;
+const BASE_URL = `http://localhost:${process.env.port}/#/sign-in-form`;
 const requestLogger = RequestLogger();
 fixture`Auth pages`;
 
