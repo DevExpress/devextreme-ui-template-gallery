@@ -4,51 +4,61 @@
     <dxi-item location="before">
       <div class="header-text">User Profile</div>
     </dxi-item>
-    <dxi-item location="after"
-              locateInMenu="never">
+    <dxi-item
+      location="after"
+      locateInMenu="never"
+    >
       <dx-button
         text="Cancel"
         [disabled]="!isDataChanged"
         stylingMode="contained"
-        (click)="cancel()"
-      ></dx-button>
+        (onClick)="cancel()"
+      >
+      </dx-button>
     </dxi-item>
-    <dxi-item location="after"
-              locateInMenu="never">
+    <dxi-item
+      location="after"
+      locateInMenu="never"
+    >
       <dx-button
         [disabled]="!isDataChanged"
         text="Save"
         icon="save"
         type="default"
         stylingMode="contained"
-        (click)="save()"
-      ></dx-button>
+        (onClick)="save()"
+      >
+      </dx-button>
     </dxi-item>
   </dx-toolbar>
 
   <dx-load-panel
+    container=".view-wrapper-scroll"
     [visible]="isLoading"
     [showPane]="false"
-    container=".view-wrapper-scroll"
     [position]="{ of: 'user-profile' }"
-  ></dx-load-panel>
+  >
+  </dx-load-panel>
   <dx-scroll-view
     class="view-wrapper-scroll"
     (onScroll)="scroll($event)"
   >
-    <div *ngIf="!isLoading"
-         class="cards-container"
+    <div
+      *ngIf="!isLoading"
+      class="cards-container"
     >
-
-      <profile-card class="profile-card basic-info-card"
-                    title="Basic Info"
-                    [colCount]="4"
-                    [cardData]="profileData"
-                    [items]="basicInfoItems"
-                    (dataChanged)="dataChanged()"
+      <profile-card
+        class="profile-card basic-info-card"
+        title="Basic Info"
+        [colCount]="4"
+        [cardData]="profileData"
+        [items]="basicInfoItems"
+        (dataChanged)="dataChanged()"
       >
-        <div class="basic-info-top-item"
-             top-item>
+        <div 
+          class="basic-info-top-item"
+          top-item
+        >
           <form-photo
             [link]="profileData?.image"
             [editable]="true"
@@ -58,30 +68,32 @@
             <div class="title-text">{{profileData.name}}</div>
             <div class="subtitle-text with-clipboard-copy">
               <span>ID: {{profileData.id}}</span>
-              <dx-button icon="copy"
-                         class="copy-clipboard-button"
-                         (click)="copyToClipboard(profileData.id, $event)"
-                         [activeStateEnabled]="false"
-                         [focusStateEnabled]="false"
-                         [hoverStateEnabled]="false"
+              <dx-button
+                icon="copy"
+                class="copy-clipboard-button"
+                [activeStateEnabled]="false"
+                [focusStateEnabled]="false"
+                [hoverStateEnabled]="false"
+                (onClick)="copyToClipboard(profileData.id, $event)"
               ></dx-button>
             </div>
             <dx-button
               text="Change Password"
-              [icon]="(screen.xSmallScreenChanged | async) ? null : 'lock'"
               class="change-password-button"
               stylingMode="contained"
-              (click)="changePassword()"
+              [icon]="(screen.xSmallScreenChanged | async) ? null : 'lock'"
+              (onClick)="changePassword()"
             ></dx-button>
           </div>
         </div> :
       </profile-card>
 
-      <profile-card class="profile-card contacts-card"
-                    title="Contacts"
-                    [cardData]="profileData"
-                    [items]="contactItems"
-                    (dataChanged)="dataChanged()"
+      <profile-card
+        class="profile-card contacts-card"
+        title="Contacts"
+        [cardData]="profileData"
+        [items]="contactItems"
+        (dataChanged)="dataChanged()"
       >
         <div top-item>
           <div class="image-wrapper">
@@ -91,23 +103,25 @@
             <div class="title-text">{{ profileData.phone | phone }}</div>
             <div class="subtitle-text with-clipboard-copy">
               {{ profileData.email }}
-              <dx-button icon="copy"
-                         class="copy-clipboard-button"
-                         (click)="copyToClipboard(profileData.email, $event)"
-                         [activeStateEnabled]="false"
-                         [focusStateEnabled]="false"
-                         [hoverStateEnabled]="false"
+              <dx-button
+                icon="copy"
+                class="copy-clipboard-button"
+                [activeStateEnabled]="false"
+                [focusStateEnabled]="false"
+                [hoverStateEnabled]="false"
+                (onClick)="copyToClipboard(profileData.email, $event)"
               ></dx-button>
             </div>
           </div>
         </div>
       </profile-card>
 
-      <profile-card class="profile-card address-card"
-                    title="Address"
-                    [cardData]="profileData"
-                    [items]="addressItems"
-                    (dataChanged)="dataChanged()"
+      <profile-card
+        class="profile-card address-card"
+        title="Address"
+        [cardData]="profileData"
+        [items]="addressItems"
+        (dataChanged)="dataChanged()"
       >
         <div top-item>
           <div class="image-wrapper">

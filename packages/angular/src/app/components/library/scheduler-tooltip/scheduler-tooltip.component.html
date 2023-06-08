@@ -2,19 +2,23 @@
   <div class='title'>{{selectedAppointmentData.text}}</div>
   <div class='content'>
     <div class='date'>
-      <dx-button icon='clock'
-              [focusStateEnabled]="false"
-              [activeStateEnabled]="false"
-              [hoverStateEnabled]="false"
+      <dx-button
+        icon='clock'
+        [focusStateEnabled]="false"
+        [activeStateEnabled]="false"
+        [hoverStateEnabled]="false"
       ></dx-button>
         {{getTimeString | apply: selectedAppointmentData}}
     </div>
-    <div *ngIf="selectedAppointmentData.description"
-         class='description' >
-      <dx-button icon='textdocument'
-                 [focusStateEnabled]="false"
-                 [activeStateEnabled]="false"
-                 [hoverStateEnabled]="false"
+    <div 
+      *ngIf="selectedAppointmentData.description"
+      class='description'
+    >
+      <dx-button
+        icon='textdocument'
+        [focusStateEnabled]="false"
+        [activeStateEnabled]="false"
+        [hoverStateEnabled]="false"
       ></dx-button>
         {{selectedAppointmentData.description}}
     </div>
@@ -25,7 +29,7 @@
       text='Delete'
       type='danger'
       stylingMode='text'
-      (click)="clickDeleteAppointment.emit(selectedAppointmentData)"
+      (onClick)="clickDeleteAppointment.emit(selectedAppointmentData)"
     ></dx-button>
     <dx-button
       class='button-success'
