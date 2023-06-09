@@ -1,8 +1,9 @@
-<card-analytics
-  contentClass="sales-range"
-  [isMenuVisible]="false"
->
-  <dx-range-selector [dataSource]="data" [(value)]="visualRange" (onValueChanged)="onRangeChanged($event)">
+<card-analytics contentClass="sales-range" [isMenuVisible]="false">
+  <dx-range-selector
+    [dataSource]="data"
+    [(value)]="visualRange"
+    (onValueChanged)="onRangeChanged($event)"
+  >
     <dxo-scale
       minorTickInterval="day"
       tickInterval="month"

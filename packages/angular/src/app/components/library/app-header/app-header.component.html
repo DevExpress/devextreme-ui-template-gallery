@@ -33,33 +33,22 @@
       }"
     >
     </dxi-item>
-    <dxi-item
-      location="after"
-      locateInMenu="never"
-    >
+    <dxi-item location="after" locateInMenu="never">
       <ng-container *dxTemplate>
         <theme-switcher></theme-switcher>
       </ng-container>
     </dxi-item>
 
-    <dxi-item
-      location="after"
-    >
+    <dxi-item location="after">
       <div *dxTemplate>
         <div class="messages">
           <dx-button icon="belloutline"></dx-button>
-          <div class="dx-badge">
-            4
-          </div>
+          <div class="dx-badge"> 4 </div>
         </div>
       </div>
     </dxi-item>
 
-    <dxi-item
-      location="after"
-      locateInMenu="auto"
-      menuItemTemplate="menuItem"
-    >
+    <dxi-item location="after" locateInMenu="auto" menuItemTemplate="menuItem">
       <div *dxTemplate="let data of 'item'">
         <user-panel
           [user]="user"

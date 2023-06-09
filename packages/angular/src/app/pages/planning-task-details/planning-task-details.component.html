@@ -18,10 +18,10 @@
         widget="dxButton"
         showText="inMenu"
         [options]="{
-        text: 'Attach',
-        icon: 'attach',
-        stylingMode: 'text'
-      }"
+          text: 'Attach',
+          icon: 'attach',
+          stylingMode: 'text'
+        }"
       ></dxi-item>
       <dxi-item
         location="after"
@@ -29,11 +29,11 @@
         widget="dxButton"
         showText="inMenu"
         [options]="{
-        text: 'Refresh',
-        icon: 'refresh',
-        onClick: refresh,
-        stylingMode: 'text'
-      }"
+          text: 'Refresh',
+          icon: 'refresh',
+          onClick: refresh,
+          stylingMode: 'text'
+        }"
       ></dxi-item>
     </dx-toolbar>
 
@@ -55,7 +55,10 @@
               ></card-activities>
             </dxi-item>
             <dxi-item title="Notes">
-              <card-notes [items]="task?.notes" [user]="task?.owner"></card-notes>
+              <card-notes
+                [items]="task?.notes"
+                [user]="task?.owner"
+              ></card-notes>
             </dxi-item>
             <dxi-item title="Messages" [badge]="task?.messages.length">
               <card-messages

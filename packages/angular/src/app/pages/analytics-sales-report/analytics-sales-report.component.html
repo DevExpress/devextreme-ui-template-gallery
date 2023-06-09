@@ -1,10 +1,6 @@
 <dx-scroll-view class="view-wrapper-scroll">
   <div class="view-wrapper">
-
-    <toolbar-analytics
-      titleText="Sales Report"
-    >
-    </toolbar-analytics>
+    <toolbar-analytics titleText="Sales Report"> </toolbar-analytics>
 
     <div class="cards wide">
       <sales-range-card
@@ -26,7 +22,7 @@
 </dx-scroll-view>
 <dx-load-panel
   container=".view-wrapper"
-  [position]="{of: '.content'}"
+  [position]="{ of: '.content' }"
   [visible]="isLoading"
   [showPane]="true"
 ></dx-load-panel>
