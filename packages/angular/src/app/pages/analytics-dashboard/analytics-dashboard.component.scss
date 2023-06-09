@@ -8,7 +8,7 @@
 }
 
 .view-wrapper {
-  padding: $content-padding;
+  padding: var(--content-padding);
 }
 
 .cards {
@@ -22,13 +22,13 @@
     grid-template-columns: repeat(4, calc(25% - 15px));
 
     ::ng-deep .card {
-      background-color: $side-panel-background;
+      background-color: var(--side-panel-background);
       border: none;
       height: 120px;
 
       ::ng-deep {
         .dx-button {
-          background-color: $side-panel-background;
+          background-color: var(--side-panel-background);
         }
 
         .content {

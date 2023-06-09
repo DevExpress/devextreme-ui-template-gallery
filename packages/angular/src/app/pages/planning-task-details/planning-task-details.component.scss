@@ -1,24 +1,24 @@
 @use "../../../variables.scss" as *;
 
-$left-panel-width: 400px;
-
-.dx-toolbar ::ng-deep {
-  margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
-
-  .dx-toolbar-label > div {
-    @include header();
-  }
-}
-
 :host {
+  --left-panel-width: 400px;
+
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   height: 100%;
 }
 
+.dx-toolbar ::ng-deep {
+  margin-bottom: calc(var(--toolbar-margin-bottom) / 2);
+
+  .dx-toolbar-label > div {
+    @include header();
+  }
+}
+
 .view-wrapper {
-  padding: $content-padding $content-padding 0 $content-padding;
+  padding: var(--content-padding) var(--content-padding) 0 var(--content-padding);
 
   .panels {
     display: flex;

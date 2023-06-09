@@ -14,7 +14,7 @@
   right: calc(-1 * var(--contact-side-panel-width));
   top: 0;
   bottom: 0;
-  background: $base-bg;
+  background: var(--base-bg);
   transition: right 400ms;
 
   .embedded.dx-viewport & {
@@ -23,14 +23,14 @@
 
   &.open {
     right: 0;
-    box-shadow: 0 0 16px $border-color;
+    box-shadow: 0 0 16px var(--border-color);
   }
 
   &.pin {
     position: absolute;
     transition: none;
     box-shadow: none;
-    border-left: 1px solid $border-color;
+    border-left: 1px solid var(--border-color);
 
     &.open {
       top: 0;
@@ -49,26 +49,26 @@
   }
 
   .data-wrapper {
-    padding-bottom: $toolbar-vertical-padding;
+    padding-bottom: var(--toolbar-vertical-padding);
     height: 100%;
     width: var(--contact-side-panel-width);
 
     .panel-toolbar {
-      $padding: calc($toolbar-vertical-padding / 2);
+      --padding: calc(var(--toolbar-vertical-padding) / 2);
 
-      padding: $padding $padding $padding $toolbar-vertical-padding;
+      padding: var(--padding) var(--padding) var(--padding) var(--toolbar-vertical-padding);
     }
 
     .data-part {
       padding: 0 16px;
 
       &.border {
-        border-bottom: 1px solid $border-color;
+        border-bottom: 1px solid var(--border-color);
       }
 
       &-toolbar {
         padding: 10px 16px;
-        margin-bottom: $toolbar-margin-bottom;
+        margin-bottom: var(--toolbar-margin-bottom);
 
         .dx-button {
           min-width: 90px;

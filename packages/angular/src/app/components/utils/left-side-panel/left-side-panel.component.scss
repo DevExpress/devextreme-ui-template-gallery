@@ -56,13 +56,13 @@
 
     .side-panel-content-wrapper {
       position: absolute;
-      background-color: $base-bg;
+      background-color: var(--base-bg);
       z-index: 3;
       top: calc(-1 * var(--theme-padding));
       left: var(--button-height);
       padding-top: var(--theme-padding);
-      height: calc(100% + $content-padding * 2);
-      box-shadow: 8px 0 16px -8px $border-color;
+      height: calc(100% + var(--content-padding) * 2);
+      box-shadow: 8px 0 16px -8px var(--border-color);
     }
   }
 }
