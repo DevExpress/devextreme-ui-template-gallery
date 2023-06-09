@@ -2,10 +2,10 @@
 
 :host {
   display: block;
-  color: $base-text-color-alpha;
-  padding: 20px 0 16px $footer-left-padding;
-  background-color: $side-panel-background;
-  height: $footer-height;
+  color: var(--base-text-color-alpha);
+  padding: 20px 0 16px var(--footer-left-padding);
+  background-color: var(--side-panel-background);
+  height: var(--footer-height);
   position: absolute;
   bottom: 0;
   left: 0;

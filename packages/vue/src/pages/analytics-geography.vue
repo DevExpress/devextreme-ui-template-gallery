@@ -76,7 +76,7 @@ const tabChange = ([startDate, endDate]: string[]) => loadData(startDate, endDat
 @use "@/variables" as *;
 
 .view-wrapper {
-  padding: $content-padding;
+  padding: var(--content-padding);
 }
 
 .cards {

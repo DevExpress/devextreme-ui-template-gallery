@@ -5,14 +5,14 @@
   z-index: 1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 0 4px rgba(0, 0, 0, 0.15);
   padding: 10px 0;
-  background-color: $base-bg;
+  background-color: var(--base-bg);
 
   .header-title {
-    color: $accent-color;
+    color: var(--accent-color);
   }
 
   .dx-toolbar.header-toolbar {
-    padding-right: $content-padding;
+    padding-right: var(--content-padding);
 
     .global-search-box {
       padding-right: 11px;
@@ -34,12 +34,12 @@
     }
 
     .dx-toolbar-item.menu-button {
-      width: $side-panel-min-width;
+      width: var(--side-panel-min-width);
       text-align: center;
       padding: 0;
 
       .dx-icon {
-        color: $accent-color;
+        color: var(--accent-color);
       }
     }
   }

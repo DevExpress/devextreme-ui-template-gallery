@@ -7,15 +7,15 @@
 }
 
 header {
-  padding: $header-toolbar-vertical-padding 0;
-  background-color: $base-bg;
+  padding: var(--header-toolbar-vertical-padding) 0;
+  background-color: var(--base-bg);
 
   ::ng-deep .header-title {
-    color: $accent-color;
+    color: var(--accent-color);
   }
 
   .header-toolbar {
-    padding-right: $content-padding;
+    padding-right: var(--content-padding);
 
     ::ng-deep .global-search-box {
       padding-right: 11px;
@@ -37,12 +37,12 @@ header {
     }
 
     ::ng-deep .dx-toolbar-item.menu-button {
-      width: $side-panel-min-width;
+      width: var(--side-panel-min-width);
       text-align: center;
       padding: 0;
 
       .dx-icon {
-        color: $accent-color;
+        color: var(--accent-color);
       }
     }
   }

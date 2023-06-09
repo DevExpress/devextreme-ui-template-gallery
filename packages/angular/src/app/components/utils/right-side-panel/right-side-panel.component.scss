@@ -1,7 +1,7 @@
 @use "../../../../variables.scss" as *;
 
 :host {
-  --side-panel-width: calc(var(--calendar-width) + #{$content-padding});
+  --side-panel-width: calc(var(--calendar-width) + var(--content-padding));
 
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@
     }
 
     &.open .right-side-panel {
-      border: 1px solid $border-color;
+      border: 1px solid var(--border-color);
       border-radius: 8px;
 
       .side-panel-content-wrapper,
@@ -32,7 +32,7 @@
 
   &.overlapping {
     position: absolute;
-    background-color: $base-bg;
+    background-color: var(--base-bg);
     z-index: 3;
     right: 0;
     top: 0;
@@ -43,11 +43,11 @@
     }
 
     .right-side-panel {
-      padding: $content-padding 0;
+      padding: var(--content-padding) 0;
     }
 
     &.open .right-side-panel {
-      box-shadow: 0 0 8px $border-color;
+      box-shadow: 0 0 8px var(--border-color);
     }
   }
 
@@ -55,7 +55,7 @@
     width: var(--side-panel-width);
 
     .side-panel-header {
-      padding: $content-padding;
+      padding: var(--content-padding);
       border-bottom-color: var(--border-color);
     }
 
@@ -66,7 +66,7 @@
   }
 
   .open-button::ng-deep .dx-icon {
-    color: $accent-color;
+    color: var(--accent-color);
   }
 }
 
@@ -80,7 +80,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: $content-padding 0;
+    padding: var(--content-padding) 0;
     border-bottom: solid 1px transparent;
 
     &.hide-open-button {
@@ -92,7 +92,7 @@
     flex: 1 1 0;
 
     .side-panel-title-text {
-      color: $accent-color;
+      color: var(--accent-color);
       font-weight: 500;
       font-size: 14px;
       line-height: 16px;
@@ -101,6 +101,6 @@
 
   .side-panel-content-wrapper {
     white-space: nowrap;
-    padding-left: $toolbar-vertical-padding;
+    padding-left: var(--toolbar-vertical-padding);
   }
 }

@@ -21,7 +21,7 @@ body {
 }
 
 .subtitle-text {
-  color: $subtitle-text-color;
+  color: var(--subtitle-text-color);
   font-size: 14px;
   font-weight: 400;
 }
@@ -89,7 +89,7 @@ body {
 .separator {
   height: 24px;
   width: 1px;
-  background: $border-color;
+  background: var(--border-color);
 
   ::ng-deep .dx-toolbar-menu-section & {
     height: 1px;
@@ -135,17 +135,17 @@ body {
   &.view-mode {
     .accent {
       .dx-texteditor.form-editor .form-editor-input {
-        color: $accent-color;
+        color: var(--accent-color);
       }
     }
 
     .dx-texteditor,
     .dx-texteditor.dx-editor-filled,
-    .dx-texteditor.form-editor, {
+    .dx-texteditor.form-editor {
       pointer-events: none;
 
       .form-editor-input {
-        color: $texteditor-edit-color;
+        color: var(--texteditor-edit-color);
       }
 
       &,

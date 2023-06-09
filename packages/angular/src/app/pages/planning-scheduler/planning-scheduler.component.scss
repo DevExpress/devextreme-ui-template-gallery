@@ -20,23 +20,23 @@
       height: inherit;
       justify-content: center;
       gap: 16px;
-      padding: $content-padding $content-padding $theme-padding;
+      padding: var(--content-padding) var(--content-padding) var(--theme-padding);
 
       .left-side-panel-content {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: $theme-padding;
+        gap: var(--theme-padding);
 
         .buttons {
           display: flex;
           width: 100%;
           gap: 16px;
-          margin-top: $theme-padding;
-          padding: 0 $theme-padding;
+          margin-top: var(--theme-padding);
+          padding: 0 var(--theme-padding);
 
           .dx-button {
-            width: calc((100% - $theme-padding) / 2);
+            width: calc((100% - var(--theme-padding)) / 2);
             font-size: 13px;
             border-radius: 4px;
           }
@@ -44,7 +44,7 @@
 
         .calendar {
           align-self: center;
-          padding: $theme-padding;
+          padding: var(--theme-padding);
 
           .dx-calendar {
             width: var(--calendar-width);

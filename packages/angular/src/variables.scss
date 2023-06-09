@@ -1,43 +1,14 @@
-$base-bg: var(--base-bg);
-$base-bg-darken-5: var(--base-bg-darken-5);
-$base-bg-darken-4: var(--base-bg-darken-4);
-$base-text-color: var(--base-text-color);
-$base-focus-color: var(--base-focus-color);
-$content-padding: 16px;
-$side-panel-background: $base-bg-darken-5;
-$background-color: $base-bg;
-$border-color: var(--border-color);
-$accent-color: var(--accent-color);
-$background-gray-color: var(--background-gray-color);
-$texteditor-edit-color: var(--texteditor-edit-color);
-$texteditor-label-color: var(--texteditor-label-color);
-$base-text-color-alpha: var(--base-text-color-alpha);
-$toolbar-height: var(--toolbar-height);
-$filled-texteditor-input-horizontal-padding: var(--filled-texteditor-input-horizontal-padding);
-$list-padding-left: var(--list-padding-left);
-$list-padding-vertical: var(--list-padding-vertical);
-$footer-left-padding: var(--footer-left-padding);
-$list-item-horizontal-padding: var(--list-item-horizontal-padding);
-$header-toolbar-vertical-padding: 10px;
-$toolbar-vertical-padding: 16px;
-$side-panel-min-width: var(--side-panel-min-width);
-$toolbar-margin-bottom: $content-padding;
-$theme-padding: var(--theme-padding);
-$subtitle-text-color: $texteditor-label-color;
-$footer-height: 70px;
-$drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
-
 @mixin separator() {
   .h-separator {
     height: 1px;
     width: auto;
-    background: $border-color;
+    background: var(--border-color);
   }
 
   .separator {
     height: 24px;
     width: 1px;
-    background: $border-color;
+    background: var(--border-color);
 
     ::ng-deep .dx-toolbar-menu-section & {
       height: 1px;
@@ -61,7 +32,7 @@ $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
-  color: $texteditor-label-color;
+  color: var(--texteditor-label-color);
 }
 
 @mixin message-text {
@@ -72,8 +43,8 @@ $drop-down-gnrc-button-height: var(--drop-down-gnrc-button-height);
 @mixin messages-content {
   .messages-content {
     padding: 20px;
-    border-top: 1px solid $border-color;
-    background-color: $side-panel-background;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--side-panel-background);
   }
 }
 

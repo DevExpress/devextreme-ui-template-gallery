@@ -186,7 +186,7 @@ function send(e: DxButtonTypes.ClickEvent) {
   }
 
   .message {
-    background-color: $base-bg;
+    background-color: var(--base-bg);
     padding: 10px;
     margin-bottom: 10px;
 
@@ -194,7 +194,7 @@ function send(e: DxButtonTypes.ClickEvent) {
       @include message-title();
 
       .subject {
-        color: $base-text-color;
+        color: var(--base-text-color);
         font-weight: 700;
       }
     }

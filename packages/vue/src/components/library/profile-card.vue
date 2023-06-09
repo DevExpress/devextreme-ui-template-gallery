@@ -103,13 +103,13 @@ function onFieldChange<T extends keyof Profile>(fieldName: T, value: Profile[T])
   @include shadow();
 
   width: 100%;
-  padding: 0 0 $content-padding 0;
+  padding: 0 0 var(--content-padding) 0;
   border-radius: 8px;
   background-color: var(--card-background);
 
   .panel-header {
-    padding: $content-padding;
-    border-bottom: 1px solid $border-color;
+    padding: var(--content-padding);
+    border-bottom: 1px solid var(--border-color);
   }
 
   .top-item-wrapper {
@@ -117,12 +117,12 @@ function onFieldChange<T extends keyof Profile>(fieldName: T, value: Profile[T])
   }
 
   :deep(.dx-field-item) {
-    padding-top: calc($content-padding / 2);
+    padding-top: calc(var(--content-padding) / 2);
     padding-right: 0;
   }
 
   .form-container {
-    margin: calc($content-padding * 2) $content-padding 0;
+    margin: calc(var(--content-padding) * 2) var(--content-padding) 0;
   }
 }
 </style>

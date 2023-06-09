@@ -335,29 +335,29 @@ const refreshOptions = {
 
       .position {
         font-size: 12px;
-        color: $texteditor-label-color;
+        color: var(--texteditor-label-color);
       }
     }
 
     :deep(.dx-row-focused) {
       .name-template.name-template {
-        color: $base-focus-color;
+        color: var(--base-focus-color);
 
         .position {
-          color: $base-focus-color;
+          color: var(--base-focus-color);
         }
       }
       .status {
-        @include status($base-focus-color);
+        @include status(var(--base-focus-color));
       }
     }
 
     :deep(.dx-datagrid-header-panel) {
-      padding: 0 $content-padding;
+      padding: 0 var(--content-padding);
 
       .dx-toolbar {
         margin-bottom: 0;
-        padding: $toolbar-margin-bottom 0;
+        padding: var(--toolbar-margin-bottom) 0;
       }
     }
 

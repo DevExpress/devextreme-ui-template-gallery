@@ -279,7 +279,7 @@ defineExpose({
 
 #tasks-grid {
   min-height: 300px;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--border-color);
 
   :deep(.priority span) {
     font-size: 13px;
@@ -287,7 +287,7 @@ defineExpose({
 }
 
 :deep(.dx-row.completed) {
-  background: $background-gray-color;
+  background: var(--background-gray-color);
 }
 
 :deep(.edit-cell) {

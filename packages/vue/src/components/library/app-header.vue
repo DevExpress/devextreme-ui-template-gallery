@@ -122,15 +122,15 @@ header {
   flex: 0 0 auto;
   z-index: 1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 0 4px rgba(0, 0, 0, 0.15);
-  padding: $header-toolbar-vertical-padding 0;
-  background-color: $base-bg;
+  padding: var(--header-toolbar-vertical-padding) 0;
+  background-color: var(--base-bg);
 
   :deep(.header-title) {
-    color: $accent-color;
+    color: var(--accent-color);
   }
 
   .header-toolbar {
-    padding-right: $content-padding;
+    padding-right: var(--content-padding);
 
     :deep(.global-search-box){
       padding-right: 11px;
@@ -152,12 +152,12 @@ header {
     }
 
     :deep(.dx-toolbar-item.menu-button) {
-      width: $side-panel-min-width;
+      width: var(--side-panel-min-width);
       text-align: center;
       padding: 0;
 
       .dx-icon {
-        color: $accent-color;
+        color: var(--accent-color);
       }
     }
   }

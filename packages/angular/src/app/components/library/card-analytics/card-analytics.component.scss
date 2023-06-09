@@ -5,11 +5,11 @@
     border-radius: 4px;
     box-shadow: none;
     position: relative;
-    border: 1px solid $border-color;
+    border: 1px solid var(--border-color);
     overflow: hidden;
 
     .header {
-      padding: $content-padding $content-padding 0;
+      padding: var(--content-padding) var(--content-padding) 0;
     }
 
     ::ng-deep .overflow-menu {
@@ -20,7 +20,7 @@
     }
 
     .title {
-      color: $base-text-color;
+      color: var(--base-text-color);
       line-height: 19px;
       font-weight: 500;
       font-size: 16px;
@@ -30,9 +30,9 @@
     }
 
     .content {
-      padding: 0 $content-padding $content-padding;
+      padding: 0 var(--content-padding) var(--content-padding);
       box-sizing: content-box;
-      color: $texteditor-label-color;
+      color: var(--texteditor-label-color);
       font-size: 14px;
       line-height: 17px;
       height: 270px;

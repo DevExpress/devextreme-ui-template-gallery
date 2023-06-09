@@ -54,7 +54,7 @@ const props = withDefaults(defineProps<{
     border-radius: 8px;
     background-repeat: no-repeat;
     background-size: cover;
-    border: 1px solid $border-color;
+    border: 1px solid var(--border-color);
     overflow: hidden;
   }
 

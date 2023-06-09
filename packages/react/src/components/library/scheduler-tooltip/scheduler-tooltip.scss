@@ -42,19 +42,19 @@
     display: flex;
     width: 100%;
     gap: 16px;
-    padding: $theme-padding;
+    padding: var(--theme-padding);
 
     .dx-button {
-      width: calc((100% - $theme-padding) / 2);
+      width: calc((100% - var(--theme-padding)) / 2);
       border-radius: 4px;
     }
 
     .button-danger {
-      background-color: $tooltip-danger-button-color;
+      background-color: var(--tooltip-danger-button-color);
     }
 
     .button-success {
-      background-color: $tooltip-success-button-color;
+      background-color: var(--tooltip-success-button-color);
     }
   }
 }
