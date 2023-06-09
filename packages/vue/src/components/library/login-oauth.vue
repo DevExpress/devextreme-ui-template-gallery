@@ -5,26 +5,29 @@
       width="100%"
       icon="icons/google-logo.svg"
       text="Login with Google"
-      :styling-mode="getButtonStylingMode(currentTheme)"
+      :styling-mode="buttonStylingMode"
     />
     <dx-button
       width="100%"
       icon="icons/microsoft-logo.svg"
       text="Login with Microsoft"
-      :styling-mode="getButtonStylingMode(currentTheme)"
+      :styling-mode="buttonStylingMode"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import DxButton, { DxButtonTypes } from 'devextreme-vue/button';
 import { themeService } from '@/theme/theme-service';
 
 const { currentTheme } = themeService;
 
-function getButtonStylingMode(theme: string | undefined): DxButtonTypes.ButtonStyle {
-  return theme === 'dark' ? 'outlined' : 'contained';
-}
+// eslint-disable-next-line arrow-body-style
+const buttonStylingMode = computed<DxButtonTypes.ButtonStyle>(() => {
+  return currentTheme.value === 'dark' ? 'outlined' : 'contained';
+});
+
 </script>
 
 <style scoped lang="scss">
