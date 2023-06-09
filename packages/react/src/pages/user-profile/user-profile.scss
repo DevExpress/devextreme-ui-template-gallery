@@ -1,6 +1,8 @@
 @use "../../variables.scss" as *;
 
-$gap-padding: 24px;
+:root {
+  --gap-padding: 24px;
+}
 
 .view-host {
   display: flex;
@@ -9,7 +11,7 @@ $gap-padding: 24px;
 
   .view-wrapper-scroll {
     width: 100%;
-    margin-top: calc($content-padding / 2);
+    margin-top: calc(var(--content-padding) / 2);
     max-height: calc(100% - var(--toolbar-height));
   }
 }
@@ -34,10 +36,10 @@ $gap-padding: 24px;
   right: 0;
   display: flex;
   flex-direction: column;
-  padding-top: $content-padding;
+  padding-top: var(--content-padding);
 
   & > .dx-toolbar {
-    padding: 0 calc($content-padding * 2);
+    padding: 0 calc(var(--content-padding) * 2);
     width: auto;
     position: relative;
 
@@ -54,8 +56,8 @@ $gap-padding: 24px;
   .cards-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 calc($content-padding * 2);
-    padding: calc($content-padding / 2) 0 $content-padding;
+    margin: 0 calc(var(--content-padding) * 2);
+    padding: calc(var(--content-padding) / 2) 0 var(--content-padding);
     gap: 24px;
   }
 
@@ -64,7 +66,7 @@ $gap-padding: 24px;
       flex: 0 0 44px;
       height: 44px;
       border-radius: 50%;
-      margin-right: $gap-padding;
+      margin-right: var(--gap-padding);
 
       img {
         height: 20px;
@@ -84,7 +86,7 @@ $gap-padding: 24px;
         margin: 0 0 2px 5px;
 
         .dx-icon:active {
-          color: $accent-color;
+          color: var(--accent-color);
         }
       }
     }
@@ -99,7 +101,7 @@ $gap-padding: 24px;
       }
 
       .dx-icon {
-        color: $subtitle-text-color;
+        color: var(--subtitle-text-color);
       }
     }
   }
@@ -110,7 +112,7 @@ $gap-padding: 24px;
 
     .basic-info-top-item {
       .form-photo-view {
-        margin-right: $content-padding;
+        margin-right: var(--content-padding);
 
         .form-photo {
           border-radius: 50%;
@@ -118,7 +120,7 @@ $gap-padding: 24px;
       }
 
       .change-password-button {
-        margin-top: calc($content-padding / 2);
+        margin-top: calc(var(--content-padding) / 2);
       }
     }
   }

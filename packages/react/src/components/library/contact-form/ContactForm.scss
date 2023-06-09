@@ -12,7 +12,7 @@
 
   .status-editor-field {
     display: flex;
-    padding-left: $list-padding-left;
+    padding-left: var(--list-padding-left);
 
     .status-contact {
       align-self: flex-end;

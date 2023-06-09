@@ -3,7 +3,7 @@
 .opportunities {
   padding: 16px;
   border-radius: 4px;
-  background: $side-panel-background;
+  background: var(--side-panel-background);
   flex: 1 300px;
   max-width: 300px;
 
@@ -27,11 +27,11 @@
   }
 
   .owner {
-    color: $texteditor-label-color;
+    color: var(--texteditor-label-color);
     font-size: 14px;
 
     .owner-name {
-      color: $base-text-color;
+      color: var(--base-text-color);
     }
   }
 }
