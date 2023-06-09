@@ -13,16 +13,18 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'form-item-date',
-  template: ` <dx-date-box [(value)]="value"
-                           [readOnly]="!isEditing"
-                           [label]="label"
-                           [elementAttr]="{class: 'form-editor'}"
-                           [inputAttr]="{class: 'form-editor-input'}"
-                           stylingMode="filled"
-                           placeholder="MM/dd/y"
-                           displayFormat="MM/dd/y"
-                           pickerType="calendar"
-  ></dx-date-box>`,
+  template: `
+    <dx-date-box
+      [(value)]="value"
+      [readOnly]="!isEditing"
+      [label]="label"
+      [elementAttr]="{class: 'form-editor'}"
+      [inputAttr]="{class: 'form-editor-input'}"
+      stylingMode="filled"
+      placeholder="MM/dd/y"
+      displayFormat="MM/dd/y"
+      pickerType="calendar"
+    ></dx-date-box>`,
 })
 export class FormDateboxComponent {
   @ViewChild(DxDropDownButtonComponent) dropDownButtonComponent: DxDropDownButtonComponent;

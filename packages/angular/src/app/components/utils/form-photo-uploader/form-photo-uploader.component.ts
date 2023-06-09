@@ -18,17 +18,16 @@ import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
       <span>Drag and drop a photo here or click the area to select it from a folder</span>
     </div>
     <dx-file-uploader
+      accept="image/*"
+      uploadMode="instantly"
       dialogTrigger="#uploader"
       dropZone="#uploader"
       [multiple]="false"
-      accept="image/*"
-      uploadMode="instantly"
       [showFileList]=false
       [visible]="false"
       (onDropZoneEnter)="onDropZoneEnter($event)"
       (onDropZoneLeave)="onDropZoneLeave($event)"
-    >
-    </dx-file-uploader>
+    ></dx-file-uploader>
 `,
   styles: [`
     #uploader {
