@@ -1,15 +1,12 @@
 <div>
   <div class="user-info">
-    <div
-      class="image-container"
-      *ngIf="showAvatar"
-    >
+    <div class="image-container" *ngIf="showAvatar">
       <div
         [style.backgroundImage]="'url(' + user?.avatarUrl + ')'"
         class="user-image"
       ></div>
     </div>
-    <div class='user-name'>{{ user?.name }}</div>
+    <div class="user-name">{{ user?.name }}</div>
   </div>
   <dx-list
     #userInfoList

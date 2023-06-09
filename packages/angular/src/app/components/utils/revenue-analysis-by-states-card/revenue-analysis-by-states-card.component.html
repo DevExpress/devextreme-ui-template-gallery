@@ -2,19 +2,15 @@
   titleText="Revenue Analysis by States"
   contentClass="sales-by-state-and-city grid"
 >
-  <dx-data-grid [dataSource]="data" [height]="290" [loadPanel]="{enabled: false}">
-    <dxi-column
-      caption="State"
-      dataField="stateName"
-      [hidingPriority]="2"
-    >
+  <dx-data-grid
+    [dataSource]="data"
+    [height]="290"
+    [loadPanel]="{ enabled: false }"
+  >
+    <dxi-column caption="State" dataField="stateName" [hidingPriority]="2">
     </dxi-column>
 
-    <dxi-column
-      caption="City"
-      dataField="city"
-    >
-    </dxi-column>
+    <dxi-column caption="City" dataField="city"> </dxi-column>
 
     <dxi-column
       alignment="left"

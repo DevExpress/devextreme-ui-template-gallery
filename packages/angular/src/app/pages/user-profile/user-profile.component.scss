@@ -1,4 +1,4 @@
-@use "../../../variables.scss" as *;
+@use '../../../variables.scss' as *;
 
 $gap-padding: 24px;
 
@@ -43,7 +43,7 @@ $gap-padding: 24px;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
-    dx-button[text="Cancel"] {
+    dx-button[text='Cancel'] {
       margin-right: 5px;
     }
   }

@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 
 span.status {
   font-size: 13px;
@@ -6,7 +6,7 @@ span.status {
   &::before {
     $diameter: 10px;
 
-    content: " ";
+    content: ' ';
     width: $diameter;
     height: $diameter;
     border-radius: math.div($diameter, 2);

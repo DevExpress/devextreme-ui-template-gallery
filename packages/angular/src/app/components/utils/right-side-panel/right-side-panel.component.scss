@@ -1,4 +1,4 @@
-@use "../../../../variables.scss" as *;
+@use '../../../../variables.scss' as *;
 
 :host {
   --side-panel-width: calc(var(--calendar-width) + #{$content-padding});
@@ -58,7 +58,6 @@
       padding: $content-padding;
       border-bottom-color: var(--border-color);
     }
-
 
     .side-panel-content-wrapper {
       padding-left: 0;

@@ -1,4 +1,4 @@
-@use "../../../../variables.scss" as *;
+@use '../../../../variables.scss' as *;
 
 :host::ng-deep .dx-item:not(:first-child) .agenda-item {
   border-top: solid 1px $border-color;

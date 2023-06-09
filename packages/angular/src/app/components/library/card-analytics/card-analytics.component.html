@@ -1,10 +1,6 @@
 <div class="card {{ contentClass }}">
   <div class="header">
-    <card-menu
-      [visible]="isMenuVisible"
-      [items]="menuItems"
-      >
-    </card-menu>
+    <card-menu [visible]="isMenuVisible" [items]="menuItems"></card-menu>
     <div *ngIf="titleText" class="title">{{ titleText }}</div>
     <ng-content select="[filter]"></ng-content>
   </div>

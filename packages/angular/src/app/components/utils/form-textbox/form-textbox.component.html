@@ -1,17 +1,19 @@
-<dx-text-box [label]="label"
-             [(value)]="value"
-             [readOnly]="!isEditing"
-             [mask]="mask"
-             [elementAttr]="{class: 'form-editor'}"
-             [inputAttr]="{class: 'form-editor-input'}"
-             stylingMode="filled"
-             (onValueChanged)="valueChanged($event)"
-             valueChangeEvent="keyup input change"
+<dx-text-box
+  stylingMode="filled"
+  valueChangeEvent="keyup input change"
+  [label]="label"
+  [(value)]="value"
+  [readOnly]="!isEditing"
+  [mask]="mask"
+  [elementAttr]="{ class: 'form-editor' }"
+  [inputAttr]="{ class: 'form-editor-input' }"
+  (onValueChanged)="valueChanged($event)"
 >
   <dx-validator [validationRules]="validators"></dx-validator>
-  <dxi-button *ngIf="icon"
-              [options]="{icon: icon, elementAttr: { class: 'form-editor-icon' }}"
-              name="icon"
-              location="before"
+  <dxi-button
+    *ngIf="icon"
+    name="icon"
+    location="before"
+    [options]="{ icon: icon, elementAttr: { class: 'form-editor-icon' } }"
   ></dxi-button>
 </dx-text-box>
