@@ -20,12 +20,12 @@
     grid-template-columns: repeat(4, calc(25% - 15px));
 
     .card {
-      background-color: $side-panel-background;
+      background-color: var(--side-panel-background);
       border: none;
       height: 120px;
 
       .dx-button {
-        background-color: $side-panel-background;
+        background-color: var(--side-panel-background);
       }
     }
 

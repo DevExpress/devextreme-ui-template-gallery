@@ -11,23 +11,23 @@
     display: flex;
     height: inherit;
     gap: 16px;
-    padding: $content-padding $content-padding $theme-padding;
+    padding: var(--content-padding) var(--content-padding) var(--theme-padding);
 
     .left-content {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: $theme-padding;
+      gap: var(--theme-padding);
 
       .buttons {
         display: flex;
         width: 100%;
         gap: 16px;
-        margin-top: $theme-padding;
-        padding: 0 $theme-padding;
+        margin-top: var(--theme-padding);
+        padding: 0 var(--theme-padding);
 
         .dx-button {
-          width: calc((100% - $theme-padding) / 2);
+          width: calc((100% - var(--theme-padding)) / 2);
           font-size: 13px;
           border-radius: 4px;
         }
@@ -35,11 +35,11 @@
 
       .calendar {
         align-self: center;
-        padding: $theme-padding;
+        padding: var(--theme-padding);
       }
 
       .dx-calendar {
-        width: $calendar-width;
+        width: var(--calendar-width);
       }
     }
 
@@ -61,7 +61,7 @@
 
   .dx-scheduler-header {
     border-radius: 8px 8px 0 0;
-    height: $scheduler-toolbar-height;
+    height: var(--scheduler-toolbar-height);
   }
 
   .dx-scheduler-work-space {
@@ -70,8 +70,8 @@
 }
 
 .dx-tooltip-wrapper > .dx-popup-normal {
-  background-color: $base-bg !important;
-  color: $base-text-color !important;
+  background-color: var(--base-bg) !important;
+  color: var(--base-text-color) !important;
   border-radius: 8px !important;
   max-width: 360px;
   filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.24));

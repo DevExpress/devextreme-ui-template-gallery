@@ -6,7 +6,7 @@
 }
 
 .planning-grid {
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--border-color);
 }
 
 .dx-datagrid-header-panel {
@@ -19,7 +19,7 @@
 }
 
 .dx-row.completed {
-  background: $background-gray-color;
+  background: var(--background-gray-color);
 }
 
 .edit-cell {
