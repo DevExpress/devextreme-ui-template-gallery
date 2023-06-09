@@ -1,3 +1,8 @@
+:root {
+  --material-change-password-popup-height: 255px;
+  --generic-change-password-popup-height: 190px;
+}
+
 @mixin separator() {
   .h-separator {
     height: 1px;

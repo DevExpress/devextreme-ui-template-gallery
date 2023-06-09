@@ -1,6 +1,8 @@
 :root {
   --content-padding: 16px;
   --toolbar-vertical-padding: 16px;
+  --material-change-password-popup-height: 255px;
+  --generic-change-password-popup-height: 190px;
 }
 
 @mixin separator() {
