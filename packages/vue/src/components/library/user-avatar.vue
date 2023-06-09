@@ -25,8 +25,8 @@ const props = withDefaults(defineProps<{
     line-height: 24px;
     text-align: center;
     border-radius: 50%;
-    background: $accent-color;
-    color: $base-bg;
+    background: var(--accent-color);
+    color: var(--base-bg);
   }
 }
 </style>

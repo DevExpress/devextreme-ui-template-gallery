@@ -47,13 +47,13 @@ const props = withDefaults(defineProps<{
   font-size: 13px;
 
   &::before {
-    $diameter: 10px;
+    --diameter: 10px;
 
     content: " ";
-    width: $diameter;
-    height: $diameter;
-    border-radius: math.div($diameter, 2);
-    margin-right: math.div($diameter, 2);
+    width: var(--diameter);
+    height: var(--diameter);
+    border-radius: calc(var(--diameter) / 2);
+    margin-right: calc(var(--diameter) / 2);
     display: inline-block;
   }
 

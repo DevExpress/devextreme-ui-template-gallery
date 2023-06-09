@@ -53,11 +53,11 @@ const opportunityClick = () => {
 }
 
 .owner {
-  color: $texteditor-label-color;
+  color: var(--texteditor-label-color);
   font-size: 14px;
 
   .owner-name {
-    color: $base-text-color;
+    color: var(--base-text-color);
   }
 }
 </style>

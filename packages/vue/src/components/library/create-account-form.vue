@@ -148,21 +148,21 @@ function confirmPassword(e: {value: ''}) {
 
 .create-account-form {
   .policy-info {
-    color: $base-text-color-alpha;
+    color: var(--base-text-color-alpha);
     font-size: 12px;
     font-style: normal;
 
     a {
-      color: $base-text-color-alpha;
+      color: var(--base-text-color-alpha);
     }
   }
 
   .login-link {
-    color: $accent-color;
+    color: var(--accent-color);
     font-size: 12px;
     text-align: center;
     padding: 6px 0 32px 0;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--border-color);
   }
 }
 </style>

@@ -107,9 +107,9 @@ watch(
     min-height: 100%;
     display: flex;
     flex: 1;
-    background-color: $side-panel-background;
-    padding-top: $toolbar-vertical-padding;
-    padding-bottom: $footer-height;
+    background-color: var(--side-panel-background);
+    padding-top: var(--toolbar-vertical-padding);
+    padding-bottom: var(--footer-height);
     .dx-treeview {
       // ## Long text positioning
       white-space: nowrap;
@@ -119,7 +119,7 @@ watch(
         padding-left: 0;
         padding-right: 0;
         .dx-icon {
-          width: $side-panel-min-width !important;
+          width: var(--side-panel-min-width) !important;
           margin: 0 !important;
         }
       }
@@ -141,11 +141,11 @@ watch(
       .dx-treeview-node {
         &[aria-level="1"] {
           font-weight: bold;
-          border-bottom: 1px solid $border-color;
+          border-bottom: 1px solid var(--border-color);
         }
         &[aria-level="2"] .dx-treeview-item-content {
           font-weight: normal;
-          padding: 0 $side-panel-min-width;
+          padding: 0 var(--side-panel-min-width);
         }
       }
       // ##
@@ -158,10 +158,10 @@ watch(
             background: transparent;
           }
           &.dx-state-selected > .dx-treeview-item * {
-            color: $accent-color;
+            color: var(--accent-color);
           }
           &:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
-            background-color: $base-bg-darken-4;
+            background-color: var(--base-bg-darken-4);
           }
         }
       }

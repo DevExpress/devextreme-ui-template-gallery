@@ -45,7 +45,7 @@ const totalCount = computed(() => ((props.data as unknown as Array<{[key:string]
 
 .tile.card-wrapper {
   :deep(.card) {
-    background-color: $side-panel-background;
+    background-color: var(--side-panel-background);
     border: none;
     height: 120px;
 
@@ -54,7 +54,7 @@ const totalCount = computed(() => ((props.data as unknown as Array<{[key:string]
         display: inline-block;
         font-size: 26px;
         font-weight: 700;
-        color: $base-text-color;
+        color: var(--base-text-color);
         margin-right: 27px;
       }
 
@@ -62,7 +62,7 @@ const totalCount = computed(() => ((props.data as unknown as Array<{[key:string]
         display: inline-block;
         font-size: 16px;
         font-weight: 400;
-        color: $base-text-color;
+        color: var(--base-text-color);
         line-height: 24px;
 
         span {

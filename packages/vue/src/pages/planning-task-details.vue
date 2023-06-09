@@ -155,17 +155,14 @@ const refreshOptions = {
 @use "@/variables" as *;
 @use "sass:math";
 
-$left-panel-width: 400px;
-$right-panel-width: 360px;
-
 @media only screen and (max-width: 875px) {
   :deep(.contact-name-toolbar-item) {
-    min-width: calc(#{$left-panel-width} + #{$right-panel-width} - 145px);
+    min-width: calc(var(--left-panel-width) + var(--right-panel-width) - 145px);
   }
 }
 
 .dx-toolbar {
-  margin-bottom: calc(#{$toolbar-margin-bottom} / 2);
+  margin-bottom: calc(var(--toolbar-margin-bottom) / 2);
 
   :deep(.dx-toolbar-label > div) {
     @include header();
@@ -173,7 +170,10 @@ $right-panel-width: 360px;
 }
 
 .view-wrapper {
-  padding: $content-padding $content-padding 0 $content-padding;
+  --left-panel-width: 400px;
+  --right-panel-width: 360px;
+
+  padding: var(--content-padding) var(--content-padding) 0 var(--content-padding);
 
   .panels {
     display: flex;

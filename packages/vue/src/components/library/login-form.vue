@@ -130,7 +130,7 @@ async function onSubmit() {
 
 .login-form {
   :deep(.form-text) {
-    color: $base-text-color-alpha;
+    color: var(--base-text-color-alpha);
   }
 }
 

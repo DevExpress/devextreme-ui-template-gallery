@@ -57,12 +57,12 @@ const props = withDefaults(defineProps<{
   border-radius: 4px;
   box-shadow: none;
   position: relative;
-  background-color: $background-color;
-  border: 1px solid $border-color;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
   overflow: hidden;
 
   .header {
-    padding: $content-padding $content-padding 0;
+    padding: var(--content-padding) var(--content-padding) 0;
   }
 
   .overflow-menu {
@@ -73,7 +73,7 @@ const props = withDefaults(defineProps<{
   }
 
   :deep(.content) {
-    padding: 0 $content-padding $content-padding;
+    padding: 0 var(--content-padding) var(--content-padding);
     box-sizing: content-box;
     color: #757575;
     font-size: 14px;
@@ -82,7 +82,7 @@ const props = withDefaults(defineProps<{
   }
 
   :deep(.title) {
-    color: $base-text-color;
+    color: var(--base-text-color);
     line-height: 19px;
     font-weight: 500;
     font-size: 16px;
