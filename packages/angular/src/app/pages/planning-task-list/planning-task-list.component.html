@@ -98,10 +98,7 @@
   <ng-container
     *ngIf="taskCollections$ | async as taskCollections; else loading"
   >
-    <ng-container
-      *ngIf="taskCollections"
-      [ngSwitch]="displayTaskComponent"
-    >
+    <ng-container *ngIf="taskCollections" [ngSwitch]="displayTaskComponent">
       <div *ngSwitchCase="taskPanelItems[0].text" class="grid">
         <task-list-grid
           #planningDataGrid
@@ -134,11 +131,7 @@
     >
     </dx-load-panel>
   </ng-template>
-  <form-popup
-    [(visible)]="isAddTaskPopupOpened"
-    titleText="New Task"
-    >
-      <task-form [task]="newTask" [isCreateMode]="true"></task-form>
+  <form-popup [(visible)]="isAddTaskPopupOpened" titleText="New Task">
+    <task-form [task]="newTask" [isCreateMode]="true"></task-form>
   </form-popup>
 </div>
-

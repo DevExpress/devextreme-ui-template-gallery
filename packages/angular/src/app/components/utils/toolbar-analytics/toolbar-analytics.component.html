@@ -3,9 +3,7 @@
     <span class="toolbar-header">{{ titleText }}</span>
   </dxi-item>
 
-  <dxi-item
-    *ngIf="panelItems"
-    location="before">
+  <dxi-item *ngIf="panelItems" location="before">
     <dx-tabs
       [width]="(screen.xSmallScreenChanged | async) ? 150 : 'auto'"
       [showNavButtons]="false"
@@ -17,10 +15,7 @@
     ></dx-tabs>
   </dxi-item>
 
-  <dxi-item
-    location="after"
-    locateInMenu="auto"
-    >
+  <dxi-item location="after" locateInMenu="auto">
     <dx-button
       class="add-card"
       icon="plus"

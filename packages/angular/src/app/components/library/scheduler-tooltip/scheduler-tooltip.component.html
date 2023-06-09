@@ -1,41 +1,38 @@
-<div class='appointment-tooltip'>
-  <div class='title'>{{selectedAppointmentData.text}}</div>
-  <div class='content'>
-    <div class='date'>
+<div class="appointment-tooltip">
+  <div class="title">{{ selectedAppointmentData.text }}</div>
+  <div class="content">
+    <div class="date">
       <dx-button
-        icon='clock'
+        icon="clock"
         [focusStateEnabled]="false"
         [activeStateEnabled]="false"
         [hoverStateEnabled]="false"
       ></dx-button>
-        {{getTimeString | apply: selectedAppointmentData}}
+      {{ getTimeString | apply: selectedAppointmentData }}
     </div>
-    <div 
-      *ngIf="selectedAppointmentData.description"
-      class='description'
-    >
+    <div *ngIf="selectedAppointmentData.description" class="description">
       <dx-button
-        icon='textdocument'
+        icon="textdocument"
         [focusStateEnabled]="false"
         [activeStateEnabled]="false"
         [hoverStateEnabled]="false"
       ></dx-button>
-        {{selectedAppointmentData.description}}
+      {{ selectedAppointmentData.description }}
     </div>
   </div>
-  <div class='buttons'>
+  <div class="buttons">
     <dx-button
-      class='button-danger'
-      text='Delete'
-      type='danger'
-      stylingMode='text'
+      class="button-danger"
+      text="Delete"
+      type="danger"
+      stylingMode="text"
       (onClick)="clickDeleteAppointment.emit(selectedAppointmentData)"
     ></dx-button>
     <dx-button
-      class='button-success'
-      text='Edit'
-      type='success'
-      stylingMode='text'
+      class="button-success"
+      text="Edit"
+      type="success"
+      stylingMode="text"
       (onClick)="clickEditAppointment.emit()"
     ></dx-button>
   </div>

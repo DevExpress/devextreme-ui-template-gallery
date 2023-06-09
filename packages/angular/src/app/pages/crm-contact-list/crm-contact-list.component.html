@@ -27,7 +27,8 @@
     <dxo-export
       [enabled]="true"
       [allowExportSelectedData]="true"
-      [formats]="['xlsx', 'pdf']">
+      [formats]="['xlsx', 'pdf']"
+    >
     </dxo-export>
 
     <dxo-toolbar>
@@ -58,7 +59,12 @@
         locateInMenu="auto"
         showText="inMenu"
         widget="dxButton"
-        [options]="{ text: 'Refresh', icon: 'refresh', onClick: refresh, stylingMode: 'text' }"
+        [options]="{
+          text: 'Refresh',
+          icon: 'refresh',
+          onClick: refresh,
+          stylingMode: 'text'
+        }"
       ></dxi-item>
       <dxi-item location="after" locateInMenu="auto">
         <div class="separator"></div>
@@ -149,10 +155,7 @@
   >
   </contact-panel>
 
-  <form-popup
-    [(visible)]="isAddContactPopupOpened"
-    titleText="New Contact"
-  >
+  <form-popup [(visible)]="isAddContactPopupOpened" titleText="New Contact">
     <contact-new-form></contact-new-form>
   </form-popup>
 </div>

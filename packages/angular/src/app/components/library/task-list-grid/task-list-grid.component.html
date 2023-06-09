@@ -74,7 +74,8 @@
     <status-indicator
       [isField]="false"
       [showBar]="true"
-      [value]="cellInfo.data.priority">
+      [value]="cellInfo.data.priority"
+    >
     </status-indicator>
   </div>
 
@@ -88,16 +89,26 @@
       fieldTemplate="field"
     >
       <div *dxTemplate="let data of 'field'">
-        <status-indicator [showBar]="true" [value]="cellInfo.value"></status-indicator>
+        <status-indicator
+          [showBar]="true"
+          [value]="cellInfo.value"
+        ></status-indicator>
       </div>
       <div *dxTemplate="let data of 'item'">
-        <status-indicator [showBar]="true" [isField]="false" [value]="data"></status-indicator>
+        <status-indicator
+          [showBar]="true"
+          [isField]="false"
+          [value]="data"
+        ></status-indicator>
       </div>
     </dx-select-box>
   </div>
 
   <div *dxTemplate="let cellInfo of 'cellStatus'">
-    <status-indicator [isField]="false" [value]="cellInfo.data.status"></status-indicator>
+    <status-indicator
+      [isField]="false"
+      [value]="cellInfo.data.status"
+    ></status-indicator>
   </div>
 
   <div *dxTemplate="let cellInfo of 'editCellStatus'">

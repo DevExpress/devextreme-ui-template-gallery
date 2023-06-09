@@ -21,9 +21,7 @@
         </dx-validator>
       </dx-text-area>
       <dx-toolbar>
-        <dxi-item
-          location="before"
-        >
+        <dxi-item location="before">
           <dx-file-uploader
             class="file-uploader"
             labelText=""
@@ -46,23 +44,25 @@
       </dx-toolbar>
     </div>
     <div class="messages-content">
-        <div class="message-list">
-          <div class="message-container" *ngFor="let data of items">
-            <user-avatar [dataLetters]="getAvatarText(data.manager)"></user-avatar>
-            <div class="message dx-card">
-              <div class="message-title">
-                <div>
-                  <div class="subject">{{ data.subject }}</div>
-                  <div>{{ data.date | date: "MM/dd/y" }} - {{ data.manager }}</div>
-                </div>
-                <div>
-                  <dx-button icon="overflow"></dx-button>
-                </div>
+      <div class="message-list">
+        <div class="message-container" *ngFor="let data of items">
+          <user-avatar
+            [dataLetters]="getAvatarText(data.manager)"
+          ></user-avatar>
+          <div class="message dx-card">
+            <div class="message-title">
+              <div>
+                <div class="subject">{{ data.subject }}</div>
+                <div>{{ data.date | date: 'MM/dd/y' }} - {{ data.manager }}</div>
               </div>
-              <div class="message-text">{{ getText(data) }}</div>
+              <div>
+                <dx-button icon="overflow"></dx-button>
+              </div>
             </div>
+            <div class="message-text">{{ getText(data) }}</div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </dx-validation-group>

@@ -9,14 +9,11 @@
       <div class="activity">
         <div class="name">{{ item.name }}</div>
         <div class="date" [ngClass]="{ by: showBy }">
-          <span>{{ item.date | date: "MM/dd/yyyy" }}</span>
+          <span>{{ item.date | date: 'MM/dd/yyyy' }}</span>
           <span *ngIf="showBy">by</span>
           <span>{{ item.manager }}</span>
         </div>
-        <card-menu
-          [items]="activityMenuItems"
-          >
-        </card-menu>
+        <card-menu [items]="activityMenuItems"> </card-menu>
       </div>
     </div>
   </dx-list>

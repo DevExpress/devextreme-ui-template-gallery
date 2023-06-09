@@ -11,10 +11,13 @@ export type AgendaItem = { startDate: Date };
 @Component({
   selector: 'agenda',
   template: `
-  <dx-list [dataSource]="items"
-           (onItemClick)="handleItemClick($event)">
-    <div *dxTemplate="let task of 'item'"
-         class="agenda-item"
+  <dx-list
+    [dataSource]="items"
+    (onItemClick)="handleItemClick($event)"
+  >
+    <div
+      *dxTemplate="let task of 'item'"
+      class="agenda-item"
     >
       <agenda-list-item
         [appointment]="task"

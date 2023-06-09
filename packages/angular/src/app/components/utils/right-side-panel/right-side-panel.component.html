@@ -5,10 +5,10 @@
         <div class="side-panel-title-text">
           {{ title }}
         </div>
-        </div>
+      </div>
       <dx-button
         class="open-button"
-        [icon]="(isOpened ? (isLarge ? 'panelleft': 'close'): 'panelright')"
+        [icon]="isOpened ? (isLarge ? 'panelleft' : 'close') : 'panelright'"
         (onClick)="toggleOpen()"
       >
       </dx-button>
@@ -19,4 +19,3 @@
     </div>
   </div>
 </div>
-
