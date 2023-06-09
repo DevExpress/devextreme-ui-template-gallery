@@ -13,7 +13,8 @@ export type AgendaItem = { startDate: Date };
   template: `
   <dx-list
     [dataSource]="items"
-    (onItemClick)="handleItemClick($event)">
+    (onItemClick)="handleItemClick($event)"
+  >
     <div
       *dxTemplate="let task of 'item'"
       class="agenda-item"
