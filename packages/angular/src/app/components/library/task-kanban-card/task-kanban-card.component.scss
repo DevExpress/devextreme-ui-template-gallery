@@ -1,8 +1,12 @@
 @use "../../../../variables.scss" as *;
 
-$low-priorety-color: #dfb32f;
-$normal-priorety-color: #6fbaca;
-$high-priorety-color: #d9534f;
+:host {
+  --low-priorety-color: #dfb32f;
+  --normal-priorety-color: #6fbaca;
+  --high-priorety-color: #d9534f;
+
+  display: block;
+}
 
 @mixin priority($priorety-color) {
   .card-priority {
@@ -12,10 +16,6 @@ $high-priorety-color: #d9534f;
   span.priority {
     color: $priorety-color;
   }
-}
-
-:host {
-  display: block;
 }
 
 .card {
@@ -35,15 +35,15 @@ $high-priorety-color: #d9534f;
   }
 
   &.priority-low {
-    @include priority($low-priorety-color);
+    @include priority(var(--low-priorety-color));
   }
 
   &.priority-normal {
-    @include priority($normal-priorety-color);
+    @include priority(var(--normal-priorety-color));
   }
 
   &.priority-high {
-    @include priority($high-priorety-color);
+    @include priority(var(--high-priorety-color));
   }
 }
 

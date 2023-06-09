@@ -2,8 +2,8 @@
 
 ::ng-deep {
   .dx-tooltip-wrapper > .dx-popup-normal {
-    background-color: $base-bg !important;
-    color: $base-text-color !important;
+    background-color: var(--base-bg) !important;
+    color: var(--base-text-color) !important;
     border-radius: 8px !important;
     max-width: 360px;
     filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.24));
@@ -50,10 +50,10 @@
       display: flex;
       width: 100%;
       gap: 16px;
-      padding: $theme-padding;
+      padding: var(--theme-padding);
 
       .dx-button {
-        width: calc((100% - $theme-padding) / 2);
+        width: calc((100% - var(--theme-padding)) / 2);
         border-radius: 4px;
       }
 

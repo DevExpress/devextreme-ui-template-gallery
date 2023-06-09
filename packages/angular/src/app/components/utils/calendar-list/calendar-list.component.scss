@@ -21,13 +21,13 @@
     vertical-align: middle;
     align-items: center;
     gap: 8px;
-    color: $base-text-color;
+    color: var(--base-text-color);
 
     @include h1-header-text();
   }
 
   .dx-list-group-body .dx-list-item.dx-list-item-selected {
-    background-color: $base-bg;
+    background-color: var(--base-bg);
   }
 
   .dx-list-group:not(.dx-list-group-collapsed):not(:last-child) {
@@ -47,7 +47,7 @@
     @include calendar-items-text();
   }
 
-  --checkbox-color: $accent-color;
+  --checkbox-color: var(--accent-color);
 
   .dx-checkbox-checked .dx-checkbox-icon {
     background-color: var(--checkbox-color);
