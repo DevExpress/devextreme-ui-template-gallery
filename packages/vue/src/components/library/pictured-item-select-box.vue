@@ -72,7 +72,7 @@ function emitChangedValue(changedData: SimpleObject) {
   flex: 0 0 2em;
   width: 2em;
   height: 2em;
-  border: 1px solid $border-color;
+  border: 1px solid var(--border-color);
   border-radius: 50%;
   margin-right: 8px;
   object-fit: cover;
@@ -88,7 +88,7 @@ function emitChangedValue(changedData: SimpleObject) {
 .pictured-item-select-field {
   :deep(.pictured-item-editor-input.dx-texteditor-input) {
     padding-left: 0;
-    color: $base-text-color;
+    color: var(--base-text-color);
   }
 
   .pictured-item-image {

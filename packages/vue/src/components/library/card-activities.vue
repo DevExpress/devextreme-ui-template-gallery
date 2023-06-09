@@ -93,7 +93,7 @@ const activityMenuItems: Array<{ text: string }> = [
 
   .activity {
     box-shadow: 0 1px 4px 0 #00000026;
-    border-left: 2px solid $accent-color;
+    border-left: 2px solid var(--accent-color);
     margin-right: 4px;
     padding: 8px 2px 8px 16px;
     display: grid;
@@ -108,7 +108,7 @@ const activityMenuItems: Array<{ text: string }> = [
     .date {
       padding: 0 10px;
       font-size: 12px;
-      color: $texteditor-label-color;
+      color: var(--texteditor-label-color);
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;

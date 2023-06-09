@@ -83,7 +83,7 @@ const emit = defineEmits(['clickEditAppointment', 'clickDeleteAppointment']);
 @use "@/variables.scss" as *;
 
 .dx-tooltip-wrapper > .dx-popup-normal {
-  background-color: $base-bg !important;
+  background-color: var(--base-bg) !important;
   color: var(--base-text-color) !important;
   border-radius: 8px !important;
   max-width: 360px;

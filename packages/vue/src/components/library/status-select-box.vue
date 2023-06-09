@@ -77,7 +77,7 @@ function emitChangedValue(changedData: SimpleObject) {
   .status-indicator {
     display: flex;
     align-self: center;
-    padding-left: $list-padding-left;
+    padding-left: var(--list-padding-left);
   }
 
   :deep(.status-editor-input) {

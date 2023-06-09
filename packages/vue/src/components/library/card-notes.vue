@@ -148,7 +148,7 @@ onMounted(() => {
 }
 
 .note {
-  background-color: $base-bg;
+  background-color: var(--base-bg);
   padding: 10px;
   margin-bottom: 10px;
 

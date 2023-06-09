@@ -113,7 +113,7 @@ function addOpportunity() {
       .opportunities {
         padding: 16px;
         border-radius: 4px;
-        background: $side-panel-background;
+        background: var(--side-panel-background);
         flex: 1 300px;
         max-width: 300px;
       }
