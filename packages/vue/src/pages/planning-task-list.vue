@@ -132,9 +132,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import DxButton from 'devextreme-vue/button';
-import DxTabs from 'devextreme-vue/tabs';
-import { ItemClickEvent as TabsItemClickEvent } from 'devextreme/ui/tabs';
-import { InputEvent as TextBoxInputEvent } from 'devextreme/ui/text_box';
+import DxTabs, { DxTabsTypes } from 'devextreme-vue/tabs';
+import { DxTextBoxTypes } from 'devextreme-vue/text-box';
 import {
   DxToolbar,
   DxItem as DxToolbarItem,
@@ -170,7 +169,7 @@ const addTask = () => {
   isNewTaskPopupOpened.value = true;
 };
 const chooseColumnDataGrid = () => tasksGridCmp.value.showColumnChooser();
-const searchDataGrid = (e: TextBoxInputEvent) => tasksGridCmp.value.search(e.component.option('text'));
+const searchDataGrid = (e: DxTextBoxTypes.InputEvent) => tasksGridCmp.value.search(e.component.option('text'));
 const exportToPdf = () => {
   ({
     grid: tasksGridCmp,
@@ -201,7 +200,7 @@ const loadTasksAsync = async () => {
   isLoading.value = false;
 };
 
-const tabValueChange = (e: TabsItemClickEvent) => {
+const tabValueChange = (e: DxTabsTypes.ItemClickEvent) => {
   const { itemData } = e;
   displayTaskComponent.value = itemData.text;
   const tabId = taskPanelItems.find((item) => displayTaskComponent.value === item.text)?.id;

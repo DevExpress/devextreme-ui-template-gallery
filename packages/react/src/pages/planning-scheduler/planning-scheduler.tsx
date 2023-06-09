@@ -5,11 +5,10 @@ import { defaultCalendarListItems } from 'dx-template-gallery-data';
 
 import Button from 'devextreme-react/button';
 import Calendar from 'devextreme-react/calendar';
-import Scheduler, { Resource } from 'devextreme-react/scheduler';
+import Scheduler, { Resource, SchedulerTypes } from 'devextreme-react/scheduler';
 import SpeedDialAction from 'devextreme-react/speed-dial-action';
 import Tooltip from 'devextreme-react/tooltip';
 
-import { ViewType } from 'devextreme/ui/scheduler';
 import { useScreenSize } from '../../utils/media-query';
 
 import { useSchedulerLogic } from './use-scheduler-logic';
@@ -20,7 +19,7 @@ import { RightSidePanel } from '../../components/utils/right-side-panel/right-si
 import { Agenda } from '../../components/utils/agenda/agenda';
 import { TooltipContentTemplate } from '../../components/library/scheduler-tooltip/scheduler-tooltip';
 
-const views: ViewType[] = ['day', 'workWeek', 'month', 'agenda'];
+const views: SchedulerTypes.ViewType[] = ['day', 'workWeek', 'month', 'agenda'];
 interface CalendarListItem {
   id: number,
   text: string,

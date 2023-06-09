@@ -61,14 +61,12 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import { DxTextArea } from 'devextreme-vue/text-area';
-import { DxButton } from 'devextreme-vue/button';
+import { DxButton, DxButtonTypes } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
 import DxValidator, { DxRequiredRule } from 'devextreme-vue/validator';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { formatDate } from '@/utils/formatters';
-
-import { ClickEvent } from 'devextreme/ui/button';
 
 import { getContactNotes } from 'dx-template-gallery-data';
 import type { Note } from '@/types/notes';
@@ -99,7 +97,7 @@ watch(
   },
 );
 
-function addNote(e: ClickEvent) {
+function addNote(e: DxButtonTypes.ClickEvent) {
   if (!e.validationGroup.validate().isValid) {
     return;
   }

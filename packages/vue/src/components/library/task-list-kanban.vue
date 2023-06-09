@@ -58,9 +58,8 @@
 import { computed } from 'vue';
 import 'jspdf-autotable';
 import { Task, TaskStatus, taskStatusList } from '@/types/task';
-import { AddEvent, ReorderEvent, DragStartEvent } from 'devextreme/ui/sortable';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
-import { DxSortable } from 'devextreme-vue/sortable';
+import { DxSortable, DxSortableTypes } from 'devextreme-vue/sortable';
 import { DxButton } from 'devextreme-vue/button';
 
 import CardMenu from '@/components/library/card-menu.vue';
@@ -100,18 +99,18 @@ const kanbanDataSource = computed(
   () => (props.tasks ? fillOutBoard(props.tasks) : []),
 );
 
-function onListReorder(e: ReorderEvent) {
+function onListReorder(e: DxSortableTypes.ReorderEvent) {
   const { fromIndex, toIndex } = e;
   const list = kanbanDataSource.value.splice(fromIndex, 1)[0];
   kanbanDataSource.value.splice(toIndex, 0, list);
 }
 
-function onTaskDragStart(e: DragStartEvent) {
+function onTaskDragStart(e: DxSortableTypes.DragStartEvent) {
   const { fromData, fromIndex } = e;
   e.itemData = fromData.cards[fromIndex];
 }
 
-function onTaskDrop(e: ReorderEvent | AddEvent) {
+function onTaskDrop(e: DxSortableTypes.ReorderEvent | DxSortableTypes.AddEvent) {
   const {
     fromData, toData, fromIndex, toIndex, itemData,
   } = e;

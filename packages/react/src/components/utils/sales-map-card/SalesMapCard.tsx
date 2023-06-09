@@ -6,7 +6,8 @@ import VectorMap, {
   Tooltip,
 } from 'devextreme-react/vector-map';
 import { CardAnalytics } from '../../library/card-analytics/CardAnalytics';
-import { LegendItem, MapLayerElement } from 'devextreme/viz/vector_map';
+import { MapLayerElement } from 'devextreme/viz/vector_map';
+import { VectorMapTypes } from 'devextreme-react/vector-map';
 
 const customizeLegendText = (arg) => {
   return ['< 80000$', '80000$ to 100000$', '100000$ to 400000$', '> 400000$'][
@@ -14,7 +15,7 @@ const customizeLegendText = (arg) => {
   ];
 };
 
-const customizeItems = (items: Array<LegendItem>) => items.reverse();
+const customizeItems = (items: Array<VectorMapTypes.LegendItem>) => items.reverse();
 
 const customizeTooltip = (arg: MapLayerElement) => {
   return arg.layer.type === 'marker' ? {

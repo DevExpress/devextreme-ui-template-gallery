@@ -9,7 +9,7 @@ import {
   DxSelectBoxModule,
   DxTextBoxModule,
 } from 'devextreme-angular';
-import { RowClickEvent } from 'devextreme/ui/data_grid';
+import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
 import {
@@ -17,7 +17,7 @@ import {
   ContactStatusModule,
 } from 'src/app/components';
 import { Contact, contactStatusList, ContactStatus, } from 'src/app/types/contact';
-import { SelectionChangedEvent } from 'devextreme/ui/drop_down_button';
+import { DxDropDownButtonTypes } from 'devextreme-angular/ui/drop-down-button';
 import DataSource from 'devextreme/data/data_source';
 import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/services';
@@ -69,7 +69,7 @@ export class CrmContactListComponent {
     this.dataGrid.instance.refresh();
   };
 
-  rowClick(e: RowClickEvent) {
+  rowClick(e: DxDataGridTypes.RowClickEvent) {
     const { data } = e;
 
     this.userId = data.id;
@@ -86,7 +86,7 @@ export class CrmContactListComponent {
     this.dataGrid.instance.updateDimensions();
   };
 
-  filterByStatus = (e: SelectionChangedEvent) => {
+  filterByStatus = (e: DxDropDownButtonTypes.SelectionChangedEvent) => {
     const { item: status }: { item: FilterContactStatus } = e;
 
     if (status === 'All') {

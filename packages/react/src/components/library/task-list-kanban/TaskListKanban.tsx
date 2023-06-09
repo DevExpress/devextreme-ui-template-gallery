@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import ScrollView from 'devextreme-react/scroll-view';
-import Sortable from 'devextreme-react/sortable';
+import Sortable, { SortableTypes } from 'devextreme-react/sortable';
 import Button from 'devextreme-react/button';
-
-import { DragStartEvent, ReorderEvent } from 'devextreme/ui/sortable';
 
 import { CardMenu } from '../card-menu/CardMenu';
 import { TaskKanbanCard } from '../task-kanban-card/TaskKanbanCard';
@@ -45,8 +43,8 @@ const TaskList = ({
   title: string,
   index: number,
   tasks: Task[],
-  onTaskDragStart: (e: DragStartEvent) => void,
-  onTaskDrop: (e: ReorderEvent) => void,
+  onTaskDragStart: (e: SortableTypes.DragStartEvent) => void,
+  onTaskDrop: (e: SortableTypes.ReorderEvent) => void,
   changePopupVisibility?: () => void,
 }) => {
 
@@ -81,7 +79,7 @@ export const TaskListKanban = React.forwardRef<Sortable, PlanningProps>(({ dataS
     setLists(initialLists);
   }, [dataSource]);
   const onListReorder = useCallback(
-    ({ fromIndex, toIndex }: ReorderEvent) => {
+    ({ fromIndex, toIndex }: SortableTypes.ReorderEvent) => {
       setLists(reorder(lists, lists[fromIndex], fromIndex, toIndex));
       setStatuses(reorder(statuses, statuses[fromIndex], fromIndex, toIndex));
     },
@@ -89,14 +87,14 @@ export const TaskListKanban = React.forwardRef<Sortable, PlanningProps>(({ dataS
   );
 
   const onTaskDragStart = useCallback(
-    (e: DragStartEvent) => {
+    (e: SortableTypes.DragStartEvent) => {
       e.itemData = lists[e.fromData][e.fromIndex];
     },
     [lists]
   );
 
   const onTaskDrop = useCallback(
-    (e: ReorderEvent) => {
+    (e: SortableTypes.ReorderEvent) => {
       const updatedList = [...lists];
       e.itemData.status = statuses[e.toData];
       updatedList[e.fromData] = reorder(updatedList[e.fromData], e.itemData, e.fromIndex, -1);
