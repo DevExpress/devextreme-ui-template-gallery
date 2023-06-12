@@ -110,14 +110,7 @@ function saveNewPassword() {
 .change-profile-password-popup {
   .dx-form {
     padding: 0 8px;
-
-    .dx-theme-generic & {
-      height: var(--generic-change-password-popup-height);
-    }
-
-    .dx-theme-material & {
-      height: var(--material-change-password-popup-height);
-    }
+    height: var(--change-password-popup-height, auto);
   }
 
   .dx-popup-normal {

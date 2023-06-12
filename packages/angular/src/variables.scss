@@ -1,6 +1,11 @@
 :root {
-  --material-change-password-popup-height: 255px;
-  --generic-change-password-popup-height: 190px;
+  .dx-theme-generic {
+    --change-password-popup-height: 255px;
+  }
+
+  .dx-theme-material {
+    --change-password-popup-height: 190px;
+  }
 }
 
 @mixin separator() {
