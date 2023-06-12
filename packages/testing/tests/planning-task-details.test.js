@@ -3,8 +3,8 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { getPostfix, toggleCommonConfiguration } from './utils';
-import { screenModes, timeoutSecond } from '../config.js';
+import { getPostfix, toggleCommonConfiguration, setTheme } from './utils';
+import { screenModes, themeModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/planning-task-details`;
@@ -23,60 +23,72 @@ const setEmbedded = async (t, embed, screenMode) => {
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
-    test(`Planning task details form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
-      const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-      // eslint-disable-next-line max-len
-      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
+    themeModes.forEach((themeMode) => {
+      const postfix = getPostfix(embedded, screenMode, themeMode);
 
-      await t.expect(Selector('.content .dx-toolbar-label').withText('Call to clarify customer requirements.').exists).ok();
-      await takeScreenshot(`planning-task-details${getPostfix(embedded, screenMode)}`, 'body');
-
-      await t
-        .expect(compareResults.isValid())
-        .ok(compareResults.errorMessages());
-    });
-
-    test(`Planning task details Form (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
-      const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
-      // eslint-disable-next-line max-len
-      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
-
-      const form = Selector('.dx-form');
-
-      await takeScreenshot(`planning-task-form-readonly${getPostfix(embedded, screenMode)}`, form);
-      await t.click(Selector('.dx-button[aria-label=Edit]'));
-      await takeScreenshot(`planning-task-form-edit${getPostfix(embedded, screenMode)}`, form);
-
-      await t
-        .expect(compareResults.isValid())
-        .ok(compareResults.errorMessages());
-    });
-
-    test(`Planning task details tabpanel (embed=${embedded}, ${screenMode[0]})`, async (t) => {
-      if (screenMode[0] === 400) return;
-      const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
-      // eslint-disable-next-line max-len
-      await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
-
-      await t.wait(timeoutSecond);
-
-      const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
-      const tabPanels = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel]');
-
-      const tabsCount = await tabs.count;
-      for (let indexTab = 0; indexTab < tabsCount; indexTab += 1) {
-        const tab = tabs.nth(indexTab);
-        const tabName = (await tab.innerText).toLowerCase();
-
-        await t.click(tab);
-        await takeScreenshot(`planning-task-form-tab-${tabName}${getPostfix(embedded, screenMode)}`, tabPanels.nth(indexTab));
+      if (embedded && themeMode === 'dark') {
+        return;
       }
 
-      await t
-        .expect(compareResults.isValid())
-        .ok(compareResults.errorMessages());
+      test(`Planning task details form (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
+        const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+        // eslint-disable-next-line max-len
+        await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
+        await setTheme(t, themeMode);
+
+        await t.expect(Selector('.content .dx-toolbar-label').withText('Call to clarify customer requirements.').exists).ok();
+        await takeScreenshot(`planning-task-details${postfix}`, 'body');
+
+        await t
+          .expect(compareResults.isValid())
+          .ok(compareResults.errorMessages());
+      });
+
+      test(`Planning task details Form (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
+        const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+
+        // eslint-disable-next-line max-len
+        await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
+        await setTheme(t, themeMode);
+        await t.wait(1000);
+
+        const form = Selector('.dx-form');
+
+        await takeScreenshot(`planning-task-form-readonly${postfix}`, form);
+        await t.click(Selector('.dx-button[aria-label=Edit]'));
+        await takeScreenshot(`planning-task-form-edit${postfix}`, form);
+
+        await t
+          .expect(compareResults.isValid())
+          .ok(compareResults.errorMessages());
+      });
+
+      test(`Planning task details tabpanel (embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
+        if (screenMode[0] === 400) return;
+        const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+
+        // eslint-disable-next-line max-len
+        await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
+        await setTheme(t, themeMode);
+
+        await t.wait(timeoutSecond);
+
+        const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
+        const tabPanels = Selector('.content .dx-tabpanel-container .dx-item[role=tabpanel]');
+
+        const tabsCount = await tabs.count;
+        for (let indexTab = 0; indexTab < tabsCount; indexTab += 1) {
+          const tab = tabs.nth(indexTab);
+          const tabName = (await tab.innerText).toLowerCase();
+
+          await t.click(tab);
+          await takeScreenshot(`planning-task-form-tab-${tabName}${postfix}`, tabPanels.nth(indexTab));
+        }
+
+        await t
+          .expect(compareResults.isValid())
+          .ok(compareResults.errorMessages());
+      });
     });
   });
 });

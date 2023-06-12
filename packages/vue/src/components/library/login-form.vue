@@ -72,6 +72,7 @@
       text="Create an account"
       width="100%"
       @click="onCreateAccountClick"
+      :styling-mode="buttonStylingMode"
     />
     <login-oauth />
   </form>
@@ -87,13 +88,21 @@ import DxForm, {
   DxButtonItem,
   DxButtonOptions,
 } from 'devextreme-vue/form';
-import DxButton from 'devextreme-vue/button';
+import DxButton, { DxButtonTypes } from 'devextreme-vue/button';
 import notify from 'devextreme/ui/notify';
 
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { authInfo as auth } from '@/auth';
 import LoginOauth from '@/components/library/login-oauth.vue';
+import { themeService } from '@/theme/theme-service';
+
+const { currentTheme } = themeService;
+
+// eslint-disable-next-line arrow-body-style
+const buttonStylingMode = computed<DxButtonTypes.ButtonStyle>(() => {
+  return currentTheme.value === 'dark' ? 'outlined' : 'contained';
+});
 
 const props = defineProps<{
   resetLink?: string,

@@ -3,9 +3,9 @@
 import { Selector, RequestLogger } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import {
-  getPostfix, toggleCommonConfiguration, forceResizeRecalculation,
+  getPostfix, toggleCommonConfiguration, forceResizeRecalculation, setTheme,
 } from './utils';
-import { screenModes, timeoutSecond } from '../config.js';
+import { screenModes, themeModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/analytics-geography`;
@@ -21,23 +21,32 @@ const checkScreenMode = async (t, screenMode) => {
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
-    test(`Analytics Geography (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
-      const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+    themeModes.forEach((themeMode) => {
+      const postfix = getPostfix(embedded, screenMode, themeMode);
 
-      await toggleCommonConfiguration(t, BASE_URL, embedded, () => {},
-        screenMode, timeoutSecond, false, requestLogger);
-      await forceResizeRecalculation(t, screenMode);
+      if (embedded && themeMode === 'dark') {
+        return;
+      }
 
-      await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      await takeScreenshot(`analytics-geography-all${getPostfix(embedded, screenMode)}`, 'body');
-      await checkScreenMode(t, screenMode);
-      await t.click(Selector('.dx-tabs .dx-item').nth(3));
-      await t.wait(timeoutSecond);
-      await takeScreenshot(`analytics-geography-year${getPostfix(embedded, screenMode)}`, 'body');
+      test(`Analytics Geography (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
+        const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      await t
-        .expect(compareResults.isValid())
-        .ok(compareResults.errorMessages());
-    }).requestHooks(requestLogger);
+        await toggleCommonConfiguration(t, BASE_URL, embedded, () => {},
+          screenMode, timeoutSecond, false, requestLogger);
+        await forceResizeRecalculation(t, screenMode);
+        await setTheme(t, themeMode);
+
+        await t.expect(Selector('body.dx-device-generic').count).eql(1);
+        await takeScreenshot(`analytics-geography-all${postfix}`, 'body');
+        await checkScreenMode(t, screenMode);
+        await t.click(Selector('.dx-tabs .dx-item').nth(3));
+        await t.wait(timeoutSecond);
+        await takeScreenshot(`analytics-geography-year${postfix}`, 'body');
+
+        await t
+          .expect(compareResults.isValid())
+          .ok(compareResults.errorMessages());
+      }).requestHooks(requestLogger);
+    });
   });
 });

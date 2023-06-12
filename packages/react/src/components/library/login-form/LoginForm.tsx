@@ -1,22 +1,28 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useContext } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
 import { LoginOauth } from '../login-oauth/LoginOauth';
-import Button from 'devextreme-react/button';
+import Button, { ButtonTypes } from 'devextreme-react/button';
 import Form, { Item, Label, ButtonItem, ButtonOptions, RequiredRule, EmailRule } from 'devextreme-react/form';
 import LoadIndicator from 'devextreme-react/load-indicator';
 import notify from 'devextreme/ui/notify';
 
 import { useAuth } from '../../../contexts/auth';
+import { ThemeContext } from '../../../theme/theme';
 
 import './LoginForm.scss';
+
+function getButtonStylingMode(theme: string | undefined): ButtonTypes.ButtonStyle {
+  return theme === 'dark' ? 'outlined' : 'contained';
+}
 
 export const LoginForm = ({ resetLink, createAccountLink }) => {
   const navigate = useNavigate();
   const { signIn } = useAuth();
   const [loading, setLoading] = useState(false);
   const formData = useRef({ email: '', password: '' });
+  const themeContext = useContext(ThemeContext);
 
   const onSubmit = useCallback(
     async(e) => {
@@ -74,6 +80,7 @@ export const LoginForm = ({ resetLink, createAccountLink }) => {
         text='Create an account'
         width='100%'
         onClick={onCreateAccountClick}
+        stylingMode={getButtonStylingMode(themeContext?.theme)}
       />
 
       <LoginOauth />

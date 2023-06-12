@@ -8,11 +8,12 @@
     text-transform: none;
   }
 
-  .dx-card {
+  .dx-card.content {
     margin: auto auto;
     padding: 24px;
     flex-grow: 0;
     max-width: 360px;
+    width: auto;
     border-radius: 8px;
 
     &.content {
