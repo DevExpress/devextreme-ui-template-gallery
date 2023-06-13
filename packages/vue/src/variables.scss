@@ -1,6 +1,14 @@
 :root {
   --content-padding: 16px;
   --toolbar-vertical-padding: 16px;
+
+  .dx-theme-generic {
+    --change-password-popup-height: 190px;
+  }
+
+  .dx-theme-material {
+    --change-password-popup-height: 260px;
+  }
 }
 
 @mixin separator() {
