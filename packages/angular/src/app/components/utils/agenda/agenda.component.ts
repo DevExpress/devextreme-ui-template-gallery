@@ -2,7 +2,7 @@ import {
   Component, EventEmitter, Input, NgModule, Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DxListModule } from 'devextreme-angular/ui/list';
+import { DxListModule, DxListTypes } from 'devextreme-angular/ui/list';
 import { Task } from 'src/app/types/task';
 import { AgendaListItemModule } from "./agenda-list-item.component";
 
@@ -35,7 +35,8 @@ export class AgendaComponent {
 
   @Output() clickAppointment = new EventEmitter<{ itemData: Task, element: EventTarget }>();
 
-  handleItemClick({itemData, element}) {
+  handleItemClick(e: DxListTypes.ItemClickEvent) {
+    const { itemData, element } = e;
     this.clickAppointment.emit({itemData, element});
   }
 }

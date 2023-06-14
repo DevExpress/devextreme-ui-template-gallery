@@ -1,7 +1,7 @@
 import { Component, NgModule, Input, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DxListModule } from 'devextreme-angular/ui/list';
+import { DxListModule, DxListTypes } from 'devextreme-angular/ui/list';
 import { IUser } from '../../../services/auth.service';
 
 @Component({
@@ -24,8 +24,8 @@ export class UserMenuSectionComponent {
 
   constructor() {}
 
-  handleListItemClick({ itemData }) {
-    itemData.onClick();
+  handleListItemClick(e: DxListTypes.ItemClickEvent) {
+    e.itemData?.onClick();
   }
 }
 
