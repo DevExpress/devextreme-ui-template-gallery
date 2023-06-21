@@ -1,16 +1,31 @@
-<dx-list class="calendar-list" [dataSource]="dataSource" [activeStateEnabled]="false" [focusStateEnabled]="false"
-  [hoverStateEnabled]="false" [grouped]="true" [collapsibleGroups]="true" [scrollingEnabled]="false">
+<dx-list 
+  class="calendar-list"
+  [dataSource]="dataSource"
+  [activeStateEnabled]="false"
+  [focusStateEnabled]="false"
+  [hoverStateEnabled]="false"
+  [grouped]="true"
+  [collapsibleGroups]="true"
+  [scrollingEnabled]="false"
+>
   <div *dxTemplate="let item of 'group'">
     <div class="list-header">
       {{ item.key }}
-      <dx-button icon="add" stylingMode="contained" (onClick)="onAddClick($event)"></dx-button>
+      <dx-button 
+        icon="add"
+        stylingMode="contained"
+        (onClick)="onAddClick($event)"
+      ></dx-button>
     </div>
   </div>
 
   <div *dxTemplate="let item of 'item'">
     <div class="list-item">
-      <dx-check-box [value]="selectedItems.includes(item)" [focusStateEnabled]="false"
-        (onValueChanged)="selectionChanged(item, $event.value)"></dx-check-box>
+      <dx-check-box 
+        [value]="selectedItems.includes(item)"
+        [focusStateEnabled]="false"
+        (onValueChanged)="selectionChanged(item, $event.value)"
+      ></dx-check-box>
       <span class="list-item-text">{{ item.text }}</span>
     </div>
   </div>
