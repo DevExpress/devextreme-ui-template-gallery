@@ -278,7 +278,7 @@ The result can be exported to HTML or Markdown.`;
       map((tasks) => {
         const today = DateTime.now();
         const mondayMidnight = today.set({
-          weekday: 1, hour: 0, minute: 0, millisecond: 0,
+          weekday: 1, hour: 0, minute: 0, second: 0, millisecond: 0,
         });
         const uniqueTasks = tasks.slice(0, 11);
 

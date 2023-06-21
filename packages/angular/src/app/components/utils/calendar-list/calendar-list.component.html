@@ -24,7 +24,6 @@
       <dx-check-box
         [value]="selectedItems.includes(item)"
         [focusStateEnabled]="false"
-        [ngStyle]="{ '--checkbox-color': item.checkboxColor }"
         (onValueChanged)="selectionChanged(item, $event.value)"
       ></dx-check-box>
       <span class="list-item-text">{{ item.text }}</span>
