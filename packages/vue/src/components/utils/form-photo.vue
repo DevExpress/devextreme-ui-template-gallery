@@ -35,7 +35,7 @@ const hostRef = ref(null);
 const props = withDefaults(defineProps<{
   link: string,
   size?: number
-  editable: boolean
+  editable?: boolean
 }>(), {
   size: 124,
   link: '',

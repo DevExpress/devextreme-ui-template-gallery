@@ -16,7 +16,7 @@
     />
     <dx-form
       :form-data="data"
-      class="plain-styled-form"
+      class="plain-styled-form dx-form"
       :class="{'view-mode': !isEditing}"
       :screen-by-width="getSizeQualifier"
       v-if="!!props.data"
