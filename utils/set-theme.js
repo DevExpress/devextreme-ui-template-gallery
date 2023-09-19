@@ -42,8 +42,8 @@ const changeThemesMeta = (theme) => {
         writeFileSync(
           fileForChange,
           contentForChange
-            .replace(/(scss\/bundles\/dx\.)(.+?\.)*?(dark|light)\.compact(\.scss)?"/g,
-              `$1${baseBundleName}$3.compact$4"`),
+            .replace(/(scss\/bundles\/dx\.)(.+?\.)*?(dark|light)\.compact(\.scss)?("|')/g,
+              `$1${baseBundleName}$3.compact$4$5`),
         );
       },
     );
