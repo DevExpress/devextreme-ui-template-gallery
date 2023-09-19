@@ -97,14 +97,6 @@ jobs:
       working-directory: packages/angular
       run: npm install $(find ../../devextreme-repo/packages/devextreme/artifacts/npm/devextreme-dist/ -maxdepth 1 -name "devextreme-*.tgz")
 
-    - name: Install devextreme package for React
-      working-directory: packages/react
-      run: npm install $(find ../../devextreme-repo/packages/devextreme/artifacts/npm/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
-
-    - name: Install devextreme-dist package for React
-      working-directory: packages/react
-      run: npm install $(find ../../devextreme-repo/packages/devextreme/artifacts/npm/devextreme-dist/ -maxdepth 1 -name "devextreme-*.tgz")
-
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
 
