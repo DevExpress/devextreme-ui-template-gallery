@@ -15,7 +15,7 @@ jobs:
     - name: Set themes matrix
       id: set-matrix
       run: |
-        themes_json=`cat ./packages/metadata/themes.json`
+        themes_json=`echo '["fluent.blue.light.compact"]'`
         themes_json="${themes_json//$'\n'/''}"
         themes_json="${themes_json//$'\r'/''}"
         themes_json="${themes_json//$' '/''}"
@@ -29,9 +29,44 @@ jobs:
     strategy:
       matrix:
         theme: ${{fromJson(needs.set-matrix.outputs.matrix)}}
-        mode: [ default, embedded ]
+        mode: [ default ]
 
     steps:
+      #Build Devextreme latest
+    - name: Checkout Devextreme
+      uses: actions/checkout@v3
+      with:
+        repository: 'GoodDayForSurf/DevExtreme'
+        path: './devextreme-repo'
+
+    - name: DevExtreme - Restore npm cache
+      uses: actions/cache@v3
+      with:
+        path: 'devextreme-repo/**/node_modules'
+        key: ${{ runner.os }}-node-modules-${{ hashFiles('devextreme-repo/**/package-lock.json') }}
+
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.16.1'
+
+    - name: DevExtreme - Install packages
+      working-directory: ./devextreme-repo
+      run: npm install --no-audit --no-fund
+
+    - name: DevExtreme - Build
+      working-directory: ./devextreme-repo/packages/devextreme
+      run: npm run build-npm-devextreme
+
+    - name: DevExtreme - Pack
+      working-directory: ./devextreme-repo/packages/devextreme/artifacts/npm/devextreme
+      run: npm pack
+
+    - name: DevExtreme dist - Pack
+      working-directory: ./devextreme-repo/packages/devextreme/artifacts/npm/devextreme-dist
+      run: npm pack
+
+      #Build UI Template Gallery
     - name: Get sources
       uses: actions/checkout@v3
 
@@ -53,6 +88,12 @@ jobs:
 
     - name: Run npm install
       run: npm install
+
+    - name: Demos - Install devextreme package
+      run: npm install $(find ./devextreme-repo/packages/devextreme/artifacts/npm/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
+
+    - name: Demos - Install devextreme-dist package
+      run: npm install $(find ./devextreme-repo/packages/devextreme/artifacts/npm/devextreme-dist/ -maxdepth 1 -name "devextreme-*.tgz")
 
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
@@ -73,53 +114,9 @@ jobs:
         name: build-artifacts
         path: devextreme-ui-template-gallery/
 
-  build-shell:
-    name: Build shell
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Get sources
-      uses: actions/checkout@v3
-
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-
-    - name: Set NPM version
-      run: npm i npm@7 -g
-
-    - name: Restore npm cache
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-
-    - name: Run npm install
-      run: npm install
-
-    - name: Run npm install for shell
-      run: npm install
-      working-directory: packages/shell
-
-    - name: Build Shell
-      run: npm run build-shell
-      working-directory: packages/shell
-
-    - name: Copy apps
-      run: npm run copy-shell
-
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-artifacts
-        path: devextreme-ui-template-gallery/
-
   deploy:
     name: Deploy
-    needs: [build, build-shell]
+    needs: [build]
     runs-on: ubuntu-latest
 
     steps:
