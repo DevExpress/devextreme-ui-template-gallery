@@ -2,7 +2,7 @@ const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 const { argv, exit, cwd } = require('process');
 
-const packages = ['angular']; // require('./packages');
+const packages = require('./packages');
 
 const filesForChange = {
   angular: 'angular.json',

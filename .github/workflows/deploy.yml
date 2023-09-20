@@ -106,7 +106,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: build-artifacts
-        path: devextreme-ui-template-gallery/
+        path: devextreme-ui-template-gallery-with-fluent/
 
   deploy:
     name: Deploy
@@ -121,12 +121,12 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: build-artifacts
-        path: devextreme-ui-template-gallery
+        path: devextreme-ui-template-gallery-with-fluent
 
     - name: Deploy in gh-pages
-      uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages
-        folder: devextreme-ui-template-gallery
+        folder: devextreme-ui-template-gallery-with-fluent
         target-folder: .
 
