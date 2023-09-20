@@ -15,7 +15,7 @@ jobs:
     - name: Set themes matrix
       id: set-matrix
       run: |
-        themes_json=`echo '["fluent.blue.light.compact"]'`
+        themes_json=`echo '["material.blue.light.compact"]'`
         themes_json="${themes_json//$'\n'/''}"
         themes_json="${themes_json//$'\r'/''}"
         themes_json="${themes_json//$' '/''}"
@@ -88,14 +88,6 @@ jobs:
 
     - name: Run npm install
       run: npm install
-
-    - name: Install devextreme package for Angular
-      working-directory: packages/angular
-      run: npm install $(find ../../devextreme-repo/packages/devextreme/artifacts/npm/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
-
-    - name: Install devextreme-dist package for Angular
-      working-directory: packages/angular
-      run: npm install $(find ../../devextreme-repo/packages/devextreme/artifacts/npm/devextreme-dist/ -maxdepth 1 -name "devextreme-*.tgz")
 
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
