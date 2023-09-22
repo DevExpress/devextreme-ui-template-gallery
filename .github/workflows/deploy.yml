@@ -37,13 +37,13 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: 'GoodDayForSurf/DevExtreme'
-        path: './devextreme-repo'
+        path: 'devextreme'
 
     - name: DevExtreme - Restore npm cache
       uses: actions/cache@v3
       with:
-        path: 'devextreme-repo/**/node_modules'
-        key: ${{ runner.os }}-node-modules-${{ hashFiles('devextreme-repo/**/package-lock.json') }}
+        path: 'devextreme/**/node_modules'
+        key: ${{ runner.os }}-node-modules-${{ hashFiles('devextreme/**/package-lock.json') }}
 
     - name: Use Node.js 18
       uses: actions/setup-node@v3
@@ -51,32 +51,27 @@ jobs:
         node-version: '18.16.1'
 
     - name: DevExtreme - Install packages
-      working-directory: ./devextreme-repo
+      working-directory: devextreme
       run: npm install --no-audit --no-fund
 
     - name: DevExtreme - Build
-      working-directory: ./devextreme-repo/packages/devextreme
+      working-directory: devextreme/packages/devextreme
       run: npm run build-npm-devextreme
 
     - name: DevExtreme - Pack
-      working-directory: ./devextreme-repo/packages/devextreme/artifacts/npm/devextreme
+      working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme
       run: npm pack
 
     - name: DevExtreme dist - Pack
-      working-directory: ./devextreme-repo/packages/devextreme/artifacts/npm/devextreme-dist
+      working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme-dist
       run: npm pack
-
-    - name: Install devextreme package for React
-      working-directory: packages/react
-      run: npm install $(find ../../devextreme-repo/packages/devextreme/artifacts/npm/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
-
-    - name: Install devextreme-dist package for React
-      working-directory: packages/react
-      run: npm install $(find ../../devextreme-repo/packages/devextreme/artifacts/npm/devextreme-dist/ -maxdepth 1 -name "devextreme-*.tgz")
 
       #Build UI Template Gallery
     - name: Get sources
       uses: actions/checkout@v3
+
+    - name: Test 01
+      run: ls .
 
     - name: Use Node.js
       uses: actions/setup-node@v3
@@ -96,6 +91,33 @@ jobs:
 
     - name: Run npm install
       run: npm install
+
+    - name: Test 4
+      run: ls .
+
+    - name: Test 5
+      run: ls ../
+
+    - name: Test 6
+      run: ls ../../
+
+    - name: Test 7
+      run: ls ../../..
+
+    - name: Test 5
+      run: ls ../devextreme-ui-template-gallery/
+
+    - name: Install latest devextreme for Angular
+      working-directory: packages/angular
+      run: npm install $(find ../../../devextreme/packages/devextreme/artifacts/npm/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
+
+    - name: Install latest devextreme-dist for Angular
+      working-directory: packages/angular
+      run: npm install $(find ../../../devextreme/packages/devextreme/artifacts/npm/devextreme-dist/ -maxdepth 1 -name "devextreme-*.tgz")
+
+    - name: Fix devextreme for Angulr
+      working-directory: ./packages/angular
+      run: cp ../../../devextreme/packages/devextreme/artifacts/npm/devextreme/scss/bundles ./node_modules/devextreme/scss/
 
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
