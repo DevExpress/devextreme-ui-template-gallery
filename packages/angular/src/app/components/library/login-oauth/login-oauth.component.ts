@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { DxButtonModule, DxButtonTypes } from 'devextreme-angular/ui/button';
 import { ThemeService } from '../../../services/theme.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ThemeService } from '../../../services/theme.service';
   styleUrls: ['./login-oauth.component.scss']
 })
 export class LoginOauthComponent {
-  btnStylingMode: string;
+  btnStylingMode: DxButtonTypes.ButtonStyle;
 
   constructor(private themeService: ThemeService) {
     this.themeService.isDark.subscribe((value: boolean) => {
