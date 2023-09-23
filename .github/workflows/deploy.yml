@@ -86,7 +86,7 @@ jobs:
     - name: Restore npm cache
       uses: actions/cache@v3
       with:
-        path: ~/uitg/.npm
+        path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
@@ -117,20 +117,23 @@ jobs:
 
     - name: Fix devextreme for Angular
       working-directory: uitg/packages/angular
-      run: cp ../../../devextreme/packages/devextreme/artifacts/npm/devextreme/scss/bundles ./node_modules/devextreme/scss/
+      run: cp -r ../../../devextreme/packages/devextreme/artifacts/npm/devextreme/scss/bundles ./node_modules/devextreme/scss/
 
     - name: Set theme
       working-directory: uitg
       run: npm run set-theme -- ${{ matrix.theme }}
 
     - name: Set embedded mode
+      working-directory: uitg
       if: ${{ matrix.mode == 'embedded' }}
       run: npm run make-embedded-mode
 
     - name: Build
+      working-directory: uitg
       run: npm run build
 
     - name: Copy apps
+      working-directory: uitg
       run: npm run copy-build -- ${{ matrix.mode }} ${{ matrix.theme }}
 
     - name: Upload build artifacts
