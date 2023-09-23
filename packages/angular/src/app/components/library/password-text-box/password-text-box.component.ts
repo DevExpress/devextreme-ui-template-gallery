@@ -13,7 +13,7 @@ import {
   DxValidatorComponent,
   DxValidatorModule
 } from 'devextreme-angular';
-import { ValidationRule } from 'devextreme-angular/common';
+import { EditorStyle, ValidationRule } from 'devextreme-angular/common';
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { ContactStatusModule } from 'src/app/components/utils/contact-status/contact-status.component';
 
@@ -29,7 +29,7 @@ export class PasswordTextBoxComponent {
 
   @Input() placeholder = '';
 
-  @Input() stylingMode = 'outlined';
+  @Input() stylingMode: EditorStyle = 'outlined';
 
   @Input() validators: ValidationRule[] = [];
 

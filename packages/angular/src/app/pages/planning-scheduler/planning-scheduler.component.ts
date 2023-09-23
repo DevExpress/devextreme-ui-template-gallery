@@ -12,6 +12,7 @@ import {
   DxSchedulerComponent,
   DxSpeedDialActionModule,
 } from "devextreme-angular";
+import { DxSchedulerTypes } from 'devextreme-angular/ui/scheduler';
 import { Task } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
 import { CalendarListModule } from 'src/app/components/utils/calendar-list/calendar-list.component';
@@ -37,7 +38,7 @@ export class PlanningSchedulerComponent implements OnInit {
 
   currentDate = new Date();
 
-  currentView = 'workWeek';
+  currentView: DxSchedulerTypes.ViewType = 'workWeek';
 
   isRightPanelOpen = false;
 
