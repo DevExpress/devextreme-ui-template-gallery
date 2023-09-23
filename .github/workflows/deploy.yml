@@ -69,6 +69,8 @@ jobs:
       #Build UI Template Gallery
     - name: Get sources
       uses: actions/checkout@v3
+      with:
+        path: 'uitg'
 
     - name: Test 01
       run: ls .
@@ -84,12 +86,13 @@ jobs:
     - name: Restore npm cache
       uses: actions/cache@v3
       with:
-        path: ~/.npm
+        path: ~/uitg/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
 
     - name: Run npm install
+      working-directory: uitg
       run: npm install
 
     - name: Test 4
@@ -104,22 +107,20 @@ jobs:
     - name: Test 7
       run: ls ../../..
 
-    - name: Test 5
-      run: ls ../devextreme-ui-template-gallery/
-
     - name: Install latest devextreme for Angular
-      working-directory: packages/angular
+      working-directory: uitg/packages/angular
       run: npm install $(find ../../../devextreme/packages/devextreme/artifacts/npm/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
 
     - name: Install latest devextreme-dist for Angular
-      working-directory: packages/angular
+      working-directory: uitg/packages/angular
       run: npm install $(find ../../../devextreme/packages/devextreme/artifacts/npm/devextreme-dist/ -maxdepth 1 -name "devextreme-*.tgz")
 
-    - name: Fix devextreme for Angulr
-      working-directory: ./packages/angular
+    - name: Fix devextreme for Angular
+      working-directory: uitg/packages/angular
       run: cp ../../../devextreme/packages/devextreme/artifacts/npm/devextreme/scss/bundles ./node_modules/devextreme/scss/
 
     - name: Set theme
+      working-directory: uitg
       run: npm run set-theme -- ${{ matrix.theme }}
 
     - name: Set embedded mode
