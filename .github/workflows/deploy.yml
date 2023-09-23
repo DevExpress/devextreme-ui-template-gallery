@@ -66,11 +66,21 @@ jobs:
       working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme-dist
       run: npm pack
 
+    - name: Upload devextreme Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: devextreme
+        path: devextreme/packages/devextreme/artifacts/npm/devextreme/devextreme-*.tgz
+
+    - name: Upload devextreme-dist Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: devextreme-dist
+        path: devextreme/packages/devextreme/artifacts/npm/devextreme-dist/devextreme-*.tgz
+
       #Build UI Template Gallery
     - name: Get sources
       uses: actions/checkout@v3
-      with:
-        path: 'uitg'
 
     - name: Test 01
       run: ls .
@@ -92,55 +102,55 @@ jobs:
           ${{ runner.os }}-node-
 
     - name: Run npm install
-      working-directory: uitg
       run: npm install
 
-    - name: Test 4
+    - name: Download devextreme Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: devextreme
+        path: devextreme-latest
+
+    - name: Download devextreme-dist Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: devextreme-dist
+        path: devextreme-dist-latest
+
+    - name: Test 3
       run: ls .
 
-    - name: Test 5
+    - name: Test 4
       run: ls ../
 
-    - name: Test 6
-      run: ls ../../
-
-    - name: Test 7
-      run: ls ../../..
+    - name: Test 5
+      run: ls ../..
 
     - name: Install latest devextreme for Angular
-      working-directory: uitg/packages/angular
-      run: npm install $(find ../../../devextreme/packages/devextreme/artifacts/npm/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
+      working-directory: packages/angular
+      run: npm install $(../../devextreme-latest/ -maxdepth 1 -name "devextreme-*.tgz")
 
     - name: Install latest devextreme-dist for Angular
-      working-directory: uitg/packages/angular
-      run: npm install $(find ../../../devextreme/packages/devextreme/artifacts/npm/devextreme-dist/ -maxdepth 1 -name "devextreme-*.tgz")
-
-    - name: Fix devextreme for Angular
-      working-directory: uitg/packages/angular
-      run: cp -r ../../../devextreme/packages/devextreme/artifacts/npm/devextreme/scss/bundles ./node_modules/devextreme/scss/
+      working-directory: packages/angular
+      run: npm install $(find ../../devextreme-dist-latest/ -maxdepth 1 -name "devextreme-*.tgz")
 
     - name: Set theme
-      working-directory: uitg
       run: npm run set-theme -- ${{ matrix.theme }}
 
     - name: Set embedded mode
-      working-directory: uitg
       if: ${{ matrix.mode == 'embedded' }}
       run: npm run make-embedded-mode
 
     - name: Build
-      working-directory: uitg
       run: npm run build
 
     - name: Copy apps
-      working-directory: uitg
       run: npm run copy-build -- ${{ matrix.mode }} ${{ matrix.theme }}
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
         name: build-artifacts
-        path: devextreme-ui-template-gallery-with-fluent/
+        path: devextreme-ui-template-gallery
 
   deploy:
     name: Deploy
@@ -155,12 +165,12 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: build-artifacts
-        path: devextreme-ui-template-gallery-with-fluent
+        path: devextreme-ui-template-gallery-dx-latest
 
     - name: Deploy in gh-pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages
-        folder: devextreme-ui-template-gallery-with-fluent
+        folder: devextreme-ui-template-gallery-dx-latest
         target-folder: .
 
