@@ -9,17 +9,17 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-    - name: Get sources
-      uses: actions/checkout@v3
+      - name: Get sources
+        uses: actions/checkout@v3
 
-    - name: Set themes matrix
-      id: set-matrix
-      run: |
-        themes_json=`cat ./packages/metadata/themes.json`
-        themes_json="${themes_json//$'\n'/''}"
-        themes_json="${themes_json//$'\r'/''}"
-        themes_json="${themes_json//$' '/''}"
-        echo "matrix=$themes_json" >> $GITHUB_OUTPUT
+      - name: Set themes matrix
+        id: set-matrix
+        run: |
+          themes_json=`cat ./packages/metadata/themes.json`
+          themes_json="${themes_json//$'\n'/''}"
+          themes_json="${themes_json//$'\r'/''}"
+          themes_json="${themes_json//$' '/''}"
+          echo "matrix=$themes_json" >> $GITHUB_OUTPUT
   build:
     needs: set-matrix
     name: Build applications
@@ -32,90 +32,197 @@ jobs:
         mode: [ default, embedded ]
 
     steps:
-    - name: Get sources
-      uses: actions/checkout@v3
+      #Build Devextreme latest
+      - name: Checkout Devextreme
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        uses: actions/checkout@v3
+        with:
+          repository: 'Devexpress/DevExtreme'
+          path: 'devextreme'
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
+      - name: DevExtreme - Restore npm cache
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        uses: actions/cache@v3
+        with:
+          path: 'devextreme/**/node_modules'
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('devextreme/**/package-lock.json') }}
 
-    - name: Set NPM version
-      run: npm i npm@7 -g
+      - name: Use Node.js 18
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.16.1'
 
-    - name: Restore npm cache
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: DevExtreme - Install packages
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        working-directory: devextreme
+        run: npm install --no-audit --no-fund
 
-    - name: Run npm install
-      run: npm install
+      - name: DevExtreme - Build
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        working-directory: devextreme/packages/devextreme
+        run: npm run build-npm-devextreme
 
-    - name: Set theme
-      run: npm run set-theme -- ${{ matrix.theme }}
+      - name: DevExtreme - Pack
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme
+        run: npm pack
 
-    - name: Set mode
-      if: ${{ matrix.mode == 'embedded' }}
-      run: npm run make-embedded-mode
+      - name: DevExtreme dist - Pack
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme-dist
+        run: npm pack
 
-    - name: Build
-      run: npm run build
+      - name: Upload devextreme Artifact
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: devextreme-build
+          path: devextreme/packages/devextreme/artifacts/npm
 
-    - name: Copy apps
-      run: npm run copy-build -- ${{ matrix.mode }} ${{ matrix.theme }}
+      - name: DevExtreme-angular - Build
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        working-directory: devextreme/packages/devextreme-angular
+        run: npm run build
 
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-artifacts
-        path: devextreme-ui-template-gallery/
+      - name: DevExtreme-angular - Pack
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        working-directory: devextreme/packages/devextreme-angular
+        run: npm run pack
+
+      - name: Upload devextreme-angular Artifact
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: devextreme-angular-npm
+          path: devextreme/packages/devextreme-angular/npm/dist/devextreme-angular*.tgz
+
+        #Build UI Template Gallery
+      - name: Get sources
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Set NPM version
+        run: npm i npm@7 -g
+
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Run npm install
+        run: npm install
+
+      - name: Download devextreme Artifact
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        uses: actions/download-artifact@v2
+        with:
+          name: devextreme-build
+          path: devextreme-build-latest
+
+      - name: Download devextreme-angular Artifact
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        uses: actions/download-artifact@v2
+        with:
+          name: devextreme-angular-npm
+          path: devextreme-angular-npm-latest
+
+      - name: Install latest devextreme packages for Angular
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        working-directory: packages/angular
+        run: |
+          npm install $(find ../../devextreme-build-latest/devextreme -maxdepth 1 -name "devextreme-*.tgz")
+          npm install $(find ../../devextreme-build-latest/devextreme-dist -maxdepth 1 -name "devextreme-*.tgz")
+          npm install $(find ../../devextreme-angular-npm-latest -maxdepth 1 -name "devextreme-angular*.tgz")
+
+      - name: Fix devextreme SCSS for Angular
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        working-directory: packages/angular
+        run: |
+          cp -r ../../devextreme-build-latest/devextreme/scss/bundles ./node_modules/devextreme/scss/
+          cp -r ../../devextreme-build-latest/devextreme/scss/widgets/material/typography/fonts ./node_modules/devextreme/scss/widgets/fluent/typography/
+
+      - name: Delete Artifact
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        uses: GeekyEggo/delete-artifact@v2.0.0
+        with:
+          name: devextreme-build
+
+      - name: Delete Artifact
+        if: ${{ matrix.theme == 'fluent.blue.light.compact' }}
+        uses: GeekyEggo/delete-artifact@v2.0.0
+        with:
+          name: devextreme-angular-npm
+
+      - name: Set theme
+        run: npm run set-theme -- ${{ matrix.theme }}
+
+      - name: Set embedded mode
+        if: ${{ matrix.mode == 'embedded' && matrix.theme != 'fluent.blue.light.compact' }}
+        run: npm run make-embedded-mode
+
+      - name: Build
+        run: npm run build
+
+      - name: Copy apps
+        run: npm run copy-build -- ${{ matrix.mode }} ${{ matrix.theme }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: devextreme-ui-template-gallery
 
   build-shell:
     name: Build shell
     runs-on: ubuntu-latest
 
     steps:
-    - name: Get sources
-      uses: actions/checkout@v3
+      - name: Get sources
+        uses: actions/checkout@v3
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
-    - name: Set NPM version
-      run: npm i npm@7 -g
+      - name: Set NPM version
+        run: npm i npm@7 -g
 
-    - name: Restore npm cache
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: Run npm install
-      run: npm install
+      - name: Run npm install
+        run: npm install
 
-    - name: Run npm install for shell
-      run: npm install
-      working-directory: packages/shell
+      - name: Run npm install for shell
+        run: npm install
+        working-directory: packages/shell
 
-    - name: Build Shell
-      run: npm run build-shell
-      working-directory: packages/shell
+      - name: Build Shell
+        run: npm run build-shell
+        working-directory: packages/shell
 
-    - name: Copy apps
-      run: npm run copy-shell
+      - name: Copy apps
+        run: npm run copy-shell
 
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-artifacts
-        path: devextreme-ui-template-gallery/
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: devextreme-ui-template-gallery/
 
   deploy:
     name: Deploy
@@ -123,19 +230,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Get sources
-      uses: actions/checkout@v3
+      - name: Get sources
+        uses: actions/checkout@v3
 
-    - name: Download build artifacts
-      uses: actions/download-artifact@v3
-      with:
-        name: build-artifacts
-        path: devextreme-ui-template-gallery
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+          path: devextreme-ui-template-gallery
 
-    - name: Deploy in gh-pages
-      uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
-      with:
-        branch: gh-pages
-        folder: devextreme-ui-template-gallery
-        target-folder: .
+      - name: Deploy in gh-pages
+        uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
+        with:
+          branch: gh-pages
+          folder: devextreme-ui-template-gallery
+          target-folder: .
 
