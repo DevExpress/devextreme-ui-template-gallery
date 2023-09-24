@@ -90,9 +90,6 @@ jobs:
       - name: Get sources
         uses: actions/checkout@v3
 
-      - name: Test 01
-        run: ls .
-
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -124,6 +121,9 @@ jobs:
           name: devextreme-angular-npm
           path: devextreme-angular-npm-latest
 
+      - name: Check Angular
+        run: ls ./devextreme-angular-npm-latest
+
       - name: Install latest devextreme packages for Angular
         working-directory: packages/angular
         run: |
@@ -135,7 +135,7 @@ jobs:
         working-directory: packages/angular
         run: |
           cp -r ../../devextreme-build-latest/devextreme/scss/bundles ./node_modules/devextreme/scss/
-          cp -r ../../devextreme-build-latest/devextreme/scss/widgets/material/typography/fonts ./node_modules/devextreme/widgets/fluent/typography/
+          cp -r ../../devextreme-build-latest/devextreme/scss/widgets/material/typography/fonts ./node_modules/devextreme/scss/widgets/fluent/typography/
 
       - name: Delete Artifact
         uses: GeekyEggo/delete-artifact@v2.0.0
@@ -145,7 +145,7 @@ jobs:
       - name: Delete Artifact
         uses: GeekyEggo/delete-artifact@v2.0.0
         with:
-          name: devextreme-angular-build
+          name: devextreme-angular-npm
 
       - name: Check devextreme SCSS/BUNDLES for Angular
         working-directory: packages/angular
