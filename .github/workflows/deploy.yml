@@ -109,11 +109,9 @@ jobs:
 
       - name: Install latest devextreme for Angular
         working-directory: packages/angular
-        run: npm install $(find ../../devextreme-build-latest/devextreme -maxdepth 1 -name "devextreme-*.tgz")
-
-      - name: Install latest devextreme-dist for Angular
-        working-directory: packages/angular
-        run: npm install $(find ../../devextreme-build-latest/devextreme-dist -maxdepth 1 -name "devextreme-*.tgz")
+        run: |
+          npm install $(find ../../devextreme-build-latest/devextreme -maxdepth 1 -name "devextreme-*.tgz")
+          npm install $(find ../../devextreme-build-latest/devextreme-dist -maxdepth 1 -name "devextreme-*.tgz")
 
       - name: Fix devextreme SCSS/BUNDLES for Angular
         working-directory: packages/angular
