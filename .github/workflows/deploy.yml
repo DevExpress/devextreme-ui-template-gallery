@@ -32,52 +32,6 @@ jobs:
         mode: [ default ]
 
     steps:
-      #Build Devextreme latest
-    - name: Checkout Devextreme
-      uses: actions/checkout@v3
-      with:
-        repository: 'GoodDayForSurf/DevExtreme'
-        path: 'devextreme'
-
-    - name: DevExtreme - Restore npm cache
-      uses: actions/cache@v3
-      with:
-        path: 'devextreme/**/node_modules'
-        key: ${{ runner.os }}-node-modules-${{ hashFiles('devextreme/**/package-lock.json') }}
-
-    - name: Use Node.js 18
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.16.1'
-
-    - name: DevExtreme - Install packages
-      working-directory: devextreme
-      run: npm install --no-audit --no-fund
-
-    - name: DevExtreme - Build
-      working-directory: devextreme/packages/devextreme
-      run: npm run build-npm-devextreme
-
-    - name: DevExtreme - Pack
-      working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme
-      run: npm pack
-
-    - name: DevExtreme dist - Pack
-      working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme-dist
-      run: npm pack
-
-    - name: Upload devextreme Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: devextreme
-        path: devextreme/packages/devextreme/artifacts/npm/devextreme/devextreme-*.tgz
-
-    - name: Upload devextreme-dist Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: devextreme-dist
-        path: devextreme/packages/devextreme/artifacts/npm/devextreme-dist/devextreme-*.tgz
-
       #Build UI Template Gallery
     - name: Get sources
       uses: actions/checkout@v3
@@ -85,10 +39,10 @@ jobs:
     - name: Test 01
       run: ls .
 
-    - name: Use Node.js
+    - name: Use Node.js 18
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: '18.16.1'
 
     - name: Set NPM version
       run: npm i npm@7 -g
@@ -104,34 +58,58 @@ jobs:
     - name: Run npm install
       run: npm install
 
-    - name: Download devextreme Artifact
-      uses: actions/download-artifact@v2
+      #Build Devextreme latest
+    - name: Checkout Devextreme
+      uses: actions/checkout@v3
       with:
-        name: devextreme
-        path: devextreme-latest
+        repository: 'GoodDayForSurf/DevExtreme'
+        path: 'devextreme-latest'
 
-    - name: Download devextreme-dist Artifact
-      uses: actions/download-artifact@v2
+    - name: DevExtreme - Restore npm cache
+      uses: actions/cache@v3
       with:
-        name: devextreme-dist
-        path: devextreme-dist-latest
+        path: 'devextreme-latest/**/node_modules'
+        key: ${{ runner.os }}-node-modules-${{ hashFiles('devextreme/**/package-lock.json') }}
 
-    - name: Test 3
+    - name: Test 02
       run: ls .
 
-    - name: Test 4
-      run: ls ../
+    - name: DevExtreme - Install packages
+      working-directory: devextreme-latest
+      run: npm install --no-audit --no-fund
 
-    - name: Test 5
-      run: ls ../..
+    - name: DevExtreme - Build
+      working-directory: devextreme-latest/packages/devextreme
+      run: npm run build-npm-devextreme
+
+    - name: DevExtreme - Pack
+      working-directory: devextreme-latest/packages/devextreme/artifacts/npm/devextreme
+      run: npm pack
+
+    - name: DevExtreme dist - Pack
+      working-directory: devextreme-latest/packages/devextreme/artifacts/npm/devextreme-dist
+      run: npm pack
+
+    - name: Test dir
+      run: ls .
 
     - name: Install latest devextreme for Angular
       working-directory: packages/angular
-      run: npm install $(../../devextreme-latest/ -maxdepth 1 -name "devextreme-*.tgz")
+      run: npm install $(../../devextreme-latest/packages/devextreme/artifacts/npm/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
 
     - name: Install latest devextreme-dist for Angular
       working-directory: packages/angular
-      run: npm install $(find ../../devextreme-dist-latest/ -maxdepth 1 -name "devextreme-*.tgz")
+      run: npm install $(find ../../devextreme-latest/packages/devextreme/artifacts/npm/devextreme-dist/ -maxdepth 1 -name "devextreme-*.tgz")
+
+    - name: Fix devextreme SCSS/BUNDLES  for Angular
+      working-directory: packages/angular
+      run: cp -r ../../devextreme-latest/packages/devextreme/artifacts/npm/devextreme/scss/bundles ./node_modules/devextreme/scss/
+
+    - name: Upload devextreme for Angular artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: devextreme-for-angular
+        path: ./node_modules/devextreme
 
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
