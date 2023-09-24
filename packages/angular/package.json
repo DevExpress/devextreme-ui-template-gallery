@@ -20,7 +20,7 @@
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
-    "devextreme": "file:devextreme-23.2.0.tgz",
+    "devextreme": "file:devextreme-23.2.0-24-09-a1.tgz",
     "devextreme-angular": "file:devextreme-angular-23.2.0.tgz",
     "devextreme-dist": "file:devextreme-dist-23.2.0.tgz",
     "devextreme-schematics": "^1.2.16",
