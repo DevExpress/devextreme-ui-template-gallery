@@ -2,6 +2,8 @@ name: Deploy
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 5 * * *'  # Every night at 5:00
 
 jobs:
   set-matrix:
@@ -133,16 +135,6 @@ jobs:
         run: |
           cp -r ../../devextreme-build-latest/devextreme/scss/widgets/material/typography/fonts ./node_modules/devextreme/scss/widgets/fluent/typography/
 
-      - name: Delete Artifact
-        uses: GeekyEggo/delete-artifact@v2.0.0
-        with:
-          name: devextreme-build
-
-      - name: Delete Artifact
-        uses: GeekyEggo/delete-artifact@v2.0.0
-        with:
-          name: devextreme-angular-npm
-
       - name: Set theme
         run: npm run set-theme -- ${{ matrix.theme }}
 
@@ -164,6 +156,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Delete Artifact
+        uses: GeekyEggo/delete-artifact@v2.0.0
+        with:
+          name: devextreme-build
+
+      - name: Delete Artifact
+        uses: GeekyEggo/delete-artifact@v2.0.0
+        with:
+          name: devextreme-angular-npm
+
       - name: Get sources
         uses: actions/checkout@v3
 

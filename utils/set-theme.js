@@ -27,6 +27,7 @@ const changeThemesMeta = (theme) => {
   const isGenericTheme = baseTheme === 'generic';
   const color = isGenericTheme ? 'blue' : namePart;
   const isDarkTheme = theme.includes('.dark');
+  const isCompact = /compact$/.test(theme);
   const baseBundleName = baseTheme === 'generic' ? '' : `${baseTheme}.${color}.`;
 
   (theme.includes('fluent') ? ['angular'] : packages).forEach((packageName) => {
@@ -34,30 +35,30 @@ const changeThemesMeta = (theme) => {
     const appVariablesPath = join(appPath, variablesPath[packageName]);
 
     [].concat(filesForChange[packageName]).forEach(
-        (file) => {
-          const fileForChange = join(appPath, file);
+      (file) => {
+        const fileForChange = join(appPath, file);
 
-          // main import
-          const contentForChange = readFileSync(fileForChange, 'utf8');
+        // main import
+        const contentForChange = readFileSync(fileForChange, 'utf8');
 
-          writeFileSync(
-              fileForChange,
-              contentForChange
-                  .replace(/(scss\/bundles\/dx\.)(.+?\.)*?(dark|light)\.compact(\.scss)?("|')/g,
-                      `$1${baseBundleName}$3.compact$4$5`),
-          );
-        },
+        writeFileSync(
+          fileForChange,
+          contentForChange
+            .replace(/(scss\/bundles\/dx\.)(.+?\.)*?(dark|light)\.compact(\.scss)?("|')/g,
+              `$1${baseBundleName}$3${isCompact ? '.compact' : ''}$4$5`),
+        );
+      },
     );
 
     [].concat(themeJsFiles[packageName]).forEach(
-        (file) => {
-          const fileForChange = join(appPath, file);
+      (file) => {
+        const fileForChange = join(appPath, file);
 
-          const contentForChange = readFileSync(fileForChange, 'utf8');
-          if (isDarkTheme) {
-            writeFileSync(fileForChange, contentForChange.replace(/const themes = \['light', 'dark']/g, "const themes = ['dark', 'light']"));
-          }
-        },
+        const contentForChange = readFileSync(fileForChange, 'utf8');
+        if (isDarkTheme) {
+          writeFileSync(fileForChange, contentForChange.replace(/const themes = \['light', 'dark']/g, "const themes = ['dark', 'light']"));
+        }
+      },
     );
 
     const variablesContentForChange = readFileSync(appVariablesPath, 'utf8');
@@ -66,11 +67,11 @@ const changeThemesMeta = (theme) => {
 
     if (isGenericTheme) {
       newVariablesContent = newVariablesContent
-          .replace(', $mode: $theme', '')
-          .replace(/\$color: "\w+"/, '$color: $theme');
+        .replace(', $mode: $theme', '')
+        .replace(/\$color: "\w+"/, '$color: $theme');
     } else {
       newVariablesContent = newVariablesContent
-          .replace('($color: $theme)', `($color: "${color}", $mode: $theme)`);
+        .replace('($color: $theme)', `($color: "${color}", $mode: $theme)`);
     }
 
     writeFileSync(appVariablesPath, newVariablesContent);
@@ -81,10 +82,11 @@ const theme = argv[2];
 
 console.log(`Set theme ${theme}`);
 
-if (!/(material|fluent)\.\w+\.(dark|light)\.compact/.test(theme)
+if (!/(material|fluent)\.\w+\.(dark|light)(\.compact)?$/.test(theme)
     && !/generic\.(dark|light)\.compact/.test(theme)
 ) {
-  console.log('Usage set-theme.js <themename>. Variants: (material|fluent).<color>.(dark|light).compact or generic.(dark|light).compact');
+  console.error(`Failed to set theme ${theme}!`);
+  console.log('Usage set-theme.js <themename>. Variants: (material|fluent).<color>.(dark|light).(compact)? or generic.(dark|light).compact');
   exit(1);
 }
 
