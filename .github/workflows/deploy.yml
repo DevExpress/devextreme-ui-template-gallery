@@ -139,6 +139,7 @@ jobs:
         run: npm run set-theme -- ${{ matrix.theme }}
 
       - name: Build
+        working-directory: packages/angular
         run: npm run build
 
       - name: Copy apps
