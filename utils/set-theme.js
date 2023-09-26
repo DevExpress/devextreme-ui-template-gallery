@@ -27,7 +27,7 @@ const changeThemesMeta = (theme) => {
   const isGenericTheme = baseTheme === 'generic';
   const color = isGenericTheme ? 'blue' : namePart;
   const isDarkTheme = theme.includes('.dark');
-  const isCompact = /compact$/.test(theme);
+  const isCompactTheme = /compact$/.test(theme);
   const baseBundleName = baseTheme === 'generic' ? '' : `${baseTheme}.${color}.`;
 
   packages.forEach((packageName) => {
@@ -45,7 +45,7 @@ const changeThemesMeta = (theme) => {
           fileForChange,
           contentForChange
             .replace(/(scss\/bundles\/dx\.)(.+?\.)*?(dark|light)\.compact(\.scss)?("|')/g,
-              `$1${baseBundleName}$3${isCompact ? '.compact' : ''}$4$5`),
+              `$1${baseBundleName}$3${isCompactTheme ? '.compact' : ''}$4$5`),
         );
       },
     );
