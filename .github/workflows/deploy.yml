@@ -17,7 +17,7 @@ jobs:
       - name: Set themes matrix
         id: set-matrix
         run: |
-          themes_json=`echo '["fluent.blue.light"]'`
+          themes_json=`echo '["fluent.blue.light.compact", "fluent.blue.light"]'`
           themes_json="${themes_json//$'\n'/''}"
           themes_json="${themes_json//$'\r'/''}"
           themes_json="${themes_json//$' '/''}"
@@ -38,7 +38,7 @@ jobs:
       - name: Checkout Devextreme
         uses: actions/checkout@v3
         with:
-          repository: 'Devexpress/DevExtreme'
+          repository: 'GoodDayForSurf/DevExtreme'
           path: 'devextreme'
 
       - name: DevExtreme - Restore npm cache
