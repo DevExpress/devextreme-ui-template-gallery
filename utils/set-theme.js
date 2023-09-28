@@ -54,10 +54,10 @@ const theme = argv[2];
 console.log(`Set theme ${theme}`);
 
 if (!/(material|fluent)\.\w+\.(dark|light)(\.compact)?$/.test(theme)
-    && !/generic\.(dark|light)\.compact/.test(theme)
+    && !/generic\.(dark|light)(\.compact)?/.test(theme)
 ) {
   console.error(`Failed to set theme ${theme}!`);
-  console.log('Usage set-theme.js <themename>. Variants: (material|fluent).<color>.(dark|light).(compact)? or generic.(dark|light).compact');
+  console.log('Usage set-theme.js <themename>. Variants: (material|fluent).<color>.(dark|light).(compact)? or generic.(dark|light).(compact)?');
   exit(1);
 }
 
