@@ -28,7 +28,7 @@ export const AppHeader = ({ menuToggleEnabled, title, toggleMenu, className }: A
         </Item>
         <Item location='after'>
           <div className='messages'>
-            <Button icon='belloutline' />
+            <Button icon='belloutline' stylingMode='text' />
             <div className='dx-badge'>
               4
             </div>

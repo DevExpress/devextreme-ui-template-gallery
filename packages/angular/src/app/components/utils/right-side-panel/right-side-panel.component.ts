@@ -46,11 +46,6 @@ export class RightSidePanelComponent {
     this.isOpened = !this.isOpened;
     this.openedChange.emit(this.isOpened);
   };
-
-  accordionTitleClick = (e: DxButtonTypes.ClickEvent) => {
-    e.event.stopPropagation();
-  };
-
 }
 
 @NgModule({

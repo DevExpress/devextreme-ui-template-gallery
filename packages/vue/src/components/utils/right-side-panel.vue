@@ -20,6 +20,7 @@
           </div>
           <dx-button
             class="open-button"
+            styling-mode="text"
             :icon="(isOpened ? (screenInfo.isLarge ? 'panelleft': 'close'): 'panelright')"
             @click="toggleOpen"
           />

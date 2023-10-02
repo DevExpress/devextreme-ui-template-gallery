@@ -32,7 +32,7 @@ const Card = ({ data, user, manager }: { data: Message; user: string, manager: s
           </div>
         </div>
         <div>
-          <Button icon='overflow' />
+          <Button icon='overflow' stylingMode='text' />
         </div>
       </div>
       <div className='message-text'>{getText(data, user, manager)}</div>

@@ -1,6 +1,7 @@
 <template>
   <dx-button
     class="theme-button"
+    styling-mode="text"
     :icon="currentTheme === 'dark' ? 'sun' : 'moon'"
     @click="onClickButton"
   />

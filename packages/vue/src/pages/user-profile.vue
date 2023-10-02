@@ -69,6 +69,7 @@
                 <dx-button
                   icon="copy"
                   class="copy-clipboard-button"
+                  stylingMode="text"
                   @click="copyToClipboard(profileData.id, $event)"
                   :active-state-enabled="false"
                   :focus-state-enabled="false"
@@ -109,6 +110,7 @@
                 <dx-button
                   icon="copy"
                   class="copy-clipboard-button"
+                  stylingMode="text"
                   @click="copyToClipboard(profileData.email, $event)"
                   :active-state-enabled="false"
                   :focus-state-enabled="false"
