@@ -33,7 +33,7 @@ import 'jspdf-autotable';
   styleUrls: ['./task-list-grid.component.scss'],
 })
 export class TaskListGridComponent implements OnChanges {
-  @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
+  @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent<Task, number>;
 
   @Input() dataSource: Task[];
 
