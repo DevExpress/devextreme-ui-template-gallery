@@ -15,15 +15,10 @@ import { FormTextbox, FormPhoto, ContactStatus } from '../..';
 import { useScreenSize } from '../../../utils/media-query';
 import ValidationGroup from 'devextreme-react/validation-group';
 
-const accordionTitleClick = (e: ButtonTypes.ClickEvent) => {
-  e.event?.stopPropagation();
-};
-
 const renderCustomTitle = (item) => {
   return (
     <>
       <span>{item.title}</span>
-      <Button icon='add' type='default' stylingMode='text' onClick={accordionTitleClick} />
     </>
   );
 };
@@ -103,10 +98,18 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
             location='after'
             visible={isLarge || isMedium}
           >
-            <Button icon={isPinned ? 'pin' : 'unpin'} onClick={onPinClick} />
+            <Button
+              icon={isPinned ? 'pin' : 'unpin'}
+              stylingMode='text'
+              onClick={onPinClick}
+            />
           </ToolbarItem>
           <ToolbarItem location='after'>
-            <Button icon='close' onClick={onClosePanelClick} />
+            <Button
+              icon='close'
+              stylingMode='text'
+              onClick={onClosePanelClick}
+            />
           </ToolbarItem>
         </Toolbar>
         <ScrollView className='panel-scroll'>

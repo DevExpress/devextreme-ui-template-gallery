@@ -77,7 +77,7 @@ export const CRMContactDetails = () => {
       <div className='view-wrapper view-wrapper-contact-details'>
         <Toolbar className='toolbar-details'>
           <Item location='before'>
-            <Button icon='arrowleft' />
+            <Button icon='arrowleft' stylingMode='text' />
           </Item>
           <Item location='before' text={ data?.name ?? 'Loading...' } />
           <Item location='after' locateInMenu='auto'>
