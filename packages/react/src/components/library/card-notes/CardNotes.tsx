@@ -20,7 +20,7 @@ const Card = ({ note }: { note: Note }) => {
           {formatDate(new Date(note.date), 'MM/dd/yyyy')} - {note.manager}
         </div>
         <div>
-          <Button icon='overflow' />
+          <Button icon='overflow' stylingMode='text' />
         </div>
       </div>
       <div className='note-text'>{note.text}</div>

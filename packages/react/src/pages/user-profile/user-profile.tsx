@@ -88,6 +88,7 @@ const UserProfileContent = ({
                 <span>ID: {profileData?.id}</span>
                 <Button icon='copy'
                   className='copy-clipboard-button'
+                  stylingMode='text'
                   onClick={copyToClipboard(profileData?.id)}
                   activeStateEnabled={false}
                   focusStateEnabled={false}
@@ -125,6 +126,7 @@ const UserProfileContent = ({
                 <Button
                   icon='copy'
                   className='copy-clipboard-button'
+                  stylingMode='text'
                   onClick={copyToClipboard(profileData?.email)}
                   activeStateEnabled={false}
                   focusStateEnabled={false}
