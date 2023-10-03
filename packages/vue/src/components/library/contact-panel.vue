@@ -27,13 +27,21 @@
             location="after"
             widget="dxButton"
             :visible="isPinEnabled"
-            :options="{ icon: isPinned ? 'pin' : 'unpin', onClick: () => isPinned = !isPinned }"
+            :options="{
+              icon: isPinned ? 'pin' : 'unpin',
+              stylingMode: 'text',
+              onClick: () => isPinned = !isPinned
+            }"
           />
 
           <dx-item
             location="after"
             widget="dxButton"
-            :options="{ icon: 'close', onClick: onClose }"
+            :options="{
+              icon: 'close',
+              stylingMode: 'text',
+              onClick: onClose
+            }"
           />
         </dx-toolbar>
 
@@ -170,12 +178,6 @@
               <template #title="{ data }">
                 <div class="accordion-title">
                   <span>{{ data.title }}</span>
-                  <dx-button
-                    icon="add"
-                    type="default"
-                    styling-mode="text"
-                    @click="e => {e.event.stopPropagation(); accordionPlusClick(e);}"
-                  />
                 </div>
               </template>
 
@@ -279,10 +281,6 @@ const loadContact = async (contactId: number) => {
   panelData.value = await getContact(contactId);
   isLoading.value = false;
 };
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-function accordionPlusClick(/* e : Event */) {
-}
 
 function handleSaveClick({ validationGroup }: DxButtonTypes.ClickEvent) {
   if (validationGroup.validate().isValid) {

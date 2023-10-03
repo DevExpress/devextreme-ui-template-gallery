@@ -14,7 +14,7 @@
         {{ item.key }}
         <dx-button
           icon="add"
-          styling-mode="contained"
+          styling-mode="text"
           @click="onAddClick"
         />
       </div>

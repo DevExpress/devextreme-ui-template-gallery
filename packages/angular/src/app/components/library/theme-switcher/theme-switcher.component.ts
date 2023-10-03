@@ -10,6 +10,7 @@ import { ThemeService } from 'src/app/services';
   template: `
     <dx-button
       class="theme-button"
+      stylingMode="text"
       [icon]="themeService.currentTheme !== 'dark' ? 'moon' : 'sun'"
       (onClick)="onButtonClick()"
     ></dx-button>

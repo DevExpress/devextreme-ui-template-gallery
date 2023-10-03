@@ -125,10 +125,6 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
     }
   };
 
-  accordionTitleClick = (e: DxButtonTypes.ClickEvent) => {
-    e.event.stopPropagation();
-  };
-
   toggleEdit = () => {
     this.isEditing = !this.isEditing;
   };

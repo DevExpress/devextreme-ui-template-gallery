@@ -3,7 +3,10 @@
     <div class="view-wrapper">
       <dx-toolbar class="toolbar-details">
         <dx-toolbar-item location="before">
-          <dx-button icon="arrowleft" />
+          <dx-button
+            icon="arrowleft"
+            styling-mode="text"
+          />
         </dx-toolbar-item>
         <dx-toolbar-item
           location="before"

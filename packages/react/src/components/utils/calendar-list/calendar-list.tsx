@@ -13,7 +13,7 @@ const onAddClick = (e) => {
 const listTitleRender = (item) => {
   return <div className='list-header'>
     {item.key}
-    <Button icon='add' stylingMode='contained' onClick={onAddClick} />
+    <Button icon='add' stylingMode='text' onClick={onAddClick} />
   </div>;
 };
 

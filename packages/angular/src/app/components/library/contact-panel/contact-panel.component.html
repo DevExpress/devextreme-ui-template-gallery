@@ -10,12 +10,16 @@
         </dxi-item>
         <dxi-item location="after" [visible]="isPinEnabled">
           <dx-button
+            stylingMode="text"
             [icon]="pinned ? 'pin' : 'unpin'"
             (onClick)="onPinClick()"
           ></dx-button>
         </dxi-item>
         <dxi-item location="after">
-          <dx-button icon="close" (onClick)="onClosePanel()"></dx-button>
+          <dx-button
+            icon="close" 
+            stylingMode="text"
+            (onClick)="onClosePanel()"></dx-button>
         </dxi-item>
       </dx-toolbar>
 
@@ -169,13 +173,6 @@
           <dx-accordion [multiple]="true" [collapsible]="true">
             <div class="accordion-title" *dxTemplate="let t of 'title'">
               <span>{{ t.title }}</span>
-              <dx-button
-                icon="add"
-                type="default"
-                stylingMode="text"
-                (onClick)="accordionTitleClick($event)"
-              >
-              </dx-button>
             </div>
 
             <dxi-item title="Opportunities">

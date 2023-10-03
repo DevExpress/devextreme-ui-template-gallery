@@ -50,7 +50,7 @@ export const PlanningTaskDetails = () => {
       <div className='view-wrapper view-wrapper-details'>
         <Toolbar className='toolbar-details'>
           <ToolbarItem location='before'>
-            <Button icon='arrowleft' />
+            <Button icon='arrowleft' stylingMode='text' />
           </ToolbarItem>
           <ToolbarItem location='before' text={ task?.text ?? 'Loading...' } />
           <ToolbarItem location='after' locateInMenu='auto'>
