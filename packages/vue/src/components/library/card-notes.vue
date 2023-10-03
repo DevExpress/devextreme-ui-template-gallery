@@ -46,7 +46,7 @@
                   <div>{{ formatDate(new Date(note.date)) }} - {{ note.manager }}</div>
                   <dx-button
                     icon="overflow"
-                    stylingMode="text"
+                    styling-mode="text"
                   />
                 </div>
                 <div class="note-text">

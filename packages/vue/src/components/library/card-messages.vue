@@ -74,7 +74,7 @@
                   </div>
                   <dx-button
                     icon="overflow"
-                    stylingMode="text"
+                    styling-mode="text"
                   />
                 </div>
                 <div class="message-text">
