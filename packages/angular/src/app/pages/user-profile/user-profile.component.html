@@ -1,30 +1,4 @@
 <div class="view-wrapper">
-  <dx-toolbar [class.scrolled]="isContentScrolled">
-    <dxi-item location="before">
-      <div class="header-text">User Profile</div>
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="never">
-      <dx-button
-        text="Cancel"
-        [disabled]="!isDataChanged"
-        stylingMode="contained"
-        (onClick)="cancel()"
-      >
-      </dx-button>
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="never">
-      <dx-button
-        [disabled]="!isDataChanged"
-        text="Save"
-        icon="save"
-        type="default"
-        stylingMode="contained"
-        (onClick)="save()"
-      >
-      </dx-button>
-    </dxi-item>
-  </dx-toolbar>
-
   <dx-load-panel
     container=".view-wrapper-scroll"
     [visible]="isLoading"
@@ -33,6 +7,33 @@
   >
   </dx-load-panel>
   <dx-scroll-view class="view-wrapper-scroll" (onScroll)="scroll($event)">
+    <div class="toolbar-wrapper">
+    <dx-toolbar [class.scrolled]="isContentScrolled" class="base-toolbar">
+      <dxi-item location="before">
+        <div class="header-text">User Profile</div>
+      </dxi-item>
+      <dxi-item location="after" locateInMenu="never">
+        <dx-button
+          text="Cancel"
+          [disabled]="!isDataChanged"
+          stylingMode="contained"
+          (onClick)="cancel()"
+        >
+        </dx-button>
+      </dxi-item>
+      <dxi-item location="after" locateInMenu="never">
+        <dx-button
+          [disabled]="!isDataChanged"
+          text="Save"
+          icon="save"
+          type="default"
+          stylingMode="contained"
+          (onClick)="save()"
+        >
+        </dx-button>
+      </dxi-item>
+    </dx-toolbar>
+  </div>
     <div *ngIf="!isLoading" class="cards-container">
       <profile-card
         class="profile-card basic-info-card"

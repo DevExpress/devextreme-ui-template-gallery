@@ -2,6 +2,7 @@ export const navigation = [
   {
     text: 'CRM',
     icon: 'user',
+    expanded: true,
     path: '',
     items: [
       {

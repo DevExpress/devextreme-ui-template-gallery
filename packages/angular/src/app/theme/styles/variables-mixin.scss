@@ -20,16 +20,17 @@ $theme-type: 'material';
 :root {
   --side-panel-min-width: 48px;
   --content-padding: 16px;
+  --page-padding: 32px;
   --header-toolbar-vertical-padding: 10px;
   --footer-height: 70px;
   --toolbar-vertical-padding: 16px;
   --toolbar-margin-bottom: var(--content-padding);
   --base-bg: #{$base-bg};
-  --background-color: var(--base-bg);
-  --base-bg-darken-5: #{darken($base-bg, 5)};
-  --base-bg-darken-4: #{darken($base-bg, 4)};
+  --background-color: #{($base-neutral-background2)};
+  --base-bg-darken-5: #{darken($base-neutral-background2, 5)};
+  --base-bg-darken-4: #{darken($base-neutral-background2, 4)};
   --side-panel-background: var(--base-bg-darken-5);
-  --card-background: var(--base-bg);
+  --card-background: #{$base-neutral-background1};
   --calendar-width: 292px;
 
   @if $theme == dark {

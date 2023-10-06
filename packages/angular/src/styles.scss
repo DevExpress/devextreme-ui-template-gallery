@@ -225,3 +225,16 @@ body {
 .status-indicator-high {
   @include status(#ff5722);
 }
+
+
+.dx-theme-fluent {
+  .dx-toolbar {
+    background-color: transparent;
+  }
+  .view-wrapper {
+    & .dx-toolbar.base-toolbar {
+      border-radius: 8px;
+      background-color: var(--base-bg);
+    }
+  }
+}

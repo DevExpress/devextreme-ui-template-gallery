@@ -11,12 +11,13 @@
 .view-wrapper {
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 64px;
   left: 0;
   right: 0;
   flex-direction: row;
 
   .grid {
+    padding: 0 var(--page-padding);
     .name-template {
       .position {
         font-size: 12px;
@@ -39,13 +40,18 @@
     }
 
     ::ng-deep & {
+      //fluent
       .dx-datagrid-header-panel {
-        padding: 0 var(--content-padding);
+        padding: 5px var(--content-padding);
+        border-bottom: 0;
+        margin: 24px 0;
+        background-color: var(--base-bg);
+        border-radius: 8px;
+        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
       }
 
       .dx-toolbar {
         margin-bottom: 0;
-        padding: var(--toolbar-margin-bottom) 0;
       }
 
       .dx-datagrid-content .dx-row {
