@@ -1,6 +1,14 @@
 @use "../../../../variables.scss" as *;
 @use "sass:math";
 
+:host {
+  padding: 5px var(--content-padding);
+  border-bottom: 0;
+  background-color: var(--base-bg);
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+}
+
 .toolbar-header {
   @include header();
 }

@@ -9,7 +9,7 @@
 }
 
 .view-wrapper {
-  padding: calc(var(--content-padding) * 2);
+  padding: 24px calc(var(--content-padding) * 2);
 
   .cards {
     display: grid;

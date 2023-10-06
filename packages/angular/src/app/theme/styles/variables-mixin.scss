@@ -37,6 +37,8 @@ $theme-type: 'material';
     --card-background: var(--base-bg-darken-5);
   }
 
+  --base-bg-hover: #{$base-neutral-background3-hover};
+  --base-bg-selected: #{$base-bg-selected};
   --border-color: #{$base-border-color};
   --accent-color: #{$base-accent};
   --base-text-color: #{$base-text-color};

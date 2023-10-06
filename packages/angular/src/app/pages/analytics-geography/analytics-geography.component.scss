@@ -9,7 +9,7 @@
 }
 
 .view-wrapper {
-  padding: calc(var(--content-padding) * 2);
+  padding: 24px calc(var(--content-padding) * 2);
 
   .cards {
     display: grid;
@@ -19,7 +19,7 @@
 
     &.wide {
       grid-template-columns: repeat(1, 100%);
-      margin: 20px 0;
+      margin: 24px 0;
     }
   }
 

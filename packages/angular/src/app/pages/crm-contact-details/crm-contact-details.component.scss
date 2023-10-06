@@ -12,7 +12,11 @@
 }
 
 .dx-toolbar ::ng-deep {
-  margin-bottom: calc(var(--toolbar-margin-bottom) / 2);
+  margin-bottom: 24px;
+  background-color: var(--base-bg);
+  padding: 5px var(--content-padding);
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
 
   .dx-toolbar-label > div {
     @include header();
@@ -31,12 +35,10 @@
 
     .left {
       flex: 1 var(--left-panel-width);
-      margin-top: 8px;
     }
 
     .right {
       flex: 1 calc(100% - var(--left-panel-width) - 20px);
-      margin-top: 8px;
       min-width: 340px;
     }
   }
