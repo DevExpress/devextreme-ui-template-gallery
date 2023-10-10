@@ -28,7 +28,7 @@
         widget="dxTextBox"
         css-class="global-search-box"
         :options="{
-          stylingMode: 'underlined',
+          stylingMode: 'filled',
           mode: 'search',
           placeholder: 'Search',
           width: 180

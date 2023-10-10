@@ -158,7 +158,8 @@ const refreshOptions = {
   --left-panel-width: 400px;
   --right-panel-width: 360px;
 
-  padding: var(--content-padding) var(--content-padding) 0 var(--content-padding);
+  padding-top: var(--content-padding);
+  padding-bottom: var(--content-padding);
 
   .panels {
     display: flex;
