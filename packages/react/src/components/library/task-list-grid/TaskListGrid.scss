@@ -5,10 +5,6 @@
   min-height: 300px;
 }
 
-.planning-grid {
-  border-top: 1px solid var(--border-color);
-}
-
 .dx-datagrid-header-panel {
   padding-top: 0;
 }
@@ -16,10 +12,6 @@
 .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-icon.dx-icon-plus,
 .dx-datagrid-header-panel .dx-datagrid-toolbar-button .dx-button-text {
   color: #fff;
-}
-
-.dx-row.completed {
-  background: var(--background-gray-color);
 }
 
 .edit-cell {
