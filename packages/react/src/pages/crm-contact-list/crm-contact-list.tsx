@@ -168,6 +168,7 @@ export const CRMContactList = () => {
           onRowClick={onRowClick}
           onExporting={onExporting}
           allowColumnReordering
+          showBorders
           ref={gridRef}
         >
           <LoadPanel showPane={false} />

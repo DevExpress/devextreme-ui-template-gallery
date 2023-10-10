@@ -18,6 +18,7 @@ $theme: null !default;
   --header-toolbar-vertical-padding: 10px;
   --toolbar-vertical-padding: 16px;
   --content-padding: 16px;
+  --page-padding: 32px;
   --toolbar-margin-bottom: var(--content-padding);
   --footer-height: 70px;
   --base-bg-darken-5: #{darken($base-bg, 5)};

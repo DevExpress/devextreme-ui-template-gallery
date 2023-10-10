@@ -6,12 +6,14 @@
   flex-direction: column;
   display: flex;
   height: inherit;
+  padding: 0 var(--page-padding);
 
   .calendar-content {
     display: flex;
     height: inherit;
     gap: 16px;
-    padding: var(--content-padding) var(--content-padding) var(--theme-padding);
+    padding-top: var(--content-padding);
+    padding-bottom: var(--theme-padding);
 
     .left-content {
       display: flex;
@@ -35,7 +37,7 @@
 
       .calendar {
         align-self: center;
-        padding: var(--theme-padding);
+        padding: var(--theme-padding) 0;
       }
 
       .dx-calendar {
