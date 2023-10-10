@@ -11,6 +11,7 @@
     @saved="toogleUseNavigation"
     :hover-state-enabled="true"
     :column-auto-width="true"
+    :show-borders="true"
   >
     <dx-load-panel
       :enabled="false"

@@ -6,6 +6,7 @@
       :allow-column-reordering="true"
       :focused-row-enabled="true"
       :focused-row-key="focusedRowKey"
+      :show-borders="true"
       height="100%"
       class="grid"
       @row-click="rowClick"

@@ -364,7 +364,7 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
   .cards-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 calc(var(--content-padding) * 2);
+    margin: 0 1px;
     padding: calc(var(--content-padding) / 2) 0 var(--content-padding);
     gap: 24px;
 

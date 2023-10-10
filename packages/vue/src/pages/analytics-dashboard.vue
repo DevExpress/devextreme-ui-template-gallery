@@ -91,7 +91,8 @@ const tabChange = ([startDate, endDate]: string[]) => {
 @use "@/variables.scss" as *;
 
 .view-wrapper {
-  padding: var(--content-padding);
+  padding-top: var(--content-padding);
+  padding-bottom: var(--content-padding);
 
   .cards, .tiles {
     display: grid;
