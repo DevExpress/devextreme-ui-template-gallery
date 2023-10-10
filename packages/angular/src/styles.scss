@@ -101,6 +101,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding: 0 var(--page-padding);
 }
 
 .dx-card.details-card {
