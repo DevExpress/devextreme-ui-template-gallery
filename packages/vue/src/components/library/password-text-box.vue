@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<{
   validators?: Array<typeof DxValidationRule>,
 }>(), {
   value: '',
-  stylingMode: 'outlined',
+  stylingMode: 'filled',
   placeholder: '',
   validators: () => [],
 });

@@ -53,7 +53,6 @@ export const ContactFromDetails = ({ data, editing, updateField }: {
               label='Status'
               value={data.status}
               readOnly={!editing}
-              stylingMode='filled'
               items={CONTACT_STATUS_LIST}
               width='100%'
               fieldRender={statusRender}

@@ -32,6 +32,7 @@
             <dx-form-item>
               <status-select-box
                 v-model="contactData.status"
+                class="contact-status"
                 :items="contactStatusList"
                 :read-only="!isEditing"
                 styling-mode="filled"

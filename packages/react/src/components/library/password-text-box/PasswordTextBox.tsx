@@ -16,7 +16,7 @@ export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({
   value = '',
   onValueChange,
   placeholder,
-  stylingMode = 'outlined',
+  stylingMode = 'filled',
   validators,
   onValueValidated
 }, ref) => {
