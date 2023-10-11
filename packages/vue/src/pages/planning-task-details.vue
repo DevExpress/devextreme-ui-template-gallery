@@ -18,7 +18,7 @@
         >
           <dx-drop-down-button
             text="Actions"
-            styling-mode="contained"
+            styling-mode="text"
           >
             <dx-drop-down-item text="Duplicate" />
             <dx-drop-down-item text="Close" />
