@@ -17,7 +17,7 @@
         :selected-item-keys="[5]"
         key-expr="key"
         :items="analyticsPanelItems"
-        @item-click="selectionChange($event)"
+        @selection-changed="selectionChange($event)"
       />
     </dx-item>
 
@@ -82,8 +82,8 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits(['tab-change']);
 const [initialStartDate, initialEndDate] = analyticsPanelItems[4].value.split('/');
 
-const selectionChange = (e: DxTabsTypes.ItemClickEvent) => {
-  const [startDate, endDate] = e.itemData.value.split('/');
+const selectionChange = (e: DxTabsTypes.SelectionChangedEvent) => {
+  const [startDate, endDate] = e.addedItems[0].value.split('/');
   emit('tab-change', [startDate, endDate]);
 };
 

@@ -28,8 +28,8 @@ export class ToolbarAnalyticsComponent {
 
   constructor(protected screen: ScreenService) { }
 
-  selectionChange(e: DxTabsTypes.ItemClickEvent) {
-    const dates = e.itemData.value.split('/');
+  selectionChange(e: DxTabsTypes.SelectionChangedEvent) {
+    const dates = e.addedItems[0].value.split('/');
 
     this.selectionChanged.emit({ startDate: dates[0], endDate: dates[1] });
   }
