@@ -150,29 +150,6 @@ watch(
       }
       // ##
     }
-    // ## Selected & Focuced items customization
-    .dx-treeview {
-      .dx-treeview-node-container {
-        .dx-treeview-node {
-          &.dx-state-selected:not(.dx-state-focused) > .dx-treeview-item {
-            background: transparent;
-          }
-          &.dx-state-selected > .dx-treeview-item * {
-            color: var(--accent-color);
-          }
-          &:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
-            background-color: var(--base-bg-darken-4);
-          }
-        }
-      }
-    }
-    .dx-theme-generic .dx-treeview {
-      .dx-treeview-node-container {
-        .dx-treeview-node.dx-state-selected.dx-state-focused > .dx-treeview-item * {
-          color: inherit;
-        }
-      }
-    }
     // ##
   }
 }
