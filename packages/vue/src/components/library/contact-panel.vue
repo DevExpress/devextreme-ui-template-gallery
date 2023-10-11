@@ -106,7 +106,7 @@
             <div class="data-part data-part-toolbar border">
               <dx-toolbar>
                 <dx-item
-                  location="before"
+                  location="after"
                   :visible="!isEditing"
                 >
                   <dx-button
@@ -119,7 +119,7 @@
                 </dx-item>
 
                 <dx-item
-                  location="before"
+                  location="after"
                   :visible="!isEditing"
                 >
                   <dx-button
@@ -131,7 +131,7 @@
                 </dx-item>
 
                 <dx-item
-                  location="before"
+                  location="after"
                   locate-in-menu="before"
                   :visible="isEditing"
                 >
@@ -145,7 +145,7 @@
                 </dx-item>
 
                 <dx-item
-                  location="before"
+                  location="after"
                   locate-in-menu="before"
                   :visible="isEditing"
                 >
@@ -157,12 +157,11 @@
                 </dx-item>
 
                 <dx-item
-                  location="after"
+                  location="before"
                   widget="dxDropDownButton"
                   :options="{
-                    width: 120,
                     text: 'Actions',
-                    stylingMode: 'contained',
+                    stylingMode: 'text',
                     items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
                   }"
                 />
