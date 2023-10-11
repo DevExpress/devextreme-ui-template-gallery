@@ -46,7 +46,11 @@
 
       <div class="right">
         <div class="dx-card details-card">
-          <dx-tab-panel [showNavButtons]="true" [deferRendering]="false">
+          <dx-tab-panel
+            secondary="secondary"
+            [showNavButtons]="true"
+            [deferRendering]="false"
+          >
             <dxi-item title="Activities">
               <card-activities
                 [isLoading]="isLoading"

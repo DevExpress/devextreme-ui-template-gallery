@@ -1,5 +1,8 @@
 <div class="dx-card details-card">
-  <dx-tab-panel [showNavButtons]="true">
+  <dx-tab-panel
+    secondary="secondary"
+    [showNavButtons]="true"
+  >
     <dxi-item title="Tasks">
       <card-tasks [tasks]="tasks" [isLoading]="isLoading"></card-tasks>
     </dxi-item>

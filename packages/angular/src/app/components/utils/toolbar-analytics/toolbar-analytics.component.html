@@ -5,11 +5,12 @@
 
   <dxi-item *ngIf="panelItems" location="before">
     <dx-tabs
+      secondary="secondary"
+      keyExpr="key"
       [width]="(screen.xSmallScreenChanged | async) ? 150 : 'auto'"
       [showNavButtons]="false"
       [scrollByContent]="true"
       [selectedItemKeys]="selectedItems"
-      keyExpr="key"
       [items]="panelItems"
       (onSelectionChanged)="selectionChange($event)"
     ></dx-tabs>
