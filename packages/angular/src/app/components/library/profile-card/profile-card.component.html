@@ -19,7 +19,7 @@
           [dataField]="item.dataField"
           [editorType]="item.editorType"
           [editorOptions]="
-            assign | apply: { stylingMode: 'outlined' }:item.editorOptions
+            assign | apply: { stylingMode: 'outlined', valueChangeEvent: 'input' }:item.editorOptions
           "
           [colSpan]="item.colSpan"
         >
