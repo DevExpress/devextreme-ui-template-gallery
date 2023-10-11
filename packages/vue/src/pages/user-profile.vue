@@ -339,6 +339,8 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
   display: flex;
   flex-direction: column;
   padding-top: var(--content-padding);
+  max-width: 1200px;
+  margin: 0 auto;
 
   .view-wrapper-scroll {
     width: 100%;

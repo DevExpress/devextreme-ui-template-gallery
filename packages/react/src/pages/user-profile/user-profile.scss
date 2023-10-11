@@ -37,6 +37,8 @@
   display: flex;
   flex-direction: column;
   padding-top: var(--content-padding);
+  max-width: 1200px;
+  margin: 0 auto;
 
   & > .dx-toolbar {
     padding: 0 calc(var(--content-padding) * 2);
