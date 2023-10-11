@@ -85,31 +85,6 @@
       // ##
     }
 
-    // ## Selected & Focuced items customization
-    ::ng-deep .dx-treeview {
-      .dx-treeview-node-container {
-        .dx-treeview-node {
-          &.dx-state-selected:not(.dx-state-focused) > .dx-treeview-item,
-          &.dx-state-selected:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
-            background: var(--base-bg-selected);
-          }
-
-          &.dx-state-selected > .dx-treeview-item * {
-            //fluent
-            color: var(--accent-color);
-          }
-
-          &:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
-            background-color: var(--base-bg-hover);
-          }
-
-          // .dx-treeview-item {
-          //   background-color: var(--background-color);
-          // }
-        }
-      }
-    }
-
     :host-context(.dx-theme-generic) ::ng-deep.dx-treeview {
       .dx-treeview-node-container .dx-treeview-node.dx-state-selected.dx-state-focused > .dx-treeview-item * {
         color: inherit;
