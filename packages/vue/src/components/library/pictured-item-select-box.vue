@@ -6,7 +6,7 @@
     :items="items"
     :drop-down-options="{wrapperAttr: {class: 'pictured-item-select-box-dropdown'}}"
     value-expr="name"
-    styling-mode="outlined"
+    styling-mode="filled"
     label-mode="hidden"
     width="100%"
     field-template="field"

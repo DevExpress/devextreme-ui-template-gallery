@@ -2,6 +2,7 @@
   <dx-select-box
     label="Status"
     :value="modelValue"
+    :class="classList"
     @value-changed="emitChangedValue"
     :items="items"
     :read-only="readOnly"
@@ -48,12 +49,14 @@ withDefaults(defineProps<{
   editable?: boolean,
   labelMode?: string,
   stylingMode?: string,
+  classList: string,
 }>(), {
   modelValue: '',
   editable: true,
   readOnly: false,
-  stylingMode: 'outlined',
-  labelMode: 'floating',
+  stylingMode: '',
+  labelMode: '',
+  classList: '',
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -66,7 +69,7 @@ function emitChangedValue(changedData: SimpleObject) {
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
 
-.dx-texteditor-with-floating-label .status-editor-field .status-indicator {
+.contact-status .status-editor-field .status-indicator {
   align-self: flex-end;
   display: inline;
 }

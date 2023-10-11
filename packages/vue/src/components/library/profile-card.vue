@@ -21,7 +21,7 @@
           :data-field="item.dataField"
           :editor-type="item.editorType"
           :editor-options="{
-            stylingMode: 'outlined',
+            stylingMode: 'filled',
             valueChangeEvent: 'input',
             ...item.editorOptions
           }"
