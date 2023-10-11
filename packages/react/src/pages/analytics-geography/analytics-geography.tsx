@@ -62,7 +62,7 @@ export const AnalyticsGeography = () => {
   }, [dateRange]);
 
   const onTabClick = useCallback((e) => {
-    const { index, period } = ANALYTICS_PERIODS[e.itemData];
+    const { index, period } = ANALYTICS_PERIODS[e.addedItems[0]];
     setTabIndex(index);
     setDateRange(period.split('/'));
     setIsLoading(true);
@@ -86,7 +86,7 @@ export const AnalyticsGeography = () => {
               showNavButtons={false}
               dataSource={items}
               selectedIndex={tabIndex}
-              onItemClick={onTabClick}
+              onSelectionChanged={onTabClick}
             />
           </Item>
         }
