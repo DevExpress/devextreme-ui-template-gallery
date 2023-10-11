@@ -54,7 +54,7 @@ export const PlanningTaskDetails = () => {
           </ToolbarItem>
           <ToolbarItem location='before' text={ task?.text ?? 'Loading...' } />
           <ToolbarItem location='after' locateInMenu='auto'>
-            <DropDownButton text='Actions' stylingMode='contained'>
+            <DropDownButton text='Actions' stylingMode='text'>
               <DropDownItem text='Duplicate' />
               <DropDownItem text='Close' />
               <DropDownItem text='Delete' />
