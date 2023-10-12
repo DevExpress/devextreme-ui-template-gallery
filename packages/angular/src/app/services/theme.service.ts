@@ -1,4 +1,5 @@
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
+import { current } from 'devextreme/ui/themes'
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -41,6 +42,10 @@ export class ThemeService {
 
   getCurrentTheme() {
     return this.currentTheme;
+  }
+
+  isFluent(): boolean {
+    return current().includes('fluent');
   }
 
   switchTheme() {

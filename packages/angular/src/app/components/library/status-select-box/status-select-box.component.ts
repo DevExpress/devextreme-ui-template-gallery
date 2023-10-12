@@ -3,9 +3,10 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
+import { EditorStyle, LabelMode } from 'devextreme-angular/common';
 import { contactStatusList } from 'src/app/types/contact';
 import { ContactStatusModule } from 'src/app/components/utils/contact-status/contact-status.component';
-import { EditorStyle } from 'devextreme-angular/common';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'status-select-box',
@@ -21,13 +22,16 @@ export class StatusSelectBoxComponent {
 
   @Input() readOnly = false;
 
-  @Input() stylingMode: EditorStyle = 'outlined';
+  @Input() stylingMode: EditorStyle = this.theme.isFluent() ? 'filled' : undefined;
 
-  @Input() labelMode;
+  @Input() labelMode: LabelMode = this.theme.isFluent() ? 'outside' : undefined;
 
   @Input() classList;
 
   @Output() valueChange = new EventEmitter<string>();
+
+  constructor(private theme: ThemeService) {}
+
 }
 
 @NgModule({
