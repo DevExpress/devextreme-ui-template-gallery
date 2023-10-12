@@ -5,12 +5,6 @@
   min-height: 300px;
 }
 
-::ng-deep {
-  .dx-row.completed {
-    background: var(--background-gray-color);
-  }
-}
-
 .edit-cell {
   position: relative;
 }

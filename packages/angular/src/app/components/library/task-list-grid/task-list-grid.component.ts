@@ -95,16 +95,6 @@ export class TaskListGridComponent implements OnChanges {
     }
   }
 
-  onRowPreparedGrid = (e: DxDataGridTypes.RowPreparedEvent<Task, number>) => {
-    const { rowType, rowElement, data } = e;
-
-    if (rowType === 'header') return;
-
-    if (data.status === 'Completed') {
-      rowElement.classList.add('completed');
-    }
-  };
-
   toogleUseNavigation = () => {
     this.useNavigation = !this.useNavigation;
   };
