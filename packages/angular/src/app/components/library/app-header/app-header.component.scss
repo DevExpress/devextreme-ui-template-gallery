@@ -25,14 +25,18 @@ header {
       position: relative;
 
       .dx-badge {
-        display: block;
         position: absolute;
         background-color: red;
         color: white;
-        right: -10%;
-        top: -10%;
+        right: -5%;
+        top: -5%;
         font-size: 12px;
-        padding: 0 4px;
+        display: flex;
+        align-items: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 10px;
+        justify-content: center;
       }
     }
 
