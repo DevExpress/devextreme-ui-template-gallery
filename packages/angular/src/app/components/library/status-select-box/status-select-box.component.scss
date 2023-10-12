@@ -7,6 +7,15 @@
     display: inline;
   }
 }
+:host-context(.dx-theme-fluent) {
+  .contact-status .status-editor-field .status-indicator {
+    align-self: center;
+  
+    &::ng-deep .status {
+      display: flex;
+    }
+  }
+}
 
 .status-editor-field {
   display: flex;
