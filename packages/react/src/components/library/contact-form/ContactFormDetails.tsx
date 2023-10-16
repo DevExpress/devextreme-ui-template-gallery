@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import classNames from 'classnames';
 
@@ -15,6 +15,7 @@ import { FormTextbox } from '../../utils/form-textbox/FormTextbox';
 
 import { Contact } from '../../../types/crm-contact';
 import { CONTACT_STATUS_LIST } from '../../../shared/constants';
+import { ThemeContext } from '../../../theme/theme';
 
 const PHOTO_SIZE = 184;
 
@@ -36,6 +37,8 @@ const statusItemRender = (text: string) => <ContactStatus text={text} />;
 export const ContactFromDetails = ({ data, editing, updateField }: {
   data: Contact, editing: boolean, updateField: (field: string | number) => (value: string | number) => void
 }) => {
+  const themeContext = useContext(ThemeContext);
+  const stylingMode = themeContext?.isFluent() ? 'filled' : undefined;
   return (
     <From
       className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}
@@ -51,10 +54,11 @@ export const ContactFromDetails = ({ data, editing, updateField }: {
           <ItemForm>
             <SelectBox
               label='Status'
+              width='100%'
               value={data.status}
               readOnly={!editing}
               items={CONTACT_STATUS_LIST}
-              width='100%'
+              stylingMode={stylingMode}
               fieldRender={statusRender}
               itemRender={statusItemRender}
               onValueChange={updateField('status')}

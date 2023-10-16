@@ -1,4 +1,5 @@
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
+import { current as getCurrentDXTheme } from 'devextreme/ui/themes';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 const themes = ['light', 'dark'] as const;
@@ -73,11 +74,15 @@ export function useThemeContext() {
 
   const switchTheme = useCallback(() => setTheme((currentTheme: Theme) => toggleTeme(currentTheme)), []);
 
+  const isFluent = useCallback((): boolean => {
+    return getCurrentDXTheme().includes('fluent');
+  }, []);
+
   useEffect(() => {
     isLoaded && setAppTheme(theme);
   }, [theme, isLoaded]);
 
-  return useMemo(()=> ({ theme, switchTheme, isLoaded }), [theme, isLoaded]);
+  return useMemo(()=> ({ theme, switchTheme, isLoaded, isFluent }), [theme, isLoaded, isFluent]);
 }
 
 export const ThemeContext = React.createContext<ReturnType<typeof useThemeContext> | null>(null);
