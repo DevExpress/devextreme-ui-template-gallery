@@ -46,3 +46,9 @@
     font-size: 28px;
   }
 }
+
+:host-context(.dx-theme-fluent) {
+  .photo {
+    border-radius: 50%;
+  }
+}

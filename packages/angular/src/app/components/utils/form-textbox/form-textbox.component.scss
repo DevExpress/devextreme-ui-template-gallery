@@ -4,3 +4,16 @@
   border-color: transparent;
   background-color: transparent;
 }
+
+.dx-form.plain-styled-form.view-mode .dx-texteditor .form-editor-input, .dx-form.plain-styled-form.view-mode .dx-texteditor.dx-editor-filled .form-editor-input, .dx-form.plain-styled-form.view-mode .dx-texteditor.form-editor .form-editor-input {
+  padding-left: 0;
+}
+
+:host-context(.dx-theme-fluent) {
+  ::ng-deep .form-editor.dx-state-readonly {
+    .form-editor-input {
+      padding-left: 0;
+      font-size: 16px;
+    }
+  }
+}

@@ -19,3 +19,11 @@
   position: relative;
   padding-bottom: 30px;
 }
+
+:host-context(.dx-theme-fluent) {
+  #contact-form {
+    ::ng-deep .form-title {
+      font-size: 18px;
+    }
+  }
+}
