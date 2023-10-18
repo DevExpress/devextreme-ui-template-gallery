@@ -40,3 +40,24 @@
     }
   }
 }
+
+:host-context(.dx-theme-fluent) {
+  .view-wrapper {
+    .panels {
+      .left {
+        flex: 1;
+        background-color: var(--base-bg);
+        padding: 16px 24px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+      }
+
+      .right {
+        flex: 1.2;
+        .dx-card {
+          box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+        }
+      }
+    }
+  }
+}

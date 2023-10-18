@@ -25,6 +25,12 @@ import { CommonModule } from '@angular/common';
       displayFormat="MM/dd/y"
       pickerType="calendar"
   ></dx-date-box>`,
+  styles: [`
+    :host-context(.dx-theme-fluent) {
+      
+
+    }
+  `]
 })
 export class FormDateboxComponent {
   @ViewChild(DxDropDownButtonComponent) dropDownButtonComponent: DxDropDownButtonComponent;
