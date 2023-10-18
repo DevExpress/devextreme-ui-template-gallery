@@ -8,12 +8,11 @@
   height: 100%;
 
   .menu-container {
-    background-color: var(--side-panel-background);
+    background-color: var(--base-bg);
     min-height: 100%;
     width: 250px;
     display: flex;
     flex: 1;
-    padding-top: var(--toolbar-vertical-padding);
     padding-bottom: var(--footer-height);
 
     ::ng-deep .dx-treeview {

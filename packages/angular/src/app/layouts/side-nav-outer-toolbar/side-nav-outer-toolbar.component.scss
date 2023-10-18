@@ -18,3 +18,8 @@
   flex-grow: 1;
   width: 100%;
 }
+
+
+::ng-deep .dx-drawer-shrink .dx-drawer-panel-content {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
+}
