@@ -37,7 +37,7 @@
         [currentDate]="getSchedulerCurrentDate | apply: currentDate"
         [startDayHour]="4"
         [showCurrentTimeIndicator]="false"
-        (currentViewChange)="onCurrentViewChange($event)"
+        (onOptionChanged)="onSchedulerOptionChange($event)"
         (onAppointmentClick)="onAppointmentClick($event)"
         (onAppointmentTooltipShowing)="onAppointmentTooltipShowing($event)"
         (onCellClick)="onCellClick($event)"
