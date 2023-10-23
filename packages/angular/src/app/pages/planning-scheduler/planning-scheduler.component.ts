@@ -20,7 +20,7 @@ import { RightSidePanelModule } from 'src/app/components/utils/right-side-panel/
 import { AgendaItem, AgendaModule } from "../../components/utils/agenda/agenda.component";
 import { ApplyPipeModule } from '../../pipes/apply.pipe';
 import { SchedulerTooltipModule } from '../../components/library/scheduler-tooltip/scheduler-tooltip.component';
-import { ChangedOptionInfo } from 'devextreme/events';
+import { DxSchedulerTypes } from 'devextreme-angular/ui/scheduler'
 
 type SelectedAppointment = { data: Record<string, any>, target: any };
 
@@ -99,7 +99,7 @@ export class PlanningSchedulerComponent implements OnInit {
     return this.schedulerCurrentDate;
   }
 
-  onSchedulerOptionChange(e: ChangedOptionInfo) {
+  onSchedulerOptionChange(e: DxSchedulerTypes.OptionChangedEvent) {
     if (e.name === 'currentView') {
       this.onCurrentViewChange(e.value);
     }
