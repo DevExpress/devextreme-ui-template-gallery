@@ -74,7 +74,7 @@ export class PlanningTaskListComponent implements OnInit {
   };
 
   onClickSaveNewTask = () => {
-    notify({ message: `New task "${this.taskForm.getData().text}" saved`, position: { at: 'bottom center', my: 'bottom center' } }, 'success');
+    notify({ message: `New task "${this.taskForm.getNewTaskData().text}" saved`, position: { at: 'bottom center', my: 'bottom center' } }, 'success');
   };
 
   refresh = () => {
