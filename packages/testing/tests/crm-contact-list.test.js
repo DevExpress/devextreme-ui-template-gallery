@@ -78,7 +78,24 @@ fixture`Contact List`;
 
         await t.click(Selector('[aria-label=Save]'));
 
-        await t.wait(5000);
+        await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${postfix}`, 'body');
+        const inputs = Selector('.dx-popup-content input.form-editor-input');
+
+        const promises = [];
+
+        for (let i = 0; i <= inputs.count; i += 1) {
+          promises.push(t.typeText(inputs.nth(i),
+            // eslint-disable-next-line no-nested-ternary
+            i === 5 ? '1111111111'
+              : i === 6 ? 'test@test.com' : 'test'));
+        }
+
+        await Promise.all(promises);
+
+        await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${postfix}`, 'body');
+
+        await t.click(Selector('[aria-label=Save]'));
+
         await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${postfix}`, 'body');
 
         await t

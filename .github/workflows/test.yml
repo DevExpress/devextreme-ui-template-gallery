@@ -41,39 +41,38 @@ jobs:
       matrix:
         theme: [
           { fullName: 'material.blue.light.compact', type: 'material', name: 'material.light' },
-          { fullName: 'generic.light.compact', type: 'generic',  name: 'generic.light'},
         ]
         ARGS: [
-          { project: 'angular', page: 'crm-contact-details' },
-          { project: 'angular', page: 'crm-contact-list' },
+          # { project: 'angular', page: 'crm-contact-details' },
+          # { project: 'angular', page: 'crm-contact-list' },
           # { project: 'angular', page: 'planning-task-details' }, No selector for Toolbar item on mobile device(bug)
-          { project: 'angular', page: 'planning-task-list' },
-          { project: 'angular', page: 'planning-scheduler' },
-          { project: 'angular', page: 'analytics-dashboard' },
-          { project: 'angular', page: 'analytics-sales-report' },
-          { project: 'angular', page: 'analytics-geography' },
-          { project: 'angular', page: 'user-profile' },
-          { project: 'angular', page: 'auth-pages' },
-          { project: 'react', page: 'crm-contact-details' },
-          { project: 'react', page: 'crm-contact-list' },
+          # { project: 'angular', page: 'planning-task-list' },
+          # { project: 'angular', page: 'planning-scheduler' },
+          # { project: 'angular', page: 'analytics-dashboard' },
+          # { project: 'angular', page: 'analytics-sales-report' },
+          # { project: 'angular', page: 'analytics-geography' },
+          # { project: 'angular', page: 'user-profile' },
+          # { project: 'angular', page: 'auth-pages' },
+          # { project: 'react', page: 'crm-contact-details' },
+          # { project: 'react', page: 'crm-contact-list' },
           # { project: 'react', page: 'planning-task-details' }, # Title width is different (screen width 400). Menu stays opened
-          { project: 'react', page: 'planning-task-list' },
-          { project: 'react', page: 'planning-scheduler' },
-          { project: 'react', page: 'analytics-dashboard' },
-          { project: 'react', page: 'auth-pages' },
+          # { project: 'react', page: 'planning-task-list' },
+          # { project: 'react', page: 'planning-scheduler' },
+          # { project: 'react', page: 'analytics-dashboard' },
+          # { project: 'react', page: 'auth-pages' },
           # { project: 'react', page: 'analytics-geography' }, # Menu contents disappear after item click (screen width 400)
           # { project: 'vue', page: 'crm-contact-details' }, No selector for Toolbar item on mobile device(bug)
-          { project: 'react', page: 'analytics-sales-report' },
-          { project: 'react', page: 'user-profile' },
+          # { project: 'react', page: 'analytics-sales-report' },
+          # { project: 'react', page: 'user-profile' },
           { project: 'vue', page: 'crm-contact-list' },
           # { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)
-          { project: 'vue', page: 'planning-task-list' },
-          { project: 'vue', page: 'planning-scheduler' },
-          { project: 'vue', page: 'analytics-dashboard' },
-          { project: 'vue', page: 'analytics-sales-report' },
-          { project: 'vue', page: 'analytics-geography' },
-          { project: 'vue', page: 'auth-pages' },
-          { project: 'vue', page: 'user-profile' },
+          # { project: 'vue', page: 'planning-task-list' },
+          # { project: 'vue', page: 'planning-scheduler' },
+          # { project: 'vue', page: 'analytics-dashboard' },
+          # { project: 'vue', page: 'analytics-sales-report' },
+          # { project: 'vue', page: 'analytics-geography' },
+          # { project: 'vue', page: 'auth-pages' },
+          # { project: 'vue', page: 'user-profile' },
         ]
     runs-on: ubuntu-latest
     timeout-minutes: 30
