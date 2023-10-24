@@ -122,6 +122,7 @@
     @save="onSaveNewTask"
   >
     <task-form
+      ref="taskFormRef"
       :content-by-screen="{ xs: screenInfo.isSmallMobileMedia ? 1 : 2, sm: 2 }"
       :is-create-mode="true"
       :data="popupTask"
@@ -152,7 +153,9 @@ import TaskListGantt from '@/components/library/task-list-gantt.vue';
 import { newTask } from '@/types/task';
 
 import { screenInfo } from '@/utils/media-query';
+import notify from 'devextreme/ui/notify';
 
+const taskFormRef = ref<typeof TaskForm>();
 const isLoading = ref(true);
 const displayTaskComponent = ref(taskPanelItems[0].text);
 const activeTabId = ref<TaskPanelItemsIds>('grid');
@@ -218,6 +221,7 @@ const reload = () => {
 };
 
 const onSaveNewTask = () => {
+  notify({ message: `New task "${taskFormRef.value?.getData().text}" saved`, position: { at: 'bottom center', my: 'bottom center' } }, 'success');
   isNewTaskPopupOpened.value = false;
 };
 
