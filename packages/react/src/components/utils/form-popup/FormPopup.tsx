@@ -28,7 +28,6 @@ export const FormPopup = ({
 }: PropsWithChildren<PopupProps>) => {
   const { isXSmall } = useScreenSize();
   const validationGroup = useRef<ValidationGroup>(null);
-  // const [visibility, setVisibility] = useState(visible);
   const close = () => {
     validationGroup.current?.instance.reset();
     setVisible(false);

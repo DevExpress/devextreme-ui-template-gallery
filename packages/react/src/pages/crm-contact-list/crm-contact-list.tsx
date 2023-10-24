@@ -27,6 +27,7 @@ import { ContactStatus } from '../../components';
 
 import { CONTACT_STATUS_LIST } from '../../shared/constants';
 import DataSource from 'devextreme/data/data_source';
+import notify from 'devextreme/ui/notify';
 
 type FilterContactStatus = ContactStatusType | 'All';
 
@@ -90,6 +91,8 @@ export const CRMContactList = () => {
   const [popupVisible, setPopupVisible] = useState(false);
   const gridRef = useRef<DataGrid>(null);
 
+  let newContactData: Contact;
+
   useEffect(() => {
     setGridDataSource(new DataSource({
       key: 'id',
@@ -97,8 +100,8 @@ export const CRMContactList = () => {
     }));
   }, []);
 
-  const changePopupVisibility = useCallback(() => {
-    setPopupVisible(!popupVisible);
+  const changePopupVisibility = useCallback((isVisble) => {
+    setPopupVisible(isVisble);
   }, [popupVisible]);
 
   const changePanelOpened = useCallback(() => {
@@ -135,6 +138,15 @@ export const CRMContactList = () => {
   const refresh = useCallback(() => {
     gridRef.current?.instance.refresh();
   }, []);
+
+  const onDataChanged = useCallback((data) => {
+    newContactData = data;
+  }, []);
+
+  const onSaveClick = () => {
+    notify({ message: `New contact "${newContactData.firstName} ${newContactData.lastName}" saved`, position: { at: 'bottom center', my: 'bottom center' } }, 'success');
+    setPopupVisible(false);
+  };
 
   return (
     <div className='view crm-contact-list'>
@@ -241,8 +253,8 @@ export const CRMContactList = () => {
           <Column dataField='email' caption='Email' hidingPriority={1} />
         </DataGrid>
         <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} changePanelPinned={changePanelPinned} />
-        <FormPopup title='New Contact' visible={popupVisible} setVisible={changePopupVisibility}>
-          <ContactNewForm />
+        <FormPopup title='New Contact' visible={popupVisible} setVisible={changePopupVisibility} onSave={onSaveClick}>
+          <ContactNewForm onDataChanged={onDataChanged} />
         </FormPopup>
       </div>
     </div>

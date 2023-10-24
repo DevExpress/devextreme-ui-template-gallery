@@ -8,11 +8,14 @@ import { FormTextbox, FormPhotoUploader } from '../..';
 import { EmailRule } from 'devextreme-react/validator';
 import { getSizeQualifier } from '../../../utils/media-query';
 
-export const ContactNewForm = () => {
+export const ContactNewForm = ({ onDataChanged }: { onDataChanged: (data) => void }) => {
   const [newContactData, setNewContactData] = useState<Contact>(newContact);
 
   const updateField = (field: string) => (value) => {
-    setNewContactData((prevState) => ({ ...prevState, ...{ [field]: value } }));
+    const newData = { ...newContactData, ...{ [field]: value } };
+
+    onDataChanged(newData);
+    setNewContactData(newData);
   };
 
   return (
