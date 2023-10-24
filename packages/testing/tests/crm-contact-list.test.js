@@ -77,6 +77,8 @@ fixture`Contact List`;
         await takeScreenshot(`crm-contact-list-add-contact-popup${postfix}`, 'body');
 
         await t.click(Selector('[aria-label=Save]'));
+
+        await t.wait(5000);
         await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${postfix}`, 'body');
 
         await t
