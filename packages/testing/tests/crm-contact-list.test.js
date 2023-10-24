@@ -73,30 +73,34 @@ fixture`Contact List`;
         }
 
         await t.click(Selector('[aria-label="Add Contact"]'));
+
         await t.wait(1000);
+
         await takeScreenshot(`crm-contact-list-add-contact-popup${postfix}`, 'body');
 
         await t.click(Selector('[aria-label=Save]'));
 
         await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${postfix}`, 'body');
+
         const inputs = Selector('.dx-popup-content input.form-editor-input');
 
         const promises = [];
 
         for (let i = 0; i <= inputs.count; i += 1) {
-          promises.push(t.typeText(inputs.nth(i),
-            // eslint-disable-next-line no-nested-ternary
-            i === 5 ? '1111111111'
-              : i === 6 ? 'test@test.com' : 'test'));
+          // eslint-disable-next-line no-nested-ternary
+          const text = i === 5 ? '1111111111'
+            : i === 6 ? 'test@test.com' : 'test';
+
+          promises.push(t.typeText(inputs.nth(i), text));
         }
 
         await Promise.all(promises);
 
-        await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${postfix}`, 'body');
-
         await t.click(Selector('[aria-label=Save]'));
 
-        await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${postfix}`, 'body');
+        await t.wait(2000);
+
+        await t.expect(Selector('.dx-toast-message').exists).ok(); // .withText('"test"')
 
         await t
           .expect(compareResults.isValid())
