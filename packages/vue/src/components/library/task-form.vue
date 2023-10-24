@@ -203,8 +203,8 @@ function handleCancelClick() {
   isEditing.value = false;
 }
 
-defineExpose<{getData:() => Task}>({
-  getData: () => newData,
+defineExpose<{getNewTaskData:() => Task}>({
+  getNewTaskData: () => newData,
 });
 </script>
 <style scoped lang="scss">
