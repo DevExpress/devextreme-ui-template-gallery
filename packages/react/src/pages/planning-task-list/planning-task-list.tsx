@@ -26,6 +26,7 @@ import Button from 'devextreme-react/button';
 import TextBox, { TextBoxTypes } from 'devextreme-react/text-box';
 import Tabs from 'devextreme-react/tabs';
 import notify from 'devextreme/ui/notify';
+import { Task } from '../../types/task';
 
 const listsData = ['List', 'Kanban Board', 'Gantt'];
 
@@ -38,8 +39,8 @@ export const PlanningTaskList = () => {
 
   const [view, setView] = useState(listView);
   const [index, setIndex] = useState(0);
-  const [gridData, setGridData] = useState<any[]>([]);
-  const [filteredData, setFilteredData] = useState<any[]>([]);
+  const [gridData, setGridData] = useState<Task[]>([]);
+  const [filteredData, setFilteredData] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [formTaskInitData, setFormTaskInitData] = useState({ ...newTaskDefaults });
   const [popupVisible, setPopupVisible] = useState(false);
