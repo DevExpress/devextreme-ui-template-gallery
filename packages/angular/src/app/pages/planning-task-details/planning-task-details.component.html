@@ -6,7 +6,11 @@
       </dxi-item>
       <dxi-item location="before" [text]="taskName"></dxi-item>
       <dxi-item location="after" locateInMenu="auto">
-        <dx-drop-down-button text="Actions" stylingMode="text">
+        <dx-drop-down-button
+          text="Actions"
+          stylingMode="text"
+          [dropDownOptions]="{ width: 'auto' }"
+        >
           <dxi-item text="Duplicate"></dxi-item>
           <dxi-item text="Close"></dxi-item>
           <dxi-item text="Delete"></dxi-item>

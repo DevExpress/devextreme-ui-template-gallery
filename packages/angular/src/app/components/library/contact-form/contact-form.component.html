@@ -139,7 +139,7 @@
             <dx-button
               class="form-item-button"
               stylingMode="outlined"
-              [visible]="!isEditing"
+              [style.visibility]="!isEditing ? 'visible' : 'hidden'"
               [text]="'Call'"
               [icon]="'tel'"
               [type]="'default'"
@@ -158,7 +158,7 @@
             <dx-button
               class="form-item-button"
               stylingMode="outlined"
-              [visible]="!isEditing"
+              [style.visibility]="!isEditing ? 'visible' : 'hidden'"
               [text]="'Send Email'"
               [icon]="'email'"
               [type]="'default'"

@@ -3,14 +3,3 @@
 .status span {
   font-size: 13px;
 }
-
-:host-context(.dx-theme-fluent .form-editor.dx-state-readonly) {
-  .status.status-indicator {
-    ::ng-deep .dx-state-readonly {
-      .status-input.status-editor-input {
-        padding-left: 0;
-        font-size: 16px;
-      }
-    }
-  }
-}
