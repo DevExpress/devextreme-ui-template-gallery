@@ -25,7 +25,7 @@ import { ContactStatus as ContactStatusType, Contact } from '../../types/crm-con
 import { FormPopup, ContactNewForm, ContactPanel } from '../../components';
 import { ContactStatus } from '../../components';
 
-import { CONTACT_STATUS_LIST } from '../../shared/constants';
+import { CONTACT_STATUS_LIST, newContact } from '../../shared/constants';
 import DataSource from 'devextreme/data/data_source';
 import notify from 'devextreme/ui/notify';
 
@@ -89,6 +89,7 @@ export const CRMContactList = () => {
   const [isPanelOpened, setPanelOpened] = useState(false);
   const [contactId, setContactId] = useState<number>(0);
   const [popupVisible, setPopupVisible] = useState(false);
+  const [formDataDefaults, setFormDataDefaults] = useState({ ...newContact });
   const gridRef = useRef<DataGrid>(null);
 
   let newContactData: Contact;
@@ -102,7 +103,7 @@ export const CRMContactList = () => {
 
   const changePopupVisibility = useCallback((isVisble) => {
     setPopupVisible(isVisble);
-  }, [popupVisible]);
+  }, []);
 
   const changePanelOpened = useCallback(() => {
     setPanelOpened(!isPanelOpened);
@@ -143,15 +144,17 @@ export const CRMContactList = () => {
     newContactData = data;
   }, []);
 
-  const onSaveClick = () => {
+  const onSaveClick = useCallback(() => {
     notify({
       message: `New contact "${newContactData.firstName} ${newContactData.lastName}" saved`,
       position: { at: 'bottom center', my: 'bottom center' }
     },
     'success'
     );
+
+    setFormDataDefaults({ ...formDataDefaults });
     setPopupVisible(false);
-  };
+  }, []);
 
   return (
     <div className='view crm-contact-list'>
@@ -259,7 +262,7 @@ export const CRMContactList = () => {
         </DataGrid>
         <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} changePanelPinned={changePanelPinned} />
         <FormPopup title='New Contact' visible={popupVisible} setVisible={changePopupVisibility} onSave={onSaveClick}>
-          <ContactNewForm onDataChanged={onDataChanged} />
+          <ContactNewForm initData={ formDataDefaults } onDataChanged={onDataChanged} />
         </FormPopup>
       </div>
     </div>

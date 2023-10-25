@@ -52,9 +52,9 @@ export const PlanningTaskList = () => {
 
   let newTaskData = { ...newTaskDefaults };
 
-  const changePopupVisibility = (isVisible) => {
+  const changePopupVisibility = useCallback((isVisible) => {
     setPopupVisible(isVisible);
-  };
+  }, []);
 
   useEffect(() => {
     Promise.all([
@@ -89,6 +89,11 @@ export const PlanningTaskList = () => {
   const onTabClick = useCallback((e: { itemData?: string }) => {
     setView(e.itemData || '');
     setIndex(listsData.findIndex((d) => d === e.itemData));
+  }, []);
+
+  const onAddTaskClick = useCallback(() => {
+    setFormTaskInitData({ ...newTaskDefaults });
+    setPopupVisible(true);
   }, []);
 
   const refresh = useCallback(() => {
@@ -176,7 +181,7 @@ export const PlanningTaskList = () => {
             text='Add Task'
             type='default'
             stylingMode='contained'
-            onClick={() => setPopupVisible(true)}
+            onClick={onAddTaskClick}
           />
         </Item>
         <Item
