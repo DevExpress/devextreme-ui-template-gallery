@@ -30,7 +30,7 @@ import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar
   styleUrls: ['./task-form.component.scss'],
 })
 export class TaskFormComponent implements OnInit {
-  @Input() task!: Task;
+  @Input() task: Task;
 
   @Input() isLoading: boolean = false;
 
