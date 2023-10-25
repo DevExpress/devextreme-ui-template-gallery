@@ -66,7 +66,13 @@ export const PlanningTaskList = () => {
   }, []);
 
   const onSaveClick = () => {
-    notify({ message: `New task "${newTaskData.text}" saved`, position: { at: 'bottom center', my: 'bottom center' } }, 'success');
+    notify({
+      message: `New task "${newTaskData.text}" saved`,
+      position: { at: 'bottom center', my: 'bottom center' }
+    },
+    'success'
+    );
+
     setFormTaskInitData({ ...newTaskDefaults });
   };
 

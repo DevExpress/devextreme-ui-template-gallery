@@ -144,7 +144,12 @@ export const CRMContactList = () => {
   }, []);
 
   const onSaveClick = () => {
-    notify({ message: `New contact "${newContactData.firstName} ${newContactData.lastName}" saved`, position: { at: 'bottom center', my: 'bottom center' } }, 'success');
+    notify({
+      message: `New contact "${newContactData.firstName} ${newContactData.lastName}" saved`,
+      position: { at: 'bottom center', my: 'bottom center' }
+    },
+    'success'
+    );
     setPopupVisible(false);
   };
 

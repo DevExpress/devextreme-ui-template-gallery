@@ -307,7 +307,14 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
 const onSaveContactNewForm = () => {
   const { firstName, lastName } = contactNewFormCmp.value.getNewContactData();
 
-  notify({ message: `New contact "${firstName} ${lastName}" saved`, position: { at: 'bottom center', my: 'bottom center' } }, 'success');
+  notify(
+    {
+      message: `New contact "${firstName} ${lastName}" saved`,
+      position: { at: 'bottom center', my: 'bottom center' },
+    },
+    'success',
+  );
+
   isAddContactPopupOpened.value = false;
 };
 

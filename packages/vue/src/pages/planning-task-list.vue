@@ -221,7 +221,14 @@ const reload = () => {
 };
 
 const onSaveNewTask = () => {
-  notify({ message: `New task "${taskFormCmp.value?.getNewTaskData().text}" saved`, position: { at: 'bottom center', my: 'bottom center' } }, 'success');
+  notify(
+    {
+      message: `New task "${taskFormCmp.value?.getNewTaskData().text}" saved`,
+      position: { at: 'bottom center', my: 'bottom center' },
+    },
+    'success',
+  );
+
   isNewTaskPopupOpened.value = false;
 };
 

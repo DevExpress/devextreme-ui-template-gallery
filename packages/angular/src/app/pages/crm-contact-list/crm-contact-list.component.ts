@@ -129,7 +129,11 @@ export class CrmContactListComponent {
 
   onClickSaveNewContact = () => {
     const { firstName, lastName} = this.contactNewForm.getNewContactData();
-    notify({ message: `New contact "${firstName} ${lastName}" saved`, position: { at: 'bottom center', my: 'bottom center' } }, 'success');
+    notify({
+        message: `New contact "${firstName} ${lastName}" saved`,
+        position: { at: 'bottom center', my: 'bottom center' }
+      },
+      'success');
   };
 }
 
