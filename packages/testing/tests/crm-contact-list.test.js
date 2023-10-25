@@ -100,6 +100,8 @@ fixture`Contact List`;
 
         await t.wait(2000);
 
+        await takeScreenshot(`crm-contact-list-add-contact-popup-on-save=${postfix}`, 'body');
+
         await t.expect(Selector('.dx-toast-message').exists).ok(); // .withText('"test"')
 
         await t
