@@ -8,26 +8,27 @@ import { Button } from 'devextreme-react';
 
 type PopupProps = {
   title: string,
-  visible?: boolean,
+  visible: boolean,
   width?: number,
   wrapperAttr?: { class: string },
   isSaveDisabled?: boolean,
-  setVisible: (boolean) => void,
+  setVisible: (visible: boolean) => void,
   onSave?: () => void,
 }
 
 export const FormPopup = ({
   title,
+  visible,
   width = 480,
   onSave,
-  visible,
-  wrapperAttr = { class: '' },
   setVisible,
+  wrapperAttr = { class: '' },
   isSaveDisabled = false,
   children
 }: PropsWithChildren<PopupProps>) => {
   const { isXSmall } = useScreenSize();
   const validationGroup = useRef<ValidationGroup>(null);
+
   const close = () => {
     validationGroup.current?.instance.reset();
     setVisible(false);
@@ -35,7 +36,7 @@ export const FormPopup = ({
 
   const onCancelClick = useCallback(() => {
     close();
-  }, []);
+  }, [close, validationGroup]);
 
   const onSaveClick = useCallback(() => {
     if (!validationGroup.current?.instance.validate().isValid) return;
