@@ -183,7 +183,7 @@
     v-model:visible="isAddContactPopupOpened"
     @save="onSaveContactNewForm"
   >
-    <contact-new-form ref="contactNewFormCmp"/>
+    <contact-new-form ref="contactNewFormCmp" />
   </form-popup>
 </template>
 
