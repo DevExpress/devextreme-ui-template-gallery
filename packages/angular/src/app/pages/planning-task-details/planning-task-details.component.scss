@@ -45,7 +45,7 @@
   .view-wrapper {
     .panels {
       .left {
-        flex: 1;
+        flex: 0 1 33%;
         background-color: var(--base-bg);
         padding: 16px 24px;
         border-radius: 8px;
@@ -53,7 +53,7 @@
       }
 
       .right {
-        flex: 1.2;
+        flex: 0 1 65%;
         .dx-card {
           box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
         }
