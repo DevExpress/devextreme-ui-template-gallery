@@ -99,7 +99,7 @@ export class PlanningSchedulerComponent implements OnInit {
     return this.schedulerCurrentDate;
   }
 
-  onSchedulerOptionChange(e: DxSchedulerTypes.OptionChangedEvent) {
+  onSchedulerOptionChanged(e: DxSchedulerTypes.OptionChangedEvent) {
     if (e.name === 'currentView') {
       this.onCurrentViewChange(e.value);
     }
