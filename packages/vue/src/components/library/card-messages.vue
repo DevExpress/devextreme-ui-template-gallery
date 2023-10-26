@@ -72,7 +72,10 @@
                     </div>
                     <div>{{ formatDate(new Date(data.date)) }} - {{ data.manager }}</div>
                   </div>
-                  <dx-button icon="overflow" />
+                  <dx-button
+                    icon="overflow"
+                    styling-mode="text"
+                  />
                 </div>
                 <div class="message-text">
                   {{ getText(data) }}

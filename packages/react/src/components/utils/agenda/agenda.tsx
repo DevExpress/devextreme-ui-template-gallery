@@ -27,6 +27,7 @@ export const Agenda = ({ selectedAppointmentData = { startDate: new Date() }, to
       </div>
       <Button
         icon={isLarge ? 'panelleft' : 'panel'}
+        stylingMode='text'
         onClick={toggleOpen}
       />
     </div>

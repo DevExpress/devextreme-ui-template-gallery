@@ -74,7 +74,7 @@ function handleDropDownButtonContentReady({ component }: {component: typeof DxDr
       width: auto;
       aspect-ratio: 1 / 1;
       box-sizing: border-box;
-      border: 2px solid var(--border-color);
+      border: 1px solid var(--border-color);
       object-fit: cover;
       object-position: top;
       background: rgb(255, 255, 255);
@@ -85,6 +85,10 @@ function handleDropDownButtonContentReady({ component }: {component: typeof DxDr
       }
 
       .dx-theme-material & {
+        height: 100%;
+      }
+
+      .dx-theme-fluent & {
         height: 100%;
       }
     }
