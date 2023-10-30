@@ -2,7 +2,8 @@
   <ticker-card
     title="Revenue Total"
     :data="props.data"
-    :percentage="14.7"
+    :percentage="-14.7"
+    icon="dataarea"
   />
 </template>
 

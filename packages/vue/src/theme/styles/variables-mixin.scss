@@ -1,5 +1,5 @@
-$theme: null !default;
-@use "/node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: $theme);
+$theme-mode: null !default;
+@use "/node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: $theme-mode);
 @use "/node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
 @use "/node_modules/devextreme/scss/widgets/material/button/mixins" as *;
 @use "/node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
@@ -8,6 +8,7 @@ $theme: null !default;
 @use '/node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
 @use "/node_modules/devextreme/scss/widgets/material/list/sizes" as *;
 @use "/node_modules/devextreme/scss/widgets/material/button/sizes" as *;
+@use "theme-special" as * with ($theme: "material");
 
 @forward "/node_modules/devextreme/scss/widgets/material/colors";
 @forward "/node_modules/devextreme/scss/widgets/material/textEditor/colors";
@@ -17,6 +18,7 @@ $theme: null !default;
 
 
 :root {
+  --dark-warning-color: #{darken(adjust-hue($base-warning, -12), 3.73)};
   --header-toolbar-vertical-padding: 10px;
   --toolbar-vertical-padding: 16px;
   --content-padding: 16px;
@@ -38,6 +40,10 @@ $theme: null !default;
   --side-panel-background: var(--base-bg-darken-5);
   --border-color: #{$base-border-color};
   --accent-color: #{$base-accent};
+  --success-color: #{$base-success};
+  --info-color: #{$base-accent};
+  --warning-color: #{$base-warning};
+  --error-color: #{$base-danger};
   --base-text-color: #{$base-text-color};
   --base-focus-color: #{$base-focus-color};
   --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};

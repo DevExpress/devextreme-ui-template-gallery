@@ -3,6 +3,8 @@
     title="Leads"
     total="51"
     :percentage="8.5"
+    icon="datapie"
+    tone="info"
   />
 </template>
 

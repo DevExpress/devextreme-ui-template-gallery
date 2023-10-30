@@ -96,6 +96,7 @@ watch(
 
 <style scoped lang="scss">
 @use "@/variables" as *;
+
 .side-navigation-menu {
   display: flex;
   flex-direction: column;
@@ -117,7 +118,7 @@ watch(
       // ## Icon width customization
       .dx-treeview-item {
         padding-left: 0;
-        padding-right: 0;
+        // padding-right: 0;
         .dx-icon {
           width: var(--side-panel-min-width) !important;
           margin: 0 !important;
@@ -129,8 +130,7 @@ watch(
         padding: 0 0 !important;
       }
       .dx-treeview-toggle-item-visibility {
-        right: 10px;
-        left: auto;
+        order: 3;
       }
       .dx-rtl .dx-treeview-toggle-item-visibility {
         left: 10px;
@@ -145,7 +145,7 @@ watch(
         }
         &[aria-level="2"] .dx-treeview-item-content {
           font-weight: normal;
-          padding: 0 var(--side-panel-min-width);
+          padding: 0;
         }
       }
       // ##
