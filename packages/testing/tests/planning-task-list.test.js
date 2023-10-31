@@ -25,29 +25,29 @@ fixture`Planning List`;
         return;
       }
 
-      // test(`Planning task list (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
-      //   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+      test(`Planning task list (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
+        const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-      //   // eslint-disable-next-line max-len
-      //   await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
-      //   await forceResizeRecalculation(t, screenMode);
-      //   await setTheme(t, themeMode);
+        // eslint-disable-next-line max-len
+        await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
+        await forceResizeRecalculation(t, screenMode);
+        await setTheme(t, themeMode);
 
-      //   await t.expect(Selector('body.dx-device-generic').count).eql(1);
-      //   await takeScreenshot(`planning-task-grid${postfix}`, 'body');
-      //   await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
-      //   await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(0));
-      //   await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
-      //   await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
-      //   await takeScreenshot(`planning-task-kanban${postfix}`, 'body');
-      //   await t.doubleClick(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
-      //   await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
-      //   await takeScreenshot(`planning-task-gantt${postfix}`, 'body');
+        await t.expect(Selector('body.dx-device-generic').count).eql(1);
+        await takeScreenshot(`planning-task-grid${postfix}`, 'body');
+        await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
+        await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(0));
+        await t.click(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(1));
+        await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
+        await takeScreenshot(`planning-task-kanban${postfix}`, 'body');
+        await t.doubleClick(Selector('.content .dx-toolbar .dx-tabs .dx-item').nth(2));
+        await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
+        await takeScreenshot(`planning-task-gantt${postfix}`, 'body');
 
-      //   await t
-      //     .expect(compareResults.isValid())
-      //     .ok(compareResults.errorMessages());
-      // }).requestHooks(requestLogger);
+        await t
+          .expect(compareResults.isValid())
+          .ok(compareResults.errorMessages());
+      }).requestHooks(requestLogger);
 
       test(`Add task popup (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);

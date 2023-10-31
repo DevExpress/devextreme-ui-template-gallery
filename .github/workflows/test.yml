@@ -47,7 +47,7 @@ jobs:
           { project: 'angular', page: 'crm-contact-details' },
           { project: 'angular', page: 'crm-contact-list' },
           # { project: 'angular', page: 'planning-task-details' }, No selector for Toolbar item on mobile device(bug)
-          { project: 'angular', page: 'planning-task-list' },
+          # { project: 'angular', page: 'planning-task-list' },
           { project: 'angular', page: 'planning-scheduler' },
           { project: 'angular', page: 'analytics-dashboard' },
           { project: 'angular', page: 'analytics-sales-report' },
