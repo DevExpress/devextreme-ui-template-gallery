@@ -4,8 +4,8 @@
   [fullScreen]="!!(screen.xSmallScreenChanged | async)"
   [width]="width"
   [wrapperAttr]="getWrapperAttrs | apply: wrapperAttr"
+  [height]="height"
   (onHidden)="close()"
-  height="auto"
 >
   <dxi-toolbar-item toolbar="bottom" location="center">
     <div

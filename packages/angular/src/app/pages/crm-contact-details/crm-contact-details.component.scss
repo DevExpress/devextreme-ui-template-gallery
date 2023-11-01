@@ -48,7 +48,7 @@
   .view-wrapper {
     .panels {
       .left {
-        flex: 0 1 33%;
+        flex: 1 var(--left-panel-width);
         background-color: var(--base-bg);
         padding: 16px 24px;
         border-radius: 8px;
@@ -56,7 +56,7 @@
       }
 
       .right {
-        flex: 0 1 65%;
+        flex: 1 calc(100% - var(--left-panel-width) - 110px);
       }
     }
   }

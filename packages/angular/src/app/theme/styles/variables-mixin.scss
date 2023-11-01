@@ -26,20 +26,28 @@ $theme-type: 'material';
   --toolbar-vertical-padding: 16px;
   --toolbar-margin-bottom: var(--content-padding);
   --base-bg: #{$base-bg};
-  --background-color: #{($base-neutral-background2)};
-  --base-bg-darken-5: #{darken($base-neutral-background2, 5)};
-  --base-bg-darken-4: #{darken($base-neutral-background2, 4)};
+  --background-color: #{($typography-bg)};
+  --base-bg-darken-5: #{darken($typography-bg, 5)};
+  --base-bg-darken-4: #{darken($typography-bg, 4)};
   --side-panel-background: var(--base-bg-darken-5);
-  --card-background: #{$base-neutral-background1};
+  --card-background: #{$base-bg};
   --calendar-width: 292px;
 
   @if $theme == dark {
     --card-background: var(--base-bg-darken-5);
+    --base-bg-hover: #EBEBEB;
+    --base-bg-selected: #EBEBEB;
+    --shadow-color: 0px 0px 6px 0px rgba(0, 0, 0, 0.04), 0px 4px 4px 0px rgba(0, 0, 0, 0.12);;
   }
 
-  --base-bg-hover: #{$base-neutral-background3-hover};
-  --base-bg-selected: #{$base-bg-selected};
+  @if $theme == light {
+    --base-bg-hover: #292929;
+    --base-bg-selected: #292929;
+    --shadow-color: 0px 0px 6px 0px rgba(0, 0, 0, 0.04), 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
+  }
+
   --border-color: #{$base-border-color};
+  --shadow-color: #{$base-shadow-color};
   --accent-color: #{$base-accent};
   --base-text-color: #{$base-text-color};
   --base-focus-color: #{$base-focus-color};

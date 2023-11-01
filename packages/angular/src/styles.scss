@@ -236,6 +236,10 @@ body {
       border-radius: 8px;
       background-color: var(--base-bg);
     }
+
+    div.gantt {
+      padding: 0;
+    }
   }
 
   .dx-form {
@@ -251,5 +255,13 @@ body {
     .status-input.status-editor-input {
       padding-left: 0;
     }
+  }
+
+  .dx-datagrid-headers.dx-datagrid-nowrap.dx-bordered-top-view {
+    border-radius: 8px 0;
+  }
+
+  .dx-gridbase-container > .dx-datagrid-rowsview.dx-scrollable {
+    border-radius: 0 8px;
   }
 }

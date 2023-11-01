@@ -28,6 +28,8 @@ export class FormPopupComponent {
 
   @Input() width = 480;
 
+  @Input() height: string | number = 'auto';
+
   @Input() wrapperAttr: Record<string, string> = {};
 
   @Input() visible = false;
