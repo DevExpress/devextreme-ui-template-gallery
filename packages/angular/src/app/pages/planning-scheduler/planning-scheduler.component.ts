@@ -21,7 +21,6 @@ import { RightSidePanelModule } from 'src/app/components/utils/right-side-panel/
 import { AgendaItem, AgendaModule } from "../../components/utils/agenda/agenda.component";
 import { ApplyPipeModule } from '../../pipes/apply.pipe';
 import { SchedulerTooltipModule } from '../../components/library/scheduler-tooltip/scheduler-tooltip.component';
-import { DxSchedulerTypes } from 'devextreme-angular/ui/scheduler'
 
 type SelectedAppointment = { data: Record<string, any>, target: any };
 
@@ -105,7 +104,7 @@ export class PlanningSchedulerComponent implements OnInit {
       this.onCurrentViewChange(e.value);
     }
   }
-  onCurrentViewChange = (view: string) => {
+  onCurrentViewChange = (view: DxSchedulerTypes.ViewType) => {
     this.currentView = view;
 
     if (this.currentView === 'month' && !this.screen.sizes['screen-x-small']) {
