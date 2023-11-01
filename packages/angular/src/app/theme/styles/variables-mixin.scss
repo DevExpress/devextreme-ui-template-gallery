@@ -1,5 +1,4 @@
 $theme-mode: null !default;
-$theme-type: 'material';
 
 @use "/node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: $theme-mode);
 @use "/node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
