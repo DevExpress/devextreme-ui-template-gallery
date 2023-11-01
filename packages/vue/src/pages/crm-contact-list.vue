@@ -183,7 +183,7 @@
     v-model:visible="isAddContactPopupOpened"
     @save="onSaveContactNewForm"
   >
-    <contact-new-form />
+    <contact-new-form ref="contactNewFormCmp" />
   </form-popup>
 </template>
 
@@ -215,6 +215,7 @@ import { contactStatusList, Contact } from '@/types/contact';
 import DataSource from 'devextreme/data/data_source';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
+import notify from 'devextreme/ui/notify';
 import { formatPhone } from '@/utils/formatters';
 import ContactStatus from '@/components/utils/contact-status.vue';
 import FormPopup from '@/components/utils/form-popup.vue';
@@ -224,6 +225,7 @@ import ContactPanel from '@/components/library/contact-panel.vue';
 const filterStatusList = ['All', ...contactStatusList];
 type FilterContactStatus = typeof filterStatusList[number];
 
+const contactNewFormCmp = ref<InstanceType<typeof ContactNewForm>>();
 const panelData = ref<Array<Contact> | null>(null);
 const isPanelOpened = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
@@ -303,6 +305,16 @@ const customizePhoneCell = (cellInfo: {value: string}) => {
 };
 
 const onSaveContactNewForm = () => {
+  const { firstName, lastName } = contactNewFormCmp.value.getNewContactData();
+
+  notify(
+    {
+      message: `New contact "${firstName} ${lastName}" saved`,
+      position: { at: 'bottom center', my: 'bottom center' },
+    },
+    'success',
+  );
+
   isAddContactPopupOpened.value = false;
 };
 

@@ -122,6 +122,7 @@
     @save="onSaveNewTask"
   >
     <task-form
+      ref="taskFormCmp"
       :content-by-screen="{ xs: screenInfo.isSmallMobileMedia ? 1 : 2, sm: 2 }"
       :is-create-mode="true"
       :data="popupTask"
@@ -152,12 +153,14 @@ import TaskListGantt from '@/components/library/task-list-gantt.vue';
 import { newTask } from '@/types/task';
 
 import { screenInfo } from '@/utils/media-query';
+import notify from 'devextreme/ui/notify';
 
 const isLoading = ref(true);
 const displayTaskComponent = ref(taskPanelItems[0].text);
 const activeTabId = ref<TaskPanelItemsIds>('grid');
-const tasksGridCmp = ref<InstanceType<typeof TaskListGrid> | null>(null);
-const tasksGanttCmp = ref<InstanceType<typeof TaskListGantt> | null>(null);
+const taskFormCmp = ref<InstanceType<typeof TaskForm>>();
+const tasksGridCmp = ref<InstanceType<typeof TaskListGrid>>();
+const tasksGanttCmp = ref<InstanceType<typeof TaskListGantt>>();
 const popupTask = ref<Task>(newTask);
 
 const gridData = ref<Task[]>([]);
@@ -196,7 +199,7 @@ const loadTasksAsync = async () => {
   isLoading.value = true;
   const tasks = await getTasks();
 
-  gridData.value = tasks.filter((item) => !!item.status && !!item.priority);
+  gridData.value = tasks.filter((item: Task) => !!item.status && !!item.priority);
   isLoading.value = false;
 };
 
@@ -218,6 +221,14 @@ const reload = () => {
 };
 
 const onSaveNewTask = () => {
+  notify(
+    {
+      message: `New task "${taskFormCmp.value?.getNewTaskData().text}" saved`,
+      position: { at: 'bottom center', my: 'bottom center' },
+    },
+    'success',
+  );
+
   isNewTaskPopupOpened.value = false;
 };
 
