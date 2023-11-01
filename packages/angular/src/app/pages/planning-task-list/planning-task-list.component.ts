@@ -8,11 +8,12 @@ import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxTabsTypes } from 'devextreme-angular/ui/tabs';
 import { DxTextBoxTypes } from 'devextreme-angular/ui/text-box';
+import notify from 'devextreme/ui/notify';
 import { taskPanelItems } from 'src/app/types/resource';
 import { Task, newTask } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
 import { forkJoin, map, Observable } from 'rxjs';
-import { TaskFormModule } from 'src/app/components/library/task-form/task-form.component';
+import { TaskFormComponent, TaskFormModule } from 'src/app/components/library/task-form/task-form.component';
 import { FormPopupModule } from 'src/app/components/utils/form-popup/form-popup.component';
 import { TaskListGridComponent, TaskListModule } from 'src/app/components/library/task-list-grid/task-list-grid.component';
 import { TaskListKanbanModule, TaskListKanbanComponent } from 'src/app/components/library/task-list-kanban/task-list-kanban.component';
@@ -30,6 +31,8 @@ export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningGantt', { static: false }) gantt: TaskListGanttComponent;
 
   @ViewChild('planningKanban', { static: false }) kanban: TaskListKanbanComponent;
+
+  @ViewChild(TaskFormComponent, { static: false }) taskForm: TaskFormComponent;
 
   newTask = newTask;
 
@@ -68,6 +71,14 @@ export class PlanningTaskListComponent implements OnInit {
 
   addTask = () => {
     this.isAddTaskPopupOpened = true;
+  };
+
+  onClickSaveNewTask = () => {
+    notify({
+        message: `New task "${this.taskForm.getNewTaskData().text}" saved`,
+        position: { at: 'bottom center', my: 'bottom center' }
+      },
+      'success');
   };
 
   refresh = () => {

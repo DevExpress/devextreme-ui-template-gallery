@@ -13,7 +13,7 @@ import LoadPanel from 'devextreme-react/load-panel';
 
 import { TaskListGrid, TaskListKanban, TaskListGantt, FormPopup, TaskFormDetails } from '../../components';
 
-import { newTask } from '../../shared/constants';
+import { newTask as newTaskDefaults } from '../../shared/constants';
 import { useScreenSize } from '../../utils/media-query';
 
 import { getTasks, getFilteredTasks } from 'dx-template-gallery-data';
@@ -25,6 +25,8 @@ import './planning-task-list.scss';
 import Button from 'devextreme-react/button';
 import TextBox, { TextBoxTypes } from 'devextreme-react/text-box';
 import Tabs from 'devextreme-react/tabs';
+import notify from 'devextreme/ui/notify';
+import { Task } from '../../types/task';
 
 const listsData = ['List', 'Kanban Board', 'Gantt'];
 
@@ -37,16 +39,22 @@ export const PlanningTaskList = () => {
 
   const [view, setView] = useState(listView);
   const [index, setIndex] = useState(0);
-  const [gridData, setGridData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
+  const [gridData, setGridData] = useState<Task[]>([]);
+  const [filteredData, setFilteredData] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
-  const [newTaskData, setNewTaskData] = useState(newTask);
+  const [formTaskInitData, setFormTaskInitData] = useState({ ...newTaskDefaults });
   const [popupVisible, setPopupVisible] = useState(false);
 
   const { isXSmall } = useScreenSize();
 
   const isDataGrid = view === listView;
   const isKanban = view === kanbanView;
+
+  let newTaskData = { ...newTaskDefaults };
+
+  const changePopupVisibility = useCallback((isVisible) => {
+    setPopupVisible(isVisible);
+  }, []);
 
   useEffect(() => {
     Promise.all([
@@ -57,14 +65,25 @@ export const PlanningTaskList = () => {
     ]).catch((error) => console.log(error));
   }, []);
 
+  const onSaveClick = () => {
+    notify({
+      message: `New task "${newTaskData.text}" saved`,
+      position: { at: 'bottom center', my: 'bottom center' }
+    },
+    'success'
+    );
+
+    setFormTaskInitData({ ...newTaskDefaults });
+  };
+
   useEffect(() => {
     if (filteredData.length && gridData.length) {
       setLoading(false);
     }
   }, [filteredData, gridData]);
 
-  const onDataChanged = useCallback(data => {
-    setNewTaskData(data);
+  const onDataChanged = useCallback((data) => {
+    newTaskData = data;
   }, []);
 
   const onTabClick = useCallback((e: { itemData?: string }) => {
@@ -72,9 +91,10 @@ export const PlanningTaskList = () => {
     setIndex(listsData.findIndex((d) => d === e.itemData));
   }, []);
 
-  const changePopupVisibility = useCallback(() => {
-    setPopupVisible(!popupVisible);
-  }, [popupVisible]);
+  const onAddTaskClick = useCallback(() => {
+    setFormTaskInitData({ ...newTaskDefaults });
+    setPopupVisible(true);
+  }, []);
 
   const refresh = useCallback(() => {
     if (isDataGrid) {
@@ -161,7 +181,7 @@ export const PlanningTaskList = () => {
             text='Add Task'
             type='default'
             stylingMode='contained'
-            onClick={changePopupVisibility}
+            onClick={onAddTaskClick}
           />
         </Item>
         <Item
@@ -238,10 +258,10 @@ export const PlanningTaskList = () => {
       </Toolbar>
       {loading && <LoadPanel container='.content' showPane={false} visible position={{ of: '.content' }} />}
       {!loading && isDataGrid && <TaskListGrid dataSource={gridData} ref={gridRef} />}
-      {!loading && isKanban && <TaskListKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={changePopupVisibility} />}
+      {!loading && isKanban && <TaskListKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={() => changePopupVisibility(!popupVisible)} />}
       {!loading && view === ganttView && <TaskListGantt dataSource={filteredData} ref={ganttRef} />}
-      <FormPopup title='New Task' visible={popupVisible} setVisible={changePopupVisibility}>
-        <TaskFormDetails subjectField data={newTaskData} editing onDataChanged={onDataChanged} />
+      <FormPopup title='New Task' visible={popupVisible} setVisible={changePopupVisibility} onSave={onSaveClick}>
+        <TaskFormDetails subjectField data={formTaskInitData} editing onDataChanged={onDataChanged} />
       </FormPopup>
     </div>
   );
