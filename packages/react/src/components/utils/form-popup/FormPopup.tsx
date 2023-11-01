@@ -20,8 +20,8 @@ export const FormPopup = ({
   title,
   visible,
   width = 480,
-  setVisible,
   onSave,
+  setVisible,
   wrapperAttr = { class: '' },
   isSaveDisabled = false,
   children

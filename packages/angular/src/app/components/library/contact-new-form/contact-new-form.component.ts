@@ -25,6 +25,8 @@ export class ContactNewFormComponent {
   newUser = newContact;
   getSizeQualifier = getSizeQualifier;
   constructor() { }
+
+  getNewContactData = ()=> ({ ...this.newUser })
 }
 
 @NgModule({

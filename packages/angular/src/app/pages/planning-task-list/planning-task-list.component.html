@@ -131,7 +131,7 @@
     >
     </dx-load-panel>
   </ng-template>
-  <form-popup [(visible)]="isAddTaskPopupOpened" titleText="New Task">
+  <form-popup [(visible)]="isAddTaskPopupOpened" (save)= "onClickSaveNewTask()" titleText="New Task">
     <task-form [task]="newTask" [isCreateMode]="true"></task-form>
   </form-popup>
 </div>
