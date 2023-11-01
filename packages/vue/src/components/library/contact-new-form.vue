@@ -107,10 +107,22 @@ import {
   DxItem as DxFormItem,
   DxColCountByScreen,
 } from 'devextreme-vue/form';
-import { ref } from 'vue';
-import { newContact } from '@/types/contact';
+import { reactive, watch } from 'vue';
+import { ContactBase, newContact } from '@/types/contact';
 import FormTextbox from '@/components/utils/form-textbox.vue';
 import FormPhotoUploader from '../utils/form-photo-uploader.vue';
 
-const contact = ref({ ...newContact });
+const contact = reactive({ ...newContact });
+let newContactData = { ...newContact };
+
+watch(
+  contact,
+  (newValue) => {
+    newContactData = { ...newValue };
+  },
+);
+
+defineExpose<{getNewContactData:() => ContactBase}>({
+  getNewContactData: () => newContactData,
+});
 </script>

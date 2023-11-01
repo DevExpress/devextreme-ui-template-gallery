@@ -16,7 +16,7 @@
     />
     <dx-form
       :form-data="data"
-      class="plain-styled-form"
+      class="plain-styled-form dx-form"
       :class="{'view-mode': !isEditing}"
       :screen-by-width="getSizeQualifier"
       v-if="!!props.data"
@@ -135,7 +135,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import { getSizeQualifier } from '@/utils/media-query';
 import StatusIndicator from '@/components/library/status-indicator.vue';
 import { DxTextArea } from 'devextreme-vue/text-area';
@@ -170,19 +170,25 @@ const props = withDefaults(defineProps<{
 });
 
 const isEditing = ref(props.isCreateMode);
-const data = ref(props.data);
+const data = reactive({ ...props.data });
+
+let newData: Task;
 
 watch(
   () => props.data,
   (newValue) => {
-    data.value = newValue;
+    Object.assign(data, newValue);
   },
 );
 
-let dataSaved: Task;
+watch(
+  data,
+  (newValue) => {
+    newData = { ...newValue };
+  },
+);
 
 function handleEditClick() {
-  dataSaved = { ...data.value };
   isEditing.value = true;
 }
 
@@ -193,12 +199,13 @@ function handleSaveClick({ validationGroup }: DxButtonTypes.ClickEvent) {
 }
 
 function handleCancelClick() {
-  if (dataSaved) {
-    data.value = dataSaved;
-  }
-
+  Object.assign(data, props.data);
   isEditing.value = false;
 }
+
+defineExpose<{getNewTaskData:() => Task}>({
+  getNewTaskData: () => newData,
+});
 </script>
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
