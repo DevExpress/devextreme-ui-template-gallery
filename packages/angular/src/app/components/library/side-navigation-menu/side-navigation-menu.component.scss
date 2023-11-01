@@ -24,7 +24,6 @@
       // ## Icon width customization
       .dx-treeview-item {
         padding-left: 0;
-        padding-right: 0;
 
         .dx-icon.dx-icon {
           width: var(--side-panel-min-width);
@@ -32,16 +31,13 @@
         }
       }
 
-      // ##
-
       // ## Arrow customization
       .dx-treeview-node.dx-treeview-node {
         padding: 0 0;
       }
 
       .dx-treeview-toggle-item-visibility {
-        right: 10px;
-        left: auto;
+        order: 3;
       }
 
       .dx-rtl .dx-treeview-toggle-item-visibility {
