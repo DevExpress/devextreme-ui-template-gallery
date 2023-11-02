@@ -2,7 +2,7 @@
   <ticker-card
     title="Opportunities"
     :data="props.data"
-    :icon="'datatrending'"
+    icon="datatrending"
     :percentage="20.3"
   />
 </template>

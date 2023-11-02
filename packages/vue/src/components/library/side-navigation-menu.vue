@@ -118,7 +118,7 @@ watch(
       // ## Icon width customization
       .dx-treeview-item {
         padding-left: 0;
-        // padding-right: 0;
+
         .dx-icon {
           width: var(--side-panel-min-width) !important;
           margin: 0 !important;

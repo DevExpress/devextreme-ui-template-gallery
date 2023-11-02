@@ -56,11 +56,12 @@ const getIconClass = () => props.tone || (props.percentage > 0 ? 'positive' : 'n
 @use "@/variables.scss" as *;
 
 .ticker {
+  height: auto;
   --gap-padding: 16px;
 
   border-radius: 8px;
   box-shadow: var(--card-shadow);
-  background-color: var(--base-bg, #FFF);
+  background-color: var(--base-bg, #fff);
   border: none;
   padding: 16px;
   display: flex;
@@ -68,22 +69,22 @@ const getIconClass = () => props.tone || (props.percentage > 0 ? 'positive' : 'n
   align-items: center;
 
   .positive {
-    background-color: color-mix(in srgb, var(--success-color) 12%, transparent);
+    background-color: color-mix(in sRGB, var(--success-color) 12%, transparent);
     color: var(--success-color);
   }
 
   .warning {
-    background-color: color-mix(in srgb, var(--warning-color) 12%, transparent);
+    background-color: color-mix(in sRGB, var(--warning-color) 12%, transparent);
     color: var(--icon-dark-warning-color);
   }
 
   .info {
-    background-color: color-mix(in srgb, var(--info-color) 12%, transparent);
+    background-color: color-mix(in sRGB, var(--info-color) 12%, transparent);
     color: var(--info-color);
   }
 
   .negative {
-    background-color: color-mix(in srgb, var(--error-color) 12%, transparent);
+    background-color: color-mix(in sRGB, var(--error-color) 12%, transparent);
     color: var(--error-color);
   }
 

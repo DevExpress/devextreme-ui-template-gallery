@@ -17,40 +17,26 @@ $theme-mode: null !default;
 @use "sass:math";
 @use "sass:color";
 
-$base-neutral-background2: rgb(250, 250, 250); // rgb(31, 31, 31)
-$base-neutral-background1: rgb(255, 255, 255);
-$base-neutral-background3-hover: rgb(235, 235, 235);
-$base-bg-selected: rgb(224, 224, 224); //rgb(56, 56, 56)
-
-@if $theme-mode == dark {
-  $base-neutral-background2: rgb(31, 31, 31);
-  $base-bg-selected: rgb(56, 56, 56);
-  $base-neutral-background3-hover: rgb(41, 41, 41);
-}
-
 :root {
   --dark-warning-color: #{darken(adjust-hue($base-warning, -12), 3.73)};
   --side-panel-min-width: 48px;
   --content-padding: 16px;
-  --page-padding: 32px;
   --header-toolbar-vertical-padding: 10px;
   --footer-height: 70px;
   --toolbar-vertical-padding: 16px;
   --toolbar-margin-bottom: var(--content-padding);
   --base-bg: #{$base-bg};
-  --background-color: #{($base-neutral-background2)};
-  --base-bg-darken-5: #{darken($base-neutral-background2, 5)};
-  --base-bg-darken-4: #{darken($base-neutral-background2, 4)};
+  --background-color: var(--base-bg);
+  --base-bg-darken-5: #{darken($base-bg, 5)};
+  --base-bg-darken-4: #{darken($base-bg, 4)};
   --side-panel-background: var(--base-bg-darken-5);
-  --card-background: #{$base-neutral-background1};
+  --card-background: var(--base-bg);
   --calendar-width: 292px;
 
   @if $theme-mode == dark {
     --card-background: var(--base-bg-darken-5);
   }
 
-  --base-bg-hover: #{$base-neutral-background3-hover};
-  --base-bg-selected: #{$base-bg-selected};
   --border-color: #{$base-border-color};
   --accent-color: #{$base-accent};
   --success-color: #{$base-success};
