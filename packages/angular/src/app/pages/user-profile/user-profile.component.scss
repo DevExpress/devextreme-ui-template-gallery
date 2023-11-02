@@ -122,10 +122,10 @@
   }
 
   .contacts-card .image-wrapper {
-    background-color: rgba(244, 67, 54, 0.2);
+    background-color: color-mix(in sRGB, var(--error-color) 12%, transparent);
   }
 
   .address-card .image-wrapper {
-    background-color: rgba(3, 169, 244, 0.2);
+    background-color: color-mix(in sRGB, var(--info-color) 12%, transparent);
   }
 }

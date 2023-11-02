@@ -414,11 +414,11 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
     }
 
     .contacts-card .image-wrapper {
-      background-color: color-mix(in srgb, var(--error-color) 12%, transparent);
+      background-color: color-mix(in sRGB, var(--error-color) 12%, transparent);
     }
 
     .address-card .image-wrapper {
-      background-color: color-mix(in srgb, var(--info-color) 12%, transparent);
+      background-color: color-mix(in sRGB, var(--info-color) 12%, transparent);
     }
 
     .basic-info-top-item,
