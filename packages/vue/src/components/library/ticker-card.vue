@@ -56,9 +56,9 @@ const getIconClass = () => props.tone || (props.percentage > 0 ? 'positive' : 'n
 @use "@/variables.scss" as *;
 
 .ticker {
-  height: auto;
   --gap-padding: 16px;
 
+  height: auto;
   border-radius: 8px;
   box-shadow: var(--card-shadow);
   background-color: var(--base-bg, #fff);
