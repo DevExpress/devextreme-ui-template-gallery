@@ -1,5 +1,5 @@
 <template>
-  <div class="tile">
+  <div class="ticker">
     <div
       class="icon-wrapper"
       :class="getIconClass()"
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div
-      :class="{'percentage': true, 'positive': percentage > 0, 'negative': percentage < 0}"
+      :class="['percentage', percentage > 0 ? 'positive': 'negative']"
       v-if="props.percentage !== 0"
     >
       <div :class="[`dx-icon-${percentage > 0 ? 'spinup' : 'spindown'}`]" />
@@ -55,7 +55,7 @@ const getIconClass = () => props.tone || (props.percentage > 0 ? 'positive' : 'n
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
 
-.tile {
+.ticker {
   --gap-padding: 16px;
 
   border-radius: 8px;

@@ -1,11 +1,10 @@
-<div class="tile"
->
+<div class="ticker">
   <div
-  class="icon-wrapper"
-  [class]="getIconClass()"
->
-  <i [class]="'dx-icon dx-icon-' + icon"></i>
-</div>
+    class="icon-wrapper"
+    [class]="getIconClass()"
+  >
+    <i [class]="'dx-icon dx-icon-' + icon"></i>
+  </div>
   <div class="middle">
     <div class="title">
       {{ titleText }}
@@ -20,9 +19,7 @@
   </div>
   <div *ngIf="percentage !== 0"
        class="percentage"
-       [class.positive]="percentage > 0"
-       [class.negative]="percentage < 0"
-
+       [class]="percentage > 0 ? 'positive': 'negative'"
   >
     <div [class]="'dx-icon-'+ (percentage > 0 ? 'spinup' : 'spindown')"></div>
     <i class="value"></i>

@@ -9,14 +9,10 @@
       </toolbar-analytics>
 
       <div class="tiles">
-        <opportunities-ticker
-          :data="opportunities"
-        />
-        <revenue-total-ticker
-          :data="sales"
-        />
-        <conversion-ticker/>
-        <leads-ticker/>
+        <opportunities-ticker :data="opportunities" />
+        <revenue-total-ticker :data="sales" />
+        <conversion-ticker />
+        <leads-ticker />
       </div>
 
       <div class="cards">
