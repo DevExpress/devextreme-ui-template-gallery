@@ -14,8 +14,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: TEST
-      if: ${{ github.ref.name == 'dev' }}
-      run: echo '------------->'
+      run: echo '-------------> ${{ github.ref.name }}'
 
     - name: Use Node.js
       uses: actions/setup-node@v3
