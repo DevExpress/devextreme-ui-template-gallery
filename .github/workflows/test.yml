@@ -97,21 +97,29 @@ jobs:
         working-directory: devextreme/packages/devextreme-react
         run: npm run pack
 
+      - name: DevExtreme-react - Pack npm
+        working-directory: devextreme/packages/devextreme-react/npm
+        run: npm pack
+
       - name: Upload devextreme-react Artifact
         uses: actions/upload-artifact@v2
         with:
           name: devextreme-react-npm
-          path: devextreme/packages/devextreme-react/npm/dist/devextreme-react*.tgz
+          path: devextreme/packages/devextreme-react/npm/devextreme-react*.tgz
 
       - name: DevExtreme-vue - Pack
         working-directory: devextreme/packages/devextreme-vue
         run: npm run pack
 
+      - name: DevExtreme-vue - Pack npm
+        working-directory: devextreme/packages/devextreme-vue/npm
+        run: npm pack
+
       - name: Upload devextreme-vue Artifact
         uses: actions/upload-artifact@v2
         with:
           name: devextreme-vue-npm
-          path: devextreme/packages/devextreme-vue/npm/dist/devextreme-vue*.tgz
+          path: devextreme/packages/devextreme-vue/npm/devextreme-vue*.tgz
 
   testcafe:
     name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }} - ${{ matrix.theme.type }}
