@@ -13,6 +13,9 @@ jobs:
     - name: Get sources
       uses: actions/checkout@v3
 
+    - name: TEST $GITHUB_REF_NAME
+      run: echo $GITHUB_REF_NAME
+
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
@@ -36,6 +39,7 @@ jobs:
 
   build-dx-npm-and-dx--project--npm:
     runs-on: ubuntu-latest
+    if: $GITHUB_REF_NAME == "dev"
     steps:
       #Build Devextreme latest
       - name: Checkout Devextreme
@@ -179,31 +183,29 @@ jobs:
       run: npm i npm@7 -g
 
     - name: Download devextreme Artifact
+      if: $GITHUB_REF_NAME == "dev"
       uses: actions/download-artifact@v2
       with:
         name: devextreme-npm
         path: devextreme-npm-latest
 
     - name: Download devextreme-${{ matrix.ARGS.project }} Artifact
+      if: $GITHUB_REF_NAME == "dev"
       uses: actions/download-artifact@v2
       with:
         name: devextreme-${{ matrix.ARGS.project }}-npm
         path: devextreme-${{ matrix.ARGS.project }}-npm-latest
 
     - name: Replace package.json
+      if: $GITHUB_REF_NAME == "dev"
       run: |
         FILE_FRAMEWORK_PATH=$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz")
         FILE_DX_PATH=$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
         FILE_DX_DIST_PATH=$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz")
-        sed -i 's/"devextreme": "[^"]+"/"devextreme": "FILE_DX_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
-        sed -i 's/"devextreme-dist": "[^"]+"/"devextreme-dist": "FILE_DX_DIST_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
-        sed -i 's/"devextreme-${{ matrix.ARGS.project }}": "[^"]+"/"devextreme-${{ matrix.ARGS.project }}": "FILE_FRAMEWORK_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
-
-    - name: Upload package.json Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ matrix.ARGS.project }}-package.json
-        path: ./packages/${{ matrix.ARGS.project }}/package.json
+        echo $FILE_FRAMEWORK_PATH
+        sed -i 's/"devextreme": "[^"]+"/"devextreme": "$FILE_DX_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
+        sed -i 's/"devextreme-dist": "\d+\.\d+\.\d+"/"devextreme-dist": "$FILE_DX_DIST_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
+        sed -i 's/"devextreme-${{ matrix.ARGS.project }}": "[^"]+"/"devextreme-${{ matrix.ARGS.project }}": "$FILE_FRAMEWORK_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
 
     - name: Restore npm cache
       uses: actions/cache@v3
@@ -245,3 +247,21 @@ jobs:
         name: screenshots-${{ matrix.ARGS.project }}
         path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
         if-no-files-found: ignore
+
+    - name: Delete ${{ matrix.ARGS.project }} Artifact
+      if: $GITHUB_REF_NAME == "dev"
+      uses: GeekyEggo/delete-artifact@v2.0.0
+      with:
+        name: devextreme-${{ matrix.ARGS.project }}-npm
+
+  clean:
+    name: Clean
+    if: $GITHUB_REF_NAME == "dev"
+    needs: [ testcafe ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete Artifact
+        uses: GeekyEggo/delete-artifact@v2.0.0
+        with:
+          name: devextreme-npm
