@@ -34,7 +34,7 @@ jobs:
       run: npm run test
       working-directory: packages/metadata
 
-  build-dx-npm-and-dx-angular-npm:
+  build-dx-npm-and-dx--project--npm:
     runs-on: ubuntu-latest
     steps:
       #Build Devextreme latest
@@ -123,7 +123,7 @@ jobs:
 
   testcafe:
     name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }} - ${{ matrix.theme.type }}
-    needs: [build-dx-npm-and-dx-angular-npm]
+    needs: [build-dx-npm-and-dx--project--npm]
     strategy:
       fail-fast: false
       matrix:
@@ -178,17 +178,6 @@ jobs:
     - name: Set NPM version
       run: npm i npm@7 -g
 
-    - name: Restore npm cache
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-
-    - name: Run npm install
-      run: npm install --no-audit --no-fund
-
     - name: Download devextreme Artifact
       uses: actions/download-artifact@v2
       with:
@@ -201,13 +190,31 @@ jobs:
         name: devextreme-${{ matrix.ARGS.project }}-npm
         path: devextreme-${{ matrix.ARGS.project }}-npm-latest
 
-    - name: Install latest devextreme packages for ${{ matrix.ARGS.project }}
-      working-directory: packages/${{ matrix.ARGS.project }}
+    - name: Replace package.json
       run: |
-        npm install $(find ../../devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
-        npm install $(find ../../devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz")
-        npm install $(find ../../devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz")
-    
+        FILE_FRAMEWORK_PATH=$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz")
+        FILE_DX_PATH=$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
+        FILE_DX_DIST_PATH=$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz")
+        sed -i 's/"devextreme": "[^"]+"/"devextreme": "FILE_DX_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
+        sed -i 's/"devextreme-dist": "[^"]+"/"devextreme-dist": "FILE_DX_DIST_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
+        sed -i 's/"devextreme-${{ matrix.ARGS.project }}": "[^"]+"/"devextreme-${{ matrix.ARGS.project }}": "FILE_FRAMEWORK_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
+
+    - name: Upload package.json Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ matrix.ARGS.project }}-package.json
+        path: ./packages/${{ matrix.ARGS.project }}/package.json
+
+    - name: Restore npm cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Run npm install
+      run: npm install --no-audit --no-fund
 
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme.fullName }}
