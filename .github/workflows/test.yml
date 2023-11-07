@@ -13,8 +13,8 @@ jobs:
     - name: Get sources
       uses: actions/checkout@v3
 
-    - name: TEST $GITHUB_REF
-      run: echo $GITHUB_REF
+    - name: TEST GITHUB_BASE_REF
+      run: echo $GITHUB_BASE_REF
 
     - name: Use Node.js
       uses: actions/setup-node@v3
