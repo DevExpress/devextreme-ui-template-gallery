@@ -39,7 +39,6 @@ jobs:
 
   build-dx-npm-and-dx--project--npm:
     runs-on: ubuntu-latest
-    if: $GITHUB_REF_NAME == "dev"
     steps:
       #Build Devextreme latest
       - name: Checkout Devextreme
@@ -183,21 +182,18 @@ jobs:
       run: npm i npm@7 -g
 
     - name: Download devextreme Artifact
-      if: $GITHUB_REF_NAME == "dev"
       uses: actions/download-artifact@v2
       with:
         name: devextreme-npm
         path: devextreme-npm-latest
 
     - name: Download devextreme-${{ matrix.ARGS.project }} Artifact
-      if: $GITHUB_REF_NAME == "dev"
       uses: actions/download-artifact@v2
       with:
         name: devextreme-${{ matrix.ARGS.project }}-npm
         path: devextreme-${{ matrix.ARGS.project }}-npm-latest
 
     - name: Replace package.json
-      if: $GITHUB_REF_NAME == "dev"
       run: |
         FILE_FRAMEWORK_PATH=$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz")
         FILE_DX_PATH=$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
@@ -249,14 +245,12 @@ jobs:
         if-no-files-found: ignore
 
     - name: Delete ${{ matrix.ARGS.project }} Artifact
-      if: $GITHUB_REF_NAME == "dev"
       uses: GeekyEggo/delete-artifact@v2.0.0
       with:
         name: devextreme-${{ matrix.ARGS.project }}-npm
 
   clean:
     name: Clean
-    if: $GITHUB_REF_NAME == "dev"
     needs: [ testcafe ]
     runs-on: ubuntu-latest
 
