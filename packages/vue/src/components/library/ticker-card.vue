@@ -56,7 +56,7 @@ const getIconClass = () => props.tone || (props.percentage > 0 ? 'positive' : 'n
 @use "@/variables.scss" as *;
 
 .ticker {
-  --gap-padding: 16px;
+  --gap-padding: 12px;
 
   height: auto;
   border-radius: 8px;
@@ -94,8 +94,9 @@ const getIconClass = () => props.tone || (props.percentage > 0 ? 'positive' : 'n
     height: 48px;
     border-radius: 50%;
 
-    i {
+    .dx-icon {
       margin: auto;
+      font-size: 24px;
     }
   }
 
@@ -111,9 +112,9 @@ const getIconClass = () => props.tone || (props.percentage > 0 ? 'positive' : 'n
 
   .total {
     display: inline-block;
-    font-size: 24px;
-    line-height: 24px;
+    font-size: 20px;
     font-weight: 600;
+    line-height: 20px;
     color: var(--base-text-color);
   }
 
