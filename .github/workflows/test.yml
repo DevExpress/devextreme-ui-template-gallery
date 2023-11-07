@@ -203,6 +203,12 @@ jobs:
         sed -i 's/"devextreme-dist": "\d+\.\d+\.\d+"/"devextreme-dist": "$FILE_DX_DIST_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
         sed -i 's/"devextreme-${{ matrix.ARGS.project }}": "[^"]+"/"devextreme-${{ matrix.ARGS.project }}": "$FILE_FRAMEWORK_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
 
+    - name: Upload package.json Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: package-${{ matrix.ARGS.project }}.json
+        path: ./packages/${{ matrix.ARGS.project }}/package.json
+
     - name: Restore npm cache
       uses: actions/cache@v3
       with:
