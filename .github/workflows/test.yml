@@ -199,7 +199,7 @@ jobs:
         run: npm run build
         working-directory: packages/${{ matrix.framework.name }}
 
-      - name: Upload build devextreme-${{ matrix.framework.name }} Artifact
+      - name: Upload artifact devextreme-${{ matrix.framework.name }}-${{ matrix.theme.name }}-build
         uses: actions/upload-artifact@v2
         with:
           retention-days: 1
@@ -219,7 +219,7 @@ jobs:
         ]
         ARGS: [
           { project: 'angular', page: 'crm-contact-details' },
-        ##  { project: 'angular', page: 'crm-contact-list' },
+          { project: 'angular', page: 'crm-contact-list' },
           # { project: 'angular', page: 'planning-task-details' }, No selector for Toolbar item on mobile device(bug)
          ## { project: 'angular', page: 'planning-task-list' },
          ## { project: 'angular', page: 'planning-scheduler' },
@@ -250,7 +250,7 @@ jobs:
         ##  { project: 'vue', page: 'user-profile' },
         ]
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 5
 
     steps:
     - name: Get sources
