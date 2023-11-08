@@ -126,10 +126,90 @@ jobs:
           name: devextreme-vue-npm
           path: devextreme/packages/devextreme-vue/npm/devextreme-vue*.tgz
 
+  build-uitg:
+    name: build-uitg-${{ matrix.framework.name }} - ${{ matrix.theme.name }}
+    if: ${{ always() }}
+    needs: [build-latest-dx-npm]
+    strategy:
+      fail-fast: false
+      matrix:
+        framework: [
+          { name: 'angular' },
+          { name: 'react' },
+          { name: 'vue' },
+        ]
+        theme: [
+          { name: 'material.blue.light.compact' },
+          { name: 'generic.light.compact' },
+        ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Get sources
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Set NPM version
+        run: npm i npm@7 -g
+
+      - name: For dev branch - download devextreme Artifact
+        if: ${{ github.base_ref == 'dev' }}
+        uses: actions/download-artifact@v2
+        with:
+          name: devextreme-npm
+          path: devextreme-npm-latest
+
+      - name: For dev branch - download devextreme-${{ matrix.ARGS.project }} Artifact
+        if: ${{ github.base_ref == 'dev' }}
+        uses: actions/download-artifact@v2
+        with:
+          name: devextreme-${{ matrix.ARGS.project }}-npm
+          path: devextreme-${{ matrix.ARGS.project }}-npm-latest
+
+      - name: For dev branch - replace dx versions to latest builds in package.json
+        if: ${{ github.base_ref == 'dev' }}
+        run: |
+          FILE_FRAMEWORK_PATH="$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz" | sed 's|/|\\/|g')"
+          FILE_DX_PATH="$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz" | sed 's|/|\\/|g')"
+          FILE_DX_DIST_PATH="$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz" | sed 's|/|\\/|g')"
+          sed -i "s|\"devextreme\": \"[0-9.]\+\"|\"devextreme\": \"\.\.\/\.\.\/$FILE_DX_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s/\"devextreme-dist\": \"[0-9.]\+\"/\"devextreme-dist\": \"\.\.\/\.\.\/$FILE_DX_DIST_PATH\"/g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s|\"devextreme-${{ matrix.ARGS.project }}\": \"[0-9.]\+\"|\"devextreme-${{ matrix.ARGS.project }}\": \"\.\.\/\.\.\/$FILE_FRAMEWORK_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Run npm install
+        run: npm install --no-audit --no-fund
+
+      - name: Set theme
+        run: npm run set-theme -- ${{ matrix.theme.name }}
+
+      - name: Build
+        run: npm run build
+        working-directory: packages/${{ matrix.framework.name }}
+
+      - name: Upload build devextreme-${{ matrix.framework.name }} Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          retention-days: 1
+          name: devextreme-${{ matrix.framework.name }}-${{ matrix.theme.name }}-build
+          path: packages/${{ matrix.framework.name }}/build/**/*
+
   testcafe:
     name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }} - ${{ matrix.theme.type }}
     if: ${{ always() }}
-    needs: [build-latest-dx-npm]
+    needs: [build-uitg]
     strategy:
       fail-fast: false
       matrix:
@@ -222,9 +302,12 @@ jobs:
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme.fullName }}
 
-    - name: Build
-      run: npm run build
-      working-directory: packages/${{ matrix.ARGS.project }}
+    - name: download ${{ matrix.ARGS.project }}-${{ matrix.theme.fullName }}
+      uses: actions/download-artifact@v2
+      with:
+        working-directory: packages/${{ matrix.ARGS.project }}
+        name: devextreme-${{ matrix.ARGS.project }}-${{ matrix.theme.fullName }}-build
+        path: build
 
     - name: Start app
       run: npm run start-apps -- --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme.name }}
