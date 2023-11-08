@@ -13,12 +13,6 @@ jobs:
     - name: Get sources
       uses: actions/checkout@v3
 
-    - name: TEST
-      run: |
-        sed -i 's/"devextreme": "[0-9.]\+"/"SSSSSSSSSS": "11111"/g' ./test.test
-        cat ./test.test
-      
-
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
@@ -206,9 +200,10 @@ jobs:
         FILE_FRAMEWORK_PATH=$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz")
         FILE_DX_PATH=$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
         FILE_DX_DIST_PATH=$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz")
-        sed -i 's/"devextreme":\s*"[^"]+"/"devextreme": "$FILE_DX_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
-        sed -i 's/"devextreme-dist":\s*"\d+\.\d+\.\d+"/"devextreme-dist": "$FILE_DX_DIST_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
-        sed -i 's/"devextreme-${{ matrix.ARGS.project }}":\s*"[^"]+"/"devextreme-${{ matrix.ARGS.project }}": "$FILE_FRAMEWORK_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
+        sed -i 's/"devextreme": "[0-9.]\+"/"devextreme": "$FILE_DX_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
+        sed -i 's/"devextreme-dist": "[0-9.]\+"/"devextreme-dist": "$FILE_DX_DIST_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
+        sed -i 's/"devextreme-${{ matrix.ARGS.project }}": "[0-9.]\+"/"devextreme-${{ matrix.ARGS.project }}": "$FILE_FRAMEWORK_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
+        cat ./packages/${{ matrix.ARGS.project }}/package.json
 
     - name: Upload package.json Artifact
       uses: actions/upload-artifact@v2
