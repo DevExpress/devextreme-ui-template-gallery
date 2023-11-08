@@ -143,7 +143,7 @@ jobs:
         ##  { name: 'generic.light.compact' },
         ]
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 5
 
     steps:
       - name: Get sources
@@ -223,7 +223,7 @@ jobs:
           # { project: 'angular', page: 'planning-task-details' }, No selector for Toolbar item on mobile device(bug)
          ## { project: 'angular', page: 'planning-task-list' },
          ## { project: 'angular', page: 'planning-scheduler' },
-         ## { project: 'angular', page: 'analytics-dashboard' },
+          { project: 'angular', page: 'analytics-dashboard' },
          ## { project: 'angular', page: 'analytics-sales-report' },
          ## { project: 'angular', page: 'analytics-geography' },
          ## { project: 'angular', page: 'user-profile' },
@@ -250,7 +250,7 @@ jobs:
         ##  { project: 'vue', page: 'user-profile' },
         ]
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
 
     steps:
     - name: Get sources
