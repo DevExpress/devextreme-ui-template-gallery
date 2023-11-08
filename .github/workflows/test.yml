@@ -13,12 +13,20 @@ jobs:
     - name: Get sources
       uses: actions/checkout@v3
 
-    - name: TEST
+    - name: TEST 0
       run: |
-        export RRRR="123"
-        echo '------>' $RRRR
+        RRRR="$(find . -maxdepth 1 -name "test*")"
+        FFFF="=="
+        echo "----++--> $RRRR $FFFF"
+        RRRR=$(echo "./test.test" | sed 's|/|\\/|g')
+        echo "------> $RRRR"
+
+    - name: TEST 1
+      run: |
+        RRRR="devextreme-npm-latest\/devextreme\/devextreme-23.2.0.tgz"
+        echo "------> $RRRR"
         sed -i "s/\"devextreme\": \"[0-9.]\+\"/\"SSSSSSSSSS\": \"$RRRR\"/g" ./test.test
-        cat ./test.test
+        cat ./test.test   
 
     - name: Use Node.js
       uses: actions/setup-node@v3
@@ -82,6 +90,7 @@ jobs:
       - name: Upload devextreme Artifact
         uses: actions/upload-artifact@v3
         with:
+          retention-days: 1
           name: devextreme-npm
           path: |
             devextreme/packages/devextreme/artifacts/npm/devextreme/devextreme-*.tgz
@@ -98,6 +107,7 @@ jobs:
       - name: Upload devextreme-angular Artifact
         uses: actions/upload-artifact@v2
         with:
+          retention-days: 1
           name: devextreme-angular-npm
           path: devextreme/packages/devextreme-angular/npm/dist/devextreme-angular*.tgz
 
@@ -112,6 +122,7 @@ jobs:
       - name: Upload devextreme-react Artifact
         uses: actions/upload-artifact@v2
         with:
+          retention-days: 1
           name: devextreme-react-npm
           path: devextreme/packages/devextreme-react/npm/devextreme-react*.tgz
 
@@ -126,6 +137,7 @@ jobs:
       - name: Upload devextreme-vue Artifact
         uses: actions/upload-artifact@v2
         with:
+          retention-days: 1
           name: devextreme-vue-npm
           path: devextreme/packages/devextreme-vue/npm/devextreme-vue*.tgz
 
@@ -204,21 +216,16 @@ jobs:
     - name: Replace package.json
       if: ${{ github.base_ref == 'dev' }}
       run: |
-        export FILE_FRAMEWORK_PATH=$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz")
-        FILE_DX_PATH=$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
-        FILE_DX_DIST_PATH=$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz")
-        sed -i "s/\"devextreme\": \"[0-9.]\+\"/\"devextreme\": \"$FILE_DX_PATH\"/g' ./packages/${{ matrix.ARGS.project }}/package.json
-        sed -i "s/\"devextreme-dist\": \"[0-9.]\+\"/\"devextreme-dist\": \"$FILE_DX_DIST_PATH\"/g' ./packages/${{ matrix.ARGS.project }}/package.json
-        sed -i "s/\"devextreme-${{ matrix.ARGS.project }}\": \"[0-9.]\+\"/\"devextreme-${{ matrix.ARGS.project }}\": \"$FILE_FRAMEWORK_PATH\"/g' ./packages/${{ matrix.ARGS.project }}/package.json
+        FILE_FRAMEWORK_PATH="$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz" | sed 's|/|\\/|g')"
+        FILE_DX_PATH="$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz" | sed 's|/|\\/|g')"
+        FILE_DX_DIST_PATH="$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz" | sed 's|/|\\/|g')"
+        sed -i "s|\"devextreme\": \"[0-9.]\+\"|\"devextreme\": \"\.\.\/\.\.\/$FILE_DX_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+        sed -i "s/\"devextreme-dist\": \"[0-9.]\+\"/\"devextreme-dist\": \"\.\.\/\.\.\/$FILE_DX_DIST_PATH\"/g" ./packages/${{ matrix.ARGS.project }}/package.json
+        sed -i "s|\"devextreme-${{ matrix.ARGS.project }}\": \"[0-9.]\+\"|\"devextreme-${{ matrix.ARGS.project }}\": \"\.\.\/\.\.\/$FILE_FRAMEWORK_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
         cat ./packages/${{ matrix.ARGS.project }}/package.json
 
-    - name: Upload package.json Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: package-${{ matrix.ARGS.project }}.json
-        path: ./packages/${{ matrix.ARGS.project }}/package.json
-
     - name: Restore npm cache
+      if: ${{ github.base_ref == 'dev' }}
       uses: actions/cache@v3
       with:
         path: ~/.npm
@@ -258,21 +265,3 @@ jobs:
         name: screenshots-${{ matrix.ARGS.project }}
         path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
         if-no-files-found: ignore
-
-    - name: Delete ${{ matrix.ARGS.project }} Artifact
-      if: ${{ github.base_ref == 'dev' }}
-      uses: GeekyEggo/delete-artifact@v2.0.0
-      with:
-        name: devextreme-${{ matrix.ARGS.project }}-npm
-
-  clean:
-    name: Clean
-    if: ${{ github.base_ref == 'dev' }}
-    needs: [ testcafe ]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Delete Artifact
-        uses: GeekyEggo/delete-artifact@v2.0.0
-        with:
-          name: devextreme-npm
