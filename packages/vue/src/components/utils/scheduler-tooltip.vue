@@ -10,6 +10,7 @@
       <div class="date">
         <dx-button
           icon="clock"
+          styling-mode="text"
           :focus-state-enabled="false"
           :active-state-enabled="false"
           :hover-state-enabled="false"
@@ -22,6 +23,7 @@
       >
         <dx-button
           icon="textdocument"
+          styling-mode="text"
           :focus-state-enabled="false"
           :active-state-enabled="false"
           :hover-state-enabled="false"

@@ -33,12 +33,13 @@ export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({
     setIsPasswordMode(!isPasswordMode);
   }, [isPasswordMode]);
 
-  const buttonOptions = useMemo(() =>
+  const buttonOptions: any = useMemo(() =>
     ({
       visible: value?.length > 0,
       icon: isPasswordMode ? 'eyeopen' : 'eyeclose',
       hoverStateEnabled: false,
       activeStateEnabled: false,
+      stylingMode: 'text',
       onClick: switchMode
     }),
   [value, switchMode]);

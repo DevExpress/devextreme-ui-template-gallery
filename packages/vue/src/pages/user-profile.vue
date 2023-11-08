@@ -1,6 +1,6 @@
 <template>
   <div class="view-wrapper">
-    <div :class="{scrolled: isContentScrolled, 'toolbar-wrapper': true}">
+    <div :class="{scrolled: isContentScrolled, 'toolbar-wrapper': true, 'theme-dependent': true}">
       <dx-toolbar>
         <dx-item location="before">
           <div class="header-text">

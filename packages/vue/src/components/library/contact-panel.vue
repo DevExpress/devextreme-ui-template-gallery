@@ -112,7 +112,7 @@
                   <dx-button
                     text="Edit"
                     icon="edit"
-                    styling-mode="outlined"
+                    styling-mode="contained"
                     type="default"
                     @click="toggleEdit()"
                   />
@@ -138,7 +138,7 @@
                   <dx-button
                     text="Save"
                     icon="save"
-                    styling-mode="outlined"
+                    styling-mode="contained"
                     type="default"
                     @click="handleSaveClick"
                   />

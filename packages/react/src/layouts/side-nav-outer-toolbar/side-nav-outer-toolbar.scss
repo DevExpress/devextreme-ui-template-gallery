@@ -1,5 +1,9 @@
 @use "../../variables.scss" as *;
 
+.dx-drawer-panel-content {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
+}
+
 .side-nav-outer-toolbar {
   flex-direction: column;
   display: flex;
@@ -9,6 +13,10 @@
 
 .layout-header {
   z-index: 1501;
+}
+
+.layout-body {
+  background-color: var(--background-color);
 }
 
 .drawer {

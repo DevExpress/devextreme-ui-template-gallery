@@ -184,13 +184,13 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
             <div className='data-part data-part-toolbar border'>
               <Toolbar>
                 <ToolbarItem location='after' visible={!isEditing}>
-                  <Button icon='edit' text='Edit' stylingMode='outlined' type='default' onClick={toggleEditHandler} />
+                  <Button icon='edit' text='Edit' stylingMode='contained' type='default' onClick={toggleEditHandler} />
                 </ToolbarItem>
                 <ToolbarItem location='after' visible={!isEditing}>
                   <Button text='Details' stylingMode='outlined' type='default' onClick={navigateToDetails} />
                 </ToolbarItem>
                 <ToolbarItem location='after' visible={isEditing}>
-                  <Button text='Save' icon='save' stylingMode='outlined' type='default' onClick={onSaveClick} />
+                  <Button text='Save' icon='save' stylingMode='contained' type='default' onClick={onSaveClick} />
                 </ToolbarItem>
                 <ToolbarItem location='after' visible={isEditing}>
                   <Button text='Cancel' stylingMode='text' onClick={toggleEditHandler} />

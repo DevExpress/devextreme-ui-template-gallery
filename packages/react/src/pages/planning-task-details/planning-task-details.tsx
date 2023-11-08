@@ -48,7 +48,7 @@ export const PlanningTaskDetails = () => {
   return (
     <ScrollView className='view-wrapper-scroll'>
       <div className='view-wrapper view-wrapper-details'>
-        <Toolbar className='toolbar-details'>
+        <Toolbar className='toolbar-details theme-dependent'>
           <ToolbarItem location='before'>
             <Button icon='arrowleft' stylingMode='text' />
           </ToolbarItem>

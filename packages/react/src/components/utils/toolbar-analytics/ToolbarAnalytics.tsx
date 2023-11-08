@@ -15,7 +15,7 @@ export const ToolbarAnalytics = ({
 }: React.PropsWithChildren<ToolbarAnalyticsProps>) => {
   return (
     <div className='view-wrapper view-wrapper-dashboard'>
-      <Toolbar>
+      <Toolbar className='theme-dependent'>
         <Item location='before'>
           <span className='toolbar-header'>{title}</span>
         </Item>

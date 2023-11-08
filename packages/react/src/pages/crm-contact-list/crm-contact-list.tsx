@@ -158,9 +158,9 @@ export const CRMContactList = () => {
 
   return (
     <div className='view crm-contact-list'>
-      <div className='view-wrapper view-wrapper-contact-list'>
+      <div className='view-wrapper view-wrapper-contact-list list-page'>
         <DataGrid
-          className='grid'
+          className='grid theme-dependent'
           noDataText=''
           focusedRowEnabled
           height='100%'

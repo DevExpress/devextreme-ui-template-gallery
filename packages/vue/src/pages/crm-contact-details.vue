@@ -1,7 +1,7 @@
 <template>
   <dx-scroll-view class="view-wrapper-scroll">
     <div class="view-wrapper">
-      <dx-toolbar class="toolbar-details">
+      <dx-toolbar class="toolbar-details theme-dependent">
         <dx-toolbar-item location="before">
           <dx-button
             icon="arrowleft"

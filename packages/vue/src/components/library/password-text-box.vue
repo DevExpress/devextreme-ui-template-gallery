@@ -15,6 +15,7 @@
         icon: isPasswordMode ? 'eyeopen' : 'eyeclose',
         hoverStateEnabled: false,
         activeStateEnabled: false,
+        stylingMode: 'text',
         onClick: switchMode
       }"
     />

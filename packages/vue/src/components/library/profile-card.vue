@@ -21,7 +21,7 @@
           :data-field="item.dataField"
           :editor-type="item.editorType"
           :editor-options="{
-            stylingMode: 'outlined',
+            stylingMode: 'filled',
             valueChangeEvent: 'input',
             ...item.editorOptions
           }"
@@ -40,6 +40,7 @@
             v-if="item.dataField === 'status'"
             :items="item.itemsList"
             :model-value="cardData[item.dataField]"
+            styling-mode="filled"
             label-mode="hidden"
             @update:model-value="onFieldChange()"
           />

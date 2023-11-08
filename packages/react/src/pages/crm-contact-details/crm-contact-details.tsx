@@ -75,7 +75,7 @@ export const CRMContactDetails = () => {
   return (
     <ScrollView className='view-wrapper-scroll'>
       <div className='view-wrapper view-wrapper-contact-details'>
-        <Toolbar className='toolbar-details'>
+        <Toolbar className='toolbar-details theme-dependent'>
           <Item location='before'>
             <Button icon='arrowleft' stylingMode='text' />
           </Item>

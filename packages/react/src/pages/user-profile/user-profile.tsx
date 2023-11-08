@@ -234,7 +234,7 @@ export const UserProfile = () => {
 
   return <div className='view-host user-profile'>
     <div className='view-wrapper'>
-      <Toolbar className={isContentScrolled ? 'scrolled' : ''}>
+      <Toolbar className={`theme-dependent ${isContentScrolled ? 'scrolled' : ''}`}>
         <Item location='before'>
           <div className='header-text'>User Profile</div>
         </Item>

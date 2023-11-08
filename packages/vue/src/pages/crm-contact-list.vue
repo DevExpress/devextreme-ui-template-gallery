@@ -1,5 +1,5 @@
 <template>
-  <div class="view-wrapper">
+  <div class="view-wrapper list-page">
     <dx-data-grid
       ref="dataGrid"
       :data-source="dataSource"
@@ -8,7 +8,7 @@
       :focused-row-key="focusedRowKey"
       :show-borders="true"
       height="100%"
-      class="grid"
+      class="grid theme-dependent"
       @row-click="rowClick"
       @exporting="onExporting"
     >

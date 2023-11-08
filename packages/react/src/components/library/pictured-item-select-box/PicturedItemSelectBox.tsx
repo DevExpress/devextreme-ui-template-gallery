@@ -46,7 +46,7 @@ export const PicturedItemSelectBox = ({ value, label = '', items = [], onValueCh
     items={items}
     itemRender={ItemRender}
     valueExpr='name'
-    stylingMode='outlined'
+    stylingMode='filled'
     labelMode='hidden'
     width='100%'
     fieldRender={fieldRender}

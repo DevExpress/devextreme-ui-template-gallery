@@ -106,6 +106,10 @@ const drawerOptions = computed(() => {
 <style scoped lang="scss">
 @use '@/variables' as *;
 
+.dx-drawer-panel-content {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
+}
+
 .side-nav-outer-toolbar {
   flex-direction: column;
   display: flex;
@@ -120,7 +124,7 @@ const drawerOptions = computed(() => {
 .layout-body {
   flex: 1;
   min-height: 0;
-  background-color: var(--base-bg);
+  background-color: var(--background-color);
 }
 
 .content {

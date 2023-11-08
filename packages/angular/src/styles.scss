@@ -226,3 +226,43 @@ body {
 .status-indicator-high {
   @include status(#ff5722);
 }
+
+
+.dx-theme-fluent {
+  .layout-body .menu-container.theme-dependent, app-footer {
+    background-color: var(--base-bg);
+  }
+
+  .layout-body .menu-container.theme-dependent {
+    padding-top: 0;
+  }
+
+  .view-wrapper {
+    .dx-toolbar.dx-widget.theme-dependent {
+      background-color: var(--base-bg);
+      padding: 5px var(--content-padding);
+      border-radius: 8px;
+      box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+    }
+  
+    .grid.theme-dependent {
+      .dx-toolbar {
+        background-color: var(--base-bg);
+        padding: 5px var(--content-padding);
+        border-radius: 8px;
+        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+      }
+  
+      .dx-datagrid-header-panel {
+        padding: 0;
+      }
+    }
+  }
+  .view-wrapper.list-page {
+    margin-top: var(--content-padding);
+
+    .dx-toolbar.dx-widget.theme-dependent, .grid.theme-dependent .dx-toolbar {
+      margin-bottom: var(--content-padding);
+    }
+  }
+}
