@@ -1,8 +1,6 @@
-$theme: null !default;
+$theme-mode: null !default;
 
-$theme-type: 'fluent';
-
-@use "/node_modules/devextreme/scss/widgets/fluent/colors" as * with ($color: "blue", $mode: $theme);
+@use "/node_modules/devextreme/scss/widgets/fluent/colors" as * with ($color: "blue", $mode: $theme-mode);
 @use "/node_modules/devextreme/scss/widgets/fluent/sizes" as * with ($size: "default");
 @use "/node_modules/devextreme/scss/widgets/fluent/button/mixins" as *;
 @use "/node_modules/devextreme/scss/widgets/fluent/textEditor/colors" as *;
@@ -11,10 +9,11 @@ $theme-type: 'fluent';
 @use '/node_modules/devextreme/scss/widgets/fluent/toolbar/sizes' as toolbar_sizes;
 @use "/node_modules/devextreme/scss/widgets/fluent/list/sizes" as *;
 @use "/node_modules/devextreme/scss/widgets/fluent/button/sizes" as *;
+@use "theme-special" as * with ($theme: "material");
 @use "sass:math";
 @use "sass:color";
 
-:root, .app-theme-#{$theme} {
+:root, .app-theme-#{$theme-mode} {
   --side-panel-min-width: 48px;
   --calendar-width: 292px;
   --header-toolbar-vertical-padding: 10px;
@@ -52,11 +51,7 @@ $theme-type: 'fluent';
   --drop-down-gnrc-button-height: #{$fluent-base-inline-widget-height};
   --subtitle-text-color: var(--texteditor-label-color);
 
-  @if $theme == dark {
+  @if $theme-mode == dark {
     --card-background: var(--base-bg-darken-5);
-  }
-
-  @if $theme-type == fluent {
-    --background-color: #{$typography-bg};
   }
 }

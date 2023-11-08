@@ -1,6 +1,5 @@
-$theme: null !default;
-$theme-type: 'fluent';
-@use "/node_modules/devextreme/scss/widgets/fluent/colors" as * with ($color: "blue", $mode: $theme);
+$theme-mode: null !default;
+@use "/node_modules/devextreme/scss/widgets/fluent/colors" as * with ($color: "blue", $mode: $theme-mode);
 @use "/node_modules/devextreme/scss/widgets/fluent/sizes" as * with ($size: "default");
 @use "/node_modules/devextreme/scss/widgets/fluent/button/mixins" as *;
 @use "/node_modules/devextreme/scss/widgets/fluent/textEditor/colors" as *;
@@ -9,6 +8,7 @@ $theme-type: 'fluent';
 @use '/node_modules/devextreme/scss/widgets/fluent/toolbar/sizes' as toolbar_sizes;
 @use "/node_modules/devextreme/scss/widgets/fluent/list/sizes" as *;
 @use "/node_modules/devextreme/scss/widgets/fluent/button/sizes" as *;
+@use "theme-special" as * with ($theme: "material");
 
 @forward "/node_modules/devextreme/scss/widgets/fluent/colors";
 @forward "/node_modules/devextreme/scss/widgets/fluent/textEditor/colors";
@@ -35,10 +35,6 @@ $theme-type: 'fluent';
 
   @if $theme == dark {
     --card-background: var(--base-bg-darken-5);
-  }
-
-  @if $theme-type == fluent {
-    --background-color: #{$typography-bg};
   }
 
   --side-panel-background: var(--base-bg-darken-5);

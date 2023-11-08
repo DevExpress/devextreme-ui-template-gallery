@@ -1,0 +1,7 @@
+$theme: null !default;
+
+:root {
+  @if $theme == fluent {
+    --background-color: #{$typography-bg};
+  }
+}
