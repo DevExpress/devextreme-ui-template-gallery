@@ -184,21 +184,21 @@ jobs:
     - name: Set NPM version
       run: npm i npm@7 -g
 
-    - name: Download devextreme Artifact
+    - name: For dev branch - download devextreme Artifact
       if: ${{ github.base_ref == 'dev' }}
       uses: actions/download-artifact@v2
       with:
         name: devextreme-npm
         path: devextreme-npm-latest
 
-    - name: Download devextreme-${{ matrix.ARGS.project }} Artifact
+    - name: For dev branch - download devextreme-${{ matrix.ARGS.project }} Artifact
       if: ${{ github.base_ref == 'dev' }}
       uses: actions/download-artifact@v2
       with:
         name: devextreme-${{ matrix.ARGS.project }}-npm
         path: devextreme-${{ matrix.ARGS.project }}-npm-latest
 
-    - name: Replace package.json
+    - name: For dev branch - replace dx versions to latest builds in package.json
       if: ${{ github.base_ref == 'dev' }}
       run: |
         FILE_FRAMEWORK_PATH="$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz" | sed 's|/|\\/|g')"
