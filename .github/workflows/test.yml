@@ -14,7 +14,10 @@ jobs:
       uses: actions/checkout@v3
 
     - name: TEST
-      run: echo '-------------> ${{ github.baseRef }}  - ${{ github.baseref }}  - ${{ github.base_ref }}'
+      run: |
+        sed -i 's/"devextreme": "[0-9.]\+"/"SSSSSSSSSS": "11111"/g' ./test.test
+        cat ./test.test
+      
 
     - name: Use Node.js
       uses: actions/setup-node@v3
