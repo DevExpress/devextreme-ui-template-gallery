@@ -11,7 +11,7 @@
       <dx-button
         text="Edit"
         icon="edit"
-        styling-mode="outlined"
+        styling-mode="contained"
         type="default"
         @click="emit('editToggled')"
       />
@@ -23,7 +23,7 @@
     >
       <dx-button
         text="Save"
-        styling-mode="outlined"
+        styling-mode="contained"
         type="default"
         @click="emit('saveClicked', $event)"
       />
@@ -36,7 +36,8 @@
       <dx-button
         text="Cancel"
         @click="emit('editCanceled')"
-        styling-mode="text"
+        styling-mode="outlined"
+        type="normal"
       />
     </dx-toolbar-item>
   </dx-toolbar>

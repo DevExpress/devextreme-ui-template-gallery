@@ -8,7 +8,9 @@
         Geography
       </toolbar-analytics>
 
-      <sales-map-card :data="salesByStateMarkers" />
+      <div class="cards wide">
+        <sales-map-card :data="salesByStateMarkers" />
+      </div>
 
       <div class="cards">
         <revenue-analysis-card :data="salesByStateAndCity" />
@@ -86,6 +88,11 @@ const tabChange = ([startDate, endDate]: string[]) => loadData(startDate, endDat
   grid-gap: 20px;
   gap: 20px;
   grid-template-columns: repeat(2, calc(50% - 10px));
+}
+
+.cards.wide {
+    margin-right: 0;
+    grid-template-columns: repeat(1, 100%);
 }
 
 @media only screen and (max-width: 900px) {

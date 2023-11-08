@@ -125,7 +125,7 @@
                 <dx-button
                   text="Details"
                   stylingMode="outlined"
-                  type="default"
+                  type="normal"
                   (onClick)="navigateToDetails()"
                 >
                 </dx-button>
@@ -151,7 +151,8 @@
               >
                 <dx-button
                   text="Cancel"
-                  stylingMode="text"
+                  stylingMode="outlined"
+                  type="normal"
                   (onClick)="toggleEdit()"
                 ></dx-button>
               </dxi-item>
@@ -161,6 +162,8 @@
                 [options]="{
                   text: 'Actions',
                   stylingMode: 'text',
+                  dropDownOptions: { width: 'auto' },
+                  width: 'auto',
                   items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
                 }"
               ></dxi-item>

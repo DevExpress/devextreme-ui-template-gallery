@@ -1,5 +1,5 @@
 <template>
-  <div class="view-wrappe list-page">
+  <div class="view-wrapper list-page">
     <dx-toolbar class="toolbar-details theme-dependent">
       <dx-toolbar-item location="before">
         <span class="toolbar-header">Tasks</span>

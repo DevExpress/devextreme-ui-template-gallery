@@ -1,9 +1,5 @@
 @use "../../../variables.scss" as *;
 
-::ng-deep .dx-drawer-panel-content {
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
-}
-
 :host {
   flex-direction: column;
   display: flex;

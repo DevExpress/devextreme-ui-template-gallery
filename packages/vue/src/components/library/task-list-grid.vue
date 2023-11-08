@@ -5,7 +5,6 @@
     height="100%"
     :data-source="dataSource"
     @row-click="navigateToDetails($event)"
-    @row-prepared="onRowPreparedGrid"
     @editing-start="toogleUseNavigation"
     @edit-canceled="toogleUseNavigation"
     @saved="toogleUseNavigation"
@@ -202,16 +201,6 @@ const props = withDefaults(defineProps<{
 const dxDataGridCmp = ref<InstanceType<typeof DxDataGrid> | null>(null);
 let useNavigation = true;
 
-const onRowPreparedGrid = (e: DxDataGridTypes.RowPreparedEvent<Task, number>) => {
-  const { rowType, rowElement, data } = e;
-
-  if (rowType === 'header') return;
-
-  if (data.status === 'Completed') {
-    rowElement.classList.add('completed');
-  }
-};
-
 const navigateToDetails = (e: DxDataGridTypes.RowClickEvent) => {
   if (useNavigation && e.rowType !== 'detailAdaptive') {
     router.push('/planning-task-details');
@@ -280,15 +269,10 @@ defineExpose({
 
 #tasks-grid {
   min-height: 300px;
-  border-top: 1px solid var(--border-color);
 
   :deep(.priority span) {
     font-size: 13px;
   }
-}
-
-:deep(.dx-row.completed) {
-  background: var(--background-gray-color);
 }
 
 :deep(.edit-cell) {

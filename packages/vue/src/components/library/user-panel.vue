@@ -9,7 +9,7 @@
         class: 'user-button'
       }"
       :drop-down-options="{
-        width: '150'
+        width: 'auto'
       }"
       drop-down-content-template="dropDownContentTemplate"
       @content-ready="handleDropDownButtonContentReady"
@@ -85,10 +85,6 @@ function handleDropDownButtonContentReady({ component }: {component: typeof DxDr
       }
 
       .dx-theme-material & {
-        height: 100%;
-      }
-
-      .dx-theme-fluent & {
         height: 100%;
       }
     }

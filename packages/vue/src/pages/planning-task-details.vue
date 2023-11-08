@@ -19,6 +19,7 @@
           <dx-drop-down-button
             text="Actions"
             styling-mode="text"
+            drop-down-options="{ width: 'auto' }"
           >
             <dx-drop-down-item text="Duplicate" />
             <dx-drop-down-item text="Close" />
@@ -77,7 +78,6 @@
 
               <dx-item
                 title="Messages"
-                :badge="messageBadge"
               >
                 <card-messages
                   :user="taskData?.owner"
@@ -115,11 +115,6 @@ const taskId = 1;
 const taskName = ref('');
 const taskData = ref<Task>();
 const isLoading = ref(false);
-
-const messageBadge = computed(() => {
-  const length = taskData.value ? taskData.value.messages?.length : 0;
-  return (length >= 0) ? `${length}` : '...';
-});
 
 const notes = computed(() => taskData.value?.notes);
 

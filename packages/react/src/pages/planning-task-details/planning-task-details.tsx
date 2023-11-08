@@ -19,21 +19,15 @@ const TASK_ID = 1;
 
 export const PlanningTaskDetails = () => {
   const [task, setTask] = useState<Task>();
-  const [messagesCount, setMessagesCount] = useState('0');
   const [isLoading, setIsLoading] = useState(false);
 
   const loadData = useCallback(() => {
     getTask(TASK_ID)
       .then((data) => {
         setTask(data);
-        setMessagesCount(data.messages.length.toString());
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
-  }, []);
-
-  const onMessagesCountChanged = useCallback((count) => {
-    setMessagesCount(count);
   }, []);
 
   const refresh = useCallback(() => {
@@ -54,7 +48,7 @@ export const PlanningTaskDetails = () => {
           </ToolbarItem>
           <ToolbarItem location='before' text={ task?.text ?? 'Loading...' } />
           <ToolbarItem location='after' locateInMenu='auto'>
-            <DropDownButton text='Actions' stylingMode='text'>
+            <DropDownButton text='Actions' stylingMode='text' dropDownOptions={{ width: 'auto' }}>
               <DropDownItem text='Duplicate' />
               <DropDownItem text='Close' />
               <DropDownItem text='Delete' />
@@ -101,8 +95,8 @@ export const PlanningTaskDetails = () => {
                 <TabPanelItem title='Notes'>
                   <CardNotes items={task?.notes} user={task?.owner} />
                 </TabPanelItem>
-                <TabPanelItem title='Messages' badge={messagesCount}>
-                  <CardMessages items={task?.messages} user={task?.owner} onMessagesCountChanged={onMessagesCountChanged} />
+                <TabPanelItem title='Messages'>
+                  <CardMessages items={task?.messages} user={task?.owner} />
                 </TabPanelItem>
               </TabPanel>
             </div>

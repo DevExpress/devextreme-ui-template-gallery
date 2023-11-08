@@ -12,7 +12,7 @@
         <div class="input-content">
           <dx-text-area
             label="New Note"
-            styling-mode="outlined"
+            styling-mode="filled"
             :value="nodeText"
             value-change-event="keyup"
             @value-changed="e => nodeText = e.value"

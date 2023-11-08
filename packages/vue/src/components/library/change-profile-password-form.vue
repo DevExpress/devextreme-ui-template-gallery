@@ -6,6 +6,7 @@
     :is-save-disabled="isSaveDisabled"
     @update:visible="changeVisibleState"
     :width="360"
+    :height="410"
     :wrapper-attr="{class: 'change-profile-password-popup'}"
     @save="saveNewPassword()"
   >
@@ -109,7 +110,6 @@ function saveNewPassword() {
 
 .change-profile-password-popup {
   .dx-form {
-    padding: 0 8px;
     height: var(--change-password-popup-height, auto);
   }
 

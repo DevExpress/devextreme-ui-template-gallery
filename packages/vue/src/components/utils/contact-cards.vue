@@ -30,7 +30,6 @@
 
       <dx-tab-item
         title="Messages"
-        :badge="messages?.length + ''"
       >
         <card-messages
           :user="props.contactName"

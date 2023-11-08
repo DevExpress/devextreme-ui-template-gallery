@@ -30,7 +30,7 @@
         >
           <dx-drop-down-button
             text="Actions"
-            :width="120"
+            :drop-down-options="{ width: 'auto' }"
             styling-mode="text"
           >
             <dx-drop-down-item text="Assign to Me" />
