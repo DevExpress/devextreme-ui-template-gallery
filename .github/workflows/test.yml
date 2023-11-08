@@ -13,6 +13,13 @@ jobs:
     - name: Get sources
       uses: actions/checkout@v3
 
+    - name: TEST
+      run: |
+        export RRRR="123"
+        echo '------>' $RRRR
+        sed -i 's/"devextreme": "[0-9.]\+"/"SSSSSSSSSS": "$RRRR"/g' ./test.test
+        cat ./test.test
+
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
@@ -34,7 +41,7 @@ jobs:
       run: npm run test
       working-directory: packages/metadata
 
-  build-dx-npm-and-dx--project--npm:
+  build-latest-dx-npm:
     if: ${{ github.base_ref == 'dev' }}
     runs-on: ubuntu-latest
     steps:
@@ -125,7 +132,7 @@ jobs:
   testcafe:
     name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }} - ${{ matrix.theme.type }}
     if: ${{ always() }}
-    needs: [build-dx-npm-and-dx--project--npm]
+    needs: [build-latest-dx-npm]
     strategy:
       fail-fast: false
       matrix:
@@ -197,7 +204,7 @@ jobs:
     - name: Replace package.json
       if: ${{ github.base_ref == 'dev' }}
       run: |
-        FILE_FRAMEWORK_PATH=$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz")
+        export FILE_FRAMEWORK_PATH=$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz")
         FILE_DX_PATH=$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
         FILE_DX_DIST_PATH=$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz")
         sed -i 's/"devextreme": "[0-9.]\+"/"devextreme": "$FILE_DX_PATH"/g' ./packages/${{ matrix.ARGS.project }}/package.json
