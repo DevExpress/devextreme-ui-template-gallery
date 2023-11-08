@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
 import { contactStatusList } from 'src/app/types/contact';
 import { ContactStatusModule } from 'src/app/components/utils/contact-status/contact-status.component';
-import { EditorStyle, LabelMode } from 'devextreme-angular/common';
+import { EditorStyle } from 'devextreme-angular/common';
 
 @Component({
   selector: 'status-select-box',
