@@ -258,7 +258,7 @@
         background-color: var(--base-bg);
         padding: 16px 24px;
         border-radius: 8px;
-        @include shadow();
+        @include fluent-shadow();
       }
 
       .right {
@@ -275,7 +275,7 @@
   }
 
   .dx-card {
-    @include shadow();
+    @include fluent-shadow();
   }
 
   .host .photo.photo {
@@ -298,7 +298,7 @@
       border-radius: 8px;
       border: 0;
       background: var(--base-bg);
-      @include shadow();
+      @include fluent-shadow();
     }
   }
 
