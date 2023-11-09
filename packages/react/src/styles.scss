@@ -335,6 +335,11 @@ body {
         padding-left: 0;
       }
     }
+    .status-editor-field {
+      .status-contact {
+        align-items: center;
+      }
+    }
   }
 
   .cards:not(.compact) {
