@@ -46,12 +46,14 @@ function switchThemeStyleSheets(enabledTheme: Theme) {
   });
 }
 
-async function setAppTheme(newTheme?: Theme) {
+async function setAppTheme(newTheme?: Theme, isFluent?: boolean) {
   const themeName = newTheme || getCurrentTheme();
 
   switchThemeStyleSheets(themeName);
 
-  currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${themeName}.compact`));
+  const regTheme = isFluent ? /\.[a-z]+$/ : /\.[a-z]+\.compact$/;
+  const replaceTheme = isFluent ? `.${themeName}` : `.${themeName}.compact`;
+  currentVizTheme(currentVizTheme().replace(regTheme, replaceTheme));
   refreshTheme();
 }
 
@@ -74,7 +76,7 @@ export function useThemeContext() {
   const switchTheme = useCallback(() => setTheme((currentTheme: Theme) => toggleTeme(currentTheme)), []);
 
   useEffect(() => {
-    isLoaded && setAppTheme(theme);
+    isLoaded && setAppTheme(theme, isFluent());
   }, [theme, isLoaded]);
 
   return useMemo(()=> ({ theme, switchTheme, isLoaded }), [theme, isLoaded]);
