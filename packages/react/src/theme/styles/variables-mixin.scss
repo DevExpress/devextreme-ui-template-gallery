@@ -9,11 +9,12 @@ $theme-mode: null !default;
 @use '/node_modules/devextreme/scss/widgets/fluent/toolbar/sizes' as toolbar_sizes;
 @use "/node_modules/devextreme/scss/widgets/fluent/list/sizes" as *;
 @use "/node_modules/devextreme/scss/widgets/fluent/button/sizes" as *;
-@use "theme-special" as * with ($theme: "material");
+@use "theme-special" as * with ($theme: "fluent");
 @use "sass:math";
 @use "sass:color";
 
 :root, .app-theme-#{$theme-mode} {
+  --typography-bg: #{$typography-bg};
   --side-panel-min-width: 48px;
   --calendar-width: 292px;
   --header-toolbar-vertical-padding: 10px;
@@ -34,7 +35,6 @@ $theme-mode: null !default;
   --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
   --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
   --base-bg: #{$base-bg};
-  --background-color: var(--base-bg);
   --card-background: var(--base-bg);
   --side-panel-background: var(--base-bg-darken-5);
   --border-color: #{$base-border-color};

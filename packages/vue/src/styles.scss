@@ -240,18 +240,12 @@
 
   .view-wrapper {
     .dx-toolbar.dx-widget.theme-dependent {
-      background-color: var(--base-bg);
-      padding: 5px var(--content-padding);
-      border-radius: 8px;
-      box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+      @include toolbar-panel();
     }
   
     .grid.theme-dependent {
       .dx-toolbar.dx-widget {
-        background-color: var(--base-bg);
-        padding: 5px var(--content-padding);
-        border-radius: 8px;
-        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+        @include toolbar-panel();
       }
   
       .dx-datagrid-header-panel {
@@ -264,7 +258,7 @@
         background-color: var(--base-bg);
         padding: 16px 24px;
         border-radius: 8px;
-        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+        @include shadow();
       }
 
       .right {
@@ -281,15 +275,22 @@
   }
 
   .dx-card {
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+    @include shadow();
   }
 
   .host .photo.photo {
     border-radius: 50%;
   }
 
-  .dx-form.plain-styled-form.view-mode .dx-texteditor .form-editor-input, .dx-form.plain-styled-form.view-mode .dx-texteditor.dx-editor-filled .form-editor-input, .dx-form.plain-styled-form.view-mode .dx-texteditor.form-editor .form-editor-input {
-    padding-left: 0;
+  .dx-form.plain-styled-form.view-mode {
+    .dx-texteditor {
+      &.form-editor,
+      &.dx-editor-filled {
+        .form-editor-input {
+          padding-left: 0;
+        }
+      }
+    }
   }
 
   .cards:not(.compact) {
@@ -297,7 +298,7 @@
       border-radius: 8px;
       border: 0;
       background: var(--base-bg);
-      box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+      @include shadow();
     }
   }
 
@@ -311,9 +312,6 @@
     }
 
     .form-editor-input {
-      padding-left: 0;
-    }
-    .status-input.status-editor-input {
       padding-left: 0;
     }
   }
