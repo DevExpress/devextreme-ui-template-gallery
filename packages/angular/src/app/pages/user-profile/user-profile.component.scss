@@ -10,6 +10,7 @@
 
   .view-wrapper-scroll {
     width: 100%;
+    margin-top: calc(var(--content-padding) / 2);
     max-height: calc(100% - var(--toolbar-height));
   }
 }
@@ -31,21 +32,17 @@
   right: 0;
   display: flex;
   flex-direction: column;
+  padding-top: var(--content-padding);
   max-width: 1200px;
   margin: 0 auto;
 
-  .toolbar-wrapper {
-    position: relative;
-    z-index: 1;
-  }
-
-  & .dx-toolbar {
-    margin: 24px 32px;
+  & > .dx-toolbar {
+    padding: 0 calc(var(--content-padding) * 2);
     width: auto;
     position: relative;
-    padding: 5px var(--content-padding);
 
     &.scrolled {
+      padding-bottom: 8px;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
@@ -57,8 +54,8 @@
   .cards-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 calc(var(--content-padding) * 2);
-    padding: 0 0 var(--content-padding);
+    margin: 0 1px;
+    padding: calc(var(--content-padding) / 2) 0 var(--content-padding);
     gap: 24px;
   }
 

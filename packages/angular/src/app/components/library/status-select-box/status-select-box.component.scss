@@ -27,21 +27,3 @@
     }
   }
 }
-
-:host-context(.dx-theme-fluent) {
-  .contact-status.dx-state-readonly {
-    .status-editor-field {
-      .status-indicator {
-        padding-left: 0;
-      }
-    }
-  }
-
-  .contact-status .status-editor-field .status-indicator {
-    align-self: center;
-  
-    &::ng-deep .status {
-      display: flex;
-    }
-  }
-}

@@ -8,7 +8,8 @@
 }
 
 .view-wrapper {
-  padding: 24px calc(var(--content-padding) * 2);
+  padding-top: var(--content-padding);
+  padding-bottom: var(--content-padding);
 }
 
 .cards {
@@ -18,7 +19,7 @@
   grid-template-columns: repeat(2, calc(50% - 10px));
 
   &.grey {
-    margin: 24px 0;
+    margin: 20px 0;
     grid-template-columns: repeat(4, calc(25% - 15px));
 
     ::ng-deep .card {

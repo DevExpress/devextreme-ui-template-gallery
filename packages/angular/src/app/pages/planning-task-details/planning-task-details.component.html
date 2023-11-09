@@ -1,16 +1,12 @@
 <dx-scroll-view class="view-wrapper-scroll">
   <div class="view-wrapper">
-    <dx-toolbar class="toolbar-details">
+    <dx-toolbar class="toolbar-details theme-dependent">
       <dxi-item location="before">
         <dx-button icon="arrowleft" stylingMode="text"></dx-button>
       </dxi-item>
       <dxi-item location="before" [text]="taskName"></dxi-item>
       <dxi-item location="after" locateInMenu="auto">
-        <dx-drop-down-button
-          text="Actions"
-          stylingMode="text"
-          [dropDownOptions]="{ width: 'auto' }"
-        >
+        <dx-drop-down-button text="Actions" stylingMode="text" [dropDownOptions]="{ width: 'auto' }">
           <dxi-item text="Duplicate"></dxi-item>
           <dxi-item text="Close"></dxi-item>
           <dxi-item text="Delete"></dxi-item>
@@ -48,7 +44,7 @@
         </dx-validation-group>
       </div>
 
-      <div class="right">
+      <div class="right theme-dependent">
         <div class="dx-card details-card">
           <dx-tab-panel
             secondary="secondary"

@@ -22,7 +22,7 @@ export class StatusSelectBoxComponent {
 
   @Input() readOnly = false;
 
-  @Input() stylingMode: EditorStyle = this.theme.isFluent() ? 'filled' : undefined;
+  @Input() stylingMode: EditorStyle = 'filled';
 
   @Input() labelMode: LabelMode = this.theme.isFluent() ? 'outside' : undefined;
 

@@ -2,7 +2,7 @@
   <dx-validation-group>
     <toolbar-form
       [isEditing]="isEditing"
-      titleClass="form-title"
+      titleClass="dx-form-group-caption"
       (editingCancelled)="handleCancelClick()"
       (editModeToggled)="handleEditClick()"
       (saveButtonClicked)="handleSaveClick($event)"
@@ -139,7 +139,7 @@
             <dx-button
               class="form-item-button"
               stylingMode="outlined"
-              [style.visibility]="!isEditing ? 'visible' : 'hidden'"
+              [visible]="!isEditing"
               [text]="'Call'"
               [icon]="'tel'"
               [type]="'default'"
@@ -158,7 +158,7 @@
             <dx-button
               class="form-item-button"
               stylingMode="outlined"
-              [style.visibility]="!isEditing ? 'visible' : 'hidden'"
+              [visible]="!isEditing"
               [text]="'Send Email'"
               [icon]="'email'"
               [type]="'default'"

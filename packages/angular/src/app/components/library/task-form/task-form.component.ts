@@ -66,6 +66,8 @@ export class TaskFormComponent implements OnInit {
     this.task = { ...this.savedData };
     this.isEditing = false;
   };
+
+  getNewTaskData = ()=> ({ ...this.task });
 }
 
 @NgModule({

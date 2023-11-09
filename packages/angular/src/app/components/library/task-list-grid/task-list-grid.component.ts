@@ -93,7 +93,7 @@ export class TaskListGridComponent implements OnChanges {
     if (changes.dataSource) {
       this.tasks = changes.dataSource.currentValue.filter((item) => !!item.status && !!item.priority);
     }
-  }
+  };
 
   toogleUseNavigation = () => {
     this.useNavigation = !this.useNavigation;

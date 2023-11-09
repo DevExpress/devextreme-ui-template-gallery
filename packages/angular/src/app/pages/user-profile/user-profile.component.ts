@@ -47,7 +47,7 @@ export class UserProfileComponent {
 
   isDataChanged = false;
 
-  isContentScrolled = true;
+  isContentScrolled = false;
 
   basicInfoItems: Record<string, any>[] = this.getBasicInfoItems();
 
@@ -204,7 +204,7 @@ export class UserProfileComponent {
   }
 
   scroll({reachedTop = false}) {
-    this.isContentScrolled = true;
+    this.isContentScrolled = !reachedTop;
   }
 
 }

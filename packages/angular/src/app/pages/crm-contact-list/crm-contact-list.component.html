@@ -1,6 +1,6 @@
-<div class="view-wrapper">
+<div class="view-wrapper list-page">
   <dx-data-grid
-    class="grid"
+    class="grid theme-dependent"
     noDataText=""
     height="100%"
     [dataSource]="dataSource"
@@ -156,7 +156,7 @@
   >
   </contact-panel>
 
-  <form-popup [(visible)]="isAddContactPopupOpened" titleText="New Contact">
+  <form-popup [(visible)]="isAddContactPopupOpened" (save)= "onClickSaveNewContact()" titleText="New Contact">
     <contact-new-form></contact-new-form>
   </form-popup>
 </div>

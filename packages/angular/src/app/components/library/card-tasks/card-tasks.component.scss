@@ -5,8 +5,6 @@
   padding: 20px 0 0;
 }
 
-:host-context(.dx-theme-fluent) {
-  #card-tasks {
-    padding: 0;
-  }
+dx-data-grid {
+  border-top: 1px solid var(--border-color);
 }

@@ -40,15 +40,6 @@
   }
 }
 
-:host-context(.dx-theme-fluent .cards:not(.grey)) {
-  .card {
-    border-radius: 8px;
-    border: 0;
-    background: var(--base-bg);
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
-  }
-}
-
 @media only screen and (max-width: 900px) {
   :host {
     .card {

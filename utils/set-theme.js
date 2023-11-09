@@ -88,7 +88,7 @@ function setCssThemeVariables(appVariablesPath, {
 }) {
   const variablesContentForChange = readFileSync(appVariablesPath, 'utf8');
 
-  const cssColorsSettings = isGenericTheme ? '$color: $theme' : `$color: "${color}", $mode: $theme`;
+  const cssColorsSettings = isGenericTheme ? '$color: $theme-mode' : `$color: "${color}", $mode: $theme-mode`;
 
   const newVariablesContent = variablesContentForChange
     .replace(/(material|fluent|generic)/g, baseTheme)

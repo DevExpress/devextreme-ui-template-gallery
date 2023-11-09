@@ -5,9 +5,3 @@
 .contact-card {
   border: none;
 }
-
-:host-context(.dx-theme-fluent) {
-  .dx-card {
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
-  }
-}
