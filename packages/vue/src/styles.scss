@@ -223,19 +223,6 @@
 
   .layout-body .menu-container.theme-dependent {
     padding-top: 0;
-
-    .dx-treeview {
-      .dx-treeview-item {
-        padding-right: 12px;
-        flex-direction: row-reverse;
-      }
-      .dx-treeview-node {
-        &[aria-level="2"] 
-        .dx-treeview-item-content {
-          padding-right: 0;
-        }
-      }
-    }
   }
 
   .view-wrapper {
