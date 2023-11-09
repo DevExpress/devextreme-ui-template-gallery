@@ -33,7 +33,7 @@ export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({
     setIsPasswordMode(!isPasswordMode);
   }, [isPasswordMode]);
 
-  const buttonOptions: any = useMemo(() =>
+  const buttonOptions: Record<string, any> = useMemo(() =>
     ({
       visible: value?.length > 0,
       icon: isPasswordMode ? 'eyeopen' : 'eyeclose',
