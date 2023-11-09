@@ -27,6 +27,7 @@ fixture`Contact List`;
       test(`Crm contact list (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
+        console.log(`TEST ------> Crm contact list (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`);
         // eslint-disable-next-line max-len
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
         await setTheme(t, themeMode);
@@ -62,7 +63,7 @@ fixture`Contact List`;
 
       test(`Add contact popup (${project}, embed=${embedded}, ${screenMode[0]})`, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
+        console.log(`TEST ------> Add contact popup (${project}, embed=${embedded}, ${screenMode[0]})`);
         // eslint-disable-next-line max-len
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
         await forceResizeRecalculation(t, screenMode);
@@ -83,6 +84,10 @@ fixture`Contact List`;
 
         await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${postfix}`, 'body');
 
+        await t
+          .expect(compareResults.isValid())
+          .ok(compareResults.errorMessages());
+
         const inputs = Selector('.dx-popup-content input.form-editor-input');
 
         await t.typeText(inputs.nth(0), 'test 0');
@@ -96,13 +101,9 @@ fixture`Contact List`;
 
         await t.click(Selector('[aria-label=Save]'));
 
-        await t.wait(2000);
+        await t.wait(1000);
 
         await t.expect(Selector('.dx-toast-message').withText('"test 0 test 1"').exists).ok();
-
-        await t
-          .expect(compareResults.isValid())
-          .ok(compareResults.errorMessages());
       });
     });
   });
