@@ -39,8 +39,9 @@ class ThemeService {
     });
 
     this.currentTheme.value = theme;
-
-    currentVizTheme(currentVizTheme().replace(/\.[a-z]+\.compact$/, `.${theme}.compact`));
+    const regTheme = this.isFluent() ? /\.[a-z]+$/ : /\.[a-z]+\.compact$/;
+    const replaceTheme = this.isFluent() ? `.${theme}` : `.${theme}.compact`;
+    currentVizTheme(currentVizTheme().replace(regTheme, replaceTheme));
     refreshTheme();
   }
 
