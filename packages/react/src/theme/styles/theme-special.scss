@@ -2,6 +2,7 @@ $theme: null !default;
 
 :root {
   --background-color: var(--base-bg);
+
   @if $theme == fluent {
     --background-color: var(--typography-bg);
   }

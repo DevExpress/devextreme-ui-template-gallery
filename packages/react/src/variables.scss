@@ -156,12 +156,12 @@
 }
 
 @mixin fluent-shadow() {
-  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.04);
 }
 
 @mixin toolbar-panel() {
   background-color: var(--base-bg);
   padding: 5px var(--content-padding);
   border-radius: 8px;
-  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.04);
 }

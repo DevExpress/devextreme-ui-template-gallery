@@ -230,10 +230,11 @@ body {
 
 .dx-theme-fluent {
   .dx-drawer-panel-content {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.12);
   }
 
-  .layout-body .menu-container.theme-dependent, app-footer {
+  .layout-body .menu-container.theme-dependent,
+  app-footer {
     background-color: var(--base-bg);
   }
 
@@ -245,12 +246,12 @@ body {
     .dx-toolbar.dx-widget.theme-dependent {
       @include toolbar-panel();
     }
-  
+
     .grid.theme-dependent {
       .dx-toolbar {
         @include toolbar-panel();
       }
-  
+
       .dx-datagrid-header-panel {
         padding: 0;
       }
@@ -261,6 +262,7 @@ body {
         background-color: var(--base-bg);
         padding: 16px 24px;
         border-radius: 8px;
+
         @include fluent-shadow();
       }
 
@@ -269,10 +271,12 @@ body {
       }
     }
   }
+
   .view-wrapper.list-page {
     margin-top: var(--content-padding);
 
-    .dx-toolbar.dx-widget.theme-dependent, .grid.theme-dependent .dx-toolbar {
+    .dx-toolbar.dx-widget.theme-dependent,
+    .grid.theme-dependent .dx-toolbar {
       margin-bottom: var(--content-padding);
     }
   }
@@ -297,6 +301,14 @@ body {
   }
 
   .form-editor.dx-state-readonly {
+    .status.status-indicator {
+      .dx-state-readonly {
+        .status-input.status-editor-input {
+          padding-left: 0;
+        }
+      }
+    }
+
     .form-editor-input {
       padding-left: 0;
     }
@@ -313,6 +325,7 @@ body {
 
   .contact-status .status-editor-field .status-indicator {
     align-self: center !important;
+
     & .status {
       display: flex !important;
     }
@@ -323,21 +336,8 @@ body {
       border-radius: 8px;
       border: 0;
       background: var(--base-bg);
+
       @include fluent-shadow();
-    }
-  }
-
-  .form-editor.dx-state-readonly {
-    .status.status-indicator {
-      .dx-state-readonly {
-        .status-input.status-editor-input {
-          padding-left: 0;
-        }
-      }
-    }
-
-    .form-editor-input {
-      padding-left: 0;
     }
   }
 
@@ -347,6 +347,7 @@ body {
       margin-top: 5px;
     }
   }
+
   .contact-form {
     .form-editor-input {
       padding-left: 0;

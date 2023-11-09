@@ -263,10 +263,11 @@ body {
 
 .dx-theme-fluent {
   .dx-drawer-panel-content {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.12);
   }
 
-  .layout-body .menu-container.theme-dependent, .footer {
+  .layout-body .menu-container.theme-dependent,
+  .footer {
     background-color: var(--base-bg);
   }
 
@@ -278,12 +279,12 @@ body {
     .dx-toolbar.dx-widget.theme-dependent {
       @include toolbar-panel();
     }
-  
+
     .grid.theme-dependent {
       .dx-toolbar {
-       @include toolbar-panel();
+        @include toolbar-panel();
       }
-  
+
       .dx-datagrid-header-panel {
         padding: 0;
       }
@@ -294,6 +295,7 @@ body {
         background-color: var(--base-bg);
         padding: 16px 24px;
         border-radius: 8px;
+
         @include fluent-shadow();
       }
 
@@ -302,10 +304,12 @@ body {
       }
     }
   }
+
   .view-wrapper.list-page {
     margin-top: var(--content-padding);
 
-    .dx-toolbar.dx-widget.theme-dependent, .grid.theme-dependent .dx-toolbar {
+    .dx-toolbar.dx-widget.theme-dependent,
+    .grid.theme-dependent .dx-toolbar {
       margin-bottom: var(--content-padding);
     }
   }
@@ -335,10 +339,15 @@ body {
         padding-left: 0;
       }
     }
+
     .status-editor-field {
       .status-contact {
         align-items: center;
       }
+    }
+
+    .form-editor-input {
+      padding-left: 0;
     }
   }
 
@@ -347,6 +356,7 @@ body {
       border-radius: 8px;
       border: 0;
       background: var(--base-bg);
+
       @include fluent-shadow();
     }
   }
@@ -355,9 +365,11 @@ body {
     .item-editor-field {
       padding-left: 0;
     }
+
     .form-editor-input {
       padding-left: 0;
     }
+
     .status-input.status-editor-input {
       padding-left: 0;
     }
@@ -367,11 +379,6 @@ body {
     .dx-button.form-item-button {
       margin-left: 0;
       margin-top: 5px;
-    }
-  }
-  .contact-form {
-    .form-editor-input {
-      padding-left: 0;
     }
   }
 
