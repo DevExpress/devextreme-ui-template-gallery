@@ -13,8 +13,9 @@
         >
           <dx-button
             text="Cancel"
+            styling-mode="outlined"
+            type="normal"
             :disabled="!isDataChanged"
-            styling-mode="contained"
             @click="cancel()"
           />
         </dx-item>

@@ -328,11 +328,11 @@
   }
 
   .dx-datagrid-headers.dx-datagrid-nowrap.dx-bordered-top-view {
-    border-radius: 8px 0;
+    border-radius: 8px 8px 0 0;
   }
 
   .dx-gridbase-container > .dx-datagrid-rowsview.dx-scrollable {
-    border-radius: 0 8px;
+    border-radius: 0 0 8px 8px;
   }
 
   .panel.profile-card {

@@ -6,8 +6,9 @@
     <dxi-item location="after" locateInMenu="never">
       <dx-button
         text="Cancel"
+        stylingMode="outlined"
+        type="normal"
         [disabled]="!isDataChanged"
-        stylingMode="contained"
         (onClick)="cancel()"
       >
       </dx-button>
