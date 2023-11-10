@@ -81,6 +81,7 @@ const setEmbedded = async (t, embed, screenMode) => {
 
         for (let i = 0; i < nameTabs.length; i += 1) {
           await t.click(tabs.withText(new RegExp(nameTabs[i], 'i')));
+          await t.wait(1000);
           const tabPanel = Selector('.content .dx-tabpanel[role=tabpanel]');
 
           await takeScreenshot(`crm-form-tab-${nameTabs[i].toLowerCase()}${postfix}`, tabPanel);
