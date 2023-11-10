@@ -339,19 +339,6 @@ const refreshOptions = {
       }
     }
 
-    :deep(.dx-row-focused) {
-      .name-template.name-template {
-        color: var(--base-focus-color);
-
-        .position {
-          color: var(--base-focus-color);
-        }
-      }
-      .status {
-        @include status(var(--base-focus-color));
-      }
-    }
-
     :deep(.dx-datagrid-header-panel) {
       padding: 0 var(--content-padding);
 
