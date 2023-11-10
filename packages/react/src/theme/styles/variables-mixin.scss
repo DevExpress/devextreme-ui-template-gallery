@@ -14,6 +14,7 @@ $theme-mode: null !default;
 @use "sass:color";
 
 :root, .app-theme-#{$theme-mode} {
+  --dark-warning-color: #{darken(adjust-hue($base-warning, -12), 3.73)};
   --typography-bg: #{$typography-bg};
   --side-panel-min-width: 48px;
   --calendar-width: 292px;
@@ -39,6 +40,10 @@ $theme-mode: null !default;
   --side-panel-background: var(--base-bg-darken-5);
   --border-color: #{$base-border-color};
   --accent-color: #{$base-accent};
+  --success-color: #{$base-success};
+  --info-color: #{$base-accent};
+  --warning-color: #{$base-warning};
+  --error-color: #{$base-danger};
   --base-text-color: #{$base-text-color};
   --base-focus-color: #{$base-focus-color};
   --texteditor-edit-color: #{$texteditor-color};

@@ -1,15 +1,24 @@
 import React from 'react';
-import { CardAnalytics } from '../card-analytics/CardAnalytics';
 import './TickerCard.scss';
 
-export const TickerCard = ({ title, contentClass, value, percentage, formatValue = (value) => `${value}` }: {
-  title: string, contentClass: string, value: number, percentage: number, formatValue?: (value: number) => string
+export const TickerCard = ({ title, icon, tone, value, percentage, formatValue = (value) => `${value}` }: {
+  title: string, icon: string, tone?: 'warning' | 'info', value: number, percentage: number, formatValue?: (value: number) => string
 }) => (
-  <CardAnalytics contentClass={contentClass} title={title} isLoading={!value}>
-    <div className='total'>{formatValue(value)}</div>
-    <div className='percentage'>
-      <i className={percentage >= 0 ? 'dx-icon-spinup' : 'dx-icon-spindown'} />
-      <span>{`${Math.abs(percentage)}%`}</span>
+  <div className='ticker'>
+    <div className={`icon-wrapper ${tone || (percentage > 0 ? 'positive' : 'negative')}`}>
+      <i className={`dx-icon dx-icon-${icon} `} />
     </div>
-  </CardAnalytics>
+    <div className='middle'>
+      <div className='title'>
+        { title }
+      </div>
+      <div className='total'>
+        {formatValue(value)}
+      </div>
+    </div>
+    <div className={`percentage ${percentage > 0 ? 'positive' : 'negative'}`}>
+      <div className={`dx-icon-${percentage > 0 ? 'spinup' : 'spindown'}`} />
+      <div className='value'>{`${Math.abs(percentage)}%`}</div>
+    </div>
+  </div>
 );

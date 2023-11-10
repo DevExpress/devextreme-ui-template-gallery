@@ -36,17 +36,19 @@
   }
 }
 
-@media only screen and (max-width: 900px) {
-  .cards {
-    grid-template-columns: repeat(1, 100%);
-
-    &.compact {
-      grid-template-columns: repeat(2, calc(50% - 10px));
-    }
+@media only screen and (max-width: 1400px) {
+  .cards.compact {
+    grid-template-columns: repeat(2, calc(50% - 10px));
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(1, 100%);
+  }
+}
+
+@media only screen and (max-width: 700px) {
   .cards {
     &.compact {
       grid-template-columns: repeat(1, 100%);
