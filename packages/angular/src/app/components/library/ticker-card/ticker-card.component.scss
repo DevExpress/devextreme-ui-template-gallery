@@ -1,34 +1,86 @@
-@use "../../../../variables.scss" as *;
+.ticker {
+  --gap-padding: 12px;
 
-.total {
-  display: inline-block;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--base-text-color);
-  margin-right: 27px;
-}
+  height: auto;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  background-color: var(--base-bg, #fff);
+  border: none;
+  padding: 16px;
+  display: flex;
+  gap: var(--gap-padding);
+  align-items: center;
 
-.percentage {
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--base-text-color);
-  line-height: 24px;
-
-  span {
-    display: inline-block;
-    vertical-align: text-bottom;
+  .positive {
+    background-color: color-mix(in sRGB, var(--success-color) 12%, transparent);
+    color: var(--success-color);
   }
 
-  .dx-icon-spindown {
-    font-size: 24px;
-    color: #ff5722;
-    display: inline-block;
+  .warning {
+    background-color: color-mix(in sRGB, var(--warning-color) 12%, transparent);
+    color: var(--icon-dark-warning-color);
   }
 
-  .dx-icon-spinup {
-    font-size: 24px;
-    color: #2eb52c;
+  .info {
+    background-color: color-mix(in sRGB, var(--info-color) 12%, transparent);
+    color: var(--info-color);
+  }
+
+  .negative {
+    background-color: color-mix(in sRGB, var(--error-color) 12%, transparent);
+    color: var(--error-color);
+  }
+
+  .icon-wrapper {
+    display: flex;
+    flex: 0 0 48px;
+    height: 48px;
+    border-radius: 50%;
+
+    .dx-icon {
+      margin: auto;
+      font-size: 24px;
+    }
+  }
+
+  .middle {
+    flex: 1;
+  }
+
+  .title {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 8px;
+  }
+
+  .total {
     display: inline-block;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 20px;
+    color: var(--base-text-color);
+  }
+
+  .percentage {
+    display: flex;
+    align-self: flex-start;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    align-items: center;
+    padding: 4px 8px 4px 2px;
+
+    .value {
+      line-height: 20px;
+    }
+
+    .dx-icon-spindown {
+      font-size: 20px;
+    }
+
+    .dx-icon-spinup {
+      font-size: 20px;
+    }
   }
 }

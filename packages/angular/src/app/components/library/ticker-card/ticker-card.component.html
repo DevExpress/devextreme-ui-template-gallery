@@ -1,17 +1,28 @@
-<card-analytics
-  [titleText]="titleText"
-  [isLoading]="data === null && total === null"
-  [contentClass]="contentClass"
->
-  <div class="total">
-    {{
+<div class="ticker">
+  <div
+    class="icon-wrapper"
+    [class]="getIconClass()"
+  >
+    <i [class]="'dx-icon dx-icon-' + icon"></i>
+  </div>
+  <div class="middle">
+    <div class="title">
+      {{ titleText }}
+    </div>
+    <div class="total">
+      {{
       total === null
         ? (getTotal | apply: data | currency: 'USD':'$':'1.0-0')
         : total
-    }}
+      }}
+    </div>
   </div>
-  <div class="percentage" *ngIf="percentage !== 0">
-    <i [class]="'dx-icon-' + (percentage > 0 ? 'spinup' : 'spindown')"></i>
+  <div *ngIf="percentage !== 0"
+       class="percentage"
+       [class]="percentage > 0 ? 'positive': 'negative'"
+  >
+    <div [class]="'dx-icon-'+ (percentage > 0 ? 'spinup' : 'spindown')"></div>
+    <i class="value"></i>
     <span>{{ abs(percentage) }}%</span>
   </div>
-</card-analytics>
+</div>
