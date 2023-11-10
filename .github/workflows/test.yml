@@ -40,7 +40,7 @@ jobs:
     steps:
       #Build Devextreme latest
       - name: Checkout Devextreme
-        run: git clone https://github.com/GoodDayForSurf/DevExtreme.git devextreme
+        run: git clone https://github.com/DevExpress/DevExtreme.git devextreme
 
       - name: Use Node.js 18
         uses: actions/setup-node@v3
