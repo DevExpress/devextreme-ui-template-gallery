@@ -244,7 +244,8 @@ export const UserProfile = () => {
             className='cancel-button'
             text='Cancel'
             disabled={!isDataChanged}
-            stylingMode='contained'
+            stylingMode='outlined'
+            type='normal'
             onClick={onCancel}
           />
         </Item>
