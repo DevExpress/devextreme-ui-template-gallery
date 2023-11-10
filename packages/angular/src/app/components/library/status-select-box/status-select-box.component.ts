@@ -24,7 +24,7 @@ export class StatusSelectBoxComponent {
 
   @Input() stylingMode: EditorStyle = 'filled';
 
-  @Input() labelMode: LabelMode = this.theme.isFluent() ? 'outside' : undefined;
+  @Input() labelMode: any = this.theme.isFluent() ? 'outside' : undefined;
 
   @Input() classList;
 
