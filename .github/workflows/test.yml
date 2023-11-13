@@ -34,7 +34,7 @@ jobs:
       run: npm run test
       working-directory: packages/metadata
 
-   build-latest-dx-npm:
+  build-latest-dx-npm:
     if: ${{ github.base_ref == 'dev' }}
     runs-on: ubuntu-latest
     steps:
