@@ -34,7 +34,7 @@ jobs:
       run: npm run test
       working-directory: packages/metadata
 
-  build-latest-dx-npm:
+   build-latest-dx-npm:
     if: ${{ github.base_ref == 'dev' }}
     runs-on: ubuntu-latest
     steps:
@@ -169,7 +169,7 @@ jobs:
           { project: 'vue', page: 'user-profile' },
         ]
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
 
     steps:
     - name: Get sources
@@ -182,6 +182,13 @@ jobs:
 
     - name: Set NPM version
       run: npm i npm@7 -g
+    - name: For dev branch - download devextreme Artifact
+      if: ${{ github.base_ref == 'dev' }}
+      uses: actions/download-artifact@v2
+      with:
+        name: devextreme-npm
+        path: devextreme-npm-latest
+
     - name: For dev branch - download devextreme Artifact
       if: ${{ github.base_ref == 'dev' }}
       uses: actions/download-artifact@v2
