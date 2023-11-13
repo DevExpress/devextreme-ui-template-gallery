@@ -355,7 +355,6 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
     }
 
     .dx-toolbar {
-      padding: 0 calc(var(--content-padding) * 2);
       width: auto;
 
       .dx-button[aria-label="Cancel"] {
