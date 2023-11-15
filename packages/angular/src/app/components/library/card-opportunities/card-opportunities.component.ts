@@ -29,9 +29,7 @@ export class CardOpportunitiesComponent implements OnChanges {
     this.isLoading = isLoadActive || isLoadClosed;
   }
 
-  addOpportunity = () => {
-    notify('Add opportunity event');
-  };
+  addOpportunity = () => {};
 }
 
 @NgModule({
