@@ -1,7 +1,7 @@
 <template>
   <dx-scroll-view class="view-wrapper-scroll">
     <div class="view-wrapper">
-      <dx-toolbar class="toolbar-details">
+      <dx-toolbar class="toolbar-details theme-dependent">
         <dx-toolbar-item location="before">
           <dx-button
             icon="arrowleft"
@@ -19,6 +19,7 @@
           <dx-drop-down-button
             text="Actions"
             styling-mode="text"
+            drop-down-options="{ width: 'auto' }"
           >
             <dx-drop-down-item text="Duplicate" />
             <dx-drop-down-item text="Close" />
@@ -77,7 +78,6 @@
 
               <dx-item
                 title="Messages"
-                :badge="messageBadge"
               >
                 <card-messages
                   :user="taskData?.owner"
@@ -102,7 +102,7 @@ import {
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
 import { DxTabPanel, DxItem } from 'devextreme-vue/tab-panel';
-import { DxValidationGroup } from 'devextreme-vue';
+import { DxValidationGroup, DxButton } from 'devextreme-vue';
 // eslint-disable-next-line import/no-unresolved
 import { getTask } from 'dx-template-gallery-data';
 import type { Task } from '@/types/task';
@@ -115,11 +115,6 @@ const taskId = 1;
 const taskName = ref('');
 const taskData = ref<Task>();
 const isLoading = ref(false);
-
-const messageBadge = computed(() => {
-  const length = taskData.value ? taskData.value.messages?.length : 0;
-  return (length >= 0) ? `${length}` : '...';
-});
 
 const notes = computed(() => taskData.value?.notes);
 
@@ -176,7 +171,8 @@ const refreshOptions = {
   --left-panel-width: 400px;
   --right-panel-width: 360px;
 
-  padding: var(--content-padding) var(--content-padding) 0 var(--content-padding);
+  padding-top: var(--content-padding);
+  padding-bottom: var(--content-padding);
 
   .panels {
     display: flex;

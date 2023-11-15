@@ -7,7 +7,7 @@ import { formatCurrency } from '../../../utils/format-currency';
 export const OpportunitiesTicker = ({ value }: TickerProps) =>
   <TickerCard
     title='Opportunities'
-    contentClass='opportunities-total'
+    icon='datatrending'
     value={value}
     formatValue={formatCurrency}
     percentage={20.3}

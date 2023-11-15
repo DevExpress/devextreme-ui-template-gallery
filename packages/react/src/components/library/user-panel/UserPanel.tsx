@@ -16,7 +16,7 @@ export const UserPanel = ({ menuMode }: UserPanelProps) => {
   };
 
   const buttonDropDownOptions = {
-    width: '150'
+    width: 'auto'
   };
 
   const dropDownButtonContentReady = useCallback(({ component }) => {

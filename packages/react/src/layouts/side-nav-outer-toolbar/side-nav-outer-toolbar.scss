@@ -11,6 +11,10 @@
   z-index: 1501;
 }
 
+.layout-body {
+  background-color: var(--background-color);
+}
+
 .drawer {
   flex: 1;
   min-height: 0;

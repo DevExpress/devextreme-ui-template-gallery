@@ -1,0 +1,13 @@
+$theme: null !default;
+
+:root {
+  --icon-dark-warning-color: var(--warning-color);
+  --card-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.06), 0 2px 2px 0 rgba(0, 0, 0, 0.06);
+  --background-color: var(--base-bg);
+
+  @if $theme == fluent {
+    --icon-dark-warning-color: var(--warning-color);
+    --card-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.06), 0 2px 2px 0 rgba(0, 0, 0, 0.06);
+    --background-color: var(--typography-bg);
+  }
+}

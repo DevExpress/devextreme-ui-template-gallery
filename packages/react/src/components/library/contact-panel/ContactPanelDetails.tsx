@@ -184,19 +184,24 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
             <div className='data-part data-part-toolbar border'>
               <Toolbar>
                 <ToolbarItem location='after' visible={!isEditing}>
-                  <Button icon='edit' text='Edit' stylingMode='outlined' type='default' onClick={toggleEditHandler} />
+                  <Button icon='edit' text='Edit' stylingMode='contained' type='default' onClick={toggleEditHandler} />
                 </ToolbarItem>
                 <ToolbarItem location='after' visible={!isEditing}>
-                  <Button text='Details' stylingMode='outlined' type='default' onClick={navigateToDetails} />
+                  <Button text='Details' stylingMode='outlined' type='normal' onClick={navigateToDetails} />
                 </ToolbarItem>
                 <ToolbarItem location='after' visible={isEditing}>
-                  <Button text='Save' icon='save' stylingMode='outlined' type='default' onClick={onSaveClick} />
+                  <Button text='Save' icon='save' stylingMode='contained' type='default' onClick={onSaveClick} />
                 </ToolbarItem>
                 <ToolbarItem location='after' visible={isEditing}>
-                  <Button text='Cancel' stylingMode='text' onClick={toggleEditHandler} />
+                  <Button text='Cancel' stylingMode='outlined' type='normal' onClick={toggleEditHandler} />
                 </ToolbarItem>
                 <ToolbarItem location='before'>
-                  <DropDownButton text='Actions' stylingMode='text' items={['Call', 'Send Fax', 'Send Email', 'Make a Meeting']} />
+                  <DropDownButton
+                    text='Actions'
+                    dropDownOptions={{ width: 'auto' }}
+                    stylingMode='text'
+                    items={['Call', 'Send Fax', 'Send Email', 'Make a Meeting']}
+                  />
                 </ToolbarItem>
               </Toolbar>
             </div>

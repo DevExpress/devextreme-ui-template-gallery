@@ -1,7 +1,7 @@
 <template>
   <dx-scroll-view class="view-wrapper-scroll">
     <div class="view-wrapper">
-      <dx-toolbar class="toolbar-details">
+      <dx-toolbar class="toolbar-details theme-dependent">
         <dx-toolbar-item location="before">
           <dx-button
             icon="arrowleft"
@@ -30,7 +30,7 @@
         >
           <dx-drop-down-button
             text="Actions"
-            :width="120"
+            :drop-down-options="{ width: 'auto' }"
             styling-mode="text"
           >
             <dx-drop-down-item text="Assign to Me" />
@@ -158,7 +158,8 @@ const refreshOptions = {
   --left-panel-width: 400px;
   --right-panel-width: 360px;
 
-  padding: var(--content-padding) var(--content-padding) 0 var(--content-padding);
+  padding-top: var(--content-padding);
+  padding-bottom: var(--content-padding);
 
   .panels {
     display: flex;

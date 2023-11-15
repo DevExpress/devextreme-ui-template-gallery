@@ -1,5 +1,5 @@
 <template>
-  <dx-toolbar>
+  <dx-toolbar class="theme-dependent">
     <dx-item location="before">
       <span class="toolbar-header">
         <slot />

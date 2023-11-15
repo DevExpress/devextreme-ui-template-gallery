@@ -40,6 +40,7 @@
             v-if="item.dataField === 'status'"
             :items="item.itemsList"
             :model-value="cardData[item.dataField]"
+            styling-mode="filled"
             label-mode="hidden"
             @update:model-value="onFieldChange()"
           />

@@ -45,6 +45,7 @@ const props = withDefaults(defineProps<{
 
 .contact-status {
   font-size: 13px;
+  display: flex;
 
   &::before {
     --diameter: 10px;
@@ -55,6 +56,7 @@ const props = withDefaults(defineProps<{
     border-radius: calc(var(--diameter) / 2);
     margin-right: calc(var(--diameter) / 2);
     display: inline-block;
+    align-self: center;
   }
 
   :deep(&.input) {

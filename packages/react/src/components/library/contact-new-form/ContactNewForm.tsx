@@ -1,18 +1,24 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
 import { Contact } from '../../../types/crm-contact';
-import { newContact } from '../../../shared/constants';
 import { FormTextbox, FormPhotoUploader } from '../..';
 import { EmailRule } from 'devextreme-react/validator';
 import { getSizeQualifier } from '../../../utils/media-query';
 
-export const ContactNewForm = () => {
-  const [newContactData, setNewContactData] = useState<Contact>(newContact);
+export const ContactNewForm = ({ initData, onDataChanged }: { initData: Contact, onDataChanged: (data) => void }) => {
+  const [newContactData, setNewContactData] = useState<Contact>({ ...initData });
+
+  useEffect(() => {
+    setNewContactData({ ...initData });
+  }, [initData]);
 
   const updateField = (field: string) => (value) => {
-    setNewContactData((prevState) => ({ ...prevState, ...{ [field]: value } }));
+    const newData = { ...newContactData, ...{ [field]: value } };
+
+    onDataChanged(newData);
+    setNewContactData(newData);
   };
 
   return (
@@ -79,6 +85,7 @@ export const ContactNewForm = () => {
             isEditing={false}
             onValueChange={updateField('phone')}
             icon='tel'
+            label='Phone'
             mask='+1(000)000-0000'
           />
         </FormItem>
@@ -87,6 +94,7 @@ export const ContactNewForm = () => {
             value={newContactData.email}
             onValueChange={updateField('email')}
             isEditing={false}
+            label='Email'
             icon='email'
           >
             <EmailRule />
@@ -98,6 +106,7 @@ export const ContactNewForm = () => {
             isEditing={false}
             onValueChange={updateField('address')}
             icon='home'
+            label='Address'
           />
         </FormItem>
       </GroupItem>

@@ -15,7 +15,15 @@
     padding-left: var(--list-padding-left);
 
     .status-contact {
-      align-self: flex-end;
+      align-items: flex-end;
+    }
+  }
+
+  .dx-texteditor-with-floating-label {
+    .status-editor-field {
+      .status-contact {
+        align-self: flex-end;
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 import './theme-dark';
 import './theme-light';
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
+import { current } from 'devextreme/ui/themes';
 import { ref } from 'vue';
 
 const themes = ['light', 'dark'] as const;
@@ -17,6 +18,10 @@ class ThemeService {
   private readonly themeMarker = 'theme-';
 
   currentTheme = ref<Theme>(this.getCurrentTheme());
+
+  isFluent(): boolean {
+    return current().includes('fluent');
+  }
 
   getCurrentTheme(): Theme {
     return window.localStorage[this.storageKey] || getNextTheme();

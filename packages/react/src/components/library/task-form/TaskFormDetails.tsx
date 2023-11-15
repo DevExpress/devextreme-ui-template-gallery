@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import Form, { SimpleItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
@@ -19,8 +19,17 @@ import { getSizeQualifier } from '../../../utils/media-query';
 export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: {
   editing: boolean, data: Task, subjectField: boolean, onDataChanged: (data) => void
 }) => {
+  const [formData, setFormData] = useState<Task>({ ...data });
+
+  useEffect(() => {
+    setFormData({ ...data });
+  }, [data]);
+
   const updateField = (field: string) => (value: string) => {
-    onDataChanged((prevState) => ({ ...prevState, ...{ [field]: value } }));
+    const newData = { ...formData, [field]: value };
+    onDataChanged(newData);
+
+    setFormData(newData);
   };
 
   return (
@@ -31,7 +40,7 @@ export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: 
       {subjectField && <SimpleItem colSpan={2}>
         <FormTextbox
           label='Subject'
-          value={data.text}
+          value={formData.text}
           isEditing={!editing}
           onValueChange={updateField('text')}
         />
@@ -41,7 +50,7 @@ export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: 
         <SimpleItem cssClass='accent'>
           <FormTextbox
             label='Company'
-            value={data.company}
+            value={formData.company}
             isEditing={!editing}
             onValueChange={updateField('company')}
           />
@@ -49,7 +58,7 @@ export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: 
         <SimpleItem cssClass='accent'>
           <FormTextbox
             label='Assigned to'
-            value={data.owner}
+            value={formData.owner}
             isEditing={!editing}
             onValueChange={updateField('owner')}
           />
@@ -57,7 +66,7 @@ export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: 
         <SimpleItem>
           <SelectBox
             label='Priority'
-            value={data.priority}
+            value={formData.priority}
             items={PRIORITY_ITEMS}
             readOnly={!editing}
             stylingMode='filled'
@@ -69,7 +78,7 @@ export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: 
         <SimpleItem>
           <SelectBox
             label='Status'
-            value={data.status}
+            value={formData.status}
             items={STATUS_ITEMS}
             readOnly={!editing}
             stylingMode='filled'
@@ -80,7 +89,7 @@ export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: 
         </SimpleItem>
         <SimpleItem>
           <FormDateBox
-            value={data.startDate}
+            value={formData.startDate}
             readOnly={!editing}
             name='Set Start Date'
             label='Start Date'
@@ -89,7 +98,7 @@ export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: 
         </SimpleItem>
         <SimpleItem>
           <FormDateBox
-            value={data.dueDate}
+            value={formData.dueDate}
             readOnly={!editing}
             name='Set Due Date'
             label='Due Date'
@@ -102,7 +111,7 @@ export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: 
         <TextArea
           label='Details'
           readOnly={!editing}
-          value={data.description}
+          value={formData.description}
           stylingMode='filled'
           onValueChange={updateField('description')}
         />

@@ -69,10 +69,14 @@ function emitChangedValue(changedData: SimpleObject) {
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
 
-.contact-status .status-editor-field .status-indicator {
-  align-self: flex-end;
-  display: inline;
-}
+.dx-texteditor-with-floating-label.contact-status {
+    .status-editor-field {
+      .status-indicator {
+        align-self: flex-end;
+        display: inline;
+      }
+    }
+  }
 
 .status-editor-field {
   display: flex;

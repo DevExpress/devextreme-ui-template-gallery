@@ -78,6 +78,7 @@
           v-model="contact.phone"
           :is-editing="true"
           icon="tel"
+          label="Phone"
           mask="+1(000)000-0000"
         />
       </dx-form-item>
@@ -86,6 +87,7 @@
           v-model="contact.email"
           :is-editing="true"
           icon="email"
+          label="Email"
           :validators="[{type: 'email'}, {type: 'required'}]"
         />
       </dx-form-item>
@@ -94,6 +96,7 @@
           v-model="contact.address"
           :is-editing="true"
           icon="home"
+          label="Address"
         />
       </dx-form-item>
     </dx-form-item>
@@ -107,10 +110,22 @@ import {
   DxItem as DxFormItem,
   DxColCountByScreen,
 } from 'devextreme-vue/form';
-import { ref } from 'vue';
-import { newContact } from '@/types/contact';
+import { reactive, watch } from 'vue';
+import { ContactBase, newContact } from '@/types/contact';
 import FormTextbox from '@/components/utils/form-textbox.vue';
 import FormPhotoUploader from '../utils/form-photo-uploader.vue';
 
-const contact = ref({ ...newContact });
+const contact = reactive({ ...newContact });
+let newContactData = { ...newContact };
+
+watch(
+  contact,
+  (newValue) => {
+    newContactData = { ...newValue };
+  },
+);
+
+defineExpose<{getNewContactData:() => ContactBase}>({
+  getNewContactData: () => newContactData,
+});
 </script>
