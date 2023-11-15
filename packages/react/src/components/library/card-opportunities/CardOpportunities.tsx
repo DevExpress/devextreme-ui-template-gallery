@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Button from 'devextreme-react/button';
-import notify from 'devextreme/ui/notify';
 import { OpportunityTile } from '../../utils/opportunity-tile/OpportunityTile';
 
 import { Opportunities } from '../../../types/card-opportunities';
@@ -10,9 +9,7 @@ import { withLoadPanel } from '../../../utils/withLoadPanel';
 
 import './CardOpportunities.scss';
 
-const addOpportunity = () => {
-  notify('Add opportunity event');
-};
+const addOpportunity = () => {};
 
 const CardTemplate = ({ items, title }: { items: Opportunities, title: string}) => (
   <div className='opportunities-block'>

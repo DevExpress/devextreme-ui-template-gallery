@@ -54,7 +54,6 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import notify from 'devextreme/ui/notify';
 import { DxButton } from 'devextreme-vue/button';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 // eslint-disable-next-line import/no-unresolved
@@ -90,9 +89,7 @@ onMounted(() => {
   loadData();
 });
 
-function addOpportunity() {
-  notify('Add opportunity event');
-}
+function addOpportunity() {}
 </script>
 
 <style scoped lang="scss">
