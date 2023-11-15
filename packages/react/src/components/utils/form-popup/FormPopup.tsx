@@ -10,6 +10,7 @@ type PopupProps = {
   title: string,
   visible: boolean,
   width?: number,
+  height?: number | string,
   wrapperAttr?: { class: string },
   isSaveDisabled?: boolean,
   setVisible: (visible: boolean) => void,
@@ -20,6 +21,7 @@ export const FormPopup = ({
   title,
   visible,
   width = 480,
+  height = 'auto',
   onSave,
   setVisible,
   wrapperAttr = { class: '' },
@@ -52,7 +54,7 @@ export const FormPopup = ({
       fullScreen={isXSmall}
       width={width}
       wrapperAttr={{ ...wrapperAttr, class: `${wrapperAttr?.class} form-popup` }}
-      height='auto'
+      height={height}
     >
       <ToolbarItem
         toolbar='bottom'
@@ -61,7 +63,8 @@ export const FormPopup = ({
         <div className={`form-popup-buttons-container ${width <= 360 ? 'flex-buttons' : ''}`}>
           <Button
             text='Cancel'
-            stylingMode='contained'
+            stylingMode='outlined'
+            type='normal'
             onClick={onCancelClick}
           />
           <Button

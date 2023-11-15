@@ -1,6 +1,6 @@
 <dx-scroll-view class="view-wrapper-scroll">
   <div class="view-wrapper">
-    <dx-toolbar class="toolbar-details">
+    <dx-toolbar class="toolbar-details theme-dependent">
       <dxi-item location="before">
         <dx-button icon="arrowleft" stylingMode="text"></dx-button>
       </dxi-item>
@@ -16,8 +16,8 @@
         <dx-drop-down-button
           text="Actions"
           stylingMode="text"
-          [width]="120"
           [items]="['Assign to Me', 'Archive']"
+          [dropDownOptions]="{ width: 'auto' }"
         ></dx-drop-down-button>
       </dxi-item>
       <dxi-item location="after" locateInMenu="auto">
@@ -48,7 +48,7 @@
       ></dxi-item>
     </dx-toolbar>
 
-    <div class="panels">
+    <div class="panels theme-dependent">
       <div class="left">
         <contact-form
           [contactData]="contactData"
@@ -56,7 +56,7 @@
         ></contact-form>
       </div>
 
-      <div class="right">
+      <div class="right theme-dependent">
         <contact-cards
           [isLoading]="isLoading"
           [contactName]="contactData?.name"

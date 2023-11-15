@@ -10,6 +10,7 @@
       <div class="card-priority" />
       <dx-button
         icon="edit"
+        styling-mode="text"
         @click="notifyByCard"
       />
       <div class="card-content">

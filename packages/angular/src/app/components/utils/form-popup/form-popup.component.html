@@ -5,7 +5,7 @@
   [width]="width"
   [wrapperAttr]="getWrapperAttrs | apply: wrapperAttr"
   (onHidden)="close()"
-  height="auto"
+  [height]="height"
 >
   <dxi-toolbar-item toolbar="bottom" location="center">
     <div
@@ -14,7 +14,8 @@
     >
       <dx-button
         text="Cancel"
-        stylingMode="contained"
+        stylingMode="outlined"
+        type="normal"
         (onClick)="close()"
       ></dx-button>
       <dx-button

@@ -19,14 +19,17 @@ const props = withDefaults(defineProps<{
 .circle {
   &[data-letters]::before {
     content: attr(data-letters);
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
+    display: flex;
+    width: 32px;
+    height: 32px;
+    margin: 2px 5px;
     text-align: center;
+    justify-content: center;
     border-radius: 50%;
     background: var(--accent-color);
     color: var(--base-bg);
+    align-items: center;
+    font-size: 12px;
   }
 }
 </style>

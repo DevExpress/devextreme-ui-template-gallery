@@ -5,7 +5,8 @@ import { TickerProps } from '../../../types/analytics';
 
 export const LeadsTicker = ({ value }: TickerProps) =>
   <TickerCard
-    contentClass='leads'
+    icon='datapie'
+    tone='info'
     title='Leads'
     value={value}
     percentage={8.5}

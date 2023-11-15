@@ -27,7 +27,12 @@ export const TaskKanbanCard = ({ task }: { task: Task }) => {
     <div className='kanban-card dx-card dx-theme-text-color dx-theme-background-color' onClick={navigateToDetails}>
       <div className={`card-wrapper priority-${task.priority.toLowerCase()}`}>
         <div className='card-priority' />
-        <Button className='edit-button' icon='edit' onClick={onClick(task)} />
+        <Button
+          className='edit-button'
+          icon='edit'
+          stylingMode='text'
+          onClick={onClick(task)}
+        />
         <div className='card-content'>
           <div className='card-subject dx-theme-text-color'>{task.text}</div>
           <div className='card-data'>

@@ -10,7 +10,7 @@ interface StatusSelectBoxProps {
   value: string,
   readOnly?: boolean,
   stylingMode?: EditorStyle,
-  labelMode?: LabelMode,
+  labelMode?: LabelMode | undefined,
   onValueChange: (value) => void,
 }
 
@@ -40,8 +40,8 @@ const ItemRender = (item) => {
 export const StatusSelectBox = ({
   value,
   readOnly,
-  stylingMode = 'outlined',
-  labelMode = 'floating',
+  stylingMode,
+  labelMode,
   onValueChange
 }: StatusSelectBoxProps) => {
   return <SelectBox

@@ -83,6 +83,7 @@
       <div *dxTemplate>
         <form-textbox
           icon="tel"
+          label="Phone"
           mask="+1(000)000-0000"
           [(value)]="newUser.phone"
           [isEditing]="true"
@@ -94,6 +95,7 @@
       <div *dxTemplate>
         <form-textbox
           icon="email"
+          label="Email"
           [(value)]="newUser.email"
           [validators]="[{ type: 'email' }, { type: 'required' }]"
           [isEditing]="true"
@@ -104,6 +106,7 @@
       <div *dxTemplate>
         <form-textbox
           icon="home"
+          label="Address"
           [(value)]="newUser.address"
           [isEditing]="true"
         ></form-textbox>

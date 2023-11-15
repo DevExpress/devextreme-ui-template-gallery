@@ -12,11 +12,6 @@
     <template #group="{ data: item }">
       <div class="list-header">
         {{ item.key }}
-        <dx-button
-          icon="add"
-          styling-mode="text"
-          @click="onAddClick"
-        />
       </div>
     </template>
 
@@ -36,9 +31,8 @@
 </template>
 
 <script setup lang="ts">
-import { DxList, DxCheckBox, DxButton } from 'devextreme-vue';
+import { DxList, DxCheckBox } from 'devextreme-vue';
 import { watchEffect } from 'vue';
-import { DxButtonTypes } from 'devextreme-vue/button';
 
 const props = withDefaults(defineProps<{
   dataSource: {items: Record<string, unknown>[]}[],
@@ -58,10 +52,6 @@ function selectionChanged(item: Record<string, unknown>, { value }: { value: boo
   selectedItems = value ? [...selectedItems, item] : selectedItems.filter((el) => el !== item);
   emit('listSelectionChanged', selectedItems);
 }
-
-function onAddClick(e: DxButtonTypes.ClickEvent) {
-  e.event?.stopImmediatePropagation();
-}
 </script>
 
 <style scoped lang="scss">
@@ -71,12 +61,6 @@ function onAddClick(e: DxButtonTypes.ClickEvent) {
   width: 100%;
 
   :deep(.dx-list-group-header) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-style: none;
-    flex-direction: row-reverse;
-
     .dx-inkripple {
       border-radius: 4px;
     }

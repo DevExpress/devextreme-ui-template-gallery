@@ -21,7 +21,7 @@ export const AppHeader = ({ menuToggleEnabled, title, toggleMenu, className }: A
         </Item>
         <Item location='before' cssClass='header-title' text={title} visible={!!title} />
         <Item location='after' locateInMenu='auto' cssClass='global-search-box'>
-          <TextBox placeholder='Search' width={180} mode='search' stylingMode='underlined' />
+          <TextBox placeholder='Search' width={180} mode='search' stylingMode='filled' />
         </Item>
         <Item location='after' locateInMenu='never'>
           <ThemeSwitcher />

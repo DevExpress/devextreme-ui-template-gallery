@@ -85,6 +85,7 @@ export const ContactNewForm = ({ initData, onDataChanged }: { initData: Contact,
             isEditing={false}
             onValueChange={updateField('phone')}
             icon='tel'
+            label='Phone'
             mask='+1(000)000-0000'
           />
         </FormItem>
@@ -93,6 +94,7 @@ export const ContactNewForm = ({ initData, onDataChanged }: { initData: Contact,
             value={newContactData.email}
             onValueChange={updateField('email')}
             isEditing={false}
+            label='Email'
             icon='email'
           >
             <EmailRule />
@@ -104,6 +106,7 @@ export const ContactNewForm = ({ initData, onDataChanged }: { initData: Contact,
             isEditing={false}
             onValueChange={updateField('address')}
             icon='home'
+            label='Address'
           />
         </FormItem>
       </GroupItem>

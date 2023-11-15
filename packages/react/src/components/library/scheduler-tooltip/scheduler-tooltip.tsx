@@ -25,6 +25,7 @@ export const TooltipContentTemplate = ({ selectedAppointmentData, deleteCurrentA
     <div className='content'>
       <div className='date'>
         <Button icon='clock'
+          stylingMode='text'
           focusStateEnabled={false}
           activeStateEnabled={false}
           hoverStateEnabled={false}
@@ -33,7 +34,9 @@ export const TooltipContentTemplate = ({ selectedAppointmentData, deleteCurrentA
       </div>
       {selectedAppointmentData.description &&
         <div className='description'>
-          <Button icon='textdocument'
+          <Button
+            icon='textdocument'
+            stylingMode='text'
             focusStateEnabled={false}
             activeStateEnabled={false}
             hoverStateEnabled={false}

@@ -30,10 +30,6 @@ export class CalendarListComponent implements OnInit {
     this.selectedItems = isSelected ? [...selected, item] :  selected.filter((el) => el !== item);
     this.listSelectionChanged.emit(this.selectedItems);
   }
-
-  onAddClick(e: DxButtonTypes.ClickEvent) {
-    e.event.stopImmediatePropagation();
-  }
 }
 
 @NgModule({

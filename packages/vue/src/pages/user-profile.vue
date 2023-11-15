@@ -1,7 +1,7 @@
 <template>
   <div class="view-wrapper">
-    <div :class="{scrolled: isContentScrolled, 'toolbar-wrapper': true}">
-      <dx-toolbar>
+    <div :class="{scrolled: isContentScrolled, 'toolbar-wrapper': true, 'theme-dependent': true}">
+      <dx-toolbar class="theme-dependent">
         <dx-item location="before">
           <div class="header-text">
             User Profile
@@ -13,8 +13,9 @@
         >
           <dx-button
             text="Cancel"
+            styling-mode="outlined"
+            type="normal"
             :disabled="!isDataChanged"
-            styling-mode="contained"
             @click="cancel()"
           />
         </dx-item>
@@ -339,6 +340,8 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
   display: flex;
   flex-direction: column;
   padding-top: var(--content-padding);
+  max-width: 1200px;
+  margin: 0 auto;
 
   .view-wrapper-scroll {
     width: 100%;
@@ -352,7 +355,6 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
     }
 
     .dx-toolbar {
-      padding: 0 calc(var(--content-padding) * 2);
       width: auto;
 
       .dx-button[aria-label="Cancel"] {
@@ -364,7 +366,7 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
   .cards-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 calc(var(--content-padding) * 2);
+    margin: 0 1px;
     padding: calc(var(--content-padding) / 2) 0 var(--content-padding);
     gap: 24px;
 

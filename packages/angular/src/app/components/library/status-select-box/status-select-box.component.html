@@ -1,6 +1,7 @@
 <dx-select-box
   label="Status"
   [value]="value"
+  [class]="classList"
   (valueChange)="valueChange.emit($event)"
   [items]="items"
   [readOnly]="readOnly"

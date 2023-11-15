@@ -23,6 +23,10 @@ export class TickerCardComponent {
 
   @Input() percentage: number;
 
+  @Input() icon: string;
+
+  @Input() tone?: 'warning' | 'info';
+
   @Input() contentClass: string | null = null;
 
   getTotal(data: Array<{value?: number, total?: number}> ): number {
@@ -32,6 +36,8 @@ export class TickerCardComponent {
   abs(value: number): number {
     return Math.abs(value);
   }
+
+  getIconClass = () => this.tone || (this.percentage > 0 ? 'positive' : 'negative');
 }
 
 @NgModule({

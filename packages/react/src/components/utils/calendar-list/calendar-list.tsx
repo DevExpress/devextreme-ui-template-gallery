@@ -3,17 +3,11 @@ import './calendar-list.scss';
 import React, { useState, useCallback } from 'react';
 
 import List from 'devextreme-react/list';
-import Button from 'devextreme-react/button';
 import CheckBox from 'devextreme-react/check-box';
-
-const onAddClick = (e) => {
-  e.event.stopImmediatePropagation();
-};
 
 const listTitleRender = (item) => {
   return <div className='list-header'>
     {item.key}
-    <Button icon='add' stylingMode='text' onClick={onAddClick} />
   </div>;
 };
 

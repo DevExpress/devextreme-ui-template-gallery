@@ -1,10 +1,11 @@
-<div class="view-wrapper">
-  <dx-toolbar>
+<div class="view-wrapper list-page">
+  <dx-toolbar class="theme-dependent">
     <dxi-item location="before">
       <span class="toolbar-header">Tasks</span>
     </dxi-item>
     <dxi-item location="before">
       <dx-tabs
+        secondary="secondary"
         [width]="(screen.xSmallScreenChanged | async) ? 220 : 'auto'"
         [showNavButtons]="false"
         [scrollByContent]="true"

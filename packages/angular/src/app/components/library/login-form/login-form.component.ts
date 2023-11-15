@@ -5,7 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { LoginOauthModule } from 'src/app/components/library/login-oauth/login-oauth.component';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
-import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { DxButtonModule, DxButtonTypes } from 'devextreme-angular/ui/button';
 import notify from 'devextreme/ui/notify';
 import { AuthService, IResponse, ThemeService } from 'src/app/services';
 
@@ -20,7 +20,7 @@ export class LoginFormComponent implements OnInit {
 
   defaultAuthData: IResponse;
 
-  btnStylingMode: string;
+  btnStylingMode: DxButtonTypes.ButtonStyle;
 
   passwordMode = 'password';
 
