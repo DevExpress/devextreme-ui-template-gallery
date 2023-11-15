@@ -93,10 +93,6 @@ function handleDropDownButtonContentReady({ component }: {component: typeof DxDr
         width: auto;
         height: 100%;
       }
-
-      .dx-theme-fluent & {
-        height: 100%;
-      }
     }
 
     .dx-buttongroup {

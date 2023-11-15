@@ -236,12 +236,10 @@
     .dx-toolbar.dx-widget.theme-dependent {
       @include toolbar-panel();
     }
-
     .grid.theme-dependent {
       .dx-toolbar.dx-widget {
         @include toolbar-panel();
       }
-
       .dx-datagrid-header-panel {
         padding: 0;
       }
