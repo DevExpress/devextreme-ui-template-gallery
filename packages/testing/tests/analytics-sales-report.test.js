@@ -42,7 +42,7 @@ fixture`Analytics Sales Report`;
         }
 
         await t.drag(Selector('.slider').nth(1), -100, 0, { offsetX: 10, offsetY: 10 });
-        await t.drag(Selector('.slider').nth(0), 100, 0, { offsetX: 10, offsetY: 10 });
+        await t.drag(Selector('.slider').nth(0), 100, 0, { offsetX: 5, offsetY: 5 });
         await t.wait(timeoutSecond);
 
         if (isPeriodSelectorBoxVisible) {
