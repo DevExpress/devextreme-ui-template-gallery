@@ -9,8 +9,6 @@ import { withLoadPanel } from '../../../utils/withLoadPanel';
 
 import './CardOpportunities.scss';
 
-const addOpportunity = () => {};
-
 const CardTemplate = ({ items, title }: { items: Opportunities, title: string}) => (
   <div className='opportunities-block'>
     <div className='dx-form-group-caption'>{title}</div>
@@ -38,7 +36,6 @@ const Cards = ({ active, closed }: { active: Opportunities, closed: Opportunitie
       stylingMode='outlined'
       type='default'
       className='add-tile'
-      onClick={addOpportunity}
     />
 
     <CardTemplate title='Active' items={active} />
