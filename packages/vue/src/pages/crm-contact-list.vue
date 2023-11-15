@@ -1,5 +1,5 @@
 <template>
-  <div class="view-wrapper list-page">
+  <div class="view-wrapper list-page  view-wrapper-contact-list">
     <dx-data-grid
       ref="dataGrid"
       :data-source="dataSource"
