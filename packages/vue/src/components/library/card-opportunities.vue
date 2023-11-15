@@ -16,7 +16,6 @@
         styling-mode="outlined"
         type="default"
         class="add-tile"
-        @click="addOpportunity"
       />
 
       <div>
@@ -88,8 +87,6 @@ async function loadData() {
 onMounted(() => {
   loadData();
 });
-
-function addOpportunity() {}
 </script>
 
 <style scoped lang="scss">
