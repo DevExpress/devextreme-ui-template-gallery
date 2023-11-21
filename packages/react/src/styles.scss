@@ -463,6 +463,10 @@ body {
         flex: 1 calc(100% - var(--left-panel-width) - 110px) !important;
       }
     }
+
+    &.view-wrapper-contact-list {
+      margin-bottom: var(--content-padding);
+    }
   }
 
   .view-wrapper.list-page {
