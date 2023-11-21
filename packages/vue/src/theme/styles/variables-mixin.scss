@@ -19,7 +19,7 @@ $theme-mode: null !default;
 
 :root {
   --dark-warning-color: #{darken(adjust-hue($base-warning, -12), 3.73)};
-  --typography-bg: #{$typography-bg};
+  --typography-bg: #{$base-typography-bg};
   --header-toolbar-vertical-padding: 10px;
   --toolbar-vertical-padding: 16px;
   --content-padding: 24px;
