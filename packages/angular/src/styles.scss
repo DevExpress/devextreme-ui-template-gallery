@@ -270,6 +270,10 @@ body {
         flex: 1 calc(100% - var(--left-panel-width) - 110px) !important;
       }
     }
+
+    &.crm-contact-list {
+      margin-bottom: var(--content-padding);
+    }
   }
 
   .view-wrapper.list-page {
