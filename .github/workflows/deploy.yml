@@ -1,27 +1,88 @@
 name: Deploy
 
 on:
+  schedule:
+    - cron: '0 5 * * *'  # Every night at 5:00
   workflow_dispatch:
 
 jobs:
+  build-dx-npm-and-dx-angular-npm:
+    runs-on: ubuntu-latest
+    steps:
+      #Build Devextreme latest
+      - name: Checkout Devextreme
+        run: git clone -b 23_2FLUENT_PUBLISH_VARIABLES https://github.com/EugeniyKiyashko/DevExtreme.git devextreme
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.16.1'
+
+      - name: Set NPM version
+        run: npm i npm@8 -g
+
+      - name: DevExtreme - Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: 'devextreme/**/node_modules'
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('devextreme/**/package-lock.json') }}
+
+      - name: DevExtreme - Install packages
+        working-directory: devextreme
+        run: npm install --no-audit --no-fund
+
+      - name: DevExtreme - Build
+        working-directory: devextreme/packages/devextreme
+        run: npm run build-npm-devextreme
+
+      - name: DevExtreme - Pack
+        working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme
+        run: npm pack
+
+      - name: DevExtreme dist - Pack
+        working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme-dist
+        run: npm pack
+
+      - name: Upload devextreme Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: devextreme-npm
+          path: |
+            devextreme/packages/devextreme/artifacts/npm/devextreme/devextreme-*.tgz
+            devextreme/packages/devextreme/artifacts/npm/devextreme-dist/devextreme-dist*.tgz
+
+      - name: DevExtreme-angular - Build
+        working-directory: devextreme/packages/devextreme-angular
+        run: npm run build
+
+      - name: DevExtreme-angular - Pack
+        working-directory: devextreme/packages/devextreme-angular
+        run: npm run pack
+
+      - name: Upload devextreme-angular Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: devextreme-angular-npm
+          path: devextreme/packages/devextreme-angular/npm/dist/devextreme-angular*.tgz
+
   set-matrix:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-    - name: Get sources
-      uses: actions/checkout@v3
+      - name: Get sources
+        uses: actions/checkout@v3
 
-    - name: Set themes matrix
-      id: set-matrix
-      run: |
-        themes_json=`cat ./packages/metadata/themes.json`
-        themes_json="${themes_json//$'\n'/''}"
-        themes_json="${themes_json//$'\r'/''}"
-        themes_json="${themes_json//$' '/''}"
-        echo "matrix=$themes_json" >> $GITHUB_OUTPUT
+      - name: Set themes matrix
+        id: set-matrix
+        run: |
+          themes_json=`echo '["fluent.modern.light"]'`
+          themes_json="${themes_json//$'\n'/''}"
+          themes_json="${themes_json//$'\r'/''}"
+          themes_json="${themes_json//$' '/''}"
+          echo "matrix=$themes_json" >> $GITHUB_OUTPUT
   build:
-    needs: set-matrix
+    needs: [set-matrix, build-dx-npm-and-dx-angular-npm]
     name: Build applications
     runs-on: ubuntu-latest
     env:
@@ -29,113 +90,90 @@ jobs:
     strategy:
       matrix:
         theme: ${{fromJson(needs.set-matrix.outputs.matrix)}}
-        mode: [ default, embedded ]
+        mode: [ default ]
 
     steps:
-    - name: Get sources
-      uses: actions/checkout@v3
+        #Build UI Template Gallery
+      - name: Set NPM version
+        run: npm i npm@7 -g
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
+      - name: Get sources
+        uses: actions/checkout@v3
 
-    - name: Set NPM version
-      run: npm i npm@7 -g
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-modules
 
-    - name: Restore npm cache
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: Run npm install
+        run: npm install
 
-    - name: Run npm install
-      run: npm install
+      - name: Download devextreme Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: devextreme-npm
+          path: devextreme-npm-latest
 
-    - name: Set theme
-      run: npm run set-theme -- ${{ matrix.theme }}
+      - name: Download devextreme-angular Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: devextreme-angular-npm
+          path: devextreme-angular-npm-latest
 
-    - name: Set mode
-      if: ${{ matrix.mode == 'embedded' }}
-      run: npm run make-embedded-mode
+      - name: Install latest devextreme packages for Angular
+        working-directory: packages/angular
+        run: |
+          npm install $(find ../../devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz")
+          npm install $(find ../../devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz")
+          npm install $(find ../../devextreme-angular-npm-latest -maxdepth 1 -name "devextreme-angular*.tgz")
 
-    - name: Build
-      run: npm run build
+      - name: Set theme
+        run: npm run set-theme -- ${{ matrix.theme }}
 
-    - name: Copy apps
-      run: npm run copy-build -- ${{ matrix.mode }} ${{ matrix.theme }}
+      - name: Build
+        working-directory: packages/angular
+        run: npm run build
 
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-artifacts
-        path: devextreme-ui-template-gallery/
+      - name: Copy apps
+        run: npm run copy-build -- ${{ matrix.mode }} ${{ matrix.theme }}
 
-  build-shell:
-    name: Build shell
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Get sources
-      uses: actions/checkout@v3
-
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-
-    - name: Set NPM version
-      run: npm i npm@7 -g
-
-    - name: Restore npm cache
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-
-    - name: Run npm install
-      run: npm install
-
-    - name: Run npm install for shell
-      run: npm install
-      working-directory: packages/shell
-
-    - name: Build Shell
-      run: npm run build-shell
-      working-directory: packages/shell
-
-    - name: Copy apps
-      run: npm run copy-shell
-
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-artifacts
-        path: devextreme-ui-template-gallery/
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: devextreme-ui-template-gallery
 
   deploy:
     name: Deploy
-    needs: [build, build-shell]
+    needs: [build]
     runs-on: ubuntu-latest
 
     steps:
-    - name: Get sources
-      uses: actions/checkout@v3
+      - name: Delete Artifact
+        uses: GeekyEggo/delete-artifact@v2.0.0
+        with:
+          name: devextreme-npm
 
-    - name: Download build artifacts
-      uses: actions/download-artifact@v3
-      with:
-        name: build-artifacts
-        path: devextreme-ui-template-gallery
+      - name: Delete Artifact
+        uses: GeekyEggo/delete-artifact@v2.0.0
+        with:
+          name: devextreme-angular-npm
 
-    - name: Deploy in gh-pages
-      uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
-      with:
-        branch: gh-pages
-        folder: devextreme-ui-template-gallery
-        target-folder: .
+      - name: Get sources
+        uses: actions/checkout@v3
 
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+          path: devextreme-ui-template-gallery
+
+      - name: Deploy in gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          clean: false
+          branch: gh-pages
+          folder: devextreme-ui-template-gallery
+          target-folder: .
