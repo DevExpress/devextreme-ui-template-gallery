@@ -395,6 +395,8 @@ body {
   }
 
   .profile-card-panel {
+    @include fluent-shadow();
+
     background-color: var(--base-bg);
   }
 
