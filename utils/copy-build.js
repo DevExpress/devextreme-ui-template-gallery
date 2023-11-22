@@ -1,7 +1,7 @@
 const { copySync, emptyDir } = require('fs-extra');
 const { join } = require('path');
 const { argv, cwd } = require('process');
-const packages = require('./packages');
+const packages = ['angular'];
 
 const commonDestination = 'devextreme-ui-template-gallery';
 
