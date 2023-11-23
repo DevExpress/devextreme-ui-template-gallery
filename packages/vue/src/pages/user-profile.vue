@@ -97,10 +97,7 @@
         >
           <div class="contacts-top-item">
             <div class="image-wrapper">
-              <img
-                alt=""
-                src="icons/at.svg"
-              >
+              <i class="dx-icon dx-icon-mention" />
             </div>
             <div>
               <div class="title-text">
@@ -131,10 +128,7 @@
         >
           <div class="address-top-item">
             <div class="image-wrapper">
-              <img
-                alt=""
-                src="icons/geo-position.svg"
-              >
+              <i class="dx-icon dx-icon-map"/>
             </div>
             <div>
               <div class="title-text">
@@ -377,7 +371,7 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
         border-radius: 50%;
         margin-right: var(--gap-padding);
 
-        img {
+        .dx-icon {
           height: 20px;
           width: 20px;
           margin: auto;
@@ -416,11 +410,13 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
     }
 
     .contacts-card .image-wrapper {
-      background-color: rgb(244 67 54 / 0.2);
+      background-color: color-mix(in sRGB, var(--error-color) 12%, transparent);
+      color: var(--error-color);
     }
 
     .address-card .image-wrapper {
-      background-color: rgb(3 169 244 / 0.2);
+      background-color: color-mix(in sRGB, var(--info-color) 12%, transparent);
+      color: var(--info-color);
     }
 
     .basic-info-top-item,
