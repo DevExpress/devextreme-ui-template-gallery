@@ -209,8 +209,15 @@
   @include status(#ff5722);
 }
 
+.dx-theme-fluent-typography {
+  font-family: "Inter";
+}
 
 .dx-theme-fluent {
+  .dx-widget {
+    font-family: "Inter";
+  }
+
   .dx-drawer-panel-content {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
   }
