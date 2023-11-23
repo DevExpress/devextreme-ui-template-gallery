@@ -1,5 +1,7 @@
 @use "variables.scss" as *;
 
+@import "https://fonts.googleapis.com/css?family=Inter:300,400,500,700";
+
 html,
 body {
   margin: 0;
@@ -110,10 +112,6 @@ body {
 
 .dx-texteditor-label {
   height: auto;
-
-  .dx-label {
-    line-height: 1;
-  }
 }
 
 .dx-form.plain-styled-form {
