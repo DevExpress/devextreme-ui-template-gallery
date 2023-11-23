@@ -561,9 +561,9 @@ body {
     border-radius: 8px 8px 0 0;
   }
 
-  .dx-gridbase-container {
-    > .dx-datagrid-rowsview.dx-scrollable {
-      .dx-datagrid-content {
+  .theme-dependent {
+    .dx-gridbase-container {
+      > .dx-bordered-bottom-view {
         border-radius: 0 0 8px 8px;
       }
     }
