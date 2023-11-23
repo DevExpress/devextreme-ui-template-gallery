@@ -115,7 +115,7 @@ const UserProfileContent = ({
         >
           <div className='profile-card-top-item'>
             <div className='image-wrapper'>
-              <img alt='' src='icons/at.svg' />
+              <i className='dx-icon dx-icon-mention' />
             </div>
             <div>
               <div className='title-text'>
@@ -146,7 +146,7 @@ const UserProfileContent = ({
         >
           <div className='profile-card-top-item'>
             <div className='image-wrapper'>
-              <img alt='' src='icons/geo-position.svg' />
+              <i className='dx-icon dx-icon-map' />
             </div>
             <div>
               <div className='title-text'>
