@@ -1,5 +1,7 @@
 @use "./variables.scss" as *;
 
+@import "https://fonts.googleapis.com/css?family=Inter:300,400,500,700";
+
 .view-wrapper-scroll > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
   height: 100%;
 
