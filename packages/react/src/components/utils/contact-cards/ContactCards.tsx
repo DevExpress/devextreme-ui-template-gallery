@@ -21,7 +21,11 @@ export const ContactCards = ({
 }) => {
   return (
     <div className='dx-card details-card'>
-      <TabPanel showNavButtons deferRendering={false}>
+      <TabPanel
+        showNavButtons
+        focusStateEnabled={false}
+        deferRendering={false}
+      >
         <TabPanelItem title='Tasks'>
           <CardTasks
             isLoading={isLoading}

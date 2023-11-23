@@ -39,7 +39,10 @@
     }
 
     .message {
+      @include card-shadow();
+
       background-color: var(--base-bg);
+      border: 0.5px solid var(--border-color);
       padding: 10px;
       margin-bottom: 10px;
 

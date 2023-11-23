@@ -257,11 +257,18 @@ body {
 .messages-content {
   padding: 20px;
   border-top: 1px solid var(--border-color);
-  background-color: var(--side-panel-background);
+  background-color: var(--base-bg);
 }
 
+.dx-theme-fluent-typography {
+  font-family: "Inter";
+}
 
 .dx-theme-fluent {
+  .dx-widget {
+    font-family: "Inter";
+  }
+
   .dx-drawer-panel-content {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.12);
   }
@@ -296,7 +303,7 @@ body {
         padding: 16px 24px;
         border-radius: 8px;
 
-        @include fluent-shadow();
+        @include card-shadow();
       }
 
       .right {
@@ -319,7 +326,7 @@ body {
   }
 
   .dx-card {
-    @include fluent-shadow();
+    @include card-shadow();
   }
 
   .plain-styled-form .form-photo {
@@ -361,7 +368,7 @@ body {
       border: 0;
       background: var(--base-bg);
 
-      @include fluent-shadow();
+      @include card-shadow();
     }
   }
 
@@ -394,12 +401,16 @@ body {
     border-radius: 8px 8px 0 0;
   }
 
-  .dx-gridbase-container > .dx-datagrid-rowsview.dx-scrollable {
-    border-radius: 0 0 8px 8px;
+  .dx-gridbase-container {
+    > .dx-datagrid-rowsview.dx-scrollable {
+      .dx-datagrid-content {
+        border-radius: 0 0 8px 8px;
+      }
+    }
   }
 
   .profile-card-panel {
-    @include fluent-shadow();
+    @include card-shadow();
 
     background-color: var(--base-bg);
   }
