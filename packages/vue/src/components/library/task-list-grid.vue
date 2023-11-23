@@ -2,6 +2,7 @@
   <dx-data-grid
     ref="dxDataGridCmp"
     id="tasks-grid"
+    class="theme-dependent"
     height="100%"
     :data-source="dataSource"
     @row-click="navigateToDetails($event)"
