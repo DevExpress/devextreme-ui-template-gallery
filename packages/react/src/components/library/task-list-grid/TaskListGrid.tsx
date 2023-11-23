@@ -67,7 +67,7 @@ export const TaskListGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
 
   return (
     <DataGrid
-      className='planning-grid'
+      className='planning-grid theme-dependent'
       ref={ref}
       dataSource={data}
       columnAutoWidth
