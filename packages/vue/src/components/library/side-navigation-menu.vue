@@ -118,6 +118,8 @@ watch(
       .dx-treeview-item {
         padding-left: 0;
         flex-direction: row-reverse;
+        border-radius: 0;
+
         .dx-icon {
           width: var(--side-panel-min-width) !important;
           margin: 0 !important;

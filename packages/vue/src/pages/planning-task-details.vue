@@ -59,6 +59,7 @@
         <div class="right">
           <div class="dx-card details-card">
             <dx-tab-panel
+              :focus-state-enabled="false"
               :show-nav-buttons="true"
               :defer-rendering="false"
             >

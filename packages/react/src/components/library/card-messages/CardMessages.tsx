@@ -92,7 +92,7 @@ export const CardMessages = ({ items, user }: {
               widget='dxButton'
               options={{
                 text: 'Send',
-                stylingMode: 'outlined',
+                stylingMode: 'contained',
                 type: 'default',
                 onClick: send,
               }}

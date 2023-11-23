@@ -28,7 +28,7 @@
               location="after"
               :options="{
                 text: 'Add',
-                stylingMode: 'outlined',
+                stylingMode: 'contained',
                 type: 'default',
                 onClick: addNote
               }"
@@ -149,6 +149,9 @@ onMounted(() => {
 }
 
 .note {
+  @include card-shadow();
+
+  border: 0.5px solid var(--border-color);
   background-color: var(--base-bg);
   padding: 10px;
   margin-bottom: 10px;
