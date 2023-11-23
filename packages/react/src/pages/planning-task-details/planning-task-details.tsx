@@ -88,7 +88,11 @@ export const PlanningTaskDetails = () => {
           </div>
           <div className='right'>
             <div className='dx-card details-card'>
-              <TabPanel showNavButtons deferRendering={false}>
+              <TabPanel
+                showNavButtons
+                focusStateEnabled={false}
+                deferRendering={false}
+              >
                 <TabPanelItem title='Activities'>
                   <CardActivities activities={task?.activities} isLoading={isLoading} />
                 </TabPanelItem>

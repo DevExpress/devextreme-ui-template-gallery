@@ -10,9 +10,12 @@
 }
 
 .note {
+  @include card-shadow();
+
   background-color: var(--base-bg);
   padding: 10px;
   margin-bottom: 10px;
+  border: 0.5px solid var(--border-color);
 
   .note-title {
     @include message-title();

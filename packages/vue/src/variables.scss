@@ -56,7 +56,7 @@
   .messages-content {
     padding: 20px;
     border-top: 1px solid var(--border-color);
-    background-color: var(--side-panel-background);
+    background-color: var(--base-bg);
   }
 }
 
@@ -117,7 +117,7 @@
   opacity: $opacity;
 }
 
-@mixin fluent-shadow() {
+@mixin card-shadow() {
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
 }
 

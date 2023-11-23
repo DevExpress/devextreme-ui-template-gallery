@@ -63,7 +63,7 @@ export const CardNotes = ({ items, user }: { items?: Notes; user?: string }) => 
               widget='dxButton'
               options={{
                 text: 'Add',
-                stylingMode: 'outlined',
+                stylingMode: 'contained',
                 type: 'default',
                 onClick: add,
               }}
