@@ -66,7 +66,7 @@ export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigation
   return (
     <div className='dx-swatch-additional side-navigation-menu' ref={getWrapperRef}>
       {children}
-      <div className='menu-container'>
+      <div className='menu-container theme-dependent'>
         <TreeView
           ref={treeViewRef}
           items={items}

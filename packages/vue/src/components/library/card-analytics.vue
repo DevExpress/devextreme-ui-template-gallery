@@ -56,9 +56,9 @@ const props = withDefaults(defineProps<{
 .card {
   border-radius: 4px;
   box-shadow: none;
+  border: 1px solid var(--border-color);
   position: relative;
   background-color: var(--background-color);
-  border: 1px solid var(--border-color);
   overflow: hidden;
 
   .header {

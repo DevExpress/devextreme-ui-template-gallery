@@ -2,7 +2,7 @@
   <dx-validation-group>
     <toolbar-form
       [isEditing]="isEditing"
-      titleClass="form-title"
+      titleClass="dx-form-group-caption"
       (editingCancelled)="handleCancelClick()"
       (editModeToggled)="handleEditClick()"
       (saveButtonClicked)="handleSaveClick($event)"
@@ -27,9 +27,9 @@
           <dxi-item>
             <status-select-box
               *dxTemplate
+              classList="contact-status"
               [(value)]="contactData.status"
               [readOnly]="!isEditing"
-              stylingMode="filled"
             ></status-select-box>
           </dxi-item>
 

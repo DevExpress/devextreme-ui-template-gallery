@@ -19,21 +19,15 @@ const TASK_ID = 1;
 
 export const PlanningTaskDetails = () => {
   const [task, setTask] = useState<Task>();
-  const [messagesCount, setMessagesCount] = useState('0');
   const [isLoading, setIsLoading] = useState(false);
 
   const loadData = useCallback(() => {
     getTask(TASK_ID)
       .then((data) => {
         setTask(data);
-        setMessagesCount(data.messages.length.toString());
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
-  }, []);
-
-  const onMessagesCountChanged = useCallback((count) => {
-    setMessagesCount(count);
   }, []);
 
   const refresh = useCallback(() => {
@@ -48,13 +42,13 @@ export const PlanningTaskDetails = () => {
   return (
     <ScrollView className='view-wrapper-scroll'>
       <div className='view-wrapper view-wrapper-details'>
-        <Toolbar className='toolbar-details'>
+        <Toolbar className='toolbar-details theme-dependent'>
           <ToolbarItem location='before'>
             <Button icon='arrowleft' stylingMode='text' />
           </ToolbarItem>
           <ToolbarItem location='before' text={ task?.text ?? 'Loading...' } />
           <ToolbarItem location='after' locateInMenu='auto'>
-            <DropDownButton text='Actions' stylingMode='contained'>
+            <DropDownButton text='Actions' stylingMode='text' dropDownOptions={{ width: 'auto' }}>
               <DropDownItem text='Duplicate' />
               <DropDownItem text='Close' />
               <DropDownItem text='Delete' />
@@ -94,15 +88,19 @@ export const PlanningTaskDetails = () => {
           </div>
           <div className='right'>
             <div className='dx-card details-card'>
-              <TabPanel showNavButtons deferRendering={false}>
+              <TabPanel
+                showNavButtons
+                focusStateEnabled={false}
+                deferRendering={false}
+              >
                 <TabPanelItem title='Activities'>
                   <CardActivities activities={task?.activities} isLoading={isLoading} />
                 </TabPanelItem>
                 <TabPanelItem title='Notes'>
                   <CardNotes items={task?.notes} user={task?.owner} />
                 </TabPanelItem>
-                <TabPanelItem title='Messages' badge={messagesCount}>
-                  <CardMessages items={task?.messages} user={task?.owner} onMessagesCountChanged={onMessagesCountChanged} />
+                <TabPanelItem title='Messages'>
+                  <CardMessages items={task?.messages} user={task?.owner} />
                 </TabPanelItem>
               </TabPanel>
             </div>

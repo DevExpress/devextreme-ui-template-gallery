@@ -52,7 +52,7 @@ export const CardNotes = ({ items, user }: { items?: Notes; user?: string }) => 
     <ValidationGroup>
       <div className='notes'>
         <div className='input-notes'>
-          <TextArea label='New Note' stylingMode='outlined' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged}>
+          <TextArea label='New Note' stylingMode='filled' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged}>
             <Validator>
               <RequiredRule />
             </Validator>
@@ -63,7 +63,7 @@ export const CardNotes = ({ items, user }: { items?: Notes; user?: string }) => 
               widget='dxButton'
               options={{
                 text: 'Add',
-                stylingMode: 'outlined',
+                stylingMode: 'contained',
                 type: 'default',
                 onClick: add,
               }}

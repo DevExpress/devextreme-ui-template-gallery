@@ -88,6 +88,6 @@ export const LoginForm = ({ resetLink, createAccountLink }) => {
   );
 };
 
-const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email', value: 'jheart@corp.com' };
+const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email', value: 'jheart@dx-email.com' };
 const passwordEditorOptions = { stylingMode: 'filled', placeholder: 'Password', mode: 'password', value: 'password' };
 const rememberMeEditorOptions = { text: 'Remember me', elementAttr: { class: 'form-text' } };

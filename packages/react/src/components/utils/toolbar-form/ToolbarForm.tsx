@@ -14,13 +14,13 @@ export const ToolbarForm = ({ editing, toggleEditing, onCancelClick, onSaveClick
         <span className='dx-form-group-caption'>Details</span>
       </Item>
       <Item location='after' visible={!editing}>
-        <Button text='Edit' icon='edit' stylingMode='outlined' type='default' onClick={toggleEditing} />
+        <Button text='Edit' icon='edit' stylingMode='contained' type='default' onClick={toggleEditing} />
       </Item>
       <Item location='after' visible={editing}>
-        <Button text='Save' stylingMode='outlined' type='default' onClick={onSaveClick} />
+        <Button text='Save' stylingMode='contained' type='default' onClick={onSaveClick} />
       </Item>
       <Item location='after' visible={editing}>
-        <Button text='Cancel' stylingMode='text' onClick={onCancelClick} />
+        <Button text='Cancel' stylingMode='outlined' type='normal' onClick={onCancelClick} />
       </Item>
     </Toolbar>
   );

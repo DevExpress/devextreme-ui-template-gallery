@@ -31,6 +31,7 @@ export const FormTextbox = ({ value, label, isEditing, onValueChange, mask = '',
         location='before'
         options={{
           icon: icon,
+          stylingMode: 'text',
           elementAttr: { class: 'form-editor-icon' }
         }} />
       }

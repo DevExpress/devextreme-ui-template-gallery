@@ -1,6 +1,6 @@
 @use "../../../../variables.scss" as *;
 
-.dx-texteditor-with-floating-label .status-editor-field .status-indicator {
+.contact-status .status-editor-field .status-indicator {
   align-self: flex-end;
 
   &::ng-deep .status {

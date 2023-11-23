@@ -32,8 +32,10 @@
             <dx-form-item>
               <status-select-box
                 v-model="contactData.status"
+                class="contact-status"
                 :items="contactStatusList"
                 :read-only="!isEditing"
+                :label-mode="isFluent() ? 'outside' : 'floating'"
                 styling-mode="filled"
               />
             </dx-form-item>
@@ -184,12 +186,15 @@ import { DxValidationGroup } from 'devextreme-vue/validation-group';
 import { formEditorProps } from '@/shared/form-editor-config';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 import { Contact, contactStatusList } from '@/types/contact';
+import { themeService } from '@/theme/theme-service';
 import FormPhoto from '@/components/utils/form-photo.vue';
 import FormTextbox from '@/components/utils/form-textbox.vue';
 import StatusSelectBox from '@/components/library/status-select-box.vue';
 import ToolbarForm from '@/components/utils/toolbar-form.vue';
 
 const emptyContact = { state: { stateShort: '' } } as Contact;
+
+const { isFluent } = themeService;
 
 const props = withDefaults(defineProps<{
   isLoading: boolean,

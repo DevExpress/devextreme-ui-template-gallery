@@ -40,8 +40,8 @@ const Card = ({ data, user, manager }: { data: Message; user: string, manager: s
   </div>
 );
 
-export const CardMessages = ({ items, user, onMessagesCountChanged }: {
-  items?: Messages; user?: string; onMessagesCountChanged: (count: number) => void
+export const CardMessages = ({ items, user }: {
+  items?: Messages; user?: string;
 }) => {
   const [messages, setMessages] = useState(items);
   const [title, setTitle] = useState('');
@@ -56,9 +56,8 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
       return;
     }
     setMessages([...messages, { manager: user, date: new Date(), text: message, subject: title }]);
-    onMessagesCountChanged(messages.length + 1);
     e.validationGroup.reset();
-  }, [message, title, messages, user, onMessagesCountChanged]);
+  }, [message, title, messages, user]);
 
   const onTitleChanged = useCallback((value) => {
     setTitle(value);
@@ -72,12 +71,12 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
     <ValidationGroup>
       <div className='messages'>
         <div className='input-messages'>
-          <TextBox label='Subject' stylingMode='outlined' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged}>
+          <TextBox label='Subject' stylingMode='filled' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged}>
             <Validator>
               <RequiredRule />
             </Validator>
           </TextBox>
-          <TextArea label='Message' height={150} stylingMode='outlined' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged}>
+          <TextArea label='Message' height={150} stylingMode='filled' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged}>
             <Validator>
               <RequiredRule />
             </Validator>
@@ -93,7 +92,7 @@ export const CardMessages = ({ items, user, onMessagesCountChanged }: {
               widget='dxButton'
               options={{
                 text: 'Send',
-                stylingMode: 'outlined',
+                stylingMode: 'contained',
                 type: 'default',
                 onClick: send,
               }}

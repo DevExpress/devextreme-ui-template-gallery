@@ -19,7 +19,7 @@
           [dataField]="item.dataField"
           [editorType]="item.editorType"
           [editorOptions]="
-            assign | apply: { stylingMode: 'outlined' }:item.editorOptions
+            assign | apply: { stylingMode: 'filled', valueChangeEvent: 'input' }:item.editorOptions
           "
           [colSpan]="item.colSpan"
         >
@@ -33,6 +33,7 @@
               <div *dxTemplate>
                 <status-select-box
                   labelMode="hidden"
+                  stylingMode="filled"
                   [value]="cardData[item.dataField]"
                   (valueChange)="onFieldChange(item.dataField, $event)"
                 >

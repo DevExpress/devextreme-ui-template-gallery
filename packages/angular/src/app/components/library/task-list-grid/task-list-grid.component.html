@@ -1,14 +1,15 @@
 <dx-data-grid
   id="tasks-grid"
+  class="theme-dependent"
   height="100%"
   [dataSource]="tasks"
-  (onRowPrepared)="onRowPreparedGrid($event)"
   (onRowClick)="navigateToDetails($event)"
   (onEditingStart)="toogleUseNavigation()"
   (onEditCanceled)="toogleUseNavigation()"
   (onSaved)="toogleUseNavigation()"
   [hoverStateEnabled]="true"
   [columnAutoWidth]="true"
+  [showBorders]="true"
 >
   <dxo-paging [pageSize]="15"></dxo-paging>
   <dxo-pager [visible]="true" [showPageSizeSelector]="true"></dxo-pager>

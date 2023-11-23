@@ -55,12 +55,6 @@ export const TaskListGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
     setData(dataSource.filter((d) => d.status && d.priority));
   }, [dataSource]);
 
-  const onRowPrepared = useCallback(({ rowType, rowElement, data }) => {
-    if (rowType !== 'header' && data.status === 'Completed') {
-      rowElement.classList.add('completed');
-    }
-  }, []);
-
   const navigateToDetails = useCallback(({ rowType }: DataGridTypes.RowClickEvent) => {
     if (useNavigation && rowType !== 'detailAdaptive') {
       navigate('/planning-task-details');
@@ -73,16 +67,16 @@ export const TaskListGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSou
 
   return (
     <DataGrid
-      className='planning-grid'
+      className='planning-grid theme-dependent'
       ref={ref}
       dataSource={data}
       columnAutoWidth
       hoverStateEnabled
+      showBorders
       height='100%'
       onEditingStart={toogleUseNavigation}
       onEditCanceled={toogleUseNavigation}
       onSaved={toogleUseNavigation}
-      onRowPrepared={onRowPrepared}
       onRowClick={navigateToDetails}>
       <LoadPanel enabled={false} />
       <Scrolling mode='virtual' />

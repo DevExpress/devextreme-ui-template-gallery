@@ -36,6 +36,7 @@ const statusItemRender = (text: string) => <ContactStatus text={text} />;
 export const ContactFromDetails = ({ data, editing, updateField }: {
   data: Contact, editing: boolean, updateField: (field: string | number) => (value: string | number) => void
 }) => {
+  const stylingMode = 'filled';
   return (
     <From
       className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}
@@ -51,11 +52,11 @@ export const ContactFromDetails = ({ data, editing, updateField }: {
           <ItemForm>
             <SelectBox
               label='Status'
+              width='100%'
               value={data.status}
               readOnly={!editing}
-              stylingMode='filled'
               items={CONTACT_STATUS_LIST}
-              width='100%'
+              stylingMode={stylingMode}
               fieldRender={statusRender}
               itemRender={statusItemRender}
               onValueChange={updateField('status')}

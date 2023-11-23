@@ -15,6 +15,7 @@
         icon: isPasswordMode ? 'eyeopen' : 'eyeclose',
         hoverStateEnabled: false,
         activeStateEnabled: false,
+        stylingMode: 'text',
         onClick: switchMode
       }"
     />
@@ -37,7 +38,7 @@ const props = withDefaults(defineProps<{
   validators?: Array<typeof DxValidationRule>,
 }>(), {
   value: '',
-  stylingMode: 'outlined',
+  stylingMode: 'filled',
   placeholder: '',
   validators: () => [],
 });

@@ -1,13 +1,14 @@
 <template>
-  <div class="view-wrapper">
+  <div class="view-wrapper list-page  view-wrapper-contact-list">
     <dx-data-grid
       ref="dataGrid"
       :data-source="dataSource"
       :allow-column-reordering="true"
       :focused-row-enabled="true"
       :focused-row-key="focusedRowKey"
+      :show-borders="true"
       height="100%"
-      class="grid"
+      class="grid theme-dependent"
       @row-click="rowClick"
       @exporting="onExporting"
     >
@@ -348,19 +349,6 @@ const refreshOptions = {
       .position {
         font-size: 12px;
         color: var(--texteditor-label-color);
-      }
-    }
-
-    :deep(.dx-row-focused) {
-      .name-template.name-template {
-        color: var(--base-focus-color);
-
-        .position {
-          color: var(--base-focus-color);
-        }
-      }
-      .status {
-        @include status(var(--base-focus-color));
       }
     }
 

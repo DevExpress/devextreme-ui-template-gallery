@@ -120,7 +120,7 @@ const drawerOptions = computed(() => {
 .layout-body {
   flex: 1;
   min-height: 0;
-  background-color: var(--base-bg);
+  background-color: var(--background-color);
 }
 
 .content {

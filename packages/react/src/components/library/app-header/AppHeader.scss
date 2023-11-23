@@ -7,10 +7,6 @@
   padding: 10px 0;
   background-color: var(--base-bg);
 
-  .header-title {
-    color: var(--accent-color);
-  }
-
   .dx-toolbar.header-toolbar {
     padding-right: var(--content-padding);
 
@@ -22,14 +18,16 @@
       position: relative;
 
       .dx-badge {
-        display: block;
         position: absolute;
         background-color: red;
         color: white;
         right: -10%;
         top: -10%;
         font-size: 12px;
-        padding: 0 4px;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        justify-content: center;
       }
     }
 
@@ -37,10 +35,6 @@
       width: var(--side-panel-min-width);
       text-align: center;
       padding: 0;
-
-      .dx-icon {
-        color: var(--accent-color);
-      }
     }
   }
 }

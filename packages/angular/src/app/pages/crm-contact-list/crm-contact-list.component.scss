@@ -24,20 +24,6 @@
       }
     }
 
-    ::ng-deep .dx-row-focused {
-      .name-template {
-        color: var(--base-focus-color);
-
-        .position.position {
-          color: var(--base-focus-color);
-        }
-      }
-
-      .status {
-        @include status(var(--base-focus-color));
-      }
-    }
-
     ::ng-deep & {
       .dx-datagrid-header-panel {
         padding: 0 var(--content-padding);

@@ -6,7 +6,7 @@
     <dx-button
       text="Edit"
       icon="edit"
-      stylingMode="outlined"
+      stylingMode="contained"
       type="default"
       (onClick)="handleEditClick()"
     ></dx-button>
@@ -14,7 +14,7 @@
   <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
     <dx-button
       text="Save"
-      stylingMode="outlined"
+      stylingMode="contained"
       type="default"
       (onClick)="handleSaveButtonClick($event)"
     ></dx-button>
@@ -23,7 +23,8 @@
     <dx-button
       text="Cancel"
       (onClick)="handleCancelEditClick()"
-      stylingMode="text"
+      stylingMode="outlined"
+      type="normal"
     ></dx-button>
   </dxi-item>
 </dx-toolbar>

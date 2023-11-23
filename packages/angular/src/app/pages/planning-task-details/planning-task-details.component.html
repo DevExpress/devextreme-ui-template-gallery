@@ -1,12 +1,12 @@
 <dx-scroll-view class="view-wrapper-scroll">
   <div class="view-wrapper">
-    <dx-toolbar class="toolbar-details">
+    <dx-toolbar class="toolbar-details theme-dependent">
       <dxi-item location="before">
         <dx-button icon="arrowleft" stylingMode="text"></dx-button>
       </dxi-item>
       <dxi-item location="before" [text]="taskName"></dxi-item>
       <dxi-item location="after" locateInMenu="auto">
-        <dx-drop-down-button text="Actions" stylingMode="contained">
+        <dx-drop-down-button text="Actions" stylingMode="text" [dropDownOptions]="{ width: 'auto' }">
           <dxi-item text="Duplicate"></dxi-item>
           <dxi-item text="Close"></dxi-item>
           <dxi-item text="Delete"></dxi-item>
@@ -44,9 +44,14 @@
         </dx-validation-group>
       </div>
 
-      <div class="right">
+      <div class="right theme-dependent">
         <div class="dx-card details-card">
-          <dx-tab-panel [showNavButtons]="true" [deferRendering]="false">
+          <dx-tab-panel
+            secondary="secondary"
+            [focusStateEnabled]="false"
+            [showNavButtons]="true"
+            [deferRendering]="false"
+          >
             <dxi-item title="Activities">
               <card-activities
                 [isLoading]="isLoading"
@@ -60,7 +65,7 @@
                 [user]="task?.owner"
               ></card-notes>
             </dxi-item>
-            <dxi-item title="Messages" [badge]="task?.messages.length">
+            <dxi-item title="Messages">
               <card-messages
                 [items]="task?.messages"
                 [user]="task?.owner"

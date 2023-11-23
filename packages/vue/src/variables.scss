@@ -1,5 +1,4 @@
 :root {
-  --content-padding: 16px;
   --toolbar-vertical-padding: 16px;
 
   .dx-theme-generic {
@@ -32,7 +31,7 @@
 
 @mixin header {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400;
   padding-right: 25px;
 }
 
@@ -57,7 +56,7 @@
   .messages-content {
     padding: 20px;
     border-top: 1px solid var(--border-color);
-    background-color: var(--side-panel-background);
+    background-color: var(--base-bg);
   }
 }
 
@@ -116,4 +115,15 @@
   font-size: 12px;
   line-height: 16px;
   opacity: $opacity;
+}
+
+@mixin card-shadow() {
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+}
+
+@mixin toolbar-panel() {
+  background-color: var(--base-bg);
+  padding: 5px var(--content-padding);
+  border-radius: 8px;
+  @include shadow();
 }

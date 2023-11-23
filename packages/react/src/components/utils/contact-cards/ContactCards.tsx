@@ -17,13 +17,15 @@ export const ContactCards = ({
   activeOpportunities,
   closedOpportunities,
   notes,
-  messagesCount,
   messages,
-  onMessagesCountChanged
 }) => {
   return (
     <div className='dx-card details-card'>
-      <TabPanel showNavButtons deferRendering={false}>
+      <TabPanel
+        showNavButtons
+        focusStateEnabled={false}
+        deferRendering={false}
+      >
         <TabPanelItem title='Tasks'>
           <CardTasks
             isLoading={isLoading}
@@ -42,8 +44,8 @@ export const ContactCards = ({
         <TabPanelItem title='Notes'>
           <CardNotes items={notes} user={name} />
         </TabPanelItem>
-        <TabPanelItem title='Messages' badge={messagesCount}>
-          <CardMessages items={messages} user={name} onMessagesCountChanged={onMessagesCountChanged} />
+        <TabPanelItem title='Messages'>
+          <CardMessages items={messages} user={name} />
         </TabPanelItem>
       </TabPanel>
     </div>

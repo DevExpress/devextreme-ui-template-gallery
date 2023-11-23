@@ -55,7 +55,6 @@ body {
     position: relative;
     flex-grow: 1;
     width: 100%;
-    background: var(--base-bg);
     height: 100%;
 
     .view-wrapper {

@@ -1,6 +1,9 @@
 <template>
   <div class="dx-card details-card">
-    <dx-tab-panel :show-nav-buttons="true">
+    <dx-tab-panel
+      :focus-state-enabled="false"
+      :show-nav-buttons="true"
+    >
       <dx-tab-item title="Tasks">
         <card-tasks
           :tasks="props.tasks"
@@ -30,7 +33,6 @@
 
       <dx-tab-item
         title="Messages"
-        :badge="messages?.length + ''"
       >
         <card-messages
           :user="props.contactName"
