@@ -66,7 +66,7 @@
       border-radius: 50%;
       margin-right: var(--gap-padding);
 
-      img {
+      .dx-icon {
         height: 20px;
         width: 20px;
         margin: auto;
@@ -124,10 +124,12 @@
   }
 
   .contacts-card .image-wrapper {
-    background-color: rgba(244, 67, 54, 0.2);
+    background-color: color-mix(in sRGB, var(--error-color) 12%, transparent);
+    color: var(--error-color);
   }
 
   .address-card .image-wrapper {
-    background-color: rgba(3, 169, 244, 0.2);
+    background-color: color-mix(in sRGB, var(--info-color) 12%, transparent);
+    color: var(--info-color);
   }
 }
