@@ -184,6 +184,7 @@ const refreshOptions = {
     .left {
       flex: 1 400px;
       margin-top: 8px;
+      height: fit-content;
     }
 
     .right {
