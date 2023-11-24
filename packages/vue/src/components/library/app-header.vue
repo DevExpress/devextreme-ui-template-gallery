@@ -1,6 +1,8 @@
 <template>
   <header>
-    <dx-toolbar class="header-toolbar">
+    <dx-toolbar
+      class="header-toolbar"
+      ref="toolbarRef">
       <dx-item
         :visible="menuToggleEnabled"
         location="before"
@@ -82,22 +84,32 @@
 import { DxButton } from 'devextreme-vue/button';
 import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { useRouter, useRoute } from 'vue-router';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 import { authInfo as auth, AuthUser } from '../../auth';
 import ThemeSwitcher from './theme-switcher.vue';
 import UserPanel from './user-panel.vue';
+import { themeService } from '../../theme/theme-service';
 
 const router = useRouter();
 const route = useRoute();
 
 const user = ref<Record<string, unknown> | unknown>({});
+const toolbarRef = ref<DxToolbar>(null);
 
 defineProps<{
   menuToggleEnabled: boolean,
     title: string,
     toggleMenuFunc:(e: unknown) => void,
 }>();
+
+onMounted(() => {
+  if (themeService.isFluent()) {
+    setTimeout(() => {
+      toolbarRef.value.instance.repaint();
+    }, 200);
+  }
+});
 
 auth.getUser().then((e: AuthUser) => {
   user.value = e.data;

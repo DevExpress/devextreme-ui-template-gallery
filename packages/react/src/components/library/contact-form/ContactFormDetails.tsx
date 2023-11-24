@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import From, { Item as ItemForm, GroupItem, ColCountByScreen } from 'devextreme-react/form';
+import Form, { Item as ItemForm, GroupItem, ColCountByScreen } from 'devextreme-react/form';
 import SelectBox from 'devextreme-react/select-box';
 import Button from 'devextreme-react/button';
 import TextBox from 'devextreme-react/text-box';
@@ -38,7 +38,7 @@ export const ContactFromDetails = ({ data, editing, updateField }: {
 }) => {
   const stylingMode = 'filled';
   return (
-    <From
+    <Form
       className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}
       labelMode='floating'
     >
@@ -198,6 +198,6 @@ export const ContactFromDetails = ({ data, editing, updateField }: {
           />
         </ItemForm>
       </GroupItem>
-    </From>
+    </Form>
   );
 };

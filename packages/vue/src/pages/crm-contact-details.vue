@@ -170,6 +170,7 @@ const refreshOptions = {
     .left {
       flex: 1 var(--left-panel-width);
       margin-top: 8px;
+      height: fit-content;
     }
 
     .right {

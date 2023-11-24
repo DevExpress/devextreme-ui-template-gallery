@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import Toolbar, { Item } from 'devextreme-react/toolbar';
 import TextBox from 'devextreme-react/text-box';
 import Button from 'devextreme-react/button';
@@ -7,15 +7,26 @@ import { Template } from 'devextreme-react/core/template';
 
 import { UserPanel } from '../user-panel/UserPanel';
 import { ThemeSwitcher } from '../theme-switcher/ThemeSwitcher';
+import { ThemeContext } from '../../../theme/theme';
 
 import type { AppHeaderProps } from '../../../types';
 
 import './AppHeader.scss';
 
 export const AppHeader = ({ menuToggleEnabled, title, toggleMenu, className }: AppHeaderProps) => {
+  const toolbarRef = useRef<Toolbar>(null);
+  const theme = useContext(ThemeContext);
+
+  useEffect(() => {
+    if(theme?.isFluent()) {
+      setTimeout(() => {
+        toolbarRef?.current?.instance.repaint();
+      }, 100);
+    }
+  }, []);
   return (
     <header className={`header-component ${className}`}>
-      <Toolbar className='header-toolbar'>
+      <Toolbar ref={toolbarRef} className='header-toolbar'>
         <Item visible={menuToggleEnabled} location='before' widget='dxButton' cssClass='menu-button'>
           <Button icon='menu' stylingMode='text' onClick={toggleMenu} />
         </Item>
