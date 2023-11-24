@@ -76,7 +76,7 @@ jobs:
       - name: Set themes matrix
         id: set-matrix
         run: |
-          themes_json=`echo '["fluent.modern.light"]'`
+          themes_json=`echo '["fluent.saas.light"]'`
           themes_json="${themes_json//$'\n'/''}"
           themes_json="${themes_json//$'\r'/''}"
           themes_json="${themes_json//$' '/''}"
