@@ -28,6 +28,7 @@ module.exports = {
     'linebreak-style': 0,
     'import/prefer-default-export': 'off',
     'default-param-last': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'vue/max-attributes-per-line': ['error', {
       singleline: {
         max: 1,

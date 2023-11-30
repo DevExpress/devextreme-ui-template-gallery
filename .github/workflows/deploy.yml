@@ -54,6 +54,15 @@ jobs:
     - name: Run npm install
       run: npm install
 
+    - name: Authenticate to GitHub Package
+      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+
+    - name: Get DevExtreme Version
+      run: export DEVEXTREME_INTERNAL_VERSION=$(npm pkg get dependencies.devextreme --workspaces=false | tr -d '"')
+
+    - name: Install devextreme-internal
+      run: npm i devextreme@npm:@devexpress/devextreme-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com --no-save
+
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
 
@@ -100,9 +109,14 @@ jobs:
     - name: Run npm install
       run: npm install
 
-    - name: Run npm install for shell
-      run: npm install
-      working-directory: packages/shell
+    - name: Authenticate to GitHub Package
+      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+
+    - name: Get DevExtreme Version
+      run: export DEVEXTREME_INTERNAL_VERSION=$(npm pkg get dependencies.devextreme --workspaces=false | tr -d '"')
+
+    - name: Install devextreme-internal
+      run: npm i devextreme@npm:@devexpress/devextreme-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com --no-save
 
     - name: Build Shell
       run: npm run build-shell
