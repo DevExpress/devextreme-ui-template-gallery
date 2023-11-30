@@ -19,7 +19,11 @@ $theme-mode: null !default;
 
 :root {
   --dark-warning-color: #{darken(adjust-hue($base-warning, -12), 3.73)};
-  --typography-bg: #{$base-typography-bg};
+  --typography-bg: var(--base-bg);
+
+  @if variable-exists("base-typography-bg") {
+    --typography-bg: #{$base-typography-bg};
+  }
   --side-panel-min-width: 48px;
   --content-padding: 24px;
   --page-padding: 32px;

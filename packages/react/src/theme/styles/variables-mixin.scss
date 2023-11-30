@@ -15,7 +15,11 @@ $theme-mode: null !default;
 
 :root, .app-theme-#{$theme-mode} {
   --dark-warning-color: #{darken(adjust-hue($base-warning, -12), 3.73)};
-  --typography-bg: #{$base-typography-bg};
+  --typography-bg: var(--base-bg);
+
+  @if variable-exists("base-typography-bg") {
+    --typography-bg: #{$base-typography-bg};
+  }
   --side-panel-min-width: 48px;
   --calendar-width: 292px;
   --header-toolbar-vertical-padding: 10px;
