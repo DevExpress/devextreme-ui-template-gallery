@@ -24,6 +24,7 @@ $theme-mode: null !default;
   @if variable-exists("base-typography-bg") {
     --typography-bg: #{$base-typography-bg};
   }
+
   --side-panel-min-width: 48px;
   --content-padding: 24px;
   --page-padding: 32px;

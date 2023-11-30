@@ -20,6 +20,7 @@ $theme-mode: null !default;
   @if variable-exists("base-typography-bg") {
     --typography-bg: #{$base-typography-bg};
   }
+
   --side-panel-min-width: 48px;
   --calendar-width: 292px;
   --header-toolbar-vertical-padding: 10px;
