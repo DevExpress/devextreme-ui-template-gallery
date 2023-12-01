@@ -63,6 +63,9 @@ jobs:
     - name: Install devextreme-internal
       run: npm i devextreme@npm:@devexpress/devextreme-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com --no-save
 
+    - name: Install devextreme-dist-internal
+      run: npm i devextreme-dist@npm:@devexpress/devextreme-dist-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com --no-save
+
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
 
@@ -117,6 +120,9 @@ jobs:
 
     - name: Install devextreme-internal
       run: npm i devextreme@npm:@devexpress/devextreme-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com --no-save
+
+    - name: Install devextreme-dist-internal
+      run: npm i devextreme-dist@npm:@devexpress/devextreme-dist-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com --no-save
 
     - name: Build Shell
       run: npm run build-shell
