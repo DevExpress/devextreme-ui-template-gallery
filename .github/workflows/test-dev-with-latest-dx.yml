@@ -14,17 +14,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Build latest DX
-        run: ls .
-
-      - name: Build latest DX
-        run: ls ./.github/
+      - name: Get sources
+        uses: actions/checkout@v3
 
       - name: Build latest DX
         uses: ./.github/workflows/actions/build-latest-dx
-
-      - name: Get sources
-        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
