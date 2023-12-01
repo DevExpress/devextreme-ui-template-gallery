@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Build latest DX
-        run: pwd
+        run: ls
 
       - name: Build latest DX
-        uses: ./../.github/workflows/actions/build-latest-dx
+        uses: ./.github/workflows/actions/build-latest-dx
 
       - name: Get sources
         uses: actions/checkout@v3
