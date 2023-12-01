@@ -133,7 +133,7 @@ const tabChange = ([startDate, endDate]: string[]) => {
 
 @media only screen and (max-width: 700px) {
   .view-wrapper {
-    .cards {
+    .cards, .tiles {
       grid-template-columns: repeat(1, 100%);
     }
   }
@@ -141,7 +141,7 @@ const tabChange = ([startDate, endDate]: string[]) => {
 
 @media only screen and (max-width: 400px) {
   .view-wrapper {
-    .cards {
+    .cards, .tiles {
       grid-template-columns: repeat(1, 100%);
     }
   }
