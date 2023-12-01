@@ -1,4 +1,4 @@
-name: Test dev branch with latest DX
+name: Test with latest DX
 
 on:
   push:
