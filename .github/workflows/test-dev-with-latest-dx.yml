@@ -2,10 +2,10 @@ name: Test
 
 on:
   push:
-    branches-ignore:
+    branches:
       - dev
   pull_request:
-    branches-ignore:
+    branches:
       - dev
 
 jobs:
@@ -14,32 +14,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Get sources
-      uses: actions/checkout@v3
+      - name: Get sources
+        uses: actions/checkout@v3
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
-    - name: Restore npm cache
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: Run npm install for metadata
-      run: npm install
-      working-directory: packages/metadata
+      - name: Run npm install for metadata
+        run: npm install
+        working-directory: packages/metadata
 
-    - name: Test Metadata
-      run: npm run test
-      working-directory: packages/metadata
+      - name: Test Metadata
+        run: npm run test
+        working-directory: packages/metadata
 
   build-latest-dx-npm:
-    if: ${{ github.base_ref == 'dev' }}
     runs-on: ubuntu-latest
     steps:
       #Build Devextreme latest
@@ -131,7 +130,6 @@ jobs:
 
   testcafe:
     name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }} - ${{ matrix.theme.type }}
-    if: ${{ always() }}
     needs: [build-latest-dx-npm]
     strategy:
       fail-fast: false
@@ -176,84 +174,80 @@ jobs:
     timeout-minutes: 40
 
     steps:
-    - name: Get sources
-      uses: actions/checkout@v3
+      - name: Get sources
+        uses: actions/checkout@v3
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
-    - name: Set NPM version
-      run: npm i npm@7 -g
-    - name: For dev branch - download devextreme Artifact
-      if: ${{ github.base_ref == 'dev' }}
-      uses: actions/download-artifact@v2
-      with:
-        name: devextreme-npm
-        path: devextreme-npm-latest
+      - name: Set NPM version
+        run: npm i npm@7 -g
+      - name: For dev branch - download devextreme Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: devextreme-npm
+          path: devextreme-npm-latest
 
-    - name: For dev branch - download devextreme Artifact
-      if: ${{ github.base_ref == 'dev' }}
-      uses: actions/download-artifact@v2
-      with:
-        name: devextreme-npm
-        path: devextreme-npm-latest
+      - name: For dev branch - download devextreme Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: devextreme-npm
+          path: devextreme-npm-latest
 
-    - name: For dev branch - download devextreme-${{ matrix.ARGS.project }} Artifact
-      if: ${{ github.base_ref == 'dev' }}
-      uses: actions/download-artifact@v2
-      with:
-        name: devextreme-${{ matrix.ARGS.project }}-npm
-        path: devextreme-${{ matrix.ARGS.project }}-npm-latest
+      - name: For dev branch - download devextreme-${{ matrix.ARGS.project }} Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: devextreme-${{ matrix.ARGS.project }}-npm
+          path: devextreme-${{ matrix.ARGS.project }}-npm-latest
 
-    - name: For dev branch - replace dx versions to latest builds in package.json
-      if: ${{ github.base_ref == 'dev' }}
-      run: |
-        FILE_FRAMEWORK_PATH="$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz" | sed 's|/|\\/|g')"
-        FILE_DX_PATH="$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz" | sed 's|/|\\/|g')"
-        FILE_DX_DIST_PATH="$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz" | sed 's|/|\\/|g')"
-        sed -i "s|\"devextreme\": \"[0-9.]\+\"|\"devextreme\": \"\.\.\/\.\.\/$FILE_DX_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
-        sed -i "s/\"devextreme-dist\": \"[0-9.]\+\"/\"devextreme-dist\": \"\.\.\/\.\.\/$FILE_DX_DIST_PATH\"/g" ./packages/${{ matrix.ARGS.project }}/package.json
-        sed -i "s|\"devextreme-${{ matrix.ARGS.project }}\": \"[0-9.]\+\"|\"devextreme-${{ matrix.ARGS.project }}\": \"\.\.\/\.\.\/$FILE_FRAMEWORK_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+      - name: For dev branch - replace dx versions to latest builds in package.json
+        run: |
+          FILE_FRAMEWORK_PATH="$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz" | sed 's|/|\\/|g')"
+          FILE_DX_PATH="$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz" | sed 's|/|\\/|g')"
+          FILE_DX_DIST_PATH="$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz" | sed 's|/|\\/|g')"
+          sed -i "s|\"devextreme\": \"[0-9.]\+\"|\"devextreme\": \"\.\.\/\.\.\/$FILE_DX_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s/\"devextreme-dist\": \"[0-9.]\+\"/\"devextreme-dist\": \"\.\.\/\.\.\/$FILE_DX_DIST_PATH\"/g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s|\"devextreme-${{ matrix.ARGS.project }}\": \"[0-9.]\+\"|\"devextreme-${{ matrix.ARGS.project }}\": \"\.\.\/\.\.\/$FILE_FRAMEWORK_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
 
-    - name: Restore npm cache
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: Run npm install
-      run: npm install --no-audit --no-fund
+      - name: Run npm install
+        run: npm install --no-audit --no-fund
 
-    - name: Set theme
-      run: npm run set-theme -- ${{ matrix.theme.fullName }}
+      - name: Set theme
+        run: npm run set-theme -- ${{ matrix.theme.fullName }}
 
-    - name: Build
-      run: npm run build
-      working-directory: packages/${{ matrix.ARGS.project }}
+      - name: Build
+        run: npm run build
+        working-directory: packages/${{ matrix.ARGS.project }}
 
-    - name: Start app
-      run: npm run start-apps -- --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme.name }}
-      working-directory: packages/testing
+      - name: Start app
+        run: npm run start-apps -- --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme.name }}
+        working-directory: packages/testing
 
-    - name: Run tests
-      run: |
-        all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true  --theme ${{ matrix.theme.name }}"
-        echo "$all_args"
-        export TESTCAFE_DASHBOARD_LAYOUT_TESTING_ENABLED=true
-        export TESTCAFE_DASHBOARD_DEVEXTREME_TOKEN=eyJwcm9qZWN0SWQiOiI5ZjRlMTJjMC1kNmExLTQxZDEtYmE1OS0wZTI3OTE1N2QxZDAiLCJ0b2tlblNlY3JldCI6InQwQXh6bzFMczBDVE81VU95bzc2dkF2eE05Ym9pQ3JxajRCQUtyWm5la0EzYlp3SENOR3RoamFaWkhoa0xvRnJZM1lvV0ZlbEt2S2JyYjFkbEs5UFVoMmlGaG9aVlprdTU1NXhZWmhGQkQ0eWtBZENJWkJvdU9ZV1hDWlRkVi9sQUFxMVNlMkFtRkg5UkRXTTlTcEk0WmVOSkEwZnYwNUlDN3Q3UXFmZ3o2VUdYVDNvZDJHQ2RqclVKYnZrZ2ZmNjdRb3RNaXZuTG1CSmM4REdLelhhbmhobzMzVzE5U1Axd1NSNGR6d3ZWdHp2dGV2em5Da0cwR0dSc3Z3OWdQS214UHpFUGsreTJtMjlSZm92dGtuNGZtb0prRng1RzBSZ2o2WnhPSXBrUDZOMVZyWWhuTk9lc1VEQmVobzB1VGFjTlNwZFE0N2FVZCsydmM3Q3Y0QmtZQT09In0=
-        export TESTCAFE_DASHBOARD_DEVEXTREME_URL=https://devextreme.resolve.sh
-        export TESTCAFE_DASHBOARD_BUILD_ID=${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
-        npm run test-testcafe -- $all_args
-      working-directory: packages/testing
+      - name: Run tests
+        run: |
+          all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true  --theme ${{ matrix.theme.name }}"
+          echo "$all_args"
+          export TESTCAFE_DASHBOARD_LAYOUT_TESTING_ENABLED=true
+          export TESTCAFE_DASHBOARD_DEVEXTREME_TOKEN=eyJwcm9qZWN0SWQiOiI5ZjRlMTJjMC1kNmExLTQxZDEtYmE1OS0wZTI3OTE1N2QxZDAiLCJ0b2tlblNlY3JldCI6InQwQXh6bzFMczBDVE81VU95bzc2dkF2eE05Ym9pQ3JxajRCQUtyWm5la0EzYlp3SENOR3RoamFaWkhoa0xvRnJZM1lvV0ZlbEt2S2JyYjFkbEs5UFVoMmlGaG9aVlprdTU1NXhZWmhGQkQ0eWtBZENJWkJvdU9ZV1hDWlRkVi9sQUFxMVNlMkFtRkg5UkRXTTlTcEk0WmVOSkEwZnYwNUlDN3Q3UXFmZ3o2VUdYVDNvZDJHQ2RqclVKYnZrZ2ZmNjdRb3RNaXZuTG1CSmM4REdLelhhbmhobzMzVzE5U1Axd1NSNGR6d3ZWdHp2dGV2em5Da0cwR0dSc3Z3OWdQS214UHpFUGsreTJtMjlSZm92dGtuNGZtb0prRng1RzBSZ2o2WnhPSXBrUDZOMVZyWWhuTk9lc1VEQmVobzB1VGFjTlNwZFE0N2FVZCsydmM3Q3Y0QmtZQT09In0=
+          export TESTCAFE_DASHBOARD_DEVEXTREME_URL=https://devextreme.resolve.sh
+          export TESTCAFE_DASHBOARD_BUILD_ID=${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+          npm run test-testcafe -- $all_args
+        working-directory: packages/testing
 
-    - name: Copy screenshots artifacts
-      if: ${{ failure() }}
-      uses: actions/upload-artifact@v3
-      with:
-        name: screenshots-${{ matrix.ARGS.project }}
-        path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
-        if-no-files-found: ignore
+      - name: Copy screenshots artifacts
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshots-${{ matrix.ARGS.project }}
+          path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
+          if-no-files-found: ignore
