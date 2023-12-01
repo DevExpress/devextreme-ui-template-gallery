@@ -137,25 +137,25 @@ jobs:
         name: build-artifacts
         path: devextreme-ui-template-gallery/
 
-  deploy:
-    name: Deploy
-    needs: [build, build-shell]
-    runs-on: ubuntu-latest
+  # deploy:
+  #   name: Deploy
+  #   needs: [build, build-shell]
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Get sources
-      uses: actions/checkout@v3
+  #   steps:
+  #   - name: Get sources
+  #     uses: actions/checkout@v3
 
-    - name: Download build artifacts
-      uses: actions/download-artifact@v3
-      with:
-        name: build-artifacts
-        path: devextreme-ui-template-gallery
+  #   - name: Download build artifacts
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: build-artifacts
+  #       path: devextreme-ui-template-gallery
 
-    - name: Deploy in gh-pages
-      uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
-      with:
-        branch: gh-pages
-        folder: devextreme-ui-template-gallery
-        target-folder: .
+  #   - name: Deploy in gh-pages
+  #     uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
+  #     with:
+  #       branch: gh-pages
+  #       folder: devextreme-ui-template-gallery
+  #       target-folder: .
 
