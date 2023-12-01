@@ -15,7 +15,10 @@ jobs:
 
     steps:
       - name: Build latest DX
-        run: ls
+        run: ls .
+
+      - name: Build latest DX
+        run: ls ./.github/
 
       - name: Build latest DX
         uses: ./.github/workflows/actions/build-latest-dx
