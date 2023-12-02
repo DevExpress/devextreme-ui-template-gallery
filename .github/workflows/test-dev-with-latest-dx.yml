@@ -22,7 +22,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build latest DX
-        uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/actions/build-latest-dx@dev_theme_var_WIP3
+      #  uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/actions/build-latest-dx@dev_theme_var_WIP3
+        uses: .github/workflows/actions/build-latest-dx
 
       - name: Use Node.js
         uses: actions/setup-node@v3
