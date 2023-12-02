@@ -9,6 +9,8 @@ on:
       - dev
 
 jobs:
+  test-w:
+    uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/build-latest-dx.yml@dev_theme_var_WIP3
   test-meta:
     name: Test metadata
     runs-on: ubuntu-latest
@@ -17,8 +19,8 @@ jobs:
       - name: Get sources
         uses: actions/checkout@v3
 
-      - name: Build latest DX
-        uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/actions/build-latest-dx/action.yml@dev_theme_var_WIP3
+      # - name: Build latest DX
+      #  uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/actions/build-latest-dx/action.yml@dev_theme_var_WIP3
 
       - name: Use Node.js
         uses: actions/setup-node@v3

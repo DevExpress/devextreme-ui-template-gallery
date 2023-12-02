@@ -1,0 +1,7 @@
+name: Latest DX
+
+runs:
+  using: 'composite'
+  steps:
+    - name: TEST ACTION
+      run: echo "TEST ACTION"
