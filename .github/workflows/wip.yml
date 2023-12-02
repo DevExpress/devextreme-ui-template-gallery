@@ -1,0 +1,46 @@
+name: Test with latest DX
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  # test-w:
+  #  uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/build-latest-dx.yml@dev_theme_var_WIP3
+
+  test-meta:
+    name: Test metadata
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get sources
+        uses: actions/checkout@v3
+
+      - name: Build latest DX
+        uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/actions/build-latest-dx@dev_theme_var_WIP3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Run npm install for metadata
+        run: npm install
+        working-directory: packages/metadata
+
+      - name: Test Metadata
+        run: npm run test
+        working-directory: packages/metadata
