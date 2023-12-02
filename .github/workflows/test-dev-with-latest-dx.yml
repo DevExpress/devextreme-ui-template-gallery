@@ -9,8 +9,9 @@ on:
       - dev
 
 jobs:
-  test-w:
-    uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/build-latest-dx.yml@dev_theme_var_WIP3
+  # test-w:
+  #  uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/build-latest-dx.yml@dev_theme_var_WIP3
+
   test-meta:
     name: Test metadata
     runs-on: ubuntu-latest
