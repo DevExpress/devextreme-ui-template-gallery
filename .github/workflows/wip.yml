@@ -1,7 +1,6 @@
 name: WIP
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:
