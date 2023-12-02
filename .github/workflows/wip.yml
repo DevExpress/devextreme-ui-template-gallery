@@ -1,6 +1,7 @@
 name: Test with latest DX
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
