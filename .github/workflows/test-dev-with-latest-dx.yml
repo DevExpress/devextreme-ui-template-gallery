@@ -23,8 +23,8 @@ jobs:
       - name: Build latest DX
         run: ls ..
 
-      - name: Build latest DX
-        uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/actions/build-latest-dx@dev_theme_var_WIP3
+     # - name: Build latest DX
+     #   uses: GoodDayForSurf/devextreme-ui-template-gallery/.github/workflows/actions/build-latest-dx@dev_theme_var_WIP3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
