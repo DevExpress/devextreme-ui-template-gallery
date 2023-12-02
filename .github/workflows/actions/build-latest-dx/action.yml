@@ -1,7 +1,11 @@
-name: Latest DX
+name: "Show Directory and Greet"
+description: "Display current directory and greet"
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - name: TEST ACTION
-      run: echo "TEST ACTION"
+    - name: Show Current Directory
+      run: |
+        echo "Current Directory: $(pwd)"
+    - name: Greet
+      run: echo "Hello from the Action!"
