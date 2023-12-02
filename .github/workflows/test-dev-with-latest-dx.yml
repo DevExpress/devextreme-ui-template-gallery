@@ -1,6 +1,7 @@
 name: Test with latest DX
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - dev
