@@ -1,4 +1,7 @@
 name: Latest DX
+on:
+  workflow_call:
+
 runs:
   steps:
     - name: TEST ACTION
