@@ -18,6 +18,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build latest DX
+        run: ls .
+
+      - name: Build latest DX
+        run: ls ..
+
+      - name: Build latest DX
         uses: ./.github/workflows/actions/build-latest-dx
 
       - name: Use Node.js
