@@ -16,10 +16,6 @@ jobs:
     steps:
       - name: Get sources
         uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            .github
-            src
 
       - name: Build latest DX
         run: ls .
@@ -28,7 +24,7 @@ jobs:
         run: ls ..
 
       - name: Build latest DX
-        uses: actions/build-latest-dx/action.yml
+        uses: GoodDayForSurf/devextreme-ui-template-gallery/./github/actions/build-latest-dx
 
       - name: Use Node.js
         uses: actions/setup-node@v3
