@@ -5,7 +5,9 @@ runs:
   using: 'composite'
   steps:
     - name: Show Current Directory
+      shell: bash
       run: |
         echo "Current Directory: $(pwd)"
     - name: Greet
+      shell: bash
       run: echo "Hello from the Action!"
