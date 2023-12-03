@@ -4,8 +4,6 @@ description: "Display current directory and greet"
 runs:
   using: 'composite'
   steps:
-    - shell: bash
-
     #Build Devextreme latest
     - name: Checkout Devextreme
       run: git clone https://github.com/DevExpress/DevExtreme.git devextreme
