@@ -64,23 +64,25 @@ jobs:
       run: npm pack @devexpress/devextreme-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com
 
     - name: Unpack devextreme-internal
-      run: tar -xvzf $(find . -name devexpress-devextreme-internal-*.tgz)
+      run: mkdir devextreme-internal-package & cd ./devextreme-internal-package |
+        tar -xvzf $(find . -name devexpress-devextreme-internal-*.tgz)
 
     - name: Copy devextreme-internal
       run: rm -rf ./node_modules/devextreme/* |
-        mv ./package/* ./node_modules/devextreme |
-        rm -rf ./package
+        mv ./devextreme-internal-package/package/* ./node_modules/devextreme |
+        rm -rf ./devextreme-internal-package
 
     - name: Download devextreme-dist-internal
       run: npm pack @devexpress/devextreme-dist-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com
 
     - name: Unpack devextreme-dist-internal
-      run: tar -xvzf $(find . -name devexpress-devextreme-dist-internal-*.tgz)
+      run: mkdir devextreme-dist-internal-package & cd ./devextreme-dist-internal-package |
+        tar -xvzf $(find . -name devexpress-devextreme-dist-internal-*.tgz)
 
     - name: Copy devextreme-dist-internal
       run: rm -rf ./node_modules/devextreme-dist/* |
-        mv ./package/* ./node_modules/devextreme-dist |
-        rm -rf ./package
+        mv ./devextreme-dist-internal-package/package/* ./node_modules/devextreme-dist |
+        rm -rf ./devextreme-dist-internal-package
 
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
