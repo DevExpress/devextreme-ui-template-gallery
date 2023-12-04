@@ -280,7 +280,7 @@ const taskSearchOptions = {
   right: 0;
 
   .dx-toolbar {
-    padding: var(--toolbar-vertical-padding) var(--content-padding);
+    padding: var(--toolbar-margin-bottom) var(--content-padding);
   }
 
   :deep(.dx-toolbar) {
