@@ -65,12 +65,13 @@ jobs:
 
     - name: Unpack devextreme-internal
       run: export DEVEXTREME_FILE_NAME=$(find . -name devexpress-devextreme-internal-*.tgz) |
-        mkdir devextreme-internal-package & cd ./devextreme-internal-package |
+        mkdir devextreme-internal-package
+        cd ./devextreme-internal-package
         tar -xvzf ../$DEVEXTREME_FILE_NAME
 
     - name: Copy devextreme-internal
       run: rm -rf ./node_modules/devextreme/* |
-        mv ./devextreme-internal-package/package/* ./node_modules/devextreme |
+        mv ./devextreme-internal-package/package/* ./node_modules/devextreme
         rm -rf ./devextreme-internal-package
 
     - name: Download devextreme-dist-internal
@@ -78,12 +79,13 @@ jobs:
 
     - name: Unpack devextreme-dist-internal
       run: export DEVEXTREME_DIST_FILE_NAME=$(find . -name devexpress-devextreme-dist-internal-*.tgz) |
-        mkdir devextreme-dist-internal-package & cd ./devextreme-dist-internal-package |
+        mkdir devextreme-dist-internal-package
+        cd ./devextreme-dist-internal-package
         tar -xvzf ../$DEVEXTREME_DIST_FILE_NAME
 
     - name: Copy devextreme-dist-internal
       run: rm -rf ./node_modules/devextreme-dist/* |
-        mv ./devextreme-dist-internal-package/package/* ./node_modules/devextreme-dist |
+        mv ./devextreme-dist-internal-package/package/* ./node_modules/devextreme-dist
         rm -rf ./devextreme-dist-internal-package
 
     - name: Set theme
@@ -143,12 +145,13 @@ jobs:
 
     - name: Unpack devextreme-internal
       run: export DEVEXTREME_FILE_NAME=$(find . -name devexpress-devextreme-internal-*.tgz) |
-        mkdir devextreme-internal-package & cd ./devextreme-internal-package |
+        mkdir devextreme-internal-package
+        cd ./devextreme-internal-package
         tar -xvzf ../$DEVEXTREME_FILE_NAME
 
     - name: Copy devextreme-internal
       run: rm -rf ./node_modules/devextreme/* |
-        mv ./devextreme-internal-package/package/* ./node_modules/devextreme |
+        mv ./devextreme-internal-package/package/* ./node_modules/devextreme
         rm -rf ./devextreme-internal-package
 
     - name: Download devextreme-dist-internal
@@ -156,12 +159,13 @@ jobs:
 
     - name: Unpack devextreme-dist-internal
       run: export DEVEXTREME_DIST_FILE_NAME=$(find . -name devexpress-devextreme-dist-internal-*.tgz) |
-        mkdir devextreme-dist-internal-package & cd ./devextreme-dist-internal-package |
+        mkdir devextreme-dist-internal-package
+        cd ./devextreme-dist-internal-package
         tar -xvzf ../$DEVEXTREME_DIST_FILE_NAME
 
     - name: Copy devextreme-dist-internal
       run: rm -rf ./node_modules/devextreme-dist/* |
-        mv ./devextreme-dist-internal-package/package/* ./node_modules/devextreme-dist |
+        mv ./devextreme-dist-internal-package/package/* ./node_modules/devextreme-dist
         rm -rf ./devextreme-dist-internal-package
 
     - name: Build Shell
