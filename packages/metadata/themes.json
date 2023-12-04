@@ -1,7 +1,7 @@
 [
     "material.blue.light.compact",
-    "material.blue.dark.compact",
     "generic.light.compact",
-    "generic.dark.compact"
-    "fluent.blue"
+    "fluent.blue.light",
+    "fluent.blue.light.compact",
+    "fluent.saas.light.compact"
 ]

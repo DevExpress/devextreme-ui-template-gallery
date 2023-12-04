@@ -372,8 +372,6 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
         margin-right: var(--gap-padding);
 
         .dx-icon {
-          height: 20px;
-          width: 20px;
           margin: auto;
         }
       }

@@ -1,0 +1,12 @@
+name: Latest DX
+on:
+  workflow_call:
+
+jobs:
+  test-w:
+    name: Test metadata
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: TEST ACTION
+        run: echo "TEST ACTION"
