@@ -27,14 +27,17 @@ runs:
       run: npm install --no-audit --no-fund
 
     - name: DevExtreme - Build
+      shell: bash
       working-directory: devextreme/packages/devextreme
       run: npm run build-npm-devextreme
 
     - name: DevExtreme - Pack
+      shell: bash
       working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme
       run: npm pack
 
     - name: DevExtreme dist - Pack
+      shell: bash
       working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme-dist
       run: npm pack
 
@@ -46,15 +49,14 @@ runs:
         path: |
           devextreme/packages/devextreme/artifacts/npm/devextreme/devextreme-*.tgz
           devextreme/packages/devextreme/artifacts/npm/devextreme-dist/devextreme-dist*.tgz
-    - name: DevExtreme-angular - Build
-      working-directory: devextreme/packages/devextreme-angular
-      run: npm run build
 
     - name: DevExtreme-angular - Pack
+      shell: bash
       working-directory: devextreme/packages/devextreme-angular
       run: npm run pack
 
     - name: Upload devextreme-angular Artifact
+      shell: bash
       uses: actions/upload-artifact@v2
       with:
         retention-days: 1
@@ -62,10 +64,12 @@ runs:
         path: devextreme/packages/devextreme-angular/npm/dist/devextreme-angular*.tgz
 
     - name: DevExtreme-react - Pack
+      shell: bash
       working-directory: devextreme/packages/devextreme-react
       run: npm run pack
 
     - name: DevExtreme-react - Pack npm
+      shell: bash
       working-directory: devextreme/packages/devextreme-react/npm
       run: npm pack
 
@@ -77,10 +81,12 @@ runs:
         path: devextreme/packages/devextreme-react/npm/devextreme-react*.tgz
 
     - name: DevExtreme-vue - Pack
+      shell: bash
       working-directory: devextreme/packages/devextreme-vue
       run: npm run pack
 
     - name: DevExtreme-vue - Pack npm
+      shell: bash
       working-directory: devextreme/packages/devextreme-vue/npm
       run: npm pack
 
