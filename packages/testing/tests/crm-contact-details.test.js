@@ -3,7 +3,9 @@
 /* eslint-disable no-undef */
 import { Selector } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
-import { getPostfix, toggleCommonConfiguration, setTheme, forceResizeRecalculation } from './utils';
+import {
+  getPostfix, toggleCommonConfiguration, setTheme, forceResizeRecalculation,
+} from './utils';
 import { screenModes, themeModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
@@ -76,6 +78,8 @@ const setEmbedded = async (t, embed, screenMode) => {
         // eslint-disable-next-line max-len
         await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
         await setTheme(t, themeMode);
+        await forceResizeRecalculation(t, screenMode);
+        await t.wait(1000);
 
         const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
 
