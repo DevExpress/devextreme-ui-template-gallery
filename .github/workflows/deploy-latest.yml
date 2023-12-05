@@ -96,7 +96,6 @@ jobs:
           path: devextreme/packages/devextreme-vue/npm/devextreme-vue*.tgz
 
   set-matrix:
-    needs: [build-latest-dx-npm]
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -114,7 +113,7 @@ jobs:
           echo "matrix=$themes_json" >> $GITHUB_OUTPUT
 
   build:
-    needs: [set-matrix]
+    needs: [build-latest-dx-npm, set-matrix]
     name: Build applications
     runs-on: ubuntu-latest
     env:
