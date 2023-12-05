@@ -45,7 +45,6 @@ const props = withDefaults(defineProps<{
 
 .contact-status {
   font-size: 13px;
-  display: flex;
 
   &::before {
     --diameter: 10px;
