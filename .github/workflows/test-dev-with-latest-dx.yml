@@ -1,4 +1,4 @@
-name: Test with latest DX
+name: Test dev with latest DX
 
 on:
   push:
@@ -83,6 +83,7 @@ jobs:
           path: |
             devextreme/packages/devextreme/artifacts/npm/devextreme/devextreme-*.tgz
             devextreme/packages/devextreme/artifacts/npm/devextreme-dist/devextreme-dist*.tgz
+
       - name: DevExtreme-angular - Build
         working-directory: devextreme/packages/devextreme-angular
         run: npm run build
@@ -184,11 +185,6 @@ jobs:
 
       - name: Set NPM version
         run: npm i npm@7 -g
-      - name: For dev branch - download devextreme Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: devextreme-npm
-          path: devextreme-npm-latest
 
       - name: For dev branch - download devextreme Artifact
         uses: actions/download-artifact@v2
@@ -204,12 +200,13 @@ jobs:
 
       - name: For dev branch - replace dx versions to latest builds in package.json
         run: |
+          VERSION_REG_EXP="[0-9.a-z\-]\+"
           FILE_FRAMEWORK_PATH="$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz" | sed 's|/|\\/|g')"
           FILE_DX_PATH="$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz" | sed 's|/|\\/|g')"
           FILE_DX_DIST_PATH="$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz" | sed 's|/|\\/|g')"
-          sed -i "s|\"devextreme\": \"[0-9.]\+\"|\"devextreme\": \"\.\.\/\.\.\/$FILE_DX_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
-          sed -i "s/\"devextreme-dist\": \"[0-9.]\+\"/\"devextreme-dist\": \"\.\.\/\.\.\/$FILE_DX_DIST_PATH\"/g" ./packages/${{ matrix.ARGS.project }}/package.json
-          sed -i "s|\"devextreme-${{ matrix.ARGS.project }}\": \"[0-9.]\+\"|\"devextreme-${{ matrix.ARGS.project }}\": \"\.\.\/\.\.\/$FILE_FRAMEWORK_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s|\"devextreme\": \"VERSION_REG_EXP\"|\"devextreme\": \"\.\.\/\.\.\/$FILE_DX_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s/\"devextreme-dist\": \"VERSION_REG_EXP\"/\"devextreme-dist\": \"\.\.\/\.\.\/$FILE_DX_DIST_PATH\"/g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s|\"devextreme-${{ matrix.ARGS.project }}\": \"VERSION_REG_EXP\"|\"devextreme-${{ matrix.ARGS.project }}\": \"\.\.\/\.\.\/$FILE_FRAMEWORK_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
 
       - name: Restore npm cache
         uses: actions/cache@v3
