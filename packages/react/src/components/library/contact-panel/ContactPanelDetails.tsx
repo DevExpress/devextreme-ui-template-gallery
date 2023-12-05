@@ -3,7 +3,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { Button, ButtonTypes } from 'devextreme-react/button';
-import { DropDownButton } from 'devextreme-react/drop-down-button';
 import { ScrollView } from 'devextreme-react/scroll-view';
 import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
@@ -195,14 +194,15 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                 <ToolbarItem location='after' visible={isEditing}>
                   <Button text='Cancel' stylingMode='outlined' type='normal' onClick={toggleEditHandler} />
                 </ToolbarItem>
-                <ToolbarItem location='before'>
-                  <DropDownButton
-                    text='Actions'
-                    dropDownOptions={{ width: 'auto' }}
-                    stylingMode='text'
-                    items={['Call', 'Send Fax', 'Send Email', 'Make a Meeting']}
-                  />
-                </ToolbarItem>
+                <ToolbarItem location='before'
+                  widget='dxDropDownButton'
+                  options={{
+                    text: 'Actions',
+                    stylingMode: 'text',
+                    dropDownOptions: { width: 'auto' },
+                    width: 'auto',
+                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                  }} />
               </Toolbar>
             </div>
           </ValidationGroup>
