@@ -54,40 +54,14 @@ jobs:
     - name: Run npm install
       run: npm install
 
-    - name: Authenticate to GitHub Package
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
-      
-    - name: Download Internal Packages
+    - name: Install Internal Packages
       run: |
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
         DEVEXTREME_INTERNAL_VERSION=$(npm pkg get dependencies.devextreme --workspaces=false | tr -d '"')
         npm pack @devexpress/devextreme-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com
+        npm i devextreme@$(find . -name DevExpress-devextreme-internal-*.tgz)
         npm pack @devexpress/devextreme-dist-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com
-
-    - name: Unpack devextreme-internal
-      run: |
-        DEVEXTREME_FILE_NAME=$(find . -name DevExpress-devextreme-internal-*.tgz)
-        mkdir devextreme-internal-package
-        cd ./devextreme-internal-package
-        tar -xvzf ../$DEVEXTREME_FILE_NAME
-
-    - name: Copy devextreme-internal
-      run: | 
-        rm -rf ./node_modules/devextreme/*
-        mv ./devextreme-internal-package/package/* ./node_modules/devextreme
-        rm -rf ./devextreme-internal-package 
-
-    - name: Unpack devextreme-dist-internal
-      run: |
-        DEVEXTREME_DIST_FILE_NAME=$(find . -name DevExpress-devextreme-dist-internal-*.tgz)
-        mkdir devextreme-dist-internal-package
-        cd ./devextreme-dist-internal-package
-        tar -xvzf ../$DEVEXTREME_DIST_FILE_NAME
-
-    - name: Copy devextreme-dist-internal
-      run: |
-        rm -rf ./node_modules/devextreme-dist/*
-        mv ./devextreme-dist-internal-package/package/* ./node_modules/devextreme-dist
-        rm -rf ./devextreme-dist-internal-package
+        npm i devextreme-dist@$(find . -name DevExpress-devextreme-dist-internal-*.tgz)
 
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
@@ -135,40 +109,14 @@ jobs:
     - name: Run npm install
       run: npm install
 
-    - name: Authenticate to GitHub Package
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
-
-    - name: Download Internal Packages
+    - name: Install Internal Packages
       run: |
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
         DEVEXTREME_INTERNAL_VERSION=$(npm pkg get dependencies.devextreme --workspaces=false | tr -d '"')
         npm pack @devexpress/devextreme-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com
+        npm i devextreme@$(find . -name DevExpress-devextreme-internal-*.tgz)
         npm pack @devexpress/devextreme-dist-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com
-
-    - name: Unpack devextreme-internal
-      run: |
-        DEVEXTREME_FILE_NAME=$(find . -name DevExpress-devextreme-internal-*.tgz)
-        mkdir devextreme-internal-package
-        cd ./devextreme-internal-package
-        tar -xvzf ../$DEVEXTREME_FILE_NAME
-
-    - name: Copy devextreme-internal
-      run: |
-        rm -rf ./node_modules/devextreme/*
-        mv ./devextreme-internal-package/package/* ./node_modules/devextreme
-        rm -rf ./devextreme-internal-package
-
-    - name: Unpack devextreme-dist-internal
-      run: |
-        DEVEXTREME_DIST_FILE_NAME=$(find . -name DevExpress-devextreme-dist-internal-*.tgz)
-        mkdir devextreme-dist-internal-package
-        cd ./devextreme-dist-internal-package
-        tar -xvzf ../$DEVEXTREME_DIST_FILE_NAME
-
-    - name: Copy devextreme-dist-internal
-      run: |
-        rm -rf ./node_modules/devextreme-dist/*
-        mv ./devextreme-dist-internal-package/package/* ./node_modules/devextreme-dist
-        rm -rf ./devextreme-dist-internal-package
+        npm i devextreme-dist@$(find . -name DevExpress-devextreme-dist-internal-*.tgz)
 
     - name: Build Shell
       run: npm run build-shell
