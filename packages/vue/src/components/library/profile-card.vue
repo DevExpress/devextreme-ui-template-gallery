@@ -113,7 +113,7 @@ function onFieldChange<T extends keyof Profile>(fieldName: T, value: Profile[T])
   background-color: var(--card-background);
 
   .panel-header {
-    padding: var(--content-padding);
+    padding: 12px var(--content-padding);
     border-bottom: 1px solid var(--border-color);
   }
 

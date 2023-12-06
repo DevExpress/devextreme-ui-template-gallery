@@ -33,14 +33,12 @@ $theme-mode: null !default;
   --footer-height: 70px;
   --calendar-width: 292px;
   --side-panel-min-width: 48px;
-
   --base-bg: #{$base-bg};
   --base-bg-darken-5: #{darken($base-bg, 5)};
   --base-bg-darken-4: #{darken($base-bg, 4)};
   --card-background: var(--base-bg);
-  --side-panel-background: var(--base-bg-darken-5);
 
-  @if $theme == dark {
+  @if $theme-mode == dark {
     --card-background: var(--base-bg-darken-5);
   }
 
