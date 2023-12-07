@@ -21,7 +21,7 @@ const getPackage = (packageName) => packages.find((p) => p.name === packageName)
 
 const startProject = (pkg) => {
   const appDirectory = join(testingDirectory, '..', pkg.name, 'build');
-  const httpServerBin = join(testingDirectory, 'node_modules', 'http-server', 'bin', 'http-server');
+  const httpServerBin = join(testingDirectory, '..', '..', 'node_modules', 'http-server', 'bin', 'http-server');
 
   const server = spawn('node', [httpServerBin, appDirectory, '-c-1', `-p ${pkg.port}`], {
     detached: true,

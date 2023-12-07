@@ -2,12 +2,11 @@
   "name": "devextreme-ui-template-gallery",
   "private": true,
   "scripts": {
-    "build": "lerna run build",
+    "build": "npm run build --workspaces --if-present",
     "set-theme": "node utils/set-theme.js",
     "copy-build": "node utils/copy-build.js",
     "copy-shell": "node utils/copy-shell.js",
     "make-embedded-mode": "node utils/make-embedded-mode.js",
-    "postinstall": "lerna bootstrap",
     "lint-html": "prettier --write . && prettier --check .",
     "lint-js": "eslint .",
     "lint-fix": "prettier --write . && eslint --fix . && stylelint **/*.{css,scss} --fix",
@@ -51,7 +50,6 @@
     "eslint-plugin-react-perf": "^3.3.0",
     "eslint-plugin-spellcheck": "^0.0.17",
     "fs-extra": "^10.0.0",
-    "lerna": "^4.0.0",
     "prettier": "2.4.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
@@ -60,6 +58,13 @@
     "typescript": "^4.6.3",
     "vue": "^3.2.38",
     "vue-eslint-parser": "^9.0.3"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "devextreme": "23.2-next",
+    "devextreme-dist": "23.2-next"
   },
   "pre-commit": [
     "lint-bundles"

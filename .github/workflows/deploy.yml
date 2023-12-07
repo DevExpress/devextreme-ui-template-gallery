@@ -54,6 +54,15 @@ jobs:
     - name: Run npm install
       run: npm install
 
+    - name: Install Internal Packages
+      run: |
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+        DEVEXTREME_INTERNAL_VERSION=$(npm pkg get dependencies.devextreme --workspaces=false | tr -d '"')
+        npm pack @devexpress/devextreme-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com
+        npm i devextreme@$(find . -name DevExpress-devextreme-internal-*.tgz)
+        npm pack @devexpress/devextreme-dist-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com
+        npm i devextreme-dist@$(find . -name DevExpress-devextreme-dist-internal-*.tgz)
+
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
 
@@ -100,9 +109,14 @@ jobs:
     - name: Run npm install
       run: npm install
 
-    - name: Run npm install for shell
-      run: npm install
-      working-directory: packages/shell
+    - name: Install Internal Packages
+      run: |
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+        DEVEXTREME_INTERNAL_VERSION=$(npm pkg get dependencies.devextreme --workspaces=false | tr -d '"')
+        npm pack @devexpress/devextreme-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com
+        npm i devextreme@$(find . -name DevExpress-devextreme-internal-*.tgz)
+        npm pack @devexpress/devextreme-dist-internal@$DEVEXTREME_INTERNAL_VERSION --registry https://npm.pkg.github.com
+        npm i devextreme-dist@$(find . -name DevExpress-devextreme-dist-internal-*.tgz)
 
     - name: Build Shell
       run: npm run build-shell
