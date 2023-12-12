@@ -20,10 +20,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
-
-      - name: Set NPM version
-        run: npm i npm@7 -g
+          node-version: '20'
 
       - name: Restore npm cache
         uses: actions/cache@v3
@@ -51,10 +48,7 @@ jobs:
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
-          node-version: '18.16.1'
-
-      - name: Set NPM version
-        run: npm i npm@8 -g
+          node-version: '20'
 
       - name: DevExtreme - Restore npm cache
         uses: actions/cache@v3
@@ -183,10 +177,8 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'
 
-      - name: Set NPM version
-        run: npm i npm@7 -g
       - name: For dev branch - download devextreme Artifact
         uses: actions/download-artifact@v2
         with:
