@@ -31,7 +31,7 @@
           stylingMode: 'filled',
           mode: 'search',
           placeholder: 'Search',
-          width: 180
+          width: 180,
         }"
       />
       <dx-item

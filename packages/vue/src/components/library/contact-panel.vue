@@ -30,7 +30,7 @@
             :options="{
               icon: isPinned ? 'pin' : 'unpin',
               stylingMode: 'text',
-              onClick: () => isPinned = !isPinned
+              onClick: () => isPinned = !isPinned,
             }"
           />
 
@@ -40,7 +40,7 @@
             :options="{
               icon: 'close',
               stylingMode: 'text',
-              onClick: onClose
+              onClick: onClose,
             }"
           />
         </dx-toolbar>
@@ -49,7 +49,7 @@
           <dx-validation-group>
             <div class="data-part border">
               <dx-form
-                :class="{'view-mode': !isEditing, 'plain-styled-form dx-form': true}"
+                :class="{ 'view-mode': !isEditing, 'plain-styled-form dx-form': true }"
               >
                 <dx-form-group-item
                   :col-count="2"
@@ -164,7 +164,7 @@
                     text: 'Actions',
                     dropDownOptions: { width: 'auto' },
                     stylingMode: 'text',
-                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting'],
                   }"
                 />
               </dx-toolbar>

@@ -20,7 +20,7 @@
   </dx-scroll-view>
   <dx-load-panel
     container=".view-wrapper"
-    :position="{of: '.dx-drawer-content'}"
+    :position="{ of: '.dx-drawer-content' }"
     :visible="loading"
     :show-pane="true"
   />

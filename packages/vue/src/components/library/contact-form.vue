@@ -16,7 +16,7 @@
       />
       <dx-form
         class="plain-styled-form dx-form"
-        :class="{'view-mode': !isEditing}"
+        :class="{ 'view-mode': !isEditing }"
         v-if="!!props.contactData"
       >
         <dx-form-group-item :col-count="2">
@@ -142,7 +142,7 @@
                 text: 'Call',
                 icon: 'tel',
                 type: 'default',
-                stylingMode: 'outlined'
+                stylingMode: 'outlined',
               }"
               :validators="[]"
             />
@@ -152,7 +152,7 @@
               label="Email"
               v-model.number="contactDataRef.email"
               :is-editing="isEditing"
-              :validators="[{type: 'email'}]"
+              :validators="[{ type: 'email' }]"
             />
             <dx-button
               v-if="!isEditing"
@@ -161,7 +161,7 @@
                 text: 'Send Email',
                 icon: 'email',
                 type: 'default',
-                stylingMode: 'outlined'
+                stylingMode: 'outlined',
               }"
             />
           </dx-form-item>

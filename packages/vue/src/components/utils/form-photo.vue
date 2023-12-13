@@ -6,12 +6,12 @@
     <div
       :style="{
         width: props.size + 'px',
-        height: props.size+ 'px',
-        maxHeight: props.size+ 'px',
-        'backgroundImage': `url('data:image/png;base64,${props.link}')`
+        height: props.size + 'px',
+        maxHeight: props.size + 'px',
+        backgroundImage: `url('data:image/png;base64,${props.link}')`,
       }"
       class="photo"
-      :class="['photo', editable ? ' editable': '']"
+      :class="['photo', editable ? ' editable' : '']"
     >
       <i
         v-if="editable"

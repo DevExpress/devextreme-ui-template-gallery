@@ -14,7 +14,7 @@
       toolbar="bottom"
       location="center"
     >
-      <div :class="{'form-popup-buttons-container': true, 'flex-buttons': width <= 360}">
+      <div :class="{ 'form-popup-buttons-container': true, 'flex-buttons': width <= 360 }">
         <dx-button
           text="Cancel"
           styling-mode="outlined"

@@ -30,7 +30,7 @@
                 text: 'Add',
                 stylingMode: 'contained',
                 type: 'default',
-                onClick: addNote
+                onClick: addNote,
               }"
             />
           </dx-toolbar>

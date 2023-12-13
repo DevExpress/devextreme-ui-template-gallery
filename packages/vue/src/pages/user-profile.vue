@@ -1,6 +1,6 @@
 <template>
   <div class="view-wrapper">
-    <div :class="{scrolled: isContentScrolled, 'toolbar-wrapper': true, 'theme-dependent': true}">
+    <div :class="{ scrolled: isContentScrolled, 'toolbar-wrapper': true, 'theme-dependent': true }">
       <dx-toolbar class="theme-dependent">
         <dx-item location="before">
           <div class="header-text">
@@ -128,7 +128,7 @@
         >
           <div class="address-top-item">
             <div class="image-wrapper">
-              <i class="dx-icon dx-icon-map"/>
+              <i class="dx-icon dx-icon-map" />
             </div>
             <div>
               <div class="title-text">
