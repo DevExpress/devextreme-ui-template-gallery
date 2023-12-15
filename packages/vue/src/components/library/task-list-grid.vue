@@ -148,7 +148,7 @@
             :value="cellInfo.value"
           />
         </template>
-        <template #item="{data}">
+        <template #item="{ data }">
           <status-indicator
             :value="data"
           />

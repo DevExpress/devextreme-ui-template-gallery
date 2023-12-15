@@ -65,8 +65,10 @@ function setCssThemeImports(fileForChange, baseBundleName, isCompact) {
   writeFileSync(
     fileForChange,
     readFileSync(fileForChange, 'utf8')
-      .replace(/(scss\/bundles\/dx\.)(.+\.){0,2}(dark|light)(\.compact)?(\.scss)?/g,
-        `$1${baseBundleName}$3${isCompact ? '.compact' : ''}$5`),
+      .replace(
+        /(scss\/bundles\/dx\.)(.+\.){0,2}(dark|light)(\.compact)?(\.scss)?/g,
+        `$1${baseBundleName}$3${isCompact ? '.compact' : ''}$5`,
+      ),
   );
 }
 
@@ -78,8 +80,10 @@ function setAppDefaultThemeMode(fileForChange, isDark) {
     throw new Error(`Theme settings not found in ${fileForChange}`);
   }
 
-  writeFileSync(fileForChange, jsThemeFileContent.replace(jsThemesRegExp,
-    `const themes$1= [${isDark ? "'dark', 'light'" : "'light', 'dark'"}]`));
+  writeFileSync(fileForChange, jsThemeFileContent.replace(
+    jsThemesRegExp,
+    `const themes$1= [${isDark ? "'dark', 'light'" : "'light', 'dark'"}]`,
+  ));
 }
 
 function setCssThemeVariables(appVariablesPath, {

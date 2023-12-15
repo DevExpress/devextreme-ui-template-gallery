@@ -11,7 +11,7 @@
     width="100%"
     field-template="field"
   >
-    <template #field="{data}">
+    <template #field="{ data }">
       <div class="status-editor-field">
         <contact-status
           class="status-indicator"
@@ -22,7 +22,7 @@
           class="status-{{data.toLowerCase()}}"
           :hover-state-enabled="false"
           :input-attr="{
-            class: `status-editor-input contact-status status-${data?.toLowerCase()}`
+            class: `status-editor-input contact-status status-${data?.toLowerCase()}`,
           }"
           :read-only="true"
           :value="data"
@@ -30,7 +30,7 @@
       </div>
     </template>
 
-    <template #item="{data}">
+    <template #item="{ data }">
       <contact-status :value="data" />
     </template>
   </dx-select-box>

@@ -65,26 +65,26 @@ const props = withDefaults(defineProps<{
   manager: '',
 });
 
-const tasks = ref<Task[]>([]);
+const tasksRef = ref<Task[]>([]);
 
 watch(
   () => props.tasks,
   (newTasks) => {
-    tasks.value = newTasks;
+    tasksRef.value = newTasks;
   },
 );
 
 const filteredTasks = computed(
-  () => tasks.value.filter((item) => !!item.status && !!item.priority),
+  () => tasksRef.value.filter((item) => !!item.status && !!item.priority),
 );
 
 const onReorder = (e) => {
   const visibleRows = e.component.getVisibleRows();
-  const toIndex = tasks.value.indexOf(visibleRows[e.toIndex].data);
-  const fromIndex = tasks.value.indexOf(e.itemData);
+  const toIndex = tasksRef.value.indexOf(visibleRows[e.toIndex].data);
+  const fromIndex = tasksRef.value.indexOf(e.itemData);
 
-  tasks.value.splice(fromIndex, 1);
-  tasks.value.splice(toIndex, 0, e.itemData);
+  tasksRef.value.splice(fromIndex, 1);
+  tasksRef.value.splice(toIndex, 0, e.itemData);
 };
 </script>
 

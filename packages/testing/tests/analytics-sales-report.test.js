@@ -24,8 +24,16 @@ fixture`Analytics Sales Report`;
 
       test(`Analytics Sales Report (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-        await toggleCommonConfiguration(t, BASE_URL, embedded, () => { },
-          screenMode, timeoutSecond, false, requestLogger);
+        await toggleCommonConfiguration(
+          t,
+          BASE_URL,
+          embedded,
+          () => { },
+          screenMode,
+          timeoutSecond,
+          false,
+          requestLogger,
+        );
         await setTheme(t, themeMode);
         await forceResizeRecalculation(t, screenMode);
         await t.wait(timeoutSecond);

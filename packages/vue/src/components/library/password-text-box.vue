@@ -16,12 +16,12 @@
         hoverStateEnabled: false,
         activeStateEnabled: false,
         stylingMode: 'text',
-        onClick: switchMode
+        onClick: switchMode,
       }"
     />
     <dx-validator
       :validation-rules="[
-        {type: 'required', message: 'Password is required'}, ...validators]"
+        { type: 'required', message: 'Password is required' }, ...validators]"
     />
   </dx-text-box>
 </template>

@@ -15,7 +15,7 @@
       </div>
     </div>
     <div
-      :class="['percentage', percentage > 0 ? 'positive': 'negative']"
+      :class="['percentage', percentage > 0 ? 'positive' : 'negative']"
       v-if="props.percentage !== 0"
     >
       <div :class="[`dx-icon-${percentage > 0 ? 'spinup' : 'spindown'}`]" />

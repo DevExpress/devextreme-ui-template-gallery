@@ -26,7 +26,7 @@
   <dx-load-panel
     container=".view-wrapper"
     :shading="false"
-    :position="{of: '.dx-drawer-content'}"
+    :position="{ of: '.dx-drawer-content' }"
     :visible="loading"
     :show-pane="true"
   />

@@ -5,6 +5,7 @@ const packages = require('./packages');
 
 const commonDestination = 'devextreme-ui-template-gallery';
 
+// eslint-disable-next-line default-param-last
 const copyApplications = (mode = 'default', theme) => {
   packages.forEach((packageName) => {
     const destination = join(cwd(), commonDestination, theme, packageName, mode);

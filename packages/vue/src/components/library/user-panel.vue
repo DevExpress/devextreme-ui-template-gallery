@@ -6,10 +6,10 @@
       :icon="user?.avatarUrl"
       :show-arrow-icon="false"
       :element-attr="{
-        class: 'user-button'
+        class: 'user-button',
       }"
       :drop-down-options="{
-        width: 'auto'
+        width: 'auto',
       }"
       drop-down-content-template="dropDownContentTemplate"
       @content-ready="handleDropDownButtonContentReady"

@@ -8,8 +8,6 @@ import allThemes from './themes.json';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(public sanitizer: DomSanitizer) {}
-
   title = 'shell';
 
   approaches = ['angular', 'react', 'vue'];
@@ -33,17 +31,19 @@ export class AppComponent {
     items: this.approaches,
     value: this.approach,
     width: 200,
-    onValueChanged: (e: any) => { this.approach = e.value; },
+    onValueChanged: (e: any): void => { this.approach = e.value; },
   };
 
   themeSelectBoxOptions = {
     items: this.themes,
     value: this.theme,
     width: 200,
-    onValueChanged: (e: any) => { this.theme = e.value; },
+    onValueChanged: (e: any): void => { this.theme = e.value; },
   };
 
-  viewChanged(e: any) {
+  constructor(public sanitizer: DomSanitizer) {}
+
+  viewChanged(e: any): void {
     this.view = e.addedItems[0];
   }
 }

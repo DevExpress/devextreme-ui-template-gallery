@@ -23,7 +23,7 @@
           :editor-options="{
             stylingMode: 'filled',
             valueChangeEvent: 'input',
-            ...item.editorOptions
+            ...item.editorOptions,
           }"
           :col-span="item.colSpan"
         >

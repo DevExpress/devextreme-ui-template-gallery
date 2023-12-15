@@ -4,7 +4,7 @@
     :label="label"
     :value="modelValue"
     :items="items"
-    :drop-down-options="{wrapperAttr: {class: 'pictured-item-select-box-dropdown'}}"
+    :drop-down-options="{ wrapperAttr: { class: 'pictured-item-select-box-dropdown' } }"
     value-expr="name"
     styling-mode="filled"
     label-mode="hidden"
@@ -22,7 +22,7 @@
         >
         <dx-text-box
           :hover-state-enabled="false"
-          :input-attr="{class: 'pictured-item-editor-input'}"
+          :input-attr="{ class: 'pictured-item-editor-input' }"
           :read-only="true"
           :value="data?.name"
         />

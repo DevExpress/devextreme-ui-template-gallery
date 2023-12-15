@@ -30,8 +30,17 @@ const checkScreenMode = async (t, screenMode) => {
       test(`Analytics Dashboard (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-        await toggleCommonConfiguration(t, BASE_URL, embedded, () => {},
-          screenMode, timeoutSecond, false, requestLogger);
+        await toggleCommonConfiguration(
+          t,
+          BASE_URL,
+          embedded,
+          () => {},
+          screenMode,
+          timeoutSecond,
+          false,
+          requestLogger,
+        );
+
         await setTheme(t, themeMode);
         await forceResizeRecalculation(t, screenMode);
         await t.wait(1000);
@@ -39,7 +48,7 @@ const checkScreenMode = async (t, screenMode) => {
         await t.expect(Selector('body.dx-device-generic').count).eql(1);
         await takeScreenshot(`analytics-dashboard-all${postfix}`, 'body');
         await checkScreenMode(t, screenMode);
-        await t.doubleClick(Selector('.dx-tabs .dx-item').nth(3));
+        await t.click(Selector('.dx-tabs .dx-item').nth(3).find('.dx-tab-text'));
         await t.wait(1000);
         await takeScreenshot(`analytics-dashboard-year${postfix}`, 'body');
 

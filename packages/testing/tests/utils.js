@@ -54,7 +54,14 @@ export async function setTheme(t, theme) {
 }
 
 export const toggleCommonConfiguration = async (
-  t, url, embedded, setEmbedded, screenMode, timeout, isDoubleResize, requestLogger,
+  t,
+  url,
+  embedded,
+  setEmbedded,
+  screenMode,
+  timeout,
+  isDoubleResize,
+  requestLogger,
 ) => {
   await t.resizeWindow(...screenMode);
   await t.navigateTo(url);

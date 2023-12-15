@@ -7,7 +7,7 @@
     @update:visible="changeVisibleState"
     :width="360"
     :height="410"
-    :wrapper-attr="{class: 'change-profile-password-popup'}"
+    :wrapper-attr="{ class: 'change-profile-password-popup' }"
     @save="saveNewPassword()"
   >
     <dx-form

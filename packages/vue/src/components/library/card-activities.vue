@@ -1,7 +1,7 @@
 <template>
   <div
     id="activities-list"
-    :class="{load: props.items}"
+    :class="{ load: props.items }"
   >
     <dx-load-panel
       :visible="props.isLoading"

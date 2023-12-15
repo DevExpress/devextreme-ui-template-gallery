@@ -31,8 +31,16 @@ const checkScreenMode = async (t, screenMode) => {
       test(`Analytics Geography (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-        await toggleCommonConfiguration(t, BASE_URL, embedded, () => {},
-          screenMode, timeoutSecond, false, requestLogger);
+        await toggleCommonConfiguration(
+          t,
+          BASE_URL,
+          embedded,
+          () => {},
+          screenMode,
+          timeoutSecond,
+          false,
+          requestLogger,
+        );
         await forceResizeRecalculation(t, screenMode);
         await setTheme(t, themeMode);
 

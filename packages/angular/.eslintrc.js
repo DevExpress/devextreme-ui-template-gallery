@@ -3,6 +3,8 @@ module.exports = {
   "ignorePatterns": [
     "projects/**/*"
   ],
+  'plugins': ['@typescript-eslint'],
+  'parser': '@typescript-eslint/parser',
   "overrides": [
     {
       "files": [

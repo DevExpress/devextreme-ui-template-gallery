@@ -88,7 +88,7 @@
           :is-editing="true"
           icon="email"
           label="Email"
-          :validators="[{type: 'email'}, {type: 'required'}]"
+          :validators="[{ type: 'email' }, { type: 'required' }]"
         />
       </dx-form-item>
       <dx-form-item>
