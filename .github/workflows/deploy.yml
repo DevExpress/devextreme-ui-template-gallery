@@ -52,7 +52,7 @@ jobs:
       run: npm install
 
     - name: Install Internal Packages
-      uses: DevExpress/github-actions/install-internal-package
+      uses: DevExpress/github-actions/install-internal-package@main
       with:
         install-dist: true
 
@@ -100,7 +100,7 @@ jobs:
       run: npm install
 
     - name: Install Internal Packages
-      uses: DevExpress/github-actions/install-internal-package
+      uses: DevExpress/github-actions/install-internal-package@main
       with:
         install-dist: true
 
