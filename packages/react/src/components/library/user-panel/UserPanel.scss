@@ -4,13 +4,12 @@
   display: flex;
   flex-direction: column;
 
-  .user-button {
+  .user-button.dx-dropdownbutton {
     margin-left: 5px;
 
     img.dx-icon {
       border-radius: 50%;
       margin: 0;
-      width: auto;
       aspect-ratio: 1 / 1;
       box-sizing: border-box;
       border: 1px solid var(--border-color);
@@ -20,14 +19,17 @@
       background-clip: padding-box;
 
       .dx-theme-generic & {
+        width: auto;
         height: var(--drop-down-gnrc-button-height);
       }
 
       .dx-theme-material & {
+        width: auto;
         height: 100%;
       }
 
       .dx-theme-fluent & {
+        width: auto;
         height: 100%;
       }
     }
