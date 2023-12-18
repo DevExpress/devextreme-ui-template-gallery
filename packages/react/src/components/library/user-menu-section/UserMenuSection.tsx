@@ -1,14 +1,20 @@
 import React, { useMemo, useCallback } from 'react';
 import { useAuth } from '../../../contexts/auth';
-import List from 'devextreme-react/list';
+import List, { ListTypes } from 'devextreme-react/list';
 
 import './UserMenuSection.scss';
 import type { UserMenuSectionProps } from '../../../types';
 
+type MenuItem = {
+  text: string;
+  icon: string;
+  onClick: () => void;
+};
+
 export const UserMenuSection = ({ showAvatar, listRef }: UserMenuSectionProps) => {
   const { user, signOut } = useAuth();
 
-  const menuItems = useMemo(
+  const menuItems = useMemo<MenuItem[]>(
     () => [
       {
         text: 'Logout',
@@ -23,7 +29,7 @@ export const UserMenuSection = ({ showAvatar, listRef }: UserMenuSectionProps) =
     class: 'user-info-list'
   };
 
-  const onItemClick = useCallback(({ itemData }) => itemData.onClick(), []);
+  const onItemClick = useCallback(({ itemData }: ListTypes.ItemClickEvent<MenuItem>) => itemData?.onClick(), []);
 
   return (
     <>

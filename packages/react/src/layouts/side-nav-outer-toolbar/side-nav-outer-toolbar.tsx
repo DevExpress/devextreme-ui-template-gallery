@@ -3,6 +3,8 @@ import React, { useState, useCallback } from 'react';
 
 import Drawer from 'devextreme-react/drawer';
 import { Template } from 'devextreme-react/core/template';
+import { ButtonTypes } from 'devextreme-react/button';
+import { TreeViewTypes } from 'devextreme-react/tree-view';
 
 import { useNavigate } from 'react-router';
 
@@ -13,6 +15,7 @@ import { useMenuPatch } from '../../utils/patches';
 import type { SideNavToolbarProps } from '../../types';
 
 import './side-nav-outer-toolbar.scss';
+import { SideNavigationItem } from '../../components/library/side-navigation-menu/SideNavigationMenu';
 
 export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren<SideNavToolbarProps>) => {
   const navigate = useNavigate();
@@ -20,9 +23,9 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
   const [patchCssClass, onMenuReady] = useMenuPatch();
   const [menuStatus, setMenuStatus] = useState(isLarge ? MenuStatus.Opened : MenuStatus.Closed);
 
-  const toggleMenu = useCallback(({ event }) => {
+  const toggleMenu = useCallback(({ event }: ButtonTypes.ClickEvent) => {
     setMenuStatus((prevMenuStatus) => (prevMenuStatus === MenuStatus.Closed ? MenuStatus.Opened : MenuStatus.Closed));
-    event.stopPropagation();
+    event?.stopPropagation();
   }, []);
 
   const temporaryOpenMenu = useCallback(() => {
@@ -35,20 +38,20 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
   }, [isLarge]);
 
   const onNavigationChanged = useCallback(
-    ({ itemData: { path }, event, node }) => {
-      if (menuStatus === MenuStatus.Closed || !path || node.selected) {
-        event.preventDefault();
+    ({ itemData: { path }, event, node }: TreeViewTypes.ItemClickEvent & { itemData: SideNavigationItem }) => {
+      if (menuStatus === MenuStatus.Closed || !path || node?.selected) {
+        event?.preventDefault();
         return;
       }
 
       navigate(path);
       if (!isLarge || menuStatus === MenuStatus.TemporaryOpened) {
         setMenuStatus(MenuStatus.Closed);
-        event.stopPropagation();
+        event?.stopPropagation();
       }
     },
     [navigate, menuStatus, isLarge]
-  );
+  ) as (e: TreeViewTypes.ItemClickEvent) => void;
 
   return (
     <div className='side-nav-outer-toolbar'>

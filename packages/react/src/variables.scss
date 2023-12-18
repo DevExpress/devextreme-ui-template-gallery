@@ -33,7 +33,7 @@
 
 @mixin header {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400;
   padding-right: 25px;
 }
 
@@ -153,4 +153,15 @@
   font-size: 12px;
   line-height: 16px;
   opacity: $opacity;
+}
+
+@mixin card-shadow() {
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.04);
+}
+
+@mixin toolbar-panel() {
+  background-color: var(--base-bg);
+  padding: 5px var(--content-padding);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.04);
 }

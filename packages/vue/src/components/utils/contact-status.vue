@@ -55,6 +55,7 @@ const props = withDefaults(defineProps<{
     border-radius: calc(var(--diameter) / 2);
     margin-right: calc(var(--diameter) / 2);
     display: inline-block;
+    align-self: center;
   }
 
   :deep(&.input) {

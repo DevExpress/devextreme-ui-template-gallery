@@ -6,7 +6,7 @@
     <dx-data-grid
       :data-source="props.data"
       :height="290"
-      :load-panel="{enabled: false}"
+      :load-panel="{ enabled: false }"
     >
       <dx-column
         caption="State"

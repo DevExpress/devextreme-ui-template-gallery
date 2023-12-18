@@ -23,20 +23,6 @@
         }
       }
 
-      .dx-row-focused {
-        .name-template.name-template {
-          color: var(--base-focus-color);
-
-          .position.position {
-            color: var(--base-focus-color);
-          }
-        }
-
-        .status {
-          @include status-contact(var(--base-focus-color));
-        }
-      }
-
       .dx-datagrid-header-panel {
         padding: 0 var(--content-padding);
       }

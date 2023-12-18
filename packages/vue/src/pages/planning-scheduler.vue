@@ -343,7 +343,7 @@ function deleteSelectedAppointment(appointmentData: AppointmentData) {
       flex-wrap: wrap;
       height: inherit;
       gap: 16px;
-      padding: var(--content-padding) var(--content-padding) var(--theme-padding);
+      padding: var(--content-padding) 0 var(--theme-padding);
 
       .left-side-panel-content {
         display: flex;
@@ -367,7 +367,7 @@ function deleteSelectedAppointment(appointmentData: AppointmentData) {
 
         .calendar {
           align-self: center;
-          padding: var(--theme-padding);
+          padding: var(--theme-padding) 0;
 
           .dx-calendar {
             width: var(--calendar-width);

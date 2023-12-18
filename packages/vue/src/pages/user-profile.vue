@@ -1,7 +1,7 @@
 <template>
   <div class="view-wrapper">
-    <div :class="{scrolled: isContentScrolled, 'toolbar-wrapper': true}">
-      <dx-toolbar>
+    <div :class="{ scrolled: isContentScrolled, 'toolbar-wrapper': true, 'theme-dependent': true }">
+      <dx-toolbar class="theme-dependent">
         <dx-item location="before">
           <div class="header-text">
             User Profile
@@ -13,8 +13,9 @@
         >
           <dx-button
             text="Cancel"
+            styling-mode="outlined"
+            type="normal"
             :disabled="!isDataChanged"
-            styling-mode="contained"
             @click="cancel()"
           />
         </dx-item>
@@ -96,10 +97,7 @@
         >
           <div class="contacts-top-item">
             <div class="image-wrapper">
-              <img
-                alt=""
-                src="icons/at.svg"
-              >
+              <i class="dx-icon dx-icon-mention" />
             </div>
             <div>
               <div class="title-text">
@@ -130,10 +128,7 @@
         >
           <div class="address-top-item">
             <div class="image-wrapper">
-              <img
-                alt=""
-                src="icons/geo-position.svg"
-              >
+              <i class="dx-icon dx-icon-map" />
             </div>
             <div>
               <div class="title-text">
@@ -339,6 +334,8 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
   display: flex;
   flex-direction: column;
   padding-top: var(--content-padding);
+  max-width: 1200px;
+  margin: 0 auto;
 
   .view-wrapper-scroll {
     width: 100%;
@@ -352,7 +349,6 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
     }
 
     .dx-toolbar {
-      padding: 0 calc(var(--content-padding) * 2);
       width: auto;
 
       .dx-button[aria-label="Cancel"] {
@@ -364,7 +360,7 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
   .cards-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 calc(var(--content-padding) * 2);
+    margin: 0 1px;
     padding: calc(var(--content-padding) / 2) 0 var(--content-padding);
     gap: 24px;
 
@@ -375,9 +371,7 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
         border-radius: 50%;
         margin-right: var(--gap-padding);
 
-        img {
-          height: 20px;
-          width: 20px;
+        .dx-icon {
           margin: auto;
         }
       }
@@ -414,11 +408,13 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
     }
 
     .contacts-card .image-wrapper {
-      background-color: rgb(244 67 54 / 0.2);
+      background-color: color-mix(in sRGB, var(--error-color) 12%, transparent);
+      color: var(--error-color);
     }
 
     .address-card .image-wrapper {
-      background-color: rgb(3 169 244 / 0.2);
+      background-color: color-mix(in sRGB, var(--info-color) 12%, transparent);
+      color: var(--info-color);
     }
 
     .basic-info-top-item,

@@ -22,7 +22,7 @@
 
   &.open {
     right: 0;
-    box-shadow: 0 0 16px var(--border-color);
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.04), 0 4px 4px 0 rgba(0, 0, 0, 0.12);
   }
 
   &.pin {
@@ -69,7 +69,7 @@
         padding: 10px 16px;
         margin-bottom: var(--toolbar-margin-bottom);
 
-        .dx-button {
+        .dx-toolbar-after .dx-button {
           min-width: 90px;
         }
       }

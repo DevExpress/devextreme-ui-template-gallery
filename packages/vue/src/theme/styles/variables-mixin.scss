@@ -1,43 +1,53 @@
-$theme: null !default;
-@use "/node_modules/devextreme/scss/widgets/material/colors" as * with ($color: "blue", $mode: $theme);
-@use "/node_modules/devextreme/scss/widgets/material/sizes" as * with ($size: "compact");
-@use "/node_modules/devextreme/scss/widgets/material/button/mixins" as *;
-@use "/node_modules/devextreme/scss/widgets/material/textEditor/colors" as *;
-@use "/node_modules/devextreme/scss/widgets/material/fieldset/sizes" as *;
-@use "/node_modules/devextreme/scss/widgets/material/popup/sizes" as *;
-@use '/node_modules/devextreme/scss/widgets/material/toolbar/sizes' as toolbar_sizes;
-@use "/node_modules/devextreme/scss/widgets/material/list/sizes" as *;
-@use "/node_modules/devextreme/scss/widgets/material/button/sizes" as *;
+$theme-mode: null !default;
+@use "devextreme/scss/widgets/fluent/colors" as * with ($color: "blue", $mode: $theme-mode);
+@use "devextreme/scss/widgets/fluent/sizes" as * with ($size: "default");
+@use "devextreme/scss/widgets/fluent/button/mixins" as *;
+@use "devextreme/scss/widgets/fluent/textEditor/colors" as *;
+@use "devextreme/scss/widgets/fluent/fieldset/sizes" as *;
+@use "devextreme/scss/widgets/fluent/popup/sizes" as *;
+@use 'devextreme/scss/widgets/fluent/toolbar/sizes' as toolbar_sizes;
+@use "devextreme/scss/widgets/fluent/list/sizes" as *;
+@use "devextreme/scss/widgets/fluent/button/sizes" as *;
+@use "theme-special" as * with ($theme: "fluent");
 
-@forward "/node_modules/devextreme/scss/widgets/material/colors";
-@forward "/node_modules/devextreme/scss/widgets/material/textEditor/colors";
+@forward "devextreme/scss/widgets/fluent/colors";
+@forward "devextreme/scss/widgets/fluent/textEditor/colors";
 
 @use "sass:math";
 @use "sass:color";
 
 
 :root {
+  --dark-warning-color: #{darken(adjust-hue($base-warning, -12), 3.73)};
+  --typography-bg: var(--base-bg);
+
+  @if variable-exists("base-typography-bg") {
+    --typography-bg: #{$base-typography-bg};
+  }
+
   --header-toolbar-vertical-padding: 10px;
   --toolbar-vertical-padding: 16px;
-  --content-padding: 16px;
+  --content-padding: 24px;
+  --page-padding: 32px;
   --footer-height: 70px;
   --calendar-width: 292px;
   --side-panel-min-width: 48px;
-
   --base-bg: #{$base-bg};
   --base-bg-darken-5: #{darken($base-bg, 5)};
   --base-bg-darken-4: #{darken($base-bg, 4)};
-  --background-color: var(--base-bg);
   --card-background: var(--base-bg);
-  --side-panel-background: var(--base-bg-darken-5);
 
-  @if $theme == dark {
+  @if $theme-mode == dark {
     --card-background: var(--base-bg-darken-5);
   }
 
   --side-panel-background: var(--base-bg-darken-5);
   --border-color: #{$base-border-color};
   --accent-color: #{$base-accent};
+  --success-color: #{$base-success};
+  --info-color: #{$base-accent};
+  --warning-color: #{$base-warning};
+  --error-color: #{$base-danger};
   --base-text-color: #{$base-text-color};
   --base-focus-color: #{$base-focus-color};
   --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
@@ -47,17 +57,17 @@ $theme: null !default;
   --toolbar-margin-bottom: var(--content-padding);
   --subtitle-text-color: var(--texteditor-label-color);
 
-  --toolbar-height: #{toolbar_sizes.$material-toolbar-height};
-  --filled-texteditor-input-horizontal-padding: #{$material-field-value-horizontal-padding};
-  --list-padding-left: #{$material-list-item-horizontal-padding};
-  --list-padding-vertical: #{$material-list-item-vertical-padding};
-  --footer-left-padding: #{calc((var(--side-panel-min-width) - $material-base-icon-size) / 2)};
-  --popup-toolbar-item-spacing: #{$material-popup-toolbar-item-spacing};
-  --drop-down-gnrc-button-height: #{$material-base-inline-widget-height};
-  --theme-padding: #{$material-button-horizontal-padding};
+  --toolbar-height: #{toolbar_sizes.$fluent-toolbar-height};
+  --filled-texteditor-input-horizontal-padding: #{$fluent-field-value-horizontal-padding};
+  --list-padding-left: #{$fluent-list-item-horizontal-padding};
+  --list-padding-vertical: #{$fluent-list-item-vertical-padding};
+  --footer-left-padding: #{calc((var(--side-panel-min-width) - $fluent-base-icon-size) / 2)};
+  --popup-toolbar-item-spacing: #{$fluent-popup-toolbar-item-spacing};
+  --drop-down-gnrc-button-height: #{$fluent-base-inline-widget-height};
+  --theme-padding: #{$fluent-button-horizontal-padding};
   --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
   --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
-  --button-height-theme-difference: calc((var(--theme-padding) - 10px) / 3); // WA for no button-height in generic theme
+  --button-height-theme-difference: calc((var(--theme-padding) - 10px) / 3); // WA for no button-height in fluent theme
   --button-height: calc(26px + var(--button-height-theme-difference)); // remove when design-system is released
   --scheduler-toolbar-height: calc(var(--button-height) + 2 * var(--theme-padding));
 }

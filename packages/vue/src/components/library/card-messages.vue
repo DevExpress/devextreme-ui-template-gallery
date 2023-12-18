@@ -15,7 +15,7 @@
         <div class="input-content">
           <dx-text-box
             label="Subject"
-            styling-mode="outlined"
+            styling-mode="filled"
             :value="messageTitle"
             value-change-event="keyup"
             @value-changed="e => messageTitle = e.value"
@@ -26,7 +26,7 @@
           </dx-text-box>
           <dx-text-area
             label="Message"
-            styling-mode="outlined"
+            styling-mode="filled"
             :value="messageText"
             :height="150"
             value-change-event="keyup"
@@ -50,7 +50,7 @@
               location="after"
               :options="{
                 text: 'Send',
-                stylingMode: 'outlined',
+                stylingMode: 'contained',
                 type: 'default',
                 onClick: send,
               }"
@@ -189,6 +189,9 @@ function send(e: DxButtonTypes.ClickEvent) {
   }
 
   .message {
+    @include card-shadow();
+
+    border: 0.5px solid var(--border-color);
     background-color: var(--base-bg);
     padding: 10px;
     margin-bottom: 10px;

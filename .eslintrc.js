@@ -13,10 +13,9 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  parser: 'babel-eslint',
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
   },
   plugins: ['spellcheck', 'no-only-tests'],
   rules: {
@@ -365,9 +364,12 @@ module.exports = {
         '@typescript-eslint/no-useless-constructor': 0,
         '@typescript-eslint/explicit-module-boundary-types': 0, // was warn
         '@typescript-eslint/indent': 0,
+        '@typescript-eslint/prefer-nullish-coalescing': 0,
+        '@typescript-eslint/explicit-function-return-type': 'warn',
         'react/jsx-filename-extension': 0,
         'implicit-arrow-linebreak': 0,
         'import/no-duplicates': 0,
+        'prefer-destructuring': 0,
         'no-return-await': 0,
         indent: [
           'error',

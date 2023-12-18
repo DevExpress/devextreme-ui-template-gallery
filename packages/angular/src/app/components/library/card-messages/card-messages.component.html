@@ -3,7 +3,7 @@
     <div class="input-content">
       <dx-text-box
         label="Subject"
-        stylingMode="outlined"
+        stylingMode="filled"
         [(value)]="messageTitle"
       >
         <dx-validator>
@@ -12,7 +12,7 @@
       </dx-text-box>
       <dx-text-area
         label="Message"
-        stylingMode="outlined"
+        stylingMode="filled"
         [(value)]="messageText"
         [height]="150"
       >
@@ -35,7 +35,7 @@
           widget="dxButton"
           [options]="{
             text: 'Send',
-            stylingMode: 'outlined',
+            stylingMode: 'contained',
             type: 'default',
             onClick: send
           }"

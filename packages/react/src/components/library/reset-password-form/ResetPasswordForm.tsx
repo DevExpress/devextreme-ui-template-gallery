@@ -57,5 +57,5 @@ export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
   );
 };
 
-const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email', value: 'jheart@corp.com' };
+const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email', value: 'jheart@dx-email.com' };
 const submitButtonAttributes = { class: 'submit-button' };

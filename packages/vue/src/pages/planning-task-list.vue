@@ -1,6 +1,6 @@
 <template>
-  <div class="view-wrapper">
-    <dx-toolbar class="toolbar-details">
+  <div class="view-wrapper list-page">
+    <dx-toolbar class="toolbar-details theme-dependent">
       <dx-toolbar-item location="before">
         <span class="toolbar-header">Tasks</span>
       </dx-toolbar-item>
@@ -280,7 +280,7 @@ const taskSearchOptions = {
   right: 0;
 
   .dx-toolbar {
-    padding: var(--toolbar-vertical-padding) var(--content-padding);
+    padding: var(--toolbar-margin-bottom) var(--content-padding);
   }
 
   :deep(.dx-toolbar) {

@@ -12,7 +12,7 @@
     />
     <dx-text-box-button
       v-if="icon"
-      :options="{icon: icon, elementAttr: { class: 'form-editor-icon' }}"
+      :options="{ icon: icon, elementAttr: { class: 'form-editor-icon' }, stylingMode: 'text' }"
       name="icon"
       location="before"
     />

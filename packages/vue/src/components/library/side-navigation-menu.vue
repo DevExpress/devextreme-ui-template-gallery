@@ -4,7 +4,7 @@
     @click="forwardClick"
   >
     <slot />
-    <div class="menu-container">
+    <div class="menu-container theme-dependent">
       <dx-tree-view
         ref="treeViewRef"
         :items="items"
@@ -117,7 +117,9 @@ watch(
       // ## Icon width customization
       .dx-treeview-item {
         padding-left: 0;
-        padding-right: 0;
+        flex-direction: row-reverse;
+        border-radius: 0;
+
         .dx-icon {
           width: var(--side-panel-min-width) !important;
           margin: 0 !important;
@@ -145,33 +147,10 @@ watch(
         }
         &[aria-level="2"] .dx-treeview-item-content {
           font-weight: normal;
-          padding: 0 var(--side-panel-min-width);
+          padding: 0 0 0 var(--side-panel-min-width);
         }
       }
       // ##
-    }
-    // ## Selected & Focuced items customization
-    .dx-treeview {
-      .dx-treeview-node-container {
-        .dx-treeview-node {
-          &.dx-state-selected:not(.dx-state-focused) > .dx-treeview-item {
-            background: transparent;
-          }
-          &.dx-state-selected > .dx-treeview-item * {
-            color: var(--accent-color);
-          }
-          &:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
-            background-color: var(--base-bg-darken-4);
-          }
-        }
-      }
-    }
-    .dx-theme-generic .dx-treeview {
-      .dx-treeview-node-container {
-        .dx-treeview-node.dx-state-selected.dx-state-focused > .dx-treeview-item * {
-          color: inherit;
-        }
-      }
     }
     // ##
   }

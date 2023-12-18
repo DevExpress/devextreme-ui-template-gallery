@@ -2,6 +2,8 @@
   <ticker-card
     title="Leads"
     total="51"
+    icon="datapie"
+    tone="info"
     :percentage="8.5"
   />
 </template>

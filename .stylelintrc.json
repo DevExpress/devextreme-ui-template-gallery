@@ -26,6 +26,11 @@
         "shorthand-property-no-redundant-values": null,
         "string-quotes": null,
         "value-no-vendor-prefix": true,
+        "value-keyword-case": [ "lower", { "ignoreKeywords": "sRGB" }],
+        "media-feature-range-notation": null,
+        "annotation-no-unknown": [ true, { "ignoreAnnotations": "default" } ],
+        "selector-not-notation": "simple",
+        "selector-attribute-quotes": "always",
 
         "scss/at-else-empty-line-before": null,
         "scss/at-if-closing-brace-newline-after": null,
@@ -53,5 +58,11 @@
         "scss/operator-no-newline-before": true,
         "scss/operator-no-unspaced": true,
         "scss/operator-no-newline-after": null
-    }
+    },
+    "overrides": [
+        {
+          "files": ["*.scss", "**/*.scss"],
+          "customSyntax": "postcss-scss"
+        }
+    ]
 }

@@ -28,10 +28,10 @@
         widget="dxTextBox"
         css-class="global-search-box"
         :options="{
-          stylingMode: 'underlined',
+          stylingMode: 'filled',
           mode: 'search',
           placeholder: 'Search',
-          width: 180
+          width: 180,
         }"
       />
       <dx-item
@@ -128,10 +128,6 @@ header {
   padding: var(--header-toolbar-vertical-padding) 0;
   background-color: var(--base-bg);
 
-  :deep(.header-title) {
-    color: var(--accent-color);
-  }
-
   .header-toolbar {
     padding-right: var(--content-padding);
 
@@ -143,14 +139,16 @@ header {
       position: relative;
 
       .dx-badge {
-        display: block;
         position: absolute;
         background-color: red;
         color: white;
         right: -10%;
         top: -10%;
         font-size: 12px;
-        padding: 0 4px;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        justify-content: center;
       }
     }
 
@@ -158,10 +156,6 @@ header {
       width: var(--side-panel-min-width);
       text-align: center;
       padding: 0;
-
-      .dx-icon {
-        color: var(--accent-color);
-      }
     }
   }
 }

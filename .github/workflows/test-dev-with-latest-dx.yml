@@ -1,0 +1,248 @@
+name: Test with latest DX
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  test-meta:
+    name: Test metadata
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get sources
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Run npm install for metadata
+        run: npm install
+        working-directory: packages/metadata
+
+      - name: Test Metadata
+        run: npm run test
+        working-directory: packages/metadata
+
+  build-latest-dx-npm:
+    runs-on: ubuntu-latest
+    steps:
+      #Build Devextreme latest
+      - name: Checkout Devextreme
+        run: git clone https://github.com/DevExpress/DevExtreme.git devextreme
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: DevExtreme - Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: 'devextreme/**/node_modules'
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('devextreme/**/package-lock.json') }}
+
+      - name: DevExtreme - Install packages
+        working-directory: devextreme
+        run: npm install --no-audit --no-fund
+
+      - name: DevExtreme - Build
+        working-directory: devextreme/packages/devextreme
+        run: npm run build-npm-devextreme
+
+      - name: DevExtreme - Pack
+        working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme
+        run: npm pack
+
+      - name: DevExtreme dist - Pack
+        working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme-dist
+        run: npm pack
+
+      - name: Upload devextreme Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          retention-days: 1
+          name: devextreme-npm
+          path: |
+            devextreme/packages/devextreme/artifacts/npm/devextreme/devextreme-*.tgz
+            devextreme/packages/devextreme/artifacts/npm/devextreme-dist/devextreme-dist*.tgz
+      - name: DevExtreme-angular - Build
+        working-directory: devextreme/packages/devextreme-angular
+        run: npm run build
+
+      - name: DevExtreme-angular - Pack
+        working-directory: devextreme/packages/devextreme-angular
+        run: npm run pack
+
+      - name: Upload devextreme-angular Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          retention-days: 1
+          name: devextreme-angular-npm
+          path: devextreme/packages/devextreme-angular/npm/dist/devextreme-angular*.tgz
+
+      - name: DevExtreme-react - Pack
+        working-directory: devextreme/packages/devextreme-react
+        run: npm run pack
+
+      - name: DevExtreme-react - Pack npm
+        working-directory: devextreme/packages/devextreme-react/npm
+        run: npm pack
+
+      - name: Upload devextreme-react Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          retention-days: 1
+          name: devextreme-react-npm
+          path: devextreme/packages/devextreme-react/npm/devextreme-react*.tgz
+
+      - name: DevExtreme-vue - Pack
+        working-directory: devextreme/packages/devextreme-vue
+        run: npm run pack
+
+      - name: DevExtreme-vue - Pack npm
+        working-directory: devextreme/packages/devextreme-vue/npm
+        run: npm pack
+
+      - name: Upload devextreme-vue Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          retention-days: 1
+          name: devextreme-vue-npm
+          path: devextreme/packages/devextreme-vue/npm/devextreme-vue*.tgz
+
+  testcafe:
+    name: ${{ matrix.ARGS.project }} - ${{ matrix.ARGS.page }} - ${{ matrix.theme.type }}
+    needs: [build-latest-dx-npm]
+    strategy:
+      fail-fast: false
+      matrix:
+        theme: [
+          { fullName: 'material.blue.light.compact', type: 'material', name: 'material.light' },
+          { fullName: 'generic.light.compact', type: 'generic',  name: 'generic.light'},
+        ]
+        ARGS: [
+          { project: 'angular', page: 'crm-contact-details' },
+          { project: 'angular', page: 'crm-contact-list' },
+          # { project: 'angular', page: 'planning-task-details' }, No selector for Toolbar item on mobile device(bug)
+          { project: 'angular', page: 'planning-task-list' },
+          { project: 'angular', page: 'planning-scheduler' },
+          { project: 'angular', page: 'analytics-dashboard' },
+          { project: 'angular', page: 'analytics-sales-report' },
+          { project: 'angular', page: 'analytics-geography' },
+          { project: 'angular', page: 'user-profile' },
+          { project: 'angular', page: 'auth-pages' },
+          { project: 'react', page: 'crm-contact-details' },
+          { project: 'react', page: 'crm-contact-list' },
+          # { project: 'react', page: 'planning-task-details' }, # Title width is different (screen width 400). Menu stays opened
+          { project: 'react', page: 'planning-task-list' },
+          { project: 'react', page: 'planning-scheduler' },
+          { project: 'react', page: 'analytics-dashboard' },
+          { project: 'react', page: 'auth-pages' },
+          # { project: 'react', page: 'analytics-geography' }, # Menu contents disappear after item click (screen width 400)
+          # { project: 'vue', page: 'crm-contact-details' }, No selector for Toolbar item on mobile device(bug)
+          { project: 'react', page: 'analytics-sales-report' },
+          { project: 'react', page: 'user-profile' },
+          { project: 'vue', page: 'crm-contact-list' },
+          # { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)
+          { project: 'vue', page: 'planning-task-list' },
+          { project: 'vue', page: 'planning-scheduler' },
+          { project: 'vue', page: 'analytics-dashboard' },
+          { project: 'vue', page: 'analytics-sales-report' },
+          { project: 'vue', page: 'analytics-geography' },
+          { project: 'vue', page: 'auth-pages' },
+          { project: 'vue', page: 'user-profile' },
+        ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    steps:
+      - name: Get sources
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: For dev branch - download devextreme Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: devextreme-npm
+          path: devextreme-npm-latest
+
+      - name: For dev branch - download devextreme Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: devextreme-npm
+          path: devextreme-npm-latest
+
+      - name: For dev branch - download devextreme-${{ matrix.ARGS.project }} Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: devextreme-${{ matrix.ARGS.project }}-npm
+          path: devextreme-${{ matrix.ARGS.project }}-npm-latest
+
+      - name: For dev branch - replace dx versions to latest builds in package.json
+        run: |
+          FILE_FRAMEWORK_PATH="$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz" | sed 's|/|\\/|g')"
+          FILE_DX_PATH="$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz" | sed 's|/|\\/|g')"
+          FILE_DX_DIST_PATH="$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz" | sed 's|/|\\/|g')"
+          sed -i "s|\"devextreme\": \"[0-9.]\+\"|\"devextreme\": \"\.\.\/\.\.\/$FILE_DX_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s/\"devextreme-dist\": \"[0-9.]\+\"/\"devextreme-dist\": \"\.\.\/\.\.\/$FILE_DX_DIST_PATH\"/g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s|\"devextreme-${{ matrix.ARGS.project }}\": \"[0-9.]\+\"|\"devextreme-${{ matrix.ARGS.project }}\": \"\.\.\/\.\.\/$FILE_FRAMEWORK_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Run npm install
+        run: npm install --no-audit --no-fund
+
+      - name: Set theme
+        run: npm run set-theme -- ${{ matrix.theme.fullName }}
+
+      - name: Build
+        run: npm run build
+        working-directory: packages/${{ matrix.ARGS.project }}
+
+      - name: Start app
+        run: npm run start-apps -- --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme.name }}
+        working-directory: packages/testing
+
+      - name: Run tests
+        run: |
+          all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true  --theme ${{ matrix.theme.name }}"
+          echo "$all_args"
+          export TESTCAFE_DASHBOARD_LAYOUT_TESTING_ENABLED=true
+          export TESTCAFE_DASHBOARD_DEVEXTREME_TOKEN=eyJwcm9qZWN0SWQiOiI5ZjRlMTJjMC1kNmExLTQxZDEtYmE1OS0wZTI3OTE1N2QxZDAiLCJ0b2tlblNlY3JldCI6InQwQXh6bzFMczBDVE81VU95bzc2dkF2eE05Ym9pQ3JxajRCQUtyWm5la0EzYlp3SENOR3RoamFaWkhoa0xvRnJZM1lvV0ZlbEt2S2JyYjFkbEs5UFVoMmlGaG9aVlprdTU1NXhZWmhGQkQ0eWtBZENJWkJvdU9ZV1hDWlRkVi9sQUFxMVNlMkFtRkg5UkRXTTlTcEk0WmVOSkEwZnYwNUlDN3Q3UXFmZ3o2VUdYVDNvZDJHQ2RqclVKYnZrZ2ZmNjdRb3RNaXZuTG1CSmM4REdLelhhbmhobzMzVzE5U1Axd1NSNGR6d3ZWdHp2dGV2em5Da0cwR0dSc3Z3OWdQS214UHpFUGsreTJtMjlSZm92dGtuNGZtb0prRng1RzBSZ2o2WnhPSXBrUDZOMVZyWWhuTk9lc1VEQmVobzB1VGFjTlNwZFE0N2FVZCsydmM3Q3Y0QmtZQT09In0=
+          export TESTCAFE_DASHBOARD_DEVEXTREME_URL=https://devextreme.resolve.sh
+          export TESTCAFE_DASHBOARD_BUILD_ID=${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+          npm run test-testcafe -- $all_args
+        working-directory: packages/testing
+
+      - name: Copy screenshots artifacts
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshots-${{ matrix.ARGS.project }}
+          path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
+          if-no-files-found: ignore

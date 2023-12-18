@@ -74,7 +74,8 @@ export const ProfileCard = ({
                 dataField={item.dataField}
                 editorType={item.editorType}
                 editorOptions={{
-                  stylingMode: 'outlined',
+                  stylingMode: 'filled',
+                  valueChangeEvent: 'input',
                   ...item.editorOptions
                 }}
                 colSpan={item.colSpan}>
@@ -88,6 +89,7 @@ export const ProfileCard = ({
                 {item.dataField === 'status' &&
                   <StatusSelectBox
                     labelMode='hidden'
+                    stylingMode='filled'
                     value={cardData[item.dataField]}
                     onValueChange={onFieldChange(item.dataField)}
                   />

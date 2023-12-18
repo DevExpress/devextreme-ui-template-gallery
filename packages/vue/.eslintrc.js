@@ -15,6 +15,11 @@ module.exports = {
     sourceType: 'module',
     ecmaVersion: 2020,
   },
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
+  },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -28,6 +33,8 @@ module.exports = {
     'linebreak-style': 0,
     'import/prefer-default-export': 'off',
     'default-param-last': 'off',
+    'import/extensions': 0,
+    'import/no-extraneous-dependencies': 'off',
     'vue/max-attributes-per-line': ['error', {
       singleline: {
         max: 1,

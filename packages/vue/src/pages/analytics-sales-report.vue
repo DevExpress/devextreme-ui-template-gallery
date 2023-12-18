@@ -21,7 +21,7 @@
   </dx-scroll-view>
   <dx-load-panel
     container=".view-wrapper"
-    :position="{of: '.dx-drawer-content'}"
+    :position="{ of: '.dx-drawer-content' }"
     :visible="loading"
     :show-pane="true"
   />
@@ -94,7 +94,8 @@ onMounted(() => {
 <style scoped lang="scss">
 @use "@/variables" as *;
 .view-wrapper {
-  padding: var(--content-padding);
+  padding-top: var(--content-padding);
+  padding-bottom: var(--content-padding);
 }
 
 .cards  {

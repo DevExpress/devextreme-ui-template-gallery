@@ -40,8 +40,8 @@ const onDropZoneLeave = (e: {dropZoneElement: HTMLElement}) => {
 
 <style scoped lang="scss">
 #dropzone {
-  background-color: rgba(183, 183, 183, 0.1);
-  border-width: 2px;
+  background-color: var(--typography-bg);
+  border-width: 1.5px;
   border-style: dashed;
   border-radius: 8px;
   padding: 10px;
@@ -56,7 +56,6 @@ const onDropZoneLeave = (e: {dropZoneElement: HTMLElement}) => {
 
   & > span {
     font-weight: 100;
-    opacity: 0.5;
     text-align: center;
   }
 }

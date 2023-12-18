@@ -49,7 +49,6 @@ body {
   .content {
     line-height: 1.5;
     position: relative;
-    background: var(--base-bg);
     flex-grow: 1;
     width: 100%;
     height: 100%;
@@ -78,6 +77,7 @@ body {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  padding: 0 var(--page-padding);
 }
 
 .responsive-paddings {
@@ -257,5 +257,165 @@ body {
 .messages-content {
   padding: 20px;
   border-top: 1px solid var(--border-color);
-  background-color: var(--side-panel-background);
+  background-color: var(--base-bg);
+}
+
+.dx-theme-fluent-typography {
+  font-family: "Inter", sans-serif;
+}
+
+.dx-theme-fluent {
+  .dx-widget {
+    font-family: "Inter", sans-serif;
+  }
+
+  .dx-drawer-panel-content {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  .layout-body .menu-container.theme-dependent,
+  .footer {
+    background-color: var(--base-bg);
+  }
+
+  .layout-body .menu-container.theme-dependent {
+    padding-top: 0;
+  }
+
+  .view-wrapper {
+    .dx-toolbar.dx-widget.theme-dependent {
+      @include toolbar-panel();
+    }
+
+    .grid.theme-dependent {
+      .dx-toolbar {
+        @include toolbar-panel();
+      }
+
+      .dx-datagrid-header-panel {
+        padding: 0;
+      }
+    }
+
+    .panels {
+      .left {
+        background-color: var(--base-bg);
+        padding: 16px 24px;
+        border-radius: 8px;
+
+        @include card-shadow();
+      }
+
+      .right {
+        flex: 1 calc(100% - var(--left-panel-width) - 110px) !important;
+      }
+    }
+
+    &.view-wrapper-contact-list {
+      margin-bottom: var(--content-padding);
+    }
+  }
+
+  .view-wrapper.list-page {
+    margin-top: var(--content-padding);
+
+    .dx-toolbar.dx-widget.theme-dependent,
+    .grid.theme-dependent .dx-toolbar {
+      margin-bottom: var(--content-padding);
+    }
+  }
+
+  .dx-card {
+    @include card-shadow();
+  }
+
+  .plain-styled-form .form-photo {
+    border-radius: 50%;
+  }
+
+  .dx-form.plain-styled-form.view-mode {
+    .dx-texteditor {
+      &.form-editor,
+      &.dx-editor-filled {
+        .form-editor-input {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
+  .contact-form {
+    .dx-state-readonly {
+      .status-editor-field {
+        padding-left: 0;
+      }
+    }
+
+    .status-editor-field {
+      .status-contact {
+        align-items: center;
+      }
+    }
+
+    .form-editor-input {
+      padding-left: 0;
+    }
+  }
+
+  .cards:not(.compact) {
+    .card {
+      border-radius: 8px;
+      border: 0;
+      background: var(--base-bg);
+
+      @include card-shadow();
+    }
+  }
+
+  .dx-state-readonly {
+    .item-editor-field {
+      padding-left: 0;
+    }
+
+    .form-editor-input {
+      padding-left: 0;
+    }
+
+    .status-input.status-editor-input {
+      padding-left: 0;
+    }
+  }
+
+  .dx-form.plain-styled-form {
+    .dx-button.form-item-button {
+      margin-left: 0;
+      margin-top: 5px;
+    }
+  }
+
+  div.gantt {
+    padding: 0;
+  }
+
+  .dx-datagrid-headers.dx-datagrid-nowrap.dx-bordered-top-view {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .theme-dependent {
+    .dx-gridbase-container {
+      > .dx-bordered-bottom-view {
+        border-radius: 0 0 8px 8px;
+      }
+    }
+  }
+
+  .profile-card-panel {
+    @include card-shadow();
+
+    background-color: var(--base-bg);
+  }
+
+  .right-side-panel.open {
+    background-color: var(--base-bg);
+  }
 }

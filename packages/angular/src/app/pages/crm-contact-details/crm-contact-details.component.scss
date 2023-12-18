@@ -21,7 +21,8 @@
 
 
 .view-wrapper {
-  padding: var(--content-padding) var(--content-padding) 0 var(--content-padding);
+  padding-top: var(--content-padding);
+  padding-bottom: var(--content-padding);
 
   .panels {
     display: flex;

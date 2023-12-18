@@ -16,14 +16,14 @@
       />
       <dx-form
         class="plain-styled-form dx-form"
-        :class="{'view-mode': !isEditing}"
+        :class="{ 'view-mode': !isEditing }"
         v-if="!!props.contactData"
       >
         <dx-form-group-item :col-count="2">
           <dx-col-count-by-screen :xs="2" />
           <dx-form-item>
             <form-photo
-              :link="contactData.image"
+              :link="contactDataRef.image"
               :size="184"
             />
           </dx-form-item>
@@ -31,9 +31,11 @@
           <dx-form-group-item>
             <dx-form-item>
               <status-select-box
-                v-model="contactData.status"
+                v-model="contactDataRef.status"
+                class="contact-status"
                 :items="contactStatusList"
                 :read-only="!isEditing"
+                :label-mode="isFluent() ? 'outside' : 'floating'"
                 styling-mode="filled"
               />
             </dx-form-item>
@@ -41,7 +43,7 @@
             <dx-form-item>
               <form-textbox
                 label="First Name"
-                v-model="contactData.firstName"
+                v-model="contactDataRef.firstName"
                 :is-editing="isEditing"
               />
             </dx-form-item>
@@ -49,7 +51,7 @@
             <dx-form-item>
               <form-textbox
                 label="Last Name"
-                v-model="contactData.lastName"
+                v-model="contactDataRef.lastName"
                 :is-editing="isEditing"
               />
             </dx-form-item>
@@ -58,7 +60,7 @@
           <dx-form-item>
             <form-textbox
               label="Position"
-              v-model="contactData.position"
+              v-model="contactDataRef.position"
               :is-editing="isEditing"
             />
           </dx-form-item>
@@ -66,7 +68,7 @@
           <dx-form-item css-class="accent">
             <form-textbox
               label="Assigned to"
-              v-model="contactData.manager"
+              v-model="contactDataRef.manager"
               :is-editing="isEditing"
             />
           </dx-form-item>
@@ -77,7 +79,7 @@
           >
             <form-textbox
               label="Company"
-              v-model="contactData.company"
+              v-model="contactDataRef.company"
               :is-editing="isEditing"
             />
           </dx-form-item>
@@ -91,14 +93,14 @@
           <dx-form-item :col-span="4">
             <form-textbox
               label="Address"
-              v-model="contactData.address"
+              v-model="contactDataRef.address"
               :is-editing="isEditing"
             />
           </dx-form-item>
           <dx-form-item :col-span="2">
             <form-textbox
               label="City"
-              v-model="contactData.city"
+              v-model="contactDataRef.city"
               :is-editing="isEditing"
             />
           </dx-form-item>
@@ -106,14 +108,14 @@
           <dx-form-item>
             <form-textbox
               label="State"
-              v-model="contactData.state.stateShort"
+              v-model="contactDataRef.state.stateShort"
               :is-editing="isEditing"
             />
           </dx-form-item>
           <dx-form-item>
             <dx-number-box
               label="Zip Code"
-              v-model.number="contactData.zipCode"
+              v-model.number="contactDataRef.zipCode"
               :is-editing="isEditing"
               v-bind="formEditorProps"
             >
@@ -129,7 +131,7 @@
           <dx-form-item>
             <form-textbox
               label="Phone"
-              v-model.number="contactData.phone"
+              v-model.number="contactDataRef.phone"
               :is-editing="isEditing"
               mask="+1(000)000-0000"
             />
@@ -140,7 +142,7 @@
                 text: 'Call',
                 icon: 'tel',
                 type: 'default',
-                stylingMode: 'outlined'
+                stylingMode: 'outlined',
               }"
               :validators="[]"
             />
@@ -148,9 +150,9 @@
           <dx-form-item>
             <form-textbox
               label="Email"
-              v-model.number="contactData.email"
+              v-model.number="contactDataRef.email"
               :is-editing="isEditing"
-              :validators="[{type: 'email'}]"
+              :validators="[{ type: 'email' }]"
             />
             <dx-button
               v-if="!isEditing"
@@ -159,7 +161,7 @@
                 text: 'Send Email',
                 icon: 'email',
                 type: 'default',
-                stylingMode: 'outlined'
+                stylingMode: 'outlined',
               }"
             />
           </dx-form-item>
@@ -184,12 +186,15 @@ import { DxValidationGroup } from 'devextreme-vue/validation-group';
 import { formEditorProps } from '@/shared/form-editor-config';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 import { Contact, contactStatusList } from '@/types/contact';
+import { themeService } from '@/theme/theme-service';
 import FormPhoto from '@/components/utils/form-photo.vue';
 import FormTextbox from '@/components/utils/form-textbox.vue';
 import StatusSelectBox from '@/components/library/status-select-box.vue';
 import ToolbarForm from '@/components/utils/toolbar-form.vue';
 
 const emptyContact = { state: { stateShort: '' } } as Contact;
+
+const { isFluent } = themeService;
 
 const props = withDefaults(defineProps<{
   isLoading: boolean,
@@ -200,7 +205,7 @@ const props = withDefaults(defineProps<{
 });
 
 const isEditing = ref(false);
-const contactData = ref(emptyContact);
+const contactDataRef = ref(emptyContact);
 
 let contactDataSaved = emptyContact;
 const zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
@@ -208,12 +213,12 @@ const zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is
 watch(
   () => props.contactData,
   (contactDataNew: Contact| null) => {
-    contactData.value = contactDataNew || emptyContact;
+    contactDataRef.value = contactDataNew || emptyContact;
   },
 );
 
 function startEdit() {
-  contactDataSaved = { ...contactData.value };
+  contactDataSaved = { ...contactDataRef.value };
   isEditing.value = true;
 }
 
@@ -224,7 +229,7 @@ function handleSaveClick({ validationGroup }) {
 }
 
 function cancelEdit() {
-  contactData.value = contactDataSaved;
+  contactDataRef.value = contactDataSaved;
   isEditing.value = false;
 }
 </script>

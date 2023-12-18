@@ -25,7 +25,8 @@
   </dx-scroll-view>
   <dx-load-panel
     container=".view-wrapper"
-    :position="{of: '.dx-drawer-content'}"
+    :shading="false"
+    :position="{ of: '.dx-drawer-content' }"
     :visible="loading"
     :show-pane="true"
   />
@@ -91,7 +92,8 @@ const tabChange = ([startDate, endDate]: string[]) => {
 @use "@/variables.scss" as *;
 
 .view-wrapper {
-  padding: var(--content-padding);
+  padding-top: var(--content-padding);
+  padding-bottom: var(--content-padding);
 
   .cards, .tiles {
     display: grid;
@@ -114,13 +116,25 @@ const tabChange = ([startDate, endDate]: string[]) => {
   }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1400px) {
   .view-wrapper {
     .tiles {
       grid-template-columns: repeat(2, calc(50% - 10px));
     }
+  }
+}
 
+@media only screen and (max-width: 900px) {
+  .view-wrapper {
     .cards {
+      grid-template-columns: repeat(1, 100%);
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .view-wrapper {
+    .cards, .tiles {
       grid-template-columns: repeat(1, 100%);
     }
   }
@@ -128,7 +142,7 @@ const tabChange = ([startDate, endDate]: string[]) => {
 
 @media only screen and (max-width: 400px) {
   .view-wrapper {
-    .tiles, .cards {
+    .cards, .tiles {
       grid-template-columns: repeat(1, 100%);
     }
   }

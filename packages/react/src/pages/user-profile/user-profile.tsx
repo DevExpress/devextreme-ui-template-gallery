@@ -115,7 +115,7 @@ const UserProfileContent = ({
         >
           <div className='profile-card-top-item'>
             <div className='image-wrapper'>
-              <img alt='' src='icons/at.svg' />
+              <i className='dx-icon dx-icon-mention' />
             </div>
             <div>
               <div className='title-text'>
@@ -146,7 +146,7 @@ const UserProfileContent = ({
         >
           <div className='profile-card-top-item'>
             <div className='image-wrapper'>
-              <img alt='' src='icons/geo-position.svg' />
+              <i className='dx-icon dx-icon-map' />
             </div>
             <div>
               <div className='title-text'>
@@ -234,7 +234,7 @@ export const UserProfile = () => {
 
   return <div className='view-host user-profile'>
     <div className='view-wrapper'>
-      <Toolbar className={isContentScrolled ? 'scrolled' : ''}>
+      <Toolbar className={`theme-dependent ${isContentScrolled ? 'scrolled' : ''}`}>
         <Item location='before'>
           <div className='header-text'>User Profile</div>
         </Item>
@@ -244,7 +244,8 @@ export const UserProfile = () => {
             className='cancel-button'
             text='Cancel'
             disabled={!isDataChanged}
-            stylingMode='contained'
+            stylingMode='outlined'
+            type='normal'
             onClick={onCancel}
           />
         </Item>

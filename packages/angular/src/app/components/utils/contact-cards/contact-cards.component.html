@@ -1,5 +1,9 @@
 <div class="dx-card details-card">
-  <dx-tab-panel [showNavButtons]="true">
+  <dx-tab-panel
+    secondary="secondary"
+    [focusStateEnabled]="false"
+    [showNavButtons]="true"
+  >
     <dxi-item title="Tasks">
       <card-tasks [tasks]="tasks" [isLoading]="isLoading"></card-tasks>
     </dxi-item>
@@ -19,7 +23,7 @@
     <dxi-item title="Notes">
       <card-notes [user]="contactName" [items]="notes"></card-notes>
     </dxi-item>
-    <dxi-item title="Messages" [badge]="messages?.length">
+    <dxi-item title="Messages">
       <card-messages [user]="contactName" [items]="messages"></card-messages>
     </dxi-item>
   </dx-tab-panel>

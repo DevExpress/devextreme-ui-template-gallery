@@ -37,7 +37,7 @@ export class PlanningSchedulerComponent implements OnInit {
 
   currentDate = new Date();
 
-  currentView = 'workWeek';
+  currentView: DxSchedulerTypes.ViewType = 'workWeek';
 
   isRightPanelOpen = false;
 
@@ -104,7 +104,7 @@ export class PlanningSchedulerComponent implements OnInit {
       this.onCurrentViewChange(e.value);
     }
   }
-  onCurrentViewChange = (view: string) => {
+  onCurrentViewChange = (view: DxSchedulerTypes.ViewType) => {
     this.currentView = view;
 
     if (this.currentView === 'month' && !this.screen.sizes['screen-x-small']) {

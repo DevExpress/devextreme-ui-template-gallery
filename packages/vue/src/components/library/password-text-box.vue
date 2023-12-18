@@ -15,12 +15,13 @@
         icon: isPasswordMode ? 'eyeopen' : 'eyeclose',
         hoverStateEnabled: false,
         activeStateEnabled: false,
-        onClick: switchMode
+        stylingMode: 'text',
+        onClick: switchMode,
       }"
     />
     <dx-validator
       :validation-rules="[
-        {type: 'required', message: 'Password is required'}, ...validators]"
+        { type: 'required', message: 'Password is required' }, ...validators]"
     />
   </dx-text-box>
 </template>
@@ -37,7 +38,7 @@ const props = withDefaults(defineProps<{
   validators?: Array<typeof DxValidationRule>,
 }>(), {
   value: '',
-  stylingMode: 'outlined',
+  stylingMode: 'filled',
   placeholder: '',
   validators: () => [],
 });

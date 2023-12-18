@@ -6,10 +6,10 @@
       :icon="user?.avatarUrl"
       :show-arrow-icon="false"
       :element-attr="{
-        class: 'user-button'
+        class: 'user-button',
       }"
       :drop-down-options="{
-        width: '150'
+        width: 'auto',
       }"
       drop-down-content-template="dropDownContentTemplate"
       @content-ready="handleDropDownButtonContentReady"
@@ -71,7 +71,6 @@ function handleDropDownButtonContentReady({ component }: {component: typeof DxDr
     img.dx-icon {
       border-radius: 50%;
       margin: 0;
-      width: auto;
       aspect-ratio: 1 / 1;
       box-sizing: border-box;
       border: 1px solid var(--border-color);
@@ -81,14 +80,17 @@ function handleDropDownButtonContentReady({ component }: {component: typeof DxDr
       background-clip: padding-box;
 
       .dx-theme-generic & {
+        width: auto;
         height: var(--drop-down-gnrc-button-height);
       }
 
       .dx-theme-material & {
+        width: auto;
         height: 100%;
       }
 
       .dx-theme-fluent & {
+        width: auto;
         height: 100%;
       }
     }

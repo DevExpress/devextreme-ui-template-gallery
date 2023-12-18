@@ -12,7 +12,7 @@
         <div class="input-content">
           <dx-text-area
             label="New Note"
-            styling-mode="outlined"
+            styling-mode="filled"
             :value="nodeText"
             value-change-event="keyup"
             @value-changed="e => nodeText = e.value"
@@ -28,9 +28,9 @@
               location="after"
               :options="{
                 text: 'Add',
-                stylingMode: 'outlined',
+                stylingMode: 'contained',
                 type: 'default',
-                onClick: addNote
+                onClick: addNote,
               }"
             />
           </dx-toolbar>
@@ -149,6 +149,9 @@ onMounted(() => {
 }
 
 .note {
+  @include card-shadow();
+
+  border: 0.5px solid var(--border-color);
   background-color: var(--base-bg);
   padding: 10px;
   margin-bottom: 10px;

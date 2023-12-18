@@ -21,7 +21,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: '20'
 
     - name: Install Headless Chrome dependencies
       run: |
@@ -41,7 +41,7 @@ jobs:
           ${{ runner.os }}-node
 
     - name: Run npm install
-      run: npm install --legacy-peer-deps
+      run: npm install
 
     - name: Lint applications
       run: npm run lint-${{ matrix.PROJECT }}

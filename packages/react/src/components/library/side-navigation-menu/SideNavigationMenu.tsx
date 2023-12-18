@@ -13,6 +13,17 @@ import './SideNavigationMenu.scss';
 
 import * as events from 'devextreme/events';
 
+export type SideNavigationItem = {
+  expanded: boolean;
+  path: string;
+  text: string;
+  icon: string;
+  items: Array<{
+    text: string;
+    path: string;
+  }>;
+};
+
 export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigationMenuProps>) => {
   const { children, selectedItemChanged, openMenu, compactMode, onMenuReady } = props;
 
@@ -21,7 +32,7 @@ export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigation
     return navigation.map((item) => ({ ...item, expanded: isLarge, path: item.path && !/^\//.test(item.path) ? `/${item.path}` : item.path }));
   }
 
-  const items = useMemo(
+  const items: SideNavigationItem[] = useMemo(
     normalizePath,
     []
   );
@@ -66,7 +77,7 @@ export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigation
   return (
     <div className='dx-swatch-additional side-navigation-menu' ref={getWrapperRef}>
       {children}
-      <div className='menu-container'>
+      <div className='menu-container theme-dependent'>
         <TreeView
           ref={treeViewRef}
           items={items}

@@ -18,7 +18,8 @@
         :editor-options="{
           stylingMode: 'filled',
           placeholder: 'Confirm Password',
-          mode: 'password' }"
+          mode: 'password',
+        }"
       >
         <dx-required-rule message="Password is required" />
         <dx-custom-rule

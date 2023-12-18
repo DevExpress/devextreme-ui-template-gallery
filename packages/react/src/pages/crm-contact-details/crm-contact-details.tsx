@@ -26,16 +26,11 @@ const CONTACT_ID = 12;
 
 export const CRMContactDetails = () => {
   const [data, setData] = useState<Contact>();
-  const [messagesCount, setMessagesCount] = useState(0);
   const [notes, setNotes] = useState();
   const [messages, setMessages] = useState([]);
   const [activeOpportunities, setActiveOpportunities] = useState();
   const [closedOpportunities, setClosedOpportunities] = useState();
   const [isLoading, setIsLoading] = useState(false);
-
-  const onMessagesCountChanged = useCallback((count) => {
-    setMessagesCount(count);
-  }, []);
 
   useEffect(() => {
     loadData();
@@ -54,7 +49,6 @@ export const CRMContactDetails = () => {
       getContactMessages(CONTACT_ID)
         .then((data) => {
           setMessages(data);
-          setMessagesCount(data.length);
         }),
       getActiveContactOpportunities(CONTACT_ID)
         .then((data) => {
@@ -75,7 +69,7 @@ export const CRMContactDetails = () => {
   return (
     <ScrollView className='view-wrapper-scroll'>
       <div className='view-wrapper view-wrapper-contact-details'>
-        <Toolbar className='toolbar-details'>
+        <Toolbar className='toolbar-details theme-dependent'>
           <Item location='before'>
             <Button icon='arrowleft' stylingMode='text' />
           </Item>
@@ -91,7 +85,7 @@ export const CRMContactDetails = () => {
             <DropDownButton
               text='Actions'
               stylingMode='text'
-              width={120}
+              dropDownOptions={{ width: 'auto' }}
               items={['Assign to Me', 'Archive']}
             />
           </Item>
@@ -140,8 +134,6 @@ export const CRMContactDetails = () => {
               closedOpportunities={closedOpportunities}
               notes={notes}
               messages={messages}
-              messagesCount={messagesCount}
-              onMessagesCountChanged={onMessagesCountChanged}
               tasks={data?.tasks}
               activities={data?.activities}
               name={data?.name} />

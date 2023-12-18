@@ -16,7 +16,6 @@
         styling-mode="outlined"
         type="default"
         class="add-tile"
-        @click="addOpportunity"
       />
 
       <div>
@@ -54,7 +53,6 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import notify from 'devextreme/ui/notify';
 import { DxButton } from 'devextreme-vue/button';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 // eslint-disable-next-line import/no-unresolved
@@ -89,10 +87,6 @@ async function loadData() {
 onMounted(() => {
   loadData();
 });
-
-function addOpportunity() {
-  notify('Add opportunity event');
-}
 </script>
 
 <style scoped lang="scss">

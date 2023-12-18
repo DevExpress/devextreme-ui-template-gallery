@@ -1,7 +1,7 @@
 <template>
   <div
     id="activities-list"
-    :class="{load: props.items}"
+    :class="{ load: props.items }"
   >
     <dx-load-panel
       :visible="props.isLoading"
@@ -94,7 +94,7 @@ const activityMenuItems: Array<{ text: string }> = [
   .activity {
     box-shadow: 0 1px 4px 0 #00000026;
     border-left: 2px solid var(--accent-color);
-    margin-right: 4px;
+    margin-right: 1px;
     padding: 8px 2px 8px 16px;
     display: grid;
     grid-template-columns: 3fr 1fr 0fr;

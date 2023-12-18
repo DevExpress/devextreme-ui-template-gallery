@@ -111,57 +111,59 @@
 
           <div class="data-part data-part-toolbar border">
             <dx-toolbar>
-              <dxi-item location="before" [visible]="!isEditing">
+              <dxi-item location="after" [visible]="!isEditing">
                 <dx-button
                   text="Edit"
                   icon="edit"
-                  stylingMode="outlined"
+                  stylingMode="contained"
                   type="default"
                   (onClick)="toggleEdit()"
                 >
                 </dx-button>
               </dxi-item>
-              <dxi-item location="before" [visible]="!isEditing">
+              <dxi-item location="after" [visible]="!isEditing">
                 <dx-button
                   text="Details"
                   stylingMode="outlined"
-                  type="default"
+                  type="normal"
                   (onClick)="navigateToDetails()"
                 >
                 </dx-button>
               </dxi-item>
               <dxi-item
-                location="before"
-                locateInMenu="before"
+                location="after"
+                locateInMenu="after"
                 [visible]="isEditing"
               >
                 <dx-button
                   text="Save"
                   icon="save"
-                  stylingMode="outlined"
+                  stylingMode="contained"
                   type="default"
                   (onClick)="onSaveClick($event)"
                 >
                 </dx-button>
               </dxi-item>
               <dxi-item
-                location="before"
-                locateInMenu="before"
+                location="after"
+                locateInMenu="after"
                 [visible]="isEditing"
               >
                 <dx-button
                   text="Cancel"
-                  stylingMode="text"
+                  stylingMode="outlined"
+                  type="normal"
                   (onClick)="toggleEdit()"
                 ></dx-button>
               </dxi-item>
               <dxi-item
-                location="after"
+                location="before"
                 widget="dxDropDownButton"
                 [options]="{
-                  width: 120,
                   text: 'Actions',
-                  stylingMode: 'contained',
+                  stylingMode: 'text',
+                  dropDownOptions: { width: 'auto' },
+                  width: 'auto',
                   items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
                 }"
               ></dxi-item>

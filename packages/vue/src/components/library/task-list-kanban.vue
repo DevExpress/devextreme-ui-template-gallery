@@ -145,7 +145,7 @@ const addTask = () => {
     font-size: 16px;
     padding: 10px;
     margin-bottom: -10px;
-    font-weight: bold;
+    font-weight: 500;
     cursor: pointer;
     display: flex;
     justify-content: space-between;

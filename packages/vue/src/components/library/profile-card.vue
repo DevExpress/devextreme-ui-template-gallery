@@ -20,7 +20,11 @@
           :key="item.dataField"
           :data-field="item.dataField"
           :editor-type="item.editorType"
-          :editor-options="{ stylingMode: 'outlined', ...item.editorOptions } "
+          :editor-options="{
+            stylingMode: 'filled',
+            valueChangeEvent: 'input',
+            ...item.editorOptions,
+          }"
           :col-span="item.colSpan"
         >
           <dx-label
@@ -36,6 +40,7 @@
             v-if="item.dataField === 'status'"
             :items="item.itemsList"
             :model-value="cardData[item.dataField]"
+            styling-mode="filled"
             label-mode="hidden"
             @update:model-value="onFieldChange()"
           />
@@ -108,7 +113,7 @@ function onFieldChange<T extends keyof Profile>(fieldName: T, value: Profile[T])
   background-color: var(--card-background);
 
   .panel-header {
-    padding: var(--content-padding);
+    padding: 12px var(--content-padding);
     border-bottom: 1px solid var(--border-color);
   }
 

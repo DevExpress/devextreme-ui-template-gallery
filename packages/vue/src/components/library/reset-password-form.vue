@@ -14,7 +14,7 @@
           stylingMode: 'filled',
           placeholder: 'Email',
           mode: 'email',
-          value: 'jheart@corp.com'
+          value: 'jheart@dx-email.com',
         }"
       >
         <dx-required-rule message="Email is required" />

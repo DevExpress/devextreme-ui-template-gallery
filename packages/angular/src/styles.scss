@@ -101,6 +101,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding: 0 var(--page-padding);
 }
 
 .dx-card.details-card {
@@ -224,4 +225,171 @@ body {
 
 .status-indicator-high {
   @include status(#ff5722);
+}
+
+.dx-theme-fluent-typography {
+  font-family: "Inter", sans-serif;
+}
+
+.dx-theme-fluent {
+  .dx-widget {
+    font-family: "Inter", sans-serif;
+  }
+
+  .dx-drawer-panel-content {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  .layout-body .menu-container.theme-dependent,
+  app-footer {
+    background-color: var(--base-bg);
+  }
+
+  .layout-body .menu-container.theme-dependent {
+    padding-top: 0;
+  }
+
+  .view-wrapper {
+    .dx-toolbar.dx-widget.theme-dependent {
+      @include toolbar-panel();
+    }
+
+    .grid.theme-dependent {
+      .dx-toolbar {
+        @include toolbar-panel();
+      }
+
+      .dx-datagrid-header-panel {
+        padding: 0;
+      }
+    }
+
+    .panels {
+      .left {
+        background-color: var(--base-bg);
+        padding: 16px 24px;
+        border-radius: 8px;
+
+        @include card-shadow();
+      }
+
+      .theme-dependent.right {
+        flex: 1 calc(100% - var(--left-panel-width) - 110px) !important;
+      }
+    }
+
+    &.crm-contact-list {
+      margin-bottom: var(--content-padding);
+    }
+  }
+
+  .view-wrapper.list-page {
+    margin-top: var(--content-padding);
+
+    .dx-toolbar.dx-widget.theme-dependent,
+    .grid.theme-dependent .dx-toolbar {
+      margin-bottom: var(--content-padding);
+    }
+  }
+
+  .dx-card {
+    @include card-shadow();
+  }
+
+  .plain-styled-form .photo {
+    border-radius: 50%;
+  }
+
+  .dx-form.plain-styled-form.view-mode {
+    .dx-texteditor {
+      &.form-editor,
+      &.dx-editor-filled {
+        .form-editor-input {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
+  .form-editor.dx-state-readonly {
+    .status.status-indicator {
+      .dx-state-readonly {
+        .status-input.status-editor-input {
+          padding-left: 0;
+        }
+      }
+    }
+
+    .form-editor-input {
+      padding-left: 0;
+    }
+  }
+
+  .contact-status.dx-state-readonly {
+    .status-editor-field {
+      .status-indicator {
+        padding-left: 0;
+        align-self: center !important;
+      }
+    }
+  }
+
+  .contact-status .status-editor-field .status-indicator {
+    align-self: center !important;
+
+    & .status {
+      display: flex !important;
+    }
+  }
+
+  .cards:not(.grey) {
+    .card {
+      border-radius: 8px;
+      border: 0;
+      background: var(--base-bg);
+
+      @include card-shadow();
+    }
+  }
+
+  .dx-form.plain-styled-form {
+    .dx-button.form-item-button {
+      margin-left: 0;
+      margin-top: 5px;
+    }
+  }
+
+  .contact-form {
+    .form-editor-input {
+      padding-left: 0;
+    }
+  }
+
+  div.gantt {
+    padding: 0 !important;
+  }
+
+  .dx-datagrid-headers.dx-datagrid-nowrap.dx-bordered-top-view {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .theme-dependent {
+    .dx-gridbase-container {
+      > .dx-bordered-bottom-view {
+        border-radius: 0 0 8px 8px;
+      }
+    }
+  }
+
+  .profile-card {
+    .panel {
+      @include card-shadow();
+
+      background-color: var(--base-bg);
+    }
+  }
+
+  .right-side-panel.open {
+    background-color: var(--base-bg);
+  }
 }

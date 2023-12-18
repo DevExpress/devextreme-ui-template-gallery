@@ -78,6 +78,7 @@
           v-model="contact.phone"
           :is-editing="true"
           icon="tel"
+          label="Phone"
           mask="+1(000)000-0000"
         />
       </dx-form-item>
@@ -86,7 +87,8 @@
           v-model="contact.email"
           :is-editing="true"
           icon="email"
-          :validators="[{type: 'email'}, {type: 'required'}]"
+          label="Email"
+          :validators="[{ type: 'email' }, { type: 'required' }]"
         />
       </dx-form-item>
       <dx-form-item>
@@ -94,6 +96,7 @@
           v-model="contact.address"
           :is-editing="true"
           icon="home"
+          label="Address"
         />
       </dx-form-item>
     </dx-form-item>

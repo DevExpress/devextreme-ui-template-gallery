@@ -20,7 +20,7 @@
     :items="menuItems"
     @item-click="onItemClick"
     :element-attr="{
-      class: 'user-info-list'
+      class: 'user-info-list',
     }"
   />
 </template>

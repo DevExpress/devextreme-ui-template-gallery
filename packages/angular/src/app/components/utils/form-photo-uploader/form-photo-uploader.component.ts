@@ -32,8 +32,8 @@ import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
 `,
   styles: [`
     #uploader {
-      background-color: rgba(183, 183, 183, 0.1);
-      border-width: 2px;
+      background-color: var(--typography-bg);
+      border-width: 1.5px;
       border-style: dashed;
       border-radius: 8px;
       padding: 10px;
@@ -48,7 +48,6 @@ import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
 
       & > span {
         font-weight: 100;
-        opacity: 0.5;
         text-align: center;
       }
     }

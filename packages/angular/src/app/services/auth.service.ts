@@ -15,7 +15,7 @@ export interface IResponse {
 
 const defaultPath = '/';
 export const defaultUser: IUser = {
-  email: 'jheart@corp.com',
+  email: 'jheart@dx-email.com',
   name: 'John Heart',
   avatarUrl: 'https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/01.png',
 };

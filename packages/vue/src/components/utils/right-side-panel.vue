@@ -4,7 +4,7 @@
       'right-side-panel-wrapper': true,
       overlapping: !screenInfo.isLarge,
       open: openState,
-      'closed-state-hidden': !showOpenButton
+      'closed-state-hidden': !showOpenButton,
     }"
   >
     <div class="right-side-panel">
@@ -21,7 +21,7 @@
           <dx-button
             class="open-button"
             styling-mode="text"
-            :icon="(isOpened ? (screenInfo.isLarge ? 'panelleft': 'close'): 'panelright')"
+            :icon="(isOpened ? (screenInfo.isLarge ? 'panelleft' : 'close') : 'panelright')"
             @click="toggleOpen"
           />
         </div>

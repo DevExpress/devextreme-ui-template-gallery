@@ -38,10 +38,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
-
-    - name: Set NPM version
-      run: npm i npm@7 -g
+        node-version: '20'
 
     - name: Restore npm cache
       uses: actions/cache@v3
@@ -53,6 +50,11 @@ jobs:
 
     - name: Run npm install
       run: npm install
+
+    - name: Install Internal Packages
+      uses: DevExpress/github-actions/install-internal-package@main
+      with:
+        install-dist: true
 
     - name: Set theme
       run: npm run set-theme -- ${{ matrix.theme }}
@@ -84,10 +86,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
-
-    - name: Set NPM version
-      run: npm i npm@7 -g
+        node-version: '20'
 
     - name: Restore npm cache
       uses: actions/cache@v3
@@ -100,9 +99,10 @@ jobs:
     - name: Run npm install
       run: npm install
 
-    - name: Run npm install for shell
-      run: npm install
-      working-directory: packages/shell
+    - name: Install Internal Packages
+      uses: DevExpress/github-actions/install-internal-package@main
+      with:
+        install-dist: true
 
     - name: Build Shell
       run: npm run build-shell

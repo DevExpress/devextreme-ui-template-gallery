@@ -1,11 +1,12 @@
-<div class="view-wrapper">
+<div class="view-wrapper list-page crm-contact-list">
   <dx-data-grid
-    class="grid"
+    class="grid theme-dependent"
     noDataText=""
     height="100%"
     [dataSource]="dataSource"
     [allowColumnReordering]="true"
     [focusedRowEnabled]="true"
+    [showBorders]="true"
     [(focusedRowKey)]="userId"
     (onRowClick)="rowClick($event)"
     (onExporting)="onExporting($event)"

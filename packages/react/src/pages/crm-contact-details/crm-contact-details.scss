@@ -14,12 +14,13 @@
   }
 }
 
-.view-wrapper-contact-details {
+.view-wrapper.view-wrapper-contact-details {
   position: relative;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: var(--content-padding) var(--content-padding) 0 var(--content-padding);
+  padding-top: var(--content-padding);
+  padding-bottom: var(--content-padding);
 
   @media only screen and (max-width: 875px) {
     .contact-name-toolbar-item {

@@ -33,9 +33,10 @@
   display: flex;
   flex-direction: column;
   padding-top: var(--content-padding);
+  max-width: 1200px;
+  margin: 0 auto;
 
   & > .dx-toolbar {
-    padding: 0 calc(var(--content-padding) * 2);
     width: auto;
     position: relative;
 
@@ -52,7 +53,7 @@
   .cards-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 calc(var(--content-padding) * 2);
+    margin: 0 1px;
     padding: calc(var(--content-padding) / 2) 0 var(--content-padding);
     gap: 24px;
   }
@@ -64,9 +65,7 @@
       border-radius: 50%;
       margin-right: var(--gap-padding);
 
-      img {
-        height: 20px;
-        width: 20px;
+      .dx-icon {
         margin: auto;
       }
     }
@@ -122,10 +121,12 @@
   }
 
   .contacts-card .image-wrapper {
-    background-color: rgba(244, 67, 54, 0.2);
+    background-color: color-mix(in sRGB, var(--error-color) 12%, transparent);
+    color: var(--error-color);
   }
 
   .address-card .image-wrapper {
-    background-color: rgba(3, 169, 244, 0.2);
+    background-color: color-mix(in sRGB, var(--info-color) 12%, transparent);
+    color: var(--info-color);
   }
 }

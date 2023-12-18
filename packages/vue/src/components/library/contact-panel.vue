@@ -30,7 +30,7 @@
             :options="{
               icon: isPinned ? 'pin' : 'unpin',
               stylingMode: 'text',
-              onClick: () => isPinned = !isPinned
+              onClick: () => isPinned = !isPinned,
             }"
           />
 
@@ -40,7 +40,7 @@
             :options="{
               icon: 'close',
               stylingMode: 'text',
-              onClick: onClose
+              onClick: onClose,
             }"
           />
         </dx-toolbar>
@@ -49,7 +49,7 @@
           <dx-validation-group>
             <div class="data-part border">
               <dx-form
-                :class="{'view-mode': !isEditing, 'plain-styled-form dx-form': true}"
+                :class="{ 'view-mode': !isEditing, 'plain-styled-form dx-form': true }"
               >
                 <dx-form-group-item
                   :col-count="2"
@@ -106,64 +106,65 @@
             <div class="data-part data-part-toolbar border">
               <dx-toolbar>
                 <dx-item
-                  location="before"
+                  location="after"
                   :visible="!isEditing"
                 >
                   <dx-button
                     text="Edit"
                     icon="edit"
-                    styling-mode="outlined"
+                    styling-mode="contained"
                     type="default"
                     @click="toggleEdit()"
                   />
                 </dx-item>
 
                 <dx-item
-                  location="before"
+                  location="after"
                   :visible="!isEditing"
                 >
                   <dx-button
                     text="Details"
                     styling-mode="outlined"
-                    type="default"
+                    type="normal"
                     @click="navigateToDetails()"
                   />
                 </dx-item>
 
                 <dx-item
-                  location="before"
+                  location="after"
                   locate-in-menu="before"
                   :visible="isEditing"
                 >
                   <dx-button
                     text="Save"
                     icon="save"
-                    styling-mode="outlined"
+                    styling-mode="contained"
                     type="default"
                     @click="handleSaveClick"
                   />
                 </dx-item>
 
                 <dx-item
-                  location="before"
+                  location="after"
                   locate-in-menu="before"
                   :visible="isEditing"
                 >
                   <dx-button
                     text="Cancel"
                     @click="toggleEdit()"
-                    styling-mode="text"
+                    styling-mode="outlined"
+                    type="normal"
                   />
                 </dx-item>
 
                 <dx-item
-                  location="after"
+                  location="before"
                   widget="dxDropDownButton"
                   :options="{
-                    width: 120,
                     text: 'Actions',
-                    stylingMode: 'contained',
-                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                    dropDownOptions: { width: 'auto' },
+                    stylingMode: 'text',
+                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting'],
                   }"
                 />
               </dx-toolbar>
@@ -355,7 +356,7 @@ const navigateToDetails = () => {
 
   &.open {
     right: 0;
-    box-shadow: 0 0 16px var(--border-color);
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.04), 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
   }
 
   &.pin {

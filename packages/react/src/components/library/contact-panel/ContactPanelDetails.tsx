@@ -3,7 +3,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { Button, ButtonTypes } from 'devextreme-react/button';
-import { DropDownButton } from 'devextreme-react/drop-down-button';
 import { ScrollView } from 'devextreme-react/scroll-view';
 import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
@@ -183,21 +182,27 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
 
             <div className='data-part data-part-toolbar border'>
               <Toolbar>
-                <ToolbarItem location='before' visible={!isEditing}>
-                  <Button icon='edit' text='Edit' stylingMode='outlined' type='default' onClick={toggleEditHandler} />
+                <ToolbarItem location='after' visible={!isEditing}>
+                  <Button icon='edit' text='Edit' stylingMode='contained' type='default' onClick={toggleEditHandler} />
                 </ToolbarItem>
-                <ToolbarItem location='before' visible={!isEditing}>
-                  <Button text='Details' stylingMode='outlined' type='default' onClick={navigateToDetails} />
+                <ToolbarItem location='after' visible={!isEditing}>
+                  <Button text='Details' stylingMode='outlined' type='normal' onClick={navigateToDetails} />
                 </ToolbarItem>
-                <ToolbarItem location='before' visible={isEditing}>
-                  <Button text='Save' icon='save' stylingMode='outlined' type='default' onClick={onSaveClick} />
+                <ToolbarItem location='after' visible={isEditing}>
+                  <Button text='Save' icon='save' stylingMode='contained' type='default' onClick={onSaveClick} />
                 </ToolbarItem>
-                <ToolbarItem location='before' visible={isEditing}>
-                  <Button text='Cancel' stylingMode='text' onClick={toggleEditHandler} />
+                <ToolbarItem location='after' visible={isEditing}>
+                  <Button text='Cancel' stylingMode='outlined' type='normal' onClick={toggleEditHandler} />
                 </ToolbarItem>
-                <ToolbarItem location='after'>
-                  <DropDownButton text='Actions' width={120} stylingMode='contained' items={['Call', 'Send Fax', 'Send Email', 'Make a Meeting']} />
-                </ToolbarItem>
+                <ToolbarItem location='before'
+                  widget='dxDropDownButton'
+                  options={{
+                    text: 'Actions',
+                    stylingMode: 'text',
+                    dropDownOptions: { width: 'auto' },
+                    width: 'auto',
+                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                  }} />
               </Toolbar>
             </div>
           </ValidationGroup>

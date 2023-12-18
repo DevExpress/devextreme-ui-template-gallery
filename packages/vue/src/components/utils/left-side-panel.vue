@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{'left-side-panel': true, 'overlapping': isSmallScreen, open: isOpened}"
+    :class="{ 'left-side-panel': true, overlapping: isSmallScreen, open: isOpened }"
   >
     <div class="side-panel-container">
       <div

@@ -1,13 +1,14 @@
 <div class="view-wrapper">
-  <dx-toolbar [class.scrolled]="isContentScrolled">
+  <dx-toolbar class="theme-dependent" [class.scrolled]="isContentScrolled">
     <dxi-item location="before">
       <div class="header-text">User Profile</div>
     </dxi-item>
     <dxi-item location="after" locateInMenu="never">
       <dx-button
         text="Cancel"
+        stylingMode="outlined"
+        type="normal"
         [disabled]="!isDataChanged"
-        stylingMode="contained"
         (onClick)="cancel()"
       >
       </dx-button>
@@ -83,7 +84,7 @@
       >
         <div top-item>
           <div class="image-wrapper">
-            <img alt="" src="assets/icons/at.svg" />
+            <i class="dx-icon dx-icon-mention"></i>
           </div>
           <div>
             <div class="title-text">{{ profileData.phone | phone }}</div>
@@ -112,7 +113,7 @@
       >
         <div top-item>
           <div class="image-wrapper">
-            <img alt="" src="assets/icons/geo-position.svg" />
+            <i class="dx-icon dx-icon-map"></i>
           </div>
           <div>
             <div class="title-text">
