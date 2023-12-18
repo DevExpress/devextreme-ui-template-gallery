@@ -34,8 +34,7 @@ function isThemeStyleSheet(styleSheet, theme: Theme) {
     return styleSheet?.href?.includes(`${themeMarker}`);
   } else {
     const rules = Array.from<CSSStyleRule>(styleSheet.cssRules);
-    return !![rules[0], rules.at(-1)].find(
-      (rule) => rule?.selectorText?.includes(`.${themeMarker}`));
+    return !!rules.find((rule) => rule?.selectorText?.includes(`.${themeMarker}`));
   }
 }
 
