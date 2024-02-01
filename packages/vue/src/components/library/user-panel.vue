@@ -37,19 +37,19 @@
 <script setup lang="ts">
 import { DxDropDownButton, DxDropDownBox } from 'devextreme-vue';
 import { ref } from 'vue';
+import { UserInfo } from '../../auth';
 import UserMenuSection from './user-menu-section.vue';
 
 withDefaults(defineProps<{
   menuMode: string,
   menuItems: Array<unknown>,
-  user: object,
+  user: UserInfo | undefined,
 }>(), {
   menuMode: '',
   menuItems: () => [],
-  user: () => ({}),
 });
 
-const userMenuSectionRef = ref<InstanceType<typeof UserMenuSection>>(null);
+const userMenuSectionRef = ref<InstanceType<typeof UserMenuSection>>();
 
 function handleDropDownButtonContentReady({ component }: {component: typeof DxDropDownBox}) {
   component.registerKeyHandler('downArrow', () => {

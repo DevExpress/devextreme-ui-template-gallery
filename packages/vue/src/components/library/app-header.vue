@@ -79,28 +79,27 @@
 </template>
 
 <script setup lang="ts">
-import { DxButton } from 'devextreme-vue/button';
-import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
 import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
-
-import { authInfo as auth, AuthUser } from '../../auth';
+import { DxButton, DxButtonTypes } from 'devextreme-vue/button';
+import { DxToolbar, DxItem } from 'devextreme-vue/toolbar';
+import { authInfo as auth, UserInfo, AuthUser } from '../../auth';
 import ThemeSwitcher from './theme-switcher.vue';
 import UserPanel from './user-panel.vue';
 
 const router = useRouter();
 const route = useRoute();
 
-const user = ref<Record<string, unknown> | unknown>({});
+const user = ref<UserInfo>();
 
 defineProps<{
   menuToggleEnabled: boolean,
     title: string,
-    toggleMenuFunc:(e: unknown) => void,
+    toggleMenuFunc:(e: DxButtonTypes.ClickEvent) => void,
 }>();
 
-auth.getUser().then((e: AuthUser) => {
-  user.value = e.data;
+auth.getUser().then(({ data }: AuthUser) => {
+  user.value = data as UserInfo;
 });
 
 function onLogoutClick() {
