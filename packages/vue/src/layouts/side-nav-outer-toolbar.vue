@@ -30,16 +30,12 @@
 </template>
 
 <script setup lang="ts">
-import DxDrawer from 'devextreme-vue/drawer';
-
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-// eslint-disable-next-line import/no-unresolved
-import DevExpress from 'devextreme';
+import { DxDrawer } from 'devextreme-vue';
+import { DxButtonTypes } from 'devextreme-vue/button';
 import AppHeader from '@/components/library/app-header.vue';
 import SideNavigationMenu from '@/components/library/side-navigation-menu.vue';
-// eslint-disable-next-line no-undef
-import ToolbarItemClickEvent = DevExpress.ui.dxFileManager.ToolbarItemClickEvent;
 
 const props = withDefaults(defineProps<{
   title: string,
@@ -50,7 +46,6 @@ const props = withDefaults(defineProps<{
 });
 
 const route = useRoute();
-
 const menuOpened = ref(props.isLarge);
 const menuTemporaryOpened = ref(false);
 
@@ -73,9 +68,9 @@ watch(
   },
 );
 
-function toggleMenu(e: ToolbarItemClickEvent) {
-  const pointerEvent = e.event;
-  pointerEvent?.stopPropagation();
+function toggleMenu({ event }: DxButtonTypes.ClickEvent) {
+  event?.stopPropagation();
+
   if (menuOpened.value) {
     menuTemporaryOpened.value = false;
   }
