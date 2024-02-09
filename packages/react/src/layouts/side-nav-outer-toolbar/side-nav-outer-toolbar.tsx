@@ -17,51 +17,61 @@ import type { SideNavToolbarProps } from '../../types';
 import './side-nav-outer-toolbar.scss';
 import { SideNavigationItem } from '../../components/library/side-navigation-menu/SideNavigationMenu';
 
-type MenuStatusType = number | null;
+enum MenuOpenState {
+  Closed = 1,
+  Opened = 2,
+  TemporaryOpened = 3,
+}
+
+type MenuStatus = MenuOpenState | null;
 
 export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren<SideNavToolbarProps>) => {
   const navigate = useNavigate();
   const { isXSmall, isLarge } = useScreenSize();
   const [patchCssClass, onMenuReady] = useMenuPatch();
-  const [menuStatus, setMenuStatus] = useState<MenuStatusType>(null);
-  const getDefaultMenuStatus = useCallback(() => isLarge ? MenuStatus.Opened : MenuStatus.Closed, [isLarge]);
+  const [menuStatus, setMenuStatus] = useState<MenuStatus>(null);
 
-  const getActualMenuStatus = useCallback(status => {
+  const getDefaultMenuOpenState = useCallback(() => isLarge ? MenuOpenState.Opened : MenuOpenState.Closed, [isLarge]);
+  const getMenuOpenState = useCallback((status: MenuStatus) => {
     if (status === null) {
-      return getDefaultMenuStatus();
+      return getDefaultMenuOpenState();
     }
 
     return status;
-  }, [getDefaultMenuStatus]);
+  }, [getDefaultMenuOpenState]);
 
-  const getNewMenuStatus = useCallback(newStatus => {
-    return newStatus === getDefaultMenuStatus() ? null : newStatus;
-  }, [getDefaultMenuStatus]);
+  const getMenuStatus = useCallback((status: MenuStatus) => {
+    return status === getDefaultMenuOpenState() ? null : status;
+  }, [getDefaultMenuOpenState]);
+
+  const changeMenuStatus = useCallback((reducerFn: (prevStatus: MenuStatus) => MenuStatus) => {
+    setMenuStatus(prevMenuStatus => getMenuStatus(reducerFn(getMenuOpenState(prevMenuStatus)) ?? prevMenuStatus));
+  }, [getMenuOpenState, getMenuStatus]);
 
   const toggleMenu = useCallback(({ event }: ButtonTypes.ClickEvent) => {
-    setMenuStatus(prevMenuStatus => getNewMenuStatus(getActualMenuStatus(prevMenuStatus) === MenuStatus.Closed ? MenuStatus.Opened : MenuStatus.Closed));
+    changeMenuStatus(prevStatus => prevStatus === MenuOpenState.Closed ? MenuOpenState.Opened : MenuOpenState.Closed);
     event?.stopPropagation();
-  }, [getNewMenuStatus, getActualMenuStatus]);
+  }, [changeMenuStatus]);
 
   const temporaryOpenMenu = useCallback(() => {
-    setMenuStatus(prevMenuStatus => getNewMenuStatus(getActualMenuStatus(prevMenuStatus) === MenuStatus.Closed ? MenuStatus.TemporaryOpened : prevMenuStatus));
-  }, [getNewMenuStatus, getActualMenuStatus]);
+    changeMenuStatus(prevStatus => prevStatus === MenuOpenState.Closed ? MenuOpenState.TemporaryOpened : null);
+  }, [changeMenuStatus]);
 
   const onOutsideClick = useCallback(() => {
-    setMenuStatus(prevMenuStatus => getNewMenuStatus(getActualMenuStatus(prevMenuStatus) !== MenuStatus.Closed && !isLarge ? MenuStatus.Closed : prevMenuStatus));
+    changeMenuStatus(prevStatus => prevStatus !== MenuOpenState.Closed && !isLarge ? MenuOpenState.Closed : null);
     return !isLarge;
-  }, [isLarge, getNewMenuStatus, getActualMenuStatus]);
+  }, [isLarge, changeMenuStatus]);
 
   const onNavigationChanged = useCallback(
     ({ itemData: { path }, event, node }: TreeViewTypes.ItemClickEvent & { itemData: SideNavigationItem }) => {
-      if (getActualMenuStatus(menuStatus) === MenuStatus.Closed || !path || node?.selected) {
+      if (getMenuOpenState(menuStatus) === MenuOpenState.Closed || !path || node?.selected) {
         event?.preventDefault();
         return;
       }
 
       navigate(path);
-      if (!isLarge || menuStatus === MenuStatus.TemporaryOpened) {
-        setMenuStatus(getNewMenuStatus(MenuStatus.Closed));
+      if (!isLarge || menuStatus === MenuOpenState.TemporaryOpened) {
+        setMenuStatus(getMenuStatus(MenuOpenState.Closed));
         event?.stopPropagation();
       }
     },
@@ -69,7 +79,7 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
   ) as (e: TreeViewTypes.ItemClickEvent) => void;
 
   useEffect(() => {
-    setMenuStatus(getNewMenuStatus(menuStatus));
+    changeMenuStatus(() => menuStatus);
   }, [isLarge]);
 
   return (
@@ -84,7 +94,7 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
         minSize={isXSmall ? 0 : 48}
         maxSize={250}
         shading={isLarge ? false : true}
-        opened={getActualMenuStatus(menuStatus) === MenuStatus.Closed ? false : true}
+        opened={getMenuOpenState(menuStatus) === MenuOpenState.Closed ? false : true}
         template='menu'
       >
         <div className='content'>
@@ -93,15 +103,14 @@ export const SideNavOuterToolbar = ({ title, children }: React.PropsWithChildren
           })}
         </div>
         <Template name='menu'>
-          <SideNavigationMenu compactMode={getActualMenuStatus(menuStatus) === MenuStatus.Closed} selectedItemChanged={onNavigationChanged} openMenu={temporaryOpenMenu} onMenuReady={onMenuReady} />
+          <SideNavigationMenu
+            compactMode={getMenuOpenState(menuStatus) === MenuOpenState.Closed}
+            selectedItemChanged={onNavigationChanged}
+            openMenu={temporaryOpenMenu}
+            onMenuReady={onMenuReady}
+          />
         </Template>
       </Drawer>
     </div>
   );
-};
-
-const MenuStatus = {
-  Closed: 1,
-  Opened: 2,
-  TemporaryOpened: 3,
 };
