@@ -1,9 +1,3 @@
-@DevExpress/devextreme-dist-internal
-ISC
-
-@DevExpress/devextreme-internal
-SEE LICENSE IN README.md
-
 @angular/cdk
 MIT
 The MIT License
@@ -124,6 +118,9 @@ THE SOFTWARE.
 devexpress-gantt
 SEE LICENSE IN README.md
 
+devextreme
+SEE LICENSE IN README.md
+
 devextreme-angular
 MIT
 The MIT License (MIT)
@@ -148,6 +145,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+devextreme-dist
 
 dompurify
 (MPL-2.0 OR Apache-2.0)
