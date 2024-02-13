@@ -41,6 +41,7 @@ const setEmbedded = async (t, embed, screenMode) => {
         await setTheme(t, themeMode);
 
         await t.resizeWindow(...[1285, 810]);
+        await t.resizeWindow(...screenMode.map((dimension) => dimension + 1));
         await t.resizeWindow(...screenMode);
         await t.click(Selector('.dx-drawer-content'));
         await t.expect(Selector('.content .dx-toolbar-label').withText('Sammy Hill').exists).ok();
