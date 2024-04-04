@@ -60,7 +60,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
   const onSaveClick = useCallback(({ validationGroup } : ButtonTypes.ClickEvent) => {
     if(!validationGroup.validate().isValid) return;
     setIsEditing(!isEditing);
-  }, []);
+  }, [isEditing]);
 
   const navigateToDetails = useCallback(() => {
     navigate('/crm-contact-details');
