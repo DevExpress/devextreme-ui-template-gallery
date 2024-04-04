@@ -94,34 +94,6 @@ const setEmbedded = async (t, embed, screenMode) => {
           .expect(compareResults.isValid())
           .ok(compareResults.errorMessages());
       });
-
-      test(`Crm contact details save form (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
-        const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
-        // eslint-disable-next-line max-len
-        await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
-        await setTheme(t, themeMode);
-
-        const gridRow = Selector('tbody[role=presentation]').child('tr.dx-data-row');
-        await t.click(gridRow);
-
-        const form = Selector('.left');
-
-        const editButton = Selector('.dx-button[aria-label=Edit]');
-        await t.click(editButton);
-
-        const inputs = Selector('input.form-editor-input');
-        await t.typeText(inputs.nth(0), 'Test save');
-
-        const saveButton = Selector('.dx-button[aria-label=Save]');
-        await t.click(saveButton);
-
-        await takeScreenshot(`crm-form-saved${postfix}`, form);
-
-        await t
-          .expect(compareResults.isValid())
-          .ok(compareResults.errorMessages());
-      });
     });
   });
 });

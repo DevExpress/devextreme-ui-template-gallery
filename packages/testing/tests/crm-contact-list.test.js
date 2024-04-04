@@ -49,6 +49,13 @@ fixture`Contact List`;
 
         await t.click(Selector('.dx-button[aria-label=Edit]'));
         await takeScreenshot(`crm-contact-list-form-edit${postfix}`, Selector('.data-wrapper'));
+
+        const input = Selector('#contact-panel .form-editor-input').nth(0);
+        await t.typeText(input, 'test 0');
+
+        await t.click(Selector('.dx-button[aria-label=Save]'));
+        await takeScreenshot(`crm-contact-list-form-saved${postfix}`, Selector('.data-wrapper'));
+
         await t.click(Selector('[aria-label="Close"]'));
 
         await t.click(Selector('.dx-button[aria-label=All]'));
