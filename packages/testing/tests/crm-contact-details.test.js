@@ -108,7 +108,6 @@ const setEmbedded = async (t, embed, screenMode) => {
 
         // const form = Selector('.plain-styled-form');
         const form = Selector('.left');
-        await takeScreenshot(`crm-form-readonly${postfix}`, form);
 
         const editButton = Selector('.dx-button[aria-label=Edit]');
         await t.click(editButton);
@@ -118,7 +117,8 @@ const setEmbedded = async (t, embed, screenMode) => {
 
         const saveButton = Selector('.dx-button[aria-label=Save]');
         await t.click(saveButton);
-        await takeScreenshot(`crm-form-edit${postfix}`, form);
+
+        await takeScreenshot(`crm-form-saved${postfix}`, form);
 
         await t
           .expect(compareResults.isValid())
