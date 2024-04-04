@@ -50,7 +50,7 @@ fixture`Contact List`;
         await t.click(Selector('.dx-button[aria-label=Edit]'));
         await takeScreenshot(`crm-contact-list-form-edit${postfix}`, Selector('.data-wrapper'));
 
-        const input = Selector('#contact-panel .form-editor-input').nth(0);
+        const input = Selector('.panel-scroll .form-editor-input').nth(0);
         await t.typeText(input, 'test 0');
 
         await t.click(Selector('.dx-button[aria-label=Save]'));
