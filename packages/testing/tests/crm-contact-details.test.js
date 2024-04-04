@@ -105,7 +105,6 @@ const setEmbedded = async (t, embed, screenMode) => {
         const gridRow = Selector('tbody[role=presentation]').child('tr.dx-data-row');
         await t.click(gridRow);
 
-        // const form = Selector('.plain-styled-form');
         const form = Selector('.left');
 
         const editButton = Selector('.dx-button[aria-label=Edit]');
