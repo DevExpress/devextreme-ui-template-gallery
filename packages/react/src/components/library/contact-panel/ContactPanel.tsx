@@ -14,12 +14,14 @@ const ContactPanelWithLoadPanel = withLoadPanel(ContactPanelDetails);
 export const ContactPanel = ({ contactId, isOpened, changePanelOpened, changePanelPinned } : { contactId: number | null, isOpened: boolean, changePanelOpened:(value: boolean)=> void, changePanelPinned: () => void }) => {
 
   const [data, setData] = useState<Contact>();
+  const [defaultData, setDefaultData] = useState<Contact | null>(null);
 
   const loadData = useCallback(() => {
     if (!contactId) return;
 
     getContact(contactId)
       .then((data) => {
+        setDefaultData(data);
         setData(data);
       })
       .catch((error) => console.log(error));
@@ -35,6 +37,7 @@ export const ContactPanel = ({ contactId, isOpened, changePanelOpened, changePan
 
   return (
     <ContactPanelWithLoadPanel
+      defaultContact={defaultData}
       contact={data}
       hasData={!!data}
       isOpened={isOpened}

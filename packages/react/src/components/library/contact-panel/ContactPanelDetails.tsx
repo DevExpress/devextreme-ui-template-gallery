@@ -29,7 +29,7 @@ const formatPrice = (price) => {
   });
 };
 
-export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDataChanged, changePanelPinned } : { contact: Contact, isOpened: boolean, changePanelOpened:(value: boolean)=> void, onDataChanged:(data)=> void, changePanelPinned:() => void }) => {
+export const ContactPanelDetails = ({ defaultContact, contact, isOpened, changePanelOpened, onDataChanged, changePanelPinned } : { defaultContact: Contact | null, contact: Contact, isOpened: boolean, changePanelOpened:(value: boolean)=> void, onDataChanged:(data)=> void, changePanelPinned:() => void }) => {
   const [isPinned, setIsPinned] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const { isLarge, isMedium } = useScreenSize();
@@ -54,6 +54,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
   }, []);
 
   const toggleEditHandler = useCallback(() => {
+    if (isEditing) onDataChanged(defaultContact);
     setIsEditing(!isEditing);
   }, [isEditing]);
 
