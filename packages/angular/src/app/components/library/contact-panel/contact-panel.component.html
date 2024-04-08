@@ -3,10 +3,10 @@
     <ng-container *ngIf="!isLoading">
       <dx-toolbar class="panel-toolbar">
         <dxi-item location="before">
-          <span class="contact-name value">{{ user.name }}</span>
+          <span class="contact-name value">{{ formData.name }}</span>
         </dxi-item>
         <dxi-item location="before">
-          <contact-status [value]="user.status"></contact-status>
+          <contact-status [value]="formData.status"></contact-status>
         </dxi-item>
         <dxi-item location="after" [visible]="isPinEnabled">
           <dx-button
@@ -35,7 +35,7 @@
                 <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
                 <dxi-item cssClass="photo-box">
                   <div *dxTemplate>
-                    <form-photo [link]="user.image"></form-photo>
+                    <form-photo [link]="formData.image"></form-photo>
                   </div>
                 </dxi-item>
 
@@ -44,7 +44,7 @@
                     <div *dxTemplate>
                       <form-textbox
                         label="Company"
-                        [(value)]="user.company"
+                        [(value)]="formData.company"
                         [isEditing]="isEditing"
                       ></form-textbox>
                     </div>
@@ -54,7 +54,7 @@
                     <div *dxTemplate>
                       <form-textbox
                         label="Position"
-                        [(value)]="user.position"
+                        [(value)]="formData.position"
                         [isEditing]="isEditing"
                       ></form-textbox>
                     </div>
@@ -64,7 +64,7 @@
                     <div *dxTemplate>
                       <form-textbox
                         label="Assigned to"
-                        [(value)]="user.manager"
+                        [(value)]="formData.manager"
                         [isEditing]="isEditing"
                       ></form-textbox>
                     </div>
@@ -78,7 +78,7 @@
                     <form-textbox
                       icon="tel"
                       mask="+1(000)000-0000"
-                      [(value)]="user.phone"
+                      [(value)]="formData.phone"
                       [isEditing]="isEditing"
                     >
                     </form-textbox>
@@ -88,7 +88,7 @@
                   <div *dxTemplate>
                     <form-textbox
                       icon="email"
-                      [(value)]="user.email"
+                      [(value)]="formData.email"
                       [isEditing]="isEditing"
                       [validators]="[{ type: 'email' }]"
                     ></form-textbox>
@@ -98,7 +98,7 @@
                   <div *dxTemplate>
                     <form-textbox
                       icon="home"
-                      [(value)]="user.address"
+                      [(value)]="formData.address"
                       [isEditing]="isEditing"
                       [validators]="[]"
                     >
@@ -153,7 +153,7 @@
                   text="Cancel"
                   stylingMode="outlined"
                   type="normal"
-                  (onClick)="toggleEdit()"
+                  (onClick)="cancelHandler()"
                 ></dx-button>
               </dxi-item>
               <dxi-item
@@ -181,7 +181,7 @@
               <div *dxTemplate="let i of 'item'">
                 <div
                   class="opportunities"
-                  *ngFor="let opportunity of user.opportunities"
+                  *ngFor="let opportunity of formData.opportunities"
                 >
                   <span class="value">{{ opportunity.name }} </span>
                   <br />
@@ -194,7 +194,7 @@
             </dxi-item>
 
             <dxi-item title="Activities">
-              <card-activities [activities]="user.activities"></card-activities>
+              <card-activities [activities]="formData.activities"></card-activities>
             </dxi-item>
           </dx-accordion>
         </div>

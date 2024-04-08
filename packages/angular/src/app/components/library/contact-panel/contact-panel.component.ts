@@ -51,7 +51,9 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
 
   private pinEventSubject = new Subject<boolean>();
 
-  user: Contact;
+  formData: Contact;
+
+  contactData: Contact;
 
   pinned = false;
 
@@ -97,7 +99,8 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
     this.isLoading = true;
 
     this.service.getContact(id).subscribe((data) => {
-      this.user = data;
+      this.formData = data;
+      this.contactData = { ...this.formData };
       this.isLoading = false;
       this.isEditing = false;
     })
@@ -115,6 +118,7 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
 
   onSaveClick = ({ validationGroup } : DxButtonTypes.ClickEvent) => {
     if (!validationGroup.validate().isValid) return;
+    this.contactData = { ...this.formData };
     this.isEditing = !this.isEditing;
   }
 
@@ -128,6 +132,11 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
   toggleEdit = () => {
     this.isEditing = !this.isEditing;
   };
+
+  cancelHandler() {
+    this.toggleEdit();
+    this.formData = { ...this.contactData };
+  }
 
   navigateToDetails = () => {
     this.router.navigate(['/crm-contact-details']);

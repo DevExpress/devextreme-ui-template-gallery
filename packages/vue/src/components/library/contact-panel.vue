@@ -151,7 +151,7 @@
                 >
                   <dx-button
                     text="Cancel"
-                    @click="toggleEdit()"
+                    @click="cancelHandler()"
                     styling-mode="outlined"
                     type="normal"
                   />
@@ -246,13 +246,24 @@ const props = withDefaults(defineProps<{
   contactId: number | null
 }>(), { isPanelOpened: false, contactId: null });
 
-const toggleEdit = () => {
+let contactData: Contact | null = null;
+
+const toggleEdit = async () => {
   isEditing.value = !isEditing.value;
+};
+
+const cancelHandler = () => {
+  toggleEdit();
+  panelData.value = structuredClone(contactData);
 };
 
 const emit = defineEmits(['close', 'pinChanged']);
 
-const underContactFields = [
+const underContactFields: {
+  name: 'phone' | 'email' | 'address'
+  icon: string
+  mask?: string
+}[] = [
   {
     name: 'phone',
     mask: '+1(000)000-0000',
@@ -278,13 +289,17 @@ watch(
 );
 
 const loadContact = async (contactId: number) => {
+  isEditing.value = false;
   isLoading.value = true;
-  panelData.value = await getContact(contactId);
+  const contactPanelData = await getContact(contactId);
+  panelData.value = contactPanelData;
+  contactData = structuredClone(contactPanelData);
   isLoading.value = false;
 };
 
 function handleSaveClick({ validationGroup }: DxButtonTypes.ClickEvent) {
   if (validationGroup.validate().isValid) {
+    contactData = structuredClone(panelData.value);
     isEditing.value = false;
   }
 }
