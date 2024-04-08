@@ -248,7 +248,7 @@ const props = withDefaults(defineProps<{
 
 let contactData: Contact | null = null;
 
-const toggleEdit = async () => {
+const toggleEdit = () => {
   isEditing.value = !isEditing.value;
 };
 
