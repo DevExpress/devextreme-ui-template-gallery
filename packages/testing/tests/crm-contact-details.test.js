@@ -59,7 +59,6 @@ const setEmbedded = async (t, embed, screenMode) => {
         await toggleCommonConfiguration(t, BASE_URL, embedded, setEmbedded, screenMode, timeoutSecond);
         await setTheme(t, themeMode);
 
-        // const form = Selector('.plain-styled-form');
         const form = Selector('.left');
 
         await takeScreenshot(`crm-form-readonly${postfix}`, form);
