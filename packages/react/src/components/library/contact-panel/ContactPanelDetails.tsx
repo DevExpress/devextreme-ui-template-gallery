@@ -35,9 +35,13 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
   const { isLarge, isMedium } = useScreenSize();
 
   const navigate = useNavigate();
+  const [formData, setFormData] = useState(contact);
 
   const updateField = (field: string) => (value) => {
-    onDataChanged({ ...contact, ...{ [field]: value } });
+    setFormData({
+      ...formData,
+      [field]: value
+    });
   };
 
   useEffect(() => {
@@ -57,10 +61,16 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
     setIsEditing(!isEditing);
   }, [isEditing]);
 
+  const cancelHandler = useCallback(() => {
+    toggleEditHandler();
+    setFormData(contact);
+  }, [contact, toggleEditHandler]);
+
   const onSaveClick = useCallback(({ validationGroup } : ButtonTypes.ClickEvent) => {
     if(!validationGroup.validate().isValid) return;
+    onDataChanged(formData);
     setIsEditing(!isEditing);
-  }, [isEditing]);
+  }, [formData, isEditing]);
 
   const navigateToDetails = useCallback(() => {
     navigate('/crm-contact-details');
@@ -126,7 +136,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                     <FormItem cssClass='accent'>
                       <FormTextbox
                         label='Company'
-                        value={contact.company}
+                        value={formData.company}
                         isEditing={!isEditing}
                         onValueChange={updateField('company')}
                       />
@@ -134,7 +144,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                     <FormItem>
                       <FormTextbox
                         label='Position'
-                        value={contact.position}
+                        value={formData.position}
                         isEditing={!isEditing}
                         onValueChange={updateField('position')}
                       />
@@ -142,7 +152,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                     <FormItem cssClass='accent'>
                       <FormTextbox
                         label='Assigned to'
-                        value={contact.manager}
+                        value={formData.manager}
                         isEditing={!isEditing}
                         onValueChange={updateField('manager')}
                       />
@@ -153,7 +163,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                 <GroupItem cssClass='contact-fields-group'>
                   <FormItem>
                     <FormTextbox
-                      value={contact.phone}
+                      value={formData.phone}
                       isEditing={!isEditing}
                       onValueChange={updateField('phone')}
                       icon='tel'
@@ -162,7 +172,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                   </FormItem>
                   <FormItem>
                     <FormTextbox
-                      value={contact.email}
+                      value={formData.email}
                       isEditing={!isEditing}
                       onValueChange={updateField('email')}
                       icon='email'
@@ -170,7 +180,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                   </FormItem>
                   <FormItem>
                     <FormTextbox
-                      value={contact.address}
+                      value={formData.address}
                       isEditing={!isEditing}
                       onValueChange={updateField('address')}
                       icon='home'
@@ -192,7 +202,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                   <Button text='Save' icon='save' stylingMode='contained' type='default' onClick={onSaveClick} />
                 </ToolbarItem>
                 <ToolbarItem location='after' visible={isEditing}>
-                  <Button text='Cancel' stylingMode='outlined' type='normal' onClick={toggleEditHandler} />
+                  <Button text='Cancel' stylingMode='outlined' type='normal' onClick={cancelHandler} />
                 </ToolbarItem>
                 <ToolbarItem location='before'
                   widget='dxDropDownButton'
