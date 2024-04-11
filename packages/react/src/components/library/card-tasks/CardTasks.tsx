@@ -16,12 +16,10 @@ const Grid = ({ tasks }: { tasks: Task[] }) => {
     const toIndex = gridData.indexOf(visibleRows[e.toIndex].data);
     const fromIndex = gridData.indexOf(e.itemData);
 
-    setGridData([
-      ...gridData.slice(0, fromIndex),
-      ...gridData.slice(fromIndex + 1, toIndex + 1),
-      e.itemData,
-      ...gridData.slice(toIndex + 1)
-    ]);
+    const newGridData = [...gridData];
+    newGridData.splice(fromIndex, 1);
+    newGridData.splice(toIndex, 0, e.itemData);
+    setGridData(newGridData);
   }, [gridData]);
 
   return (
