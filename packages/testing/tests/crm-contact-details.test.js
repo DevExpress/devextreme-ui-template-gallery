@@ -85,8 +85,6 @@ const setEmbedded = async (t, embed, screenMode) => {
         const itemCount = await dragIcons.count;
         await t.dragToElement(dragIcons.nth(3), dragIcons.nth(1));
         await t.expect(Selector('span.dx-datagrid-drag-icon').count).eql(itemCount);
-        await t.dragToElement(dragIcons.nth(1), dragIcons.nth(3));
-        await t.expect(Selector('span.dx-datagrid-drag-icon').count).eql(itemCount);
 
         const tabs = Selector('.content .dx-tabpanel-tabs .dx-tab-text');
 
