@@ -205,7 +205,7 @@ function onCalendarDateChange({ value }: { value: Date }) {
   updateAgenda({ startDate: currentDate.value });
 }
 
-function showAppointmentCreationForm(appointment: SelectedAppointment| null) {
+function showAppointmentCreationForm(appointment?: SelectedAppointment| null) {
   schedulerRef.value?.instance.showAppointmentPopup(appointment?.data, !appointment);
 }
 
