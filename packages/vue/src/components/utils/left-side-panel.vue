@@ -64,7 +64,6 @@ watchEffect(() => {
     width: 0;
     transition: width var(--transition);
     overflow: hidden;
-    white-space: nowrap;
 
     .dx-scrollview {
       min-width: var(--left-side-panel-width);
