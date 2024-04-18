@@ -23,6 +23,15 @@ class ThemeService {
     return current().includes('fluent');
   }
 
+  private getNewVizTheme(theme: Theme) {
+    const themeArr = currentVizTheme().split('.');
+    return themeArr.reduce((prev, curr) => {
+      if (!prev) return themeArr[0];
+      if (themes.includes(curr as Theme)) return `${prev}.${theme}`;
+      return `${prev}.${curr}`;
+    }, '');
+  }
+
   getCurrentTheme(): Theme {
     return window.localStorage[this.storageKey] || getNextTheme();
   }
@@ -39,9 +48,7 @@ class ThemeService {
     });
 
     this.currentTheme.value = theme;
-    const regTheme = this.isFluent() ? /\.[a-z]+$/ : /\.[a-z]+\.compact$/;
-    const replaceTheme = this.isFluent() ? `.${theme}` : `.${theme}.compact`;
-    currentVizTheme(currentVizTheme().replace(regTheme, replaceTheme));
+    currentVizTheme(this.getNewVizTheme(theme));
     refreshTheme();
   }
 

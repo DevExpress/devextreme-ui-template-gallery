@@ -27,6 +27,15 @@ function getCurrentTheme(): Theme {
   return window.localStorage[storageKey] || getNextTheme();
 }
 
+function getNewVizTheme(theme: Theme) {
+  const themeArr = currentVizTheme().split('.');
+  return themeArr.reduce((prev, curr) => {
+    if (!prev) return themeArr[0];
+    if (themes.includes(curr as Theme)) return `${prev}.${theme}`;
+    return `${prev}.${curr}`;
+  }, '');
+}
+
 function isThemeStyleSheet(styleSheet, theme: Theme) {
   const themeMarker = `${themePrefix}${theme}`;
   // eslint-disable-next-line no-undef
@@ -47,18 +56,16 @@ function switchThemeStyleSheets(enabledTheme: Theme) {
   });
 }
 
-async function setAppTheme(newTheme?: Theme, isFluent?: boolean) {
+async function setAppTheme(newTheme?: Theme) {
   const themeName = newTheme || getCurrentTheme();
 
   switchThemeStyleSheets(themeName);
 
-  const regTheme = isFluent ? /\.[a-z]+$/ : /\.[a-z]+\.compact$/;
-  const replaceTheme = isFluent ? `.${themeName}` : `.${themeName}.compact`;
-  currentVizTheme(currentVizTheme().replace(regTheme, replaceTheme));
+  currentVizTheme(getNewVizTheme(themeName));
   refreshTheme();
 }
 
-function toggleTeme(currentTheme: Theme): Theme {
+function toggleTheme(currentTheme: Theme): Theme {
   const newTheme = getNextTheme(currentTheme);
   window.localStorage[storageKey] = newTheme;
   return newTheme;
@@ -74,14 +81,14 @@ export function useThemeContext() {
     });
   }, []);
 
-  const switchTheme = useCallback(() => setTheme((currentTheme: Theme) => toggleTeme(currentTheme)), []);
+  const switchTheme = useCallback(() => setTheme((currentTheme: Theme) => toggleTheme(currentTheme)), []);
 
   const isFluent = useCallback((): boolean => {
     return getCurrentDXTheme().includes('fluent');
   }, []);
 
   useEffect(() => {
-    isLoaded && setAppTheme(theme, isFluent());
+    isLoaded && setAppTheme(theme);
   }, [theme, isLoaded]);
 
   return useMemo(()=> ({ theme, switchTheme, isLoaded, isFluent }), [theme, isLoaded, isFluent]);
