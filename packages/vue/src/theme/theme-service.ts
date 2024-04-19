@@ -39,8 +39,8 @@ class ThemeService {
     });
 
     this.currentTheme.value = theme;
-    const regexTheme = new RegExp(`${themes.join('|')}`, 'g');
-    currentVizTheme(currentVizTheme().replace(regexTheme, theme));
+    const regexTheme = new RegExp(`\\.(${themes.join('|')})`, 'g');
+    currentVizTheme(currentVizTheme().replace(regexTheme, `.${theme}`));
     refreshTheme();
   }
 

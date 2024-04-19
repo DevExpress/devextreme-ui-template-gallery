@@ -36,8 +36,8 @@ export class ThemeService {
     this.currentTheme = theme;
     this.isDark.next(this.currentTheme === 'dark');
 
-    const regexTheme = new RegExp(`${themes.join('|')}`, 'g');
-    currentVizTheme(currentVizTheme().replace(regexTheme, theme));
+    const regexTheme = new RegExp(`\\.(${themes.join('|')})`, 'g');
+    currentVizTheme(currentVizTheme().replace(regexTheme, `.${theme}`));
     refreshTheme();
   }
 

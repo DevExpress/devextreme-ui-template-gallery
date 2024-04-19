@@ -52,8 +52,8 @@ async function setAppTheme(newTheme?: Theme) {
 
   switchThemeStyleSheets(themeName);
 
-  const regexTheme = new RegExp(`${themes.join('|')}`, 'g');
-  currentVizTheme(currentVizTheme().replace(regexTheme, themeName));
+  const regexTheme = new RegExp(`\\.(${themes.join('|')})`, 'g');
+  currentVizTheme(currentVizTheme().replace(regexTheme, `.${themeName}`));
   refreshTheme();
 }
 
