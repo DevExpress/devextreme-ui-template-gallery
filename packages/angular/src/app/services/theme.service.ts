@@ -36,21 +36,13 @@ export class ThemeService {
     this.currentTheme = theme;
     this.isDark.next(this.currentTheme === 'dark');
 
-    currentVizTheme(this.getNewVizTheme(theme));
+    const regexTheme = new RegExp(`${themes.join('|')}`, 'g');
+    currentVizTheme(currentVizTheme().replace(regexTheme, theme));
     refreshTheme();
   }
 
   getCurrentTheme() {
     return this.currentTheme;
-  }
-
-  private getNewVizTheme(theme: Theme) {
-    const themeArr = currentVizTheme().split('.');
-    return themeArr.reduce((prev, curr) => {
-      if (!prev) return themeArr[0];
-      if (themes.includes(curr as Theme)) return `${prev}.${theme}`;
-      return `${prev}.${curr}`;
-    }, '');
   }
 
   isFluent(): boolean {

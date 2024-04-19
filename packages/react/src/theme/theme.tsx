@@ -27,15 +27,6 @@ function getCurrentTheme(): Theme {
   return window.localStorage[storageKey] || getNextTheme();
 }
 
-function getNewVizTheme(theme: Theme) {
-  const themeArr = currentVizTheme().split('.');
-  return themeArr.reduce((prev, curr) => {
-    if (!prev) return themeArr[0];
-    if (themes.includes(curr as Theme)) return `${prev}.${theme}`;
-    return `${prev}.${curr}`;
-  }, '');
-}
-
 function isThemeStyleSheet(styleSheet, theme: Theme) {
   const themeMarker = `${themePrefix}${theme}`;
   // eslint-disable-next-line no-undef
@@ -61,7 +52,8 @@ async function setAppTheme(newTheme?: Theme) {
 
   switchThemeStyleSheets(themeName);
 
-  currentVizTheme(getNewVizTheme(themeName));
+  const regexTheme = new RegExp(`${themes.join('|')}`, 'g');
+  currentVizTheme(currentVizTheme().replace(regexTheme, themeName));
   refreshTheme();
 }
 
