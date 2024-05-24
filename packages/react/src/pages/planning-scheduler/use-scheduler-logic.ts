@@ -1,7 +1,7 @@
 import { useRef, useState, useCallback, useMemo, useEffect } from 'react';
 
-import Tooltip from 'devextreme-react/tooltip';
-import Scheduler, { SchedulerTypes } from 'devextreme-react/scheduler';
+import { TooltipRef } from 'devextreme-react/tooltip';
+import { SchedulerRef, SchedulerTypes } from 'devextreme-react/scheduler';
 import DataSource from 'devextreme/data/data_source';
 
 import { getTasksForScheduler } from 'dx-template-gallery-data';
@@ -10,8 +10,8 @@ import { findAllAppointmentsForDay } from './utils';
 
 export const useSchedulerLogic = () => {
   const { isXSmall, isLarge } = useScreenSize();
-  const tooltipRef = useRef<Tooltip>(null);
-  const schedulerRef = useRef<Scheduler>(null);
+  const tooltipRef = useRef<TooltipRef>(null);
+  const schedulerRef = useRef<SchedulerRef>(null);
 
   const [agendaItems, setAgendaItems] = useState<{ startDate: Date }[]>();
   const [currentView, setCurrentView] = useState<SchedulerTypes.ViewType>('workWeek');
@@ -42,7 +42,7 @@ export const useSchedulerLogic = () => {
   const toggleRightPanelOpen = useCallback(() => {
     setRightPanelOpen(!rightPanelOpen);
     if (isLarge) {
-      schedulerRef.current?.instance.repaint();
+      schedulerRef.current?.instance().repaint();
     }
   }, [rightPanelOpen, isLarge]);
 
@@ -57,17 +57,17 @@ export const useSchedulerLogic = () => {
   }, [isXSmall, currentView]);
 
   const showAppointmentCreationForm = useCallback(() => {
-    schedulerRef.current?.instance.showAppointmentPopup();
+    schedulerRef.current?.instance().showAppointmentPopup();
   }, []);
 
   const deleteCurrentAppointment = useCallback(() => {
-    schedulerRef.current?.instance.deleteAppointment(selectedAppointment?.data);
-    tooltipRef.current?.instance.hide();
+    schedulerRef.current?.instance().deleteAppointment(selectedAppointment?.data);
+    tooltipRef.current?.instance().hide();
   }, [selectedAppointment]);
 
   const editCurrentAppointment = useCallback(() => {
-    schedulerRef.current?.instance.showAppointmentPopup(selectedAppointment?.data, false);
-    tooltipRef.current?.instance.hide();
+    schedulerRef.current?.instance().showAppointmentPopup(selectedAppointment?.data, false);
+    tooltipRef.current?.instance().hide();
   }, [selectedAppointment]);
 
   const updateAgenda = useCallback((appointmentData) => {
@@ -102,7 +102,7 @@ export const useSchedulerLogic = () => {
       toggleRightPanelOpen();
     }
     else {
-      tooltipRef.current?.instance.show();
+      tooltipRef.current?.instance().show();
     }
 
   }, [currentView, isXSmall, rightPanelOpen, updateAgenda, toggleRightPanelOpen]);
@@ -119,7 +119,7 @@ export const useSchedulerLogic = () => {
   }, [tasks, selectedAppointment, updateAgenda]);
 
   const setCurrentDate = useCallback((selectedDate: Date)=>{
-    const schedulerInstance = schedulerRef.current?.instance;
+    const schedulerInstance = schedulerRef.current?.instance();
     const startViewDate = schedulerInstance?.getStartViewDate();
     const endViewDate = schedulerInstance?.getEndViewDate();
 
@@ -147,7 +147,7 @@ export const useSchedulerLogic = () => {
   }, [selectedAppointment, updateAgenda]);
 
   const showAppointmentTooltip = useCallback((e) => {
-    schedulerRef.current?.instance.showAppointmentTooltip(e.itemData, e.element);
+    schedulerRef.current?.instance().showAppointmentTooltip(e.itemData, e.element);
   }, []);
 
   const onCellClick = useCallback((e) => {

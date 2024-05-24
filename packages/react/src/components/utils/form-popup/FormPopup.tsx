@@ -2,7 +2,7 @@ import './FormPopup.scss';
 import React, { useCallback, useRef, PropsWithChildren } from 'react';
 
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
-import ValidationGroup from 'devextreme-react/validation-group';
+import { ValidationGroup, ValidationGroupRef } from 'devextreme-react/validation-group';
 import { useScreenSize } from '../../../utils/media-query';
 import { Button } from 'devextreme-react';
 
@@ -29,10 +29,10 @@ export const FormPopup = ({
   children
 }: PropsWithChildren<PopupProps>) => {
   const { isXSmall } = useScreenSize();
-  const validationGroup = useRef<ValidationGroup>(null);
+  const validationGroup = useRef<ValidationGroupRef>(null);
 
   const close = () => {
-    validationGroup.current?.instance.reset();
+    validationGroup.current?.instance().reset();
     setVisible(false);
   };
 
@@ -41,7 +41,7 @@ export const FormPopup = ({
   }, [close, validationGroup]);
 
   const onSaveClick = useCallback(() => {
-    if (!validationGroup.current?.instance.validate().isValid) return;
+    if (!validationGroup.current?.instance().validate().isValid) return;
 
     onSave && onSave();
     close();

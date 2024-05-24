@@ -1,6 +1,6 @@
 import { TreeViewTypes } from 'devextreme-react/tree-view';
 import { ButtonTypes } from 'devextreme-react/button';
-import List from 'devextreme-react/list';
+import { ListRef } from 'devextreme-react/list';
 import React from 'react';
 
 export interface AppHeaderProps {
@@ -23,7 +23,7 @@ export interface UserPanelProps {
 
 export interface UserMenuSectionProps {
   showAvatar?: boolean;
-  listRef?: React.RefObject<List>;
+  listRef?: React.RefObject<ListRef>;
 }
 
 export interface User {

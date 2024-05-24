@@ -3,7 +3,7 @@ import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react'
 import notify from 'devextreme/ui/notify';
 import { ValidationRule } from 'devextreme-react/common';
 import Form, { Item, Label } from 'devextreme-react/form';
-import Validator, { ValidatorTypes } from 'devextreme-react/validator';
+import { ValidatorRef, ValidatorTypes } from 'devextreme-react/validator';
 import { FormPopup } from '../../utils/form-popup/FormPopup';
 import { PasswordTextBox } from '../password-text-box/PasswordTextBox';
 
@@ -12,7 +12,7 @@ const saveNewPassword = (): void => {
 };
 
 export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
-  const confirmField = useRef<Validator>(null);
+  const confirmField = useRef<ValidatorRef>(null);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');
@@ -47,7 +47,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
   ]);
 
   const checkConfirm = useCallback(() => {
-    confirmField.current?.instance.validate();
+    confirmField.current?.instance().validate();
   }, []);
 
   const onCurrentPasswordValidated = useCallback((e: ValidatorTypes.ValidatedEvent) => {

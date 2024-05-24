@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 
-import TreeView from 'devextreme-react/tree-view';
+import { TreeView, TreeViewRef } from 'devextreme-react/tree-view';
 
 import { AppFooter } from '../..';
 import { navigation } from '../../../app-navigation';
@@ -41,7 +41,7 @@ export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigation
     navigationData: { currentPath },
   } = useNavigation();
 
-  const treeViewRef = useRef<TreeView>(null);
+  const treeViewRef = useRef<TreeViewRef>(null);
   const wrapperRef = useRef();
   const getWrapperRef = useCallback(
     (element) => {
@@ -59,7 +59,7 @@ export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigation
   );
 
   useEffect(() => {
-    const treeView = treeViewRef.current && treeViewRef.current.instance;
+    const treeView = treeViewRef.current && treeViewRef.current.instance();
     if (!treeView) {
       return;
     }
