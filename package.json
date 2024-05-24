@@ -61,8 +61,8 @@
     "packages/*"
   ],
   "dependencies": {
-    "devextreme": "23.2-next",
-    "devextreme-dist": "23.2-next"
+    "devextreme": "24.1-next",
+    "devextreme-dist": "24.1-next"
   },
   "pre-commit": [
     "lint-bundles"
