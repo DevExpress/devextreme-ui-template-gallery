@@ -204,9 +204,9 @@ jobs:
           FILE_FRAMEWORK_PATH="$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz" | sed 's|/|\\/|g')"
           FILE_DX_PATH="$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz" | sed 's|/|\\/|g')"
           FILE_DX_DIST_PATH="$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz" | sed 's|/|\\/|g')"
-          sed -i "s|\"devextreme\": \"[0-9a-zA-Z.]\+\"|\"devextreme\": \"\.\/$FILE_DX_PATH\"|g" ./package.json
-          sed -i "s/\"devextreme-dist\": \"[0-9a-zA-Z.]\+\"/\"devextreme-dist\": \"\.\/$FILE_DX_DIST_PATH\"/g" ./package.json
-          sed -i "s|\"devextreme-${{ matrix.ARGS.project }}\": \"[0-9a-zA-Z.]\+\"|\"devextreme-${{ matrix.ARGS.project }}\": \"\.\.\/\.\.\/$FILE_FRAMEWORK_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s|\"devextreme\": \"[0-9a-zA-Z.-]\+\"|\"devextreme\": \"\.\/$FILE_DX_PATH\"|g" ./package.json
+          sed -i "s/\"devextreme-dist\": \"[0-9a-zA-Z.-]\+\"/\"devextreme-dist\": \"\.\/$FILE_DX_DIST_PATH\"/g" ./package.json
+          sed -i "s|\"devextreme-${{ matrix.ARGS.project }}\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-${{ matrix.ARGS.project }}\": \"\.\.\/\.\.\/$FILE_FRAMEWORK_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
 
       - name: Restore npm cache
         uses: actions/cache@v4
