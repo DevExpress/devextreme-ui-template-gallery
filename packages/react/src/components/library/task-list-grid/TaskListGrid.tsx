@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import DataGrid, {
+import {
+  DataGrid, DataGridRef,
   Column, Selection, Sorting, HeaderFilter, DataGridTypes,
   RequiredRule, Paging, Pager, Editing, Scrolling, LoadPanel,
 } from 'devextreme-react/data-grid';
@@ -46,7 +47,7 @@ const editPriorityRender = ({ setValue, value }: GridEdit) => (
   />
 );
 
-export const TaskListGrid = React.forwardRef<DataGrid, PlanningProps>(({ dataSource }, ref) => {
+export const TaskListGrid = React.forwardRef<DataGridRef, PlanningProps>(({ dataSource }, ref) => {
   const [data, setData] = useState<Task[]>();
 
   const navigate = useNavigate();
