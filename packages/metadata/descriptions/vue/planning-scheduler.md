@@ -1,4 +1,5 @@
 The DevExtreme Vue Scheduler View template can be used to plan and manage appointments and events in an Vue-powered application.
+<--split-->
 
 ## UI Components  
 

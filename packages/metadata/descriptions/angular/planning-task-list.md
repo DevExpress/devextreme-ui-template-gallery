@@ -1,4 +1,5 @@
 Our Angular Task List View template allows you to incorporate task/project management related UI layouts within your next DevExtreme-powered Angular application.  
+<--split-->
 
 ## UI Components  
 

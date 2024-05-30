@@ -1,4 +1,5 @@
 The DevExtreme React Sign Up Form template helps you implement a user registration workflow in your application.
+<--split-->
 
 ## UI Components  
 

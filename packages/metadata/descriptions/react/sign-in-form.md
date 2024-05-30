@@ -1,4 +1,5 @@
 The DevExtreme React Sign In Form template helps you implement authentication workflow for registered users in your application.
+<--split-->
 
 ## UI Components  
 

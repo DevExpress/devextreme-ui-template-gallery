@@ -1,4 +1,5 @@
 Our Vue Contact Detail View template helps you bootstrap UI layouts for Vue-powered CRM/contact management applications. The layout includes a contact details section and a tab panel to manage related entities, such as tasks, activities, opportunities, notes, and messages. 
+<--split-->
 
 ## UI Components  
 

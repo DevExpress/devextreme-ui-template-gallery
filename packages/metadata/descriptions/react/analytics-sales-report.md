@@ -1,4 +1,5 @@
 Our React Sales Dashboard template can be used to quickly bootstrap a sales dashboard UI layout in an React-powered BI or analytics application. 
+<--split-->
 
 ## UI Components  
 

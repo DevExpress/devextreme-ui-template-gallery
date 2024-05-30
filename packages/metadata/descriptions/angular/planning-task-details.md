@@ -1,4 +1,5 @@
 The DevExtreme Angular Task Detail View template can be used to manage task information in an Angular-powered application. The template includes a task edit form and a tab section for related entities such as activities, notes, and comments. 
+<--split-->
 
 ## UI Components  
 
