@@ -3,8 +3,8 @@
     id="dropzone"
     ref="dropzone"
     :class="isDropZoneActive
-      ? 'theme-accent-as-border-color'
-      : 'theme-border-color'
+      ? 'dx-theme-accent-as-border-color'
+      : 'dx-theme-border-color'
     "
   >
     <span>Drag and drop a photo here or click the area to select it from a folder</span>
