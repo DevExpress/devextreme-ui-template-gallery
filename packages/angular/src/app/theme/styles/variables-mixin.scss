@@ -4,7 +4,6 @@ $theme-mode: null !default;
 @use "devextreme/scss/widgets/fluent/sizes" as * with ($size: "default");
 @use "devextreme/scss/widgets/fluent/fieldset/sizes" as *;
 @use "theme-special" as * with ($theme: "fluent");
-
 @use "sass:math";
 @use "sass:color";
 

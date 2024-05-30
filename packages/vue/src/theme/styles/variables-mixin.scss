@@ -1,11 +1,10 @@
 $theme-mode: null !default;
+
 @use "devextreme/scss/widgets/fluent/colors" as * with ($color: "blue", $mode: $theme-mode);
 @use "devextreme/scss/widgets/fluent/sizes" as * with ($size: "default");
 @use "theme-special" as * with ($theme: "fluent");
-
 @use "sass:math";
 @use "sass:color";
-
 
 :root {
   --dark-warning-color: #{darken(adjust-hue($base-warning, -12), 3.73)};

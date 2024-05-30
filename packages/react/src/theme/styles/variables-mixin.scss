@@ -1,4 +1,5 @@
 $theme-mode: null !default;
+
 @use "devextreme/scss/widgets/fluent/colors" as * with ($color: "blue", $mode: $theme-mode);
 @use "devextreme/scss/widgets/fluent/sizes" as * with ($size: "default");
 @use "theme-special" as * with ($theme: "fluent");
