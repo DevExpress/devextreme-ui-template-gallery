@@ -1,4 +1,5 @@
 The DevExtreme React Geography Dashboard template helps you create geography-based dashboard layouts in an React-powered BI or analytics application. 
+<--split-->
 
 ## UI Components  
 

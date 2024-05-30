@@ -1,4 +1,5 @@
 The DevExtreme Vue Overview Dashboard template helps you construct a high-level dashboard UI layout in an Vue-powered BI or analytics application. 
+<--split-->
 
 ## UI Components  
 
