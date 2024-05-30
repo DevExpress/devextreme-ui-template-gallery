@@ -1,7 +1,7 @@
 import React, { useState, forwardRef, useMemo, useCallback } from 'react';
 import TextBox, { Button } from 'devextreme-react/text-box';
 import { ValidationRule, ButtonStyle } from 'devextreme-react/common';
-import Validator, { ValidatorTypes } from 'devextreme-react/validator';
+import { Validator, ValidatorRef, ValidatorTypes } from 'devextreme-react/validator';
 
 interface PasswordTextBoxProps {
   value?: string,
@@ -12,7 +12,7 @@ interface PasswordTextBoxProps {
   onValueValidated?: (e: ValidatorTypes.ValidatedEvent) => void;
 }
 
-export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({
+export const PasswordTextBox = forwardRef<ValidatorRef, PasswordTextBoxProps>(({
   value = '',
   onValueChange,
   placeholder,

@@ -6,7 +6,8 @@ import { Workbook } from 'exceljs';
 import './crm-contact-list.scss';
 
 import { getContacts } from 'dx-template-gallery-data';
-import DataGrid, {
+import {
+  DataGrid, DataGridRef,
   Sorting, Selection, HeaderFilter, Scrolling, SearchPanel,
   ColumnChooser, Export, Column, Toolbar, Item, LoadPanel,
   DataGridTypes
@@ -90,7 +91,7 @@ export const CRMContactList = () => {
   const [contactId, setContactId] = useState<number>(0);
   const [popupVisible, setPopupVisible] = useState(false);
   const [formDataDefaults, setFormDataDefaults] = useState({ ...newContact });
-  const gridRef = useRef<DataGrid>(null);
+  const gridRef = useRef<DataGridRef>(null);
 
   let newContactData: Contact;
 
@@ -107,11 +108,11 @@ export const CRMContactList = () => {
 
   const changePanelOpened = useCallback(() => {
     setPanelOpened(!isPanelOpened);
-    gridRef.current?.instance.option('focusedRowIndex', -1);
+    gridRef.current?.instance().option('focusedRowIndex', -1);
   }, [isPanelOpened]);
 
   const changePanelPinned = useCallback(() => {
-    gridRef.current?.instance.updateDimensions();
+    gridRef.current?.instance().updateDimensions();
   }, []);
 
   const onAddContactClick = useCallback(() => {
@@ -128,16 +129,16 @@ export const CRMContactList = () => {
   const filterByStatus = useCallback((e: DropDownButtonTypes.SelectionChangedEvent) => {
     const { item: status }: { item: FilterContactStatus } = e;
     if (status === 'All') {
-      gridRef.current?.instance.clearFilter();
+      gridRef.current?.instance().clearFilter();
     } else {
-      gridRef.current?.instance.filter(['status', '=', status]);
+      gridRef.current?.instance().filter(['status', '=', status]);
     }
 
     setStatus(status);
   }, []);
 
   const refresh = useCallback(() => {
-    gridRef.current?.instance.refresh();
+    gridRef.current?.instance().refresh();
   }, []);
 
   const onDataChanged = useCallback((data) => {

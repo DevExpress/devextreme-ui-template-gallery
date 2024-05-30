@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Gantt, { Tasks, Column, Toolbar, Item, Validation, Editing } from 'devextreme-react/gantt';
+import { Gantt, GanttRef, Tasks, Column, Toolbar, Item, Validation, Editing } from 'devextreme-react/gantt';
 
 import { PlanningProps } from '../../../types/task';
 
 import './TaskListGantt.scss';
 
-export const TaskListGantt = React.forwardRef<Gantt, PlanningProps>(({ dataSource }, ref) => {
+export const TaskListGantt = React.forwardRef<GanttRef, PlanningProps>(({ dataSource }, ref) => {
 /* eslint-disable  @typescript-eslint/no-explicit-any */
   return (
     <div className='gantt'>
