@@ -3,8 +3,6 @@ $theme-mode: null !default;
 @use "devextreme/scss/widgets/fluent/sizes" as * with ($size: "default");
 @use "theme-special" as * with ($theme: "fluent");
 
-@forward "devextreme/scss/widgets/fluent/colors";
-
 @use "sass:math";
 @use "sass:color";
 

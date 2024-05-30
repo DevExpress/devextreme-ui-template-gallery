@@ -2,17 +2,7 @@ $theme-mode: null !default;
 
 @use "devextreme/scss/widgets/fluent/colors" as * with ($color: "blue", $mode: $theme-mode);
 @use "devextreme/scss/widgets/fluent/sizes" as * with ($size: "default");
-@use "devextreme/scss/widgets/fluent/button/mixins" as *;
-@use "devextreme/scss/widgets/fluent/popup/sizes" as *;
-@use "devextreme/scss/widgets/fluent/textEditor/colors" as *;
-@use "devextreme/scss/widgets/fluent/fieldset/sizes" as *;
-@use "devextreme/scss/widgets/fluent/toolbar/sizes" as toolbar_sizes;
-@use "devextreme/scss/widgets/fluent/list/sizes" as *;
-@use "devextreme/scss/widgets/fluent/button/sizes" as *;
 @use "theme-special" as * with ($theme: "fluent");
-
-@forward "devextreme/scss/widgets/fluent/colors";
-@forward "devextreme/scss/widgets/fluent/textEditor/colors";
 
 @use "sass:math";
 @use "sass:color";
