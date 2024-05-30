@@ -1,4 +1,5 @@
 The DevExtreme Angular Scheduler View template can be used to plan and manage appointments and events in an Angular-powered application.
+<--split-->
 
 ## UI Components  
 

@@ -1,4 +1,5 @@
 The DevExtreme Angular Geography Dashboard template helps you create geography-based dashboard layouts in an Angular-powered BI or analytics application. 
+<--split-->
 
 ## UI Components  
 

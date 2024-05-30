@@ -1,4 +1,5 @@
 The DevExtreme Vue User Profile template helps you create an editing form for user's profile in your application.
+<--split-->
 
 ## UI Components  
 
