@@ -14,7 +14,7 @@
         class="list"
         v-for="board in kanbanDataSource"
       >
-        <div class="list-title dx-theme-text-color">
+        <div class="list-title theme-text-color">
           <span>{{ board.name }}</span>
           <card-menu :items="boardMenuItems" />
         </div>

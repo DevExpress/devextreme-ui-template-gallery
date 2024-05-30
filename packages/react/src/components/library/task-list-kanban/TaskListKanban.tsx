@@ -50,7 +50,7 @@ const TaskList = ({
 
   return (
     <div className='list'>
-      <div className='list-title dx-theme-text-color'>
+      <div className='list-title theme-text-color'>
         <span>{title}</span>
         <CardMenu items={boardMenuItems} />
       </div>

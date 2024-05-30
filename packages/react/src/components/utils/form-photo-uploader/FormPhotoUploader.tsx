@@ -26,8 +26,8 @@ export const FormPhotoUploader = () => {
         ref={getUploaderRef}
         id='uploader'
         className={`${ isDropZoneActive
-          ? 'dx-theme-accent-as-border-color'
-          : 'dx-theme-border-color' }`}
+          ? 'theme-accent-as-border-color'
+          : 'theme-border-color' }`}
       >
         <span>Drag and drop a photo here or click the area to select it from a folder</span>
       </div>

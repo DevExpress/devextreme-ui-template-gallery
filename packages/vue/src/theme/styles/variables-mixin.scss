@@ -22,7 +22,7 @@ $theme-mode: null !default;
   --typography-bg: var(--base-bg);
 
   @if variable-exists("base-typography-bg") {
-    --typography-bg: #{$base-typography-bg};
+    --typography-bg: var(--dx-color-main-bg);
   }
 
   --header-toolbar-vertical-padding: 10px;
@@ -32,7 +32,7 @@ $theme-mode: null !default;
   --footer-height: 70px;
   --calendar-width: 292px;
   --side-panel-min-width: 48px;
-  --base-bg: #{$base-bg};
+  --base-bg: var(--dx-component-color-bg);
   --base-bg-darken-5: #{darken($base-bg, 5)};
   --base-bg-darken-4: #{darken($base-bg, 4)};
   --card-background: var(--base-bg);
@@ -42,29 +42,27 @@ $theme-mode: null !default;
   }
 
   --side-panel-background: var(--base-bg-darken-5);
-  --border-color: #{$base-border-color};
-  --accent-color: #{$base-accent};
-  --success-color: #{$base-success};
-  --info-color: #{$base-accent};
-  --warning-color: #{$base-warning};
-  --error-color: #{$base-danger};
-  --base-text-color: #{$base-text-color};
-  --base-focus-color: #{$base-focus-color};
+  --border-color: var(--dx-color-border);
+  --accent-color: var(--dx-color-primary);
+  --success-color: var(--dx-color-success);
+  --info-color: var(--dx-color-primary);
+  --warning-color: var(--dx-color-warning);
+  --error-color: var(--dx-color-danger);
+  --base-text-color: var(--dx-color-text);
   --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
-  --texteditor-edit-color: #{$texteditor-color};
-  --texteditor-label-color: #{$texteditor-label-color};
+  --texteditor-edit-color: var(--dx-texteditor-color-text);
+  --texteditor-label-color: var(--dx-texteditor-color-label);
   --base-text-color-alpha: #{rgba($base-text-color, alpha($base-text-color) * 0.7)};
   --toolbar-margin-bottom: var(--content-padding);
   --subtitle-text-color: var(--texteditor-label-color);
 
-  --toolbar-height: #{toolbar_sizes.$fluent-toolbar-height};
-  --filled-texteditor-input-horizontal-padding: #{$fluent-field-value-horizontal-padding};
-  --list-padding-left: #{$fluent-list-item-horizontal-padding};
-  --list-padding-vertical: #{$fluent-list-item-vertical-padding};
-  --footer-left-padding: #{calc((var(--side-panel-min-width) - $fluent-base-icon-size) / 2)};
-  --popup-toolbar-item-spacing: #{$fluent-popup-toolbar-item-spacing};
-  --drop-down-gnrc-button-height: #{$fluent-base-inline-widget-height};
-  --theme-padding: #{$fluent-button-horizontal-padding};
+  --toolbar-height: var(--dx-toolbar-height);
+  --list-padding-left: var(--dx-list-item-padding-inline);
+  --list-padding-vertical: var(--dx-list-item-padding-block);
+  --footer-left-padding: calc((var(--side-panel-min-width) - var(--dx-font-size-icon)) / 2);
+  --popup-toolbar-item-spacing: var(--dx-popup-toolbar-item-padding-inline);
+  --drop-down-gnrc-button-height: var(--dx-component-height);
+  --theme-padding: var(--dx-button-padding-inline);
   --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
   --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
   --button-height-theme-difference: calc((var(--theme-padding) - 10px) / 3); // WA for no button-height in fluent theme

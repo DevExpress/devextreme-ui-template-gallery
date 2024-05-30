@@ -10,6 +10,22 @@
   }
 }
 
+.theme-text-color {
+  color: var(--dx-color-text);
+}
+
+.theme-bg-color {
+  background-color: var(--dx-component-color-bg);
+}
+
+.theme-accent-as-border-color {
+  border-color: var(--dx-color-border);
+}
+
+.theme-border-color {
+  border-color: var(--dx-color-primary);
+}
+
 .header-text {
   @include header();
 }
