@@ -1,5 +1,5 @@
 The DevExtreme React Scheduler View template can be used to plan and manage appointments and events in an React-powered application.
-<--split-->
+<!--split-->
 
 ## UI Components  
 

@@ -1,5 +1,5 @@
 The DevExtreme React Reset Password Form template helps you implement a user password reset workflow in your application.
-<--split-->
+<!--split-->
 
 ## UI Components  
 

@@ -1,5 +1,5 @@
 Our Angular Sales Dashboard template can be used to quickly bootstrap a sales dashboard UI layout in an Angular-powered BI or analytics application. 
-<--split-->
+<!--split-->
 
 ## UI Components  
 
