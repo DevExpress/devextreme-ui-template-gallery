@@ -1,5 +1,5 @@
 Our React Task List View template allows you to incorporate task/project management related UI layouts within your next DevExtreme-powered React application.  
-<--split-->
+<!--split-->
 
 ## UI Components  
 

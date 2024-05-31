@@ -1,5 +1,5 @@
 The DevExtreme Vue Geography Dashboard template helps you create geography-based dashboard layouts in an Vue-powered BI or analytics application. 
-<--split-->
+<!--split-->
 
 ## UI Components  
 

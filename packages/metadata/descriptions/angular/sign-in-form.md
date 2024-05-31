@@ -1,5 +1,5 @@
 The DevExtreme Angular Sign In Form template helps you implement authentication workflow for registered users in your application.
-<--split-->
+<!--split-->
 
 ## UI Components  
 
