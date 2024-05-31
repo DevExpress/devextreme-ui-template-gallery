@@ -1,5 +1,5 @@
 The DevExtreme React Overview Dashboard template helps you construct a high-level dashboard UI layout in an React-powered BI or analytics application. 
-<--split-->
+<!--split-->
 
 ## UI Components  
 

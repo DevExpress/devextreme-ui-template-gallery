@@ -1,5 +1,5 @@
 Our Contact List View template allows you to incorporate the necessary UI elements for Vue-powered CRM/contact management applications. 
-<--split-->
+<!--split-->
 
 ## UI Components  
 

@@ -1,5 +1,5 @@
 The DevExtreme Angular Sign Up Form template helps you implement a user registration workflow in your application.
-<--split-->
+<!--split-->
 
 ## UI Components  
 
