@@ -11,6 +11,14 @@ body {
   box-sizing: border-box;
 }
 
+.theme-text-color {
+  color: var(--dx-color-text);
+}
+
+.theme-bg-color {
+  background-color: var(--dx-component-color-bg);
+}
+
 .header-text {
   @include header();
 }

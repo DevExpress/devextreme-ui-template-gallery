@@ -1,5 +1,5 @@
 <div
-  class="card dx-theme-text-color dx-theme-background-color"
+  class="card theme-text-color theme-bg-color"
   (click)="navigateToDetails()"
 >
   <div class="card-wrapper" class="priority-{{ task.priority | lowercase }}">
@@ -10,10 +10,10 @@
       (onClick)="notify($event)"
     ></dx-button>
     <div class="card-content">
-      <div class="card-subject dx-theme-text-color">{{ task.text }}</div>
+      <div class="card-subject theme-text-color">{{ task.text }}</div>
       <div class="card-data">
         <span class="priority">{{ task.priority }}</span>
-        <span class="date dx-theme-text-color">{{
+        <span class="date theme-text-color">{{
           task.dueDate | date: 'MM/dd/yyyy'
         }}</span>
       </div>
