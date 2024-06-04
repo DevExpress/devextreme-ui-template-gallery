@@ -217,7 +217,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Run npm install
-        run: npm install --no-audit --no-fund
+        run: npm install --no-audit --no-fund --legacy-peer-deps
 
       - name: Set theme
         run: npm run set-theme -- ${{ matrix.theme.fullName }}
