@@ -42,7 +42,7 @@ export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigation
   } = useNavigation();
 
   const treeViewRef = useRef<TreeViewRef>(null);
-  const wrapperRef = useRef(undefined);
+  const wrapperRef = useRef();
   const getWrapperRef = useCallback(
     (element) => {
       const prevElement = wrapperRef.current;

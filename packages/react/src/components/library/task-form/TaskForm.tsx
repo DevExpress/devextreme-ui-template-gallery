@@ -15,7 +15,7 @@ const TaskFormWithLoadPanel = withLoadPanel(TaskFormDetails);
 export const TaskForm = ({ task, isLoading }: { task?: Task, isLoading: boolean }) => {
   const [data, setData] = useState(task);
   const [editing, setEditing] = useState(false);
-  const dataRef = useRef<Task | undefined>(undefined);
+  const dataRef = useRef<Task>();
 
   useEffect(() => {
     if (task) {
