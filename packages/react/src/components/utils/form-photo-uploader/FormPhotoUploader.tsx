@@ -7,7 +7,7 @@ import { FileUploader, FileUploaderTypes } from 'devextreme-react/file-uploader'
 export const FormPhotoUploader = () => {
   const [isDropZoneActive, setDropZoneActive] = useState(false);
 
-  const uploaderZone = useRef();
+  const uploaderZone = useRef(undefined);
 
   const getUploaderRef = useCallback(
     (element) => {
