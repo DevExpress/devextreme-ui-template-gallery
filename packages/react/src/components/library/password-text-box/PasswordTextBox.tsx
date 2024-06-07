@@ -1,3 +1,4 @@
+import type * as PropTypes from 'prop-types';
 import React, { useState, forwardRef, useMemo, useCallback } from 'react';
 import TextBox, { Button } from 'devextreme-react/text-box';
 import { ValidationRule, ButtonStyle } from 'devextreme-react/common';
@@ -12,7 +13,7 @@ interface PasswordTextBoxProps {
   onValueValidated?: (e: ValidatorTypes.ValidatedEvent) => void;
 }
 
-export const PasswordTextBox = forwardRef<Validator, PasswordTextBoxProps>(({
+export const PasswordTextBox = forwardRef<PropTypes.Validator, PasswordTextBoxProps>(({
   value = '',
   onValueChange,
   placeholder,

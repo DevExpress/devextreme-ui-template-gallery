@@ -1,9 +1,10 @@
+import type * as PropTypes from 'prop-types';
 import './ChangeProfilePasswordForm.scss';
 import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import notify from 'devextreme/ui/notify';
 import { ValidationRule } from 'devextreme-react/common';
 import Form, { Item, Label } from 'devextreme-react/form';
-import Validator, { ValidatorTypes } from 'devextreme-react/validator';
+import { ValidatorTypes } from 'devextreme-react/validator';
 import { FormPopup } from '../../utils/form-popup/FormPopup';
 import { PasswordTextBox } from '../password-text-box/PasswordTextBox';
 
@@ -12,7 +13,7 @@ const saveNewPassword = (): void => {
 };
 
 export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
-  const confirmField = useRef<Validator>(null);
+  const confirmField = useRef<PropTypes.Validator>(null);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');

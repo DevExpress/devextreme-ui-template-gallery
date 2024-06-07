@@ -16,7 +16,7 @@ const ContactFromDetailsWithLoadPanel = withLoadPanel(ContactFromDetails);
 export const ContactForm = ({ data, isLoading = false }: { data?: Contact, isLoading: boolean }) => {
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState(data);
-  const dataRef = useRef<Contact>();
+  const dataRef = useRef<Contact>(undefined);
 
   useEffect(() => {
     setFormData(data);
