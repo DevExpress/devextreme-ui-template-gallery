@@ -187,26 +187,36 @@ jobs:
           name: devextreme-npm
           path: devextreme-npm-latest
 
-      - name: For dev branch - download devextreme Artifact
+      - name: For dev branch - download devextreme-angular Artifact
         uses: actions/download-artifact@v4
         with:
-          name: devextreme-npm
-          path: devextreme-npm-latest
+          name: devextreme-angular-npm
+          path: devextreme-angular-npm-latest
 
-      - name: For dev branch - download devextreme-${{ matrix.ARGS.project }} Artifact
+      - name: For dev branch - download devextreme-vue Artifact
         uses: actions/download-artifact@v4
         with:
-          name: devextreme-${{ matrix.ARGS.project }}-npm
-          path: devextreme-${{ matrix.ARGS.project }}-npm-latest
+          name: devextreme-vue-npm
+          path: devextreme-vue-npm-latest
+
+      - name: For dev branch - download devextreme-react Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: devextreme-react-npm
+          path: devextreme-react-npm-latest
 
       - name: For dev branch - replace dx versions to latest builds in package.json
         run: |
-          FILE_FRAMEWORK_PATH="$(find devextreme-${{ matrix.ARGS.project }}-npm-latest -maxdepth 1 -name "devextreme-${{ matrix.ARGS.project }}*.tgz" | sed 's|/|\\/|g')"
+          FILE_ANGULAR_PATH="$(find devextreme-angular-npm-latest -maxdepth 1 -name "devextreme-angular*.tgz" | sed 's|/|\\/|g')"
+          FILE_VUE_PATH="$(find devextreme-vue-npm-latest -maxdepth 1 -name "devextreme-vue*.tgz" | sed 's|/|\\/|g')"
+          FILE_REACT_PATH="$(find devextreme-react-npm-latest -maxdepth 1 -name "devextreme-react*.tgz" | sed 's|/|\\/|g')"
           FILE_DX_PATH="$(find devextreme-npm-latest/devextreme/ -maxdepth 1 -name "devextreme-*.tgz" | sed 's|/|\\/|g')"
           FILE_DX_DIST_PATH="$(find devextreme-npm-latest/devextreme-dist/ -maxdepth 1 -name "devextreme-dist*.tgz" | sed 's|/|\\/|g')"
           sed -i "s|\"devextreme\": \"[0-9a-zA-Z.-]\+\"|\"devextreme\": \"\.\/$FILE_DX_PATH\"|g" ./package.json
           sed -i "s/\"devextreme-dist\": \"[0-9a-zA-Z.-]\+\"/\"devextreme-dist\": \"\.\/$FILE_DX_DIST_PATH\"/g" ./package.json
-          sed -i "s|\"devextreme-${{ matrix.ARGS.project }}\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-${{ matrix.ARGS.project }}\": \"\.\.\/\.\.\/$FILE_FRAMEWORK_PATH\"|g" ./packages/${{ matrix.ARGS.project }}/package.json
+          sed -i "s|\"devextreme-angular\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-angular\": \"\.\.\/\.\.\/$FILE_ANGULAR_PATH\"|g" ./packages/angular/package.json
+          sed -i "s|\"devextreme-vue\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-vue\": \"\.\.\/\.\.\/$FILE_VUE_PATH\"|g" ./packages/vue/package.json
+          sed -i "s|\"devextreme-react\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-react\": \"\.\.\/\.\.\/$FILE_REACT_PATH\"|g" ./packages/react/package.json
 
       - name: Restore npm cache
         uses: actions/cache@v4
