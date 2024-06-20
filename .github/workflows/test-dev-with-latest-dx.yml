@@ -215,6 +215,7 @@ jobs:
           sed -i "s|\"devextreme\": \"[0-9a-zA-Z.-]\+\"|\"devextreme\": \"\.\/$FILE_DX_PATH\"|g" ./package.json
           sed -i "s/\"devextreme-dist\": \"[0-9a-zA-Z.-]\+\"/\"devextreme-dist\": \"\.\/$FILE_DX_DIST_PATH\"/g" ./package.json
           sed -i "s|\"devextreme-angular\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-angular\": \"\.\.\/\.\.\/$FILE_ANGULAR_PATH\"|g" ./packages/angular/package.json
+          sed -i "s|\"devextreme-angular\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-angular\": \"\.\.\/\.\.\/$FILE_ANGULAR_PATH\"|g" ./packages/shell/package.json
           sed -i "s|\"devextreme-vue\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-vue\": \"\.\.\/\.\.\/$FILE_VUE_PATH\"|g" ./packages/vue/package.json
           sed -i "s|\"devextreme-react\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-react\": \"\.\.\/\.\.\/$FILE_REACT_PATH\"|g" ./packages/react/package.json
 
@@ -227,7 +228,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Run npm install
-        run: npm install --no-audit --no-fund
+        run: npm install --no-audit --no-fund --no-package-lock
 
       - name: Set theme
         run: npm run set-theme -- ${{ matrix.theme.fullName }}
