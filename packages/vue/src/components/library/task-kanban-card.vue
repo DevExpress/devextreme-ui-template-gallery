@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card dx-theme-text-color dx-theme-background-color"
+    class="card theme-text-color theme-bg-color"
     @click="navigateToDetails()"
   >
     <div
@@ -14,17 +14,17 @@
         @click="notifyByCard"
       />
       <div class="card-content">
-        <div class="card-subject dx-theme-text-color">
+        <div class="card-subject theme-text-color">
           {{ task.text }}
         </div>
         <div class="card-data">
           <span class="priority">{{ task.priority }}</span>
-          <span class="date dx-theme-text-color">{{
+          <span class="date theme-text-color">{{
             formatDate(task.dueDate)
           }}</span>
         </div>
         <div class="card-assignee">
-          <span class="company dx-theme-text-color">{{ task.company }}</span>
+          <span class="company theme-text-color">{{ task.company }}</span>
           <avatar :data-letters="getAvatarText(task.owner)" />
         </div>
       </div>

@@ -47,8 +47,20 @@ fixture`Contact List`;
           await t.click(Selector('.dx-icon-pin'));
         }
 
+        const inputs = Selector('.panel-scroll .form-editor-input');
+
+        await t.click(Selector('.dx-button[aria-label=Edit]'));
+        await t.typeText(inputs.nth(1), 'unwanted text');
+        await t.click(Selector('.dx-button[aria-label=Cancel]'));
+        await t.expect(inputs.nth(1).value).notContains('unwanted text');
+
         await t.click(Selector('.dx-button[aria-label=Edit]'));
         await takeScreenshot(`crm-contact-list-form-edit${postfix}`, Selector('.data-wrapper'));
+        await t.typeText(inputs.nth(0), 'test 0');
+
+        await t.click(Selector('.dx-button[aria-label=Save]'));
+        await takeScreenshot(`crm-contact-list-form-saved${postfix}`, Selector('.data-wrapper'));
+
         await t.click(Selector('[aria-label="Close"]'));
 
         await t.click(Selector('.dx-button[aria-label=All]'));

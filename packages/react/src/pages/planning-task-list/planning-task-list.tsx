@@ -3,9 +3,9 @@ import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 
 import Toolbar, { Item } from 'devextreme-react/toolbar';
-import DataGrid from 'devextreme-react/data-grid';
-import Sortable from 'devextreme-react/sortable';
-import Gantt from 'devextreme-react/gantt';
+import { DataGridRef } from 'devextreme-react/data-grid';
+import { SortableRef } from 'devextreme-react/sortable';
+import { GanttRef } from 'devextreme-react/gantt';
 import { exportGantt as exportGanttToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridXSLX } from 'devextreme/excel_exporter';
@@ -31,9 +31,9 @@ import { Task } from '../../types/task';
 const listsData = ['List', 'Kanban Board', 'Gantt'];
 
 export const PlanningTaskList = () => {
-  const gridRef = useRef<DataGrid>(null);
-  const kanbanRef = useRef<Sortable>(null);
-  const ganttRef = useRef<Gantt>(null);
+  const gridRef = useRef<DataGridRef>(null);
+  const kanbanRef = useRef<SortableRef>(null);
+  const ganttRef = useRef<GanttRef>(null);
 
   const [listView, kanbanView, ganttView] = listsData;
 
@@ -98,16 +98,16 @@ export const PlanningTaskList = () => {
 
   const refresh = useCallback(() => {
     if (isDataGrid) {
-      gridRef.current?.instance.refresh();
+      gridRef.current?.instance().refresh();
     } else if (isKanban) {
-      kanbanRef.current?.instance.update();
+      kanbanRef.current?.instance().update();
     } else {
-      ganttRef.current?.instance.refresh();
+      ganttRef.current?.instance().refresh();
     }
   }, [view]);
 
   const showColumnChooser = useCallback(() => {
-    gridRef.current?.instance.showColumnChooser();
+    gridRef.current?.instance().showColumnChooser();
   }, []);
 
   const exportToPDF = useCallback(() => {
@@ -115,14 +115,14 @@ export const PlanningTaskList = () => {
       const doc = new jsPDF();
       exportDataGrid({
         jsPDFDocument: doc,
-        component: gridRef.current?.instance,
+        component: gridRef.current?.instance(),
       }).then(() => {
         doc.save('Tasks.pdf');
       });
     } else {
       exportGanttToPdf(
         {
-          component: ganttRef.current?.instance,
+          component: ganttRef.current?.instance(),
           createDocumentMethod: (args) => new jsPDF(args),
         },
       ).then((doc) => doc.save('gantt.pdf'));
@@ -134,7 +134,7 @@ export const PlanningTaskList = () => {
     const worksheet = workbook.addWorksheet('Main sheet');
 
     exportDataGridXSLX({
-      component: gridRef.current?.instance,
+      component: gridRef.current?.instance(),
       worksheet,
       autoFilterEnabled: true,
     }).then(() => {
@@ -145,7 +145,7 @@ export const PlanningTaskList = () => {
   }, []);
 
   const search = useCallback((e: TextBoxTypes.InputEvent) => {
-    gridRef.current?.instance.searchByText(e.component.option('text') ?? '');
+    gridRef.current?.instance().searchByText(e.component.option('text') ?? '');
   }, []);
 
   const getTabsWidth = useCallback(() => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import ScrollView from 'devextreme-react/scroll-view';
-import Sortable, { SortableTypes } from 'devextreme-react/sortable';
+import { Sortable, SortableRef, SortableTypes } from 'devextreme-react/sortable';
 import Button from 'devextreme-react/button';
 
 import { CardMenu } from '../card-menu/CardMenu';
@@ -50,7 +50,7 @@ const TaskList = ({
 
   return (
     <div className='list'>
-      <div className='list-title dx-theme-text-color'>
+      <div className='list-title theme-text-color'>
         <span>{title}</span>
         <CardMenu items={boardMenuItems} />
       </div>
@@ -68,7 +68,7 @@ const TaskList = ({
   );
 };
 
-export const TaskListKanban = React.forwardRef<Sortable, PlanningProps>(({ dataSource, changePopupVisibility }, ref) => {
+export const TaskListKanban = React.forwardRef<SortableRef, PlanningProps>(({ dataSource, changePopupVisibility }, ref) => {
   const [lists, setLists] = useState<Task[][]>([]);
   const [statuses, setStatuses] = useState(STATUS_ITEMS);
   useEffect(() => {
