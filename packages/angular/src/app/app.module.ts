@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { DxHttpModule } from 'devextreme-angular/http';
+
 import { AppComponent } from './app.component';
 import { SideNavOuterToolbarModule, SingleCardModule } from './layouts';
 import {
@@ -29,6 +31,7 @@ import { ThemeService } from './services';
   ],
   imports: [
     BrowserModule,
+    DxHttpModule,
     SideNavOuterToolbarModule,
     SingleCardModule,
     AppFooterModule,
