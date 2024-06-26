@@ -64,6 +64,11 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+@devexpress/devextreme-dist-internal
+
+@devexpress/devextreme-internal
+SEE LICENSE IN README.md
+
 @devextreme/runtime
 SEE LICENSE IN LICENSE
 
@@ -94,7 +99,7 @@ SOFTWARE.
 
 core-js
 MIT
-Copyright (c) 2014-2023 Denis Pushkarev
+Copyright (c) 2014-2024 Denis Pushkarev
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -116,9 +121,6 @@ THE SOFTWARE.
 
 
 devexpress-gantt
-SEE LICENSE IN README.md
-
-devextreme
 SEE LICENSE IN README.md
 
 devextreme-angular
@@ -146,12 +148,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-devextreme-dist
-
 dompurify
 (MPL-2.0 OR Apache-2.0)
 DOMPurify
-Copyright 2023 Dr.-Ing. Mario Heiderich, Cure53
+Copyright 2024 Dr.-Ing. Mario Heiderich, Cure53
 
 DOMPurify is free software; you can redistribute it and/or modify it under the
 terms of either:

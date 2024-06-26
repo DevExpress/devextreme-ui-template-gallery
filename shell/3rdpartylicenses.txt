@@ -13,11 +13,11 @@ MIT
 @angular/router
 MIT
 
+@devexpress/devextreme-internal
+SEE LICENSE IN README.md
+
 @devextreme/runtime
 SEE LICENSE IN LICENSE
-
-devextreme
-SEE LICENSE IN README.md
 
 devextreme-angular
 MIT
