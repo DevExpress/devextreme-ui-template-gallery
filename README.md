@@ -6,9 +6,11 @@ This repository includes responsive UI Templates for the most popular UI/UX patt
 
 Take a look at the **online** gallery here:
 
-- [Angular](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/crm-contact-list)
-- [React](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/react/default/#/crm-contact-list)
-- [Vue](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/vue/default/#/crm-contact-list)
+|         | Material | Fluent | Generic |
+|---------|:--------:|:------:|:-------:|
+| **Angular** | [x](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/angular/default/#/crm-contact-list) | [x](https://devexpress.github.io/devextreme-ui-template-gallery/fluent.blue.light/angular/default/#/crm-contact-list) | [x](https://devexpress.github.io/devextreme-ui-template-gallery/generic.light.compact/angular/default/#/crm-contact-list) |
+| **React** | [x](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/react/default/#/crm-contact-list) | [x](https://devexpress.github.io/devextreme-ui-template-gallery/fluent.blue.light/react/default/#/crm-contact-list) | [x](https://devexpress.github.io/devextreme-ui-template-gallery/generic.light.compact/react/default/#/crm-contact-list) |
+| **Vue** | [x](https://devexpress.github.io/devextreme-ui-template-gallery/material.blue.light.compact/vue/default/#/crm-contact-list) | [x](https://devexpress.github.io/devextreme-ui-template-gallery/fluent.blue.light/vue/default/#/crm-contact-list) | [x](https://devexpress.github.io/devextreme-ui-template-gallery/generic.light.compact/vue/default/#/crm-contact-list) |
 
 Use the left menu to navigate through the views.
 
