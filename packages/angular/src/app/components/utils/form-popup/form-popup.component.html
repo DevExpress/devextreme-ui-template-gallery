@@ -7,7 +7,7 @@
   (onHidden)="close()"
   [height]="height"
 >
-  <dxi-toolbar-item toolbar="bottom" location="center">
+  <dxi-popup-toolbar-item toolbar="bottom" location="center">
     <div
       class="form-popup-buttons-container"
       [class.flex-buttons]="width <= 360"
@@ -26,7 +26,7 @@
         (onClick)="onSaveClick()"
       ></dx-button>
     </div>
-  </dxi-toolbar-item>
+  </dxi-popup-toolbar-item>
   <dx-validation-group #validationGroup>
     <ng-content></ng-content>
   </dx-validation-group>
