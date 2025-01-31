@@ -72,7 +72,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: build-artifacts
+        name: build-artifacts-${{ matrix.mode }}-${{ matrix.theme }}
         path: devextreme-ui-template-gallery/
 
   build-shell:
@@ -114,12 +114,24 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: build-artifacts
+        name: build-artifacts-shell
         path: devextreme-ui-template-gallery/
+
+  merge-artifacts:
+    runs-on: ubuntu-latest
+    needs: [build, build-shell]
+
+    steps:
+      - name: Merge screenshot artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: build-artifacts
+          pattern: build-artifacts-*
+          delete-merged: true
 
   deploy:
     name: Deploy
-    needs: [build, build-shell]
+    needs: [merge-artifacts]
     runs-on: ubuntu-latest
 
     steps:
@@ -138,4 +150,3 @@ jobs:
         branch: gh-pages
         folder: devextreme-ui-template-gallery
         target-folder: .
-
