@@ -133,17 +133,19 @@ jobs:
         path: ${{ github.workspace }}/packages/testing/testing/artifacts/compared-screenshots/*
         if-no-files-found: ignore
 
-
   merge-artifacts:
     runs-on: ubuntu-latest
     needs: testcafe
     if: ${{ failure() }}
+    strategy:
+      matrix:
+        project: [ 'angular', 'react', 'vue' ]
 
     steps:
       - name: Merge screenshot artifacts
         uses: actions/upload-artifact/merge@v4
         continue-on-error: true
         with:
-          name: screenshots-${{ matrix.ARGS.project }}
-          pattern: screenshots-${{ matrix.ARGS.project }}-*
+          name: screenshots-${{ matrix.project }}
+          pattern: screenshots-${{ matrix.project }}-*
           delete-merged: true
