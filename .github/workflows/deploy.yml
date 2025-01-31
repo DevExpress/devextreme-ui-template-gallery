@@ -129,24 +129,24 @@ jobs:
           pattern: build-artifacts-*
           delete-merged: true
 
-  deploy:
-    name: Deploy
-    needs: [merge-artifacts]
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Get sources
-      uses: actions/checkout@v4
-
-    - name: Download build artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: build-artifacts
-        path: devextreme-ui-template-gallery
-
-    - name: Deploy in gh-pages
-      uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
-      with:
-        branch: gh-pages
-        folder: devextreme-ui-template-gallery
-        target-folder: .
+#  deploy:
+#    name: Deploy
+#    needs: [merge-artifacts]
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Get sources
+#      uses: actions/checkout@v4
+#
+#    - name: Download build artifacts
+#      uses: actions/download-artifact@v4
+#      with:
+#        name: build-artifacts
+#        path: devextreme-ui-template-gallery
+#
+#    - name: Deploy in gh-pages
+#      uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
+#      with:
+#        branch: gh-pages
+#        folder: devextreme-ui-template-gallery
+#        target-folder: .
