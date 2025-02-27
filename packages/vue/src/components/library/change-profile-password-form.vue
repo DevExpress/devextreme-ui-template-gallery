@@ -16,10 +16,10 @@
       :show-colon-after-label="true"
     >
       <dx-item>
-        <dx-label text="Current Password" />
+        <dx-label text="Old Password" />
         <password-text-box
           v-model="formData['currentPassword']"
-          placeholder="Current Password"
+          placeholder="Enter old password"
           @value-changed="onFieldChanged()"
         />
       </dx-item>
@@ -29,18 +29,18 @@
       </dx-item>
 
       <dx-item>
-        <dx-label text="Password" />
+        <dx-label text="New Password" />
         <password-text-box
           v-model="formData['password']"
-          placeholder="Password"
+          placeholder="Create new password"
           @value-changed="onFieldChanged()"
         />
       </dx-item>
       <dx-item>
-        <dx-label text="Confirm Password" />
+        <dx-label text="Re-enter Password" />
         <password-text-box
           v-model="formData['confirmedPassword']"
-          placeholder="Confirm Password"
+          placeholder="Confirm new password"
           :validators="confirmPasswordValidators"
           @value-changed="onFieldChanged()"
         />
