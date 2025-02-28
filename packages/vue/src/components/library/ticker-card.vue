@@ -30,7 +30,6 @@
 import { formatPrice } from '@/utils/formatters';
 import { Sales, SalesOrOpportunitiesByCategory } from '@/types/analytics';
 import { computed, withDefaults } from 'vue';
-import CardAnalytics from '@/components/library/card-analytics.vue';
 
 const props = withDefaults(
   defineProps<{
