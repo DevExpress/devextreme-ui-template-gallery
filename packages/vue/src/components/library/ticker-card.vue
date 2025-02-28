@@ -35,7 +35,7 @@ const props = withDefaults(
   defineProps<{
     icon: string,
     tone?: 'warning' | 'info',
-    title? : string,
+    title: string,
     data?: SalesOrOpportunitiesByCategory | Sales | null,
     total?: string | null,
     percentage: number,
