@@ -6,6 +6,6 @@ copyFile(
   join(__dirname, 'src', 'app', 'themes.json'),
   (err) => {
     if (err) throw err;
-    console.log('themes.json copied');
+    console.log('themes.json copied'); // eslint-disable-line no-console
   },
 );
