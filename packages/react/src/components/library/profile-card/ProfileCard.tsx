@@ -75,7 +75,7 @@ export const ProfileCard = ({
                 editorType={item.editorType}
                 editorOptions={{
                   stylingMode: 'filled',
-                  valueChangeEvent: 'input',
+                  valueChangeEvent: 'focusout',
                   ...item.editorOptions
                 }}
                 colSpan={item.colSpan}>

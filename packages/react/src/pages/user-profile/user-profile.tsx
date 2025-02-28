@@ -41,7 +41,7 @@ type UserProfileContentProps = {
   contactItems: ProfileCardItem[];
   addressItems: ProfileCardItem[];
   profileData: Record<string, string>;
-  handleDataChanged: () => void;
+  handleDataChanged: (cardData: Record<string, string>) => void;
   handleChangePasswordClick: () => void;
   handleContentScrolled: (boolean) => void;
 };
@@ -173,9 +173,10 @@ export const UserProfile = () => {
   const [addressItems, setAddressItems] = useState<ProfileCardItem[]>([]);
   const [isContentScrolled, setIsContentScrolled] = useState(false);
 
-  const dataChanged = useCallback(() => {
+  const dataChanged = useCallback((data) => {
+    setProfileData({ ...profileData, ...data });
     setIsDataChanged(true);
-  }, []);
+  }, [profileData]);
 
   const changePassword = useCallback(() => {
     setIsChangedPasswordPopupOpened(true);
