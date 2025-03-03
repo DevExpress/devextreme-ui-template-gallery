@@ -34,7 +34,7 @@ import { computed, withDefaults } from 'vue';
 const props = withDefaults(
   defineProps<{
     icon: string,
-    tone?: 'warning' | 'info' | undefined,
+    tone?: 'warning' | 'info', // eslint-disable-line vue/require-default-prop
     title: string,
     data?: SalesOrOpportunitiesByCategory | Sales | null,
     total?: string | null,
