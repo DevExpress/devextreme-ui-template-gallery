@@ -6,7 +6,7 @@ export const packages = [{
   port: 8081,
 }, {
   name: 'vue',
-  port: 8082,
+  port: 8080,
 }];
 
 export const fakeScreenSize = [900, 900];
