@@ -34,7 +34,7 @@ import { computed, withDefaults } from 'vue';
 const props = withDefaults(
   defineProps<{
     icon: string,
-    tone?: 'warning' | 'info',
+    tone?: 'warning' | 'info' | undefined,
     title: string,
     data?: SalesOrOpportunitiesByCategory | Sales | null,
     total?: string | null,
