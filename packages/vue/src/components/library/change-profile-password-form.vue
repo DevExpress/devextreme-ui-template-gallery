@@ -19,7 +19,6 @@
         <dx-label text="Old Password" />
         <password-text-box
           v-model="formData['currentPassword']"
-          placeholder="Enter old password"
           @value-changed="onFieldChanged()"
         />
       </dx-item>
@@ -32,15 +31,13 @@
         <dx-label text="New Password" />
         <password-text-box
           v-model="formData['password']"
-          placeholder="Create new password"
           @value-changed="onFieldChanged()"
         />
       </dx-item>
       <dx-item>
-        <dx-label text="Re-enter Password" />
+        <dx-label text="Confirm new password" />
         <password-text-box
           v-model="formData['confirmedPassword']"
-          placeholder="Confirm new password"
           :validators="confirmPasswordValidators"
           @value-changed="onFieldChanged()"
         />

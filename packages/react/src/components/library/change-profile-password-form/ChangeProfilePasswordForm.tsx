@@ -86,7 +86,6 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
         <Label text='Old Password' />
         <PasswordTextBox
           value={currentPassword}
-          placeholder='Enter old password'
           onValueChange={setCurrentPassword}
           onValueValidated={onCurrentPasswordValidated}
         />
@@ -100,18 +99,16 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
         <Label text='New Password' />
         <PasswordTextBox
           value={newPassword}
-          placeholder='Create new password'
           onValueChange={onNewPasswordChange}
           onValueValidated={onNewPasswordValidated}
         />
       </Item>
 
       <Item>
-        <Label text='Re-enter Password' />
+        <Label text='Confirm new password' />
         <PasswordTextBox
           ref={confirmField}
           value={confirmedPassword}
-          placeholder='Confirm new password'
           validators={confirmPasswordValidators}
           onValueChange={setConfirmedPassword}
           onValueValidated={onConfirmedPasswordValidated}
