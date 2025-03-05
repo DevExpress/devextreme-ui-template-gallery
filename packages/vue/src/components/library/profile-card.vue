@@ -16,7 +16,8 @@
         :on-field-data-changed="evt => onFieldChange(evt.dataField, evt.value)"
       >
         <dx-item
-          v-for="item in items"
+          v-for="item in computedItems"
+          v-memo="[computedItems]"
           :key="item.dataField"
           :data-field="item.dataField"
           :editor-type="item.editorType"
@@ -38,18 +39,19 @@
           />
           <status-select-box
             v-if="item.dataField === 'status'"
+            class-list=""
             :items="item.itemsList"
             :model-value="cardData[item.dataField]"
             styling-mode="filled"
             label-mode="hidden"
-            @update:model-value="onFieldChange()"
+            @update:model-value="onFieldChange(item.dataField, $event)"
           />
           <pictured-item-select-box
             v-else-if="item.dataField === 'supervisor'"
             :label="item.label"
             :model-value="cardData[item.dataField]"
             :items="item.itemsList"
-            @update:model-value="onFieldChange()"
+            @update:model-value="onFieldChange(item.dataField, $event)"
           />
         </dx-item>
       </dx-form>
@@ -68,7 +70,9 @@ import { screenInfo, getSizeQualifier } from '@/utils/media-query';
 import PicturedItemSelectBox from '@/components/library/pictured-item-select-box.vue';
 import StatusSelectBox from '@/components/library/status-select-box.vue';
 import { Profile, SimpleObject } from '@/types';
-import { reactive, ref } from 'vue';
+import {
+  reactive, ref, computed,
+} from 'vue';
 
 const props = withDefaults(defineProps<{
   title: '',
@@ -80,8 +84,9 @@ const props = withDefaults(defineProps<{
 });
 
 const emit = defineEmits(['data-changed']);
+const computedCardData = reactive({ ...props.cardData });
 
-const cardValue = reactive<Profile>(props.cardData);
+const computedItems = computed(() => props.items);
 const form = ref<InstanceType<typeof DxForm> | null>(null);
 
 function onFieldChange<T extends keyof Profile>(fieldName: T, value: Profile[T]) {
@@ -92,10 +97,10 @@ function onFieldChange<T extends keyof Profile>(fieldName: T, value: Profile[T])
   }
 
   if (fieldName) {
-    cardValue[fieldName] = value;
+    computedCardData[fieldName] = value;
   }
 
-  emit('data-changed', cardValue);
+  emit('data-changed', computedCardData);
 }
 
 </script>
