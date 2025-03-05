@@ -82,6 +82,49 @@ fixture`User Profile`;
           .expect(compareResults.isValid())
           .ok(compareResults.errorMessages());
       }).requestHooks(requestLogger);
+
+      test(`User Profile (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode}) check inputs focuses`, async (t) => {
+        const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+        // eslint-disable-next-line max-len
+        await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
+        await forceResizeRecalculation(t, screenMode);
+        await setTheme(t, themeMode);
+
+        const inputs = Selector('.form-container input.dx-texteditor-input')
+          .filter((node) => !node.closest('.dx-dropdowneditor-input-wrapper'));
+
+        const inputsCount = await inputs.count;
+
+        const checks = [];
+        for (let i = 0; i < inputsCount; i += 1) {
+          const check = async () => {
+            const input = await inputs.nth(i);
+            const inputId = await input.getAttribute('id');
+            const inputName = await input.getAttribute('name');
+
+            await t
+              .click(input)
+              .pressKey('backspace')
+              .pressKey('1')
+              .expect(input.focused)
+              .ok(`Focus lost on input name:${inputName}, id: ${inputId}`);
+          };
+
+          checks.push(check());
+        }
+
+        await Promise.all(checks);
+
+        const localPostfix = 'block-after-text-in-inputs';
+
+        await takeScreenshot(`basic-${localPostfix}${postfix}`, '.basic-info-card');
+        await takeScreenshot(`contacts-${localPostfix}${postfix}`, '.contacts-card');
+        await takeScreenshot(`address-${localPostfix}${postfix}`, '.address-card');
+
+        await t
+          .expect(compareResults.isValid())
+          .ok(compareResults.errorMessages());
+      }).requestHooks(requestLogger);
     });
   });
 });
