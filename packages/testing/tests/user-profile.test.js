@@ -24,12 +24,13 @@ fixture`User Profile`;
   screenModes.forEach((screenMode) => {
     themeModes.forEach((themeMode) => {
       const postfix = getPostfix(embedded, screenMode, themeMode);
+      const commonTestName = `User Profile (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`;
 
       if (embedded && themeMode === 'dark') {
         return;
       }
 
-      test(`User Profile (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
+      test(commonTestName, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
         // eslint-disable-next-line max-len
@@ -83,40 +84,55 @@ fixture`User Profile`;
           .ok(compareResults.errorMessages());
       }).requestHooks(requestLogger);
 
-      test(`User Profile (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode}) check inputs focuses`, async (t) => {
+      test(`${commonTestName} check inputs focuses in `, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
         // eslint-disable-next-line max-len
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
         await forceResizeRecalculation(t, screenMode);
         await setTheme(t, themeMode);
 
+        const runChecks = async (selector, callback) => {
+          const count = await selector.count;
+          const promises = [];
+          for (let i = 0; i < count; i += 1) {
+            promises.push(callback(i));
+          }
+          await Promise.all(promises);
+        };
+
         const inputs = Selector('.form-container input.dx-texteditor-input')
           .filter((node) => !node.closest('.dx-dropdowneditor-input-wrapper'));
 
-        const inputsCount = await inputs.count;
+        await runChecks(inputs, async (i) => {
+          const input = await inputs.nth(i);
+          const inputId = await input.getAttribute('id');
+          const inputName = await input.getAttribute('name');
 
-        const checks = [];
-        for (let i = 0; i < inputsCount; i += 1) {
-          const check = async () => {
-            const input = await inputs.nth(i);
-            const inputId = await input.getAttribute('id');
-            const inputName = await input.getAttribute('name');
+          await t
+            .click(input)
+            .pressKey('backspace')
+            .pressKey('1')
+            .expect(input.focused)
+            .ok(`Focus lost on input name:${inputName}, id: ${inputId}`);
+        });
 
-            await t
-              .click(input)
-              .pressKey('backspace')
-              .pressKey('1')
-              .expect(input.focused)
-              .ok(`Focus lost on input name:${inputName}, id: ${inputId}`);
-          };
+        const dropDowns = Selector(
+          '.form-container .dx-dropdowneditor-input-wrapper.dx-selectbox-container',
+        );
 
-          checks.push(check());
-        }
+        await runChecks(dropDowns, async (i) => {
+          const dropDown = await dropDowns.nth(i);
 
-        await Promise.all(checks);
+          await t
+            .click(dropDown)
+            .wait(100)
+            .click(
+              Selector('.dx-popup-wrapper .dx-item.dx-list-item:not(.dx-list-item-selected)')
+                .nth(0),
+            );
+        });
 
-        const localPostfix = 'block-after-text-in-inputs';
-
+        const localPostfix = 'block-after-actions-wtih-form';
         await takeScreenshot(`basic-${localPostfix}${postfix}`, '.basic-info-card');
         await takeScreenshot(`contacts-${localPostfix}${postfix}`, '.contacts-card');
         await takeScreenshot(`address-${localPostfix}${postfix}`, '.address-card');
