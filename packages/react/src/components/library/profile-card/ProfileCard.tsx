@@ -25,6 +25,11 @@ interface ProfileCardProps {
   wrapperCssClass?: string;
 }
 
+const commonEditorOptions = {
+  stylingMode: 'filled',
+  valueChangeEvent: 'input',
+};
+
 export const ProfileCard = ({
   items = [],
   colCount = 2,
@@ -44,22 +49,22 @@ export const ProfileCard = ({
     }
 
     if (fieldName) {
-      cardData[fieldName] = value;
+      cardData = { ...cardData, [fieldName]: value };
     }
 
     onDataChanged(cardData);
   };
   const onFormFieldChange = (e: FormTypes.FieldDataChangedEvent) => onFieldChange(e.dataField)(e.value);
+  const itemsWithCommonOptions = useMemo(() => items.map((item) => {
+    item.editorOptions = { ...commonEditorOptions, ...item.editorOptions };
+    return item;
+  }), [items]);
 
-  const renderItems = useMemo(() => items.map((item, index) => (
+  const renderItems = useMemo(() => itemsWithCommonOptions.map((item, index) => (
     <Item key={index}
       dataField={item.dataField}
       editorType={item.editorType}
-      editorOptions={{
-        stylingMode: 'filled',
-        valueChangeEvent: 'input',
-        ...item.editorOptions
-      }}
+      editorOptions={item.editorOptions}
       colSpan={item.colSpan}>
       {item.label && <Label text={item.label} />}
       {item.validators?.map((rule, index) =>
@@ -85,7 +90,7 @@ export const ProfileCard = ({
         />
       }
     </Item>
-  )), []);
+  )), [items, onFieldChange, cardData]);
 
   return (
     <div className={wrapperCssClass}>
