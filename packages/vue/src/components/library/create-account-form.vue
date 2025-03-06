@@ -12,34 +12,31 @@
         editor-type="dxTextBox"
         :editor-options="{
           stylingMode: 'filled',
-          placeholder: 'Email',
           mode: 'email',
           value: 'jheart@dx-email.com',
         }"
       >
         <dx-required-rule message="Email is required" />
         <dx-email-rule message="Email is invalid" />
-        <dx-label :visible="false" />
+        <dx-label text="Email" />
       </dx-item>
       <dx-item
         data-field="password"
         editor-type="dxTextBox"
         :editor-options="{
           stylingMode: 'filled',
-          placeholder: 'Password',
           mode: 'password',
           value: 'password',
         }"
       >
         <dx-required-rule message="Password is required" />
-        <dx-label :visible="false" />
+        <dx-label text="Password" />
       </dx-item>
       <dx-item
         data-field="confirmedPassword"
         editor-type="dxTextBox"
         :editor-options="{
           stylingMode: 'filled',
-          placeholder: 'Confirm Password',
           mode: 'password',
           value: 'password',
         }"
@@ -49,7 +46,7 @@
           message="Passwords do not match"
           :validation-callback="confirmPassword"
         />
-        <dx-label :visible="false" />
+        <dx-label text="Confirm Password" />
       </dx-item>
       <dx-item>
         <template #default>

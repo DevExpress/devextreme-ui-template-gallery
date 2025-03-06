@@ -43,16 +43,16 @@ export const CreateAccountForm = ({ redirectLink = '/login', buttonLink }) => {
         <Item dataField='email' editorType='dxTextBox' editorOptions={emailEditorOptions}>
           <RequiredRule message='Email is required' />
           <EmailRule message='Email is invalid' />
-          <Label visible={false} />
+          <Label text='Email' />
         </Item>
         <Item dataField='password' editorType='dxTextBox' editorOptions={passwordEditorOptions}>
           <RequiredRule message='Password is required' />
-          <Label visible={false} />
+          <Label text='Password' />
         </Item>
         <Item dataField='confirmedPassword' editorType='dxTextBox' editorOptions={confirmedPasswordEditorOptions}>
           <RequiredRule message='Password is required' />
           <CustomRule message='Passwords do not match' validationCallback={confirmPassword} />
-          <Label visible={false} />
+          <Label text='Confirm Password' />
         </Item>
         <Item>
           <div className='policy-info'>
@@ -74,6 +74,6 @@ export const CreateAccountForm = ({ redirectLink = '/login', buttonLink }) => {
   );
 };
 
-const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email', value: 'jheart@dx-email.com' };
-const passwordEditorOptions = { stylingMode: 'filled', placeholder: 'Password', mode: 'password', value: 'password' };
-const confirmedPasswordEditorOptions = { stylingMode: 'filled', placeholder: 'Confirm Password', mode: 'password', value: 'password' };
+const emailEditorOptions = { stylingMode: 'filled', mode: 'email', value: 'jheart@dx-email.com' };
+const passwordEditorOptions = { stylingMode: 'filled', mode: 'password', value: 'password' };
+const confirmedPasswordEditorOptions = { stylingMode: 'filled', mode: 'password', value: 'password' };

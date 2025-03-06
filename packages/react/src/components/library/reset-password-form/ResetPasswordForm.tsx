@@ -42,7 +42,7 @@ export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
         <Item dataField='email' editorType='dxTextBox' editorOptions={emailEditorOptions}>
           <RequiredRule message='Email is required' />
           <EmailRule message='Email is invalid' />
-          <Label visible={false} />
+          <Label text='Email' />
         </Item>
         <ButtonItem>
           <ButtonOptions elementAttr={submitButtonAttributes} width='100%' type='default' useSubmitBehavior>
@@ -57,5 +57,5 @@ export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
   );
 };
 
-const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email', value: 'jheart@dx-email.com' };
+const emailEditorOptions = { stylingMode: 'filled', mode: 'email', value: 'jheart@dx-email.com' };
 const submitButtonAttributes = { class: 'submit-button' };
