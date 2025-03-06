@@ -105,7 +105,7 @@ export const ChangeProfilePasswordForm = ({ visible, setVisible }) => {
       </Item>
 
       <Item>
-        <Label text='Confirm new password' />
+        <Label text='Confirm New Password' />
         <PasswordTextBox
           ref={confirmField}
           value={confirmedPassword}

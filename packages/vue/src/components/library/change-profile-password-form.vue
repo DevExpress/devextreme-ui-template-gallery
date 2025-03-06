@@ -35,7 +35,7 @@
         />
       </dx-item>
       <dx-item>
-        <dx-label text="Confirm new password" />
+        <dx-label text="Confirm New Password" />
         <password-text-box
           v-model="formData['confirmedPassword']"
           :validators="confirmPasswordValidators"
