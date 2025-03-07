@@ -1,9 +1,11 @@
 <form class="login-form" (submit)="onSubmit($event)">
   <dx-form
+    labelLocation="top"
     [formData]="formData"
     [disabled]="loading"
     [showColonAfterLabel]="true"
     [showRequiredMark]="false"
+    
   >
     <dxi-item
       dataField="email"
