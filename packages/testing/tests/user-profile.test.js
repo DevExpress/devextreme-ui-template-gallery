@@ -133,9 +133,9 @@ fixture`User Profile`;
         });
 
         const localPostfix = 'block-after-actions-wtih-form';
-        await takeScreenshot(`basic-${localPostfix}${postfix}`, '.basic-info-card');
-        await takeScreenshot(`contacts-${localPostfix}${postfix}`, '.contacts-card');
-        await takeScreenshot(`address-${localPostfix}${postfix}`, '.address-card');
+        await takeScreenshot(`basic-${localPostfix}${postfix}`, '.basic-info-card .form-container');
+        await takeScreenshot(`contacts-${localPostfix}${postfix}`, '.contacts-card .form-container');
+        await takeScreenshot(`address-${localPostfix}${postfix}`, '.address-card .form-container');
 
         await t
           .expect(compareResults.isValid())
