@@ -4,6 +4,7 @@
     @submit.prevent="onSubmit"
   >
     <dx-form
+      label-location="top"
       :form-data="formData"
       :disabled="loading"
     >
