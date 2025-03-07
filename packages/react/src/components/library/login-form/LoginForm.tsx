@@ -52,7 +52,6 @@ export const LoginForm = ({ resetLink, createAccountLink }) => {
         formData={formData.current}
         disabled={loading}
         showColonAfterLabel
-        showRequiredMark={false}
       >
         <Item dataField='email' editorType='dxTextBox' editorOptions={emailEditorOptions}>
           <RequiredRule message='Email is required' />
