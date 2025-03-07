@@ -48,6 +48,7 @@ export const LoginForm = ({ resetLink, createAccountLink }) => {
   return (
     <form className='login-form' onSubmit={onSubmit}>
       <Form
+        labelLocation='top'
         formData={formData.current}
         disabled={loading}
         showColonAfterLabel
@@ -63,7 +64,7 @@ export const LoginForm = ({ resetLink, createAccountLink }) => {
           <Label text='Password' />
         </Item>
         <Item dataField='rememberMe' editorType='dxCheckBox' editorOptions={rememberMeEditorOptions}>
-          <Label text='Confirm Password' />
+          <Label visible={false} />
         </Item>
         <ButtonItem>
           <ButtonOptions width='100%' type='default' useSubmitBehavior>

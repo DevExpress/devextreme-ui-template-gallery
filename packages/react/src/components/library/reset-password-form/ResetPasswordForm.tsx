@@ -42,7 +42,7 @@ export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
         <Item dataField='email' editorType='dxTextBox' editorOptions={emailEditorOptions}>
           <RequiredRule message='Email is required' />
           <EmailRule message='Email is invalid' />
-          <Label text='Email' />
+          <Label visible={false} />
         </Item>
         <ButtonItem>
           <ButtonOptions elementAttr={submitButtonAttributes} width='100%' type='default' useSubmitBehavior>

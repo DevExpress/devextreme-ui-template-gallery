@@ -39,7 +39,7 @@ export const CreateAccountForm = ({ redirectLink = '/login', buttonLink }) => {
 
   return (
     <form className='create-account-form' onSubmit={onSubmit}>
-      <Form formData={formData.current} disabled={loading}>
+      <Form formData={formData.current} disabled={loading} labelLocation='top'>
         <Item dataField='email' editorType='dxTextBox' editorOptions={emailEditorOptions}>
           <RequiredRule message='Email is required' />
           <EmailRule message='Email is invalid' />
