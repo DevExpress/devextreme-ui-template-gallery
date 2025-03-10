@@ -1,5 +1,5 @@
 import './ProfileCard.scss';
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { Form, FormRef, Item, Label, ValidationRule as ValidationRuleComponent, FormTypes } from 'devextreme-react/form';
 import { StatusSelectBox } from '../status-select-box/StatusSelectBox';
 import { PicturedItemSelectBox } from '../pictured-item-select-box/PicturedItemSelectBox';
@@ -25,6 +25,11 @@ interface ProfileCardProps {
   wrapperCssClass?: string;
 }
 
+const commonEditorOptions = {
+  stylingMode: 'filled',
+  valueChangeEvent: 'input',
+};
+
 export const ProfileCard = ({
   items = [],
   colCount = 2,
@@ -44,12 +49,48 @@ export const ProfileCard = ({
     }
 
     if (fieldName) {
-      cardData[fieldName] = value;
+      cardData = { ...cardData, [fieldName]: value };
     }
 
     onDataChanged(cardData);
   };
   const onFormFieldChange = (e: FormTypes.FieldDataChangedEvent) => onFieldChange(e.dataField)(e.value);
+  const itemsWithCommonOptions = useMemo(() => items.map((item) => {
+    item.editorOptions = { ...commonEditorOptions, ...item.editorOptions };
+    return item;
+  }), [items]);
+
+  const renderItems = useMemo(() => itemsWithCommonOptions.map((item, index) => (
+    <Item key={index}
+      dataField={item.dataField}
+      editorType={item.editorType}
+      editorOptions={item.editorOptions}
+      colSpan={item.colSpan}>
+      {item.label && <Label text={item.label} />}
+      {item.validators?.map((rule, index) =>
+        <ValidationRuleComponent
+          key={index}
+          type={rule.type}
+        />)
+      }
+      {item.dataField === 'status' &&
+        <StatusSelectBox
+          labelMode='hidden'
+          stylingMode='filled'
+          value={cardData[item.dataField]}
+          onValueChange={onFieldChange(item.dataField)}
+        />
+      }
+      {item.dataField === 'supervisor' &&
+        <PicturedItemSelectBox
+          label={item.label}
+          value={cardData[item.dataField]}
+          items={item.itemsList}
+          onValueChange={onFieldChange(item.dataField)}
+        />
+      }
+    </Item>
+  )), [items, onFieldChange, cardData]);
 
   return (
     <div className={wrapperCssClass}>
@@ -69,41 +110,7 @@ export const ProfileCard = ({
             labelMode='outside'
             onFieldDataChanged={onFormFieldChange}
           >
-            {items.map((item, index) => (
-              <Item key={index}
-                dataField={item.dataField}
-                editorType={item.editorType}
-                editorOptions={{
-                  stylingMode: 'filled',
-                  valueChangeEvent: 'input',
-                  ...item.editorOptions
-                }}
-                colSpan={item.colSpan}>
-                {item.label && <Label text={item.label} />}
-                {item.validators?.map((rule, index) =>
-                  <ValidationRuleComponent
-                    key={index}
-                    type={rule.type}
-                  />)
-                }
-                {item.dataField === 'status' &&
-                  <StatusSelectBox
-                    labelMode='hidden'
-                    stylingMode='filled'
-                    value={cardData[item.dataField]}
-                    onValueChange={onFieldChange(item.dataField)}
-                  />
-                }
-                {item.dataField === 'supervisor' &&
-                  <PicturedItemSelectBox
-                    label={item.label}
-                    value={cardData[item.dataField]}
-                    items={item.itemsList}
-                    onValueChange={onFieldChange(item.dataField)}
-                  />
-                }
-              </Item>
-            ))}
+            {renderItems}
           </Form>
         </div>
       </div>
