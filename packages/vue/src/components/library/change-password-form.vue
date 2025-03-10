@@ -7,17 +7,16 @@
       <dx-item
         data-field="password"
         editor-type="dxTextBox"
-        :editor-options="{ stylingMode: 'filled', placeholder: 'Password', mode: 'password' }"
+        :editor-options="{ stylingMode: 'filled', mode: 'password' }"
       >
         <dx-required-rule message="Password is required" />
-        <dx-label :visible="false" />
+        <dx-label text="Password" />
       </dx-item>
       <dx-item
         data-field="confirmedPassword"
         editor-type="dxTextBox"
         :editor-options="{
           stylingMode: 'filled',
-          placeholder: 'Confirm Password',
           mode: 'password',
         }"
       >
@@ -26,7 +25,7 @@
           message="Passwords do not match"
           :validation-callback="confirmPassword"
         />
-        <dx-label :visible="false" />
+        <dx-label text="Confirm Password" />
       </dx-item>
       <dx-button-item>
         <dx-button-options

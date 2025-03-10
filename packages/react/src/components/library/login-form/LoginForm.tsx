@@ -48,19 +48,19 @@ export const LoginForm = ({ resetLink, createAccountLink }) => {
   return (
     <form className='login-form' onSubmit={onSubmit}>
       <Form
+        labelLocation='top'
         formData={formData.current}
         disabled={loading}
         showColonAfterLabel
-        showRequiredMark={false}
       >
         <Item dataField='email' editorType='dxTextBox' editorOptions={emailEditorOptions}>
           <RequiredRule message='Email is required' />
           <EmailRule message='Email is invalid' />
-          <Label visible={false} />
+          <Label text='Email' />
         </Item>
         <Item dataField='password' editorType='dxTextBox' editorOptions={passwordEditorOptions}>
           <RequiredRule message='Password is required' />
-          <Label visible={false} />
+          <Label text='Password' />
         </Item>
         <Item dataField='rememberMe' editorType='dxCheckBox' editorOptions={rememberMeEditorOptions}>
           <Label visible={false} />
@@ -88,6 +88,6 @@ export const LoginForm = ({ resetLink, createAccountLink }) => {
   );
 };
 
-const emailEditorOptions = { stylingMode: 'filled', placeholder: 'Email', mode: 'email', value: 'jheart@dx-email.com' };
-const passwordEditorOptions = { stylingMode: 'filled', placeholder: 'Password', mode: 'password', value: 'password' };
+const emailEditorOptions = { stylingMode: 'filled', mode: 'email', value: 'jheart@dx-email.com' };
+const passwordEditorOptions = { stylingMode: 'filled', mode: 'password', value: 'password' };
 const rememberMeEditorOptions = { text: 'Remember me', elementAttr: { class: 'form-text' } };

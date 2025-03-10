@@ -14,11 +14,10 @@ const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/user-profile`;
 const requestLogger = RequestLogger();
 
-const CURRENT_PASSWORD_PLACEHOLDER = 'Current Password';
-const NEW_PASSWORD_PLACEHOLDER = 'Password';
-const CONFIRMED_PASSWORD_PLACEHOLDER = 'Confirm Password';
-
 fixture`User Profile`;
+
+const OLD_PASSWORD = 'oldpassword';
+const NEW_PASSWORD = 'newpassword';
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
@@ -43,19 +42,20 @@ fixture`User Profile`;
         await t.wait(1000);
         await takeScreenshot(`user-profile-change-password${postfix}`, 'body');
 
-        const getFormInput = (placeholder) => Selector('.dx-placeholder')
-          .withAttribute('data-dx_placeholder', placeholder)
-          .prevSibling('input');
-
         const popupSelector = screenMode[0] === 400 ? '.dx-popup-fullscreen' : '.dx-popup-normal';
+        const formInputs = Selector('.dx-popup-content .dx-texteditor-input[type="password"]');
+
+        const oldPasswordInput = formInputs.nth(0);
+        const newPasswordInput = formInputs.nth(1);
+        const repeatNewPasswordInput = formInputs.nth(2);
 
         await t
-          .typeText(getFormInput(CURRENT_PASSWORD_PLACEHOLDER), 'oldpassword')
-          .typeText(getFormInput(NEW_PASSWORD_PLACEHOLDER), 'newpassword');
+          .typeText(oldPasswordInput, OLD_PASSWORD)
+          .typeText(newPasswordInput, NEW_PASSWORD);
 
         await takeScreenshot(`user-profile-change-password-old-new${postfix}`, popupSelector);
 
-        await t.typeText(getFormInput(CONFIRMED_PASSWORD_PLACEHOLDER), 'newpassword');
+        await t.typeText(repeatNewPasswordInput, NEW_PASSWORD);
 
         await takeScreenshot(`user-profile-change-password-ready-to-save${postfix}`, popupSelector);
 
@@ -69,8 +69,8 @@ fixture`User Profile`;
         await takeScreenshot(`user-profile-change-password-after-save${postfix}`, popupSelector);
 
         await t
-          .typeText(getFormInput(CURRENT_PASSWORD_PLACEHOLDER), 'oldpassword')
-          .typeText(getFormInput(NEW_PASSWORD_PLACEHOLDER), 'newpassword')
+          .typeText(formInputs.nth(0), 'oldpassword')
+          .typeText(formInputs.nth(1), 'newpassword')
           .click(Selector(popupSelector).find('.form-popup-buttons-container').find('.dx-button').nth(0)) // Cancel button
           .expect(Selector(popupSelector).visible)
           .notOk()

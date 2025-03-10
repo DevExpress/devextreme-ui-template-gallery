@@ -6,6 +6,7 @@
     <dx-form
       :form-data="formData"
       :disabled="loading"
+      label-location="top"
     >
       <dx-item
         data-field="email"
@@ -19,7 +20,7 @@
       >
         <dx-required-rule message="Email is required" />
         <dx-email-rule message="Email is invalid" />
-        <dx-label :visible="false" />
+        <dx-label text="Email" />
       </dx-item>
       <dx-item
         data-field="password"
@@ -32,7 +33,7 @@
         }"
       >
         <dx-required-rule message="Password is required" />
-        <dx-label :visible="false" />
+        <dx-label text="Password" />
       </dx-item>
       <dx-item
         data-field="rememberMe"
