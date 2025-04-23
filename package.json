@@ -61,7 +61,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "devextreme": "24.2.5",
+    "devextreme": ".\\devextreme-25.1.0.tgz",
     "devextreme-dist": "24.2.5"
   },
   "pre-commit": [
