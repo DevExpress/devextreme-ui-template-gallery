@@ -61,8 +61,8 @@
     "packages/*"
   ],
   "dependencies": {
-    "devextreme": "24.2.5",
-    "devextreme-dist": "24.2.5"
+    "devextreme": "file:devextreme-25.1.2.tgz",
+    "devextreme-dist": "file:devextreme-dist-25.1.2.tgz"
   },
   "pre-commit": [
     "lint-bundles"
