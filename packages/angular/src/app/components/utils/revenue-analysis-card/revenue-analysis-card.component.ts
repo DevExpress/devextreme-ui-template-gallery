@@ -9,9 +9,10 @@ import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 import { SalesByState } from 'src/app/types/analytics';
 
 @Component({
-  selector: 'revenue-analysis-card',
-  templateUrl: './revenue-analysis-card.component.html',
-  styleUrls: ['./revenue-analysis-card.component.scss'],
+    selector: 'revenue-analysis-card',
+    templateUrl: './revenue-analysis-card.component.html',
+    styleUrls: ['./revenue-analysis-card.component.scss'],
+    standalone: false
 })
 export class RevenueAnalysisCardComponent {
   @Input() data: SalesByState;

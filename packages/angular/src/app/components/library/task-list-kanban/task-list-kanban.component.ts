@@ -20,9 +20,10 @@ type Board = {
 };
 
 @Component({
-  selector: 'task-list-kanban',
-  templateUrl: './task-list-kanban.component.html',
-  styleUrls: ['./task-list-kanban.component.scss'],
+    selector: 'task-list-kanban',
+    templateUrl: './task-list-kanban.component.html',
+    styleUrls: ['./task-list-kanban.component.scss'],
+    standalone: false
 })
 export class TaskListKanbanComponent implements OnChanges {
   @ViewChild(DxSortableComponent, { static: false }) sortable: DxSortableComponent;

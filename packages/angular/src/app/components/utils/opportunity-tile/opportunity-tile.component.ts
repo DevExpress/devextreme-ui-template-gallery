@@ -6,9 +6,10 @@ import { Opportunity } from 'src/app/types/opportunities';
 import notify from 'devextreme/ui/notify';
 
 @Component({
-  selector: 'opportunity-tile',
-  templateUrl: 'opportunity-tile.component.html',
-  styleUrls: ['./opportunity-tile.component.scss'],
+    selector: 'opportunity-tile',
+    templateUrl: 'opportunity-tile.component.html',
+    styleUrls: ['./opportunity-tile.component.scss'],
+    standalone: false
 })
 
 export class OpportunityTileComponent {

@@ -9,9 +9,10 @@ import { CardMenuModule } from '../card-menu/card-menu.component';
 import { Activity } from 'src/app/types/activities';
 
 @Component({
-  selector: 'card-activities',
-  templateUrl: './card-activities.component.html',
-  styleUrls: ['./card-activities.component.scss'],
+    selector: 'card-activities',
+    templateUrl: './card-activities.component.html',
+    styleUrls: ['./card-activities.component.scss'],
+    standalone: false
 })
 export class CardActivitiesComponent {
   @Input() activities: Activity[];

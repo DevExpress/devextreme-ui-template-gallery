@@ -8,8 +8,9 @@ import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { SalesByStateAndCity } from 'src/app/types/analytics';
 
 @Component({
-  selector: 'revenue-snapshot-card',
-  templateUrl: './revenue-snapshot-card.component.html',
+    selector: 'revenue-snapshot-card',
+    templateUrl: './revenue-snapshot-card.component.html',
+    standalone: false
 })
 export class RevenueSnapshotCardComponent {
   @Input() data: SalesByStateAndCity;

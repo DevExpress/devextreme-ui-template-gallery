@@ -3,7 +3,7 @@ import {
   EventEmitter,
   Input,
   NgModule,
-  Output, 
+  Output,
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,9 +19,10 @@ import { ContactStatusModule } from 'src/app/components/utils/contact-status/con
 
 
 @Component({
-  selector: 'password-text-box',
-  templateUrl: 'password-text-box.component.html',
-  styles: [],
+    selector: 'password-text-box',
+    templateUrl: 'password-text-box.component.html',
+    styles: [],
+    standalone: false
 })
 export class PasswordTextBoxComponent {
   @ViewChild('validator', { static: true }) validator: DxValidatorComponent;

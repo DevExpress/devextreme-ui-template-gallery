@@ -33,9 +33,10 @@ import { ContactNewFormComponent, ContactNewFormModule } from 'src/app/component
 type FilterContactStatus = ContactStatus | 'All';
 
 @Component({
-  templateUrl: './crm-contact-list.component.html',
-  styleUrls: ['./crm-contact-list.component.scss'],
-  providers: [DataService],
+    templateUrl: './crm-contact-list.component.html',
+    styleUrls: ['./crm-contact-list.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class CrmContactListComponent {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;

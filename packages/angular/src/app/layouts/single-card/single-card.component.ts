@@ -4,9 +4,10 @@ import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 import { CardAuthModule } from '../../components/library/card-auth/card-auth.component'
 
 @Component({
-  selector: 'app-single-card',
-  templateUrl: './single-card.component.html',
-  styleUrls: ['./single-card.component.scss'],
+    selector: 'app-single-card',
+    templateUrl: './single-card.component.html',
+    styleUrls: ['./single-card.component.scss'],
+    standalone: false
 })
 export class SingleCardComponent {
   @Input()

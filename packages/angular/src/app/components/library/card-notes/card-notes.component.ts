@@ -13,9 +13,10 @@ import {
 import { Notes, Note } from 'src/app/types/notes';
 
 @Component({
-  selector: 'card-notes',
-  templateUrl: './card-notes.component.html',
-  styleUrls: ['./card-notes.component.scss'],
+    selector: 'card-notes',
+    templateUrl: './card-notes.component.html',
+    styleUrls: ['./card-notes.component.scss'],
+    standalone: false
 })
 export class CardNotesComponent {
   @Input() user: string;

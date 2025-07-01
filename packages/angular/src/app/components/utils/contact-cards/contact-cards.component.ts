@@ -21,9 +21,10 @@ import { Opportunities } from 'src/app/types/opportunities';
 import { Task } from 'src/app/types/task';
 
 @Component({
-  selector: 'contact-cards',
-  templateUrl: './contact-cards.component.html',
-  styleUrls: ['./contact-cards.component.scss'],
+    selector: 'contact-cards',
+    templateUrl: './contact-cards.component.html',
+    styleUrls: ['./contact-cards.component.scss'],
+    standalone: false
 })
 export class ContactCardsComponent {
     @Input() tasks: Task[];

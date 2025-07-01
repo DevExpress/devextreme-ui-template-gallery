@@ -28,9 +28,10 @@ import {
 import { DataService, ScreenService } from 'src/app/services';
 
 @Component({
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'],
-  providers: [DataService],
+    templateUrl: './user-profile.component.html',
+    styleUrls: ['./user-profile.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class UserProfileComponent {
   profileId = 22;

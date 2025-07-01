@@ -11,9 +11,10 @@ import { Opportunity } from 'src/app/types/opportunities';
 import { OpportunityTileModule } from 'src/app/components/utils/opportunity-tile/opportunity-tile.component';
 
 @Component({
-  selector: 'card-opportunities',
-  templateUrl: './card-opportunities.component.html',
-  styleUrls: ['./card-opportunities.component.scss'],
+    selector: 'card-opportunities',
+    templateUrl: './card-opportunities.component.html',
+    styleUrls: ['./card-opportunities.component.scss'],
+    standalone: false
 })
 export class CardOpportunitiesComponent implements OnChanges {
   @Input() openedOpportunities: Opportunity[];

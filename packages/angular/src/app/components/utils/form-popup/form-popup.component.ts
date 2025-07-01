@@ -16,9 +16,10 @@ import { ScreenService } from 'src/app/services';
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 
 @Component({
-  selector: 'form-popup',
-  templateUrl: './form-popup.component.html',
-  styleUrls: ['./form-popup.component.scss']
+    selector: 'form-popup',
+    templateUrl: './form-popup.component.html',
+    styleUrls: ['./form-popup.component.scss'],
+    standalone: false
 })
 
 export class FormPopupComponent {

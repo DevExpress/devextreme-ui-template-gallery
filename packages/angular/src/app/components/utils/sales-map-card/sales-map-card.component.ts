@@ -10,9 +10,10 @@ import * as mapsData from 'devextreme-dist/js/vectormap-data/usa.js';
 import { MapLayerElement } from 'devextreme/viz/vector_map';
 
 @Component({
-  selector: 'sales-map-card',
-  templateUrl: './sales-map-card.component.html',
-  styleUrls: ['./sales-map-card.component.scss'],
+    selector: 'sales-map-card',
+    templateUrl: './sales-map-card.component.html',
+    styleUrls: ['./sales-map-card.component.scss'],
+    standalone: false
 })
 export class SalesMapCardComponent {
   @Input() data: any;

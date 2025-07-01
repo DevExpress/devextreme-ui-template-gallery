@@ -27,9 +27,10 @@ import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 
 @Component({
-  templateUrl: './analytics-sales-report.component.html',
-  styleUrls: ['./analytics-sales-report.component.scss'],
-  providers: [DataService],
+    templateUrl: './analytics-sales-report.component.html',
+    styleUrls: ['./analytics-sales-report.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class AnalyticsSalesReportComponent implements OnInit {
   groupByPeriods = ['Day', 'Month'];
@@ -45,7 +46,7 @@ export class AnalyticsSalesReportComponent implements OnInit {
   constructor(private service: DataService) {}
 
   onRangeChanged = ({value: dates}) => {
-    const [startDate, endDate] = dates.map((date) => formatDate(date, 'YYYY-MM-dd', 'en'));
+    const [startDate, endDate] = dates.map((date) => formatDate(date, 'y-MM-dd', 'en'));
 
     this.isLoading = true;
 

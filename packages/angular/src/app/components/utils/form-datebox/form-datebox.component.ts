@@ -12,8 +12,8 @@ import { DxCalendarTypes } from 'devextreme-angular/ui/calendar';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'form-item-date',
-  template: `
+    selector: 'form-item-date',
+    template: `
     <dx-date-box
       [(value)]="value"
       [readOnly]="!isEditing"
@@ -25,6 +25,7 @@ import { CommonModule } from '@angular/common';
       displayFormat="MM/dd/y"
       pickerType="calendar"
   ></dx-date-box>`,
+    standalone: false
 })
 export class FormDateboxComponent {
   @ViewChild(DxDropDownButtonComponent) dropDownButtonComponent: DxDropDownButtonComponent;

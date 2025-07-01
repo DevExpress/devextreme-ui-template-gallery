@@ -2,7 +2,7 @@ import {
   Component, NgModule, ViewChild, EventEmitter, Output, Input, SimpleChanges, OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {
   DxButtonModule,
@@ -28,9 +28,10 @@ import { Task } from 'src/app/types/task';
 import 'jspdf-autotable';
 
 @Component({
-  selector: 'task-list-grid',
-  templateUrl: './task-list-grid.component.html',
-  styleUrls: ['./task-list-grid.component.scss'],
+    selector: 'task-list-grid',
+    templateUrl: './task-list-grid.component.html',
+    styleUrls: ['./task-list-grid.component.scss'],
+    standalone: false
 })
 export class TaskListGridComponent implements OnChanges {
   @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
@@ -110,22 +111,16 @@ export class TaskListGridComponent implements OnChanges {
   };
 }
 
-@NgModule({
-  imports: [
-    DxButtonModule,
+@NgModule({ exports: [TaskListGridComponent],
+  declarations: [TaskListGridComponent],
+  imports: [DxButtonModule,
     DxDataGridModule,
     DxDropDownButtonModule,
     DxSelectBoxModule,
     DxTextBoxModule,
     DxToolbarModule,
-
     StatusIndicatorModule,
-
-    HttpClientModule,
-    CommonModule,
-  ],
-  providers: [],
-  exports: [TaskListGridComponent],
-  declarations: [TaskListGridComponent],
+    CommonModule],
+  providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 export class TaskListModule { }

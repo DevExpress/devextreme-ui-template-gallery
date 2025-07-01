@@ -35,10 +35,11 @@ import { distinctUntilChanged, Subject, Subscription} from 'rxjs';
 import { Contact } from 'src/app/types/contact';
 
 @Component({
-  selector: 'contact-panel',
-  templateUrl: './contact-panel.component.html',
-  styleUrls: ['./contact-panel.component.scss'],
-  providers: [DataService],
+    selector: 'contact-panel',
+    templateUrl: './contact-panel.component.html',
+    styleUrls: ['./contact-panel.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecked, OnDestroy {
   @Input() isOpened = false;

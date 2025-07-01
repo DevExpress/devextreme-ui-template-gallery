@@ -10,8 +10,9 @@ import { AuthService } from '../../../services';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-change-password-form',
-  templateUrl: './change-password-form.component.html',
+    selector: 'app-change-password-form',
+    templateUrl: './change-password-form.component.html',
+    standalone: false
 })
 export class ChangePasswordFormComponent implements OnInit, OnDestroy {
   loading = false;

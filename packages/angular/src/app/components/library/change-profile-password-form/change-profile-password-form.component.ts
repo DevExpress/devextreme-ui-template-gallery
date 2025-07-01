@@ -13,9 +13,10 @@ import {
 import { ValidationRule } from 'devextreme-angular/common';
 
 @Component({
-  selector: 'change-profile-password-form',
-  templateUrl: './change-profile-password-form.component.html',
-  styleUrls: ['./change-profile-password-form.component.scss']
+    selector: 'change-profile-password-form',
+    templateUrl: './change-profile-password-form.component.html',
+    styleUrls: ['./change-profile-password-form.component.scss'],
+    standalone: false
 })
 export class ChangeProfilePasswordFormComponent {
   @ViewChild(FormPopupComponent, { static: true }) formPopup;

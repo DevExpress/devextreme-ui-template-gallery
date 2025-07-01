@@ -21,9 +21,10 @@ import { TaskListGanttComponent, TaskListGanttModule } from 'src/app/components/
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 
 @Component({
-  templateUrl: './planning-task-list.component.html',
-  styleUrls: ['./planning-task-list.component.scss'],
-  providers: [DataService],
+    templateUrl: './planning-task-list.component.html',
+    styleUrls: ['./planning-task-list.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;

@@ -6,9 +6,10 @@ import { DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 
 @Component({
-  selector: 'pictured-item-select-box',
-  templateUrl: 'pictured-item-select-box.component.html',
-  styleUrls: ['./pictured-item-select-box.component.scss'],
+    selector: 'pictured-item-select-box',
+    templateUrl: 'pictured-item-select-box.component.html',
+    styleUrls: ['./pictured-item-select-box.component.scss'],
+    standalone: false
 })
 export class PicturedItemSelectBoxComponent {
   @Input() value: Record<string, unknown>;

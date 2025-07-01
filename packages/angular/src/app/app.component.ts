@@ -2,9 +2,10 @@ import { Component, HostBinding, OnDestroy, } from '@angular/core';
 import { AppInfoService, AuthService, ScreenService, ThemeService } from './services';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnDestroy {
   @HostBinding('class') get getClass() {

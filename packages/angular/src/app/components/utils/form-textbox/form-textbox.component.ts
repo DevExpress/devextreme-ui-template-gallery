@@ -8,9 +8,10 @@ import {
 import { ValidationRule } from 'devextreme-angular/common';
 
 @Component({
-  selector: 'form-textbox',
-  templateUrl: './form-textbox.component.html',
-  styleUrls: ['form-textbox.component.scss'],
+    selector: 'form-textbox',
+    templateUrl: './form-textbox.component.html',
+    styleUrls: ['form-textbox.component.scss'],
+    standalone: false
 })
 export class FormTextboxComponent {
   @Input() isEditing = false;

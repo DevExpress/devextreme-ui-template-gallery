@@ -10,9 +10,10 @@ import { DxoValueAxisModule } from 'devextreme-angular/ui/nested';
 import { SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 
 @Component({
-  selector: 'sales-by-range-card',
-  templateUrl: './sales-by-range-card.component.html',
-  styleUrls: ['./sales-by-range-card.component.scss'],
+    selector: 'sales-by-range-card',
+    templateUrl: './sales-by-range-card.component.html',
+    styleUrls: ['./sales-by-range-card.component.scss'],
+    standalone: false
 })
 export class SalesByRangeCardComponent {
   @Input() data: SalesOrOpportunitiesByCategory;

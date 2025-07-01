@@ -17,9 +17,10 @@ import { getSizeQualifier } from 'src/app/services/screen.service';
 type CardData = Record<string, any>;
 
 @Component({
-  selector: 'profile-card',
-  templateUrl: './profile-card.component.html',
-  styleUrls: ['profile-card.component.scss'],
+    selector: 'profile-card',
+    templateUrl: './profile-card.component.html',
+    styleUrls: ['profile-card.component.scss'],
+    standalone: false
 })
 export class ProfileCardComponent {
   @ViewChild('form', { static: true }) form: DxFormComponent;

@@ -10,9 +10,10 @@ import { DxRangeSelectorModule } from 'devextreme-angular/ui/range-selector';
 import { Sale } from 'src/app/types/analytics';
 
 @Component({
-  selector: 'sales-range-card',
-  templateUrl: './sales-range-card.component.html',
-  styleUrls: ['./sales-range-card.component.scss'],
+    selector: 'sales-range-card',
+    templateUrl: './sales-range-card.component.html',
+    styleUrls: ['./sales-range-card.component.scss'],
+    standalone: false
 })
 export class SalesRangeCardComponent {
   @Input() data: Sale[];

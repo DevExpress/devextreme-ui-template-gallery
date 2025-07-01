@@ -9,9 +9,10 @@ import { ContactStatusModule } from 'src/app/components/utils/contact-status/con
 import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
-  selector: 'status-select-box',
-  templateUrl: 'status-select-box.component.html',
-  styleUrls: ['./status-select-box.component.scss'],
+    selector: 'status-select-box',
+    templateUrl: 'status-select-box.component.html',
+    styleUrls: ['./status-select-box.component.scss'],
+    standalone: false
 })
 export class StatusSelectBoxComponent {
   @Input() value: string;

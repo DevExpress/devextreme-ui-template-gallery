@@ -11,9 +11,10 @@ import { AuthService, IUser } from 'src/app/services';
 import { ThemeSwitcherModule } from 'src/app/components/library/theme-switcher/theme-switcher.component';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: 'app-header.component.html',
-  styleUrls: ['./app-header.component.scss'],
+    selector: 'app-header',
+    templateUrl: 'app-header.component.html',
+    styleUrls: ['./app-header.component.scss'],
+    standalone: false
 })
 
 export class AppHeaderComponent implements OnInit {

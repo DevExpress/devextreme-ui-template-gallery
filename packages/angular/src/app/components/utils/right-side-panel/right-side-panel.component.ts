@@ -13,10 +13,11 @@ import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import {DataService, ScreenService} from 'src/app/services';
 
 @Component({
-  selector: 'right-side-panel',
-  templateUrl: './right-side-panel.component.html',
-  styleUrls: ['./right-side-panel.component.scss'],
-  providers: [DataService],
+    selector: 'right-side-panel',
+    templateUrl: './right-side-panel.component.html',
+    styleUrls: ['./right-side-panel.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class RightSidePanelComponent {
   @Input() isOpened = false;

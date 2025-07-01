@@ -21,9 +21,10 @@ import { TaskFormModule } from 'src/app/components/library/task-form/task-form.c
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 @Component({
-  templateUrl: './planning-task-details.component.html',
-  styleUrls: ['./planning-task-details.component.scss'],
-  providers: [DataService],
+    templateUrl: './planning-task-details.component.html',
+    styleUrls: ['./planning-task-details.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class PlanningTaskDetailsComponent implements OnInit {
   task: Task;

@@ -6,9 +6,10 @@ import { DxButtonModule } from 'devextreme-angular';
 import {ApplyPipeModule} from "../../../pipes/apply.pipe";
 
 @Component({
-  selector: 'scheduler-tooltip',
-  templateUrl: './scheduler-tooltip.component.html',
-  styleUrls: ['./scheduler-tooltip.component.scss'],
+    selector: 'scheduler-tooltip',
+    templateUrl: './scheduler-tooltip.component.html',
+    styleUrls: ['./scheduler-tooltip.component.scss'],
+    standalone: false
 })
 export class SchedulerTooltipComponent {
   @Input() selectedAppointmentData: Record<string, any>;

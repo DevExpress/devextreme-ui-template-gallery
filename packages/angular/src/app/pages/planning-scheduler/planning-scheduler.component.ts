@@ -25,9 +25,10 @@ import { DxSchedulerTypes } from 'devextreme-angular/ui/scheduler'
 type SelectedAppointment = { data: Record<string, any>, target: any };
 
 @Component({
-  templateUrl: './planning-scheduler.component.html',
-  styleUrls: ['./planning-scheduler.component.scss'],
-  providers: [DataService],
+    templateUrl: './planning-scheduler.component.html',
+    styleUrls: ['./planning-scheduler.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class PlanningSchedulerComponent implements OnInit {
   @ViewChild('schedulerRef', { static: false }) schedulerRef: DxSchedulerComponent;

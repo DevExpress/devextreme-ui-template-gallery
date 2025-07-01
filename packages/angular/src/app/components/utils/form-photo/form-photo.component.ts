@@ -5,9 +5,10 @@ import {
 import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
 
 @Component({
-  selector: 'form-photo',
-  templateUrl: './form-photo.component.html',
-  styleUrls: ['./form-photo.component.scss'],
+    selector: 'form-photo',
+    templateUrl: './form-photo.component.html',
+    styleUrls: ['./form-photo.component.scss'],
+    standalone: false
 })
 export class FormPhotoComponent implements OnInit {
   @Input() link: string;

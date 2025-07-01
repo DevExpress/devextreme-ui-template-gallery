@@ -24,9 +24,10 @@ import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import { SalesByState, SalesByStateAndCity } from 'src/app/types/analytics';
 
 @Component({
-  templateUrl: './analytics-geography.component.html',
-  styleUrls: ['./analytics-geography.component.scss'],
-  providers: [DataService],
+    templateUrl: './analytics-geography.component.html',
+    styleUrls: ['./analytics-geography.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
   analyticsPanelItems = analyticsPanelItems;

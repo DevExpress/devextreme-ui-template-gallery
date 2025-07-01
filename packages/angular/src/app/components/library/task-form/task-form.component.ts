@@ -25,9 +25,10 @@ import { ScreenService } from '../../../services';
 import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
 
 @Component({
-  selector: 'task-form',
-  templateUrl: './task-form.component.html',
-  styleUrls: ['./task-form.component.scss'],
+    selector: 'task-form',
+    templateUrl: './task-form.component.html',
+    styleUrls: ['./task-form.component.scss'],
+    standalone: false
 })
 export class TaskFormComponent implements OnInit {
   @Input() task: Task;

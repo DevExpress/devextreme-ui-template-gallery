@@ -16,9 +16,10 @@ import { newContact } from 'src/app/types/contact';
 import { getSizeQualifier } from 'src/app/services/screen.service';
 
 @Component({
-  selector: 'contact-new-form',
-  templateUrl: './contact-new-form.component.html',
-  providers: [],
+    selector: 'contact-new-form',
+    templateUrl: './contact-new-form.component.html',
+    providers: [],
+    standalone: false
 })
 
 export class ContactNewFormComponent {

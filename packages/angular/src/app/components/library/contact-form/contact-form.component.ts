@@ -25,9 +25,10 @@ import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
 
 @Component({
-  selector: 'contact-form',
-  templateUrl: './contact-form.component.html',
-  styleUrls: ['./contact-form.component.scss'],
+    selector: 'contact-form',
+    templateUrl: './contact-form.component.html',
+    styleUrls: ['./contact-form.component.scss'],
+    standalone: false
 })
 export class ContactFormComponent {
   @Input() contactData: Contact;

@@ -18,9 +18,10 @@ import { SideNavigationMenuModule, AppHeaderModule, AppFooterModule } from '../.
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-side-nav-outer-toolbar',
-  templateUrl: './side-nav-outer-toolbar.component.html',
-  styleUrls: ['./side-nav-outer-toolbar.component.scss'],
+    selector: 'app-side-nav-outer-toolbar',
+    templateUrl: './side-nav-outer-toolbar.component.html',
+    styleUrls: ['./side-nav-outer-toolbar.component.scss'],
+    standalone: false
 })
 export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   @ViewChild(DxScrollViewComponent, { static: true }) scrollView!: DxScrollViewComponent;

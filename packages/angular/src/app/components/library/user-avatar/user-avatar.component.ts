@@ -3,9 +3,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'user-avatar',
-  templateUrl: './user-avatar.component.html',
-  styleUrls: ['./user-avatar.component.scss'],
+    selector: 'user-avatar',
+    templateUrl: './user-avatar.component.html',
+    styleUrls: ['./user-avatar.component.scss'],
+    standalone: false
 })
 
 export class UserAvatarComponent {

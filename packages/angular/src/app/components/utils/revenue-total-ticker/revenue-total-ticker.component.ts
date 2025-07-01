@@ -6,8 +6,9 @@ import { Sales } from 'src/app/types/analytics';
 import { TickerCardModule } from 'src/app/components/library/ticker-card/ticker-card.component';
 
 @Component({
-  selector: 'revenue-total-ticker',
-  templateUrl: 'revenue-total-ticker.component.html',
+    selector: 'revenue-total-ticker',
+    templateUrl: 'revenue-total-ticker.component.html',
+    standalone: false
 })
 
 export class RevenueTotalTickerComponent {

@@ -10,9 +10,10 @@ import { Task } from 'src/app/types/task';
 import { UserAvatarModule } from 'src/app/components/library/user-avatar/user-avatar.component';
 
 @Component({
-  selector: 'task-kanban-card',
-  templateUrl: './task-kanban-card.component.html',
-  styleUrls: ['./task-kanban-card.component.scss'],
+    selector: 'task-kanban-card',
+    templateUrl: './task-kanban-card.component.html',
+    styleUrls: ['./task-kanban-card.component.scss'],
+    standalone: false
 })
 export class TaskKanbanCardComponent {
   @Input() task: Task;

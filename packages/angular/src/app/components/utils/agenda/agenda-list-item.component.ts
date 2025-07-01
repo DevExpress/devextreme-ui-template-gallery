@@ -7,8 +7,8 @@ import { Duration } from 'luxon';
 import { ApplyPipeModule } from "../../../pipes/apply.pipe";
 
 @Component({
-  selector: 'agenda-list-item',
-  template: `
+    selector: 'agenda-list-item',
+    template: `
     <div class='agenda-list-item'>
       <div class='time'>
         <div class='start'>{{getStart| apply: appointment}}</div>
@@ -24,7 +24,8 @@ import { ApplyPipeModule } from "../../../pipes/apply.pipe";
       </div>
     </div>
 `,
-  styleUrls: ['./agenda-list-item.component.scss'],
+    styleUrls: ['./agenda-list-item.component.scss'],
+    standalone: false
 })
 export class AgendaListItemComponent {
   @Input() appointment: Record<string, any> = {};

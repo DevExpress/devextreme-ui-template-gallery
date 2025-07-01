@@ -34,9 +34,10 @@ type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | Sal
 type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
 
 @Component({
-  templateUrl: './analytics-dashboard.component.html',
-  styleUrls: ['./analytics-dashboard.component.scss'],
-  providers: [DataService],
+    templateUrl: './analytics-dashboard.component.html',
+    styleUrls: ['./analytics-dashboard.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class AnalyticsDashboardComponent implements OnInit {
   analyticsPanelItems = analyticsPanelItems;

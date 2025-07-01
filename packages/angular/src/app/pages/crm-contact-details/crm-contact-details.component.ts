@@ -23,9 +23,10 @@ import { ContactCardsModule } from 'src/app/components/utils/contact-cards/conta
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 @Component({
-  templateUrl: './crm-contact-details.component.html',
-  styleUrls: ['./crm-contact-details.component.scss'],
-  providers: [DataService],
+    templateUrl: './crm-contact-details.component.html',
+    styleUrls: ['./crm-contact-details.component.scss'],
+    providers: [DataService],
+    standalone: false
 })
 export class CrmContactDetailsComponent implements OnInit {
   contactId = 12;

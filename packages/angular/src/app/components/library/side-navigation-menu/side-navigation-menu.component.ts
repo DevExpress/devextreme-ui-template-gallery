@@ -14,9 +14,10 @@ import * as events from 'devextreme/events';
 import { navigation } from '../../../app-navigation';
 
 @Component({
-  selector: 'side-navigation-menu',
-  templateUrl: './side-navigation-menu.component.html',
-  styleUrls: ['./side-navigation-menu.component.scss'],
+    selector: 'side-navigation-menu',
+    templateUrl: './side-navigation-menu.component.html',
+    styleUrls: ['./side-navigation-menu.component.scss'],
+    standalone: false
 })
 export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   @ViewChild(DxTreeViewComponent, { static: true })

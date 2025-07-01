@@ -5,9 +5,10 @@ import { DxListModule, DxListTypes } from 'devextreme-angular/ui/list';
 import { IUser } from '../../../services/auth.service';
 
 @Component({
-  selector: 'user-menu-section',
-  templateUrl: 'user-menu-section.component.html',
-  styleUrls: ['./user-menu-section.component.scss'],
+    selector: 'user-menu-section',
+    templateUrl: 'user-menu-section.component.html',
+    styleUrls: ['./user-menu-section.component.scss'],
+    standalone: false
 })
 
 export class UserMenuSectionComponent {

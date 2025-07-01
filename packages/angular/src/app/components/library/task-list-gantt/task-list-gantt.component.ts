@@ -11,9 +11,10 @@ import { Task } from 'src/app/types/task';
 import 'jspdf-autotable';
 
 @Component({
-  selector: 'task-list-gantt',
-  templateUrl: './task-list-gantt.component.html',
-  styleUrls: ['./task-list-gantt.component.scss'],
+    selector: 'task-list-gantt',
+    templateUrl: './task-list-gantt.component.html',
+    styleUrls: ['./task-list-gantt.component.scss'],
+    standalone: false
 })
 export class TaskListGanttComponent {
   @ViewChild(DxGanttComponent, { static: false }) gantt: DxGanttComponent;

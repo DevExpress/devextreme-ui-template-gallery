@@ -1,7 +1,8 @@
 import { NgModule, Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'apply',
+    name: 'apply',
+    standalone: false
 })
 export class ApplyPipe implements PipeTransform {
   transform(value: Object | ((...args: any[]) => any), arg1, ...args: any[]): any {

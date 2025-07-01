@@ -9,9 +9,10 @@ import { AuthService, IResponse } from 'src/app/services';
 const notificationText = 'We\'ve sent a link to reset your password. Check your inbox.';
 
 @Component({
-  selector: 'reset-password-form',
-  templateUrl: './reset-password-form.component.html',
-  styleUrls: ['./reset-password-form.component.scss'],
+    selector: 'reset-password-form',
+    templateUrl: './reset-password-form.component.html',
+    styleUrls: ['./reset-password-form.component.scss'],
+    standalone: false
 })
 export class ResetPasswordFormComponent implements OnInit {
   @Input() signInLink = '/auth/login';
