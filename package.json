@@ -79,7 +79,8 @@
     "typescript": "5.5.2",
     "devextreme": "24.2.8",
     "devextreme-angular": "24.2.8",
-    "devextreme-dist": "24.2.8"
+    "devextreme-dist": "24.2.8",
+    "eslint-config-devextreme": "^1.1.6"
   },
   "pre-commit": [
     "lint-bundles"
