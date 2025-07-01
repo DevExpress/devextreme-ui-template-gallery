@@ -12,6 +12,8 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "devexpress-gantt": "^4.1.33",
+    "devextreme": "25.1.2-beta",
+    "devextreme-dist": "25.1.2-beta",
     "devextreme-vue": "25.1.2-beta",
     "dx-template-gallery-data": "^1.0.0",
     "exceljs": "^3.10.0",
