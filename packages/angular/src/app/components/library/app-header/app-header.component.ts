@@ -1,5 +1,5 @@
 import {
-  Component, NgModule, Input, Output, EventEmitter, OnInit,
+  Component, NgModule, Input, Output, EventEmitter, OnInit, inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +14,13 @@ import { ThemeSwitcherModule } from 'src/app/components/library/theme-switcher/t
     selector: 'app-header',
     templateUrl: 'app-header.component.html',
     styleUrls: ['./app-header.component.scss'],
-    standalone: false
+    imports: [
+        CommonModule,
+        DxButtonModule,
+        DxToolbarModule,
+        ThemeSwitcherModule,
+        UserPanelModule,
+    ]
 })
 
 export class AppHeaderComponent implements OnInit {
@@ -27,6 +33,8 @@ export class AppHeaderComponent implements OnInit {
   @Input()
   title!: string;
 
+  private authService = inject(AuthService);
+
   user: IUser | null = { email: '' };
 
   userMenuItems = [
@@ -38,8 +46,6 @@ export class AppHeaderComponent implements OnInit {
     },
   }];
 
-  constructor(private authService: AuthService) { }
-
   ngOnInit() {
     this.authService.getUser().then((e) => this.user = e.data);
   }
@@ -48,16 +54,3 @@ export class AppHeaderComponent implements OnInit {
     this.menuToggle.emit();
   };
 }
-
-@NgModule({
-  imports: [
-    CommonModule,
-    DxButtonModule,
-    DxToolbarModule,
-    ThemeSwitcherModule,
-    UserPanelModule,
-  ],
-  declarations: [AppHeaderComponent],
-  exports: [AppHeaderComponent],
-})
-export class AppHeaderModule { }

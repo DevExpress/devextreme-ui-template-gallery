@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnDestroy, } from '@angular/core';
+import {Component, HostBinding, inject, OnDestroy,} from '@angular/core';
 import { AppInfoService, AuthService, ScreenService, ThemeService } from './services';
 
 @Component({
@@ -11,12 +11,13 @@ export class AppComponent implements OnDestroy {
   @HostBinding('class') get getClass() {
     return Object.keys(this.screen.sizes).filter((cl) => this.screen.sizes[cl]).join(' ');
   }
+  private authService = inject(AuthService);
+  private themeService =  inject(ThemeService);
+  private screen = inject(ScreenService);
+  public appInfo = inject(AppInfoService);
 
-  constructor(private authService: AuthService,
-              private themeService: ThemeService,
-              private screen: ScreenService,
-              public appInfo: AppInfoService) {
-    themeService.setAppTheme();
+  constructor() {
+    this.themeService.setAppTheme();
   }
 
   isAuthenticated() {

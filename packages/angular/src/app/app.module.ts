@@ -6,7 +6,7 @@ import { DxHttpModule } from 'devextreme-angular/http';
 import { AppComponent } from './app.component';
 import { SideNavOuterToolbarModule, SingleCardModule } from './layouts';
 import {
-  AppFooterModule,
+  AppFooterComponent,
   ResetPasswordFormModule,
   CreateAccountFormModule,
   ChangePasswordFormComponent,
@@ -34,7 +34,7 @@ import { ThemeService } from './services';
     DxHttpModule,
     SideNavOuterToolbarModule,
     SingleCardModule,
-    AppFooterModule,
+    AppFooterComponent,
     ResetPasswordFormModule,
     CreateAccountFormModule,
     ChangePasswordFormComponent,
