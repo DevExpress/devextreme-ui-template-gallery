@@ -9,7 +9,7 @@ import {
   AppFooterModule,
   ResetPasswordFormModule,
   CreateAccountFormModule,
-  ChangePasswordFormModule,
+  ChangePasswordFormComponent,
   LoginFormModule,
 } from './components';
 
@@ -37,7 +37,7 @@ import { ThemeService } from './services';
     AppFooterModule,
     ResetPasswordFormModule,
     CreateAccountFormModule,
-    ChangePasswordFormModule,
+    ChangePasswordFormComponent,
     LoginFormModule,
     UnauthenticatedContentModule,
 

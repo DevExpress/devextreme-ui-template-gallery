@@ -10,9 +10,14 @@ import { AuthService } from '../../../services';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-change-password-form',
-    templateUrl: './change-password-form.component.html',
-    standalone: false
+  selector: 'app-change-password-form',
+  templateUrl: './change-password-form.component.html',
+  imports: [
+    CommonModule,
+    RouterModule,
+    DxFormModule,
+    DxLoadIndicatorModule,
+  ]
 })
 export class ChangePasswordFormComponent implements OnInit, OnDestroy {
   loading = false;
@@ -52,14 +57,3 @@ export class ChangePasswordFormComponent implements OnInit, OnDestroy {
     this.paramMapSubscription.unsubscribe();
   }
 }
-@NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    DxFormModule,
-    DxLoadIndicatorModule,
-  ],
-  declarations: [ChangePasswordFormComponent],
-  exports: [ChangePasswordFormComponent],
-})
-export class ChangePasswordFormModule { }
