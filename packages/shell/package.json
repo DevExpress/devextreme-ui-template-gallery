@@ -16,8 +16,6 @@
     "zone.js": "~0.14.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.0.0",
-    "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^20.10.4",
@@ -27,6 +25,5 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.7.0",
-    "typescript": "~5.2.0"
   }
 }
