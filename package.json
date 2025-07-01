@@ -77,9 +77,9 @@
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
     "typescript": "5.5.2",
-    "devextreme": "24.2.8",
+    "devextreme": "25.1.2-beta",
     "devextreme-angular": "24.2.8",
-    "devextreme-dist": "24.2.8"
+    "devextreme-dist": "25.1.2-beta"
   },
   "pre-commit": [
     "lint-bundles"
