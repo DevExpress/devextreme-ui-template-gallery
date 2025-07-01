@@ -49,6 +49,7 @@
     "@typescript-eslint/parser": "^5.0.0",
     "devextreme-cli": "^1.10.1",
     "devextreme-themebuilder": "25.1.2-beta",
+    "eslint-plugin-jest": "^29.0.1",
     "eslint": "^8.55.0",
     "jasmine-core": "^4.5.0",
     "karma": "~6.3.0",
