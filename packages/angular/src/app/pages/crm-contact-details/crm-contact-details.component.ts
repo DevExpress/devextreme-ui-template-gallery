@@ -8,7 +8,7 @@ import {
   DxScrollViewModule,
 } from 'devextreme-angular';
 import {
-  CardActivitiesModule,
+  CardActivitiesComponent,
   CardNotesModule,
   CardMessagesModule,
 } from 'src/app/components';
@@ -97,8 +97,7 @@ export class CrmContactDetailsComponent implements OnInit {
 
     ContactFormModule,
     ContactCardsModule,
-
-    CardActivitiesModule,
+    CardActivitiesComponent,
     CardNotesModule,
     CardMessagesModule,
 

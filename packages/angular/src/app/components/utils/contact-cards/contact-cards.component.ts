@@ -10,7 +10,7 @@ import {
 import {
   CardNotesModule,
   CardMessagesModule,
-  CardActivitiesModule,
+  CardActivitiesComponent,
   CardOpportunitiesModule,
   CardTasksModule,
 } from 'src/app/components';
@@ -52,7 +52,7 @@ export class ContactCardsComponent {
 
     CardNotesModule,
     CardMessagesModule,
-    CardActivitiesModule,
+    CardActivitiesComponent,
     CardOpportunitiesModule,
     CardTasksModule,
 

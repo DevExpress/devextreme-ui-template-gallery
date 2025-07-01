@@ -27,8 +27,8 @@ import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import {
   FormTextboxModule,
   FormPhotoModule,
-  CardActivitiesModule,
   ContactStatusModule,
+  CardActivitiesComponent,
 } from 'src/app/components';
 import { ScreenService, DataService } from 'src/app/services';
 import { distinctUntilChanged, Subject, Subscription} from 'rxjs';
@@ -158,7 +158,7 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
 
     FormTextboxModule,
     FormPhotoModule,
-    CardActivitiesModule,
+    CardActivitiesComponent,
     ContactStatusModule,
     CommonModule,
   ],

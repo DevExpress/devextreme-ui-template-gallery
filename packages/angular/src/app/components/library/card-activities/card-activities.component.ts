@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, NgModule, Input, SimpleChanges, OnInit, OnChanges,
+  Component, Input
 } from '@angular/core';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxListModule } from 'devextreme-angular/ui/list';
@@ -12,7 +12,13 @@ import { Activity } from 'src/app/types/activities';
     selector: 'card-activities',
     templateUrl: './card-activities.component.html',
     styleUrls: ['./card-activities.component.scss'],
-    standalone: false
+    imports: [
+        DxListModule,
+        DxButtonModule,
+        DxLoadPanelModule,
+        CardMenuModule,
+        CommonModule,
+    ]
 })
 export class CardActivitiesComponent {
   @Input() activities: Activity[];
@@ -26,17 +32,3 @@ export class CardActivitiesComponent {
     { text: 'Delete' },
   ];
 }
-
-@NgModule({
-  imports: [
-    DxListModule,
-    DxButtonModule,
-    DxLoadPanelModule,
-    CardMenuModule,
-
-    CommonModule,
-  ],
-  declarations: [CardActivitiesComponent],
-  exports: [CardActivitiesComponent],
-})
-export class CardActivitiesModule { }

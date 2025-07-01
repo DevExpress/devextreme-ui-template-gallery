@@ -16,7 +16,7 @@ import {
 import { AuthService, ScreenService, AppInfoService } from './services';
 import { UnauthenticatedContentModule } from './layouts/unauthenticated-content/unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
-import { CrmContactListModule } from './pages/crm-contact-list/crm-contact-list.component';
+import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
 import { CrmContactDetailsModule } from './pages/crm-contact-details/crm-contact-details.component';
 import { PlanningTaskListModule } from './pages/planning-task-list/planning-task-list.component';
 import { PlanningTaskDetailsModule } from './pages/planning-task-details/planning-task-details.component';
@@ -40,8 +40,7 @@ import { ThemeService } from './services';
     ChangePasswordFormComponent,
     LoginFormModule,
     UnauthenticatedContentModule,
-
-    CrmContactListModule,
+    CrmContactListComponent,
     CrmContactDetailsModule,
     PlanningTaskListModule,
     PlanningTaskDetailsModule,
