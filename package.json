@@ -78,8 +78,11 @@
     "@angular/router": "^17.0.0",
     "typescript": "5.5.2",
     "devextreme": "24.2.8",
-    "devextreme-angular": "24.2.8",
     "devextreme-dist": "24.2.8",
+    "devextreme-angular": "24.2.8",
+    "devextreme-vue": "24.2.8",
+    "devextreme-react": "24.2.8",
+    "devextreme-themebuilder": "24.2.5",
     "eslint-config-devextreme": "^1.1.6"
   },
   "pre-commit": [
