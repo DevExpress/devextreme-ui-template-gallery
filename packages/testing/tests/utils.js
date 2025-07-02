@@ -66,7 +66,12 @@ export const toggleCommonConfiguration = async (
   await t.resizeWindow(...screenMode);
   await t.navigateTo(url);
 
-  await t.click(Selector('dx-license div:last-child'));
+  const licenseCloseButton = Selector('dx-license div:last-child');
+  
+  if (licenseCloseButton) {
+    await t.click(licenseCloseButton);
+  }
+  
   await awaitFontsLoaded(t, requestLogger);
   await toogleEmbeddedClass(embedded);
   if (embedded && isDoubleResize) {
