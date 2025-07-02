@@ -1,4 +1,4 @@
-import { ClientFunction } from 'testcafe';
+import { ClientFunction, Selector } from 'testcafe';
 import { DateTime } from 'luxon';
 import { fakeScreenSize } from '../config';
 
@@ -66,6 +66,7 @@ export const toggleCommonConfiguration = async (
   await t.resizeWindow(...screenMode);
   await t.navigateTo(url);
 
+  await t.click(Selector('dx-license div:last-child'));
   await awaitFontsLoaded(t, requestLogger);
   await toogleEmbeddedClass(embedded);
   if (embedded && isDoubleResize) {
