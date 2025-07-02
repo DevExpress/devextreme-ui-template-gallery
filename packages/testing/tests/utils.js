@@ -65,17 +65,6 @@ export const toggleCommonConfiguration = async (
 ) => {
   await t.resizeWindow(...screenMode);
   await t.navigateTo(url);
-
-  let licenseCloseButton;
-  
-  try {
-    licenseCloseButton = Selector('dx-license div:last-child');
-  } catch (e) {}
-  
-  if (licenseCloseButton && licenseCloseButton.exists) {
-    await t.click(licenseCloseButton);
-  }
-  
   await awaitFontsLoaded(t, requestLogger);
   await toogleEmbeddedClass(embedded);
   if (embedded && isDoubleResize) {
@@ -83,6 +72,13 @@ export const toggleCommonConfiguration = async (
   }
   setEmbedded(t, embedded, screenMode);
 
+  const licenseCloseButton = Selector('dx-license div:last-child').with({ timeout: 0 });
+  const licenseCloseButtonExists = await licenseCloseButton.exists;
+  
+  if (licenseCloseButtonExists) {
+    await t.click(licenseCloseButton);
+  }
+  
   await t.wait(timeout);
 };
 
