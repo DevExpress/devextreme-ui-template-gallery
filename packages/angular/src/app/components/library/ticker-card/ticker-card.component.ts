@@ -4,7 +4,7 @@ import {
   NgModule,
   Input
 } from '@angular/core';
-import { CardAnalyticsModule } from '../card-analytics/card-analytics.component';
+import { CardAnalyticsComponent } from '../card-analytics/card-analytics.component';
 import { Sales, SalesOrOpportunitiesByCategory } from '../../../types/analytics';
 import { ApplyPipeModule } from "src/app/pipes/apply.pipe";
 
@@ -43,7 +43,7 @@ export class TickerCardComponent {
 
 @NgModule({
   imports: [
-    CardAnalyticsModule,
+    CardAnalyticsComponent,
     ApplyPipeModule,
 
     CommonModule,

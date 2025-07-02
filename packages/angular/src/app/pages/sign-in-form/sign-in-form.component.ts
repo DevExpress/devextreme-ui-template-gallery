@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CardAuthModule, LoginFormModule } from 'src/app/components';
+import { CardAuthComponent, LoginFormModule } from 'src/app/components';
 
 @Component({
     selector: 'app-sign-in-form',
@@ -17,7 +17,7 @@ export class AppSignInComponent {
   imports: [
     CommonModule,
     LoginFormModule,
-    CardAuthModule,
+    CardAuthComponent,
   ],
   providers: [],
   exports: [AppSignInComponent],

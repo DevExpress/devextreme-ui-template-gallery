@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { DataService } from 'src/app/services';
-import { CardAnalyticsModule } from 'src/app/components/library/card-analytics/card-analytics.component';
+import { CardAnalyticsComponent } from 'src/app/components/library/card-analytics/card-analytics.component';
 import { ToolbarAnalyticsModule } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
 import { RevenueAnalysisByStatesCardModule } from 'src/app/components/utils/revenue-analysis-by-states-card/revenue-analysis-by-states-card.component';
 import { SalesMapCardModule } from 'src/app/components/utils/sales-map-card/sales-map-card.component';
@@ -104,7 +104,7 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     DxPieChartModule,
     DxVectorMapModule,
     DxChartModule,
-    CardAnalyticsModule,
+    CardAnalyticsComponent,
     ToolbarAnalyticsModule,
     DxLoadPanelModule,
     RevenueAnalysisByStatesCardModule,

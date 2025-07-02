@@ -1,6 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 
-import { CardAuthModule, CreateAccountFormModule } from 'src/app/components';
+import { CardAuthComponent, CreateAccountFormModule } from 'src/app/components';
 
 @Component({
     selector: 'app-sign-up-form',
@@ -20,7 +20,7 @@ export class AppSignUpComponent {
 @NgModule({
   imports: [
     CreateAccountFormModule,
-    CardAuthModule,
+    CardAuthComponent,
   ],
   providers: [],
   exports: [AppSignUpComponent],

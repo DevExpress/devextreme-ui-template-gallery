@@ -3,7 +3,7 @@ import {
   NgModule,
   Input,
 } from '@angular/core';
-import { CardAnalyticsModule } from '../../library/card-analytics/card-analytics.component';
+import { CardAnalyticsComponent } from '../../library/card-analytics/card-analytics.component';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { SalesByState } from 'src/app/types/analytics';
 
@@ -22,7 +22,7 @@ export class RevenueSnapshotByStatesCardComponent {
 
 @NgModule({
   imports: [
-    CardAnalyticsModule,
+    CardAnalyticsComponent,
     DxPieChartModule,
   ],
   declarations: [RevenueSnapshotByStatesCardComponent],

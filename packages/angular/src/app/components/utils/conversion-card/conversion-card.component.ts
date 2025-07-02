@@ -2,7 +2,7 @@ import {
   Component, NgModule, Input,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardAnalyticsModule } from 'src/app/components/library/card-analytics/card-analytics.component';
+import { CardAnalyticsComponent } from 'src/app/components/library/card-analytics/card-analytics.component';
 import { DxFunnelModule } from 'devextreme-angular/ui/funnel';
 import { SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 
@@ -22,7 +22,7 @@ export class ConversionCardComponent {
 @NgModule({
   imports: [
     CommonModule,
-    CardAnalyticsModule,
+    CardAnalyticsComponent,
     DxFunnelModule,
   ],
   declarations: [ConversionCardComponent],

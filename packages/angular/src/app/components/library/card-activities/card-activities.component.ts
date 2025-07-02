@@ -5,7 +5,7 @@ import {
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
-import { CardMenuModule } from '../card-menu/card-menu.component';
+import { CardMenuComponent } from '../card-menu/card-menu.component';
 import { Activity } from 'src/app/types/activities';
 
 @Component({
@@ -16,7 +16,7 @@ import { Activity } from 'src/app/types/activities';
         DxListModule,
         DxButtonModule,
         DxLoadPanelModule,
-        CardMenuModule,
+        CardMenuComponent,
         CommonModule,
     ]
 })
