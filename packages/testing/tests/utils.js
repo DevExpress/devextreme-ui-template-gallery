@@ -66,9 +66,13 @@ export const toggleCommonConfiguration = async (
   await t.resizeWindow(...screenMode);
   await t.navigateTo(url);
 
-  const licenseCloseButton = Selector('dx-license div:last-child');
+  let licenseCloseButton;
   
-  if (licenseCloseButton.exists) {
+  try {
+    licenseCloseButton = Selector('dx-license div:last-child');
+  } catch (e) {}
+  
+  if (licenseCloseButton && licenseCloseButton.exists) {
     await t.click(licenseCloseButton);
   }
   
