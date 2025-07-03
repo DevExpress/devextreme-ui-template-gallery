@@ -21,7 +21,7 @@ import { PhonePipeModule } from 'src/app/pipes/phone.pipe';
 import {
   FormPhotoModule,
   FormTextboxModule,
-  ChangeProfilePasswordFormModule,
+  ChangeProfilePasswordFormComponent,
   ProfileCardModule,
   FormPopupModule,
 } from 'src/app/components';
@@ -226,7 +226,7 @@ export class UserProfileComponent {
     FormPhotoModule,
     FormPopupModule,
     ProfileCardModule,
-    ChangeProfilePasswordFormModule,
+    ChangeProfilePasswordFormComponent,
     CommonModule,
     PhonePipeModule,
   ],

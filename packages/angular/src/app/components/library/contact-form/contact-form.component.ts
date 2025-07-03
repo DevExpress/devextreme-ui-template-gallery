@@ -1,6 +1,4 @@
-import {
-  Component, NgModule, Input,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -9,7 +7,6 @@ import {
   DxNumberBoxModule,
   DxSelectBoxModule,
   DxTextBoxModule,
-  DxToolbarModule,
   DxValidatorModule,
   DxValidationGroupModule,
 } from 'devextreme-angular';
@@ -28,7 +25,22 @@ import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar
     selector: 'contact-form',
     templateUrl: './contact-form.component.html',
     styleUrls: ['./contact-form.component.scss'],
-    standalone: false
+    imports: [
+      DxFormModule,
+      DxSelectBoxModule,
+      DxButtonModule,
+      DxTextBoxModule,
+      DxNumberBoxModule,
+      DxLoadPanelModule,
+      DxValidationGroupModule,
+      FormTextboxModule,
+      ContactStatusModule,
+      FormPhotoModule,
+      DxValidatorModule,
+      ToolbarFormModule,
+      CommonModule,
+      StatusSelectBoxModule,
+    ]
 })
 export class ContactFormComponent {
   @Input() contactData: Contact;
@@ -57,27 +69,3 @@ export class ContactFormComponent {
     this.isEditing = false;
   }
 }
-
-@NgModule({
-  imports: [
-    DxFormModule,
-    DxSelectBoxModule,
-    DxButtonModule,
-    DxTextBoxModule,
-    DxNumberBoxModule,
-    DxLoadPanelModule,
-    DxValidationGroupModule,
-
-    FormTextboxModule,
-    ContactStatusModule,
-    FormPhotoModule,
-    DxValidatorModule,
-    ToolbarFormModule,
-    CommonModule,
-    StatusSelectBoxModule,
-  ],
-  providers: [],
-  exports: [ContactFormComponent],
-  declarations: [ContactFormComponent],
-})
-export class ContactFormModule { }

@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ValidationCallbackData } from 'devextreme-angular/common';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import notify from 'devextreme/ui/notify';
 import { AuthService } from '../../../services';
-
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-change-password-form',
@@ -28,7 +27,9 @@ export class ChangePasswordFormComponent implements OnInit, OnDestroy {
 
   paramMapSubscription: Subscription;
 
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
+  private authService = inject(AuthService);
+    private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   ngOnInit() {
     this.paramMapSubscription = this.route.paramMap.subscribe((params) => {

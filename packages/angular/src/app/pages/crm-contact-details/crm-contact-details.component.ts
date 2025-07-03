@@ -18,7 +18,7 @@ import { Contact } from 'src/app/types/contact';
 import { Messages } from 'src/app/types/messages';
 import { Notes } from 'src/app/types/notes';
 import { Opportunities } from 'src/app/types/opportunities';
-import { ContactFormModule } from 'src/app/components/library/contact-form/contact-form.component';
+import { ContactFormComponent } from 'src/app/components/library/contact-form/contact-form.component';
 import { ContactCardsModule } from 'src/app/components/utils/contact-cards/contact-cards.component';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
@@ -95,7 +95,7 @@ export class CrmContactDetailsComponent implements OnInit {
     DxScrollViewModule,
     DxToolbarModule,
 
-    ContactFormModule,
+    ContactFormComponent,
     ContactCardsModule,
     CardActivitiesComponent,
     CardNotesComponent,

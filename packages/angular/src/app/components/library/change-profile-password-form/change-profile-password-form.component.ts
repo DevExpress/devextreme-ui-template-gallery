@@ -16,7 +16,13 @@ import { ValidationRule } from 'devextreme-angular/common';
     selector: 'change-profile-password-form',
     templateUrl: './change-profile-password-form.component.html',
     styleUrls: ['./change-profile-password-form.component.scss'],
-    standalone: false
+    imports: [
+      CommonModule,
+      DxFormModule,
+      DxLoadIndicatorModule,
+      PasswordTextBoxModule,
+      FormPopupModule,
+    ],
 })
 export class ChangeProfilePasswordFormComponent {
   @ViewChild(FormPopupComponent, { static: true }) formPopup;
@@ -63,16 +69,3 @@ export class ChangeProfilePasswordFormComponent {
     this.visibleChange.emit(this.visible);
   }
 }
-
-@NgModule({
-  imports: [
-    CommonModule,
-    DxFormModule,
-    DxLoadIndicatorModule,
-    PasswordTextBoxModule,
-    FormPopupModule,
-  ],
-  declarations: [ChangeProfilePasswordFormComponent],
-  exports: [ChangeProfilePasswordFormComponent],
-})
-export class ChangeProfilePasswordFormModule { }
