@@ -3,12 +3,12 @@ import {
   OnInit,
   OnChanges,
   OnDestroy,
-  NgModule,
   Output,
   Input,
   SimpleChanges,
   EventEmitter,
   AfterViewChecked,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -39,7 +39,22 @@ import { Contact } from 'src/app/types/contact';
     templateUrl: './contact-panel.component.html',
     styleUrls: ['./contact-panel.component.scss'],
     providers: [DataService],
-    standalone: false
+    imports: [
+      DxAccordionModule,
+      DxButtonModule,
+      DxDropDownButtonModule,
+      DxToolbarModule,
+      DxLoadPanelModule,
+      DxScrollViewModule,
+      DxFormModule,
+      DxValidatorModule,
+      DxValidationGroupModule,
+      FormTextboxModule,
+      FormPhotoModule,
+      CardActivitiesComponent,
+      ContactStatusModule,
+      CommonModule,
+    ]
 })
 export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecked, OnDestroy {
   @Input() isOpened = false;
@@ -66,7 +81,11 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
 
   userPanelSubscriptions: Subscription[] = [];
 
-  constructor(private screen: ScreenService, private service: DataService, private router: Router) {
+  private screen = inject(ScreenService);
+  private service = inject(DataService);
+  private router = inject(Router);
+
+  constructor() {
     this.userPanelSubscriptions.push(
       this.screen.changed.subscribe(this.calculatePin),
       this
@@ -143,26 +162,3 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
     this.router.navigate(['/crm-contact-details']);
   };
 }
-
-@NgModule({
-  imports: [
-    DxAccordionModule,
-    DxButtonModule,
-    DxDropDownButtonModule,
-    DxToolbarModule,
-    DxLoadPanelModule,
-    DxScrollViewModule,
-    DxFormModule,
-    DxValidatorModule,
-    DxValidationGroupModule,
-
-    FormTextboxModule,
-    FormPhotoModule,
-    CardActivitiesComponent,
-    ContactStatusModule,
-    CommonModule,
-  ],
-  declarations: [ContactPanelComponent],
-  exports: [ContactPanelComponent],
-})
-export class ContactPanelModule { }

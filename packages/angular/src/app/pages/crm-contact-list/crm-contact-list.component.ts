@@ -24,7 +24,7 @@ import { jsPDF } from 'jspdf';
 import notify from "devextreme/ui/notify";
 import { formatPhone } from 'src/app/pipes/phone.pipe';
 import { FormPopupModule } from 'src/app/components';
-import { ContactPanelModule } from 'src/app/components/library/contact-panel/contact-panel.component';
+import { ContactPanelComponent } from 'src/app/components/library/contact-panel/contact-panel.component';
 import { ContactNewFormComponent } from 'src/app/components/library/contact-new-form/contact-new-form.component';
 
 type FilterContactStatus = ContactStatus | 'All';
@@ -39,7 +39,7 @@ type FilterContactStatus = ContactStatus | 'All';
       DxDropDownButtonModule,
       DxSelectBoxModule,
       DxTextBoxModule,
-      ContactPanelModule,
+      ContactPanelComponent,
       ContactNewFormComponent,
       FormPopupModule,
       ContactStatusModule,

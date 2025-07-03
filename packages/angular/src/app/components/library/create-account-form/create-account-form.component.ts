@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, Input, OnInit } from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 import { LoginOauthModule } from 'src/app/components/library/login-oauth/login-oauth.component';
@@ -7,24 +7,33 @@ import { ValidationCallbackData } from 'devextreme-angular/common';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import notify from 'devextreme/ui/notify';
-import { AuthService, IResponse } from 'src/app/services';
+import {AuthService, IResponse} from 'src/app/services';
 
 @Component({
     selector: 'app-create-account-form',
     templateUrl: './create-account-form.component.html',
     styleUrls: ['./create-account-form.component.scss'],
-    standalone: false
+    imports: [
+      CommonModule,
+      RouterModule,
+      LoginOauthModule,
+      DxFormModule,
+      DxLoadIndicatorModule,
+    ]
 })
 export class CreateAccountFormComponent implements OnInit {
   @Input() redirectLink = '/auth/login';
+
   @Input() buttonLink = '/auth/login';
+
   loading = false;
 
   defaultAuthData: IResponse;
 
   formData: any = {};
 
-  constructor(private authService: AuthService, private router: Router) { }
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   async onSubmit(e: Event) {
     e.preventDefault();
@@ -47,15 +56,3 @@ export class CreateAccountFormComponent implements OnInit {
     this.defaultAuthData = await this.authService.getUser();
   }
 }
-@NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    LoginOauthModule,
-    DxFormModule,
-    DxLoadIndicatorModule,
-  ],
-  declarations: [CreateAccountFormComponent],
-  exports: [CreateAccountFormComponent],
-})
-export class CreateAccountFormModule { }

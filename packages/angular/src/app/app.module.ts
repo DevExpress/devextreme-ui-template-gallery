@@ -8,9 +8,9 @@ import { SideNavOuterToolbarModule, SingleCardModule } from './layouts';
 import {
   AppFooterComponent,
   ResetPasswordFormModule,
-  CreateAccountFormModule,
+  CreateAccountFormComponent,
   ChangePasswordFormComponent,
-  LoginFormModule,
+  LoginFormComponent,
 } from './components';
 
 import { AuthService, ScreenService, AppInfoService } from './services';
@@ -36,9 +36,9 @@ import { ThemeService } from './services';
     SingleCardModule,
     AppFooterComponent,
     ResetPasswordFormModule,
-    CreateAccountFormModule,
+    CreateAccountFormComponent,
     ChangePasswordFormComponent,
-    LoginFormModule,
+    LoginFormComponent,
     UnauthenticatedContentModule,
     CrmContactListComponent,
     CrmContactDetailsModule,

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, inject} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 import { LoginOauthModule } from 'src/app/components/library/login-oauth/login-oauth.component';
@@ -13,7 +13,14 @@ import { AuthService, IResponse, ThemeService } from 'src/app/services';
     selector: 'app-login-form',
     templateUrl: './login-form.component.html',
     styleUrls: ['./login-form.component.scss'],
-    standalone: false
+    imports: [
+      CommonModule,
+      RouterModule,
+      LoginOauthModule,
+      DxFormModule,
+      DxLoadIndicatorModule,
+      DxButtonModule,
+    ]
 })
 export class LoginFormComponent implements OnInit {
   @Input() resetLink = '/auth/reset-password';
@@ -45,7 +52,11 @@ export class LoginFormComponent implements OnInit {
     // }]
   }
 
-  constructor(private authService: AuthService, private router: Router, private themeService: ThemeService) {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private themeService = inject(ThemeService);
+
+  constructor() {
     this.themeService.isDark.subscribe((value: boolean) => {
       this.btnStylingMode = value ? 'outlined' : 'contained';
     });
@@ -76,16 +87,4 @@ export class LoginFormComponent implements OnInit {
     this.defaultAuthData = await this.authService.getUser();
   }
 }
-@NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    LoginOauthModule,
-    DxFormModule,
-    DxLoadIndicatorModule,
-    DxButtonModule
-  ],
-  declarations: [LoginFormComponent],
-  exports: [LoginFormComponent],
-})
-export class LoginFormModule { }
+
