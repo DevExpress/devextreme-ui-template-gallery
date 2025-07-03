@@ -99,7 +99,7 @@ jobs:
           ${{ runner.os }}-node-
 
     - name: Run npm install
-      run: npm install --no-audit --no-fund --force
+      run: npm install --no-audit --no-fund
 
     - name: Install Internal Packages
       uses: DevExpress/github-actions/install-internal-package@main
