@@ -11,8 +11,8 @@ import {
 } from 'devextreme-angular';
 import {
   CardActivitiesComponent,
-  CardNotesModule,
-  CardMessagesModule,
+  CardNotesComponent,
+  CardMessagesComponent,
   StatusIndicatorModule,
 } from 'src/app/components';
 import { Task } from 'src/app/types/task';
@@ -65,8 +65,8 @@ export class PlanningTaskDetailsComponent implements OnInit {
     DxToolbarModule,
 
     CardActivitiesComponent,
-    CardNotesModule,
-    CardMessagesModule,
+    CardNotesComponent,
+    CardMessagesComponent,
     TaskFormModule,
     StatusIndicatorModule,
     DxScrollViewModule,

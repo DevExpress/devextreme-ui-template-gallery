@@ -1,5 +1,5 @@
 import {
-  Component, Input, NgModule, OnChanges, SimpleChanges, ViewChild,
+  Component, Input,OnChanges, SimpleChanges, ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -14,7 +14,11 @@ import { Task } from '../../../types/task';
     selector: 'card-tasks',
     templateUrl: './card-tasks.component.html',
     styleUrls: ['./card-tasks.component.scss'],
-    standalone: false
+    imports: [
+      DxDataGridModule,
+      DxLoadPanelModule,
+      CommonModule,
+    ]
 })
 export class CardTasksComponent implements OnChanges {
   @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;
@@ -44,10 +48,3 @@ export class CardTasksComponent implements OnChanges {
     this.currentTasks.splice(toIndex, 0, e.itemData);
   }
 }
-
-@NgModule({
-  imports: [DxDataGridModule, DxLoadPanelModule, CommonModule],
-  declarations: [CardTasksComponent],
-  exports: [CardTasksComponent],
-})
-export class CardTasksModule { }

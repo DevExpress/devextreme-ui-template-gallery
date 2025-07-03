@@ -9,8 +9,8 @@ import {
 } from 'devextreme-angular';
 import {
   CardActivitiesComponent,
-  CardNotesModule,
-  CardMessagesModule,
+  CardNotesComponent,
+  CardMessagesComponent,
 } from 'src/app/components';
 import { DataService } from 'src/app/services';
 import { forkJoin, map } from 'rxjs';
@@ -98,8 +98,8 @@ export class CrmContactDetailsComponent implements OnInit {
     ContactFormModule,
     ContactCardsModule,
     CardActivitiesComponent,
-    CardNotesModule,
-    CardMessagesModule,
+    CardNotesComponent,
+    CardMessagesComponent,
 
     CommonModule,
   ],

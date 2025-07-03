@@ -8,11 +8,11 @@ import {
   DxDataGridModule,
 } from 'devextreme-angular';
 import {
-  CardNotesModule,
-  CardMessagesModule,
+  CardNotesComponent,
+  CardMessagesComponent,
   CardActivitiesComponent,
-  CardOpportunitiesModule,
-  CardTasksModule,
+  CardOpportunitiesComponent,
+  CardTasksComponent,
 } from 'src/app/components';
 import { Activity } from 'src/app/types/activities';
 import { Messages } from 'src/app/types/messages';
@@ -50,11 +50,11 @@ export class ContactCardsComponent {
     DxTabPanelModule,
     DxDataGridModule,
 
-    CardNotesModule,
-    CardMessagesModule,
+    CardNotesComponent,
+    CardMessagesComponent,
     CardActivitiesComponent,
-    CardOpportunitiesModule,
-    CardTasksModule,
+    CardOpportunitiesComponent,
+    CardTasksComponent,
 
     CommonModule,
   ],
