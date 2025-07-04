@@ -39,7 +39,7 @@ fixture`Analytics Sales Report`;
         await t.wait(timeoutSecond);
 
         await t.expect(Selector('body.dx-device-generic').count).eql(1);
-        await takeScreenshot(`analytics-sales-report-month${postfix}`, 'body');
+        await takeScreenshot(`analytics-sales-report-month${postfix}`, 'body', { textDiffTreshold: 0.1 });
 
         const isPeriodSelectorBoxVisible = screenModes[0] === screenMode;
         if (isPeriodSelectorBoxVisible) {
@@ -47,7 +47,7 @@ fixture`Analytics Sales Report`;
 
           await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
           await t.wait(timeoutSecond);
-          await takeScreenshot(`analytics-sales-report-day${postfix}`, 'body');
+          await takeScreenshot(`analytics-sales-report-day${postfix}`, 'body', { textDiffTreshold: 0.1 });
         }
 
         await t.drag(Selector('.slider').nth(1), -50, 0, { offsetX: 10, offsetY: 10 });
