@@ -7,8 +7,8 @@ import {
   ScreenService,
   ThemeService
 } from "./app/services";
-import { HttpClientModule, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
-import { provideRouter } from "@angular/router";
+import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { provideRouter, withHashLocation } from "@angular/router";
 
 import themes from 'devextreme/ui/themes';
 import { AppComponent } from './app/app.component';
@@ -29,7 +29,7 @@ themes.initialized(() => {
       AuthGuardService,
       importProvidersFrom(HttpClientModule),
       provideHttpClient(withInterceptorsFromDi()),
-      provideRouter(routes),
+      provideRouter(routes, withHashLocation()),
     ]
   }).catch(e => console.error(e));
 
