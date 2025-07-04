@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular';
 import { ThemeService } from 'src/app/services';
@@ -17,7 +17,7 @@ import { ThemeService } from 'src/app/services';
     imports: [ CommonModule, DxButtonModule ],
 })
 export class ThemeSwitcherComponent {
-  constructor(public themeService: ThemeService) {}
+  protected themeService = inject(ThemeService);
 
   onButtonClick () {
     this.themeService.switchTheme();

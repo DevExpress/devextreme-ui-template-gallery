@@ -19,9 +19,9 @@ import { UserAvatarComponent } from 'src/app/components/library/user-avatar/user
     ],
 })
 export class TaskKanbanCardComponent {
-  private router = inject(Router);
-
   @Input() task: Task;
+
+  private router = inject(Router);
 
   getAvatarText = (name: string) => name.split(' ').map((name) => name[0]).join('');
 

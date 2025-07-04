@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
-import { UserPanelModule } from '../user-panel/user-panel.component';
+import { UserPanelComponent } from '../user-panel/user-panel.component';
 import { AuthService, IUser } from 'src/app/services';
 import { ThemeSwitcherComponent } from 'src/app/components/library/theme-switcher/theme-switcher.component';
 
@@ -19,7 +19,7 @@ import { ThemeSwitcherComponent } from 'src/app/components/library/theme-switche
         DxButtonModule,
         DxToolbarModule,
         ThemeSwitcherComponent,
-        UserPanelModule,
+        UserPanelComponent,
     ]
 })
 

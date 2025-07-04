@@ -1,4 +1,4 @@
-import { Component, NgModule, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
@@ -8,7 +8,11 @@ import { IUser } from '../../../services/auth.service';
     selector: 'user-panel',
     templateUrl: 'user-panel.component.html',
     styleUrls: ['./user-panel.component.scss'],
-    standalone: false
+    imports: [
+      DxDropDownButtonModule,
+      UserMenuSectionComponent,
+      CommonModule,
+    ],
 })
 
 export class UserPanelComponent {
@@ -23,22 +27,9 @@ export class UserPanelComponent {
 
   @ViewChild(UserMenuSectionComponent) userMenuSection: UserMenuSectionComponent;
 
-  constructor() {}
-
   handleDropDownButtonContentReady({ component }) {
     component.registerKeyHandler('downArrow', () => {
       this.userMenuSection.userInfoList.nativeElement.focus();
     });
   }
 }
-
-@NgModule({
-  imports: [
-    DxDropDownButtonModule,
-    UserMenuSectionComponent,
-    CommonModule,
-  ],
-  declarations: [UserPanelComponent],
-  exports: [UserPanelComponent],
-})
-export class UserPanelModule { }

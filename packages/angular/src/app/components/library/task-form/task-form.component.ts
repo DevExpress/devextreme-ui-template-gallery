@@ -43,13 +43,13 @@ import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar
     ],
 })
 export class TaskFormComponent implements OnInit {
-  protected screen = inject(ScreenService);
-
   @Input() task: Task;
 
   @Input() isLoading: boolean = false;
 
   @Input() isCreateMode: boolean = false;
+
+  protected screen = inject(ScreenService);
 
   savedData: Task = null;
 

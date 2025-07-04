@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
-import { EditorStyle } from 'devextreme-angular/common';
+import { EditorStyle, LabelMode } from 'devextreme-angular/common';
 import { contactStatusList } from 'src/app/types/contact';
 import { ContactStatusModule } from 'src/app/components/utils/contact-status/contact-status.component';
 import { ThemeService } from 'src/app/services/theme.service';
@@ -20,8 +20,6 @@ import { ThemeService } from 'src/app/services/theme.service';
     ],
 })
 export class StatusSelectBoxComponent {
-  private theme = inject(ThemeService);
-
   @Input() value: string;
 
   @Input() label = '';
@@ -32,10 +30,18 @@ export class StatusSelectBoxComponent {
 
   @Input() stylingMode: EditorStyle = 'filled';
 
-  @Input() labelMode: any = this.theme.isFluent() ? 'outside' : undefined;
+  @Input() labelMode: LabelMode;
 
-  @Input() classList;
+  @Input() classList: string;
 
   @Output() valueChange = new EventEmitter<string>();
+
+  private theme = inject(ThemeService);
+
+  constructor() {
+    if(this.theme.isFluent()) {
+      this.labelMode = 'outside';
+    }
+  }
 }
 
