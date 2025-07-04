@@ -17,6 +17,7 @@ const setEmbedded = async (t, embed, screenMode) => {
   if (embed) {
     if (screenMode[0] === 400) {
       await t.click('.view-wrapper .toolbar-details .dx-icon-overflow');
+      await t.wait(500);
       await t.click(Selector('.dx-popup-content .dx-button[aria-label=Refresh]'));
     } else {
       await t.click(Selector('.dx-button[aria-label=Refresh]'));
