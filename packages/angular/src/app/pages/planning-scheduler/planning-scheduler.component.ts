@@ -19,7 +19,7 @@ import { LeftSidePanelModule } from 'src/app/components/utils/left-side-panel/le
 import { RightSidePanelModule } from 'src/app/components/utils/right-side-panel/right-side-panel.component';
 import { AgendaItem, AgendaModule } from "../../components/utils/agenda/agenda.component";
 import { ApplyPipeModule } from '../../pipes/apply.pipe';
-import { SchedulerTooltipModule } from '../../components/library/scheduler-tooltip/scheduler-tooltip.component';
+import { SchedulerTooltipComponent } from '../../components/library/scheduler-tooltip/scheduler-tooltip.component';
 import { DxSchedulerTypes } from 'devextreme-angular/ui/scheduler'
 
 type SelectedAppointment = { data: Record<string, any>, target: any };
@@ -250,7 +250,7 @@ export class PlanningSchedulerComponent implements OnInit {
     LeftSidePanelModule,
     RightSidePanelModule,
     AgendaModule,
-    SchedulerTooltipModule,
+    SchedulerTooltipComponent,
   ],
   providers: [],
   exports: [],

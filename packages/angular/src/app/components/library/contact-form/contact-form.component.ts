@@ -14,7 +14,7 @@ import {
   ContactStatusModule,
   FormTextboxModule,
   FormPhotoModule,
-  StatusSelectBoxModule,
+  StatusSelectBoxComponent,
 } from 'src/app/components';
 import { Contact } from 'src/app/types/contact';
 import { ValidationRule } from 'devextreme-angular/common';
@@ -39,7 +39,7 @@ import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar
       DxValidatorModule,
       ToolbarFormModule,
       CommonModule,
-      StatusSelectBoxModule,
+      StatusSelectBoxComponent,
     ]
 })
 export class ContactFormComponent {

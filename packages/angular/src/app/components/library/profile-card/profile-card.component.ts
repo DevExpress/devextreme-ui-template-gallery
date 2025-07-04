@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule, DxDateBoxModule, DxFormComponent, DxFormModule, DxNumberBoxModule, DxSelectBoxModule,
@@ -11,7 +11,7 @@ import { FormPhotoModule } from 'src/app/components/utils/form-photo/form-photo.
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { PicturedItemSelectBoxComponent } from 'src/app/components/library/pictured-item-select-box/pictured-item-select-box.component';
 import { ScreenService } from 'src/app/services';
-import { StatusSelectBoxModule } from 'src/app/components/library/status-select-box/status-select-box.component';
+import { StatusSelectBoxComponent } from 'src/app/components/library/status-select-box/status-select-box.component';
 import { getSizeQualifier } from 'src/app/services/screen.service';
 
 type CardData = Record<string, any>;
@@ -35,7 +35,7 @@ type CardData = Record<string, any>;
       DxValidatorModule,
       CommonModule,
       PicturedItemSelectBoxComponent,
-      StatusSelectBoxModule,
+      StatusSelectBoxComponent,
     ],
 })
 export class ProfileCardComponent {
@@ -55,7 +55,7 @@ export class ProfileCardComponent {
 
   assign = Object.assign;
 
-  constructor(public screen: ScreenService) {}
+  public screen = inject(ScreenService);
 
   onFieldChange(fieldName?, value?) {
     const {isValid} = this.form.instance.validate();

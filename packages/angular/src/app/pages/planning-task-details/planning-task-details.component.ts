@@ -13,7 +13,7 @@ import {
   CardActivitiesComponent,
   CardNotesComponent,
   CardMessagesComponent,
-  StatusIndicatorModule,
+  StatusIndicatorComponent,
 } from 'src/app/components';
 import { Task } from 'src/app/types/task';
 import { DataService } from 'src/app/services';
@@ -68,7 +68,7 @@ export class PlanningTaskDetailsComponent implements OnInit {
     CardNotesComponent,
     CardMessagesComponent,
     TaskFormModule,
-    StatusIndicatorModule,
+    StatusIndicatorComponent,
     DxScrollViewModule,
     CommonModule,
   ],

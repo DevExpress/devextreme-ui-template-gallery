@@ -13,7 +13,7 @@ import {
   DxValidatorModule,
 } from 'devextreme-angular';
 import {
-  StatusIndicatorModule,
+  StatusIndicatorComponent,
   FormItemDateModule,
   FormTextboxModule,
 } from 'src/app/components';
@@ -83,7 +83,7 @@ export class TaskFormComponent implements OnInit {
     DxValidatorModule,
 
     FormTextboxModule,
-    StatusIndicatorModule,
+    StatusIndicatorComponent,
     FormItemDateModule,
     ToolbarFormModule,
     CommonModule,

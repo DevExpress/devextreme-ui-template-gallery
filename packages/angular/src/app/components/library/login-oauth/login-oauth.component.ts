@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { DxButtonModule, DxButtonTypes } from 'devextreme-angular/ui/button';
 import { ThemeService } from '../../../services/theme.service';
 
@@ -13,7 +13,9 @@ import { ThemeService } from '../../../services/theme.service';
 export class LoginOauthComponent {
   btnStylingMode: DxButtonTypes.ButtonStyle;
 
-  constructor(private themeService: ThemeService) {
+  private themeService = inject(ThemeService);
+
+  constructor() {
     this.themeService.isDark.subscribe((value: boolean) => {
       this.btnStylingMode = value ? 'outlined' : 'contained';
     });
