@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 
 
-import { CardAuthComponent, ResetPasswordFormModule } from 'src/app/components';
+import { CardAuthComponent, ResetPasswordFormComponent } from 'src/app/components';
 
 @Component({
     selector: 'app-reset-password-form',
@@ -22,7 +22,7 @@ export class AppResetPasswordComponent {
 @NgModule({
   imports: [
     CardAuthComponent,
-    ResetPasswordFormModule,
+    ResetPasswordFormComponent,
   ],
   providers: [],
   exports: [AppResetPasswordComponent],

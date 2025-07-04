@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { DxButtonModule, DxButtonTypes } from 'devextreme-angular/ui/button';
 import { ThemeService } from '../../../services/theme.service';
 
@@ -6,7 +6,9 @@ import { ThemeService } from '../../../services/theme.service';
     selector: 'app-login-oauth',
     templateUrl: './login-oauth.component.html',
     styleUrls: ['./login-oauth.component.scss'],
-    standalone: false
+    imports: [
+      DxButtonModule
+    ]
 })
 export class LoginOauthComponent {
   btnStylingMode: DxButtonTypes.ButtonStyle;
@@ -19,12 +21,3 @@ export class LoginOauthComponent {
 
 
 }
-
-@NgModule({
-  imports: [
-    DxButtonModule
-  ],
-  declarations: [LoginOauthComponent],
-  exports: [LoginOauthComponent],
-})
-export class LoginOauthModule { }

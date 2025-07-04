@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { SideNavOuterToolbarModule, SingleCardModule } from './layouts';
 import {
   AppFooterComponent,
-  ResetPasswordFormModule,
+  ResetPasswordFormComponent,
   CreateAccountFormComponent,
   ChangePasswordFormComponent,
   LoginFormComponent,
@@ -35,7 +35,7 @@ import { ThemeService } from './services';
     SideNavOuterToolbarModule,
     SingleCardModule,
     AppFooterComponent,
-    ResetPasswordFormModule,
+    ResetPasswordFormComponent,
     CreateAccountFormComponent,
     ChangePasswordFormComponent,
     LoginFormComponent,

@@ -2,7 +2,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  NgModule,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -17,12 +16,18 @@ import { ValidationRule, EditorStyle } from 'devextreme-angular/common';
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { ContactStatusModule } from 'src/app/components/utils/contact-status/contact-status.component';
 
-
 @Component({
     selector: 'password-text-box',
     templateUrl: 'password-text-box.component.html',
     styles: [],
-    standalone: false
+    imports: [
+      ApplyPipeModule,
+      DxSelectBoxModule,
+      DxTextBoxModule,
+      ContactStatusModule,
+      DxValidatorModule,
+      CommonModule
+    ]
 })
 export class PasswordTextBoxComponent {
   @ViewChild('validator', { static: true }) validator: DxValidatorComponent;
@@ -58,16 +63,3 @@ export class PasswordTextBoxComponent {
     this.validator?.instance.validate();
   }
 }
-
-@NgModule({
-  imports: [
-    ApplyPipeModule,
-    DxSelectBoxModule,
-    DxTextBoxModule,
-    ContactStatusModule,
-    DxValidatorModule,
-    CommonModule],
-  declarations: [PasswordTextBoxComponent],
-  exports: [PasswordTextBoxComponent],
-})
-export class PasswordTextBoxModule {}

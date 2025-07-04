@@ -1,5 +1,5 @@
 import {
-  Component, EventEmitter, Input, NgModule, Output,
+  Component, EventEmitter, Input, Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
@@ -9,7 +9,12 @@ import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
     selector: 'pictured-item-select-box',
     templateUrl: 'pictured-item-select-box.component.html',
     styleUrls: ['./pictured-item-select-box.component.scss'],
-    standalone: false
+    imports: [
+      ApplyPipeModule,
+      DxSelectBoxModule,
+      DxTextBoxModule,
+      CommonModule,
+    ],
 })
 export class PicturedItemSelectBoxComponent {
   @Input() value: Record<string, unknown>;
@@ -20,14 +25,3 @@ export class PicturedItemSelectBoxComponent {
 
   @Output() valueChange = new EventEmitter<string>();
 }
-
-@NgModule({
-  imports: [
-    ApplyPipeModule,
-    DxSelectBoxModule,
-    DxTextBoxModule,
-    CommonModule],
-  declarations: [PicturedItemSelectBoxComponent],
-  exports: [PicturedItemSelectBoxComponent],
-})
-export class PicturedItemSelectBoxModule {}

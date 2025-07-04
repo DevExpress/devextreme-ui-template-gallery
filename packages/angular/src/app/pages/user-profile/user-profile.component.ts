@@ -22,7 +22,7 @@ import {
   FormPhotoModule,
   FormTextboxModule,
   ChangeProfilePasswordFormComponent,
-  ProfileCardModule,
+  ProfileCardComponent,
   FormPopupModule,
 } from 'src/app/components';
 import { DataService, ScreenService } from 'src/app/services';
@@ -225,7 +225,7 @@ export class UserProfileComponent {
     FormTextboxModule,
     FormPhotoModule,
     FormPopupModule,
-    ProfileCardModule,
+    ProfileCardComponent,
     ChangeProfilePasswordFormComponent,
     CommonModule,
     PhonePipeModule,

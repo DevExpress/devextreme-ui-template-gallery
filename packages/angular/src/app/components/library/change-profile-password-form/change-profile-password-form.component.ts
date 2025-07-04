@@ -7,7 +7,6 @@ import notify from 'devextreme/ui/notify';
 
 import {
   PasswordTextBoxComponent,
-  PasswordTextBoxModule,
 } from 'src/app/components/library/password-text-box/password-text-box.component';
 
 import { ValidationRule } from 'devextreme-angular/common';
@@ -20,7 +19,7 @@ import { ValidationRule } from 'devextreme-angular/common';
       CommonModule,
       DxFormModule,
       DxLoadIndicatorModule,
-      PasswordTextBoxModule,
+      PasswordTextBoxComponent,
       FormPopupModule,
     ],
 })
