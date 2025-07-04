@@ -1,8 +1,7 @@
 import {
-  Component, NgModule, ViewChild, EventEmitter, Output, Input, SimpleChanges, OnChanges,
+  Component, ViewChild, EventEmitter, Output, Input, SimpleChanges, OnChanges, inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {
   DxButtonModule,
@@ -14,7 +13,6 @@ import {
   DxToolbarModule,
 } from 'devextreme-angular';
 import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
-import { DxTabsTypes } from 'devextreme-angular/ui/tabs';
 import {
   StatusIndicatorComponent,
 } from 'src/app/components';
@@ -31,7 +29,17 @@ import 'jspdf-autotable';
     selector: 'task-list-grid',
     templateUrl: './task-list-grid.component.html',
     styleUrls: ['./task-list-grid.component.scss'],
-    standalone: false
+    imports: [
+      DxButtonModule,
+      DxDataGridModule,
+      DxDropDownButtonModule,
+      DxSelectBoxModule,
+      DxTextBoxModule,
+      DxToolbarModule,
+      StatusIndicatorComponent,
+      CommonModule
+    ],
+    providers: []
 })
 export class TaskListGridComponent implements OnChanges {
   @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
@@ -39,6 +47,8 @@ export class TaskListGridComponent implements OnChanges {
   @Input() dataSource: Task[];
 
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
+
+  private router = inject(Router);
 
   tasks: Task[];
 
@@ -49,9 +59,6 @@ export class TaskListGridComponent implements OnChanges {
   isLoading = true;
 
   useNavigation = true;
-
-  constructor(private router: Router) {
-  }
 
   refresh() {
     this.grid.instance.refresh();
@@ -100,10 +107,6 @@ export class TaskListGridComponent implements OnChanges {
     this.useNavigation = !this.useNavigation;
   };
 
-  tabsItemClick = (e: DxTabsTypes.ItemClickEvent) => {
-    this.tabValueChanged.emit(e);
-  };
-
   navigateToDetails = (e: DxDataGridTypes.RowClickEvent) => {
     if(this.useNavigation && e.rowType !== 'detailAdaptive') {
       this.router.navigate(['/planning-task-details']);
@@ -111,16 +114,3 @@ export class TaskListGridComponent implements OnChanges {
   };
 }
 
-@NgModule({ exports: [TaskListGridComponent],
-  declarations: [TaskListGridComponent],
-  imports: [DxButtonModule,
-    DxDataGridModule,
-    DxDropDownButtonModule,
-    DxSelectBoxModule,
-    DxTextBoxModule,
-    DxToolbarModule,
-    StatusIndicatorComponent,
-    CommonModule],
-  providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-export class TaskListModule { }

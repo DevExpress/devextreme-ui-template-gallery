@@ -55,10 +55,6 @@ export class AnalyticsDashboardComponent implements OnInit {
     this.loadData(dates.startDate, dates.endDate);
   }
 
-  customizeSaleText(arg: { percentText: string }) {
-    return arg.percentText;
-  }
-
   loadData = (startDate: string, endDate: string) => {
     this.isLoading = true;
     const tasks: Observable<object>[] = [

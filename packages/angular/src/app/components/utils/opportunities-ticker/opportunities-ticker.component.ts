@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
-import { TickerCardModule } from 'src/app/components/library/ticker-card/ticker-card.component';
+import { TickerCardComponent } from 'src/app/components/library/ticker-card/ticker-card.component';
 
 @Component({
     selector: 'opportunities-ticker',
@@ -18,7 +18,7 @@ export class OpportunitiesTickerComponent {
 @NgModule({
   imports: [
     CommonModule,
-    TickerCardModule,
+    TickerCardComponent,
   ],
   declarations: [OpportunitiesTickerComponent],
   exports: [OpportunitiesTickerComponent],

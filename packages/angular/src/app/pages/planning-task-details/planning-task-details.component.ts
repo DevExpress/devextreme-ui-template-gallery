@@ -17,7 +17,7 @@ import {
 } from 'src/app/components';
 import { Task } from 'src/app/types/task';
 import { DataService } from 'src/app/services';
-import { TaskFormModule } from 'src/app/components/library/task-form/task-form.component';
+import { TaskFormComponent } from 'src/app/components/library/task-form/task-form.component';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 @Component({
@@ -67,7 +67,7 @@ export class PlanningTaskDetailsComponent implements OnInit {
     CardActivitiesComponent,
     CardNotesComponent,
     CardMessagesComponent,
-    TaskFormModule,
+    TaskFormComponent,
     StatusIndicatorComponent,
     DxScrollViewModule,
     CommonModule,

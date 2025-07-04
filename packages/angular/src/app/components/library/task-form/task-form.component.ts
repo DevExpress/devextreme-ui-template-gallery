@@ -1,6 +1,4 @@
-import {
-  Component, NgModule, Input, OnInit,
-} from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -28,9 +26,25 @@ import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar
     selector: 'task-form',
     templateUrl: './task-form.component.html',
     styleUrls: ['./task-form.component.scss'],
-    standalone: false
+    imports: [
+      DxButtonModule,
+      DxFormModule,
+      DxLoadPanelModule,
+      DxSelectBoxModule,
+      DxTextBoxModule,
+      DxTextAreaModule,
+      DxToolbarModule,
+      DxValidatorModule,
+      FormTextboxModule,
+      StatusIndicatorComponent,
+      FormItemDateModule,
+      ToolbarFormModule,
+      CommonModule,
+    ],
 })
 export class TaskFormComponent implements OnInit {
+  protected screen = inject(ScreenService);
+
   @Input() task: Task;
 
   @Input() isLoading: boolean = false;
@@ -46,8 +60,6 @@ export class TaskFormComponent implements OnInit {
   priorityList = taskPriorityList;
 
   getSizeQualifier = getSizeQualifier;
-
-  constructor(protected screen: ScreenService) {}
 
   ngOnInit() {
     this.isEditing = this.isCreateMode;
@@ -70,26 +82,3 @@ export class TaskFormComponent implements OnInit {
 
   getNewTaskData = ()=> ({ ...this.task });
 }
-
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxFormModule,
-    DxLoadPanelModule,
-    DxSelectBoxModule,
-    DxTextBoxModule,
-    DxTextAreaModule,
-    DxToolbarModule,
-    DxValidatorModule,
-
-    FormTextboxModule,
-    StatusIndicatorComponent,
-    FormItemDateModule,
-    ToolbarFormModule,
-    CommonModule,
-  ],
-  providers: [],
-  exports: [TaskFormComponent],
-  declarations: [TaskFormComponent],
-})
-export class TaskFormModule { }

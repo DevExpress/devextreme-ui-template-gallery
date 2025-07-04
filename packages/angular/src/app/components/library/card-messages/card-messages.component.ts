@@ -10,7 +10,7 @@ import {
   DxValidatorModule,
 } from 'devextreme-angular';
 import { Message, Messages } from 'src/app/types/messages';
-import { UserAvatarModule } from 'src/app/components/library/user-avatar/user-avatar.component';
+import { UserAvatarComponent } from 'src/app/components/library/user-avatar/user-avatar.component';
 
 @Component({
     selector: 'card-messages',
@@ -24,7 +24,7 @@ import { UserAvatarModule } from 'src/app/components/library/user-avatar/user-av
       DxButtonModule,
       DxValidationGroupModule,
       DxValidatorModule,
-      UserAvatarModule,
+      UserAvatarComponent,
       CommonModule,
     ]
 })

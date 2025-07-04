@@ -2,7 +2,7 @@ import {
   Component, NgModule,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TickerCardModule } from 'src/app/components/library/ticker-card/ticker-card.component';
+import { TickerCardComponent } from 'src/app/components/library/ticker-card/ticker-card.component';
 
 @Component({
     selector: 'conversion-ticker',
@@ -16,7 +16,7 @@ export class ConversionTickerComponent {
 @NgModule({
   imports: [
     CommonModule,
-    TickerCardModule,
+    TickerCardComponent,
   ],
   declarations: [ConversionTickerComponent],
   exports: [ConversionTickerComponent],

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {importProvidersFrom, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { DxHttpModule } from 'devextreme-angular/http';
@@ -24,6 +24,7 @@ import { AnalyticsDashboardModule } from './pages/analytics-dashboard/analytics-
 import { AnalyticsSalesReportModule } from './pages/analytics-sales-report/analytics-sales-report.component';
 import { AnalyticsGeographyModule } from './pages/analytics-geography/analytics-geography.component';
 import { ThemeService } from './services';
+import {HttpClientModule, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,11 @@ import { ThemeService } from './services';
 
     AppRoutingModule,
   ],
-  providers: [AuthService, ScreenService, AppInfoService, ThemeService],
+  providers: [
+    AuthService, ScreenService, AppInfoService, ThemeService,
+    importProvidersFrom(HttpClientModule),
+    provideHttpClient(withInterceptorsFromDi())
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

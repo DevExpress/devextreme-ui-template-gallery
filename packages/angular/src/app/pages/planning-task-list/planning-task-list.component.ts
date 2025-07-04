@@ -13,11 +13,11 @@ import { taskPanelItems } from 'src/app/types/resource';
 import { Task, newTask } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
 import { forkJoin, map, Observable } from 'rxjs';
-import { TaskFormComponent, TaskFormModule } from 'src/app/components/library/task-form/task-form.component';
+import { TaskFormComponent } from 'src/app/components/library/task-form/task-form.component';
 import { FormPopupModule } from 'src/app/components/utils/form-popup/form-popup.component';
-import { TaskListGridComponent, TaskListModule } from 'src/app/components/library/task-list-grid/task-list-grid.component';
-import { TaskListKanbanModule, TaskListKanbanComponent } from 'src/app/components/library/task-list-kanban/task-list-kanban.component';
-import { TaskListGanttComponent, TaskListGanttModule } from 'src/app/components/library/task-list-gantt/task-list-gantt.component';
+import { TaskListGridComponent } from 'src/app/components/library/task-list-grid/task-list-grid.component';
+import { TaskListKanbanComponent } from 'src/app/components/library/task-list-kanban/task-list-kanban.component';
+import { TaskListGanttComponent } from 'src/app/components/library/task-list-gantt/task-list-gantt.component';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 
 @Component({
@@ -115,11 +115,10 @@ export class PlanningTaskListComponent implements OnInit {
     DxToolbarModule,
     DxLoadPanelModule,
     FormPopupModule,
-
-    TaskFormModule,
-    TaskListKanbanModule,
-    TaskListModule,
-    TaskListGanttModule,
+    TaskFormComponent,
+    TaskListKanbanComponent,
+    TaskListGridComponent,
+    TaskListGanttComponent,
 
     CommonModule,
   ],
