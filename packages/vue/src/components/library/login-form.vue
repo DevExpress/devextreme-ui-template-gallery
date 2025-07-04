@@ -6,6 +6,7 @@
     <dx-form
       :form-data="formData"
       :disabled="loading"
+      :showColonAfterLabel="true"
       label-location="top"
     >
       <dx-item
