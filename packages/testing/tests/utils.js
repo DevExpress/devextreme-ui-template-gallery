@@ -74,11 +74,11 @@ export const toggleCommonConfiguration = async (
 
   const licenseCloseButton = Selector('dx-license div:last-child').with({ timeout: 0 });
   const licenseCloseButtonExists = await licenseCloseButton.exists;
-  
+
   if (licenseCloseButtonExists) {
     await t.click(licenseCloseButton);
   }
-  
+
   await t.wait(timeout);
 };
 
