@@ -12,7 +12,7 @@ import {
 import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
-import { ContactStatusModule } from 'src/app/components';
+import { ContactStatusComponent } from 'src/app/components';
 import { Contact, contactStatusList, ContactStatus, } from 'src/app/types/contact';
 import { DxDropDownButtonTypes } from 'devextreme-angular/ui/drop-down-button';
 import DataSource from 'devextreme/data/data_source';
@@ -42,7 +42,7 @@ type FilterContactStatus = ContactStatus | 'All';
       ContactPanelComponent,
       ContactNewFormComponent,
       FormPopupModule,
-      ContactStatusModule,
+      ContactStatusComponent,
       CommonModule,
     ]
 })

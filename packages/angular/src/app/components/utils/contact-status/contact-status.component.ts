@@ -1,6 +1,4 @@
-import {
-  Component, Input, NgModule,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactStatus } from 'src/app/types/contact';
 
@@ -10,7 +8,7 @@ import { ContactStatus } from 'src/app/types/contact';
   <span class="status status-{{ value | lowercase }}">{{ showText ? value : '' }}</span>
 `,
     styleUrls: ['./contact-status.component.scss'],
-    standalone: false
+    imports: [ CommonModule ],
 })
 export class ContactStatusComponent {
   @Input() value: ContactStatus;
@@ -18,9 +16,3 @@ export class ContactStatusComponent {
   @Input() showText = true;
 }
 
-@NgModule({
-  imports: [CommonModule],
-  declarations: [ContactStatusComponent],
-  exports: [ContactStatusComponent],
-})
-export class ContactStatusModule { }

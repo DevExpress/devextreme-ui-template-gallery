@@ -1,13 +1,18 @@
 import {Component, EventEmitter, inject, Input, Output, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  DxButtonModule, DxDateBoxModule, DxFormComponent, DxFormModule, DxNumberBoxModule, DxSelectBoxModule,
-  DxTextBoxModule, DxToolbarModule,
+  DxButtonModule,
+  DxDateBoxModule,
+  DxFormComponent,
+  DxFormModule,
+  DxNumberBoxModule,
+  DxSelectBoxModule,
+  DxTextBoxModule,
+  DxToolbarModule,
   DxValidatorModule,
   DxScrollViewModule
 } from 'devextreme-angular';
 import { FormTextboxModule } from 'src/app/components/utils/form-textbox/form-textbox.component';
-import { FormPhotoModule } from 'src/app/components/utils/form-photo/form-photo.component';
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { PicturedItemSelectBoxComponent } from 'src/app/components/library/pictured-item-select-box/pictured-item-select-box.component';
 import { ScreenService } from 'src/app/services';
@@ -31,7 +36,6 @@ type CardData = Record<string, any>;
       DxScrollViewModule,
       DxTextBoxModule,
       FormTextboxModule,
-      FormPhotoModule,
       DxValidatorModule,
       CommonModule,
       PicturedItemSelectBoxComponent,
@@ -69,9 +73,5 @@ export class ProfileCardComponent {
     }
 
     this.dataChanged.emit(this.cardData);
-  }
-
-  getFieldValue(cardData, fieldName) {
-    return cardData[fieldName];
   }
 }

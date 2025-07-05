@@ -16,7 +16,7 @@ import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 import { DataService } from 'src/app/services';
 import { CardAnalyticsComponent } from 'src/app/components/library/card-analytics/card-analytics.component';
 import { ToolbarAnalyticsModule } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
-import { ConversionCardModule } from 'src/app/components/utils/conversion-card/conversion-card.component';
+import { ConversionCardComponent } from 'src/app/components/utils/conversion-card/conversion-card.component';
 import { RevenueCardModule } from 'src/app/components/utils/revenue-card/revenue-card.component';
 import { RevenueAnalysisCardModule } from 'src/app/components/utils/revenue-analysis-card/revenue-analysis-card.component';
 import { RevenueSnapshotCardModule } from 'src/app/components/utils/revenue-snapshot-card/revenue-snapshot-card.component';
@@ -99,7 +99,7 @@ export class AnalyticsDashboardComponent implements OnInit {
     ToolbarAnalyticsModule,
     DxLoadPanelModule,
     ApplyPipeModule,
-    ConversionCardModule,
+    ConversionCardComponent,
     RevenueAnalysisCardModule,
     RevenueCardModule,
     RevenueSnapshotCardModule,

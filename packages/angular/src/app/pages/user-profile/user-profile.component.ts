@@ -19,7 +19,7 @@ import {
 import { forkJoin } from 'rxjs';
 import { PhonePipeModule } from 'src/app/pipes/phone.pipe';
 import {
-  FormPhotoModule,
+  FormPhotoComponent,
   FormTextboxModule,
   ChangeProfilePasswordFormComponent,
   ProfileCardComponent,
@@ -223,7 +223,7 @@ export class UserProfileComponent {
     DxLoadPanelModule,
     DxTextBoxModule,
     FormTextboxModule,
-    FormPhotoModule,
+    FormPhotoComponent,
     FormPopupModule,
     ProfileCardComponent,
     ChangeProfilePasswordFormComponent,

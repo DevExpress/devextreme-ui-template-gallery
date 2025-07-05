@@ -1,10 +1,10 @@
 import {
-  Component, EventEmitter, Input, NgModule, Output,
+  Component, EventEmitter, Input, Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxListModule, DxListTypes } from 'devextreme-angular/ui/list';
 import { Task } from 'src/app/types/task';
-import { AgendaListItemModule } from "./agenda-list-item.component";
+import { AgendaListItemComponent } from "./agenda-list-item.component";
 
 export type AgendaItem = { startDate: Date };
 
@@ -27,7 +27,11 @@ export type AgendaItem = { startDate: Date };
   </dx-list>
 `,
     styleUrls: ['./agenda.component.scss'],
-    standalone: false
+    imports: [
+      CommonModule,
+      DxListModule,
+      AgendaListItemComponent,
+    ],
 })
 export class AgendaComponent {
   @Input() items: AgendaItem[];
@@ -41,14 +45,3 @@ export class AgendaComponent {
     this.clickAppointment.emit({itemData, element});
   }
 }
-
-@NgModule({
-  imports: [
-    CommonModule,
-    DxListModule,
-    AgendaListItemModule,
-  ],
-  declarations: [AgendaComponent],
-  exports: [AgendaComponent],
-})
-export class AgendaModule { }

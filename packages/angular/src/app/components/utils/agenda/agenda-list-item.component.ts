@@ -1,6 +1,4 @@
-import {
-  Component, Input, NgModule,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { Duration } from 'luxon';
@@ -25,7 +23,11 @@ import { ApplyPipeModule } from "../../../pipes/apply.pipe";
     </div>
 `,
     styleUrls: ['./agenda-list-item.component.scss'],
-    standalone: false
+    imports: [
+      CommonModule,
+      DxListModule,
+      ApplyPipeModule,
+    ],
 })
 export class AgendaListItemComponent {
   @Input() appointment: Record<string, any> = {};
@@ -46,14 +48,3 @@ export class AgendaListItemComponent {
     });
   };
 }
-
-@NgModule({
-  imports: [
-    CommonModule,
-    DxListModule,
-    ApplyPipeModule,
-  ],
-  declarations: [AgendaListItemComponent],
-  exports: [AgendaListItemComponent],
-})
-export class AgendaListItemModule {}

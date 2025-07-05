@@ -12,7 +12,7 @@ import {
 } from 'devextreme-angular';
 import {
   StatusIndicatorComponent,
-  FormItemDateModule,
+  FormDateboxComponent,
   FormTextboxModule,
 } from 'src/app/components';
 import { taskPriorityList, taskStatusList } from 'src/app/types/task';
@@ -37,7 +37,7 @@ import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar
       DxValidatorModule,
       FormTextboxModule,
       StatusIndicatorComponent,
-      FormItemDateModule,
+      FormDateboxComponent,
       ToolbarFormModule,
       CommonModule,
     ],

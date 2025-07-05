@@ -26,8 +26,8 @@ import {
 import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import {
   FormTextboxModule,
-  FormPhotoModule,
-  ContactStatusModule,
+  FormPhotoComponent,
+  ContactStatusComponent,
   CardActivitiesComponent,
 } from 'src/app/components';
 import { ScreenService, DataService } from 'src/app/services';
@@ -50,9 +50,9 @@ import { Contact } from 'src/app/types/contact';
       DxValidatorModule,
       DxValidationGroupModule,
       FormTextboxModule,
-      FormPhotoModule,
+      FormPhotoComponent,
       CardActivitiesComponent,
-      ContactStatusModule,
+      ContactStatusComponent,
       CommonModule,
     ]
 })

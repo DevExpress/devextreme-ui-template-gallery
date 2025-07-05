@@ -14,7 +14,6 @@ import {
 } from 'devextreme-angular';
 import { ValidationRule, EditorStyle } from 'devextreme-angular/common';
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
-import { ContactStatusModule } from 'src/app/components/utils/contact-status/contact-status.component';
 
 @Component({
     selector: 'password-text-box',
@@ -24,7 +23,6 @@ import { ContactStatusModule } from 'src/app/components/utils/contact-status/con
       ApplyPipeModule,
       DxSelectBoxModule,
       DxTextBoxModule,
-      ContactStatusModule,
       DxValidatorModule,
       CommonModule
     ]
@@ -45,9 +43,6 @@ export class PasswordTextBoxComponent {
   @Output() valueChanged = new EventEmitter<string>();
 
   isPasswordMode = true;
-
-  constructor() {
-  }
 
   switchMode = () => {
     this.isPasswordMode = !this.isPasswordMode;

@@ -1,6 +1,4 @@
-import {
-  Component, NgModule, Input,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -24,7 +22,19 @@ import { Task } from 'src/app/types/task';
     selector: 'contact-cards',
     templateUrl: './contact-cards.component.html',
     styleUrls: ['./contact-cards.component.scss'],
-    standalone: false
+    imports: [
+      DxButtonModule,
+      DxTabPanelModule,
+      DxDataGridModule,
+
+      CardNotesComponent,
+      CardMessagesComponent,
+      CardActivitiesComponent,
+      CardOpportunitiesComponent,
+      CardTasksComponent,
+
+      CommonModule,
+    ],
 })
 export class ContactCardsComponent {
     @Input() tasks: Task[];
@@ -44,22 +54,3 @@ export class ContactCardsComponent {
     @Input() isLoading: boolean;
 }
 
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxTabPanelModule,
-    DxDataGridModule,
-
-    CardNotesComponent,
-    CardMessagesComponent,
-    CardActivitiesComponent,
-    CardOpportunitiesComponent,
-    CardTasksComponent,
-
-    CommonModule,
-  ],
-  providers: [],
-  exports: [ContactCardsComponent],
-  declarations: [ContactCardsComponent],
-})
-export class ContactCardsModule { }

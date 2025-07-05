@@ -1,17 +1,18 @@
-import {
-  Component, NgModule, EventEmitter, Output, Input, OnInit,
-} from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { DxButtonModule, DxCheckBoxModule } from 'devextreme-angular';
 import { DxListModule } from 'devextreme-angular/ui/list';
-import { DxButtonTypes } from 'devextreme-angular/ui/button';
 
 @Component({
     selector: 'calendar-list',
     templateUrl: './calendar-list.component.html',
     styleUrls: ['./calendar-list.component.scss'],
-    standalone: false
+    imports: [
+      DxListModule,
+      DxCheckBoxModule,
+      DxButtonModule,
+      CommonModule
+    ],
 })
 export class CalendarListComponent implements OnInit {
   @Input() dataSource: Record<string, any>[];
@@ -32,13 +33,3 @@ export class CalendarListComponent implements OnInit {
     this.listSelectionChanged.emit(this.selectedItems);
   }
 }
-
-@NgModule({ exports: [CalendarListComponent],
-  declarations: [CalendarListComponent],
-  imports: [DxListModule,
-        DxCheckBoxModule,
-        DxButtonModule,
-        CommonModule],
-  providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-export class CalendarListModule { }
