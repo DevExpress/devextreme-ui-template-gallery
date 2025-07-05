@@ -1,6 +1,4 @@
-import {
-  Component, OnInit, NgModule, ViewChild,
-} from '@angular/core';
+import {Component, inject, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
@@ -24,7 +22,20 @@ import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
     templateUrl: './planning-task-list.component.html',
     styleUrls: ['./planning-task-list.component.scss'],
     providers: [DataService],
-    standalone: false
+    imports: [
+      DxButtonModule,
+      DxDataGridModule,
+      DxTabsModule,
+      DxToolbarModule,
+      DxLoadPanelModule,
+      FormPopupComponent,
+      TaskFormComponent,
+      TaskListKanbanComponent,
+      TaskListGridComponent,
+      TaskListGanttComponent,
+
+      CommonModule,
+    ]
 })
 export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
@@ -34,6 +45,10 @@ export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningKanban', { static: false }) kanban: TaskListKanbanComponent;
 
   @ViewChild(TaskFormComponent, { static: false }) taskForm: TaskFormComponent;
+
+  private service = inject(DataService);
+
+  protected screen = inject(ScreenService);
 
   newTask = newTask;
 
@@ -48,9 +63,6 @@ export class PlanningTaskListComponent implements OnInit {
   displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
 
   taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
-
-  constructor(private service: DataService, protected screen: ScreenService) {
-  }
 
   ngOnInit(): void {
     this.taskCollections$ = forkJoin([
@@ -106,24 +118,3 @@ export class PlanningTaskListComponent implements OnInit {
 
   exportDataGridToXSLX = () => this.dataGrid.onExportingToXLSX();
 }
-
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxDataGridModule,
-    DxTabsModule,
-    DxToolbarModule,
-    DxLoadPanelModule,
-    FormPopupComponent,
-    TaskFormComponent,
-    TaskListKanbanComponent,
-    TaskListGridComponent,
-    TaskListGanttComponent,
-
-    CommonModule,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [PlanningTaskListComponent],
-})
-export class PlanningTaskListModule { }

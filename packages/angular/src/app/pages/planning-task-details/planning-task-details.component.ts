@@ -1,6 +1,4 @@
-import {
-  Component, OnInit, NgModule
-} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -13,7 +11,6 @@ import {
   CardActivitiesComponent,
   CardNotesComponent,
   CardMessagesComponent,
-  StatusIndicatorComponent,
 } from 'src/app/components';
 import { Task } from 'src/app/types/task';
 import { DataService } from 'src/app/services';
@@ -23,10 +20,25 @@ import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 @Component({
     templateUrl: './planning-task-details.component.html',
     styleUrls: ['./planning-task-details.component.scss'],
-    providers: [DataService],
-    standalone: false
+    providers: [ DataService ],
+    imports: [
+      DxButtonModule,
+      DxDropDownButtonModule,
+      DxTabPanelModule,
+      DxValidationGroupModule,
+      DxToolbarModule,
+
+      CardActivitiesComponent,
+      CardNotesComponent,
+      CardMessagesComponent,
+      TaskFormComponent,
+      DxScrollViewModule,
+      CommonModule,
+    ]
 })
 export class PlanningTaskDetailsComponent implements OnInit {
+  private service = inject(DataService);
+
   task: Task;
 
   taskId = 1;
@@ -34,9 +46,6 @@ export class PlanningTaskDetailsComponent implements OnInit {
   taskName = 'Loading...';
 
   isLoading = false;
-
-  constructor(private service: DataService) {
-  }
 
   loadData = () => {
     this.service.getTask(this.taskId).subscribe((data) => {
@@ -56,24 +65,3 @@ export class PlanningTaskDetailsComponent implements OnInit {
   }
 }
 
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxDropDownButtonModule,
-    DxTabPanelModule,
-    DxValidationGroupModule,
-    DxToolbarModule,
-
-    CardActivitiesComponent,
-    CardNotesComponent,
-    CardMessagesComponent,
-    TaskFormComponent,
-    StatusIndicatorComponent,
-    DxScrollViewModule,
-    CommonModule,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [PlanningTaskDetailsComponent],
-})
-export class PlanningTaskDetailsModule { }

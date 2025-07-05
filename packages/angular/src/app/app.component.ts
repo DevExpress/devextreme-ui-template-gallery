@@ -4,8 +4,6 @@ import { RouterModule } from "@angular/router";
 import { DxHttpModule } from "devextreme-angular/http";
 
 import { ScreenService, ThemeService } from './services';
-import { PlanningTaskListModule } from "./pages/planning-task-list/planning-task-list.component";
-import { PlanningTaskDetailsModule } from "./pages/planning-task-details/planning-task-details.component";
 
 @Component({
     selector: 'app-root',
@@ -13,8 +11,6 @@ import { PlanningTaskDetailsModule } from "./pages/planning-task-details/plannin
     styleUrls: ['./app.component.scss'],
     imports: [
       DxHttpModule,
-      PlanningTaskListModule,
-      PlanningTaskDetailsModule,
       RouterModule,
   ]
 })
