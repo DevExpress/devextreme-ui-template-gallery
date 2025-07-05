@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { DateTime } from 'luxon';
@@ -16,7 +16,7 @@ const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
 
 @Injectable()
 export class DataService {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   public getContacts = () =>
     this.http.get<Contact[]>(`${API_URL}/Users/Contacts`);

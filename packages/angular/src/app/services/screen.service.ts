@@ -1,4 +1,4 @@
-import { Output, Injectable, EventEmitter } from '@angular/core';
+import { Output, Injectable, EventEmitter, inject } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { ReplaySubject, Subscription } from 'rxjs';
@@ -25,9 +25,11 @@ export class ScreenService {
   @Output() smallScreenChanged = new ReplaySubject<boolean>();
   @Output() screenChanged = new ReplaySubject<{ isXSmall: boolean, isSmall: boolean, isMedium: boolean, isLarge: boolean, isXLarge: boolean }>();
 
+  private breakpointObserver$ = inject(BreakpointObserver);
+
   breakpointSubscription: Subscription;
 
-  constructor(private breakpointObserver$: BreakpointObserver) {
+  constructor() {
     this.breakpointSubscription = this.breakpointObserver$
       .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
       .subscribe((data) => {

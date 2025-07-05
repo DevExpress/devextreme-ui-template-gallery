@@ -19,7 +19,7 @@ import {
   DxValidatorModule,
   DxScrollViewModule
 } from 'devextreme-angular';
-import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
+import { ApplyPipeDirective } from 'src/app/pipes/apply.pipe';
 import { PicturedItemSelectBoxComponent } from 'src/app/components/library/pictured-item-select-box/pictured-item-select-box.component';
 import { ScreenService } from 'src/app/services';
 import { StatusSelectBoxComponent } from 'src/app/components/library/status-select-box/status-select-box.component';
@@ -32,7 +32,7 @@ type CardData = Record<string, any>;
     templateUrl: './profile-card.component.html',
     styleUrls: ['profile-card.component.scss'],
     imports: [
-      ApplyPipeModule,
+      ApplyPipeDirective,
       DxButtonModule,
       DxDateBoxModule,
       DxFormModule,

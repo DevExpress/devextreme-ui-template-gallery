@@ -25,7 +25,6 @@ import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import {
   Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory,
 } from 'src/app/types/analytics';
-import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 
 type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
 type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
@@ -33,7 +32,7 @@ type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
 @Component({
     templateUrl: './analytics-dashboard.component.html',
     styleUrls: ['./analytics-dashboard.component.scss'],
-    providers: [DataService],
+    providers: [ DataService ],
     imports: [
       DxScrollViewModule,
       DxDataGridModule,
@@ -43,7 +42,6 @@ type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
       DxChartModule,
       ToolbarAnalyticsComponent,
       DxLoadPanelModule,
-      ApplyPipeModule,
       ConversionCardComponent,
       RevenueAnalysisCardComponent,
       RevenueCardComponent,

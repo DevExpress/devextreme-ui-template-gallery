@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { Duration } from 'luxon';
-import { ApplyPipeModule } from "../../../pipes/apply.pipe";
+import { ApplyPipeDirective } from "../../../pipes/apply.pipe";
 
 @Component({
     selector: 'agenda-list-item',
@@ -26,7 +26,7 @@ import { ApplyPipeModule } from "../../../pipes/apply.pipe";
     imports: [
       CommonModule,
       DxListModule,
-      ApplyPipeModule,
+      ApplyPipeDirective,
     ],
 })
 export class AgendaListItemComponent {

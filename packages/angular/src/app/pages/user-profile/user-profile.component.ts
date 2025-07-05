@@ -17,7 +17,7 @@ import {
   DxScrollViewModule,
 } from 'devextreme-angular';
 import { forkJoin } from 'rxjs';
-import { PhonePipeModule } from 'src/app/pipes/phone.pipe';
+import { PhonePipeDirective } from 'src/app/pipes/phone.pipe';
 import {
   FormPhotoComponent,
   FormTextboxComponent,
@@ -228,7 +228,7 @@ export class UserProfileComponent {
     ProfileCardComponent,
     ChangeProfilePasswordFormComponent,
     CommonModule,
-    PhonePipeModule,
+    PhonePipeDirective,
   ],
   providers: [],
   exports: [],

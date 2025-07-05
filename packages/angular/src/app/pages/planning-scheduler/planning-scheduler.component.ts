@@ -18,7 +18,7 @@ import { CalendarListComponent } from 'src/app/components/utils/calendar-list/ca
 import { LeftSidePanelComponent } from 'src/app/components/utils/left-side-panel/left-side-panel.component';
 import { RightSidePanelComponent } from 'src/app/components/utils/right-side-panel/right-side-panel.component';
 import { AgendaItem, AgendaComponent } from "../../components/utils/agenda/agenda.component";
-import { ApplyPipeModule } from '../../pipes/apply.pipe';
+import { ApplyPipeDirective } from '../../pipes/apply.pipe';
 import { SchedulerTooltipComponent } from '../../components/library/scheduler-tooltip/scheduler-tooltip.component';
 import { DxSchedulerTypes } from 'devextreme-angular/ui/scheduler'
 
@@ -29,7 +29,7 @@ type SelectedAppointment = { data: Record<string, any>, target: any };
     styleUrls: ['./planning-scheduler.component.scss'],
     providers: [DataService],
     imports: [
-      ApplyPipeModule,
+      ApplyPipeDirective,
       DxCalendarModule,
       DxButtonModule,
       DxSchedulerModule,

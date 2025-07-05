@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Sales, SalesOrOpportunitiesByCategory } from '../../../types/analytics';
-import { ApplyPipeModule } from "src/app/pipes/apply.pipe";
+import { ApplyPipeDirective } from "src/app/pipes/apply.pipe";
 
 @Component({
     selector: 'ticker-card',
     templateUrl: './ticker-card.component.html',
     styleUrls: ['./ticker-card.component.scss'],
     imports: [
-      ApplyPipeModule,
+      ApplyPipeDirective,
       CommonModule,
     ],
 })

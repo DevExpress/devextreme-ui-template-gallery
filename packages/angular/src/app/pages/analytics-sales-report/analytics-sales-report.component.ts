@@ -20,7 +20,6 @@ import { SalesByRangeCardComponent } from 'src/app/components/utils/sales-by-ran
 import { SalesPerformanceCardComponent } from 'src/app/components/utils/sales-performance-card/sales-performance-card.component';
 import { SalesRangeCardComponent } from 'src/app/components/utils/sales-range-card/sales-range-card.component';
 import { analyticsPanelItems } from 'src/app/types/resource';
-import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 
 @Component({
@@ -37,7 +36,6 @@ import { Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
     DxDropDownButtonModule,
     DxRangeSelectorModule,
     ToolbarAnalyticsComponent,
-    ApplyPipeModule,
     CommonModule,
     SalesByRangeCardComponent,
     SalesPerformanceCardComponent,

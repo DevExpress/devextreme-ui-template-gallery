@@ -3,14 +3,14 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular';
-import {ApplyPipeModule} from "../../../pipes/apply.pipe";
+import {ApplyPipeDirective} from "../../../pipes/apply.pipe";
 
 @Component({
     selector: 'scheduler-tooltip',
     templateUrl: './scheduler-tooltip.component.html',
     styleUrls: ['./scheduler-tooltip.component.scss'],
     imports: [
-      ApplyPipeModule,
+      ApplyPipeDirective,
       CommonModule,
       DxButtonModule,
     ],

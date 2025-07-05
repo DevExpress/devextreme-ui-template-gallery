@@ -13,14 +13,12 @@ import {
   DxValidatorModule
 } from 'devextreme-angular';
 import { ValidationRule, EditorStyle } from 'devextreme-angular/common';
-import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 
 @Component({
     selector: 'password-text-box',
     templateUrl: 'password-text-box.component.html',
     styles: [],
     imports: [
-      ApplyPipeModule,
       DxSelectBoxModule,
       DxTextBoxModule,
       DxValidatorModule,
