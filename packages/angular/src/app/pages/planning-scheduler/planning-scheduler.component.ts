@@ -16,7 +16,7 @@ import { Task } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
 import { CalendarListComponent } from 'src/app/components/utils/calendar-list/calendar-list.component';
 import { LeftSidePanelComponent } from 'src/app/components/utils/left-side-panel/left-side-panel.component';
-import { RightSidePanelModule } from 'src/app/components/utils/right-side-panel/right-side-panel.component';
+import { RightSidePanelComponent } from 'src/app/components/utils/right-side-panel/right-side-panel.component';
 import { AgendaItem, AgendaComponent } from "../../components/utils/agenda/agenda.component";
 import { ApplyPipeModule } from '../../pipes/apply.pipe';
 import { SchedulerTooltipComponent } from '../../components/library/scheduler-tooltip/scheduler-tooltip.component';
@@ -248,7 +248,7 @@ export class PlanningSchedulerComponent implements OnInit {
     CommonModule,
     CalendarListComponent,
     LeftSidePanelComponent,
-    RightSidePanelModule,
+    RightSidePanelComponent,
     AgendaComponent,
     SchedulerTooltipComponent,
   ],

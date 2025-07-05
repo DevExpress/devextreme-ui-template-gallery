@@ -18,7 +18,7 @@ import {
 import { Contact } from 'src/app/types/contact';
 import { ValidationRule } from 'devextreme-angular/common';
 import { DxButtonTypes } from 'devextreme-angular/ui/button';
-import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
+import { ToolbarFormComponent } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
 
 @Component({
     selector: 'contact-form',
@@ -35,7 +35,7 @@ import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar
       FormTextboxComponent,
       FormPhotoComponent,
       DxValidatorModule,
-      ToolbarFormModule,
+      ToolbarFormComponent,
       CommonModule,
       StatusSelectBoxComponent,
     ]

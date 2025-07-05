@@ -15,10 +15,10 @@ import { Subscription } from 'rxjs';
 
 import { DataService } from 'src/app/services';
 import { CardAnalyticsComponent } from 'src/app/components/library/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
-import { RevenueAnalysisByStatesCardModule } from 'src/app/components/utils/revenue-analysis-by-states-card/revenue-analysis-by-states-card.component';
-import { SalesMapCardModule } from 'src/app/components/utils/sales-map-card/sales-map-card.component';
-import { RevenueSnapshotByStatesCardModule } from 'src/app/components/utils/revenue-snapshot-by-states-card/revenue-snapshot-by-states-card.component';
+import { ToolbarAnalyticsComponent } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
+import { RevenueAnalysisByStatesCardComponent } from 'src/app/components/utils/revenue-analysis-by-states-card/revenue-analysis-by-states-card.component';
+import { SalesMapCardComponent } from 'src/app/components/utils/sales-map-card/sales-map-card.component';
+import { RevenueSnapshotByStatesCardComponent } from 'src/app/components/utils/revenue-snapshot-by-states-card/revenue-snapshot-by-states-card.component';
 
 import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import { SalesByState, SalesByStateAndCity } from 'src/app/types/analytics';
@@ -105,11 +105,11 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     DxVectorMapModule,
     DxChartModule,
     CardAnalyticsComponent,
-    ToolbarAnalyticsModule,
+    ToolbarAnalyticsComponent,
     DxLoadPanelModule,
-    RevenueAnalysisByStatesCardModule,
-    SalesMapCardModule,
-    RevenueSnapshotByStatesCardModule,
+    RevenueAnalysisByStatesCardComponent,
+    SalesMapCardComponent,
+    RevenueSnapshotByStatesCardComponent,
     CommonModule,
   ],
   providers: [],

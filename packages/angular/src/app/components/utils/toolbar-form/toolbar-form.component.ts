@@ -1,15 +1,22 @@
 import {
-  Component, Input, NgModule, Output, EventEmitter
+  Component,
+  Input,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { DxButtonComponent } from "devextreme-angular";
 
 @Component({
     selector: 'toolbar-form',
     templateUrl: './toolbar-form.component.html',
     styleUrls: ['./toolbar-form.component.scss'],
-    standalone: false
+    imports: [
+      DxToolbarModule,
+      DxButtonComponent,
+      CommonModule,
+    ],
 })
 export class ToolbarFormComponent {
   @Input() isEditing: boolean;
@@ -34,16 +41,3 @@ export class ToolbarFormComponent {
     this.saveButtonClicked.emit(event);
   }
 }
-
-@NgModule({
-  imports: [
-    DxToolbarModule,
-    DxButtonModule,
-
-    CommonModule,
-  ],
-  providers: [],
-  exports: [ToolbarFormComponent],
-  declarations: [ToolbarFormComponent],
-})
-export class ToolbarFormModule { }

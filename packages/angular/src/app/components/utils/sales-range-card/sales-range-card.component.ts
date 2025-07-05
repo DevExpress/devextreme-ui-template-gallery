@@ -1,6 +1,5 @@
 import {
   Component,
-  NgModule,
   Input,
   Output,
   EventEmitter,
@@ -13,7 +12,10 @@ import { Sale } from 'src/app/types/analytics';
     selector: 'sales-range-card',
     templateUrl: './sales-range-card.component.html',
     styleUrls: ['./sales-range-card.component.scss'],
-    standalone: false
+    imports: [
+      CardAnalyticsComponent,
+      DxRangeSelectorModule,
+    ],
 })
 export class SalesRangeCardComponent {
   @Input() data: Sale[];
@@ -30,12 +32,3 @@ export class SalesRangeCardComponent {
   }
 }
 
-@NgModule({
-  imports: [
-    CardAnalyticsComponent,
-    DxRangeSelectorModule,
-  ],
-  declarations: [SalesRangeCardComponent],
-  exports: [SalesRangeCardComponent],
-})
-export class SalesRangeCardModule { }

@@ -18,10 +18,10 @@ import { DxDropDownButtonTypes } from 'devextreme-angular/ui/drop-down-button';
 
 import { DataService } from 'src/app/services';
 import { CardAnalyticsComponent } from 'src/app/components/library/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
-import { SalesByRangeCardModule } from 'src/app/components/utils/sales-by-range-card/sales-by-range-card.component';
-import { SalesPerformanceCardModule } from 'src/app/components/utils/sales-performance-card/sales-performance-card.component';
-import { SalesRangeCardModule } from 'src/app/components/utils/sales-range-card/sales-range-card.component';
+import { ToolbarAnalyticsComponent } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
+import { SalesByRangeCardComponent } from 'src/app/components/utils/sales-by-range-card/sales-by-range-card.component';
+import { SalesPerformanceCardComponent } from 'src/app/components/utils/sales-performance-card/sales-performance-card.component';
+import { SalesRangeCardComponent } from 'src/app/components/utils/sales-range-card/sales-range-card.component';
 import { analyticsPanelItems } from 'src/app/types/resource';
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
@@ -104,12 +104,12 @@ export class AnalyticsSalesReportComponent implements OnInit {
     DxDropDownButtonModule,
     DxRangeSelectorModule,
     CardAnalyticsComponent,
-    ToolbarAnalyticsModule,
+    ToolbarAnalyticsComponent,
     ApplyPipeModule,
     CommonModule,
-    SalesByRangeCardModule,
-    SalesPerformanceCardModule,
-    SalesRangeCardModule,
+    SalesByRangeCardComponent,
+    SalesPerformanceCardComponent,
+    SalesRangeCardComponent,
   ],
   providers: [],
   exports: [],

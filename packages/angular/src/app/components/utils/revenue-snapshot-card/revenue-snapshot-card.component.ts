@@ -1,8 +1,4 @@
-import {
-  Component,
-  NgModule,
-  Input,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardAnalyticsComponent } from '../../library/card-analytics/card-analytics.component';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { SalesByStateAndCity } from 'src/app/types/analytics';
@@ -10,7 +6,10 @@ import { SalesByStateAndCity } from 'src/app/types/analytics';
 @Component({
     selector: 'revenue-snapshot-card',
     templateUrl: './revenue-snapshot-card.component.html',
-    standalone: false
+    imports: [
+      CardAnalyticsComponent,
+      DxPieChartModule,
+    ],
 })
 export class RevenueSnapshotCardComponent {
   @Input() data: SalesByStateAndCity;
@@ -20,12 +19,3 @@ export class RevenueSnapshotCardComponent {
   }
 }
 
-@NgModule({
-  imports: [
-    CardAnalyticsComponent,
-    DxPieChartModule,
-  ],
-  declarations: [RevenueSnapshotCardComponent],
-  exports: [RevenueSnapshotCardComponent],
-})
-export class RevenueSnapshotCardModule { }

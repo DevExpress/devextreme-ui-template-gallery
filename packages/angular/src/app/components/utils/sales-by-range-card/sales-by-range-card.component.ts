@@ -1,8 +1,4 @@
-import {
-  Component,
-  NgModule,
-  Input,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardAnalyticsComponent } from '../../library/card-analytics/card-analytics.component';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
@@ -13,7 +9,12 @@ import { SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
     selector: 'sales-by-range-card',
     templateUrl: './sales-by-range-card.component.html',
     styleUrls: ['./sales-by-range-card.component.scss'],
-    standalone: false
+    imports: [
+      CardAnalyticsComponent,
+      DxPieChartModule,
+      DxChartModule,
+      DxoValueAxisModule,
+    ],
 })
 export class SalesByRangeCardComponent {
   @Input() data: SalesOrOpportunitiesByCategory;
@@ -23,14 +24,3 @@ export class SalesByRangeCardComponent {
   }
 }
 
-@NgModule({
-  imports: [
-    CardAnalyticsComponent,
-    DxPieChartModule,
-    DxChartModule,
-    DxoValueAxisModule,
-  ],
-  declarations: [SalesByRangeCardComponent],
-  exports: [SalesByRangeCardComponent],
-})
-export class SalesByRangeCardModule { }

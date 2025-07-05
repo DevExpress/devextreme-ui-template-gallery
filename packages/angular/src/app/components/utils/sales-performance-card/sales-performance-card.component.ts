@@ -1,6 +1,5 @@
 import {
   Component,
-  NgModule,
   Input,
   Output,
   EventEmitter,
@@ -14,7 +13,11 @@ import { Sale } from 'src/app/types/analytics';
     selector: 'sales-performance-card',
     templateUrl: './sales-performance-card.component.html',
     styleUrls: ['./sales-performance-card.component.scss'],
-    standalone: false
+    imports: [
+      CardAnalyticsComponent,
+      DxChartModule,
+      DxDropDownButtonModule,
+    ],
 })
 export class SalesPerformanceCardComponent {
   @Input() groupByPeriods: string[];
@@ -33,14 +36,3 @@ export class SalesPerformanceCardComponent {
     this.performancePeriodChanged.emit(event);
   }
 }
-
-@NgModule({
-  imports: [
-    CardAnalyticsComponent,
-    DxChartModule,
-    DxDropDownButtonModule,
-  ],
-  declarations: [SalesPerformanceCardComponent],
-  exports: [SalesPerformanceCardComponent],
-})
-export class SalesPerformanceCardModule { }

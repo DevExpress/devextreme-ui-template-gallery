@@ -15,13 +15,13 @@ import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 
 import { DataService } from 'src/app/services';
 import { CardAnalyticsComponent } from 'src/app/components/library/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
+import { ToolbarAnalyticsComponent } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
 import { ConversionCardComponent } from 'src/app/components/utils/conversion-card/conversion-card.component';
-import { RevenueCardModule } from 'src/app/components/utils/revenue-card/revenue-card.component';
-import { RevenueAnalysisCardModule } from 'src/app/components/utils/revenue-analysis-card/revenue-analysis-card.component';
-import { RevenueSnapshotCardModule } from 'src/app/components/utils/revenue-snapshot-card/revenue-snapshot-card.component';
+import { RevenueCardComponent } from 'src/app/components/utils/revenue-card/revenue-card.component';
+import { RevenueAnalysisCardComponent } from 'src/app/components/utils/revenue-analysis-card/revenue-analysis-card.component';
+import { RevenueSnapshotCardComponent } from 'src/app/components/utils/revenue-snapshot-card/revenue-snapshot-card.component';
 import { OpportunitiesTickerComponent } from 'src/app/components/utils/opportunities-ticker/opportunities-ticker.component';
-import { RevenueTotalTickerModule } from 'src/app/components/utils/revenue-total-ticker/revenue-total-ticker.component';
+import { RevenueTotalTickerComponent } from 'src/app/components/utils/revenue-total-ticker/revenue-total-ticker.component';
 import { ConversionTickerComponent } from 'src/app/components/utils/conversion-ticker/conversion-ticker.component';
 import { LeadsTickerComponent } from 'src/app/components/utils/leads-ticker/leads-ticker.component';
 import { analyticsPanelItems, Dates } from 'src/app/types/resource';
@@ -96,15 +96,15 @@ export class AnalyticsDashboardComponent implements OnInit {
     DxPieChartModule,
     DxChartModule,
     CardAnalyticsComponent,
-    ToolbarAnalyticsModule,
+    ToolbarAnalyticsComponent,
     DxLoadPanelModule,
     ApplyPipeModule,
     ConversionCardComponent,
-    RevenueAnalysisCardModule,
-    RevenueCardModule,
-    RevenueSnapshotCardModule,
+    RevenueAnalysisCardComponent,
+    RevenueCardComponent,
+    RevenueSnapshotCardComponent,
     OpportunitiesTickerComponent,
-    RevenueTotalTickerModule,
+    RevenueTotalTickerComponent,
     ConversionTickerComponent,
     LeadsTickerComponent,
     CommonModule,

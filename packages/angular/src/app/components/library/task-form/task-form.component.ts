@@ -20,7 +20,7 @@ import { Task } from 'src/app/types/task';
 import { getSizeQualifier } from 'src/app/services/screen.service';
 import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import { ScreenService } from '../../../services';
-import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
+import { ToolbarFormComponent } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
 
 @Component({
     selector: 'task-form',
@@ -38,7 +38,7 @@ import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar
       FormTextboxComponent,
       StatusIndicatorComponent,
       FormDateboxComponent,
-      ToolbarFormModule,
+      ToolbarFormComponent,
       CommonModule,
     ],
 })
