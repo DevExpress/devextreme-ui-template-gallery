@@ -4,7 +4,7 @@ import { RouterModule } from "@angular/router";
 import { DxHttpModule } from "devextreme-angular/http";
 
 import { ScreenService, ThemeService } from './services';
-import { SideNavOuterToolbarModule, SingleCardModule, UnauthenticatedContentModule } from "./layouts";
+import { UnauthenticatedContentModule } from "./layouts";
 import { CrmContactDetailsModule } from "./pages/crm-contact-details/crm-contact-details.component";
 import { PlanningTaskListModule } from "./pages/planning-task-list/planning-task-list.component";
 import { PlanningTaskDetailsModule } from "./pages/planning-task-details/planning-task-details.component";
@@ -19,8 +19,6 @@ import { AnalyticsGeographyModule } from "./pages/analytics-geography/analytics-
     styleUrls: ['./app.component.scss'],
     imports: [
       DxHttpModule,
-      SideNavOuterToolbarModule,
-      SingleCardModule,
       UnauthenticatedContentModule,
       CrmContactDetailsModule,
       PlanningTaskListModule,

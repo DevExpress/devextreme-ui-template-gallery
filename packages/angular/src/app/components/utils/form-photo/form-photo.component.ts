@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { DxFileUploaderComponent } from "devextreme-angular";
 
@@ -18,11 +18,11 @@ export class FormPhotoComponent implements OnInit {
 
   @Input() size = 124;
 
+  private elRef = inject(ElementRef);
+
   imageUrl: string;
 
   hostRef = this.elRef.nativeElement;
-
-  constructor(private elRef:ElementRef) {}
 
   ngOnInit() {
     this.imageUrl = `url('data:image/png;base64,${this.link}')`;
