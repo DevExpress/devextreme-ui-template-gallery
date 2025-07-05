@@ -20,10 +20,10 @@ import { ConversionCardComponent } from 'src/app/components/utils/conversion-car
 import { RevenueCardModule } from 'src/app/components/utils/revenue-card/revenue-card.component';
 import { RevenueAnalysisCardModule } from 'src/app/components/utils/revenue-analysis-card/revenue-analysis-card.component';
 import { RevenueSnapshotCardModule } from 'src/app/components/utils/revenue-snapshot-card/revenue-snapshot-card.component';
-import { OpportunitiesTickerModule } from 'src/app/components/utils/opportunities-ticker/opportunities-ticker.component';
+import { OpportunitiesTickerComponent } from 'src/app/components/utils/opportunities-ticker/opportunities-ticker.component';
 import { RevenueTotalTickerModule } from 'src/app/components/utils/revenue-total-ticker/revenue-total-ticker.component';
-import { ConversionTickerModule } from 'src/app/components/utils/conversion-ticker/conversion-ticker.component';
-import { LeadsTickerModule } from 'src/app/components/utils/leads-ticker/leads-ticker.component';
+import { ConversionTickerComponent } from 'src/app/components/utils/conversion-ticker/conversion-ticker.component';
+import { LeadsTickerComponent } from 'src/app/components/utils/leads-ticker/leads-ticker.component';
 import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import {
   Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory,
@@ -103,10 +103,10 @@ export class AnalyticsDashboardComponent implements OnInit {
     RevenueAnalysisCardModule,
     RevenueCardModule,
     RevenueSnapshotCardModule,
-    OpportunitiesTickerModule,
+    OpportunitiesTickerComponent,
     RevenueTotalTickerModule,
-    ConversionTickerModule,
-    LeadsTickerModule,
+    ConversionTickerComponent,
+    LeadsTickerComponent,
     CommonModule,
   ],
   providers: [],

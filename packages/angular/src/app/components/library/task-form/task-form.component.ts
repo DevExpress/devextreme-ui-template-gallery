@@ -13,7 +13,7 @@ import {
 import {
   StatusIndicatorComponent,
   FormDateboxComponent,
-  FormTextboxModule,
+  FormTextboxComponent,
 } from 'src/app/components';
 import { taskPriorityList, taskStatusList } from 'src/app/types/task';
 import { Task } from 'src/app/types/task';
@@ -35,7 +35,7 @@ import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar
       DxTextAreaModule,
       DxToolbarModule,
       DxValidatorModule,
-      FormTextboxModule,
+      FormTextboxComponent,
       StatusIndicatorComponent,
       FormDateboxComponent,
       ToolbarFormModule,

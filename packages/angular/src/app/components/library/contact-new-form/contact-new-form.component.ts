@@ -6,8 +6,8 @@ import {
   DxValidatorModule,
 } from 'devextreme-angular';
 import {
-  FormTextboxModule,
-  FormPhotoUploaderModule,
+  FormTextboxComponent,
+  FormPhotoUploaderComponent,
 } from 'src/app/components';
 import { newContact } from 'src/app/types/contact';
 import { getSizeQualifier } from 'src/app/services/screen.service';
@@ -19,8 +19,8 @@ import { getSizeQualifier } from 'src/app/services/screen.service';
       DxTextBoxModule,
       DxFormModule,
       DxValidatorModule,
-      FormTextboxModule,
-      FormPhotoUploaderModule,
+      FormTextboxComponent,
+      FormPhotoUploaderComponent,
       CommonModule,
     ]
 })

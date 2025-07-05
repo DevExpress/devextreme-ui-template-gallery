@@ -20,10 +20,10 @@ import { forkJoin } from 'rxjs';
 import { PhonePipeModule } from 'src/app/pipes/phone.pipe';
 import {
   FormPhotoComponent,
-  FormTextboxModule,
+  FormTextboxComponent,
   ChangeProfilePasswordFormComponent,
   ProfileCardComponent,
-  FormPopupModule,
+  FormPopupComponent,
 } from 'src/app/components';
 import { DataService, ScreenService } from 'src/app/services';
 
@@ -222,9 +222,9 @@ export class UserProfileComponent {
     DxScrollViewModule,
     DxLoadPanelModule,
     DxTextBoxModule,
-    FormTextboxModule,
+    FormTextboxComponent,
     FormPhotoComponent,
-    FormPopupModule,
+    FormPopupComponent,
     ProfileCardComponent,
     ChangeProfilePasswordFormComponent,
     CommonModule,

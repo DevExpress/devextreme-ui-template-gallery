@@ -1,4 +1,11 @@
-import {Component, EventEmitter, inject, Input, Output, ViewChild} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -12,7 +19,6 @@ import {
   DxValidatorModule,
   DxScrollViewModule
 } from 'devextreme-angular';
-import { FormTextboxModule } from 'src/app/components/utils/form-textbox/form-textbox.component';
 import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { PicturedItemSelectBoxComponent } from 'src/app/components/library/pictured-item-select-box/pictured-item-select-box.component';
 import { ScreenService } from 'src/app/services';
@@ -35,7 +41,6 @@ type CardData = Record<string, any>;
       DxSelectBoxModule,
       DxScrollViewModule,
       DxTextBoxModule,
-      FormTextboxModule,
       DxValidatorModule,
       CommonModule,
       PicturedItemSelectBoxComponent,

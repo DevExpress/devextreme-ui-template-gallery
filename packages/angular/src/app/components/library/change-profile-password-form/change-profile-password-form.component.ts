@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import {Component, EventEmitter, Input, NgModule, Output, ViewChild} from '@angular/core';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
-import {FormPopupComponent, FormPopupModule} from 'src/app/components/utils/form-popup/form-popup.component';
+import { FormPopupComponent } from 'src/app/components/utils/form-popup/form-popup.component';
 import notify from 'devextreme/ui/notify';
 
 import {
@@ -20,7 +20,7 @@ import { ValidationRule } from 'devextreme-angular/common';
       DxFormModule,
       DxLoadIndicatorModule,
       PasswordTextBoxComponent,
-      FormPopupModule,
+      FormPopupComponent,
     ],
 })
 export class ChangeProfilePasswordFormComponent {

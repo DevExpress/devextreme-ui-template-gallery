@@ -11,7 +11,7 @@ import {
   DxValidationGroupModule,
 } from 'devextreme-angular';
 import {
-  FormTextboxModule,
+  FormTextboxComponent,
   FormPhotoComponent,
   StatusSelectBoxComponent,
 } from 'src/app/components';
@@ -32,7 +32,7 @@ import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar
       DxNumberBoxModule,
       DxLoadPanelModule,
       DxValidationGroupModule,
-      FormTextboxModule,
+      FormTextboxComponent,
       FormPhotoComponent,
       DxValidatorModule,
       ToolbarFormModule,

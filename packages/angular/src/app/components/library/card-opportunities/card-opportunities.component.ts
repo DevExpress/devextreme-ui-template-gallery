@@ -7,7 +7,7 @@ import {
   DxLoadPanelModule,
 } from 'devextreme-angular';
 import { Opportunity } from 'src/app/types/opportunities';
-import { OpportunityTileModule } from 'src/app/components/utils/opportunity-tile/opportunity-tile.component';
+import { OpportunityTileComponent } from 'src/app/components/utils/opportunity-tile/opportunity-tile.component';
 
 @Component({
     selector: 'card-opportunities',
@@ -16,7 +16,7 @@ import { OpportunityTileModule } from 'src/app/components/utils/opportunity-tile
     imports: [
       DxButtonModule,
       DxLoadPanelModule,
-      OpportunityTileModule,
+      OpportunityTileComponent,
       CommonModule,
     ]
 })

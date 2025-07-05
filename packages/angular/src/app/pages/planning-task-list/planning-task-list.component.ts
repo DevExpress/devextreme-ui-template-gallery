@@ -14,7 +14,7 @@ import { Task, newTask } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
 import { forkJoin, map, Observable } from 'rxjs';
 import { TaskFormComponent } from 'src/app/components/library/task-form/task-form.component';
-import { FormPopupModule } from 'src/app/components/utils/form-popup/form-popup.component';
+import { FormPopupComponent } from 'src/app/components/utils/form-popup/form-popup.component';
 import { TaskListGridComponent } from 'src/app/components/library/task-list-grid/task-list-grid.component';
 import { TaskListKanbanComponent } from 'src/app/components/library/task-list-kanban/task-list-kanban.component';
 import { TaskListGanttComponent } from 'src/app/components/library/task-list-gantt/task-list-gantt.component';
@@ -114,7 +114,7 @@ export class PlanningTaskListComponent implements OnInit {
     DxTabsModule,
     DxToolbarModule,
     DxLoadPanelModule,
-    FormPopupModule,
+    FormPopupComponent,
     TaskFormComponent,
     TaskListKanbanComponent,
     TaskListGridComponent,
