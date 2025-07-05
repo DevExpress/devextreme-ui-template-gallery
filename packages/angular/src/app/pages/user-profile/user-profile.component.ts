@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
-  Component, NgModule,
+  Component,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import notify from 'devextreme/ui/notify';
@@ -20,20 +21,40 @@ import { forkJoin } from 'rxjs';
 import { PhonePipeDirective } from 'src/app/pipes/phone.pipe';
 import {
   FormPhotoComponent,
-  FormTextboxComponent,
   ChangeProfilePasswordFormComponent,
   ProfileCardComponent,
-  FormPopupComponent,
 } from 'src/app/components';
 import { DataService, ScreenService } from 'src/app/services';
 
 @Component({
     templateUrl: './user-profile.component.html',
     styleUrls: ['./user-profile.component.scss'],
-    providers: [DataService],
-    standalone: false
+    providers: [ DataService ],
+    imports: [
+      DxButtonModule,
+      DxDateBoxModule,
+      DxFormModule,
+      DxFileUploaderModule,
+      DxNumberBoxModule,
+      DxToolbarModule,
+      DxSelectBoxModule,
+      DxScrollViewModule,
+      DxLoadPanelModule,
+      DxTextBoxModule,
+      FormPhotoComponent,
+      ProfileCardComponent,
+      ChangeProfilePasswordFormComponent,
+      CommonModule,
+      PhonePipeDirective,
+    ]
 })
 export class UserProfileComponent {
+  private service = inject(DataService);
+
+  private ref = inject(ChangeDetectorRef);
+
+  protected screen = inject(ScreenService);
+
   profileId = 22;
 
   profileData: Record<string, any>;
@@ -56,10 +77,10 @@ export class UserProfileComponent {
 
   addressItems: Record<string, any>[] = this.getAddressItems();
 
-  constructor(private service: DataService, public screen: ScreenService, private ref: ChangeDetectorRef) {
+  constructor() {
     forkJoin([
-      service.getSupervisors(),
-      service.getProfile(this.profileId)
+      this.service.getSupervisors(),
+      this.service.getProfile(this.profileId)
     ]).subscribe(([supervisorsList, profileData]) => {
       this.supervisorsList.length = 0;
       this.supervisorsList.push(...supervisorsList);
@@ -207,31 +228,5 @@ export class UserProfileComponent {
   scroll({reachedTop = false}) {
     this.isContentScrolled = !reachedTop;
   }
-
 }
 
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxDateBoxModule,
-    DxFormModule,
-    DxFileUploaderModule,
-    DxNumberBoxModule,
-    DxToolbarModule,
-    DxSelectBoxModule,
-    DxScrollViewModule,
-    DxLoadPanelModule,
-    DxTextBoxModule,
-    FormTextboxComponent,
-    FormPhotoComponent,
-    FormPopupComponent,
-    ProfileCardComponent,
-    ChangeProfilePasswordFormComponent,
-    CommonModule,
-    PhonePipeDirective,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [UserProfileComponent],
-})
-export class UserProfileListModule { }
