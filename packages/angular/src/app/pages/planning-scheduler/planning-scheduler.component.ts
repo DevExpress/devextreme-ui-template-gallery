@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, NgModule, ViewChild
+  Component, inject, OnInit, ViewChild
 } from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import { CommonModule } from '@angular/common';
@@ -28,12 +28,28 @@ type SelectedAppointment = { data: Record<string, any>, target: any };
     templateUrl: './planning-scheduler.component.html',
     styleUrls: ['./planning-scheduler.component.scss'],
     providers: [DataService],
-    standalone: false
+    imports: [
+      ApplyPipeModule,
+      DxCalendarModule,
+      DxButtonModule,
+      DxSchedulerModule,
+      DxSpeedDialActionModule,
+      DxTooltipModule,
+      CommonModule,
+      CalendarListComponent,
+      LeftSidePanelComponent,
+      RightSidePanelComponent,
+      AgendaComponent,
+      SchedulerTooltipComponent,
+    ]
 })
 export class PlanningSchedulerComponent implements OnInit {
   @ViewChild('schedulerRef', { static: false }) schedulerRef: DxSchedulerComponent;
 
   @ViewChild('tooltipRef', { static: false }) tooltipRef: DxTooltipComponent;
+  private service = inject(DataService);
+  protected screen = inject(ScreenService);
+
   tasks: DataSource<Task> = new DataSource([]);
 
   currentDate = new Date();
@@ -54,14 +70,14 @@ export class PlanningSchedulerComponent implements OnInit {
 
   schedulerCurrentDate: Date = this.currentDate;
 
-  constructor(private service: DataService, protected screen: ScreenService) {
+  constructor() {
     this.service.getDefaultListDS().subscribe(
    (data) => {
      this.listDataSource = data;
      this.resourcesList = data.reduce((res: Record<string,any>[], calendarList) => res.concat(calendarList.items), []);
       });
 
-    screen.screenChanged.subscribe(({isXSmall}) => {
+    this.screen.screenChanged.subscribe(({isXSmall}) => {
       this.isXSmall = isXSmall;
       this.repaintScheduler();
     });
@@ -72,11 +88,6 @@ export class PlanningSchedulerComponent implements OnInit {
       this.tasks = new DataSource(data);
       this.repaintScheduler();
     })
-  }
-
-  openRightPanelOpen() {
-    this.isRightPanelOpen = true;
-    this.repaintScheduler();
   }
 
   onCalendarDateChange = (date) => {
@@ -233,27 +244,4 @@ export class PlanningSchedulerComponent implements OnInit {
     this.tooltipRef?.instance.hide();
     this.agendaItems = this.findAllAppointmentsForDay(appointmentData)
   }
-
-
 }
-
-@NgModule({
-  imports: [
-    ApplyPipeModule,
-    DxCalendarModule,
-    DxButtonModule,
-    DxSchedulerModule,
-    DxSpeedDialActionModule,
-    DxTooltipModule,
-    CommonModule,
-    CalendarListComponent,
-    LeftSidePanelComponent,
-    RightSidePanelComponent,
-    AgendaComponent,
-    SchedulerTooltipComponent,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [PlanningSchedulerComponent],
-})
-export class PlanningSchedulerModule { }

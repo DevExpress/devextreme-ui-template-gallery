@@ -1,12 +1,10 @@
-import {
-  Component, OnInit, NgModule,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
 
 import { Observable, forkJoin } from 'rxjs';
 import { share } from 'rxjs/operators';
 
-import {DxScrollViewModule} from 'devextreme-angular/ui/scroll-view';
+import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
@@ -17,7 +15,6 @@ import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { DxDropDownButtonTypes } from 'devextreme-angular/ui/drop-down-button';
 
 import { DataService } from 'src/app/services';
-import { CardAnalyticsComponent } from 'src/app/components/library/card-analytics/card-analytics.component';
 import { ToolbarAnalyticsComponent } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
 import { SalesByRangeCardComponent } from 'src/app/components/utils/sales-by-range-card/sales-by-range-card.component';
 import { SalesPerformanceCardComponent } from 'src/app/components/utils/sales-performance-card/sales-performance-card.component';
@@ -29,8 +26,23 @@ import { Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 @Component({
     templateUrl: './analytics-sales-report.component.html',
     styleUrls: ['./analytics-sales-report.component.scss'],
-    providers: [DataService],
-    standalone: false
+    providers: [ DataService ],
+  imports: [
+    DxScrollViewModule,
+    DxLoadPanelModule,
+    DxButtonModule,
+    DxToolbarModule,
+    DxPieChartModule,
+    DxChartModule,
+    DxDropDownButtonModule,
+    DxRangeSelectorModule,
+    ToolbarAnalyticsComponent,
+    ApplyPipeModule,
+    CommonModule,
+    SalesByRangeCardComponent,
+    SalesPerformanceCardComponent,
+    SalesRangeCardComponent,
+  ]
 })
 export class AnalyticsSalesReportComponent implements OnInit {
   groupByPeriods = ['Day', 'Month'];
@@ -67,10 +79,6 @@ export class AnalyticsSalesReportComponent implements OnInit {
       })
   }
 
-  customizeSaleText(arg: { percentText: string }) {
-    return arg.percentText;
-  }
-
   loadData = (groupBy: string) => {
     const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
     const tasks = [
@@ -93,26 +101,3 @@ export class AnalyticsSalesReportComponent implements OnInit {
   }
 }
 
-@NgModule({
-  imports: [
-    DxScrollViewModule,
-    DxLoadPanelModule,
-    DxButtonModule,
-    DxToolbarModule,
-    DxPieChartModule,
-    DxChartModule,
-    DxDropDownButtonModule,
-    DxRangeSelectorModule,
-    CardAnalyticsComponent,
-    ToolbarAnalyticsComponent,
-    ApplyPipeModule,
-    CommonModule,
-    SalesByRangeCardComponent,
-    SalesPerformanceCardComponent,
-    SalesRangeCardComponent,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [AnalyticsSalesReportComponent],
-})
-export class AnalyticsSalesReportModule { }

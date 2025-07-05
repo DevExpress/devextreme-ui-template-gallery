@@ -1,6 +1,4 @@
-import {
-  Component, OnInit, NgModule,
-} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { map, share } from 'rxjs/operators';
 import { Observable, forkJoin } from 'rxjs';
@@ -14,7 +12,6 @@ import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 
 import { DataService } from 'src/app/services';
-import { CardAnalyticsComponent } from 'src/app/components/library/card-analytics/card-analytics.component';
 import { ToolbarAnalyticsComponent } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
 import { ConversionCardComponent } from 'src/app/components/utils/conversion-card/conversion-card.component';
 import { RevenueCardComponent } from 'src/app/components/utils/revenue-card/revenue-card.component';
@@ -37,19 +34,37 @@ type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
     templateUrl: './analytics-dashboard.component.html',
     styleUrls: ['./analytics-dashboard.component.scss'],
     providers: [DataService],
-    standalone: false
+    imports: [
+      DxScrollViewModule,
+      DxDataGridModule,
+      DxBulletModule,
+      DxFunnelModule,
+      DxPieChartModule,
+      DxChartModule,
+      ToolbarAnalyticsComponent,
+      DxLoadPanelModule,
+      ApplyPipeModule,
+      ConversionCardComponent,
+      RevenueAnalysisCardComponent,
+      RevenueCardComponent,
+      RevenueSnapshotCardComponent,
+      OpportunitiesTickerComponent,
+      RevenueTotalTickerComponent,
+      ConversionTickerComponent,
+      LeadsTickerComponent,
+      CommonModule,
+    ],
 })
 export class AnalyticsDashboardComponent implements OnInit {
-  analyticsPanelItems = analyticsPanelItems;
+  private service = inject(DataService);
 
+  analyticsPanelItems = analyticsPanelItems;
   opportunities: SalesOrOpportunitiesByCategory = null;
   sales: Sales = null;
   salesByState: SalesByState = null;
   salesByCategory: SalesByStateAndCity = null;
 
   isLoading: boolean = true;
-
-  constructor(private service: DataService) {}
 
   selectionChange(dates: Dates) {
     this.loadData(dates.startDate, dates.endDate);
@@ -86,31 +101,3 @@ export class AnalyticsDashboardComponent implements OnInit {
     this.loadData(startDate, endDate);
   }
 }
-
-@NgModule({
-  imports: [
-    DxScrollViewModule,
-    DxDataGridModule,
-    DxBulletModule,
-    DxFunnelModule,
-    DxPieChartModule,
-    DxChartModule,
-    CardAnalyticsComponent,
-    ToolbarAnalyticsComponent,
-    DxLoadPanelModule,
-    ApplyPipeModule,
-    ConversionCardComponent,
-    RevenueAnalysisCardComponent,
-    RevenueCardComponent,
-    RevenueSnapshotCardComponent,
-    OpportunitiesTickerComponent,
-    RevenueTotalTickerComponent,
-    ConversionTickerComponent,
-    LeadsTickerComponent,
-    CommonModule,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [AnalyticsDashboardComponent],
-})
-export class AnalyticsDashboardModule { }
