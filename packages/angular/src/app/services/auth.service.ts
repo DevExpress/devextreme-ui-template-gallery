@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 
 export interface IUser {
@@ -22,6 +22,7 @@ export const defaultUser: IUser = {
 
 @Injectable()
 export class AuthService {
+  private router = inject(Router);
   private _user: IUser | null = defaultUser;
 
   get loggedIn(): boolean {
@@ -33,8 +34,6 @@ export class AuthService {
   set lastAuthenticatedPath(value: string) {
     this._lastAuthenticatedPath = value;
   }
-
-  constructor(private router: Router) { }
 
   async logIn(email: string, password: string) {
     try {
@@ -123,7 +122,8 @@ export class AuthService {
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  constructor(private router: Router, private authService: AuthService) { }
+  private router = inject(Router);
+  private authService = inject(AuthService);
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const isLoggedIn = this.authService.loggedIn;
