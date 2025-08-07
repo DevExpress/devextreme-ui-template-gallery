@@ -163,6 +163,9 @@ const refreshOptions = {
 .dx-toolbar {
   margin-bottom: calc(var(--toolbar-margin-bottom) / 2);
 
+  :deep(.dx-toolbar-before){
+    width: 300px;
+  }
   :deep(.dx-toolbar-label > div) {
     @include header();
   }

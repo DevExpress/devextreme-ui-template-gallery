@@ -17,6 +17,10 @@
   padding-top: var(--content-padding);
   padding-bottom: var(--content-padding);
 
+  .dx-toolbar-before {
+    width: 300px;
+  }
+
   .panels {
     display: flex;
     flex-wrap: wrap;
