@@ -167,7 +167,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                       isEditing={!isEditing}
                       onValueChange={updateField('phone')}
                       icon='tel'
-                      mask='+1(000)000-0000'
+                      mask='(000) 000-0000'
                     />
                   </FormItem>
                   <FormItem>

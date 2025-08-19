@@ -169,7 +169,7 @@ export const ContactFromDetails = ({ data, editing, updateField }: {
           <FormTextbox
             label='Phone'
             value={data.phone}
-            mask='+1(000)000-0000'
+            mask='(000) 000-0000'
             isEditing={!editing}
             onValueChange={updateField('phone')}
           />

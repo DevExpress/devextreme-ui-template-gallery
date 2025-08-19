@@ -33,7 +33,7 @@ const copyToClipboard = (text) => (evt) => {
 };
 
 const formatPhone = (value) => {
-  return String(value).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3');
+  return String(value).replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
 };
 
 type UserProfileContentProps = {

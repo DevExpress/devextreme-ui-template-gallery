@@ -136,7 +136,7 @@
               label="Phone"
               v-model.number="contactDataRef.phone"
               :is-editing="isEditing"
-              mask="+1(000)000-0000"
+              mask="(000) 000-0000"
             />
             <dx-button
               v-if="!isEditing"
