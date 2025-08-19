@@ -42,6 +42,8 @@ export class AnalyticsSalesAnalysisComponent implements OnInit {
   salesByCategory: SalesOrOpportunitiesByCategory = null;
   salesByDateAndCategory: Sale[] = null;
 
+  customRange = analyticsPanelItems[5].value.split('/').map((d) => new Date(d));
+
   constructor(private service: DataService) {}
 
   onRangeChanged = ({value: dates}) => {
@@ -88,6 +90,8 @@ export class AnalyticsSalesAnalysisComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.visualRange = this.customRange;
+    this.onRangeChanged({ value: this.customRange });
     this.loadData(this.groupByPeriods[1].toLowerCase());
   }
 }

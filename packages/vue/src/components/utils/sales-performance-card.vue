@@ -16,7 +16,11 @@
     </template>
 
     <dx-chart :data-source="data">
-      <dx-argument-axis :visual-range="props.visualRange" />
+      <dx-argument-axis
+        :visual-range="props.visualRange"
+        argument-type="datetime"
+        :value-margins-enabled="false"
+      />
       <dx-tooltip
         :enabled="true"
         :customize-tooltip="seriesName => ({ text: seriesName })"
@@ -30,11 +34,6 @@
       >
         <dx-point hover-mode="allArgumentPoints" />
       </dx-common-series-settings>
-
-      <dx-argument-axis
-        argument-type="datetime"
-        :value-margins-enabled="false"
-      />
       <dx-legend :visible="false" />
       <dx-size :height="270" />
     </dx-chart>

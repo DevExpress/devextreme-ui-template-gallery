@@ -11,14 +11,14 @@ import { RangeSelectorTypes } from 'devextreme-react/range-selector';
 import { DropDownButtonTypes } from 'devextreme-react/drop-down-button';
 import ScrollView from 'devextreme-react/scroll-view';
 
-import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
+import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY, CUSTOM_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 
 import './analytics-sales-analysis.scss';
 
 const formatDateRange = (dateRange: Date[]) => dateRange.map((date) => formatDate(date, 'yyyy-MM-dd'));
 
 const defaultDateRange = ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/').map((d) => new Date(d));
-
+const customDateRange = ANALYTICS_PERIODS[CUSTOM_ANALYTICS_PERIOD_KEY].period.split('/').map((d) => new Date(d));
 const groupByPeriods = ['Day', 'Month'];
 
 export const AnalyticsSalesAnalysis = () => {
@@ -41,6 +41,7 @@ export const AnalyticsSalesAnalysis = () => {
   }, []);
 
   useEffect(() => {
+    onRangeChanged({ value: customDateRange } as RangeSelectorTypes.ValueChangedEvent);
     getSales(...formatDateRange(defaultDateRange))
       .then((data) => setSales(data))
       .catch((error) => console.log(error));

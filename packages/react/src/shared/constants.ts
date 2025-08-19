@@ -25,9 +25,14 @@ export const ANALYTICS_PERIODS = {
     period: '2018-01-01/2022-01-01',
     index: 4,
   },
+  Custom: {
+    period: '2020-05-01/2021-07-31',
+    index: 5,
+  }
 };
 
 export const DEFAULT_ANALYTICS_PERIOD_KEY = 'All';
+export const CUSTOM_ANALYTICS_PERIOD_KEY = 'Custom';
 
 export const CONTACT_STATUS_LIST = [
   'Salaried',

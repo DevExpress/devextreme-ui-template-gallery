@@ -6,6 +6,7 @@
       <div class="cards">
         <sales-range-card
           :data="sales"
+          :value="visualRange"
           class="sales-range-card"
           @range-changed="onRangeChanged"
         />
@@ -55,6 +56,8 @@ const salesByCategory = ref<SalesByStateAndCity | null>(null);
 
 const visualRange = ref<[Date, Date]>([]);
 
+const customRange = analyticsPanelItems[5].value.split('/').map((d) => new Date(d)) as [Date, Date];
+
 const groupByPeriods = ['Day', 'Month'];
 
 const loading = ref<boolean>(true);
@@ -65,8 +68,9 @@ const performancePeriodChange = async (e: DxDropDownButtonTypes.SelectionChanged
   loading.value = false;
 };
 
-const onRangeChanged = async (dates: [Date, Date]) => {
-  visualRange.value = dates;
+const onRangeChanged = async (e: { value: [Date, Date] } | [Date, Date]) => {
+  const dates = Array.isArray(e) ? e : e.value;
+  visualRange.value = dates as [Date, Date];
   loading.value = true;
   salesByCategory.value = await getSalesByCategory(
     ...dates.map((date) => formatDate(date, 'yyyy-MM-dd')),
@@ -87,6 +91,8 @@ const loadData = async (groupBy: string) => {
 };
 
 onMounted(() => {
+  visualRange.value = customRange;
+  onRangeChanged(customRange);
   loadData(groupByPeriods[1].toLowerCase());
 });
 </script>
