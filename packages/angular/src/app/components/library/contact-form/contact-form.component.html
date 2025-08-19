@@ -101,12 +101,17 @@
         </dxi-item>
 
         <dxi-item>
-          <form-textbox
+          <dx-select-box
             *dxTemplate
             label="State"
+            stylingMode="filled"
+            valueChangeEvent="keyup input change"
             [(value)]="contactData.state.stateShort"
-            [isEditing]="isEditing"
-          ></form-textbox>
+            [items]="usStates"
+            [readOnly]="!isEditing"
+            [searchEnabled]="true"
+            [elementAttr]="{ class: 'form-editor' }"
+          ></dx-select-box>
         </dxi-item>
 
         <dxi-item>

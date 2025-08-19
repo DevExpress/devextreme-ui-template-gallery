@@ -106,10 +106,13 @@
           </dx-form-item>
 
           <dx-form-item>
-            <form-textbox
+            <dx-select-box
               label="State"
               v-model="contactDataRef.state.stateShort"
-              :is-editing="isEditing"
+              :items="usStates"
+              :read-only="!isEditing"
+              :search-enabled="true"
+              v-bind="formSelectBoxProps"
             />
           </dx-form-item>
           <dx-form-item>
@@ -181,9 +184,11 @@ import {
   DxColCountByScreen,
 } from 'devextreme-vue/form';
 import { DxNumberBox } from 'devextreme-vue/number-box';
+import DxSelectBox from 'devextreme-vue/select-box';
 import { DxValidator } from 'devextreme-vue/validator';
 import { DxValidationGroup } from 'devextreme-vue/validation-group';
-import { formEditorProps } from '@/shared/form-editor-config';
+import { formEditorProps, formSelectBoxProps } from '@/shared/form-editor-config';
+import { US_STATES } from '@/shared/constants';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 import { Contact, contactStatusList } from '@/types/contact';
 import { themeService } from '@/theme/theme-service';
@@ -206,6 +211,7 @@ const props = withDefaults(defineProps<{
 
 const isEditing = ref(false);
 const contactDataRef = ref(emptyContact);
+const usStates = US_STATES;
 
 let contactDataSaved = emptyContact;
 const zipCodeValidator = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
