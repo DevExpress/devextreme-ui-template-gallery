@@ -211,7 +211,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                     stylingMode: 'text',
                     dropDownOptions: { width: 'auto' },
                     width: 'auto',
-                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                    items: ['Call', 'Send Fax', 'Send Email', 'Schedule a Meeting']
                   }} />
               </Toolbar>
             </div>

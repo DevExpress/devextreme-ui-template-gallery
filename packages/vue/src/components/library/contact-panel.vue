@@ -164,7 +164,7 @@
                     text: 'Actions',
                     dropDownOptions: { width: 'auto' },
                     stylingMode: 'text',
-                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting'],
+                    items: ['Call', 'Send Fax', 'Send Email', 'Schedule a Meeting'],
                   }"
                 />
               </dx-toolbar>
