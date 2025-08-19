@@ -134,7 +134,7 @@
           <dx-form-item>
             <form-textbox
               label="Phone"
-              v-model.number="contactDataRef.phone"
+              v-model="contactDataRef.phone"
               :is-editing="isEditing"
               mask="(000) 000-0000"
             />
@@ -153,7 +153,7 @@
           <dx-form-item>
             <form-textbox
               label="Email"
-              v-model.number="contactDataRef.email"
+              v-model="contactDataRef.email"
               :is-editing="isEditing"
               :validators="[{ type: 'email' }]"
             />
