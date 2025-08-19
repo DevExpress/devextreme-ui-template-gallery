@@ -66,7 +66,7 @@ export const router = createRouter({
       'planning-task-details',
       'planning-scheduler',
       'analytics-dashboard',
-      'analytics-sales-report',
+      'analytics-sales-analysis',
       'analytics-geography',
       'sign-in-form',
       'sign-up-form',

@@ -4,14 +4,14 @@ import { Selector, RequestLogger } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import {
   forceResizeRecalculation, getPostfix, toggleCommonConfiguration, setTheme,
-} from './utils';
+} from './utils.js';
 import { screenModes, themeModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
-const BASE_URL = `http://localhost:${process.env.port}/#/analytics-sales-report`;
+const BASE_URL = `http://localhost:${process.env.port}/#/analytics-sales-analysis`;
 const requestLogger = RequestLogger();
 
-fixture`Analytics Sales Report`;
+fixture`Analytics Sales Analysis`;
 
 [false, true].forEach((embedded) => {
   screenModes.forEach((screenMode) => {
@@ -22,7 +22,7 @@ fixture`Analytics Sales Report`;
         return;
       }
 
-      test(`Analytics Sales Report (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
+      test(`Analytics Sales Analysis (${project}, embed=${embedded}, ${screenMode[0]}, ${themeMode})`, async (t) => {
         const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
         await toggleCommonConfiguration(
           t,
@@ -39,7 +39,7 @@ fixture`Analytics Sales Report`;
         await t.wait(timeoutSecond);
 
         await t.expect(Selector('body.dx-device-generic').count).eql(1);
-        await takeScreenshot(`analytics-sales-report-month${postfix}`, 'body');
+        await takeScreenshot(`analytics-sales-analysis-month${postfix}`, 'body');
 
         const isPeriodSelectorBoxVisible = screenModes[0] === screenMode;
         if (isPeriodSelectorBoxVisible) {
@@ -47,7 +47,7 @@ fixture`Analytics Sales Report`;
 
           await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
           await t.wait(timeoutSecond);
-          await takeScreenshot(`analytics-sales-report-day${postfix}`, 'body');
+          await takeScreenshot(`analytics-sales-analysis-day${postfix}`, 'body');
         }
 
         await t.drag(Selector('.slider').nth(1), -50, 0, { offsetX: 10, offsetY: 10 });
@@ -56,13 +56,13 @@ fixture`Analytics Sales Report`;
         await t.wait(timeoutSecond);
 
         if (isPeriodSelectorBoxVisible) {
-          await takeScreenshot(`analytics-sales-report-day-range${postfix}`, 'body');
+          await takeScreenshot(`analytics-sales-analysis-day-range${postfix}`, 'body');
           await t.click(Selector('.sales-filter .dx-dropdownbutton'));
           await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(1));
           await t.wait(timeoutSecond);
         }
 
-        await takeScreenshot(`analytics-sales-report-month-range${postfix}`, 'body');
+        await takeScreenshot(`analytics-sales-analysis-month-range${postfix}`, 'body');
 
         await t
           .expect(compareResults.isValid())

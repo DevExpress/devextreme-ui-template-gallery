@@ -27,11 +27,11 @@ import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 import { Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 
 @Component({
-  templateUrl: './analytics-sales-report.component.html',
-  styleUrls: ['./analytics-sales-report.component.scss'],
+  templateUrl: './analytics-sales-analysis.component.html',
+  styleUrls: ['./analytics-sales-analysis.component.scss'],
   providers: [DataService],
 })
-export class AnalyticsSalesReportComponent implements OnInit {
+export class AnalyticsSalesAnalysisComponent implements OnInit {
   groupByPeriods = ['Day', 'Month'];
 
   visualRange: unknown = {};
@@ -112,6 +112,6 @@ export class AnalyticsSalesReportComponent implements OnInit {
   ],
   providers: [],
   exports: [],
-  declarations: [AnalyticsSalesReportComponent],
+  declarations: [AnalyticsSalesAnalysisComponent],
 })
-export class AnalyticsSalesReportModule { }
+export class AnalyticsSalesAnalysisModule { }

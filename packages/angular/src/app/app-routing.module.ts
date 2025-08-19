@@ -16,7 +16,7 @@ import { CrmContactDetailsComponent } from './pages/crm-contact-details/crm-cont
 import { PlanningTaskListComponent } from './pages/planning-task-list/planning-task-list.component';
 import { PlanningTaskDetailsComponent } from './pages/planning-task-details/planning-task-details.component';
 import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analytics-dashboard.component';
-import { AnalyticsSalesReportComponent } from './pages/analytics-sales-report/analytics-sales-report.component';
+import { AnalyticsSalesAnalysisComponent } from './pages/analytics-sales-analysis/analytics-sales-analysis.component';
 import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
 import { PlanningSchedulerComponent } from './pages/planning-scheduler/planning-scheduler.component';
 import { AppSignInComponent } from './pages/sign-in-form/sign-in-form.component';
@@ -89,8 +89,8 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'analytics-sales-report',
-        component: AnalyticsSalesReportComponent,
+        path: 'analytics-sales-analysis',
+        component: AnalyticsSalesAnalysisComponent,
         canActivate: [AuthGuardService],
       },
       {

@@ -5,7 +5,7 @@ import {
   PlanningTaskList,
   PlanningTaskDetails,
   AnalyticsDashboard,
-  AnalyticsSalesReport,
+  AnalyticsSalesAnalysis,
   AnalyticsGeography,
   SignInPage,
   SignUpPage,
@@ -40,8 +40,8 @@ const routes = [
     element: AnalyticsDashboard,
   },
   {
-    path: '/analytics-sales-report',
-    element: AnalyticsSalesReport,
+    path: '/analytics-sales-analysis',
+    element: AnalyticsSalesAnalysis,
   },
   {
     path: '/analytics-geography',

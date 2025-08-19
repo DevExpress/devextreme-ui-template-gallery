@@ -1,7 +1,7 @@
 <template>
   <dx-scroll-view class="view-wrapper-scroll">
     <div class="view-wrapper">
-      <toolbar-analytics>Sales Report</toolbar-analytics>
+      <toolbar-analytics>Sales Analysis</toolbar-analytics>
 
       <div class="cards">
         <sales-range-card

@@ -43,8 +43,8 @@ export const navigation = [
         path: '/analytics-dashboard',
       },
       {
-        text: 'Sales Report',
-        path: '/analytics-sales-report',
+        text: 'Sales Analysis',
+        path: '/analytics-sales-analysis',
       },
       {
         text: 'Geography',

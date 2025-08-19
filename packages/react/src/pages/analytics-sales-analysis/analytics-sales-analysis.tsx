@@ -13,7 +13,7 @@ import ScrollView from 'devextreme-react/scroll-view';
 
 import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
 
-import './analytics-sales-report.scss';
+import './analytics-sales-analysis.scss';
 
 const formatDateRange = (dateRange: Date[]) => dateRange.map((date) => formatDate(date, 'yyyy-MM-dd'));
 
@@ -21,7 +21,7 @@ const defaultDateRange = ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.
 
 const groupByPeriods = ['Day', 'Month'];
 
-export const AnalyticsSalesReport = () => {
+export const AnalyticsSalesAnalysis = () => {
   const [sales, setSales] = useState<Sale[]>([]);
   const [salesByCategory, setSalesByCategory] = useState<SaleOrOpportunityByCategory[]>([]);
   const [salesByDateAndCategory, setSalesByDateAndCategory] = useState<Sale[]>([]);
@@ -66,7 +66,7 @@ export const AnalyticsSalesReport = () => {
 
   return (
     <ScrollView className='view-wrapper-scroll'>
-      <ToolbarAnalytics title='Sales Report'>
+      <ToolbarAnalytics title='Sales Analysis'>
         <div className='cards wide'>
           <SalesRangeCard datasource={sales} range={dateRange} onRangeChanged={onRangeChanged} />
           <SalesByRangeCard datasource={salesByCategory} />

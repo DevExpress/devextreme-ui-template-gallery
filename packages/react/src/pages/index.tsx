@@ -4,7 +4,7 @@ export { PlanningTaskList } from './planning-task-list/planning-task-list';
 export { PlanningTaskDetails } from './planning-task-details/planning-task-details';
 export { PlanningScheduler } from './planning-scheduler/planning-scheduler';
 export { AnalyticsDashboard } from './analytics-dashboard/analytics-dashboard';
-export { AnalyticsSalesReport } from './analytics-sales-report/analytics-sales-report';
+export { AnalyticsSalesAnalysis } from './analytics-sales-analysis/analytics-sales-analysis';
 export { AnalyticsGeography } from './analytics-geography/analytics-geography';
 export { SignInPage } from './sign-in-form/sign-in-form';
 export { SignUpPage } from './sign-up-form/sign-up-form';
