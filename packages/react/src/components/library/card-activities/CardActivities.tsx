@@ -13,8 +13,8 @@ import { withLoadPanel } from '../../../utils/withLoadPanel';
 import './CardActivities.scss';
 
 const activityMenuItems = [
-  { text: 'View details' },
-  { text: 'Delete' },
+  { text: 'View Details' },
+  { text: 'Delete Record' },
 ];
 
 const listItemRender = (item: Activity) => {
