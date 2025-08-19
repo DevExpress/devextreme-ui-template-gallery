@@ -39,7 +39,7 @@
               height="24px"
               :visible="true"
             />
-            <span v-if="!loading">Reset my password</span>
+            <span v-if="!loading">Reset password</span>
           </span>
         </div>
       </template>

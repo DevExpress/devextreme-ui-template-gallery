@@ -46,7 +46,7 @@ export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
         </Item>
         <ButtonItem>
           <ButtonOptions elementAttr={submitButtonAttributes} width='100%' type='default' useSubmitBehavior>
-            <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Reset my password'}</span>
+            <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Reset password'}</span>
           </ButtonOptions>
         </ButtonItem>
       </Form>
