@@ -16,8 +16,8 @@ export const LoginOauth = () => {
   return (
     <div className='oauth-button-container'>
       <p>or</p>
-      <Button width='100%' icon='icons/google-logo.svg' text='Login with Google' stylingMode={getButtonStylingMode(themeContext?.theme)} />
-      <Button width='100%' icon='icons/microsoft-logo.svg' text='Login with Microsoft' stylingMode={getButtonStylingMode(themeContext?.theme)} />
+      <Button width='100%' icon='icons/google-logo.svg' text='Log In with Google' stylingMode={getButtonStylingMode(themeContext?.theme)} />
+      <Button width='100%' icon='icons/microsoft-logo.svg' text='Log In with Microsoft' stylingMode={getButtonStylingMode(themeContext?.theme)} />
     </div>
   );
 };

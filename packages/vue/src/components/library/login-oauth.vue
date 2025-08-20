@@ -4,13 +4,13 @@
     <dx-button
       width="100%"
       icon="icons/google-logo.svg"
-      text="Login with Google"
+      text="Log In with Google"
       :styling-mode="buttonStylingMode"
     />
     <dx-button
       width="100%"
       icon="icons/microsoft-logo.svg"
-      text="Login with Microsoft"
+      text="Log In with Microsoft"
       :styling-mode="buttonStylingMode"
     />
   </div>
