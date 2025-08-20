@@ -11,7 +11,7 @@ export class AppSignUpComponent {
 
   defaultLink = '/sign-in-form';
 
-  buttonLink = '/sign-up-form';
+  buttonLink = '/register-form';
 
   constructor() { }
 }

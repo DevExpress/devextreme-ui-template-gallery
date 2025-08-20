@@ -12,15 +12,15 @@ export const UnauthenticatedContent = () => {
           <SingleCard title='Sign In'>
             <LoginForm
               resetLink='/reset-password'
-              createAccountLink='/create-account'
+              createAccountLink='/register'
             />
           </SingleCard>
         }
       />
       <Route
-        path='/create-account'
+        path='/register'
         element={
-          <SingleCard title='Sign Up'>
+          <SingleCard title='Register'>
             <CreateAccountForm
               buttonLink='/sign-in'
               redirectLink='/sign-in'

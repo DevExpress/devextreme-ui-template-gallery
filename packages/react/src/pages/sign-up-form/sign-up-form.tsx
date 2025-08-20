@@ -4,10 +4,10 @@ import { CardAuth, CreateAccountForm } from '../../components';
 
 export const SignUpPage = () => {
   return (
-    <CardAuth title='Sign Up'>
+    <CardAuth title='Register'>
       <CreateAccountForm
         redirectLink='/sign-in-form'
-        buttonLink='/sign-up-form'
+        buttonLink='/register-form'
       />
     </CardAuth>
   );

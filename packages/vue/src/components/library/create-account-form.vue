@@ -79,7 +79,7 @@
               height="24px"
               :visible="true"
             />
-            <span v-if="!loading">Create a new account</span>
+            <span v-if="!loading">Register</span>
           </span>
         </div>
       </template>

@@ -40,7 +40,7 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'create-account',
+        path: 'register',
         component: CreateAccountFormComponent,
         canActivate: [AuthGuardService],
       },
@@ -104,7 +104,7 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'sign-up-form',
+        path: 'register-form',
         component: AppSignUpComponent,
         canActivate: [AuthGuardService],
       },

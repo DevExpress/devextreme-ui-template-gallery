@@ -74,7 +74,7 @@ export class AuthService {
     try {
       // Send request
 
-      this.router.navigate(['/auth/create-account']);
+      this.router.navigate(['/auth/register']);
       return {
         isOk: true,
       };
@@ -130,7 +130,7 @@ export class AuthGuardService implements CanActivate {
     const isAuthForm = [
       'sign-in',
       'reset-password',
-      'create-account',
+      'register',
       'change-password/:recoveryCode',
     ].includes(route.routeConfig?.path || defaultPath);
 

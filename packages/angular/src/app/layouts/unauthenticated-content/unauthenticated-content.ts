@@ -34,7 +34,7 @@ export class UnauthenticatedContentComponent {
     switch (path) {
       case 'sign-in': return 'Sign In';
       case 'reset-password': return 'Reset Password';
-      case 'create-account': return 'Sign Up';
+      case 'register': return 'Register';
       case 'change-password': return 'Change Password';
       default: return '';
     }

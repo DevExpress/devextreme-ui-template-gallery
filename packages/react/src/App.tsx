@@ -20,7 +20,7 @@ function RootApp() {
   const isLoginForm = [
     'sign-in',
     'reset-password',
-    'create-account',
+    'register',
   ].includes(useLocation().pathname.substring(1));
 
   if (loading) {

@@ -77,7 +77,7 @@ export const LoginForm = ({ resetLink, createAccountLink }) => {
 
       <Button
         className='btn-create-account'
-        text='Create an account'
+        text='Register'
         width='100%'
         onClick={onCreateAccountClick}
         stylingMode={getButtonStylingMode(themeContext?.theme)}

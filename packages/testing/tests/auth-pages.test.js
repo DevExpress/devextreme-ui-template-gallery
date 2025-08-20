@@ -43,7 +43,7 @@ fixture`Auth pages`;
 
         await t.click(Selector('a').withText('Sign In'));
 
-        await t.click(Selector('.dx-button[aria-label="Create an account"]'));
+        await t.click(Selector('.dx-button[aria-label="Register"]'));
 
         await takeScreenshot(`auth-create-account-prompt${postfix}`, 'body');
 

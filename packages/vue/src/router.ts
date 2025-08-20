@@ -23,7 +23,7 @@ export const router = createRouter({
         layout: simpleLayout,
         title: 'Sign In',
       },
-      props: { resetLink: '/reset-password', createAccountLink: '/create-account' },
+      props: { resetLink: '/reset-password', createAccountLink: '/register' },
       component: loadAuthComponent('login-form'),
     },
     {
@@ -39,12 +39,12 @@ export const router = createRouter({
       component: loadAuthComponent('reset-password-form'),
     },
     {
-      path: '/create-account',
-      name: 'create-account',
+      path: '/register',
+      name: 'register',
       meta: {
         requiresAuth: false,
         layout: simpleLayout,
-        title: 'Sign Up',
+        title: 'Register',
       },
       props: { redirectLink: '/sign-in', buttonLink: '/sign-in' },
       component: loadAuthComponent('create-account-form'),
@@ -69,7 +69,7 @@ export const router = createRouter({
       'analytics-sales-analysis',
       'analytics-geography',
       'sign-in-form',
-      'sign-up-form',
+      'register-form',
       'reset-password-form',
       'user-profile',
     ].map((name) => ({

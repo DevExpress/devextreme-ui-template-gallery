@@ -52,7 +52,7 @@ const routes = [
     element: SignInPage,
   },
   {
-    path: '/sign-up-form',
+    path: '/register-form',
     element: SignUpPage,
   },
   {

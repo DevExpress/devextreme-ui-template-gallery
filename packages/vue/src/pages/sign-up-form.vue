@@ -1,8 +1,8 @@
 <template>
-  <card-auth title="Sign Up">
+  <card-auth title="Register">
     <create-account-form
       redirect-link="/sign-in-form"
-      button-link="/sign-up-form"
+      button-link="/register-form"
     />
   </card-auth>
 </template>

@@ -62,8 +62,8 @@ export const navigation = [
         path: '/sign-in-form',
       },
       {
-        text: 'Sign Up Form',
-        path: '/sign-up-form',
+        text: 'Register Form',
+        path: '/register-form',
       },
       {
         text: 'Reset Password Form',

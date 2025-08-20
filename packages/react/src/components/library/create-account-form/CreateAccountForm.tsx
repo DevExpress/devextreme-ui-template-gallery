@@ -61,7 +61,7 @@ export const CreateAccountForm = ({ redirectLink = '/sign-in', buttonLink }) => 
         </Item>
         <ButtonItem>
           <ButtonOptions width='100%' type='default' useSubmitBehavior>
-            <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Create a new account'}</span>
+            <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Register'}</span>
           </ButtonOptions>
         </ButtonItem>
       </Form>
