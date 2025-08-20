@@ -3,11 +3,11 @@ import { Component, NgModule } from '@angular/core';
 import { CardAuthModule, CreateAccountFormModule } from 'src/app/components';
 
 @Component({
-  selector: 'app-sign-up-form',
-  templateUrl: './sign-up-form.component.html',
-  styleUrls: ['./sign-up-form.component.scss']
+  selector: 'app-register-form',
+  templateUrl: './register-form.component.html',
+  styleUrls: ['./register-form.component.scss']
 })
-export class AppSignUpComponent {
+export class AppRegisterComponent {
 
   defaultLink = '/sign-in-form';
 
@@ -22,8 +22,8 @@ export class AppSignUpComponent {
     CardAuthModule,
   ],
   providers: [],
-  exports: [AppSignUpComponent],
-  declarations: [AppSignUpComponent],
+  exports: [AppRegisterComponent],
+  declarations: [AppRegisterComponent],
 })
-export class AppSignUpComponentModule { }
+export class AppRegisterComponentModule { }
 

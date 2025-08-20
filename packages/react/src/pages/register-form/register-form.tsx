@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CardAuth, CreateAccountForm } from '../../components';
 
-export const SignUpPage = () => {
+export const RegisterPage = () => {
   return (
     <CardAuth title='Register'>
       <CreateAccountForm

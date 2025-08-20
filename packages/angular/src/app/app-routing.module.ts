@@ -20,7 +20,7 @@ import { AnalyticsSalesAnalysisComponent } from './pages/analytics-sales-analysi
 import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
 import { PlanningSchedulerComponent } from './pages/planning-scheduler/planning-scheduler.component';
 import { AppSignInComponent } from './pages/sign-in-form/sign-in-form.component';
-import { AppSignUpComponent } from './pages/sign-up-form/sign-up-form.component';
+import { AppRegisterComponent } from './pages/register-form/register-form.component';
 import { AppResetPasswordComponent } from './pages/reset-password-form/reset-password-form.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
@@ -105,7 +105,7 @@ const routes: Routes = [
       },
       {
         path: 'register-form',
-        component: AppSignUpComponent,
+        component: AppRegisterComponent,
         canActivate: [AuthGuardService],
       },
       {

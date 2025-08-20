@@ -7,6 +7,6 @@ export { AnalyticsDashboard } from './analytics-dashboard/analytics-dashboard';
 export { AnalyticsSalesAnalysis } from './analytics-sales-analysis/analytics-sales-analysis';
 export { AnalyticsGeography } from './analytics-geography/analytics-geography';
 export { SignInPage } from './sign-in-form/sign-in-form';
-export { SignUpPage } from './sign-up-form/sign-up-form';
+export { RegisterPage } from './register-form/register-form';
 export { ResetPasswordPage } from './reset-password-form/reset-password-form';
 export { UserProfile } from './user-profile/user-profile';

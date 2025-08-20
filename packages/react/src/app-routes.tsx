@@ -8,7 +8,7 @@ import {
   AnalyticsSalesAnalysis,
   AnalyticsGeography,
   SignInPage,
-  SignUpPage,
+  RegisterPage,
   ResetPasswordPage,
   UserProfile
 } from './pages';
@@ -53,7 +53,7 @@ const routes = [
   },
   {
     path: '/register-form',
-    element: SignUpPage,
+    element: RegisterPage,
   },
   {
     path: '/reset-password-form',
