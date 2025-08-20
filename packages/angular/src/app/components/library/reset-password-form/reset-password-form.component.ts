@@ -14,9 +14,9 @@ const notificationText = 'We\'ve sent a link to reset your password. Check your 
   styleUrls: ['./reset-password-form.component.scss'],
 })
 export class ResetPasswordFormComponent implements OnInit {
-  @Input() signInLink = '/auth/login';
+  @Input() signInLink = '/auth/sign-in';
 
-  @Input() buttonLink = '/auth/login';
+  @Input() buttonLink = '/auth/sign-in';
 
   defaultAuthData: IResponse;
 

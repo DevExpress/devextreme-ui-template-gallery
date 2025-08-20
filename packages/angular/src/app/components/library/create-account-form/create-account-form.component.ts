@@ -15,8 +15,8 @@ import { AuthService, IResponse } from 'src/app/services';
   styleUrls: ['./create-account-form.component.scss'],
 })
 export class CreateAccountFormComponent implements OnInit {
-  @Input() redirectLink = '/auth/login';
-  @Input() buttonLink = '/auth/login';
+  @Input() redirectLink = '/auth/sign-in';
+  @Input() buttonLink = '/auth/sign-in';
   loading = false;
 
   defaultAuthData: IResponse;

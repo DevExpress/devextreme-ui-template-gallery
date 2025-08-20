@@ -24,7 +24,7 @@ export const ChangePasswordForm = () => {
       setLoading(false);
 
       if (result.isOk) {
-        navigate('/login');
+        navigate('/sign-in');
       } else {
         notify(result.message, 'error', 2000);
       }

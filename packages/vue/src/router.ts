@@ -16,8 +16,8 @@ export const router = createRouter({
       redirect: '/crm-contact-list',
     },
     {
-      path: '/login',
-      name: 'login',
+      path: '/sign-in',
+      name: 'sign-in',
       meta: {
         requiresAuth: false,
         layout: simpleLayout,
@@ -29,7 +29,7 @@ export const router = createRouter({
     {
       path: '/reset-password',
       name: 'reset-password',
-      props: { signInLink: '/login', buttonLink: '/login' },
+      props: { signInLink: '/sign-in', buttonLink: '/sign-in' },
       meta: {
         requiresAuth: false,
         layout: simpleLayout,
@@ -46,7 +46,7 @@ export const router = createRouter({
         layout: simpleLayout,
         title: 'Sign Up',
       },
-      props: { redirectLink: '/login', buttonLink: '/login' },
+      props: { redirectLink: '/sign-in', buttonLink: '/sign-in' },
       component: loadAuthComponent('create-account-form'),
     },
     {

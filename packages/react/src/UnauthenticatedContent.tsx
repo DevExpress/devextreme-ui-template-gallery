@@ -7,7 +7,7 @@ export const UnauthenticatedContent = () => {
   return (
     <Routes>
       <Route
-        path='/login'
+        path='/sign-in'
         element={
           <SingleCard title='Sign In'>
             <LoginForm
@@ -22,8 +22,8 @@ export const UnauthenticatedContent = () => {
         element={
           <SingleCard title='Sign Up'>
             <CreateAccountForm
-              buttonLink='/login'
-              redirectLink='/login'
+              buttonLink='/sign-in'
+              redirectLink='/sign-in'
             />
           </SingleCard>
         }
@@ -36,8 +36,8 @@ export const UnauthenticatedContent = () => {
             description='Please enter the email address that you used to register, and we will send you a link to reset your password via Email.'>
 
             <ResetPasswordForm
-              signInLink='/login'
-              buttonLink='/login'
+              signInLink='/sign-in'
+              buttonLink='/sign-in'
             />
           </SingleCard>
         }
@@ -50,7 +50,7 @@ export const UnauthenticatedContent = () => {
           </SingleCard>
         }
       />
-      <Route path='*' element={<Navigate to='/login' />} />
+      <Route path='*' element={<Navigate to='/sign-in' />} />
     </Routes>
   );
 };

@@ -18,7 +18,7 @@ import { useThemeContext, ThemeContext } from './theme/theme';
 function RootApp() {
   const { user, loading } = useAuth();
   const isLoginForm = [
-    'login',
+    'sign-in',
     'reset-password',
     'create-account',
   ].includes(useLocation().pathname.substring(1));

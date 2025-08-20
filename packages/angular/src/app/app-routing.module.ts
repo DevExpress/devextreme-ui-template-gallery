@@ -30,7 +30,7 @@ const routes: Routes = [
     component: UnauthenticatedContentComponent,
     children: [
       {
-        path: 'login',
+        path: 'sign-in',
         component: LoginFormComponent,
         canActivate: [AuthGuardService],
       },
@@ -51,7 +51,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'login',
+        redirectTo: 'sign-in',
         pathMatch: 'full',
       },
     ]
