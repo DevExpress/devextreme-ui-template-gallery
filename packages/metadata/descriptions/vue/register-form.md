@@ -1,4 +1,4 @@
-The DevExtreme Vue Sign Up Form template helps you implement a user registration workflow in your application.
+The DevExtreme Vue Register Form template helps you implement a user registration workflow in your application.
 <!--split-->
 
 ## UI Components  
