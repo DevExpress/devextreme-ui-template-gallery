@@ -29,6 +29,10 @@ export const UnauthenticatedContent = () => {
         }
       />
       <Route
+        path='/sign-up'
+        element={<Navigate to='/register' replace />}
+      />
+      <Route
         path='/reset-password'
         element={
           <SingleCard

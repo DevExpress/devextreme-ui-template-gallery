@@ -50,6 +50,10 @@ export const router = createRouter({
       component: loadAuthComponent('create-account-form'),
     },
     {
+      path: '/sign-up',
+      redirect: '/register',
+    },
+    {
       path: '/change-password/:recoveryCode',
       name: 'change-password',
       meta: {
@@ -81,6 +85,10 @@ export const router = createRouter({
       // eslint-disable-next-line func-call-spacing
       component: () => import (/* webpackChunkName: "pages" */ `@/pages/${name}.vue`),
     })),
+    ...[
+      { from: '/analytics-sales-report', to: '/analytics-sales-analysis' },
+      { from: '/sign-up-form', to: '/register-form' },
+    ].map((redirect) => ({ path: redirect.from, redirect: redirect.to })),
   ],
 });
 

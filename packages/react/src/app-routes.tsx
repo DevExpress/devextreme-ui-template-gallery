@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   CRMContactDetails,
   CRMContactList,
@@ -13,6 +14,7 @@ import {
   UserProfile
 } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
+import { Navigate } from 'react-router-dom';
 
 const routes = [
   {
@@ -65,9 +67,20 @@ const routes = [
   },
 ];
 
-export const appRoutes = routes.map((route) => {
-  return {
+const redirects = [
+  { from: '/analytics-sales-report', to: '/analytics-sales-analysis' },
+  { from: '/sign-up-form', to: '/register-form' },
+];
+
+const redirectRoutes = redirects.map(({ from, to }) => ({
+  path: from,
+  element: <Navigate to={to} replace />,
+}));
+
+export const appRoutes = [
+  ...routes.map((route) => ({
     ...route,
     element: withNavigationWatcher(route.element, route.path),
-  };
-});
+  })),
+  ...redirectRoutes,
+];

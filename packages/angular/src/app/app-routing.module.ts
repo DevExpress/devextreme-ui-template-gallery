@@ -45,6 +45,11 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
+        path: 'sign-up',
+        redirectTo: 'register',
+        pathMatch: 'full',
+      },
+      {
         path: 'change-password/:recoveryCode',
         component: ChangePasswordFormComponent,
         canActivate: [AuthGuardService],
@@ -117,6 +122,10 @@ const routes: Routes = [
         path: 'user-profile',
         component: UserProfileComponent
       },
+      ...[
+        { from: 'analytics-sales-report', to: 'analytics-sales-analysis' },
+        { from: 'sign-up-form', to: 'register-form' },
+      ].map(redirect => ({ path: redirect.from, redirectTo: redirect.to, pathMatch: 'full' as const })),
       {
         path: '**',
         redirectTo: 'crm-contact-list',
