@@ -77,12 +77,12 @@
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
     "typescript": "5.5.2",
-    "devextreme": "25.1.3",
-    "devextreme-dist": "25.1.3",
-    "devextreme-angular": "25.1.3",
-    "devextreme-vue": "25.1.3",
-    "devextreme-react": "25.1.3",
-    "devextreme-themebuilder": "25.1.3",
+    "devextreme": "24.2.8",
+    "devextreme-dist": "24.2.8",
+    "devextreme-angular": "24.2.8",
+    "devextreme-vue": "24.2.8",
+    "devextreme-react": "24.2.8",
+    "devextreme-themebuilder": "24.2.5",
     "eslint-config-devextreme": "^1.1.6"
   },
   "pre-commit": [
