@@ -50,10 +50,6 @@ export const router = createRouter({
       component: loadAuthComponent('create-account-form'),
     },
     {
-      path: '/sign-up',
-      redirect: '/register',
-    },
-    {
       path: '/change-password/:recoveryCode',
       name: 'change-password',
       meta: {
@@ -63,6 +59,10 @@ export const router = createRouter({
       },
       component: loadAuthComponent('change-password-form'),
     },
+    ...[
+      { from: '/create-account', to: '/register' },
+      { from: '/login', to: '/sign-in' },
+    ].map((redirect) => ({ path: redirect.from, redirect: redirect.to })),
     ...[
       'crm-contact-list',
       'crm-contact-details',

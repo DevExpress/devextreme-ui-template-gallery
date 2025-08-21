@@ -18,6 +18,10 @@ export const UnauthenticatedContent = () => {
         }
       />
       <Route
+        path='/login'
+        element={<Navigate to='/sign-in' replace />}
+      />
+      <Route
         path='/register'
         element={
           <SingleCard title='Register'>
@@ -29,7 +33,7 @@ export const UnauthenticatedContent = () => {
         }
       />
       <Route
-        path='/sign-up'
+        path='/create-account'
         element={<Navigate to='/register' replace />}
       />
       <Route

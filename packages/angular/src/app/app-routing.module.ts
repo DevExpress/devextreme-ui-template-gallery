@@ -45,15 +45,14 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'sign-up',
-        redirectTo: 'register',
-        pathMatch: 'full',
-      },
-      {
         path: 'change-password/:recoveryCode',
         component: ChangePasswordFormComponent,
         canActivate: [AuthGuardService],
       },
+      ...[
+        { from: 'create-account', to: 'register' },
+        { from: 'login', to: 'sign-in' },
+      ].map(redirect => ({ path: redirect.from, redirectTo: redirect.to, pathMatch: 'full' as const })),
       {
         path: '**',
         redirectTo: 'sign-in',
