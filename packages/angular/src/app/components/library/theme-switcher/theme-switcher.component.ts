@@ -1,13 +1,11 @@
-import {
-  Component, NgModule,
-} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular';
 import { ThemeService } from 'src/app/services';
 
 @Component({
-  selector: 'theme-switcher',
-  template: `
+    selector: 'theme-switcher',
+    template: `
     <dx-button
       class="theme-button"
       stylingMode="text"
@@ -15,19 +13,14 @@ import { ThemeService } from 'src/app/services';
       (onClick)="onButtonClick()"
     ></dx-button>
 `,
-  styleUrls: [],
+    styleUrls: [],
+    imports: [ CommonModule, DxButtonModule ],
 })
 export class ThemeSwitcherComponent {
-  constructor(public themeService: ThemeService) {}
+  protected themeService = inject(ThemeService);
 
   onButtonClick () {
     this.themeService.switchTheme();
   }
 }
 
-@NgModule({
-  imports: [CommonModule, DxButtonModule],
-  declarations: [ThemeSwitcherComponent],
-  exports: [ThemeSwitcherComponent],
-})
-export class ThemeSwitcherModule { }

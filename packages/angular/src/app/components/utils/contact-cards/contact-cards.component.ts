@@ -1,6 +1,4 @@
-import {
-  Component, NgModule, Input,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -8,11 +6,11 @@ import {
   DxDataGridModule,
 } from 'devextreme-angular';
 import {
-  CardNotesModule,
-  CardMessagesModule,
-  CardActivitiesModule,
-  CardOpportunitiesModule,
-  CardTasksModule,
+  CardNotesComponent,
+  CardMessagesComponent,
+  CardActivitiesComponent,
+  CardOpportunitiesComponent,
+  CardTasksComponent,
 } from 'src/app/components';
 import { Activity } from 'src/app/types/activities';
 import { Messages } from 'src/app/types/messages';
@@ -21,9 +19,22 @@ import { Opportunities } from 'src/app/types/opportunities';
 import { Task } from 'src/app/types/task';
 
 @Component({
-  selector: 'contact-cards',
-  templateUrl: './contact-cards.component.html',
-  styleUrls: ['./contact-cards.component.scss'],
+    selector: 'contact-cards',
+    templateUrl: './contact-cards.component.html',
+    styleUrls: ['./contact-cards.component.scss'],
+    imports: [
+      DxButtonModule,
+      DxTabPanelModule,
+      DxDataGridModule,
+
+      CardNotesComponent,
+      CardMessagesComponent,
+      CardActivitiesComponent,
+      CardOpportunitiesComponent,
+      CardTasksComponent,
+
+      CommonModule,
+    ],
 })
 export class ContactCardsComponent {
     @Input() tasks: Task[];
@@ -43,22 +54,3 @@ export class ContactCardsComponent {
     @Input() isLoading: boolean;
 }
 
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxTabPanelModule,
-    DxDataGridModule,
-
-    CardNotesModule,
-    CardMessagesModule,
-    CardActivitiesModule,
-    CardOpportunitiesModule,
-    CardTasksModule,
-
-    CommonModule,
-  ],
-  providers: [],
-  exports: [ContactCardsComponent],
-  declarations: [ContactCardsComponent],
-})
-export class ContactCardsModule { }

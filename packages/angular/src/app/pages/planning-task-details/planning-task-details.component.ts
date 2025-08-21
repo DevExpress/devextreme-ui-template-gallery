@@ -1,6 +1,4 @@
-import {
-  Component, OnInit, NgModule
-} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -10,22 +8,37 @@ import {
   DxScrollViewModule,
 } from 'devextreme-angular';
 import {
-  CardActivitiesModule,
-  CardNotesModule,
-  CardMessagesModule,
-  StatusIndicatorModule,
+  CardActivitiesComponent,
+  CardNotesComponent,
+  CardMessagesComponent,
 } from 'src/app/components';
 import { Task } from 'src/app/types/task';
 import { DataService } from 'src/app/services';
-import { TaskFormModule } from 'src/app/components/library/task-form/task-form.component';
+import { TaskFormComponent } from 'src/app/components/library/task-form/task-form.component';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 @Component({
-  templateUrl: './planning-task-details.component.html',
-  styleUrls: ['./planning-task-details.component.scss'],
-  providers: [DataService],
+    templateUrl: './planning-task-details.component.html',
+    styleUrls: ['./planning-task-details.component.scss'],
+    providers: [ DataService ],
+    imports: [
+      DxButtonModule,
+      DxDropDownButtonModule,
+      DxTabPanelModule,
+      DxValidationGroupModule,
+      DxToolbarModule,
+
+      CardActivitiesComponent,
+      CardNotesComponent,
+      CardMessagesComponent,
+      TaskFormComponent,
+      DxScrollViewModule,
+      CommonModule,
+    ]
 })
 export class PlanningTaskDetailsComponent implements OnInit {
+  private service = inject(DataService);
+
   task: Task;
 
   taskId = 1;
@@ -33,9 +46,6 @@ export class PlanningTaskDetailsComponent implements OnInit {
   taskName = 'Loading...';
 
   isLoading = false;
-
-  constructor(private service: DataService) {
-  }
 
   loadData = () => {
     this.service.getTask(this.taskId).subscribe((data) => {
@@ -55,24 +65,3 @@ export class PlanningTaskDetailsComponent implements OnInit {
   }
 }
 
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxDropDownButtonModule,
-    DxTabPanelModule,
-    DxValidationGroupModule,
-    DxToolbarModule,
-
-    CardActivitiesModule,
-    CardNotesModule,
-    CardMessagesModule,
-    TaskFormModule,
-    StatusIndicatorModule,
-    DxScrollViewModule,
-    CommonModule,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [PlanningTaskDetailsComponent],
-})
-export class PlanningTaskDetailsModule { }

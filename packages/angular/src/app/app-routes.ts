@@ -1,6 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
+import { Routes } from '@angular/router';
 import {
   LoginFormComponent,
   ResetPasswordFormComponent,
@@ -24,7 +22,7 @@ import { AppSignUpComponent } from './pages/sign-up-form/sign-up-form.component'
 import { AppResetPasswordComponent } from './pages/reset-password-form/reset-password-form.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'auth',
     component: UnauthenticatedContentComponent,
@@ -125,14 +123,3 @@ const routes: Routes = [
     ]
   },
 ];
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { useHash: true, }),
-    BrowserModule,
-  ],
-  providers: [AuthGuardService],
-  exports: [RouterModule],
-  declarations: [],
-})
-export class AppRoutingModule { }
