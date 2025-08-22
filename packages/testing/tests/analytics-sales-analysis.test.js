@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
-import { Selector, RequestLogger } from 'testcafe';
+import { Selector, RequestLogger, ClientFunction } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import {
   forceResizeRecalculation, getPostfix, toggleCommonConfiguration, setTheme,
@@ -42,26 +42,41 @@ fixture`Analytics Sales Analysis`;
         await takeScreenshot(`analytics-sales-analysis-month${postfix}`, 'body');
 
         const isPeriodSelectorBoxVisible = screenModes[0] === screenMode;
+        const setRange = ClientFunction((start, end) => {
+          const root = document.querySelector('.sales-range .dx-range-selector') || document.querySelector('.sales-range .dx-rangeslider');
+          if (!root || !(window).DevExpress) return null;
+          const inst = (window).DevExpress.ui.dxRangeSelector.getInstance(root);
+          inst.option('value', [new Date(start), new Date(end)]);
+          return inst.option('value');
+        });
+
+        const getRange = ClientFunction(() => {
+          const root = document.querySelector('.sales-range .dx-range-selector') || document.querySelector('.sales-range .dx-rangeslider');
+          if (!root || !(window).DevExpress) return [];
+          const inst = (window).DevExpress.ui.dxRangeSelector.getInstance(root);
+          return inst.option('value');
+        });
+        
         if (isPeriodSelectorBoxVisible) {
           await t.click(Selector('.sales-filter .dx-dropdownbutton'));
-
           await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
           await t.wait(timeoutSecond);
           await takeScreenshot(`analytics-sales-analysis-day${postfix}`, 'body');
-        }
 
-        await t.drag(Selector('.slider').nth(1), -50, 0, { offsetX: 10, offsetY: 10 });
-        await t.drag(Selector('.slider').nth(0), 100, 0, { offsetX: 10, offsetY: 10 });
-
-        await t.wait(timeoutSecond);
-
-        if (isPeriodSelectorBoxVisible) {
+          await setRange('2020-01-01', '2020-01-31');
+          await t.wait(1000);
+          const dayRange = await getRange();
+          await t.expect(Array.isArray(dayRange) && dayRange.length === 2).ok();
           await takeScreenshot(`analytics-sales-analysis-day-range${postfix}`, 'body');
           await t.click(Selector('.sales-filter .dx-dropdownbutton'));
           await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(1));
           await t.wait(timeoutSecond);
         }
 
+        await setRange('2020-01-01', '2020-03-31');
+        await t.wait(1000);
+        const monthRange = await getRange();
+        await t.expect(Array.isArray(monthRange) && monthRange.length === 2).ok();
         await takeScreenshot(`analytics-sales-analysis-month-range${postfix}`, 'body');
 
         await t
