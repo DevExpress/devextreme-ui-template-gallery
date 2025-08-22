@@ -47,7 +47,7 @@ export class AnalyticsSalesAnalysisComponent implements OnInit {
   constructor(private service: DataService) {}
 
   onRangeChanged = ({value: dates}) => {
-    const [startDate, endDate] = dates.map((date) => formatDate(date, 'YYYY-MM-dd', 'en'));
+    const [startDate, endDate] = dates.map((date) => formatDate(date, 'yyyy-MM-dd', 'en'));
 
     this.isLoading = true;
 
