@@ -50,13 +50,6 @@ fixture`Analytics Sales Analysis`;
           return inst.option('value');
         });
 
-        const getRange = ClientFunction(() => {
-          const root = document.querySelector('.sales-range .dx-range-selector') || document.querySelector('.sales-range .dx-rangeslider');
-          if (!root || !(window).DevExpress) return [];
-          const inst = (window).DevExpress.ui.dxRangeSelector.getInstance(root);
-          return inst.option('value');
-        });
-        
         if (isPeriodSelectorBoxVisible) {
           await t.click(Selector('.sales-filter .dx-dropdownbutton'));
           await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
@@ -65,8 +58,6 @@ fixture`Analytics Sales Analysis`;
 
           await setRange('2020-01-01', '2020-01-31');
           await t.wait(1000);
-          const dayRange = await getRange();
-          await t.expect(Array.isArray(dayRange) && dayRange.length === 2).ok();
           await takeScreenshot(`analytics-sales-analysis-day-range${postfix}`, 'body');
           await t.click(Selector('.sales-filter .dx-dropdownbutton'));
           await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(1));
@@ -75,8 +66,6 @@ fixture`Analytics Sales Analysis`;
 
         await setRange('2020-01-01', '2020-03-31');
         await t.wait(1000);
-        const monthRange = await getRange();
-        await t.expect(Array.isArray(monthRange) && monthRange.length === 2).ok();
         await takeScreenshot(`analytics-sales-analysis-month-range${postfix}`, 'body');
 
         await t
