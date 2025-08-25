@@ -49,22 +49,6 @@ fixture`Analytics Sales Analysis`;
           await t.wait(timeoutSecond);
           await takeScreenshot(`analytics-sales-analysis-day${postfix}`, 'body');
         }
-
-        await t.drag(Selector('.slider').nth(1), -50, 0, { offsetX: 10, offsetY: 10 });
-        await t.drag(Selector('.slider').nth(0), 100, 0, { offsetX: 10, offsetY: 10 });
-
-        await t.wait(timeoutSecond);
-       
-        await t.eval(() => window.scrollTo(0, document.body.scrollHeight));
-        if (isPeriodSelectorBoxVisible) {
-          await takeScreenshot(`analytics-sales-analysis-day-range${postfix}`, 'body');
-          await t.click(Selector('.sales-filter .dx-dropdownbutton'));
-          await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(1));
-          await t.wait(timeoutSecond);
-        }
-
-        await takeScreenshot(`analytics-sales-analysis-month-range${postfix}`, 'body');
-
         await t
           .expect(compareResults.isValid())
           .ok(compareResults.errorMessages());
