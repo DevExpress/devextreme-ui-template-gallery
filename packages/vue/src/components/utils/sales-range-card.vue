@@ -21,11 +21,6 @@
       <dx-size :height="90" />
 
       <dx-loading-indicator :show="false" />
-      <dx-slider-marker :visible="true" />
-      <dx-slider-handle
-        :opacity="0.5"
-        :width="2"
-      />
 
       <dx-range-selector-chart>
         <dx-series
@@ -46,8 +41,6 @@ import {
   DxSize,
   DxMarker,
   DxLoadingIndicator,
-  DxSliderMarker,
-  DxSliderHandle,
   DxChart as DxRangeSelectorChart,
   DxLabel as DxRangeSelectorLabel,
   DxSeries,
