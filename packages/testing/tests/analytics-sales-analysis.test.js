@@ -54,7 +54,8 @@ fixture`Analytics Sales Analysis`;
         await t.drag(Selector('.slider').nth(0), 100, 0, { offsetX: 10, offsetY: 10 });
 
         await t.wait(timeoutSecond);
-
+        const salesElement = Selector('.sales');
+        await t.scrollIntoView(salesElement);
         if (isPeriodSelectorBoxVisible) {
           await takeScreenshot(`analytics-sales-analysis-day-range${postfix}`, 'body');
           await t.click(Selector('.sales-filter .dx-dropdownbutton'));
