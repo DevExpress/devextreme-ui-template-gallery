@@ -61,8 +61,8 @@ const props = withDefaults(defineProps<{
 });
 
 const activityMenuItems: Array<{ text: string }> = [
-  { text: 'View details' },
-  { text: 'Delete' },
+  { text: 'View Details' },
+  { text: 'Delete Record' },
 ];
 </script>
 <style scoped lang="scss">

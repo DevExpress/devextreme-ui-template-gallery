@@ -2,7 +2,7 @@
   <card-auth title="Sign In">
     <login-form
       reset-link="/reset-password-form"
-      create-account-link="/sign-up-form"
+      create-account-link="/register-form"
     />
   </card-auth>
 </template>

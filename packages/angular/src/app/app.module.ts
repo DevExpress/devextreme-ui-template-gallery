@@ -21,7 +21,7 @@ import { CrmContactDetailsModule } from './pages/crm-contact-details/crm-contact
 import { PlanningTaskListModule } from './pages/planning-task-list/planning-task-list.component';
 import { PlanningTaskDetailsModule } from './pages/planning-task-details/planning-task-details.component';
 import { AnalyticsDashboardModule } from './pages/analytics-dashboard/analytics-dashboard.component';
-import { AnalyticsSalesReportModule } from './pages/analytics-sales-report/analytics-sales-report.component';
+import { AnalyticsSalesAnalysisModule } from './pages/analytics-sales-analysis/analytics-sales-analysis.component';
 import { AnalyticsGeographyModule } from './pages/analytics-geography/analytics-geography.component';
 import { ThemeService } from './services';
 
@@ -46,7 +46,7 @@ import { ThemeService } from './services';
     PlanningTaskListModule,
     PlanningTaskDetailsModule,
     AnalyticsDashboardModule,
-    AnalyticsSalesReportModule,
+    AnalyticsSalesAnalysisModule,
     AnalyticsGeographyModule,
 
     AppRoutingModule,

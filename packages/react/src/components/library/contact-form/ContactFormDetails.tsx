@@ -14,7 +14,7 @@ import { ContactStatus } from '../../utils/contact-status/ContactStatus';
 import { FormTextbox } from '../../utils/form-textbox/FormTextbox';
 
 import { Contact } from '../../../types/crm-contact';
-import { CONTACT_STATUS_LIST } from '../../../shared/constants';
+import { CONTACT_STATUS_LIST, US_STATES } from '../../../shared/constants';
 
 const PHOTO_SIZE = 184;
 
@@ -131,10 +131,14 @@ export const ContactFromDetails = ({ data, editing, updateField }: {
         </ItemForm>
 
         <ItemForm>
-          <FormTextbox
+          <SelectBox
             label='State'
+            width='100%'
             value={data.state.stateShort}
-            isEditing={!editing}
+            readOnly={!editing}
+            items={US_STATES}
+            stylingMode={stylingMode}
+            searchEnabled
             onValueChange={updateField('state')}
           />
         </ItemForm>
@@ -165,7 +169,7 @@ export const ContactFromDetails = ({ data, editing, updateField }: {
           <FormTextbox
             label='Phone'
             value={data.phone}
-            mask='+1(000)000-0000'
+            mask='(000) 000-0000'
             isEditing={!editing}
             onValueChange={updateField('phone')}
           />

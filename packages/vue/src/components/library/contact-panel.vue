@@ -164,7 +164,7 @@
                     text: 'Actions',
                     dropDownOptions: { width: 'auto' },
                     stylingMode: 'text',
-                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting'],
+                    items: ['Call', 'Send Fax', 'Send Email', 'Schedule a Meeting'],
                   }"
                 />
               </dx-toolbar>
@@ -266,7 +266,7 @@ const underContactFields: {
 }[] = [
   {
     name: 'phone',
-    mask: '+1(000)000-0000',
+    mask: '(000) 000-0000',
     icon: 'tel',
   },
   {

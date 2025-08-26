@@ -12,7 +12,7 @@ import { createAccount } from '../../../api/auth';
 
 import './CreateAccountForm.scss';
 
-export const CreateAccountForm = ({ redirectLink = '/login', buttonLink }) => {
+export const CreateAccountForm = ({ redirectLink = '/sign-in', buttonLink }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const formData = useRef({ email: '', password: '' });
@@ -61,7 +61,7 @@ export const CreateAccountForm = ({ redirectLink = '/login', buttonLink }) => {
         </Item>
         <ButtonItem>
           <ButtonOptions width='100%' type='default' useSubmitBehavior>
-            <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Create a new account'}</span>
+            <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Register'}</span>
           </ButtonOptions>
         </ButtonItem>
       </Form>

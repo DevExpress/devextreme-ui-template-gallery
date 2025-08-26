@@ -16,11 +16,11 @@ import { CrmContactDetailsComponent } from './pages/crm-contact-details/crm-cont
 import { PlanningTaskListComponent } from './pages/planning-task-list/planning-task-list.component';
 import { PlanningTaskDetailsComponent } from './pages/planning-task-details/planning-task-details.component';
 import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analytics-dashboard.component';
-import { AnalyticsSalesReportComponent } from './pages/analytics-sales-report/analytics-sales-report.component';
+import { AnalyticsSalesAnalysisComponent } from './pages/analytics-sales-analysis/analytics-sales-analysis.component';
 import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
 import { PlanningSchedulerComponent } from './pages/planning-scheduler/planning-scheduler.component';
 import { AppSignInComponent } from './pages/sign-in-form/sign-in-form.component';
-import { AppSignUpComponent } from './pages/sign-up-form/sign-up-form.component';
+import { AppRegisterComponent } from './pages/register-form/register-form.component';
 import { AppResetPasswordComponent } from './pages/reset-password-form/reset-password-form.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
@@ -30,7 +30,7 @@ const routes: Routes = [
     component: UnauthenticatedContentComponent,
     children: [
       {
-        path: 'login',
+        path: 'sign-in',
         component: LoginFormComponent,
         canActivate: [AuthGuardService],
       },
@@ -40,7 +40,7 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'create-account',
+        path: 'register',
         component: CreateAccountFormComponent,
         canActivate: [AuthGuardService],
       },
@@ -49,9 +49,13 @@ const routes: Routes = [
         component: ChangePasswordFormComponent,
         canActivate: [AuthGuardService],
       },
+      ...[
+        { from: 'create-account', to: 'register' },
+        { from: 'login', to: 'sign-in' },
+      ].map(redirect => ({ path: redirect.from, redirectTo: redirect.to, pathMatch: 'full' as const })),
       {
         path: '**',
-        redirectTo: 'login',
+        redirectTo: 'sign-in',
         pathMatch: 'full',
       },
     ]
@@ -89,8 +93,8 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'analytics-sales-report',
-        component: AnalyticsSalesReportComponent,
+        path: 'analytics-sales-analysis',
+        component: AnalyticsSalesAnalysisComponent,
         canActivate: [AuthGuardService],
       },
       {
@@ -104,8 +108,8 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'sign-up-form',
-        component: AppSignUpComponent,
+        path: 'register-form',
+        component: AppRegisterComponent,
         canActivate: [AuthGuardService],
       },
       {
@@ -117,6 +121,10 @@ const routes: Routes = [
         path: 'user-profile',
         component: UserProfileComponent
       },
+      ...[
+        { from: 'analytics-sales-report', to: 'analytics-sales-analysis' },
+        { from: 'sign-up-form', to: 'register-form' },
+      ].map(redirect => ({ path: redirect.from, redirectTo: redirect.to, pathMatch: 'full' as const })),
       {
         path: '**',
         redirectTo: 'crm-contact-list',

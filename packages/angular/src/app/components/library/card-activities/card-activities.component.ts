@@ -21,8 +21,8 @@ export class CardActivitiesComponent {
   @Input() isLoading: boolean = false;
 
   activityMenuItems: Array<{ text: string }> = [
-    { text: 'View details' },
-    { text: 'Delete' },
+    { text: 'View Details' },
+    { text: 'Delete Record' },
   ];
 }
 

@@ -6,7 +6,8 @@
   >
     <dx-range-selector
       :data-source="props.data"
-      @update:value="(e) => emit('range-changed', e)"
+      :value="props.value"
+      @value-changed="(e) => emit('range-changed', e)"
     >
       <dx-scale
         minor-tick-interval="day"
@@ -45,13 +46,14 @@ import {
   DxSeries,
 } from 'devextreme-vue/range-selector';
 
-import { SalesByState } from '@/types/analytics';
+import { Sales, SalesByState } from '@/types/analytics';
 import CardAnalytics from '@/components/library/card-analytics.vue';
 
 const emit = defineEmits(['range-changed']);
 
 const props = defineProps<{
-  data: SalesByState
+  data: Sales | SalesByState,
+  value?: [Date, Date]
 }>();
 </script>
 <style scoped lang="scss">

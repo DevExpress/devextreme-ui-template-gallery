@@ -46,7 +46,7 @@ const editCellStatusRender = () => (
 );
 
 const cellPhoneRender = (cell: DataGridTypes.ColumnCellTemplateData) => (
-  String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '+1($1)$2-$3')
+  String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
 );
 
 const fieldRender = (text: string) => (
