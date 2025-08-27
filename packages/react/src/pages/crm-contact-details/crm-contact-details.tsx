@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { Item, Toolbar } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
@@ -22,9 +23,13 @@ import {
 import './crm-contact-details.scss';
 import ScrollView from 'devextreme-react/scroll-view';
 
-const CONTACT_ID = 12;
+const DEFAULT_CONTACT_ID = 12;
 
 export const CRMContactDetails = () => {
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get('id');
+  const navigate = useNavigate();
+  const contactId = id ? parseInt(id, 10) : DEFAULT_CONTACT_ID;
   const [data, setData] = useState<Contact>();
   const [notes, setNotes] = useState();
   const [messages, setMessages] = useState([]);
@@ -38,40 +43,44 @@ export const CRMContactDetails = () => {
 
   const loadData = useCallback(() => {
     Promise.all([
-      getContact(CONTACT_ID)
+      getContact(contactId)
         .then((data) => {
           setData(data);
         }),
-      getContactNotes(CONTACT_ID)
+      getContactNotes(contactId)
         .then((data) => {
           setNotes(data);
         }),
-      getContactMessages(CONTACT_ID)
+      getContactMessages(contactId)
         .then((data) => {
           setMessages(data);
         }),
-      getActiveContactOpportunities(CONTACT_ID)
+      getActiveContactOpportunities(contactId)
         .then((data) => {
           setActiveOpportunities(data);
         }),
-      getClosedContactOpportunities(CONTACT_ID)
+      getClosedContactOpportunities(contactId)
         .then((data) => {
           setClosedOpportunities(data);
         }),
     ]).then(() => { setIsLoading(false); }).catch((error) => console.log(error));
-  }, []);
+  }, [contactId]);
 
   const refresh = useCallback(() => {
     setIsLoading(true);
     loadData();
-  }, []);
+  }, [loadData]);
 
   return (
     <ScrollView className='view-wrapper-scroll'>
       <div className='view-wrapper view-wrapper-contact-details'>
         <Toolbar className='toolbar-details theme-dependent'>
           <Item location='before'>
-            <Button icon='arrowleft' stylingMode='text' />
+            <Button
+              icon='arrowleft'
+              stylingMode='text'
+              onClick={() => navigate('/crm-contact-list')}
+            />
           </Item>
           <Item location='before' text={ data?.name ?? 'Loading...' } />
           <Item location='after' locateInMenu='auto'>
