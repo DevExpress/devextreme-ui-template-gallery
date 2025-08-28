@@ -325,7 +325,7 @@ watch([isPinned, () => props.isPanelOpened], () => {
 });
 
 const navigateToDetails = () => {
-  router.push('/crm-contact-details');
+  router.push(`/crm-contact-details?id=${panelData.value?.id}`);
 };
 </script>
 
