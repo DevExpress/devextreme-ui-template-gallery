@@ -20,7 +20,7 @@ export const TaskKanbanCard = ({ task }: { task: Task }) => {
   const navigate = useNavigate();
 
   const navigateToDetails = useCallback(() => {
-    navigate('/planning-task-details');
+    navigate(`/planning-task-details?id=${task.id}`);
   }, []);
 
   return (

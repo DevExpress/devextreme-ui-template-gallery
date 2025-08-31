@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { Toolbar, Item as ToolbarItem } from 'devextreme-react/toolbar';
 import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
@@ -15,25 +16,29 @@ import { getTask } from 'dx-template-gallery-data';
 
 import './planning-task-details.scss';
 
-const TASK_ID = 1;
+const DEFAULT_TASK_ID = 1;
 
 export const PlanningTaskDetails = () => {
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get('id');
+  const navigate = useNavigate();
+  const taskId = id ? parseInt(id, 10) : DEFAULT_TASK_ID;
   const [task, setTask] = useState<Task>();
   const [isLoading, setIsLoading] = useState(false);
 
   const loadData = useCallback(() => {
-    getTask(TASK_ID)
+    getTask(taskId)
       .then((data) => {
         setTask(data);
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [taskId]);
 
   const refresh = useCallback(() => {
     setIsLoading(true);
     loadData();
-  }, []);
+  }, [loadData]);
 
   useEffect(() => {
     loadData();
@@ -44,7 +49,11 @@ export const PlanningTaskDetails = () => {
       <div className='view-wrapper view-wrapper-details'>
         <Toolbar className='toolbar-details theme-dependent'>
           <ToolbarItem location='before'>
-            <Button icon='arrowleft' stylingMode='text' />
+            <Button
+              icon='arrowleft'
+              stylingMode='text'
+              onClick={() => navigate(-1)}
+            />
           </ToolbarItem>
           <ToolbarItem location='before' text={ task?.text ?? 'Loading...' } />
           <ToolbarItem location='after' locateInMenu='auto'>
