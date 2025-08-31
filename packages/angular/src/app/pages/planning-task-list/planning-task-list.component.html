@@ -9,7 +9,7 @@
         [width]="(screen.xSmallScreenChanged | async) ? 220 : 'auto'"
         [showNavButtons]="false"
         [scrollByContent]="true"
-        [selectedIndex]="0"
+        [selectedIndex]="selectedIndex"
         [items]="taskPanelItems"
         (onItemClick)="tabValueChange($event)"
       ></dx-tabs>
