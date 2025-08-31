@@ -6,6 +6,7 @@
           <dx-button
             icon="arrowleft"
             styling-mode="text"
+            @click="navigateBack"
           />
         </dx-toolbar-item>
         <dx-toolbar-item
@@ -96,6 +97,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxDropDownButton, DxItem as DxDropDownItem } from 'devextreme-vue/drop-down-button';
 import {
@@ -112,15 +114,20 @@ import CardActivities from '@/components/library/card-activities.vue';
 import CardMessages from '@/components/library/card-messages.vue';
 import TaskForm from '@/components/library/task-form.vue';
 
-const taskId = 1;
+const DEFAULT_TASK_ID = 1;
+let taskId;
 const taskName = ref('');
 const taskData = ref<Task>();
 const isLoading = ref(false);
+const router = useRouter();
+const route = useRoute();
 
 const notes = computed(() => taskData.value?.notes);
 
 async function loadData() {
   isLoading.value = true;
+  const queryId = route.query.id;
+  taskId = queryId ? Number(queryId) : DEFAULT_TASK_ID;
   const data = await getTask(taskId);
 
   taskData.value = data;
@@ -130,6 +137,10 @@ async function loadData() {
 
 const refresh = () => {
   loadData();
+};
+
+const navigateBack = () => {
+  router.go(-1);
 };
 
 onMounted(() => {

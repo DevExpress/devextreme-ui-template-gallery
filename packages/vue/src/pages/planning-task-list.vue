@@ -9,7 +9,7 @@
           :width="screenInfo.isXSmall ? 220 : 'auto'"
           :show-nav-buttons="false"
           :scroll-by-content="true"
-          :selected-index="0"
+          :selected-index="selectedIndex"
           :items="taskPanelItems"
           @item-click="tabValueChange"
         />
@@ -86,35 +86,33 @@
       :show-pane="false"
       width="auto"
     />
-    <template v-if="!!gridData.length">
-      <div
-        v-if="taskPanelItems[0].text === displayTaskComponent"
-        class="grid"
-      >
-        <task-list-grid
-          ref="tasksGridCmp"
-          :data-source="gridData"
-        />
-      </div>
-      <div
-        v-else-if="taskPanelItems[1].text === displayTaskComponent"
-        class="kanban"
-      >
-        <task-list-kanban
-          :tasks="kanbanData"
-          @add-task="addTask"
-        />
-      </div>
-      <div
-        v-else-if="taskPanelItems[2].text === displayTaskComponent"
-        class="gantt"
-      >
-        <task-list-gantt
-          ref="tasksGanttCmp"
-          :tasks="ganttData"
-        />
-      </div>
-    </template>
+    <div
+      v-if="taskPanelItems[0].text === displayTaskComponent"
+      class="grid"
+    >
+      <task-list-grid
+        ref="tasksGridCmp"
+        :data-source="gridData"
+      />
+    </div>
+    <div
+      v-else-if="taskPanelItems[1].text === displayTaskComponent"
+      class="kanban"
+    >
+      <task-list-kanban
+        :tasks="kanbanData"
+        @add-task="addTask"
+      />
+    </div>
+    <div
+      v-else-if="taskPanelItems[2].text === displayTaskComponent"
+      class="gantt"
+    >
+      <task-list-gantt
+        ref="tasksGanttCmp"
+        :tasks="ganttData"
+      />
+    </div>
   </div>
   <form-popup
     title="New Task"
@@ -131,7 +129,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import DxButton from 'devextreme-vue/button';
 import DxTabs, { DxTabsTypes } from 'devextreme-vue/tabs';
 import { DxTextBoxTypes } from 'devextreme-vue/text-box';
@@ -158,6 +157,7 @@ import notify from 'devextreme/ui/notify';
 const isLoading = ref(true);
 const displayTaskComponent = ref(taskPanelItems[0].text);
 const activeTabId = ref<TaskPanelItemsIds>('grid');
+const selectedIndex = ref(0);
 const taskFormCmp = ref<InstanceType<typeof TaskForm>>();
 const tasksGridCmp = ref<InstanceType<typeof TaskListGrid>>();
 const tasksGanttCmp = ref<InstanceType<typeof TaskListGantt>>();
@@ -203,15 +203,50 @@ const loadTasksAsync = async () => {
   isLoading.value = false;
 };
 
+const route = useRoute();
+const router = useRouter();
+
+const viewToParam: Record<string, string> = {
+  [taskPanelItems[0].text]: 'list',
+  [taskPanelItems[1].text]: 'kanban-board',
+  [taskPanelItems[2].text]: 'gantt',
+};
+const paramToView: Record<string, string> = Object.fromEntries(Object.entries(viewToParam).map(([k,v]) => [v,k]));
+
+const updateFlags = () => {
+  const tabId = taskPanelItems.find((item) => displayTaskComponent.value === item.text)?.id;
+  activeTabId.value = tabId || 'grid';
+  selectedIndex.value = taskPanelItems.findIndex(i => i.text === displayTaskComponent.value) || 0;
+};
+
+const setQueryParam = () => {
+  const qp = viewToParam[displayTaskComponent.value];
+  if (route.query.view !== qp) {
+    router.replace({ query: { ...route.query, view: qp } });
+  }
+};
+
+const syncFromRoute = () => {
+  const qp = route.query.view as string | undefined;
+  if (qp && paramToView[qp] && paramToView[qp] !== displayTaskComponent.value) {
+    displayTaskComponent.value = paramToView[qp];
+    updateFlags();
+  } else if (!qp) {
+    setQueryParam();
+  }
+};
+
+watch(() => route.query.view, () => syncFromRoute());
+
 const tabValueChange = (e: DxTabsTypes.ItemClickEvent) => {
   const { itemData } = e;
   displayTaskComponent.value = itemData.text;
-  const tabId = taskPanelItems.find((item) => displayTaskComponent.value === item.text)?.id;
-  activeTabId.value = tabId || 'grid';
+  updateFlags();
+  setQueryParam();
 
-  if (tabId !== 'grid' && kanbanData.value.length === 0) {
+  if (activeTabId.value !== 'grid' && kanbanData.value.length === 0) {
     loadFilteredTasksAsync();
-  } else if (tabId === 'grid' && gridData.value.length === 0) {
+  } else if (activeTabId.value === 'grid' && gridData.value.length === 0) {
     loadTasksAsync();
   }
 };
@@ -232,7 +267,17 @@ const onSaveNewTask = () => {
   isNewTaskPopupOpened.value = false;
 };
 
-loadTasksAsync();
+syncFromRoute();
+
+const initLoad = () => {
+  if (activeTabId.value === 'grid' && gridData.value.length === 0) {
+    loadTasksAsync();
+  } else if (kanbanData.value.length === 0 || ganttData.value.length === 0) {
+    loadFilteredTasksAsync();
+  }
+};
+
+initLoad();
 
 const refreshOptions = {
   text: 'Refresh',
