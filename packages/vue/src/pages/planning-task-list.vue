@@ -211,7 +211,9 @@ const viewToParam: Record<string, string> = {
   [taskPanelItems[1].text]: 'kanban-board',
   [taskPanelItems[2].text]: 'gantt',
 };
-const paramToView: Record<string, string> = Object.fromEntries(Object.entries(viewToParam).map(([k,v]) => [v,k]));
+const paramToView: Record<string, string> = Object.fromEntries(
+  Object.entries(viewToParam).map(([k,v]) => [v,k])
+);
 
 const updateFlags = () => {
   const tabId = taskPanelItems.find((item) => displayTaskComponent.value === item.text)?.id;
