@@ -3,7 +3,7 @@ import { defaultUser } from '../utils/default-user';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export async function signIn(email: string, password: string) {
   try {
-    // Send request
+    // Send request test
     return {
       isOk: true,
       data: { ...defaultUser, email },
