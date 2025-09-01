@@ -212,13 +212,13 @@ const viewToParam: Record<string, string> = {
   [taskPanelItems[2].text]: 'gantt',
 };
 const paramToView: Record<string, string> = Object.fromEntries(
-  Object.entries(viewToParam).map(([k,v]) => [v,k])
+  Object.entries(viewToParam).map(([k, v]) => [v, k]),
 );
 
 const updateFlags = () => {
   const tabId = taskPanelItems.find((item) => displayTaskComponent.value === item.text)?.id;
   activeTabId.value = tabId || 'grid';
-  selectedIndex.value = taskPanelItems.findIndex(i => i.text === displayTaskComponent.value) || 0;
+  selectedIndex.value = taskPanelItems.findIndex((i) => i.text === displayTaskComponent.value) || 0;
 };
 
 const setQueryParam = () => {
