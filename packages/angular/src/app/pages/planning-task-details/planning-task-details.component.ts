@@ -1,7 +1,8 @@
 import {
   Component, OnInit, NgModule
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import {
   DxButtonModule,
   DxDropDownButtonModule,
@@ -20,6 +21,9 @@ import { DataService } from 'src/app/services';
 import { TaskFormModule } from 'src/app/components/library/task-form/task-form.component';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
+const DEFAULT_TASK_ID = 1;
+
+
 @Component({
   templateUrl: './planning-task-details.component.html',
   styleUrls: ['./planning-task-details.component.scss'],
@@ -28,13 +32,19 @@ import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 export class PlanningTaskDetailsComponent implements OnInit {
   task: Task;
 
-  taskId = 1;
+  taskId: number;
 
   taskName = 'Loading...';
 
   isLoading = false;
 
-  constructor(private service: DataService) {
+  constructor(
+    private service: DataService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {
+    const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
+    this.taskId = id || DEFAULT_TASK_ID;
   }
 
   loadData = () => {
@@ -52,6 +62,10 @@ export class PlanningTaskDetailsComponent implements OnInit {
   refresh = () => {
     this.isLoading = true;
     this.loadData();
+  }
+
+  navigateBack(): void {
+    this.location.back()
   }
 }
 

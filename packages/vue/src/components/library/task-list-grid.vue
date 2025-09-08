@@ -204,7 +204,7 @@ let useNavigation = true;
 
 const navigateToDetails = (e: DxDataGridTypes.RowClickEvent) => {
   if (useNavigation && e.rowType !== 'detailAdaptive') {
-    router.push('/planning-task-details');
+    router.push(`/planning-task-details?id=${e.data.id}`);
   }
 };
 

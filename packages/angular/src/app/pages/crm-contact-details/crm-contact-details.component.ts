@@ -1,7 +1,8 @@
 import {
   Component, OnInit, NgModule,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import {
   DxButtonModule,
   DxDropDownButtonModule,
@@ -22,13 +23,15 @@ import { ContactFormModule } from 'src/app/components/library/contact-form/conta
 import { ContactCardsModule } from 'src/app/components/utils/contact-cards/contact-cards.component';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
+const DEFAULT_CONTACT_ID = 12;
+
 @Component({
   templateUrl: './crm-contact-details.component.html',
   styleUrls: ['./crm-contact-details.component.scss'],
   providers: [DataService],
 })
 export class CrmContactDetailsComponent implements OnInit {
-  contactId = 12;
+  contactId: number;
 
   contactData: Contact;
 
@@ -44,7 +47,13 @@ export class CrmContactDetailsComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(private service: DataService) {
+  constructor(
+    private service: DataService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {
+    const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
+    this.contactId = id || DEFAULT_CONTACT_ID;
   }
 
   ngOnInit(): void {
@@ -85,6 +94,10 @@ export class CrmContactDetailsComponent implements OnInit {
     this.isLoading = true;
     this.loadData();
   };
+
+  navigateBack(): void {
+    this.location.back()
+  }
 }
 
 @NgModule({

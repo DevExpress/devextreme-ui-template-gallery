@@ -54,7 +54,7 @@ const notifyByCard = (event: {event: Event}) => {
 };
 
 const navigateToDetails = () => {
-  router.push('/planning-task-details');
+  router.push(`/planning-task-details?id=${props.task?.id}`);
 };
 </script>
 

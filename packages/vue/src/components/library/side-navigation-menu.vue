@@ -67,7 +67,6 @@ function updateSelection() {
   }
 
   treeViewRef.value.instance.selectItem(route.path);
-  treeViewRef.value.instance.expandItem(route.path);
 }
 
 onMounted(() => {
@@ -89,6 +88,7 @@ watch(
       treeViewRef.value?.instance.collapseAll();
     } else {
       updateSelection();
+      treeViewRef.value.instance.expandItem(route.path);
     }
   },
 );

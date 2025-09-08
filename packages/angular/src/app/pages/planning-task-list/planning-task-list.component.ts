@@ -19,6 +19,7 @@ import { TaskListGridComponent, TaskListModule } from 'src/app/components/librar
 import { TaskListKanbanModule, TaskListKanbanComponent } from 'src/app/components/library/task-list-kanban/task-list-kanban.component';
 import { TaskListGanttComponent, TaskListGanttModule } from 'src/app/components/library/task-list-gantt/task-list-gantt.component';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './planning-task-list.component.html',
@@ -40,6 +41,8 @@ export class PlanningTaskListComponent implements OnInit {
 
   displayTaskComponent = this.taskPanelItems[0].text;
 
+  selectedIndex = 0;
+
   isAddTaskPopupOpened = false;
 
   displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
@@ -48,8 +51,17 @@ export class PlanningTaskListComponent implements OnInit {
 
   taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
-  constructor(private service: DataService, protected screen: ScreenService) {
-  }
+  private readonly viewToParam: Record<string, string> = {
+    [this.taskPanelItems[0].text]: 'list',
+    [this.taskPanelItems[1].text]: 'kanban-board',
+    [this.taskPanelItems[2].text]: 'gantt'
+  };
+
+  private readonly paramToView: Record<string, string> = Object.fromEntries(
+    Object.entries(this.viewToParam).map(([k, v]) => [v, k])
+  );
+
+  constructor(private service: DataService, protected screen: ScreenService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.taskCollections$ = forkJoin([
@@ -59,14 +71,24 @@ export class PlanningTaskListComponent implements OnInit {
       map(
         ([filteredTasks, allTasks]) => { return { allTasks, filteredTasks }  })
     );
+    this.route.queryParamMap.subscribe(params => {
+      const viewParam = params.get('view');
+      if (viewParam && this.paramToView[viewParam] && this.paramToView[viewParam] !== this.displayTaskComponent) {
+        this.displayTaskComponent = this.paramToView[viewParam];
+        this.updateFlags();
+      } else if (!viewParam) {
+        this.updateQueryParam();
+      }
+    });
+
+    this.updateFlags();
   }
 
   tabValueChange(e: DxTabsTypes.ItemClickEvent) {
     const { itemData } = e;
-
     this.displayTaskComponent = itemData.text;
-    this.displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
-    this.displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
+    this.updateFlags();
+    this.updateQueryParam();
   };
 
   addTask = () => {
@@ -104,6 +126,20 @@ export class PlanningTaskListComponent implements OnInit {
   };
 
   exportDataGridToXSLX = () => this.dataGrid.onExportingToXLSX();
+
+  private updateFlags() {
+    this.displayGrid = this.displayTaskComponent === this.taskPanelItems[0].text;
+    this.displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
+    const idx = this.taskPanelItems.findIndex(i => i.text === this.displayTaskComponent);
+    this.selectedIndex = idx >= 0 ? idx : 0;
+  }
+
+  private updateQueryParam() {
+    const qp = this.viewToParam[this.displayTaskComponent];
+    if (qp) {
+      this.router.navigate([], { queryParams: { view: qp }, queryParamsHandling: 'merge', replaceUrl: true });
+    }
+  }
 }
 
 @NgModule({

@@ -73,8 +73,8 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
   }, [formData, isEditing]);
 
   const navigateToDetails = useCallback(() => {
-    navigate('/crm-contact-details');
-  }, []);
+    navigate(`/crm-contact-details?id=${formData.id}`);
+  }, [formData.id]);
 
   const renderCustomOpportunities = useCallback(() => {
     return (

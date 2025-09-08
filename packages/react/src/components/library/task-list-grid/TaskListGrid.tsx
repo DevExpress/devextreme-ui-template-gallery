@@ -56,9 +56,9 @@ export const TaskListGrid = React.forwardRef<DataGridRef, PlanningProps>(({ data
     setData(dataSource.filter((d) => d.status && d.priority));
   }, [dataSource]);
 
-  const navigateToDetails = useCallback(({ rowType }: DataGridTypes.RowClickEvent) => {
+  const navigateToDetails = useCallback(({ rowType, data }: DataGridTypes.RowClickEvent) => {
     if (useNavigation && rowType !== 'detailAdaptive') {
-      navigate('/planning-task-details');
+      navigate(`/planning-task-details?id=${data.id}`);
     }
   }, []);
 
