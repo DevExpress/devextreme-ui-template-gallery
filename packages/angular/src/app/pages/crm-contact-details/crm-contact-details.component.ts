@@ -1,8 +1,8 @@
 import {
   Component, OnInit, NgModule,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule, Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import {
   DxButtonModule,
   DxDropDownButtonModule,
@@ -50,10 +50,10 @@ export class CrmContactDetailsComponent implements OnInit {
   constructor(
     private service: DataService,
     private route: ActivatedRoute,
-    private router: Router
+    private location: Location
   ) {
-    const id = this.route.snapshot.queryParamMap.get('id');
-    this.contactId = id ? parseInt(id, 10) : DEFAULT_CONTACT_ID;
+    const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
+    this.contactId = id || DEFAULT_CONTACT_ID;
   }
 
   ngOnInit(): void {
@@ -96,7 +96,7 @@ export class CrmContactDetailsComponent implements OnInit {
   };
 
   navigateBack(): void {
-    this.router.navigate(['/crm-contact-list']);
+    this.location.back()
   }
 }
 

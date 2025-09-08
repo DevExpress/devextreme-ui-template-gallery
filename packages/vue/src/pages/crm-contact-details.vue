@@ -103,7 +103,7 @@ import ContactForm from '@/components/library/contact-form.vue';
 import ContactCards from '@/components/utils/contact-cards.vue';
 
 const DEFAULT_CONTACT_ID = 12;
-let contactId;
+let contactId: number;
 const contactName = ref('');
 const contactData = ref<Contact>();
 const isLoading = ref(false);
@@ -112,8 +112,8 @@ const route = useRoute();
 
 async function loadData() {
   isLoading.value = true;
-  const queryId = route.query.id;
-  contactId = queryId ? Number(queryId) : DEFAULT_CONTACT_ID;
+  const queryId = Number(route.query.id);
+  contactId = queryId || DEFAULT_CONTACT_ID;
   const data = await getContact(contactId);
 
   contactData.value = data;
@@ -126,7 +126,7 @@ const refresh = () => {
 };
 
 const navigateBack = () => {
-  router.push('/crm-contact-list');
+  router.go(-1);
 };
 
 onMounted(() => {

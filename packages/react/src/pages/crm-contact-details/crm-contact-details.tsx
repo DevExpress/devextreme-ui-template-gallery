@@ -27,9 +27,9 @@ const DEFAULT_CONTACT_ID = 12;
 
 export const CRMContactDetails = () => {
   const [searchParams] = useSearchParams();
-  const id = searchParams.get('id');
+  const id = parseInt(searchParams.get('id') || '', 10);
   const navigate = useNavigate();
-  const contactId = id ? parseInt(id, 10) : DEFAULT_CONTACT_ID;
+  const contactId = id || DEFAULT_CONTACT_ID;
   const [data, setData] = useState<Contact>();
   const [notes, setNotes] = useState();
   const [messages, setMessages] = useState([]);
@@ -79,7 +79,7 @@ export const CRMContactDetails = () => {
             <Button
               icon='arrowleft'
               stylingMode='text'
-              onClick={() => navigate('/crm-contact-list')}
+              onClick={() => navigate(-1)}
             />
           </Item>
           <Item location='before' text={ data?.name ?? 'Loading...' } />

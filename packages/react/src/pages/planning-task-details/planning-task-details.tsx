@@ -20,9 +20,9 @@ const DEFAULT_TASK_ID = 1;
 
 export const PlanningTaskDetails = () => {
   const [searchParams] = useSearchParams();
-  const id = searchParams.get('id');
+  const id = parseInt(searchParams.get('id') || '', 10);
   const navigate = useNavigate();
-  const taskId = id ? parseInt(id, 10) : DEFAULT_TASK_ID;
+  const taskId = id || DEFAULT_TASK_ID;
   const [task, setTask] = useState<Task>();
   const [isLoading, setIsLoading] = useState(false);
 

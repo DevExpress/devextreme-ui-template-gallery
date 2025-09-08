@@ -126,8 +126,8 @@ const notes = computed(() => taskData.value?.notes);
 
 async function loadData() {
   isLoading.value = true;
-  const queryId = route.query.id;
-  taskId = queryId ? Number(queryId) : DEFAULT_TASK_ID;
+  const queryId = Number(route.query.id);
+  taskId = queryId || DEFAULT_TASK_ID;
   const data = await getTask(taskId);
 
   taskData.value = data;
