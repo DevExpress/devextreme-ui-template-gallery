@@ -30,8 +30,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    - name: Run npm install for metadata
-      run: npm install
+    - name: Run npm ci for metadata
+      run: npm ci
       working-directory: packages/metadata
 
     - name: Test Metadata
@@ -99,8 +99,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    - name: Run npm install
-      run: npm install --no-audit --no-fund
+    - name: Run npm ci
+      run: npm ci --no-audit --no-fund
 
     - name: Install Internal Packages
       uses: DevExpress/github-actions/install-internal-package@main
