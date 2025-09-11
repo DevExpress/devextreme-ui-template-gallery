@@ -48,8 +48,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    - name: Run npm install
-      run: npm install
+    - name: Run npm ci
+      run: npm ci
 
     - name: Install Internal Packages
       uses: DevExpress/github-actions/install-internal-package@main
@@ -96,8 +96,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    - name: Run npm install
-      run: npm install
+    - name: Run npm ci
+      run: npm ci
 
     - name: Install Internal Packages
       uses: DevExpress/github-actions/install-internal-package@main
