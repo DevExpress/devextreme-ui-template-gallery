@@ -11,7 +11,7 @@ export const TaskListGantt = React.forwardRef<GanttRef, PlanningProps>(({ dataSo
   return (
     <div className='gantt'>
       <Gantt ref={ref} taskListWidth={500} scaleType='weeks' height={700}>
-        <Tasks dataSource={dataSource} startExpr='startDate' endExpr='dueDate' titleExpr='text' />
+        <Tasks dataSource={dataSource} keyExpr='taskId' startExpr='startDate' endExpr='dueDate' titleExpr='text' />
         <Column dataField='text' caption='Subject' width={300} />
         <Column dataField='startDate' caption='Start Date' dataType='date' sortOrder='asc' />
         <Column dataField='dueDate' caption='Due Date' dataType='date' />
