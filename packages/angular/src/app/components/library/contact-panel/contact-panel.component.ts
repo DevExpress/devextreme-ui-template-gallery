@@ -159,6 +159,8 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
   }
 
   navigateToDetails = () => {
-    this.router.navigate(['/crm-contact-details']);
-  };
+    this.router.navigate(['/crm-contact-details'], {
+      queryParams: { id: this.contactData.id }
+    });
+  }
 }

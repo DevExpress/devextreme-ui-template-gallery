@@ -24,7 +24,7 @@ import { AuthService, IResponse, ThemeService } from 'src/app/services';
 })
 export class LoginFormComponent implements OnInit {
   @Input() resetLink = '/auth/reset-password';
-  @Input() createAccountLink = '/auth/create-account';
+  @Input() createAccountLink = '/auth/register';
 
   defaultAuthData: IResponse;
 

@@ -16,20 +16,20 @@ export const router = createRouter({
       redirect: '/crm-contact-list',
     },
     {
-      path: '/login',
-      name: 'login',
+      path: '/sign-in',
+      name: 'sign-in',
       meta: {
         requiresAuth: false,
         layout: simpleLayout,
         title: 'Sign In',
       },
-      props: { resetLink: '/reset-password', createAccountLink: '/create-account' },
+      props: { resetLink: '/reset-password', createAccountLink: '/register' },
       component: loadAuthComponent('login-form'),
     },
     {
       path: '/reset-password',
       name: 'reset-password',
-      props: { signInLink: '/login', buttonLink: '/login' },
+      props: { signInLink: '/sign-in', buttonLink: '/sign-in' },
       meta: {
         requiresAuth: false,
         layout: simpleLayout,
@@ -39,14 +39,14 @@ export const router = createRouter({
       component: loadAuthComponent('reset-password-form'),
     },
     {
-      path: '/create-account',
-      name: 'create-account',
+      path: '/register',
+      name: 'register',
       meta: {
         requiresAuth: false,
         layout: simpleLayout,
-        title: 'Sign Up',
+        title: 'Register',
       },
-      props: { redirectLink: '/login', buttonLink: '/login' },
+      props: { redirectLink: '/sign-in', buttonLink: '/sign-in' },
       component: loadAuthComponent('create-account-form'),
     },
     {
@@ -60,16 +60,20 @@ export const router = createRouter({
       component: loadAuthComponent('change-password-form'),
     },
     ...[
+      { from: '/create-account', to: '/register' },
+      { from: '/login', to: '/sign-in' },
+    ].map((redirect) => ({ path: redirect.from, redirect: redirect.to })),
+    ...[
       'crm-contact-list',
       'crm-contact-details',
       'planning-task-list',
       'planning-task-details',
       'planning-scheduler',
       'analytics-dashboard',
-      'analytics-sales-report',
+      'analytics-sales-analysis',
       'analytics-geography',
       'sign-in-form',
-      'sign-up-form',
+      'register-form',
       'reset-password-form',
       'user-profile',
     ].map((name) => ({
@@ -81,6 +85,10 @@ export const router = createRouter({
       // eslint-disable-next-line func-call-spacing
       component: () => import (/* webpackChunkName: "pages" */ `@/pages/${name}.vue`),
     })),
+    ...[
+      { from: '/analytics-sales-report', to: '/analytics-sales-analysis' },
+      { from: '/sign-up-form', to: '/register-form' },
+    ].map((redirect) => ({ path: redirect.from, redirect: redirect.to })),
   ],
 });
 

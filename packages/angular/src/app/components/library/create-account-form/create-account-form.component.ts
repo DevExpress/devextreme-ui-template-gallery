@@ -22,18 +22,19 @@ import {AuthService, IResponse} from 'src/app/services';
     ]
 })
 export class CreateAccountFormComponent implements OnInit {
-  @Input() redirectLink = '/auth/login';
+  @Input() redirectLink = '/auth/sign-in';
 
-  @Input() buttonLink = '/auth/login';
+  @Input() buttonLink = '/auth/sign-in';
+
+  private authService = inject(AuthService);
+
+  private router = inject(Router);
 
   loading = false;
 
   defaultAuthData: IResponse;
 
   formData: any = {};
-
-  private authService = inject(AuthService);
-  private router = inject(Router);
 
   async onSubmit(e: Event) {
     e.preventDefault();

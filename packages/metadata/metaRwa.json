@@ -107,7 +107,7 @@
                 "Demos": [
                     {
                         "Title": "Sales Dashboard",
-                        "Name": "analytics-sales-report",
+                        "Name": "analytics-sales-analysis",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
                             "Angular",
@@ -153,11 +153,11 @@
                 ]
             },
             {
-                "Name": "Sign Up Form",
+                "Name": "Register Form",
                 "Demos": [
                     {
-                        "Title": "Sign Up Form",
-                        "Name": "sign-up-form",
+                        "Title": "Register Form",
+                        "Name": "register-form",
                         "DemoType": "Rwa",
                         "AvailableApproaches": [
                             "Angular",

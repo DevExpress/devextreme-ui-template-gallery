@@ -31,8 +31,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node
 
-    - name: Run npm install
-      run: npm install
+    - name: Run npm ci
+      run: npm ci
 
     - name: Lint applications
       run: npm run lint-${{ matrix.PROJECT }}

@@ -31,7 +31,9 @@ export class TaskKanbanCardComponent {
   };
 
   navigateToDetails = () => {
-    this.router.navigate(['/planning-task-details']);
+    this.router.navigate(['/planning-task-details'], {
+      queryParams: { id: this.task.id }
+    });
   };
 }
 

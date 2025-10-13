@@ -86,7 +86,7 @@ export const ContactNewForm = ({ initData, onDataChanged }: { initData: Contact,
             onValueChange={updateField('phone')}
             icon='tel'
             label='Phone'
-            mask='+1(000)000-0000'
+            mask='(000) 000-0000'
           />
         </FormItem>
         <FormItem>

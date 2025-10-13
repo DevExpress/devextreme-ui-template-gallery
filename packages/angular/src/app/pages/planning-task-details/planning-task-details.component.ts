@@ -1,5 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import {
   DxButtonModule,
   DxDropDownButtonModule,
@@ -16,6 +17,9 @@ import { Task } from 'src/app/types/task';
 import { DataService } from 'src/app/services';
 import { TaskFormComponent } from 'src/app/components/library/task-form/task-form.component';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
+
+const DEFAULT_TASK_ID = 1;
+
 
 @Component({
     templateUrl: './planning-task-details.component.html',
@@ -41,11 +45,16 @@ export class PlanningTaskDetailsComponent implements OnInit {
 
   task: Task;
 
-  taskId = 1;
+  taskId: number;
 
   taskName = 'Loading...';
 
   isLoading = false;
+
+  constructor() {
+    const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
+    this.taskId = id || DEFAULT_TASK_ID;
+  }
 
   loadData = () => {
     this.service.getTask(this.taskId).subscribe((data) => {
@@ -62,6 +71,10 @@ export class PlanningTaskDetailsComponent implements OnInit {
   refresh = () => {
     this.isLoading = true;
     this.loadData();
+  }
+
+  navigateBack(): void {
+    this.location.back()
   }
 }
 

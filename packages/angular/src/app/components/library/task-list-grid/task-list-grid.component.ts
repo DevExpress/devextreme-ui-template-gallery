@@ -109,7 +109,9 @@ export class TaskListGridComponent implements OnChanges {
 
   navigateToDetails = (e: DxDataGridTypes.RowClickEvent) => {
     if(this.useNavigation && e.rowType !== 'detailAdaptive') {
-      this.router.navigate(['/planning-task-details']);
+      this.router.navigate(['/planning-task-details'], {
+        queryParams: { id: e.data.id }
+      });
     }
   };
 }

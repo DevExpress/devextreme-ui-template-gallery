@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 
@@ -31,6 +32,7 @@ import { Task } from '../../types/task';
 const listsData = ['List', 'Kanban Board', 'Gantt'];
 
 export const PlanningTaskList = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const gridRef = useRef<DataGridRef>(null);
   const kanbanRef = useRef<SortableRef>(null);
   const ganttRef = useRef<GanttRef>(null);
@@ -86,10 +88,44 @@ export const PlanningTaskList = () => {
     newTaskData = data;
   }, []);
 
+  const viewToParam: Record<string, string> = {
+    [listView]: 'list',
+    [kanbanView]: 'kanban-board',
+    [ganttView]: 'gantt'
+  };
+
+  const paramToView: Record<string, string> = Object.fromEntries(
+    Object.entries(viewToParam).map(([k, v]) => [v, k])
+  );
+
+  useEffect(() => {
+    const qp = searchParams.get('view');
+    if (qp && paramToView[qp]) {
+      const desiredView = paramToView[qp];
+      if (desiredView !== view) {
+        setView(desiredView);
+        setIndex(listsData.findIndex((d) => d === desiredView));
+      }
+    } else if (!qp) {
+      setSearchParams((prev) => {
+        const next = new URLSearchParams(prev);
+        next.set('view', viewToParam[view]);
+        return next;
+      });
+    }
+  }, [searchParams, view, listsData, setSearchParams]);
+
   const onTabClick = useCallback((e: { itemData?: string }) => {
-    setView(e.itemData || '');
-    setIndex(listsData.findIndex((d) => d === e.itemData));
-  }, []);
+    const newView = e.itemData || '';
+    setView(newView);
+    setIndex(listsData.findIndex((d) => d === newView));
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      const qpValue = viewToParam[newView] || viewToParam[listView];
+      next.set('view', qpValue);
+      return next;
+    });
+  }, [listsData, setSearchParams]);
 
   const onAddTaskClick = useCallback(() => {
     setFormTaskInitData({ ...newTaskDefaults });

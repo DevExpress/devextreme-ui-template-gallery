@@ -1,6 +1,6 @@
 <template>
   <card-analytics
-    title="Product Sale by Range"
+    title="Sales by Date Range"
   >
     <dx-pie-chart
       class="sales-pie"

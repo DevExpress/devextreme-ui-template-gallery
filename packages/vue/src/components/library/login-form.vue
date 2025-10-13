@@ -71,7 +71,7 @@
       </router-link>
     </div>
     <dx-button
-      text="Create an account"
+      text="Register"
       width="100%"
       @click="onCreateAccountClick"
       :styling-mode="buttonStylingMode"

@@ -6,6 +6,7 @@
           <dx-button
             icon="arrowleft"
             styling-mode="text"
+            @click="navigateBack"
           />
         </dx-toolbar-item>
         <dx-toolbar-item
@@ -86,6 +87,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxButton } from 'devextreme-vue/button';
 import { DxDropDownButton, DxItem as DxDropDownItem } from 'devextreme-vue/drop-down-button';
@@ -100,13 +102,18 @@ import type { Contact } from '@/types/contact';
 import ContactForm from '@/components/library/contact-form.vue';
 import ContactCards from '@/components/utils/contact-cards.vue';
 
-const contactId = 12;
+const DEFAULT_CONTACT_ID = 12;
+let contactId: number;
 const contactName = ref('');
 const contactData = ref<Contact>();
 const isLoading = ref(false);
+const router = useRouter();
+const route = useRoute();
 
 async function loadData() {
   isLoading.value = true;
+  const queryId = Number(route.query.id);
+  contactId = queryId || DEFAULT_CONTACT_ID;
   const data = await getContact(contactId);
 
   contactData.value = data;
@@ -116,6 +123,10 @@ async function loadData() {
 
 const refresh = () => {
   loadData();
+};
+
+const navigateBack = () => {
+  router.go(-1);
 };
 
 onMounted(() => {

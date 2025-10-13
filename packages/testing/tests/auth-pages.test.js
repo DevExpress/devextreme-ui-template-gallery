@@ -13,7 +13,7 @@ import { screenModes, themeModes, timeoutSecond } from '../config.js';
 
 const project = process.env.project;
 const BASE_URL = `http://localhost:${process.env.port}/#/sign-in-form`;
-const LOGGED_OUT_URL = `http://localhost:${process.env.port}/#${project === 'angular' ? '/auth' : ''}/login`;
+const LOGGED_OUT_URL = `http://localhost:${process.env.port}/#${project === 'angular' ? '/auth' : ''}/sign-in`;
 
 const requestLogger = RequestLogger();
 fixture`Auth pages`;
@@ -43,7 +43,7 @@ fixture`Auth pages`;
 
         await t.click(Selector('a').withText('Sign In'));
 
-        await t.click(Selector('.dx-button[aria-label="Create an account"]'));
+        await t.click(Selector('.dx-button[aria-label="Register"]'));
 
         await takeScreenshot(`auth-create-account-prompt${postfix}`, 'body');
 

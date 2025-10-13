@@ -17,6 +17,8 @@ import { Opportunities } from 'src/app/types/opportunities';
 import { ContactFormComponent } from 'src/app/components/library/contact-form/contact-form.component';
 import { ContactCardsComponent } from 'src/app/components/utils/contact-cards/contact-cards.component';
 
+const DEFAULT_CONTACT_ID = 12;
+
 @Component({
     templateUrl: './crm-contact-details.component.html',
     styleUrls: ['./crm-contact-details.component.scss'],
@@ -36,7 +38,7 @@ import { ContactCardsComponent } from 'src/app/components/utils/contact-cards/co
 export class CrmContactDetailsComponent implements OnInit {
   private service = inject(DataService);
 
-  contactId = 12;
+  contactId: number;
 
   contactData: Contact;
 
@@ -51,6 +53,11 @@ export class CrmContactDetailsComponent implements OnInit {
   contactName = 'Loading...';
 
   isLoading = false;
+
+  constructor() {
+    const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
+    this.contactId = id || DEFAULT_CONTACT_ID;
+  }
 
   ngOnInit(): void {
     this.loadData();
@@ -90,4 +97,8 @@ export class CrmContactDetailsComponent implements OnInit {
     this.isLoading = true;
     this.loadData();
   };
+
+  navigateBack(): void {
+    this.location.back()
+  }
 }

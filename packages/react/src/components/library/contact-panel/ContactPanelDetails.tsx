@@ -73,8 +73,8 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
   }, [formData, isEditing]);
 
   const navigateToDetails = useCallback(() => {
-    navigate('/crm-contact-details');
-  }, []);
+    navigate(`/crm-contact-details?id=${formData.id}`);
+  }, [formData.id]);
 
   const renderCustomOpportunities = useCallback(() => {
     return (
@@ -167,7 +167,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                       isEditing={!isEditing}
                       onValueChange={updateField('phone')}
                       icon='tel'
-                      mask='+1(000)000-0000'
+                      mask='(000) 000-0000'
                     />
                   </FormItem>
                   <FormItem>
@@ -211,7 +211,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
                     stylingMode: 'text',
                     dropDownOptions: { width: 'auto' },
                     width: 'auto',
-                    items: ['Call', 'Send Fax', 'Send Email', 'Make a Meeting']
+                    items: ['Call', 'Send Fax', 'Send Email', 'Schedule a Meeting']
                   }} />
               </Toolbar>
             </div>

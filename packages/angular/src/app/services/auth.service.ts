@@ -73,7 +73,7 @@ export class AuthService {
     try {
       // Send request
 
-      this.router.navigate(['/auth/create-account']);
+      this.router.navigate(['/auth/register']);
       return {
         isOk: true,
       };
@@ -116,7 +116,7 @@ export class AuthService {
   }
 
   async logOut() {
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/auth/sign-in']);
   }
 }
 
@@ -128,14 +128,14 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const isLoggedIn = this.authService.loggedIn;
     const isAuthForm = [
-      'login',
+      'sign-in',
       'reset-password',
-      'create-account',
+      'register',
       'change-password/:recoveryCode',
     ].includes(route.routeConfig?.path || defaultPath);
 
     if (!isLoggedIn && isAuthForm) {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/auth/sign-in']);
     }
 
     if (isLoggedIn) {

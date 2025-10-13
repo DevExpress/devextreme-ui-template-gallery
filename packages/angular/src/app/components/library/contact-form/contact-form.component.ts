@@ -19,6 +19,7 @@ import { Contact } from 'src/app/types/contact';
 import { ValidationRule } from 'devextreme-angular/common';
 import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import { ToolbarFormComponent } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
+import { US_STATES } from 'src/app/shared/constants';
 
 @Component({
     selector: 'contact-form',
@@ -50,6 +51,8 @@ export class ContactFormComponent {
   isEditing = false;
 
   zipCodeValidator: ValidationRule = { type: 'pattern', pattern: /^\d{5}$/, message: 'Zip is invalid' };
+
+  usStates = US_STATES;
 
   handleEditClick() {
     this.savedData = { ...this.contactData };

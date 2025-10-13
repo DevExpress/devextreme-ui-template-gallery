@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   CRMContactDetails,
   CRMContactList,
@@ -5,14 +6,15 @@ import {
   PlanningTaskList,
   PlanningTaskDetails,
   AnalyticsDashboard,
-  AnalyticsSalesReport,
+  AnalyticsSalesAnalysis,
   AnalyticsGeography,
   SignInPage,
-  SignUpPage,
+  RegisterPage,
   ResetPasswordPage,
   UserProfile
 } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
+import { Navigate } from 'react-router-dom';
 
 const routes = [
   {
@@ -40,8 +42,8 @@ const routes = [
     element: AnalyticsDashboard,
   },
   {
-    path: '/analytics-sales-report',
-    element: AnalyticsSalesReport,
+    path: '/analytics-sales-analysis',
+    element: AnalyticsSalesAnalysis,
   },
   {
     path: '/analytics-geography',
@@ -52,8 +54,8 @@ const routes = [
     element: SignInPage,
   },
   {
-    path: '/sign-up-form',
-    element: SignUpPage,
+    path: '/register-form',
+    element: RegisterPage,
   },
   {
     path: '/reset-password-form',
@@ -65,9 +67,20 @@ const routes = [
   },
 ];
 
-export const appRoutes = routes.map((route) => {
-  return {
+const redirects = [
+  { from: '/analytics-sales-report', to: '/analytics-sales-analysis' },
+  { from: '/sign-up-form', to: '/register-form' },
+];
+
+const redirectRoutes = redirects.map(({ from, to }) => ({
+  path: from,
+  element: <Navigate to={to} replace />,
+}));
+
+export const appRoutes = [
+  ...routes.map((route) => ({
     ...route,
     element: withNavigationWatcher(route.element, route.path),
-  };
-});
+  })),
+  ...redirectRoutes,
+];

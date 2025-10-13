@@ -26,4 +26,8 @@ export const analyticsPanelItems: Array<{ text: string, value: string, key: numb
     text: 'All',
     value: '2018-01-01/2022-01-01',
     key: 5,
+  }, {
+    text: 'Custom',
+    value: '2020-05-01/2021-07-31',
+    key: 6,
   }];

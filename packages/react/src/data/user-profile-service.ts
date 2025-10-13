@@ -45,7 +45,7 @@ export const service = {
       {
         dataField: 'phone',
         editorOptions: {
-          mask: '+1(000)000-0000',
+          mask: '(000) 000-0000',
         }
       },
       {

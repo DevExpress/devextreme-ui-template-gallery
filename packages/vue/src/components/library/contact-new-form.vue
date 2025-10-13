@@ -79,7 +79,7 @@
           :is-editing="true"
           icon="tel"
           label="Phone"
-          mask="+1(000)000-0000"
+          mask="(000) 000-0000"
         />
       </dx-form-item>
       <dx-form-item>

@@ -8,6 +8,7 @@
   >
     <dx-tasks
       :data-source="props.tasks"
+      :key-expr="'taskId'"
       :start-expr="'startDate'"
       :end-expr="'dueDate'"
       title-expr="text"
