@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
 
 import { Observable, forkJoin } from 'rxjs';
@@ -23,26 +23,26 @@ import { analyticsPanelItems } from 'src/app/types/resource';
 import { Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 
 @Component({
-    templateUrl: './analytics-sales-report.component.html',
-    styleUrls: ['./analytics-sales-report.component.scss'],
+    templateUrl: './analytics-sales-analysis.component.html',
+    styleUrls: ['./analytics-sales-analysis.component.scss'],
     providers: [ DataService ],
-  imports: [
-    DxScrollViewModule,
-    DxLoadPanelModule,
-    DxButtonModule,
-    DxToolbarModule,
-    DxPieChartModule,
-    DxChartModule,
-    DxDropDownButtonModule,
-    DxRangeSelectorModule,
-    ToolbarAnalyticsComponent,
-    CommonModule,
-    SalesByRangeCardComponent,
-    SalesPerformanceCardComponent,
-    SalesRangeCardComponent,
-  ]
+    imports: [
+      DxScrollViewModule,
+      DxLoadPanelModule,
+      DxButtonModule,
+      DxToolbarModule,
+      DxPieChartModule,
+      DxChartModule,
+      DxDropDownButtonModule,
+      DxRangeSelectorModule,
+      ToolbarAnalyticsComponent,
+      CommonModule,
+      SalesByRangeCardComponent,
+      SalesPerformanceCardComponent,
+      SalesRangeCardComponent,
+    ]
 })
-export class AnalyticsSalesReportComponent implements OnInit {
+export class AnalyticsSalesAnalysisComponent implements OnInit {
   private service = inject(DataService);
 
   groupByPeriods = ['Day', 'Month'];

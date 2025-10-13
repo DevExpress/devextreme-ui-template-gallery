@@ -1,6 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { forkJoin, map } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 import {
   DxButtonModule,
@@ -37,6 +38,10 @@ const DEFAULT_CONTACT_ID = 12;
 })
 export class CrmContactDetailsComponent implements OnInit {
   private service = inject(DataService);
+
+  private route = inject(ActivatedRoute);
+
+  private location = inject(Location);
 
   contactId: number;
 

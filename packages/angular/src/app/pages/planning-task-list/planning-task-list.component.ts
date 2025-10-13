@@ -49,6 +49,10 @@ export class PlanningTaskListComponent implements OnInit {
 
   private service = inject(DataService);
 
+  private route = inject(ActivatedRoute);
+
+  private router = inject(Router);
+
   protected screen = inject(ScreenService);
 
   newTask = newTask;
