@@ -30,8 +30,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Run npm ci for metadata
-        run: npm ci
+      - name: Run npm install for metadata
+        run: npm install
         working-directory: packages/metadata
 
       - name: Test Metadata
@@ -58,7 +58,7 @@ jobs:
 
       - name: DevExtreme - Install packages
         working-directory: devextreme
-        run: npm ci --no-audit --no-fund
+        run: npm install --no-audit --no-fund
 
       - name: DevExtreme - Build
         working-directory: devextreme/packages/devextreme
@@ -227,8 +227,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Run npm ci
-        run: npm ci --no-audit --no-fund --no-package-lock
+      - name: Run npm install
+        run: npm install --no-audit --no-fund --no-package-lock
 
       - name: Set theme
         run: npm run set-theme -- ${{ matrix.theme.fullName }}
