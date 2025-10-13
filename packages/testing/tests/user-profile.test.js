@@ -131,6 +131,7 @@ const NEW_PASSWORD = 'newpassword';
                 .nth(0),
             );
         });
+        await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
 
         const localPostfix = 'block-after-actions-wtih-form';
         await takeScreenshot(`basic-${localPostfix}${postfix}`, '.basic-info-card .form-container');

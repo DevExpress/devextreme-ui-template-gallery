@@ -44,6 +44,7 @@ const checkScreenMode = async (t, screenMode) => {
         await setTheme(t, themeMode);
         await forceResizeRecalculation(t, screenMode);
         await t.wait(1000);
+        await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
 
         await t.expect(Selector('body.dx-device-generic').count).eql(1);
         await takeScreenshot(`analytics-dashboard-all${postfix}`, 'body');
