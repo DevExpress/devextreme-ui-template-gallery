@@ -38,12 +38,18 @@ fixture`Auth pages`;
         await takeScreenshot(`auth-login-prompt${postfix}`, 'body');
 
         await t.click(Selector('a').withText('Forgot password?'));
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`auth-reset-password-prompt${postfix}`, 'body');
 
         await t.click(Selector('a').withText('Sign In'));
-
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
+        
         await t.click(Selector('.dx-button[aria-label="Register"]'));
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`auth-create-account-prompt${postfix}`, 'body');
 

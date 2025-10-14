@@ -55,17 +55,24 @@ fixture`Contact List`;
         await t.expect(inputs.nth(1).value).notContains('unwanted text');
 
         await t.click(Selector('.dx-button[aria-label=Edit]'));
-        await t.click('.contact-name'); // to remove focus from the pin button
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
         await takeScreenshot(`crm-contact-list-form-edit${postfix}`, Selector('.data-wrapper'));
         await t.typeText(inputs.nth(0), 'test 0');
 
         await t.click(Selector('.dx-button[aria-label=Save]'));
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
+        
         await takeScreenshot(`crm-contact-list-form-saved${postfix}`, Selector('.data-wrapper'));
 
         await t.click(Selector('[aria-label="Close"]'));
 
         await t.click(Selector('.dx-button[aria-label=All]'));
         await t.click(Selector('.dx-list-item-content').withText('Terminated'));
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
+        
         await takeScreenshot(`crm-contact-list-grid-filtering-terminated=${postfix}`, 'body');
 
         await t
