@@ -66,7 +66,7 @@ jobs:
           { project: 'react', page: 'auth-pages' },
           # { project: 'react', page: 'analytics-geography' }, # Menu contents disappear after item click (screen width 400)
           # { project: 'vue', page: 'crm-contact-details' }, No selector for Toolbar item on mobile device(bug)
-          { project: 'react', page: 'analytics-sales-analysis' }, # has some problems in screenshot test
+          { project: 'react', page: 'analytics-sales-analysis' },
           { project: 'react', page: 'user-profile' },
           { project: 'vue', page: 'crm-contact-list' },
           # { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)
