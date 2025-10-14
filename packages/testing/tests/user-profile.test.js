@@ -42,7 +42,6 @@ const NEW_PASSWORD = 'newpassword';
         await takeScreenshot(`user-profile${postfix}`, 'body');
         await t.click(Selector('.change-password-button'));
         await t.wait(1000);
-        await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
         await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
         await t.wait(2000);
 
