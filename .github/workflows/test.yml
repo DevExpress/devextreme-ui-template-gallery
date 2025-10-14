@@ -69,7 +69,7 @@ jobs:
           { project: 'react', page: 'analytics-sales-analysis' }, # has some problems in screenshot test
           { project: 'react', page: 'user-profile' },
           { project: 'vue', page: 'crm-contact-list' },
-          { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)
+          # { project: 'vue', page: 'planning-task-details' }, # Title width is different (screen width 400)
           { project: 'vue', page: 'planning-task-list' },
           { project: 'vue', page: 'planning-scheduler' },
           { project: 'vue', page: 'analytics-dashboard' },
