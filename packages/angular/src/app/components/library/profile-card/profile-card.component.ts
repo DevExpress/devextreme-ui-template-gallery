@@ -28,24 +28,24 @@ import { getSizeQualifier } from 'src/app/services/screen.service';
 type CardData = Record<string, any>;
 
 @Component({
-    selector: 'profile-card',
-    templateUrl: './profile-card.component.html',
-    styleUrls: ['profile-card.component.scss'],
-    imports: [
-      ApplyPipeDirective,
-      DxButtonModule,
-      DxDateBoxModule,
-      DxFormModule,
-      DxNumberBoxModule,
-      DxToolbarModule,
-      DxSelectBoxModule,
-      DxScrollViewModule,
-      DxTextBoxModule,
-      DxValidatorModule,
-      CommonModule,
-      PicturedItemSelectBoxComponent,
-      StatusSelectBoxComponent,
-    ],
+  selector: 'profile-card',
+  templateUrl: './profile-card.component.html',
+  styleUrls: ['profile-card.component.scss'],
+  imports: [
+    ApplyPipeDirective,
+    DxButtonModule,
+    DxDateBoxModule,
+    DxFormModule,
+    DxNumberBoxModule,
+    DxToolbarModule,
+    DxSelectBoxModule,
+    DxScrollViewModule,
+    DxTextBoxModule,
+    DxValidatorModule,
+    CommonModule,
+    PicturedItemSelectBoxComponent,
+    StatusSelectBoxComponent,
+  ],
 })
 export class ProfileCardComponent {
   @ViewChild('form', { static: true }) form: DxFormComponent;

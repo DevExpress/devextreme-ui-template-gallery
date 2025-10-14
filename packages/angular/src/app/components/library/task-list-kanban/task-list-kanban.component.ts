@@ -18,17 +18,17 @@ type Board = {
 };
 
 @Component({
-    selector: 'task-list-kanban',
-    templateUrl: './task-list-kanban.component.html',
-    styleUrls: ['./task-list-kanban.component.scss'],
-    imports: [
-      DxButtonModule,
-      DxScrollViewModule,
-      DxSortableModule,
-      TaskKanbanCardComponent,
-      CardMenuComponent,
-      CommonModule,
-    ]
+  selector: 'task-list-kanban',
+  templateUrl: './task-list-kanban.component.html',
+  styleUrls: ['./task-list-kanban.component.scss'],
+  imports: [
+    DxButtonModule,
+    DxScrollViewModule,
+    DxSortableModule,
+    TaskKanbanCardComponent,
+    CardMenuComponent,
+    CommonModule,
+  ]
 })
 export class TaskListKanbanComponent implements OnChanges {
   @ViewChild(DxSortableComponent, { static: false }) sortable: DxSortableComponent;

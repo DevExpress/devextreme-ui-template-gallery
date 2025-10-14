@@ -9,15 +9,15 @@ import { ContactStatusComponent } from 'src/app/components/utils/contact-status/
 import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
-    selector: 'status-select-box',
-    templateUrl: 'status-select-box.component.html',
-    styleUrls: ['./status-select-box.component.scss'],
-    imports: [
-      DxSelectBoxModule,
-      DxTextBoxModule,
-      ContactStatusComponent,
-      CommonModule
-    ],
+  selector: 'status-select-box',
+  templateUrl: 'status-select-box.component.html',
+  styleUrls: ['./status-select-box.component.scss'],
+  imports: [
+    DxSelectBoxModule,
+    DxTextBoxModule,
+    ContactStatusComponent,
+    CommonModule
+  ],
 })
 export class StatusSelectBoxComponent {
   @Input() value: string;

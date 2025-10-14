@@ -35,26 +35,26 @@ import { distinctUntilChanged, Subject, Subscription} from 'rxjs';
 import { Contact } from 'src/app/types/contact';
 
 @Component({
-    selector: 'contact-panel',
-    templateUrl: './contact-panel.component.html',
-    styleUrls: ['./contact-panel.component.scss'],
-    providers: [DataService],
-    imports: [
-      DxAccordionModule,
-      DxButtonModule,
-      DxDropDownButtonModule,
-      DxToolbarModule,
-      DxLoadPanelModule,
-      DxScrollViewModule,
-      DxFormModule,
-      DxValidatorModule,
-      DxValidationGroupModule,
-      FormTextboxComponent,
-      FormPhotoComponent,
-      CardActivitiesComponent,
-      ContactStatusComponent,
-      CommonModule,
-    ]
+  selector: 'contact-panel',
+  templateUrl: './contact-panel.component.html',
+  styleUrls: ['./contact-panel.component.scss'],
+  providers: [DataService],
+  imports: [
+    DxAccordionModule,
+    DxButtonModule,
+    DxDropDownButtonModule,
+    DxToolbarModule,
+    DxLoadPanelModule,
+    DxScrollViewModule,
+    DxFormModule,
+    DxValidatorModule,
+    DxValidationGroupModule,
+    FormTextboxComponent,
+    FormPhotoComponent,
+    CardActivitiesComponent,
+    ContactStatusComponent,
+    CommonModule,
+  ]
 })
 export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecked, OnDestroy {
   @Input() isOpened = false;
@@ -66,6 +66,12 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
   @Output() pinnedChange = new EventEmitter<boolean>();
 
   private pinEventSubject = new Subject<boolean>();
+
+  private screen = inject(ScreenService);
+
+  private service = inject(DataService);
+
+  private router = inject(Router);
 
   formData: Contact;
 
@@ -80,10 +86,6 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
   isPinEnabled = false;
 
   userPanelSubscriptions: Subscription[] = [];
-
-  private screen = inject(ScreenService);
-  private service = inject(DataService);
-  private router = inject(Router);
 
   constructor() {
     this.userPanelSubscriptions.push(

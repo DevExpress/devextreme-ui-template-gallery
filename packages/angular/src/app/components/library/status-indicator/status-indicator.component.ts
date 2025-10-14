@@ -6,11 +6,11 @@ import { TaskStatus, TaskPriority } from 'src/app/types/task';
 import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
 
 @Component({
-    selector: 'status-indicator',
-    template: `
-  <div
-    [ngClass]="{'input-with-bar': showBar }"
-    class="
+  selector: 'status-indicator',
+  template: `
+    <div
+      [ngClass]="{'input-with-bar': showBar }"
+      class="
       status
       status-indicator
       status-indicator-{{ dashValue }}">
@@ -25,11 +25,11 @@ import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
       </dx-text-box>
     </div>
   `,
-    styleUrls: ['./status-indicator.component.scss'],
-    imports: [
-      CommonModule,
-      DxTextBoxModule,
-    ]
+  styleUrls: ['./status-indicator.component.scss'],
+  imports: [
+    CommonModule,
+    DxTextBoxModule,
+  ]
 })
 export class StatusIndicatorComponent implements OnInit {
   @Input() value: TaskStatus | TaskPriority;

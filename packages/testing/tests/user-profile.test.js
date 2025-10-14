@@ -36,6 +36,8 @@ const NEW_PASSWORD = 'newpassword';
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
         await forceResizeRecalculation(t, screenMode);
         await setTheme(t, themeMode);
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`user-profile${postfix}`, 'body');
         await t.click(Selector('.change-password-button'));

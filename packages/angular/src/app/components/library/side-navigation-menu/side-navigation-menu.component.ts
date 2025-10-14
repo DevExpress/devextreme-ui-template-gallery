@@ -14,10 +14,10 @@ import * as events from 'devextreme/events';
 import { navigation } from '../../../app-navigation';
 
 @Component({
-    selector: 'side-navigation-menu',
-    templateUrl: './side-navigation-menu.component.html',
-    styleUrls: ['./side-navigation-menu.component.scss'],
-    imports: [ DxTreeViewModule ],
+  selector: 'side-navigation-menu',
+  templateUrl: './side-navigation-menu.component.html',
+  styleUrls: ['./side-navigation-menu.component.scss'],
+  imports: [ DxTreeViewModule ],
 })
 export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   @ViewChild(DxTreeViewComponent, { static: true })
@@ -62,6 +62,10 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
 
   private _items!: Record <string, unknown>[];
 
+  private _compactMode = false;
+
+  private elementRef = inject(ElementRef);
+
   get items() {
     if (!this._items) {
       this._items = navigation.map((item) => {
@@ -74,10 +78,6 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
 
     return this._items;
   }
-
-  private _compactMode = false;
-
-  private elementRef = inject(ElementRef);
 
   setSelectedItem() {
     if (!this.menu.instance) {

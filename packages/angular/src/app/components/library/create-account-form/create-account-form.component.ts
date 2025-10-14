@@ -10,16 +10,16 @@ import notify from 'devextreme/ui/notify';
 import {AuthService, IResponse} from 'src/app/services';
 
 @Component({
-    selector: 'app-create-account-form',
-    templateUrl: './create-account-form.component.html',
-    styleUrls: ['./create-account-form.component.scss'],
-    imports: [
-      CommonModule,
-      RouterModule,
-      LoginOauthComponent,
-      DxFormModule,
-      DxLoadIndicatorModule,
-    ]
+  selector: 'app-create-account-form',
+  templateUrl: './create-account-form.component.html',
+  styleUrls: ['./create-account-form.component.scss'],
+  imports: [
+    CommonModule,
+    RouterModule,
+    LoginOauthComponent,
+    DxFormModule,
+    DxLoadIndicatorModule,
+  ]
 })
 export class CreateAccountFormComponent implements OnInit {
   @Input() redirectLink = '/auth/sign-in';

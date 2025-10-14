@@ -13,9 +13,7 @@ import {
   DxToolbarModule,
 } from 'devextreme-angular';
 import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
-import {
-  StatusIndicatorComponent,
-} from 'src/app/components';
+import { StatusIndicatorComponent } from 'src/app/components';
 import { exportDataGrid as exportToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportToXLSX } from 'devextreme/excel_exporter';
 import { Workbook } from 'exceljs';
@@ -26,20 +24,20 @@ import { Task } from 'src/app/types/task';
 import 'jspdf-autotable';
 
 @Component({
-    selector: 'task-list-grid',
-    templateUrl: './task-list-grid.component.html',
-    styleUrls: ['./task-list-grid.component.scss'],
-    imports: [
-      DxButtonModule,
-      DxDataGridModule,
-      DxDropDownButtonModule,
-      DxSelectBoxModule,
-      DxTextBoxModule,
-      DxToolbarModule,
-      StatusIndicatorComponent,
-      CommonModule
-    ],
-    providers: []
+  selector: 'task-list-grid',
+  templateUrl: './task-list-grid.component.html',
+  styleUrls: ['./task-list-grid.component.scss'],
+  imports: [
+    DxButtonModule,
+    DxDataGridModule,
+    DxDropDownButtonModule,
+    DxSelectBoxModule,
+    DxTextBoxModule,
+    DxToolbarModule,
+    StatusIndicatorComponent,
+    CommonModule
+  ],
+  providers: []
 })
 export class TaskListGridComponent implements OnChanges {
   @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;

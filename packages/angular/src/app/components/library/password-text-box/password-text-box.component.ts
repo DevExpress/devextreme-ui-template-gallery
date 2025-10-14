@@ -15,15 +15,15 @@ import {
 import { ValidationRule, EditorStyle } from 'devextreme-angular/common';
 
 @Component({
-    selector: 'password-text-box',
-    templateUrl: 'password-text-box.component.html',
-    styles: [],
-    imports: [
-      DxSelectBoxModule,
-      DxTextBoxModule,
-      DxValidatorModule,
-      CommonModule
-    ]
+  selector: 'password-text-box',
+  templateUrl: 'password-text-box.component.html',
+  styles: [],
+  imports: [
+    DxSelectBoxModule,
+    DxTextBoxModule,
+    DxValidatorModule,
+    CommonModule
+  ]
 })
 export class PasswordTextBoxComponent {
   @ViewChild('validator', { static: true }) validator: DxValidatorComponent;

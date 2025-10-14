@@ -8,15 +8,15 @@ import { Task } from 'src/app/types/task';
 import { UserAvatarComponent } from 'src/app/components/library/user-avatar/user-avatar.component';
 
 @Component({
-    selector: 'task-kanban-card',
-    templateUrl: './task-kanban-card.component.html',
-    styleUrls: ['./task-kanban-card.component.scss'],
-    imports: [
-      DxButtonModule,
-      DxToastModule,
-      CommonModule,
-      UserAvatarComponent,
-    ],
+  selector: 'task-kanban-card',
+  templateUrl: './task-kanban-card.component.html',
+  styleUrls: ['./task-kanban-card.component.scss'],
+  imports: [
+    DxButtonModule,
+    DxToastModule,
+    CommonModule,
+    UserAvatarComponent,
+  ],
 })
 export class TaskKanbanCardComponent {
   @Input() task: Task;

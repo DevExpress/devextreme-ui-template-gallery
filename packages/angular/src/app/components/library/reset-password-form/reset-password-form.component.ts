@@ -9,29 +9,30 @@ import { AuthService, IResponse } from 'src/app/services';
 const notificationText = 'We\'ve sent a link to reset your password. Check your inbox.';
 
 @Component({
-    selector: 'reset-password-form',
-    templateUrl: './reset-password-form.component.html',
-    styleUrls: ['./reset-password-form.component.scss'],
-    imports: [
-      CommonModule,
-      RouterModule,
-      DxFormModule,
-      DxLoadIndicatorModule,
-    ]
+  selector: 'reset-password-form',
+  templateUrl: './reset-password-form.component.html',
+  styleUrls: ['./reset-password-form.component.scss'],
+  imports: [
+    CommonModule,
+    RouterModule,
+    DxFormModule,
+    DxLoadIndicatorModule,
+  ]
 })
 export class ResetPasswordFormComponent implements OnInit {
   @Input() signInLink = '/auth/sign-in';
 
   @Input() buttonLink = '/auth/sign-in';
 
+  private authService = inject(AuthService);
+
+  private router = inject(Router);
+
   defaultAuthData: IResponse;
 
   loading = false;
 
   formData: any = {};
-
-  private authService = inject(AuthService);
-  private router = inject(Router);
 
   async onSubmit(e: Event) {
     e.preventDefault();

@@ -23,24 +23,24 @@ import { ScreenService } from '../../../services';
 import { ToolbarFormComponent } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
 
 @Component({
-    selector: 'task-form',
-    templateUrl: './task-form.component.html',
-    styleUrls: ['./task-form.component.scss'],
-    imports: [
-      DxButtonModule,
-      DxFormModule,
-      DxLoadPanelModule,
-      DxSelectBoxModule,
-      DxTextBoxModule,
-      DxTextAreaModule,
-      DxToolbarModule,
-      DxValidatorModule,
-      FormTextboxComponent,
-      StatusIndicatorComponent,
-      FormDateboxComponent,
-      ToolbarFormComponent,
-      CommonModule,
-    ],
+  selector: 'task-form',
+  templateUrl: './task-form.component.html',
+  styleUrls: ['./task-form.component.scss'],
+  imports: [
+    DxButtonModule,
+    DxFormModule,
+    DxLoadPanelModule,
+    DxSelectBoxModule,
+    DxTextBoxModule,
+    DxTextAreaModule,
+    DxToolbarModule,
+    DxValidatorModule,
+    FormTextboxComponent,
+    StatusIndicatorComponent,
+    FormDateboxComponent,
+    ToolbarFormComponent,
+    CommonModule,
+  ],
 })
 export class TaskFormComponent implements OnInit {
   @Input() task: Task;

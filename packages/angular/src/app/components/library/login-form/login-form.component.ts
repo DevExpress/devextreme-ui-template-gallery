@@ -10,21 +10,28 @@ import notify from 'devextreme/ui/notify';
 import { AuthService, IResponse, ThemeService } from 'src/app/services';
 
 @Component({
-    selector: 'app-login-form',
-    templateUrl: './login-form.component.html',
-    styleUrls: ['./login-form.component.scss'],
-    imports: [
-      CommonModule,
-      RouterModule,
-      LoginOauthComponent,
-      DxFormModule,
-      DxLoadIndicatorModule,
-      DxButtonModule,
-    ]
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss'],
+  imports: [
+    CommonModule,
+    RouterModule,
+    LoginOauthComponent,
+    DxFormModule,
+    DxLoadIndicatorModule,
+    DxButtonModule,
+  ]
 })
 export class LoginFormComponent implements OnInit {
   @Input() resetLink = '/auth/reset-password';
+
   @Input() createAccountLink = '/auth/register';
+
+  private authService = inject(AuthService);
+
+  private router = inject(Router);
+
+  private themeService = inject(ThemeService);
 
   defaultAuthData: IResponse;
 
@@ -41,31 +48,13 @@ export class LoginFormComponent implements OnInit {
     stylingMode:'filled',
     mode: this.passwordMode,
     value: 'password',
-    // buttons: [{
-    //   name: 'password',
-    //   location: 'after',
-    //   options: {
-    //     icon: 'info',
-    //     stylingMode:'text',
-    //     onClick: () => this.changePasswordMode(),
-    //   }
-    // }]
   }
-
-  private authService = inject(AuthService);
-  private router = inject(Router);
-  private themeService = inject(ThemeService);
 
   constructor() {
     this.themeService.isDark.subscribe((value: boolean) => {
       this.btnStylingMode = value ? 'outlined' : 'contained';
     });
   }
-
-  changePasswordMode() {
-    debugger;
-    this.passwordMode = this.passwordMode === 'text' ? 'password' : 'text';
-  };
 
   async onSubmit(e: Event) {
     e.preventDefault();

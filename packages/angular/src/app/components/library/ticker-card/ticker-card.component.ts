@@ -4,13 +4,13 @@ import { Sales, SalesOrOpportunitiesByCategory } from '../../../types/analytics'
 import { ApplyPipeDirective } from "src/app/pipes/apply.pipe";
 
 @Component({
-    selector: 'ticker-card',
-    templateUrl: './ticker-card.component.html',
-    styleUrls: ['./ticker-card.component.scss'],
-    imports: [
-      ApplyPipeDirective,
-      CommonModule,
-    ],
+  selector: 'ticker-card',
+  templateUrl: './ticker-card.component.html',
+  styleUrls: ['./ticker-card.component.scss'],
+  imports: [
+    ApplyPipeDirective,
+    CommonModule,
+  ],
 })
 
 export class TickerCardComponent {
