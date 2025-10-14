@@ -63,7 +63,7 @@ fixture`Contact List`;
         await t.click(Selector('.dx-button[aria-label=Save]'));
         await t.click(0, 0); // remove focus and scrollbar
         await t.wait(2000);
-        
+
         await takeScreenshot(`crm-contact-list-form-saved${postfix}`, Selector('.data-wrapper'));
 
         await t.click(Selector('[aria-label="Close"]'));
@@ -72,7 +72,7 @@ fixture`Contact List`;
         await t.click(Selector('.dx-list-item-content').withText('Terminated'));
         await t.click(0, 0); // remove focus and scrollbar
         await t.wait(2000);
-        
+
         await takeScreenshot(`crm-contact-list-grid-filtering-terminated=${postfix}`, 'body');
 
         await t
@@ -100,6 +100,8 @@ fixture`Contact List`;
         await takeScreenshot(`crm-contact-list-add-contact-popup${postfix}`, 'body');
 
         await t.click(Selector('[aria-label=Save]'));
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${postfix}`, 'body');
 

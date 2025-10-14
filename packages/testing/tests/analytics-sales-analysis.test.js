@@ -49,7 +49,7 @@ fixture`Analytics Sales Analysis`;
           await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
           await t.click(0, 0); // remove focus and scrollbar
           await t.wait(timeoutSecond);
-          
+
           await takeScreenshot(`analytics-sales-analysis-day${postfix}`, 'body');
         }
         await t

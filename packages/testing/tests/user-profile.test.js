@@ -41,6 +41,8 @@ const NEW_PASSWORD = 'newpassword';
         await t.click(Selector('.change-password-button'));
         await t.wait(1000);
         await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`user-profile-change-password${postfix}`, 'body');
 
@@ -65,8 +67,10 @@ const NEW_PASSWORD = 'newpassword';
           .click(Selector(popupSelector).find('.form-popup-buttons-container').find('.dx-button').nth(1)) // Save button
           .expect(Selector(popupSelector).visible)
           .notOk()
-          .click(Selector('.change-password-button'))
-          .wait(1000);
+          .click(Selector('.change-password-button'));
+
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`user-profile-change-password-after-save${postfix}`, popupSelector);
 
@@ -76,8 +80,9 @@ const NEW_PASSWORD = 'newpassword';
           .click(Selector(popupSelector).find('.form-popup-buttons-container').find('.dx-button').nth(0)) // Cancel button
           .expect(Selector(popupSelector).visible)
           .notOk()
-          .click(Selector('.change-password-button'))
-          .wait(1000);
+          .click(Selector('.change-password-button'));
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`user-profile-change-password-after-cancel${postfix}`, popupSelector);
 
@@ -133,7 +138,8 @@ const NEW_PASSWORD = 'newpassword';
                 .nth(0),
             );
         });
-        await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
 
         const localPostfix = 'block-after-actions-wtih-form';
         await takeScreenshot(`basic-${localPostfix}${postfix}`, '.basic-info-card .form-container');

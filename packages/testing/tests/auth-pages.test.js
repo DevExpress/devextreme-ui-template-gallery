@@ -34,6 +34,8 @@ fixture`Auth pages`;
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
         await forceResizeRecalculation(t, screenMode);
         await setTheme(t, themeMode);
+        await t.click(0, 0); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`auth-login-prompt${postfix}`, 'body');
 
@@ -46,7 +48,7 @@ fixture`Auth pages`;
         await t.click(Selector('a').withText('Sign In'));
         await t.click(0, 0); // remove focus and scrollbar
         await t.wait(2000);
-        
+
         await t.click(Selector('.dx-button[aria-label="Register"]'));
         await t.click(0, 0); // remove focus and scrollbar
         await t.wait(2000);
