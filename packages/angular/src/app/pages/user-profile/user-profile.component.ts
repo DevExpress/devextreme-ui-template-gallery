@@ -4,6 +4,8 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { forkJoin } from 'rxjs';
+
 import notify from 'devextreme/ui/notify';
 import {
   DxButtonModule,
@@ -17,7 +19,7 @@ import {
   DxFileUploaderModule,
   DxScrollViewModule,
 } from 'devextreme-angular';
-import { forkJoin } from 'rxjs';
+
 import { PhonePipeDirective } from 'src/app/pipes/phone.pipe';
 import {
   FormPhotoComponent,
@@ -27,26 +29,26 @@ import {
 import { DataService, ScreenService } from 'src/app/services';
 
 @Component({
-    templateUrl: './user-profile.component.html',
-    styleUrls: ['./user-profile.component.scss'],
-    providers: [ DataService ],
-    imports: [
-      DxButtonModule,
-      DxDateBoxModule,
-      DxFormModule,
-      DxFileUploaderModule,
-      DxNumberBoxModule,
-      DxToolbarModule,
-      DxSelectBoxModule,
-      DxScrollViewModule,
-      DxLoadPanelModule,
-      DxTextBoxModule,
-      FormPhotoComponent,
-      ProfileCardComponent,
-      ChangeProfilePasswordFormComponent,
-      CommonModule,
-      PhonePipeDirective,
-    ]
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.scss'],
+  providers: [ DataService ],
+  imports: [
+    DxButtonModule,
+    DxDateBoxModule,
+    DxFormModule,
+    DxFileUploaderModule,
+    DxNumberBoxModule,
+    DxToolbarModule,
+    DxSelectBoxModule,
+    DxScrollViewModule,
+    DxLoadPanelModule,
+    DxTextBoxModule,
+    FormPhotoComponent,
+    ProfileCardComponent,
+    ChangeProfilePasswordFormComponent,
+    CommonModule,
+    PhonePipeDirective,
+  ]
 })
 export class UserProfileComponent {
   private service = inject(DataService);

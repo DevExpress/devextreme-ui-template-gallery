@@ -73,7 +73,7 @@ jobs:
           { project: 'vue', page: 'planning-task-list' },
           { project: 'vue', page: 'planning-scheduler' },
           { project: 'vue', page: 'analytics-dashboard' },
-          { project: 'vue', page: 'analytics-sales-report' },
+          { project: 'vue', page: 'analytics-sales-analysis' },
           { project: 'vue', page: 'analytics-geography' },
           { project: 'vue', page: 'auth-pages' },
           { project: 'vue', page: 'user-profile' },

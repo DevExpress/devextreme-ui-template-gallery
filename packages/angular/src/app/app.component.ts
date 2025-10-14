@@ -6,12 +6,12 @@ import { DxHttpModule } from "devextreme-angular/http";
 import { ScreenService, ThemeService } from './services';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    imports: [
-      DxHttpModule,
-      RouterModule,
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  imports: [
+    DxHttpModule,
+    RouterModule,
   ]
 })
 export class AppComponent implements OnDestroy {

@@ -1,27 +1,27 @@
 import { CommonModule } from '@angular/common';
-import {Component, inject, NgModule} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SingleCardComponent } from 'src/app/layouts';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-unauthenticated-content',
-    template: `
+  selector: 'app-unauthenticated-content',
+  template: `
     <app-single-card [title]="title" [description]="description">
       <router-outlet></router-outlet>
     </app-single-card>
   `,
-    styles: [`
+  styles: [`
     :host {
       width: 100%;
       height: 100%;
     }
   `],
-    imports: [
-      CommonModule,
-      RouterModule,
-      SingleCardComponent,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SingleCardComponent,
+  ],
 })
 export class UnauthenticatedContentComponent {
   private router = inject(Router);

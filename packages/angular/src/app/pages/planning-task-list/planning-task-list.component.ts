@@ -1,12 +1,16 @@
 import {Component, inject, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxTabsTypes } from 'devextreme-angular/ui/tabs';
 import { DxTextBoxTypes } from 'devextreme-angular/ui/text-box';
+import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import notify from 'devextreme/ui/notify';
+
 import { taskPanelItems } from 'src/app/types/resource';
 import { Task, newTask } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
@@ -16,8 +20,6 @@ import { FormPopupComponent } from 'src/app/components/utils/form-popup/form-pop
 import { TaskListGridComponent } from 'src/app/components/library/task-list-grid/task-list-grid.component';
 import { TaskListKanbanComponent } from 'src/app/components/library/task-list-kanban/task-list-kanban.component';
 import { TaskListGanttComponent } from 'src/app/components/library/task-list-gantt/task-list-gantt.component';
-import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     templateUrl: './planning-task-list.component.html',

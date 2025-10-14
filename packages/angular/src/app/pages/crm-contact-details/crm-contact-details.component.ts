@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { forkJoin, map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { forkJoin, map } from 'rxjs';
 
 import {
   DxButtonModule,
@@ -21,9 +21,9 @@ import { ContactCardsComponent } from 'src/app/components/utils/contact-cards/co
 const DEFAULT_CONTACT_ID = 12;
 
 @Component({
-    templateUrl: './crm-contact-details.component.html',
-    styleUrls: ['./crm-contact-details.component.scss'],
-    providers: [ DataService ],
+  templateUrl: './crm-contact-details.component.html',
+  styleUrls: ['./crm-contact-details.component.scss'],
+  providers: [ DataService ],
   imports: [
     CommonModule,
 

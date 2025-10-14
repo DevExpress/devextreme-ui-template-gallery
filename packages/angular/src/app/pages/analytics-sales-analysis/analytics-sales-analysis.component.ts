@@ -23,24 +23,24 @@ import { analyticsPanelItems } from 'src/app/types/resource';
 import { Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 
 @Component({
-    templateUrl: './analytics-sales-analysis.component.html',
-    styleUrls: ['./analytics-sales-analysis.component.scss'],
-    providers: [ DataService ],
-    imports: [
-      DxScrollViewModule,
-      DxLoadPanelModule,
-      DxButtonModule,
-      DxToolbarModule,
-      DxPieChartModule,
-      DxChartModule,
-      DxDropDownButtonModule,
-      DxRangeSelectorModule,
-      ToolbarAnalyticsComponent,
-      CommonModule,
-      SalesByRangeCardComponent,
-      SalesPerformanceCardComponent,
-      SalesRangeCardComponent,
-    ]
+  templateUrl: './analytics-sales-analysis.component.html',
+  styleUrls: ['./analytics-sales-analysis.component.scss'],
+  providers: [ DataService ],
+  imports: [
+    DxScrollViewModule,
+    DxLoadPanelModule,
+    DxButtonModule,
+    DxToolbarModule,
+    DxPieChartModule,
+    DxChartModule,
+    DxDropDownButtonModule,
+    DxRangeSelectorModule,
+    ToolbarAnalyticsComponent,
+    CommonModule,
+    SalesByRangeCardComponent,
+    SalesPerformanceCardComponent,
+    SalesRangeCardComponent,
+  ]
 })
 export class AnalyticsSalesAnalysisComponent implements OnInit {
   private service = inject(DataService);

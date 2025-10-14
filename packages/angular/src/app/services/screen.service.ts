@@ -21,8 +21,11 @@ export function getSizeQualifier(width: number) {
 @Injectable()
 export class ScreenService {
   @Output() changed = new EventEmitter();
+
   @Output() xSmallScreenChanged = new ReplaySubject<boolean>();
+
   @Output() smallScreenChanged = new ReplaySubject<boolean>();
+
   @Output() screenChanged = new ReplaySubject<{ isXSmall: boolean, isSmall: boolean, isMedium: boolean, isLarge: boolean, isXLarge: boolean }>();
 
   private breakpointObserver$ = inject(BreakpointObserver);

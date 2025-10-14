@@ -1,6 +1,7 @@
 import {
   Component, ViewChild, inject,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
   DxDataGridModule,
@@ -9,19 +10,21 @@ import {
   DxSelectBoxModule,
   DxTextBoxModule,
 } from 'devextreme-angular';
-import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
-import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
-import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
-import { ContactStatusComponent } from 'src/app/components';
-import { Contact, contactStatusList, ContactStatus, } from 'src/app/types/contact';
-import { DxDropDownButtonTypes } from 'devextreme-angular/ui/drop-down-button';
-import DataSource from 'devextreme/data/data_source';
-import { CommonModule } from '@angular/common';
-import { DataService } from 'src/app/services';
+
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { jsPDF } from 'jspdf';
+
+import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
+import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
+import DataSource from 'devextreme/data/data_source';
 import notify from "devextreme/ui/notify";
+import { DxDropDownButtonTypes } from 'devextreme-angular/ui/drop-down-button';
+import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
+
+import { Contact, contactStatusList, ContactStatus, } from 'src/app/types/contact';
+import { ContactStatusComponent } from 'src/app/components';
+import { DataService } from 'src/app/services';
 import { formatPhone } from 'src/app/pipes/phone.pipe';
 import { FormPopupComponent } from 'src/app/components';
 import { ContactPanelComponent } from 'src/app/components/library/contact-panel/contact-panel.component';
@@ -30,26 +33,28 @@ import { ContactNewFormComponent } from 'src/app/components/library/contact-new-
 type FilterContactStatus = ContactStatus | 'All';
 
 @Component({
-    templateUrl: './crm-contact-list.component.html',
-    styleUrls: ['./crm-contact-list.component.scss'],
-    providers: [DataService],
-    imports: [
-      DxButtonModule,
-      DxDataGridModule,
-      DxDropDownButtonModule,
-      DxSelectBoxModule,
-      DxTextBoxModule,
-      ContactPanelComponent,
-      ContactNewFormComponent,
-      FormPopupComponent,
-      ContactStatusComponent,
-      CommonModule,
-    ]
+  templateUrl: './crm-contact-list.component.html',
+  styleUrls: ['./crm-contact-list.component.scss'],
+  providers: [DataService],
+  imports: [
+    DxButtonModule,
+    DxDataGridModule,
+    DxDropDownButtonModule,
+    DxSelectBoxModule,
+    DxTextBoxModule,
+    ContactPanelComponent,
+    ContactNewFormComponent,
+    FormPopupComponent,
+    ContactStatusComponent,
+    CommonModule,
+  ]
 })
 export class CrmContactListComponent {
   @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
 
   @ViewChild(ContactNewFormComponent, { static: false }) contactNewForm: ContactNewFormComponent;
+
+  private service = inject(DataService);
 
   statusList = contactStatusList;
 
@@ -70,8 +75,6 @@ export class CrmContactListComponent {
         })
     }),
   });
-
-  private service = inject(DataService);
 
   addContact() {
     this.isAddContactPopupOpened = true;

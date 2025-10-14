@@ -12,6 +12,8 @@ import {
   DxSchedulerComponent,
   DxSpeedDialActionModule,
 } from "devextreme-angular";
+import { DxSchedulerTypes } from 'devextreme-angular/ui/scheduler'
+
 import { Task } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
 import { CalendarListComponent } from 'src/app/components/utils/calendar-list/calendar-list.component';
@@ -20,34 +22,35 @@ import { RightSidePanelComponent } from 'src/app/components/utils/right-side-pan
 import { AgendaItem, AgendaComponent } from "../../components/utils/agenda/agenda.component";
 import { ApplyPipeDirective } from '../../pipes/apply.pipe';
 import { SchedulerTooltipComponent } from '../../components/library/scheduler-tooltip/scheduler-tooltip.component';
-import { DxSchedulerTypes } from 'devextreme-angular/ui/scheduler'
 
 type SelectedAppointment = { data: Record<string, any>, target: any };
 
 @Component({
-    templateUrl: './planning-scheduler.component.html',
-    styleUrls: ['./planning-scheduler.component.scss'],
-    providers: [DataService],
-    imports: [
-      ApplyPipeDirective,
-      DxCalendarModule,
-      DxButtonModule,
-      DxSchedulerModule,
-      DxSpeedDialActionModule,
-      DxTooltipModule,
-      CommonModule,
-      CalendarListComponent,
-      LeftSidePanelComponent,
-      RightSidePanelComponent,
-      AgendaComponent,
-      SchedulerTooltipComponent,
-    ]
+  templateUrl: './planning-scheduler.component.html',
+  styleUrls: ['./planning-scheduler.component.scss'],
+  providers: [DataService],
+  imports: [
+    ApplyPipeDirective,
+    DxCalendarModule,
+    DxButtonModule,
+    DxSchedulerModule,
+    DxSpeedDialActionModule,
+    DxTooltipModule,
+    CommonModule,
+    CalendarListComponent,
+    LeftSidePanelComponent,
+    RightSidePanelComponent,
+    AgendaComponent,
+    SchedulerTooltipComponent,
+  ]
 })
 export class PlanningSchedulerComponent implements OnInit {
   @ViewChild('schedulerRef', { static: false }) schedulerRef: DxSchedulerComponent;
 
   @ViewChild('tooltipRef', { static: false }) tooltipRef: DxTooltipComponent;
+
   private service = inject(DataService);
+
   protected screen = inject(ScreenService);
 
   tasks: DataSource<Task> = new DataSource([]);

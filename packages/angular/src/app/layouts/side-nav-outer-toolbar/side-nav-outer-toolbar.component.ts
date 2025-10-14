@@ -10,25 +10,24 @@ import { DxTreeViewTypes } from 'devextreme-angular/ui/tree-view';
 import { DxDrawerModule, DxDrawerTypes } from 'devextreme-angular/ui/drawer';
 import { DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
 import { CommonModule } from '@angular/common';
-
 import { Router, RouterModule, NavigationEnd, Event } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 import { ScreenService, AppInfoService } from '../../services';
 import { SideNavigationMenuComponent, AppHeaderComponent, AppFooterComponent } from '../../components';
 
-import { Subscription } from 'rxjs';
-
 @Component({
-    selector: 'app-side-nav-outer-toolbar',
-    templateUrl: './side-nav-outer-toolbar.component.html',
-    styleUrls: ['./side-nav-outer-toolbar.component.scss'],
-   imports: [
-     RouterModule,
-     SideNavigationMenuComponent,
-     DxDrawerModule,
-     AppHeaderComponent,
-     CommonModule,
-     AppFooterComponent
-   ],
+  selector: 'app-side-nav-outer-toolbar',
+  templateUrl: './side-nav-outer-toolbar.component.html',
+  styleUrls: ['./side-nav-outer-toolbar.component.scss'],
+  imports: [
+    RouterModule,
+    SideNavigationMenuComponent,
+    DxDrawerModule,
+    AppHeaderComponent,
+    CommonModule,
+    AppFooterComponent
+  ],
 })
 export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   @ViewChild(DxScrollViewComponent, { static: true }) scrollView!: DxScrollViewComponent;
@@ -37,7 +36,9 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   title!: string;
 
   private screen = inject(ScreenService);
+
   private router = inject(Router);
+
   protected appInfo = inject(AppInfoService);
 
   selectedRoute = '';

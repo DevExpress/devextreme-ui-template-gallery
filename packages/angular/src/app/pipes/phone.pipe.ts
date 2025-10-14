@@ -5,7 +5,7 @@ export function formatPhone(value) {
 }
 
 @Pipe({
-    name: 'phone',
+  name: 'phone',
 })
 export class PhonePipeDirective implements PipeTransform {
   transform(value: number): any {

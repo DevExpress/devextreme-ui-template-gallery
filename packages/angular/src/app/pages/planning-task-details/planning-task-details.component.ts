@@ -8,6 +8,8 @@ import {
   DxValidationGroupModule,
   DxScrollViewModule,
 } from 'devextreme-angular';
+import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
+
 import {
   CardActivitiesComponent,
   CardNotesComponent,
@@ -16,29 +18,27 @@ import {
 import { Task } from 'src/app/types/task';
 import { DataService } from 'src/app/services';
 import { TaskFormComponent } from 'src/app/components/library/task-form/task-form.component';
-import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 const DEFAULT_TASK_ID = 1;
 
-
 @Component({
-    templateUrl: './planning-task-details.component.html',
-    styleUrls: ['./planning-task-details.component.scss'],
-    providers: [ DataService ],
-    imports: [
-      DxButtonModule,
-      DxDropDownButtonModule,
-      DxTabPanelModule,
-      DxValidationGroupModule,
-      DxToolbarModule,
+  templateUrl: './planning-task-details.component.html',
+  styleUrls: ['./planning-task-details.component.scss'],
+  providers: [ DataService ],
+  imports: [
+    DxButtonModule,
+    DxDropDownButtonModule,
+    DxTabPanelModule,
+    DxValidationGroupModule,
+    DxToolbarModule,
 
-      CardActivitiesComponent,
-      CardNotesComponent,
-      CardMessagesComponent,
-      TaskFormComponent,
-      DxScrollViewModule,
-      CommonModule,
-    ]
+    CardActivitiesComponent,
+    CardNotesComponent,
+    CardMessagesComponent,
+    TaskFormComponent,
+    DxScrollViewModule,
+    CommonModule,
+  ]
 })
 export class PlanningTaskDetailsComponent implements OnInit {
   private service = inject(DataService);
