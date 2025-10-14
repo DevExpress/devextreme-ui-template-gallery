@@ -11,14 +11,14 @@ import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
 import { Task } from '../../../types/task';
 
 @Component({
-    selector: 'card-tasks',
-    templateUrl: './card-tasks.component.html',
-    styleUrls: ['./card-tasks.component.scss'],
-    imports: [
-      DxDataGridModule,
-      DxLoadPanelModule,
-      CommonModule,
-    ]
+  selector: 'card-tasks',
+  templateUrl: './card-tasks.component.html',
+  styleUrls: ['./card-tasks.component.scss'],
+  imports: [
+    DxDataGridModule,
+    DxLoadPanelModule,
+    CommonModule,
+  ]
 })
 export class CardTasksComponent implements OnChanges {
   @ViewChild('dataGrid', { static: false }) component: DxDataGridComponent;

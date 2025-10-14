@@ -22,24 +22,24 @@ import { ToolbarFormComponent } from 'src/app/components/utils/toolbar-form/tool
 import { US_STATES } from 'src/app/shared/constants';
 
 @Component({
-    selector: 'contact-form',
-    templateUrl: './contact-form.component.html',
-    styleUrls: ['./contact-form.component.scss'],
-    imports: [
-      DxFormModule,
-      DxSelectBoxModule,
-      DxButtonModule,
-      DxTextBoxModule,
-      DxNumberBoxModule,
-      DxLoadPanelModule,
-      DxValidationGroupModule,
-      FormTextboxComponent,
-      FormPhotoComponent,
-      DxValidatorModule,
-      ToolbarFormComponent,
-      CommonModule,
-      StatusSelectBoxComponent,
-    ]
+  selector: 'contact-form',
+  templateUrl: './contact-form.component.html',
+  styleUrls: ['./contact-form.component.scss'],
+  imports: [
+    DxFormModule,
+    DxSelectBoxModule,
+    DxButtonModule,
+    DxTextBoxModule,
+    DxNumberBoxModule,
+    DxLoadPanelModule,
+    DxValidationGroupModule,
+    FormTextboxComponent,
+    FormPhotoComponent,
+    DxValidatorModule,
+    ToolbarFormComponent,
+    CommonModule,
+    StatusSelectBoxComponent,
+  ]
 })
 export class ContactFormComponent {
   @Input() contactData: Contact;

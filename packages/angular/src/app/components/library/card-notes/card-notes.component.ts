@@ -11,18 +11,18 @@ import {
 import { Notes, Note } from 'src/app/types/notes';
 
 @Component({
-    selector: 'card-notes',
-    templateUrl: './card-notes.component.html',
-    styleUrls: ['./card-notes.component.scss'],
-    imports: [
-      DxTextAreaModule,
-      DxToolbarModule,
-      DxButtonModule,
-      DxValidationGroupModule,
-      DxValidatorModule,
-      DxScrollViewModule,
-      CommonModule,
-    ]
+  selector: 'card-notes',
+  templateUrl: './card-notes.component.html',
+  styleUrls: ['./card-notes.component.scss'],
+  imports: [
+    DxTextAreaModule,
+    DxToolbarModule,
+    DxButtonModule,
+    DxValidationGroupModule,
+    DxValidatorModule,
+    DxScrollViewModule,
+    CommonModule,
+  ]
 })
 export class CardNotesComponent {
   @Input() user: string;

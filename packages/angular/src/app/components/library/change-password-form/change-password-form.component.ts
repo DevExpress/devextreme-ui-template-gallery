@@ -19,6 +19,12 @@ import { AuthService } from '../../../services';
   ]
 })
 export class ChangePasswordFormComponent implements OnInit, OnDestroy {
+  private authService = inject(AuthService);
+
+  private router = inject(Router);
+
+  private route = inject(ActivatedRoute);
+
   loading = false;
 
   formData: any = {};
@@ -26,10 +32,6 @@ export class ChangePasswordFormComponent implements OnInit, OnDestroy {
   recoveryCode = '';
 
   paramMapSubscription: Subscription;
-
-  private authService = inject(AuthService);
-    private router = inject(Router);
-  private route = inject(ActivatedRoute);
 
   ngOnInit() {
     this.paramMapSubscription = this.route.paramMap.subscribe((params) => {

@@ -13,20 +13,20 @@ import { Message, Messages } from 'src/app/types/messages';
 import { UserAvatarComponent } from 'src/app/components/library/user-avatar/user-avatar.component';
 
 @Component({
-    selector: 'card-messages',
-    templateUrl: './card-messages.component.html',
-    styleUrls: ['./card-messages.component.scss'],
-    imports: [
-      DxTextAreaModule,
-      DxTextBoxModule,
-      DxToolbarModule,
-      DxFileUploaderModule,
-      DxButtonModule,
-      DxValidationGroupModule,
-      DxValidatorModule,
-      UserAvatarComponent,
-      CommonModule,
-    ]
+  selector: 'card-messages',
+  templateUrl: './card-messages.component.html',
+  styleUrls: ['./card-messages.component.scss'],
+  imports: [
+    DxTextAreaModule,
+    DxTextBoxModule,
+    DxToolbarModule,
+    DxFileUploaderModule,
+    DxButtonModule,
+    DxValidationGroupModule,
+    DxValidatorModule,
+    UserAvatarComponent,
+    CommonModule,
+  ]
 })
 export class CardMessagesComponent {
   @Input() user: string;
