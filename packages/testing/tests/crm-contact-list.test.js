@@ -55,6 +55,7 @@ fixture`Contact List`;
         await t.expect(inputs.nth(1).value).notContains('unwanted text');
 
         await t.click(Selector('.dx-button[aria-label=Edit]'));
+        await t.click('.contact-name'); // to remove focus from the pin button
         await takeScreenshot(`crm-contact-list-form-edit${postfix}`, Selector('.data-wrapper'));
         await t.typeText(inputs.nth(0), 'test 0');
 

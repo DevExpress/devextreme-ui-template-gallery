@@ -32,6 +32,7 @@ fixture`Planning List`;
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
         await forceResizeRecalculation(t, screenMode);
         await setTheme(t, themeMode);
+        await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
 
         await t.expect(Selector('body.dx-device-generic').count).eql(1);
         await takeScreenshot(`planning-task-grid${postfix}`, 'body');

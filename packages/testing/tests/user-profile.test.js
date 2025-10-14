@@ -40,6 +40,8 @@ const NEW_PASSWORD = 'newpassword';
         await takeScreenshot(`user-profile${postfix}`, 'body');
         await t.click(Selector('.change-password-button'));
         await t.wait(1000);
+        await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
+
         await takeScreenshot(`user-profile-change-password${postfix}`, 'body');
 
         const popupSelector = screenMode[0] === 400 ? '.dx-popup-fullscreen' : '.dx-popup-normal';
