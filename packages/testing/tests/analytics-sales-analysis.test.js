@@ -36,7 +36,7 @@ fixture`Analytics Sales Analysis`;
         );
         await setTheme(t, themeMode);
         await forceResizeRecalculation(t, screenMode);
-        await t.click(0, 0); // remove focus and scrollbar
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
         await t.wait(timeoutSecond);
 
         await t.expect(Selector('body.dx-device-generic').count).eql(1);
@@ -47,7 +47,7 @@ fixture`Analytics Sales Analysis`;
           await t.click(Selector('.sales-filter .dx-dropdownbutton'));
 
           await t.click(Selector('.dx-dropdownbutton-popup-wrapper .dx-list .dx-list-item').nth(0));
-          await t.click(0, 0); // remove focus and scrollbar
+          await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
           await t.wait(timeoutSecond);
 
           await takeScreenshot(`analytics-sales-analysis-day${postfix}`, 'body');
