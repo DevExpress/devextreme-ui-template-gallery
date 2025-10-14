@@ -10,14 +10,14 @@ import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 import { Sale } from 'src/app/types/analytics';
 
 @Component({
-    selector: 'sales-performance-card',
-    templateUrl: './sales-performance-card.component.html',
-    styleUrls: ['./sales-performance-card.component.scss'],
-    imports: [
-      CardAnalyticsComponent,
-      DxChartModule,
-      DxDropDownButtonModule,
-    ],
+  selector: 'sales-performance-card',
+  templateUrl: './sales-performance-card.component.html',
+  styleUrls: ['./sales-performance-card.component.scss'],
+  imports: [
+    CardAnalyticsComponent,
+    DxChartModule,
+    DxDropDownButtonModule,
+  ],
 })
 export class SalesPerformanceCardComponent {
   @Input() groupByPeriods: string[];

@@ -4,15 +4,15 @@ import { DxButtonModule, DxCheckBoxModule } from 'devextreme-angular';
 import { DxListModule } from 'devextreme-angular/ui/list';
 
 @Component({
-    selector: 'calendar-list',
-    templateUrl: './calendar-list.component.html',
-    styleUrls: ['./calendar-list.component.scss'],
-    imports: [
-      DxListModule,
-      DxCheckBoxModule,
-      DxButtonModule,
-      CommonModule
-    ],
+  selector: 'calendar-list',
+  templateUrl: './calendar-list.component.html',
+  styleUrls: ['./calendar-list.component.scss'],
+  imports: [
+    DxListModule,
+    DxCheckBoxModule,
+    DxButtonModule,
+    CommonModule
+  ],
 })
 export class CalendarListComponent implements OnInit {
   @Input() dataSource: Record<string, any>[];

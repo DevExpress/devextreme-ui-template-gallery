@@ -19,22 +19,22 @@ import { Opportunities } from 'src/app/types/opportunities';
 import { Task } from 'src/app/types/task';
 
 @Component({
-    selector: 'contact-cards',
-    templateUrl: './contact-cards.component.html',
-    styleUrls: ['./contact-cards.component.scss'],
-    imports: [
-      DxButtonModule,
-      DxTabPanelModule,
-      DxDataGridModule,
+  selector: 'contact-cards',
+  templateUrl: './contact-cards.component.html',
+  styleUrls: ['./contact-cards.component.scss'],
+  imports: [
+    DxButtonModule,
+    DxTabPanelModule,
+    DxDataGridModule,
 
-      CardNotesComponent,
-      CardMessagesComponent,
-      CardActivitiesComponent,
-      CardOpportunitiesComponent,
-      CardTasksComponent,
+    CardNotesComponent,
+    CardMessagesComponent,
+    CardActivitiesComponent,
+    CardOpportunitiesComponent,
+    CardTasksComponent,
 
-      CommonModule,
-    ],
+    CommonModule,
+  ],
 })
 export class ContactCardsComponent {
     @Input() tasks: Task[];

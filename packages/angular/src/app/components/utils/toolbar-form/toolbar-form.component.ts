@@ -9,14 +9,14 @@ import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxButtonComponent } from "devextreme-angular";
 
 @Component({
-    selector: 'toolbar-form',
-    templateUrl: './toolbar-form.component.html',
-    styleUrls: ['./toolbar-form.component.scss'],
-    imports: [
-      DxToolbarModule,
-      DxButtonComponent,
-      CommonModule,
-    ],
+  selector: 'toolbar-form',
+  templateUrl: './toolbar-form.component.html',
+  styleUrls: ['./toolbar-form.component.scss'],
+  imports: [
+    DxToolbarModule,
+    DxButtonComponent,
+    CommonModule,
+  ],
 })
 export class ToolbarFormComponent {
   @Input() isEditing: boolean;

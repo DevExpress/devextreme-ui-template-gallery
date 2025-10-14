@@ -13,15 +13,15 @@ import {
 import { ValidationRule } from 'devextreme-angular/common';
 
 @Component({
-    selector: 'form-textbox',
-    templateUrl: './form-textbox.component.html',
-    styleUrls: ['form-textbox.component.scss'],
-    imports: [
-      DxButtonModule,
-      DxTextBoxModule,
-      DxValidatorModule,
-      CommonModule,
-    ],
+  selector: 'form-textbox',
+  templateUrl: './form-textbox.component.html',
+  styleUrls: ['form-textbox.component.scss'],
+  imports: [
+    DxButtonModule,
+    DxTextBoxModule,
+    DxValidatorModule,
+    CommonModule,
+  ],
 })
 export class FormTextboxComponent {
   @Input() isEditing = false;

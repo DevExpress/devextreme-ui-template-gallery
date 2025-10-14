@@ -3,13 +3,13 @@ import { CommonModule } from "@angular/common";
 import { DxFileUploaderComponent } from "devextreme-angular";
 
 @Component({
-    selector: 'form-photo',
-    templateUrl: './form-photo.component.html',
-    styleUrls: ['./form-photo.component.scss'],
-    imports: [
-      DxFileUploaderComponent,
-      CommonModule,
-    ],
+  selector: 'form-photo',
+  templateUrl: './form-photo.component.html',
+  styleUrls: ['./form-photo.component.scss'],
+  imports: [
+    DxFileUploaderComponent,
+    CommonModule,
+  ],
 })
 export class FormPhotoComponent implements OnInit {
   @Input() link: string;

@@ -4,22 +4,21 @@ import { CommonModule } from '@angular/common';
 import { DxButtonComponent } from "devextreme-angular";
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-
 import { type DxTabsTypes } from 'devextreme-angular/ui/tabs';
 
 import { ScreenService } from 'src/app/services';
 import { Dates, PanelItem } from 'src/app/types/resource';
 
 @Component({
-    selector: 'toolbar-analytics',
-    templateUrl: './toolbar-analytics.component.html',
-    styleUrls: ['./toolbar-analytics.component.scss'],
-    imports: [
-      CommonModule,
-      DxButtonComponent,
-      DxTabsModule,
-      DxToolbarModule
-    ],
+  selector: 'toolbar-analytics',
+  templateUrl: './toolbar-analytics.component.html',
+  styleUrls: ['./toolbar-analytics.component.scss'],
+  imports: [
+    CommonModule,
+    DxButtonComponent,
+    DxTabsModule,
+    DxToolbarModule
+  ],
 })
 
 export class ToolbarAnalyticsComponent {

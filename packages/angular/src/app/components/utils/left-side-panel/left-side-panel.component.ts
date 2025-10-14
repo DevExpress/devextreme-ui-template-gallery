@@ -5,14 +5,14 @@ import { ScreenService } from 'src/app/services';
 import { DxScrollViewModule } from "devextreme-angular/ui/scroll-view";
 
 @Component({
-    selector: 'left-side-panel',
-    templateUrl: './left-side-panel.component.html',
-    styleUrls: ['./left-side-panel.component.scss'],
-    imports: [
-      DxButtonModule,
-      DxScrollViewModule,
-      CommonModule,
-    ],
+  selector: 'left-side-panel',
+  templateUrl: './left-side-panel.component.html',
+  styleUrls: ['./left-side-panel.component.scss'],
+  imports: [
+    DxButtonModule,
+    DxScrollViewModule,
+    CommonModule,
+  ],
 })
 export class LeftSidePanelComponent {
   private screen = inject(ScreenService);

@@ -4,12 +4,12 @@ import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { Sales } from 'src/app/types/analytics';
 
 @Component({
-    selector: 'revenue-card',
-    templateUrl: './revenue-card.component.html',
-    imports: [
-      CardAnalyticsComponent,
-      DxChartModule,
-    ],
+  selector: 'revenue-card',
+  templateUrl: './revenue-card.component.html',
+  imports: [
+    CardAnalyticsComponent,
+    DxChartModule,
+  ],
 })
 export class RevenueCardComponent {
   @Input() data: Sales;
