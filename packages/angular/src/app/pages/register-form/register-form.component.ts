@@ -1,11 +1,18 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { CardAuthModule, CreateAccountFormModule } from 'src/app/components';
+import {
+  CardAuthComponent,
+  CreateAccountFormComponent,
+} from 'src/app/components';
 
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.scss']
+  styleUrls: ['./register-form.component.scss'],
+  imports: [
+    CardAuthComponent,
+    CreateAccountFormComponent
+  ]
 })
 export class AppRegisterComponent {
 
@@ -15,15 +22,4 @@ export class AppRegisterComponent {
 
   constructor() { }
 }
-
-@NgModule({
-  imports: [
-    CreateAccountFormModule,
-    CardAuthModule,
-  ],
-  providers: [],
-  exports: [AppRegisterComponent],
-  declarations: [AppRegisterComponent],
-})
-export class AppRegisterComponentModule { }
 

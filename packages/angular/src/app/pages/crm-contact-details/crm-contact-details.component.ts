@@ -1,36 +1,48 @@
-import {
-  Component, OnInit, NgModule,
-} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { forkJoin, map } from 'rxjs';
+
 import {
   DxButtonModule,
   DxDropDownButtonModule,
   DxScrollViewModule,
+  DxToolbarModule,
 } from 'devextreme-angular';
-import {
-  CardActivitiesModule,
-  CardNotesModule,
-  CardMessagesModule,
-} from 'src/app/components';
+
 import { DataService } from 'src/app/services';
-import { forkJoin, map } from 'rxjs';
 import { Contact } from 'src/app/types/contact';
 import { Messages } from 'src/app/types/messages';
 import { Notes } from 'src/app/types/notes';
 import { Opportunities } from 'src/app/types/opportunities';
-import { ContactFormModule } from 'src/app/components/library/contact-form/contact-form.component';
-import { ContactCardsModule } from 'src/app/components/utils/contact-cards/contact-cards.component';
-import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
+import { ContactFormComponent } from 'src/app/components/library/contact-form/contact-form.component';
+import { ContactCardsComponent } from 'src/app/components/utils/contact-cards/contact-cards.component';
 
 const DEFAULT_CONTACT_ID = 12;
 
 @Component({
   templateUrl: './crm-contact-details.component.html',
   styleUrls: ['./crm-contact-details.component.scss'],
-  providers: [DataService],
+  providers: [ DataService ],
+  imports: [
+    CommonModule,
+
+    DxButtonModule,
+    DxDropDownButtonModule,
+    DxScrollViewModule,
+    DxToolbarModule,
+
+    ContactFormComponent,
+    ContactCardsComponent,
+  ]
 })
 export class CrmContactDetailsComponent implements OnInit {
+  private service = inject(DataService);
+
+  private route = inject(ActivatedRoute);
+
+  private location = inject(Location);
+
   contactId: number;
 
   contactData: Contact;
@@ -47,11 +59,7 @@ export class CrmContactDetailsComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(
-    private service: DataService,
-    private route: ActivatedRoute,
-    private location: Location
-  ) {
+  constructor() {
     const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
     this.contactId = id || DEFAULT_CONTACT_ID;
   }
@@ -99,25 +107,3 @@ export class CrmContactDetailsComponent implements OnInit {
     this.location.back()
   }
 }
-
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxDropDownButtonModule,
-    DxScrollViewModule,
-    DxToolbarModule,
-
-    ContactFormModule,
-    ContactCardsModule,
-
-    CardActivitiesModule,
-    CardNotesModule,
-    CardMessagesModule,
-
-    CommonModule,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [CrmContactDetailsComponent],
-})
-export class CrmContactDetailsModule { }

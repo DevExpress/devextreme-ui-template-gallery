@@ -1,30 +1,44 @@
-import {
-  Component, OnInit, NgModule, ViewChild,
-} from '@angular/core';
+import {Component, inject, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { DxTabsTypes } from 'devextreme-angular/ui/tabs';
 import { DxTextBoxTypes } from 'devextreme-angular/ui/text-box';
+import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import notify from 'devextreme/ui/notify';
+
 import { taskPanelItems } from 'src/app/types/resource';
 import { Task, newTask } from 'src/app/types/task';
 import { DataService, ScreenService } from 'src/app/services';
 import { forkJoin, map, Observable } from 'rxjs';
-import { TaskFormComponent, TaskFormModule } from 'src/app/components/library/task-form/task-form.component';
-import { FormPopupModule } from 'src/app/components/utils/form-popup/form-popup.component';
-import { TaskListGridComponent, TaskListModule } from 'src/app/components/library/task-list-grid/task-list-grid.component';
-import { TaskListKanbanModule, TaskListKanbanComponent } from 'src/app/components/library/task-list-kanban/task-list-kanban.component';
-import { TaskListGanttComponent, TaskListGanttModule } from 'src/app/components/library/task-list-gantt/task-list-gantt.component';
-import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
-import { ActivatedRoute, Router } from '@angular/router';
+import { TaskFormComponent } from 'src/app/components/library/task-form/task-form.component';
+import { FormPopupComponent } from 'src/app/components/utils/form-popup/form-popup.component';
+import { TaskListGridComponent } from 'src/app/components/library/task-list-grid/task-list-grid.component';
+import { TaskListKanbanComponent } from 'src/app/components/library/task-list-kanban/task-list-kanban.component';
+import { TaskListGanttComponent } from 'src/app/components/library/task-list-gantt/task-list-gantt.component';
 
 @Component({
-  templateUrl: './planning-task-list.component.html',
-  styleUrls: ['./planning-task-list.component.scss'],
-  providers: [DataService],
+    templateUrl: './planning-task-list.component.html',
+    styleUrls: ['./planning-task-list.component.scss'],
+    providers: [DataService],
+    imports: [
+      DxButtonModule,
+      DxDataGridModule,
+      DxTabsModule,
+      DxToolbarModule,
+      DxLoadPanelModule,
+      FormPopupComponent,
+      TaskFormComponent,
+      TaskListKanbanComponent,
+      TaskListGridComponent,
+      TaskListGanttComponent,
+
+      CommonModule,
+    ]
 })
 export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
@@ -34,6 +48,14 @@ export class PlanningTaskListComponent implements OnInit {
   @ViewChild('planningKanban', { static: false }) kanban: TaskListKanbanComponent;
 
   @ViewChild(TaskFormComponent, { static: false }) taskForm: TaskFormComponent;
+
+  private service = inject(DataService);
+
+  private route = inject(ActivatedRoute);
+
+  private router = inject(Router);
+
+  protected screen = inject(ScreenService);
 
   newTask = newTask;
 
@@ -61,8 +83,6 @@ export class PlanningTaskListComponent implements OnInit {
     Object.entries(this.viewToParam).map(([k, v]) => [v, k])
   );
 
-  constructor(private service: DataService, protected screen: ScreenService, private route: ActivatedRoute, private router: Router) {}
-
   ngOnInit(): void {
     this.taskCollections$ = forkJoin([
       this.service.getFilteredTasks(),
@@ -71,6 +91,7 @@ export class PlanningTaskListComponent implements OnInit {
       map(
         ([filteredTasks, allTasks]) => { return { allTasks, filteredTasks }  })
     );
+
     this.route.queryParamMap.subscribe(params => {
       const viewParam = params.get('view');
       if (viewParam && this.paramToView[viewParam] && this.paramToView[viewParam] !== this.displayTaskComponent) {
@@ -86,6 +107,7 @@ export class PlanningTaskListComponent implements OnInit {
 
   tabValueChange(e: DxTabsTypes.ItemClickEvent) {
     const { itemData } = e;
+
     this.displayTaskComponent = itemData.text;
     this.updateFlags();
     this.updateQueryParam();
@@ -141,25 +163,3 @@ export class PlanningTaskListComponent implements OnInit {
     }
   }
 }
-
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxDataGridModule,
-    DxTabsModule,
-    DxToolbarModule,
-    DxLoadPanelModule,
-    FormPopupModule,
-
-    TaskFormModule,
-    TaskListKanbanModule,
-    TaskListModule,
-    TaskListGanttModule,
-
-    CommonModule,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [PlanningTaskListComponent],
-})
-export class PlanningTaskListModule { }

@@ -1,25 +1,18 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CardAuthModule, LoginFormModule } from 'src/app/components';
+import { CardAuthComponent, LoginFormComponent } from 'src/app/components';
 
 @Component({
   selector: 'app-sign-in-form',
   templateUrl: './sign-in-form.component.html',
-  styleUrls: ['./sign-in-form.component.scss']
-})
-export class AppSignInComponent {
-  constructor() { }
-}
-
-@NgModule({
+  styleUrls: ['./sign-in-form.component.scss'],
   imports: [
     CommonModule,
-    LoginFormModule,
-    CardAuthModule,
-  ],
-  providers: [],
-  exports: [AppSignInComponent],
-  declarations: [AppSignInComponent],
+    LoginFormComponent,
+    CardAuthComponent,
+  ]
 })
-export class AppSignInModule { }
+export class AppSignInComponent {
+}
+

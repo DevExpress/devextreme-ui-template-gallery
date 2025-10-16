@@ -1,25 +1,28 @@
-import { Component, HostBinding, OnDestroy, } from '@angular/core';
-import { AppInfoService, AuthService, ScreenService, ThemeService } from './services';
+import { Component, HostBinding, inject, OnDestroy } from '@angular/core';
+import { RouterModule } from "@angular/router";
+
+import { DxHttpModule } from "devextreme-angular/http";
+
+import { ScreenService, ThemeService } from './services';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  imports: [
+    DxHttpModule,
+    RouterModule,
+  ]
 })
 export class AppComponent implements OnDestroy {
   @HostBinding('class') get getClass() {
     return Object.keys(this.screen.sizes).filter((cl) => this.screen.sizes[cl]).join(' ');
   }
+  private themeService =  inject(ThemeService);
+  private screen = inject(ScreenService);
 
-  constructor(private authService: AuthService,
-              private themeService: ThemeService,
-              private screen: ScreenService,
-              public appInfo: AppInfoService) {
-    themeService.setAppTheme();
-  }
-
-  isAuthenticated() {
-    return this.authService.loggedIn;
+  constructor() {
+    this.themeService.setAppTheme();
   }
 
   ngOnDestroy(): void {

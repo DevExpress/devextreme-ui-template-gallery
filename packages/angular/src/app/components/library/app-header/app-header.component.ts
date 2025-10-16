@@ -1,19 +1,26 @@
 import {
-  Component, NgModule, Input, Output, EventEmitter, OnInit,
+  Component, Input, Output, EventEmitter, OnInit, inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
-import { UserPanelModule } from '../user-panel/user-panel.component';
+import { UserPanelComponent } from '../user-panel/user-panel.component';
 import { AuthService, IUser } from 'src/app/services';
-import { ThemeSwitcherModule } from 'src/app/components/library/theme-switcher/theme-switcher.component';
+import { ThemeSwitcherComponent } from 'src/app/components/library/theme-switcher/theme-switcher.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: 'app-header.component.html',
   styleUrls: ['./app-header.component.scss'],
+  imports: [
+      CommonModule,
+      DxButtonModule,
+      DxToolbarModule,
+      ThemeSwitcherComponent,
+      UserPanelComponent,
+  ]
 })
 
 export class AppHeaderComponent implements OnInit {
@@ -26,6 +33,8 @@ export class AppHeaderComponent implements OnInit {
   @Input()
   title!: string;
 
+  private authService = inject(AuthService);
+
   user: IUser | null = { email: '' };
 
   userMenuItems = [
@@ -37,8 +46,6 @@ export class AppHeaderComponent implements OnInit {
     },
   }];
 
-  constructor(private authService: AuthService) { }
-
   ngOnInit() {
     this.authService.getUser().then((e) => this.user = e.data);
   }
@@ -47,16 +54,3 @@ export class AppHeaderComponent implements OnInit {
     this.menuToggle.emit();
   };
 }
-
-@NgModule({
-  imports: [
-    CommonModule,
-    DxButtonModule,
-    DxToolbarModule,
-    ThemeSwitcherModule,
-    UserPanelModule,
-  ],
-  declarations: [AppHeaderComponent],
-  exports: [AppHeaderComponent],
-})
-export class AppHeaderModule { }

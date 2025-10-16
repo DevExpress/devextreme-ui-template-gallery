@@ -12,13 +12,13 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "devextreme-screenshot-comparer": "^2.0.14",
+    "devextreme-screenshot-comparer": "^2.0.17",
     "fs-extra": "^10.0.0",
     "http-server": "^14.1.0"
   },
   "dependencies": {
     "luxon": "^3.3.0",
     "minimist": "^1.2.6",
-    "testcafe": "^2.1.0"
+    "testcafe": "^3.7.2"
   }
 }

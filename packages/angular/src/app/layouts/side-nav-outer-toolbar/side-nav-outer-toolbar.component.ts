@@ -2,31 +2,44 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  NgModule,
   Input,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { DxTreeViewTypes } from 'devextreme-angular/ui/tree-view';
 import { DxDrawerModule, DxDrawerTypes } from 'devextreme-angular/ui/drawer';
 import { DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
 import { CommonModule } from '@angular/common';
-
 import { Router, RouterModule, NavigationEnd, Event } from '@angular/router';
-import { ScreenService, AppInfoService } from '../../services';
-import { SideNavigationMenuModule, AppHeaderModule, AppFooterModule } from '../../components';
-
 import { Subscription } from 'rxjs';
+
+import { ScreenService, AppInfoService } from '../../services';
+import { SideNavigationMenuComponent, AppHeaderComponent, AppFooterComponent } from '../../components';
 
 @Component({
   selector: 'app-side-nav-outer-toolbar',
   templateUrl: './side-nav-outer-toolbar.component.html',
   styleUrls: ['./side-nav-outer-toolbar.component.scss'],
+  imports: [
+    RouterModule,
+    SideNavigationMenuComponent,
+    DxDrawerModule,
+    AppHeaderComponent,
+    CommonModule,
+    AppFooterComponent
+  ],
 })
 export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   @ViewChild(DxScrollViewComponent, { static: true }) scrollView!: DxScrollViewComponent;
 
   @Input()
   title!: string;
+
+  private screen = inject(ScreenService);
+
+  private router = inject(Router);
+
+  protected appInfo = inject(AppInfoService);
 
   selectedRoute = '';
 
@@ -46,7 +59,7 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
 
   screenSubscription: Subscription;
 
-  constructor(private screen: ScreenService, private router: Router, public appInfo: AppInfoService) {
+  constructor() {
     this.routerSubscription = this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.selectedRoute = event.urlAfterRedirects.split('?')[0];
@@ -113,17 +126,3 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
     }
   }
 }
-
-@NgModule({
-  imports: [
-    RouterModule,
-    SideNavigationMenuModule,
-    DxDrawerModule,
-    AppHeaderModule,
-    CommonModule,
-    AppFooterModule
-  ],
-  exports: [SideNavOuterToolbarComponent],
-  declarations: [SideNavOuterToolbarComponent],
-})
-export class SideNavOuterToolbarModule { }

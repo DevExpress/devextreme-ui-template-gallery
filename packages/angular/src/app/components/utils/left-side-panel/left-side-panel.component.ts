@@ -1,25 +1,26 @@
-import {
-  Component,
-  NgModule,
-} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  DxButtonModule,
-} from 'devextreme-angular';
+import { DxButtonModule } from 'devextreme-angular';
 import { ScreenService } from 'src/app/services';
-import {DxScrollViewModule} from "devextreme-angular/ui/scroll-view";
+import { DxScrollViewModule } from "devextreme-angular/ui/scroll-view";
 
 @Component({
   selector: 'left-side-panel',
   templateUrl: './left-side-panel.component.html',
   styleUrls: ['./left-side-panel.component.scss'],
+  imports: [
+    DxButtonModule,
+    DxScrollViewModule,
+    CommonModule,
+  ],
 })
 export class LeftSidePanelComponent {
+  private screen = inject(ScreenService);
   isSmallScreen = false;
   isOpened = !(this.screen.sizes['screen-x-small'] || this.screen.sizes['screen-small']);
 
-  constructor(protected screen: ScreenService) {
-    screen.smallScreenChanged.subscribe((isSmall) => {
+  constructor() {
+    this.screen.smallScreenChanged.subscribe((isSmall) => {
       this.isSmallScreen = isSmall;
 
       if (!isSmall) {
@@ -33,13 +34,3 @@ export class LeftSidePanelComponent {
   };
 }
 
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxScrollViewModule,
-    CommonModule,
-  ],
-  declarations: [LeftSidePanelComponent],
-  exports: [LeftSidePanelComponent],
-})
-export class LeftSidePanelModule { }

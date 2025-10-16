@@ -1,6 +1,4 @@
-import {
-  Component, OnInit, NgModule,
-} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { map, share } from 'rxjs/operators';
 import { Observable, forkJoin } from 'rxjs';
@@ -14,21 +12,19 @@ import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 
 import { DataService } from 'src/app/services';
-import { CardAnalyticsModule } from 'src/app/components/library/card-analytics/card-analytics.component';
-import { ToolbarAnalyticsModule } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
-import { ConversionCardModule } from 'src/app/components/utils/conversion-card/conversion-card.component';
-import { RevenueCardModule } from 'src/app/components/utils/revenue-card/revenue-card.component';
-import { RevenueAnalysisCardModule } from 'src/app/components/utils/revenue-analysis-card/revenue-analysis-card.component';
-import { RevenueSnapshotCardModule } from 'src/app/components/utils/revenue-snapshot-card/revenue-snapshot-card.component';
-import { OpportunitiesTickerModule } from 'src/app/components/utils/opportunities-ticker/opportunities-ticker.component';
-import { RevenueTotalTickerModule } from 'src/app/components/utils/revenue-total-ticker/revenue-total-ticker.component';
-import { ConversionTickerModule } from 'src/app/components/utils/conversion-ticker/conversion-ticker.component';
-import { LeadsTickerModule } from 'src/app/components/utils/leads-ticker/leads-ticker.component';
+import { ToolbarAnalyticsComponent } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
+import { ConversionCardComponent } from 'src/app/components/utils/conversion-card/conversion-card.component';
+import { RevenueCardComponent } from 'src/app/components/utils/revenue-card/revenue-card.component';
+import { RevenueAnalysisCardComponent } from 'src/app/components/utils/revenue-analysis-card/revenue-analysis-card.component';
+import { RevenueSnapshotCardComponent } from 'src/app/components/utils/revenue-snapshot-card/revenue-snapshot-card.component';
+import { OpportunitiesTickerComponent } from 'src/app/components/utils/opportunities-ticker/opportunities-ticker.component';
+import { RevenueTotalTickerComponent } from 'src/app/components/utils/revenue-total-ticker/revenue-total-ticker.component';
+import { ConversionTickerComponent } from 'src/app/components/utils/conversion-ticker/conversion-ticker.component';
+import { LeadsTickerComponent } from 'src/app/components/utils/leads-ticker/leads-ticker.component';
 import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import {
   Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory,
 } from 'src/app/types/analytics';
-import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
 
 type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
 type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
@@ -36,11 +32,31 @@ type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
 @Component({
   templateUrl: './analytics-dashboard.component.html',
   styleUrls: ['./analytics-dashboard.component.scss'],
-  providers: [DataService],
+  providers: [ DataService ],
+  imports: [
+    DxScrollViewModule,
+    DxDataGridModule,
+    DxBulletModule,
+    DxFunnelModule,
+    DxPieChartModule,
+    DxChartModule,
+    ToolbarAnalyticsComponent,
+    DxLoadPanelModule,
+    ConversionCardComponent,
+    RevenueAnalysisCardComponent,
+    RevenueCardComponent,
+    RevenueSnapshotCardComponent,
+    OpportunitiesTickerComponent,
+    RevenueTotalTickerComponent,
+    ConversionTickerComponent,
+    LeadsTickerComponent,
+    CommonModule,
+  ],
 })
 export class AnalyticsDashboardComponent implements OnInit {
-  analyticsPanelItems = analyticsPanelItems;
+  private service = inject(DataService);
 
+  analyticsPanelItems = analyticsPanelItems;
   opportunities: SalesOrOpportunitiesByCategory = null;
   sales: Sales = null;
   salesByState: SalesByState = null;
@@ -48,14 +64,8 @@ export class AnalyticsDashboardComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  constructor(private service: DataService) {}
-
   selectionChange(dates: Dates) {
     this.loadData(dates.startDate, dates.endDate);
-  }
-
-  customizeSaleText(arg: { percentText: string }) {
-    return arg.percentText;
   }
 
   loadData = (startDate: string, endDate: string) => {
@@ -89,31 +99,3 @@ export class AnalyticsDashboardComponent implements OnInit {
     this.loadData(startDate, endDate);
   }
 }
-
-@NgModule({
-  imports: [
-    DxScrollViewModule,
-    DxDataGridModule,
-    DxBulletModule,
-    DxFunnelModule,
-    DxPieChartModule,
-    DxChartModule,
-    CardAnalyticsModule,
-    ToolbarAnalyticsModule,
-    DxLoadPanelModule,
-    ApplyPipeModule,
-    ConversionCardModule,
-    RevenueAnalysisCardModule,
-    RevenueCardModule,
-    RevenueSnapshotCardModule,
-    OpportunitiesTickerModule,
-    RevenueTotalTickerModule,
-    ConversionTickerModule,
-    LeadsTickerModule,
-    CommonModule,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [AnalyticsDashboardComponent],
-})
-export class AnalyticsDashboardModule { }

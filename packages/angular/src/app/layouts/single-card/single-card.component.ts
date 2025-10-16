@@ -1,12 +1,17 @@
-import { Component, NgModule, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
-import { CardAuthModule } from '../../components/library/card-auth/card-auth.component'
+import { CardAuthComponent } from '../../components/library/card-auth/card-auth.component'
 
 @Component({
   selector: 'app-single-card',
   templateUrl: './single-card.component.html',
   styleUrls: ['./single-card.component.scss'],
+  imports: [
+    CommonModule,
+    DxScrollViewModule,
+    CardAuthComponent,
+  ],
 })
 export class SingleCardComponent {
   @Input()
@@ -14,15 +19,5 @@ export class SingleCardComponent {
 
   @Input()
   description!: string;
-
-  constructor() { }
 }
 
-@NgModule({
-  imports: [CommonModule, DxScrollViewModule, CardAuthModule],
-  exports: [SingleCardComponent],
-  declarations: [SingleCardComponent],
-})
-export class SingleCardModule {
-
-}

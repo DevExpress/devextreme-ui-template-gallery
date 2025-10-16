@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component, Input, NgModule,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   DxTextAreaModule,
   DxTextBoxModule,
@@ -12,12 +10,23 @@ import {
   DxValidatorModule,
 } from 'devextreme-angular';
 import { Message, Messages } from 'src/app/types/messages';
-import { UserAvatarModule } from 'src/app/components/library/user-avatar/user-avatar.component';
+import { UserAvatarComponent } from 'src/app/components/library/user-avatar/user-avatar.component';
 
 @Component({
   selector: 'card-messages',
   templateUrl: './card-messages.component.html',
   styleUrls: ['./card-messages.component.scss'],
+  imports: [
+    DxTextAreaModule,
+    DxTextBoxModule,
+    DxToolbarModule,
+    DxFileUploaderModule,
+    DxButtonModule,
+    DxValidationGroupModule,
+    DxValidatorModule,
+    UserAvatarComponent,
+    CommonModule,
+  ]
 })
 export class CardMessagesComponent {
   @Input() user: string;
@@ -53,20 +62,3 @@ export class CardMessagesComponent {
     e.validationGroup.reset();
   };
 }
-
-@NgModule({
-  imports: [
-    DxTextAreaModule,
-    DxTextBoxModule,
-    DxToolbarModule,
-    DxFileUploaderModule,
-    DxButtonModule,
-    DxValidationGroupModule,
-    DxValidatorModule,
-    UserAvatarModule,
-    CommonModule,
-  ],
-  declarations: [CardMessagesComponent],
-  exports: [CardMessagesComponent],
-})
-export class CardMessagesModule { }

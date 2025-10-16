@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component, Input, NgModule, OnInit,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   DxTextAreaModule,
   DxToolbarModule,
@@ -16,6 +14,15 @@ import { Notes, Note } from 'src/app/types/notes';
   selector: 'card-notes',
   templateUrl: './card-notes.component.html',
   styleUrls: ['./card-notes.component.scss'],
+  imports: [
+    DxTextAreaModule,
+    DxToolbarModule,
+    DxButtonModule,
+    DxValidationGroupModule,
+    DxValidatorModule,
+    DxScrollViewModule,
+    CommonModule,
+  ]
 })
 export class CardNotesComponent {
   @Input() user: string;
@@ -40,18 +47,3 @@ export class CardNotesComponent {
     e.validationGroup.reset();
   };
 }
-
-@NgModule({
-  imports: [
-    DxTextAreaModule,
-    DxToolbarModule,
-    DxButtonModule,
-    DxValidationGroupModule,
-    DxValidatorModule,
-    DxScrollViewModule,
-    CommonModule,
-  ],
-  declarations: [CardNotesComponent],
-  exports: [CardNotesComponent],
-})
-export class CardNotesModule { }

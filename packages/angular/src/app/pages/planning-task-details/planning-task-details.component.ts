@@ -1,6 +1,4 @@
-import {
-  Component, OnInit, NgModule
-} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -10,26 +8,45 @@ import {
   DxValidationGroupModule,
   DxScrollViewModule,
 } from 'devextreme-angular';
+import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
+
 import {
-  CardActivitiesModule,
-  CardNotesModule,
-  CardMessagesModule,
-  StatusIndicatorModule,
+  CardActivitiesComponent,
+  CardNotesComponent,
+  CardMessagesComponent,
 } from 'src/app/components';
 import { Task } from 'src/app/types/task';
 import { DataService } from 'src/app/services';
-import { TaskFormModule } from 'src/app/components/library/task-form/task-form.component';
-import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
+import { TaskFormComponent } from 'src/app/components/library/task-form/task-form.component';
 
 const DEFAULT_TASK_ID = 1;
-
 
 @Component({
   templateUrl: './planning-task-details.component.html',
   styleUrls: ['./planning-task-details.component.scss'],
-  providers: [DataService],
+  providers: [ DataService ],
+  imports: [
+    DxButtonModule,
+    DxDropDownButtonModule,
+    DxTabPanelModule,
+    DxValidationGroupModule,
+    DxToolbarModule,
+
+    CardActivitiesComponent,
+    CardNotesComponent,
+    CardMessagesComponent,
+    TaskFormComponent,
+    DxScrollViewModule,
+    CommonModule,
+  ]
 })
 export class PlanningTaskDetailsComponent implements OnInit {
+  private service = inject(DataService);
+
+  private route = inject(ActivatedRoute);
+
+  private location = inject(Location);
+
   task: Task;
 
   taskId: number;
@@ -38,11 +55,7 @@ export class PlanningTaskDetailsComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(
-    private service: DataService,
-    private route: ActivatedRoute,
-    private location: Location
-  ) {
+  constructor() {
     const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
     this.taskId = id || DEFAULT_TASK_ID;
   }
@@ -69,24 +82,3 @@ export class PlanningTaskDetailsComponent implements OnInit {
   }
 }
 
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxDropDownButtonModule,
-    DxTabPanelModule,
-    DxValidationGroupModule,
-    DxToolbarModule,
-
-    CardActivitiesModule,
-    CardNotesModule,
-    CardMessagesModule,
-    TaskFormModule,
-    StatusIndicatorModule,
-    DxScrollViewModule,
-    CommonModule,
-  ],
-  providers: [],
-  exports: [],
-  declarations: [PlanningTaskDetailsComponent],
-})
-export class PlanningTaskDetailsModule { }

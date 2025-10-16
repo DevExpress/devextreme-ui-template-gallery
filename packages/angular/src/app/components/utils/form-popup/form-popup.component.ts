@@ -1,8 +1,10 @@
 import {
   Component,
-  NgModule,
   Input,
-  ViewChild, Output, EventEmitter,
+  ViewChild,
+  Output,
+  EventEmitter,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -13,12 +15,20 @@ import {
   DxValidationGroupComponent,
 } from 'devextreme-angular';
 import { ScreenService } from 'src/app/services';
-import { ApplyPipeModule } from 'src/app/pipes/apply.pipe';
+import { ApplyPipeDirective } from 'src/app/pipes/apply.pipe';
 
 @Component({
-  selector: 'form-popup',
-  templateUrl: './form-popup.component.html',
-  styleUrls: ['./form-popup.component.scss']
+    selector: 'form-popup',
+    templateUrl: './form-popup.component.html',
+    styleUrls: ['./form-popup.component.scss'],
+    imports: [
+      ApplyPipeDirective,
+      DxButtonModule,
+      DxToolbarModule,
+      DxPopupModule,
+      DxValidationGroupModule,
+      CommonModule,
+    ],
 })
 
 export class FormPopupComponent {
@@ -40,7 +50,7 @@ export class FormPopupComponent {
 
   @Output() visibleChange = new EventEmitter<boolean>();
 
-  constructor(protected screen: ScreenService) { }
+  protected screen = inject(ScreenService);
 
   isValid() {
     return this.validationGroup.instance.validate().isValid;
@@ -69,17 +79,3 @@ export class FormPopupComponent {
     };
   }
 }
-
-@NgModule({
-  imports: [
-    ApplyPipeModule,
-    DxButtonModule,
-    DxToolbarModule,
-    DxPopupModule,
-    DxValidationGroupModule,
-    CommonModule,
-  ],
-  declarations: [FormPopupComponent],
-  exports: [FormPopupComponent],
-})
-export class FormPopupModule { }

@@ -1,6 +1,4 @@
-import {
-  Component, NgModule, Input,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -9,26 +7,39 @@ import {
   DxNumberBoxModule,
   DxSelectBoxModule,
   DxTextBoxModule,
-  DxToolbarModule,
   DxValidatorModule,
   DxValidationGroupModule,
 } from 'devextreme-angular';
 import {
-  ContactStatusModule,
-  FormTextboxModule,
-  FormPhotoModule,
-  StatusSelectBoxModule,
+  FormTextboxComponent,
+  FormPhotoComponent,
+  StatusSelectBoxComponent,
 } from 'src/app/components';
 import { Contact } from 'src/app/types/contact';
 import { ValidationRule } from 'devextreme-angular/common';
 import { DxButtonTypes } from 'devextreme-angular/ui/button';
-import { ToolbarFormModule } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
+import { ToolbarFormComponent } from 'src/app/components/utils/toolbar-form/toolbar-form.component';
 import { US_STATES } from 'src/app/shared/constants';
 
 @Component({
   selector: 'contact-form',
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss'],
+  imports: [
+    DxFormModule,
+    DxSelectBoxModule,
+    DxButtonModule,
+    DxTextBoxModule,
+    DxNumberBoxModule,
+    DxLoadPanelModule,
+    DxValidationGroupModule,
+    FormTextboxComponent,
+    FormPhotoComponent,
+    DxValidatorModule,
+    ToolbarFormComponent,
+    CommonModule,
+    StatusSelectBoxComponent,
+  ]
 })
 export class ContactFormComponent {
   @Input() contactData: Contact;
@@ -59,27 +70,3 @@ export class ContactFormComponent {
     this.isEditing = false;
   }
 }
-
-@NgModule({
-  imports: [
-    DxFormModule,
-    DxSelectBoxModule,
-    DxButtonModule,
-    DxTextBoxModule,
-    DxNumberBoxModule,
-    DxLoadPanelModule,
-    DxValidationGroupModule,
-
-    FormTextboxModule,
-    ContactStatusModule,
-    FormPhotoModule,
-    DxValidatorModule,
-    ToolbarFormModule,
-    CommonModule,
-    StatusSelectBoxModule,
-  ],
-  providers: [],
-  exports: [ContactFormComponent],
-  declarations: [ContactFormComponent],
-})
-export class ContactFormModule { }

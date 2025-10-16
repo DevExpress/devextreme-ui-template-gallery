@@ -3,12 +3,12 @@ import {
   OnInit,
   OnChanges,
   OnDestroy,
-  NgModule,
   Output,
   Input,
   SimpleChanges,
   EventEmitter,
   AfterViewChecked,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -25,10 +25,10 @@ import {
 } from 'devextreme-angular';
 import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import {
-  FormTextboxModule,
-  FormPhotoModule,
-  CardActivitiesModule,
-  ContactStatusModule,
+  FormTextboxComponent,
+  FormPhotoComponent,
+  ContactStatusComponent,
+  CardActivitiesComponent,
 } from 'src/app/components';
 import { ScreenService, DataService } from 'src/app/services';
 import { distinctUntilChanged, Subject, Subscription} from 'rxjs';
@@ -39,6 +39,22 @@ import { Contact } from 'src/app/types/contact';
   templateUrl: './contact-panel.component.html',
   styleUrls: ['./contact-panel.component.scss'],
   providers: [DataService],
+  imports: [
+    DxAccordionModule,
+    DxButtonModule,
+    DxDropDownButtonModule,
+    DxToolbarModule,
+    DxLoadPanelModule,
+    DxScrollViewModule,
+    DxFormModule,
+    DxValidatorModule,
+    DxValidationGroupModule,
+    FormTextboxComponent,
+    FormPhotoComponent,
+    CardActivitiesComponent,
+    ContactStatusComponent,
+    CommonModule,
+  ]
 })
 export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecked, OnDestroy {
   @Input() isOpened = false;
@@ -50,6 +66,12 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
   @Output() pinnedChange = new EventEmitter<boolean>();
 
   private pinEventSubject = new Subject<boolean>();
+
+  private screen = inject(ScreenService);
+
+  private service = inject(DataService);
+
+  private router = inject(Router);
 
   formData: Contact;
 
@@ -65,7 +87,7 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
 
   userPanelSubscriptions: Subscription[] = [];
 
-  constructor(private screen: ScreenService, private service: DataService, private router: Router) {
+  constructor() {
     this.userPanelSubscriptions.push(
       this.screen.changed.subscribe(this.calculatePin),
       this
@@ -144,26 +166,3 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
     });
   }
 }
-
-@NgModule({
-  imports: [
-    DxAccordionModule,
-    DxButtonModule,
-    DxDropDownButtonModule,
-    DxToolbarModule,
-    DxLoadPanelModule,
-    DxScrollViewModule,
-    DxFormModule,
-    DxValidatorModule,
-    DxValidationGroupModule,
-
-    FormTextboxModule,
-    FormPhotoModule,
-    CardActivitiesModule,
-    ContactStatusModule,
-    CommonModule,
-  ],
-  declarations: [ContactPanelComponent],
-  exports: [ContactPanelComponent],
-})
-export class ContactPanelModule { }

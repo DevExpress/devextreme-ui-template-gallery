@@ -1,7 +1,8 @@
-import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
-import { current } from 'devextreme/ui/themes'
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
+import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
+import { current } from 'devextreme/ui/themes'
 
 const themes = ['light', 'dark'] as const;
 

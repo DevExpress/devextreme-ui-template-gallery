@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
@@ -12,19 +12,27 @@ const notificationText = 'We\'ve sent a link to reset your password. Check your 
   selector: 'reset-password-form',
   templateUrl: './reset-password-form.component.html',
   styleUrls: ['./reset-password-form.component.scss'],
+  imports: [
+    CommonModule,
+    RouterModule,
+    DxFormModule,
+    DxLoadIndicatorModule,
+  ]
 })
 export class ResetPasswordFormComponent implements OnInit {
   @Input() signInLink = '/auth/sign-in';
 
   @Input() buttonLink = '/auth/sign-in';
 
+  private authService = inject(AuthService);
+
+  private router = inject(Router);
+
   defaultAuthData: IResponse;
 
   loading = false;
 
   formData: any = {};
-
-  constructor(private authService: AuthService, private router: Router) { }
 
   async onSubmit(e: Event) {
     e.preventDefault();
@@ -46,14 +54,3 @@ export class ResetPasswordFormComponent implements OnInit {
     this.defaultAuthData = await this.authService.getUser();
   }
 }
-@NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    DxFormModule,
-    DxLoadIndicatorModule,
-  ],
-  declarations: [ResetPasswordFormComponent],
-  exports: [ResetPasswordFormComponent],
-})
-export class ResetPasswordFormModule { }

@@ -1,4 +1,4 @@
-import { ClientFunction } from 'testcafe';
+import { ClientFunction, Selector } from 'testcafe';
 import { DateTime } from 'luxon';
 import { fakeScreenSize } from '../config';
 
@@ -65,13 +65,19 @@ export const toggleCommonConfiguration = async (
 ) => {
   await t.resizeWindow(...screenMode);
   await t.navigateTo(url);
-
   await awaitFontsLoaded(t, requestLogger);
   await toogleEmbeddedClass(embedded);
   if (embedded && isDoubleResize) {
     await forceResizeRecalculation(t, screenMode);
   }
   setEmbedded(t, embedded, screenMode);
+
+  const licenseCloseButton = Selector('dx-license div:last-child').with({ timeout: 0 });
+  const licenseCloseButtonExists = await licenseCloseButton.exists;
+
+  if (licenseCloseButtonExists) {
+    await t.click(licenseCloseButton);
+  }
 
   await t.wait(timeout);
 };

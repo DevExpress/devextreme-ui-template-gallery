@@ -1,6 +1,4 @@
-import {
-  Component, NgModule, Input, ViewChild,
-} from '@angular/core';
+import { Component, Input, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DxGanttModule, DxGanttComponent } from 'devextreme-angular/ui/gantt';
@@ -14,14 +12,17 @@ import 'jspdf-autotable';
   selector: 'task-list-gantt',
   templateUrl: './task-list-gantt.component.html',
   styleUrls: ['./task-list-gantt.component.scss'],
+  imports: [
+    DxGanttModule,
+    CommonModule,
+  ],
 })
 export class TaskListGanttComponent {
   @ViewChild(DxGanttComponent, { static: false }) gantt: DxGanttComponent;
 
   @Input() dataSource: Task[];
 
-  constructor(private router: Router) {
-  }
+  private router = inject(Router);
 
   refresh() {
     this.gantt.instance.refresh();
@@ -40,15 +41,3 @@ export class TaskListGanttComponent {
     this.router.navigate(['/planning-task-details']);
   };
 }
-
-@NgModule({
-  imports: [
-    DxGanttModule,
-
-    CommonModule,
-  ],
-  providers: [],
-  exports: [TaskListGanttComponent],
-  declarations: [TaskListGanttComponent],
-})
-export class TaskListGanttModule { }

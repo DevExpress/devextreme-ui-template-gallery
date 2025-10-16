@@ -36,10 +36,15 @@ const NEW_PASSWORD = 'newpassword';
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
         await forceResizeRecalculation(t, screenMode);
         await setTheme(t, themeMode);
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`user-profile${postfix}`, 'body');
         await t.click(Selector('.change-password-button'));
         await t.wait(1000);
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
+
         await takeScreenshot(`user-profile-change-password${postfix}`, 'body');
 
         const popupSelector = screenMode[0] === 400 ? '.dx-popup-fullscreen' : '.dx-popup-normal';
@@ -63,8 +68,10 @@ const NEW_PASSWORD = 'newpassword';
           .click(Selector(popupSelector).find('.form-popup-buttons-container').find('.dx-button').nth(1)) // Save button
           .expect(Selector(popupSelector).visible)
           .notOk()
-          .click(Selector('.change-password-button'))
-          .wait(1000);
+          .click(Selector('.change-password-button'));
+
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`user-profile-change-password-after-save${postfix}`, popupSelector);
 
@@ -74,8 +81,9 @@ const NEW_PASSWORD = 'newpassword';
           .click(Selector(popupSelector).find('.form-popup-buttons-container').find('.dx-button').nth(0)) // Cancel button
           .expect(Selector(popupSelector).visible)
           .notOk()
-          .click(Selector('.change-password-button'))
-          .wait(1000);
+          .click(Selector('.change-password-button'));
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`user-profile-change-password-after-cancel${postfix}`, popupSelector);
 
@@ -131,6 +139,8 @@ const NEW_PASSWORD = 'newpassword';
                 .nth(0),
             );
         });
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         const localPostfix = 'block-after-actions-wtih-form';
         await takeScreenshot(`basic-${localPostfix}${postfix}`, '.basic-info-card .form-container');

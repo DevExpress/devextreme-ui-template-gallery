@@ -1,13 +1,15 @@
-import { CommonModule } from '@angular/common';
-import {
-  Component, ElementRef, Input, NgModule, OnInit,
-} from '@angular/core';
-import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
+import { Component, ElementRef, inject, Input, OnInit } from '@angular/core';
+import { CommonModule } from "@angular/common";
+import { DxFileUploaderComponent } from "devextreme-angular";
 
 @Component({
   selector: 'form-photo',
   templateUrl: './form-photo.component.html',
   styleUrls: ['./form-photo.component.scss'],
+  imports: [
+    DxFileUploaderComponent,
+    CommonModule,
+  ],
 })
 export class FormPhotoComponent implements OnInit {
   @Input() link: string;
@@ -16,23 +18,13 @@ export class FormPhotoComponent implements OnInit {
 
   @Input() size = 124;
 
+  private elRef = inject(ElementRef);
+
   imageUrl: string;
 
   hostRef = this.elRef.nativeElement;
-
-  constructor(private elRef:ElementRef) {}
 
   ngOnInit() {
     this.imageUrl = `url('data:image/png;base64,${this.link}')`;
   }
 }
-
-@NgModule({
-  imports: [
-    DxFileUploaderModule,
-    CommonModule
-  ],
-  declarations: [FormPhotoComponent],
-  exports: [FormPhotoComponent],
-})
-export class FormPhotoModule { }

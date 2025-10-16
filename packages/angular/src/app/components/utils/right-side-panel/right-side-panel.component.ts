@@ -1,15 +1,11 @@
 import {
   Component,
-  NgModule,
   Output,
   Input,
-  EventEmitter, HostBinding,
+  EventEmitter, HostBinding, inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  DxButtonModule,
-} from 'devextreme-angular';
-import { DxButtonTypes } from 'devextreme-angular/ui/button';
+import { DxButtonComponent } from 'devextreme-angular';
 import {DataService, ScreenService} from 'src/app/services';
 
 @Component({
@@ -17,6 +13,10 @@ import {DataService, ScreenService} from 'src/app/services';
   templateUrl: './right-side-panel.component.html',
   styleUrls: ['./right-side-panel.component.scss'],
   providers: [DataService],
+  imports: [
+    DxButtonComponent,
+    CommonModule,
+  ],
 })
 export class RightSidePanelComponent {
   @Input() isOpened = false;
@@ -33,27 +33,18 @@ export class RightSidePanelComponent {
 
   @HostBinding('class.open') get open() { return this.isOpened; };
 
+  private screen = inject(ScreenService);
+
   isLarge = this.screen.sizes['screen-large'];
 
-  constructor(protected screen: ScreenService) {
-    screen.screenChanged.subscribe(({isLarge, isXLarge}) => {
+  constructor() {
+    this.screen.screenChanged.subscribe(({isLarge, isXLarge}) => {
       this.isLarge = isLarge || isXLarge;
     });
   }
-
 
   toggleOpen = () => {
     this.isOpened = !this.isOpened;
     this.openedChange.emit(this.isOpened);
   };
 }
-
-@NgModule({
-  imports: [
-    DxButtonModule,
-    CommonModule,
-  ],
-  declarations: [RightSidePanelComponent],
-  exports: [RightSidePanelComponent],
-})
-export class RightSidePanelModule { }

@@ -43,8 +43,11 @@ const checkScreenMode = async (t, screenMode) => {
         );
         await forceResizeRecalculation(t, screenMode);
         await setTheme(t, themeMode);
+        await t.click(Selector('.content .dx-toolbar .toolbar-header')); // for remove focus tab after click
 
         await t.expect(Selector('body.dx-device-generic').count).eql(1);
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000); // wait while scrollbar removed
         await takeScreenshot(`analytics-geography-all${postfix}`, 'body');
         await checkScreenMode(t, screenMode);
         await t.click(Selector('.dx-tabs .dx-item').nth(3));

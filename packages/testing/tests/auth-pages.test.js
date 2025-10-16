@@ -34,16 +34,24 @@ fixture`Auth pages`;
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, false, requestLogger);
         await forceResizeRecalculation(t, screenMode);
         await setTheme(t, themeMode);
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`auth-login-prompt${postfix}`, 'body');
 
         await t.click(Selector('a').withText('Forgot password?'));
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`auth-reset-password-prompt${postfix}`, 'body');
 
         await t.click(Selector('a').withText('Sign In'));
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await t.click(Selector('.dx-button[aria-label="Register"]'));
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`auth-create-account-prompt${postfix}`, 'body');
 

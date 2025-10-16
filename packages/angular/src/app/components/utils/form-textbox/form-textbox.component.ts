@@ -1,4 +1,9 @@
-import {Component, EventEmitter, Input, NgModule, Output} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   DxButtonModule,
@@ -11,6 +16,12 @@ import { ValidationRule } from 'devextreme-angular/common';
   selector: 'form-textbox',
   templateUrl: './form-textbox.component.html',
   styleUrls: ['form-textbox.component.scss'],
+  imports: [
+    DxButtonModule,
+    DxTextBoxModule,
+    DxValidatorModule,
+    CommonModule,
+  ],
 })
 export class FormTextboxComponent {
   @Input() isEditing = false;
@@ -34,15 +45,3 @@ export class FormTextboxComponent {
   }
 
 }
-
-@NgModule({
-  imports: [
-    DxButtonModule,
-    DxTextBoxModule,
-    DxValidatorModule,
-    CommonModule,
-  ],
-  declarations: [FormTextboxComponent],
-  exports: [FormTextboxComponent],
-})
-export class FormTextboxModule { }

@@ -1,11 +1,10 @@
 import {
   Component,
-  NgModule,
   Input,
   Output,
   EventEmitter,
 } from '@angular/core';
-import { CardAnalyticsModule } from '../../library/card-analytics/card-analytics.component';
+import { CardAnalyticsComponent } from '../../library/card-analytics/card-analytics.component';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 import { Sale } from 'src/app/types/analytics';
@@ -14,6 +13,11 @@ import { Sale } from 'src/app/types/analytics';
   selector: 'sales-performance-card',
   templateUrl: './sales-performance-card.component.html',
   styleUrls: ['./sales-performance-card.component.scss'],
+  imports: [
+    CardAnalyticsComponent,
+    DxChartModule,
+    DxDropDownButtonModule,
+  ],
 })
 export class SalesPerformanceCardComponent {
   @Input() groupByPeriods: string[];
@@ -32,14 +36,3 @@ export class SalesPerformanceCardComponent {
     this.performancePeriodChanged.emit(event);
   }
 }
-
-@NgModule({
-  imports: [
-    CardAnalyticsModule,
-    DxChartModule,
-    DxDropDownButtonModule,
-  ],
-  declarations: [SalesPerformanceCardComponent],
-  exports: [SalesPerformanceCardComponent],
-})
-export class SalesPerformanceCardModule { }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SingleCardModule } from 'src/app/layouts';
+import { SingleCardComponent } from 'src/app/layouts';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,9 +17,14 @@ import { Router } from '@angular/router';
       height: 100%;
     }
   `],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SingleCardComponent,
+  ],
 })
 export class UnauthenticatedContentComponent {
-  constructor(private router: Router) { }
+  private router = inject(Router);
 
   get description() {
     const path = this.router.url.split('/').at(-1);
@@ -40,13 +45,3 @@ export class UnauthenticatedContentComponent {
     }
   }
 }
-@NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    SingleCardModule,
-  ],
-  declarations: [UnauthenticatedContentComponent],
-  exports: [UnauthenticatedContentComponent],
-})
-export class UnauthenticatedContentModule { }

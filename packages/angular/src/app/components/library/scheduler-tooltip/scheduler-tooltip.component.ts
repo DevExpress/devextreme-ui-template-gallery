@@ -1,14 +1,19 @@
 import {
-  Component, EventEmitter, Input, NgModule, Output,
+  Component, EventEmitter, Input, Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule } from 'devextreme-angular';
-import {ApplyPipeModule} from "../../../pipes/apply.pipe";
+import { ApplyPipeDirective } from "../../../pipes/apply.pipe";
 
 @Component({
   selector: 'scheduler-tooltip',
   templateUrl: './scheduler-tooltip.component.html',
   styleUrls: ['./scheduler-tooltip.component.scss'],
+  imports: [
+    ApplyPipeDirective,
+    CommonModule,
+    DxButtonModule,
+  ],
 })
 export class SchedulerTooltipComponent {
   @Input() selectedAppointmentData: Record<string, any>;
@@ -35,14 +40,3 @@ export class SchedulerTooltipComponent {
     return `${selectedAppointmentData.startDate.toLocaleString(undefined, dateOptions)} - ${selectedAppointmentData.endDate?.toLocaleTimeString(undefined, timeOptions)}`;
   }
 }
-
-@NgModule({
-  imports: [
-    ApplyPipeModule,
-    CommonModule,
-    DxButtonModule,
-  ],
-  declarations: [SchedulerTooltipComponent],
-  exports: [SchedulerTooltipComponent],
-})
-export class SchedulerTooltipModule { }

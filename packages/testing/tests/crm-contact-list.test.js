@@ -30,12 +30,17 @@ fixture`Contact List`;
         // eslint-disable-next-line max-len
         await toggleCommonConfiguration(t, BASE_URL, embedded, () => {}, screenMode, timeoutSecond, true);
         await setTheme(t, themeMode);
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await t.expect(Selector('body.dx-device-generic').count).eql(1);
         await takeScreenshot(`crm-contact-list${postfix}`, 'body');
 
         await t.click('tr.dx-data-row:first-child');
         await forceResizeRecalculation(t, screenMode);
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
+
         await takeScreenshot(`crm-contact-list-full${postfix}`, 'body');
         await t.expect(Selector('.contact-name').withText('Amelia Harper').count).eql(1);
         await takeScreenshot(`crm-contact-list-form${postfix}`, Selector('.data-wrapper'));
@@ -55,16 +60,24 @@ fixture`Contact List`;
         await t.expect(inputs.nth(1).value).notContains('unwanted text');
 
         await t.click(Selector('.dx-button[aria-label=Edit]'));
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
         await takeScreenshot(`crm-contact-list-form-edit${postfix}`, Selector('.data-wrapper'));
         await t.typeText(inputs.nth(0), 'test 0');
 
         await t.click(Selector('.dx-button[aria-label=Save]'));
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
+
         await takeScreenshot(`crm-contact-list-form-saved${postfix}`, Selector('.data-wrapper'));
 
         await t.click(Selector('[aria-label="Close"]'));
 
         await t.click(Selector('.dx-button[aria-label=All]'));
         await t.click(Selector('.dx-list-item-content').withText('Terminated'));
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
+
         await takeScreenshot(`crm-contact-list-grid-filtering-terminated=${postfix}`, 'body');
 
         await t
@@ -86,12 +99,14 @@ fixture`Contact List`;
         }
 
         await t.click(Selector('[aria-label="Add Contact"]'));
-
-        await t.wait(1000);
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`crm-contact-list-add-contact-popup${postfix}`, 'body');
 
         await t.click(Selector('[aria-label=Save]'));
+        await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
+        await t.wait(2000);
 
         await takeScreenshot(`crm-contact-list-add-contact-popup-validate=${postfix}`, 'body');
 
