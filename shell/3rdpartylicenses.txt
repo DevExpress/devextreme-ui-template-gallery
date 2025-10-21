@@ -13,7 +13,7 @@ MIT
 @angular/router
 MIT
 
-@devexpress/devextreme-internal
+devextreme
 SEE LICENSE IN README.md
 
 devextreme-angular
