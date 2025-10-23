@@ -58,15 +58,14 @@
     "stylelint-config-standard": "^33.0.0",
     "stylelint-config-standard-scss": "^11.1.0",
     "stylelint-scss": "^5.3.2",
-    "typescript": "~5.2.2",
     "vue": "^3.2.38",
-    "vue-eslint-parser": "^9.3.2"
+    "vue-eslint-parser": "^9.3.2",
+    "typescript": "~5.8.3"
   },
   "workspaces": [
     "packages/*"
   ],
   "dependencies": {
-    "typescript": "~5.8.3",
     "devextreme": "25.1.4",
     "devextreme-dist": "25.1.4",
     "devextreme-themebuilder": "25.1.4",
