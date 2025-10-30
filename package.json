@@ -58,8 +58,8 @@
     "packages/*"
   ],
   "dependencies": {
-    "devextreme": "C:\\_work_projects\\DevExtreme-25_2\\packages\\devextreme\\artifacts\\npm\\devextreme\\devextreme-25.2.0.tgz",
-    "devextreme-dist": "C:\\_work_projects\\DevExtreme-25_2\\packages\\devextreme\\artifacts\\npm\\devextreme-dist\\devextreme-dist-25.2.0.tgz",
+    "devextreme": "./devextreme-25.2.1.tgz",
+    "devextreme-dist": "./devextreme-dist-25.2.1.tgz",
     "devextreme-themebuilder": "25.1.4",
     "eslint-config-devextreme": "^1.1.6"
   },
