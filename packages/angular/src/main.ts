@@ -1,4 +1,4 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { enableProdMode, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from "@angular/platform-browser";
 import {
   AppInfoService,
@@ -7,7 +7,7 @@ import {
   ScreenService,
   ThemeService
 } from "./app/services";
-import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { provideRouter, withHashLocation } from "@angular/router";
 
 import themes from 'devextreme/ui/themes';
@@ -27,7 +27,7 @@ themes.initialized(() => {
       AppInfoService,
       ThemeService,
       AuthGuardService,
-      importProvidersFrom(HttpClientModule),
+      provideZoneChangeDetection({ eventCoalescing: true }),
       provideHttpClient(withInterceptorsFromDi()),
       provideRouter(routes, withHashLocation()),
     ]
