@@ -58,9 +58,9 @@
     "packages/*"
   ],
   "dependencies": {
-    "devextreme": "25.1.4",
-    "devextreme-dist": "25.1.4",
-    "devextreme-themebuilder": "25.1.4",
+    "devextreme": "25.1.6",
+    "devextreme-dist": "25.1.6",
+    "devextreme-themebuilder": "25.1.6",
     "eslint-config-devextreme": "^1.1.6"
   },
   "pre-commit": [
