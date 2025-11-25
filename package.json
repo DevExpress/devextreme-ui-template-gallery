@@ -31,7 +31,8 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-airbnb": "^7.0.1",
     "@vue/eslint-config-typescript": "^12.0.0",
-    "eclint": "2.8.1",
+    "devextreme-cli": "latest",
+    "devextreme-themebuilder": "25.1.4",
     "eslint": "^8.55.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.1.0",
@@ -61,9 +62,16 @@
     "devextreme": "25.1.4",
     "devextreme-dist": "25.1.4",
     "devextreme-themebuilder": "25.1.4",
-    "eslint-config-devextreme": "^1.1.6"
+    "eslint-config-devextreme": "^1.1.6",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.2"
   },
   "pre-commit": [
     "lint-bundles"
-  ]
+  ],
+  "overrides": {
+    "follow-redirects": ">=1.15.6",
+    "glob": ">=10.5.0",
+    "nth-check": ">=2.0.1"
+  }
 }
