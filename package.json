@@ -68,11 +68,5 @@
   },
   "pre-commit": [
     "lint-bundles"
-  ],
-  "overrides": {
-    "axios": ">=0.30.2",
-    "follow-redirects": ">=1.15.6",
-    "glob": ">=10.5.0",
-    "nth-check": ">=2.0.1"
-  }
+  ]
 }
