@@ -24,8 +24,18 @@ createTestCafe('localhost', 1437, 1438)
   .then((tc) => {
     testCafe = tc;
 
+    const chromeOptions = [
+      'disable-dev-shm-usage',
+      'no-sandbox',
+      'allow-restricted-networking',
+      'disable-gpu',
+      'disable-permissions-api',
+      'disable-bluetooth',
+      'disable-features=WebBluetooth,WebUSB,WebSerial',
+      'disable-web-security',
+    ];
     const runner = testCafe.createRunner()
-      .browsers('chrome:headless')
+      .browsers(`chrome:headless --${chromeOptions.join(' --')}`)
       .reporter('minimal')
       .src([
         `tests/${args.page}.test.js`,
@@ -44,7 +54,7 @@ createTestCafe('localhost', 1437, 1438)
       quarantineMode: args.quarantineMode === 'true',
     });
   })
-  .then((failedCount) => {
-    testCafe.close();
+  .then(async (failedCount) => {
+    await testCafe.close();
     exit(failedCount);
   });

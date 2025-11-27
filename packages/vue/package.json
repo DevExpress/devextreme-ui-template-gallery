@@ -12,12 +12,10 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "devexpress-gantt": "^4.1.33",
-    "devextreme-vue": "25.1.4",
+    "devextreme-vue": "25.1.7",
     "dx-template-gallery-data": "^1.0.0",
     "exceljs": "^3.10.0",
     "file-saver-es": "^2.0.5",
-    "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.5.25",
     "luxon": "^3.3.0",
     "vue": "^3.2.39",
     "vue-router": "^4.0.3"
