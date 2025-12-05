@@ -109,7 +109,7 @@ const drawerOptions = computed(() => {
 }
 
 .layout-header {
-  z-index: 1501;
+  z-index: 1502;
 }
 
 .layout-body {
@@ -121,4 +121,9 @@ const drawerOptions = computed(() => {
 .content {
   flex-grow: 1;
 }
+</style>
+<style>
+  .dx-drawer-panel-content .dx-overlay-content {
+    box-shadow: 0 4px 4px 0 rgba(0 0 0 / 12%);
+  }
 </style>
