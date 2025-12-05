@@ -2,7 +2,7 @@
   label="Status"
   [value]="value"
   [class]="classList"
-  (valueChange)="valueChange.emit($event)"
+  (onValueChanged)="valueChange.emit($event.value)"
   [items]="items"
   [readOnly]="readOnly"
   [stylingMode]="stylingMode"
