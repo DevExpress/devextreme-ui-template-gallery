@@ -16,7 +16,7 @@
         <div class="calendar">
           <dx-calendar
             [value]="currentDate"
-            (valueChange)="onCalendarDateChange($event)"
+            (onValueChanged)="onCalendarDateChange($event.value)"
           ></dx-calendar>
         </div>
         <calendar-list
