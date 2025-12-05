@@ -346,9 +346,5 @@ const taskSearchOptions = {
   .gantt {
     padding: 0 var(--content-padding) var(--content-padding);
   }
-
-  .kanban {
-    padding: 0 0 var(--content-padding) calc(var(--content-padding) / 2);
-  }
 }
 </style>
