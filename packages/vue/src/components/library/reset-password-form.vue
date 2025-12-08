@@ -107,7 +107,6 @@ async function onSubmit() {
 
   .login-link {
     color: var(--accent-color);
-    font-size: 12px;
     text-align: center;
     margin-top: 6px;
   }
