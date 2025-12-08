@@ -2,7 +2,7 @@
   class="pictured-item-select-box"
   [label]="label"
   [value]="value"
-  (valueChange)="valueChange.emit($event)"
+  (onValueChanged)="valueChange.emit($event.value)"
   [items]="items"
   valueExpr="name"
   stylingMode="filled"
