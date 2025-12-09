@@ -31,7 +31,7 @@
         #schedulerRef
         height="inherit"
         [adaptivityEnabled]="!!(screen.screenChanged | async)?.isXSmall"
-        [allDayPanelMode]="'hidden'"
+        [allDayPanelMode]="'allDay'"
         [dataSource]="tasks"
         [currentView]="currentView"
         [currentDate]="getSchedulerCurrentDate | apply: currentDate"
