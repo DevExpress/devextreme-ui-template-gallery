@@ -147,7 +147,6 @@ async function onSubmit() {
 
 .reset-link {
   text-align: center;
-  font-size: 12px;
   font-style: normal;
   margin: 6px 0 50px 0;
 

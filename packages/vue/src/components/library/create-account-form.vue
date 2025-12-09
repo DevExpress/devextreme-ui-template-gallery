@@ -157,7 +157,6 @@ function confirmPassword(e: {value: ''}) {
 
   .login-link {
     color: var(--accent-color);
-    font-size: 12px;
     text-align: center;
     padding: 6px 0 32px 0;
     border-bottom: 1px solid var(--border-color);
