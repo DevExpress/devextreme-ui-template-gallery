@@ -4,7 +4,12 @@
     selected-range-update-mode="reset"
     :is-menu-visible="false"
   >
+    <dx-load-indicator
+      v-if="!props.data || props.data.length === 0"
+      class="centered"
+    />
     <dx-range-selector
+      v-if="props.data && props.data.length > 0"
       :data-source="props.data"
       :value="props.value"
       @value-changed="(e) => emit('range-changed', e)"
@@ -19,8 +24,6 @@
         <dx-range-selector-label format="MMM yyyy" />
       </dx-scale>
       <dx-size :height="90" />
-
-      <dx-loading-indicator :show="false" />
 
       <dx-range-selector-chart>
         <dx-series
@@ -40,11 +43,11 @@ import {
   DxMinorTick,
   DxSize,
   DxMarker,
-  DxLoadingIndicator,
   DxChart as DxRangeSelectorChart,
   DxLabel as DxRangeSelectorLabel,
   DxSeries,
 } from 'devextreme-vue/range-selector';
+import { DxLoadIndicator } from 'devextreme-vue/load-indicator';
 
 import { Sales, SalesByState } from '@/types/analytics';
 import CardAnalytics from '@/components/library/card-analytics.vue';
@@ -57,6 +60,11 @@ const props = defineProps<{
 }>();
 </script>
 <style scoped lang="scss">
+.centered {
+  margin: auto;
+  display: block;
+}
+
 :deep(.sales-range) {
   margin-top: 20px;
 
