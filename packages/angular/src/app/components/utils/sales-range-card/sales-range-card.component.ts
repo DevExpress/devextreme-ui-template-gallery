@@ -7,6 +7,7 @@ import {
 import { CardAnalyticsComponent } from '../../library/card-analytics/card-analytics.component';
 import { DxRangeSelectorModule } from 'devextreme-angular/ui/range-selector';
 import { Sale } from 'src/app/types/analytics';
+import { DxLoadIndicatorModule } from 'devextreme-angular';
 
 @Component({
   selector: 'sales-range-card',
@@ -15,6 +16,7 @@ import { Sale } from 'src/app/types/analytics';
   imports: [
     CardAnalyticsComponent,
     DxRangeSelectorModule,
+    DxLoadIndicatorModule
   ],
 })
 export class SalesRangeCardComponent {
