@@ -33,7 +33,7 @@
             ref="schedulerRef"
             height="inherit"
             :adaptivity-enabled="!!screenInfo.isXSmall"
-            :all-day-panel-mode="'hidden'"
+            :all-day-panel-mode="'allDay'"
             :data-source="tasks"
             :current-view="currentView"
             :current-date="schedulerCurrentDate"

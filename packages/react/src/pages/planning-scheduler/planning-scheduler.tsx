@@ -99,7 +99,7 @@ export const PlanningScheduler = () => {
         <Scheduler
           ref={schedulerRef}
           adaptivityEnabled={isXSmall}
-          allDayPanelMode='hidden'
+          allDayPanelMode='allDay'
           defaultCurrentView='workWeek'
           dataSource={tasks}
           height='inherit'
