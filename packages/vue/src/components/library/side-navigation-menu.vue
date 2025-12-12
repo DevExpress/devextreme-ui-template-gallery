@@ -96,6 +96,35 @@ watch(
 
 <style scoped lang="scss">
 @use "@/variables" as *;
+.dx-drawer-overlap .side-navigation-menu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  pointer-events: none;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.05);
+  z-index: 2000;
+}
+
+.dx-drawer-overlap .side-navigation-menu::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0)
+    );
+  z-index: 2000;
+}
+
 .side-navigation-menu {
   display: flex;
   flex-direction: column;

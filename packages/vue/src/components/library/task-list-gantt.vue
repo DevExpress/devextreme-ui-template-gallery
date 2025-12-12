@@ -101,4 +101,7 @@ defineExpose({
 </script>
 
 <style scoped lang="scss">
+.dx-gantt {
+  border-radius: 8px;
+}
 </style>
