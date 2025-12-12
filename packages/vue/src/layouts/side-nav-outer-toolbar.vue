@@ -109,7 +109,7 @@ const drawerOptions = computed(() => {
 }
 
 .layout-header {
-  z-index: 1502;
+  z-index: 1501;
 }
 
 .layout-body {
