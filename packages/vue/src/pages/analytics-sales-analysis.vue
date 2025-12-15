@@ -50,9 +50,9 @@ import SalesRangeCard from '@/components/utils/sales-range-card.vue';
 import SalesByRangeCard from '@/components/utils/sales-by-range-card.vue';
 import SalesPerformanceCard from '@/components/utils/sales-performance-card.vue';
 
-const sales = ref<Sales | null>(null);
-const salesByDateAndCategory = ref<Sales | null>(null);
-const salesByCategory = ref<SalesByStateAndCity | null>(null);
+const sales = ref<Sales>([]);
+const salesByDateAndCategory = ref<Sales>([]);
+const salesByCategory = ref<SalesByStateAndCity>([]);
 
 const visualRange = ref<[Date, Date]>([]);
 
