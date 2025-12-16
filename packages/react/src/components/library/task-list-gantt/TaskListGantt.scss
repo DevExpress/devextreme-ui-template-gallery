@@ -1,2 +1,6 @@
 @use "../../../variables.scss" as *;
 @use "sass:math";
+
+.dx-gantt {
+  border-radius: 8px;
+}

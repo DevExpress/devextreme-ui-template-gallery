@@ -122,3 +122,8 @@ const drawerOptions = computed(() => {
   flex-grow: 1;
 }
 </style>
+<style>
+  .dx-drawer-panel-content .dx-overlay-content {
+    box-shadow: 0 4px 4px 0 rgba(0 0 0 / 12%);
+  }
+</style>
