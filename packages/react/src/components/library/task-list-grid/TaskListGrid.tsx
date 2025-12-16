@@ -81,8 +81,8 @@ export const TaskListGrid = React.forwardRef<DataGridRef, PlanningProps>(({ data
       onRowClick={navigateToDetails}>
       <LoadPanel enabled={false} />
       <Scrolling mode='virtual' />
-      <Paging defaultPageSize={15} />
-      <Pager visible showPageSizeSelector />
+      <Paging defaultPageSize={30} />
+      <Pager visible />
       <Editing mode='row' allowUpdating />
       <Selection selectAllMode='allPages' showCheckBoxesMode='always' mode='multiple' />
       <HeaderFilter visible />

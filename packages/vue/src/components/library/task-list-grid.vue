@@ -17,11 +17,8 @@
       :enabled="false"
     />
     <dx-scrolling mode="virtual" />
-    <dx-paging :page-size="15" />
-    <dx-pager
-      :visible="true"
-      :show-page-size-selector="true"
-    />
+    <dx-paging :page-size="30" />
+    <dx-pager :visible="true" />
     <dx-editing
       mode="row"
       :allow-updating="true"
