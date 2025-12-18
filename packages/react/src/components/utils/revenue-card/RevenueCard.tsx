@@ -1,13 +1,28 @@
 import React from 'react';
 import Chart, { ArgumentAxis, Border, CommonSeriesSettings, Format, Label, Legend, Series, Size, ValueAxis } from 'devextreme-react/chart';
+import { ChartsColor, registerGradient } from 'devextreme/common/charts';
 import { CardAnalytics } from '../../library/card-analytics/CardAnalytics';
 import { Sale } from '../../../types/analytics';
 
-export const RevenueCard = ({ datasource }: { datasource: Sale[]}) => (
+const seriesColor: ChartsColor = {
+  base: '#115EA3',
+  fillId: registerGradient('linear', {
+    rotationAngle: 90,
+    colors: [{
+      offset: '20%',
+      color: '#1F74BD',
+    }, {
+      offset: '90%',
+      color: '#93BCE1',
+    }],
+  }),
+};
+
+export const RevenueCard = ({ datasource }: { datasource: Sale[] }) => (
   <CardAnalytics title='Revenue' contentClass='sales'>
     <Chart dataSource={datasource}>
       <Series valueField='total' />
-      <CommonSeriesSettings argumentField='date' type='splinearea'>
+      <CommonSeriesSettings argumentField='date' type='splinearea' color={seriesColor}>
         <Border visible />
       </CommonSeriesSettings>
       <ArgumentAxis argumentType='datetime' />
