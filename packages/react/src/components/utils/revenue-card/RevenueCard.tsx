@@ -10,10 +10,10 @@ const seriesColor: ChartsColor = {
     rotationAngle: 90,
     colors: [{
       offset: '20%',
-      color: '#1F74BD',
+      color: 'rgba(0, 74, 168, 0.75)',
     }, {
       offset: '90%',
-      color: '#93BCE1',
+      color: 'rgba(114, 179, 231, 0.35)',
     }],
   }),
 };
