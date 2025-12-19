@@ -331,6 +331,7 @@ function deleteSelectedAppointment(appointmentData: AppointmentData) {
   flex-direction: column;
   flex-grow: 1;
   height: 100%;
+  min-width: 560px;
 
   .view-wrapper {
     position: relative;
