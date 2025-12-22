@@ -1,6 +1,6 @@
 import React from 'react';
 import Chart, { ArgumentAxis, Border, CommonSeriesSettings, Format, Label, Legend, Series, Size, ValueAxis } from 'devextreme-react/chart';
-import { ChartsColor, registerGradient } from 'devextreme/common/charts';
+import { ChartsColor, registerGradient } from 'devextreme-react/common/charts';
 import { CardAnalytics } from '../../library/card-analytics/CardAnalytics';
 import { Sale } from '../../../types/analytics';
 

@@ -46,7 +46,7 @@ import {
 
 import { Sales } from '@/types/analytics';
 import CardAnalytics from '@/components/library/card-analytics.vue';
-import { ChartsColor, registerGradient } from 'devextreme/common/charts';
+import { ChartsColor, registerGradient } from 'devextreme-vue/common/charts';
 
 const props = defineProps<{
   data: Sales

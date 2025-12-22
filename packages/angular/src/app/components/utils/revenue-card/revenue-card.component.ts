@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CardAnalyticsComponent } from '../../library/card-analytics/card-analytics.component';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { Sales } from 'src/app/types/analytics';
-import { ChartsColor, registerGradient } from 'devextreme/common/charts';
+import { ChartsColor, registerGradient } from 'devextreme-angular/common/charts';
 
 @Component({
   selector: 'revenue-card',
