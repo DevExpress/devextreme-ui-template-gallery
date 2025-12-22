@@ -52,9 +52,9 @@
     "packages/*"
   ],
   "dependencies": {
-    "devextreme": "25.1.7",
-    "devextreme-dist": "25.1.7",
-    "devextreme-themebuilder": "25.1.7",
+    "devextreme": "25.2.3",
+    "devextreme-dist": "25.2.3",
+    "devextreme-themebuilder": "25.2.3",
     "eslint-config-devextreme": "1.1.6",
     "jspdf": "^3.0.4",
     "jspdf-autotable": "^5.0.2"
