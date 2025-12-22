@@ -331,13 +331,14 @@ function deleteSelectedAppointment(appointmentData: AppointmentData) {
   flex-direction: column;
   flex-grow: 1;
   height: 100%;
-  min-width: 560px;
+  overflow-x: auto;
 
   .view-wrapper {
     position: relative;
     flex-direction: column;
     display: flex;
     height: inherit;
+    min-width: 560px;
 
     .panels {
       display: flex;

@@ -7,7 +7,7 @@
   display: flex;
   height: inherit;
   padding: 0 var(--page-padding);
-  min-width: 560px;
+  overflow-x: auto;
 
   .calendar-content {
     display: flex;
@@ -15,6 +15,7 @@
     gap: 16px;
     padding-top: var(--content-padding);
     padding-bottom: var(--theme-padding);
+    min-width: 560px;
 
     .left-content {
       display: flex;
