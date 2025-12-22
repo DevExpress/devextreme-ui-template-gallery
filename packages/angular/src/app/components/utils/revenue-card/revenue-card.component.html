@@ -1,7 +1,7 @@
 <card-analytics titleText="Revenue" contentClass="sales">
   <dx-chart [dataSource]="data">
     <dxi-series valueField="total"></dxi-series>
-    <dxo-common-series-settings argumentField="date" type="splinearea">
+    <dxo-common-series-settings argumentField="date" type="splinearea" [color]="seriesColor">
       <dxo-border [visible]="true"></dxo-border>
     </dxo-common-series-settings>
     <dxo-argument-axis argumentType="datetime"></dxo-argument-axis>

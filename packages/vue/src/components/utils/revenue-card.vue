@@ -11,6 +11,7 @@
       <dx-common-series-settings
         argument-field="date"
         type="splinearea"
+        :color="seriesColor"
       >
         <dx-border :visible="true" />
       </dx-common-series-settings>
@@ -45,10 +46,25 @@ import {
 
 import { Sales } from '@/types/analytics';
 import CardAnalytics from '@/components/library/card-analytics.vue';
+import { ChartsColor, registerGradient } from 'devextreme-vue/common/charts';
 
 const props = defineProps<{
   data: Sales
 }>();
+
+const seriesColor: ChartsColor = {
+  base: '#115EA3',
+  fillId: registerGradient('linear', {
+    rotationAngle: 90,
+    colors: [{
+      offset: '20%',
+      color: 'rgba(0, 74, 168, 0.75)',
+    }, {
+      offset: '90%',
+      color: 'rgba(114, 179, 231, 0.35)',
+    }],
+  }),
+};
 </script>
 
 <style scoped>
