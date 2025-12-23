@@ -27,17 +27,17 @@
   ></dxi-column>
 
   <dxo-toolbar>
-    <dxi-item name="undo"></dxi-item>
-    <dxi-item name="redo"></dxi-item>
+    <dxi-item name="undo" [options]="{ icon: 'revert' }"></dxi-item>
+    <dxi-item name="redo" [options]="{ icon: 'redo' }"></dxi-item>
     <dxi-item name="separator"></dxi-item>
-    <dxi-item name="collapseAll"></dxi-item>
-    <dxi-item name="expandAll"></dxi-item>
+    <dxi-item name="collapseAll" [options]="{ icon: 'arrowdown' }"></dxi-item>
+    <dxi-item name="expandAll" [options]="{ icon: 'arrowup' }"></dxi-item>
     <dxi-item name="separator"></dxi-item>
-    <dxi-item name="addTask"></dxi-item>
-    <dxi-item name="deleteTask"></dxi-item>
+    <dxi-item name="addTask" [options]="{ icon: 'add' }"></dxi-item>
+    <dxi-item name="deleteTask" [options]="{ icon: 'trash' }"></dxi-item>
     <dxi-item name="separator"></dxi-item>
-    <dxi-item name="zoomIn"></dxi-item>
-    <dxi-item name="zoomOut"></dxi-item>
+    <dxi-item name="zoomIn" [options]="{ icon: 'zoominoutline' }"></dxi-item>
+    <dxi-item name="zoomOut" [options]="{ icon: 'zoomoutoutline' }"></dxi-item>
   </dxo-toolbar>
 
   <dxo-validation [autoUpdateParentTasks]="true"></dxo-validation>

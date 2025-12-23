@@ -32,17 +32,33 @@
     />
 
     <dx-gantt-toolbar>
-      <dx-item name="undo" />
-      <dx-item name="redo" />
+      <dx-item name="undo"
+        :options="toolbarItemOptions.undo"
+      />
+      <dx-item name="redo"
+        :options="toolbarItemOptions.redo"
+      />
       <dx-item name="separator" />
-      <dx-item name="collapseAll" />
-      <dx-item name="expandAll" />
+      <dx-item name="collapseAll"
+        :options="toolbarItemOptions.collapseAll"
+      />
+      <dx-item name="expandAll"
+        :options="toolbarItemOptions.expandAll"
+      />
       <dx-item name="separator" />
-      <dx-item name="addTask" />
-      <dx-item name="deleteTask" />
+      <dx-item name="addTask"
+        :options="toolbarItemOptions.addTask"
+      />
+      <dx-item name="deleteTask"
+        :options="toolbarItemOptions.deleteTask"
+      />
       <dx-item name="separator" />
-      <dx-item name="zoomIn" />
-      <dx-item name="zoomOut" />
+      <dx-item name="zoomIn"
+        :options="toolbarItemOptions.zoomIn"
+      />
+      <dx-item name="zoomOut"
+        :options="toolbarItemOptions.zoomOut"
+      />
     </dx-gantt-toolbar>
 
     <dx-validation :auto-update-parent-tasks="true" />
@@ -93,6 +109,17 @@ const onTaskClick = (e: DxGanttTypes.TaskClickEvent) => {
   if (!e.event?.target?.closest('.dx-treelist-expanded, .dx-treelist-collapsed')) {
     navigateToDetails();
   }
+};
+
+const toolbarItemOptions = {
+  undo: { icon: 'revert' },
+  redo: { icon: 'redo' },
+  collapseAll: { icon: 'arrowdown' },
+  expandAll: { icon: 'arrowup' },
+  addTask: { icon: 'add' },
+  deleteTask: { icon: 'trash' },
+  zoomIn: { icon: 'zoominoutline' },
+  zoomOut: { icon: 'zoomoutoutline' },
 };
 
 defineExpose({
