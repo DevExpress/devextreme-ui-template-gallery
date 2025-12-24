@@ -6,6 +6,17 @@ import { PlanningProps } from '../../../types/task';
 
 import './TaskListGantt.scss';
 
+const toolbarItemOptions = {
+  undo: { icon: 'revert' },
+  redo: { icon: 'redo' },
+  collapseAll: { icon: 'arrowdown' },
+  expandAll: { icon: 'arrowup' },
+  addTask: { icon: 'add' },
+  deleteTask: { icon: 'trash' },
+  zoomIn: { icon: 'zoominoutline' },
+  zoomOut: { icon: 'zoomoutoutline' },
+};
+
 export const TaskListGantt = React.forwardRef<GanttRef, PlanningProps>(({ dataSource }, ref) => {
 /* eslint-disable  @typescript-eslint/no-explicit-any */
   return (
@@ -17,17 +28,17 @@ export const TaskListGantt = React.forwardRef<GanttRef, PlanningProps>(({ dataSo
         <Column dataField='dueDate' caption='Due Date' dataType='date' />
 
         <Toolbar>
-          <Item name='undo' />
-          <Item name='redo' />
+          <Item name='undo' options={toolbarItemOptions.undo} />
+          <Item name='redo' options={toolbarItemOptions.redo} />
           <Item name={'separator' as any} />
-          <Item name='collapseAll' />
-          <Item name='expandAll' />
+          <Item name='collapseAll' options={toolbarItemOptions.collapseAll} />
+          <Item name='expandAll' options={toolbarItemOptions.expandAll} />
           <Item name={'separator' as any} />
-          <Item name='addTask' />
-          <Item name='deleteTask' />
+          <Item name='addTask' options={toolbarItemOptions.addTask} />
+          <Item name='deleteTask' options={toolbarItemOptions.deleteTask} />
           <Item name={'separator' as any} />
-          <Item name='zoomIn' />
-          <Item name='zoomOut' />
+          <Item name='zoomIn' options={toolbarItemOptions.zoomIn} />
+          <Item name='zoomOut' options={toolbarItemOptions.zoomOut} />
         </Toolbar>
 
         <Validation autoUpdateParentTasks />
