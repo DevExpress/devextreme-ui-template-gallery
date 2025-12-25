@@ -350,7 +350,7 @@ const navigateToDetails = () => {
   right: calc(-1 * var(--contact-side-panel-width));
   background: var(--base-bg);
   transition: right 400ms;
-  border-radius: 0px 8px 8px 0px;
+  border-radius: 0 8px 8px 0;
 
   :deep(.dx-layout-manager-one-col) .dx-box-item {
     .dx-single-column-item-content .contact-fields-group {
