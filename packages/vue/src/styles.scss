@@ -226,8 +226,12 @@
     font-family: "Inter", sans-serif;
   }
 
-  .dx-drawer-panel-content {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
+  .light .dx-drawer-panel-content {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
+  }
+
+  .dark .dx-drawer-panel-content {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.96);
   }
 
   .layout-body {

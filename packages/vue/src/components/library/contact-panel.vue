@@ -350,6 +350,7 @@ const navigateToDetails = () => {
   right: calc(-1 * var(--contact-side-panel-width));
   background: var(--base-bg);
   transition: right 400ms;
+  border-radius: 0px 8px 8px 0px;
 
   :deep(.dx-layout-manager-one-col) .dx-box-item {
     .dx-single-column-item-content .contact-fields-group {
@@ -371,7 +372,7 @@ const navigateToDetails = () => {
 
   &.open {
     right: 0;
-    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.04), 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--panel-shadow, 0px 0px 6px 0px rgba(0, 0, 0, 0.04), 0px 4px 4px 0px rgba(0, 0, 0, 0.12));
   }
 
   &.pin {
@@ -436,5 +437,14 @@ const navigateToDetails = () => {
       }
     }
   }
+}
+</style>
+<style lang="scss">
+.dx-theme-fluent .light {
+  --panel-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+}
+
+.dx-theme-fluent .dark {
+  --panel-shadow: 0px 4px 16px rgba(0, 0, 0, 0.48);
 }
 </style>

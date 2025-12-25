@@ -16,7 +16,9 @@ import { ScreenService, ThemeService } from './services';
 })
 export class AppComponent implements OnDestroy {
   @HostBinding('class') get getClass() {
-    return Object.keys(this.screen.sizes).filter((cl) => this.screen.sizes[cl]).join(' ');
+    const classes = Object.keys(this.screen.sizes).filter((cl) => this.screen.sizes[cl]);
+    classes.push(this.themeService.currentTheme);
+    return classes.join(' ');
   }
   private themeService =  inject(ThemeService);
   private screen = inject(ScreenService);

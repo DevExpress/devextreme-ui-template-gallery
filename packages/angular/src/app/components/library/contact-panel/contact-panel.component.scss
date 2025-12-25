@@ -8,6 +8,14 @@
   --contact-side-panel-width: 100vw;
 }
 
+:host-context(.dx-theme-fluent .light) .panel.open {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
+}
+
+:host-context(.dx-theme-fluent .dark) .panel.open {
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.48);
+}
+
 :host .panel {
   position: absolute;
   right: calc(-1 * var(--contact-side-panel-width));
@@ -15,6 +23,7 @@
   bottom: 0;
   background: var(--base-bg);
   transition: right 400ms;
+  border-radius: 0px 8px 8px 0px;
 
   .embedded.dx-viewport & {
     top: 0;
