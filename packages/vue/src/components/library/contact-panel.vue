@@ -441,10 +441,10 @@ const navigateToDetails = () => {
 </style>
 <style lang="scss">
 .dx-theme-fluent .light {
-  --panel-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+  --panel-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
 }
 
 .dx-theme-fluent .dark {
-  --panel-shadow: 0px 4px 16px rgba(0, 0, 0, 0.48);
+  --panel-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.48);
 }
 </style>

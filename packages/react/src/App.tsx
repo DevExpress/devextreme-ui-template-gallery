@@ -43,7 +43,7 @@ export const App = () => {
       <ThemeContext.Provider value={themeContext}>
         <AuthProvider>
           <NavigationProvider>
-            <div className={`app ${screenSizeClass} ${themeContext.theme}` }>
+            <div className={`app ${screenSizeClass} ${themeContext.theme}`}>
               {
                 themeContext.isLoaded ? <RootApp /> : ''
               }
