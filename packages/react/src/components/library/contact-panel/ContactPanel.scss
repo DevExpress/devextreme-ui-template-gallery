@@ -8,6 +8,14 @@
   --contact-side-panel-width: 100vw;
 }
 
+.dx-theme-fluent .light .panel.open {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+.dx-theme-fluent .dark .panel.open {
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.48);
+}
+
 .panel {
   position: absolute;
   top: 0;
@@ -15,6 +23,7 @@
   right: calc(-1 * var(--contact-side-panel-width));
   background: var(--base-bg);
   transition: right 400ms;
+  border-radius: 0 8px 8px 0;
 
   .embedded.dx-viewport & {
     top: 0;

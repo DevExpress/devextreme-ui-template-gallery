@@ -4,9 +4,10 @@ import {
 } from 'vue';
 import { AppInfo, appInfoInjectKey } from '@/types/app-info';
 import { screenInfo } from './utils/media-query';
+import { themeService } from './theme/theme-service';
 
 const appInfo = inject<AppInfo>(appInfoInjectKey);
-const cssClasses = computed(() => ['app'].concat(screenInfo.value.cssClasses));
+const cssClasses = computed(() => ['app'].concat(screenInfo.value.cssClasses).concat(themeService.currentTheme.value));
 document.title = appInfo?.title || '';
 </script>
 
