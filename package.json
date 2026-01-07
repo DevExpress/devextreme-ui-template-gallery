@@ -56,7 +56,7 @@
     "devextreme-dist": "25.2.3",
     "devextreme-themebuilder": "25.2.3",
     "eslint-config-devextreme": "1.1.6",
-    "jspdf": "^3.0.4",
+    "jspdf": "^4.0.0",
     "jspdf-autotable": "^5.0.2"
   },
   "pre-commit": [
