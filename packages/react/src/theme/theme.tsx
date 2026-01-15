@@ -6,13 +6,13 @@ const themes = ['light', 'dark'] as const;
 const storageKey = 'app-theme';
 const themePrefix = 'app-theme-';
 
-const prefixes = ['./styles/theme-dx-', './styles/variables-'];
+const prefixes = ['theme-dx-', 'variables-'];
 
 const loadStylesImports = async() => {
   await Promise.all([
     ...prefixes.flatMap((prefix) => [
-      import(/* webpackChunkName: "app-theme-dark" */ `${prefix}dark.scss`),
-      import(/* webpackChunkName: "app-theme-light" */ `${prefix}light.scss`)
+      import(/* webpackChunkName: "app-theme-dark" */ `./styles/${prefix}dark.scss`),
+      import(/* webpackChunkName: "app-theme-light" */ `./styles/${prefix}light.scss`)
     ]),
   ]);
 };
