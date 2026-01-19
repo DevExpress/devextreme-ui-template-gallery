@@ -56,7 +56,7 @@
     "@typescript-eslint/parser": "^8.28.0",
     "@vitejs/plugin-react": "^4.5.0",
     "devextreme-cli": "1.9.0",
-    "devextreme-themebuilder": "24.2.5",
+    "devextreme-themebuilder": "25.2.3",
     "eslint": "^9.23.0",
     "eslint-import-resolver-typescript": "^4.2.4",
     "eslint-plugin-import": "^2.31.0",

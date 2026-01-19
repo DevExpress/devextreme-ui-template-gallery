@@ -40,7 +40,7 @@ const props = withDefaults(defineProps<{
 }
 </style>
 <style scoped lang="scss">
-@use 'src/variables' as *;
+@use '@/variables' as *;
 @use "sass:math";
 
 .contact-status {

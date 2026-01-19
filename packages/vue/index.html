@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="Web site created using create-vite" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <!-- for preload theme fonts -->
     <style>body::after { content: ''; font-family: 'Inter'; } </style>
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Vue UI Template Gallery</title>
     <!-- Matomo Tag Manager -->
     <script>
         var _mtm = window._mtm = window._mtm || [];
@@ -22,9 +23,9 @@
   </head>
   <body class="dx-viewport">
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>We're sorry but Vue UI Template Gallery doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

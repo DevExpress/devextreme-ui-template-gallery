@@ -5,12 +5,13 @@ $theme-mode: null !default;
 @use "theme-special" as * with ($theme: "fluent");
 @use "sass:math";
 @use "sass:color";
+@use "sass:meta";
 
 :root {
-  --dark-warning-color: #{darken(adjust-hue($base-warning, -12), 3.73)};
+  --dark-warning-color: #{color.adjust(color.adjust($base-warning, $hue: -12deg), $lightness: -3.73%)};
   --typography-bg: var(--base-bg);
 
-  @if variable-exists("base-typography-bg") {
+  @if meta.variable-exists("base-typography-bg") {
     --typography-bg: var(--dx-color-main-bg);
   }
 
@@ -22,8 +23,8 @@ $theme-mode: null !default;
   --calendar-width: 292px;
   --side-panel-min-width: 48px;
   --base-bg: var(--dx-component-color-bg);
-  --base-bg-darken-5: #{darken($base-bg, 5)};
-  --base-bg-darken-4: #{darken($base-bg, 4)};
+  --base-bg-darken-5: #{color.adjust($base-bg, $lightness: -5%)};
+  --base-bg-darken-4: #{color.adjust($base-bg, $lightness: -4%)};
   --card-background: var(--base-bg);
 
   @if $theme-mode == dark {
@@ -41,7 +42,7 @@ $theme-mode: null !default;
   --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
   --texteditor-edit-color: var(--dx-texteditor-color-text);
   --texteditor-label-color: var(--dx-texteditor-color-label);
-  --base-text-color-alpha: #{rgba($base-text-color, alpha($base-text-color) * 0.7)};
+  --base-text-color-alpha: #{rgba($base-text-color, color.alpha($base-text-color) * 0.7)};
   --toolbar-margin-bottom: var(--content-padding);
   --subtitle-text-color: var(--texteditor-label-color);
 
