@@ -45,7 +45,7 @@
       </template>
     </dx-form>
     <div class="login-link">
-      Return to <router-link :to="props.signInLink">
+      Return to <router-link :to="props.signInLink || '/sign-in'">
         Sign In
       </router-link>
     </div>
@@ -89,7 +89,7 @@ async function onSubmit() {
   loading.value = false;
 
   if (result.isOk) {
-    router.push(props.buttonLink);
+    router.push(props.buttonLink || '/create-password');
     notify(notificationText, 'success', 2500);
   } else {
     notify(result.message, 'error', 2000);

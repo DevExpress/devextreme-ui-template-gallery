@@ -1,11 +1,14 @@
-
 import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { Button, ButtonTypes } from 'devextreme-react/button';
 import { ScrollView } from 'devextreme-react/scroll-view';
 import Toolbar, { Item as ToolbarItem } from 'devextreme-react/toolbar';
-import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
+import Form, {
+  Item as FormItem,
+  GroupItem,
+  ColCountByScreen,
+} from 'devextreme-react/form';
 import Accordion, { Item as AccordionItem } from 'devextreme-react/accordion';
 import { formatNumber } from 'devextreme/localization';
 import { Contact } from '../../../types/crm-contact';
@@ -29,7 +32,19 @@ const formatPrice = (price) => {
   });
 };
 
-export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDataChanged, changePanelPinned } : { contact: Contact, isOpened: boolean, changePanelOpened:(value: boolean)=> void, onDataChanged:(data)=> void, changePanelPinned:() => void }) => {
+export const ContactPanelDetails = ({
+  contact,
+  isOpened,
+  changePanelOpened,
+  onDataChanged,
+  changePanelPinned,
+}: {
+  contact: Contact;
+  isOpened: boolean;
+  changePanelOpened: (value: boolean) => void;
+  onDataChanged: (data) => void;
+  changePanelPinned: () => void;
+}) => {
   const [isPinned, setIsPinned] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const { isLarge, isMedium } = useScreenSize();
@@ -40,7 +55,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
   const updateField = (field: string) => (value) => {
     setFormData({
       ...formData,
-      [field]: value
+      [field]: value,
     });
   };
 
@@ -66,35 +81,44 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
     setFormData(contact);
   }, [contact, toggleEditHandler]);
 
-  const onSaveClick = useCallback(({ validationGroup } : ButtonTypes.ClickEvent) => {
-    if(!validationGroup.validate().isValid) return;
-    onDataChanged(formData);
-    setIsEditing(!isEditing);
-  }, [formData, isEditing]);
+  const onSaveClick = useCallback(
+    ({ validationGroup }: ButtonTypes.ClickEvent) => {
+      if (!validationGroup.validate().isValid) return;
+      onDataChanged(formData);
+      setIsEditing(!isEditing);
+    },
+    [formData, isEditing]
+  );
 
   const navigateToDetails = useCallback(() => {
     navigate(`/crm-contact-details?id=${formData.id}`);
   }, [formData.id]);
 
   const renderCustomOpportunities = useCallback(() => {
-    return (
-      contact.opportunities.map((item, idx) => {
-        return (
-          <div className='opportunities' key={idx}>
-            <span className='value'>{item.name}</span>
-            <br />
-            <span className='value black small'>{formatPrice(item.price)}</span>
-          </div>
-        );
-      }));
+    return contact.opportunities.map((item, idx) => {
+      return (
+        <div className='opportunities' key={idx}>
+          <span className='value'>{item.name}</span>
+          <br />
+          <span className='value black small'>{formatPrice(item.price)}</span>
+        </div>
+      );
+    });
   }, [contact]);
 
   const renderCustomActivities = useCallback(() => {
-    return (<CardActivities activities={contact.activities} />);
+    return <CardActivities activities={contact.activities} />;
   }, [contact]);
 
   return (
-    <div id='contact-panel' className={classNames({ 'panel': true, 'open': isOpened, 'pin': isPinned && (isLarge || isMedium) })}>
+    <div
+      id='contact-panel'
+      className={classNames({
+        panel: true,
+        open: isOpened,
+        pin: isPinned && (isLarge || isMedium),
+      })}
+    >
       <div className='data-wrapper'>
         <Toolbar className='panel-toolbar'>
           <ToolbarItem location='before'>
@@ -103,10 +127,7 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
           <ToolbarItem location='before'>
             <ContactStatus text={contact.status} />
           </ToolbarItem>
-          <ToolbarItem
-            location='after'
-            visible={isLarge || isMedium}
-          >
+          <ToolbarItem location='after' visible={isLarge || isMedium}>
             <Button
               icon={isPinned ? 'pin' : 'unpin'}
               stylingMode='text'
@@ -125,7 +146,10 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
           <ValidationGroup>
             <div className='data-part border'>
               <Form
-                className={classNames({ 'plain-styled-form': true, 'view-mode': !isEditing })}
+                className={classNames({
+                  'plain-styled-form': true,
+                  'view-mode': !isEditing,
+                })}
               >
                 <GroupItem colCount={2} cssClass='photo-row'>
                   <ColCountByScreen xs={2} />
@@ -193,33 +217,68 @@ export const ContactPanelDetails = ({ contact, isOpened, changePanelOpened, onDa
             <div className='data-part data-part-toolbar border'>
               <Toolbar>
                 <ToolbarItem location='after' visible={!isEditing}>
-                  <Button icon='edit' text='Edit' stylingMode='contained' type='default' onClick={toggleEditHandler} />
+                  <Button
+                    icon='edit'
+                    text='Edit'
+                    stylingMode='contained'
+                    type='default'
+                    onClick={toggleEditHandler}
+                  />
                 </ToolbarItem>
                 <ToolbarItem location='after' visible={!isEditing}>
-                  <Button text='Details' stylingMode='outlined' type='normal' onClick={navigateToDetails} />
+                  <Button
+                    text='Details'
+                    stylingMode='outlined'
+                    type='normal'
+                    onClick={navigateToDetails}
+                  />
                 </ToolbarItem>
                 <ToolbarItem location='after' visible={isEditing}>
-                  <Button text='Save' icon='save' stylingMode='contained' type='default' onClick={onSaveClick} />
+                  <Button
+                    text='Save'
+                    icon='save'
+                    stylingMode='contained'
+                    type='default'
+                    onClick={onSaveClick}
+                  />
                 </ToolbarItem>
                 <ToolbarItem location='after' visible={isEditing}>
-                  <Button text='Cancel' stylingMode='outlined' type='normal' onClick={cancelHandler} />
+                  <Button
+                    text='Cancel'
+                    stylingMode='outlined'
+                    type='normal'
+                    onClick={cancelHandler}
+                  />
                 </ToolbarItem>
-                <ToolbarItem location='before'
+                <ToolbarItem
+                  location='before'
                   widget='dxDropDownButton'
                   options={{
                     text: 'Actions',
                     stylingMode: 'text',
                     dropDownOptions: { width: 'auto' },
                     width: 'auto',
-                    items: ['Call', 'Send Fax', 'Send Email', 'Schedule a Meeting']
-                  }} />
+                    items: [
+                      'Call',
+                      'Send Fax',
+                      'Send Email',
+                      'Schedule a Meeting',
+                    ],
+                  }}
+                />
               </Toolbar>
             </div>
           </ValidationGroup>
           <div className='data-part'>
             <Accordion multiple collapsible itemTitleRender={renderCustomTitle}>
-              <AccordionItem title='Opportunities' render={renderCustomOpportunities} />
-              <AccordionItem title='Activities' render={renderCustomActivities} />
+              <AccordionItem
+                title='Opportunities'
+                render={renderCustomOpportunities}
+              />
+              <AccordionItem
+                title='Activities'
+                render={renderCustomActivities}
+              />
             </Accordion>
           </div>
         </ScrollView>

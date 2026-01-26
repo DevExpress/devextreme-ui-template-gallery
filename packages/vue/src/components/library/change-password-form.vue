@@ -84,7 +84,7 @@ async function onSubmit() {
   const { password } = formData;
   loading.value = true;
 
-  const result = await authInfo.changePassword(password, recoveryCode.value);
+  const result = await authInfo.changePassword(password, Array.isArray(recoveryCode.value) ? recoveryCode.value[0] : recoveryCode.value);
   loading.value = false;
 
   if (result.isOk) {
@@ -94,7 +94,7 @@ async function onSubmit() {
   }
 }
 
-function confirmPassword(e: {value: ''}) {
+function confirmPassword(e: any) {
   return e.value === formData.password;
 }</script>
 

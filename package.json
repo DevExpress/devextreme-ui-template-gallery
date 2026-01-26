@@ -22,6 +22,7 @@
     "lint-utils --fix": "eslint --fix utils"
   },
   "devDependencies": {
+    "@types/luxon": "^3.7.1",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "@typescript-eslint/utils": "^8.46.2",

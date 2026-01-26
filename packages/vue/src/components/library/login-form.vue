@@ -66,7 +66,7 @@
       </template>
     </dx-form>
     <div class="reset-link">
-      <router-link :to="props.resetLink">
+      <router-link :to="props.resetLink || '/reset-password'">
         Forgot password?
       </router-link>
     </div>
@@ -101,7 +101,7 @@ import { themeService } from '@/theme/theme-service';
 
 const { currentTheme } = themeService;
 
-// eslint-disable-next-line arrow-body-style
+ 
 const buttonStylingMode = computed<DxButtonTypes.ButtonStyle>(() => {
   return currentTheme.value === 'dark' ? 'outlined' : 'contained';
 });
@@ -120,7 +120,7 @@ const formData = reactive({
 const loading = ref(false);
 
 function onCreateAccountClick() {
-  router.push(props.createAccountLink);
+  router.push(props.createAccountLink || '/create-account');
 }
 
 async function onSubmit() {

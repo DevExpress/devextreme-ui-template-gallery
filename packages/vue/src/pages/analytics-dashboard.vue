@@ -16,10 +16,10 @@
       </div>
 
       <div class="cards">
-        <revenue-card :data="sales" />
-        <conversion-card :data="opportunities" />
-        <revenue-analysis-card :data="salesByState" />
-        <revenue-snapshot-card :data="salesByCategory" />
+        <revenue-card :data="sales || []" />
+        <conversion-card :data="opportunities || []" />
+        <revenue-analysis-card :data="salesByState || []" />
+        <revenue-snapshot-card :data="salesByCategory || []" />
       </div>
     </div>
   </dx-scroll-view>
@@ -42,7 +42,7 @@ import {
   getSalesByCategory,
   getSales,
   getSalesByState,
-  // eslint-disable-next-line
+   
 } from 'dx-template-gallery-data';
 import {
   Sales,
@@ -72,7 +72,7 @@ const loadData = async (startDate: string, endDate: string) => {
   loading.value = true;
 
   await Promise.all([
-    getOpportunitiesByCategory(startDate, endDate)
+    getOpportunitiesByCategory()
       .then((result: SalesOrOpportunitiesByCategory) => { opportunities.value = result; }),
     getSalesByCategory(startDate, endDate)
       .then((result: SalesByStateAndCity) => { salesByCategory.value = result; }),

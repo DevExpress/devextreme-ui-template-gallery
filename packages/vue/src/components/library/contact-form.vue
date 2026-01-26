@@ -32,8 +32,8 @@
             <dx-form-item>
               <status-select-box
                 v-model="contactDataRef.status"
-                class="contact-status"
-                :items="contactStatusList"
+                class-list="contact-status"
+                :items="[...contactStatusList]"
                 :read-only="!isEditing"
                 :label-mode="isFluent() ? 'outside' : 'floating'"
                 styling-mode="filled"
@@ -122,7 +122,7 @@
               :is-editing="isEditing"
               v-bind="formEditorProps"
             >
-              <dx-validator :validation-rules="[zipCodeValidator]" />
+              <dx-validator :validation-rules="[zipCodeValidator as any]" />
             </dx-number-box>
           </dx-form-item>
         </dx-form-group-item>
@@ -228,7 +228,8 @@ function startEdit() {
   isEditing.value = true;
 }
 
-function handleSaveClick({ validationGroup }) {
+function handleSaveClick(e: any) {
+  const { validationGroup } = e;
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }

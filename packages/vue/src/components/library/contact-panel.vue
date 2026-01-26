@@ -132,7 +132,7 @@
 
                 <dx-item
                   location="after"
-                  locate-in-menu="before"
+                  locate-in-menu="auto"
                   :visible="isEditing"
                 >
                   <dx-button
@@ -146,7 +146,7 @@
 
                 <dx-item
                   location="after"
-                  locate-in-menu="before"
+                  locate-in-menu="auto"
                   :visible="isEditing"
                 >
                   <dx-button
@@ -214,7 +214,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { router } from '@/router';
-// eslint-disable-next-line import/no-unresolved
+ 
 import { getContact } from 'dx-template-gallery-data';
 import { DxAccordion, DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
 import { DxButton, DxButtonTypes } from 'devextreme-vue/button';
@@ -292,8 +292,8 @@ const loadContact = async (contactId: number) => {
   isEditing.value = false;
   isLoading.value = true;
   const contactPanelData = await getContact(contactId);
-  panelData.value = contactPanelData;
-  contactData = structuredClone(contactPanelData);
+  panelData.value = contactPanelData as any;
+  contactData = structuredClone(contactPanelData) as any;
   isLoading.value = false;
 };
 

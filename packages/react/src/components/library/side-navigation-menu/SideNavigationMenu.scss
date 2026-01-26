@@ -1,7 +1,7 @@
-@use "../../../variables.scss" as *;
+@use '../../../variables.scss' as *;
 
 .dx-drawer-overlap .side-navigation-menu::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -13,19 +13,14 @@
 }
 
 .dx-drawer-overlap .side-navigation-menu::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 2px;
   pointer-events: none;
-  background: 
-    linear-gradient(
-      to bottom, 
-      rgba(0,0,0,0.15), 
-      rgba(0,0,0,0)
-    );
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
   z-index: 2000;
 }
 
@@ -83,12 +78,12 @@
         // ## Arrow customization
         padding: 0 0 !important;
 
-        &[aria-level="1"] {
+        &[aria-level='1'] {
           font-weight: bold;
           border-bottom: 1px solid var(--border-color);
         }
 
-        &[aria-level="2"] .dx-treeview-item-content {
+        &[aria-level='2'] .dx-treeview-item-content {
           font-weight: normal;
           padding: 0 0 0 var(--side-panel-min-width);
         }

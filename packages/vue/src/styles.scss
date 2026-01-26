@@ -1,6 +1,9 @@
-@use "variables.scss" as *;
+@use 'variables.scss' as *;
 
-.view-wrapper-scroll > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+.view-wrapper-scroll
+  > .dx-scrollable-wrapper
+  > .dx-scrollable-container
+  > .dx-scrollable-content {
   height: 100%;
 
   & > .dx-scrollview-content {
@@ -84,7 +87,7 @@
 }
 
 .side-nav-outer-toolbar .dx-drawer {
-  height: calc(100% - 56px)
+  height: calc(100% - 56px);
 }
 
 .responsive-paddings {
@@ -133,7 +136,9 @@
 }
 
 .dx-form.plain-styled-form {
-  & > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
+  &
+    > .dx-layout-manager.dx-layout-manager-one-col
+    .dx-field-item.dx-last-row:not(.dx-last-col) {
     padding-bottom: 0;
   }
 
@@ -218,12 +223,12 @@
 }
 
 .dx-theme-fluent-typography {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .dx-theme-fluent {
   .dx-widget {
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   .light .dx-drawer-panel-content {
@@ -235,7 +240,8 @@
   }
 
   .layout-body {
-    .menu-container.theme-dependent, .footer {
+    .menu-container.theme-dependent,
+    .footer {
       background-color: var(--base-bg);
     }
   }
@@ -277,7 +283,8 @@
   .view-wrapper.list-page {
     margin-top: var(--content-padding);
 
-    .dx-toolbar.dx-widget.theme-dependent, .grid.theme-dependent .dx-toolbar {
+    .dx-toolbar.dx-widget.theme-dependent,
+    .grid.theme-dependent .dx-toolbar {
       margin-bottom: var(--content-padding);
     }
   }

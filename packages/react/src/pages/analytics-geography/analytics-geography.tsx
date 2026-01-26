@@ -5,10 +5,18 @@ import * as mapsData from 'devextreme-dist/js/vectormap-data/usa.js';
 import LoadPanel from 'devextreme-react/load-panel';
 import ScrollView from 'devextreme-react/scroll-view';
 
-import { ToolbarAnalytics, SalesMapCard, RevenueAnalysisByStatesCard, RevenueSnapshotByStatesCard } from '../../components';
+import {
+  ToolbarAnalytics,
+  SalesMapCard,
+  RevenueAnalysisByStatesCard,
+  RevenueSnapshotByStatesCard,
+} from '../../components';
 import { SaleByStateAndCity, SaleByState } from '../../types/analytics';
 import { useScreenSize } from '../../utils/media-query';
-import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
+import {
+  getSalesByStateAndCity,
+  calcSalesByState,
+} from 'dx-template-gallery-data';
 import {
   ANALYTICS_PERIODS,
   DEFAULT_ANALYTICS_PERIOD_KEY,
@@ -43,7 +51,9 @@ export const AnalyticsGeography = () => {
   const [dateRange, setDateRange] = useState(
     ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/')
   );
-  const [salesByStateAndCity, setSalesByStateAndCity] = useState<SaleByStateAndCity[]>([]);
+  const [salesByStateAndCity, setSalesByStateAndCity] = useState<
+    SaleByStateAndCity[]
+  >([]);
   const [salesByState, setSalesByState] = useState<SaleByState[]>([]);
   const [salesByStateMarkers, setSalesByStateMarkers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -77,9 +87,7 @@ export const AnalyticsGeography = () => {
       <ToolbarAnalytics
         title='Geography'
         additionalToolbarContent={
-          <Item
-            location='before'
-          >
+          <Item location='before'>
             <Tabs
               width={tabsWidth}
               scrollByContent
@@ -92,17 +100,18 @@ export const AnalyticsGeography = () => {
         }
       >
         <div className='cards wide'>
-          <SalesMapCard
-            datasource={salesByStateMarkers}
-            mapsData={mapsData}
-          />
+          <SalesMapCard datasource={salesByStateMarkers} mapsData={mapsData} />
         </div>
         <div className='cards normal'>
           <RevenueAnalysisByStatesCard datasource={salesByStateAndCity} />
           <RevenueSnapshotByStatesCard datasource={salesByState} />
         </div>
       </ToolbarAnalytics>
-      <LoadPanel container='.content' visible={isLoading} position={{ of: '.layout-body' }} />
+      <LoadPanel
+        container='.content'
+        visible={isLoading}
+        position={{ of: '.layout-body' }}
+      />
     </ScrollView>
   );
 };

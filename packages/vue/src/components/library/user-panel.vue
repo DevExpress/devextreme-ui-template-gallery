@@ -17,7 +17,7 @@
       <template #dropDownContentTemplate="{ }">
         <user-menu-section
           :menu-items="menuItems"
-          :user="user"
+          :user="user || {}"
           :show-avatar="false"
           ref="userMenuSection"
         />
@@ -27,7 +27,7 @@
     <div v-if="menuMode === 'list'">
       <user-menu-section
         :menu-items="menuItems"
-        :user="user"
+        :user="user || {}"
         :show-avatar="true"
       />
     </div>
@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { DxDropDownButton, DxDropDownBox } from 'devextreme-vue';
+import { DxDropDownButton } from 'devextreme-vue';
 import { ref } from 'vue';
 import { UserInfo } from '../../auth';
 import UserMenuSection from './user-menu-section.vue';
@@ -51,8 +51,8 @@ withDefaults(defineProps<{
 
 const userMenuSectionRef = ref<InstanceType<typeof UserMenuSection>>();
 
-function handleDropDownButtonContentReady({ component }: {component: typeof DxDropDownBox}) {
-  component.registerKeyHandler('downArrow', () => {
+function handleDropDownButtonContentReady(e: any) {
+  e.component.registerKeyHandler('downArrow', () => {
     userMenuSectionRef.value?.focusList();
   });
 }

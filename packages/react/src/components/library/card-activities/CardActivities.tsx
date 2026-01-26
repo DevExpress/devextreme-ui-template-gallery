@@ -12,10 +12,7 @@ import { withLoadPanel } from '../../../utils/withLoadPanel';
 
 import './CardActivities.scss';
 
-const activityMenuItems = [
-  { text: 'View Details' },
-  { text: 'Delete Record' },
-];
+const activityMenuItems = [{ text: 'View Details' }, { text: 'Delete Record' }];
 
 const listItemRender = (item: Activity) => {
   return (
@@ -33,13 +30,24 @@ const listItemRender = (item: Activity) => {
 
 const ActivitiesList = ({ activities }) => {
   return (
-    <List className='activities-list' dataSource={activities} scrollingEnabled={false} itemRender={listItemRender} />
+    <List
+      className='activities-list'
+      dataSource={activities}
+      scrollingEnabled={false}
+      itemRender={listItemRender}
+    />
   );
 };
 
 const ActivitiesWithLoadPanel = withLoadPanel(ActivitiesList);
 
-export const CardActivities = ({ activities, isLoading }: { activities?: Activities, isLoading?: boolean }) => (
+export const CardActivities = ({
+  activities,
+  isLoading,
+}: {
+  activities?: Activities;
+  isLoading?: boolean;
+}) => (
   <div className={classNames({ 'card-activities': true, load: !activities })}>
     <ActivitiesWithLoadPanel
       activities={activities}
@@ -47,7 +55,7 @@ export const CardActivities = ({ activities, isLoading }: { activities?: Activit
       loading={isLoading}
       panelProps={{
         container: '.card-activities',
-        position: { of: '.card-activities' }
+        position: { of: '.card-activities' },
       }}
     />
   </div>

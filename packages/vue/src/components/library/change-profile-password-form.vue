@@ -53,7 +53,6 @@ import { DxForm, DxItem, DxLabel } from 'devextreme-vue/form';
 import FormPopup from '@/components/utils/form-popup.vue';
 import PasswordTextBox from '@/components/library/password-text-box.vue';
 import { SimpleObject } from '@/types';
-import { DxValidationRule } from 'devextreme-vue/validator';
 
 withDefaults(defineProps<{
   visible: boolean,
@@ -71,7 +70,7 @@ const emit = defineEmits(['update:visible']);
 
 const formData: SimpleObject = {};
 
-const confirmPasswordValidators: (typeof DxValidationRule)[] = [
+const confirmPasswordValidators: any[] = [
   {
     type: 'compare',
     message: 'Passwords do not match',

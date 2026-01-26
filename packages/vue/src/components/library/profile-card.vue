@@ -10,48 +10,48 @@
         :form-data="props.cardData"
         :show-colon-after-label="true"
         :col-count="screenInfo.isXSmall ? 2 : colCount"
-        :screen-by-width="getSizeQualifier"
+        :screen-by-width="getSizeQualifier as any"
         label-location="top"
         label-mode="outside"
-        :on-field-data-changed="evt => onFieldChange(evt.dataField, evt.value)"
+        :on-field-data-changed="evt => onFieldChange(evt.dataField as any, evt.value)"
       >
         <dx-item
           v-for="item in computedItems"
           v-memo="[computedItems]"
-          :key="item.dataField"
-          :data-field="item.dataField"
-          :editor-type="item.editorType"
+          :key="item.dataField as string"
+          :data-field="item.dataField as string"
+          :editor-type="item.editorType as any"
           :editor-options="{
             stylingMode: 'filled',
             valueChangeEvent: 'input',
-            ...item.editorOptions,
+            ...(item.editorOptions as any || {}),
           }"
-          :col-span="item.colSpan"
+          :col-span="item.colSpan as number"
         >
           <dx-label
             v-if="item.label"
-            :text="item.label"
+            :text="(item.label as string) || ''"
           />
           <dx-validation-rule
             v-for="rule in item.validators"
             :key="rule"
-            :type="rule.type"
+            :type="(rule as any).type"
           />
           <status-select-box
             v-if="item.dataField === 'status'"
             class-list=""
-            :items="item.itemsList"
-            :model-value="cardData[item.dataField]"
+            :items="(item.itemsList as unknown[]) || []"
+            :model-value="(cardData as any)[item.dataField as any]"
             styling-mode="filled"
             label-mode="hidden"
-            @update:model-value="onFieldChange(item.dataField, $event)"
+            @update:model-value="onFieldChange(item.dataField as any, $event)"
           />
           <pictured-item-select-box
             v-else-if="item.dataField === 'supervisor'"
-            :label="item.label"
-            :model-value="cardData[item.dataField]"
-            :items="item.itemsList"
-            @update:model-value="onFieldChange(item.dataField, $event)"
+            :label="(item.label as string) || ''"
+            :model-value="(cardData as any)[item.dataField as any]"
+            :items="(item.itemsList as any[]) || []"
+            @update:model-value="onFieldChange(item.dataField as any, $event)"
           />
         </dx-item>
       </dx-form>
@@ -75,12 +75,13 @@ import {
 } from 'vue';
 
 const props = withDefaults(defineProps<{
-  title: '',
+  title: string,
   cardData: Profile,
   colCount?: number,
   items: SimpleObject[]
 }>(), {
   colCount: 2,
+  title: '',
 });
 
 const emit = defineEmits(['data-changed']);

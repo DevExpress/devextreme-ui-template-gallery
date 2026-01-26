@@ -23,7 +23,7 @@ import { themeService } from '@/theme/theme-service';
 
 const { currentTheme } = themeService;
 
-// eslint-disable-next-line arrow-body-style
+ 
 const buttonStylingMode = computed<DxButtonTypes.ButtonStyle>(() => {
   return currentTheme.value === 'dark' ? 'outlined' : 'contained';
 });

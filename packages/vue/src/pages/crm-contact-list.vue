@@ -172,7 +172,7 @@
 
     <!--  Contact panel  -->
     <contact-panel
-      :contact-id="panelData?.id"
+      :contact-id="panelData?.id || null"
       :is-panel-opened="isPanelOpened"
       @close="onClose"
       @pin-changed="onPanelPinChanged"
@@ -227,7 +227,7 @@ const filterStatusList = ['All', ...contactStatusList];
 type FilterContactStatus = typeof filterStatusList[number];
 
 const contactNewFormCmp = ref<InstanceType<typeof ContactNewForm>>();
-const panelData = ref<Array<Contact> | null>(null);
+const panelData = ref<Contact | null>(null);
 const isPanelOpened = ref(false);
 const dataGrid = ref<InstanceType<typeof DxDataGrid> | null>(null);
 
@@ -295,18 +295,18 @@ const refresh = () => {
   dataSource.reload();
 };
 
-const customizePhoneCell = (cellInfo: {value: string}) => {
+const customizePhoneCell = (cellInfo: {value: string}): string => {
   const { value } = cellInfo;
 
   if (!value) {
-    return undefined;
+    return '';
   }
 
-  return formatPhone(value.toString());
+  return formatPhone(value.toString()) || '';
 };
 
 const onSaveContactNewForm = () => {
-  const { firstName, lastName } = contactNewFormCmp.value.getNewContactData();
+  const { firstName, lastName } = contactNewFormCmp.value?.getNewContactData() || {};
 
   notify(
     {

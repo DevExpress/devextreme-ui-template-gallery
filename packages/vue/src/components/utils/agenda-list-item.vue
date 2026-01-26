@@ -13,7 +13,7 @@
         {{ appointment.text }}
       </div>
       <div class="description-resource">
-        {{ resources[appointment.calendarId]?.text }}
+        {{ resources[(appointment.calendarId as any) || '']?.text }}
       </div>
     </div>
   </div>
@@ -24,11 +24,11 @@ import { computed } from 'vue';
 import { Duration } from 'luxon';
 
 const props = withDefaults(defineProps<{
-  appointment: {startDate: Date},
-  resources: Record<string, unknown>[],
+  appointment: {startDate: Date, endDate?: Date, text?: string, calendarId?: string},
+  resources: Record<string, any>,
 }>(), {
   items: () => ({}),
-  resources: () => [],
+  resources: () => ({}),
 });
 
 const startTime = computed(() => props.appointment.startDate.toLocaleTimeString(undefined, {
@@ -39,7 +39,8 @@ const startTime = computed(() => props.appointment.startDate.toLocaleTimeString(
 
 const duration = computed(() => {
   const { startDate, endDate } = props.appointment;
-  return Duration.fromMillis(endDate - startDate)
+  if (!endDate) return '';
+  return Duration.fromMillis(endDate.getTime() - startDate.getTime())
     .rescale()
     .toFormat("h'h' m'm'");
 });

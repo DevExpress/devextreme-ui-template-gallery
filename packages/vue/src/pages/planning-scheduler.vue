@@ -7,7 +7,7 @@
             <div class="buttons">
               <dx-button
                 text="Today"
-                @click="onSelectedDateChange"
+                @click="() => onSelectedDateChange()"
               />
               <dx-button
                 text="Create event"
@@ -18,7 +18,7 @@
             <div class="calendar">
               <dx-calendar
                 :value="currentDate"
-                @value-changed="onCalendarDateChange"
+                @value-changed="(e: any) => onCalendarDateChange(e)"
               />
             </div>
             <calendar-list
@@ -39,12 +39,12 @@
             :current-date="schedulerCurrentDate"
             :start-day-hour="4"
             :show-current-time-indicator="false"
-            @option-changed="onSchedulerOptionChange"
-            @appointment-click="onAppointmentClick"
-            @appointment-added="onAppointmentModified"
-            @appointment-deleted="onAppointmentModified"
-            @appointment-tooltip-showing="onAppointmentTooltipShowing"
-            @appointment-form-opening="onAppointmentFormOpening"
+            @option-changed="(e: any) => onSchedulerOptionChange(e)"
+            @appointment-click="(e: any) => onAppointmentClick(e)"
+            @appointment-added="(e: any) => onAppointmentModified(e)"
+            @appointment-deleted="(e: any) => onAppointmentModified(e)"
+            @appointment-tooltip-showing="(e: any) => onAppointmentTooltipShowing(e)"
+            @appointment-form-opening="(e: any) => onAppointmentFormOpening(e)"
             @cell-click="onCellClick"
           >
             <dx-resource
@@ -64,7 +64,7 @@
             :position="tooltipPosition"
           >
             <scheduler-tooltip
-              :selected-appointment-data="selectedAppointment?.data"
+              :selected-appointment-data="selectedAppointment?.data || {}"
               @click-edit-appointment="editSelectedAppointment"
               @click-delete-appointment="deleteSelectedAppointment"
             />
@@ -113,9 +113,7 @@ import RightSidePanel from '@/components/utils/right-side-panel.vue';
 
 import { defaultCalendarListItems, getTasksForScheduler } from 'dx-template-gallery-data';
 import DataSource from 'devextreme/data/data_source';
-import { Task } from '@/types';
 import AgendaList, { AgendaItem } from '@/components/utils/agenda-list.vue';
-import { DxForm } from 'devextreme-vue/form';
 
 type AppointmentData = {startDate: Date, calendarId?: string};
 type SelectedAppointment = {
@@ -174,7 +172,7 @@ watchEffect(() => {
   }
 });
 
-getTasksForScheduler().then((data: Task[]) => {
+getTasksForScheduler().then((data: any) => {
   tasks.value = new DataSource(data);
 });
 
@@ -200,7 +198,9 @@ function updateAgenda(appointmentData?: AppointmentData) {
   agendaItems.value = findAllAppointmentsForDay(appointmentData);
 }
 
-function onCalendarDateChange({ value }: { value: Date }) {
+function onCalendarDateChange(e: any) {
+  const value = e.value;
+  if (!value) return;
   currentDate.value = value;
   updateAgenda({ startDate: currentDate.value });
 }
@@ -225,15 +225,15 @@ function calendarListChanged(selectedCalendars: {id: string}[]) {
   updateAgenda({ startDate: currentDate.value });
 }
 
-function onAppointmentFormOpening(e: {form: typeof DxForm, appointmentData: AppointmentData}) {
-  const editor = e.form.getEditor('calendarId');
-  if (e.appointmentData.calendarId === undefined) {
+function onAppointmentFormOpening(e: any) {
+  const editor = e.form?.getEditor('calendarId');
+  if (e.appointmentData?.calendarId === undefined && editor) {
     editor.option('value', 0);
   }
 }
 
-function onAppointmentModified(e: {appointmentData: AppointmentData}) {
-  if (e.appointmentData.startDate.toDateString()
+function onAppointmentModified(e: any) {
+  if (e.appointmentData?.startDate?.toDateString()
     === selectedAppointment.value?.data.startDate.toDateString()) {
     updateAgenda(e.appointmentData);
   }
@@ -250,15 +250,16 @@ function onCurrentViewChange(view: string) {
   }
 }
 
-function onSchedulerOptionChange({ name, value }: {name: string, value: string}) {
+function onSchedulerOptionChange(e: any) {
+  const { name, value } = e;
   if (name === 'currentView') {
     onCurrentViewChange(value);
   }
 }
 
-function onAppointmentClick(e: {appointmentData: AppointmentData, targetElement: HTMLElement}) {
-  const { appointmentData } = e;
-  selectedAppointment.value = { data: appointmentData, target: e.targetElement };
+function onAppointmentClick(e: any) {
+  const { appointmentData, targetElement } = e;
+  selectedAppointment.value = { data: appointmentData, target: targetElement };
 
   if (currentView.value === 'month') {
     updateAgenda(appointmentData);
@@ -266,16 +267,11 @@ function onAppointmentClick(e: {appointmentData: AppointmentData, targetElement:
   }
 }
 
-function onAppointmentTooltipShowing(
-  e: {appointments: {
-      appointmentData: AppointmentData }[],
-    targetElement: HTMLElement,
-    cancel: boolean},
-) {
+function onAppointmentTooltipShowing(e: any) {
   e.cancel = true;
 
   const { appointmentData } = e.appointments[0];
-  const isAppointmentCollectorClicked = ({ targetElement }: {targetElement: HTMLElement}) => (targetElement as unknown as HTMLElement[])?.[0]?.classList.contains('dx-scheduler-appointment-collector');
+  const isAppointmentCollectorClicked = (evt: any) => evt.targetElement?.[0]?.classList.contains('dx-scheduler-appointment-collector');
 
   selectedAppointment.value = { data: appointmentData, target: e.targetElement };
 
@@ -315,7 +311,9 @@ function editSelectedAppointment() {
 }
 
 function deleteSelectedAppointment(appointmentData: AppointmentData) {
-  schedulerRef.value?.instance.deleteAppointment(selectedAppointment.value?.data);
+  if (selectedAppointment.value?.data) {
+    schedulerRef.value?.instance.deleteAppointment(selectedAppointment.value.data as any);
+  }
   tooltipRef.value?.instance.hide();
   agendaItems.value = findAllAppointmentsForDay(appointmentData);
 }

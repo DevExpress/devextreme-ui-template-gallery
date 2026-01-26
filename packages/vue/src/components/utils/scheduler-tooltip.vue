@@ -55,19 +55,19 @@ import { computed } from 'vue';
 import { DxButton } from 'devextreme-vue';
 
 const props = withDefaults(defineProps<{
-  selectedAppointmentData: {startDate?: Date},
+  selectedAppointmentData: {startDate?: Date, endDate?: Date, text?: string, description?: string},
 }>(), {
   selectedAppointmentData: () => ({}),
 });
 
 const timeString = computed(() => {
-  const timeOptions = {
+  const timeOptions: Intl.DateTimeFormatOptions = {
     hour: 'numeric',
     minute: 'numeric',
     hour12: false,
   };
 
-  const dateOptions = {
+  const dateOptions: Intl.DateTimeFormatOptions = {
     ...timeOptions,
     weekday: 'short',
     day: 'numeric',

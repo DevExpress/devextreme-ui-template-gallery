@@ -1,4 +1,4 @@
-@use "../variables.scss" as *;
+@use '../variables.scss' as *;
 
 @mixin menu-pre-init-patch {
   --menu-min-size: 60px;
@@ -8,7 +8,7 @@
   }
 
   .dx-drawer-panel-content.dx-overlay::before {
-    content: "";
+    content: '';
     width: var(--menu-min-size);
     height: 100%;
     display: inline-block;

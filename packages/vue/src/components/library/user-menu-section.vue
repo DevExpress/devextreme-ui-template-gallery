@@ -31,19 +31,19 @@ import { ref } from 'vue';
 
 withDefaults(defineProps<{
   showAvatar: boolean,
-  menuItems: Array,
-  user: object,
+  menuItems: Array<any>,
+  user: any,
 }>(), {
   showAvatar: false,
-  menuItems: [],
-  user: {},
+  menuItems: () => [],
+  user: () => ({}),
 });
 
-const userInfoListRef = ref(null);
-const onItemClick = ({ itemData }) => itemData.onClick();
+const userInfoListRef = ref<any>(null);
+const onItemClick = ({ itemData }: any) => itemData.onClick();
 
 function focusList() {
-  userInfoListRef.value.instance.focus();
+  userInfoListRef.value?.instance.focus();
 }
 
 defineExpose({ focusList });

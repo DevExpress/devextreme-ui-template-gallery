@@ -24,7 +24,10 @@ export const TaskKanbanCard = ({ task }: { task: Task }) => {
   }, []);
 
   return (
-    <div className='kanban-card dx-card theme-text-color theme-bg-color' onClick={navigateToDetails}>
+    <div
+      className='kanban-card dx-card theme-text-color theme-bg-color'
+      onClick={navigateToDetails}
+    >
       <div className={`card-wrapper priority-${task.priority.toLowerCase()}`}>
         <div className='card-priority' />
         <Button
@@ -37,7 +40,9 @@ export const TaskKanbanCard = ({ task }: { task: Task }) => {
           <div className='card-subject theme-text-color'>{task.text}</div>
           <div className='card-data'>
             <span className='priority'>{task.priority}</span>
-            <span className='date theme-text-color'>{formatDate(new Date(task.dueDate), 'MM/dd/yyyy')}</span>
+            <span className='date theme-text-color'>
+              {formatDate(new Date(task.dueDate), 'MM/dd/yyyy')}
+            </span>
           </div>
           <div className='card-assignee'>
             <span className='company theme-text-color'>{task.company}</span>

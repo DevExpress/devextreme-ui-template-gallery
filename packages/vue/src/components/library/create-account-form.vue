@@ -53,10 +53,10 @@
         <template #default>
           <div class="policy-info">
             By creating an account, you agree to the
-            <router-link :to="props.redirectLink">
+            <router-link :to="props.redirectLink || '/terms'">
               Terms of Service
             </router-link> and
-            <router-link :to="props.redirectLink">
+            <router-link :to="props.redirectLink || '/privacy'">
               Privacy Policy
             </router-link>
           </div>
@@ -85,7 +85,7 @@
       </template>
     </dx-form>
     <div class="login-link">
-      Have an account? <router-link :to="props.redirectLink">
+      Have an account? <router-link :to="props.redirectLink || '/sign-in'">
         Sign In
       </router-link>
     </div>
@@ -130,14 +130,16 @@ const onSubmit = async () => {
   const result = await auth.createAccount(email, password);
   loading.value = false;
 
-  if (result.isOk) {
+  if (result.isOk && props.buttonLink) {
     router.push(props.buttonLink);
+  } else if (result.isOk) {
+    router.push('/');
   } else {
     notify(result.message, 'error', 2000);
   }
 };
 
-function confirmPassword(e: {value: ''}) {
+function confirmPassword(e: any) {
   return e.value === formData.password;
 }</script>
 

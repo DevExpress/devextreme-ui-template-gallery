@@ -1,7 +1,7 @@
 <template>
   <dx-text-box
     :model-value="value"
-    :styling-mode="stylingMode"
+    :styling-mode="stylingMode as any"
     :placeholder="placeholder"
     :mode="isPasswordMode ? 'password' : 'text'"
     value-change-event="keyup input change"
@@ -21,7 +21,7 @@
     />
     <dx-validator
       :validation-rules="[
-        { type: 'required', message: 'Password is required' }, ...validators]"
+        { type: 'required', message: 'Password is required' }, ...validators] as any"
     />
   </dx-text-box>
 </template>

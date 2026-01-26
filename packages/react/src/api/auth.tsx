@@ -32,17 +32,11 @@ export async function getUser() {
 }
 
 export async function createAccount(email: string, password: string) {
-  try {
-    // Send request
-    return {
-      isOk: true,
-    };
-  } catch {
-    return {
-      isOk: false,
-      message: 'Failed to create account',
-    };
-  }
+  // Send request
+  return {
+    isOk: true,
+    message: '',
+  };
 }
 
 export async function changePassword(email: string, recoveryCode?: string) {
@@ -61,15 +55,9 @@ export async function changePassword(email: string, recoveryCode?: string) {
 }
 
 export async function resetPassword(email: string) {
-  try {
-    // Send request
-    return {
-      isOk: true,
-    };
-  } catch {
-    return {
-      isOk: false,
-      message: 'Failed to reset password',
-    };
-  }
+  // Send request
+  return {
+    isOk: true,
+    message: '',
+  };
 }

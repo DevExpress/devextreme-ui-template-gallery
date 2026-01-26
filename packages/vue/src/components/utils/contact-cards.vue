@@ -21,7 +21,7 @@
       </dx-tab-item>
 
       <dx-tab-item title="Opportunities">
-        <card-opportunities :contact-id="props.contactId" />
+        <card-opportunities :contact-id="props.contactId ?? undefined" />
       </dx-tab-item>
 
       <dx-tab-item title="Notes">
@@ -54,7 +54,7 @@ import type { Message } from '@/types/messages';
 import ContactActivities from '@/components/library/card-activities.vue';
 import CardNotes from '@/components/library/card-notes.vue';
 import CardMessages from '@/components/library/card-messages.vue';
-// eslint-disable-next-line import/no-unresolved
+ 
 import { getContactMessages } from 'dx-template-gallery-data';
 import CardTasks from '@/components/library/card-tasks.vue';
 import CardOpportunities from '@/components/library/card-opportunities.vue';
@@ -81,7 +81,7 @@ async function loadMessages() {
 
   isMessagesLoading.value = true;
 
-  messages.value = await getContactMessages(props.contactId);
+  messages.value = await getContactMessages(props.contactId) as any;
   isMessagesLoading.value = false;
 }
 

@@ -14,6 +14,6 @@ import { Sales } from '../../types/analytics';
 const props = withDefaults(defineProps<{
   data: Sales | null
 }>(), {
-  data: () => null,
+  data: () => [],
 });
 </script>

@@ -54,9 +54,8 @@ const sales = ref<Sales>([]);
 const salesByDateAndCategory = ref<Sales>([]);
 const salesByCategory = ref<SalesByStateAndCity>([]);
 
-const visualRange = ref<[Date, Date]>([]);
-
 const customRange = analyticsPanelItems[5].value.split('/').map((d) => new Date(d)) as [Date, Date];
+const visualRange = ref<[Date, Date]>(customRange);
 
 const groupByPeriods = ['Day', 'Month'];
 

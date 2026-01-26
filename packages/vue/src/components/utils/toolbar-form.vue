@@ -5,7 +5,7 @@
     </dx-toolbar-item>
     <dx-toolbar-item
       location="after"
-      locate-in-menu="after"
+      locate-in-menu="auto"
       :visible="!props.isEditing"
     >
       <dx-button
@@ -18,7 +18,7 @@
     </dx-toolbar-item>
     <dx-toolbar-item
       location="after"
-      locate-in-menu="after"
+      locate-in-menu="auto"
       :visible="props.isEditing"
     >
       <dx-button
@@ -30,7 +30,7 @@
     </dx-toolbar-item>
     <dx-toolbar-item
       location="after"
-      locate-in-menu="after"
+      locate-in-menu="auto"
       :visible="props.isEditing"
     >
       <dx-button

@@ -9,12 +9,12 @@
       </toolbar-analytics>
 
       <div class="cards wide">
-        <sales-map-card :data="salesByStateMarkers" />
+        <sales-map-card :data="(salesByStateMarkers as any) || []" />
       </div>
 
       <div class="cards">
-        <revenue-analysis-card :data="salesByStateAndCity" />
-        <revenue-snapshot-card :data="salesByState" />
+        <revenue-analysis-card :data="salesByStateAndCity || []" />
+        <revenue-snapshot-card :data="(salesByState as any) || []" />
       </div>
     </div>
   </dx-scroll-view>
@@ -30,7 +30,7 @@ import { ref } from 'vue';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxLoadPanel } from 'devextreme-vue/load-panel';
 
-// eslint-disable-next-line import/no-unresolved
+ 
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 
 import { SalesByState, SalesByStateAndCity } from '@/types/analytics';
@@ -45,7 +45,7 @@ const salesByStateMarkers = ref<Record<string, unknown> | null>(null);
 
 const loading = ref<boolean>(true);
 
-const createMapCoords = (coords: string) => coords.split(', ').map((coord) => parseFloat(coord));
+const createMapCoords = (coords: any) => String(coords).split(', ').map((coord) => parseFloat(coord));
 
 const getSalesByStateMarkers = () => ({
   type: 'StateCollection',

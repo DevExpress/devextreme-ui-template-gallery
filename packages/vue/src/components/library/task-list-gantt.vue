@@ -32,31 +32,39 @@
     />
 
     <dx-gantt-toolbar>
-      <dx-item name="undo"
+      <dx-item
+        name="undo"
         :options="toolbarItemOptions.undo"
       />
-      <dx-item name="redo"
+      <dx-item
+        name="redo"
         :options="toolbarItemOptions.redo"
       />
       <dx-item name="separator" />
-      <dx-item name="collapseAll"
+      <dx-item
+        name="collapseAll"
         :options="toolbarItemOptions.collapseAll"
       />
-      <dx-item name="expandAll"
+      <dx-item
+        name="expandAll"
         :options="toolbarItemOptions.expandAll"
       />
       <dx-item name="separator" />
-      <dx-item name="addTask"
+      <dx-item
+        name="addTask"
         :options="toolbarItemOptions.addTask"
       />
-      <dx-item name="deleteTask"
+      <dx-item
+        name="deleteTask"
         :options="toolbarItemOptions.deleteTask"
       />
       <dx-item name="separator" />
-      <dx-item name="zoomIn"
+      <dx-item
+        name="zoomIn"
         :options="toolbarItemOptions.zoomIn"
       />
-      <dx-item name="zoomOut"
+      <dx-item
+        name="zoomOut"
         :options="toolbarItemOptions.zoomOut"
       />
     </dx-gantt-toolbar>
@@ -95,7 +103,7 @@ const onExporting = () => {
   const doc = new JsPDF();
   exportGantt({
     jsPDFDocument: doc,
-    component: dxGanttCmp.value.instance,
+    component: dxGanttCmp.value?.instance,
   }).then(() => {
     doc.save('Tasks.pdf');
   });

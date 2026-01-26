@@ -20,7 +20,7 @@
           <dx-drop-down-button
             text="Actions"
             styling-mode="text"
-            drop-down-options="{ width: 'auto' }"
+            :drop-down-options="{ width: 'auto' }"
           >
             <dx-drop-down-item text="Duplicate" />
             <dx-drop-down-item text="Close" />
@@ -73,7 +73,7 @@
               </dx-item>
               <dx-item title="Notes">
                 <card-notes
-                  :user="taskData?.owner"
+                  :user="taskData?.owner || ''"
                   :items="notes"
                 />
               </dx-item>
@@ -82,8 +82,8 @@
                 title="Messages"
               >
                 <card-messages
-                  :user="taskData?.owner"
-                  :messages="taskData?.messages"
+                  :user="taskData?.owner || ''"
+                  :messages="taskData?.messages || []"
                   :is-loading="false"
                 />
               </dx-item>
@@ -106,7 +106,7 @@ import {
 } from 'devextreme-vue/toolbar';
 import { DxTabPanel, DxItem } from 'devextreme-vue/tab-panel';
 import { DxValidationGroup, DxButton } from 'devextreme-vue';
-// eslint-disable-next-line import/no-unresolved
+ 
 import { getTask } from 'dx-template-gallery-data';
 import type { Task } from '@/types/task';
 import CardNotes from '@/components/library/card-notes.vue';
@@ -130,7 +130,7 @@ async function loadData() {
   taskId = queryId || DEFAULT_TASK_ID;
   const data = await getTask(taskId);
 
-  taskData.value = data;
+  taskData.value = data as any;
   taskName.value = data.text;
   isLoading.value = false;
 }

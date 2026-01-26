@@ -121,7 +121,7 @@
   >
     <task-form
       ref="taskFormCmp"
-      :content-by-screen="{ xs: screenInfo.isSmallMobileMedia ? 1 : 2, sm: 2 }"
+      :content-by-screen="{ xs: screenInfo.isXSmall ? 1 : 2, sm: 2 }"
       :is-create-mode="true"
       :data="popupTask"
     />
@@ -139,7 +139,7 @@ import {
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
 
-// eslint-disable-next-line import/no-unresolved
+ 
 import { getTasks, getFilteredTasks } from 'dx-template-gallery-data';
 import { taskPanelItems, TaskPanelItemsIds } from '@/types/resource';
 import type { Task } from '@/types/task';
@@ -171,18 +171,21 @@ const isNewTaskPopupOpened = ref(false);
 const addTask = () => {
   isNewTaskPopupOpened.value = true;
 };
-const chooseColumnDataGrid = () => tasksGridCmp.value.showColumnChooser();
-const searchDataGrid = (e: DxTextBoxTypes.InputEvent) => tasksGridCmp.value.search(e.component.option('text'));
+const chooseColumnDataGrid = () => tasksGridCmp.value?.showColumnChooser();
+const searchDataGrid = (e: DxTextBoxTypes.InputEvent) => tasksGridCmp.value?.search(e.component.option('text') || '');
 const exportToPdf = () => {
-  ({
+  const component = ({
     grid: tasksGridCmp,
     gantt: tasksGanttCmp,
     kanban: null,
-  })[activeTabId.value]?.value.exportToPdf();
+  } as any)[activeTabId.value]?.value;
+  if (component && 'exportToPdf' in component) {
+    component.exportToPdf();
+  }
 };
 
 const exportToXlsx = () => {
-  tasksGridCmp.value.exportToXlsx();
+  tasksGridCmp.value?.exportToXlsx();
 };
 
 const loadFilteredTasksAsync = async () => {
@@ -190,8 +193,8 @@ const loadFilteredTasksAsync = async () => {
 
   const filteredTasks = await getFilteredTasks();
 
-  kanbanData.value = [...filteredTasks];
-  ganttData.value = filteredTasks;
+  kanbanData.value = [...filteredTasks] as any;
+  ganttData.value = filteredTasks as any;
   isLoading.value = false;
 };
 
@@ -199,7 +202,7 @@ const loadTasksAsync = async () => {
   isLoading.value = true;
   const tasks = await getTasks();
 
-  gridData.value = tasks.filter((item: Task) => !!item.status && !!item.priority);
+  gridData.value = tasks.filter((item: any) => !!item.status && !!item.priority) as any;
   isLoading.value = false;
 };
 
@@ -254,7 +257,7 @@ const tabValueChange = (e: DxTabsTypes.ItemClickEvent) => {
 };
 
 const reload = () => {
-  tasksGridCmp.value.refresh();
+  tasksGridCmp.value?.refresh();
 };
 
 const onSaveNewTask = () => {

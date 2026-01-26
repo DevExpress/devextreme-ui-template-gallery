@@ -88,8 +88,8 @@ const drawerOptions = computed(() => {
   const shaderEnabled = !props.isLarge;
 
   return {
-    menuMode: props.isLarge ? 'shrink' : 'overlap',
-    menuRevealMode: props.isXSmall ? 'slide' : 'expand',
+    menuMode: props.isLarge ? 'shrink' as const : 'overlap' as const,
+    menuRevealMode: props.isXSmall ? 'slide' as const : 'expand' as const,
     minMenuSize: props.isXSmall ? 0 : 48,
     maxMenuSize: props.isXSmall ? 250 : undefined,
     closeOnOutsideClick: shaderEnabled,

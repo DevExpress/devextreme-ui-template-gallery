@@ -1,7 +1,7 @@
 <template>
   <dx-form
     class="plain-styled-form"
-    :screen-by-width="getSizeQualifier"
+    :screen-by-width="getSizeQualifier as any"
   >
     <dx-form-item item-type="group">
       <dx-col-count-by-screen

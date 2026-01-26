@@ -15,19 +15,19 @@ const customizeLegendText = (arg) => {
   ];
 };
 
-const customizeItems = (items: Array<VectorMapTypes.LegendItem>) => items.reverse();
+const customizeItems = (items: Array<VectorMapTypes.LegendItem>) =>
+  items.reverse();
 
 const customizeTooltip = (arg: MapLayerElement) => {
-  return arg.layer.type === 'marker' ? {
-    text: arg.attribute('tooltip'),
-  } : {};
+  return arg.layer.type === 'marker'
+    ? {
+      text: arg.attribute('tooltip'),
+    }
+    : {};
 };
 
 export const SalesMapCard = ({ datasource, mapsData }) => (
-  <CardAnalytics
-    title='Revenue by States'
-    contentClass='sales-by-state-map'
-  >
+  <CardAnalytics title='Revenue by States' contentClass='sales-by-state-map'>
     <VectorMap id='vector-map' bounds={[-118, 50, -80, 25]}>
       <Layer dataSource={mapsData.usa} hoverEnabled={false} />
       <Layer

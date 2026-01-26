@@ -45,7 +45,6 @@
 <script setup lang="ts">
 import { DxSelectBox } from 'devextreme-vue/select-box';
 import { DxTextBox } from 'devextreme-vue/text-box';
-import { SimpleObject } from '@/types';
 
 withDefaults(defineProps<{
   label?: string,
@@ -59,7 +58,7 @@ withDefaults(defineProps<{
 
 const emit = defineEmits(['update:modelValue']);
 
-function emitChangedValue(changedData: SimpleObject) {
+function emitChangedValue(changedData: any) {
   emit('update:modelValue', changedData.value);
 }
 </script>

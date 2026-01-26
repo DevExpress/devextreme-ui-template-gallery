@@ -5,7 +5,7 @@
   >
     <div
       class="card-wrapper"
-      :class="`priority-${ task.priority.toLowerCase() }`"
+      :class="`priority-${ task?.priority?.toLowerCase() || 'normal' }`"
     >
       <div class="card-priority" />
       <dx-button
@@ -15,17 +15,15 @@
       />
       <div class="card-content">
         <div class="card-subject theme-text-color">
-          {{ task.text }}
+          {{ task?.text }}
         </div>
         <div class="card-data">
-          <span class="priority">{{ task.priority }}</span>
-          <span class="date theme-text-color">{{
-            formatDate(task.dueDate)
-          }}</span>
+          <span class="priority">{{ task?.priority }}</span>
+          <span class="date theme-text-color">{{ task?.dueDate ? formatDate(task.dueDate) : '' }}</span>
         </div>
         <div class="card-assignee">
-          <span class="company theme-text-color">{{ task.company }}</span>
-          <avatar :data-letters="getAvatarText(task.owner)" />
+          <span class="company theme-text-color">{{ task?.company }}</span>
+          <avatar :data-letters="getAvatarText(task?.owner || '')" />
         </div>
       </div>
     </div>
@@ -43,13 +41,13 @@ import Avatar from '@/components/library/user-avatar.vue';
 const props = withDefaults(defineProps<{
   task: Task | null
 }>(), {
-  task: () => null,
+  task: () => ({} as Task),
 });
 
 const getAvatarText = (name: string) => name.split(' ').map((namePart) => namePart[0]).join('');
 
-const notifyByCard = (event: {event: Event}) => {
-  event.event.stopPropagation();
+const notifyByCard = (event: any) => {
+  event.event?.stopPropagation();
   notify(`Edit '${props.task?.text}' card event`);
 };
 

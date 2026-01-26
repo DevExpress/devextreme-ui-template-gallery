@@ -34,7 +34,7 @@ const router = useRouter();
 const isLargeScreen = sizes()['screen-large'];
 const items = navigation.map((item) => {
   if (item.path && !(/^\//.test(item.path))) {
-    // eslint-disable-next-line no-param-reassign
+     
     item.path = `/${item.path}`;
   }
   return { ...item, expanded: isLargeScreen };
@@ -52,7 +52,7 @@ function forwardClick(...args: unknown[]) {
   emit('click', args);
 }
 
-function handleItemClick(e) {
+function handleItemClick(e: any) {
   if (!e.itemData.path || props.compactMode) {
     return;
   }
@@ -88,7 +88,7 @@ watch(
       treeViewRef.value?.instance.collapseAll();
     } else {
       updateSelection();
-      treeViewRef.value.instance.expandItem(route.path);
+      treeViewRef.value?.instance.expandItem(route.path);
     }
   },
 );

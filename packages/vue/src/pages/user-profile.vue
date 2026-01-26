@@ -71,7 +71,7 @@
                   icon="copy"
                   class="copy-clipboard-button"
                   styling-mode="text"
-                  @click="copyToClipboard(profileData.id, $event)"
+                  @click="copyToClipboard(String(profileData.id), $event)"
                   :active-state-enabled="false"
                   :focus-state-enabled="false"
                   :hover-state-enabled="false"
@@ -79,7 +79,7 @@
               </div>
               <dx-button
                 text="Change Password"
-                :icon="screenInfo.isXSmall ? null : 'lock'"
+                :icon="screenInfo.isXSmall ? undefined : 'lock'"
                 class="change-password-button"
                 styling-mode="contained"
                 @click="changePassword()"
@@ -264,9 +264,9 @@ watch(profileData, (value) => {
 });
 
 Promise.all([getProfile(22), getSupervisors()]).then(([profile, supervisors]) => {
-  profileData.value = profile;
+  profileData.value = profile as any;
   supervisorsList.value = supervisors;
-  savedData = { ...profile };
+  savedData = { ...profile } as any;
   isLoading.value = false;
 });
 
@@ -292,7 +292,7 @@ function cancel() {
   profileData.value = { ...savedData } as Profile;
 }
 
-function copyToClipboard(text: string, { event }: { event: Event }) {
+function copyToClipboard(text: string, e: any) {
   window.navigator.clipboard?.writeText(text);
   const tipText = 'Text copied';
   notify(
@@ -300,7 +300,7 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
       message: tipText,
       minWidth: `${tipText.length + 2}ch`,
       width: 'auto',
-      position: { of: event.target, offset: '0 -30' },
+      position: { of: e.event?.target, offset: '0 -30' },
     },
     'info',
     500,

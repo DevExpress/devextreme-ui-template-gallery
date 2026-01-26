@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { DxTextBox, DxButton as DxTextBoxButton } from 'devextreme-vue/text-box';
-import { DxValidator, DxValidationRule } from 'devextreme-vue/validator';
+import { DxValidator } from 'devextreme-vue/validator';
 import { computed } from 'vue';
 import { formEditorProps } from '@/shared/form-editor-config';
 
@@ -33,11 +33,11 @@ const props = withDefaults(
   icon?: string,
   mask?: string,
   validationGroup?: string,
-  validators?: Array<typeof DxValidationRule>,
+  validators?: Array<any>,
 }>(),
   {
     validators: () => [{ type: 'required' }],
-    modelValue: null,
+    modelValue: undefined,
     isEditing: false,
     label: '',
     icon: '',

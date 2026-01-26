@@ -65,7 +65,7 @@
       <div class="panels">
         <div class="left">
           <contact-form
-            :contact-data="contactData"
+            :contact-data="contactData || null"
             :is-editing="false"
             :is-loading="isLoading"
           />
@@ -74,10 +74,10 @@
         <div class="right">
           <contact-cards
             :is-loading="isLoading"
-            :contact-name="contactData?.name"
+            :contact-name="contactData?.name || ''"
             :contact-id="contactId"
-            :tasks="contactData?.tasks"
-            :activities="contactData?.activities"
+            :tasks="contactData?.tasks || []"
+            :activities="contactData?.activities || []"
           />
         </div>
       </div>
@@ -95,7 +95,7 @@ import {
   DxToolbar,
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
-// eslint-disable-next-line import/no-unresolved
+ 
 import { getContact } from 'dx-template-gallery-data';
 import type { Contact } from '@/types/contact';
 
@@ -116,7 +116,7 @@ async function loadData() {
   contactId = queryId || DEFAULT_CONTACT_ID;
   const data = await getContact(contactId);
 
-  contactData.value = data;
+  contactData.value = data as any;
   contactName.value = data.name;
   isLoading.value = false;
 }

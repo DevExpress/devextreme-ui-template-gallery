@@ -103,7 +103,7 @@
       <dx-select-box
         class="edit-cell"
         :value="cellData?.value"
-        :items="priorityList"
+        :items="[...priorityList]"
         @value-changed="(e) => onPrioritySelectChange(e.value, cellData)"
         @selection-changed="cellData.component.updateDimensions"
         field-template="field"
@@ -134,7 +134,7 @@
       <dx-select-box
         class="edit-cell"
         :value="cellInfo.value"
-        :items="statusList"
+        :items="[...statusList]"
         @value-changed="(e) => onStatusSelectChange(e.value, cellInfo)"
         @selection-changed="cellInfo.component.updateDimensions"
         field-template="field"
@@ -154,7 +154,7 @@
     </template>
   </dx-data-grid>
   <dx-load-panel
-    :visible="props.isLoading"
+    :visible="false"
     container=".content"
     :position="{ of: '.content' }"
   />
@@ -190,10 +190,10 @@ import { taskPriorityList as priorityList, taskStatusList as statusList } from '
 import { Workbook } from 'exceljs';
 import StatusIndicator from '@/components/library/status-indicator.vue';
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   dataSource: Task[] | null
 }>(), {
-  dataSource: () => null,
+  dataSource: () => [],
 });
 
 const dxDataGridCmp = ref<InstanceType<typeof DxDataGrid> | null>(null);
@@ -211,21 +211,21 @@ const toogleUseNavigation = () => {
 
 const addRow = () => dxDataGridCmp.value?.instance.addRow();
 const onPrioritySelectChange = (value: string, cellData: Record<string, unknown>) => {
-  cellData.setValue(value);
-  cellData.component.refresh();
-  cellData.component.focus();
+  (cellData.setValue as any)(value);
+  (cellData.component as any).refresh();
+  (cellData.component as any).focus();
 };
 
 const onStatusSelectChange = (value: string, cellInfo: Record<string, unknown>) => {
-  cellInfo.setValue(value);
-  cellInfo.component.refresh();
+  (cellInfo.setValue as any)(value);
+  (cellInfo.component as any).refresh();
 };
 
 const exportToPdf = () => {
   const doc = new JsPDF();
   exportGridToPdf({
     jsPDFDocument: doc,
-    component: dxDataGridCmp.value.instance,
+    component: dxDataGridCmp.value?.instance,
   }).then(() => {
     doc.save('Tasks.pdf');
   });
@@ -236,7 +236,7 @@ const exportToXlsx = () => {
   const worksheet = workbook.addWorksheet('Tasks');
 
   exportToXLSX({
-    component: dxDataGridCmp.value.instance,
+    component: dxDataGridCmp.value?.instance,
     worksheet,
     autoFilterEnabled: true,
   }).then(() => {
@@ -251,13 +251,13 @@ defineExpose({
   exportToPdf,
   exportToXlsx,
   showColumnChooser() {
-    dxDataGridCmp.value.instance.showColumnChooser();
+    dxDataGridCmp.value?.instance.showColumnChooser();
   },
   search(text: string) {
-    dxDataGridCmp.value.instance.searchByText(text);
+    dxDataGridCmp.value?.instance.searchByText(text);
   },
   refresh() {
-    dxDataGridCmp.value.instance.refresh();
+    dxDataGridCmp.value?.instance.refresh();
   },
 });
 </script>

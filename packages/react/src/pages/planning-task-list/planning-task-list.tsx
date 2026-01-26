@@ -12,7 +12,13 @@ import { exportDataGrid } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridXSLX } from 'devextreme/excel_exporter';
 import LoadPanel from 'devextreme-react/load-panel';
 
-import { TaskListGrid, TaskListKanban, TaskListGantt, FormPopup, TaskFormDetails } from '../../components';
+import {
+  TaskListGrid,
+  TaskListKanban,
+  TaskListGantt,
+  FormPopup,
+  TaskFormDetails,
+} from '../../components';
 
 import { newTask as newTaskDefaults } from '../../shared/constants';
 import { useScreenSize } from '../../utils/media-query';
@@ -44,7 +50,9 @@ export const PlanningTaskList = () => {
   const [gridData, setGridData] = useState<Task[]>([]);
   const [filteredData, setFilteredData] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
-  const [formTaskInitData, setFormTaskInitData] = useState({ ...newTaskDefaults });
+  const [formTaskInitData, setFormTaskInitData] = useState({
+    ...newTaskDefaults,
+  });
   const [popupVisible, setPopupVisible] = useState(false);
 
   const { isXSmall } = useScreenSize();
@@ -60,19 +68,18 @@ export const PlanningTaskList = () => {
 
   useEffect(() => {
     Promise.all([
-      getTasks()
-        .then((data) => setGridData(data)),
-      getFilteredTasks()
-        .then((data) => setFilteredData(data))
+      getTasks().then((data) => setGridData(data)),
+      getFilteredTasks().then((data) => setFilteredData(data)),
     ]).catch((error) => console.log(error));
   }, []);
 
   const onSaveClick = () => {
-    notify({
-      message: `New task "${newTaskData.text}" saved`,
-      position: { at: 'bottom center', my: 'bottom center' }
-    },
-    'success'
+    notify(
+      {
+        message: `New task "${newTaskData.text}" saved`,
+        position: { at: 'bottom center', my: 'bottom center' },
+      },
+      'success'
     );
 
     setFormTaskInitData({ ...newTaskDefaults });
@@ -91,7 +98,7 @@ export const PlanningTaskList = () => {
   const viewToParam: Record<string, string> = {
     [listView]: 'list',
     [kanbanView]: 'kanban-board',
-    [ganttView]: 'gantt'
+    [ganttView]: 'gantt',
   };
 
   const paramToView: Record<string, string> = Object.fromEntries(
@@ -115,17 +122,20 @@ export const PlanningTaskList = () => {
     }
   }, [searchParams, view, listsData, setSearchParams]);
 
-  const onTabClick = useCallback((e: { itemData?: string }) => {
-    const newView = e.itemData || '';
-    setView(newView);
-    setIndex(listsData.findIndex((d) => d === newView));
-    setSearchParams((prev) => {
-      const next = new URLSearchParams(prev);
-      const qpValue = viewToParam[newView] || viewToParam[listView];
-      next.set('view', qpValue);
-      return next;
-    });
-  }, [listsData, setSearchParams]);
+  const onTabClick = useCallback(
+    (e: { itemData?: string }) => {
+      const newView = e.itemData || '';
+      setView(newView);
+      setIndex(listsData.findIndex((d) => d === newView));
+      setSearchParams((prev) => {
+        const next = new URLSearchParams(prev);
+        const qpValue = viewToParam[newView] || viewToParam[listView];
+        next.set('view', qpValue);
+        return next;
+      });
+    },
+    [listsData, setSearchParams]
+  );
 
   const onAddTaskClick = useCallback(() => {
     setFormTaskInitData({ ...newTaskDefaults });
@@ -156,12 +166,10 @@ export const PlanningTaskList = () => {
         doc.save('Tasks.pdf');
       });
     } else {
-      exportGanttToPdf(
-        {
-          component: ganttRef.current?.instance(),
-          createDocumentMethod: (args) => new jsPDF(args),
-        },
-      ).then((doc) => doc.save('gantt.pdf'));
+      exportGanttToPdf({
+        component: ganttRef.current?.instance(),
+        createDocumentMethod: (args) => new jsPDF(args),
+      }).then((doc) => doc.save('gantt.pdf'));
     }
   }, [view]);
 
@@ -175,7 +183,10 @@ export const PlanningTaskList = () => {
       autoFilterEnabled: true,
     }).then(() => {
       workbook.xlsx.writeBuffer().then((buffer) => {
-        saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+        saveAs(
+          new Blob([buffer], { type: 'application/octet-stream' }),
+          'DataGrid.xlsx'
+        );
       });
     });
   }, []);
@@ -194,10 +205,7 @@ export const PlanningTaskList = () => {
         <Item location='before'>
           <span className='toolbar-header'>Tasks</span>
         </Item>
-        <Item
-          location='before'
-          widget='dxTabs'
-        >
+        <Item location='before' widget='dxTabs'>
           <Tabs
             dataSource={listsData}
             width={getTabsWidth()}
@@ -207,11 +215,7 @@ export const PlanningTaskList = () => {
             onItemClick={onTabClick}
           />
         </Item>
-        <Item
-          location='after'
-          widget='dxButton'
-          locateInMenu='auto'
-        >
+        <Item location='after' widget='dxButton' locateInMenu='auto'>
           <Button
             icon='plus'
             text='Add Task'
@@ -256,7 +260,6 @@ export const PlanningTaskList = () => {
           showText='inMenu'
           locateInMenu='auto'
           disabled={isKanban}
-
         >
           <Button
             icon='exportpdf'
@@ -285,19 +288,42 @@ export const PlanningTaskList = () => {
           locateInMenu='auto'
           disabled={view !== listView}
         >
-          <TextBox
-            mode='search'
-            placeholder='Task Search'
-            onInput={search}
-          />
+          <TextBox mode='search' placeholder='Task Search' onInput={search} />
         </Item>
       </Toolbar>
-      {loading && <LoadPanel container='.content' showPane={false} visible position={{ of: '.content' }} />}
-      {!loading && isDataGrid && <TaskListGrid dataSource={gridData} ref={gridRef} />}
-      {!loading && isKanban && <TaskListKanban dataSource={filteredData} ref={kanbanRef} changePopupVisibility={() => changePopupVisibility(!popupVisible)} />}
-      {!loading && view === ganttView && <TaskListGantt dataSource={filteredData} ref={ganttRef} />}
-      <FormPopup title='New Task' visible={popupVisible} setVisible={changePopupVisibility} onSave={onSaveClick}>
-        <TaskFormDetails subjectField data={formTaskInitData} editing onDataChanged={onDataChanged} />
+      {loading && (
+        <LoadPanel
+          container='.content'
+          showPane={false}
+          visible
+          position={{ of: '.content' }}
+        />
+      )}
+      {!loading && isDataGrid && (
+        <TaskListGrid dataSource={gridData} ref={gridRef} />
+      )}
+      {!loading && isKanban && (
+        <TaskListKanban
+          dataSource={filteredData}
+          ref={kanbanRef}
+          changePopupVisibility={() => changePopupVisibility(!popupVisible)}
+        />
+      )}
+      {!loading && view === ganttView && (
+        <TaskListGantt dataSource={filteredData} ref={ganttRef} />
+      )}
+      <FormPopup
+        title='New Task'
+        visible={popupVisible}
+        setVisible={changePopupVisibility}
+        onSave={onSaveClick}
+      >
+        <TaskFormDetails
+          subjectField
+          data={formTaskInitData}
+          editing
+          onDataChanged={onDataChanged}
+        />
       </FormPopup>
     </div>
   );

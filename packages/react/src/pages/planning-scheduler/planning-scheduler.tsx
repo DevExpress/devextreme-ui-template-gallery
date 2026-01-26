@@ -5,7 +5,10 @@ import { defaultCalendarListItems } from 'dx-template-gallery-data';
 
 import Button from 'devextreme-react/button';
 import Calendar from 'devextreme-react/calendar';
-import Scheduler, { Resource, SchedulerTypes } from 'devextreme-react/scheduler';
+import Scheduler, {
+  Resource,
+  SchedulerTypes,
+} from 'devextreme-react/scheduler';
 import SpeedDialAction from 'devextreme-react/speed-dial-action';
 import Tooltip from 'devextreme-react/tooltip';
 
@@ -21,10 +24,10 @@ import { TooltipContentTemplate } from '../../components/library/scheduler-toolt
 
 const views: SchedulerTypes.ViewType[] = ['day', 'workWeek', 'month', 'agenda'];
 interface CalendarListItem {
-  id: number,
-  text: string,
-  color: string,
-  checkboxColor: string,
+  id: number;
+  text: string;
+  color: string;
+  checkboxColor: string;
 }
 
 const onAppointmentFormOpening = (e) => {
@@ -64,95 +67,97 @@ export const PlanningScheduler = () => {
   } = useSchedulerLogic();
 
   const resourcesList = useMemo(() => {
-    return calendarListItems
-      .reduce((res: CalendarListItem[], calendarList) => { return res.concat(calendarList.items); }, []);
+    return calendarListItems.reduce((res: CalendarListItem[], calendarList) => {
+      return res.concat(calendarList.items);
+    }, []);
   }, [calendarListItems]);
 
-  return <div className='view-wrapper-calendar'>
-    <div className='calendar-content'>
-      <LeftSidePanel>
-        <div className={isXSmall || isSmall ? 'left-content small' : 'left-content'}>
-          <div className='buttons'>
-            <Button
-              text='Today'
-              onClick={onSelectedDateChange}
-            />
-            <Button
-              text='Create event'
-              type='default'
-              onClick={showAppointmentCreationForm}
+  return (
+    <div className='view-wrapper-calendar'>
+      <div className='calendar-content'>
+        <LeftSidePanel>
+          <div
+            className={
+              isXSmall || isSmall ? 'left-content small' : 'left-content'
+            }
+          >
+            <div className='buttons'>
+              <Button text='Today' onClick={onSelectedDateChange} />
+              <Button
+                text='Create event'
+                type='default'
+                onClick={showAppointmentCreationForm}
+              />
+            </div>
+            <div className='calendar'>
+              <Calendar value={date} onValueChange={onSelectedDateChange} />
+            </div>
+            <CalendarList
+              calendarItems={calendarListItems}
+              onSelectedCalendarsChange={onSelectedCalendarsChange}
             />
           </div>
-          <div className='calendar'>
-            <Calendar
-              value={date}
-              onValueChange={onSelectedDateChange}
+        </LeftSidePanel>
+        <div className='main-content'>
+          <Scheduler
+            ref={schedulerRef}
+            adaptivityEnabled={isXSmall}
+            allDayPanelMode='allDay'
+            defaultCurrentView='workWeek'
+            dataSource={tasks}
+            height='inherit'
+            currentDate={schedulerCurrentDate}
+            currentView={currentView}
+            onCurrentViewChange={onCurrentViewChange}
+            onAppointmentAdded={onAppointmentModified}
+            onAppointmentClick={onAppointmentClick}
+            onAppointmentDeleted={onAppointmentModified}
+            onAppointmentFormOpening={onAppointmentFormOpening}
+            onAppointmentTooltipShowing={onAppointmentTooltipShowing}
+            onCellClick={onCellClick}
+            showCurrentTimeIndicator={false}
+            startDayHour={4}
+            views={views}
+          >
+            <Resource
+              dataSource={resourcesList}
+              fieldExpr='calendarId'
+              label='Calendar'
             />
-          </div>
-          <CalendarList
-            calendarItems={calendarListItems}
-            onSelectedCalendarsChange={onSelectedCalendarsChange}
+          </Scheduler>
+          <SpeedDialAction
+            icon='add'
+            visible={isXSmall}
+            onClick={showAppointmentCreationForm}
           />
-        </div>
-      </LeftSidePanel>
-      <div className='main-content'>
-        <Scheduler
-          ref={schedulerRef}
-          adaptivityEnabled={isXSmall}
-          allDayPanelMode='allDay'
-          defaultCurrentView='workWeek'
-          dataSource={tasks}
-          height='inherit'
-          currentDate={schedulerCurrentDate}
-          currentView={currentView}
-          onCurrentViewChange={onCurrentViewChange}
-          onAppointmentAdded={onAppointmentModified}
-          onAppointmentClick={onAppointmentClick}
-          onAppointmentDeleted={onAppointmentModified}
-          onAppointmentFormOpening={onAppointmentFormOpening}
-          onAppointmentTooltipShowing={onAppointmentTooltipShowing}
-          onCellClick={onCellClick}
-          showCurrentTimeIndicator={false}
-          startDayHour={4}
-          views={views}
-        >
-          <Resource
-            dataSource={resourcesList}
-            fieldExpr='calendarId'
-            label='Calendar'
-          />
-        </Scheduler>
-        <SpeedDialAction
-          icon='add'
-          visible={isXSmall}
-          onClick={showAppointmentCreationForm}
-        />
 
-        <Tooltip
-          ref={tooltipRef}
-          target={selectedAppointment?.target}
-          showEvent='click'
-          position={tooltipPosition}
-        >
-          <TooltipContentTemplate
-            deleteCurrentAppointment={deleteCurrentAppointment}
-            editCurrentAppointment={editCurrentAppointment}
-            selectedAppointmentData={selectedAppointment?.data} />
-        </Tooltip>
-      </div>
-      <RightSidePanel
-        showOpenButton={currentView === 'month'}
-        isOpened={rightPanelOpen}
-        toggleOpen={toggleRightPanelOpen}
-      >
-        <Agenda
-          selectedAppointmentData={selectedAppointment?.data}
+          <Tooltip
+            ref={tooltipRef}
+            target={selectedAppointment?.target}
+            showEvent='click'
+            position={tooltipPosition}
+          >
+            <TooltipContentTemplate
+              deleteCurrentAppointment={deleteCurrentAppointment}
+              editCurrentAppointment={editCurrentAppointment}
+              selectedAppointmentData={selectedAppointment?.data}
+            />
+          </Tooltip>
+        </div>
+        <RightSidePanel
+          showOpenButton={currentView === 'month'}
+          isOpened={rightPanelOpen}
           toggleOpen={toggleRightPanelOpen}
-          items={agendaItems}
-          resources={resourcesList}
-          showAppointmentTooltip={showAppointmentTooltip}
-        />
-      </RightSidePanel>
+        >
+          <Agenda
+            selectedAppointmentData={selectedAppointment?.data}
+            toggleOpen={toggleRightPanelOpen}
+            items={agendaItems}
+            resources={resourcesList}
+            showAppointmentTooltip={showAppointmentTooltip}
+          />
+        </RightSidePanel>
+      </div>
     </div>
-  </div>;
+  );
 };

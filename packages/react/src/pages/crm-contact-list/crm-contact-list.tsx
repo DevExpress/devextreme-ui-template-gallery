@@ -7,21 +7,36 @@ import './crm-contact-list.scss';
 
 import { getContacts } from 'dx-template-gallery-data';
 import {
-  DataGrid, DataGridRef,
-  Sorting, Selection, HeaderFilter, Scrolling, SearchPanel,
-  ColumnChooser, Export, Column, Toolbar, Item, LoadPanel,
-  DataGridTypes
+  DataGrid,
+  DataGridRef,
+  Sorting,
+  Selection,
+  HeaderFilter,
+  Scrolling,
+  SearchPanel,
+  ColumnChooser,
+  Export,
+  Column,
+  Toolbar,
+  Item,
+  LoadPanel,
+  DataGridTypes,
 } from 'devextreme-react/data-grid';
 
 import SelectBox from 'devextreme-react/select-box';
 import TextBox from 'devextreme-react/text-box';
 import Button from 'devextreme-react/button';
-import DropDownButton, { DropDownButtonTypes } from 'devextreme-react/drop-down-button';
+import DropDownButton, {
+  DropDownButtonTypes,
+} from 'devextreme-react/drop-down-button';
 
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { exportDataGrid as exportDataGridToXLSX } from 'devextreme/excel_exporter';
 
-import { ContactStatus as ContactStatusType, Contact } from '../../types/crm-contact';
+import {
+  ContactStatus as ContactStatusType,
+  Contact,
+} from '../../types/crm-contact';
 
 import { FormPopup, ContactNewForm, ContactPanel } from '../../components';
 import { ContactStatus } from '../../components';
@@ -42,12 +57,16 @@ const cellNameRender = (cell: DataGridTypes.ColumnCellTemplateData) => (
 );
 
 const editCellStatusRender = () => (
-  <SelectBox className='cell-info' dataSource={CONTACT_STATUS_LIST} itemRender={ContactStatus} fieldRender={fieldRender} />
+  <SelectBox
+    className='cell-info'
+    dataSource={CONTACT_STATUS_LIST}
+    itemRender={ContactStatus}
+    fieldRender={fieldRender}
+  />
 );
 
-const cellPhoneRender = (cell: DataGridTypes.ColumnCellTemplateData) => (
-  String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
-);
+const cellPhoneRender = (cell: DataGridTypes.ColumnCellTemplateData) =>
+  String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
 
 const fieldRender = (text: string) => (
   <>
@@ -75,7 +94,10 @@ const onExporting = (e: DataGridTypes.ExportingEvent) => {
       autoFilterEnabled: true,
     }).then(() => {
       workbook.xlsx.writeBuffer().then((buffer) => {
-        saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Contacts.xlsx');
+        saveAs(
+          new Blob([buffer], { type: 'application/octet-stream' }),
+          'Contacts.xlsx'
+        );
       });
     });
     e.cancel = true;
@@ -86,7 +108,8 @@ const dropDownOptions = { width: 'auto' };
 const exportFormats = ['xlsx', 'pdf'];
 
 export const CRMContactList = () => {
-  const [gridDataSource, setGridDataSource] = useState<DataSource<Contact[], string>>();
+  const [gridDataSource, setGridDataSource] =
+    useState<DataSource<Contact[], string>>();
   const [isPanelOpened, setPanelOpened] = useState(false);
   const [contactId, setContactId] = useState<number>(0);
   const [popupVisible, setPopupVisible] = useState(false);
@@ -96,10 +119,12 @@ export const CRMContactList = () => {
   let newContactData: Contact;
 
   useEffect(() => {
-    setGridDataSource(new DataSource({
-      key: 'id',
-      load: () => getContacts(),
-    }));
+    setGridDataSource(
+      new DataSource({
+        key: 'id',
+        load: () => getContacts(),
+      })
+    );
   }, []);
 
   const changePopupVisibility = useCallback((isVisble) => {
@@ -126,16 +151,19 @@ export const CRMContactList = () => {
 
   const [status, setStatus] = useState(filterStatusList[0]);
 
-  const filterByStatus = useCallback((e: DropDownButtonTypes.SelectionChangedEvent) => {
-    const { item: status }: { item: FilterContactStatus } = e;
-    if (status === 'All') {
-      gridRef.current?.instance().clearFilter();
-    } else {
-      gridRef.current?.instance().filter(['status', '=', status]);
-    }
+  const filterByStatus = useCallback(
+    (e: DropDownButtonTypes.SelectionChangedEvent) => {
+      const { item: status }: { item: FilterContactStatus } = e;
+      if (status === 'All') {
+        gridRef.current?.instance().clearFilter();
+      } else {
+        gridRef.current?.instance().filter(['status', '=', status]);
+      }
 
-    setStatus(status);
-  }, []);
+      setStatus(status);
+    },
+    []
+  );
 
   const refresh = useCallback(() => {
     gridRef.current?.instance().refresh();
@@ -146,11 +174,12 @@ export const CRMContactList = () => {
   }, []);
 
   const onSaveClick = useCallback(() => {
-    notify({
-      message: `New contact "${newContactData.firstName} ${newContactData.lastName}" saved`,
-      position: { at: 'bottom center', my: 'bottom center' }
-    },
-    'success'
+    notify(
+      {
+        message: `New contact "${newContactData.firstName} ${newContactData.lastName}" saved`,
+        position: { at: 'bottom center', my: 'bottom center' },
+      },
+      'success'
     );
 
     setFormDataDefaults({ ...formDataDefaults });
@@ -253,7 +282,11 @@ export const CRMContactList = () => {
             cellRender={ContactStatus}
             editCellRender={editCellStatusRender}
           />
-          <Column dataField='assignedTo' caption='Assigned to' hidingPriority={4} />
+          <Column
+            dataField='assignedTo'
+            caption='Assigned to'
+            hidingPriority={4}
+          />
           <Column
             dataField='phone'
             caption='Phone'
@@ -262,9 +295,22 @@ export const CRMContactList = () => {
           />
           <Column dataField='email' caption='Email' hidingPriority={1} />
         </DataGrid>
-        <ContactPanel contactId={contactId} isOpened={isPanelOpened} changePanelOpened={changePanelOpened} changePanelPinned={changePanelPinned} />
-        <FormPopup title='New Contact' visible={popupVisible} setVisible={changePopupVisibility} onSave={onSaveClick}>
-          <ContactNewForm initData={ formDataDefaults } onDataChanged={onDataChanged} />
+        <ContactPanel
+          contactId={contactId}
+          isOpened={isPanelOpened}
+          changePanelOpened={changePanelOpened}
+          changePanelPinned={changePanelPinned}
+        />
+        <FormPopup
+          title='New Contact'
+          visible={popupVisible}
+          setVisible={changePopupVisibility}
+          onSave={onSaveClick}
+        >
+          <ContactNewForm
+            initData={formDataDefaults}
+            onDataChanged={onDataChanged}
+          />
         </FormPopup>
       </div>
     </div>

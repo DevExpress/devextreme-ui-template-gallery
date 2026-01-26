@@ -18,7 +18,7 @@
       :form-data="data"
       class="plain-styled-form dx-form"
       :class="{ 'view-mode': !isEditing }"
-      :screen-by-width="getSizeQualifier"
+      :screen-by-width="getSizeQualifier as any"
       v-if="!!props.data"
     >
       <dx-form-item
@@ -58,7 +58,7 @@
           <dx-select-box
             label="Priority"
             v-model="data.priority"
-            :items="taskPriorityList"
+            :items="[...taskPriorityList]"
             :read-only="!isEditing"
             field-template="field"
             item-template="item"
@@ -86,7 +86,7 @@
           <dx-select-box
             label="Status"
             v-model="data.status"
-            :items="taskStatusList"
+            :items="[...taskStatusList]"
             :read-only="!isEditing"
             field-template="field"
             item-template="item"
@@ -184,7 +184,7 @@ watch(
 watch(
   data,
   (newValue) => {
-    newData = { ...newValue };
+    newData = { ...newValue } as any;
   },
 );
 

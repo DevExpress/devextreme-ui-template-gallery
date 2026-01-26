@@ -68,44 +68,23 @@ export const authInfo: AuthInfo = {
   },
 
   async resetPassword(email: string) {
-    try {
-      // Send request
-      return {
-        isOk: true,
-      };
-    } catch {
-      return {
-        isOk: false,
-        message: 'Failed to reset password',
-      };
-    }
+    // Send request
+    return {
+      isOk: true,
+    };
   },
 
   async changePassword(email: string, recoveryCode: string) {
-    try {
-      // Send request
-      return {
-        isOk: true,
-      };
-    } catch {
-      return {
-        isOk: false,
-        message: 'Failed to change password',
-      };
-    }
+    // Send request
+    return {
+      isOk: true,
+    };
   },
 
   async createAccount(email: string, password: string) {
-    try {
-      // Send request
-      return {
-        isOk: true,
-      };
-    } catch {
-      return {
-        isOk: false,
-        message: 'Failed to create account',
-      };
-    }
+    // Send request
+    return {
+      isOk: true,
+    };
   },
 };

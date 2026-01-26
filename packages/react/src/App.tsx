@@ -17,11 +17,9 @@ import { useThemeContext, ThemeContext } from './theme/theme';
 
 function RootApp() {
   const { user, loading } = useAuth();
-  const isLoginForm = [
-    'sign-in',
-    'reset-password',
-    'register',
-  ].includes(useLocation().pathname.substring(1));
+  const isLoginForm = ['sign-in', 'reset-password', 'register'].includes(
+    useLocation().pathname.substring(1)
+  );
 
   if (loading) {
     return <LoadPanel visible />;
@@ -44,9 +42,7 @@ export const App = () => {
         <AuthProvider>
           <NavigationProvider>
             <div className={`app ${screenSizeClass} ${themeContext.theme}`}>
-              {
-                themeContext.isLoaded ? <RootApp /> : ''
-              }
+              {themeContext.isLoaded ? <RootApp /> : ''}
             </div>
           </NavigationProvider>
         </AuthProvider>

@@ -30,10 +30,8 @@ withDefaults(defineProps<{
 
 const emit = defineEmits(['clickAppointment']);
 
-function handleItemClick(
-  { itemData, element }: {itemData: Record<string, unknown>, element: HTMLElement},
-) {
-  emit('clickAppointment', { itemData, element });
+function handleItemClick(e: any) {
+  emit('clickAppointment', { itemData: e.itemData, element: e.element });
 }
 </script>
 

@@ -86,7 +86,7 @@ const props = withDefaults(defineProps<{
 });
 
 const isLoading = ref(true);
-const items = ref<Note[]>(props.items);
+const items = ref<Note[]>(props.items || []);
 
 const nodeText = ref<string>('');
 
@@ -121,7 +121,7 @@ async function loadData() {
   }
 
   isLoading.value = true;
-  items.value = await getContactNotes(props.contactId);
+  items.value = await getContactNotes(props.contactId) as any;
   isLoading.value = false;
 }
 

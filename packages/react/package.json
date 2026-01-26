@@ -2,6 +2,7 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "homepage": "./",
   "dependencies": {
     "classnames": "^2.3.1",
@@ -43,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
@@ -54,13 +56,14 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
-    "@vitejs/plugin-react": "^4.5.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "devextreme-cli": "1.9.0",
     "devextreme-themebuilder": "25.2.3",
     "eslint": "^9.23.0",
     "eslint-import-resolver-typescript": "^4.2.4",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-perf": "^3.3.3",
     "rollup-plugin-polyfill-node": "^0.13.0",
     "sass-embedded": "^1.86.0",
     "typescript": "~5.2.0",

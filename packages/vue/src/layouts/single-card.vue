@@ -21,13 +21,13 @@ import { ref, watch } from 'vue';
 
 const route = useRoute();
 
-const title = ref(route.meta.title);
+const title = ref<string>(route.meta.title as string || '');
 const description = ref<string>(route.meta.description as string);
 
 watch(
   () => route.path,
   () => {
-    title.value = route.meta.title;
+    title.value = route.meta.title as string || '';
     description.value = route.meta.description as string;
   },
 );
