@@ -116,7 +116,7 @@ async function loadData() {
   contactId = queryId || DEFAULT_CONTACT_ID;
   const data = await getContact(contactId);
 
-  contactData.value = data as any;
+  contactData.value = data;
   contactName.value = data.name;
   isLoading.value = false;
 }

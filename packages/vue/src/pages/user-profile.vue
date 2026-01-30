@@ -264,9 +264,9 @@ watch(profileData, (value) => {
 });
 
 Promise.all([getProfile(22), getSupervisors()]).then(([profile, supervisors]) => {
-  profileData.value = profile as any;
+  profileData.value = profile;
   supervisorsList.value = supervisors;
-  savedData = { ...profile } as any;
+  savedData = { ...profile };
   isLoading.value = false;
 });
 
@@ -292,7 +292,7 @@ function cancel() {
   profileData.value = { ...savedData } as Profile;
 }
 
-function copyToClipboard(text: string, e: any) {
+function copyToClipboard(text, e) {
   window.navigator.clipboard?.writeText(text);
   const tipText = 'Text copied';
   notify(

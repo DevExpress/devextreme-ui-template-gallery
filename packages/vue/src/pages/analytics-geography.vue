@@ -9,12 +9,12 @@
       </toolbar-analytics>
 
       <div class="cards wide">
-        <sales-map-card :data="(salesByStateMarkers as any) || []" />
+        <sales-map-card :data="salesByStateMarkers || []" />
       </div>
 
       <div class="cards">
         <revenue-analysis-card :data="salesByStateAndCity || []" />
-        <revenue-snapshot-card :data="(salesByState as any) || []" />
+        <revenue-snapshot-card :data="salesByState || []" />
       </div>
     </div>
   </dx-scroll-view>
@@ -45,7 +45,7 @@ const salesByStateMarkers = ref<Record<string, unknown> | null>(null);
 
 const loading = ref<boolean>(true);
 
-const createMapCoords = (coords: any) => String(coords).split(', ').map((coord) => parseFloat(coord));
+const createMapCoords = (coords) => String(coords).split(', ').map((coord) => parseFloat(coord));
 
 const getSalesByStateMarkers = () => ({
   type: 'StateCollection',

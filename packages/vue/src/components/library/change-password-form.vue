@@ -94,7 +94,7 @@ async function onSubmit() {
   }
 }
 
-function confirmPassword(e: any) {
+function confirmPassword(e: {value: ''}) {
   return e.value === formData.password;
 }</script>
 

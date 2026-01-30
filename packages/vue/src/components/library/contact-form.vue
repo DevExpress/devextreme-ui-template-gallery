@@ -122,7 +122,7 @@
               :is-editing="isEditing"
               v-bind="formEditorProps"
             >
-              <dx-validator :validation-rules="[zipCodeValidator as any]" />
+              <dx-validator :validation-rules="[zipCodeValidator]" />
             </dx-number-box>
           </dx-form-item>
         </dx-form-group-item>
@@ -228,8 +228,7 @@ function startEdit() {
   isEditing.value = true;
 }
 
-function handleSaveClick(e: any) {
-  const { validationGroup } = e;
+function handleSaveClick({ validationGroup }) {
   if (validationGroup.validate().isValid) {
     isEditing.value = false;
   }

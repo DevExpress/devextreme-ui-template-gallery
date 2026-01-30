@@ -78,7 +78,7 @@ const filteredTasks = computed(
   () => tasksRef.value.filter((item) => !!item.status && !!item.priority),
 );
 
-const onReorder = (e: any) => {
+const onReorder = (e) => {
   const visibleRows = e.component.getVisibleRows();
   const toIndex = tasksRef.value.indexOf(visibleRows[e.toIndex].data);
   const fromIndex = tasksRef.value.indexOf(e.itemData);

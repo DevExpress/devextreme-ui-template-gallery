@@ -139,7 +139,7 @@ const onSubmit = async () => {
   }
 };
 
-function confirmPassword(e: any) {
+function confirmPassword(e) {
   return e.value === formData.password;
 }</script>
 

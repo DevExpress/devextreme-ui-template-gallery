@@ -6,8 +6,8 @@
     @value-changed="emitChangedValue"
     :items="items"
     :read-only="readOnly"
-    :styling-mode="stylingMode as any"
-    :label-mode="labelMode as any"
+    :styling-mode="stylingMode"
+    :label-mode="labelMode"
     width="100%"
     field-template="field"
   >
@@ -40,6 +40,7 @@
 import { DxSelectBox } from 'devextreme-vue/select-box';
 import { DxTextBox } from 'devextreme-vue/text-box';
 import ContactStatus from '@/components/utils/contact-status.vue';
+import { SimpleObject } from '@/types';
 
 withDefaults(defineProps<{
   modelValue: string,
@@ -60,7 +61,7 @@ withDefaults(defineProps<{
 
 const emit = defineEmits(['update:modelValue']);
 
-function emitChangedValue(changedData: any) {
+function emitChangedValue(changedData: SimpleObject) {
   emit('update:modelValue', changedData.value);
 }
 </script>

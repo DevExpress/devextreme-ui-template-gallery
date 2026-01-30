@@ -10,21 +10,21 @@
         :form-data="props.cardData"
         :show-colon-after-label="true"
         :col-count="screenInfo.isXSmall ? 2 : colCount"
-        :screen-by-width="getSizeQualifier as any"
+        :screen-by-width="getSizeQualifier"
         label-location="top"
         label-mode="outside"
-        :on-field-data-changed="evt => onFieldChange(evt.dataField as any, evt.value)"
+        :on-field-data-changed="evt => onFieldChange(evt.dataField, evt.value)"
       >
         <dx-item
           v-for="item in computedItems"
           v-memo="[computedItems]"
-          :key="item.dataField as string"
-          :data-field="item.dataField as string"
-          :editor-type="item.editorType as any"
+          :key="item.dataField"
+          :data-field="item.dataField"
+          :editor-type="item.editorType"
           :editor-options="{
             stylingMode: 'filled',
             valueChangeEvent: 'input',
-            ...(item.editorOptions as any || {}),
+            ...item.editorOptions,
           }"
           :col-span="item.colSpan as number"
         >
@@ -35,23 +35,23 @@
           <dx-validation-rule
             v-for="rule in item.validators"
             :key="rule"
-            :type="(rule as any).type"
+            :type="rule.type"
           />
           <status-select-box
             v-if="item.dataField === 'status'"
             class-list=""
-            :items="(item.itemsList as unknown[]) || []"
-            :model-value="(cardData as any)[item.dataField as any]"
+            :items="item.itemsList || []"
+            :model-value="cardData[item.dataField]"
             styling-mode="filled"
             label-mode="hidden"
-            @update:model-value="onFieldChange(item.dataField as any, $event)"
+            @update:model-value="onFieldChange(item.dataField, $event)"
           />
           <pictured-item-select-box
             v-else-if="item.dataField === 'supervisor'"
-            :label="(item.label as string) || ''"
-            :model-value="(cardData as any)[item.dataField as any]"
-            :items="(item.itemsList as any[]) || []"
-            @update:model-value="onFieldChange(item.dataField as any, $event)"
+            :label="item.label || ''"
+            :model-value="cardData[item.dataField]"
+            :items="item.itemsList"
+            @update:model-value="onFieldChange(item.dataField, $event)"
           />
         </dx-item>
       </dx-form>

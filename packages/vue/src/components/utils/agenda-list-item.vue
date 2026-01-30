@@ -13,7 +13,7 @@
         {{ appointment.text }}
       </div>
       <div class="description-resource">
-        {{ resources[(appointment.calendarId as any) || '']?.text }}
+        {{ resources[appointment.calendarId || '']?.text }}
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@ import { Duration } from 'luxon';
 
 const props = withDefaults(defineProps<{
   appointment: {startDate: Date, endDate?: Date, text?: string, calendarId?: string},
-  resources: Record<string, any>,
+  resources: Record<string, unknown>[],
 }>(), {
   items: () => ({}),
   resources: () => ({}),

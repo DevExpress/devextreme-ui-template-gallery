@@ -51,7 +51,7 @@ withDefaults(defineProps<{
 
 const userMenuSectionRef = ref<InstanceType<typeof UserMenuSection>>();
 
-function handleDropDownButtonContentReady(e: any) {
+function handleDropDownButtonContentReady(e) {
   e.component.registerKeyHandler('downArrow', () => {
     userMenuSectionRef.value?.focusList();
   });

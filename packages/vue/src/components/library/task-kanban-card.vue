@@ -46,8 +46,8 @@ const props = withDefaults(defineProps<{
 
 const getAvatarText = (name: string) => name.split(' ').map((namePart) => namePart[0]).join('');
 
-const notifyByCard = (event: any) => {
-  event.event?.stopPropagation();
+const notifyByCard = (event: {event: Event}) => {
+  event.event.stopPropagation();
   notify(`Edit '${props.task?.text}' card event`);
 };
 

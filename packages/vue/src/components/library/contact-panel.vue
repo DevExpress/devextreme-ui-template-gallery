@@ -292,8 +292,8 @@ const loadContact = async (contactId: number) => {
   isEditing.value = false;
   isLoading.value = true;
   const contactPanelData = await getContact(contactId);
-  panelData.value = contactPanelData as any;
-  contactData = structuredClone(contactPanelData) as any;
+  panelData.value = contactPanelData;
+  contactData = structuredClone(contactPanelData);
   isLoading.value = false;
 };
 

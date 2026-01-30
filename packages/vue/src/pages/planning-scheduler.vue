@@ -18,7 +18,7 @@
             <div class="calendar">
               <dx-calendar
                 :value="currentDate"
-                @value-changed="(e: any) => onCalendarDateChange(e)"
+                @value-changed="onCalendarDateChange"
               />
             </div>
             <calendar-list
@@ -39,12 +39,12 @@
             :current-date="schedulerCurrentDate"
             :start-day-hour="4"
             :show-current-time-indicator="false"
-            @option-changed="(e: any) => onSchedulerOptionChange(e)"
-            @appointment-click="(e: any) => onAppointmentClick(e)"
-            @appointment-added="(e: any) => onAppointmentModified(e)"
-            @appointment-deleted="(e: any) => onAppointmentModified(e)"
-            @appointment-tooltip-showing="(e: any) => onAppointmentTooltipShowing(e)"
-            @appointment-form-opening="(e: any) => onAppointmentFormOpening(e)"
+            @option-changed="onSchedulerOptionChange"
+            @appointment-click="onAppointmentClick"
+            @appointment-added="onAppointmentModified"
+            @appointment-deleted="onAppointmentModified"
+            @appointment-tooltip-showing="onAppointmentTooltipShowing"
+            @appointment-form-opening="onAppointmentFormOpening"
             @cell-click="onCellClick"
           >
             <dx-resource
@@ -146,7 +146,7 @@ const tooltipPosition = computed(() => {
   }
 
   const appointmentTarget = selectedAppointment.value?.target;
-  const classList = (appointmentTarget as unknown as HTMLElement[])?.[0]?.classList
+  const classList = appointmentTarget?.[0]?.classList
     || appointmentTarget?.classList;
 
   return classList?.contains('dx-list') && rightPanelOpen ? 'left' : 'top';
@@ -172,7 +172,7 @@ watchEffect(() => {
   }
 });
 
-getTasksForScheduler().then((data: any) => {
+getTasksForScheduler().then((data) => {
   tasks.value = new DataSource(data);
 });
 
@@ -198,7 +198,7 @@ function updateAgenda(appointmentData?: AppointmentData) {
   agendaItems.value = findAllAppointmentsForDay(appointmentData);
 }
 
-function onCalendarDateChange(e: any) {
+function onCalendarDateChange(e) {
   const value = e.value;
   if (!value) return;
   currentDate.value = value;
@@ -225,14 +225,14 @@ function calendarListChanged(selectedCalendars: {id: string}[]) {
   updateAgenda({ startDate: currentDate.value });
 }
 
-function onAppointmentFormOpening(e: any) {
+function onAppointmentFormOpening(e) {
   const editor = e.form?.getEditor('calendarId');
   if (e.appointmentData?.calendarId === undefined && editor) {
     editor.option('value', 0);
   }
 }
 
-function onAppointmentModified(e: any) {
+function onAppointmentModified(e) {
   if (e.appointmentData?.startDate?.toDateString()
     === selectedAppointment.value?.data.startDate.toDateString()) {
     updateAgenda(e.appointmentData);
@@ -250,14 +250,14 @@ function onCurrentViewChange(view: string) {
   }
 }
 
-function onSchedulerOptionChange(e: any) {
+function onSchedulerOptionChange(e) {
   const { name, value } = e;
   if (name === 'currentView') {
     onCurrentViewChange(value);
   }
 }
 
-function onAppointmentClick(e: any) {
+function onAppointmentClick(e) {
   const { appointmentData, targetElement } = e;
   selectedAppointment.value = { data: appointmentData, target: targetElement };
 
@@ -267,11 +267,11 @@ function onAppointmentClick(e: any) {
   }
 }
 
-function onAppointmentTooltipShowing(e: any) {
+function onAppointmentTooltipShowing(e) {
   e.cancel = true;
 
   const { appointmentData } = e.appointments[0];
-  const isAppointmentCollectorClicked = (evt: any) => evt.targetElement?.[0]?.classList.contains('dx-scheduler-appointment-collector');
+  const isAppointmentCollectorClicked = (evt) => evt.targetElement?.[0]?.classList.contains('dx-scheduler-appointment-collector');
 
   selectedAppointment.value = { data: appointmentData, target: e.targetElement };
 
@@ -312,7 +312,7 @@ function editSelectedAppointment() {
 
 function deleteSelectedAppointment(appointmentData: AppointmentData) {
   if (selectedAppointment.value?.data) {
-    schedulerRef.value?.instance.deleteAppointment(selectedAppointment.value.data as any);
+    schedulerRef.value?.instance.deleteAppointment(selectedAppointment.value.data);
   }
   tooltipRef.value?.instance.hide();
   agendaItems.value = findAllAppointmentsForDay(appointmentData);

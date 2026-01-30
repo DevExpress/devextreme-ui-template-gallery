@@ -121,7 +121,7 @@ async function loadData() {
   }
 
   isLoading.value = true;
-  items.value = await getContactNotes(props.contactId) as any;
+  items.value = await getContactNotes(props.contactId);
   isLoading.value = false;
 }
 

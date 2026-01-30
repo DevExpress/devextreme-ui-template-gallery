@@ -81,7 +81,7 @@ async function loadMessages() {
 
   isMessagesLoading.value = true;
 
-  messages.value = await getContactMessages(props.contactId) as any;
+  messages.value = await getContactMessages(props.contactId);
   isMessagesLoading.value = false;
 }
 

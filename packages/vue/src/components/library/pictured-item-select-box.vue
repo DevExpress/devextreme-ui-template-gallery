@@ -58,7 +58,7 @@ withDefaults(defineProps<{
 
 const emit = defineEmits(['update:modelValue']);
 
-function emitChangedValue(changedData: any) {
+function emitChangedValue(changedData) {
   emit('update:modelValue', changedData.value);
 }
 </script>

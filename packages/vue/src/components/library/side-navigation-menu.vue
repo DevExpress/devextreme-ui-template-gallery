@@ -52,7 +52,7 @@ function forwardClick(...args: unknown[]) {
   emit('click', args);
 }
 
-function handleItemClick(e: any) {
+function handleItemClick(e) {
   if (!e.itemData.path || props.compactMode) {
     return;
   }

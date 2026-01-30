@@ -33,7 +33,7 @@ const props = withDefaults(
   icon?: string,
   mask?: string,
   validationGroup?: string,
-  validators?: Array<any>,
+  validators?: unknown[],
 }>(),
   {
     validators: () => [{ type: 'required' }],

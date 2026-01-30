@@ -32,7 +32,7 @@ import { ref } from 'vue';
 withDefaults(defineProps<{
   showAvatar: boolean,
   menuItems: Array<any>,
-  user: any,
+  user: object,
 }>(), {
   showAvatar: false,
   menuItems: () => [],
@@ -40,7 +40,7 @@ withDefaults(defineProps<{
 });
 
 const userInfoListRef = ref<any>(null);
-const onItemClick = ({ itemData }: any) => itemData.onClick();
+const onItemClick = ({ itemData }) => itemData.onClick();
 
 function focusList() {
   userInfoListRef.value?.instance.focus();

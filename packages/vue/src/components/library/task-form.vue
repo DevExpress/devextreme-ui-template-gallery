@@ -18,7 +18,7 @@
       :form-data="data"
       class="plain-styled-form dx-form"
       :class="{ 'view-mode': !isEditing }"
-      :screen-by-width="getSizeQualifier as any"
+      :screen-by-width="getSizeQualifier"
       v-if="!!props.data"
     >
       <dx-form-item
@@ -184,7 +184,7 @@ watch(
 watch(
   data,
   (newValue) => {
-    newData = { ...newValue } as any;
+    newData = { ...newValue };
   },
 );
 

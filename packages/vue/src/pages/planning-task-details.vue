@@ -130,7 +130,7 @@ async function loadData() {
   taskId = queryId || DEFAULT_TASK_ID;
   const data = await getTask(taskId);
 
-  taskData.value = data as any;
+  taskData.value = data;
   taskName.value = data.text;
   isLoading.value = false;
 }

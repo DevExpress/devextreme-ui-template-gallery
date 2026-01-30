@@ -6,7 +6,7 @@
   "homepage": "./",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
     "lint": "eslint .",

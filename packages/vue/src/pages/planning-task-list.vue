@@ -178,7 +178,7 @@ const exportToPdf = () => {
     grid: tasksGridCmp,
     gantt: tasksGanttCmp,
     kanban: null,
-  } as any)[activeTabId.value]?.value;
+  })[activeTabId.value]?.value;
   if (component && 'exportToPdf' in component) {
     component.exportToPdf();
   }
@@ -193,8 +193,8 @@ const loadFilteredTasksAsync = async () => {
 
   const filteredTasks = await getFilteredTasks();
 
-  kanbanData.value = [...filteredTasks] as any;
-  ganttData.value = filteredTasks as any;
+  kanbanData.value = [...filteredTasks];
+  ganttData.value = filteredTasks;
   isLoading.value = false;
 };
 
@@ -202,7 +202,7 @@ const loadTasksAsync = async () => {
   isLoading.value = true;
   const tasks = await getTasks();
 
-  gridData.value = tasks.filter((item: any) => !!item.status && !!item.priority) as any;
+  gridData.value = tasks.filter((item) => !!item.status && !!item.priority);
   isLoading.value = false;
 };
 

@@ -211,14 +211,14 @@ const toogleUseNavigation = () => {
 
 const addRow = () => dxDataGridCmp.value?.instance.addRow();
 const onPrioritySelectChange = (value: string, cellData: Record<string, unknown>) => {
-  (cellData.setValue as any)(value);
-  (cellData.component as any).refresh();
-  (cellData.component as any).focus();
+  cellData.setValue(value);
+  cellData.component.refresh();
+  cellData.component.focus();
 };
 
 const onStatusSelectChange = (value: string, cellInfo: Record<string, unknown>) => {
-  (cellInfo.setValue as any)(value);
-  (cellInfo.component as any).refresh();
+  cellInfo.setValue(value);
+  cellInfo.component.refresh();
 };
 
 const exportToPdf = () => {

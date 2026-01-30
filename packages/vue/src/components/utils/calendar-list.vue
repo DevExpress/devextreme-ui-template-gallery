@@ -48,7 +48,7 @@ watchEffect(() => {
 
 const emit = defineEmits(['listSelectionChanged']);
 
-function selectionChanged(item: Record<string, unknown>, e: any) {
+function selectionChanged(item, e) {
   const value = e.value;
   selectedItems = value ? [...selectedItems, item] : selectedItems.filter((el) => el !== item);
   emit('listSelectionChanged', selectedItems);
