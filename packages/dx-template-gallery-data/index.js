@@ -1,10 +1,8 @@
 /* eslint-disable spellcheck/spell-checker */
-const axios = require('axios');
-const luxon = require('luxon');
+import axios from 'axios';
+import { DateTime } from 'luxon';
 
 const baseUrl = 'https://js.devexpress.com/Demos/RwaService/api';
-
-const DateTime = luxon.DateTime;
 const promptDescription = `The HtmlEditor component is a client-side WYSIWYG text editor. 
 The editor allows users to format text and integrate media elements into documents. 
 The result can be exported to HTML or Markdown.`;

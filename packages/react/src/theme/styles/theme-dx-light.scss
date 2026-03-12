@@ -1,5 +1,6 @@
+// Scope light theme under the theme class for Vite bundling
 .app-theme-light {
-  content: '';
+  /* stylelint-disable */
+  @import 'devextreme/scss/bundles/dx.fluent.blue.light.scss';
 }
-/* stylelint-disable */
-@import 'devextreme/scss/bundles/dx.fluent.blue.light.scss';
+

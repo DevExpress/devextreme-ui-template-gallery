@@ -2,20 +2,15 @@ import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/th
 import { current as getCurrentDXTheme } from 'devextreme/ui/themes';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+// Static imports for Vite - SCSS files must be imported at build time
+import './styles/theme-dx-dark.scss';
+import './styles/theme-dx-light.scss';
+import './styles/variables-dark.scss';
+import './styles/variables-light.scss';
+
 const themes = ['light', 'dark'] as const;
 const storageKey = 'app-theme';
 const themePrefix = 'app-theme-';
-
-const prefixes = ['./styles/theme-dx-', './styles/variables-'];
-
-const loadStylesImports = async() => {
-  await Promise.all([
-    ...prefixes.flatMap((prefix) => [
-      import(/* webpackChunkName: "app-theme-dark" */ `${prefix}dark.scss`),
-      import(/* webpackChunkName: "app-theme-light" */ `${prefix}light.scss`)
-    ]),
-  ]);
-};
 
 export type Theme = typeof themes[number];
 
@@ -27,23 +22,19 @@ function getCurrentTheme(): Theme {
   return window.localStorage[storageKey] || getNextTheme();
 }
 
-function isThemeStyleSheet(styleSheet, theme: Theme) {
-  const themeMarker = `${themePrefix}${theme}`;
-  // eslint-disable-next-line no-undef
-  if(process.env.NODE_ENV === 'production') {
-    return styleSheet?.href?.includes(`${themeMarker}`);
-  } else {
-    const rules = Array.from<CSSStyleRule>(styleSheet.cssRules);
-    return !!rules.find((rule) => rule?.selectorText?.includes(`.${themeMarker}`));
-  }
+// Initialize theme class on module load (before React renders)
+if (typeof window !== 'undefined') {
+  const initialTheme = getCurrentTheme();
+  document.documentElement.classList.add(`${themePrefix}${initialTheme}`);
 }
 
 function switchThemeStyleSheets(enabledTheme: Theme) {
   const disabledTheme = getNextTheme(enabledTheme);
 
-  Array.from<CSSStyleSheet>(document.styleSheets).forEach((styleSheet) => {
-    styleSheet.disabled = isThemeStyleSheet(styleSheet, disabledTheme);
-  });
+  // With Vite, all CSS is bundled together, so we use class-based theme switching
+  // Remove the disabled theme class and add the enabled theme class
+  document.documentElement.classList.remove(`${themePrefix}${disabledTheme}`);
+  document.documentElement.classList.add(`${themePrefix}${enabledTheme}`);
 }
 
 async function setAppTheme(newTheme?: Theme) {
@@ -64,13 +55,6 @@ function toggleTheme(currentTheme: Theme): Theme {
 
 export function useThemeContext() {
   const [theme, setTheme] = useState(getCurrentTheme());
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    loadStylesImports().then(() => {
-      setIsLoaded(true);
-    });
-  }, []);
 
   const switchTheme = useCallback(() => setTheme((currentTheme: Theme) => toggleTheme(currentTheme)), []);
 
@@ -79,10 +63,10 @@ export function useThemeContext() {
   }, []);
 
   useEffect(() => {
-    isLoaded && setAppTheme(theme);
-  }, [theme, isLoaded]);
+    setAppTheme(theme);
+  }, [theme]);
 
-  return useMemo(()=> ({ theme, switchTheme, isLoaded, isFluent }), [theme, isLoaded, isFluent]);
+  return useMemo(()=> ({ theme, switchTheme, isLoaded: true, isFluent }), [theme, isFluent]);
 }
 
 export const ThemeContext = React.createContext<ReturnType<typeof useThemeContext> | null>(null);
