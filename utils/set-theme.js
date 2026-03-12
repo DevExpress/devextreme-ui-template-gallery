@@ -95,8 +95,8 @@ function setCssThemeVariables(appVariablesPath, {
 
   const newVariablesContent = variablesContentForChange
     .replace(/(material|fluent|generic)/g, baseTheme)
-    .replace(/\(\$size: ["'][^"']+["']\)/, `($size: "${isCompact ? 'compact' : 'default'}")`)
-    .replace(/(colors['"] as \* with\s+)\([^)]+\)/, `$1(${cssColorsSettings})`);
+    .replace(/\(\$size: "[^"]+"\)/, `($size: "${isCompact ? 'compact' : 'default'}")`)
+    .replace(/(colors['"] as \* with )\([^)]+\)/, `$1(${cssColorsSettings})`);
 
   writeFileSync(appVariablesPath, newVariablesContent);
 }
