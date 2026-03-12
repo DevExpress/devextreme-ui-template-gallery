@@ -1,3 +1,4 @@
+/* eslint-disable import/no-default-export */
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -7,7 +8,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // @ts-expect-error - Type conflict from monorepo Vite installations
   plugins: [react()],
   base: './',
   publicDir: 'public',
