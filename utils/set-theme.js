@@ -93,10 +93,14 @@ function setCssThemeVariables(appVariablesPath, {
 
   const cssColorsSettings = isGeneric ? '$color: $theme-mode' : `$color: "${color}", $mode: $theme-mode`;
 
-  const newVariablesContent = variablesContentForChange
+  let newVariablesContent = variablesContentForChange
     .replace(/(material|fluent|generic)/g, baseTheme)
     .replace(/\(\$size: "[^"]+"\)/, `($size: "${isCompact ? 'compact' : 'default'}")`)
     .replace(/(colors['"] as \* with )\([^)]+\)/, `$1(${cssColorsSettings})`);
+
+  if (baseTheme === 'generic') {
+    newVariablesContent = newVariablesContent.replace(/, \$mode: \$theme-mode\)/, ')');
+  }
 
   writeFileSync(appVariablesPath, newVariablesContent);
 }
