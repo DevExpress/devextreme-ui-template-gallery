@@ -1,29 +1,42 @@
-# vue-ts4
+# Vue 3 + TypeScript + Vite
 
-## Project setup
-```
+This template provides a minimal setup to get Vue 3 working in Vite with TypeScript support and some ESLint rules.
+
+## Project Setup
+
+```bash
 npm install
 ```
 
 ### Compiles and hot-reloads for development
-```
-npm run serve
+
+```bash
+npm run dev
 ```
 
-### Compiles and minifies for production
-```
+### Type-check, compile and minify for production
+
+```bash
 npm run build
 ```
 
-### Run your unit tests
-```
-npm run test:unit
+### Preview production build
+
+```bash
+npm run preview
 ```
 
-### Run your end-to-end tests
-```
-npm run test:e2e
+### Lint with ESLint
+
+```bash
+npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Recommended IDE Setup
+
+- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) extension
+
+## Type Support For `.vue` Imports in TS
+
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+

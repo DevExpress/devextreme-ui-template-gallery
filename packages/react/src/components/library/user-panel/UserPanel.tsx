@@ -12,36 +12,40 @@ export const UserPanel = ({ menuMode }: UserPanelProps) => {
   const listRef = useRef<ListRef>(null);
 
   const dropDownButtonAttributes = {
-    class: 'user-button'
+    class: 'user-button',
   };
 
   const buttonDropDownOptions = {
-    width: 'auto'
+    width: 'auto',
   };
 
-  const dropDownButtonContentReady = useCallback(({ component }) => {
-    component.registerKeyHandler('downArrow', () => {
-      listRef.current?.instance().focus();
-    });
-  }, [listRef]);
+  const dropDownButtonContentReady = useCallback(
+    ({ component }) => {
+      component.registerKeyHandler('downArrow', () => {
+        listRef.current?.instance().focus();
+      });
+    },
+    [listRef]
+  );
 
   return (
     <div className='user-panel'>
       {menuMode === 'context' && (
-        <DropDownButton stylingMode='text'
-          icon={user?.avatarUrl} showArrowIcon={false}
+        <DropDownButton
+          stylingMode='text'
+          icon={user?.avatarUrl}
+          showArrowIcon={false}
           elementAttr={dropDownButtonAttributes}
           dropDownOptions={buttonDropDownOptions}
           dropDownContentTemplate='dropDownTemplate'
-          onContentReady={dropDownButtonContentReady}>
+          onContentReady={dropDownButtonContentReady}
+        >
           <Template name='dropDownTemplate'>
             <UserMenuSection listRef={listRef} />
           </Template>
         </DropDownButton>
       )}
-      {menuMode === 'list' && (
-        <UserMenuSection showAvatar />
-      )}
+      {menuMode === 'list' && <UserMenuSection showAvatar />}
     </div>
   );
 };

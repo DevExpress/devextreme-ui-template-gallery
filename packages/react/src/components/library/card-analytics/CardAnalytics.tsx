@@ -10,10 +10,7 @@ type CardProps = {
   menuVisible?: boolean;
 };
 
-const menuItems = [
-  { text: 'Configure' },
-  { text: 'Remove' },
-];
+const menuItems = [{ text: 'Configure' }, { text: 'Remove' }];
 
 export const CardAnalytics = ({
   title,

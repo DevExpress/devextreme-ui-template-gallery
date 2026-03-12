@@ -29,7 +29,7 @@ export const navigation = [
       },
       {
         text: 'Scheduler',
-        path: '/planning-scheduler'
+        path: '/planning-scheduler',
       },
     ],
   },
@@ -68,8 +68,8 @@ export const navigation = [
       {
         text: 'Reset Password Form',
         path: '/reset-password-form',
-      }
-    ]
+      },
+    ],
   },
   {
     text: 'Common',
@@ -79,7 +79,7 @@ export const navigation = [
       {
         text: 'User Profile',
         path: '/user-profile',
-      }
-    ]
+      },
+    ],
   },
 ];

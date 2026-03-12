@@ -1,14 +1,25 @@
-
 import React, { useEffect, useState } from 'react';
 
-import Form, { Item as FormItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
+import Form, {
+  Item as FormItem,
+  GroupItem,
+  ColCountByScreen,
+} from 'devextreme-react/form';
 import { Contact } from '../../../types/crm-contact';
 import { FormTextbox, FormPhotoUploader } from '../..';
 import { EmailRule } from 'devextreme-react/validator';
 import { getSizeQualifier } from '../../../utils/media-query';
 
-export const ContactNewForm = ({ initData, onDataChanged }: { initData: Contact, onDataChanged: (data) => void }) => {
-  const [newContactData, setNewContactData] = useState<Contact>({ ...initData });
+export const ContactNewForm = ({
+  initData,
+  onDataChanged,
+}: {
+  initData: Contact;
+  onDataChanged: (data) => void;
+}) => {
+  const [newContactData, setNewContactData] = useState<Contact>({
+    ...initData,
+  });
 
   useEffect(() => {
     setNewContactData({ ...initData });
@@ -22,10 +33,7 @@ export const ContactNewForm = ({ initData, onDataChanged }: { initData: Contact,
   };
 
   return (
-    <Form
-      className='plain-styled-form'
-      screenByWidth={getSizeQualifier}
-    >
+    <Form className='plain-styled-form' screenByWidth={getSizeQualifier}>
       <GroupItem>
         <ColCountByScreen xs={1} sm={1} md={1} lg={1} />
         <FormItem>

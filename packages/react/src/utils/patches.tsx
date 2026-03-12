@@ -12,5 +12,8 @@ export function useMenuPatch() {
     setTimeout(() => setEnabled(false));
   }, [enabled]);
 
-  return [enabled ? 'pre-init-blink-fix' : '', onMenuReady] as [string, () => void];
+  return [enabled ? 'pre-init-blink-fix' : '', onMenuReady] as [
+    string,
+    () => void
+  ];
 }

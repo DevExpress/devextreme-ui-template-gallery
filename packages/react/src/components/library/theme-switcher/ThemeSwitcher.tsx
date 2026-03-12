@@ -9,11 +9,14 @@ export const ThemeSwitcher = () => {
     themeContext?.switchTheme();
   }, []);
 
-  return <div>
-    <Button
-      className='theme-button'
-      stylingMode='text'
-      icon={`${themeContext?.theme !== 'dark' ? 'moon' : 'sun'}`}
-      onClick={onButtonClick} />
-  </div>;
+  return (
+    <div>
+      <Button
+        className='theme-button'
+        stylingMode='text'
+        icon={`${themeContext?.theme !== 'dark' ? 'moon' : 'sun'}`}
+        onClick={onButtonClick}
+      />
+    </div>
+  );
 };

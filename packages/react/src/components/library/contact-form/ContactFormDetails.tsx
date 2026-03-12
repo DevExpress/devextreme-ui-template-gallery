@@ -2,7 +2,11 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import From, { Item as ItemForm, GroupItem, ColCountByScreen } from 'devextreme-react/form';
+import From, {
+  Item as ItemForm,
+  GroupItem,
+  ColCountByScreen,
+} from 'devextreme-react/form';
 import SelectBox from 'devextreme-react/select-box';
 import Button from 'devextreme-react/button';
 import TextBox from 'devextreme-react/text-box';
@@ -33,13 +37,22 @@ const statusRender = (text: string) => (
 
 const statusItemRender = (text: string) => <ContactStatus text={text} />;
 
-export const ContactFromDetails = ({ data, editing, updateField }: {
-  data: Contact, editing: boolean, updateField: (field: string | number) => (value: string | number) => void
+export const ContactFromDetails = ({
+  data,
+  editing,
+  updateField,
+}: {
+  data: Contact;
+  editing: boolean;
+  updateField: (field: string | number) => (value: string | number) => void;
 }) => {
   const stylingMode = 'filled';
   return (
     <From
-      className={classNames({ 'plain-styled-form': true, 'view-mode': !editing })}
+      className={classNames({
+        'plain-styled-form': true,
+        'view-mode': !editing,
+      })}
       labelMode='floating'
     >
       <GroupItem colCount={2}>
@@ -154,10 +167,7 @@ export const ContactFromDetails = ({ data, editing, updateField }: {
             onValueChange={updateField('zipCode')}
           >
             <Validator>
-              <PatternRule
-                pattern={/^\d{5}$/}
-                message='Zip is invalid'
-              />
+              <PatternRule pattern={/^\d{5}$/} message='Zip is invalid' />
             </Validator>
           </NumberBox>
         </ItemForm>

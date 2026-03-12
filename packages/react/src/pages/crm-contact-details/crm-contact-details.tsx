@@ -5,10 +5,7 @@ import { Item, Toolbar } from 'devextreme-react/toolbar';
 import Button from 'devextreme-react/button';
 import DropDownButton from 'devextreme-react/drop-down-button';
 
-import {
-  ContactCards,
-  ContactForm,
-} from '../../components';
+import { ContactCards, ContactForm } from '../../components';
 
 import { Contact } from '../../types/crm-contact';
 
@@ -43,27 +40,26 @@ export const CRMContactDetails = () => {
 
   const loadData = useCallback(() => {
     Promise.all([
-      getContact(contactId)
-        .then((data) => {
-          setData(data);
-        }),
-      getContactNotes(contactId)
-        .then((data) => {
-          setNotes(data);
-        }),
-      getContactMessages(contactId)
-        .then((data) => {
-          setMessages(data);
-        }),
-      getActiveContactOpportunities(contactId)
-        .then((data) => {
-          setActiveOpportunities(data);
-        }),
-      getClosedContactOpportunities(contactId)
-        .then((data) => {
-          setClosedOpportunities(data);
-        }),
-    ]).then(() => { setIsLoading(false); }).catch((error) => console.log(error));
+      getContact(contactId).then((data) => {
+        setData(data);
+      }),
+      getContactNotes(contactId).then((data) => {
+        setNotes(data);
+      }),
+      getContactMessages(contactId).then((data) => {
+        setMessages(data);
+      }),
+      getActiveContactOpportunities(contactId).then((data) => {
+        setActiveOpportunities(data);
+      }),
+      getClosedContactOpportunities(contactId).then((data) => {
+        setClosedOpportunities(data);
+      }),
+    ])
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
   }, [contactId]);
 
   const refresh = useCallback(() => {
@@ -82,13 +78,9 @@ export const CRMContactDetails = () => {
               onClick={() => navigate(-1)}
             />
           </Item>
-          <Item location='before' text={ data?.name ?? 'Loading...' } />
+          <Item location='before' text={data?.name ?? 'Loading...'} />
           <Item location='after' locateInMenu='auto'>
-            <Button
-              text='Terminate'
-              type='default'
-              stylingMode='contained'
-            />
+            <Button text='Terminate' type='default' stylingMode='contained' />
           </Item>
           <Item location='after'>
             <DropDownButton
@@ -107,11 +99,7 @@ export const CRMContactDetails = () => {
             widget='dxButton'
             showText='inMenu'
           >
-            <Button
-              text='Copy'
-              icon='copy'
-              stylingMode='text'
-            />
+            <Button text='Copy' icon='copy' stylingMode='text' />
           </Item>
           <Item
             location='after'
@@ -130,10 +118,7 @@ export const CRMContactDetails = () => {
 
         <div className='panels'>
           <div className='left'>
-            <ContactForm
-              data={data}
-              isLoading={isLoading}
-            />
+            <ContactForm data={data} isLoading={isLoading} />
           </div>
 
           <div className='right'>
@@ -145,7 +130,8 @@ export const CRMContactDetails = () => {
               messages={messages}
               tasks={data?.tasks}
               activities={data?.activities}
-              name={data?.name} />
+              name={data?.name}
+            />
           </div>
         </div>
       </div>

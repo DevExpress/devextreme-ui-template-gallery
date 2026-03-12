@@ -11,7 +11,7 @@ import {
   SignInPage,
   RegisterPage,
   ResetPasswordPage,
-  UserProfile
+  UserProfile,
 } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 import { Navigate } from 'react-router-dom';

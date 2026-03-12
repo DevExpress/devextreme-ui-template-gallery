@@ -17,10 +17,21 @@ import { UserAvatar } from '../user-avatar/UserAvatar';
 import './CardMessages.scss';
 
 const getText = (data: Message, user: string, manager: string) => {
-  return data.text.replace('{username}', data.manager !== manager ? manager : user);
+  return data.text.replace(
+    '{username}',
+    data.manager !== manager ? manager : user
+  );
 };
 
-const Card = ({ data, user, manager }: { data: Message; user: string, manager: string }) => (
+const Card = ({
+  data,
+  user,
+  manager,
+}: {
+  data: Message;
+  user: string;
+  manager: string;
+}) => (
   <div className='message-container'>
     <UserAvatar owner={data.manager} />
     <div className='message dx-card'>
@@ -40,8 +51,12 @@ const Card = ({ data, user, manager }: { data: Message; user: string, manager: s
   </div>
 );
 
-export const CardMessages = ({ items, user }: {
-  items?: Messages; user?: string;
+export const CardMessages = ({
+  items,
+  user,
+}: {
+  items?: Messages;
+  user?: string;
 }) => {
   const [messages, setMessages] = useState(items);
   const [title, setTitle] = useState('');
@@ -51,13 +66,19 @@ export const CardMessages = ({ items, user }: {
     setMessages(items);
   }, [items]);
 
-  const send = useCallback((e) => {
-    if (!e.validationGroup.validate().isValid || !messages || !user) {
-      return;
-    }
-    setMessages([...messages, { manager: user, date: new Date(), text: message, subject: title }]);
-    e.validationGroup.reset();
-  }, [message, title, messages, user]);
+  const send = useCallback(
+    (e) => {
+      if (!e.validationGroup.validate().isValid || !messages || !user) {
+        return;
+      }
+      setMessages([
+        ...messages,
+        { manager: user, date: new Date(), text: message, subject: title },
+      ]);
+      e.validationGroup.reset();
+    },
+    [message, title, messages, user]
+  );
 
   const onTitleChanged = useCallback((value) => {
     setTitle(value);
@@ -71,21 +92,36 @@ export const CardMessages = ({ items, user }: {
     <ValidationGroup>
       <div className='messages'>
         <div className='input-messages'>
-          <TextBox label='Subject' stylingMode='filled' value={title} valueChangeEvent='keyup' onValueChange={onTitleChanged}>
+          <TextBox
+            label='Subject'
+            stylingMode='filled'
+            value={title}
+            valueChangeEvent='keyup'
+            onValueChange={onTitleChanged}
+          >
             <Validator>
               <RequiredRule />
             </Validator>
           </TextBox>
-          <TextArea label='Message' height={150} stylingMode='filled' value={message} valueChangeEvent='keyup' onValueChange={onMessageChanged}>
+          <TextArea
+            label='Message'
+            height={150}
+            stylingMode='filled'
+            value={message}
+            valueChangeEvent='keyup'
+            onValueChange={onMessageChanged}
+          >
             <Validator>
               <RequiredRule />
             </Validator>
           </TextArea>
           <Toolbar>
-            <Item
-              location='before'
-            >
-              <FileUploder className='file-uploader' labelText='' selectButtonText='Attach file' />
+            <Item location='before'>
+              <FileUploder
+                className='file-uploader'
+                labelText=''
+                selectButtonText='Attach file'
+              />
             </Item>
             <Item
               location='after'
@@ -101,9 +137,15 @@ export const CardMessages = ({ items, user }: {
         </div>
         <div className='messages-content'>
           <div className='message-list'>
-            {user && messages?.map((message, index) => (
-              <Card key={index} data={message} user={messages[1].manager} manager={messages[0].manager} />
-            ))}
+            {user &&
+              messages?.map((message, index) => (
+                <Card
+                  key={index}
+                  data={message}
+                  user={messages[1].manager}
+                  manager={messages[0].manager}
+                />
+              ))}
           </div>
         </div>
       </div>

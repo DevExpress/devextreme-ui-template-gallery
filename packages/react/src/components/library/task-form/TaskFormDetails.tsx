@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-import Form, { SimpleItem, GroupItem, ColCountByScreen } from 'devextreme-react/form';
+import Form, {
+  SimpleItem,
+  GroupItem,
+  ColCountByScreen,
+} from 'devextreme-react/form';
 
 import SelectBox from 'devextreme-react/select-box';
 import TextArea from 'devextreme-react/text-area';
@@ -10,14 +14,27 @@ import { FormTextbox } from '../../utils/form-textbox/FormTextbox';
 import { FormDateBox } from '../../utils/form-datebox/FormDateBox';
 
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../../shared/constants';
-import { editFieldRender, statusItemRender, priorityFieldRender, priorityItemRender } from '../../../shared/statusIndicatorRenderMethods';
+import {
+  editFieldRender,
+  statusItemRender,
+  priorityFieldRender,
+  priorityItemRender,
+} from '../../../shared/statusIndicatorRenderMethods';
 
 import { Task } from '../../../types/task';
 import './TaskFormDetails.scss';
 import { getSizeQualifier } from '../../../utils/media-query';
 
-export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: {
-  editing: boolean, data: Task, subjectField: boolean, onDataChanged: (data) => void
+export const TaskFormDetails = ({
+  editing,
+  data,
+  subjectField,
+  onDataChanged,
+}: {
+  editing: boolean;
+  data: Task;
+  subjectField: boolean;
+  onDataChanged: (data) => void;
 }) => {
   const [formData, setFormData] = useState<Task>({ ...data });
 
@@ -34,17 +51,22 @@ export const TaskFormDetails = ({ editing, data, subjectField, onDataChanged }: 
 
   return (
     <Form
-      className={classNames({ 'plain-styled-form task-form-details': true, 'view-mode': !editing })}
+      className={classNames({
+        'plain-styled-form task-form-details': true,
+        'view-mode': !editing,
+      })}
       screenByWidth={getSizeQualifier}
     >
-      {subjectField && <SimpleItem colSpan={2}>
-        <FormTextbox
-          label='Subject'
-          value={formData.text}
-          isEditing={!editing}
-          onValueChange={updateField('text')}
-        />
-      </SimpleItem>}
+      {subjectField && (
+        <SimpleItem colSpan={2}>
+          <FormTextbox
+            label='Subject'
+            value={formData.text}
+            isEditing={!editing}
+            onValueChange={updateField('text')}
+          />
+        </SimpleItem>
+      )}
       <GroupItem itemType='group'>
         <ColCountByScreen xs={1} sm={2} md={2} lg={2} />
         <SimpleItem cssClass='accent'>

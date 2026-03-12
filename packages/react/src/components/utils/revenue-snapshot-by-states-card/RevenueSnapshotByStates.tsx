@@ -9,7 +9,11 @@ import PieChart, {
 } from 'devextreme-react/pie-chart';
 import { CardAnalytics } from '../../library/card-analytics/CardAnalytics';
 import { SaleByState } from '../../../types/analytics';
-export const RevenueSnapshotByStatesCard = ({ datasource }: { datasource: SaleByState[] }) => (
+export const RevenueSnapshotByStatesCard = ({
+  datasource,
+}: {
+  datasource: SaleByState[];
+}) => (
   <CardAnalytics
     title='Revenue Snapshot by States'
     contentClass='sales-by-state'

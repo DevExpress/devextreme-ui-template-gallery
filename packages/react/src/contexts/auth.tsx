@@ -1,4 +1,10 @@
-import React, { useState, useEffect, createContext, useContext, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+  useCallback,
+} from 'react';
 import { getUser, signIn as sendSignInRequest } from '../api/auth';
 import type { User, AuthContextType } from '../types';
 
@@ -30,10 +36,17 @@ function AuthProvider(props: React.PropsWithChildren<unknown>) {
     setUser(undefined);
   }, []);
 
-  return <AuthContext.Provider value={{ user, signIn, signOut, loading }} {...props} />;
+  return (
+    <AuthContext.Provider
+      value={{ user, signIn, signOut, loading }}
+      {...props}
+    />
+  );
 }
 
-const AuthContext = createContext<AuthContextType>({ loading: false } as AuthContextType);
+const AuthContext = createContext<AuthContextType>({
+  loading: false,
+} as AuthContextType);
 const useAuth = () => useContext(AuthContext);
 
 export { AuthProvider, useAuth };

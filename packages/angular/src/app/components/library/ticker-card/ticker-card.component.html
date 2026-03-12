@@ -1,8 +1,5 @@
 <div class="ticker">
-  <div
-    class="icon-wrapper"
-    [class]="getIconClass()"
-  >
+  <div class="icon-wrapper" [class]="getIconClass()">
     <i [class]="'dx-icon dx-icon-' + icon"></i>
   </div>
   <div class="middle">
@@ -11,17 +8,18 @@
     </div>
     <div class="total">
       {{
-      total === null
-        ? (getTotal | apply: data | currency: 'USD':'$':'1.0-0')
-        : total
+        total === null
+          ? (getTotal | apply: data | currency: 'USD':'$':'1.0-0')
+          : total
       }}
     </div>
   </div>
-  <div *ngIf="percentage !== 0"
-       class="percentage"
-       [class]="percentage > 0 ? 'positive': 'negative'"
+  <div
+    *ngIf="percentage !== 0"
+    class="percentage"
+    [class]="percentage > 0 ? 'positive' : 'negative'"
   >
-    <div [class]="'dx-icon-'+ (percentage > 0 ? 'spinup' : 'spindown')"></div>
+    <div [class]="'dx-icon-' + (percentage > 0 ? 'spinup' : 'spindown')"></div>
     <i class="value"></i>
     <span>{{ abs(percentage) }}%</span>
   </div>

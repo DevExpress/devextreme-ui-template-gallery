@@ -11,7 +11,10 @@ type MenuItem = {
   onClick: () => void;
 };
 
-export const UserMenuSection = ({ showAvatar, listRef }: UserMenuSectionProps) => {
+export const UserMenuSection = ({
+  showAvatar,
+  listRef,
+}: UserMenuSectionProps) => {
   const { user, signOut } = useAuth();
 
   const menuItems = useMemo<MenuItem[]>(
@@ -26,15 +29,18 @@ export const UserMenuSection = ({ showAvatar, listRef }: UserMenuSectionProps) =
   );
 
   const listElementAttr = {
-    class: 'user-info-list'
+    class: 'user-info-list',
   };
 
-  const onItemClick = useCallback(({ itemData }: ListTypes.ItemClickEvent<MenuItem>) => itemData?.onClick(), []);
+  const onItemClick = useCallback(
+    ({ itemData }: ListTypes.ItemClickEvent<MenuItem>) => itemData?.onClick(),
+    []
+  );
 
   return (
     <>
       <div className='user-info'>
-        { showAvatar && (
+        {showAvatar && (
           <div className='image-container'>
             <div
               style={{
@@ -46,7 +52,12 @@ export const UserMenuSection = ({ showAvatar, listRef }: UserMenuSectionProps) =
         )}
         <div className='user-name'>{user?.name}</div>
       </div>
-      <List ref={listRef} elementAttr={listElementAttr} onItemClick={onItemClick} items={menuItems} />
+      <List
+        ref={listRef}
+        elementAttr={listElementAttr}
+        onItemClick={onItemClick}
+        items={menuItems}
+      />
     </>
   );
 };
