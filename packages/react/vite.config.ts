@@ -29,7 +29,7 @@ export default defineConfig({
       scss: {
         api: 'modern',
         quietDeps: true,
-        silenceDeprecations: ['legacy-js-api'],
+        silenceDeprecations: ['legacy-js-api', 'import'],
         loadPaths: [
           path.resolve(__dirname, '../../node_modules'),
           path.resolve(__dirname, 'node_modules'),

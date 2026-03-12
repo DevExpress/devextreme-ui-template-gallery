@@ -1,5 +1,6 @@
+// Scope dark theme under the theme class for Vite bundling
 .app-theme-dark {
-  content: '';
+  /* stylelint-disable */
+  @import 'devextreme/scss/bundles/dx.fluent.blue.dark.scss';
 }
-/* stylelint-disable */
-@import 'devextreme/scss/bundles/dx.fluent.blue.dark.scss';
+

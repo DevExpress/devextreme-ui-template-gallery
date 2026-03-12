@@ -22,23 +22,19 @@ function getCurrentTheme(): Theme {
   return window.localStorage[storageKey] || getNextTheme();
 }
 
-function isThemeStyleSheet(styleSheet, theme: Theme) {
-  const themeMarker = `${themePrefix}${theme}`;
-  // eslint-disable-next-line no-undef
-  if(import.meta.env.PROD) {
-    return styleSheet?.href?.includes(`${themeMarker}`);
-  } else {
-    const rules = Array.from<CSSStyleRule>(styleSheet.cssRules);
-    return !!rules.find((rule) => rule?.selectorText?.includes(`.${themeMarker}`));
-  }
+// Initialize theme class on module load (before React renders)
+if (typeof window !== 'undefined') {
+  const initialTheme = getCurrentTheme();
+  document.documentElement.classList.add(`${themePrefix}${initialTheme}`);
 }
 
 function switchThemeStyleSheets(enabledTheme: Theme) {
   const disabledTheme = getNextTheme(enabledTheme);
 
-  Array.from<CSSStyleSheet>(document.styleSheets).forEach((styleSheet) => {
-    styleSheet.disabled = isThemeStyleSheet(styleSheet, disabledTheme);
-  });
+  // With Vite, all CSS is bundled together, so we use class-based theme switching
+  // Remove the disabled theme class and add the enabled theme class
+  document.documentElement.classList.remove(`${themePrefix}${disabledTheme}`);
+  document.documentElement.classList.add(`${themePrefix}${enabledTheme}`);
 }
 
 async function setAppTheme(newTheme?: Theme) {
