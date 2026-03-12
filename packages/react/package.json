@@ -60,5 +60,8 @@
     "eslint-plugin-react": "^7.33.2",
     "sass": "^1.34.1",
     "typescript": "^4.8.4"
+  },
+  "overrides": {
+    "bfj": "9.1.3"
   }
 }
