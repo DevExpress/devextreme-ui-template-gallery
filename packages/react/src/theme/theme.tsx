@@ -2,20 +2,15 @@ import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/th
 import { current as getCurrentDXTheme } from 'devextreme/ui/themes';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+// Static imports for Vite - SCSS files must be imported at build time
+import './styles/theme-dx-dark.scss';
+import './styles/theme-dx-light.scss';
+import './styles/variables-dark.scss';
+import './styles/variables-light.scss';
+
 const themes = ['light', 'dark'] as const;
 const storageKey = 'app-theme';
 const themePrefix = 'app-theme-';
-
-const prefixes = ['./styles/theme-dx-', './styles/variables-'];
-
-const loadStylesImports = async() => {
-  await Promise.all([
-    ...prefixes.flatMap((prefix) => [
-      import(`${prefix}dark.scss`),
-      import(`${prefix}light.scss`)
-    ]),
-  ]);
-};
 
 export type Theme = typeof themes[number];
 
@@ -64,13 +59,6 @@ function toggleTheme(currentTheme: Theme): Theme {
 
 export function useThemeContext() {
   const [theme, setTheme] = useState(getCurrentTheme());
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    loadStylesImports().then(() => {
-      setIsLoaded(true);
-    });
-  }, []);
 
   const switchTheme = useCallback(() => setTheme((currentTheme: Theme) => toggleTheme(currentTheme)), []);
 
@@ -79,10 +67,10 @@ export function useThemeContext() {
   }, []);
 
   useEffect(() => {
-    isLoaded && setAppTheme(theme);
-  }, [theme, isLoaded]);
+    setAppTheme(theme);
+  }, [theme]);
 
-  return useMemo(()=> ({ theme, switchTheme, isLoaded, isFluent }), [theme, isLoaded, isFluent]);
+  return useMemo(()=> ({ theme, switchTheme, isLoaded: true, isFluent }), [theme, isFluent]);
 }
 
 export const ThemeContext = React.createContext<ReturnType<typeof useThemeContext> | null>(null);
