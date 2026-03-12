@@ -11,8 +11,8 @@ const prefixes = ['./styles/theme-dx-', './styles/variables-'];
 const loadStylesImports = async() => {
   await Promise.all([
     ...prefixes.flatMap((prefix) => [
-      import(/* webpackChunkName: "app-theme-dark" */ `${prefix}dark.scss`),
-      import(/* webpackChunkName: "app-theme-light" */ `${prefix}light.scss`)
+      import(`${prefix}dark.scss`),
+      import(`${prefix}light.scss`)
     ]),
   ]);
 };
@@ -30,7 +30,7 @@ function getCurrentTheme(): Theme {
 function isThemeStyleSheet(styleSheet, theme: Theme) {
   const themeMarker = `${themePrefix}${theme}`;
   // eslint-disable-next-line no-undef
-  if(process.env.NODE_ENV === 'production') {
+  if(import.meta.env.PROD) {
     return styleSheet?.href?.includes(`${themeMarker}`);
   } else {
     const rules = Array.from<CSSStyleRule>(styleSheet.cssRules);
