@@ -28,7 +28,13 @@ const Card = ({ note }: { note: Note }) => {
   );
 };
 
-export const CardNotes = ({ items, user }: { items?: Notes; user?: string }) => {
+export const CardNotes = ({
+  items,
+  user,
+}: {
+  items?: Notes;
+  user?: string;
+}) => {
   const [noteText, setNoteText] = useState('');
   const [data, setData] = useState(items);
 
@@ -36,13 +42,16 @@ export const CardNotes = ({ items, user }: { items?: Notes; user?: string }) => 
     setData(items);
   }, [items]);
 
-  const add = useCallback((e) => {
-    if (!e.validationGroup.validate().isValid || !data || !user) {
-      return;
-    }
-    setData([...data, { manager: user, date: new Date(), text: noteText }]);
-    e.validationGroup.reset();
-  }, [noteText, data, user]);
+  const add = useCallback(
+    (e) => {
+      if (!e.validationGroup.validate().isValid || !data || !user) {
+        return;
+      }
+      setData([...data, { manager: user, date: new Date(), text: noteText }]);
+      e.validationGroup.reset();
+    },
+    [noteText, data, user]
+  );
 
   const onNoteTextChanged = useCallback((value) => {
     setNoteText(value);
@@ -52,7 +61,13 @@ export const CardNotes = ({ items, user }: { items?: Notes; user?: string }) => 
     <ValidationGroup>
       <div className='notes'>
         <div className='input-notes'>
-          <TextArea label='New Note' stylingMode='filled' value={noteText} valueChangeEvent='keyup' onValueChange={onNoteTextChanged}>
+          <TextArea
+            label='New Note'
+            stylingMode='filled'
+            value={noteText}
+            valueChangeEvent='keyup'
+            onValueChange={onNoteTextChanged}
+          >
             <Validator>
               <RequiredRule />
             </Validator>

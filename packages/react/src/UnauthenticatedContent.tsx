@@ -1,7 +1,12 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { SingleCard } from './layouts';
-import { LoginForm, ResetPasswordForm, ChangePasswordForm, CreateAccountForm } from './components';
+import {
+  LoginForm,
+  ResetPasswordForm,
+  ChangePasswordForm,
+  CreateAccountForm,
+} from './components';
 
 export const UnauthenticatedContent = () => {
   return (
@@ -17,18 +22,12 @@ export const UnauthenticatedContent = () => {
           </SingleCard>
         }
       />
-      <Route
-        path='/login'
-        element={<Navigate to='/sign-in' replace />}
-      />
+      <Route path='/login' element={<Navigate to='/sign-in' replace />} />
       <Route
         path='/register'
         element={
           <SingleCard title='Register'>
-            <CreateAccountForm
-              buttonLink='/sign-in'
-              redirectLink='/sign-in'
-            />
+            <CreateAccountForm buttonLink='/sign-in' redirectLink='/sign-in' />
           </SingleCard>
         }
       />
@@ -41,12 +40,9 @@ export const UnauthenticatedContent = () => {
         element={
           <SingleCard
             title='Reset Password'
-            description='Please enter the email address that you used to register, and we will send you a link to reset your password via Email.'>
-
-            <ResetPasswordForm
-              signInLink='/sign-in'
-              buttonLink='/sign-in'
-            />
+            description='Please enter the email address that you used to register, and we will send you a link to reset your password via Email.'
+          >
+            <ResetPasswordForm signInLink='/sign-in' buttonLink='/sign-in' />
           </SingleCard>
         }
       />

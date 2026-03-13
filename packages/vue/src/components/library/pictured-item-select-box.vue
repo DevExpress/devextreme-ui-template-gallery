@@ -86,7 +86,7 @@ function emitChangedValue(changedData: SimpleObject) {
 }
 
 .pictured-item-select-field {
-  :deep(.pictured-item-editor-input.dx-texteditor-input) {
+  :deep(input.pictured-item-editor-input.dx-texteditor-input) {
     padding-left: 0;
     color: var(--base-text-color);
   }

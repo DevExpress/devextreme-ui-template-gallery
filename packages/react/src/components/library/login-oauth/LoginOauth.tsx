@@ -6,7 +6,9 @@ import { ThemeContext } from '../../../theme/theme';
 
 import './LoginOauth.scss';
 
-function getButtonStylingMode(theme: string | undefined): ButtonTypes.ButtonStyle {
+function getButtonStylingMode(
+  theme: string | undefined
+): ButtonTypes.ButtonStyle {
   return theme === 'dark' ? 'outlined' : 'contained';
 }
 
@@ -16,8 +18,18 @@ export const LoginOauth = () => {
   return (
     <div className='oauth-button-container'>
       <p>or</p>
-      <Button width='100%' icon='icons/google-logo.svg' text='Sign In with Google' stylingMode={getButtonStylingMode(themeContext?.theme)} />
-      <Button width='100%' icon='icons/microsoft-logo.svg' text='Sign In with Microsoft' stylingMode={getButtonStylingMode(themeContext?.theme)} />
+      <Button
+        width='100%'
+        icon='icons/google-logo.svg'
+        text='Sign In with Google'
+        stylingMode={getButtonStylingMode(themeContext?.theme)}
+      />
+      <Button
+        width='100%'
+        icon='icons/microsoft-logo.svg'
+        text='Sign In with Microsoft'
+        stylingMode={getButtonStylingMode(themeContext?.theme)}
+      />
     </div>
   );
 };

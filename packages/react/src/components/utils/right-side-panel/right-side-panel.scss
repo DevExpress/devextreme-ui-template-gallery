@@ -1,5 +1,5 @@
-@use "../../../variables.scss" as *;
-@use "sass:math";
+@use '../../../variables.scss' as *;
+@use 'sass:math';
 
 #right-side-panel {
   --side-panel-width: calc(var(--calendar-width) + var(--content-padding));

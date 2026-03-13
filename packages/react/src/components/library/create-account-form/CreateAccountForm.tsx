@@ -4,7 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { LoginOauth } from '../login-oauth/LoginOauth';
 
-import Form, { Item, Label, ButtonItem, ButtonOptions, RequiredRule, CustomRule, EmailRule } from 'devextreme-react/form';
+import Form, {
+  Item,
+  Label,
+  ButtonItem,
+  ButtonOptions,
+  RequiredRule,
+  CustomRule,
+  EmailRule,
+} from 'devextreme-react/form';
 import LoadIndicator from 'devextreme-react/load-indicator';
 import notify from 'devextreme/ui/notify';
 
@@ -12,7 +20,10 @@ import { createAccount } from '../../../api/auth';
 
 import './CreateAccountForm.scss';
 
-export const CreateAccountForm = ({ redirectLink = '/sign-in', buttonLink }) => {
+export const CreateAccountForm = ({
+  redirectLink = '/sign-in',
+  buttonLink,
+}) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const formData = useRef({ email: '', password: '' });
@@ -35,33 +46,59 @@ export const CreateAccountForm = ({ redirectLink = '/sign-in', buttonLink }) => 
     [navigate]
   );
 
-  const confirmPassword = useCallback(({ value }) => value === formData.current.password, []);
+  const confirmPassword = useCallback(
+    ({ value }) => value === formData.current.password,
+    []
+  );
 
   return (
     <form className='create-account-form' onSubmit={onSubmit}>
       <Form formData={formData.current} disabled={loading} labelLocation='top'>
-        <Item dataField='email' editorType='dxTextBox' editorOptions={emailEditorOptions}>
+        <Item
+          dataField='email'
+          editorType='dxTextBox'
+          editorOptions={emailEditorOptions}
+        >
           <RequiredRule message='Email is required' />
           <EmailRule message='Email is invalid' />
           <Label text='Email' />
         </Item>
-        <Item dataField='password' editorType='dxTextBox' editorOptions={passwordEditorOptions}>
+        <Item
+          dataField='password'
+          editorType='dxTextBox'
+          editorOptions={passwordEditorOptions}
+        >
           <RequiredRule message='Password is required' />
           <Label text='Password' />
         </Item>
-        <Item dataField='confirmedPassword' editorType='dxTextBox' editorOptions={confirmedPasswordEditorOptions}>
+        <Item
+          dataField='confirmedPassword'
+          editorType='dxTextBox'
+          editorOptions={confirmedPasswordEditorOptions}
+        >
           <RequiredRule message='Password is required' />
-          <CustomRule message='Passwords do not match' validationCallback={confirmPassword} />
+          <CustomRule
+            message='Passwords do not match'
+            validationCallback={confirmPassword}
+          />
           <Label text='Confirm Password' />
         </Item>
         <Item>
           <div className='policy-info'>
-            By creating an account, you agree to the <Link to={redirectLink}>Terms of Service</Link> and <Link to={redirectLink}>Privacy Policy</Link>
+            By creating an account, you agree to the{' '}
+            <Link to={redirectLink}>Terms of Service</Link> and{' '}
+            <Link to={redirectLink}>Privacy Policy</Link>
           </div>
         </Item>
         <ButtonItem>
           <ButtonOptions width='100%' type='default' useSubmitBehavior>
-            <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Register'}</span>
+            <span className='dx-button-text'>
+              {loading ? (
+                <LoadIndicator width='24px' height='24px' visible />
+              ) : (
+                'Register'
+              )}
+            </span>
           </ButtonOptions>
         </ButtonItem>
       </Form>
@@ -74,6 +111,18 @@ export const CreateAccountForm = ({ redirectLink = '/sign-in', buttonLink }) => 
   );
 };
 
-const emailEditorOptions = { stylingMode: 'filled', mode: 'email', value: 'jheart@dx-email.com' };
-const passwordEditorOptions = { stylingMode: 'filled', mode: 'password', value: 'password' };
-const confirmedPasswordEditorOptions = { stylingMode: 'filled', mode: 'password', value: 'password' };
+const emailEditorOptions = {
+  stylingMode: 'filled',
+  mode: 'email',
+  value: 'jheart@dx-email.com',
+};
+const passwordEditorOptions = {
+  stylingMode: 'filled',
+  mode: 'password',
+  value: 'password',
+};
+const confirmedPasswordEditorOptions = {
+  stylingMode: 'filled',
+  mode: 'password',
+  value: 'password',
+};

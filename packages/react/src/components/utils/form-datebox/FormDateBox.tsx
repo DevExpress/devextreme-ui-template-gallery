@@ -8,7 +8,7 @@ export const FormDateBox = ({
   readOnly,
   name,
   label,
-  onValueChange
+  onValueChange,
 }) => {
   return (
     <DateBox

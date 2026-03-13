@@ -35,11 +35,7 @@ export const ToolbarAnalytics = ({
           widget='dxButton'
           showText='inMenu'
         >
-          <Button
-            text='Refresh'
-            icon='refresh'
-            stylingMode='text'
-          />
+          <Button text='Refresh' icon='refresh' stylingMode='text' />
         </Item>
         <Item location='after' locateInMenu='auto'>
           <div className='separator' />
@@ -50,11 +46,7 @@ export const ToolbarAnalytics = ({
           widget='dxButton'
           showText='inMenu'
         >
-          <Button
-            icon='export'
-            text='Export'
-            stylingMode='text'
-          />
+          <Button icon='export' text='Export' stylingMode='text' />
         </Item>
       </Toolbar>
       {children}

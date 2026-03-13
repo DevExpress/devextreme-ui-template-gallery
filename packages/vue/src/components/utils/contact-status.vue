@@ -22,6 +22,10 @@ const props = withDefaults(defineProps<{
       color: $status-color;
     }
 
+    @at-root input#{&}.dx-texteditor-input.status-editor-input {
+      color: $status-color;
+    }
+
     &::before {
       background: $status-color;
     }
@@ -40,7 +44,7 @@ const props = withDefaults(defineProps<{
 }
 </style>
 <style scoped lang="scss">
-@use 'src/variables' as *;
+@use '@/variables' as *;
 @use "sass:math";
 
 .contact-status {

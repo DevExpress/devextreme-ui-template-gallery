@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useCallback } from 'react';
 
 import './ContactPanel.scss';
@@ -11,8 +10,17 @@ import { ContactPanelDetails } from './ContactPanelDetails';
 
 const ContactPanelWithLoadPanel = withLoadPanel(ContactPanelDetails);
 
-export const ContactPanel = ({ contactId, isOpened, changePanelOpened, changePanelPinned } : { contactId: number | null, isOpened: boolean, changePanelOpened:(value: boolean)=> void, changePanelPinned: () => void }) => {
-
+export const ContactPanel = ({
+  contactId,
+  isOpened,
+  changePanelOpened,
+  changePanelPinned,
+}: {
+  contactId: number | null;
+  isOpened: boolean;
+  changePanelOpened: (value: boolean) => void;
+  changePanelPinned: () => void;
+}) => {
   const [data, setData] = useState<Contact>();
 
   const loadData = useCallback(() => {
@@ -25,7 +33,7 @@ export const ContactPanel = ({ contactId, isOpened, changePanelOpened, changePan
       .catch((error) => console.log(error));
   }, [contactId]);
 
-  const onDataChanged = useCallback(data => {
+  const onDataChanged = useCallback((data) => {
     setData(data);
   }, []);
 
@@ -44,9 +52,8 @@ export const ContactPanel = ({ contactId, isOpened, changePanelOpened, changePan
       changePanelPinned={changePanelPinned}
       panelProps={{
         position: { of: '.panel' },
-        container: '.panel'
+        container: '.panel',
       }}
     />
   );
 };
-

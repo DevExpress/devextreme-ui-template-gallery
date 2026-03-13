@@ -1,5 +1,5 @@
-@use "../../../variables.scss" as *;
-@use "sass:math";
+@use '../../../variables.scss' as *;
+@use 'sass:math';
 
 .status-contact {
   span {
@@ -8,7 +8,7 @@
     &::before {
       --diameter: 10px;
 
-      content: " ";
+      content: ' ';
       width: var(--diameter);
       height: var(--diameter);
       border-radius: calc(var(--diameter) / 2);

@@ -24,7 +24,9 @@
 
   @media only screen and (max-width: 875px) {
     .contact-name-toolbar-item {
-      min-width: calc(var(--left-panel-width) + var(--right-panel-width) - 145px);
+      min-width: calc(
+        var(--left-panel-width) + var(--right-panel-width) - 145px
+      );
     }
   }
 

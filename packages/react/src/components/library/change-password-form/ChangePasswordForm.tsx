@@ -2,7 +2,14 @@ import React, { useState, useRef, useCallback } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
-import Form, { Item, Label, ButtonItem, ButtonOptions, RequiredRule, CustomRule } from 'devextreme-react/form';
+import Form, {
+  Item,
+  Label,
+  ButtonItem,
+  ButtonOptions,
+  RequiredRule,
+  CustomRule,
+} from 'devextreme-react/form';
 import LoadIndicator from 'devextreme-react/load-indicator';
 import notify from 'devextreme/ui/notify';
 
@@ -32,23 +39,43 @@ export const ChangePasswordForm = () => {
     [navigate, recoveryCode]
   );
 
-  const confirmPassword = useCallback(({ value }) => value === formData.current.password, []);
+  const confirmPassword = useCallback(
+    ({ value }) => value === formData.current.password,
+    []
+  );
 
   return (
     <form onSubmit={onSubmit}>
       <Form formData={formData.current} disabled={loading}>
-        <Item dataField='password' editorType='dxTextBox' editorOptions={passwordEditorOptions}>
+        <Item
+          dataField='password'
+          editorType='dxTextBox'
+          editorOptions={passwordEditorOptions}
+        >
           <RequiredRule message='Password is required' />
           <Label visible={false} />
         </Item>
-        <Item dataField='confirmedPassword' editorType='dxTextBox' editorOptions={confirmedPasswordEditorOptions}>
+        <Item
+          dataField='confirmedPassword'
+          editorType='dxTextBox'
+          editorOptions={confirmedPasswordEditorOptions}
+        >
           <RequiredRule message='Password is required' />
-          <CustomRule message='Passwords do not match' validationCallback={confirmPassword} />
+          <CustomRule
+            message='Passwords do not match'
+            validationCallback={confirmPassword}
+          />
           <Label visible={false} />
         </Item>
         <ButtonItem>
           <ButtonOptions width='100%' type='default' useSubmitBehavior>
-            <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Continue'}</span>
+            <span className='dx-button-text'>
+              {loading ? (
+                <LoadIndicator width='24px' height='24px' visible />
+              ) : (
+                'Continue'
+              )}
+            </span>
           </ButtonOptions>
         </ButtonItem>
       </Form>
@@ -56,5 +83,13 @@ export const ChangePasswordForm = () => {
   );
 };
 
-const passwordEditorOptions = { stylingMode: 'filled', placeholder: 'Password', mode: 'password' };
-const confirmedPasswordEditorOptions = { stylingMode: 'filled', placeholder: 'Confirm Password', mode: 'password' };
+const passwordEditorOptions = {
+  stylingMode: 'filled',
+  placeholder: 'Password',
+  mode: 'password',
+};
+const confirmedPasswordEditorOptions = {
+  stylingMode: 'filled',
+  placeholder: 'Confirm Password',
+  mode: 'password',
+};

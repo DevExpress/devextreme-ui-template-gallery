@@ -5,15 +5,23 @@ import Validator, { RequiredRule } from 'devextreme-react/validator';
 import './FormTextbox.scss';
 
 type TextboxProps = {
-  value: string,
-  label?: string,
-  isEditing: boolean,
-  onValueChange: (data) => void,
-  mask?: string,
-  icon?: string,
-}
+  value: string;
+  label?: string;
+  isEditing: boolean;
+  onValueChange: (data) => void;
+  mask?: string;
+  icon?: string;
+};
 
-export const FormTextbox = ({ value, label, isEditing, onValueChange, mask = '', icon, children }: React.PropsWithChildren<TextboxProps>) => {
+export const FormTextbox = ({
+  value,
+  label,
+  isEditing,
+  onValueChange,
+  mask = '',
+  icon,
+  children,
+}: React.PropsWithChildren<TextboxProps>) => {
   return (
     <TextBox
       label={label}
@@ -25,16 +33,17 @@ export const FormTextbox = ({ value, label, isEditing, onValueChange, mask = '',
       stylingMode='filled'
       onValueChange={onValueChange}
     >
-      { icon &&
-      <TextBoxButton
-        name='icon'
-        location='before'
-        options={{
-          icon: icon,
-          stylingMode: 'text',
-          elementAttr: { class: 'form-editor-icon' }
-        }} />
-      }
+      {icon && (
+        <TextBoxButton
+          name='icon'
+          location='before'
+          options={{
+            icon: icon,
+            stylingMode: 'text',
+            elementAttr: { class: 'form-editor-icon' },
+          }}
+        />
+      )}
       <Validator>
         <RequiredRule />
         {children}

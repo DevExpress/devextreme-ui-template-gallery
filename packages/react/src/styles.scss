@@ -1,6 +1,9 @@
-@use "./variables.scss" as *;
+@use './variables.scss' as *;
 
-.view-wrapper-scroll > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-content {
+.view-wrapper-scroll
+> .dx-scrollable-wrapper
+> .dx-scrollable-container
+> .dx-scrollable-content {
   height: 100%;
 
   & > .dx-scrollview-content {
@@ -116,7 +119,6 @@ body {
   line-height: 1;
 }
 
-
 .embedded {
   .layout-header,
   .dx-swatch-additional,
@@ -135,7 +137,9 @@ body {
 }
 
 .dx-form.plain-styled-form {
-  &.dx-form > .dx-layout-manager.dx-layout-manager-one-col .dx-field-item.dx-last-row:not(.dx-last-col) {
+  &.dx-form
+  > .dx-layout-manager.dx-layout-manager-one-col
+  .dx-field-item.dx-last-row:not(.dx-last-col) {
     padding-bottom: 0;
   }
 
@@ -269,12 +273,12 @@ body {
 }
 
 .dx-theme-fluent-typography {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .dx-theme-fluent {
   .dx-widget {
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   .light .dx-drawer-panel-content {

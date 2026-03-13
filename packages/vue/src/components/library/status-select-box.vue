@@ -87,7 +87,7 @@ function emitChangedValue(changedData: SimpleObject) {
     padding-left: var(--list-padding-left);
   }
 
-  :deep(.status-editor-input) {
+  :deep(input.status-editor-input.dx-texteditor-input) {
     padding-left: 0;
   }
 }

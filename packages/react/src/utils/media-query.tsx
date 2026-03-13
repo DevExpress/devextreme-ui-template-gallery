@@ -39,8 +39,12 @@ export const useScreenSizeClass = () => {
 let handlers: Handle[] = [];
 
 const xSmallMedia = window.matchMedia('(max-width: 575.98px)');
-const smallMedia = window.matchMedia('(min-width: 576px) and (max-width: 991.98px)');
-const mediumMedia = window.matchMedia('(min-width: 992px) and (max-width: 1199.98px)');
+const smallMedia = window.matchMedia(
+  '(min-width: 576px) and (max-width: 991.98px)'
+);
+const mediumMedia = window.matchMedia(
+  '(min-width: 992px) and (max-width: 1199.98px)'
+);
 const largeMedia = window.matchMedia('(min-width: 1200px)');
 
 [xSmallMedia, smallMedia, mediumMedia, largeMedia].forEach((media) => {
