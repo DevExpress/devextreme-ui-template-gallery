@@ -41,10 +41,10 @@ $theme-mode: null !default;
   --warning-color: var(--dx-color-warning);
   --error-color: var(--dx-color-danger);
   --base-text-color: var(--dx-color-text);
-  --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
+  --background-gray-color: #{rgba($base-text-color, alpha($base-text-color) * 0.04)};
   --texteditor-edit-color: var(--dx-texteditor-color-text);
   --texteditor-label-color: var(--dx-texteditor-color-label);
-  --base-text-color-alpha: #{color.change($base-text-color, $alpha: 0.7)};
+  --base-text-color-alpha: #{rgba($base-text-color, alpha($base-text-color) * 0.7)};
   --toolbar-height: var(--dx-toolbar-height);
   --filled-texteditor-input-horizontal-padding: #{$fluent-field-value-horizontal-padding};
   --list-padding-left: var(--dx-list-item-padding-inline);
@@ -55,8 +55,8 @@ $theme-mode: null !default;
   --popup-toolbar-item-spacing: var(--dx-popup-toolbar-item-padding-inline);
   --drop-down-gnrc-button-height: var(--dx-component-height);
   --theme-padding: var(--dx-button-padding-inline);
-  --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
-  --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
+  --tooltip-danger-button-color: #{rgba($base-danger, alpha($base-danger) * 0.1)};
+  --tooltip-success-button-color: #{rgba($base-success, alpha($base-success) * 0.1)};
   --subtitle-text-color: var(--texteditor-label-color);
   --button-height-theme-difference: calc(
     (var(--theme-padding) - 10px) / 3
