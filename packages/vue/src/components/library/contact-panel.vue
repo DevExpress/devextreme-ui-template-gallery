@@ -46,7 +46,7 @@
         </dx-toolbar>
 
         <dx-scroll-view class="panel-scroll">
-          <dx-validation-group>
+          <dx-validation-group ref="validationGroupRef">
             <div class="data-part border">
               <dx-form
                 :class="{ 'view-mode': !isEditing, 'plain-styled-form dx-form': true }"
@@ -102,74 +102,74 @@
                 </dx-form-group-item>
               </dx-form>
             </div>
-
-            <div class="data-part data-part-toolbar border">
-              <dx-toolbar>
-                <dx-item
-                  location="after"
-                  :visible="!isEditing"
-                >
-                  <dx-button
-                    text="Edit"
-                    icon="edit"
-                    styling-mode="contained"
-                    type="default"
-                    @click="toggleEdit()"
-                  />
-                </dx-item>
-
-                <dx-item
-                  location="after"
-                  :visible="!isEditing"
-                >
-                  <dx-button
-                    text="Details"
-                    styling-mode="outlined"
-                    type="normal"
-                    @click="navigateToDetails()"
-                  />
-                </dx-item>
-
-                <dx-item
-                  location="after"
-                  locate-in-menu="before"
-                  :visible="isEditing"
-                >
-                  <dx-button
-                    text="Save"
-                    icon="save"
-                    styling-mode="contained"
-                    type="default"
-                    @click="handleSaveClick"
-                  />
-                </dx-item>
-
-                <dx-item
-                  location="after"
-                  locate-in-menu="before"
-                  :visible="isEditing"
-                >
-                  <dx-button
-                    text="Cancel"
-                    @click="cancelHandler()"
-                    styling-mode="outlined"
-                    type="normal"
-                  />
-                </dx-item>
-
-                <dx-item
-                  location="before"
-                  widget="dxDropDownButton"
-                  :options="{
-                    text: 'Actions',
-                    dropDownOptions: { width: 'auto' },
-                    stylingMode: 'text',
-                    items: ['Call', 'Send Fax', 'Send Email', 'Schedule a Meeting'],
-                  }"
-                />
-              </dx-toolbar>
-            </div>
           </dx-validation-group>
+
+          <div class="data-part data-part-toolbar border">
+            <dx-toolbar>
+              <dx-item
+                location="after"
+                :visible="!isEditing"
+              >
+                <dx-button
+                  text="Edit"
+                  icon="edit"
+                  styling-mode="contained"
+                  type="default"
+                  @click="toggleEdit()"
+                />
+              </dx-item>
+
+              <dx-item
+                location="after"
+                :visible="!isEditing"
+              >
+                <dx-button
+                  text="Details"
+                  styling-mode="outlined"
+                  type="normal"
+                  @click="navigateToDetails()"
+                />
+              </dx-item>
+
+              <dx-item
+                location="after"
+                locate-in-menu="before"
+                :visible="isEditing"
+              >
+                <dx-button
+                  text="Save"
+                  icon="save"
+                  styling-mode="contained"
+                  type="default"
+                  @click="handleSaveClick"
+                />
+              </dx-item>
+
+              <dx-item
+                location="after"
+                locate-in-menu="before"
+                :visible="isEditing"
+              >
+                <dx-button
+                  text="Cancel"
+                  @click="cancelHandler()"
+                  styling-mode="outlined"
+                  type="normal"
+                />
+              </dx-item>
+
+              <dx-item
+                location="before"
+                widget="dxDropDownButton"
+                :options="{
+                  text: 'Actions',
+                  dropDownOptions: { width: 'auto' },
+                  stylingMode: 'text',
+                  items: ['Call', 'Send Fax', 'Send Email', 'Schedule a Meeting'],
+                }"
+              />
+            </dx-toolbar>
+          </div>
 
           <div class="data-part">
             <dx-accordion
@@ -212,12 +212,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, toRaw, watch } from 'vue';
 import { router } from '@/router';
 // eslint-disable-next-line import/no-unresolved
 import { getContact } from 'dx-template-gallery-data';
 import { DxAccordion, DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
-import { DxButton, DxButtonTypes } from 'devextreme-vue/button';
+import { DxButton } from 'devextreme-vue/button';
 import {
   DxForm,
   DxItem as DxFormItem,
@@ -241,6 +241,7 @@ const isLoading = ref(false);
 const isPinned = ref(false);
 const isPinEnabled = ref(screenInfo.value.isLarge || screenInfo.value.isMedium);
 const panelData = ref<Contact | null>(null);
+const validationGroupRef = ref<InstanceType<typeof DxValidationGroup>>();
 const props = withDefaults(defineProps<{
   isPanelOpened: boolean,
   contactId: number | null
@@ -297,9 +298,9 @@ const loadContact = async (contactId: number) => {
   isLoading.value = false;
 };
 
-function handleSaveClick({ validationGroup }: DxButtonTypes.ClickEvent) {
-  if (validationGroup.validate().isValid) {
-    contactData = structuredClone(panelData.value);
+function handleSaveClick() {
+  if (validationGroupRef.value?.instance?.validate().isValid) {
+    contactData = structuredClone(toRaw(panelData.value));
     isEditing.value = false;
   }
 }
