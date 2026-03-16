@@ -56,7 +56,7 @@
         "scss/no-duplicate-mixins": true,
         "scss/no-global-function-names": null,
         "scss/operator-no-newline-before": true,
-        "scss/operator-no-unspaced": true,
+        "scss/operator-no-unspaced": [true, { "ignore": ["inside-parens"] }],
         "scss/operator-no-newline-after": null
     },
     "overrides": [

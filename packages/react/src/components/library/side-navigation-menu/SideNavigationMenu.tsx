@@ -24,18 +24,22 @@ export type SideNavigationItem = {
   }>;
 };
 
-export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigationMenuProps>) => {
-  const { children, selectedItemChanged, openMenu, compactMode, onMenuReady } = props;
+export const SideNavigationMenu = (
+  props: React.PropsWithChildren<SideNavigationMenuProps>
+) => {
+  const { children, selectedItemChanged, openMenu, compactMode, onMenuReady } =
+    props;
 
   const { isLarge } = useScreenSize();
   function normalizePath() {
-    return navigation.map((item) => ({ ...item, expanded: isLarge, path: item.path && !/^\//.test(item.path) ? `/${item.path}` : item.path }));
+    return navigation.map((item) => ({
+      ...item,
+      expanded: isLarge,
+      path: item.path && !/^\//.test(item.path) ? `/${item.path}` : item.path,
+    }));
   }
 
-  const items: SideNavigationItem[] = useMemo(
-    normalizePath,
-    []
-  );
+  const items: SideNavigationItem[] = useMemo(normalizePath, []);
 
   const {
     navigationData: { currentPath },
@@ -75,7 +79,10 @@ export const SideNavigationMenu = (props: React.PropsWithChildren<SideNavigation
   }, [currentPath, compactMode]);
 
   return (
-    <div className='dx-swatch-additional side-navigation-menu' ref={getWrapperRef}>
+    <div
+      className='dx-swatch-additional side-navigation-menu'
+      ref={getWrapperRef}
+    >
       {children}
       <div className='menu-container theme-dependent'>
         <TreeView

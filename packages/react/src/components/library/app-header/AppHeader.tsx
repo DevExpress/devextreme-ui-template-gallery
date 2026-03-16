@@ -12,16 +12,36 @@ import type { AppHeaderProps } from '../../../types';
 
 import './AppHeader.scss';
 
-export const AppHeader = ({ menuToggleEnabled, title, toggleMenu, className }: AppHeaderProps) => {
+export const AppHeader = ({
+  menuToggleEnabled,
+  title,
+  toggleMenu,
+  className,
+}: AppHeaderProps) => {
   return (
     <header className={`header-component ${className}`}>
       <Toolbar className='header-toolbar'>
-        <Item visible={menuToggleEnabled} location='before' widget='dxButton' cssClass='menu-button'>
+        <Item
+          visible={menuToggleEnabled}
+          location='before'
+          widget='dxButton'
+          cssClass='menu-button'
+        >
           <Button icon='menu' stylingMode='text' onClick={toggleMenu} />
         </Item>
-        <Item location='before' cssClass='header-title' text={title} visible={!!title} />
+        <Item
+          location='before'
+          cssClass='header-title'
+          text={title}
+          visible={!!title}
+        />
         <Item location='after' locateInMenu='auto' cssClass='global-search-box'>
-          <TextBox placeholder='Search' width={180} mode='search' stylingMode='filled' />
+          <TextBox
+            placeholder='Search'
+            width={180}
+            mode='search'
+            stylingMode='filled'
+          />
         </Item>
         <Item location='after' locateInMenu='never'>
           <ThemeSwitcher />
@@ -29,12 +49,14 @@ export const AppHeader = ({ menuToggleEnabled, title, toggleMenu, className }: A
         <Item location='after'>
           <div className='messages'>
             <Button icon='belloutline' stylingMode='text' />
-            <div className='dx-badge'>
-              4
-            </div>
+            <div className='dx-badge'>4</div>
           </div>
         </Item>
-        <Item location='after' locateInMenu='auto' menuItemTemplate='userPanelTemplate'>
+        <Item
+          location='after'
+          locateInMenu='auto'
+          menuItemTemplate='userPanelTemplate'
+        >
           <UserPanel menuMode='context' />
         </Item>
         <Template name='userPanelTemplate'>

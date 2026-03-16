@@ -19,7 +19,8 @@ export const OpportunityTile = ({ name, products, total, manager }) => {
       <div onClick={opportunityClick} className='opportunity'>
         <div className='name'>{name}</div>
         <div className='product-info'>
-          Products: {products}, total: <span className='total'>{format(total)}</span>
+          Products: {products}, total:{' '}
+          <span className='total'>{format(total)}</span>
         </div>
         <div className='owner'>
           Owner: <span className='owner-name'>{manager}</span>

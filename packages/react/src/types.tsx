@@ -34,7 +34,10 @@ export interface User {
 
 export type AuthContextType = {
   user?: User;
-  signIn: (email: string, password: string) => Promise<{ isOk: boolean; data?: User; message?: string }>;
+  signIn: (
+    email: string,
+    password: string
+  ) => Promise<{ isOk: boolean; data?: User; message?: string }>;
   signOut: () => void;
   loading: boolean;
 };

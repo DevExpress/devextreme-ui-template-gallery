@@ -156,7 +156,11 @@
   >
   </contact-panel>
 
-  <form-popup [(visible)]="isAddContactPopupOpened" (save)= "onClickSaveNewContact()" titleText="New Contact">
+  <form-popup
+    [(visible)]="isAddContactPopupOpened"
+    (save)="onClickSaveNewContact()"
+    titleText="New Contact"
+  >
     <contact-new-form></contact-new-form>
   </form-popup>
 </div>

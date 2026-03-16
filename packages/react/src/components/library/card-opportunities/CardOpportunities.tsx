@@ -9,7 +9,13 @@ import { withLoadPanel } from '../../../utils/withLoadPanel';
 
 import './CardOpportunities.scss';
 
-const CardTemplate = ({ items, title }: { items: Opportunities, title: string}) => (
+const CardTemplate = ({
+  items,
+  title,
+}: {
+  items: Opportunities;
+  title: string;
+}) => (
   <div className='opportunities-block'>
     <div className='dx-form-group-caption'>{title}</div>
     <div className='opportunities-container'>
@@ -26,7 +32,13 @@ const CardTemplate = ({ items, title }: { items: Opportunities, title: string}) 
   </div>
 );
 
-const Cards = ({ active, closed }: { active: Opportunities, closed: Opportunities }) => (
+const Cards = ({
+  active,
+  closed,
+}: {
+  active: Opportunities;
+  closed: Opportunities;
+}) => (
   <>
     <Button
       text='Add Opportunity'
@@ -45,7 +57,13 @@ const Cards = ({ active, closed }: { active: Opportunities, closed: Opportunitie
 
 const CardsWithLoadPanel = withLoadPanel(Cards);
 
-export const CardOpportunities = ({ active, closed }: { active?: Opportunities, closed?: Opportunities }) => {
+export const CardOpportunities = ({
+  active,
+  closed,
+}: {
+  active?: Opportunities;
+  closed?: Opportunities;
+}) => {
   return (
     <div className='card-opportunies'>
       <CardsWithLoadPanel
@@ -54,7 +72,7 @@ export const CardOpportunities = ({ active, closed }: { active?: Opportunities, 
         hasData={!!(active && closed)}
         panelProps={{
           container: '.card-opportunies',
-          position: { of: '.card-opportunies' }
+          position: { of: '.card-opportunies' },
         }}
       />
     </div>

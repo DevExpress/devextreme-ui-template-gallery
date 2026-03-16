@@ -1,32 +1,27 @@
 /* eslint-env node */
 module.exports = {
-  'root': true,
-  'env': {
-    'browser': true,
-    'es2021': true
+  root: true,
+  env: {
+    browser: true,
+    es2021: true,
   },
-  'settings': {
-    'react': {
-      'version': 'detect'
-    }
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
-  'extends': [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended'
-  ],
-  'parser': '@typescript-eslint/parser',
-  'overrides': [
-  ],
-  'globals': {
-    'JSX': true,
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  parser: '@typescript-eslint/parser',
+  overrides: [],
+  globals: {
+    JSX: true,
   },
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'sourceType': 'module'
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  'plugins': ['react', '@typescript-eslint', 'react-perf', 'import'],
-  'rules': {
+  plugins: ['react', '@typescript-eslint', 'react-perf', 'import'],
+  rules: {
     'jsx-quotes': ['error', 'prefer-single'],
     'block-spacing': 'error',
     'comma-spacing': 'error',
@@ -46,15 +41,15 @@ module.exports = {
     'no-whitespace-before-property': 'error',
     'object-curly-spacing': ['error', 'always'],
     'semi-spacing': 'error',
-    'semi': ['error', 'always'],
+    semi: ['error', 'always'],
     'space-before-blocks': 'error',
     'space-before-function-paren': ['error', 'never'],
     'space-in-parens': 'error',
     'space-infix-ops': 'error',
     'space-unary-ops': 'error',
     'eol-last': ['error', 'always'],
-    'curly': ['error', 'multi-line', 'consistent'],
-    'indent': [
+    curly: ['error', 'multi-line', 'consistent'],
+    indent: [
       'error',
       2,
       {
@@ -66,7 +61,7 @@ module.exports = {
       },
     ],
     'multiline-ternary': 'off',
-    'quotes': ['error', 'single', { avoidEscape: true }],
+    quotes: ['error', 'single', { avoidEscape: true }],
     'prefer-template': 'error',
     'react/jsx-no-bind': [
       'error',
@@ -99,13 +94,13 @@ module.exports = {
     'react/jsx-curly-brace-presence': [
       'error',
       {
-        'props': 'never',
-        'children': 'never'
-      }
+        props: 'never',
+        children: 'never',
+      },
     ],
     'react/jsx-boolean-value': ['error', 'never'],
     'react/self-closing-comp': ['error'],
     '@typescript-eslint/no-unused-vars': ['error'],
     'import/no-default-export': 'error',
-  }
+  },
 };

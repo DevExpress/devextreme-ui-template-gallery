@@ -3,6 +3,20 @@ import defaultLayout from '@/layouts/side-nav-outer-toolbar.vue';
 import simpleLayout from '@/layouts/single-card.vue';
 import { authInfo } from '@/auth';
 
+// Eager imports for all pages
+import CrmContactList from '@/pages/crm-contact-list.vue';
+import CrmContactDetails from '@/pages/crm-contact-details.vue';
+import PlanningTaskList from '@/pages/planning-task-list.vue';
+import PlanningTaskDetails from '@/pages/planning-task-details.vue';
+import PlanningScheduler from '@/pages/planning-scheduler.vue';
+import AnalyticsDashboard from '@/pages/analytics-dashboard.vue';
+import AnalyticsSalesAnalysis from '@/pages/analytics-sales-analysis.vue';
+import AnalyticsGeography from '@/pages/analytics-geography.vue';
+import SignInForm from '@/pages/sign-in-form.vue';
+import RegisterForm from '@/pages/register-form.vue';
+import ResetPasswordForm from '@/pages/reset-password-form.vue';
+import UserProfile from '@/pages/user-profile.vue';
+
 function loadAuthComponent(ComponentFileName: string) {
   // eslint-disable-next-line func-call-spacing
   return () => import (/* webpackChunkName: "auth" */ `@/components/library/${ComponentFileName}.vue`);
@@ -64,26 +78,25 @@ export const router = createRouter({
       { from: '/login', to: '/sign-in' },
     ].map((redirect) => ({ path: redirect.from, redirect: redirect.to })),
     ...[
-      'crm-contact-list',
-      'crm-contact-details',
-      'planning-task-list',
-      'planning-task-details',
-      'planning-scheduler',
-      'analytics-dashboard',
-      'analytics-sales-analysis',
-      'analytics-geography',
-      'sign-in-form',
-      'register-form',
-      'reset-password-form',
-      'user-profile',
-    ].map((name) => ({
+      { name: 'crm-contact-list', component: CrmContactList },
+      { name: 'crm-contact-details', component: CrmContactDetails },
+      { name: 'planning-task-list', component: PlanningTaskList },
+      { name: 'planning-task-details', component: PlanningTaskDetails },
+      { name: 'planning-scheduler', component: PlanningScheduler },
+      { name: 'analytics-dashboard', component: AnalyticsDashboard },
+      { name: 'analytics-sales-analysis', component: AnalyticsSalesAnalysis },
+      { name: 'analytics-geography', component: AnalyticsGeography },
+      { name: 'sign-in-form', component: SignInForm },
+      { name: 'register-form', component: RegisterForm },
+      { name: 'reset-password-form', component: ResetPasswordForm },
+      { name: 'user-profile', component: UserProfile },
+    ].map(({ name, component }) => ({
       path: `/${name}`,
       meta: {
         requiresAuth: true,
         layout: defaultLayout,
       },
-      // eslint-disable-next-line func-call-spacing
-      component: () => import (/* webpackChunkName: "pages" */ `@/pages/${name}.vue`),
+      component,
     })),
     ...[
       { from: '/analytics-sales-report', to: '/analytics-sales-analysis' },

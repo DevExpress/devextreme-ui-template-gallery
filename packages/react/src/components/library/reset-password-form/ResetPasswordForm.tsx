@@ -2,7 +2,14 @@ import React, { useState, useRef, useCallback } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-import Form, { Item, Label, ButtonItem, ButtonOptions, RequiredRule, EmailRule } from 'devextreme-react/form';
+import Form, {
+  Item,
+  Label,
+  ButtonItem,
+  ButtonOptions,
+  RequiredRule,
+  EmailRule,
+} from 'devextreme-react/form';
 import LoadIndicator from 'devextreme-react/load-indicator';
 import notify from 'devextreme/ui/notify';
 
@@ -10,7 +17,8 @@ import { resetPassword } from '../../../api/auth';
 
 import './ResetPasswordForm.scss';
 
-const notificationText = "We've sent a link to reset your password. Check your inbox.";
+const notificationText =
+  "We've sent a link to reset your password. Check your inbox.";
 
 export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
   const navigate = useNavigate();
@@ -39,14 +47,29 @@ export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
   return (
     <form className='reset-password-form' onSubmit={onSubmit}>
       <Form formData={formData.current} disabled={loading}>
-        <Item dataField='email' editorType='dxTextBox' editorOptions={emailEditorOptions}>
+        <Item
+          dataField='email'
+          editorType='dxTextBox'
+          editorOptions={emailEditorOptions}
+        >
           <RequiredRule message='Email is required' />
           <EmailRule message='Email is invalid' />
           <Label visible={false} />
         </Item>
         <ButtonItem>
-          <ButtonOptions elementAttr={submitButtonAttributes} width='100%' type='default' useSubmitBehavior>
-            <span className='dx-button-text'>{loading ? <LoadIndicator width='24px' height='24px' visible /> : 'Reset password'}</span>
+          <ButtonOptions
+            elementAttr={submitButtonAttributes}
+            width='100%'
+            type='default'
+            useSubmitBehavior
+          >
+            <span className='dx-button-text'>
+              {loading ? (
+                <LoadIndicator width='24px' height='24px' visible />
+              ) : (
+                'Reset password'
+              )}
+            </span>
           </ButtonOptions>
         </ButtonItem>
       </Form>
@@ -57,5 +80,9 @@ export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
   );
 };
 
-const emailEditorOptions = { stylingMode: 'filled', mode: 'email', value: 'jheart@dx-email.com' };
+const emailEditorOptions = {
+  stylingMode: 'filled',
+  mode: 'email',
+  value: 'jheart@dx-email.com',
+};
 const submitButtonAttributes = { class: 'submit-button' };

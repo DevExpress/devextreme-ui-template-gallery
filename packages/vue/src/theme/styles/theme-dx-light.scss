@@ -1,3 +1,6 @@
-@import "devextreme/scss/bundles/dx.fluent.blue.light";
+/* stylelint-disable */
+@use 'devextreme/scss/bundles/dx.fluent.blue.light.scss' as *;
 
-
+.theme-light {
+  content: '';
+}

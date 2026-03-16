@@ -17,9 +17,10 @@
         </dxi-item>
         <dxi-item location="after">
           <dx-button
-            icon="close" 
+            icon="close"
             stylingMode="text"
-            (onClick)="onClosePanel()"></dx-button>
+            (onClick)="onClosePanel()"
+          ></dx-button>
         </dxi-item>
       </dx-toolbar>
 
@@ -164,7 +165,12 @@
                   stylingMode: 'text',
                   dropDownOptions: { width: 'auto' },
                   width: 'auto',
-                  items: ['Call', 'Send Fax', 'Send Email', 'Schedule a Meeting']
+                  items: [
+                    'Call',
+                    'Send Fax',
+                    'Send Email',
+                    'Schedule a Meeting'
+                  ]
                 }"
               ></dxi-item>
             </dx-toolbar>
@@ -194,7 +200,9 @@
             </dxi-item>
 
             <dxi-item title="Activities">
-              <card-activities [activities]="formData.activities"></card-activities>
+              <card-activities
+                [activities]="formData.activities"
+              ></card-activities>
             </dxi-item>
           </dx-accordion>
         </div>

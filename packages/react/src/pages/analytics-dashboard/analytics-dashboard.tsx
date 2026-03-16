@@ -7,7 +7,13 @@ import ScrollView from 'devextreme-react/scroll-view';
 
 import { useScreenSize } from '../../utils/media-query';
 
-import { getOpportunitiesByCategory, getSalesByCategory, getSales, getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
+import {
+  getOpportunitiesByCategory,
+  getSalesByCategory,
+  getSales,
+  getSalesByStateAndCity,
+  calcSalesByState,
+} from 'dx-template-gallery-data';
 
 import {
   ToolbarAnalytics,
@@ -18,10 +24,17 @@ import {
   ConversionTicker,
   LeadsTicker,
   OpportunitiesTicker,
-  RevenueTotalTicker
+  RevenueTotalTicker,
 } from '../../components';
-import { ANALYTICS_PERIODS, DEFAULT_ANALYTICS_PERIOD_KEY } from '../../shared/constants';
-import { Sale, SaleOrOpportunityByCategory, SaleByState } from '../../types/analytics';
+import {
+  ANALYTICS_PERIODS,
+  DEFAULT_ANALYTICS_PERIOD_KEY,
+} from '../../shared/constants';
+import {
+  Sale,
+  SaleOrOpportunityByCategory,
+  SaleByState,
+} from '../../types/analytics';
 
 import './analytics-dashboard.scss';
 
@@ -32,10 +45,18 @@ const calculateTotal = (data: (SaleOrOpportunityByCategory & Sale)[]) => {
 const items = Object.keys(ANALYTICS_PERIODS);
 
 export const AnalyticsDashboard = () => {
-  const [tabIndex, setTabIndex] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].index);
-  const [dateRange, setDateRange] = useState(ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/'));
-  const [opportunities, setOpportunities] = useState<SaleOrOpportunityByCategory[]>([]);
-  const [salesByCategory, setSalesByCategory] = useState<SaleOrOpportunityByCategory[]>([]);
+  const [tabIndex, setTabIndex] = useState(
+    ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].index
+  );
+  const [dateRange, setDateRange] = useState(
+    ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/')
+  );
+  const [opportunities, setOpportunities] = useState<
+    SaleOrOpportunityByCategory[]
+  >([]);
+  const [salesByCategory, setSalesByCategory] = useState<
+    SaleOrOpportunityByCategory[]
+  >([]);
   const [sales, setSales] = useState<Sale[]>([]);
   const [salesByState, setSalesByState] = useState<SaleByState[]>([]);
   const [salesTotal, setSalesTotal] = useState(0);
@@ -80,9 +101,7 @@ export const AnalyticsDashboard = () => {
       <ToolbarAnalytics
         title='Dashboard'
         additionalToolbarContent={
-          <Item
-            location='before'
-          >
+          <Item location='before'>
             <Tabs
               width={tabsWidth}
               scrollByContent
@@ -107,7 +126,11 @@ export const AnalyticsDashboard = () => {
           <RevenueSnapshotCard datasource={salesByCategory} />
         </div>
       </ToolbarAnalytics>
-      <LoadPanel container='.content' visible={isLoading} position={{ of: '.layout-body' }} />
+      <LoadPanel
+        container='.content'
+        visible={isLoading}
+        position={{ of: '.layout-body' }}
+      />
     </ScrollView>
   );
 };

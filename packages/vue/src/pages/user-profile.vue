@@ -453,12 +453,5 @@ function copyToClipboard(text: string, { event }: { event: Event }) {
   }
 }
 
-:deep(.change-profile-password-popup .dx-popup-normal) {
-  border-radius: 8px;
-  padding: 8px 0;
 
-.dx-toolbar {
-  padding: 0 24px 8px;
-}
-}
 </style>

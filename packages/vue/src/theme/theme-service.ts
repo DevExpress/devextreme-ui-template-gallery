@@ -1,10 +1,10 @@
-import './theme-dark';
-import './theme-light';
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import { current } from 'devextreme/ui/themes';
 import { ref } from 'vue';
 
 const themes = ['light', 'dark'] as const;
+const storageKey = 'app-theme';
+const themePrefix = 'theme-';
 
 type Theme = typeof themes[number];
 
@@ -12,31 +12,66 @@ function getNextTheme(theme?: Theme) {
   return themes[themes.indexOf(theme as Theme) + 1] || themes[0];
 }
 
+function getCurrentTheme(): Theme {
+  return window.localStorage[storageKey] || getNextTheme();
+}
+
+const prefixes = ['theme-dx-', 'variables-'];
+
+const loadStylesImports = async () => {
+  await Promise.all([
+    ...prefixes.flatMap((prefix) => [
+      import(`./styles/${prefix}dark.scss`),
+      import(`./styles/${prefix}light.scss`),
+    ]),
+  ]);
+};
+
+function isThemeStyleSheet(styleSheet: CSSStyleSheet, theme: Theme): boolean {
+  const themeMarker = `${themePrefix}${theme}`;
+  // @ts-ignore - Vite env check
+  if (import.meta.env.PROD) {
+    return !!styleSheet?.href?.includes(`${themeMarker}`);
+  } else {
+    try {
+      const rules = Array.from(styleSheet.cssRules || []);
+      return !!rules.find((rule) =>
+        (rule as CSSStyleRule)?.selectorText?.includes(`.${themeMarker}`),
+      );
+    } catch (e) {
+      return false;
+    }
+  }
+}
+
+function switchThemeStyleSheets(enabledTheme: Theme) {
+  const disabledTheme = getNextTheme(enabledTheme);
+
+  Array.from<CSSStyleSheet>(document.styleSheets).forEach((styleSheet) => {
+    styleSheet.disabled = isThemeStyleSheet(styleSheet, disabledTheme);
+  });
+}
+
 class ThemeService {
-  private readonly storageKey = 'app-theme';
+  private isLoaded = false;
 
-  private readonly themeMarker = 'theme-';
-
-  currentTheme = ref<Theme>(this.getCurrentTheme());
+  currentTheme = ref<Theme>(getCurrentTheme());
 
   isFluent(): boolean {
     return current().includes('fluent');
   }
 
-  getCurrentTheme(): Theme {
-    return window.localStorage[this.storageKey] || getNextTheme();
+  async loadThemes() {
+    if (!this.isLoaded) {
+      await loadStylesImports();
+      this.isLoaded = true;
+    }
   }
 
-  private getThemeStyleSheets() {
-    return Array.from(document.styleSheets).filter(
-      (styleSheet) => styleSheet?.href?.includes(this.themeMarker),
-    );
-  }
+  async setAppTheme(theme = this.currentTheme.value) {
+    await this.loadThemes();
 
-  setAppTheme(theme = this.currentTheme.value) {
-    this.getThemeStyleSheets().forEach((styleSheet) => {
-      styleSheet.disabled = !styleSheet?.href?.includes(`${this.themeMarker}${theme}.`);
-    });
+    switchThemeStyleSheets(theme);
 
     this.currentTheme.value = theme;
     const regexTheme = new RegExp(`\\.(${themes.join('|')})`, 'g');
@@ -47,7 +82,7 @@ class ThemeService {
   switchAppTheme() {
     const newTheme = getNextTheme(this.currentTheme.value);
     this.setAppTheme(newTheme);
-    window.localStorage[this.storageKey] = newTheme;
+    window.localStorage[storageKey] = newTheme;
   }
 }
 

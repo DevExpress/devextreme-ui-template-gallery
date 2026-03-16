@@ -6,7 +6,7 @@ import {
   CardNotes,
   CardMessages,
   CardTasks,
-  CardOpportunities
+  CardOpportunities,
 } from '../..';
 
 export const ContactCards = ({
@@ -21,16 +21,9 @@ export const ContactCards = ({
 }) => {
   return (
     <div className='dx-card details-card'>
-      <TabPanel
-        showNavButtons
-        focusStateEnabled={false}
-        deferRendering={false}
-      >
+      <TabPanel showNavButtons focusStateEnabled={false} deferRendering={false}>
         <TabPanelItem title='Tasks'>
-          <CardTasks
-            isLoading={isLoading}
-            tasks={tasks}
-          />
+          <CardTasks isLoading={isLoading} tasks={tasks} />
         </TabPanelItem>
         <TabPanelItem title='Activities'>
           <CardActivities activities={activities} isLoading={isLoading} />

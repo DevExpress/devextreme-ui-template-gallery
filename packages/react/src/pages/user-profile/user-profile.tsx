@@ -8,7 +8,10 @@ import Button from 'devextreme-react/button';
 import ScrollView from 'devextreme-react/scroll-view';
 import { service } from '../../data/user-profile-service';
 import { FormPhoto } from '../../components';
-import { ProfileCard, ProfileCardItem } from '../../components/library/profile-card/ProfileCard';
+import {
+  ProfileCard,
+  ProfileCardItem,
+} from '../../components/library/profile-card/ProfileCard';
 import { withLoadPanel } from '../../utils/withLoadPanel';
 import { useScreenSize } from '../../utils/media-query';
 import { ChangeProfilePasswordForm } from '../../components/library/change-profile-password-form/ChangeProfilePasswordForm';
@@ -25,7 +28,7 @@ const copyToClipboard = (text) => (evt) => {
       message: tipText,
       minWidth: `${tipText.length + 2}ch`,
       width: 'auto',
-      position: { of: evt.element, offset: '0 -30' }
+      position: { of: evt.element, offset: '0 -30' },
     },
     'info',
     500
@@ -54,19 +57,18 @@ const UserProfileContent = ({
   handleDataChanged,
   handleChangePasswordClick,
   handleContentScrolled,
-}: UserProfileContentProps
-) => {
+}: UserProfileContentProps) => {
   const { isXSmall } = useScreenSize();
 
-  const onScroll = useCallback((reachedTop) => {
-    handleContentScrolled(reachedTop);
-  }, [handleContentScrolled]);
+  const onScroll = useCallback(
+    (reachedTop) => {
+      handleContentScrolled(reachedTop);
+    },
+    [handleContentScrolled]
+  );
 
   return (
-    <ScrollView
-      className='view-wrapper-scroll'
-      onScroll={onScroll}
-    >
+    <ScrollView className='view-wrapper-scroll' onScroll={onScroll}>
       <div className='cards-container'>
         <ProfileCard
           wrapperCssClass='profile-card basic-info-card'
@@ -77,16 +79,13 @@ const UserProfileContent = ({
           onDataChanged={handleDataChanged}
         >
           <div className='basic-info-top-item profile-card-top-item'>
-            <FormPhoto
-              link={profileData?.image}
-              editable
-              size={80}
-            />
+            <FormPhoto link={profileData?.image} editable size={80} />
             <div>
               <div className='title-text'>{profileData?.name}</div>
               <div className='subtitle-text with-clipboard-copy'>
                 <span>ID: {profileData?.id}</span>
-                <Button icon='copy'
+                <Button
+                  icon='copy'
                   className='copy-clipboard-button'
                   stylingMode='text'
                   onClick={copyToClipboard(profileData?.id)}
@@ -150,7 +149,8 @@ const UserProfileContent = ({
             </div>
             <div>
               <div className='title-text'>
-                {profileData?.address}, {profileData?.city}, {profileData?.state}, {profileData?.country}
+                {profileData?.address}, {profileData?.city},{' '}
+                {profileData?.state}, {profileData?.country}
               </div>
             </div>
           </div>
@@ -166,17 +166,21 @@ export const UserProfile = () => {
   const [profileData, setProfileData] = useState<Record<string, string>>();
   const [savedProfileData, setSavedProfileData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [isChangePasswordPopupOpened, setIsChangedPasswordPopupOpened] = useState(false);
+  const [isChangePasswordPopupOpened, setIsChangedPasswordPopupOpened] =
+    useState(false);
   const [isDataChanged, setIsDataChanged] = useState(false);
   const [basicInfoItems, setBasicInfoItems] = useState<ProfileCardItem[]>([]);
   const [contactItems, setContactItems] = useState<ProfileCardItem[]>([]);
   const [addressItems, setAddressItems] = useState<ProfileCardItem[]>([]);
   const [isContentScrolled, setIsContentScrolled] = useState(false);
 
-  const dataChanged = useCallback((data) => {
-    setProfileData({ ...profileData, ...data });
-    setIsDataChanged(true);
-  }, [profileData]);
+  const dataChanged = useCallback(
+    (data) => {
+      setProfileData({ ...profileData, ...data });
+      setIsDataChanged(true);
+    },
+    [profileData]
+  );
 
   const changePassword = useCallback(() => {
     setIsChangedPasswordPopupOpened(true);
@@ -186,9 +190,12 @@ export const UserProfile = () => {
     setIsContentScrolled(!reachedTop);
   }, []);
 
-  const setSavedData = useCallback((data = profileData) => {
-    setSavedProfileData(JSON.parse(JSON.stringify(data)));
-  }, [profileData]);
+  const setSavedData = useCallback(
+    (data = profileData) => {
+      setSavedProfileData(JSON.parse(JSON.stringify(data)));
+    },
+    [profileData]
+  );
 
   const onCancel = useCallback(() => {
     setProfileData(savedProfileData);
@@ -202,10 +209,11 @@ export const UserProfile = () => {
         message: 'Data saved',
         position: {
           at: 'bottom center',
-          my: 'bottom center'
-        }
+          my: 'bottom center',
+        },
       },
-      'success');
+      'success'
+    );
     setIsDataChanged(false);
     setSavedData();
   }, [profileData, setSavedData]);
@@ -222,10 +230,7 @@ export const UserProfile = () => {
       setSavedData(data);
     });
 
-    Promise.all([
-      supervisorsPromise,
-      profileDataPromise
-    ]).then(() => {
+    Promise.all([supervisorsPromise, profileDataPromise]).then(() => {
       setIsLoading(false);
     });
 
@@ -233,55 +238,57 @@ export const UserProfile = () => {
     setAddressItems(service.getAddressItems());
   }, []);
 
-  return <div className='view-host user-profile'>
-    <div className='view-wrapper'>
-      <Toolbar className={`theme-dependent ${isContentScrolled ? 'scrolled' : ''}`}>
-        <Item location='before'>
-          <div className='header-text'>User Profile</div>
-        </Item>
-        <Item location='after'
-          locateInMenu='never'>
-          <Button
-            className='cancel-button'
-            text='Cancel'
-            disabled={!isDataChanged}
-            stylingMode='outlined'
-            type='normal'
-            onClick={onCancel}
-          />
-        </Item>
-        <Item location='after'
-          locateInMenu='never'>
-          <Button
-            disabled={!isDataChanged}
-            text='Save'
-            icon='save'
-            type='default'
-            stylingMode='contained'
-            onClick={onSave}
-          />
-        </Item>
-      </Toolbar>
-      <UserProfileContentWithLoadPanel
-        basicInfoItems={basicInfoItems}
-        contactItems={contactItems}
-        addressItems={addressItems}
-        profileData={profileData}
-        handleChangePasswordClick={changePassword}
-        handleDataChanged={dataChanged}
-        handleContentScrolled={handleContentScrolled}
-        hasData={!isLoading}
-        loading={isLoading}
-        panelProps={{
-          container: '.view-wrapper',
-          position: { of: '.content' },
-        }}
+  return (
+    <div className='view-host user-profile'>
+      <div className='view-wrapper'>
+        <Toolbar
+          className={`theme-dependent ${isContentScrolled ? 'scrolled' : ''}`}
+        >
+          <Item location='before'>
+            <div className='header-text'>User Profile</div>
+          </Item>
+          <Item location='after' locateInMenu='never'>
+            <Button
+              className='cancel-button'
+              text='Cancel'
+              disabled={!isDataChanged}
+              stylingMode='outlined'
+              type='normal'
+              onClick={onCancel}
+            />
+          </Item>
+          <Item location='after' locateInMenu='never'>
+            <Button
+              disabled={!isDataChanged}
+              text='Save'
+              icon='save'
+              type='default'
+              stylingMode='contained'
+              onClick={onSave}
+            />
+          </Item>
+        </Toolbar>
+        <UserProfileContentWithLoadPanel
+          basicInfoItems={basicInfoItems}
+          contactItems={contactItems}
+          addressItems={addressItems}
+          profileData={profileData}
+          handleChangePasswordClick={changePassword}
+          handleDataChanged={dataChanged}
+          handleContentScrolled={handleContentScrolled}
+          hasData={!isLoading}
+          loading={isLoading}
+          panelProps={{
+            container: '.view-wrapper',
+            position: { of: '.content' },
+          }}
+        />
+      </div>
+
+      <ChangeProfilePasswordForm
+        visible={isChangePasswordPopupOpened}
+        setVisible={setIsChangedPasswordPopupOpened}
       />
     </div>
-
-    <ChangeProfilePasswordForm
-      visible={isChangePasswordPopupOpened}
-      setVisible={setIsChangedPasswordPopupOpened}
-    />
-  </div>;
+  );
 };

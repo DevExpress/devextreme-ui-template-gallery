@@ -126,13 +126,13 @@ function onFieldChange<T extends keyof Profile>(fieldName: T, value: Profile[T])
     display: flex;
   }
 
-  :deep(.dx-field-item) {
-    padding-top: calc(var(--content-padding) / 2);
-    padding-right: 0;
-  }
-
   .form-container {
     margin: calc(var(--content-padding) * 2) var(--content-padding) 0;
+
+    :deep(.dx-field-item) {
+      padding-top: calc(var(--content-padding) / 2);
+      padding-right: 0;
+    }
   }
 }
 </style>

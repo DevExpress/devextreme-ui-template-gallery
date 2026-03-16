@@ -19,7 +19,10 @@
           [dataField]="item.dataField"
           [editorType]="item.editorType"
           [editorOptions]="
-            assign | apply: { stylingMode: 'filled', valueChangeEvent: 'input' }:item.editorOptions
+            assign
+              | apply
+                : { stylingMode: 'filled', valueChangeEvent: 'input' }
+                : item.editorOptions
           "
           [colSpan]="item.colSpan"
         >

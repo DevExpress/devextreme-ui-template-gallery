@@ -1,4 +1,4 @@
-@use "../../../../variables.scss" as *;
+@use '../../../../variables.scss' as *;
 
 :host {
   --contact-side-panel-width: 350px;
@@ -65,7 +65,8 @@
     .panel-toolbar {
       --padding: calc(var(--toolbar-vertical-padding) / 2);
 
-      padding: var(--padding) var(--padding) var(--padding) var(--toolbar-vertical-padding);
+      padding: var(--padding) var(--padding) var(--padding)
+        var(--toolbar-vertical-padding);
     }
 
     .data-part {

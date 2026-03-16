@@ -7,13 +7,13 @@ import { router } from './router';
 import 'devexpress-gantt/dist/dx-gantt.css';
 import './styles.scss';
 
-themeService.setAppTheme();
+themeService.setAppTheme().then(() => {
+  const app = createApp(App);
 
-const app = createApp(App);
+  app.use(router);
+  app.provide<AppInfo>(appInfoInjectKey, {
+    title: 'UI Template Gallery',
+  });
 
-app.use(router);
-app.provide<AppInfo>(appInfoInjectKey, {
-  title: 'UI Template Gallery',
+  app.mount('#app');
 });
-
-app.mount('#app');

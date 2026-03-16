@@ -1,27 +1,27 @@
 <card-analytics contentClass="sales-range" [isMenuVisible]="false">
   @if (data && data.length > 0) {
-    <dx-range-selector
-      [dataSource]="data"
-      [(value)]="visualRange"
-      (onValueChanged)="onRangeChanged($event)"
+  <dx-range-selector
+    [dataSource]="data"
+    [(value)]="visualRange"
+    (onValueChanged)="onRangeChanged($event)"
+  >
+    <dxo-scale
+      minorTickInterval="day"
+      tickInterval="month"
+      valueType="datetime"
     >
-      <dxo-scale
-        minorTickInterval="day"
-        tickInterval="month"
-        valueType="datetime"
-      >
-        <dxo-minor-tick [visible]="false"></dxo-minor-tick>
-        <dxo-marker [visible]="false"></dxo-marker>
-        <dxo-label format="MMM yyyy"></dxo-label>
-      </dxo-scale>
-      <dxo-size [height]="90"></dxo-size>
+      <dxo-minor-tick [visible]="false"></dxo-minor-tick>
+      <dxo-marker [visible]="false"></dxo-marker>
+      <dxo-label format="MMM yyyy"></dxo-label>
+    </dxo-scale>
+    <dxo-size [height]="90"></dxo-size>
 
-      <dxo-chart>
-        <dxi-series type="line" argumentField="date" valueField="total">
-        </dxi-series>
-      </dxo-chart>
-    </dx-range-selector>
+    <dxo-chart>
+      <dxi-series type="line" argumentField="date" valueField="total">
+      </dxi-series>
+    </dxo-chart>
+  </dx-range-selector>
   } @else {
-    <dx-load-indicator class="centered"></dx-load-indicator>
+  <dx-load-indicator class="centered"></dx-load-indicator>
   }
 </card-analytics>

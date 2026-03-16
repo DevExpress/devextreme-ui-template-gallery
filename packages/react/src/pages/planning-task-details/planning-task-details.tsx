@@ -2,13 +2,20 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { Toolbar, Item as ToolbarItem } from 'devextreme-react/toolbar';
-import DropDownButton, { Item as DropDownItem } from 'devextreme-react/drop-down-button';
+import DropDownButton, {
+  Item as DropDownItem,
+} from 'devextreme-react/drop-down-button';
 import TabPanel, { Item as TabPanelItem } from 'devextreme-react/tab-panel';
 import ValidationGroup from 'devextreme-react/validation-group';
 import Button from 'devextreme-react/button';
 import ScrollView from 'devextreme-react/scroll-view';
 
-import { TaskForm, CardActivities, CardNotes, CardMessages } from '../../components';
+import {
+  TaskForm,
+  CardActivities,
+  CardNotes,
+  CardMessages,
+} from '../../components';
 
 import { Task } from '../../types/task';
 
@@ -55,9 +62,13 @@ export const PlanningTaskDetails = () => {
               onClick={() => navigate(-1)}
             />
           </ToolbarItem>
-          <ToolbarItem location='before' text={ task?.text ?? 'Loading...' } />
+          <ToolbarItem location='before' text={task?.text ?? 'Loading...'} />
           <ToolbarItem location='after' locateInMenu='auto'>
-            <DropDownButton text='Actions' stylingMode='text' dropDownOptions={{ width: 'auto' }}>
+            <DropDownButton
+              text='Actions'
+              stylingMode='text'
+              dropDownOptions={{ width: 'auto' }}
+            >
               <DropDownItem text='Duplicate' />
               <DropDownItem text='Close' />
               <DropDownItem text='Delete' />
@@ -69,11 +80,7 @@ export const PlanningTaskDetails = () => {
             widget='dxButton'
             showText='inMenu'
           >
-            <Button
-              text='Attach'
-              icon='attach'
-              stylingMode='text'
-            />
+            <Button text='Attach' icon='attach' stylingMode='text' />
           </ToolbarItem>
           <ToolbarItem
             location='after'
@@ -103,7 +110,10 @@ export const PlanningTaskDetails = () => {
                 deferRendering={false}
               >
                 <TabPanelItem title='Activities'>
-                  <CardActivities activities={task?.activities} isLoading={isLoading} />
+                  <CardActivities
+                    activities={task?.activities}
+                    isLoading={isLoading}
+                  />
                 </TabPanelItem>
                 <TabPanelItem title='Notes'>
                   <CardNotes items={task?.notes} user={task?.owner} />

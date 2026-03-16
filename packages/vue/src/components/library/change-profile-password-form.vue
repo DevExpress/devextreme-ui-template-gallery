@@ -105,7 +105,7 @@ function saveNewPassword() {
 
 @include separator();
 
-.change-profile-password-popup {
+.change-profile-password-popup.form-popup {
   .dx-form {
     height: var(--change-password-popup-height, auto);
   }
