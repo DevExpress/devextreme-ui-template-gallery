@@ -7,9 +7,25 @@ const packages = require('./packages');
 
 const rootPath = join(cwd(), 'packages');
 
+const resolveIndexFilePath = (indexFileLocation) => {
+  const candidatePaths = [
+    join(indexFileLocation, 'index.html'),
+    join(indexFileLocation, '..', 'index.html'),
+  ];
+
+  const indexFilePath = candidatePaths.find((candidatePath) => existsSync(candidatePath));
+
+  if (!indexFilePath) {
+    throw new Error(`Unable to locate index.html for ${indexFileLocation}`);
+  }
+
+  return indexFilePath;
+};
+
 const performIndexReplacement = (indexFileLocation) => {
-  const indexFilePath = join(indexFileLocation, 'index.html');
-  const content = readFileSync(indexFilePath).toString();
+  const indexFilePath = resolveIndexFilePath(indexFileLocation);
+  const content = readFileSync(indexFilePath, 'utf8');
+
   writeFileSync(indexFilePath, content.replace(/class="dx-viewport"/s, 'class="dx-viewport embedded"'), 'utf8');
 };
 
