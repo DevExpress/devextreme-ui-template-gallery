@@ -24,6 +24,7 @@
     "lint-utils --fix": "eslint --fix utils"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "~20.3.17",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "@typescript-eslint/utils": "^8.46.2",
