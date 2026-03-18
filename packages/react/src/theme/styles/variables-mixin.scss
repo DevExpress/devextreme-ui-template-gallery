@@ -68,7 +68,7 @@ $theme-mode: null !default;
   --theme-padding: var(--dx-button-padding-inline);
   --button-height-theme-difference: calc(
     (var(--theme-padding) - 10px) / 3
-  ); // WA for no button-height in generic theme
+  ); // WA for no button-height in fluent theme
 
   --button-height: calc(
     26px + var(--button-height-theme-difference)
