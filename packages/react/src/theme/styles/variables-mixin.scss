@@ -77,6 +77,7 @@ $theme-mode: null !default;
   --scheduler-toolbar-height: calc(
     var(--button-height) + 2 * var(--theme-padding)
   );
+  
   @if meta.variable-exists('base-danger') {
     --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
   }
