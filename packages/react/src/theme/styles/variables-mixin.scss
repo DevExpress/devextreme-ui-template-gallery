@@ -12,11 +12,18 @@ $theme-mode: null !default;
 
 :root,
 .app-theme-#{$theme-mode} {
-  --dark-warning-color: #{color.adjust(
-      $base-warning,
-      $hue: -12deg,
-      $lightness: -3.73%
-    )};
+  @if meta.variable-exists('base-warning') {
+    --dark-warning-color: #{color.adjust(
+        $base-warning,
+        $hue: -12deg,
+        $lightness: -3.73%
+      )};
+  }
+
+  @else {
+    --dark-warning-color: var(--warning-color);
+  }
+
   --typography-bg: var(--base-bg);
 
   @if meta.variable-exists('base-typography-bg') {
@@ -31,13 +38,30 @@ $theme-mode: null !default;
   --page-padding: 32px;
   --toolbar-margin-bottom: var(--content-padding);
   --footer-height: 70px;
-  --base-bg-darken-5: #{color.adjust($base-bg, $lightness: -5%)};
-  --base-bg-darken-4: #{color.adjust($base-bg, $lightness: -4%)};
-  --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
-  --base-text-color-alpha: #{rgba(
-      $base-text-color,
-      color.alpha($base-text-color) * 0.7
-    )};
+
+  @if meta.variable-exists('base-bg') {
+    --base-bg-darken-5: #{color.adjust($base-bg, $lightness: -5%)};
+    --base-bg-darken-4: #{color.adjust($base-bg, $lightness: -4%)};
+  }
+
+  @else {
+    --base-bg-darken-5: var(--dx-component-color-bg);
+    --base-bg-darken-4: var(--dx-component-color-bg);
+  }
+
+  @if meta.variable-exists('base-text-color') {
+    --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
+    --base-text-color-alpha: #{rgba(
+        $base-text-color,
+        color.alpha($base-text-color) * 0.7
+      )};
+  }
+
+  @else {
+    --background-gray-color: rgba(0, 0, 0, 0.04);
+    --base-text-color-alpha: rgba(0, 0, 0, 0.7);
+  }
+
   --footer-left-padding: calc(
     (var(--side-panel-min-width) - var(--dx-font-size-icon)) / 2
   );
@@ -53,8 +77,23 @@ $theme-mode: null !default;
   --scheduler-toolbar-height: calc(
     var(--button-height) + 2 * var(--theme-padding)
   );
-  --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
-  --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
+  
+  @if meta.variable-exists('base-danger') {
+    --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
+  }
+
+  @else {
+    --tooltip-danger-button-color: rgba(255, 0, 0, 0.1);
+  }
+
+  @if meta.variable-exists('base-success') {
+    --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
+  }
+
+  @else {
+    --tooltip-success-button-color: rgba(0, 128, 0, 0.1);
+  }
+
   --base-bg: var(--dx-component-color-bg);
   --card-background: var(--base-bg);
   --side-panel-background: var(--base-bg-darken-5);

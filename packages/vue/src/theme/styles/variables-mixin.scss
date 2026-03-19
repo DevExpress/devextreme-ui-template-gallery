@@ -13,10 +13,14 @@ $theme-mode: null !default;
 }
 
 :root {
-  --dark-warning-color: #{color.adjust(
-      color.adjust($base-warning, $hue: -12deg),
-      $lightness: -3.73%
-    )};
+  @if meta.variable-exists('base-warning') and $base-warning != null {
+    --dark-warning-color: #{color.adjust(
+        color.adjust($base-warning, $hue: -12deg),
+        $lightness: -3.73%
+      )};
+  } @else {
+    --dark-warning-color: var(--warning-color);
+  }
   --typography-bg: var(--base-bg);
 
   @if meta.variable-exists('base-typography-bg') {
@@ -31,8 +35,15 @@ $theme-mode: null !default;
   --calendar-width: 292px;
   --side-panel-min-width: 48px;
   --base-bg: var(--dx-component-color-bg);
-  --base-bg-darken-5: #{color.adjust($base-bg, $lightness: -5%)};
-  --base-bg-darken-4: #{color.adjust($base-bg, $lightness: -4%)};
+
+  @if meta.variable-exists('base-bg') and $base-bg != null {
+    --base-bg-darken-5: #{color.adjust($base-bg, $lightness: -5%)};
+    --base-bg-darken-4: #{color.adjust($base-bg, $lightness: -4%)};
+  } @else {
+    --base-bg-darken-5: var(--base-bg);
+    --base-bg-darken-4: var(--base-bg);
+  }
+
   --card-background: var(--base-bg);
 
   @if $theme-mode == dark {
@@ -47,13 +58,21 @@ $theme-mode: null !default;
   --warning-color: var(--dx-color-warning);
   --error-color: var(--dx-color-danger);
   --base-text-color: var(--dx-color-text);
-  --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
+  @if meta.variable-exists('base-text-color') and $base-text-color != null {
+    --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
+  } @else {
+    --background-gray-color: rgba(0, 0, 0, 0.04);
+  }
   --texteditor-edit-color: var(--dx-texteditor-color-text);
   --texteditor-label-color: var(--dx-texteditor-color-label);
-  --base-text-color-alpha: #{rgba(
-      $base-text-color,
-      color.alpha($base-text-color) * 0.7
-    )};
+  @if meta.variable-exists('base-text-color') and $base-text-color != null {
+    --base-text-color-alpha: #{rgba(
+        $base-text-color,
+        color.alpha($base-text-color) * 0.7
+      )};
+  } @else {
+    --base-text-color-alpha: rgba(0, 0, 0, 0.7);
+  }
   --toolbar-margin-bottom: var(--content-padding);
   --subtitle-text-color: var(--texteditor-label-color);
 
@@ -66,8 +85,16 @@ $theme-mode: null !default;
   --popup-toolbar-item-spacing: var(--dx-popup-toolbar-item-padding-inline);
   --drop-down-gnrc-button-height: var(--dx-component-height);
   --theme-padding: var(--dx-button-padding-inline);
-  --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
-  --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
+  @if meta.variable-exists('base-danger') and $base-danger != null {
+    --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
+  } @else {
+    --tooltip-danger-button-color: rgba(255, 0, 0, 0.1);
+  }
+  @if meta.variable-exists('base-success') and $base-success != null {
+    --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
+  } @else {
+    --tooltip-success-button-color: rgba(0, 128, 0, 0.1);
+  }
   --button-height-theme-difference: calc(
     (var(--theme-padding) - 10px) / 3
   ); // WA for no button-height in fluent theme
