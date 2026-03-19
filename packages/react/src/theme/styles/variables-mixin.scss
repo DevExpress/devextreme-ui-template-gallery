@@ -12,7 +12,7 @@ $theme-mode: null !default;
 
 :root,
 .app-theme-#{$theme-mode} {
-  @if meta.variable-exists('base-warning') {
+  @if meta.variable-exists('base-warning') and meta.type-of($base-warning) == 'color' {
     --dark-warning-color: #{color.adjust(
         $base-warning,
         $hue: -12deg,
@@ -39,7 +39,7 @@ $theme-mode: null !default;
   --toolbar-margin-bottom: var(--content-padding);
   --footer-height: 70px;
 
-  @if meta.variable-exists('base-bg') {
+  @if meta.variable-exists('base-bg') and meta.type-of($base-bg) == 'color' {
     --base-bg-darken-5: #{color.adjust($base-bg, $lightness: -5%)};
     --base-bg-darken-4: #{color.adjust($base-bg, $lightness: -4%)};
   }
@@ -49,7 +49,7 @@ $theme-mode: null !default;
     --base-bg-darken-4: var(--dx-component-color-bg);
   }
 
-  @if meta.variable-exists('base-text-color') {
+  @if meta.variable-exists('base-text-color') and meta.type-of($base-text-color) == 'color' {
     --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
     --base-text-color-alpha: #{rgba(
         $base-text-color,
@@ -78,7 +78,7 @@ $theme-mode: null !default;
     var(--button-height) + 2 * var(--theme-padding)
   );
   
-  @if meta.variable-exists('base-danger') {
+  @if meta.variable-exists('base-danger') and meta.type-of($base-danger) == 'color' {
     --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
   }
 
@@ -86,7 +86,7 @@ $theme-mode: null !default;
     --tooltip-danger-button-color: rgba(255, 0, 0, 0.1);
   }
 
-  @if meta.variable-exists('base-success') {
+  @if meta.variable-exists('base-success') and meta.type-of($base-success) == 'color' {
     --tooltip-success-button-color: #{color.change($base-success, $alpha: 0.1)};
   }
 
