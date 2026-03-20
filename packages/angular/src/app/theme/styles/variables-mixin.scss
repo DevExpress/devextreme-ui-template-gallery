@@ -65,7 +65,10 @@ $theme-mode: null !default;
 
   @if meta.variable-exists('base-text-color') and meta.type-of($base-text-color) == 'color' {
     --background-gray-color: #{color.change($base-text-color, $alpha: 0.04)};
-    --base-text-color-alpha: #{color.change($base-text-color, $alpha: 0.7)};
+    --base-text-color-alpha: #{color.change(
+        $base-text-color,
+        $alpha: color.alpha($base-text-color) * 0.7
+      )};
   }
 
   @else {
