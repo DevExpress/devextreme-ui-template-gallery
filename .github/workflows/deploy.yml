@@ -52,18 +52,6 @@ jobs:
       with:
         install-dist: true
 
-    - name: Sync replaced packages to pnpm store
-      run: |
-        for pkg in devextreme devextreme-dist; do
-          if [ -d "node_modules/$pkg" ] && [ ! -L "node_modules/$pkg" ]; then
-            store_pkg=$(find node_modules/.pnpm -maxdepth 3 -path "*/${pkg}@*/node_modules/${pkg}" -type d 2>/dev/null | head -1)
-            if [ -n "$store_pkg" ]; then
-              rm -rf "$store_pkg"
-              cp -r "node_modules/$pkg" "$store_pkg"
-            fi
-          fi
-        done
-
     - name: Set theme
       run: node utils/set-theme.js ${{ matrix.theme }}
 
@@ -107,18 +95,6 @@ jobs:
       uses: DevExpress/github-actions/install-internal-package@main
       with:
         install-dist: true
-
-    - name: Sync replaced packages to pnpm store
-      run: |
-        for pkg in devextreme devextreme-dist; do
-          if [ -d "node_modules/$pkg" ] && [ ! -L "node_modules/$pkg" ]; then
-            store_pkg=$(find node_modules/.pnpm -maxdepth 3 -path "*/${pkg}@*/node_modules/${pkg}" -type d 2>/dev/null | head -1)
-            if [ -n "$store_pkg" ]; then
-              rm -rf "$store_pkg"
-              cp -r "node_modules/$pkg" "$store_pkg"
-            fi
-          fi
-        done
 
     - name: Build Shell
       run: pnpm run build-shell
