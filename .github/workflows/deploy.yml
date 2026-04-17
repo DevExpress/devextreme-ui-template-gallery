@@ -63,7 +63,7 @@ jobs:
       run: pnpm run build
 
     - name: Copy apps
-      run: node utils/copy-build.js ${{ matrix.mode }} ${{ matrix.theme }}
+      run: pnpm run copy-build ${{ matrix.mode }} ${{ matrix. Theme }}
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
