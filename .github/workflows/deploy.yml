@@ -53,7 +53,7 @@ jobs:
         install-dist: true
 
     - name: Set theme
-      run: node utils/set-theme.js ${{ matrix.theme }}
+      run: pnpm run set-theme ${{ matrix.theme }}
 
     - name: Set mode
       if: ${{ matrix.mode == 'embedded' }}
