@@ -1,4 +1,4 @@
-# DevExtreme UI Template Gallery
+# DevExtreme UI Template Gallery!
 
 This repository includes responsive UI Templates for the most popular UI/UX patterns in web LOB applications. These templates are available for Angular, React, and Vue.
 
