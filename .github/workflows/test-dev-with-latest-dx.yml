@@ -41,34 +41,35 @@ jobs:
       - name: Checkout Devextreme
         run: git clone https://github.com/DevExpress/DevExtreme.git devextreme
 
-      - name: Use Node.js 18
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-
-      - name: DevExtreme - Restore npm cache
-        uses: actions/cache@v4
-        with:
-          path: 'devextreme/**/node_modules'
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('devextreme/**/package-lock.json') }}
+          cache: 'pnpm'
+          cache-dependency-path: 'devextreme/pnpm-lock.yaml'
 
       - name: DevExtreme - Install packages
         working-directory: devextreme
-        run: npm ci --no-audit --no-fund
+        run: pnpm install --frozen-lockfile
 
       - name: DevExtreme - Build
         working-directory: devextreme/packages/devextreme
         env:
           BUILD_TEST_INTERNAL_PACKAGE: true
-        run: npm run build-npm-devextreme
+        run: pnpm run build-npm-devextreme
 
       - name: DevExtreme - Pack
         working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme
-        run: npm pack
+        run: pnpm pack
 
       - name: DevExtreme dist - Pack
         working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme-dist
-        run: npm pack
+        run: pnpm pack
 
       - name: Upload devextreme Artifact
         uses: actions/upload-artifact@v4
@@ -80,11 +81,11 @@ jobs:
             devextreme/packages/devextreme/artifacts/npm/devextreme-dist/devextreme-dist*.tgz
       - name: DevExtreme-angular - Build
         working-directory: devextreme/packages/devextreme-angular
-        run: npm run build
+        run: pnpm run build
 
       - name: DevExtreme-angular - Pack
         working-directory: devextreme/packages/devextreme-angular
-        run: npm run pack
+        run: pnpm run pack
 
       - name: Upload devextreme-angular Artifact
         uses: actions/upload-artifact@v4
@@ -95,11 +96,11 @@ jobs:
 
       - name: DevExtreme-react - Pack
         working-directory: devextreme/packages/devextreme-react
-        run: npm run pack
+        run: pnpm run pack
 
       - name: DevExtreme-react - Pack npm
         working-directory: devextreme/packages/devextreme-react/npm
-        run: npm pack
+        run: pnpm pack
 
       - name: Upload devextreme-react Artifact
         uses: actions/upload-artifact@v4
@@ -110,11 +111,11 @@ jobs:
 
       - name: DevExtreme-vue - Pack
         working-directory: devextreme/packages/devextreme-vue
-        run: npm run pack
+        run: pnpm run pack
 
       - name: DevExtreme-vue - Pack npm
         working-directory: devextreme/packages/devextreme-vue/npm
-        run: npm pack
+        run: pnpm pack
 
       - name: Upload devextreme-vue Artifact
         uses: actions/upload-artifact@v4
