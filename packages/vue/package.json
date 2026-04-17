@@ -10,13 +10,13 @@
     "test:unit": "vitest",
     "lint": "eslint .",
     "build-themes": "devextreme build",
-    "postinstall": "npm run build-themes"
+    "postinstall": "pnpm run build-themes"
   },
   "dependencies": {
     "core-js": "^3.8.3",
     "devexpress-gantt": "^4.1.33",
     "devextreme-vue": "25.2.4",
-    "dx-template-gallery-data": "^1.0.0",
+    "dx-template-gallery-data": "workspace:*",
     "exceljs": "^3.10.0",
     "file-saver-es": "^2.0.5",
     "luxon": "^3.3.0",

@@ -18,24 +18,20 @@ jobs:
     - name: Get sources
       uses: actions/checkout@v4
 
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '24'
+        cache: 'pnpm'
 
-    - name: Restore npm cache
-      uses: actions/cache@v4
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node
-
-    - name: Run npm ci
-      run: npm ci
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
 
     - name: Lint applications
-      run: npm run lint-${{ matrix.PROJECT }}
+      run: pnpm run lint-${{ matrix.PROJECT }}
 
     - name: Archive artifacts
       if: ${{ failure() }}

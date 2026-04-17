@@ -17,25 +17,21 @@ jobs:
     - name: Get sources
       uses: actions/checkout@v4
 
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '24'
+        cache: 'pnpm'
 
-    - name: Restore npm cache
-      uses: actions/cache@v4
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-
-    - name: Run npm ci for metadata
-      run: npm ci
+    - name: Install dependencies for metadata
+      run: pnpm install --frozen-lockfile
       working-directory: packages/metadata
 
     - name: Test Metadata
-      run: npm run test
+      run: pnpm run test
       working-directory: packages/metadata
 
   testcafe:
@@ -85,43 +81,51 @@ jobs:
     - name: Get sources
       uses: actions/checkout@v4
 
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '24'
+        cache: 'pnpm'
 
-    - name: Restore npm cache
-      uses: actions/cache@v4
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-
-    - name: Run npm ci
-      run: npm ci --no-audit --no-fund
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
 
     - name: Install Internal Packages
       uses: DevExpress/github-actions/install-internal-package@main
       with:
         install-dist: true
 
+    - name: Sync replaced packages to pnpm store
+      run: |
+        for pkg in devextreme devextreme-dist; do
+          if [ -d "node_modules/$pkg" ] && [ ! -L "node_modules/$pkg" ]; then
+            store_pkg=$(find node_modules/.pnpm -maxdepth 3 -path "*/${pkg}@*/node_modules/${pkg}" -type d 2>/dev/null | head -1)
+            if [ -n "$store_pkg" ]; then
+              rm -rf "$store_pkg"
+              cp -r "node_modules/$pkg" "$store_pkg"
+            fi
+          fi
+        done
+
     - name: Set theme
-      run: npm run set-theme -- ${{ matrix.theme.fullName }}
+      run: node utils/set-theme.js ${{ matrix.theme.fullName }}
 
     - name: Build
-      run: npm run build
+      run: pnpm run build
       working-directory: packages/${{ matrix.ARGS.project }}
 
     - name: Start app
-      run: npm run start-apps -- --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme.name }}
+      run: node ./run-server.js --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme.name }}
       working-directory: packages/testing
 
     - name: Run tests
       run: |
         all_args="--project ${{ matrix.ARGS.project }} --page ${{ matrix.ARGS.page }} --quarantineMode true  --theme ${{ matrix.theme.name }}"
         echo "$all_args"
-        npm run test-testcafe -- $all_args
+        node ./runner.js $all_args
       working-directory: packages/testing
 
     - name: Copy screenshots artifacts

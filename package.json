@@ -1,24 +1,26 @@
 {
   "name": "devextreme-ui-template-gallery",
+  "version": "1.0.0",
+  "packageManager": "pnpm@9.15.9",
   "private": true,
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "pnpm -r run build",
     "set-theme": "node utils/set-theme.js",
     "copy-build": "node utils/copy-build.js",
     "copy-shell": "node utils/copy-shell.js",
     "make-embedded-mode": "node utils/make-embedded-mode.js",
     "lint-html": "prettier --write . && prettier --check .",
     "lint-js": "eslint .",
-    "lint-fix": "prettier --write . && npm run lint-angular-fix && npm run lint-react-fix && npm run lint-shell-fix && npm run lint-utils-fix && stylelint **/*.{css,scss} --fix",
+    "lint-fix": "prettier --write . && pnpm run lint-angular-fix && pnpm run lint-react-fix && pnpm run lint-shell-fix && pnpm run lint-utils-fix && stylelint **/*.{css,scss} --fix",
     "lint-css": "stylelint **/*.{css,scss}",
     "lint-css-fix": "stylelint --fix **/*.{css,scss}",
     "lint-angular": "eslint packages/angular",
-    "lint-react": "cd packages/react && npm run lint",
-    "lint-vue": "cd packages/vue && npm run lint",
+    "lint-react": "pnpm --filter react-app run lint",
+    "lint-vue": "pnpm --filter vue-ui-template-gallery run lint",
     "lint-utils": "eslint utils/",
-    "lint-bundles": "npm-run-all -p lint-angular lint-react lint-vue",
+    "lint-bundles": "pnpm run lint-angular && pnpm run lint-react && pnpm run lint-vue",
     "lint-angular-fix": "eslint --fix packages/angular",
-    "lint-react-fix": "cd packages/react && npm run lint -- --fix",
+    "lint-react-fix": "pnpm --filter react-app run lint -- --fix",
     "lint-shell-fix": "eslint --fix packages/shell",
     "lint-utils-fix": "eslint --fix utils",
     "lint-utils --fix": "eslint --fix utils"
@@ -27,6 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "@typescript-eslint/utils": "^8.46.2",
+    "@babel/runtime": "^7.28.0",
     "devextreme-cli": "latest",
     "eslint": "^8.55.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -51,9 +54,7 @@
     "vue": "^3.2.38",
     "vue-eslint-parser": "^9.3.2"
   },
-  "workspaces": [
-    "packages/*"
-  ],
+
   "dependencies": {
     "devextreme": "25.2.4",
     "devextreme-dist": "25.2.4",
@@ -65,28 +66,30 @@
   "pre-commit": [
     "lint-bundles"
   ],
-  "overrides": {
-    "rxjs": "~7.8.2",
-    "axios@<=1.13.4": "~1.13.5",
-    "follow-redirects@<1.15.6": "~1.15.6",
-    "glob@<10.5.0": "~10.5.0",
-    "nth-check@<2.0.1": "~2.0.1",
-    "@angular/animations": "~20.3.17",
-    "@angular/common": "~20.3.17",
-    "@angular/compiler": "~20.3.17",
-    "@angular/core": "~20.3.17",
-    "@angular/forms": "~20.3.17",
-    "@angular/build": "~20.3.19",
-    "@angular/platform-browser": "~20.3.17",
-    "@angular/platform-browser-dynamic": "~20.3.17",
-    "@angular/router": "~20.3.17",
-    "zone.js": "~0.15.1",
-    "tar@<=7.5.10": "~7.5.11",
-    "bfj@<9.1.3": "~9.1.3",
-    "minimatch@>=9.0.0 <9.0.6": "^10.2.3",
-    "minimatch@>=3.0.0 <3.1.4": "3.1.4",
-    "underscore@<=1.13.7": "1.13.8",
-    "serialize-javascript@<=7.0.2": "7.0.3",
-    "picomatch@>4.0.0": "^4.0.4"
+  "pnpm": {
+    "overrides": {
+      "rxjs": "~7.8.2",
+      "axios@<=1.13.4": "~1.13.5",
+      "follow-redirects@<1.15.6": "~1.15.6",
+      "glob@<10.5.0": "~10.5.0",
+      "nth-check@<2.0.1": "~2.0.1",
+      "@angular/animations": "~20.3.17",
+      "@angular/common": "~20.3.17",
+      "@angular/compiler": "~20.3.17",
+      "@angular/core": "~20.3.17",
+      "@angular/forms": "~20.3.17",
+      "@angular/build": "~20.3.19",
+      "@angular/platform-browser": "~20.3.17",
+      "@angular/platform-browser-dynamic": "~20.3.17",
+      "@angular/router": "~20.3.17",
+      "zone.js": "~0.15.1",
+      "tar@<=7.5.10": "~7.5.11",
+      "bfj@<9.1.3": "~9.1.3",
+      "minimatch@>=9.0.0 <9.0.6": "^10.2.3",
+      "minimatch@>=3.0.0 <3.1.4": "3.1.4",
+      "underscore@<=1.13.7": "1.13.8",
+      "serialize-javascript@<=7.0.2": "7.0.3",
+      "picomatch@>4.0.0": "^4.0.4"
+    }
   }
 }
