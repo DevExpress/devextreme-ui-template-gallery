@@ -17,25 +17,21 @@ jobs:
       - name: Get sources
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: 'pnpm'
 
-      - name: Restore npm cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Run npm ci for metadata
-        run: npm ci
+      - name: Install dependencies for metadata
+        run: pnpm install --frozen-lockfile
         working-directory: packages/metadata
 
       - name: Test Metadata
-        run: npm run test
+        run: pnpm run test
         working-directory: packages/metadata
 
   build-latest-dx-npm:
@@ -45,34 +41,35 @@ jobs:
       - name: Checkout Devextreme
         run: git clone https://github.com/DevExpress/DevExtreme.git devextreme
 
-      - name: Use Node.js 18
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-
-      - name: DevExtreme - Restore npm cache
-        uses: actions/cache@v4
-        with:
-          path: 'devextreme/**/node_modules'
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('devextreme/**/package-lock.json') }}
+          cache: 'pnpm'
+          cache-dependency-path: 'devextreme/pnpm-lock.yaml'
 
       - name: DevExtreme - Install packages
         working-directory: devextreme
-        run: npm ci --no-audit --no-fund
+        run: pnpm install --frozen-lockfile
 
       - name: DevExtreme - Build
         working-directory: devextreme/packages/devextreme
         env:
           BUILD_TEST_INTERNAL_PACKAGE: true
-        run: npm run build-npm-devextreme
+        run: pnpm run build-npm-devextreme
 
       - name: DevExtreme - Pack
         working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme
-        run: npm pack
+        run: pnpm pack
 
       - name: DevExtreme dist - Pack
         working-directory: devextreme/packages/devextreme/artifacts/npm/devextreme-dist
-        run: npm pack
+        run: pnpm pack
 
       - name: Upload devextreme Artifact
         uses: actions/upload-artifact@v4
@@ -84,11 +81,11 @@ jobs:
             devextreme/packages/devextreme/artifacts/npm/devextreme-dist/devextreme-dist*.tgz
       - name: DevExtreme-angular - Build
         working-directory: devextreme/packages/devextreme-angular
-        run: npm run build
+        run: pnpm run build
 
       - name: DevExtreme-angular - Pack
         working-directory: devextreme/packages/devextreme-angular
-        run: npm run pack
+        run: pnpm run pack
 
       - name: Upload devextreme-angular Artifact
         uses: actions/upload-artifact@v4
@@ -99,11 +96,11 @@ jobs:
 
       - name: DevExtreme-react - Pack
         working-directory: devextreme/packages/devextreme-react
-        run: npm run pack
+        run: pnpm run pack
 
       - name: DevExtreme-react - Pack npm
         working-directory: devextreme/packages/devextreme-react/npm
-        run: npm pack
+        run: pnpm pack
 
       - name: Upload devextreme-react Artifact
         uses: actions/upload-artifact@v4
@@ -114,11 +111,11 @@ jobs:
 
       - name: DevExtreme-vue - Pack
         working-directory: devextreme/packages/devextreme-vue
-        run: npm run pack
+        run: pnpm run pack
 
       - name: DevExtreme-vue - Pack npm
         working-directory: devextreme/packages/devextreme-vue/npm
-        run: npm pack
+        run: pnpm pack
 
       - name: Upload devextreme-vue Artifact
         uses: actions/upload-artifact@v4
@@ -176,10 +173,14 @@ jobs:
       - name: Get sources
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: 'pnpm'
 
       - name: For dev branch - download devextreme Artifact
         uses: actions/download-artifact@v4
@@ -219,26 +220,18 @@ jobs:
           sed -i "s|\"devextreme-vue\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-vue\": \"\.\.\/\.\.\/$FILE_VUE_PATH\"|g" ./packages/vue/package.json
           sed -i "s|\"devextreme-react\": \"[0-9a-zA-Z.-]\+\"|\"devextreme-react\": \"\.\.\/\.\.\/$FILE_REACT_PATH\"|g" ./packages/react/package.json
 
-      - name: Restore npm cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Run npm ci
-        run: npm ci --no-audit --no-fund --no-package-lock
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
 
       - name: Set theme
-        run: npm run set-theme -- ${{ matrix.theme.fullName }}
+        run: pnpm run set-theme ${{ matrix.theme.fullName }}
 
       - name: Build
-        run: npm run build
+        run: pnpm run build
         working-directory: packages/${{ matrix.ARGS.project }}
 
       - name: Start app
-        run: npm run start-apps -- --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme.name }}
+        run: pnpm run start-apps --project ${{ matrix.ARGS.project }} --theme ${{ matrix.theme.name }}
         working-directory: packages/testing
 
       - name: Run tests
@@ -249,7 +242,7 @@ jobs:
           export TESTCAFE_DASHBOARD_DEVEXTREME_TOKEN=eyJwcm9qZWN0SWQiOiI5ZjRlMTJjMC1kNmExLTQxZDEtYmE1OS0wZTI3OTE1N2QxZDAiLCJ0b2tlblNlY3JldCI6InQwQXh6bzFMczBDVE81VU95bzc2dkF2eE05Ym9pQ3JxajRCQUtyWm5la0EzYlp3SENOR3RoamFaWkhoa0xvRnJZM1lvV0ZlbEt2S2JyYjFkbEs5UFVoMmlGaG9aVlprdTU1NXhZWmhGQkQ0eWtBZENJWkJvdU9ZV1hDWlRkVi9sQUFxMVNlMkFtRkg5UkRXTTlTcEk0WmVOSkEwZnYwNUlDN3Q3UXFmZ3o2VUdYVDNvZDJHQ2RqclVKYnZrZ2ZmNjdRb3RNaXZuTG1CSmM4REdLelhhbmhobzMzVzE5U1Axd1NSNGR6d3ZWdHp2dGV2em5Da0cwR0dSc3Z3OWdQS214UHpFUGsreTJtMjlSZm92dGtuNGZtb0prRng1RzBSZ2o2WnhPSXBrUDZOMVZyWWhuTk9lc1VEQmVobzB1VGFjTlNwZFE0N2FVZCsydmM3Q3Y0QmtZQT09In0=
           export TESTCAFE_DASHBOARD_DEVEXTREME_URL=https://devextreme.resolve.sh
           export TESTCAFE_DASHBOARD_BUILD_ID=${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
-          npm run test-testcafe -- $all_args
+          pnpm run test-testcafe $all_args
         working-directory: packages/testing
 
       - name: Copy screenshots artifacts
