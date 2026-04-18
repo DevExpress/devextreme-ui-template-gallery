@@ -11,7 +11,7 @@ const themePrefix = 'app-theme-';
 
 const prefixes = ['theme-dx-', 'variables-'];
 
-const loadStylesImports = async() => {
+const loadStylesImports = async () => {
   await Promise.all([
     ...prefixes.flatMap((prefix) => [
       import(

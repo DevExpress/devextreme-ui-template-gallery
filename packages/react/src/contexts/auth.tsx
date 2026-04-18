@@ -13,7 +13,7 @@ function AuthProvider(props: React.PropsWithChildren<unknown>) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    (async function() {
+    (async function () {
       const result = await getUser();
       if (result.isOk) {
         setUser(result.data);
@@ -23,7 +23,7 @@ function AuthProvider(props: React.PropsWithChildren<unknown>) {
     })();
   }, []);
 
-  const signIn = useCallback(async(email: string, password: string) => {
+  const signIn = useCallback(async (email: string, password: string) => {
     const result = await sendSignInRequest(email, password);
     if (result.isOk) {
       setUser(result.data);

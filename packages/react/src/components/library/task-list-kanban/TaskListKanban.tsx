@@ -23,7 +23,7 @@ const boardMenuItems = [
   { text: 'Move list' },
 ];
 
-const reorder = <T, >(
+const reorder = <T,>(
   items: T[],
   item: T,
   fromIndex: number,

@@ -1,0 +1,59 @@
+@use '../../../variables.scss' as *;
+
+.chat-popup {
+  .dx-popup-content {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .dx-toolbar-after {
+    gap: 4px;
+  }
+}
+
+.chat-popup__body {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.chat-popup__chat {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+.chat-popup__chat.dx-chat {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.chat-popup__chat .dx-chat-messagelist {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.chat-popup__chat
+  .dx-chat-messagelist
+  > .dx-scrollable
+  > .dx-scrollable-wrapper
+  > .dx-scrollable-container
+  > .dx-scrollable-content {
+  padding-inline: 24px;
+}
+
+.chat-popup__chat .dx-chat-messagelist-day-header:first-child {
+  padding-top: 24px;
+}
+
+.chat-popup__chat .dx-chat-messagebox {
+  flex: 0 0 auto;
+  padding: 16px 24px 24px;
+}

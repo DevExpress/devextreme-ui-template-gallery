@@ -22,7 +22,7 @@ export const ChangePasswordForm = () => {
   const { recoveryCode } = useParams();
 
   const onSubmit = useCallback(
-    async(e) => {
+    async (e) => {
       e.preventDefault();
       const { password } = formData.current;
       setLoading(true);

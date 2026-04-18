@@ -21,8 +21,8 @@ const customizeItems = (items: Array<VectorMapTypes.LegendItem>) =>
 const customizeTooltip = (arg: MapLayerElement) => {
   return arg.layer.type === 'marker'
     ? {
-      text: arg.attribute('tooltip'),
-    }
+        text: arg.attribute('tooltip'),
+      }
     : {};
 };
 

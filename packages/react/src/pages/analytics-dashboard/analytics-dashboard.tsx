@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { Item } from 'devextreme-react/toolbar';
+import { ChatTypes } from 'devextreme-react/chat';
+import Splitter, { Item as SplitterItem } from 'devextreme-react/splitter';
+import { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Tabs from 'devextreme-react/tabs';
 import { LoadPanel } from 'devextreme-react/load-panel';
 import ScrollView from 'devextreme-react/scroll-view';
@@ -26,6 +28,9 @@ import {
   OpportunitiesTicker,
   RevenueTotalTicker,
 } from '../../components';
+import { ChatCardComponent } from '../../components/utils/chat-card-component/ChatCardComponent';
+import { ChatFloatingButton } from '../../components/utils/chat-floating-button/ChatFloatingButton';
+import { ChatPopup } from '../../components/utils/chat-popup/ChatPopup';
 import {
   ANALYTICS_PERIODS,
   DEFAULT_ANALYTICS_PERIOD_KEY,
@@ -37,6 +42,34 @@ import {
 } from '../../types/analytics';
 
 import './analytics-dashboard.scss';
+
+const currentUser: ChatTypes.User = {
+  id: 'current-user',
+  name: 'You',
+};
+
+const assistantUser: ChatTypes.User = {
+  id: 'ai-assistant',
+  name: 'AI Assistant',
+};
+
+const createInitialMessages = (): ChatTypes.Message[] => [
+  {
+    id: 1,
+    author: assistantUser,
+    text: 'Hello! Ask me about trends, predictions, or what stands out in this dashboard.',
+    timestamp: new Date(),
+  },
+];
+
+const createAssistantReply = (messageText?: string): ChatTypes.Message => ({
+  id: `assistant-${Date.now()}`,
+  author: assistantUser,
+  text: messageText
+    ? `I captured your request: "${messageText}". Connect this handler to your backend assistant to return live insights.`
+    : 'I can help analyze this dashboard once the assistant backend is connected.',
+  timestamp: new Date(),
+});
 
 const calculateTotal = (data: (SaleOrOpportunityByCategory & Sale)[]) => {
   return data.reduce((acc, item) => acc + (item.value || item.total), 0);
@@ -63,8 +96,14 @@ export const AnalyticsDashboard = () => {
   const [opportunitiesTotal, setOpportunitiesTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [tabsWidth, setTabsWidth] = useState<number | string>('auto');
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isPinned, setIsPinned] = useState(false);
+  const [messages, setMessages] = useState<ChatTypes.Message[]>(
+    createInitialMessages
+  );
 
-  const { isXSmall } = useScreenSize();
+  const { isXSmall, isSmall, isMedium, isLarge } = useScreenSize();
+  const usesSplitterLayout = isPinned && (isMedium || isLarge);
 
   useEffect(() => {
     Promise.all([
@@ -92,16 +131,79 @@ export const AnalyticsDashboard = () => {
     setIsLoading(true);
   }, []);
 
+  const openPopup = useCallback(() => {
+    setIsPinned(false);
+    setIsPopupVisible(true);
+  }, []);
+
+  const changePopupVisibility = useCallback((visible: boolean) => {
+    setIsPopupVisible(visible);
+  }, []);
+
+  const pinChat = useCallback(() => {
+    setIsPopupVisible(false);
+    setIsPinned(true);
+  }, []);
+
+  const unpinChat = useCallback(() => {
+    setIsPinned(false);
+    setIsPopupVisible(true);
+  }, []);
+
+  const closeChat = useCallback(() => {
+    setIsPinned(false);
+    setIsPopupVisible(false);
+  }, []);
+
+  const resetChat = useCallback(() => {
+    setMessages(createInitialMessages());
+  }, []);
+
+  const onMessageEntered = useCallback(
+    ({ message }: ChatTypes.MessageEnteredEvent) => {
+      const nextUserMessage: ChatTypes.Message = {
+        ...message,
+        id: `user-${Date.now()}`,
+        author: currentUser,
+        timestamp: new Date(),
+      };
+
+      setMessages((currentMessages) => [
+        ...currentMessages,
+        nextUserMessage,
+        createAssistantReply(nextUserMessage.text),
+      ]);
+    },
+    []
+  );
+
   useEffect(() => {
     setTabsWidth(isXSmall ? 150 : 'auto');
-  }, []);
+  }, [isXSmall]);
+
+  const dashboardContent = (
+    <div className='analytics-dashboard__content'>
+      <div className='cards compact'>
+        <OpportunitiesTicker value={opportunitiesTotal} />
+        <RevenueTotalTicker value={salesTotal} />
+        <ConversionTicker value={16} />
+        <LeadsTicker value={51} />
+      </div>
+      <div className='cards normal'>
+        <RevenueCard datasource={sales} />
+        <ConversionCard datasource={opportunities} />
+        <RevenueAnalysisCard datasource={salesByState} />
+        <RevenueSnapshotCard datasource={salesByCategory} />
+      </div>
+    </div>
+  );
 
   return (
     <ScrollView className='view-wrapper-scroll'>
       <ToolbarAnalytics
         title='Dashboard'
         additionalToolbarContent={
-          <Item location='before'>
+          <ToolbarItem location='before'>
             <Tabs
               width={tabsWidth}
               scrollByContent
@@ -110,20 +212,74 @@ export const AnalyticsDashboard = () => {
               selectedIndex={tabIndex}
               onSelectionChanged={onTabClick}
             />
-          </Item>
+          </ToolbarItem>
         }
       >
-        <div className='cards compact'>
-          <OpportunitiesTicker value={opportunitiesTotal} />
-          <RevenueTotalTicker value={salesTotal} />
-          <ConversionTicker value={16} />
-          <LeadsTicker value={51} />
-        </div>
-        <div className='cards normal'>
-          <RevenueCard datasource={sales} />
-          <ConversionCard datasource={opportunities} />
-          <RevenueAnalysisCard datasource={salesByState} />
-          <RevenueSnapshotCard datasource={salesByCategory} />
+        <div className='analytics-dashboard__layout'>
+          {usesSplitterLayout ? (
+            <Splitter
+              className='analytics-dashboard__splitter'
+              orientation='horizontal'
+              separatorSize={12}
+            >
+              <SplitterItem minSize='0' resizable>
+                <div className='analytics-dashboard__pane analytics-dashboard__pane--main'>
+                  {dashboardContent}
+                </div>
+              </SplitterItem>
+              <SplitterItem size={420} minSize={340} maxSize='50%' resizable>
+                <div className='analytics-dashboard__pane analytics-dashboard__pane--chat'>
+                  <ChatCardComponent
+                    messages={messages}
+                    currentUser={currentUser}
+                    onMessageEntered={onMessageEntered}
+                    onResetClick={resetChat}
+                    onCloseClick={closeChat}
+                    onUnpinClick={unpinChat}
+                  />
+                </div>
+              </SplitterItem>
+            </Splitter>
+          ) : (
+            <>
+              {dashboardContent}
+              {isPinned && !isSmall && !isXSmall && (
+                <div className='analytics-dashboard__chat-stack'>
+                  <ChatCardComponent
+                    messages={messages}
+                    currentUser={currentUser}
+                    onMessageEntered={onMessageEntered}
+                    onResetClick={resetChat}
+                    onCloseClick={closeChat}
+                    onUnpinClick={unpinChat}
+                  />
+                </div>
+              )}
+              {isPinned && (isSmall || isXSmall) && (
+                <div className='analytics-dashboard__chat-stack analytics-dashboard__chat-stack--mobile'>
+                  <ChatCardComponent
+                    messages={messages}
+                    currentUser={currentUser}
+                    onMessageEntered={onMessageEntered}
+                    onResetClick={resetChat}
+                    onCloseClick={closeChat}
+                    onUnpinClick={unpinChat}
+                  />
+                </div>
+              )}
+              {!isPinned && <ChatFloatingButton onClick={openPopup} />}
+            </>
+          )}
+
+          <ChatPopup
+            visible={isPopupVisible}
+            setVisible={changePopupVisibility}
+            messages={messages}
+            currentUser={currentUser}
+            onMessageEntered={onMessageEntered}
+            onResetClick={resetChat}
+            onPinClick={pinChat}
+          />
         </div>
       </ToolbarAnalytics>
       <LoadPanel

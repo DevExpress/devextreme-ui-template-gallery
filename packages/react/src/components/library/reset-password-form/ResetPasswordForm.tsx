@@ -26,7 +26,7 @@ export const ResetPasswordForm = ({ signInLink, buttonLink }) => {
   const formData = useRef({ email: '', password: '' });
 
   const onSubmit = useCallback(
-    async(e) => {
+    async (e) => {
       e.preventDefault();
       const { email } = formData.current;
       setLoading(true);

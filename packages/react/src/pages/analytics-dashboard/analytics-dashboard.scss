@@ -1,6 +1,8 @@
 @use '../../variables.scss' as *;
 @use 'sass:math';
 
+$dashboard-pane-offset: 20px;
+
 .view-wrapper-dashboard {
   td.dx-command-adaptive.dx-command-adaptive,
   td.sales-bullet.sales-bullet {
@@ -14,10 +16,10 @@
   width: 100%;
   margin-top: 20px;
   gap: 20px;
-  grid-template-columns: repeat(2, calc(50% - 10px));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 
   &.compact {
-    grid-template-columns: repeat(4, calc(25% - 15px));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
     .card {
       background-color: var(--side-panel-background);
@@ -36,22 +38,114 @@
   }
 }
 
+.analytics-dashboard__layout {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: stretch;
+  min-height: 0;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.analytics-dashboard__splitter.dx-splitter {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.analytics-dashboard__splitter.dx-splitter .dx-splitter-item {
+  min-height: 0;
+  min-width: 0;
+}
+
+.analytics-dashboard__splitter.dx-splitter .dx-splitter-item-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.analytics-dashboard__pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.analytics-dashboard__pane--main {
+  padding-right: 10px;
+}
+
+.analytics-dashboard__pane--chat {
+  padding-left: 10px;
+  padding-top: $dashboard-pane-offset;
+}
+
+.analytics-dashboard__splitter.dx-splitter > .dx-resize-handle {
+  margin-top: $dashboard-pane-offset;
+}
+
+.analytics-dashboard__content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+}
+
+.analytics-dashboard__content .cards {
+  flex-shrink: 0;
+}
+
+.analytics-dashboard__chat-stack {
+  flex: 0 0 420px;
+  max-width: 420px;
+  width: 100%;
+}
+
+.analytics-dashboard__chat-stack--mobile {
+  flex-basis: auto;
+  max-width: none;
+  margin-top: 20px;
+}
+
 @media only screen and (max-width: 1400px) {
   .cards.compact {
-    grid-template-columns: repeat(2, calc(50% - 10px));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .analytics-dashboard__layout {
+    flex-direction: column;
+  }
+
+  .analytics-dashboard__chat-stack {
+    flex-basis: auto;
+    max-width: none;
+    margin-top: 20px;
   }
 }
 
 @media only screen and (max-width: 900px) {
   .cards {
-    grid-template-columns: repeat(1, 100%);
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
 
 @media only screen and (max-width: 700px) {
   .cards {
     &.compact {
-      grid-template-columns: repeat(1, 100%);
+      grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   }
 }

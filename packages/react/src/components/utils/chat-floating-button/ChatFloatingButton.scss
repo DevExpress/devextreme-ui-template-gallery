@@ -1,0 +1,13 @@
+.chat-floating-button {
+  position: fixed;
+  right: 35px;
+  bottom: 30px;
+  z-index: 5;
+}
+
+.chat-floating-button__button.dx-button {
+  min-height: 45px;
+  border-radius: 30px !important;
+  box-shadow: 0 4px 6px -4px rgba(43, 127, 255, 0.3),
+    0 10px 15px -3px rgba(43, 127, 255, 0.3);
+}

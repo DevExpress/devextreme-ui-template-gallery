@@ -29,7 +29,7 @@ export const CreateAccountForm = ({
   const formData = useRef({ email: '', password: '' });
 
   const onSubmit = useCallback(
-    async(e) => {
+    async (e) => {
       e.preventDefault();
       const { email, password } = formData.current;
       setLoading(true);
