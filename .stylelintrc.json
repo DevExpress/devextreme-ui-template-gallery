@@ -20,6 +20,12 @@
         "no-empty-source": null,
         "number-max-precision": 6,
         "property-no-vendor-prefix": true,
+        "selector-class-pattern": [
+            "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*(?:__(?:[a-z0-9]+(?:-[a-z0-9]+)*))?(?:--(?:[a-z0-9]+(?:-[a-z0-9]+)*))?$",
+            {
+                "resolveNestedSelectors": true
+            }
+        ],
         "selector-no-vendor-prefix": true,
         "selector-pseudo-element-colon-notation": "double",
         "selector-pseudo-element-no-unknown": null,
