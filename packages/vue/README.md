@@ -5,31 +5,31 @@ This template provides a minimal setup to get Vue 3 working in Vite with TypeScr
 ## Project Setup
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Compiles and hot-reloads for development
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### Type-check, compile and minify for production
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ### Preview production build
 
 ```bash
-npm run preview
+pnpm run preview
 ```
 
 ### Lint with ESLint
 
 ```bash
-npm run lint
+pnpm run lint
 ```
 
 ## Recommended IDE Setup
