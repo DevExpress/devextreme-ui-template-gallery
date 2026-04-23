@@ -62,6 +62,15 @@ export const ChatPopup = ({
       wrapperAttr={{ class: 'chat-popup' }}
       onVisibleChange={setVisible}
     >
+      <ToolbarItem toolbar='top' location='before'>
+        <div className='chat-popup__title-section'>
+          <div className='chat-popup__icon'>
+            <span className='dx-icon-sparkle' />
+          </div>
+          <div className='chat-popup__title'>AI Data Insights</div>
+        </div>
+      </ToolbarItem>
+
       <ToolbarItem toolbar='top' location='after'>
         <Button
           icon='refresh'

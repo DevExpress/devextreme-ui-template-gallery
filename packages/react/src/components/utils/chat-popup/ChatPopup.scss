@@ -1,6 +1,18 @@
 @use '../../../variables.scss' as *;
 
 .chat-popup {
+  .dx-popup-title.dx-toolbar {
+    padding-block: 11px;
+  }
+
+  .dx-toolbar-before {
+    overflow: visible;
+  }
+
+  .dx-popup-title .dx-toolbar-label {
+    display: none;
+  }
+
   .dx-popup-content {
     padding: 0;
     display: flex;
@@ -12,6 +24,31 @@
   .dx-toolbar-after {
     gap: 4px;
   }
+}
+
+.chat-popup__title-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-popup__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(135deg, #2d5bff 0%, #2349d8 100%);
+  box-shadow: 0 6px 14px rgba(45, 91, 255, 0.28);
+  flex-shrink: 0;
+}
+
+.chat-popup__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--base-text-color);
 }
 
 .chat-popup__body {

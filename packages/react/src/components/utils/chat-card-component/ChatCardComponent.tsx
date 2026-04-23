@@ -29,11 +29,8 @@ export const ChatCardComponent = ({
           <div className='chat-card-component__icon'>
             <span className='dx-icon-sparkle' />
           </div>
-          <div>
+          <div className='chat-card-component__title-content'>
             <div className='chat-card-component__title'>AI Data Insights</div>
-            <div className='chat-card-component__subtitle'>
-              Pinned assistant
-            </div>
           </div>
         </div>
         <div className='chat-card-component__actions'>

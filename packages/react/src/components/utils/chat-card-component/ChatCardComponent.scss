@@ -18,8 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 24px 24px 16px;
+  padding: 16px;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -27,6 +26,12 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.chat-card-component__title-content {
+  min-width: 0;
 }
 
 .chat-card-component__actions {
@@ -49,7 +54,7 @@
 }
 
 .chat-card-component__title {
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.1;
   color: var(--base-text-color);
