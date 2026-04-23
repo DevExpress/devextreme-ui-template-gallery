@@ -1,7 +1,8 @@
-import { join } from 'path';
+import { join, dirname } from 'path';
 import { spawn } from 'child_process';
 import { argv, exit } from 'process';
 import { writeFileSync } from 'fs';
+import { createRequire } from 'module';
 import parseArgs from 'minimist';
 import { testingDirectory, pidsFileName } from './dirs.config.js';
 import { packages } from './config.js';
@@ -21,7 +22,8 @@ const getPackage = (packageName) => packages.find((p) => p.name === packageName)
 
 const startProject = (pkg) => {
   const appDirectory = join(testingDirectory, '..', pkg.name, 'build');
-  const httpServerBin = join(testingDirectory, '..', '..', 'node_modules', 'http-server', 'bin', 'http-server');
+  const require = createRequire(import.meta.url);
+  const httpServerBin = join(dirname(require.resolve('http-server/package.json')), 'bin', 'http-server');
 
   const server = spawn('node', [httpServerBin, appDirectory, '-c-1', `-p ${pkg.port}`], {
     detached: true,
