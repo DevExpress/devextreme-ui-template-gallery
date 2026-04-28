@@ -28,31 +28,36 @@ export const ChatPopup = ({
   onResetClick,
   onPinClick,
 }: ChatPopupProps) => {
-  const { isXSmall } = useScreenSize();
-  const popupContainer = isXSmall ? undefined : '.content';
-  const popupPosition: PositionConfig | undefined = isXSmall
-    ? undefined
+  const { isXSmall, isSmall } = useScreenSize();
+  const isSmallScreen = isXSmall || isSmall;
+  const popupContainer = '.content';
+  const popupPosition: PositionConfig = isSmallScreen
+    ? {
+      my: 'center',
+      at: 'center',
+      of: '.content',
+    }
     : {
-        my: {
-          x: 'right',
-          y: 'bottom',
-        },
-        at: {
-          x: 'right',
-          y: 'bottom',
-        },
-        of: '.content',
-        offset: '-32 -24',
-      };
+      my: {
+        x: 'right',
+        y: 'bottom',
+      },
+      at: {
+        x: 'right',
+        y: 'bottom',
+      },
+      of: '.content',
+      offset: '-32 -24',
+    };
 
   return (
     <Popup
       title='AI Data Insights'
       visible={visible}
-      width={isXSmall ? '100%' : 420}
-      height={isXSmall ? '100%' : 640}
-      fullScreen={isXSmall}
-      dragEnabled={false}
+      width={isSmallScreen ? '90%' : 420}
+      height={isSmallScreen ? '80%' : 640}
+      fullScreen={false}
+      dragEnabled
       hideOnOutsideClick={false}
       shading={false}
       showCloseButton
@@ -81,7 +86,7 @@ export const ChatPopup = ({
       </ToolbarItem>
 
       <ToolbarItem toolbar='top' location='after'>
-        <Button icon='pin' stylingMode='text' hint='Pin' onClick={onPinClick} />
+        <Button icon='pin' stylingMode='text' hint='Pin' disabled={isSmallScreen} onClick={onPinClick} />
       </ToolbarItem>
 
       <div className='chat-popup__body'>

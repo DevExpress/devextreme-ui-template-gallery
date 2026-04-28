@@ -90,7 +90,7 @@ export const ChatAssistant = () => {
 
   return (
     <>
-      {!isPinned && <ChatFloatingButton onClick={openPopup} />}
+      {!isPinned && !isPopupVisible && <ChatFloatingButton onClick={openPopup} />}
       <ChatPopup
         visible={isPopupVisible}
         setVisible={changePopupVisibility}

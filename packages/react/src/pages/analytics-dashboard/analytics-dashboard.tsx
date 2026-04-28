@@ -103,7 +103,14 @@ export const AnalyticsDashboard = () => {
   );
 
   const { isXSmall, isSmall, isMedium, isLarge } = useScreenSize();
+  const isSmallScreen = isXSmall || isSmall;
   const usesSplitterLayout = isPinned && (isMedium || isLarge);
+
+  useEffect(() => {
+    if (isSmallScreen && isPinned) {
+      setIsPinned(false);
+    }
+  }, [isSmallScreen, isPinned]);
 
   useEffect(() => {
     Promise.all([
@@ -243,18 +250,6 @@ export const AnalyticsDashboard = () => {
           ) : (
             <>
               {dashboardContent}
-              {isPinned && !isSmall && !isXSmall && (
-                <div className='analytics-dashboard__chat-stack'>
-                  <ChatCardComponent
-                    messages={messages}
-                    currentUser={currentUser}
-                    onMessageEntered={onMessageEntered}
-                    onResetClick={resetChat}
-                    onCloseClick={closeChat}
-                    onUnpinClick={unpinChat}
-                  />
-                </div>
-              )}
               {isPinned && (isSmall || isXSmall) && (
                 <div className='analytics-dashboard__chat-stack analytics-dashboard__chat-stack--mobile'>
                   <ChatCardComponent
@@ -267,7 +262,7 @@ export const AnalyticsDashboard = () => {
                   />
                 </div>
               )}
-              {!isPinned && <ChatFloatingButton onClick={openPopup} />}
+              {!isPinned && !isPopupVisible && <ChatFloatingButton onClick={openPopup} />}
             </>
           )}
 
