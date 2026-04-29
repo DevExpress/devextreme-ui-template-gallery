@@ -28,14 +28,14 @@ export const ChatPopup = ({
   onResetClick,
   onPinClick,
 }: ChatPopupProps) => {
-  const { isXSmall, isSmall } = useScreenSize();
-  const isSmallScreen = isXSmall || isSmall;
-  const popupContainer = '.content';
+  const { isLarge } = useScreenSize();
+  const isSmallScreen = !isLarge;
+  const popupContainer = isSmallScreen ? undefined : '.content';
   const popupPosition: PositionConfig = isSmallScreen
     ? {
       my: 'center',
       at: 'center',
-      of: '.content',
+      of: window,
     }
     : {
       my: {
@@ -52,12 +52,14 @@ export const ChatPopup = ({
 
   return (
     <Popup
+      key={isSmallScreen ? 'small' : 'large'}
       title='AI Data Insights'
       visible={visible}
       width={isSmallScreen ? '90%' : 420}
       height={isSmallScreen ? '80%' : 640}
       fullScreen={false}
       dragEnabled
+      dragAndResizeArea={window.document.body}
       hideOnOutsideClick={false}
       shading={false}
       showCloseButton

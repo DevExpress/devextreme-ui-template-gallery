@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { ChatTypes } from 'devextreme-react/chat';
 import Splitter, { Item as SplitterItem } from 'devextreme-react/splitter';
 import { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Tabs from 'devextreme-react/tabs';
@@ -31,6 +30,7 @@ import {
 import { ChatCardComponent } from '../../components/utils/chat-card-component/ChatCardComponent';
 import { ChatFloatingButton } from '../../components/utils/chat-floating-button/ChatFloatingButton';
 import { ChatPopup } from '../../components/utils/chat-popup/ChatPopup';
+import { useChatAssistant } from '../../components/library/chat-assistant/useChatAssistant';
 import {
   ANALYTICS_PERIODS,
   DEFAULT_ANALYTICS_PERIOD_KEY,
@@ -42,34 +42,6 @@ import {
 } from '../../types/analytics';
 
 import './analytics-dashboard.scss';
-
-const currentUser: ChatTypes.User = {
-  id: 'current-user',
-  name: 'You',
-};
-
-const assistantUser: ChatTypes.User = {
-  id: 'ai-assistant',
-  name: 'AI Assistant',
-};
-
-const createInitialMessages = (): ChatTypes.Message[] => [
-  {
-    id: 1,
-    author: assistantUser,
-    text: 'Hello! Ask me about trends, predictions, or what stands out in this dashboard.',
-    timestamp: new Date(),
-  },
-];
-
-const createAssistantReply = (messageText?: string): ChatTypes.Message => ({
-  id: `assistant-${Date.now()}`,
-  author: assistantUser,
-  text: messageText
-    ? `I captured your request: "${messageText}". Connect this handler to your backend assistant to return live insights.`
-    : 'I can help analyze this dashboard once the assistant backend is connected.',
-  timestamp: new Date(),
-});
 
 const calculateTotal = (data: (SaleOrOpportunityByCategory & Sale)[]) => {
   return data.reduce((acc, item) => acc + (item.value || item.total), 0);
@@ -96,21 +68,18 @@ export const AnalyticsDashboard = () => {
   const [opportunitiesTotal, setOpportunitiesTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [tabsWidth, setTabsWidth] = useState<number | string>('auto');
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [isPinned, setIsPinned] = useState(false);
-  const [messages, setMessages] = useState<ChatTypes.Message[]>(
-    createInitialMessages
-  );
 
-  const { isXSmall, isSmall, isMedium, isLarge } = useScreenSize();
-  const isSmallScreen = isXSmall || isSmall;
-  const usesSplitterLayout = isPinned && (isMedium || isLarge);
+  const chat = useChatAssistant();
+
+  const { isXSmall, isSmall, isLarge } = useScreenSize();
+  const isSmallScreen = !isLarge;
+  const usesSplitterLayout = chat.isPinned && isLarge;
 
   useEffect(() => {
-    if (isSmallScreen && isPinned) {
-      setIsPinned(false);
+    if (isSmallScreen && chat.isPinned) {
+      chat.unpinChat();
     }
-  }, [isSmallScreen, isPinned]);
+  }, [isSmallScreen, chat.isPinned, chat.unpinChat]);
 
   useEffect(() => {
     Promise.all([
@@ -137,52 +106,6 @@ export const AnalyticsDashboard = () => {
     setDateRange(period.split('/'));
     setIsLoading(true);
   }, []);
-
-  const openPopup = useCallback(() => {
-    setIsPinned(false);
-    setIsPopupVisible(true);
-  }, []);
-
-  const changePopupVisibility = useCallback((visible: boolean) => {
-    setIsPopupVisible(visible);
-  }, []);
-
-  const pinChat = useCallback(() => {
-    setIsPopupVisible(false);
-    setIsPinned(true);
-  }, []);
-
-  const unpinChat = useCallback(() => {
-    setIsPinned(false);
-    setIsPopupVisible(true);
-  }, []);
-
-  const closeChat = useCallback(() => {
-    setIsPinned(false);
-    setIsPopupVisible(false);
-  }, []);
-
-  const resetChat = useCallback(() => {
-    setMessages(createInitialMessages());
-  }, []);
-
-  const onMessageEntered = useCallback(
-    ({ message }: ChatTypes.MessageEnteredEvent) => {
-      const nextUserMessage: ChatTypes.Message = {
-        ...message,
-        id: `user-${Date.now()}`,
-        author: currentUser,
-        timestamp: new Date(),
-      };
-
-      setMessages((currentMessages) => [
-        ...currentMessages,
-        nextUserMessage,
-        createAssistantReply(nextUserMessage.text),
-      ]);
-    },
-    []
-  );
 
   useEffect(() => {
     setTabsWidth(isXSmall ? 150 : 'auto');
@@ -237,12 +160,12 @@ export const AnalyticsDashboard = () => {
               <SplitterItem size={420} minSize={340} maxSize='50%' resizable>
                 <div className='analytics-dashboard__pane analytics-dashboard__pane--chat'>
                   <ChatCardComponent
-                    messages={messages}
-                    currentUser={currentUser}
-                    onMessageEntered={onMessageEntered}
-                    onResetClick={resetChat}
-                    onCloseClick={closeChat}
-                    onUnpinClick={unpinChat}
+                    messages={chat.messages}
+                    currentUser={chat.currentUser}
+                    onMessageEntered={chat.onMessageEntered}
+                    onResetClick={chat.resetChat}
+                    onCloseClick={chat.closeChat}
+                    onUnpinClick={chat.unpinChat}
                   />
                 </div>
               </SplitterItem>
@@ -250,30 +173,30 @@ export const AnalyticsDashboard = () => {
           ) : (
             <>
               {dashboardContent}
-              {isPinned && (isSmall || isXSmall) && (
+              {chat.isPinned && (isSmall || isXSmall) && (
                 <div className='analytics-dashboard__chat-stack analytics-dashboard__chat-stack--mobile'>
                   <ChatCardComponent
-                    messages={messages}
-                    currentUser={currentUser}
-                    onMessageEntered={onMessageEntered}
-                    onResetClick={resetChat}
-                    onCloseClick={closeChat}
-                    onUnpinClick={unpinChat}
+                    messages={chat.messages}
+                    currentUser={chat.currentUser}
+                    onMessageEntered={chat.onMessageEntered}
+                    onResetClick={chat.resetChat}
+                    onCloseClick={chat.closeChat}
+                    onUnpinClick={chat.unpinChat}
                   />
                 </div>
               )}
-              {!isPinned && !isPopupVisible && <ChatFloatingButton onClick={openPopup} />}
+              {!chat.isPinned && !chat.isPopupVisible && <ChatFloatingButton onClick={chat.openPopup} />}
             </>
           )}
 
           <ChatPopup
-            visible={isPopupVisible}
-            setVisible={changePopupVisibility}
-            messages={messages}
-            currentUser={currentUser}
-            onMessageEntered={onMessageEntered}
-            onResetClick={resetChat}
-            onPinClick={pinChat}
+            visible={chat.isPopupVisible}
+            setVisible={chat.changePopupVisibility}
+            messages={chat.messages}
+            currentUser={chat.currentUser}
+            onMessageEntered={chat.onMessageEntered}
+            onResetClick={chat.resetChat}
+            onPinClick={chat.pinChat}
           />
         </div>
       </ToolbarAnalytics>

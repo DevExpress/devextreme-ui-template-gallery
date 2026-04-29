@@ -7,7 +7,14 @@ type ChatFloatingButtonProps = {
 };
 
 export const ChatFloatingButton = ({ onClick }: ChatFloatingButtonProps) => {
-  const { isXSmall, isSmall } = useScreenSize();
-  const isSmallScreen = isXSmall || isSmall;
-  return <SpeedDialAction icon='sparkle' label={isSmallScreen ? undefined : 'AI Inside'} onClick={onClick} />;
+  const { isLarge } = useScreenSize();
+  const isSmallScreen = !isLarge;
+  return (
+    <SpeedDialAction
+      key={isSmallScreen ? 'small' : 'large'}
+      icon='sparkle'
+      label={isSmallScreen ? '' : 'AI Inside'}
+      onClick={onClick}
+    />
+  );
 };
