@@ -112,12 +112,6 @@ $dashboard-pane-offset: 20px;
   width: 100%;
 }
 
-.analytics-dashboard__chat-stack--mobile {
-  flex-basis: auto;
-  max-width: none;
-  margin-top: 20px;
-}
-
 @media only screen and (max-width: 1400px) {
   .cards.compact {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

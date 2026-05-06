@@ -1,6 +1,16 @@
 @use '../../../variables.scss' as *;
 
 .chat-popup {
+  .dx-overlay-content {
+    top: auto !important;
+    right: 32px !important;
+    bottom: 24px !important;
+    left: auto !important;
+    transform: none !important;
+    max-width: calc(100% - 64px);
+    max-height: calc(100% - 48px);
+  }
+
   .dx-popup-title.dx-toolbar {
     padding-block: 16px;
   }
@@ -93,4 +103,25 @@
 .chat-popup__chat .dx-chat-messagebox {
   flex: 0 0 auto;
   padding: 16px 24px 24px;
+}
+
+.screen-small,
+.screen-x-small {
+  .chat-popup {
+    .dx-overlay-content {
+      top: 50% !important;
+      right: auto !important;
+      bottom: auto !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      width: calc(100% - 24px) !important;
+      height: min(640px, calc(100% - 24px)) !important;
+      max-width: calc(100% - 24px);
+      max-height: calc(100% - 24px);
+    }
+
+    .chat-popup__pin-button {
+      display: none;
+    }
+  }
 }

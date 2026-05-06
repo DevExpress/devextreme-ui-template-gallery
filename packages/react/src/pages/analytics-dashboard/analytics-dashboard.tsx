@@ -71,7 +71,7 @@ export const AnalyticsDashboard = () => {
 
   const chat = useChatAssistant();
 
-  const { isXSmall, isSmall, isLarge } = useScreenSize();
+  const { isXSmall, isLarge } = useScreenSize();
   const isSmallScreen = !isLarge;
   const usesSplitterLayout = chat.isPinned && isLarge;
 
@@ -173,18 +173,6 @@ export const AnalyticsDashboard = () => {
           ) : (
             <>
               {dashboardContent}
-              {chat.isPinned && (isSmall || isXSmall) && (
-                <div className='analytics-dashboard__chat-stack analytics-dashboard__chat-stack--mobile'>
-                  <ChatCardComponent
-                    messages={chat.messages}
-                    currentUser={chat.currentUser}
-                    onMessageEntered={chat.onMessageEntered}
-                    onResetClick={chat.resetChat}
-                    onCloseClick={chat.closeChat}
-                    onUnpinClick={chat.unpinChat}
-                  />
-                </div>
-              )}
               {!chat.isPinned && !chat.isPopupVisible && <ChatFloatingButton onClick={chat.openPopup} />}
             </>
           )}

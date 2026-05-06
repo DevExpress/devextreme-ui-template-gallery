@@ -11,7 +11,6 @@ export const ChatFloatingButton = ({ onClick }: ChatFloatingButtonProps) => {
   const isSmallScreen = !isLarge;
   return (
     <SpeedDialAction
-      key={isSmallScreen ? 'small' : 'large'}
       icon='sparkle'
       label={isSmallScreen ? '' : 'AI Inside'}
       onClick={onClick}
