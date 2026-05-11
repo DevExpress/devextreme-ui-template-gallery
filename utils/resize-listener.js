@@ -6,7 +6,7 @@ class ResizeListener {
           window.parent.postMessage({
             type: 'frame-height',
             height: entry.contentRect.height,
-          }, '*');
+          }, window.location.origin);
         }
       });
     });
