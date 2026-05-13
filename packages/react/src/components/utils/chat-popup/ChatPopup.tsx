@@ -4,8 +4,10 @@ import React, { memo, useMemo } from 'react';
 
 import Chat, { ChatTypes } from 'devextreme-react/chat';
 import Button from 'devextreme-react/button';
-import { Popup, ToolbarItem } from 'devextreme-react/popup';
+import { Popup, ToolbarItem, Animation } from 'devextreme-react/popup';
 import type { PositionConfig } from 'devextreme/animation/position';
+import type { AnimationConfig } from 'devextreme/animation/fx';
+import { useScreenSize } from '../../../utils/media-query';
 
 type ChatPopupProps = {
   visible: boolean;
@@ -29,6 +31,25 @@ export const ChatPopup = memo(({
   onResetClick,
   onPinClick,
 }: ChatPopupProps) => {
+  const { isLarge } = useScreenSize();
+
+  const popupShowAnimation: AnimationConfig = useMemo(() => {
+    return {
+      duration: isLarge ? 300 : 0,
+      from: { scale: 0.55 },
+      type: 'pop'
+    };
+  }, [isLarge]);
+
+  const popupHideAnimation: AnimationConfig = useMemo(() => {
+    return {
+      duration: isLarge ? 300 : 0,
+      from: { opacity: 1, scale: 1 },
+      to: { opacity: 0, scale: 0.55 },
+      type: 'pop'
+    };
+  }, [isLarge]);
+
   const popupPosition = useMemo<PositionConfig>(() => ({
     my: {
       x: 'right',
@@ -62,6 +83,7 @@ export const ChatPopup = memo(({
       wrapperAttr={popupWrapperAttr}
       onVisibleChange={setVisible}
     >
+      <Animation show={popupShowAnimation} hide={popupHideAnimation}></Animation>
       <ToolbarItem toolbar='top' location='before'>
         <div className='chat-popup__title-section'>
           <div className='chat-popup__icon'>

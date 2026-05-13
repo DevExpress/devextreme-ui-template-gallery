@@ -2,11 +2,6 @@
 
 .chat-popup {
   .dx-overlay-content {
-    top: auto !important;
-    right: 32px !important;
-    bottom: 24px !important;
-    left: auto !important;
-    transform: none !important;
     max-width: calc(100% - 64px);
     max-height: calc(100% - 48px);
   }
