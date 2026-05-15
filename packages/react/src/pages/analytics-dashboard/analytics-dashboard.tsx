@@ -163,6 +163,7 @@ export const AnalyticsDashboard = () => {
                     messages={chat.messages}
                     currentUser={chat.currentUser}
                     onMessageEntered={chat.onMessageEntered}
+                    onPromptClick={chat.onPromptClick}
                     onResetClick={chat.resetChat}
                     onCloseClick={chat.closeChat}
                     onUnpinClick={chat.unpinChat}
@@ -183,6 +184,7 @@ export const AnalyticsDashboard = () => {
             messages={chat.messages}
             currentUser={chat.currentUser}
             onMessageEntered={chat.onMessageEntered}
+            onPromptClick={chat.onPromptClick}
             onResetClick={chat.resetChat}
             onPinClick={chat.pinChat}
           />

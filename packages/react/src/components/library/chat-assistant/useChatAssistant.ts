@@ -12,20 +12,14 @@ const assistantUser: ChatTypes.User = {
 };
 
 export const createInitialMessages = (): ChatTypes.Message[] => [
-  {
-    id: 1,
-    author: assistantUser,
-    text: 'Hello! Ask me about trends, predictions, or what stands out in this dashboard.',
-    timestamp: new Date(),
-  },
 ];
 
 const createAssistantReply = (messageText?: string): ChatTypes.Message => ({
   id: `assistant-${Date.now()}`,
   author: assistantUser,
   text: messageText
-    ? `I captured your request: "${messageText}". Connect this handler to your backend assistant to return live insights.`
-    : 'I can help analyze this dashboard once the assistant backend is connected.',
+    ? `I captured your request: "${messageText}".`
+    : 'I can help analyze this dashboard.',
   timestamp: new Date(),
 });
 
@@ -33,6 +27,24 @@ export const useChatAssistant = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
   const [messages, setMessages] = useState<ChatTypes.Message[]>(createInitialMessages);
+
+  const submitUserMessage = useCallback(
+    (messageDraft: Partial<ChatTypes.Message> & Pick<ChatTypes.Message, 'text'>) => {
+      const nextUserMessage: ChatTypes.Message = {
+        ...messageDraft,
+        id: `user-${Date.now()}`,
+        author: currentUser,
+        timestamp: new Date(),
+      };
+
+      setMessages((currentMessages) => [
+        ...currentMessages,
+        nextUserMessage,
+        createAssistantReply(nextUserMessage.text),
+      ]);
+    },
+    []
+  );
 
   const openPopup = useCallback(() => {
     setIsPinned(false);
@@ -62,21 +74,18 @@ export const useChatAssistant = () => {
     setMessages(createInitialMessages());
   }, []);
 
+  const onPromptClick = useCallback(
+    (messageText: string) => {
+      submitUserMessage({ text: messageText });
+    },
+    [submitUserMessage]
+  );
+
   const onMessageEntered = useCallback(
     ({ message }: ChatTypes.MessageEnteredEvent) => {
-      const nextUserMessage: ChatTypes.Message = {
-        ...message,
-        id: `user-${Date.now()}`,
-        author: currentUser,
-        timestamp: new Date(),
-      };
-      setMessages((currentMessages) => [
-        ...currentMessages,
-        nextUserMessage,
-        createAssistantReply(nextUserMessage.text),
-      ]);
+      submitUserMessage(message);
     },
-    []
+    [submitUserMessage]
   );
 
   return {
@@ -90,6 +99,7 @@ export const useChatAssistant = () => {
     unpinChat,
     closeChat,
     resetChat,
+    onPromptClick,
     onMessageEntered,
   };
 };

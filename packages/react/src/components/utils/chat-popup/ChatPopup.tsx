@@ -1,12 +1,13 @@
 import './ChatPopup.scss';
 
-import React, { memo, useMemo } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 
 import Chat, { ChatTypes } from 'devextreme-react/chat';
 import Button from 'devextreme-react/button';
 import { Popup, ToolbarItem, Animation } from 'devextreme-react/popup';
 import type { PositionConfig } from 'devextreme/animation/position';
 import type { AnimationConfig } from 'devextreme/animation/fx';
+import { ChatEmptyView, ChatEmptyViewTexts } from '../chat-empty-view/ChatEmptyView';
 import { useScreenSize } from '../../../utils/media-query';
 
 type ChatPopupProps = {
@@ -15,6 +16,7 @@ type ChatPopupProps = {
   messages: ChatTypes.Message[];
   currentUser: ChatTypes.User;
   onMessageEntered: (event: ChatTypes.MessageEnteredEvent) => void;
+  onPromptClick: (messageText: string) => void;
   onResetClick: () => void;
   onPinClick: () => void;
 };
@@ -28,6 +30,7 @@ export const ChatPopup = memo(({
   messages,
   currentUser,
   onMessageEntered,
+  onPromptClick,
   onResetClick,
   onPinClick,
 }: ChatPopupProps) => {
@@ -65,6 +68,13 @@ export const ChatPopup = memo(({
 
   const popupWrapperAttr = useMemo(() => ({ class: 'chat-popup' }), []);
 
+  const renderEmptyView = useCallback(
+    (texts: ChatEmptyViewTexts) => (
+      <ChatEmptyView texts={texts} onPromptClick={onPromptClick} />
+    ),
+    [onPromptClick]
+  );
+
   return (
     <Popup
       title='AI Data Insights'
@@ -83,7 +93,7 @@ export const ChatPopup = memo(({
       wrapperAttr={popupWrapperAttr}
       onVisibleChange={setVisible}
     >
-      <Animation show={popupShowAnimation} hide={popupHideAnimation}></Animation>
+      <Animation show={popupShowAnimation} hide={popupHideAnimation} />
       <ToolbarItem toolbar='top' location='before'>
         <div className='chat-popup__title-section'>
           <div className='chat-popup__icon'>
@@ -118,6 +128,7 @@ export const ChatPopup = memo(({
           user={currentUser}
           items={messages}
           height='100%'
+          emptyViewRender={renderEmptyView}
           showAvatar={false}
           showDayHeaders={false}
           onMessageEntered={onMessageEntered}

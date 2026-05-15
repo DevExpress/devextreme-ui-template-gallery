@@ -12,7 +12,7 @@ export const ChatFloatingButton = ({ onClick }: ChatFloatingButtonProps) => {
   return (
     <SpeedDialAction
       icon='sparkle'
-      label={isSmallScreen ? '' : 'AI Inside'}
+      label={isSmallScreen ? '' : 'AI Insights'}
       onClick={onClick}
     />
   );
