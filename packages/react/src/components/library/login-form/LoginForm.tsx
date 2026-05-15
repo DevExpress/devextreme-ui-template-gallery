@@ -34,7 +34,7 @@ export const LoginForm = ({ resetLink, createAccountLink }) => {
   const themeContext = useContext(ThemeContext);
 
   const onSubmit = useCallback(
-    async(e) => {
+    async (e) => {
       e.preventDefault();
       const { email, password } = formData.current;
       setLoading(true);

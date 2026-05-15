@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { Item } from 'devextreme-react/toolbar';
+import Splitter, { Item as SplitterItem } from 'devextreme-react/splitter';
+import { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Tabs from 'devextreme-react/tabs';
 import { LoadPanel } from 'devextreme-react/load-panel';
 import ScrollView from 'devextreme-react/scroll-view';
@@ -26,6 +27,10 @@ import {
   OpportunitiesTicker,
   RevenueTotalTicker,
 } from '../../components';
+import { ChatCardComponent } from '../../components/utils/chat-card-component/ChatCardComponent';
+import { ChatFloatingButton } from '../../components/utils/chat-floating-button/ChatFloatingButton';
+import { ChatPopup } from '../../components/utils/chat-popup/ChatPopup';
+import { useChatAssistant } from '../../components/library/chat-assistant/useChatAssistant';
 import {
   ANALYTICS_PERIODS,
   DEFAULT_ANALYTICS_PERIOD_KEY,
@@ -64,7 +69,17 @@ export const AnalyticsDashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [tabsWidth, setTabsWidth] = useState<number | string>('auto');
 
-  const { isXSmall } = useScreenSize();
+  const chat = useChatAssistant();
+
+  const { isXSmall, isLarge } = useScreenSize();
+  const isSmallScreen = !isLarge;
+  const usesSplitterLayout = chat.isPinned && isLarge;
+
+  useEffect(() => {
+    if (isSmallScreen && chat.isPinned) {
+      chat.unpinChat();
+    }
+  }, [isSmallScreen, chat.isPinned, chat.unpinChat]);
 
   useEffect(() => {
     Promise.all([
@@ -94,14 +109,31 @@ export const AnalyticsDashboard = () => {
 
   useEffect(() => {
     setTabsWidth(isXSmall ? 150 : 'auto');
-  }, []);
+  }, [isXSmall]);
+
+  const dashboardContent = (
+    <div className='analytics-dashboard__content'>
+      <div className='cards compact'>
+        <OpportunitiesTicker value={opportunitiesTotal} />
+        <RevenueTotalTicker value={salesTotal} />
+        <ConversionTicker value={16} />
+        <LeadsTicker value={51} />
+      </div>
+      <div className='cards normal'>
+        <RevenueCard datasource={sales} />
+        <ConversionCard datasource={opportunities} />
+        <RevenueAnalysisCard datasource={salesByState} />
+        <RevenueSnapshotCard datasource={salesByCategory} />
+      </div>
+    </div>
+  );
 
   return (
     <ScrollView className='view-wrapper-scroll'>
       <ToolbarAnalytics
         title='Dashboard'
         additionalToolbarContent={
-          <Item location='before'>
+          <ToolbarItem location='before'>
             <Tabs
               width={tabsWidth}
               scrollByContent
@@ -110,20 +142,52 @@ export const AnalyticsDashboard = () => {
               selectedIndex={tabIndex}
               onSelectionChanged={onTabClick}
             />
-          </Item>
+          </ToolbarItem>
         }
       >
-        <div className='cards compact'>
-          <OpportunitiesTicker value={opportunitiesTotal} />
-          <RevenueTotalTicker value={salesTotal} />
-          <ConversionTicker value={16} />
-          <LeadsTicker value={51} />
-        </div>
-        <div className='cards normal'>
-          <RevenueCard datasource={sales} />
-          <ConversionCard datasource={opportunities} />
-          <RevenueAnalysisCard datasource={salesByState} />
-          <RevenueSnapshotCard datasource={salesByCategory} />
+        <div className='analytics-dashboard__layout'>
+          {usesSplitterLayout ? (
+            <Splitter
+              className='analytics-dashboard__splitter'
+              orientation='horizontal'
+              separatorSize={12}
+            >
+              <SplitterItem minSize='0' resizable>
+                <div className='analytics-dashboard__pane analytics-dashboard__pane--main'>
+                  {dashboardContent}
+                </div>
+              </SplitterItem>
+              <SplitterItem size={420} minSize={340} maxSize='50%' resizable>
+                <div className='analytics-dashboard__pane analytics-dashboard__pane--chat'>
+                  <ChatCardComponent
+                    messages={chat.messages}
+                    currentUser={chat.currentUser}
+                    onMessageEntered={chat.onMessageEntered}
+                    onPromptClick={chat.onPromptClick}
+                    onResetClick={chat.resetChat}
+                    onCloseClick={chat.closeChat}
+                    onUnpinClick={chat.unpinChat}
+                  />
+                </div>
+              </SplitterItem>
+            </Splitter>
+          ) : (
+            <>
+              {dashboardContent}
+              {!chat.isPinned && !chat.isPopupVisible && <ChatFloatingButton onClick={chat.openPopup} />}
+            </>
+          )}
+
+          <ChatPopup
+            visible={chat.isPopupVisible}
+            setVisible={chat.changePopupVisibility}
+            messages={chat.messages}
+            currentUser={chat.currentUser}
+            onMessageEntered={chat.onMessageEntered}
+            onPromptClick={chat.onPromptClick}
+            onResetClick={chat.resetChat}
+            onPinClick={chat.pinChat}
+          />
         </div>
       </ToolbarAnalytics>
       <LoadPanel

@@ -1,0 +1,124 @@
+@use '../../../variables.scss' as *;
+
+.chat-card-component {
+  @include card-shadow();
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  background: var(--base-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.chat-card-component__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.chat-card-component__title-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.chat-card-component__title-content {
+  min-width: 0;
+}
+
+.chat-card-component__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+
+.chat-card-component__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, #2d5bff 0%, #2349d8 100%);
+  box-shadow: 0 10px 20px rgba(45, 91, 255, 0.28);
+}
+
+.chat-card-component__title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--base-text-color);
+}
+
+.chat-card-component__subtitle {
+  margin-top: 4px;
+  color: var(--texteditor-label-color);
+  font-size: 14px;
+}
+
+.chat-card-component__body {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.chat-card-component__chat {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+.chat-card-component__chat.dx-chat {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.chat-card-component__chat
+  .dx-chat-messagelist
+  > .dx-scrollable
+  > .dx-scrollable-wrapper
+  > .dx-scrollable-container
+  > .dx-scrollable-content {
+  padding-inline: 24px;
+}
+
+.chat-card-component__chat .dx-chat-messagelist-day-header:first-child {
+  padding-top: 24px;
+}
+
+.chat-card-component__chat .dx-chat-messagebox {
+  padding: 20px 24px 24px;
+}
+
+@media only screen and (max-width: 1100px) {
+  .chat-card-component {
+    height: auto;
+    min-height: 560px;
+  }
+
+  .chat-card-component__title {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .chat-card-component__header {
+    padding: 20px 20px 12px;
+  }
+
+  .chat-card-component__title {
+    font-size: 22px;
+  }
+}

@@ -1,0 +1,122 @@
+@use '../../../variables.scss' as *;
+
+.chat-popup {
+  .dx-overlay-content {
+    max-width: calc(100% - 64px);
+    max-height: calc(100% - 48px);
+  }
+
+  .dx-popup-title.dx-toolbar {
+    padding-block: 16px;
+  }
+
+  .dx-toolbar-before {
+    overflow: visible;
+  }
+
+  .dx-popup-title .dx-toolbar-label {
+    display: none;
+  }
+
+  .dx-popup-content {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .dx-toolbar-after {
+    gap: 4px;
+  }
+}
+
+.chat-popup__title-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.chat-popup__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, #2d5bff 0%, #2349d8 100%);
+  box-shadow: 0 10px 20px rgba(45, 91, 255, 0.28);
+  flex-shrink: 0;
+}
+
+.chat-popup__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--base-text-color);
+}
+
+.chat-popup__body {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.chat-popup__chat {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+.chat-popup__chat.dx-chat {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.chat-popup__chat .dx-chat-messagelist {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.chat-popup__chat
+  .dx-chat-messagelist
+  > .dx-scrollable
+  > .dx-scrollable-wrapper
+  > .dx-scrollable-container
+  > .dx-scrollable-content {
+  padding-inline: 24px;
+}
+
+.chat-popup__chat .dx-chat-messagelist-day-header:first-child {
+  padding-top: 24px;
+}
+
+.chat-popup__chat .dx-chat-messagebox {
+  flex: 0 0 auto;
+  padding: 16px 24px 24px;
+}
+
+.screen-small,
+.screen-x-small {
+  .chat-popup {
+    .dx-overlay-content {
+      top: 50% !important;
+      right: auto !important;
+      bottom: auto !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      width: calc(100% - 24px) !important;
+      height: min(640px, calc(100% - 24px)) !important;
+      max-width: calc(100% - 24px);
+      max-height: calc(100% - 24px);
+    }
+
+    .chat-popup__pin-button {
+      display: none;
+    }
+  }
+}
