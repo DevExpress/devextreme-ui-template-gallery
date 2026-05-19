@@ -36,16 +36,14 @@ export const ChatCardComponent = ({
     <section className='chat-card-component'>
       <div className='chat-card-component__header'>
         <div className='chat-card-component__title-section'>
-          <div className='chat-card-component__icon'>
-            <span className='dx-icon-sparkle' />
-          </div>
+          <span className='chat-card-icon dx-icon dx-icon-sparkle' aria-hidden />
           <div className='chat-card-component__title-content'>
             <div className='chat-card-component__title'>AI Data Insights</div>
           </div>
         </div>
         <div className='chat-card-component__actions'>
           <Button
-            icon='refresh'
+            icon='clearformat'
             stylingMode='text'
             hint='Reset chat'
             onClick={onResetClick}

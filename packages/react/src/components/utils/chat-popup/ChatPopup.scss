@@ -34,19 +34,18 @@
 .chat-popup__title-section {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }
 
-.chat-popup__icon {
-  display: flex;
+.chat-popup__title-section .chat-card-icon {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
-  color: #fff;
-  background: linear-gradient(135deg, #2d5bff 0%, #2349d8 100%);
-  box-shadow: 0 10px 20px rgba(45, 91, 255, 0.28);
+  width: 20px;
+  height: 20px;
+  color: var(--accent-color);
+  font-size: 20px;
+  line-height: 20px;
   flex-shrink: 0;
 }
 

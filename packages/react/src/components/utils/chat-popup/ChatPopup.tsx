@@ -96,16 +96,14 @@ export const ChatPopup = memo(({
       <Animation show={popupShowAnimation} hide={popupHideAnimation} />
       <ToolbarItem toolbar='top' location='before'>
         <div className='chat-popup__title-section'>
-          <div className='chat-popup__icon'>
-            <span className='dx-icon-sparkle' />
-          </div>
+          <span className='chat-card-icon dx-icon dx-icon-sparkle' aria-hidden />
           <div className='chat-popup__title'>AI Data Insights</div>
         </div>
       </ToolbarItem>
 
       <ToolbarItem toolbar='top' location='after'>
         <Button
-          icon='refresh'
+          icon='clearformat'
           stylingMode='text'
           hint='Reset chat'
           onClick={onResetClick}
