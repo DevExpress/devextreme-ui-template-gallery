@@ -1,5 +1,5 @@
 <dx-scroll-view class="view-wrapper-scroll">
-  <div class="view-wrapper">
+  <div class="view-wrapper view-wrapper-dashboard">
     <toolbar-analytics
       titleText="Dashboard"
       [panelItems]="analyticsPanelItems"
@@ -8,18 +8,75 @@
     >
     </toolbar-analytics>
 
-    <div class="cards grey">
-      <opportunities-ticker [data]="opportunities"></opportunities-ticker>
-      <revenue-total-ticker [data]="sales"></revenue-total-ticker>
-      <conversion-ticker></conversion-ticker>
-      <leads-ticker></leads-ticker>
-    </div>
+    <ng-template #dashboardContent>
+      <div class="analytics-dashboard__content">
+        <div class="cards grey">
+          <opportunities-ticker [data]="opportunities"></opportunities-ticker>
+          <revenue-total-ticker [data]="sales"></revenue-total-ticker>
+          <conversion-ticker></conversion-ticker>
+          <leads-ticker></leads-ticker>
+        </div>
 
-    <div class="cards">
-      <revenue-card [data]="sales"></revenue-card>
-      <conversion-card [data]="opportunities"></conversion-card>
-      <revenue-analysis-card [data]="salesByState"></revenue-analysis-card>
-      <revenue-snapshot-card [data]="salesByCategory"></revenue-snapshot-card>
+        <div class="cards">
+          <revenue-card [data]="sales"></revenue-card>
+          <conversion-card [data]="opportunities"></conversion-card>
+          <revenue-analysis-card [data]="salesByState"></revenue-analysis-card>
+          <revenue-snapshot-card [data]="salesByCategory"></revenue-snapshot-card>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="analytics-dashboard__layout">
+      <ng-container *ngIf="usesSplitterLayout; else unpinnedDashboard">
+        <dx-splitter
+          class="analytics-dashboard__splitter"
+          orientation="horizontal"
+          [separatorSize]="12"
+        >
+          <dxi-splitter-item minSize="0" [resizable]="true">
+            <div class="analytics-dashboard__pane analytics-dashboard__pane--main">
+              <ng-container *ngTemplateOutlet="dashboardContent"></ng-container>
+            </div>
+          </dxi-splitter-item>
+          <dxi-splitter-item
+            [size]="420"
+            [minSize]="340"
+            maxSize="50%"
+            [resizable]="true"
+          >
+            <div class="analytics-dashboard__pane analytics-dashboard__pane--chat">
+              <chat-card-component
+                [messages]="chat.messages"
+                [currentUser]="chat.currentUser"
+                (messageEntered)="chat.onMessageEntered($event)"
+                (promptClick)="chat.onPromptClick($event)"
+                (resetClick)="chat.resetChat()"
+                (closeClick)="chat.closeChat()"
+                (unpinClick)="chat.unpinChat()"
+              ></chat-card-component>
+            </div>
+          </dxi-splitter-item>
+        </dx-splitter>
+      </ng-container>
+
+      <ng-template #unpinnedDashboard>
+        <ng-container *ngTemplateOutlet="dashboardContent"></ng-container>
+        <chat-floating-button
+          *ngIf="!chat.isPinned && !chat.isPopupVisible"
+          (buttonClick)="chat.openPopup()"
+        ></chat-floating-button>
+      </ng-template>
+
+      <chat-popup
+        [visible]="chat.isPopupVisible"
+        (visibleChange)="chat.changePopupVisibility($event)"
+        [messages]="chat.messages"
+        [currentUser]="chat.currentUser"
+        (messageEntered)="chat.onMessageEntered($event)"
+        (promptClick)="chat.onPromptClick($event)"
+        (resetClick)="chat.resetChat()"
+        (pinClick)="chat.pinChat()"
+      ></chat-popup>
     </div>
   </div>
 </dx-scroll-view>
