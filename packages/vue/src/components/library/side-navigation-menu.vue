@@ -34,7 +34,7 @@ const router = useRouter();
 const isLargeScreen = sizes()['screen-large'];
 const items = navigation.map((item) => {
   if (item.path && !(/^\//.test(item.path))) {
-    // eslint-disable-next-line no-param-reassign
+     
     item.path = `/${item.path}`;
   }
   return { ...item, expanded: isLargeScreen };

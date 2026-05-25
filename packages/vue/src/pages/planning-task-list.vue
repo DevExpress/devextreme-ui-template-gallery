@@ -139,7 +139,7 @@ import {
   DxItem as DxToolbarItem,
 } from 'devextreme-vue/toolbar';
 
-// eslint-disable-next-line import/no-unresolved
+ 
 import { getTasks, getFilteredTasks } from 'dx-template-gallery-data';
 import { taskPanelItems, TaskPanelItemsIds } from '@/types/resource';
 import type { Task } from '@/types/task';
