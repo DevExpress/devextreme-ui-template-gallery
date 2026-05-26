@@ -66,7 +66,7 @@ jobs:
       run: pnpm run copy-build ${{ matrix.mode }} ${{ matrix. Theme }}
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: build-artifacts-${{ matrix.mode }}-${{ matrix.theme }}
         path: devextreme-ui-template-gallery/
@@ -104,7 +104,7 @@ jobs:
       run: pnpm run copy-shell
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: build-artifacts-shell
         path: devextreme-ui-template-gallery/
@@ -115,7 +115,7 @@ jobs:
 
     steps:
       - name: Merge screenshot artifacts
-        uses: actions/upload-artifact/merge@v4
+        uses: actions/upload-artifact/merge@v7
         with:
           name: build-artifacts
           pattern: build-artifacts-*
@@ -131,7 +131,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Download build artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: build-artifacts
         path: devextreme-ui-template-gallery
