@@ -35,7 +35,7 @@ jobs:
 
     - name: Archive artifacts
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: artifacts
         path: test-results.xml
