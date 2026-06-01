@@ -1,6 +1,6 @@
 <template>
   <dx-scroll-view class="view-wrapper-scroll">
-    <div class="view-wrapper">
+    <div class="view-wrapper view-wrapper-dashboard">
       <toolbar-analytics
         :show-tabs="true"
         @tab-change="tabChange($event)"
@@ -19,7 +19,7 @@
 :resizable="true">
             <div class="analytics-dashboard__pane analytics-dashboard__pane--main">
               <div class="analytics-dashboard__content">
-                <div class="tiles">
+                <div class="cards compact">
                   <opportunities-ticker :data="opportunities" />
                   <revenue-total-ticker :data="sales" />
                   <conversion-ticker />
@@ -55,7 +55,7 @@ max-size="50%"
 
         <template v-else>
           <div class="analytics-dashboard__content">
-            <div class="tiles">
+            <div class="cards compact">
               <opportunities-ticker :data="opportunities" />
               <revenue-total-ticker :data="sales" />
               <conversion-ticker />
@@ -176,32 +176,44 @@ const tabChange = ([startDate, endDate]: string[]) => {
 
 $dashboard-pane-offset: 20px;
 
-.view-wrapper {
+.view-wrapper.view-wrapper-dashboard {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
   padding-top: var(--content-padding);
   padding-bottom: var(--content-padding);
   position: relative;
   overflow: hidden;
 
-  .cards, .tiles {
+  .cards {
     display: grid;
     width: 100%;
-    grid-gap: 20px;
+    margin-top: 20px;
     gap: 20px;
-  }
-
-  .tiles {
-    margin: 20px 0;
-    grid-template-columns: repeat(4, calc(25% - 15px));
-
-    :deep(.card) {
-      background-color: var(--side-panel-background);
-      border: none;
-      height: 120px;
-    }
-  }
-
-  .cards {
     grid-template-columns: repeat(2, calc(50% - 10px));
+
+    &.compact {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+      :deep(.card) {
+        background-color: var(--side-panel-background);
+        border: none;
+        height: 120px;
+
+        :deep(.dx-button) {
+          background-color: var(--side-panel-background);
+        }
+
+        :deep(.content) {
+          height: auto;
+        }
+      }
+
+      :deep(.dx-loadpanel-indicator) {
+        width: 24px;
+        height: 24px;
+      }
+    }
 
     .card-wrapper {
       flex: 1 50%;
@@ -278,9 +290,9 @@ $dashboard-pane-offset: 20px;
 }
 
 @media only screen and (max-width: 1400px) {
-  .view-wrapper {
-    .tiles {
-      grid-template-columns: repeat(2, calc(50% - 10px));
+  .view-wrapper.view-wrapper-dashboard {
+    .cards.compact {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
   }
 }
@@ -292,25 +304,17 @@ $dashboard-pane-offset: 20px;
 }
 
 @media only screen and (max-width: 900px) {
-  .view-wrapper {
+  .view-wrapper.view-wrapper-dashboard {
     .cards {
-      grid-template-columns: repeat(1, 100%);
+      grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   }
 }
 
 @media only screen and (max-width: 700px) {
-  .view-wrapper {
-    .cards, .tiles {
-      grid-template-columns: repeat(1, 100%);
-    }
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  .view-wrapper {
-    .cards, .tiles {
-      grid-template-columns: repeat(1, 100%);
+  .view-wrapper.view-wrapper-dashboard {
+    .cards.compact {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   }
 }

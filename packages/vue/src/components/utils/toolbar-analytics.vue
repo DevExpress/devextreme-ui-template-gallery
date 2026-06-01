@@ -14,7 +14,7 @@
         :width="screenInfo.isXSmall ? 150 : 'auto'"
         :show-nav-buttons="false"
         :scroll-by-content="true"
-        :selected-item-keys="[5]"
+        :selected-index="selectedIndex"
         key-expr="key"
         :items="analyticsPanelItems"
         @selection-changed="selectionChange($event)"
@@ -70,7 +70,7 @@ import {
   DxItem,
 } from 'devextreme-vue/toolbar';
 import { DxTabs, DxTabsTypes } from 'devextreme-vue/tabs';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { analyticsPanelItems } from '@/types/resource';
 
 import { screenInfo } from '@/utils/media-query';
@@ -81,9 +81,14 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits(['tab-change']);
 const [initialStartDate, initialEndDate] = analyticsPanelItems[4].value.split('/');
+const selectedIndex = ref(4);
 
 const selectionChange = (e: DxTabsTypes.SelectionChangedEvent) => {
-  const [startDate, endDate] = e.addedItems[0].value.split('/');
+  const selectedItem = e.addedItems[0];
+
+  selectedIndex.value = analyticsPanelItems.findIndex(({ key }) => key === selectedItem.key);
+
+  const [startDate, endDate] = selectedItem.value.split('/');
   emit('tab-change', [startDate, endDate]);
 };
 
