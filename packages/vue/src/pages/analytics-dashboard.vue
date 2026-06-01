@@ -179,6 +179,8 @@ $dashboard-pane-offset: 20px;
 .view-wrapper {
   padding-top: var(--content-padding);
   padding-bottom: var(--content-padding);
+  position: relative;
+  overflow: hidden;
 
   .cards, .tiles {
     display: grid;

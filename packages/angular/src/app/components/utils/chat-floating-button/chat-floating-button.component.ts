@@ -13,6 +13,7 @@ import { ScreenService } from 'src/app/services';
 @Component({
   selector: 'chat-floating-button',
   templateUrl: './chat-floating-button.component.html',
+  styles: [':host { display: contents; }'],
   imports: [DxSpeedDialActionModule],
 })
 export class ChatFloatingButtonComponent implements OnDestroy {
