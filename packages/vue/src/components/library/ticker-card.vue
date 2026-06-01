@@ -59,6 +59,7 @@ const getIconClass = () => props.tone || (props.percentage > 0 ? 'positive' : 'n
 .ticker {
   --gap-padding: 12px;
   height: auto;
+  min-width: 0;
   border-radius: 8px;
   box-shadow: var(--card-shadow);
   background-color: var(--base-bg, #fff);
@@ -95,14 +96,22 @@ const getIconClass = () => props.tone || (props.percentage > 0 ? 'positive' : 'n
   }
   .middle {
     flex: 1;
+    min-width: 0;
   }
   .title {
     font-size: 14px;
     line-height: 20px;
     margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .total {
-    display: inline-block;
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 20px;
     font-weight: 600;
     line-height: 20px;
@@ -110,6 +119,7 @@ const getIconClass = () => props.tone || (props.percentage > 0 ? 'positive' : 'n
   }
   .percentage {
     display: flex;
+    flex: 0 0 auto;
     align-self: flex-start;
     border-radius: 999px;
     font-size: 12px;

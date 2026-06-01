@@ -190,7 +190,7 @@ $dashboard-pane-offset: 20px;
     width: 100%;
     margin-top: 20px;
     gap: 20px;
-    grid-template-columns: repeat(2, calc(50% - 10px));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     &.compact {
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
