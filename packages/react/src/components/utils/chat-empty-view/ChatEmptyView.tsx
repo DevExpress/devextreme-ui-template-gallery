@@ -7,19 +7,12 @@ export type ChatEmptyViewTexts = {
   prompt: string;
 };
 
-type ChatEmptyPrompt = {
-  id: 'trends' | 'predictions';
-  title: string;
-  description: string;
-  messageText: string;
-};
-
 type ChatEmptyViewProps = {
   texts: ChatEmptyViewTexts;
   onPromptClick: (messageText: string) => void;
 };
 
-const EMPTY_VIEW_PROMPTS: ChatEmptyPrompt[] = [
+const EMPTY_VIEW_PROMPTS = [
   {
     id: 'trends',
     title: '🎯 Trends',

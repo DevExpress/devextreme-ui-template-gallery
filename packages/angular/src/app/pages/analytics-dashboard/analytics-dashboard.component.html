@@ -27,7 +27,7 @@
     </ng-template>
 
     <div class="analytics-dashboard__layout">
-      <ng-container *ngIf="usesSplitterLayout; else unpinnedDashboard">
+      @if (usesSplitterLayout) {
         <dx-splitter
           class="analytics-dashboard__splitter"
           orientation="horizontal"
@@ -57,15 +57,14 @@
             </div>
           </dxi-splitter-item>
         </dx-splitter>
-      </ng-container>
-
-      <ng-template #unpinnedDashboard>
+      } @else {
         <ng-container *ngTemplateOutlet="dashboardContent"></ng-container>
-        <chat-floating-button
-          *ngIf="!chat.isPinned && !chat.isPopupVisible"
-          (buttonClick)="chat.openPopup()"
-        ></chat-floating-button>
-      </ng-template>
+        @if (!chat.isPinned && !chat.isPopupVisible) {
+          <chat-floating-button
+            (buttonClick)="chat.openPopup()"
+          ></chat-floating-button>
+        }
+      }
 
       <chat-popup
         [visible]="chat.isPopupVisible"

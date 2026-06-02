@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonModule, DxChatModule } from 'devextreme-angular';
-import {
-  Message,
-  MessageEnteredEvent,
-  User,
-} from 'devextreme/ui/chat';
+import { DxChatTypes } from 'devextreme-angular/ui/chat';
+
+type Message = DxChatTypes.Message;
+type MessageEnteredEvent = DxChatTypes.MessageEnteredEvent;
+type User = DxChatTypes.User;
 
 import { ChatEmptyViewComponent } from '../chat-empty-view/chat-empty-view.component';
 

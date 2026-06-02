@@ -16,11 +16,11 @@ import type {
   AnimationConfig,
   PositionConfig,
 } from 'devextreme/common/core/animation';
-import {
-  Message,
-  MessageEnteredEvent,
-  User,
-} from 'devextreme/ui/chat';
+import { DxChatTypes } from 'devextreme-angular/ui/chat';
+
+type Message = DxChatTypes.Message;
+type MessageEnteredEvent = DxChatTypes.MessageEnteredEvent;
+type User = DxChatTypes.User;
 import { Subscription } from 'rxjs';
 
 import { ScreenService } from 'src/app/services';

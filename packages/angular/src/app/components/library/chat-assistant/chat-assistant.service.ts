@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  Message,
-  MessageEnteredEvent,
-  User,
-} from 'devextreme/ui/chat';
+import { DxChatTypes } from 'devextreme-angular/ui/chat';
+
+type Message = DxChatTypes.Message;
+type MessageEnteredEvent = DxChatTypes.MessageEnteredEvent;
+type User = DxChatTypes.User;
 
 type ChatMessageDraft = Partial<Message> & { text?: string };
 
