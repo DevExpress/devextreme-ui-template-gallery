@@ -18,7 +18,7 @@ import ResetPasswordForm from '@/pages/reset-password-form.vue';
 import UserProfile from '@/pages/user-profile.vue';
 
 function loadAuthComponent(ComponentFileName: string) {
-  // eslint-disable-next-line func-call-spacing
+   
   return () => import (/* webpackChunkName: "auth" */ `@/components/library/${ComponentFileName}.vue`);
 }
 

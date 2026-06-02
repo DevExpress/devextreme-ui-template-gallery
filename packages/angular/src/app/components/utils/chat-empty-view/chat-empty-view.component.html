@@ -1,0 +1,26 @@
+<div
+  class="chat-empty-view"
+  [attr.aria-label]="texts.message + '. ' + texts.prompt"
+>
+  <div class="chat-empty-view__header">
+    <div class="chat-empty-view__title">Ask AI Assistant</div>
+  </div>
+
+  <div class="chat-empty-view__prompts">
+    @for (prompt of prompts; track prompt.id) {
+    <button
+      type="button"
+      class="chat-empty-view__prompt"
+      [attr.aria-label]="prompt.title + '. ' + prompt.description"
+      (click)="promptClick.emit(prompt.messageText)"
+    >
+      <span class="chat-empty-view__prompt-content">
+        <span class="chat-empty-view__prompt-title">{{ prompt.title }}</span>
+        <span class="chat-empty-view__prompt-description">
+          {{ prompt.description }}
+        </span>
+      </span>
+    </button>
+    }
+  </div>
+</div>

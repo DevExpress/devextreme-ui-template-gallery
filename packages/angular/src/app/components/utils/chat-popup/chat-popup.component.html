@@ -1,0 +1,60 @@
+<dx-popup
+  title="AI Data Insights"
+  [visible]="visible"
+  width="min(420px, calc(100% - 64px))"
+  height="min(640px, calc(100% - 48px))"
+  [dragEnabled]="true"
+  [dragAndResizeArea]="dragAndResizeArea"
+  [showCloseButton]="true"
+  [container]="popupContainer"
+  [position]="popupPosition"
+  [wrapperAttr]="popupWrapperAttr"
+  [animation]="popupAnimation"
+  (visibleChange)="onVisibleChange($event)"
+>
+  <dxi-popup-toolbar-item toolbar="top" location="before">
+    <div class="chat-popup__title-section">
+      <span class="chat-card-icon dx-icon dx-icon-sparkle" aria-hidden="true"></span>
+      <div class="chat-popup__title">AI Data Insights</div>
+    </div>
+  </dxi-popup-toolbar-item>
+
+  <dxi-popup-toolbar-item toolbar="top" location="after">
+    <dx-button
+      icon="clearformat"
+      stylingMode="text"
+      hint="Reset chat"
+      (onClick)="resetClick.emit()"
+    ></dx-button>
+  </dxi-popup-toolbar-item>
+
+  <dxi-popup-toolbar-item toolbar="top" location="after">
+    <dx-button
+      icon="pin"
+      stylingMode="text"
+      hint="Pin"
+      [elementAttr]="pinButtonAttr"
+      (onClick)="pinClick.emit()"
+    ></dx-button>
+  </dxi-popup-toolbar-item>
+
+  <div class="chat-popup__body">
+    <dx-chat
+      class="chat-popup__chat"
+      [user]="currentUser"
+      [items]="messages"
+      height="100%"
+      emptyViewTemplate="emptyView"
+      [showAvatar]="false"
+      [showDayHeaders]="false"
+      (onMessageEntered)="messageEntered.emit($event)"
+    >
+      <div *dxTemplate="let data of 'emptyView'" class="chat-popup__empty-wrapper">
+        <chat-empty-view
+          [texts]="data.texts"
+          (promptClick)="promptClick.emit($event)"
+        ></chat-empty-view>
+      </div>
+    </dx-chat>
+  </div>
+</dx-popup>

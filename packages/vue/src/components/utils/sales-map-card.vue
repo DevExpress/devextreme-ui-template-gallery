@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-// eslint-disable-next-line import/extensions
+ 
 import * as mapsData from 'devextreme-dist/js/vectormap-data/usa.js';
 import {
   DxVectorMap, DxLayer, DxSource, DxLegend, DxTooltip, DxVectorMapTypes,

@@ -30,7 +30,7 @@ import { ref } from 'vue';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxLoadPanel } from 'devextreme-vue/load-panel';
 
-// eslint-disable-next-line import/no-unresolved
+ 
 import { getSalesByStateAndCity, calcSalesByState } from 'dx-template-gallery-data';
 
 import { SalesByState, SalesByStateAndCity } from '@/types/analytics';

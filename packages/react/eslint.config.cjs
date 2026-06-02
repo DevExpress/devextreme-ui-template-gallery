@@ -24,6 +24,8 @@ module.exports = [
         document: 'readonly',
         console: 'readonly',
         HTMLElement: 'readonly',
+        ResizeObserver: 'readonly',
+        MutationObserver: 'readonly',
         Blob: 'readonly',
         URLSearchParams: 'readonly',
         CSSStyleRule: 'readonly',

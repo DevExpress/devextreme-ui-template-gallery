@@ -1,7 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {
+  Component, inject, OnDestroy, OnInit
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { map, share } from 'rxjs/operators';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, Subscription } from 'rxjs';
 
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
@@ -10,8 +12,9 @@ import { DxFunnelModule } from 'devextreme-angular/ui/funnel';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
+import { DxSplitterModule } from 'devextreme-angular/ui/splitter';
 
-import { DataService } from 'src/app/services';
+import { DataService, ScreenService } from 'src/app/services';
 import { ToolbarAnalyticsComponent } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
 import { ConversionCardComponent } from 'src/app/components/utils/conversion-card/conversion-card.component';
 import { RevenueCardComponent } from 'src/app/components/utils/revenue-card/revenue-card.component';
@@ -25,6 +28,10 @@ import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import {
   Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory,
 } from 'src/app/types/analytics';
+import { ChatAssistantService } from 'src/app/components/library/chat-assistant/chat-assistant.service';
+import { ChatCardComponent } from 'src/app/components/utils/chat-card-component/chat-card-component.component';
+import { ChatFloatingButtonComponent } from 'src/app/components/utils/chat-floating-button/chat-floating-button.component';
+import { ChatPopupComponent } from 'src/app/components/utils/chat-popup/chat-popup.component';
 
 type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
 type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
@@ -32,7 +39,7 @@ type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
 @Component({
   templateUrl: './analytics-dashboard.component.html',
   styleUrls: ['./analytics-dashboard.component.scss'],
-  providers: [ DataService ],
+  providers: [ DataService, ChatAssistantService ],
   imports: [
     DxScrollViewModule,
     DxDataGridModule,
@@ -40,6 +47,7 @@ type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
     DxFunnelModule,
     DxPieChartModule,
     DxChartModule,
+    DxSplitterModule,
     ToolbarAnalyticsComponent,
     DxLoadPanelModule,
     ConversionCardComponent,
@@ -50,11 +58,31 @@ type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
     RevenueTotalTickerComponent,
     ConversionTickerComponent,
     LeadsTickerComponent,
+    ChatCardComponent,
+    ChatFloatingButtonComponent,
+    ChatPopupComponent,
     CommonModule,
   ],
 })
-export class AnalyticsDashboardComponent implements OnInit {
+export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
   private service = inject(DataService);
+
+  protected chat = inject(ChatAssistantService);
+
+  private screen = inject(ScreenService);
+
+  isLarge = this.screen.sizes['screen-large'];
+
+  private screenSubscription: Subscription = this.screen.screenChanged.subscribe(({
+    isLarge,
+    isXLarge,
+  }) => {
+    this.isLarge = isLarge || isXLarge;
+
+    if (!this.isLarge && this.chat.isPinned) {
+      this.chat.unpinChat();
+    }
+  });
 
   analyticsPanelItems = analyticsPanelItems;
   opportunities: SalesOrOpportunitiesByCategory = null;
@@ -97,5 +125,13 @@ export class AnalyticsDashboardComponent implements OnInit {
     const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
 
     this.loadData(startDate, endDate);
+  }
+
+  ngOnDestroy(): void {
+    this.screenSubscription.unsubscribe();
+  }
+
+  get usesSplitterLayout() {
+    return this.chat.isPinned && this.isLarge;
   }
 }

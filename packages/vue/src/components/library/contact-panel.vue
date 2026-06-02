@@ -214,7 +214,7 @@
 <script setup lang="ts">
 import { ref, toRaw, watch } from 'vue';
 import { router } from '@/router';
-// eslint-disable-next-line import/no-unresolved
+ 
 import { getContact } from 'dx-template-gallery-data';
 import { DxAccordion, DxItem as DxAccordionItem } from 'devextreme-vue/accordion';
 import { DxButton } from 'devextreme-vue/button';
