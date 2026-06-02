@@ -6,8 +6,6 @@
     height="min(640px, calc(100% - 48px))"
     :drag-enabled="true"
     :drag-and-resize-area="documentBody"
-    :hide-on-outside-click="false"
-    :shading="false"
     :show-close-button="true"
     container=".content"
     :position="popupPosition"
