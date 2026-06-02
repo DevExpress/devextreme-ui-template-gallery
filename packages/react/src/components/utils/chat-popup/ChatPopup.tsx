@@ -81,13 +81,11 @@ export const ChatPopup = memo(({
       visible={visible}
       width='min(420px, calc(100% - 64px))'
       height='min(640px, calc(100% - 48px))'
-      fullScreen={false}
       dragEnabled
       dragAndResizeArea={window.document.body}
       hideOnOutsideClick={false}
       shading={false}
       showCloseButton
-      resizeEnabled={false}
       container={POPUP_CONTAINER}
       position={popupPosition}
       wrapperAttr={popupWrapperAttr}
