@@ -1,7 +1,7 @@
 {
   "name": "devextreme-ui-template-gallery",
   "version": "1.0.0",
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@11.5.1",
   "private": true,
   "scripts": {
     "build": "pnpm -r run build",
