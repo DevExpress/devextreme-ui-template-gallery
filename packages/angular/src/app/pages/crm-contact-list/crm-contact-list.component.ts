@@ -98,7 +98,7 @@ export class CrmContactListComponent {
   };
 
   onPinnedChange = () => {
-    this.dataGrid.instance.updateDimensions();
+    this.dataGrid?.instance?.updateDimensions?.();
   };
 
   filterByStatus = (e: DxDropDownButtonTypes.SelectionChangedEvent) => {

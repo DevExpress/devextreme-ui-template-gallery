@@ -9,7 +9,7 @@
         >
         </dx-button>
       </dxi-item>
-      <dxi-item location="before" [text]="taskName"></dxi-item>
+      <dxi-item location="before" [text]="taskName()"></dxi-item>
       <dxi-item location="after" locateInMenu="auto">
         <dx-drop-down-button
           text="Actions"
@@ -49,7 +49,7 @@
     <div class="panels">
       <div class="left">
         <dx-validation-group>
-          <task-form [task]="task" [isLoading]="isLoading"></task-form>
+          <task-form [task]="task()" [isLoading]="isLoading()"></task-form>
         </dx-validation-group>
       </div>
 
@@ -63,21 +63,21 @@
           >
             <dxi-item title="Activities">
               <card-activities
-                [isLoading]="isLoading"
-                [activities]="task?.activities"
+                [isLoading]="isLoading()"
+                [activities]="task()?.activities"
                 [showBy]="true"
               ></card-activities>
             </dxi-item>
             <dxi-item title="Notes">
               <card-notes
-                [items]="task?.notes"
-                [user]="task?.owner"
+                [items]="task()?.notes"
+                [user]="task()?.owner"
               ></card-notes>
             </dxi-item>
             <dxi-item title="Messages">
               <card-messages
-                [items]="task?.messages"
-                [user]="task?.owner"
+                [items]="task()?.messages"
+                [user]="task()?.owner"
               ></card-messages>
             </dxi-item>
           </dx-tab-panel>

@@ -26,33 +26,33 @@
     "lint-utils --fix": "eslint --fix utils"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.28.0",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "@typescript-eslint/utils": "^8.46.2",
+    "@babel/runtime": "^7.29.7",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@typescript-eslint/utils": "^8.60.1",
     "devextreme-cli": "latest",
-    "eslint": "^8.55.0",
+    "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.1.0",
     "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jest": "^27.9.0",
     "eslint-plugin-n": "^14.0.0",
-    "eslint-plugin-no-only-tests": "^3.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-perf": "^3.3.1",
+    "eslint-plugin-no-only-tests": "^3.4.0",
+    "eslint-plugin-promise": "^6.6.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-perf": "^3.3.3",
     "eslint-plugin-spellcheck": "^0.0.20",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^10.1.0",
     "globals": "^16.5.0",
     "prettier": "2.4.1",
-    "stylelint": "^15.0.0",
+    "stylelint": "^15.11.0",
     "stylelint-config-standard": "^33.0.0",
     "stylelint-config-standard-scss": "^11.1.0",
     "stylelint-scss": "^5.3.2",
     "typescript": "~5.8.3",
-    "vue": "^3.2.38",
-    "vue-eslint-parser": "^9.3.2"
+    "vue": "^3.5.35",
+    "vue-eslint-parser": "^9.4.3"
   },
   "dependencies": {
     "devextreme": "25.2.4",
@@ -60,7 +60,7 @@
     "devextreme-themebuilder": "25.2.4",
     "eslint-config-devextreme": "1.1.6",
     "jspdf": "^4.2.1",
-    "jspdf-autotable": "^5.0.7"
+    "jspdf-autotable": "^5.0.8"
   },
   "pre-commit": [
     "lint-bundles"

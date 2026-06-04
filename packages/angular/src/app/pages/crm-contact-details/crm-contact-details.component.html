@@ -9,7 +9,7 @@
         >
         </dx-button>
       </dxi-item>
-      <dxi-item location="before" [text]="contactName"></dxi-item>
+      <dxi-item location="before" [text]="contactName()"></dxi-item>
       <dxi-item location="after" locateInMenu="auto">
         <dx-button
           text="Terminate"
@@ -56,21 +56,21 @@
     <div class="panels theme-dependent">
       <div class="left">
         <contact-form
-          [contactData]="contactData"
-          [isLoading]="isLoading"
+          [contactData]="contactData()"
+          [isLoading]="isLoading()"
         ></contact-form>
       </div>
 
       <div class="right theme-dependent">
         <contact-cards
-          [isLoading]="isLoading"
-          [contactName]="contactData?.name"
-          [tasks]="contactData?.tasks"
-          [activities]="contactData?.activities"
-          [activeOpportunities]="activeOpportunities"
-          [closedOpportunities]="closedOpportunities"
-          [notes]="contactNotes"
-          [messages]="contactMessages"
+          [isLoading]="isLoading()"
+          [contactName]="contactData()?.name"
+          [tasks]="contactData()?.tasks"
+          [activities]="contactData()?.activities"
+          [activeOpportunities]="activeOpportunities()"
+          [closedOpportunities]="closedOpportunities()"
+          [notes]="contactNotes()"
+          [messages]="contactMessages()"
         ></contact-cards>
       </div>
     </div>
