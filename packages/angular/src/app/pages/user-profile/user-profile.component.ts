@@ -1,7 +1,9 @@
 import {
-  ChangeDetectorRef,
   Component,
+  computed,
   inject,
+  model,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { forkJoin } from 'rxjs';
@@ -31,7 +33,7 @@ import { DataService, ScreenService } from 'src/app/services';
 @Component({
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
-  providers: [ DataService ],
+  providers: [DataService],
   imports: [
     DxButtonModule,
     DxDateBoxModule,
@@ -48,51 +50,48 @@ import { DataService, ScreenService } from 'src/app/services';
     ChangeProfilePasswordFormComponent,
     CommonModule,
     PhonePipeDirective,
-  ]
+  ],
 })
 export class UserProfileComponent {
   private service = inject(DataService);
-
-  private ref = inject(ChangeDetectorRef);
 
   protected screen = inject(ScreenService);
 
   profileId = 22;
 
-  profileData: Record<string, any>;
+  profileData = signal<Record<string, any> | undefined>(undefined);
 
-  savedProfileData: Record<string, any>;
+  savedProfileData = signal<Record<string, any> | undefined>(undefined);
 
-  isLoading = true;
+  isLoading = signal(true);
 
-  supervisorsList = [];
+  supervisorsList = signal<unknown[]>([]);
 
-  isChangePasswordPopupOpened = false;
+  isChangePasswordPopupOpened = model(false);
 
-  isDataChanged = false;
+  isDataChanged = signal(false);
 
-  isContentScrolled = false;
+  isContentScrolled = signal(false);
 
   basicInfoItems: Record<string, any>[] = this.getBasicInfoItems();
 
-  contactItems: Record<string, any>[] = this.getContactItems();
+  contactItems = computed(() => this.getContactItems(this.supervisorsList()));
 
   addressItems: Record<string, any>[] = this.getAddressItems();
 
   constructor() {
     forkJoin([
       this.service.getSupervisors(),
-      this.service.getProfile(this.profileId)
+      this.service.getProfile(this.profileId),
     ]).subscribe(([supervisorsList, profileData]) => {
-      this.supervisorsList.length = 0;
-      this.supervisorsList.push(...supervisorsList);
-      this.profileData = profileData;
+      this.supervisorsList.set(supervisorsList as unknown[]);
+      this.profileData.set(profileData as Record<string, any>);
       this.setSavedData();
-      this.isLoading = false;
+      this.isLoading.set(false);
     });
   }
 
-  getBasicInfoItems(){
+  getBasicInfoItems() {
     return [
       { dataField: 'firstName', colSpan: 2 },
       { dataField: 'lastName', colSpan: 2 },
@@ -102,7 +101,7 @@ export class UserProfileComponent {
         colSpan: 1,
         editorOptions: {
           items: ['UI/UX', 'Backend Developers'],
-        }
+        },
       },
       {
         dataField: 'position',
@@ -110,7 +109,7 @@ export class UserProfileComponent {
         colSpan: 1,
         editorOptions: {
           items: ['Designer', 'Developer', 'Technical Writer'],
-        }
+        },
       },
       {
         dataField: 'hiredDate',
@@ -118,7 +117,7 @@ export class UserProfileComponent {
         colSpan: 1,
         editorOptions: {
           max: new Date(),
-        }
+        },
       },
       {
         dataField: 'birthDate',
@@ -126,24 +125,22 @@ export class UserProfileComponent {
         editorType: 'dxDateBox',
         editorOptions: {
           max: new Date(),
-        }
+        },
       },
-    ]
+    ];
   }
 
-  getContactItems() {
+  getContactItems(supervisorsList: unknown[]) {
     return [
       {
         dataField: 'phone',
         editorOptions: {
           mask: '(000) 000-0000',
-        }
+        },
       },
       {
         dataField: 'email',
-        validators: [
-          {type: 'email'}
-        ]
+        validators: [{ type: 'email' }],
       },
       {
         dataField: 'domainUsername',
@@ -157,7 +154,7 @@ export class UserProfileComponent {
         dataField: 'supervisor',
         label: 'Supervisor',
         colSpan: 2,
-        itemsList: this.supervisorsList,
+        itemsList: supervisorsList,
         editorType: 'dxSelectBox',
       },
     ];
@@ -173,7 +170,7 @@ export class UserProfileComponent {
         label: 'State/province/area',
         editorOptions: {
           label: 'State/province/area',
-        }
+        },
       },
       {
         dataField: 'address',
@@ -188,47 +185,57 @@ export class UserProfileComponent {
   }
 
   dataChanged() {
-    this.isDataChanged = true;
+    this.isDataChanged.set(true);
   }
 
-  setSavedData(data = this.profileData) {
-    this.savedProfileData = JSON.parse(JSON.stringify(data));
+  setSavedData(data?: Record<string, any>) {
+    const source = data ?? this.profileData();
+    if (source) {
+      this.savedProfileData.set(JSON.parse(JSON.stringify(source)));
+    }
   }
 
   copyToClipboard(text, evt) {
     window.navigator.clipboard?.writeText(text);
     const tipText = 'Text copied';
-    notify({
+    notify(
+      {
         message: tipText,
         minWidth: `${tipText.length + 2}ch`,
         width: 'auto',
-        position: {of: evt.target, offset:'0 -30'}
+        position: { of: evt.target, offset: '0 -30' },
       },
-      'info', 500);
-  };
+      'info',
+      500
+    );
+  }
 
   changePassword() {
-    this.isChangePasswordPopupOpened = true;
-  };
+    this.isChangePasswordPopupOpened.set(true);
+  }
 
   cancel() {
-    this.profileData = this.savedProfileData;
-    this.ref.detectChanges();
+    const saved = this.savedProfileData();
+    if (saved) {
+      this.profileData.set(JSON.parse(JSON.stringify(saved)));
+    }
     this.setSavedData();
-
-    setTimeout(() => {
-      this.isDataChanged = false;
-    });
+    this.isDataChanged.set(false);
   }
 
   save() {
-    notify({message: 'Data saved', position: {at: 'bottom center', my: 'bottom center'}}, 'success');
-    this.isDataChanged = false;
+    notify(
+      {
+        message: 'Data saved',
+        position: { at: 'bottom center', my: 'bottom center' },
+      },
+      'success'
+    );
+    this.isDataChanged.set(false);
     this.setSavedData();
   }
 
-  scroll({reachedTop = false}) {
-    this.isContentScrolled = !reachedTop;
+  scroll({ reachedTop = false }) {
+    this.isContentScrolled.set(!reachedTop);
   }
 }
-
