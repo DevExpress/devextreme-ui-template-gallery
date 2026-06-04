@@ -34,7 +34,8 @@
   >
   </dx-load-panel>
   <dx-scroll-view class="view-wrapper-scroll" (onScroll)="scroll($event)">
-    <div *ngIf="!isLoading() && profileData(); let profile" class="cards-container">
+    @if (!isLoading() && profileData(); as profile) {
+    <div class="cards-container">
       <profile-card
         class="profile-card basic-info-card"
         title="Basic Info"
@@ -123,6 +124,7 @@
         </div>
       </profile-card>
     </div>
+    }
   </dx-scroll-view>
 </div>
 

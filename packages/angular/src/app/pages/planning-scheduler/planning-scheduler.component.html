@@ -53,9 +53,9 @@
         <dxi-view type="month"></dxi-view>
         <dxi-view type="agenda"></dxi-view>
       </dx-scheduler>
+      @if (selectedAppointment) {
       <dx-tooltip
         #tooltipRef
-        *ngIf="selectedAppointment"
         showEvent="click"
         [target]="selectedAppointment?.target"
         [position]="
@@ -72,6 +72,7 @@
           (clickDeleteAppointment)="deleteSelectedAppointment($event)"
         ></scheduler-tooltip>
       </dx-tooltip>
+      }
       <dx-speed-dial-action
         icon="add"
         [visible]="(screen.screenChanged | async)?.isXSmall"

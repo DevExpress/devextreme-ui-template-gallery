@@ -14,8 +14,8 @@
       }}
     </div>
   </div>
+  @if (percentage !== 0) {
   <div
-    *ngIf="percentage !== 0"
     class="percentage"
     [class]="percentage > 0 ? 'positive' : 'negative'"
   >
@@ -23,4 +23,5 @@
     <i class="value"></i>
     <span>{{ abs(percentage) }}%</span>
   </div>
+  }
 </div>

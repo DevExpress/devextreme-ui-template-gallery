@@ -14,7 +14,7 @@
       [screenByWidth]="getSizeQualifier"
       (onFieldDataChanged)="onFieldChange()"
     >
-      <ng-container *ngFor="let item of items">
+      @for (item of items; track item.dataField) {
         <dxi-item
           [dataField]="item.dataField"
           [editorType]="item.editorType"
@@ -26,13 +26,16 @@
           "
           [colSpan]="item.colSpan"
         >
-          <dxo-label *ngIf="item.label" [text]="item.label"> </dxo-label>
+          @if (item.label) {
+          <dxo-label [text]="item.label"> </dxo-label>
+          }
+          @for (rule of item.validators; track rule.type) {
           <dxi-validation-rule
-            *ngFor="let rule of item.validators"
             [type]="rule.type"
           ></dxi-validation-rule>
-          <ng-container [ngSwitch]="item.dataField">
-            <ng-container *ngSwitchCase="'status'">
+          }
+          @switch (item.dataField) {
+            @case ('status') {
               <div *dxTemplate>
                 <status-select-box
                   labelMode="hidden"
@@ -42,9 +45,8 @@
                 >
                 </status-select-box>
               </div>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="'supervisor'">
+            }
+            @case ('supervisor') {
               <pictured-item-select-box
                 *dxTemplate
                 [label]="item.label"
@@ -52,10 +54,10 @@
                 [items]="item.itemsList"
                 (valueChange)="onFieldChange(item.dataField, $event)"
               ></pictured-item-select-box>
-            </ng-container>
-          </ng-container>
+            }
+          }
         </dxi-item>
-      </ng-container>
+      }
     </dx-form>
   </div>
 </div>

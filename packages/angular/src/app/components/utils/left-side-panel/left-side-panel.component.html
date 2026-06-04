@@ -4,7 +4,8 @@
   [class.open]="isOpened"
 >
   <div class="side-panel-container">
-    <div *ngIf="isSmallScreen" class="button-container">
+    @if (isSmallScreen) {
+    <div class="button-container">
       <dx-button
         class="open-button"
         [icon]="isOpened ? 'hidepanel' : 'showpanel'"
@@ -12,6 +13,7 @@
       >
       </dx-button>
     </div>
+    }
 
     <div class="side-panel-content-wrapper">
       <dx-scroll-view style="max-height: 100%">

@@ -11,7 +11,8 @@
       ></dx-button>
       {{ getTimeString | apply: selectedAppointmentData }}
     </div>
-    <div *ngIf="selectedAppointmentData.description" class="description">
+    @if (selectedAppointmentData.description) {
+    <div class="description">
       <dx-button
         icon="textdocument"
         stylingMode="text"
@@ -21,6 +22,7 @@
       ></dx-button>
       {{ selectedAppointmentData.description }}
     </div>
+    }
   </div>
   <div class="buttons">
     <dx-button

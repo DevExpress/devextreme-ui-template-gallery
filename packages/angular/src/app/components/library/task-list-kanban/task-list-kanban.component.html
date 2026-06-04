@@ -9,7 +9,8 @@
     handle=".list-title"
     (onReorder)="onListReorder($event)"
   >
-    <div class="list" *ngFor="let board of kanbanDataSource">
+    @for (board of kanbanDataSource; track board.name) {
+    <div class="list">
       <div class="list-title theme-text-color">
         <span>{{ board.name }}</span>
         <card-menu [items]="boardMenuItems"> </card-menu>
@@ -27,9 +28,9 @@
           (onReorder)="onTaskDrop($event)"
           (onAdd)="onTaskDrop($event)"
         >
-          <ng-container *ngFor="let task of board.cards">
+          @for (task of board.cards; track task.id) {
             <task-kanban-card class="dx-card" [task]="task"></task-kanban-card>
-          </ng-container>
+          }
         </dx-sortable>
 
         <div class="add-task">
@@ -43,5 +44,6 @@
         </div>
       </dx-scroll-view>
     </div>
+    }
   </dx-sortable>
 </dx-scroll-view>

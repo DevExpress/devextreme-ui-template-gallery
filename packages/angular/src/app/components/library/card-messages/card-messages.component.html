@@ -45,7 +45,8 @@
     </div>
     <div class="messages-content">
       <div class="message-list">
-        <div class="message-container" *ngFor="let data of items">
+        @for (data of items; track data.subject) {
+        <div class="message-container">
           <user-avatar
             [dataLetters]="getAvatarText(data.manager)"
           ></user-avatar>
@@ -64,6 +65,7 @@
             <div class="message-text">{{ getText(data) }}</div>
           </div>
         </div>
+        }
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <div id="activities-list" [ngClass]="activities ? 'load' : null">
+  @if (activities) {
   <dx-list
-    *ngIf="activities"
     class="activities-list"
     [items]="activities"
     [scrollingEnabled]="false"
@@ -10,13 +10,16 @@
         <div class="name">{{ item.name }}</div>
         <div class="date" [ngClass]="{ by: showBy }">
           <span>{{ item.date | date: 'MM/dd/yyyy' }}</span>
-          <span *ngIf="showBy">by</span>
+          @if (showBy) {
+          <span>by</span>
+          }
           <span>{{ item.manager }}</span>
         </div>
         <card-menu [items]="activityMenuItems"> </card-menu>
       </div>
     </div>
   </dx-list>
+  }
 
   <dx-load-panel
     container="#activities-list"

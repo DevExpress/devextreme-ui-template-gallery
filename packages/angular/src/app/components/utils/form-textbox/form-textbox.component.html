@@ -10,8 +10,8 @@
   (onValueChanged)="valueChanged($event)"
 >
   <dx-validator [validationRules]="validators"></dx-validator>
+  @if (icon) {
   <dxi-button
-    *ngIf="icon"
     name="icon"
     location="before"
     [options]="{
@@ -20,4 +20,5 @@
       stylingMode: 'text'
     }"
   ></dxi-button>
+  }
 </dx-text-box>

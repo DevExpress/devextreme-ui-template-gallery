@@ -1,6 +1,6 @@
 <div id="task-form">
+  @if (!isCreateMode) {
   <toolbar-form
-    *ngIf="!isCreateMode"
     [isEditing]="isEditing"
     titleClass="dx-form-group-caption"
     (editingCancelled)="handleCancelClick()"
@@ -8,9 +8,10 @@
     (saveButtonClicked)="handleSaveClick($event)"
   >
   </toolbar-form>
+  }
 
+  @if (task) {
   <dx-form
-    *ngIf="task"
     class="plain-styled-form"
     [class.view-mode]="!isEditing"
     [screenByWidth]="getSizeQualifier"
@@ -143,6 +144,7 @@
       </div>
     </dxi-item>
   </dx-form>
+  }
 
   <dx-load-panel
     content="#task-form"

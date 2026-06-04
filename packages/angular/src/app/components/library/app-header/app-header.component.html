@@ -1,7 +1,7 @@
 <header>
   <dx-toolbar class="header-toolbar">
+    @if (menuToggleEnabled) {
     <dxi-item
-      *ngIf="menuToggleEnabled"
       location="before"
       widget="dxButton"
       cssClass="menu-button"
@@ -12,13 +12,15 @@
       }"
     >
     </dxi-item>
+    }
+    @if (title) {
     <dxi-item
       location="before"
       cssClass="header-title"
-      *ngIf="title"
       [text]="title"
     >
     </dxi-item>
+    }
 
     <dxi-item
       location="after"

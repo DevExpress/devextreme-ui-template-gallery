@@ -3,7 +3,8 @@
     <span class="toolbar-header">{{ titleText }}</span>
   </dxi-item>
 
-  <dxi-item *ngIf="panelItems" location="before">
+  @if (panelItems) {
+  <dxi-item location="before">
     <dx-tabs
       secondary="secondary"
       keyExpr="key"
@@ -15,6 +16,7 @@
       (onSelectionChanged)="selectionChange($event)"
     ></dx-tabs>
   </dxi-item>
+  }
 
   <dxi-item location="after" locateInMenu="auto">
     <dx-button
