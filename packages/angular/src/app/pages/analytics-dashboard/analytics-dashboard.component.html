@@ -11,23 +11,23 @@
     <ng-template #dashboardContent>
       <div class="analytics-dashboard__content">
         <div class="cards grey">
-          <opportunities-ticker [data]="opportunities"></opportunities-ticker>
-          <revenue-total-ticker [data]="sales"></revenue-total-ticker>
+          <opportunities-ticker [data]="opportunities()"></opportunities-ticker>
+          <revenue-total-ticker [data]="sales()"></revenue-total-ticker>
           <conversion-ticker></conversion-ticker>
           <leads-ticker></leads-ticker>
         </div>
 
         <div class="cards">
-          <revenue-card [data]="sales"></revenue-card>
-          <conversion-card [data]="opportunities"></conversion-card>
-          <revenue-analysis-card [data]="salesByState"></revenue-analysis-card>
-          <revenue-snapshot-card [data]="salesByCategory"></revenue-snapshot-card>
+          <revenue-card [data]="sales()"></revenue-card>
+          <conversion-card [data]="opportunities()"></conversion-card>
+          <revenue-analysis-card [data]="salesByState()"></revenue-analysis-card>
+          <revenue-snapshot-card [data]="salesByCategory()"></revenue-snapshot-card>
         </div>
       </div>
     </ng-template>
 
     <div class="analytics-dashboard__layout">
-      @if (usesSplitterLayout) {
+      @if (usesSplitterLayout()) {
         <dx-splitter
           class="analytics-dashboard__splitter"
           orientation="horizontal"
@@ -82,6 +82,6 @@
 <dx-load-panel
   container=".view-wrapper"
   [position]="{ of: '.content' }"
-  [visible]="isLoading"
+  [visible]="isLoading()"
   [showPane]="true"
 ></dx-load-panel>

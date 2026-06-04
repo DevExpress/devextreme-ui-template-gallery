@@ -4,17 +4,17 @@
 
     <div class="cards wide">
       <sales-range-card
-        [data]="sales"
+        [data]="sales()"
         [(visualRange)]="visualRange"
         (salesRangeChanged)="onRangeChanged($event)"
       ></sales-range-card>
 
-      <sales-by-range-card [data]="salesByCategory"></sales-by-range-card>
+      <sales-by-range-card [data]="salesByCategory()"></sales-by-range-card>
 
       <sales-performance-card
         [groupByPeriods]="groupByPeriods"
-        [salesByDateAndCategory]="salesByDateAndCategory"
-        [visualRange]="visualRange"
+        [salesByDateAndCategory]="salesByDateAndCategory()"
+        [visualRange]="visualRange()"
         (performancePeriodChanged)="selectionChange($event)"
       ></sales-performance-card>
     </div>
@@ -23,6 +23,6 @@
 <dx-load-panel
   container=".view-wrapper"
   [position]="{ of: '.content' }"
-  [visible]="isLoading"
+  [visible]="isLoading()"
   [showPane]="true"
 ></dx-load-panel>

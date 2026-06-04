@@ -9,13 +9,13 @@
     </toolbar-analytics>
 
     <div class="cards wide">
-      <sales-map-card [data]="salesByStateMarkers"></sales-map-card>
+      <sales-map-card [data]="salesByStateMarkers()"></sales-map-card>
     </div>
 
     <div class="cards">
-      <revenue-analysis-by-states-card [data]="salesByStateAndCity">
+      <revenue-analysis-by-states-card [data]="salesByStateAndCity()">
       </revenue-analysis-by-states-card>
-      <revenue-snapshot-by-states-card [data]="salesByState">
+      <revenue-snapshot-by-states-card [data]="salesByState()">
       </revenue-snapshot-by-states-card>
     </div>
   </div>
@@ -23,6 +23,6 @@
 <dx-load-panel
   container=".view-wrapper"
   [position]="{ of: '.content' }"
-  [visible]="isLoading"
+  [visible]="isLoading()"
   [showPane]="true"
 ></dx-load-panel>

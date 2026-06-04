@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CardAnalyticsComponent } from '../../library/card-analytics/card-analytics.component';
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
-import { SalesByStateAndCity } from 'src/app/types/analytics';
+import { SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 
 @Component({
   selector: 'revenue-snapshot-card',
@@ -12,7 +12,7 @@ import { SalesByStateAndCity } from 'src/app/types/analytics';
   ],
 })
 export class RevenueSnapshotCardComponent {
-  @Input() data: SalesByStateAndCity;
+  @Input() data: SalesOrOpportunitiesByCategory;
 
   customizeSaleText(arg: { percentText: string }) {
     return arg.percentText;
