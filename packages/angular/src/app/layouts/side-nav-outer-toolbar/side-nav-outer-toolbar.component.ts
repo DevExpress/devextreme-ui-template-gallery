@@ -57,7 +57,7 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
 
   routerSubscription: Subscription;
 
-  screenSubscription: Subscription;
+  screenSubscription!: Subscription;
 
   constructor() {
     this.routerSubscription = this.router.events.subscribe((event: Event) => {

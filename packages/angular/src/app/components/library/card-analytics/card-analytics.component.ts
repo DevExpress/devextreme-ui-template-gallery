@@ -15,9 +15,9 @@ import { CardMenuComponent } from '../card-menu/card-menu.component';
 })
 
 export class CardAnalyticsComponent {
-  @Input() titleText: string;
+  @Input() titleText!: string;
 
-  @Input() contentClass: string;
+  @Input() contentClass!: string;
 
   @Input() isMenuVisible = true;
 
@@ -28,5 +28,5 @@ export class CardAnalyticsComponent {
     { text: 'Remove' },
   ];
 
-  position: PositionConfig;
+  position: PositionConfig = {};
 }

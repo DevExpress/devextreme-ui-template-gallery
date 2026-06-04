@@ -66,7 +66,7 @@ export class CrmContactDetailsComponent implements OnInit {
   isLoading = signal(false);
 
   constructor() {
-    const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
+    const id = parseInt(this.route.snapshot.queryParamMap.get('id') ?? '', 10);
     this.contactId = id || DEFAULT_CONTACT_ID;
   }
 

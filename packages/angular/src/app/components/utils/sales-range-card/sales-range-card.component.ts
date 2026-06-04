@@ -7,6 +7,7 @@ import {
 import { CardAnalyticsComponent } from '../../library/card-analytics/card-analytics.component';
 import { DxRangeSelectorModule } from 'devextreme-angular/ui/range-selector';
 import { Sale } from 'src/app/types/analytics';
+import { ChartVisualRange } from 'src/app/types/chart-visual-range';
 import { DxLoadIndicatorModule } from 'devextreme-angular';
 
 @Component({
@@ -20,15 +21,16 @@ import { DxLoadIndicatorModule } from 'devextreme-angular';
   ],
 })
 export class SalesRangeCardComponent {
-  @Input() data: Sale[];
+  @Input() data!: Sale[] | null;
 
-  @Input() visualRange: unknown = {};
+  @Input() visualRange: ChartVisualRange = {};
 
-  @Output() visualRangeChange = new EventEmitter<unknown>();
+  @Output() visualRangeChange = new EventEmitter<ChartVisualRange>();
 
-  @Output() salesRangeChanged = new EventEmitter();
+  @Output() salesRangeChanged = new EventEmitter<unknown>();
 
-  onRangeChanged(event) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onRangeChanged(event: any) {
     this.salesRangeChanged.emit(event);
     this.visualRangeChange.emit(this.visualRange);
   }

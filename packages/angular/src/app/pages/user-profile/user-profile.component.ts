@@ -195,7 +195,8 @@ export class UserProfileComponent {
     }
   }
 
-  copyToClipboard(text, evt) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  copyToClipboard(text: string, evt: any) {
     window.navigator.clipboard?.writeText(text);
     const tipText = 'Text copied';
     notify(

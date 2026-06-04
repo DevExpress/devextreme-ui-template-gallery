@@ -2,7 +2,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "paths": {
+      "src/*": ["./src/*"],
+      "jszip": ["./node_modules/jszip/dist/jszip.min.js"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "esModuleInterop": true,
@@ -13,12 +16,7 @@
     "target": "ES2022",
     "module": "es2020",
     "useDefineForClassFields": false,
-    "skipLibCheck": true,
-    "ignoreDeprecations": "6.0",
-    "strict": false,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
-    "strictPropertyInitialization": false
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

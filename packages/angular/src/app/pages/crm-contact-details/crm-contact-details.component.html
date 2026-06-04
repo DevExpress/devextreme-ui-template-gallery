@@ -54,25 +54,27 @@
     </dx-toolbar>
 
     <div class="panels theme-dependent">
-      <div class="left">
-        <contact-form
-          [contactData]="contactData()"
-          [isLoading]="isLoading()"
-        ></contact-form>
-      </div>
+      @if (contactData(); as contact) {
+        <div class="left">
+          <contact-form
+            [contactData]="contact"
+            [isLoading]="isLoading()"
+          ></contact-form>
+        </div>
 
-      <div class="right theme-dependent">
-        <contact-cards
-          [isLoading]="isLoading()"
-          [contactName]="contactData()?.name"
-          [tasks]="contactData()?.tasks"
-          [activities]="contactData()?.activities"
-          [activeOpportunities]="activeOpportunities()"
-          [closedOpportunities]="closedOpportunities()"
-          [notes]="contactNotes()"
-          [messages]="contactMessages()"
-        ></contact-cards>
-      </div>
+        <div class="right theme-dependent">
+          <contact-cards
+            [isLoading]="isLoading()"
+            [contactName]="contact.name"
+            [tasks]="contact.tasks ?? []"
+            [activities]="contact.activities ?? []"
+            [activeOpportunities]="activeOpportunities() ?? []"
+            [closedOpportunities]="closedOpportunities() ?? []"
+            [notes]="contactNotes() ?? []"
+            [messages]="contactMessages() ?? []"
+          ></contact-cards>
+        </div>
+      }
     </div>
   </div>
 </dx-scroll-view>

@@ -31,9 +31,9 @@ type Board = {
   ]
 })
 export class TaskListKanbanComponent implements OnChanges {
-  @ViewChild(DxSortableComponent, { static: false }) sortable: DxSortableComponent;
+  @ViewChild(DxSortableComponent, { static: false }) sortable!: DxSortableComponent;
 
-  @Input() dataSource: Task[];
+  @Input() dataSource!: Task[];
 
   @Output() addTaskEvent: EventEmitter<any> = new EventEmitter();
 

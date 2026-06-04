@@ -35,7 +35,7 @@ import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
   ]
 })
 export class StatusIndicatorComponent implements OnInit {
-  @Input() value: TaskStatus | TaskPriority;
+  @Input() value!: TaskStatus | TaskPriority;
 
   @Input() isField = true;
 

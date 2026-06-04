@@ -62,7 +62,7 @@ export class PlanningTaskDetailsComponent implements OnInit {
   isLoading = signal(false);
 
   constructor() {
-    const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
+    const id = parseInt(this.route.snapshot.queryParamMap.get('id') ?? '', 10);
     this.taskId = id || DEFAULT_TASK_ID;
   }
 

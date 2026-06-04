@@ -20,6 +20,7 @@ import { SalesPerformanceCardComponent } from 'src/app/components/utils/sales-pe
 import { SalesRangeCardComponent } from 'src/app/components/utils/sales-range-card/sales-range-card.component';
 import { analyticsPanelItems } from 'src/app/types/resource';
 import { Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
+import { ChartVisualRange } from 'src/app/types/chart-visual-range';
 
 @Component({
   templateUrl: './analytics-sales-analysis.component.html',
@@ -46,7 +47,7 @@ export class AnalyticsSalesAnalysisComponent implements OnInit {
 
   groupByPeriods = ['Day', 'Month'];
 
-  visualRange = model<unknown>({});
+  visualRange = model<ChartVisualRange>({});
 
   isLoading = signal(true);
 
@@ -58,7 +59,8 @@ export class AnalyticsSalesAnalysisComponent implements OnInit {
 
   customRange = analyticsPanelItems[5].value.split('/').map((d) => new Date(d));
 
-  onRangeChanged = ({ value: dates }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onRangeChanged = ({ value: dates }: any) => {
     const [startDate, endDate] = dates.map((date: Date) =>
       formatDate(date, 'yyyy-MM-dd', 'en')
     );

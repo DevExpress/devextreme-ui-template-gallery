@@ -58,7 +58,7 @@ import { Contact } from 'src/app/types/contact';
 export class ContactPanelComponent implements OnInit, OnDestroy {
   isOpened = model(false);
 
-  userId = input<number>();
+  userId = input<number | null>(null);
 
   pinnedChange = output<boolean>();
 

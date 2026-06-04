@@ -33,9 +33,9 @@ export class LoginFormComponent implements OnInit {
 
   private themeService = inject(ThemeService);
 
-  defaultAuthData: IResponse;
+  defaultAuthData!: IResponse;
 
-  btnStylingMode: DxButtonTypes.ButtonStyle;
+  btnStylingMode: DxButtonTypes.ButtonStyle = 'contained';
 
   passwordMode = 'password';
 

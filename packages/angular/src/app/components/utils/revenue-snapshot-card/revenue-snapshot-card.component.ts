@@ -12,7 +12,7 @@ import { SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
   ],
 })
 export class RevenueSnapshotCardComponent {
-  @Input() data: SalesOrOpportunitiesByCategory;
+  @Input() data!: SalesOrOpportunitiesByCategory | null;
 
   customizeSaleText(arg: { percentText: string }) {
     return arg.percentText;

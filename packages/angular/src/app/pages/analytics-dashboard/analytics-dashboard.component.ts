@@ -33,6 +33,7 @@ import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import {
   Sales,
   SalesByState,
+  SalesByStateAndCity,
   SalesOrOpportunitiesByCategory,
 } from 'src/app/types/analytics';
 import { ChatAssistantService } from 'src/app/components/library/chat-assistant/chat-assistant.service';
@@ -114,12 +115,12 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
       salesByCategory: this.service.getSalesByCategory(startDate, endDate),
       salesByState: this.service
         .getSalesByStateAndCity(startDate, endDate)
-        .pipe(map((data) => this.service.getSalesByState(data))),
+        .pipe(map((data) => this.service.getSalesByState(data as SalesByStateAndCity))),
     }).subscribe((data) => {
       this.opportunities.set(data.opportunities);
       this.sales.set(data.sales as Sales);
       this.salesByCategory.set(data.salesByCategory);
-      this.salesByState.set(data.salesByState as SalesByState);
+      this.salesByState.set(data.salesByState);
       this.isLoading.set(false);
     });
   };

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-export function formatPhone(value) {
+export function formatPhone(value: string | number) {
   return String(value).replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
 }
 

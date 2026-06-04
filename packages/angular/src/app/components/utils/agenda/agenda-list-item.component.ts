@@ -34,13 +34,13 @@ export class AgendaListItemComponent {
 
   @Input() resources: Record<string, any> = [];
 
-  getFormattedDuration = ({ startDate, endDate }) => {
-    return Duration.fromMillis(endDate - startDate)
+  getFormattedDuration = ({ startDate, endDate }: { startDate: Date | string; endDate: Date | string }) => {
+    return Duration.fromMillis(new Date(endDate).getTime() - new Date(startDate).getTime())
       .rescale()
       .toFormat("h'h' m'm'");
   };
 
-  getStart = (appointment) => {
+  getStart = (appointment: { startDate: Date }) => {
     return appointment.startDate.toLocaleTimeString(undefined, {
       hour: 'numeric',
       minute: 'numeric',

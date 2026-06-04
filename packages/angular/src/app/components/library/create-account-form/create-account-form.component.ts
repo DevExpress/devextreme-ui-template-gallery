@@ -32,7 +32,7 @@ export class CreateAccountFormComponent implements OnInit {
 
   loading = false;
 
-  defaultAuthData: IResponse;
+  defaultAuthData!: IResponse;
 
   formData: any = {};
 

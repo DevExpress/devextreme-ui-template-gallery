@@ -21,9 +21,9 @@ import { OpportunityTileComponent } from 'src/app/components/utils/opportunity-t
   ]
 })
 export class CardOpportunitiesComponent implements OnChanges {
-  @Input() openedOpportunities: Opportunity[];
+  @Input() openedOpportunities!: Opportunity[];
 
-  @Input() closedOpportunities: Opportunity[];
+  @Input() closedOpportunities!: Opportunity[];
 
   isLoading = true;
 

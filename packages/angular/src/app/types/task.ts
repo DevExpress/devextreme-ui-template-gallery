@@ -24,7 +24,7 @@ export type Task = {
   description: string,
   calendarId?: number,
   endDate?: Date,
-  id: number
+  id: number | null
   text: string,
   company: string,
   priority: TaskPriority,
@@ -34,7 +34,7 @@ export type Task = {
   status: TaskStatus,
   notes: Notes,
   messages: Messages,
-  parentId: number,
+  parentId: number | null,
   progress: number,
 };
 

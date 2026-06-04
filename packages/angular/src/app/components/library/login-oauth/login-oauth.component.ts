@@ -13,7 +13,7 @@ import { ThemeService } from '../../../services/theme.service';
 export class LoginOauthComponent {
   private themeService = inject(ThemeService);
 
-  btnStylingMode: DxButtonTypes.ButtonStyle;
+  btnStylingMode: DxButtonTypes.ButtonStyle = 'contained';
 
   constructor() {
     this.themeService.isDark.subscribe((value: boolean) => {

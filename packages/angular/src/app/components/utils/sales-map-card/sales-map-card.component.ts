@@ -15,7 +15,7 @@ import { MapLayerElement } from 'devextreme/viz/vector_map';
   ],
 })
 export class SalesMapCardComponent {
-  @Input() data: any;
+  @Input() data!: any;
 
   usaMap: any = mapsData.usa;
 

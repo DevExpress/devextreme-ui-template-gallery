@@ -62,11 +62,11 @@ export class AnalyticsGeographyComponent implements OnInit {
 
   analyticsPanelItems = analyticsPanelItems;
 
-  salesByStateAndCity = signal<SalesByStateAndCity | undefined>(undefined);
+  salesByStateAndCity = signal<SalesByStateAndCity | null>(null);
 
-  salesByState = signal<SalesByState | undefined>(undefined);
+  salesByState = signal<SalesByState | null>(null);
 
-  salesByStateMarkers = signal<SalesByStateMarkers | undefined>(undefined);
+  salesByStateMarkers = signal<SalesByStateMarkers | null>(null);
 
   isLoading = signal(false);
 
@@ -103,7 +103,7 @@ export class AnalyticsGeographyComponent implements OnInit {
         this.salesByState.set(salesByState);
         this.salesByStateMarkers.set({
           type: 'StateCollection',
-          features: salesByState.map((item) => ({
+          features: salesByState.map((item: SalesByState[number]) => ({
             type: 'State',
             geometry: {
               type: 'Point',

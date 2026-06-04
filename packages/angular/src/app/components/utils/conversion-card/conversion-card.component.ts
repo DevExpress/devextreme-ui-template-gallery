@@ -14,7 +14,7 @@ import { SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
   ],
 })
 export class ConversionCardComponent {
-  @Input() data: SalesOrOpportunitiesByCategory;
+  @Input() data!: SalesOrOpportunitiesByCategory | null;
 
   customizeOppText(arg: { valueText: string }) {
     return `$${arg.valueText}`;

@@ -11,6 +11,7 @@ import {
   DxValidatorModule
 } from 'devextreme-angular';
 import { ValidationRule } from 'devextreme-angular/common';
+import { DxTextBoxTypes } from 'devextreme-angular/ui/text-box';
 
 @Component({
   selector: 'form-textbox',
@@ -26,13 +27,13 @@ import { ValidationRule } from 'devextreme-angular/common';
 export class FormTextboxComponent {
   @Input() isEditing = false;
 
-  @Input() text: string;
+  @Input() text!: string;
 
   @Input() label = '';
 
-  @Input() mask: string = null;
+  @Input() mask: string | null = null;
 
-  @Input() icon: string = null;
+  @Input() icon: string | null = null;
 
   @Input() validators: ValidationRule[] = [{ type: 'required' }];
 
@@ -40,7 +41,7 @@ export class FormTextboxComponent {
 
   @Output() valueChange = new EventEmitter<string>();
 
-  valueChanged(e) {
+  valueChanged(e: DxTextBoxTypes.ValueChangedEvent) {
     this.valueChange.emit(e.value);
   }
 

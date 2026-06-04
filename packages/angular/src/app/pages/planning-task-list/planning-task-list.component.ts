@@ -41,13 +41,13 @@ import { TaskListGanttComponent } from 'src/app/components/library/task-list-gan
     ]
 })
 export class PlanningTaskListComponent implements OnInit {
-  @ViewChild('planningDataGrid', { static: false }) dataGrid: TaskListGridComponent;
+  @ViewChild('planningDataGrid', { static: false }) dataGrid!: TaskListGridComponent;
 
-  @ViewChild('planningGantt', { static: false }) gantt: TaskListGanttComponent;
+  @ViewChild('planningGantt', { static: false }) gantt!: TaskListGanttComponent;
 
-  @ViewChild('planningKanban', { static: false }) kanban: TaskListKanbanComponent;
+  @ViewChild('planningKanban', { static: false }) kanban!: TaskListKanbanComponent;
 
-  @ViewChild(TaskFormComponent, { static: false }) taskForm: TaskFormComponent;
+  @ViewChild(TaskFormComponent, { static: false }) taskForm!: TaskFormComponent;
 
   private service = inject(DataService);
 
@@ -71,7 +71,7 @@ export class PlanningTaskListComponent implements OnInit {
 
   displayKanban = this.displayTaskComponent === this.taskPanelItems[1].text;
 
-  taskCollections$: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
+  taskCollections$!: Observable<{ allTasks: Task[]; filteredTasks: Task[] }>;
 
   private readonly viewToParam: Record<string, string> = {
     [this.taskPanelItems[0].text]: 'list',
@@ -137,7 +137,7 @@ export class PlanningTaskListComponent implements OnInit {
 
   chooseColumnDataGrid = () => this.dataGrid.showColumnChooser();
 
-  searchDataGrid = (e: DxTextBoxTypes.InputEvent) => this.dataGrid.search(e.component.option('text'));
+  searchDataGrid = (e: DxTextBoxTypes.InputEvent) => this.dataGrid.search(e.component.option('text') ?? '');
 
   exportToPdf = () => {
     if (this.displayGrid) {

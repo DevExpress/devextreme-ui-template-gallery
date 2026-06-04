@@ -75,7 +75,7 @@
       }
       <dx-speed-dial-action
         icon="add"
-        [visible]="(screen.screenChanged | async)?.isXSmall"
+        [visible]="!!(screen.screenChanged | async)?.isXSmall"
         (onClick)="showAppointmentCreationForm()"
       ></dx-speed-dial-action>
     </div>
@@ -85,7 +85,7 @@
       [isOpened]="isRightPanelOpen"
       [showOpenButton]="currentView === 'month'"
       [title]="
-        selectedAppointment?.data.startDate || currentDate | date: 'EE, MMMM d'
+        ((selectedAppointment?.data?.startDate ?? currentDate) | date: 'EE, MMMM d') ?? ''
       "
       (openedChange)="toggleRightPanelOpen($event)"
     >

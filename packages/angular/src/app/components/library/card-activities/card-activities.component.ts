@@ -19,7 +19,7 @@ import { Activity } from 'src/app/types/activities';
   ]
 })
 export class CardActivitiesComponent {
-  @Input() activities: Activity[];
+  @Input() activities!: Activity[];
 
   @Input() showBy? = false;
 

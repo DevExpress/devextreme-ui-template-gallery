@@ -12,7 +12,7 @@ import { SalesByState } from 'src/app/types/analytics';
   ],
 })
 export class RevenueSnapshotByStatesCardComponent {
-  @Input() data: SalesByState;
+  @Input() data!: SalesByState | null;
 
   customizeSaleText(arg: { percentText: string }) {
     return arg.percentText;

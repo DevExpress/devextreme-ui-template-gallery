@@ -22,11 +22,11 @@ import { Dates, PanelItem } from 'src/app/types/resource';
 })
 
 export class ToolbarAnalyticsComponent {
-  @Input() selectedItems: Array<number>;
+  @Input() selectedItems!: Array<number>;
 
-  @Input() titleText: string;
+  @Input() titleText!: string;
 
-  @Input() panelItems: Array<PanelItem>;
+  @Input() panelItems!: Array<PanelItem>;
 
   @Output() selectionChanged = new EventEmitter<Dates>();
 

@@ -28,7 +28,7 @@ export class ResetPasswordFormComponent implements OnInit {
 
   private router = inject(Router);
 
-  defaultAuthData: IResponse;
+  defaultAuthData!: IResponse;
 
   loading = false;
 

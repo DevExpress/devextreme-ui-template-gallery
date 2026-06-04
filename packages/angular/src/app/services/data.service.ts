@@ -2,15 +2,10 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { DateTime } from 'luxon';
-import {
-  map,
-  groupBy,
-  mergeMap,
-  toArray,
-} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Task } from 'src/app/types/task';
 import { Contact } from 'src/app/types/contact';
-import { Sale, SalesOrOpportunitiesByCategory } from '../types/analytics';
+import { Sale, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory } from '../types/analytics';
 
 const API_URL = 'https://js.devexpress.com/Demos/RwaService/api';
 
@@ -57,33 +52,25 @@ export class DataService {
   public getSalesByStateAndCity = (startDate: string, endDate: string) => this.http
     .get(`${API_URL}/Analytics/SalesByStateAndCity/${startDate}/${endDate}`);
 
-  public getSalesByState = (data) => {
-    let dataByState;
-    from(data)
-      .pipe(
-        groupBy((s: any) => s.stateName),
-        mergeMap((group) => group.pipe(toArray())),
-        map((val) => {
-          let total = 0;
-          let percentage = 0;
-          val.forEach((v) => {
-            total = total + v.total;
-            percentage = percentage + v.percentage;
-          });
+  public getSalesByState = (data: SalesByStateAndCity): SalesByState => {
+    const stateMap = new Map<string, SalesByState[number]>();
 
-          return {
-            stateName: val[0].stateName,
-            stateCoords: val[0].stateCoords,
-            total,
-            percentage,
-          };
-        }),
-        toArray(),
-      ).subscribe((data) => {
-        dataByState = data;
-      });
+    for (const row of data) {
+      const existing = stateMap.get(row.stateName);
+      if (existing) {
+        existing.total += row.total;
+        existing.percentage += row.percentage;
+      } else {
+        stateMap.set(row.stateName, {
+          stateName: row.stateName,
+          stateCoords: row.stateCoords,
+          total: row.total,
+          percentage: row.percentage,
+        });
+      }
+    }
 
-    return dataByState;
+    return Array.from(stateMap.values());
   };
 
   public getOpportunitiesByCategory = (startDate: string, endDate: string) => this.http
@@ -182,7 +169,7 @@ export class DataService {
     },
   ]]);
 
-  public getAppointmentsDefaultTime = (index) => [
+  public getAppointmentsDefaultTime = (index: number) => [
     {
       weekDay: 0,
       weekIndex: 0,

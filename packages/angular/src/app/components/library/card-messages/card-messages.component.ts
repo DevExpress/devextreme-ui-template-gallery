@@ -29,9 +29,9 @@ import { UserAvatarComponent } from 'src/app/components/library/user-avatar/user
   ]
 })
 export class CardMessagesComponent {
-  @Input() user: string;
+  @Input() user!: string;
 
-  @Input() items: Messages;
+  @Input() items!: Messages;
 
   messageTitle = '';
 
@@ -45,7 +45,8 @@ export class CardMessagesComponent {
     return data.text.replace('{username}',  data.manager !== this.items[0].manager ? this.items[0].manager : this.items[1].manager);
   }
 
-  send = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  send = (e: any) => {
     if (!e.validationGroup.validate().isValid) {
       return;
     }

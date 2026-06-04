@@ -12,7 +12,7 @@ import { DxFileUploaderComponent } from "devextreme-angular";
   ],
 })
 export class FormPhotoComponent implements OnInit {
-  @Input() link: string;
+  @Input() link!: string;
 
   @Input() editable = false;
 
@@ -20,7 +20,7 @@ export class FormPhotoComponent implements OnInit {
 
   private elRef = inject(ElementRef);
 
-  imageUrl: string;
+  imageUrl = '';
 
   hostRef = this.elRef.nativeElement;
 

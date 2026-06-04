@@ -23,7 +23,24 @@ import { AgendaItem, AgendaComponent } from "../../components/utils/agenda/agend
 import { ApplyPipeDirective } from '../../pipes/apply.pipe';
 import { SchedulerTooltipComponent } from '../../components/library/scheduler-tooltip/scheduler-tooltip.component';
 
-type SelectedAppointment = { data: Record<string, any>, target: any };
+type SchedulerAppointmentData = {
+  startDate?: Date | string | number;
+  [key: string]: unknown;
+};
+
+type SelectedAppointment = { data: SchedulerAppointmentData; target: unknown };
+
+type AgendaDateRef = { startDate?: Date | string | number };
+
+function getTargetClassList(target: unknown): DOMTokenList | undefined {
+  if (target instanceof HTMLElement) {
+    return target.classList;
+  }
+  if (Array.isArray(target) && target[0] instanceof HTMLElement) {
+    return target[0].classList;
+  }
+  return undefined;
+}
 
 @Component({
   templateUrl: './planning-scheduler.component.html',
@@ -45,15 +62,15 @@ type SelectedAppointment = { data: Record<string, any>, target: any };
   ]
 })
 export class PlanningSchedulerComponent implements OnInit {
-  @ViewChild('schedulerRef', { static: false }) schedulerRef: DxSchedulerComponent;
+  @ViewChild('schedulerRef', { static: false }) schedulerRef!: DxSchedulerComponent;
 
-  @ViewChild('tooltipRef', { static: false }) tooltipRef: DxTooltipComponent;
+  @ViewChild('tooltipRef', { static: false }) tooltipRef!: DxTooltipComponent;
 
   private service = inject(DataService);
 
   protected screen = inject(ScreenService);
 
-  tasks: DataSource<Task> = new DataSource([]);
+  tasks: DataSource<Task> = new DataSource<Task>([]);
 
   currentDate = new Date();
 
@@ -61,11 +78,11 @@ export class PlanningSchedulerComponent implements OnInit {
 
   isRightPanelOpen = false;
 
-  listDataSource = [];
+  listDataSource: Record<string, unknown>[] = [];
 
-  resourcesList = [];
+  resourcesList: Record<string, unknown>[] = [];
 
-  selectedAppointment: SelectedAppointment = null;
+  selectedAppointment: SelectedAppointment | null = null;
 
   agendaItems: AgendaItem[] = [];
 
@@ -88,18 +105,18 @@ export class PlanningSchedulerComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getSchedulerTasks().subscribe((data) => {
-      this.tasks = new DataSource(data);
+      this.tasks = new DataSource<Task>(data as Task[]);
       this.repaintScheduler();
     })
   }
 
-  onCalendarDateChange = (date) => {
+  onCalendarDateChange = (date: Date) => {
     this.currentDate = date;
     this.updateAgenda({ startDate: this.currentDate });
     this.repaintScheduler();
   };
 
-  getSchedulerCurrentDate = (currentDate) => {
+  getSchedulerCurrentDate = (currentDate: Date) => {
     const schedulerInstance = this.schedulerRef?.instance;
     const startViewDate = schedulerInstance?.getStartViewDate();
     const endViewDate = schedulerInstance?.getEndViewDate();
@@ -137,7 +154,7 @@ export class PlanningSchedulerComponent implements OnInit {
     this.updateAgenda({ startDate: date });
   }
 
-  onCellClick = ({cellData}) => {
+  onCellClick = ({ cellData }: { cellData: { startDate: Date } }) => {
     this.onSelectedDateChange(cellData.startDate);
 
     if (this.currentView === 'month' && cellData) {
@@ -151,9 +168,9 @@ export class PlanningSchedulerComponent implements OnInit {
     }
   };
 
-  calendarListChanged(selectedCalendars) {
+  calendarListChanged(selectedCalendars: Array<{ id: number }>) {
     const filters = selectedCalendars
-      .flatMap((calendar) => [['calendarId', '=', calendar.id], 'or']).slice(0, -1);
+      .flatMap((calendar: { id: number }) => [['calendarId', '=', calendar.id], 'or']).slice(0, -1);
 
     this.tasks?.filter(filters.length > 0 ? filters : null);
 
@@ -169,59 +186,67 @@ export class PlanningSchedulerComponent implements OnInit {
     if (isXSmall) {
       return 'bottom';
     }
-    const classList = selectedAppointment?.target?.classList || selectedAppointment?.target?.[0]?.classList;
+    const classList = getTargetClassList(selectedAppointment?.target);
     return classList?.contains('dx-list') && rightPanelOpen ? 'left' : 'top';
   }
 
-  toggleRightPanelOpen(isOpen?) {
+  toggleRightPanelOpen(isOpen?: boolean) {
     this.isRightPanelOpen = isOpen || !this.isRightPanelOpen;
     this.repaintScheduler();
   }
 
-  showAppointmentCreationForm(appointment?) {
-    this.schedulerRef?.instance.showAppointmentPopup(appointment?.data, !appointment);
+  showAppointmentCreationForm(appointment?: SelectedAppointment | null) {
+    this.schedulerRef?.instance.showAppointmentPopup(
+      appointment?.data as Parameters<DxSchedulerComponent['instance']['showAppointmentPopup']>[0],
+      !appointment,
+    );
   }
 
-  findAllAppointmentsForDay = (selectedAppointment) => {
-    if (!this.tasks) {
+  findAllAppointmentsForDay = (selectedAppointment?: AgendaDateRef) => {
+    if (!this.tasks || !selectedAppointment?.startDate) {
       return [];
     }
+    const selectedDate = new Date(selectedAppointment.startDate);
     const appointments = this.tasks.items();
-    if (appointments.length === 0 || !selectedAppointment) {
+    if (appointments.length === 0) {
       return [];
     }
     return appointments
       .filter((appointment) => {
-        return appointment.startDate.getDate() === selectedAppointment.startDate.getDate()
-          && appointment.startDate.getMonth() === selectedAppointment.startDate.getMonth();
+        const startDate = new Date(appointment.startDate);
+        return startDate.getDate() === selectedDate.getDate()
+          && startDate.getMonth() === selectedDate.getMonth();
       });
   }
 
-  updateAgenda = (appointmentData?) => {
+  updateAgenda = (appointmentData?: AgendaDateRef) => {
     this.agendaItems = this.findAllAppointmentsForDay(appointmentData);
   }
 
-  onAppointmentClick(e) {
+  onAppointmentClick(e: DxSchedulerTypes.AppointmentClickEvent) {
     const appointmentData = e.appointmentData;
-    this.selectedAppointment = { data: appointmentData, target: e.targetElement };
+    const target = (e as DxSchedulerTypes.AppointmentClickEvent & { targetElement?: unknown }).targetElement;
+    this.selectedAppointment = { data: appointmentData, target };
 
     if (this.currentView === 'month') {
-      this.updateAgenda(appointmentData);
+      this.updateAgenda({ startDate: appointmentData.startDate });
       this.toggleRightPanelOpen(true);
     }
   }
 
-  onAppointmentTooltipShowing = (e) => {
+  onAppointmentTooltipShowing = (e: DxSchedulerTypes.AppointmentTooltipShowingEvent) => {
     e.cancel = true;
     const appointmentData = e.appointments[0].appointmentData;
-    const isAppointmentCollectorClicked = (e) => {
-      return e.targetElement?.[0]?.classList.contains('dx-scheduler-appointment-collector');
+    const isAppointmentCollectorClicked = (event: DxSchedulerTypes.AppointmentTooltipShowingEvent) => {
+      const target = event.targetElement;
+      const element = Array.isArray(target) ? target[0] : target;
+      return (element as HTMLElement | undefined)?.classList?.contains('dx-scheduler-appointment-collector');
     };
 
     this.selectedAppointment = { data: appointmentData, target: e.targetElement };
 
     if (this.currentView === 'month' || isAppointmentCollectorClicked(e)) {
-      this.updateAgenda(appointmentData);
+      this.updateAgenda({ startDate: appointmentData.startDate });
     }
 
     if (this.currentView === 'month' && this.screen.sizes['screen-small'] ||
@@ -233,8 +258,11 @@ export class PlanningSchedulerComponent implements OnInit {
     }
   }
 
-  showAppointmentTooltip = (e) => {
-    this.schedulerRef?.instance.showAppointmentTooltip(e.itemData, e.element);
+  showAppointmentTooltip = (e: { itemData: Task; element: EventTarget }) => {
+    this.schedulerRef?.instance.showAppointmentTooltip(
+      e.itemData as Parameters<DxSchedulerComponent['instance']['showAppointmentTooltip']>[0],
+      e.element as Element,
+    );
   };
 
   editSelectedAppointment() {
@@ -242,8 +270,12 @@ export class PlanningSchedulerComponent implements OnInit {
     this.tooltipRef?.instance.hide();
   }
 
-  deleteSelectedAppointment(appointmentData) {
-    this.schedulerRef?.instance.deleteAppointment(this.selectedAppointment?.data);
+  deleteSelectedAppointment(appointmentData: AgendaDateRef) {
+    const appointment = this.selectedAppointment?.data;
+    if (appointment) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.schedulerRef?.instance.deleteAppointment(appointment as any);
+    }
     this.tooltipRef?.instance.hide();
     this.agendaItems = this.findAllAppointmentsForDay(appointmentData)
   }
