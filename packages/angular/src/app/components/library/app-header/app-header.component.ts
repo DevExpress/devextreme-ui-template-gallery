@@ -7,7 +7,7 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 import { UserPanelComponent } from '../user-panel/user-panel.component';
-import { AuthService, IUser } from 'src/app/services';
+import { AuthService, defaultUser, IUser } from 'src/app/services';
 import { ThemeSwitcherComponent } from 'src/app/components/library/theme-switcher/theme-switcher.component';
 
 @Component({
@@ -35,7 +35,7 @@ export class AppHeaderComponent implements OnInit {
 
   private authService = inject(AuthService);
 
-  user: IUser | null = { email: '' };
+  user: IUser | null = defaultUser;
 
   userMenuItems = [
   {
