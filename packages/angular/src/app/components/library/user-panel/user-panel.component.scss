@@ -24,13 +24,11 @@
       }
 
       ::ng-deep .dx-theme-material & {
-        width: auto;
-        height: var(--dx-component-height);
+        height: 100%;
       }
 
       ::ng-deep .dx-theme-fluent & {
-        width: auto;
-        height: var(--dx-component-height);
+        height: 100%;
       }
     }
 
