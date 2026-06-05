@@ -63,7 +63,7 @@ export class CrmContactDetailsComponent implements OnInit {
 
   contactName = computed(() => this.contactData()?.name ?? 'Loading...');
 
-  isLoading = signal(false);
+  isLoading = signal(true);
 
   constructor() {
     const id = parseInt(this.route.snapshot.queryParamMap.get('id') ?? '', 10);
@@ -75,21 +75,26 @@ export class CrmContactDetailsComponent implements OnInit {
   }
 
   loadData = () => {
+    this.isLoading.set(true);
+
     forkJoin({
+      contact: this.service.getContact(this.contactId),
       contactNotes: this.service.getContactNotes(this.contactId),
       contactMessages: this.service.getContactMessages(this.contactId),
       activeOpportunities: this.service.getActiveContactOpportunities(this.contactId),
       closedOpportunities: this.service.getClosedContactOpportunities(this.contactId),
-    }).subscribe((data) => {
-      this.contactNotes.set(data.contactNotes as Notes);
-      this.contactMessages.set(data.contactMessages as Messages);
-      this.activeOpportunities.set(data.activeOpportunities as Opportunities);
-      this.closedOpportunities.set(data.closedOpportunities as Opportunities);
-    });
-
-    this.service.getContact(this.contactId).subscribe((data) => {
-      this.contactData.set(data);
-      this.isLoading.set(false);
+    }).subscribe({
+      next: (data) => {
+        this.contactData.set(data.contact);
+        this.contactNotes.set(data.contactNotes as Notes);
+        this.contactMessages.set(data.contactMessages as Messages);
+        this.activeOpportunities.set(data.activeOpportunities as Opportunities);
+        this.closedOpportunities.set(data.closedOpportunities as Opportunities);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.isLoading.set(false);
+      },
     });
   };
 

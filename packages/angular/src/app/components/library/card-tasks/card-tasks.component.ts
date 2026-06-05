@@ -23,7 +23,7 @@ import { Task } from '../../../types/task';
 export class CardTasksComponent implements OnChanges {
   @ViewChild('dataGrid', { static: false }) component!: DxDataGridComponent;
 
-  @Input() tasks!: Task[];
+  @Input() tasks?: Task[];
 
   @Input() isLoading: boolean = false;
 
@@ -34,8 +34,9 @@ export class CardTasksComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(changes.tasks?.currentValue) {
-      this.currentTasks = changes.tasks.currentValue.filter((item: Task) => !!item.status && !!item.priority);
+    if (changes.tasks) {
+      const tasks = changes.tasks.currentValue as Task[] | undefined;
+      this.currentTasks = tasks?.filter((item: Task) => !!item.status && !!item.priority) ?? [];
     }
   }
 

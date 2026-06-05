@@ -27,7 +27,7 @@ import { Notes, Note } from 'src/app/types/notes';
 export class CardNotesComponent {
   @Input() user!: string;
 
-  @Input() items!: Notes;
+  @Input() items?: Notes;
 
   nodeText = '';
 
@@ -43,7 +43,7 @@ export class CardNotesComponent {
       text: this.nodeText,
     };
 
-    this.items.push(newNote);
+    this.items?.push(newNote);
 
     e.validationGroup.reset();
   };

@@ -1,5 +1,5 @@
 <div id="card-tasks">
-  @if (currentTasks) {
+  @if (!isLoading && tasks) {
   <dx-data-grid
     #dataGrid
     [dataSource]="currentTasks"
@@ -33,7 +33,7 @@
   }
 
   <dx-load-panel
-    [visible]="!currentTasks || isLoading"
+    [visible]="isLoading || !tasks"
     [showPane]="false"
     container="#card-tasks"
     [position]="{ of: '#card-tasks' }"

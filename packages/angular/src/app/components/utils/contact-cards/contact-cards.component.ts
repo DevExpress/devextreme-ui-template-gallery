@@ -37,17 +37,17 @@ import { Task } from 'src/app/types/task';
   ],
 })
 export class ContactCardsComponent {
-    @Input() tasks!: Task[];
+    @Input() tasks?: Task[];
 
-    @Input() activities!: Activity[];
+    @Input() activities?: Activity[];
 
-    @Input() activeOpportunities!: Opportunities;
+    @Input() activeOpportunities?: Opportunities;
 
-    @Input() closedOpportunities!: Opportunities;
+    @Input() closedOpportunities?: Opportunities;
 
-    @Input() notes!: Notes;
+    @Input() notes?: Notes;
 
-    @Input() messages!: Messages;
+    @Input() messages?: Messages;
 
     @Input() contactName!: string;
 

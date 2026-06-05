@@ -31,7 +31,7 @@ import { UserAvatarComponent } from 'src/app/components/library/user-avatar/user
 export class CardMessagesComponent {
   @Input() user!: string;
 
-  @Input() items!: Messages;
+  @Input() items?: Messages;
 
   messageTitle = '';
 
@@ -42,7 +42,14 @@ export class CardMessagesComponent {
   }
 
   getText(data: Message) {
-    return data.text.replace('{username}',  data.manager !== this.items[0].manager ? this.items[0].manager : this.items[1].manager);
+    const items = this.items;
+    
+    if (!items?.length) {
+      return data.text;
+    }
+    
+    const manager = data.manager !== items[0].manager ? items[0].manager : items[1]?.manager ?? items[0].manager;
+    return data.text.replace('{username}', manager);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,7 +65,7 @@ export class CardMessagesComponent {
       date: new Date(),
     };
 
-    this.items.push(newMessage);
+    this.items?.push(newMessage);
 
     e.validationGroup.reset();
   };

@@ -1,5 +1,5 @@
 <div id="activities-list" [ngClass]="activities ? 'load' : null">
-  @if (activities) {
+  @if (activities && !isLoading) {
   <dx-list
     class="activities-list"
     [items]="activities"
