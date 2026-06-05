@@ -1,7 +1,7 @@
 import { join, dirname } from 'path';
 import { spawn } from 'child_process';
 import { argv, exit } from 'process';
-import { writeFileSync } from 'fs';
+import { existsSync, writeFileSync } from 'fs';
 import { createRequire } from 'module';
 import parseArgs from 'minimist';
 import { testingDirectory, pidsFileName } from './dirs.config.js';
@@ -20,8 +20,19 @@ const onClose = (code) => {
 
 const getPackage = (packageName) => packages.find((p) => p.name === packageName);
 
+const getAppDirectory = (pkgName) => {
+  const buildDir = join(testingDirectory, '..', pkgName, 'build');
+  const browserDir = join(buildDir, 'browser');
+
+  if (pkgName === 'angular' && existsSync(join(browserDir, 'index.html'))) {
+    return browserDir;
+  }
+
+  return buildDir;
+};
+
 const startProject = (pkg) => {
-  const appDirectory = join(testingDirectory, '..', pkg.name, 'build');
+  const appDirectory = getAppDirectory(pkg.name);
   const require = createRequire(import.meta.url);
   const httpServerBin = join(dirname(require.resolve('http-server/package.json')), 'bin', 'http-server');
 
