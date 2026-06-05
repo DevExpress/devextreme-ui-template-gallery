@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, Input, OnInit, inject} from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 import { LoginOauthComponent } from 'src/app/components/library/login-oauth/login-oauth.component';
@@ -7,7 +7,13 @@ import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import { DxButtonModule, DxButtonTypes } from 'devextreme-angular/ui/button';
 import notify from 'devextreme/ui/notify';
-import { AuthService, IResponse, ThemeService } from 'src/app/services';
+import { AuthService, defaultUser, ThemeService } from 'src/app/services';
+
+type LoginFormData = {
+  email: string;
+  password: string;
+  rememberMe?: boolean;
+};
 
 @Component({
   selector: 'app-login-form',
@@ -22,7 +28,7 @@ import { AuthService, IResponse, ThemeService } from 'src/app/services';
     DxButtonModule,
   ]
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
   @Input() resetLink = '/auth/reset-password';
 
   @Input() createAccountLink = '/auth/register';
@@ -33,36 +39,36 @@ export class LoginFormComponent implements OnInit {
 
   private themeService = inject(ThemeService);
 
-  defaultAuthData!: IResponse;
+  formData = signal<LoginFormData>({
+    email: defaultUser.email ?? '',
+    password: 'password',
+  });
 
-  btnStylingMode: DxButtonTypes.ButtonStyle = 'contained';
+  btnStylingMode = signal<DxButtonTypes.ButtonStyle>('contained');
 
   passwordMode = 'password';
 
-  loading = false;
-
-  formData: any = {};
+  loading = signal(false);
 
   passwordEditorOptions = {
     placeholder: 'Password',
-    stylingMode:'filled',
+    stylingMode: 'filled',
     mode: this.passwordMode,
-    value: 'password',
-  }
+  };
 
   constructor() {
     this.themeService.isDark.subscribe((value: boolean) => {
-      this.btnStylingMode = value ? 'outlined' : 'contained';
+      this.btnStylingMode.set(value ? 'outlined' : 'contained');
     });
   }
 
   async onSubmit(e: Event) {
     e.preventDefault();
-    const { email, password } = this.formData;
-    this.loading = true;
+    const { email, password } = this.formData();
+    this.loading.set(true);
 
     const result = await this.authService.logIn(email, password);
-    this.loading = false;
+    this.loading.set(false);
     if (!result.isOk) {
       notify(result.message, 'error', 2000);
     }
@@ -71,9 +77,5 @@ export class LoginFormComponent implements OnInit {
   onCreateAccountClick = () => {
     this.router.navigate([this.createAccountLink]);
   };
-
-  async ngOnInit(): Promise<void> {
-    this.defaultAuthData = await this.authService.getUser();
-  }
 }
 
