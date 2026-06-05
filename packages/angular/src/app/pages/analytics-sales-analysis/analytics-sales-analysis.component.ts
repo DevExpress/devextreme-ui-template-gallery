@@ -19,8 +19,7 @@ import { SalesByRangeCardComponent } from 'src/app/components/utils/sales-by-ran
 import { SalesPerformanceCardComponent } from 'src/app/components/utils/sales-performance-card/sales-performance-card.component';
 import { SalesRangeCardComponent } from 'src/app/components/utils/sales-range-card/sales-range-card.component';
 import { analyticsPanelItems } from 'src/app/types/resource';
-import { Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
-import { ChartVisualRange } from 'src/app/types/chart-visual-range';
+import { ChartVisualRange, Sale, SalesOrOpportunitiesByCategory } from 'src/app/types/analytics';
 
 @Component({
   templateUrl: './analytics-sales-analysis.component.html',

@@ -40,6 +40,7 @@
     "@angular/build": "catalog:angular",
     "@angular/cli": "catalog:angular",
     "@angular/compiler-cli": "catalog:angular",
+    "@types/file-saver-es": "^2.0.3",
     "@types/jasmine": "^4.3.0",
     "@types/luxon": "^3.7.1",
     "@types/node": "^24.12.4",

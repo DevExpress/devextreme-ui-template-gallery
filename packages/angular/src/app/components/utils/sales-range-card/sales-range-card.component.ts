@@ -7,7 +7,7 @@ import {
 import { CardAnalyticsComponent } from '../../library/card-analytics/card-analytics.component';
 import { DxRangeSelectorModule } from 'devextreme-angular/ui/range-selector';
 import { Sale } from 'src/app/types/analytics';
-import { ChartVisualRange } from 'src/app/types/chart-visual-range';
+import { ChartVisualRange } from 'src/app/types/analytics';
 import { DxLoadIndicatorModule } from 'devextreme-angular';
 
 @Component({

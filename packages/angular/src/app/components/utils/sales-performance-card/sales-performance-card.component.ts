@@ -8,7 +8,7 @@ import { CardAnalyticsComponent } from '../../library/card-analytics/card-analyt
 import { DxChartModule } from 'devextreme-angular/ui/chart';
 import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 import { Sale } from 'src/app/types/analytics';
-import { ChartVisualRange } from 'src/app/types/chart-visual-range';
+import { ChartVisualRange } from 'src/app/types/analytics';
 import { DxDropDownButtonTypes } from 'devextreme-angular/ui/drop-down-button';
 
 @Component({
