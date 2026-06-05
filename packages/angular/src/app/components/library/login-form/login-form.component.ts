@@ -44,7 +44,9 @@ export class LoginFormComponent {
     password: 'password',
   });
 
-  btnStylingMode = signal<DxButtonTypes.ButtonStyle>('contained');
+  btnStylingMode = signal<DxButtonTypes.ButtonStyle>(
+    this.themeService.getCurrentTheme() === 'dark' ? 'outlined' : 'contained',
+  );
 
   passwordMode = 'password';
 
