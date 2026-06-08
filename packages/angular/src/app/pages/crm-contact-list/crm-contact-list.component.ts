@@ -1,5 +1,5 @@
 import {
-  Component, ViewChild, inject,
+  Component, ViewChild, inject, afterNextRender, Injector,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -56,6 +56,8 @@ export class CrmContactListComponent {
 
   private service = inject(DataService);
 
+  private injector = inject(Injector);
+
   statusList = contactStatusList;
 
   filterStatusList = ['All', ...contactStatusList];
@@ -98,7 +100,9 @@ export class CrmContactListComponent {
   };
 
   onPinnedChange = () => {
-    this.dataGrid?.instance?.updateDimensions?.();
+    afterNextRender(() => {
+      this.dataGrid?.instance?.updateDimensions();
+    }, { injector: this.injector });
   };
 
   filterByStatus = (e: DxDropDownButtonTypes.SelectionChangedEvent) => {
