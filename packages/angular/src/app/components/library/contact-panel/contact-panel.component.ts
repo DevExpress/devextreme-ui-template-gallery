@@ -95,6 +95,10 @@ export class ContactPanelComponent implements OnInit, OnDestroy {
     });
   }
 
+  private emitPinnedChange(): void {
+    this.pinnedChange.emit(this.pinned());
+  }
+
   ngOnInit(): void {
     this.calculatePin();
   }
@@ -119,13 +123,13 @@ export class ContactPanelComponent implements OnInit, OnDestroy {
     this.isOpened.set(false);
     this.pinned.set(false);
     if (wasPinned) {
-      this.pinnedChange.emit(false);
+      this.emitPinnedChange();
     }
   };
 
   onPinClick = () => {
     this.pinned.update((value) => !value);
-    this.pinnedChange.emit(this.pinned());
+    this.emitPinnedChange();
   };
 
   onSaveClick = ({ validationGroup }: DxButtonTypes.ClickEvent) => {
@@ -143,7 +147,7 @@ export class ContactPanelComponent implements OnInit, OnDestroy {
     );
     if (this.pinned() && !this.isPinEnabled()) {
       this.pinned.set(false);
-      this.pinnedChange.emit(false);
+      this.emitPinnedChange();
     }
   };
 
