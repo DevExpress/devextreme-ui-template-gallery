@@ -1,4 +1,4 @@
-<div class="panel" [ngClass]="{ pin: pinned(), open: isOpened() }">
+<div class="panel" [ngClass]="{ pin: pinned() && isPinEnabled(), open: isOpened() }">
   <div class="data-wrapper">
     @if (!isLoading() && formData(); as form) {
       <dx-toolbar class="panel-toolbar">
