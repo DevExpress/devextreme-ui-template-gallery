@@ -15,6 +15,9 @@ type ChatPopupProps = {
   setVisible: (visible: boolean) => void;
   messages: ChatTypes.Message[];
   currentUser: ChatTypes.User;
+  typingUsers?: ChatTypes.User[];
+  alerts?: ChatTypes.Alert[];
+  isProcessing?: boolean;
   onMessageEntered: (event: ChatTypes.MessageEnteredEvent) => void;
   onPromptClick: (messageText: string) => void;
   onResetClick: () => void;
@@ -29,6 +32,9 @@ export const ChatPopup = memo(({
   setVisible,
   messages,
   currentUser,
+  typingUsers = [],
+  alerts = [],
+  isProcessing = false,
   onMessageEntered,
   onPromptClick,
   onResetClick,
@@ -118,9 +124,11 @@ export const ChatPopup = memo(({
 
       <div className='chat-popup__body'>
         <Chat
-          className='chat-popup__chat'
+          className={`chat-popup__chat${isProcessing ? ' chat-disabled' : ''}`}
           user={currentUser}
           items={messages}
+          typingUsers={typingUsers}
+          alerts={alerts}
           height='100%'
           emptyViewRender={renderEmptyView}
           showAvatar={false}

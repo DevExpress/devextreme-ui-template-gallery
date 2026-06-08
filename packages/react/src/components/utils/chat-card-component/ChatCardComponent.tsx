@@ -9,6 +9,9 @@ import { ChatEmptyView, ChatEmptyViewTexts } from '../chat-empty-view/ChatEmptyV
 type ChatCardComponentProps = {
   messages: ChatTypes.Message[];
   currentUser: ChatTypes.User;
+  typingUsers?: ChatTypes.User[];
+  alerts?: ChatTypes.Alert[];
+  isProcessing?: boolean;
   onMessageEntered: (event: ChatTypes.MessageEnteredEvent) => void;
   onPromptClick: (messageText: string) => void;
   onResetClick: () => void;
@@ -19,6 +22,9 @@ type ChatCardComponentProps = {
 export const ChatCardComponent = ({
   messages,
   currentUser,
+  typingUsers = [],
+  alerts = [],
+  isProcessing = false,
   onMessageEntered,
   onPromptClick,
   onResetClick,
@@ -65,9 +71,11 @@ export const ChatCardComponent = ({
 
       <div className='chat-card-component__body'>
         <Chat
-          className='chat-card-component__chat'
+          className={`chat-card-component__chat${isProcessing ? ' chat-disabled' : ''}`}
           user={currentUser}
           items={messages}
+          typingUsers={typingUsers}
+          alerts={alerts}
           height='100%'
           emptyViewRender={renderEmptyView}
           showAvatar={false}

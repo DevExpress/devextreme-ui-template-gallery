@@ -82,11 +82,14 @@ $dashboard-pane-offset: 20px;
 
 .analytics-dashboard__pane--main {
   padding-right: 10px;
+  overflow-y: auto;
 }
 
 .analytics-dashboard__pane--chat {
   padding-left: 10px;
   padding-top: $dashboard-pane-offset;
+  overflow: hidden;
+  max-height: 100%;
 }
 
 .analytics-dashboard__splitter.dx-splitter > .dx-resize-handle {
