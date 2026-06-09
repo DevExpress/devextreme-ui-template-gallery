@@ -62,7 +62,7 @@ function buildSystemPrompt(ctx: DashboardContext): string {
     'Use markdown formatting in responses. Be specific with numbers from the data.',
     'If you do not have certain information or cannot find specific data, say so honestly. Do not invent, fabricate, or guess data. Use only the data provided above.',
     '',
-    `CURRENT DASHBOARD STATE:`,
+    'CURRENT DASHBOARD STATE:',
     `- Selected period: "${ctx.periodName}" (${ctx.dateRange[0]} to ${ctx.dateRange[1]})`,
     `- Total revenue: ${formatCurrency(ctx.salesTotal)}`,
     `- Total opportunities value: ${formatCurrency(ctx.opportunitiesTotal)}`,

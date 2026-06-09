@@ -1,6 +1,5 @@
 import './chatMessageRender.scss';
 
-import React from 'react';
 import { ChatTypes } from 'devextreme-react/chat';
 import HTMLReactParser from 'html-react-parser';
 import { micromark } from 'micromark';
