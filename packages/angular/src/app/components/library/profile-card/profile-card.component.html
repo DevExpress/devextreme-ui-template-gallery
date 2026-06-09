@@ -29,7 +29,7 @@
           @if (item.label) {
           <dxo-label [text]="item.label"> </dxo-label>
           }
-          @for (rule of item.validators; track rule.type) {
+          @for (rule of item.validators ?? []; track rule.type) {
           <dxi-validation-rule
             [type]="rule.type"
           ></dxi-validation-rule>

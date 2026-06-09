@@ -191,7 +191,7 @@ export class PlanningSchedulerComponent implements OnInit {
   }
 
   toggleRightPanelOpen(isOpen?: boolean) {
-    this.isRightPanelOpen = isOpen || !this.isRightPanelOpen;
+    this.isRightPanelOpen = isOpen ?? !this.isRightPanelOpen;
     this.repaintScheduler();
   }
 
