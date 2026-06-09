@@ -26,7 +26,7 @@ export const useChatAssistant = (context?: DashboardContext) => {
   const conversationRef = useRef<ConversationMessage[]>([]);
 
   const submitUserMessage = useCallback(
-    async (messageDraft: Partial<ChatTypes.Message> & Pick<ChatTypes.Message, 'text'>) => {
+    async(messageDraft: Partial<ChatTypes.Message> & Pick<ChatTypes.Message, 'text'>) => {
       const nextUserMessage: ChatTypes.Message = {
         ...messageDraft,
         id: `user-${Date.now()}`,

@@ -5,6 +5,7 @@ import React, { useCallback } from 'react';
 import Chat, { ChatTypes } from 'devextreme-react/chat';
 import Button from 'devextreme-react/button';
 import { ChatEmptyView, ChatEmptyViewTexts } from '../chat-empty-view/ChatEmptyView';
+import { messageRender } from '../chat-message-render/chatMessageRender';
 
 type ChatCardComponentProps = {
   messages: ChatTypes.Message[];
@@ -81,6 +82,7 @@ export const ChatCardComponent = ({
           showAvatar={false}
           showDayHeaders={false}
           onMessageEntered={onMessageEntered}
+          messageRender={messageRender}
         />
       </div>
     </section>

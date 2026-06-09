@@ -16,7 +16,7 @@ export interface DashboardContext {
 
 export const AzureOpenAIConfig = {
   dangerouslyAllowBrowser: true,
-  deployment: 'gpt-4o-mini',
+  deployment: 'demo',
   apiVersion: '2024-02-01',
   endpoint: 'https://public-api.devexpress.com/demo-openai',
   apiKey: 'DEMO',
@@ -60,6 +60,7 @@ function buildSystemPrompt(ctx: DashboardContext): string {
     'You are an AI analytics assistant embedded in a sales dashboard application.',
     'Analyze the data provided and give concise, actionable insights.',
     'Use markdown formatting in responses. Be specific with numbers from the data.',
+    'If you do not have certain information or cannot find specific data, say so honestly. Do not invent, fabricate, or guess data. Use only the data provided above.',
     '',
     `CURRENT DASHBOARD STATE:`,
     `- Selected period: "${ctx.periodName}" (${ctx.dateRange[0]} to ${ctx.dateRange[1]})`,

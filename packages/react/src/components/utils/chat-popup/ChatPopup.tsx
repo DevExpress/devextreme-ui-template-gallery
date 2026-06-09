@@ -8,6 +8,7 @@ import { Popup, ToolbarItem, Animation } from 'devextreme-react/popup';
 import type { PositionConfig } from 'devextreme/animation/position';
 import type { AnimationConfig } from 'devextreme/animation/fx';
 import { ChatEmptyView, ChatEmptyViewTexts } from '../chat-empty-view/ChatEmptyView';
+import { messageRender } from '../chat-message-render/chatMessageRender';
 import { useScreenSize } from '../../../utils/media-query';
 
 type ChatPopupProps = {
@@ -90,6 +91,7 @@ export const ChatPopup = memo(({
       dragEnabled
       dragAndResizeArea={window.document.body}
       showCloseButton
+      shading={false}
       container={POPUP_CONTAINER}
       position={popupPosition}
       wrapperAttr={popupWrapperAttr}
@@ -134,6 +136,7 @@ export const ChatPopup = memo(({
           showAvatar={false}
           showDayHeaders={false}
           onMessageEntered={onMessageEntered}
+          messageRender={messageRender}
         />
       </div>
     </Popup>
