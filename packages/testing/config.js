@@ -12,8 +12,8 @@ export const packages = [{
 export const fakeScreenSize = [900, 900];
 
 export const screenModes = [
-  [400, 800],
   [1280, 800],
+  [400, 800],
 ];
 
 export const themeModes = ['light', 'dark'];
