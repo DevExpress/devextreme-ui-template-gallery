@@ -8,6 +8,7 @@ import { Popup, ToolbarItem, Animation } from 'devextreme-react/popup';
 import type { PositionConfig } from 'devextreme/animation/position';
 import type { AnimationConfig } from 'devextreme/animation/fx';
 import { ChatEmptyView, ChatEmptyViewTexts } from '../chat-empty-view/ChatEmptyView';
+import { messageRender } from '../chat-message-render/chatMessageRender';
 import { useScreenSize } from '../../../utils/media-query';
 
 type ChatPopupProps = {
@@ -15,6 +16,9 @@ type ChatPopupProps = {
   setVisible: (visible: boolean) => void;
   messages: ChatTypes.Message[];
   currentUser: ChatTypes.User;
+  typingUsers?: ChatTypes.User[];
+  alerts?: ChatTypes.Alert[];
+  isProcessing?: boolean;
   onMessageEntered: (event: ChatTypes.MessageEnteredEvent) => void;
   onPromptClick: (messageText: string) => void;
   onResetClick: () => void;
@@ -29,6 +33,9 @@ export const ChatPopup = memo(({
   setVisible,
   messages,
   currentUser,
+  typingUsers = [],
+  alerts = [],
+  isProcessing = false,
   onMessageEntered,
   onPromptClick,
   onResetClick,
@@ -84,6 +91,7 @@ export const ChatPopup = memo(({
       dragEnabled
       dragAndResizeArea={window.document.body}
       showCloseButton
+      shading={false}
       container={POPUP_CONTAINER}
       position={popupPosition}
       wrapperAttr={popupWrapperAttr}
@@ -118,14 +126,17 @@ export const ChatPopup = memo(({
 
       <div className='chat-popup__body'>
         <Chat
-          className='chat-popup__chat'
+          className={`chat-popup__chat${isProcessing ? ' chat-disabled' : ''}`}
           user={currentUser}
           items={messages}
+          typingUsers={typingUsers}
+          alerts={alerts}
           height='100%'
           emptyViewRender={renderEmptyView}
           showAvatar={false}
           showDayHeaders={false}
           onMessageEntered={onMessageEntered}
+          messageRender={messageRender}
         />
       </div>
     </Popup>
