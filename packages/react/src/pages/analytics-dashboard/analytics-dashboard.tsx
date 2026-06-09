@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Splitter, { Item as SplitterItem } from 'devextreme-react/splitter';
 import { Item as ToolbarItem } from 'devextreme-react/toolbar';
@@ -31,6 +31,7 @@ import { ChatCardComponent } from '../../components/utils/chat-card-component/Ch
 import { ChatFloatingButton } from '../../components/utils/chat-floating-button/ChatFloatingButton';
 import { ChatPopup } from '../../components/utils/chat-popup/ChatPopup';
 import { useChatAssistant } from '../../components/library/chat-assistant/useChatAssistant';
+import { DashboardContext } from '../../components/library/chat-assistant/dashboardAIService';
 import {
   ANALYTICS_PERIODS,
   DEFAULT_ANALYTICS_PERIOD_KEY,
@@ -53,6 +54,7 @@ export const AnalyticsDashboard = () => {
   const [tabIndex, setTabIndex] = useState(
     ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].index
   );
+  const [periodName, setPeriodName] = useState(DEFAULT_ANALYTICS_PERIOD_KEY);
   const [dateRange, setDateRange] = useState(
     ANALYTICS_PERIODS[DEFAULT_ANALYTICS_PERIOD_KEY].period.split('/')
   );
@@ -69,7 +71,23 @@ export const AnalyticsDashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [tabsWidth, setTabsWidth] = useState<number | string>('auto');
 
-  const chat = useChatAssistant();
+  const dashboardContext = useMemo<DashboardContext | undefined>(() => {
+    if (isLoading) return undefined;
+    return {
+      periodName,
+      dateRange,
+      salesTotal,
+      opportunitiesTotal,
+      sales,
+      opportunities,
+      salesByCategory,
+      salesByState,
+      conversionRate: 16,
+      leads: 51,
+    };
+  }, [isLoading, periodName, dateRange, salesTotal, opportunitiesTotal, sales, opportunities, salesByCategory, salesByState]);
+
+  const chat = useChatAssistant(dashboardContext);
 
   const { isXSmall, isLarge } = useScreenSize();
   const isSmallScreen = !isLarge;
@@ -101,8 +119,10 @@ export const AnalyticsDashboard = () => {
   }, [dateRange]);
 
   const onTabClick = useCallback((e) => {
-    const { index, period } = ANALYTICS_PERIODS[e.addedItems[0]];
+    const selectedPeriod = e.addedItems[0];
+    const { index, period } = ANALYTICS_PERIODS[selectedPeriod];
     setTabIndex(index);
+    setPeriodName(selectedPeriod);
     setDateRange(period.split('/'));
     setIsLoading(true);
   }, []);
@@ -162,6 +182,9 @@ export const AnalyticsDashboard = () => {
                   <ChatCardComponent
                     messages={chat.messages}
                     currentUser={chat.currentUser}
+                    typingUsers={chat.typingUsers}
+                    alerts={chat.alerts}
+                    isProcessing={chat.isProcessing}
                     onMessageEntered={chat.onMessageEntered}
                     onPromptClick={chat.onPromptClick}
                     onResetClick={chat.resetChat}
@@ -183,6 +206,9 @@ export const AnalyticsDashboard = () => {
             setVisible={chat.changePopupVisibility}
             messages={chat.messages}
             currentUser={chat.currentUser}
+            typingUsers={chat.typingUsers}
+            alerts={chat.alerts}
+            isProcessing={chat.isProcessing}
             onMessageEntered={chat.onMessageEntered}
             onPromptClick={chat.onPromptClick}
             onResetClick={chat.resetChat}
