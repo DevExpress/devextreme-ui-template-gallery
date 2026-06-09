@@ -3,7 +3,7 @@
 import { Selector, RequestLogger } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import {
-  forceResizeRecalculation, getPostfix, toggleCommonConfiguration, setTheme,
+  getPostfix, toggleCommonConfiguration, setTheme,
 } from './utils.js';
 import { screenModes, themeModes, timeoutSecond } from '../config.js';
 
