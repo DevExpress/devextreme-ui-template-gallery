@@ -34,7 +34,6 @@ fixture`Analytics Sales Analysis`;
           false,
           requestLogger,
         );
-        await forceResizeRecalculation(t, screenMode);
         await setTheme(t, themeMode);
         await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
         await t.wait(2000);
