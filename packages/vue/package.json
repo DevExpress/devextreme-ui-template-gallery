@@ -20,6 +20,8 @@
     "exceljs": "^3.10.0",
     "file-saver-es": "^2.0.5",
     "luxon": "^3.3.0",
+    "micromark": "^4.0.2",
+    "openai": "^6.42.0",
     "vue": "^3.2.39",
     "vue-router": "^4.0.3"
   },

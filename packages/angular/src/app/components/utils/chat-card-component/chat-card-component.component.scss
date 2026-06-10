@@ -69,7 +69,7 @@
 
 .chat-card-component__body {
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 1 0;
   min-height: 0;
   overflow: hidden;
 }
@@ -80,9 +80,23 @@
   min-width: 0;
 
   &.dx-chat {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     border: 0;
     border-radius: 0;
     background: transparent;
+  }
+
+  ::ng-deep .dx-chat-messagelist {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  ::ng-deep .dx-chat-messagebox {
+    flex: 0 0 auto;
+    padding: 20px 24px 24px;
   }
 
   ::ng-deep .dx-chat-messagelist
@@ -97,9 +111,11 @@
     padding-top: 24px;
   }
 
-  ::ng-deep .dx-chat-messagebox {
-    padding: 20px 24px 24px;
-  }
+}
+
+::ng-deep .chat-disabled .dx-chat-messagebox .dx-texteditor-input {
+  pointer-events: none;
+  opacity: 0.6;
 }
 
 .chat-card-component__empty-wrapper{

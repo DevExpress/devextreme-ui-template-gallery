@@ -106,6 +106,7 @@ export const useChatAssistant = (context?: DashboardContext) => {
   const resetChat = useCallback(() => {
     setMessages(createInitialMessages());
     conversationRef.current = [];
+    setAlerts([]);
   }, []);
 
   const onPromptClick = useCallback(

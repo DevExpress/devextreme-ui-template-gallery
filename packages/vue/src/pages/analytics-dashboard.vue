@@ -43,6 +43,9 @@ max-size="50%"
               <chat-card-component
                 :messages="chat.messages.value"
                 :current-user="chat.currentUser"
+                :typing-users="chat.typingUsers.value"
+                :alerts="chat.alerts.value"
+                :is-processing="chat.isProcessing.value"
                 @message-entered="chat.onMessageEntered"
                 @prompt-click="chat.onPromptClick"
                 @reset-click="chat.resetChat"
@@ -80,6 +83,9 @@ max-size="50%"
           :visible="chat.isPopupVisible.value"
           :messages="chat.messages.value"
           :current-user="chat.currentUser"
+          :typing-users="chat.typingUsers.value"
+          :alerts="chat.alerts.value"
+          :is-processing="chat.isProcessing.value"
           @update:visible="chat.changePopupVisibility"
           @message-entered="chat.onMessageEntered"
           @prompt-click="chat.onPromptClick"
@@ -116,6 +122,8 @@ import {
   SalesByState, SalesByStateAndCity,
   SalesOrOpportunitiesByCategory,
 } from '@/types/analytics';
+import { analyticsPanelItems } from '@/types/resource';
+import { DashboardContext } from '@/composables/dashboard-ai-service';
 
 import { screenInfo } from '@/utils/media-query';
 import { useChatAssistant } from '@/composables/use-chat-assistant';
@@ -140,7 +148,32 @@ const salesByCategory = ref<SalesByStateAndCity | null>(null);
 
 const loading = ref<boolean>(true);
 
-const chat = useChatAssistant();
+const periodName = ref(analyticsPanelItems[4].text);
+const dateRange = ref(analyticsPanelItems[4].value.split('/'));
+
+const dashboardContext = computed<DashboardContext | undefined>(() => {
+  if (loading.value) return undefined;
+  const salesTotal = sales.value
+    ? sales.value.reduce((sum, s) => sum + s.total, 0) : 0;
+  const opportunitiesTotal = opportunities.value
+    ? opportunities.value.reduce((sum, o) => sum + o.value, 0) : 0;
+  return {
+    periodName: periodName.value,
+    dateRange: dateRange.value,
+    salesTotal,
+    opportunitiesTotal,
+    sales: sales.value ?? [],
+    opportunities: opportunities.value ?? [],
+    salesByCategory: salesByCategory.value
+      ? salesByCategory.value.map((s) => ({ name: s.stateName, value: s.total }))
+      : [],
+    salesByState: salesByState.value ?? [],
+    conversionRate: 16,
+    leads: 51,
+  };
+});
+
+const chat = useChatAssistant(dashboardContext);
 
 const isSmallScreen = computed(() => !screenInfo.value.isLarge);
 const usesSplitterLayout = computed(() => chat.isPinned.value && screenInfo.value.isLarge);
@@ -167,6 +200,13 @@ const loadData = async (startDate: string, endDate: string) => {
 };
 
 const tabChange = ([startDate, endDate]: string[]) => {
+  const item = analyticsPanelItems.find(
+    (p) => p.value === `${startDate}/${endDate}`,
+  );
+  if (item) {
+    periodName.value = item.text;
+  }
+  dateRange.value = [startDate, endDate];
   loadData(startDate, endDate);
 };
 </script>
@@ -269,11 +309,14 @@ $dashboard-pane-offset: 20px;
 
 .analytics-dashboard__pane--main {
   padding-right: 10px;
+  overflow-y: auto;
 }
 
 .analytics-dashboard__pane--chat {
   padding-left: 10px;
   padding-top: $dashboard-pane-offset;
+  overflow: hidden;
+  max-height: 100%;
 }
 
 .analytics-dashboard__content {
