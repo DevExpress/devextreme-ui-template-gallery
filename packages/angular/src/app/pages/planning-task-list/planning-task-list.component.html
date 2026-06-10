@@ -96,37 +96,34 @@
       }"
     ></dxi-item>
   </dx-toolbar>
-  @if (taskCollections$ | async; as taskCollections) {
-    @switch (displayTaskComponent) {
-      @case (taskPanelItems[0].text) {
-        <div class="grid">
-          <task-list-grid
-            #planningDataGrid
-            [dataSource]="taskCollections.allTasks"
-            (tabValueChanged)="tabValueChange($event)"
-          >
-          </task-list-grid>
-        </div>
-      }
-      @case (taskPanelItems[1].text) {
-        <div class="kanban">
-          <task-list-kanban
-            #planningKanban
-            [dataSource]="taskCollections.filteredTasks"
-            (addTaskEvent)="addTask()"
-          ></task-list-kanban>
-        </div>
-      }
-      @case (taskPanelItems[2].text) {
-        <div class="gantt">
-          <task-list-gantt
-            #planningGantt
-            [dataSource]="taskCollections.filteredTasks"
-          ></task-list-gantt>
-        </div>
-      }
-    }
-  } @else {
+  <ng-container
+    *ngIf="taskCollections$ | async as taskCollections; else loading"
+  >
+    <ng-container *ngIf="taskCollections" [ngSwitch]="displayTaskComponent">
+      <div *ngSwitchCase="taskPanelItems[0].text" class="grid">
+        <task-list-grid
+          #planningDataGrid
+          [dataSource]="taskCollections.allTasks"
+          (tabValueChanged)="tabValueChange($event)"
+        >
+        </task-list-grid>
+      </div>
+      <div *ngSwitchCase="taskPanelItems[1].text" class="kanban">
+        <task-list-kanban
+          #planningKanban
+          [dataSource]="taskCollections.filteredTasks"
+          (addTaskEvent)="addTask()"
+        ></task-list-kanban>
+      </div>
+      <div *ngSwitchCase="taskPanelItems[2].text" class="gantt">
+        <task-list-gantt
+          #planningGantt
+          [dataSource]="taskCollections.filteredTasks"
+        ></task-list-gantt>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-template #loading>
     <dx-load-panel
       [visible]="true"
       [showPane]="false"
@@ -134,7 +131,7 @@
       [position]="{ of: '.content' }"
     >
     </dx-load-panel>
-  }
+  </ng-template>
   <form-popup
     [(visible)]="isAddTaskPopupOpened"
     (save)="onClickSaveNewTask()"

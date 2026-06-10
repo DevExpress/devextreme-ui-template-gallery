@@ -14,14 +14,13 @@
       }}
     </div>
   </div>
-  @if (percentage !== 0) {
-    <div
-      class="percentage"
-      [class]="percentage > 0 ? 'positive' : 'negative'"
-    >
-      <div [class]="'dx-icon-' + (percentage > 0 ? 'spinup' : 'spindown')"></div>
-      <i class="value"></i>
-      <span>{{ abs(percentage) }}%</span>
-    </div>
-  }
+  <div
+    *ngIf="percentage !== 0"
+    class="percentage"
+    [class]="percentage > 0 ? 'positive' : 'negative'"
+  >
+    <div [class]="'dx-icon-' + (percentage > 0 ? 'spinup' : 'spindown')"></div>
+    <i class="value"></i>
+    <span>{{ abs(percentage) }}%</span>
+  </div>
 </div>

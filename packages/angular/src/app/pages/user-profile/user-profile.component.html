@@ -34,97 +34,95 @@
   >
   </dx-load-panel>
   <dx-scroll-view class="view-wrapper-scroll" (onScroll)="scroll($event)">
-    @if (!isLoading() && profileData(); as profile) {
-      <div class="cards-container">
-        <profile-card
-          class="profile-card basic-info-card"
-          title="Basic Info"
-          [colCount]="4"
-          [cardData]="profile"
-          [items]="basicInfoItems"
-          (dataChanged)="dataChanged()"
-        >
-          <div class="basic-info-top-item" top-item>
-            <form-photo
-              [link]="profile.image"
-              [editable]="true"
-              [size]="80"
-            ></form-photo>
-            <div>
-              <div class="title-text">{{ profile.name }}</div>
-              <div class="subtitle-text with-clipboard-copy">
-                <span>ID: {{ profile.id }}</span>
-                <dx-button
-                  icon="copy"
-                  class="copy-clipboard-button"
-                  stylingMode="text"
-                  [activeStateEnabled]="false"
-                  [focusStateEnabled]="false"
-                  [hoverStateEnabled]="false"
-                  (onClick)="copyToClipboard(profile.id, $event)"
-                ></dx-button>
-              </div>
+    <div *ngIf="!isLoading() && profileData(); let profile" class="cards-container">
+      <profile-card
+        class="profile-card basic-info-card"
+        title="Basic Info"
+        [colCount]="4"
+        [cardData]="profile"
+        [items]="basicInfoItems"
+        (dataChanged)="dataChanged()"
+      >
+        <div class="basic-info-top-item" top-item>
+          <form-photo
+            [link]="profile.image"
+            [editable]="true"
+            [size]="80"
+          ></form-photo>
+          <div>
+            <div class="title-text">{{ profile.name }}</div>
+            <div class="subtitle-text with-clipboard-copy">
+              <span>ID: {{ profile.id }}</span>
               <dx-button
-                text="Change Password"
-                class="change-password-button"
-                stylingMode="contained"
-                [icon]="(screen.xSmallScreenChanged | async) ? '' : 'lock'"
-                (onClick)="changePassword()"
+                icon="copy"
+                class="copy-clipboard-button"
+                stylingMode="text"
+                [activeStateEnabled]="false"
+                [focusStateEnabled]="false"
+                [hoverStateEnabled]="false"
+                (onClick)="copyToClipboard(profile.id, $event)"
+              ></dx-button>
+            </div>
+            <dx-button
+              text="Change Password"
+              class="change-password-button"
+              stylingMode="contained"
+              [icon]="(screen.xSmallScreenChanged | async) ? null : 'lock'"
+              (onClick)="changePassword()"
+            ></dx-button>
+          </div>
+        </div>
+      </profile-card>
+
+      <profile-card
+        class="profile-card contacts-card"
+        title="Contacts"
+        [cardData]="profile"
+        [items]="contactItems()"
+        (dataChanged)="dataChanged()"
+      >
+        <div top-item>
+          <div class="image-wrapper">
+            <i class="dx-icon dx-icon-mention"></i>
+          </div>
+          <div>
+            <div class="title-text">{{ profile.phone | phone }}</div>
+            <div class="subtitle-text with-clipboard-copy">
+              {{ profile.email }}
+              <dx-button
+                icon="copy"
+                class="copy-clipboard-button"
+                stylingMode="text"
+                [activeStateEnabled]="false"
+                [focusStateEnabled]="false"
+                [hoverStateEnabled]="false"
+                (onClick)="copyToClipboard(profile.email, $event)"
               ></dx-button>
             </div>
           </div>
-        </profile-card>
+        </div>
+      </profile-card>
 
-        <profile-card
-          class="profile-card contacts-card"
-          title="Contacts"
-          [cardData]="profile"
-          [items]="contactItems()"
-          (dataChanged)="dataChanged()"
-        >
-          <div top-item>
-            <div class="image-wrapper">
-              <i class="dx-icon dx-icon-mention"></i>
-            </div>
-            <div>
-              <div class="title-text">{{ profile.phone | phone }}</div>
-              <div class="subtitle-text with-clipboard-copy">
-                {{ profile.email }}
-                <dx-button
-                  icon="copy"
-                  class="copy-clipboard-button"
-                  stylingMode="text"
-                  [activeStateEnabled]="false"
-                  [focusStateEnabled]="false"
-                  [hoverStateEnabled]="false"
-                  (onClick)="copyToClipboard(profile.email, $event)"
-                ></dx-button>
-              </div>
+      <profile-card
+        class="profile-card address-card"
+        title="Address"
+        [cardData]="profile"
+        [items]="addressItems"
+        (dataChanged)="dataChanged()"
+      >
+        <div top-item>
+          <div class="image-wrapper">
+            <i class="dx-icon dx-icon-map"></i>
+          </div>
+          <div>
+            <div class="title-text">
+              {{ profile.address }}, {{ profile.city }},
+              {{ profile.state }}, {{ profile.country }}
             </div>
           </div>
-        </profile-card>
-
-        <profile-card
-          class="profile-card address-card"
-          title="Address"
-          [cardData]="profile"
-          [items]="addressItems"
-          (dataChanged)="dataChanged()"
-        >
-          <div top-item>
-            <div class="image-wrapper">
-              <i class="dx-icon dx-icon-map"></i>
-            </div>
-            <div>
-              <div class="title-text">
-                {{ profile.address }}, {{ profile.city }},
-                {{ profile.state }}, {{ profile.country }}
-              </div>
-            </div>
-          </div>
-        </profile-card>
-      </div>
-    }
+        </div>
+      </profile-card>
+    </div>
   </dx-scroll-view>
 </div>
 

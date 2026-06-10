@@ -8,14 +8,11 @@
   class="photo"
   [class.editable]="editable"
 >
-  @if (editable) {
-    <i class="edit-icon dx-icon-photooutline"></i>
-  }
+  <i *ngIf="editable" class="edit-icon dx-icon-photooutline"></i>
 </div>
-@if (editable) {
 <dx-file-uploader
+  *ngIf="editable"
   [dialogTrigger]="hostRef"
   [visible]="false"
   accept="image/*"
 ></dx-file-uploader>
-}

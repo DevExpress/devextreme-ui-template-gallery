@@ -81,15 +81,15 @@
 
     <ng-container *dxTemplate="let item of 'createAccountTemplate'">
       <span class="dx-button-text">
-        @if (loading()) {
+        <ng-container *ngIf="loading(); else notLoading">
           <dx-load-indicator
             width="24px"
             height="24px"
             [visible]="true"
           ></dx-load-indicator>
-        } @else {
-          Register
-        }
+        </ng-container>
+
+        <ng-template #notLoading>Register</ng-template>
       </span>
     </ng-container>
   </dx-form>

@@ -45,27 +45,25 @@
     </div>
     <div class="messages-content">
       <div class="message-list">
-        @for (data of items; track data.subject) {
-          <div class="message-container">
-            <user-avatar
-              [dataLetters]="getAvatarText(data.manager)"
-            ></user-avatar>
-            <div class="message dx-card">
-              <div class="message-title">
-                <div>
-                  <div class="subject">{{ data.subject }}</div>
-                  <div
+        <div class="message-container" *ngFor="let data of items">
+          <user-avatar
+            [dataLetters]="getAvatarText(data.manager)"
+          ></user-avatar>
+          <div class="message dx-card">
+            <div class="message-title">
+              <div>
+                <div class="subject">{{ data.subject }}</div>
+                <div
                   >{{ data.date | date: 'MM/dd/y' }} - {{ data.manager }}</div
-                  >
-                </div>
-                <div>
-                  <dx-button icon="overflow" stylingMode="text"></dx-button>
-                </div>
+                >
               </div>
-              <div class="message-text">{{ getText(data) }}</div>
+              <div>
+                <dx-button icon="overflow" stylingMode="text"></dx-button>
+              </div>
             </div>
+            <div class="message-text">{{ getText(data) }}</div>
           </div>
-        }
+        </div>
       </div>
     </div>
   </div>

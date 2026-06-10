@@ -1,25 +1,22 @@
 <div id="activities-list" [ngClass]="activities ? 'load' : null">
-  @if (activities && !isLoading) {
-    <dx-list
-      class="activities-list"
-      [items]="activities"
-      [scrollingEnabled]="false"
-    >
-      <div *dxTemplate="let item of 'item'">
-        <div class="activity">
-          <div class="name">{{ item.name }}</div>
-          <div class="date" [ngClass]="{ by: showBy }">
-            <span>{{ item.date | date: 'MM/dd/yyyy' }}</span>
-            @if (showBy) {
-              <span>by</span>
-            }
-            <span>{{ item.manager }}</span>
-          </div>
-          <card-menu [items]="activityMenuItems"> </card-menu>
+  <dx-list
+    *ngIf="activities"
+    class="activities-list"
+    [items]="activities"
+    [scrollingEnabled]="false"
+  >
+    <div *dxTemplate="let item of 'item'">
+      <div class="activity">
+        <div class="name">{{ item.name }}</div>
+        <div class="date" [ngClass]="{ by: showBy }">
+          <span>{{ item.date | date: 'MM/dd/yyyy' }}</span>
+          <span *ngIf="showBy">by</span>
+          <span>{{ item.manager }}</span>
         </div>
+        <card-menu [items]="activityMenuItems"> </card-menu>
       </div>
-    </dx-list>
-  }
+    </div>
+  </dx-list>
 
   <dx-load-panel
     container="#activities-list"

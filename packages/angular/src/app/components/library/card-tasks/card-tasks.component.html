@@ -1,36 +1,35 @@
 <div id="card-tasks">
-  @if (!isLoading && tasks) {
-    <dx-data-grid
-      #dataGrid
-      [dataSource]="currentTasks"
-      [columnAutoWidth]="true"
-    >
-      <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
+  <dx-data-grid
+    *ngIf="!isLoading && tasks"
+    #dataGrid
+    [dataSource]="currentTasks"
+    [columnAutoWidth]="true"
+  >
+    <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
 
-      <dxo-row-dragging
-        [allowReordering]="true"
-        [onReorder]="onReorder"
-        [showDragIcons]="true"
-      ></dxo-row-dragging>
+    <dxo-row-dragging
+      [allowReordering]="true"
+      [onReorder]="onReorder"
+      [showDragIcons]="true"
+    ></dxo-row-dragging>
 
-      <dxi-column
-        dataField="text"
-        caption="Subject"
-        [hidingPriority]="3"
-      ></dxi-column>
-      <dxi-column
-        dataField="date"
-        dataType="date"
-        caption="Due Date"
-        [hidingPriority]="1"
-      ></dxi-column>
-      <dxi-column
-        caption="Assigned To"
-        dataField="manager"
-        [hidingPriority]="0"
-      ></dxi-column>
-    </dx-data-grid>
-  }
+    <dxi-column
+      dataField="text"
+      caption="Subject"
+      [hidingPriority]="3"
+    ></dxi-column>
+    <dxi-column
+      dataField="date"
+      dataType="date"
+      caption="Due Date"
+      [hidingPriority]="1"
+    ></dxi-column>
+    <dxi-column
+      caption="Assigned To"
+      dataField="manager"
+      [hidingPriority]="0"
+    ></dxi-column>
+  </dx-data-grid>
 
   <dx-load-panel
     [visible]="isLoading || !tasks"
