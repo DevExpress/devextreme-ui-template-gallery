@@ -67,7 +67,7 @@
               text="Change Password"
               class="change-password-button"
               stylingMode="contained"
-              [icon]="(screen.xSmallScreenChanged | async) ? null : 'lock'"
+              [icon]="(screen.xSmallScreenChanged | async) ? '' : 'lock'"
               (onClick)="changePassword()"
             ></dx-button>
           </div>

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 import { DxButtonComponent } from 'devextreme-angular';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
@@ -15,6 +15,7 @@ import { Dates, PanelItem } from 'src/app/types/resource';
   styleUrls: ['./toolbar-analytics.component.scss'],
   imports: [
     AsyncPipe,
+    NgIf,
     DxButtonComponent,
     DxTabsModule,
     DxToolbarModule,
