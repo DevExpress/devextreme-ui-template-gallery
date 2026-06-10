@@ -1,6 +1,6 @@
 <div class="panel" [ngClass]="{ pin: pinned(), open: isOpened() }">
   <div class="data-wrapper">
-    <ng-container *ngIf="!isLoading() && formData(); let form">
+    @if (!isLoading() && formData(); as form) {
       <dx-toolbar class="panel-toolbar">
         <dxi-item location="before">
           <span class="contact-name value">{{ form.name }}</span>
@@ -185,17 +185,16 @@
 
             <dxi-item title="Opportunities">
               <div *dxTemplate="let i of 'item'">
-                <div
-                  class="opportunities"
-                  *ngFor="let opportunity of form.opportunities"
-                >
-                  <span class="value">{{ opportunity.name }} </span>
-                  <br />
-                  <span class="value black small">{{
-                    opportunity.price | currency: 'USD':'$':'1.0-0'
-                  }}</span>
-                  <br />
-                </div>
+                @for (opportunity of form.opportunities; track opportunity.name) {
+                  <div class="opportunities">
+                    <span class="value">{{ opportunity.name }} </span>
+                    <br />
+                    <span class="value black small">{{
+                        opportunity.price | currency: 'USD':'$':'1.0-0'
+                      }}</span>
+                    <br />
+                  </div>
+                }
               </div>
             </dxi-item>
 
@@ -207,7 +206,7 @@
           </dx-accordion>
         </div>
       </dx-scroll-view>
-    </ng-container>
+    }
 
     <dx-load-panel
       container=".panel"

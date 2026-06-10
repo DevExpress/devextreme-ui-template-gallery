@@ -14,15 +14,18 @@ import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
       status
       status-indicator
       status-indicator-{{ dashValue }}">
-      <span *ngIf="!isField" class="status-indicator-{{ dashValue }}">{{ getValue(value) }}</span>
-      <dx-text-box
-        *ngIf="isField"
-        class="status-indicator-{{ dashValue }}"
-        [inputAttr]="{class: 'status-input status-editor-input'}"
-        [hoverStateEnabled]="false"
-        [readOnly]="true"
-        [value]="getValue(value)">
-      </dx-text-box>
+      @if (!isField) {
+        <span class="status-indicator-{{ dashValue }}">{{ getValue(value) }}</span>
+      }
+      @if (isField) {
+        <dx-text-box
+          class="status-indicator-{{ dashValue }}"
+          [inputAttr]="{class: 'status-input status-editor-input'}"
+          [hoverStateEnabled]="false"
+          [readOnly]="true"
+          [value]="getValue(value)">
+        </dx-text-box>
+      }
     </div>
   `,
   styleUrls: ['./status-indicator.component.scss'],
