@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { DxChatTypes } from 'devextreme-angular/ui/chat';
+import { DashboardContext, ConversationMessage, getAIResponse, ALERT_TIMEOUT } from './dashboard-ai.service';
 
 type Message = DxChatTypes.Message;
 type MessageEnteredEvent = DxChatTypes.MessageEnteredEvent;
 type User = DxChatTypes.User;
+type Alert = DxChatTypes.Alert;
 
 type ChatMessageDraft = Partial<Message> & { text?: string };
 
@@ -19,15 +21,6 @@ const assistantUser: User = {
 
 export const createInitialMessages = (): Message[] => [];
 
-const createAssistantReply = (messageText?: string): Message => ({
-  id: `assistant-${Date.now()}`,
-  author: assistantUser,
-  text: messageText
-    ? `I captured your request: "${messageText}".`
-    : 'I can help analyze this dashboard.',
-  timestamp: new Date(),
-});
-
 @Injectable()
 export class ChatAssistantService {
   isPopupVisible = false;
@@ -36,9 +29,19 @@ export class ChatAssistantService {
 
   messages: Message[] = createInitialMessages();
 
+  typingUsers: User[] = [];
+
+  alerts: Alert[] = [];
+
+  isProcessing = false;
+
+  context: DashboardContext | undefined;
+
   readonly currentUser = currentUser;
 
-  private submitUserMessage(messageDraft: ChatMessageDraft) {
+  private conversationHistory: ConversationMessage[] = [];
+
+  private async submitUserMessage(messageDraft: ChatMessageDraft) {
     const nextUserMessage: Message = {
       ...messageDraft,
       id: `user-${Date.now()}`,
@@ -46,11 +49,46 @@ export class ChatAssistantService {
       timestamp: new Date(),
     };
 
-    this.messages = [
-      ...this.messages,
-      nextUserMessage,
-      createAssistantReply(messageDraft.text),
-    ];
+    this.messages = [...this.messages, nextUserMessage];
+    this.isProcessing = true;
+    this.typingUsers = [assistantUser];
+
+    this.conversationHistory.push({
+      role: 'user',
+      content: nextUserMessage.text ?? '',
+    });
+
+    try {
+      let responseText: string;
+
+      if (this.context) {
+        responseText = await getAIResponse(this.conversationHistory, this.context);
+      } else {
+        responseText = 'Dashboard data is not yet available. Please wait for the data to load.';
+      }
+
+      this.conversationHistory.push({
+        role: 'assistant',
+        content: responseText,
+      });
+
+      const assistantMessage: Message = {
+        id: `assistant-${Date.now()}`,
+        author: assistantUser,
+        text: responseText,
+        timestamp: new Date(),
+      };
+
+      this.messages = [...this.messages, assistantMessage];
+    } catch {
+      this.alerts = [{ message: 'Request limit reached, try again in a minute.' }];
+      setTimeout(() => { this.alerts = []; }, ALERT_TIMEOUT);
+
+      this.conversationHistory.pop();
+    } finally {
+      this.typingUsers = [];
+      this.isProcessing = false;
+    }
   }
 
   openPopup() {
@@ -79,6 +117,8 @@ export class ChatAssistantService {
 
   resetChat() {
     this.messages = createInitialMessages();
+    this.conversationHistory = [];
+    this.alerts = [];
   }
 
   onPromptClick(messageText: string) {

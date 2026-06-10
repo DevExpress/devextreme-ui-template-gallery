@@ -7,6 +7,7 @@
     :drag-enabled="true"
     :drag-and-resize-area="documentBody"
     :show-close-button="true"
+    :shading="false"
     container=".content"
     :position="popupPosition"
     :wrapper-attr="popupWrapperAttr"
@@ -47,13 +48,16 @@ location="after">
 
     <div class="chat-popup__body">
       <dx-chat
-        class="chat-popup__chat"
+        :class="'chat-popup__chat' + (isProcessing ? ' chat-disabled' : '')"
         :user="currentUser"
         :items="messages"
+        :typing-users="typingUsers"
+        :alerts="alerts"
         height="100%"
         :show-avatar="false"
         :show-day-headers="false"
         empty-view-template="emptyViewTemplate"
+        message-template="messageTemplate"
         @message-entered="$emit('message-entered', $event)"
       >
         <template #emptyViewTemplate="{ data }">
@@ -62,6 +66,9 @@ location="after">
             :prompt="data.texts.prompt"
             @prompt-click="$emit('prompt-click', $event)"
           />
+        </template>
+        <template #messageTemplate="{ data }">
+          <chat-message-render :text="data.message?.text || ''" />
         </template>
       </dx-chat>
     </div>
@@ -74,12 +81,16 @@ import { DxPopup, DxToolbarItem as DxPopupItem, DxAnimation } from 'devextreme-v
 import { DxChat } from 'devextreme-vue/chat';
 import DxButton from 'devextreme-vue/button';
 import ChatEmptyView from '@/components/utils/chat-empty-view.vue';
+import ChatMessageRender from '@/components/utils/chat-message-render.vue';
 import { screenInfo } from '@/utils/media-query';
 
 defineProps<{
   visible: boolean;
   messages: Array<unknown>;
   currentUser: { id: string; name: string };
+  typingUsers?: Array<unknown>;
+  alerts?: Array<unknown>;
+  isProcessing?: boolean;
 }>();
 
 defineEmits<{
@@ -213,6 +224,11 @@ const popupWrapperAttr = { class: 'chat-popup' };
 .chat-popup__chat .dx-chat-messagebox {
   flex: 0 0 auto;
   padding: 16px 24px 24px;
+}
+
+.chat-disabled .dx-chat-messagebox .dx-texteditor-input {
+  pointer-events: none;
+  opacity: 0.6;
 }
 
 .screen-small,
