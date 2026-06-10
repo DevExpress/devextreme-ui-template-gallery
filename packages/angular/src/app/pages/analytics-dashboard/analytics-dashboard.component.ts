@@ -119,30 +119,24 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
   }
 
   loadData = (startDate: string, endDate: string) => {
-    this.isLoading = true;
-    const tasks: Observable<object>[] = [
-      ['opportunities', this.service.getOpportunitiesByCategory],
-      ['sales', this.service.getSales],
-      ['salesByCategory', this.service.getSalesByCategory],
-      ['salesByState', (startDate: string, endDate: string) => this.service.getSalesByStateAndCity(startDate, endDate).pipe(
-        map((data) => this.service.getSalesByState(data))
-      )
-      ]
-    ].map(([dataName, loader]: [string, DataLoader]) => {
-      const loaderObservable = loader(startDate, endDate).pipe(share());
+    this.isLoading.set(true);
 
-      loaderObservable.subscribe((result: DashboardData) => {
-        this[dataName] = result;
-      });
-
-      return loaderObservable;
-    });
-
-    forkJoin(tasks).subscribe(() => {
-      this.isLoading = false;
+    forkJoin({
+      opportunities: this.service.getOpportunitiesByCategory(startDate, endDate),
+      sales: this.service.getSales(startDate, endDate),
+      salesByCategory: this.service.getSalesByCategory(startDate, endDate),
+      salesByState: this.service
+        .getSalesByStateAndCity(startDate, endDate)
+        .pipe(map((data) => this.service.getSalesByState(data as SalesByStateAndCity))),
+    }).subscribe((data) => {
+      this.opportunities.set(data.opportunities);
+      this.sales.set(data.sales as Sales);
+      this.salesByCategory.set(data.salesByCategory);
+      this.salesByState.set(data.salesByState);
+      this.isLoading.set(false);
       this.updateDashboardContext();
     });
-  }
+  };
 
   ngOnInit(): void {
     const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
@@ -154,27 +148,26 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
     this.screenSubscription.unsubscribe();
   }
 
-  get usesSplitterLayout() {
-    return this.chat.isPinned && this.isLarge;
-  }
-
   private updateDashboardContext() {
-    const salesTotal = this.sales
-      ? this.sales.reduce((sum, s) => sum + s.total, 0) : 0;
-    const opportunitiesTotal = this.opportunities
-      ? this.opportunities.reduce((sum, o) => sum + o.value, 0) : 0;
+    const sales = this.sales();
+    const opportunities = this.opportunities();
+    const salesByCategory = this.salesByCategory();
+    const salesByState = this.salesByState();
+
+    const salesTotal = sales
+      ? sales.reduce((sum, s) => sum + s.total, 0) : 0;
+    const opportunitiesTotal = opportunities
+      ? opportunities.reduce((sum, o) => sum + o.value, 0) : 0;
 
     this.chat.context = {
       periodName: this.periodName,
       dateRange: this.dateRange,
       salesTotal,
       opportunitiesTotal,
-      sales: this.sales ?? [],
-      opportunities: this.opportunities ?? [],
-      salesByCategory: this.salesByCategory
-        ? this.salesByCategory.map((s) => ({ name: s.stateName, value: s.total }))
-        : [],
-      salesByState: this.salesByState ?? [],
+      sales: sales ?? [],
+      opportunities: opportunities ?? [],
+      salesByCategory: salesByCategory ?? [],
+      salesByState: salesByState ?? [],
       conversionRate: 16,
       leads: 51,
     } as DashboardContext;

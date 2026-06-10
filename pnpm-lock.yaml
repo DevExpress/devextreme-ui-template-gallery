@@ -247,7 +247,7 @@ importers:
         version: 4.0.2
       openai:
         specifier: ^6.42.0
-        version: 6.42.0(ws@8.20.1)(zod@4.1.13)
+        version: 6.42.0(ws@8.20.1)(zod@4.4.2)
       rxjs:
         specifier: ~7.8.2
         version: 7.8.2
@@ -575,7 +575,7 @@ importers:
         version: 4.0.2
       openai:
         specifier: ^6.42.0
-        version: 6.42.0(ws@8.20.1)(zod@4.1.13)
+        version: 6.42.0(ws@8.20.1)(zod@4.4.2)
       vue:
         specifier: ^3.5.35
         version: 3.5.35(typescript@5.6.3)
@@ -13096,8 +13096,8 @@ snapshots:
 
   '@testing-library/dom@10.4.1':
     dependencies:
-      '@babel/code-frame': 7.29.0
-      '@babel/runtime': 7.29.2
+      '@babel/code-frame': 7.29.7
+      '@babel/runtime': 7.29.7
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       dom-accessibility-api: 0.5.16
