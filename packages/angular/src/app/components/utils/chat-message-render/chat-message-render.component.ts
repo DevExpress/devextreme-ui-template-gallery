@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { micromark } from 'micromark';
 
@@ -12,7 +12,7 @@ export class ChatMessageRenderComponent implements OnChanges {
 
   renderedHtml: SafeHtml = '';
 
-  constructor(private sanitizer: DomSanitizer) {}
+  private sanitizer = inject(DomSanitizer);
 
   ngOnChanges() {
     const html = micromark(this.text);
