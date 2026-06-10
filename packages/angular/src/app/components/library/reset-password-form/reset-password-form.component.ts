@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, signal } from '@angular/core';
+import { Component, inject, Input, OnInit, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import notify from 'devextreme/ui/notify';
-import { AuthService, defaultUser } from 'src/app/services';
+import { AuthService } from 'src/app/services';
 
 const notificationText = 'We\'ve sent a link to reset your password. Check your inbox.';
 
@@ -23,7 +23,7 @@ type ResetPasswordFormData = {
     DxLoadIndicatorModule,
   ]
 })
-export class ResetPasswordFormComponent {
+export class ResetPasswordFormComponent implements OnInit {
   @Input() signInLink = '/auth/sign-in';
 
   @Input() buttonLink = '/auth/sign-in';
@@ -35,8 +35,16 @@ export class ResetPasswordFormComponent {
   loading = signal(false);
 
   formData = signal<ResetPasswordFormData>({
-    email: defaultUser.email ?? '',
+    email: '',
   });
+
+  async ngOnInit(): Promise<void> {
+    const { data } = await this.authService.getUser();
+    
+    if (data?.email) {
+      this.formData.set({ email: data.email });
+    }
+  }
 
   async onSubmit(e: Event) {
     e.preventDefault();
