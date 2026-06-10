@@ -24,15 +24,15 @@
       <dx-scroll-view>
         <div class="message-list">
           @for (note of items; track note.text) {
-          <div class="note dx-card">
-            <div class="note-title">
-              <div>{{ note.date | date: 'MM/dd/y' }} - {{ note.manager }}</div>
-              <div>
-                <dx-button icon="overflow" stylingMode="text"></dx-button>
+            <div class="note dx-card">
+              <div class="note-title">
+                <div>{{ note.date | date: 'MM/dd/y' }} - {{ note.manager }}</div>
+                <div>
+                  <dx-button icon="overflow" stylingMode="text"></dx-button>
+                </div>
               </div>
+              <div class="note-text">{{ note.text }}</div>
             </div>
-            <div class="note-text">{{ note.text }}</div>
-          </div>
           }
         </div>
       </dx-scroll-view>

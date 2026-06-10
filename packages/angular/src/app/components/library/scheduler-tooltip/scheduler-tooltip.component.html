@@ -12,16 +12,16 @@
       {{ getTimeString | apply: selectedAppointmentData }}
     </div>
     @if (selectedAppointmentData.description) {
-    <div class="description">
-      <dx-button
-        icon="textdocument"
-        stylingMode="text"
-        [focusStateEnabled]="false"
-        [activeStateEnabled]="false"
-        [hoverStateEnabled]="false"
-      ></dx-button>
-      {{ selectedAppointmentData.description }}
-    </div>
+      <div class="description">
+        <dx-button
+          icon="textdocument"
+          stylingMode="text"
+          [focusStateEnabled]="false"
+          [activeStateEnabled]="false"
+          [hoverStateEnabled]="false"
+        ></dx-button>
+        {{ selectedAppointmentData.description }}
+      </div>
     }
   </div>
   <div class="buttons">

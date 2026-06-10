@@ -2,7 +2,7 @@
   <div class="header">
     <card-menu [visible]="isMenuVisible" [items]="menuItems"> </card-menu>
     @if (titleText) {
-    <div class="title">{{ titleText }}</div>
+      <div class="title">{{ titleText }}</div>
     }
     <ng-content select="[filter]"></ng-content>
   </div>

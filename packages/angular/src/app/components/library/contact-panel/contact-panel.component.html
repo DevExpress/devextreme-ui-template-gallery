@@ -186,14 +186,14 @@
             <dxi-item title="Opportunities">
               <div *dxTemplate="let i of 'item'">
                 @for (opportunity of form.opportunities; track opportunity.name) {
-                <div class="opportunities">
-                  <span class="value">{{ opportunity.name }} </span>
-                  <br />
-                  <span class="value black small">{{
-                    opportunity.price | currency: 'USD':'$':'1.0-0'
-                  }}</span>
-                  <br />
-                </div>
+                  <div class="opportunities">
+                    <span class="value">{{ opportunity.name }} </span>
+                    <br />
+                    <span class="value black small">{{
+                        opportunity.price | currency: 'USD':'$':'1.0-0'
+                      }}</span>
+                    <br />
+                  </div>
                 }
               </div>
             </dxi-item>

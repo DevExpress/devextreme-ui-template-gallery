@@ -10,168 +10,168 @@
     </toolbar-form>
 
     @if (contactData) {
-    <dx-form
-      class="form last plain-styled-form"
-      [formData]="contactData"
-      labelMode="floating"
-      [class.view-mode]="!isEditing"
-    >
-      <dxi-item itemType="group" [colCount]="2">
-        <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
-        <dxi-item>
-          <div *dxTemplate>
-            <form-photo [link]="contactData.image" [size]="184"></form-photo>
-          </div>
-        </dxi-item>
-        <dxi-item itemType="group">
+      <dx-form
+        class="form last plain-styled-form"
+        [formData]="contactData"
+        labelMode="floating"
+        [class.view-mode]="!isEditing"
+      >
+        <dxi-item itemType="group" [colCount]="2">
+          <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
           <dxi-item>
-            <status-select-box
+            <div *dxTemplate>
+              <form-photo [link]="contactData.image" [size]="184"></form-photo>
+            </div>
+          </dxi-item>
+          <dxi-item itemType="group">
+            <dxi-item>
+              <status-select-box
+                *dxTemplate
+                classList="contact-status"
+                [(value)]="contactData.status"
+                [readOnly]="!isEditing"
+              ></status-select-box>
+            </dxi-item>
+
+            <dxi-item>
+              <form-textbox
+                *dxTemplate
+                label="First Name"
+                [(value)]="contactData.firstName"
+                [isEditing]="isEditing"
+              ></form-textbox>
+            </dxi-item>
+
+            <dxi-item>
+              <form-textbox
+                *dxTemplate
+                label="Last Name"
+                [(value)]="contactData.lastName"
+                [isEditing]="isEditing"
+              ></form-textbox>
+            </dxi-item>
+          </dxi-item>
+
+          <dxi-item>
+            <form-textbox
               *dxTemplate
-              classList="contact-status"
-              [(value)]="contactData.status"
+              label="Position"
+              [(value)]="contactData.position"
+              [isEditing]="isEditing"
+            ></form-textbox>
+          </dxi-item>
+
+          <dxi-item cssClass="accent">
+            <form-textbox
+              *dxTemplate
+              label="Assigned to"
+              [(value)]="contactData.manager"
+              [isEditing]="isEditing"
+            ></form-textbox>
+          </dxi-item>
+
+          <dxi-item cssClass="accent" [colSpan]="2">
+            <form-textbox
+              *dxTemplate
+              label="Company"
+              [(value)]="contactData.company"
+              [isEditing]="isEditing"
+            ></form-textbox>
+          </dxi-item>
+        </dxi-item>
+
+        <dxi-item itemType="group" [colCount]="4" caption="Contacts">
+          <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
+          <dxi-item [colSpan]="4">
+            <form-textbox
+              *dxTemplate
+              label="Address"
+              [(value)]="contactData.address"
+              [isEditing]="isEditing"
+            ></form-textbox>
+          </dxi-item>
+
+          <dxi-item [colSpan]="2">
+            <form-textbox
+              *dxTemplate
+              label="City"
+              [(value)]="contactData.city"
+              [isEditing]="isEditing"
+            ></form-textbox>
+          </dxi-item>
+
+          <dxi-item>
+            <dx-select-box
+              *dxTemplate
+              label="State"
+              stylingMode="filled"
+              valueChangeEvent="keyup input change"
+              [(value)]="contactData.state.stateShort"
+              [items]="usStates"
               [readOnly]="!isEditing"
-            ></status-select-box>
+              [searchEnabled]="true"
+              [elementAttr]="{ class: 'form-editor' }"
+            ></dx-select-box>
           </dxi-item>
 
           <dxi-item>
-            <form-textbox
+            <dx-number-box
               *dxTemplate
-              label="First Name"
-              [(value)]="contactData.firstName"
-              [isEditing]="isEditing"
-            ></form-textbox>
+              label="Zip Code"
+              stylingMode="filled"
+              valueChangeEvent="keyup input change"
+              [(value)]="contactData.zipCode"
+              [readOnly]="!isEditing"
+              [elementAttr]="{ class: 'form-editor' }"
+              [inputAttr]="{ class: 'form-editor-input' }"
+            >
+              <dx-validator [validationRules]="[zipCodeValidator]"></dx-validator>
+            </dx-number-box>
+          </dxi-item>
+        </dxi-item>
+
+        <dxi-item itemType="group" [colCount]="2" cssClass="contact-fields-group">
+          <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
+          <dxi-item>
+            <div *dxTemplate>
+              <form-textbox
+                mask="(000) 000-0000"
+                label="Phone"
+                [(value)]="contactData.phone"
+                [isEditing]="isEditing"
+                [validators]="[]"
+              ></form-textbox>
+              <dx-button
+                class="form-item-button"
+                stylingMode="outlined"
+                [visible]="!isEditing"
+                [text]="'Call'"
+                [icon]="'tel'"
+                [type]="'default'"
+              ></dx-button>
+            </div>
           </dxi-item>
 
           <dxi-item>
-            <form-textbox
-              *dxTemplate
-              label="Last Name"
-              [(value)]="contactData.lastName"
-              [isEditing]="isEditing"
-            ></form-textbox>
+            <div *dxTemplate>
+              <form-textbox
+                label="Email"
+                [(value)]="contactData.email"
+                [isEditing]="isEditing"
+                [validators]="[{ type: 'email' }]"
+              ></form-textbox>
+              <dx-button
+                class="form-item-button"
+                stylingMode="outlined"
+                [visible]="!isEditing"
+                [text]="'Send Email'"
+                [icon]="'email'"
+                [type]="'default'"
+              ></dx-button>
+            </div>
           </dxi-item>
         </dxi-item>
-
-        <dxi-item>
-          <form-textbox
-            *dxTemplate
-            label="Position"
-            [(value)]="contactData.position"
-            [isEditing]="isEditing"
-          ></form-textbox>
-        </dxi-item>
-
-        <dxi-item cssClass="accent">
-          <form-textbox
-            *dxTemplate
-            label="Assigned to"
-            [(value)]="contactData.manager"
-            [isEditing]="isEditing"
-          ></form-textbox>
-        </dxi-item>
-
-        <dxi-item cssClass="accent" [colSpan]="2">
-          <form-textbox
-            *dxTemplate
-            label="Company"
-            [(value)]="contactData.company"
-            [isEditing]="isEditing"
-          ></form-textbox>
-        </dxi-item>
-      </dxi-item>
-
-      <dxi-item itemType="group" [colCount]="4" caption="Contacts">
-        <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
-        <dxi-item [colSpan]="4">
-          <form-textbox
-            *dxTemplate
-            label="Address"
-            [(value)]="contactData.address"
-            [isEditing]="isEditing"
-          ></form-textbox>
-        </dxi-item>
-
-        <dxi-item [colSpan]="2">
-          <form-textbox
-            *dxTemplate
-            label="City"
-            [(value)]="contactData.city"
-            [isEditing]="isEditing"
-          ></form-textbox>
-        </dxi-item>
-
-        <dxi-item>
-          <dx-select-box
-            *dxTemplate
-            label="State"
-            stylingMode="filled"
-            valueChangeEvent="keyup input change"
-            [(value)]="contactData.state.stateShort"
-            [items]="usStates"
-            [readOnly]="!isEditing"
-            [searchEnabled]="true"
-            [elementAttr]="{ class: 'form-editor' }"
-          ></dx-select-box>
-        </dxi-item>
-
-        <dxi-item>
-          <dx-number-box
-            *dxTemplate
-            label="Zip Code"
-            stylingMode="filled"
-            valueChangeEvent="keyup input change"
-            [(value)]="contactData.zipCode"
-            [readOnly]="!isEditing"
-            [elementAttr]="{ class: 'form-editor' }"
-            [inputAttr]="{ class: 'form-editor-input' }"
-          >
-            <dx-validator [validationRules]="[zipCodeValidator]"></dx-validator>
-          </dx-number-box>
-        </dxi-item>
-      </dxi-item>
-
-      <dxi-item itemType="group" [colCount]="2" cssClass="contact-fields-group">
-        <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
-        <dxi-item>
-          <div *dxTemplate>
-            <form-textbox
-              mask="(000) 000-0000"
-              label="Phone"
-              [(value)]="contactData.phone"
-              [isEditing]="isEditing"
-              [validators]="[]"
-            ></form-textbox>
-            <dx-button
-              class="form-item-button"
-              stylingMode="outlined"
-              [visible]="!isEditing"
-              [text]="'Call'"
-              [icon]="'tel'"
-              [type]="'default'"
-            ></dx-button>
-          </div>
-        </dxi-item>
-
-        <dxi-item>
-          <div *dxTemplate>
-            <form-textbox
-              label="Email"
-              [(value)]="contactData.email"
-              [isEditing]="isEditing"
-              [validators]="[{ type: 'email' }]"
-            ></form-textbox>
-            <dx-button
-              class="form-item-button"
-              stylingMode="outlined"
-              [visible]="!isEditing"
-              [text]="'Send Email'"
-              [icon]="'email'"
-              [type]="'default'"
-            ></dx-button>
-          </div>
-        </dxi-item>
-      </dxi-item>
-    </dx-form>
+      </dx-form>
     }
   </dx-validation-group>
   <dx-load-panel

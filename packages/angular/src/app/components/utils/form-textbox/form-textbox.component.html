@@ -11,14 +11,14 @@
 >
   <dx-validator [validationRules]="validators"></dx-validator>
   @if (icon) {
-  <dxi-button
-    name="icon"
-    location="before"
-    [options]="{
+    <dxi-button
+      name="icon"
+      location="before"
+      [options]="{
       icon: icon,
       elementAttr: { class: 'form-editor-icon' },
       stylingMode: 'text'
     }"
-  ></dxi-button>
+    ></dxi-button>
   }
 </dx-text-box>

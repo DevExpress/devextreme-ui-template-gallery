@@ -1,25 +1,25 @@
 <header>
   <dx-toolbar class="header-toolbar">
     @if (menuToggleEnabled) {
-    <dxi-item
-      location="before"
-      widget="dxButton"
-      cssClass="menu-button"
-      [options]="{
+      <dxi-item
+        location="before"
+        widget="dxButton"
+        cssClass="menu-button"
+        [options]="{
         icon: 'menu',
         stylingMode: 'text',
         onClick: toggleMenu
       }"
-    >
-    </dxi-item>
+      >
+      </dxi-item>
     }
     @if (title) {
-    <dxi-item
-      location="before"
-      cssClass="header-title"
-      [text]="title"
-    >
-    </dxi-item>
+      <dxi-item
+        location="before"
+        cssClass="header-title"
+        [text]="title"
+      >
+      </dxi-item>
     }
 
     <dxi-item

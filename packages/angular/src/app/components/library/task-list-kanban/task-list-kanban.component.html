@@ -10,40 +10,40 @@
     (onReorder)="onListReorder($event)"
   >
     @for (board of kanbanDataSource; track board.name) {
-    <div class="list">
-      <div class="list-title theme-text-color">
-        <span>{{ board.name }}</span>
-        <card-menu [items]="boardMenuItems"> </card-menu>
-      </div>
-      <dx-scroll-view
-        class="scrollable-list"
-        direction="vertical"
-        showScrollbar="always"
-      >
-        <dx-sortable
-          class="sortable-cards"
-          group="cardsGroup"
-          [data]="board"
-          (onDragStart)="onTaskDragStart($event)"
-          (onReorder)="onTaskDrop($event)"
-          (onAdd)="onTaskDrop($event)"
-        >
-          @for (task of board.cards; track task.id) {
-            <task-kanban-card class="dx-card" [task]="task"></task-kanban-card>
-          }
-        </dx-sortable>
-
-        <div class="add-task">
-          <dx-button
-            icon="plus"
-            text="Add Task"
-            stylingMode="text"
-            width="100%"
-            (onClick)="addTask()"
-          ></dx-button>
+      <div class="list">
+        <div class="list-title theme-text-color">
+          <span>{{ board.name }}</span>
+          <card-menu [items]="boardMenuItems"> </card-menu>
         </div>
-      </dx-scroll-view>
-    </div>
+        <dx-scroll-view
+          class="scrollable-list"
+          direction="vertical"
+          showScrollbar="always"
+        >
+          <dx-sortable
+            class="sortable-cards"
+            group="cardsGroup"
+            [data]="board"
+            (onDragStart)="onTaskDragStart($event)"
+            (onReorder)="onTaskDrop($event)"
+            (onAdd)="onTaskDrop($event)"
+          >
+            @for (task of board.cards; track task.id) {
+              <task-kanban-card class="dx-card" [task]="task"></task-kanban-card>
+            }
+          </dx-sortable>
+
+          <div class="add-task">
+            <dx-button
+              icon="plus"
+              text="Add Task"
+              stylingMode="text"
+              width="100%"
+              (onClick)="addTask()"
+            ></dx-button>
+          </div>
+        </dx-scroll-view>
+      </div>
     }
   </dx-sortable>
 </dx-scroll-view>

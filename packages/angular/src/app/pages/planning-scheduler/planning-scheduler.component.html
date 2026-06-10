@@ -54,24 +54,24 @@
         <dxi-view type="agenda"></dxi-view>
       </dx-scheduler>
       @if (selectedAppointment) {
-      <dx-tooltip
-        #tooltipRef
-        showEvent="click"
-        [target]="selectedAppointment?.target"
-        [position]="
+        <dx-tooltip
+          #tooltipRef
+          showEvent="click"
+          [target]="selectedAppointment?.target"
+          [position]="
           getTooltipPosition
             | apply
               : selectedAppointment
               : isRightPanelOpen
               : (screen.screenChanged | async)?.isSmall
         "
-      >
-        <scheduler-tooltip
-          [selectedAppointmentData]="selectedAppointment?.data"
-          (clickEditAppointment)="editSelectedAppointment()"
-          (clickDeleteAppointment)="deleteSelectedAppointment($event)"
-        ></scheduler-tooltip>
-      </dx-tooltip>
+        >
+          <scheduler-tooltip
+            [selectedAppointmentData]="selectedAppointment?.data"
+            (clickEditAppointment)="editSelectedAppointment()"
+            (clickDeleteAppointment)="deleteSelectedAppointment($event)"
+          ></scheduler-tooltip>
+        </dx-tooltip>
       }
       <dx-speed-dial-action
         icon="add"
