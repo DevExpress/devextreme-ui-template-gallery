@@ -6,8 +6,10 @@ import { DxChatTypes } from 'devextreme-angular/ui/chat';
 type Message = DxChatTypes.Message;
 type MessageEnteredEvent = DxChatTypes.MessageEnteredEvent;
 type User = DxChatTypes.User;
+type Alert = DxChatTypes.Alert;
 
 import { ChatEmptyViewComponent } from '../chat-empty-view/chat-empty-view.component';
+import { ChatMessageRenderComponent } from '../chat-message-render/chat-message-render.component';
 
 @Component({
   selector: 'chat-card-component',
@@ -18,12 +20,19 @@ import { ChatEmptyViewComponent } from '../chat-empty-view/chat-empty-view.compo
     DxButtonModule,
     DxChatModule,
     ChatEmptyViewComponent,
+    ChatMessageRenderComponent,
   ],
 })
 export class ChatCardComponent {
   @Input() messages: Message[] = [];
 
   @Input() currentUser: User = {};
+
+  @Input() typingUsers: User[] = [];
+
+  @Input() alerts: Alert[] = [];
+
+  @Input() isProcessing = false;
 
   @Output() messageEntered = new EventEmitter<MessageEnteredEvent>();
 
