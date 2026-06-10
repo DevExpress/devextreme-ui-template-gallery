@@ -31,11 +31,14 @@
 
   <div class="chat-card-component__body">
     <dx-chat
-      class="chat-card-component__chat"
+      [class]="'chat-card-component__chat' + (isProcessing ? ' chat-disabled' : '')"
       [user]="currentUser"
       [items]="messages"
+      [typingUsers]="typingUsers"
+      [alerts]="alerts"
       height="100%"
       emptyViewTemplate="emptyView"
+      messageTemplate="messageTemplate"
       [showAvatar]="false"
       [showDayHeaders]="false"
       (onMessageEntered)="messageEntered.emit($event)"
@@ -45,6 +48,9 @@
           [texts]="data.texts"
           (promptClick)="promptClick.emit($event)"
         ></chat-empty-view>
+      </div>
+      <div *dxTemplate="let data of 'messageTemplate'">
+        <chat-message-render [text]="data.message?.text || ''"></chat-message-render>
       </div>
     </dx-chat>
   </div>

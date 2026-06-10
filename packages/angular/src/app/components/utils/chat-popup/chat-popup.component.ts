@@ -21,10 +21,12 @@ import { DxChatTypes } from 'devextreme-angular/ui/chat';
 type Message = DxChatTypes.Message;
 type MessageEnteredEvent = DxChatTypes.MessageEnteredEvent;
 type User = DxChatTypes.User;
+type Alert = DxChatTypes.Alert;
 import { Subscription } from 'rxjs';
 
 import { ScreenService } from 'src/app/services';
 import { ChatEmptyViewComponent } from '../chat-empty-view/chat-empty-view.component';
+import { ChatMessageRenderComponent } from '../chat-message-render/chat-message-render.component';
 
 type PopupAnimation = {
   show: AnimationConfig;
@@ -43,6 +45,7 @@ const POPUP_CONTAINER = '.content';
     DxChatModule,
     DxPopupModule,
     ChatEmptyViewComponent,
+    ChatMessageRenderComponent,
   ],
 })
 export class ChatPopupComponent implements OnDestroy {
@@ -51,6 +54,12 @@ export class ChatPopupComponent implements OnDestroy {
   @Input() messages: Message[] = [];
 
   @Input() currentUser: User = {};
+
+  @Input() typingUsers: User[] = [];
+
+  @Input() alerts: Alert[] = [];
+
+  @Input() isProcessing = false;
 
   @Output() visibleChange = new EventEmitter<boolean>();
 

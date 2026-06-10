@@ -6,6 +6,7 @@
   [dragEnabled]="true"
   [dragAndResizeArea]="dragAndResizeArea"
   [showCloseButton]="true"
+  [shading]="false"
   [container]="popupContainer"
   [position]="popupPosition"
   [wrapperAttr]="popupWrapperAttr"
@@ -40,11 +41,14 @@
 
   <div class="chat-popup__body">
     <dx-chat
-      class="chat-popup__chat"
+      [class]="'chat-popup__chat' + (isProcessing ? ' chat-disabled' : '')"
       [user]="currentUser"
       [items]="messages"
+      [typingUsers]="typingUsers"
+      [alerts]="alerts"
       height="100%"
       emptyViewTemplate="emptyView"
+      messageTemplate="messageTemplate"
       [showAvatar]="false"
       [showDayHeaders]="false"
       (onMessageEntered)="messageEntered.emit($event)"
@@ -54,6 +58,9 @@
           [texts]="data.texts"
           (promptClick)="promptClick.emit($event)"
         ></chat-empty-view>
+      </div>
+      <div *dxTemplate="let data of 'messageTemplate'">
+        <chat-message-render [text]="data.message?.text || ''"></chat-message-render>
       </div>
     </dx-chat>
   </div>

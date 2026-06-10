@@ -1,4 +1,5 @@
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
+import { DashboardContext, ConversationMessage, getAIResponse, ALERT_TIMEOUT } from './dashboard-ai-service';
 
 interface ChatUser {
   id: string;
@@ -12,6 +13,10 @@ interface ChatMessage {
   timestamp: Date;
 }
 
+interface ChatAlert {
+  message: string;
+}
+
 const currentUser: ChatUser = {
   id: 'current-user',
   name: 'You',
@@ -22,21 +27,16 @@ const assistantUser: ChatUser = {
   name: 'AI Assistant',
 };
 
-const createAssistantReply = (messageText?: string): ChatMessage => ({
-  id: `assistant-${Date.now()}`,
-  author: assistantUser,
-  text: messageText
-    ? `I captured your request: "${messageText}".`
-    : 'I can help analyze this dashboard.',
-  timestamp: new Date(),
-});
-
-export function useChatAssistant() {
+export function useChatAssistant(context?: { value: DashboardContext | undefined }) {
   const isPopupVisible = ref(false);
   const isPinned = ref(false);
   const messages = ref<ChatMessage[]>([]);
+  const typingUsers = ref<ChatUser[]>([]);
+  const alerts = ref<ChatAlert[]>([]);
+  const isProcessing = ref(false);
+  const conversationHistory: ConversationMessage[] = [];
 
-  const submitUserMessage = (messageDraft: Partial<ChatMessage> & Pick<ChatMessage, 'text'>) => {
+  const submitUserMessage = async (messageDraft: Partial<ChatMessage> & Pick<ChatMessage, 'text'>) => {
     const nextUserMessage: ChatMessage = {
       ...messageDraft,
       id: `user-${Date.now()}`,
@@ -44,11 +44,48 @@ export function useChatAssistant() {
       timestamp: new Date(),
     };
 
-    messages.value = [
-      ...messages.value,
-      nextUserMessage,
-      createAssistantReply(nextUserMessage.text),
-    ];
+    messages.value = [...messages.value, nextUserMessage];
+    isProcessing.value = true;
+    typingUsers.value = [assistantUser];
+
+    conversationHistory.push({
+      role: 'user',
+      content: nextUserMessage.text ?? '',
+    });
+
+    try {
+      const ctx = context?.value;
+      let responseText: string;
+
+      if (ctx) {
+        responseText = await getAIResponse(conversationHistory, ctx);
+      } else {
+        responseText = 'Dashboard data is not yet available. Please wait for the data to load.';
+      }
+
+      conversationHistory.push({
+        role: 'assistant',
+        content: responseText,
+      });
+
+      const assistantMessage: ChatMessage = {
+        id: `assistant-${Date.now()}`,
+        author: assistantUser,
+        text: responseText,
+        timestamp: new Date(),
+      };
+
+      messages.value = [...messages.value, assistantMessage];
+    } catch (e) {
+      console.error('Chat AI error:', e);
+      alerts.value = [{ message: 'Request limit reached, try again in a minute.' }];
+      setTimeout(() => { alerts.value = []; }, ALERT_TIMEOUT);
+
+      conversationHistory.pop();
+    } finally {
+      typingUsers.value = [];
+      isProcessing.value = false;
+    }
   };
 
   const openPopup = () => {
@@ -77,6 +114,8 @@ export function useChatAssistant() {
 
   const resetChat = () => {
     messages.value = [];
+    conversationHistory.length = 0;
+    alerts.value = [];
   };
 
   const onPromptClick = (messageText: string) => {
@@ -91,6 +130,9 @@ export function useChatAssistant() {
     isPopupVisible,
     isPinned,
     messages,
+    typingUsers,
+    alerts,
+    isProcessing,
     currentUser,
     openPopup,
     changePopupVisibility,

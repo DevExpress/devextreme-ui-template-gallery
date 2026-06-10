@@ -37,6 +37,7 @@ import {
   SalesOrOpportunitiesByCategory,
 } from 'src/app/types/analytics';
 import { ChatAssistantService } from 'src/app/components/library/chat-assistant/chat-assistant.service';
+import { DashboardContext } from 'src/app/components/library/chat-assistant/dashboard-ai.service';
 import { ChatCardComponent } from 'src/app/components/utils/chat-card-component/chat-card-component.component';
 import { ChatFloatingButtonComponent } from 'src/app/components/utils/chat-floating-button/chat-floating-button.component';
 import { ChatPopupComponent } from 'src/app/components/utils/chat-popup/chat-popup.component';
@@ -102,28 +103,46 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 
   usesSplitterLayout = computed(() => this.chat.isPinned && this.isLarge());
 
+  private periodName = analyticsPanelItems[4].text;
+
+  private dateRange = analyticsPanelItems[4].value.split('/');
+
   selectionChange(dates: Dates) {
+    const item = analyticsPanelItems.find(
+      (p) => p.value === `${dates.startDate}/${dates.endDate}`,
+    );
+    if (item) {
+      this.periodName = item.text;
+    }
+    this.dateRange = [dates.startDate, dates.endDate];
     this.loadData(dates.startDate, dates.endDate);
   }
 
   loadData = (startDate: string, endDate: string) => {
-    this.isLoading.set(true);
+    this.isLoading = true;
+    const tasks: Observable<object>[] = [
+      ['opportunities', this.service.getOpportunitiesByCategory],
+      ['sales', this.service.getSales],
+      ['salesByCategory', this.service.getSalesByCategory],
+      ['salesByState', (startDate: string, endDate: string) => this.service.getSalesByStateAndCity(startDate, endDate).pipe(
+        map((data) => this.service.getSalesByState(data))
+      )
+      ]
+    ].map(([dataName, loader]: [string, DataLoader]) => {
+      const loaderObservable = loader(startDate, endDate).pipe(share());
 
-    forkJoin({
-      opportunities: this.service.getOpportunitiesByCategory(startDate, endDate),
-      sales: this.service.getSales(startDate, endDate),
-      salesByCategory: this.service.getSalesByCategory(startDate, endDate),
-      salesByState: this.service
-        .getSalesByStateAndCity(startDate, endDate)
-        .pipe(map((data) => this.service.getSalesByState(data as SalesByStateAndCity))),
-    }).subscribe((data) => {
-      this.opportunities.set(data.opportunities);
-      this.sales.set(data.sales as Sales);
-      this.salesByCategory.set(data.salesByCategory);
-      this.salesByState.set(data.salesByState);
-      this.isLoading.set(false);
+      loaderObservable.subscribe((result: DashboardData) => {
+        this[dataName] = result;
+      });
+
+      return loaderObservable;
     });
-  };
+
+    forkJoin(tasks).subscribe(() => {
+      this.isLoading = false;
+      this.updateDashboardContext();
+    });
+  }
 
   ngOnInit(): void {
     const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
@@ -133,5 +152,31 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.screenSubscription.unsubscribe();
+  }
+
+  get usesSplitterLayout() {
+    return this.chat.isPinned && this.isLarge;
+  }
+
+  private updateDashboardContext() {
+    const salesTotal = this.sales
+      ? this.sales.reduce((sum, s) => sum + s.total, 0) : 0;
+    const opportunitiesTotal = this.opportunities
+      ? this.opportunities.reduce((sum, o) => sum + o.value, 0) : 0;
+
+    this.chat.context = {
+      periodName: this.periodName,
+      dateRange: this.dateRange,
+      salesTotal,
+      opportunitiesTotal,
+      sales: this.sales ?? [],
+      opportunities: this.opportunities ?? [],
+      salesByCategory: this.salesByCategory
+        ? this.salesByCategory.map((s) => ({ name: s.stateName, value: s.total }))
+        : [],
+      salesByState: this.salesByState ?? [],
+      conversionRate: 16,
+      leads: 51,
+    } as DashboardContext;
   }
 }

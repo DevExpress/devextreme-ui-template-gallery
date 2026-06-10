@@ -32,13 +32,16 @@ aria-hidden />
 
     <div class="chat-card-component__body">
       <dx-chat
-        class="chat-card-component__chat"
+        :class="'chat-card-component__chat' + (isProcessing ? ' chat-disabled' : '')"
         :user="currentUser"
         :items="messages"
+        :typing-users="typingUsers"
+        :alerts="alerts"
         height="100%"
         :show-avatar="false"
         :show-day-headers="false"
         empty-view-template="emptyViewTemplate"
+        message-template="messageTemplate"
         @message-entered="$emit('message-entered', $event)"
       >
         <template #emptyViewTemplate="{ data }">
@@ -47,6 +50,9 @@ aria-hidden />
             :prompt="data.texts.prompt"
             @prompt-click="$emit('prompt-click', $event)"
           />
+        </template>
+        <template #messageTemplate="{ data }">
+          <chat-message-render :text="data.message?.text || ''" />
         </template>
       </dx-chat>
     </div>
@@ -57,10 +63,14 @@ aria-hidden />
 import { DxChat } from 'devextreme-vue/chat';
 import DxButton from 'devextreme-vue/button';
 import ChatEmptyView from '@/components/utils/chat-empty-view.vue';
+import ChatMessageRender from '@/components/utils/chat-message-render.vue';
 
 defineProps<{
   messages: Array<unknown>;
   currentUser: { id: string; name: string };
+  typingUsers?: Array<unknown>;
+  alerts?: Array<unknown>;
+  isProcessing?: boolean;
 }>();
 
 defineEmits<{
@@ -136,7 +146,7 @@ defineEmits<{
 
 .chat-card-component__body {
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 1 0;
   min-height: 0;
   overflow: hidden;
 }
@@ -148,9 +158,28 @@ defineEmits<{
 }
 
 .chat-card-component__chat.dx-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border: 0;
   border-radius: 0;
   background: transparent;
+}
+
+.chat-card-component__chat .dx-chat-messagelist {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.chat-card-component__chat .dx-chat-messagebox {
+  flex: 0 0 auto;
+  padding: 20px 24px 24px;
+}
+
+.chat-disabled .dx-chat-messagebox .dx-texteditor-input {
+  pointer-events: none;
+  opacity: 0.6;
 }
 
 .chat-card-component__chat
@@ -164,10 +193,6 @@ defineEmits<{
 
 .chat-card-component__chat .dx-chat-messagelist-day-header:first-child {
   padding-top: 24px;
-}
-
-.chat-card-component__chat .dx-chat-messagebox {
-  padding: 20px 24px 24px;
 }
 
 @media only screen and (max-width: 1100px) {
