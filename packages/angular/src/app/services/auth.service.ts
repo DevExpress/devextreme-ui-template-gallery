@@ -9,7 +9,7 @@ export interface IUser {
 
 export interface IResponse {
   isOk: boolean;
-  data?: IUser;
+  data?: IUser | null;
   message?: string;
 }
 

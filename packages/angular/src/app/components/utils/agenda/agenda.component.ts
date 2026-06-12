@@ -34,9 +34,9 @@ export type AgendaItem = { startDate: Date };
   ],
 })
 export class AgendaComponent {
-  @Input() items: AgendaItem[];
+  @Input() items!: AgendaItem[];
 
-  @Input() resources: Record<string,any>[];
+  @Input() resources!: Record<string,any>[];
 
   @Output() clickAppointment = new EventEmitter<{ itemData: Task, element: EventTarget }>();
 

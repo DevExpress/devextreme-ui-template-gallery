@@ -1,9 +1,14 @@
 import {
-  Component, inject, OnDestroy, OnInit
+  Component,
+  computed,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { map, share } from 'rxjs/operators';
-import { Observable, forkJoin, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { forkJoin, Subscription } from 'rxjs';
 
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
@@ -26,7 +31,10 @@ import { ConversionTickerComponent } from 'src/app/components/utils/conversion-t
 import { LeadsTickerComponent } from 'src/app/components/utils/leads-ticker/leads-ticker.component';
 import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import {
-  Sales, SalesByState, SalesByStateAndCity, SalesOrOpportunitiesByCategory,
+  Sales,
+  SalesByState,
+  SalesByStateAndCity,
+  SalesOrOpportunitiesByCategory,
 } from 'src/app/types/analytics';
 import { ChatAssistantService } from 'src/app/components/library/chat-assistant/chat-assistant.service';
 import { DashboardContext } from 'src/app/components/library/chat-assistant/dashboard-ai.service';
@@ -34,13 +42,10 @@ import { ChatCardComponent } from 'src/app/components/utils/chat-card-component/
 import { ChatFloatingButtonComponent } from 'src/app/components/utils/chat-floating-button/chat-floating-button.component';
 import { ChatPopupComponent } from 'src/app/components/utils/chat-popup/chat-popup.component';
 
-type DashboardData = SalesOrOpportunitiesByCategory | Sales | SalesByState | SalesByStateAndCity | null;
-type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
-
 @Component({
   templateUrl: './analytics-dashboard.component.html',
   styleUrls: ['./analytics-dashboard.component.scss'],
-  providers: [ DataService, ChatAssistantService ],
+  providers: [DataService, ChatAssistantService],
   imports: [
     DxScrollViewModule,
     DxDataGridModule,
@@ -72,26 +77,31 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 
   private screen = inject(ScreenService);
 
-  isLarge = this.screen.sizes['screen-large'];
+  isLarge = signal(this.screen.sizes['screen-large']);
 
-  private screenSubscription: Subscription = this.screen.screenChanged.subscribe(({
-    isLarge,
-    isXLarge,
-  }) => {
-    this.isLarge = isLarge || isXLarge;
+  private screenSubscription: Subscription = this.screen.screenChanged.subscribe(
+    ({ isLarge, isXLarge }) => {
+      this.isLarge.set(isLarge || isXLarge);
 
-    if (!this.isLarge && this.chat.isPinned) {
-      this.chat.unpinChat();
+      if (!this.isLarge() && this.chat.isPinned) {
+        this.chat.unpinChat();
+      }
     }
-  });
+  );
 
   analyticsPanelItems = analyticsPanelItems;
-  opportunities: SalesOrOpportunitiesByCategory = null;
-  sales: Sales = null;
-  salesByState: SalesByState = null;
-  salesByCategory: SalesByStateAndCity = null;
 
-  isLoading: boolean = true;
+  opportunities = signal<SalesOrOpportunitiesByCategory | null>(null);
+
+  sales = signal<Sales | null>(null);
+
+  salesByState = signal<SalesByState | null>(null);
+
+  salesByCategory = signal<SalesOrOpportunitiesByCategory | null>(null);
+
+  isLoading = signal(true);
+
+  usesSplitterLayout = computed(() => this.chat.isPinned && this.isLarge());
 
   private periodName = analyticsPanelItems[4].text;
 
@@ -109,27 +119,21 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
   }
 
   loadData = (startDate: string, endDate: string) => {
-    this.isLoading = true;
-    const tasks: Observable<object>[] = [
-      ['opportunities', this.service.getOpportunitiesByCategory],
-      ['sales', this.service.getSales],
-      ['salesByCategory', this.service.getSalesByCategory],
-      ['salesByState', (startDate: string, endDate: string) => this.service.getSalesByStateAndCity(startDate, endDate).pipe(
-        map((data) => this.service.getSalesByState(data))
-      )
-      ]
-    ].map(([dataName, loader]: [string, DataLoader]) => {
-      const loaderObservable = loader(startDate, endDate).pipe(share());
+    this.isLoading.set(true);
 
-      loaderObservable.subscribe((result: DashboardData) => {
-        this[dataName] = result;
-      });
-
-      return loaderObservable;
-    });
-
-    forkJoin(tasks).subscribe(() => {
-      this.isLoading = false;
+    forkJoin({
+      opportunities: this.service.getOpportunitiesByCategory(startDate, endDate),
+      sales: this.service.getSales(startDate, endDate),
+      salesByCategory: this.service.getSalesByCategory(startDate, endDate),
+      salesByState: this.service
+        .getSalesByStateAndCity(startDate, endDate)
+        .pipe(map((data) => this.service.getSalesByState(data as SalesByStateAndCity))),
+    }).subscribe((data) => {
+      this.opportunities.set(data.opportunities);
+      this.sales.set(data.sales as Sales);
+      this.salesByCategory.set(data.salesByCategory);
+      this.salesByState.set(data.salesByState);
+      this.isLoading.set(false);
       this.updateDashboardContext();
     });
   };
@@ -144,27 +148,26 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
     this.screenSubscription.unsubscribe();
   }
 
-  get usesSplitterLayout() {
-    return this.chat.isPinned && this.isLarge;
-  }
-
   private updateDashboardContext() {
-    const salesTotal = this.sales
-      ? this.sales.reduce((sum, s) => sum + s.total, 0) : 0;
-    const opportunitiesTotal = this.opportunities
-      ? this.opportunities.reduce((sum, o) => sum + o.value, 0) : 0;
+    const sales = this.sales();
+    const opportunities = this.opportunities();
+    const salesByCategory = this.salesByCategory();
+    const salesByState = this.salesByState();
+
+    const salesTotal = sales
+      ? sales.reduce((sum, s) => sum + s.total, 0) : 0;
+    const opportunitiesTotal = opportunities
+      ? opportunities.reduce((sum, o) => sum + o.value, 0) : 0;
 
     this.chat.context = {
       periodName: this.periodName,
       dateRange: this.dateRange,
       salesTotal,
       opportunitiesTotal,
-      sales: this.sales ?? [],
-      opportunities: this.opportunities ?? [],
-      salesByCategory: this.salesByCategory
-        ? this.salesByCategory.map((s) => ({ name: s.stateName, value: s.total }))
-        : [],
-      salesByState: this.salesByState ?? [],
+      sales: sales ?? [],
+      opportunities: opportunities ?? [],
+      salesByCategory: salesByCategory ?? [],
+      salesByState: salesByState ?? [],
       conversionRate: 16,
       leads: 51,
     } as DashboardContext;

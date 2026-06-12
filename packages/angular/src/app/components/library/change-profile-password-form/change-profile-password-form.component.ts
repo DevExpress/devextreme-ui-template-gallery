@@ -21,9 +21,9 @@ import { FormPopupComponent } from 'src/app/components/utils/form-popup/form-pop
   ],
 })
 export class ChangeProfilePasswordFormComponent {
-  @ViewChild(FormPopupComponent, { static: true }) formPopup;
+  @ViewChild(FormPopupComponent, { static: true }) formPopup!: FormPopupComponent;
 
-  @ViewChild('confirmField', { static: true }) confirmField: PasswordTextBoxComponent;
+  @ViewChild('confirmField', { static: true }) confirmField!: PasswordTextBoxComponent;
 
   @Input() visible = false;
 

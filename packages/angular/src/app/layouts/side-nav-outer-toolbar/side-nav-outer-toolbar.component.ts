@@ -55,9 +55,11 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
 
   shaderEnabled = false;
 
+  private isLargeScreen = false;
+
   routerSubscription: Subscription;
 
-  screenSubscription: Subscription;
+  screenSubscription!: Subscription;
 
   constructor() {
     this.routerSubscription = this.router.events.subscribe((event: Event) => {
@@ -68,7 +70,8 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.menuOpened = this.screen.sizes['screen-large'];
+    this.isLargeScreen = this.screen.sizes['screen-large'];
+    this.menuOpened = this.isLargeScreen;
 
     this.screenSubscription = this.screen.changed.subscribe(() => this.updateDrawer());
 
@@ -88,6 +91,16 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
     this.menuRevealMode = isXSmall ? 'slide' : 'expand';
     this.minMenuSize = isXSmall ? 0 : 48;
     this.shaderEnabled = !isLarge;
+
+    if (this.isLargeScreen && !isLarge) {
+      this.menuOpened = false;
+      this.temporaryMenuOpened = false;
+    } else if (!this.isLargeScreen && isLarge) {
+      this.menuOpened = true;
+      this.temporaryMenuOpened = false;
+    }
+
+    this.isLargeScreen = isLarge;
   }
 
   get hideMenuAfterNavigation() {

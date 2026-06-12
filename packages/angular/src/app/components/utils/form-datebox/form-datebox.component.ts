@@ -22,7 +22,7 @@ import { DxCalendarTypes } from 'devextreme-angular/ui/calendar';
   ],
 })
 export class FormDateboxComponent {
-  @ViewChild(DxDropDownButtonComponent) dropDownButtonComponent: DxDropDownButtonComponent;
+  @ViewChild(DxDropDownButtonComponent) dropDownButtonComponent!: DxDropDownButtonComponent;
 
   @Input() isEditing = false;
 

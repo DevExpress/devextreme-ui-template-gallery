@@ -1,9 +1,9 @@
 <form class="create-account-form auth-form" (submit)="onSubmit($event)">
   <dx-form
     labelLocation="top"
-    [formData]="formData"
+    [formData]="formData()"
     [showColonAfterLabel]="true"
-    [disabled]="loading"
+    [disabled]="loading()"
   >
     <dxi-item
       dataField="email"
@@ -11,8 +11,7 @@
       [editorOptions]="{
         placeholder: 'Email',
         stylingMode: 'filled',
-        mode: 'email',
-        value: defaultAuthData?.data?.email
+        mode: 'email'
       }"
     >
       <dxi-validation-rule
@@ -31,7 +30,6 @@
       editorType="dxTextBox"
       [editorOptions]="{
         stylingMode: 'filled',
-        value: 'password',
         mode: 'password'
       }"
     >
@@ -47,7 +45,6 @@
       editorType="dxTextBox"
       [editorOptions]="{
         stylingMode: 'filled',
-        value: 'password',
         mode: 'password'
       }"
     >
@@ -84,15 +81,15 @@
 
     <ng-container *dxTemplate="let item of 'createAccountTemplate'">
       <span class="dx-button-text">
-        <ng-container *ngIf="loading; else notLoading">
+        @if (loading()) {
           <dx-load-indicator
             width="24px"
             height="24px"
             [visible]="true"
           ></dx-load-indicator>
-        </ng-container>
-
-        <ng-template #notLoading>Register</ng-template>
+        } @else {
+          Register
+        }
       </span>
     </ng-container>
   </dx-form>

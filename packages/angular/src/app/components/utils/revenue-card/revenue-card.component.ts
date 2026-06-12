@@ -13,7 +13,7 @@ import { ChartsColor, registerGradient } from 'devextreme-angular/common/charts'
   ],
 })
 export class RevenueCardComponent {
-  @Input() data: Sales;
+  @Input() data!: Sales | null;
 
   seriesColor: ChartsColor = {
     base: '#115EA3',

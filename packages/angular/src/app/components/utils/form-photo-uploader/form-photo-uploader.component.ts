@@ -55,11 +55,11 @@ import { DxFileUploaderComponent } from 'devextreme-angular/ui/file-uploader';
 export class FormPhotoUploaderComponent {
   isDropZoneActive = false;
 
-  onDropZoneEnter(e) {
+  onDropZoneEnter(e: { dropZoneElement: { id: string } }) {
     if (e.dropZoneElement.id === 'uploader') { this.isDropZoneActive = true; }
   }
 
-  onDropZoneLeave(e) {
+  onDropZoneLeave(e: { dropZoneElement: { id: string } }) {
     if (e.dropZoneElement.id === 'uploader') { this.isDropZoneActive = false; }
   }
 }

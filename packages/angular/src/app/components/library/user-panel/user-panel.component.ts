@@ -25,9 +25,9 @@ export class UserPanelComponent {
   @Input()
   user!: IUser | null;
 
-  @ViewChild(UserMenuSectionComponent) userMenuSection: UserMenuSectionComponent;
+  @ViewChild(UserMenuSectionComponent) userMenuSection!: UserMenuSectionComponent;
 
-  handleDropDownButtonContentReady({ component }) {
+  handleDropDownButtonContentReady({ component }: { component: { registerKeyHandler: (key: string, handler: () => void) => void } }) {
     component.registerKeyHandler('downArrow', () => {
       this.userMenuSection.userInfoList.nativeElement.focus();
     });

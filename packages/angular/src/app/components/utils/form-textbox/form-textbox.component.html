@@ -4,20 +4,21 @@
   [label]="label"
   [(value)]="value"
   [readOnly]="!isEditing"
-  [mask]="mask"
+  [mask]="mask ?? ''"
   [elementAttr]="{ class: 'form-editor' }"
   [inputAttr]="{ class: 'form-editor-input' }"
   (onValueChanged)="valueChanged($event)"
 >
   <dx-validator [validationRules]="validators"></dx-validator>
-  <dxi-button
-    *ngIf="icon"
-    name="icon"
-    location="before"
-    [options]="{
+  @if (icon) {
+    <dxi-button
+      name="icon"
+      location="before"
+      [options]="{
       icon: icon,
       elementAttr: { class: 'form-editor-icon' },
       stylingMode: 'text'
     }"
-  ></dxi-button>
+    ></dxi-button>
+  }
 </dx-text-box>

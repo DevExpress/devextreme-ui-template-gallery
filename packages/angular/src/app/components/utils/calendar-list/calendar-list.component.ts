@@ -15,11 +15,11 @@ import { DxListModule } from 'devextreme-angular/ui/list';
   ],
 })
 export class CalendarListComponent implements OnInit {
-  @Input() dataSource: Record<string, any>[];
+  @Input() dataSource!: Record<string, any>[];
 
   @Output() listSelectionChanged = new EventEmitter<any>();
 
-  selectedItems = [];
+  selectedItems: Record<string, unknown>[] = [];
 
   constructor() {}
 
@@ -27,7 +27,7 @@ export class CalendarListComponent implements OnInit {
     this.selectedItems = [...this.dataSource.flatMap((el) => el.items)];
   }
 
-  selectionChanged(item, isSelected) {
+  selectionChanged(item: Record<string, unknown>, isSelected: boolean) {
     const selected = this.selectedItems;
     this.selectedItems = isSelected ? [...selected, item] :  selected.filter((el) => el !== item);
     this.listSelectionChanged.emit(this.selectedItems);

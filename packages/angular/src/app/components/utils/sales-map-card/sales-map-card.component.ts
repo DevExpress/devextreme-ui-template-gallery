@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CardAnalyticsComponent } from '../../library/card-analytics/card-analytics.component';
 import { DxVectorMapModule, DxVectorMapTypes } from 'devextreme-angular/ui/vector-map';
 
+// @ts-expect-error TS7016 — untyped CommonJS bundle
 import * as mapsData from 'devextreme-dist/js/vectormap-data/usa.js';
 import { MapLayerElement } from 'devextreme/viz/vector_map';
 
@@ -15,7 +16,7 @@ import { MapLayerElement } from 'devextreme/viz/vector_map';
   ],
 })
 export class SalesMapCardComponent {
-  @Input() data: any;
+  @Input() data!: any;
 
   usaMap: any = mapsData.usa;
 

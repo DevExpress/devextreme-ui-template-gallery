@@ -1,14 +1,13 @@
 import {
   Component,
-  OnInit,
-  OnChanges,
-  OnDestroy,
-  Output,
-  Input,
-  SimpleChanges,
-  EventEmitter,
-  AfterViewChecked,
+  effect,
   inject,
+  model,
+  OnDestroy,
+  OnInit,
+  output,
+  input,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -31,7 +30,7 @@ import {
   CardActivitiesComponent,
 } from 'src/app/components';
 import { ScreenService, DataService } from 'src/app/services';
-import { distinctUntilChanged, Subject, Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Contact } from 'src/app/types/contact';
 
 @Component({
@@ -56,16 +55,12 @@ import { Contact } from 'src/app/types/contact';
     CommonModule,
   ]
 })
-export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecked, OnDestroy {
-  @Input() isOpened = false;
+export class ContactPanelComponent implements OnInit, OnDestroy {
+  isOpened = model(false);
 
-  @Input() userId: number;
+  userId = input<number | null>(null);
 
-  @Output() isOpenedChange = new EventEmitter<boolean>();
-
-  @Output() pinnedChange = new EventEmitter<boolean>();
-
-  private pinEventSubject = new Subject<boolean>();
+  pinnedChange = output<boolean>();
 
   private screen = inject(ScreenService);
 
@@ -73,44 +68,39 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
 
   private router = inject(Router);
 
-  formData: Contact;
+  formData = signal<Contact | undefined>(undefined);
 
-  contactData: Contact;
+  contactData = signal<Contact | undefined>(undefined);
 
-  pinned = false;
+  pinned = signal(false);
 
-  isLoading = true;
+  isLoading = signal(true);
 
-  isEditing = false;
+  isEditing = signal(false);
 
-  isPinEnabled = false;
+  isPinEnabled = signal(false);
 
   userPanelSubscriptions: Subscription[] = [];
 
   constructor() {
     this.userPanelSubscriptions.push(
       this.screen.changed.subscribe(this.calculatePin),
-      this
-        .pinEventSubject
-        .pipe(distinctUntilChanged())
-        .subscribe(this.pinnedChange)
     );
+
+    effect(() => {
+      const id = this.userId();
+      if (id) {
+        this.loadUserById(id);
+      }
+    });
+  }
+
+  private emitPinnedChange(): void {
+    this.pinnedChange.emit(this.pinned());
   }
 
   ngOnInit(): void {
     this.calculatePin();
-  }
-
-  ngAfterViewChecked(): void {
-    this.pinEventSubject.next(this.pinned);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const { userId } = changes;
-
-    if (userId?.currentValue) {
-      this.loadUserById(userId.currentValue);
-    }
   }
 
   ngOnDestroy(): void {
@@ -118,51 +108,67 @@ export class ContactPanelComponent implements OnInit, OnChanges, AfterViewChecke
   }
 
   loadUserById = (id: number) => {
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     this.service.getContact(id).subscribe((data) => {
-      this.formData = data;
-      this.contactData = { ...this.formData };
-      this.isLoading = false;
-      this.isEditing = false;
-    })
+      this.formData.set(data);
+      this.contactData.set({ ...data });
+      this.isLoading.set(false);
+      this.isEditing.set(false);
+    });
   };
 
   onClosePanel = () => {
-    this.isOpened = false;
-    this.pinned = false;
-    this.isOpenedChange.emit(this.isOpened);
+    const wasPinned = this.pinned();
+    this.isOpened.set(false);
+    this.pinned.set(false);
+    if (wasPinned) {
+      this.emitPinnedChange();
+    }
   };
 
   onPinClick = () => {
-    this.pinned = !this.pinned;
+    this.pinned.update((value) => !value);
+    this.emitPinnedChange();
   };
 
-  onSaveClick = ({ validationGroup } : DxButtonTypes.ClickEvent) => {
+  onSaveClick = ({ validationGroup }: DxButtonTypes.ClickEvent) => {
     if (!validationGroup.validate().isValid) return;
-    this.contactData = { ...this.formData };
-    this.isEditing = !this.isEditing;
-  }
+    const form = this.formData();
+    if (form) {
+      this.contactData.set({ ...form });
+    }
+    this.isEditing.update((value) => !value);
+  };
 
   calculatePin = () => {
-    this.isPinEnabled = this.screen.sizes['screen-large'] || this.screen.sizes['screen-medium'];
-    if (this.pinned && !this.isPinEnabled) {
-      this.pinned = false;
+    this.isPinEnabled.set(
+      this.screen.sizes['screen-large'] || this.screen.sizes['screen-medium']
+    );
+    if (this.pinned() && !this.isPinEnabled()) {
+      this.pinned.set(false);
+      this.emitPinnedChange();
     }
   };
 
   toggleEdit = () => {
-    this.isEditing = !this.isEditing;
+    this.isEditing.update((value) => !value);
   };
 
   cancelHandler() {
     this.toggleEdit();
-    this.formData = { ...this.contactData };
+    const saved = this.contactData();
+    if (saved) {
+      this.formData.set({ ...saved });
+    }
   }
 
   navigateToDetails = () => {
-    this.router.navigate(['/crm-contact-details'], {
-      queryParams: { id: this.contactData.id }
-    });
-  }
+    const contact = this.contactData();
+    if (contact) {
+      this.router.navigate(['/crm-contact-details'], {
+        queryParams: { id: contact.id },
+      });
+    }
+  };
 }

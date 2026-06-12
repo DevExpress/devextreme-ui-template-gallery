@@ -1,17 +1,17 @@
-<div class="panel" [ngClass]="{ pin: pinned, open: isOpened }">
+<div class="panel" [ngClass]="{ pin: pinned(), open: isOpened() }">
   <div class="data-wrapper">
-    <ng-container *ngIf="!isLoading">
+    @if (!isLoading() && formData(); as form) {
       <dx-toolbar class="panel-toolbar">
         <dxi-item location="before">
-          <span class="contact-name value">{{ formData.name }}</span>
+          <span class="contact-name value">{{ form.name }}</span>
         </dxi-item>
         <dxi-item location="before">
-          <contact-status [value]="formData.status"></contact-status>
+          <contact-status [value]="form.status"></contact-status>
         </dxi-item>
-        <dxi-item location="after" [visible]="isPinEnabled">
+        <dxi-item location="after" [visible]="isPinEnabled()">
           <dx-button
             stylingMode="text"
-            [icon]="pinned ? 'pin' : 'unpin'"
+            [icon]="pinned() ? 'pin' : 'unpin'"
             (onClick)="onPinClick()"
           ></dx-button>
         </dxi-item>
@@ -30,13 +30,13 @@
             <dx-form
               class="plain-styled-form"
               labelMode="floating"
-              [class.view-mode]="!isEditing"
+              [class.view-mode]="!isEditing()"
             >
               <dxi-item itemType="group" [colCount]="2" cssClass="photo-row">
                 <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
                 <dxi-item cssClass="photo-box">
                   <div *dxTemplate>
-                    <form-photo [link]="formData.image"></form-photo>
+                    <form-photo [link]="form.image"></form-photo>
                   </div>
                 </dxi-item>
 
@@ -45,8 +45,8 @@
                     <div *dxTemplate>
                       <form-textbox
                         label="Company"
-                        [(value)]="formData.company"
-                        [isEditing]="isEditing"
+                        [(value)]="form.company"
+                        [isEditing]="isEditing()"
                       ></form-textbox>
                     </div>
                   </dxi-item>
@@ -55,8 +55,8 @@
                     <div *dxTemplate>
                       <form-textbox
                         label="Position"
-                        [(value)]="formData.position"
-                        [isEditing]="isEditing"
+                        [(value)]="form.position"
+                        [isEditing]="isEditing()"
                       ></form-textbox>
                     </div>
                   </dxi-item>
@@ -65,8 +65,8 @@
                     <div *dxTemplate>
                       <form-textbox
                         label="Assigned to"
-                        [(value)]="formData.manager"
-                        [isEditing]="isEditing"
+                        [(value)]="form.manager"
+                        [isEditing]="isEditing()"
                       ></form-textbox>
                     </div>
                   </dxi-item>
@@ -79,8 +79,8 @@
                     <form-textbox
                       icon="tel"
                       mask="(000) 000-0000"
-                      [(value)]="formData.phone"
-                      [isEditing]="isEditing"
+                      [(value)]="form.phone"
+                      [isEditing]="isEditing()"
                     >
                     </form-textbox>
                   </div>
@@ -89,8 +89,8 @@
                   <div *dxTemplate>
                     <form-textbox
                       icon="email"
-                      [(value)]="formData.email"
-                      [isEditing]="isEditing"
+                      [(value)]="form.email"
+                      [isEditing]="isEditing()"
                       [validators]="[{ type: 'email' }]"
                     ></form-textbox>
                   </div>
@@ -99,8 +99,8 @@
                   <div *dxTemplate>
                     <form-textbox
                       icon="home"
-                      [(value)]="formData.address"
-                      [isEditing]="isEditing"
+                      [(value)]="form.address"
+                      [isEditing]="isEditing()"
                       [validators]="[]"
                     >
                     </form-textbox>
@@ -112,7 +112,7 @@
 
           <div class="data-part data-part-toolbar border">
             <dx-toolbar>
-              <dxi-item location="after" [visible]="!isEditing">
+              <dxi-item location="after" [visible]="!isEditing()">
                 <dx-button
                   text="Edit"
                   icon="edit"
@@ -122,7 +122,7 @@
                 >
                 </dx-button>
               </dxi-item>
-              <dxi-item location="after" [visible]="!isEditing">
+              <dxi-item location="after" [visible]="!isEditing()">
                 <dx-button
                   text="Details"
                   stylingMode="outlined"
@@ -134,7 +134,7 @@
               <dxi-item
                 location="after"
                 locateInMenu="after"
-                [visible]="isEditing"
+                [visible]="isEditing()"
               >
                 <dx-button
                   text="Save"
@@ -148,7 +148,7 @@
               <dxi-item
                 location="after"
                 locateInMenu="after"
-                [visible]="isEditing"
+                [visible]="isEditing()"
               >
                 <dx-button
                   text="Cancel"
@@ -185,34 +185,33 @@
 
             <dxi-item title="Opportunities">
               <div *dxTemplate="let i of 'item'">
-                <div
-                  class="opportunities"
-                  *ngFor="let opportunity of formData.opportunities"
-                >
-                  <span class="value">{{ opportunity.name }} </span>
-                  <br />
-                  <span class="value black small">{{
-                    opportunity.price | currency: 'USD':'$':'1.0-0'
-                  }}</span>
-                  <br />
-                </div>
+                @for (opportunity of form.opportunities; track opportunity.name) {
+                  <div class="opportunities">
+                    <span class="value">{{ opportunity.name }} </span>
+                    <br />
+                    <span class="value black small">{{
+                        opportunity.price | currency: 'USD':'$':'1.0-0'
+                      }}</span>
+                    <br />
+                  </div>
+                }
               </div>
             </dxi-item>
 
             <dxi-item title="Activities">
               <card-activities
-                [activities]="formData.activities"
+                [activities]="form.activities"
               ></card-activities>
             </dxi-item>
           </dx-accordion>
         </div>
       </dx-scroll-view>
-    </ng-container>
+    }
 
     <dx-load-panel
       container=".panel"
       [width]="300"
-      [visible]="isLoading"
+      [visible]="isLoading()"
       [showPane]="false"
       [position]="{ of: '.panel' }"
     ></dx-load-panel>

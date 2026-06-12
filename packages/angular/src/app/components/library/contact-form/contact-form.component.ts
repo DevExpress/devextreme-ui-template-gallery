@@ -42,11 +42,11 @@ import { US_STATES } from 'src/app/shared/constants';
   ]
 })
 export class ContactFormComponent {
-  @Input() contactData: Contact;
+  @Input() contactData?: Contact;
 
-  @Input() isLoading: boolean;
+  @Input() isLoading!: boolean;
 
-  savedData: Contact = null;
+  savedData: Contact | null = null;
 
   isEditing = false;
 
@@ -55,6 +55,9 @@ export class ContactFormComponent {
   usStates = US_STATES;
 
   handleEditClick() {
+    if (!this.contactData) {
+      return;
+    }
     this.savedData = { ...this.contactData };
     this.isEditing = true;
   }
@@ -66,6 +69,9 @@ export class ContactFormComponent {
   }
 
   handleCancelClick() {
+    if (!this.savedData) {
+      return;
+    }
     this.contactData = { ...this.savedData };
     this.isEditing = false;
   }

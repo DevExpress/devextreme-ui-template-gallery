@@ -15,7 +15,7 @@ import { DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
   ],
 })
 export class PicturedItemSelectBoxComponent {
-  @Input() value: Record<string, unknown>;
+  @Input() value!: Record<string, unknown>;
 
   @Input() label = '';
 

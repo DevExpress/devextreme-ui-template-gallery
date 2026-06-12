@@ -26,9 +26,9 @@ import { ValidationRule, EditorStyle } from 'devextreme-angular/common';
   ]
 })
 export class PasswordTextBoxComponent {
-  @ViewChild('validator', { static: true }) validator: DxValidatorComponent;
+  @ViewChild('validator', { static: true }) validator!: DxValidatorComponent;
 
-  @Input() value: string;
+  @Input() value!: string;
 
   @Input() placeholder = '';
 
@@ -46,7 +46,7 @@ export class PasswordTextBoxComponent {
     this.isPasswordMode = !this.isPasswordMode;
   }
 
-  onValueChange(value) {
+  onValueChange(value: string) {
     this.value = value;
     this.valueChange.emit(value);
     this.valueChanged.emit(value);

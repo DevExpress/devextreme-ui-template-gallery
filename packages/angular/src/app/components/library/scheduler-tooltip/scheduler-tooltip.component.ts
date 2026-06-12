@@ -16,27 +16,32 @@ import { ApplyPipeDirective } from "../../../pipes/apply.pipe";
   ],
 })
 export class SchedulerTooltipComponent {
-  @Input() selectedAppointmentData: Record<string, any>;
+  @Input() selectedAppointmentData!: Record<string, any>;
 
   @Output() clickDeleteAppointment = new EventEmitter<any>();
 
   @Output() clickEditAppointment = new EventEmitter<any>();
 
-  getTimeString = (selectedAppointmentData) => {
-    const timeOptions = {
+  getTimeString = (selectedAppointmentData: Record<string, Date | string>) => {
+    const timeOptions: Intl.DateTimeFormatOptions = {
       hour: 'numeric',
       minute: 'numeric',
-      hour12: false
+      hour12: false,
     };
 
-    const dateOptions = {
+    const dateOptions: Intl.DateTimeFormatOptions = {
       ...timeOptions,
       weekday: 'short',
       day: 'numeric',
       month: 'numeric',
-      year: 'numeric'
+      year: 'numeric',
     };
 
-    return `${selectedAppointmentData.startDate.toLocaleString(undefined, dateOptions)} - ${selectedAppointmentData.endDate?.toLocaleTimeString(undefined, timeOptions)}`;
+    const startDate = new Date(selectedAppointmentData.startDate);
+    const endDate = selectedAppointmentData.endDate
+      ? new Date(selectedAppointmentData.endDate)
+      : null;
+
+    return `${startDate.toLocaleString(undefined, dateOptions)} - ${endDate?.toLocaleTimeString(undefined, timeOptions) ?? ''}`;
   }
 }

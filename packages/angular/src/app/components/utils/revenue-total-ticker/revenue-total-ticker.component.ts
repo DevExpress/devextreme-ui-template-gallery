@@ -13,6 +13,6 @@ import { TickerCardComponent } from 'src/app/components/library/ticker-card/tick
 })
 
 export class RevenueTotalTickerComponent {
-  @Input() data: Sales = null;
+  @Input() data: Sales | null = null;
 }
 

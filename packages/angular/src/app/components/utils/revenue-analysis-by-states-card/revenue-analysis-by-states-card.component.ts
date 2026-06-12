@@ -15,5 +15,5 @@ import { SalesByStateAndCity } from 'src/app/types/analytics';
   ],
 })
 export class RevenueAnalysisByStatesCardComponent {
-  @Input() data: SalesByStateAndCity;
+  @Input() data!: SalesByStateAndCity | null;
 }
