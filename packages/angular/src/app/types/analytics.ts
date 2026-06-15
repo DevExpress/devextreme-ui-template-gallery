@@ -31,3 +31,10 @@ export type SaleByStateAndCity = {
 };
 
 export type SalesByStateAndCity = SaleByStateAndCity[];
+
+export type ChartVisualRange =
+  | Array<string | number | Date>
+  | {
+      startValue?: string | number | Date;
+      endValue?: string | number | Date;
+    };

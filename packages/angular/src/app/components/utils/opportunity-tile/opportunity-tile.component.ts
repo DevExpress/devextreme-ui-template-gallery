@@ -11,7 +11,7 @@ import notify from 'devextreme/ui/notify';
 })
 
 export class OpportunityTileComponent {
-  @Input() data: Opportunity;
+  @Input() data!: Opportunity;
 
   opportunityClick() {
     notify('Click opportunity event');

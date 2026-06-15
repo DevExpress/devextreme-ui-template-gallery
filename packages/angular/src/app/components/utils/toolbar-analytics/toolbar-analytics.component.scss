@@ -1,6 +1,11 @@
 @use '../../../../variables.scss' as *;
 @use 'sass:math';
 
+:host {
+  display: block;
+  width: 100%;
+}
+
 .toolbar-header {
   @include header();
 }

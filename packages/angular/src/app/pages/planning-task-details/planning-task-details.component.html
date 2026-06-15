@@ -9,7 +9,7 @@
         >
         </dx-button>
       </dxi-item>
-      <dxi-item location="before" [text]="taskName"></dxi-item>
+      <dxi-item location="before" [text]="taskName()"></dxi-item>
       <dxi-item location="after" locateInMenu="auto">
         <dx-drop-down-button
           text="Actions"
@@ -49,7 +49,9 @@
     <div class="panels">
       <div class="left">
         <dx-validation-group>
-          <task-form [task]="task" [isLoading]="isLoading"></task-form>
+          @if (task(); as currentTask) {
+            <task-form [task]="currentTask" [isLoading]="isLoading()"></task-form>
+          }
         </dx-validation-group>
       </div>
 
@@ -61,25 +63,27 @@
             [showNavButtons]="true"
             [deferRendering]="false"
           >
-            <dxi-item title="Activities">
-              <card-activities
-                [isLoading]="isLoading"
-                [activities]="task?.activities"
-                [showBy]="true"
-              ></card-activities>
-            </dxi-item>
-            <dxi-item title="Notes">
-              <card-notes
-                [items]="task?.notes"
-                [user]="task?.owner"
-              ></card-notes>
-            </dxi-item>
-            <dxi-item title="Messages">
-              <card-messages
-                [items]="task?.messages"
-                [user]="task?.owner"
-              ></card-messages>
-            </dxi-item>
+            @if (task(); as currentTask) {
+              <dxi-item title="Activities">
+                <card-activities
+                  [isLoading]="isLoading()"
+                  [activities]="currentTask.activities"
+                  [showBy]="true"
+                ></card-activities>
+              </dxi-item>
+              <dxi-item title="Notes">
+                <card-notes
+                  [items]="currentTask.notes"
+                  [user]="currentTask.owner"
+                ></card-notes>
+              </dxi-item>
+              <dxi-item title="Messages">
+                <card-messages
+                  [items]="currentTask.messages"
+                  [user]="currentTask.owner"
+                ></card-messages>
+              </dxi-item>
+            }
           </dx-tab-panel>
         </div>
       </div>

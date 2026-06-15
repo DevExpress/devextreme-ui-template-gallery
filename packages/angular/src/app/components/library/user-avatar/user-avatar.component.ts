@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 
 export class UserAvatarComponent {
-  @Input() dataLetters: string | null;
+  @Input() dataLetters!: string | null;
 }
 

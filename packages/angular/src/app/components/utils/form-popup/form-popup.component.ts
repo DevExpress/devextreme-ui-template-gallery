@@ -32,7 +32,7 @@ import { ApplyPipeDirective } from 'src/app/pipes/apply.pipe';
 })
 
 export class FormPopupComponent {
-  @ViewChild('validationGroup', { static: true }) validationGroup: DxValidationGroupComponent;
+  @ViewChild('validationGroup', { static: true }) validationGroup!: DxValidationGroupComponent;
 
   @Input() titleText = '';
 
@@ -72,7 +72,7 @@ export class FormPopupComponent {
     this.visibleChange.emit(this.visible);
   }
 
-  getWrapperAttrs = (inputWrapperAttr) => {
+  getWrapperAttrs = (inputWrapperAttr: Record<string, string>) => {
     return {
       ...inputWrapperAttr,
       class: `${inputWrapperAttr.class} form-popup`,

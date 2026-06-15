@@ -3,7 +3,7 @@
 import { Selector, RequestLogger } from 'testcafe';
 import { createScreenshotsComparer } from 'devextreme-screenshot-comparer';
 import {
-  forceResizeRecalculation, getPostfix, toggleCommonConfiguration, setTheme,
+  getPostfix, toggleCommonConfiguration, setTheme,
 } from './utils.js';
 import { screenModes, themeModes, timeoutSecond } from '../config.js';
 
@@ -35,9 +35,8 @@ fixture`Analytics Sales Analysis`;
           requestLogger,
         );
         await setTheme(t, themeMode);
-        await forceResizeRecalculation(t, screenMode);
         await t.click(Selector('body'), { offsetX: 0, offsetY: 0 }); // remove focus and scrollbar
-        await t.wait(timeoutSecond);
+        await t.wait(2000);
 
         await t.expect(Selector('body.dx-device-generic').count).eql(1);
         await takeScreenshot(`analytics-sales-analysis-month${postfix}`, 'body');

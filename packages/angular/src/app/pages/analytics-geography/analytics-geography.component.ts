@@ -1,8 +1,10 @@
 import {
-  Component, OnInit, OnDestroy, inject,
+  Component,
+  inject,
+  OnInit,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
 
 import { DxPieChartModule } from 'devextreme-angular/ui/pie-chart';
 import { DxChartModule } from 'devextreme-angular/ui/chart';
@@ -10,7 +12,7 @@ import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxVectorMapModule } from 'devextreme-angular/ui/vector-map';
 import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
-import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel'
+import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 
 import { DataService } from 'src/app/services';
 import { ToolbarAnalyticsComponent } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
@@ -20,10 +22,26 @@ import { RevenueSnapshotByStatesCardComponent } from 'src/app/components/utils/r
 import { analyticsPanelItems, Dates } from 'src/app/types/resource';
 import { SalesByState, SalesByStateAndCity } from 'src/app/types/analytics';
 
+type SalesByStateMarkers = {
+  type: string;
+  features: {
+    type: string;
+    geometry: {
+      type: string;
+      coordinates: number[];
+    };
+    properties: {
+      text: string;
+      value: number;
+      tooltip: string;
+    };
+  }[];
+};
+
 @Component({
   templateUrl: './analytics-geography.component.html',
   styleUrls: ['./analytics-geography.component.scss'],
-  providers: [ DataService ],
+  providers: [DataService],
   imports: [
     DxScrollViewModule,
     DxDataGridModule,
@@ -37,22 +55,20 @@ import { SalesByState, SalesByStateAndCity } from 'src/app/types/analytics';
     SalesMapCardComponent,
     RevenueSnapshotByStatesCardComponent,
     CommonModule,
-  ]
+  ],
 })
-export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
+export class AnalyticsGeographyComponent implements OnInit {
   private service = inject(DataService);
 
   analyticsPanelItems = analyticsPanelItems;
 
-  salesByStateAndCity: SalesByStateAndCity;
+  salesByStateAndCity = signal<SalesByStateAndCity | null>(null);
 
-  salesByState: SalesByState;
+  salesByState = signal<SalesByState | null>(null);
 
-  salesByStateMarkers;
+  salesByStateMarkers = signal<SalesByStateMarkers | null>(null);
 
-  subscription: Subscription = new Subscription();
-
-  isLoading = false;
+  isLoading = signal(false);
 
   ngOnInit(): void {
     const dates = analyticsPanelItems[4].value.split('/');
@@ -60,16 +76,12 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
     this.loadData(dates[0], dates[1]);
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
   selectionChange(e: Dates) {
     this.loadData(e.startDate, e.endDate);
   }
 
   createMapCoords(coords: string) {
-    let resultCoords = [];
+    const resultCoords: number[] = [];
 
     coords.split(', ').forEach((coord) => {
       resultCoords.push(parseFloat(coord));
@@ -79,28 +91,32 @@ export class AnalyticsGeographyComponent implements OnInit, OnDestroy {
   }
 
   loadData = (startDate: string, endDate: string) => {
-    this.isLoading = true;
+    this.isLoading.set(true);
 
-    this.service.getSalesByStateAndCity(startDate, endDate).subscribe((data: SalesByStateAndCity) => {
-      this.salesByStateAndCity = data;
-      this.salesByState = this.service.getSalesByState(data);
-      this.salesByStateMarkers = {
-        type: 'StateCollection',
-        features: this.salesByState.map((item) => ({
-          type: 'State',
-          geometry: {
-            type: 'Point',
-            coordinates: this.createMapCoords(item.stateCoords),
-          },
-          properties: {
-            text: item.stateName,
-            value: item.total,
-            tooltip: `<b>${item.stateName}</b>\n${item.total}K`,
-          },
-        })),
-      };
+    this.service
+      .getSalesByStateAndCity(startDate, endDate)
+      .subscribe((data) => {
+        const salesByStateAndCity = data as SalesByStateAndCity;
+        const salesByState = this.service.getSalesByState(salesByStateAndCity);
 
-      this.isLoading = false;
-    });
+        this.salesByStateAndCity.set(salesByStateAndCity);
+        this.salesByState.set(salesByState);
+        this.salesByStateMarkers.set({
+          type: 'StateCollection',
+          features: salesByState.map((item: SalesByState[number]) => ({
+            type: 'State',
+            geometry: {
+              type: 'Point',
+              coordinates: this.createMapCoords(item.stateCoords),
+            },
+            properties: {
+              text: item.stateName,
+              value: item.total,
+              tooltip: `<b>${item.stateName}</b>\n${item.total}K`,
+            },
+          })),
+        });
+        this.isLoading.set(false);
+      });
   };
 }

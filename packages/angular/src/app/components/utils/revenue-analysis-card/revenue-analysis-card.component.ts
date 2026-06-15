@@ -15,5 +15,5 @@ import { SalesByState } from 'src/app/types/analytics';
   ],
 })
 export class RevenueAnalysisCardComponent {
-  @Input() data: SalesByState;
+  @Input() data!: SalesByState | null;
 }

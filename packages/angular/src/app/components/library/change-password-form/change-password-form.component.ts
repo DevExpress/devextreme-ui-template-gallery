@@ -31,7 +31,7 @@ export class ChangePasswordFormComponent implements OnInit, OnDestroy {
 
   recoveryCode = '';
 
-  paramMapSubscription: Subscription;
+  paramMapSubscription!: Subscription;
 
   ngOnInit() {
     this.paramMapSubscription = this.route.paramMap.subscribe((params) => {

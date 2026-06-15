@@ -18,9 +18,9 @@ import 'jspdf-autotable';
   ],
 })
 export class TaskListGanttComponent {
-  @ViewChild(DxGanttComponent, { static: false }) gantt: DxGanttComponent;
+  @ViewChild(DxGanttComponent, { static: false }) gantt!: DxGanttComponent;
 
-  @Input() dataSource: Task[];
+  @Input() dataSource!: Task[];
 
   private router = inject(Router);
 

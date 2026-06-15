@@ -1,31 +1,34 @@
 <div class="user-panel">
-  <dx-drop-down-button
-    *ngIf="menuMode === 'context'"
-    stylingMode="text"
-    dropDownContentTemplate="dropDownTemplate"
-    [icon]="user?.avatarUrl"
-    [showArrowIcon]="false"
-    [elementAttr]="{
+  @if (menuMode === 'context') {
+    <dx-drop-down-button
+      stylingMode="text"
+      dropDownContentTemplate="dropDownTemplate"
+      [icon]="user?.avatarUrl"
+      [showArrowIcon]="false"
+      [elementAttr]="{
       class: 'user-button'
     }"
-    [dropDownOptions]="{
+      [dropDownOptions]="{
       width: 'auto'
     }"
-    (onContentReady)="handleDropDownButtonContentReady($event)"
-  >
-    <div *dxTemplate="let data of 'dropDownTemplate'">
+      (onContentReady)="handleDropDownButtonContentReady($event)"
+    >
+      <div *dxTemplate="let data of 'dropDownTemplate'">
+        <user-menu-section
+          [menuItems]="menuItems"
+          [showAvatar]="false"
+          [user]="user"
+        ></user-menu-section>
+      </div>
+    </dx-drop-down-button>
+  }
+  @if (menuMode === 'list') {
+    <div>
       <user-menu-section
         [menuItems]="menuItems"
-        [showAvatar]="false"
+        [showAvatar]="true"
         [user]="user"
       ></user-menu-section>
     </div>
-  </dx-drop-down-button>
-  <div *ngIf="menuMode === 'list'">
-    <user-menu-section
-      [menuItems]="menuItems"
-      [showAvatar]="true"
-      [user]="user"
-    ></user-menu-section>
-  </div>
+  }
 </div>
