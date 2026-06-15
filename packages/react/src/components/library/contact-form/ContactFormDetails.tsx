@@ -7,9 +7,8 @@ import From, {
   GroupItem,
   ColCountByScreen,
 } from 'devextreme-react/form';
-import SelectBox from 'devextreme-react/select-box';
+import SelectBox, { FieldAddons } from 'devextreme-react/select-box';
 import Button from 'devextreme-react/button';
-import TextBox from 'devextreme-react/text-box';
 import Validator, { PatternRule, EmailRule } from 'devextreme-react/validator';
 import NumberBox from 'devextreme-react/number-box';
 
@@ -22,18 +21,9 @@ import { CONTACT_STATUS_LIST, US_STATES } from '../../../shared/constants';
 
 const PHOTO_SIZE = 184;
 
-const statusRender = (text: string) => (
-  <div className='status-editor-field'>
-    <ContactStatus text={text} showText={false} />
-    <TextBox
-      className={`status-contact status-${text.toLowerCase()}`}
-      inputAttr={{ statusEditorInput: '' }}
-      readOnly
-      text={text}
-      hoverStateEnabled={false}
-    />
-  </div>
-);
+const statusBeforeRender = (text?: string) => text
+  ? <ContactStatus text={text} />
+  : null;
 
 const statusItemRender = (text: string) => <ContactStatus text={text} />;
 
@@ -64,16 +54,20 @@ export const ContactFromDetails = ({
         <GroupItem>
           <ItemForm>
             <SelectBox
+              className='contact-status-select-box'
               label='Status'
               width='100%'
               value={data.status}
               readOnly={!editing}
               items={CONTACT_STATUS_LIST}
               stylingMode={stylingMode}
-              fieldRender={statusRender}
+              placeholder=''
+              displayExpr={() => ''}
               itemRender={statusItemRender}
               onValueChange={updateField('status')}
-            />
+            >
+              <FieldAddons beforeRender={statusBeforeRender} />
+            </SelectBox>
           </ItemForm>
 
           <ItemForm>

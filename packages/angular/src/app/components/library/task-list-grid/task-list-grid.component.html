@@ -87,11 +87,14 @@
       [items]="priorityList"
       (onValueChanged)="cellInfo.setValue($event.value)"
       (onSelectionChanged)="cellInfo.component.updateDimensions()"
-      fieldTemplate="field"
+      placeholder=""
+      [displayExpr]="displayExprFn"
     >
-      <div *dxTemplate="let data of 'field'">
+      <dxo-select-box-field-addons beforeTemplate="before"></dxo-select-box-field-addons>
+      <div *dxTemplate="let data of 'before'">
         <status-indicator
           [showBar]="true"
+          [isField]="false"
           [value]="cellInfo.value"
         ></status-indicator>
       </div>
@@ -119,10 +122,12 @@
       [items]="statusList"
       (onValueChanged)="cellInfo.setValue($event.value)"
       (onSelectionChanged)="cellInfo.component.updateDimensions()"
-      fieldTemplate="field"
+      placeholder=""
+      [displayExpr]="displayExprFn"
     >
-      <div *dxTemplate="let data of 'field'">
-        <status-indicator [value]="cellInfo.value"></status-indicator>
+      <dxo-select-box-field-addons beforeTemplate="before"></dxo-select-box-field-addons>
+      <div *dxTemplate="let data of 'before'">
+        <status-indicator [isField]="false" [value]="cellInfo.value"></status-indicator>
       </div>
       <div *dxTemplate="let s of 'item'">
         <status-indicator [isField]="false" [value]="s"></status-indicator>

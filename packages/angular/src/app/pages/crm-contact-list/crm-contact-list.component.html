@@ -135,11 +135,12 @@
         [items]="statusList"
         (onValueChanged)="cellInfo.setValue($event.value)"
         (onSelectionChanged)="cellInfo.component.updateDimensions()"
-        fieldTemplate="field"
+        placeholder=""
+        [displayExpr]="displayExprFn"
       >
-        <div *dxTemplate="let data of 'field'">
+        <dxo-select-box-field-addons beforeTemplate="before"></dxo-select-box-field-addons>
+        <div *dxTemplate="let data of 'before'">
           <contact-status [value]="cellInfo.value"></contact-status>
-          <dx-text-box [readOnly]="true"></dx-text-box>
         </div>
         <div *dxTemplate="let data of 'item'">
           <contact-status [value]="data"></contact-status>

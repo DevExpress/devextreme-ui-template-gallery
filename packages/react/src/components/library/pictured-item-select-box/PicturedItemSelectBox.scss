@@ -20,6 +20,14 @@
   align-items: center;
 }
 
+.pictured-item-select-box:not(.dx-state-readonly) {
+  .dx-dropdowneditor-field-before-template-wrapper {
+    .pictured-item-image {
+      margin-left: var(--list-padding-left);
+    }
+  }
+}
+
 .pictured-item-select-box .pictured-item-select-field {
   input[pictureditemeditorinput].dx-texteditor-input {
     color: var(--base-text-color);

@@ -9,7 +9,6 @@ import {
   DxDataGridModule,
   DxDropDownButtonModule,
   DxSelectBoxModule,
-  DxTextBoxModule,
   DxToolbarModule,
 } from 'devextreme-angular';
 import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
@@ -32,7 +31,6 @@ import 'jspdf-autotable';
     DxDataGridModule,
     DxDropDownButtonModule,
     DxSelectBoxModule,
-    DxTextBoxModule,
     DxToolbarModule,
     StatusIndicatorComponent,
     CommonModule
@@ -53,6 +51,8 @@ export class TaskListGridComponent implements OnChanges {
   priorityList = taskPriorityList;
 
   statusList = taskStatusList;
+
+  displayExprFn = () => '';
 
   isLoading = true;
 

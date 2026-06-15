@@ -9,24 +9,17 @@
     styling-mode="filled"
     label-mode="hidden"
     width="100%"
-    field-template="field"
+    :field-addons="{ beforeTemplate: 'before' }"
+    :display-expr="displayExpr"
     @value-changed="emitChangedValue"
   >
-    <template #field="{ data }">
-      <div class="pictured-item-select-field">
-        <img
-          v-if="modelValue"
-          :alt="data?.name"
-          class="pictured-item-image"
-          :src="`data:image/png;base64,${data?.image}`"
-        >
-        <dx-text-box
-          :hover-state-enabled="false"
-          :input-attr="{ class: 'pictured-item-editor-input' }"
-          :read-only="true"
-          :value="data?.name"
-        />
-      </div>
+    <template #before="{ data }">
+      <img
+        v-if="data?.image"
+        :alt="data?.name"
+        class="pictured-item-image"
+        :src="`data:image/png;base64,${data?.image}`"
+      >
     </template>
 
     <template #item="{ data }">
@@ -44,7 +37,6 @@
 
 <script setup lang="ts">
 import { DxSelectBox } from 'devextreme-vue/select-box';
-import { DxTextBox } from 'devextreme-vue/text-box';
 import { SimpleObject } from '@/types';
 
 withDefaults(defineProps<{
@@ -58,6 +50,12 @@ withDefaults(defineProps<{
 });
 
 const emit = defineEmits(['update:modelValue']);
+
+function displayExpr(data?: Record<string, unknown> | string) {
+  if (!data) return '';
+
+  return typeof data === 'string' ? data : `${data.name ?? ''}`;
+}
 
 function emitChangedValue(changedData: SimpleObject) {
   emit('update:modelValue', changedData.value);
@@ -83,6 +81,12 @@ function emitChangedValue(changedData: SimpleObject) {
 .pictured-item-select-field {
   display: flex;
   align-items: center;
+}
+
+.pictured-item-select-box:not(.dx-state-readonly) {
+  :deep(.dx-dropdowneditor-field-before-template-wrapper .pictured-item-image) {
+    margin-left: var(--list-padding-left);
+  }
 }
 
 .pictured-item-select-field {

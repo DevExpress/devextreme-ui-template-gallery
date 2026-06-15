@@ -23,8 +23,7 @@ import {
   DataGridTypes,
 } from 'devextreme-react/data-grid';
 
-import SelectBox from 'devextreme-react/select-box';
-import TextBox from 'devextreme-react/text-box';
+import SelectBox, { FieldAddons } from 'devextreme-react/select-box';
 import Button from 'devextreme-react/button';
 import DropDownButton, {
   DropDownButtonTypes,
@@ -49,6 +48,10 @@ type FilterContactStatus = ContactStatusType | 'All';
 
 const filterStatusList = ['All', ...CONTACT_STATUS_LIST];
 
+const contactStatusBeforeRender = (text?: string) => text
+  ? <ContactStatus text={text} />
+  : null;
+
 const cellNameRender = (cell: DataGridTypes.ColumnCellTemplateData) => (
   <div className='name-template'>
     <div>{cell.data.name}</div>
@@ -61,19 +64,15 @@ const editCellStatusRender = () => (
     className='cell-info'
     dataSource={CONTACT_STATUS_LIST}
     itemRender={ContactStatus}
-    fieldRender={fieldRender}
-  />
+    placeholder=''
+    displayExpr={() => ''}
+  >
+    <FieldAddons beforeRender={contactStatusBeforeRender} />
+  </SelectBox>
 );
 
 const cellPhoneRender = (cell: DataGridTypes.ColumnCellTemplateData) =>
   String(cell.data.phone).replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-
-const fieldRender = (text: string) => (
-  <>
-    <ContactStatus text={text} />
-    <TextBox readOnly />
-  </>
-);
 
 const onExporting = (e: DataGridTypes.ExportingEvent) => {
   if (e.format === 'pdf') {

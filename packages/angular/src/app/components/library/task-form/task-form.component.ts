@@ -5,7 +5,6 @@ import {
   DxFormModule,
   DxLoadPanelModule,
   DxSelectBoxModule,
-  DxTextBoxModule,
   DxTextAreaModule,
   DxToolbarModule,
   DxValidatorModule,
@@ -31,7 +30,6 @@ import { ToolbarFormComponent } from 'src/app/components/utils/toolbar-form/tool
     DxFormModule,
     DxLoadPanelModule,
     DxSelectBoxModule,
-    DxTextBoxModule,
     DxTextAreaModule,
     DxToolbarModule,
     DxValidatorModule,
@@ -58,6 +56,8 @@ export class TaskFormComponent implements OnInit {
   statusList = taskStatusList;
 
   priorityList = taskPriorityList;
+
+  displayExprFn = () => '';
 
   getSizeQualifier = getSizeQualifier;
 

@@ -7,7 +7,7 @@ import Form, {
   ColCountByScreen,
 } from 'devextreme-react/form';
 
-import SelectBox from 'devextreme-react/select-box';
+import SelectBox, { FieldAddons } from 'devextreme-react/select-box';
 import TextArea from 'devextreme-react/text-area';
 
 import { FormTextbox } from '../../utils/form-textbox/FormTextbox';
@@ -15,9 +15,9 @@ import { FormDateBox } from '../../utils/form-datebox/FormDateBox';
 
 import { PRIORITY_ITEMS, STATUS_ITEMS } from '../../../shared/constants';
 import {
-  editFieldRender,
+  editBeforeRender,
   statusItemRender,
-  priorityFieldRender,
+  priorityBeforeRender,
   priorityItemRender,
 } from '../../../shared/statusIndicatorRenderMethods';
 
@@ -87,27 +87,35 @@ export const TaskFormDetails = ({
         </SimpleItem>
         <SimpleItem>
           <SelectBox
+            className='task-details-select-box'
             label='Priority'
             value={formData.priority}
             items={PRIORITY_ITEMS}
             readOnly={!editing}
             stylingMode='filled'
-            fieldRender={priorityFieldRender}
+            placeholder=''
+            displayExpr={() => ''}
             itemRender={priorityItemRender}
             onValueChange={updateField('priority')}
-          />
+          >
+            <FieldAddons beforeRender={priorityBeforeRender} />
+          </SelectBox>
         </SimpleItem>
         <SimpleItem>
           <SelectBox
+            className='task-details-select-box'
             label='Status'
             value={formData.status}
             items={STATUS_ITEMS}
             readOnly={!editing}
             stylingMode='filled'
-            fieldRender={editFieldRender}
+            placeholder=''
+            displayExpr={() => ''}
             itemRender={statusItemRender}
             onValueChange={updateField('status')}
-          />
+          >
+            <FieldAddons beforeRender={editBeforeRender} />
+          </SelectBox>
         </SimpleItem>
         <SimpleItem>
           <FormDateBox

@@ -2,6 +2,33 @@
 
 #task-form {
   min-height: 250px;
+
+  ::ng-deep .task-details-select-box {
+    .dx-dropdowneditor-field-before-template-wrapper {
+      min-width: 0;
+
+      .status.status-indicator {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+
+        span {
+          display: inline-flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  ::ng-deep .dx-form:not(.view-mode) {
+    .task-details-select-box {
+      .dx-dropdowneditor-field-before-template-wrapper {
+        .status.status-indicator {
+          padding-left: var(--list-padding-left);
+        }
+      }
+    }
+  }
 }
 
 .form-editor {

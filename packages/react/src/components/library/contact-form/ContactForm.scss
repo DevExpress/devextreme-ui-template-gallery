@@ -10,6 +10,33 @@
     }
   }
 
+  .contact-status-select-box {
+    .dx-dropdowneditor-field-before-template-wrapper {
+      min-width: 0;
+
+      .status.status-contact {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+
+        span {
+          display: inline-flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .dx-form:not(.view-mode) {
+    .contact-status-select-box {
+      .dx-dropdowneditor-field-before-template-wrapper {
+        .status.status-contact {
+          padding-left: var(--list-padding-left);
+        }
+      }
+    }
+  }
+
   .status-editor-field {
     display: flex;
     padding-left: var(--list-padding-left);
