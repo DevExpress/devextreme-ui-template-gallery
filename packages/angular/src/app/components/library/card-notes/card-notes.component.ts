@@ -25,13 +25,14 @@ import { Notes, Note } from 'src/app/types/notes';
   ]
 })
 export class CardNotesComponent {
-  @Input() user: string;
+  @Input() user!: string;
 
-  @Input() items: Notes;
+  @Input() items?: Notes;
 
   nodeText = '';
 
-  add = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  add = (e: any) => {
     if (!e.validationGroup.validate().isValid) {
       return;
     }
@@ -42,7 +43,7 @@ export class CardNotesComponent {
       text: this.nodeText,
     };
 
-    this.items.push(newNote);
+    this.items?.push(newNote);
 
     e.validationGroup.reset();
   };

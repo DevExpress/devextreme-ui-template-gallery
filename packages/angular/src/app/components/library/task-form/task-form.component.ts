@@ -41,7 +41,7 @@ import { ToolbarFormComponent } from 'src/app/components/utils/toolbar-form/tool
   ],
 })
 export class TaskFormComponent implements OnInit {
-  @Input() task: Task;
+  @Input() task!: Task;
 
   @Input() isLoading: boolean = false;
 
@@ -49,7 +49,7 @@ export class TaskFormComponent implements OnInit {
 
   protected screen = inject(ScreenService);
 
-  savedData: Task = null;
+  savedData: Task | null = null;
 
   isEditing = false;
 
@@ -76,6 +76,9 @@ export class TaskFormComponent implements OnInit {
   };
 
   handleCancelClick = () => {
+    if (!this.savedData) {
+      return;
+    }
     this.task = { ...this.savedData };
     this.isEditing = false;
   };

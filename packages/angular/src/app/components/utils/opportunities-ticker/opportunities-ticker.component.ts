@@ -13,5 +13,5 @@ import { TickerCardComponent } from 'src/app/components/library/ticker-card/tick
 })
 
 export class OpportunitiesTickerComponent {
-  @Input() data: SalesOrOpportunitiesByCategory = null;
+  @Input() data: SalesOrOpportunitiesByCategory | null = null;
 }

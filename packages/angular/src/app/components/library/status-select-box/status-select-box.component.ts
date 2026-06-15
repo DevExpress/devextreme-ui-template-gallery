@@ -19,7 +19,7 @@ import { ThemeService } from 'src/app/services/theme.service';
   ],
 })
 export class StatusSelectBoxComponent {
-  @Input() value: string;
+  @Input() value!: string;
 
   @Input() label = '';
 
@@ -29,9 +29,9 @@ export class StatusSelectBoxComponent {
 
   @Input() stylingMode: EditorStyle = 'filled';
 
-  @Input() labelMode: LabelMode;
+  @Input() labelMode!: LabelMode;
 
-  @Input() classList: string;
+  @Input() classList!: string;
 
   @Output() valueChange = new EventEmitter<string>();
 

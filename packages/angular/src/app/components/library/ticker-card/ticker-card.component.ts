@@ -14,22 +14,22 @@ import { ApplyPipeDirective } from "src/app/pipes/apply.pipe";
 })
 
 export class TickerCardComponent {
-  @Input() titleText: string;
+  @Input() titleText!: string;
 
   @Input() data: SalesOrOpportunitiesByCategory | Sales | null = null;
 
   @Input() total: string | null = null;
 
-  @Input() percentage: number;
+  @Input() percentage!: number;
 
-  @Input() icon: string;
+  @Input() icon!: string;
 
   @Input() tone?: 'warning' | 'info';
 
   @Input() contentClass: string | null = null;
 
   getTotal(data: Array<{value?: number, total?: number}> ): number {
-    return (data || []).reduce((total, item) => total + (item.value || item.total), 0);
+    return (data || []).reduce((total, item) => total + (item.value ?? item.total ?? 0), 0);
   }
 
   abs(value: number): number {

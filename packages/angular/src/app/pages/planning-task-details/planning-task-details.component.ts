@@ -1,4 +1,10 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -47,24 +53,23 @@ export class PlanningTaskDetailsComponent implements OnInit {
 
   private location = inject(Location);
 
-  task: Task;
+  task = signal<Task | undefined>(undefined);
 
   taskId: number;
 
-  taskName = 'Loading...';
+  taskName = computed(() => this.task()?.text ?? 'Loading...');
 
-  isLoading = false;
+  isLoading = signal(false);
 
   constructor() {
-    const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
+    const id = parseInt(this.route.snapshot.queryParamMap.get('id') ?? '', 10);
     this.taskId = id || DEFAULT_TASK_ID;
   }
 
   loadData = () => {
     this.service.getTask(this.taskId).subscribe((data) => {
-      this.task = data;
-      this.taskName = data.text;
-      this.isLoading = false;
+      this.task.set(data);
+      this.isLoading.set(false);
     });
   };
 
@@ -73,12 +78,11 @@ export class PlanningTaskDetailsComponent implements OnInit {
   }
 
   refresh = () => {
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.loadData();
-  }
+  };
 
   navigateBack(): void {
-    this.location.back()
+    this.location.back();
   }
 }
-

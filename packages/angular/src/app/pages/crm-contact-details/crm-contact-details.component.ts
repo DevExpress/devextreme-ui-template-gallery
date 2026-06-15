@@ -1,7 +1,13 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, map } from 'rxjs';
+import { forkJoin } from 'rxjs';
 
 import {
   DxButtonModule,
@@ -45,22 +51,22 @@ export class CrmContactDetailsComponent implements OnInit {
 
   contactId: number;
 
-  contactData: Contact;
+  contactData = signal<Contact | undefined>(undefined);
 
-  contactNotes: Notes;
+  contactNotes = signal<Notes | undefined>(undefined);
 
-  contactMessages: Messages;
+  contactMessages = signal<Messages | undefined>(undefined);
 
-  activeOpportunities: Opportunities;
+  activeOpportunities = signal<Opportunities | undefined>(undefined);
 
-  closedOpportunities: Opportunities;
+  closedOpportunities = signal<Opportunities | undefined>(undefined);
 
-  contactName = 'Loading...';
+  contactName = computed(() => this.contactData()?.name ?? 'Loading...');
 
-  isLoading = false;
+  isLoading = signal(true);
 
   constructor() {
-    const id = parseInt(this.route.snapshot.queryParamMap.get('id'), 10);
+    const id = parseInt(this.route.snapshot.queryParamMap.get('id') ?? '', 10);
     this.contactId = id || DEFAULT_CONTACT_ID;
   }
 
@@ -69,41 +75,35 @@ export class CrmContactDetailsComponent implements OnInit {
   }
 
   loadData = () => {
-    forkJoin([
-      this.service.getContactNotes(this.contactId),
-      this.service.getContactMessages(this.contactId),
-      this.service.getActiveContactOpportunities(this.contactId),
-      this.service.getClosedContactOpportunities(this.contactId),
-    ]).pipe(
-      map(
-        ([
-          contactNotes,
-          contactMessages,
-          activeOpportunities,
-          closedOpportunities
-        ]) => ({
-          contactNotes,
-          contactMessages,
-          activeOpportunities,
-          closedOpportunities
-        }))
-      ).subscribe(
-        (data) => Object.keys(data).forEach((key) => this[key] = data[key])
-    );
+    this.isLoading.set(true);
 
-    this.service.getContact(this.contactId).subscribe((data) => {
-      this.contactName = data.name;
-      this.contactData = data;
-      this.isLoading = false;
-    })
+    forkJoin({
+      contact: this.service.getContact(this.contactId),
+      contactNotes: this.service.getContactNotes(this.contactId),
+      contactMessages: this.service.getContactMessages(this.contactId),
+      activeOpportunities: this.service.getActiveContactOpportunities(this.contactId),
+      closedOpportunities: this.service.getClosedContactOpportunities(this.contactId),
+    }).subscribe({
+      next: (data) => {
+        this.contactData.set(data.contact);
+        this.contactNotes.set(data.contactNotes as Notes);
+        this.contactMessages.set(data.contactMessages as Messages);
+        this.activeOpportunities.set(data.activeOpportunities as Opportunities);
+        this.closedOpportunities.set(data.closedOpportunities as Opportunities);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.isLoading.set(false);
+      },
+    });
   };
 
   refresh = () => {
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.loadData();
   };
 
   navigateBack(): void {
-    this.location.back()
+    this.location.back();
   }
 }

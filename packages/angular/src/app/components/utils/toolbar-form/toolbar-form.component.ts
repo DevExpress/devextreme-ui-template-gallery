@@ -19,9 +19,9 @@ import { DxButtonComponent } from "devextreme-angular";
   ],
 })
 export class ToolbarFormComponent {
-  @Input() isEditing: boolean;
+  @Input() isEditing!: boolean;
 
-  @Input() titleClass: string;
+  @Input() titleClass!: string;
 
   @Output() editModeToggled = new EventEmitter();
 
@@ -37,7 +37,7 @@ export class ToolbarFormComponent {
     this.editModeToggled.emit();
   }
 
-  handleSaveButtonClick (event) {
+  handleSaveButtonClick(event: unknown) {
     this.saveButtonClicked.emit(event);
   }
 }

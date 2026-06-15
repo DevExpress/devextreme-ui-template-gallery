@@ -11,7 +11,7 @@ import { ContactStatus } from 'src/app/types/contact';
   imports: [ CommonModule ],
 })
 export class ContactStatusComponent {
-  @Input() value: ContactStatus;
+  @Input() value!: ContactStatus;
 
   @Input() showText = true;
 }

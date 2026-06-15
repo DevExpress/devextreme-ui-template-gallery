@@ -1,8 +1,8 @@
 <form class="login-form" (submit)="onSubmit($event)">
   <dx-form
     labelLocation="top"
-    [formData]="formData"
-    [disabled]="loading"
+    [formData]="formData()"
+    [disabled]="loading()"
     [showColonAfterLabel]="true"
   >
     <dxi-item
@@ -10,8 +10,7 @@
       editorType="dxTextBox"
       [editorOptions]="{
         stylingMode: 'filled',
-        mode: 'email',
-        value: defaultAuthData?.data?.email
+        mode: 'email'
       }"
     >
       <dxi-validation-rule
@@ -61,14 +60,15 @@
 
     <ng-container *dxTemplate="let item of 'signInTemplate'">
       <span class="dx-button-text">
-        <ng-container *ngIf="loading; else notLoading">
+        @if (loading()) {
           <dx-load-indicator
             width="24px"
             height="24px"
             [visible]="true"
           ></dx-load-indicator>
-        </ng-container>
-        <ng-template #notLoading>Sign In</ng-template>
+        } @else {
+          Sign In
+        }
       </span>
     </ng-container>
   </dx-form>
@@ -80,7 +80,7 @@
   <dx-button
     class="btn-create-account"
     text="Register"
-    [stylingMode]="btnStylingMode"
+    [stylingMode]="btnStylingMode()"
     width="100%"
     (onClick)="onCreateAccountClick()"
   >

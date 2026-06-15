@@ -1,5 +1,5 @@
 import {
-  Component, ViewChild, inject,
+  Component, ViewChild, inject, afterNextRender, Injector,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -48,11 +48,13 @@ type FilterContactStatus = ContactStatus | 'All';
   ]
 })
 export class CrmContactListComponent {
-  @ViewChild(DxDataGridComponent, { static: true }) dataGrid: DxDataGridComponent;
+  @ViewChild(DxDataGridComponent, { static: true }) dataGrid!: DxDataGridComponent;
 
-  @ViewChild(ContactNewFormComponent, { static: false }) contactNewForm: ContactNewFormComponent;
+  @ViewChild(ContactNewFormComponent, { static: false }) contactNewForm!: ContactNewFormComponent;
 
   private service = inject(DataService);
+
+  private injector = inject(Injector);
 
   statusList = contactStatusList;
 
@@ -64,7 +66,7 @@ export class CrmContactListComponent {
 
   isAddContactPopupOpened = false;
 
-  userId: number;
+  userId: number | null = null;
 
   dataSource = new DataSource<Contact[], string>({
     key: 'id',
@@ -98,7 +100,9 @@ export class CrmContactListComponent {
   };
 
   onPinnedChange = () => {
-    this.dataGrid.instance.updateDimensions();
+    afterNextRender(() => {
+      this.dataGrid?.instance?.updateDimensions();
+    }, { injector: this.injector });
   };
 
   filterByStatus = (e: DxDropDownButtonTypes.SelectionChangedEvent) => {
@@ -111,9 +115,9 @@ export class CrmContactListComponent {
     }
   };
 
-  customizePhoneCell = ({ value }) => value ? formatPhone(value) : undefined;
+  customizePhoneCell = ({ value }: { value?: number }) => value ? formatPhone(value) : undefined;
 
-  onExporting(e) {
+  onExporting(e: DxDataGridTypes.ExportingEvent) {
     if (e.format === 'pdf') {
       const doc = new jsPDF();
       exportDataGridToPdf({

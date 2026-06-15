@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
-import { DxButtonComponent } from "devextreme-angular";
+import { DxButtonComponent } from 'devextreme-angular';
 import { DxTabsModule } from 'devextreme-angular/ui/tabs';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { type DxTabsTypes } from 'devextreme-angular/ui/tabs';
@@ -14,19 +14,19 @@ import { Dates, PanelItem } from 'src/app/types/resource';
   templateUrl: './toolbar-analytics.component.html',
   styleUrls: ['./toolbar-analytics.component.scss'],
   imports: [
-    CommonModule,
+    AsyncPipe,
     DxButtonComponent,
     DxTabsModule,
-    DxToolbarModule
+    DxToolbarModule,
   ],
 })
 
 export class ToolbarAnalyticsComponent {
-  @Input() selectedItems: Array<number>;
+  @Input() selectedItems!: Array<number>;
 
-  @Input() titleText: string;
+  @Input() titleText!: string;
 
-  @Input() panelItems: Array<PanelItem>;
+  @Input() panelItems!: Array<PanelItem>;
 
   @Output() selectionChanged = new EventEmitter<Dates>();
 

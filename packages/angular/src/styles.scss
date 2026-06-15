@@ -110,6 +110,7 @@ body {
 
 .view-wrapper {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   overflow: hidden;
   padding: 0 var(--page-padding);

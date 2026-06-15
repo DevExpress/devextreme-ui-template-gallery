@@ -8,8 +8,11 @@ const themes = ['light', 'dark'] as const;
 
 type Theme = typeof themes[number];
 
-function getNextTheme(theme?: Theme) {
-  return themes[themes.indexOf(theme) + 1] || themes[0];
+function getNextTheme(theme?: Theme): Theme {
+  if (theme === undefined) {
+    return themes[0];
+  }
+  return themes[themes.indexOf(theme) + 1] ?? themes[0];
 }
 
 @Injectable({

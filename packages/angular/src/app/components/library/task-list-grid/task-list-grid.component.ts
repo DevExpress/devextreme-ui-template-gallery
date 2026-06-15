@@ -38,15 +38,15 @@ import 'jspdf-autotable';
   providers: []
 })
 export class TaskListGridComponent implements OnChanges {
-  @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
+  @ViewChild(DxDataGridComponent, { static: false }) grid!: DxDataGridComponent;
 
-  @Input() dataSource: Task[];
+  @Input() dataSource!: Task[];
 
   @Output() tabValueChanged: EventEmitter<any> = new EventEmitter<EventEmitter<any>>();
 
   private router = inject(Router);
 
-  tasks: Task[];
+  tasks: Task[] = [];
 
   priorityList = taskPriorityList;
 
@@ -97,7 +97,7 @@ export class TaskListGridComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.dataSource) {
-      this.tasks = changes.dataSource.currentValue.filter((item) => !!item.status && !!item.priority);
+      this.tasks = changes.dataSource.currentValue.filter((item: Task) => !!item.status && !!item.priority);
     }
   };
 

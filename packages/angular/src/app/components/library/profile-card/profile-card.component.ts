@@ -48,7 +48,7 @@ type CardData = Record<string, any>;
   ],
 })
 export class ProfileCardComponent {
-  @ViewChild('form', { static: true }) form: DxFormComponent;
+  @ViewChild('form', { static: true }) form!: DxFormComponent;
 
   @Input() items: Record<string, any>[] = [];
 
@@ -58,7 +58,7 @@ export class ProfileCardComponent {
 
   @Output() dataChanged = new EventEmitter<any>();
 
-  @Input() cardData: CardData;
+  @Input() cardData!: CardData;
 
   getSizeQualifier = getSizeQualifier;
 
@@ -66,7 +66,7 @@ export class ProfileCardComponent {
 
   public screen = inject(ScreenService);
 
-  onFieldChange(fieldName?, value?) {
+  onFieldChange(fieldName?: string, value?: unknown) {
     const {isValid} = this.form.instance.validate();
 
     if (!isValid) {
