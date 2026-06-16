@@ -24,6 +24,8 @@ overrides:
   qs@>=6.11.1 <=6.15.1: ^6.15.2
   tmp@<0.2.6: ^0.2.6
   uuid@<11.1.1: ^11.1.1
+  '@babel/core@<=7.29.0': ^7.29.1
+  vite@>=7.0.0 <=7.3.4: ^7.3.5
 
 allowBuilds:
   "@parcel/watcher": true
@@ -44,10 +46,10 @@ catalogs:
     "@angular/build": ^22.0.0
     "@angular/cdk": ^22.0.0
     "@angular/cli": ^22.0.0
-    "@angular/common": ^22.0.0
-    "@angular/compiler": ^22.0.0
+    "@angular/common": ^22.0.1
+    "@angular/compiler": ^22.0.1
     "@angular/compiler-cli": ^22.0.0
-    "@angular/core": ^22.0.0
+    "@angular/core": ^22.0.1
     "@angular/forms": ^22.0.0
     "@angular/platform-browser": ^22.0.0
     "@angular/platform-browser-dynamic": ^22.0.0
