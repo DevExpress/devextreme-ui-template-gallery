@@ -52,62 +52,61 @@
           </div>
         </dxi-item>
 
-      <dxi-item>
-        <div *dxTemplate>
-          <dx-select-box
-            class="task-details-select-box"
-            label="Priority"
-            stylingMode="filled"
-            [(value)]="task.priority"
-            [items]="priorityList"
-            [readOnly]="!isEditing"
-            [elementAttr]="{ class: 'form-editor' }"
-            placeholder=""
-            [displayExpr]="displayExprFn"
-          >
-            <dxo-select-box-field-addons beforeTemplate="before"></dxo-select-box-field-addons>
-            <div *dxTemplate="let data of 'before'">
-              <status-indicator
-                [showBar]="true"
-                [isField]="false"
-                [value]="task.priority"
-              ></status-indicator>
-            </div>
+        <dxi-item>
+          <div *dxTemplate>
+            <dx-select-box
+              class="task-details-select-box"
+              label="Priority"
+              stylingMode="filled"
+              [(value)]="task.priority"
+              [items]="priorityList"
+              [readOnly]="!isEditing"
+              [elementAttr]="{ class: 'form-editor' }"
+              placeholder=""
+              [displayExpr]="displayExprFn"
+            >
+              <dxo-select-box-field-addons beforeTemplate="before"></dxo-select-box-field-addons>
+              <div *dxTemplate="let data of 'before'">
+                <status-indicator
+                  [showBar]="true"
+                  [isField]="false"
+                  [value]="task.priority"
+                ></status-indicator>
+              </div>
+              <div *dxTemplate="let data of 'item'">
+                <status-indicator
+                  [showBar]="true"
+                  [isField]="false"
+                  [value]="data"
+                ></status-indicator>
+              </div>
+            </dx-select-box>
+          </div>
+        </dxi-item>
 
         <dxi-item>
           <div *dxTemplate>
             <dx-select-box
+              class="task-details-select-box"
               label="Status"
               stylingMode="filled"
-              fieldTemplate="field"
               [(value)]="task.status"
               [items]="statusList"
               [readOnly]="!isEditing"
               [elementAttr]="{ class: 'form-editor' }"
+              placeholder=""
+              [displayExpr]="displayExprFn"
             >
-              <div *dxTemplate="let data of 'field'">
-                <div>
-                  <status-indicator [value]="task.status"></status-indicator>
-                </div>
+              <dxo-select-box-field-addons beforeTemplate="before"></dxo-select-box-field-addons>
+              <div *dxTemplate="let data of 'before'">
+                <status-indicator [isField]="false" [value]="task.status"></status-indicator>
               </div>
-
-      <dxi-item>
-        <div *dxTemplate>
-          <dx-select-box
-            class="task-details-select-box"
-            label="Status"
-            stylingMode="filled"
-            [(value)]="task.status"
-            [items]="statusList"
-            [readOnly]="!isEditing"
-            [elementAttr]="{ class: 'form-editor' }"
-            placeholder=""
-            [displayExpr]="displayExprFn"
-          >
-            <dxo-select-box-field-addons beforeTemplate="before"></dxo-select-box-field-addons>
-            <div *dxTemplate="let data of 'before'">
-              <status-indicator [isField]="false" [value]="task.status"></status-indicator>
-            </div>
+              <div *dxTemplate="let data of 'item'">
+                <status-indicator [isField]="false" [value]="data"></status-indicator>
+              </div>
+            </dx-select-box>
+          </div>
+        </dxi-item>
 
         <dxi-item>
           <div *dxTemplate>
