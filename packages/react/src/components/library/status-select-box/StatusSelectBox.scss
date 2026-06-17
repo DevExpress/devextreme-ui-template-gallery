@@ -7,13 +7,13 @@
     .status.status-contact {
       display: inline-flex;
       align-items: center;
-      font-size: var(--dx-font-size);
+      font-weight: 400;
       white-space: nowrap;
 
       span {
         display: inline-flex;
         align-items: center;
-        font-size: var(--dx-font-size);
+        font-weight: 400;
       }
     }
   }

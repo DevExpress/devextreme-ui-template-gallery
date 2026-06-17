@@ -64,7 +64,7 @@ function emitChangedValue(changedData: ValueChangedEvent) {
     .status.contact-status {
       display: inline-flex;
       align-items: center;
-      font-size: var(--dx-font-size);
+      font-weight: 400;
       white-space: nowrap;
     }
   }

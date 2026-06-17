@@ -234,6 +234,7 @@ defineExpose<{getNewTaskData:() => Task}>({
 
   :deep(.dx-form:not(.view-mode) .task-details-select-box .dx-dropdowneditor-field-before-template-wrapper .status.status-indicator) {
     padding-left: var(--list-padding-left);
+    padding-top: 15px;
   }
 }
 </style>
