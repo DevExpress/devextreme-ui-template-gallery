@@ -58,6 +58,7 @@
           <dx-select-box
             class="task-details-select-box"
             label="Priority"
+            label-mode="static"
             v-model="data.priority"
             :items="taskPriorityList"
             :read-only="!isEditing"
@@ -87,6 +88,7 @@
           <dx-select-box
             class="task-details-select-box"
             label="Status"
+            label-mode="static"
             v-model="data.status"
             :items="taskStatusList"
             :read-only="!isEditing"

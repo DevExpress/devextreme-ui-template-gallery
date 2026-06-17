@@ -28,8 +28,8 @@
   }
 }
 
-.pictured-item-select-field {
-  &::ng-deep .pictured-item-editor-input.dx-texteditor-input {
+.pictured-item-select-box.dx-texteditor.dx-editor-filled {
+  ::ng-deep .dx-dropdowneditor-input-wrapper .dx-texteditor-input {
     padding-left: 0;
     color: var(--base-text-color);
   }

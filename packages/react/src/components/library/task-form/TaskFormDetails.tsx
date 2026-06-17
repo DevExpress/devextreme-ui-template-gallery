@@ -89,6 +89,7 @@ export const TaskFormDetails = ({
           <SelectBox
             className='task-details-select-box'
             label='Priority'
+            labelMode='static'
             value={formData.priority}
             items={PRIORITY_ITEMS}
             readOnly={!editing}
@@ -105,6 +106,7 @@ export const TaskFormDetails = ({
           <SelectBox
             className='task-details-select-box'
             label='Status'
+            labelMode='static'
             value={formData.status}
             items={STATUS_ITEMS}
             readOnly={!editing}

@@ -28,13 +28,9 @@
   }
 }
 
-.pictured-item-select-box .pictured-item-select-field {
-  input[pictureditemeditorinput].dx-texteditor-input {
+.pictured-item-select-box.dx-texteditor.dx-editor-filled {
+  .dx-dropdowneditor-input-wrapper .dx-texteditor-input {
     color: var(--base-text-color);
     padding-left: 0;
-  }
-
-  .pictured-item-image {
-    margin-left: var(--list-padding-left);
   }
 }

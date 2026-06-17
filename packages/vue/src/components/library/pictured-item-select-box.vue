@@ -89,12 +89,14 @@ function emitChangedValue(changedData: SimpleObject) {
   }
 }
 
-.pictured-item-select-field {
-  :deep(input.pictured-item-editor-input.dx-texteditor-input) {
+.pictured-item-select-box.dx-texteditor.dx-editor-filled {
+  :deep(.dx-dropdowneditor-input-wrapper .dx-texteditor-input) {
     padding-left: 0;
     color: var(--base-text-color);
   }
+}
 
+.pictured-item-select-field {
   .pictured-item-image {
     margin-left: var(--list-padding-left);
   }
