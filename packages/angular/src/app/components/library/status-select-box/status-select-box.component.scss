@@ -5,8 +5,13 @@
     .dx-dropdowneditor-field-before-template-wrapper {
       min-width: 0;
 
+      contact-status.status-indicator {
+        display: flex;
+        align-items: center;
+      }
+
       .status.contact-status {
-        display: inline-flex;
+        display: flex;
         align-items: center;
         font-weight: 400;
         white-space: nowrap;
