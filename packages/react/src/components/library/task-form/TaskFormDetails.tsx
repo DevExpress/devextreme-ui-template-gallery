@@ -123,7 +123,6 @@ export const TaskFormDetails = ({
           <FormDateBox
             value={formData.startDate}
             readOnly={!editing}
-            name='Set Start Date'
             label='Start Date'
             onValueChange={updateField('startDate')}
           />
@@ -132,7 +131,6 @@ export const TaskFormDetails = ({
           <FormDateBox
             value={formData.dueDate}
             readOnly={!editing}
-            name='Set Due Date'
             label='Due Date'
             onValueChange={updateField('dueDate')}
           />
