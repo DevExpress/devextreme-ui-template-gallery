@@ -15,12 +15,13 @@
 >
   <dxo-select-box-field-addons beforeTemplate="before"></dxo-select-box-field-addons>
   <div *dxTemplate="let data of 'before'" class="pictured-item-select-field">
-    <img
-      *ngIf="data?.image"
-      [alt]="data.name"
-      class="pictured-item-image"
-      src="data:image/png;base64,{{ data.image }}"
-    />
+    @if (data?.image) {
+      <img
+        [alt]="data.name"
+        class="pictured-item-image"
+        src="data:image/png;base64,{{ data.image }}"
+      />
+    }
   </div>
   <div *dxTemplate="let data of 'item'">
     <img

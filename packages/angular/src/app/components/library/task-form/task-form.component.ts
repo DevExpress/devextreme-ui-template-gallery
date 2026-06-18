@@ -57,9 +57,9 @@ export class TaskFormComponent implements OnInit {
 
   priorityList = taskPriorityList;
 
-  displayExprFn = () => '';
-
   getSizeQualifier = getSizeQualifier;
+
+  displayExprFn = () => '';
 
   ngOnInit() {
     this.isEditing = this.isCreateMode;

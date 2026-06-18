@@ -35,8 +35,6 @@ export class StatusSelectBoxComponent {
 
   @Output() valueChange = new EventEmitter<string>();
 
-  displayExprFn = () => '';
-
   private theme = inject(ThemeService);
 
   constructor() {
@@ -44,5 +42,7 @@ export class StatusSelectBoxComponent {
       this.labelMode = 'outside';
     }
   }
+
+  displayExprFn = () => '';
 }
 

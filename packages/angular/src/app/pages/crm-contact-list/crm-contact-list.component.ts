@@ -58,8 +58,6 @@ export class CrmContactListComponent {
 
   statusList = contactStatusList;
 
-  displayExprFn = () => '';
-
   filterStatusList = ['All', ...contactStatusList];
 
   isPanelOpened = false;
@@ -77,6 +75,8 @@ export class CrmContactListComponent {
         })
     }),
   });
+
+  displayExprFn = () => '';
 
   addContact() {
     this.isAddContactPopupOpened = true;

@@ -52,11 +52,11 @@ export class TaskListGridComponent implements OnChanges {
 
   statusList = taskStatusList;
 
-  displayExprFn = () => '';
-
   isLoading = true;
 
   useNavigation = true;
+
+  displayExprFn = () => '';
 
   refresh() {
     this.grid.instance.refresh();

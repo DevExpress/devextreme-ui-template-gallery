@@ -13,8 +13,10 @@
 >
   <dxo-select-box-field-addons beforeTemplate="before"></dxo-select-box-field-addons>
   <div *dxTemplate="let data of 'before'">
-    <contact-status *ngIf="data" class="status-indicator" [value]="data">
-    </contact-status>
+    @if (data) {
+      <contact-status class="status-indicator" [value]="data">
+      </contact-status>
+    }
   </div>
   <div *dxTemplate="let data of 'item'">
     <contact-status [value]="data"> </contact-status>
