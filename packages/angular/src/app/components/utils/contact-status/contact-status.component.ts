@@ -5,7 +5,7 @@ import { ContactStatus } from 'src/app/types/contact';
 @Component({
   selector: 'contact-status',
   template: `
-    <span class="status status-{{ value | lowercase }}">{{ showText ? value : '' }}</span>
+    <span class="status contact-status status-{{ value | lowercase }}">{{ showText ? value : '' }}</span>
   `,
   styleUrls: ['./contact-status.component.scss'],
   imports: [ CommonModule ],

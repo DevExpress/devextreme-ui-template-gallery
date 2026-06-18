@@ -1,6 +1,6 @@
 @use 'sass:math';
 
-span.status {
+.contact-status {
   font-size: 13px;
 
   &::before {
@@ -12,6 +12,7 @@ span.status {
     border-radius: calc(var(--diameter) / 2);
     margin-right: calc(var(--diameter) / 2);
     display: inline-block;
+    align-self: center;
   }
 
   &.input {

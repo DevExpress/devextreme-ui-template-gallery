@@ -5,7 +5,7 @@
     .dx-dropdowneditor-field-before-template-wrapper {
       min-width: 0;
 
-      .status {
+      .status.contact-status {
         display: inline-flex;
         align-items: center;
         font-weight: 400;
@@ -15,7 +15,7 @@
   }
 
   &:not(.dx-state-readonly) {
-    ::ng-deep .dx-dropdowneditor-field-before-template-wrapper .status {
+    ::ng-deep .dx-dropdowneditor-field-before-template-wrapper .status.contact-status {
       padding-left: var(--list-padding-left);
     }
   }
