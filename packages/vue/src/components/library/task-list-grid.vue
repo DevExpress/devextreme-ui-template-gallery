@@ -106,16 +106,16 @@
         :items="priorityList"
         @value-changed="(e) => onPrioritySelectChange(e.value, cellData)"
         @selection-changed="cellData.component.updateDimensions"
-        field-template="field"
+        placeholder=""
+        :field-addons="{ beforeTemplate: 'before' }"
+        :display-expr="() => ''"
       >
-        <template #field>
-          <div class="form-custom-list-prop">
-            <status-indicator
-              :show-bar="true"
-              :is-field="true"
-              :value="cellData.value"
-            />
-          </div>
+        <template #before="{ data }">
+          <status-indicator
+            :show-bar="true"
+            :is-field="false"
+            :value="data"
+          />
         </template>
         <template #item="{ data }">
           <status-indicator
@@ -137,12 +137,14 @@
         :items="statusList"
         @value-changed="(e) => onStatusSelectChange(e.value, cellInfo)"
         @selection-changed="cellInfo.component.updateDimensions"
-        field-template="field"
+        placeholder=""
+        :field-addons="{ beforeTemplate: 'before' }"
+        :display-expr="() => ''"
       >
-        <template #field>
+        <template #before="{ data }">
           <status-indicator
-            :is-field="true"
-            :value="cellInfo.value"
+            :is-field="false"
+            :value="data"
           />
         </template>
         <template #item="{ data }">
@@ -275,5 +277,21 @@ defineExpose({
 
 :deep(.edit-cell) {
   position: relative;
+
+  .dx-dropdowneditor-field-before-template-wrapper {
+    min-width: 0;
+
+    .status.status-indicator {
+      display: inline-flex;
+      align-items: center;
+      padding-left: var(--list-padding-left);
+      white-space: nowrap;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+  }
 }
 </style>

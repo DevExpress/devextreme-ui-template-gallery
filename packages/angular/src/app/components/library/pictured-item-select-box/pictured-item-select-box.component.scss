@@ -20,13 +20,17 @@
   align-items: center;
 }
 
-.pictured-item-select-field {
-  &::ng-deep .pictured-item-editor-input.dx-texteditor-input {
+.pictured-item-select-box:not(.dx-state-readonly) {
+  ::ng-deep .dx-dropdowneditor-field-before-template-wrapper {
+    .pictured-item-image {
+      margin-left: var(--list-padding-left);
+    }
+  }
+}
+
+.pictured-item-select-box.dx-texteditor.dx-editor-filled {
+  ::ng-deep .dx-dropdowneditor-input-wrapper .dx-texteditor-input {
     padding-left: 0;
     color: var(--base-text-color);
-  }
-
-  .pictured-item-image {
-    margin-left: var(--list-padding-left);
   }
 }

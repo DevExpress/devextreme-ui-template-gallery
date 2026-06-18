@@ -16,13 +16,13 @@ import {
   Scrolling,
   LoadPanel,
 } from 'devextreme-react/data-grid';
-import SelectBox from 'devextreme-react/select-box';
+import SelectBox, { FieldAddons } from 'devextreme-react/select-box';
 
 import { StatusIndicator } from '../status-indicator/StatusIndicator';
 import {
-  editFieldRender,
+  editBeforeRender,
   statusItemRender,
-  priorityFieldRender,
+  priorityBeforeRender,
   priorityItemRender,
 } from '../../../shared/statusIndicatorRenderMethods';
 
@@ -48,20 +48,26 @@ const editStatusRender = ({ setValue, value }: GridEdit) => (
     className='edit-cell'
     defaultValue={value}
     items={STATUS_ITEMS}
-    fieldRender={editFieldRender}
+    placeholder=''
+    displayExpr={() => ''}
     itemRender={statusItemRender}
     onValueChange={(value) => setValue(value)}
-  />
+  >
+    <FieldAddons beforeRender={editBeforeRender} />
+  </SelectBox>
 );
 const editPriorityRender = ({ setValue, value }: GridEdit) => (
   <SelectBox
     className='edit-cell'
     defaultValue={value}
     items={PRIORITY_ITEMS}
-    fieldRender={priorityFieldRender}
+    placeholder=''
+    displayExpr={() => ''}
     itemRender={priorityItemRender}
     onValueChange={(value) => setValue(value)}
-  />
+  >
+    <FieldAddons beforeRender={priorityBeforeRender} />
+  </SelectBox>
 );
 
 export const TaskListGrid = React.forwardRef<DataGridRef, PlanningProps>(

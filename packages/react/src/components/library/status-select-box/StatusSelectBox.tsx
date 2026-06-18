@@ -1,7 +1,6 @@
 import './StatusSelectBox.scss';
 import React from 'react';
-import SelectBox from 'devextreme-react/select-box';
-import TextBox from 'devextreme-react/text-box';
+import SelectBox, { FieldAddons } from 'devextreme-react/select-box';
 import type { EditorStyle, LabelMode } from 'devextreme-react/common';
 import { ContactStatus } from '../../utils/contact-status/ContactStatus';
 import { CONTACT_STATUS_LIST } from '../../../shared/constants';
@@ -14,24 +13,14 @@ interface StatusSelectBoxProps {
   onValueChange: (value) => void;
 }
 
-const FieldRender = (data) => {
-  return (
-    <div className='status-editor-field'>
-      <ContactStatus
-        text={data}
-        showText={false}
-        contentClass='status-indicator'
-      />
-      <TextBox
-        className={`status-${data?.toLowerCase()}`}
-        value={data}
-        hoverStateEnabled={false}
-        inputAttr={{ class: 'status-input', statusEditorInput: '' }}
-        readOnly
-      />
-    </div>
-  );
-};
+const FieldBeforeRender = (data?: string) => data
+  ? (
+    <ContactStatus
+      text={data}
+      contentClass='status-indicator'
+    />
+  )
+  : null;
 
 const ItemRender = (item) => {
   return (
@@ -50,6 +39,7 @@ export const StatusSelectBox = ({
 }: StatusSelectBoxProps) => {
   return (
     <SelectBox
+      className='status-select-box'
       label='Status'
       value={value}
       items={CONTACT_STATUS_LIST}
@@ -59,7 +49,10 @@ export const StatusSelectBox = ({
       stylingMode={stylingMode}
       labelMode={labelMode}
       width='100%'
-      fieldRender={FieldRender}
-    />
+      placeholder=''
+      displayExpr={() => ''}
+    >
+      <FieldAddons beforeRender={FieldBeforeRender} />
+    </SelectBox>
   );
 };

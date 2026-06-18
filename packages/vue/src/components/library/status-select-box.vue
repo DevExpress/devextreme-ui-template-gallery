@@ -2,32 +2,22 @@
   <dx-select-box
     label="Status"
     :value="modelValue"
-    :class="classList"
+    :class="['status-select-box', classList]"
     @value-changed="emitChangedValue"
     :items="items"
     :read-only="readOnly"
     :styling-mode="stylingMode"
     :label-mode="labelMode"
     width="100%"
-    field-template="field"
+    placeholder=""
+    :field-addons="{ beforeTemplate: 'before' }"
+    :display-expr="() => ''"
   >
-    <template #field="{ data }">
-      <div class="status-editor-field">
-        <contact-status
-          class="status-indicator"
-          :show-text="false"
-          :value="data"
-        />
-        <dx-text-box
-          class="status-{{data.toLowerCase()}}"
-          :hover-state-enabled="false"
-          :input-attr="{
-            class: `status-editor-input contact-status status-${data?.toLowerCase()}`,
-          }"
-          :read-only="true"
-          :value="data"
-        />
-      </div>
+    <template #before="{ data }">
+      <contact-status
+        class="status-indicator"
+        :value="data"
+      />
     </template>
 
     <template #item="{ data }">
@@ -38,36 +28,53 @@
 
 <script setup lang="ts">
 import { DxSelectBox } from 'devextreme-vue/select-box';
-import { DxTextBox } from 'devextreme-vue/text-box';
+import type { EditorStyle, LabelMode } from 'devextreme/common';
+import type { ValueChangedEvent } from 'devextreme/ui/select_box';
 import ContactStatus from '@/components/utils/contact-status.vue';
-import { SimpleObject } from '@/types';
 
 withDefaults(defineProps<{
   modelValue: string,
   items: unknown[],
   readOnly?: boolean,
   editable?: boolean,
-  labelMode?: string,
-  stylingMode?: string,
+  labelMode?: LabelMode,
+  stylingMode?: EditorStyle,
   classList: string,
 }>(), {
   modelValue: '',
   editable: true,
   readOnly: false,
-  stylingMode: '',
-  labelMode: '',
   classList: '',
 });
 
 const emit = defineEmits(['update:modelValue']);
 
-function emitChangedValue(changedData: SimpleObject) {
+function emitChangedValue(changedData: ValueChangedEvent) {
   emit('update:modelValue', changedData.value);
 }
 </script>
 
 <style scoped lang="scss">
 @use "@/variables.scss" as *;
+
+.status-select-box {
+  :deep(.dx-dropdowneditor-field-before-template-wrapper) {
+    min-width: 0;
+
+    .status.contact-status {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+  }
+
+  &:not(.dx-state-readonly) {
+    :deep(.dx-dropdowneditor-field-before-template-wrapper .status.contact-status) {
+      padding-left: var(--list-padding-left);
+    }
+  }
+}
 
 .dx-texteditor-with-floating-label.contact-status {
     .status-editor-field {

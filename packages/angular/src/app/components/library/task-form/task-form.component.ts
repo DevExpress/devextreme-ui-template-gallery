@@ -5,7 +5,6 @@ import {
   DxFormModule,
   DxLoadPanelModule,
   DxSelectBoxModule,
-  DxTextBoxModule,
   DxTextAreaModule,
   DxToolbarModule,
   DxValidatorModule,
@@ -31,7 +30,6 @@ import { ToolbarFormComponent } from 'src/app/components/utils/toolbar-form/tool
     DxFormModule,
     DxLoadPanelModule,
     DxSelectBoxModule,
-    DxTextBoxModule,
     DxTextAreaModule,
     DxToolbarModule,
     DxValidatorModule,
@@ -60,6 +58,8 @@ export class TaskFormComponent implements OnInit {
   priorityList = taskPriorityList;
 
   getSizeQualifier = getSizeQualifier;
+
+  displayExprFn = () => '';
 
   ngOnInit() {
     this.isEditing = this.isCreateMode;

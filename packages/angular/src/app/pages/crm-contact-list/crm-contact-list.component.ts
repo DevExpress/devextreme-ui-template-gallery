@@ -8,7 +8,6 @@ import {
   DxDataGridComponent,
   DxDropDownButtonModule,
   DxSelectBoxModule,
-  DxTextBoxModule,
 } from 'devextreme-angular';
 
 import { Workbook } from 'exceljs';
@@ -41,7 +40,6 @@ type FilterContactStatus = ContactStatus | 'All';
     DxDataGridModule,
     DxDropDownButtonModule,
     DxSelectBoxModule,
-    DxTextBoxModule,
     ContactPanelComponent,
     ContactNewFormComponent,
     FormPopupComponent,
@@ -77,6 +75,8 @@ export class CrmContactListComponent {
         })
     }),
   });
+
+  displayExprFn = () => '';
 
   addContact() {
     this.isAddContactPopupOpened = true;
