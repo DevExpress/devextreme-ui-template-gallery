@@ -2,7 +2,7 @@ import {
   Component, EventEmitter, inject, Input, Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
+import { DxSelectBoxModule } from 'devextreme-angular';
 import { EditorStyle, LabelMode } from 'devextreme-angular/common';
 import { contactStatusList } from 'src/app/types/contact';
 import { ContactStatusComponent } from 'src/app/components/utils/contact-status/contact-status.component';
@@ -14,7 +14,6 @@ import { ThemeService } from 'src/app/services/theme.service';
   styleUrls: ['./status-select-box.component.scss'],
   imports: [
     DxSelectBoxModule,
-    DxTextBoxModule,
     ContactStatusComponent,
     CommonModule
   ],
@@ -43,5 +42,7 @@ export class StatusSelectBoxComponent {
       this.labelMode = 'outside';
     }
   }
+
+  displayExprFn = () => '';
 }
 

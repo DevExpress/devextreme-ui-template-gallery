@@ -52,9 +52,14 @@
 .edit-cell {
   position: relative;
 
-  contact-status {
-    position: absolute;
-    margin-top: 10px;
-    margin-left: 11px;
+  ::ng-deep .dx-dropdowneditor-field-before-template-wrapper {
+    min-width: 0;
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding-left: var(--list-padding-left);
+      white-space: nowrap;
+    }
   }
 }

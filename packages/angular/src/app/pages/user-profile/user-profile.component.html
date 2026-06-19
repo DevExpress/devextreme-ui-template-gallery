@@ -44,7 +44,7 @@
           [items]="basicInfoItems"
           (dataChanged)="dataChanged()"
         >
-          <div class="basic-info-top-item" top-item>
+          <div class="basic-info-top-item profile-card-top-item" top-item>
             <form-photo
               [link]="profile.image"
               [editable]="true"
@@ -82,7 +82,7 @@
           [items]="contactItems()"
           (dataChanged)="dataChanged()"
         >
-          <div top-item>
+          <div class="contacts-top-item profile-card-top-item" top-item>
             <div class="image-wrapper">
               <i class="dx-icon dx-icon-mention"></i>
             </div>
@@ -111,7 +111,7 @@
           [items]="addressItems"
           (dataChanged)="dataChanged()"
         >
-          <div top-item>
+          <div class="address-top-item profile-card-top-item" top-item>
             <div class="image-wrapper">
               <i class="dx-icon dx-icon-map"></i>
             </div>

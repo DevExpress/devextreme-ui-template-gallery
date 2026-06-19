@@ -56,22 +56,24 @@
 
         <dx-form-item>
           <dx-select-box
+            class="task-details-select-box"
             label="Priority"
+            label-mode="static"
             v-model="data.priority"
             :items="taskPriorityList"
             :read-only="!isEditing"
-            field-template="field"
+            placeholder=""
+            :field-addons="{ beforeTemplate: 'before' }"
+            :display-expr="() => ''"
             item-template="item"
             v-bind="formSelectBoxProps"
           >
-            <template #field>
-              <div class="task-editor-field">
-                <status-indicator
-                  :is-field="true"
-                  :show-bar="true"
-                  :value="data.priority"
-                />
-              </div>
+            <template #before="{ data: itemData }">
+              <status-indicator
+                :is-field="false"
+                :show-bar="true"
+                :value="itemData"
+              />
             </template>
             <template #item="item">
               <status-indicator
@@ -84,21 +86,23 @@
 
         <dx-form-item>
           <dx-select-box
+            class="task-details-select-box"
             label="Status"
+            label-mode="static"
             v-model="data.status"
             :items="taskStatusList"
             :read-only="!isEditing"
-            field-template="field"
+            placeholder=""
+            :field-addons="{ beforeTemplate: 'before' }"
+            :display-expr="() => ''"
             item-template="item"
             v-bind="formSelectBoxProps"
           >
-            <template #field>
-              <div class="task-editor-field">
-                <status-indicator
-                  :is-field="true"
-                  :value="data.status"
-                />
-              </div>
+            <template #before="{ data: itemData }">
+              <status-indicator
+                :is-field="false"
+                :value="itemData"
+              />
             </template>
             <template #item="item">
               <status-indicator
@@ -212,5 +216,25 @@ defineExpose<{getNewTaskData:() => Task}>({
 
 #task-form {
   min-height: 250px;
+
+  :deep(.task-details-select-box .dx-dropdowneditor-field-before-template-wrapper) {
+    min-width: 0;
+
+    .status.status-indicator {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+  }
+
+  :deep(.dx-form:not(.view-mode) .task-details-select-box .dx-dropdowneditor-field-before-template-wrapper .status.status-indicator) {
+    padding-left: var(--list-padding-left);
+    padding-top: 15px;
+  }
 }
 </style>

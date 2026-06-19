@@ -1,5 +1,31 @@
 @use '../../../../variables.scss' as *;
 
+.status-select-box {
+  ::ng-deep {
+    .dx-dropdowneditor-field-before-template-wrapper {
+      min-width: 0;
+
+      contact-status.status-indicator {
+        display: flex;
+        align-items: center;
+      }
+
+      .status.contact-status {
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &:not(.dx-state-readonly) {
+    ::ng-deep .dx-dropdowneditor-field-before-template-wrapper .status.contact-status {
+      padding-left: var(--list-padding-left);
+    }
+  }
+}
+
 .contact-status .status-editor-field .status-indicator {
   align-self: flex-end;
 

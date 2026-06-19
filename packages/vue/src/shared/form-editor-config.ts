@@ -5,4 +5,4 @@ export const formEditorProps = {
   'value-change-event': 'keyup input change',
 };
 
-export const { 'value-change-event': _, ...formSelectBoxProps } = formEditorProps;
+export const { 'value-change-event': _, 'input-attr': __, ...formSelectBoxProps } = formEditorProps;

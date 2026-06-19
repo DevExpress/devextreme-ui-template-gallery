@@ -1,7 +1,6 @@
 import './PicturedItemSelectBox.scss';
 import React from 'react';
-import SelectBox from 'devextreme-react/select-box';
-import TextBox from 'devextreme-react/text-box';
+import SelectBox, { FieldAddons } from 'devextreme-react/select-box';
 
 interface PictureItemSelectBoxProps {
   value: string;
@@ -10,23 +9,21 @@ interface PictureItemSelectBoxProps {
   onValueChange?: (value) => void;
 }
 
-const fieldRender = (data) => {
-  return (
-    <div className='pictured-item-select-field'>
-      <img
-        alt={data.name}
-        className='pictured-item-image'
-        src={`data:image/png;base64,${data.image}`}
-      />
-      <TextBox
-        hoverStateEnabled={false}
-        inputAttr={{ picturedItemEditorInput: '' }}
-        readOnly
-        value={data.name}
-      />
-    </div>
-  );
+const displayExpr = (data?: Record<string, string> | string) => {
+  if (!data) return '';
+
+  return typeof data === 'string' ? data : data.name;
 };
+
+const fieldBeforeRender = (data?: Record<string, string>) => data
+  ? (
+    <img
+      alt={data.name}
+      className='pictured-item-image'
+      src={`data:image/png;base64,${data.image}`}
+    />
+  )
+  : null;
 
 const ItemRender = (data) => {
   return (
@@ -57,13 +54,15 @@ export const PicturedItemSelectBox = ({
       items={items}
       itemRender={ItemRender}
       valueExpr='name'
+      displayExpr={displayExpr}
       stylingMode='filled'
       labelMode='hidden'
       width='100%'
-      fieldRender={fieldRender}
       dropDownOptions={{
         wrapperAttr: { class: 'pictured-item-select-box-dropdown' },
       }}
-    />
+    >
+      <FieldAddons beforeRender={fieldBeforeRender} />
+    </SelectBox>
   );
 };

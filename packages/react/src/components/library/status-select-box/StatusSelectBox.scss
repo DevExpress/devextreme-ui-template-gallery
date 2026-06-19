@@ -1,5 +1,32 @@
 @use '../../../variables.scss' as *;
 
+.status-select-box {
+  .dx-dropdowneditor-field-before-template-wrapper {
+    min-width: 0;
+
+    .status.status-contact {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 400;
+      white-space: nowrap;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+        font-weight: 400;
+      }
+    }
+  }
+
+  &:not(.dx-state-readonly) {
+    .dx-dropdowneditor-field-before-template-wrapper {
+      .status.status-contact {
+        padding-left: var(--list-padding-left);
+      }
+    }
+  }
+}
+
 .dx-texteditor-with-floating-label .status-editor-field .status-indicator {
   align-self: flex-end;
 

@@ -58,6 +58,17 @@
   }
 
   .profile-card {
+    .profile-card-top-item {
+      display: flex;
+      min-height: 50px;
+
+      & > div {
+        display: flex;
+        flex-flow: column;
+        gap: 5px;
+      }
+    }
+
     .image-wrapper {
       flex: 0 0 44px;
       height: 44px;
@@ -105,6 +116,8 @@
     min-width: 100%;
 
     .basic-info-top-item {
+      flex: 1;
+
       form-photo {
         margin-right: var(--content-padding);
 

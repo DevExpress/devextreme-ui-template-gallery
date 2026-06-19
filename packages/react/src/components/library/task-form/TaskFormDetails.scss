@@ -1,3 +1,31 @@
 .task-form-details {
   min-height: 250px;
+
+  .task-details-select-box {
+    .dx-dropdowneditor-field-before-template-wrapper {
+      min-width: 0;
+
+      .item-field {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+
+        span {
+          display: inline-flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  &:not(.view-mode) {
+    .task-details-select-box {
+      .dx-dropdowneditor-field-before-template-wrapper {
+        .item-field {
+          padding-left: var(--list-padding-left);
+          padding-top: 15px;
+        }
+      }
+    }
+  }
 }
