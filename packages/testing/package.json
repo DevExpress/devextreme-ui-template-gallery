@@ -19,6 +19,6 @@
   "dependencies": {
     "luxon": "^3.7.2",
     "minimist": "^1.2.8",
-    "testcafe": "^3.7.4"
+    "testcafe": "^3.7.5"
   }
 }
