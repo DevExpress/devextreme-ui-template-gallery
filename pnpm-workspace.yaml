@@ -27,7 +27,6 @@ overrides:
   tmp@<0.2.7: ^0.2.7
   uuid@<11.1.1: ^11.1.1
   "webpack-dev-server@<5.2.5": ">=5.2.5"
-
   vite@>=7.0.0 <=7.3.4: ^7.3.5
 
 allowBuilds:
