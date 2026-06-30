@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/node": "^20.19.43",
+    "@types/node": "^24.0.0",
     "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
     "@vitejs/plugin-vue": "^5.2.4",
