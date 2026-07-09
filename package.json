@@ -30,6 +30,7 @@
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "@typescript-eslint/utils": "^8.61.1",
+    "@types/node": "^24.13.2",
     "devextreme-cli": "latest",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -55,9 +56,11 @@
     "vue-eslint-parser": "^9.4.3"
   },
   "dependencies": {
-    "devextreme": "25.2.4",
-    "devextreme-dist": "25.2.4",
-    "devextreme-themebuilder": "25.2.4",
+    "devextreme": "~26.1.3",
+    "devextreme-dist": "~26.1.3",
+    "devexpress-gantt": "^4.1.69",
+    "devextreme-schematics": "^1.15.0",
+    "devextreme-themebuilder": "~26.1.3",
     "eslint-config-devextreme": "1.1.6",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.8"
