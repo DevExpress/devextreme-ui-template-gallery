@@ -53,7 +53,12 @@ export const CreateAccountForm = ({
 
   return (
     <form className='create-account-form' onSubmit={onSubmit}>
-      <Form formData={formData.current} disabled={loading} labelLocation='top'>
+      <Form
+        labelLocation='top'
+        formData={formData.current}
+        disabled={loading}
+        showColonAfterLabel
+      >
         <Item
           dataField='email'
           editorType='dxTextBox'

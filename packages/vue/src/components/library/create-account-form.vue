@@ -7,6 +7,7 @@
       label-location="top"
       :form-data="formData"
       :disabled="loading"
+      :show-colon-after-label="true"
     >
       <dx-item
         data-field="email"
