@@ -15,7 +15,7 @@
   "dependencies": {
     "core-js": "^3.49.0",
     "devexpress-gantt": "^4.1.69",
-    "devextreme-vue": "25.2.4",
+    "devextreme-vue": "26.1.3",
     "dx-template-gallery-data": "workspace:*",
     "exceljs": "^3.10.0",
     "file-saver-es": "^2.0.5",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/node": "^20.19.43",
+    "@types/node": "^24.13.2",
     "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
     "@vitejs/plugin-vue": "^5.2.4",
@@ -35,7 +35,7 @@
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/test-utils": "^2.4.11",
     "devextreme-cli": "1.9.0",
-    "devextreme-themebuilder": "25.2.4",
+    "devextreme-themebuilder": "26.1.3",
     "eslint": "^9.39.4",
     "eslint-import-resolver-typescript": "^4.4.5",
     "eslint-plugin-import": "^2.32.0",
