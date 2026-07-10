@@ -20,12 +20,13 @@ overrides:
   "picomatch@>4.0.0": ^4.0.4
   "piscina@<5.1.5": ^5.1.5
   qs@>=6.11.1 <=6.15.1: ^6.15.2
+  sass: 1.101.0
   "serialize-javascript@<=7.0.2": 7.0.3
   "tar@<=7.5.10": ~7.5.11
   tmp@<0.2.7: ^0.2.7
   "underscore@<=1.13.7": 1.13.8
   uuid@<11.1.1: ^11.1.1
-  vite@>=7.0.0 <=7.3.4: ^7.3.5
+  vite: 7.3.6
   "webpack-dev-server@<5.2.5": ">=5.2.5"
   "ws@>=8.0.0 <8.20.1": ">=8.20.1"
 
@@ -40,7 +41,7 @@ allowBuilds:
 
 catalogs:
   angular:
-    devextreme-angular: ^25.2.8
+    devextreme-angular: ~26.1.3
     "@angular-devkit/build-angular": ^22.0.3
     "@angular-devkit/architect": ^0.2200.0
     "@angular-devkit/schematics": ^22.0.0
