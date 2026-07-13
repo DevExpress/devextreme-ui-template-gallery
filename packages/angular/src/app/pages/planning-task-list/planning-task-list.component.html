@@ -1,9 +1,9 @@
 <div class="view-wrapper list-page">
   <dx-toolbar class="theme-dependent">
-    <dxi-item location="before">
+    <dxi-toolbar-item location="before">
       <span class="toolbar-header">Tasks</span>
-    </dxi-item>
-    <dxi-item location="before">
+    </dxi-toolbar-item>
+    <dxi-toolbar-item location="before">
       <dx-tabs
         secondary="secondary"
         [width]="(screen.xSmallScreenChanged | async) ? 220 : 'auto'"
@@ -13,9 +13,9 @@
         [items]="taskPanelItems"
         (onItemClick)="tabValueChange($event)"
       ></dx-tabs>
-    </dxi-item>
+    </dxi-toolbar-item>
 
-    <dxi-item location="after" locateInMenu="auto">
+    <dxi-toolbar-item location="after" locateInMenu="auto">
       <dx-button
         icon="plus"
         text="Add Task"
@@ -23,9 +23,9 @@
         stylingMode="contained"
         (onClick)="addTask()"
       ></dx-button>
-    </dxi-item>
+    </dxi-toolbar-item>
 
-    <dxi-item
+    <dxi-toolbar-item
       location="after"
       locateInMenu="auto"
       widget="dxButton"
@@ -36,9 +36,9 @@
         onClick: refresh,
         stylingMode: 'text'
       }"
-    ></dxi-item>
+    ></dxi-toolbar-item>
 
-    <dxi-item
+    <dxi-toolbar-item
       location="after"
       locateInMenu="auto"
       widget="dxButton"
@@ -50,13 +50,13 @@
         onClick: chooseColumnDataGrid,
         stylingMode: 'text'
       }"
-    ></dxi-item>
+    ></dxi-toolbar-item>
 
-    <dxi-item location="after" locateInMenu="auto">
+    <dxi-toolbar-item location="after" locateInMenu="auto">
       <div class="separator"></div>
-    </dxi-item>
+    </dxi-toolbar-item>
 
-    <dxi-item
+    <dxi-toolbar-item
       location="after"
       locateInMenu="auto"
       widget="dxButton"
@@ -68,9 +68,9 @@
         onClick: exportToPdf,
         stylingMode: 'text'
       }"
-    ></dxi-item>
+    ></dxi-toolbar-item>
 
-    <dxi-item
+    <dxi-toolbar-item
       location="after"
       locateInMenu="auto"
       widget="dxButton"
@@ -82,9 +82,9 @@
         onClick: exportDataGridToXSLX,
         stylingMode: 'text'
       }"
-    ></dxi-item>
+    ></dxi-toolbar-item>
 
-    <dxi-item
+    <dxi-toolbar-item
       location="after"
       locateInMenu="auto"
       widget="dxTextBox"
@@ -94,7 +94,7 @@
         mode: 'search',
         onInput: searchDataGrid
       }"
-    ></dxi-item>
+    ></dxi-toolbar-item>
   </dx-toolbar>
   @if (taskCollections$ | async; as taskCollections) {
     @switch (displayTaskComponent) {

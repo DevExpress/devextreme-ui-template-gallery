@@ -16,7 +16,7 @@
       [class.view-mode]="!isEditing"
       [screenByWidth]="getSizeQualifier"
     >
-      <dxi-item [visible]="isCreateMode">
+      <dxi-form-item [visible]="isCreateMode">
         <div *dxTemplate>
           <form-textbox
             label="Subject"
@@ -24,15 +24,15 @@
             [isEditing]="isEditing"
           ></form-textbox>
         </div>
-      </dxi-item>
-      <dxi-item itemType="group">
-        <dxo-col-count-by-screen
+      </dxi-form-item>
+      <dxi-form-item itemType="group">
+        <dxo-form-col-count-by-screen
           [xs]="1"
           [sm]="2"
           [md]="2"
           [lg]="2"
-        ></dxo-col-count-by-screen>
-        <dxi-item cssClass="accent">
+        ></dxo-form-col-count-by-screen>
+        <dxi-form-item cssClass="accent">
           <div *dxTemplate>
             <form-textbox
               label="Company"
@@ -40,9 +40,9 @@
               [isEditing]="isEditing"
             ></form-textbox>
           </div>
-        </dxi-item>
+        </dxi-form-item>
 
-        <dxi-item cssClass="accent">
+        <dxi-form-item cssClass="accent">
           <div *dxTemplate>
             <form-textbox
               label="Assigned to"
@@ -50,9 +50,9 @@
               [isEditing]="isEditing"
             ></form-textbox>
           </div>
-        </dxi-item>
+        </dxi-form-item>
 
-        <dxi-item>
+        <dxi-form-item>
           <div *dxTemplate>
             <dx-select-box
               class="task-details-select-box"
@@ -83,9 +83,9 @@
               </div>
             </dx-select-box>
           </div>
-        </dxi-item>
+        </dxi-form-item>
 
-        <dxi-item>
+        <dxi-form-item>
           <div *dxTemplate>
             <dx-select-box
               class="task-details-select-box"
@@ -108,9 +108,9 @@
               </div>
             </dx-select-box>
           </div>
-        </dxi-item>
+        </dxi-form-item>
 
-        <dxi-item>
+        <dxi-form-item>
           <div *dxTemplate>
             <form-item-date
               label="Start Date"
@@ -118,9 +118,9 @@
               [(value)]="task.startDate"
             ></form-item-date>
           </div>
-        </dxi-item>
+        </dxi-form-item>
 
-        <dxi-item>
+        <dxi-form-item>
           <div *dxTemplate>
             <form-item-date
               label="Due Date"
@@ -128,9 +128,9 @@
               [(value)]="task.dueDate"
             ></form-item-date>
           </div>
-        </dxi-item>
-      </dxi-item>
-      <dxi-item>
+        </dxi-form-item>
+      </dxi-form-item>
+      <dxi-form-item>
         <div *dxTemplate>
           <dx-text-area
             label="Details"
@@ -140,7 +140,7 @@
             [elementAttr]="{ class: 'form-editor' }"
           ></dx-text-area>
         </div>
-      </dxi-item>
+      </dxi-form-item>
     </dx-form>
   }
 

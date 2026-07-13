@@ -1,10 +1,10 @@
 <dx-toolbar class="theme-dependent">
-  <dxi-item location="before">
+  <dxi-toolbar-item location="before">
     <span class="toolbar-header">{{ titleText }}</span>
-  </dxi-item>
+  </dxi-toolbar-item>
 
   @if (panelItems) {
-    <dxi-item location="before">
+    <dxi-toolbar-item location="before">
       <dx-tabs
         secondary="secondary"
         keyExpr="key"
@@ -15,10 +15,10 @@
         [items]="panelItems"
         (onSelectionChanged)="selectionChange($event)"
       ></dx-tabs>
-    </dxi-item>
+    </dxi-toolbar-item>
   }
 
-  <dxi-item location="after" locateInMenu="auto">
+  <dxi-toolbar-item location="after" locateInMenu="auto">
     <dx-button
       class="add-card"
       icon="plus"
@@ -26,9 +26,9 @@
       type="default"
       stylingMode="contained"
     ></dx-button>
-  </dxi-item>
+  </dxi-toolbar-item>
 
-  <dxi-item
+  <dxi-toolbar-item
     location="after"
     locateInMenu="auto"
     widget="dxButton"
@@ -38,13 +38,13 @@
       icon: 'refresh',
       stylingMode: 'text'
     }"
-  ></dxi-item>
+  ></dxi-toolbar-item>
 
-  <dxi-item location="after" locateInMenu="auto">
+  <dxi-toolbar-item location="after" locateInMenu="auto">
     <div class="separator"></div>
-  </dxi-item>
+  </dxi-toolbar-item>
 
-  <dxi-item
+  <dxi-toolbar-item
     location="after"
     locateInMenu="auto"
     widget="dxButton"
@@ -54,5 +54,5 @@
       text: 'Export',
       stylingMode: 'text'
     }"
-  ></dxi-item>
+  ></dxi-toolbar-item>
 </dx-toolbar>

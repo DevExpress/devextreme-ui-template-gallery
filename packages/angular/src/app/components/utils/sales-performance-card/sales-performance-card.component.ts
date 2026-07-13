@@ -30,8 +30,8 @@ export class SalesPerformanceCardComponent {
 
   @Output() performancePeriodChanged = new EventEmitter<DxDropDownButtonTypes.SelectionChangedEvent>();
 
-  customiseToolip({ seriesName }: { seriesName: string }) {
-    return { text: seriesName };
+  customiseToolip(pointInfo: { seriesName?: string }) {
+    return { text: pointInfo.seriesName ?? '' };
   }
 
   onDropDownSelectionChange(event: DxDropDownButtonTypes.SelectionChangedEvent) {

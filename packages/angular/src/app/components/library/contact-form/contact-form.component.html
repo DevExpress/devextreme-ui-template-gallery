@@ -16,91 +16,91 @@
         labelMode="floating"
         [class.view-mode]="!isEditing"
       >
-        <dxi-item itemType="group" [colCount]="2">
-          <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
-          <dxi-item>
+        <dxi-form-item itemType="group" [colCount]="2">
+          <dxo-form-col-count-by-screen [xs]="2"></dxo-form-col-count-by-screen>
+          <dxi-form-item>
             <div *dxTemplate>
               <form-photo [link]="contactData.image" [size]="184"></form-photo>
             </div>
-          </dxi-item>
-          <dxi-item itemType="group">
-            <dxi-item>
+          </dxi-form-item>
+          <dxi-form-item itemType="group">
+            <dxi-form-item>
               <status-select-box
                 *dxTemplate
                 classList="contact-status"
                 [(value)]="contactData.status"
                 [readOnly]="!isEditing"
               ></status-select-box>
-            </dxi-item>
+            </dxi-form-item>
 
-            <dxi-item>
+            <dxi-form-item>
               <form-textbox
                 *dxTemplate
                 label="First Name"
                 [(value)]="contactData.firstName"
                 [isEditing]="isEditing"
               ></form-textbox>
-            </dxi-item>
+            </dxi-form-item>
 
-            <dxi-item>
+            <dxi-form-item>
               <form-textbox
                 *dxTemplate
                 label="Last Name"
                 [(value)]="contactData.lastName"
                 [isEditing]="isEditing"
               ></form-textbox>
-            </dxi-item>
-          </dxi-item>
+            </dxi-form-item>
+          </dxi-form-item>
 
-          <dxi-item>
+          <dxi-form-item>
             <form-textbox
               *dxTemplate
               label="Position"
               [(value)]="contactData.position"
               [isEditing]="isEditing"
             ></form-textbox>
-          </dxi-item>
+          </dxi-form-item>
 
-          <dxi-item cssClass="accent">
+          <dxi-form-item cssClass="accent">
             <form-textbox
               *dxTemplate
               label="Assigned to"
               [(value)]="contactData.manager"
               [isEditing]="isEditing"
             ></form-textbox>
-          </dxi-item>
+          </dxi-form-item>
 
-          <dxi-item cssClass="accent" [colSpan]="2">
+          <dxi-form-item cssClass="accent" [colSpan]="2">
             <form-textbox
               *dxTemplate
               label="Company"
               [(value)]="contactData.company"
               [isEditing]="isEditing"
             ></form-textbox>
-          </dxi-item>
-        </dxi-item>
+          </dxi-form-item>
+        </dxi-form-item>
 
-        <dxi-item itemType="group" [colCount]="4" caption="Contacts">
-          <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
-          <dxi-item [colSpan]="4">
+        <dxi-form-item itemType="group" [colCount]="4" caption="Contacts">
+          <dxo-form-col-count-by-screen [xs]="2"></dxo-form-col-count-by-screen>
+          <dxi-form-item [colSpan]="4">
             <form-textbox
               *dxTemplate
               label="Address"
               [(value)]="contactData.address"
               [isEditing]="isEditing"
             ></form-textbox>
-          </dxi-item>
+          </dxi-form-item>
 
-          <dxi-item [colSpan]="2">
+          <dxi-form-item [colSpan]="2">
             <form-textbox
               *dxTemplate
               label="City"
               [(value)]="contactData.city"
               [isEditing]="isEditing"
             ></form-textbox>
-          </dxi-item>
+          </dxi-form-item>
 
-          <dxi-item>
+          <dxi-form-item>
             <dx-select-box
               *dxTemplate
               label="State"
@@ -112,9 +112,9 @@
               [searchEnabled]="true"
               [elementAttr]="{ class: 'form-editor' }"
             ></dx-select-box>
-          </dxi-item>
+          </dxi-form-item>
 
-          <dxi-item>
+          <dxi-form-item>
             <dx-number-box
               *dxTemplate
               label="Zip Code"
@@ -127,12 +127,12 @@
             >
               <dx-validator [validationRules]="[zipCodeValidator]"></dx-validator>
             </dx-number-box>
-          </dxi-item>
-        </dxi-item>
+          </dxi-form-item>
+        </dxi-form-item>
 
-        <dxi-item itemType="group" [colCount]="2" cssClass="contact-fields-group">
-          <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
-          <dxi-item>
+        <dxi-form-item itemType="group" [colCount]="2" cssClass="contact-fields-group">
+          <dxo-form-col-count-by-screen [xs]="2"></dxo-form-col-count-by-screen>
+          <dxi-form-item>
             <div *dxTemplate>
               <form-textbox
                 mask="(000) 000-0000"
@@ -150,9 +150,9 @@
                 [type]="'default'"
               ></dx-button>
             </div>
-          </dxi-item>
+          </dxi-form-item>
 
-          <dxi-item>
+          <dxi-form-item>
             <div *dxTemplate>
               <form-textbox
                 label="Email"
@@ -169,8 +169,8 @@
                 [type]="'default'"
               ></dx-button>
             </div>
-          </dxi-item>
-        </dxi-item>
+          </dxi-form-item>
+        </dxi-form-item>
       </dx-form>
     }
   </dx-validation-group>

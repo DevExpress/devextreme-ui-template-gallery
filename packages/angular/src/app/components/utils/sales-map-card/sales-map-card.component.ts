@@ -34,5 +34,7 @@ export class SalesMapCardComponent {
         text: arg.attribute('tooltip'),
       };
     }
+
+    return {};
   }
 }

@@ -1,7 +1,7 @@
 <header>
   <dx-toolbar class="header-toolbar">
     @if (menuToggleEnabled) {
-      <dxi-item
+      <dxi-toolbar-item
         location="before"
         widget="dxButton"
         cssClass="menu-button"
@@ -11,18 +11,18 @@
         onClick: toggleMenu
       }"
       >
-      </dxi-item>
+      </dxi-toolbar-item>
     }
     @if (title) {
-      <dxi-item
+      <dxi-toolbar-item
         location="before"
         cssClass="header-title"
         [text]="title"
       >
-      </dxi-item>
+      </dxi-toolbar-item>
     }
 
-    <dxi-item
+    <dxi-toolbar-item
       location="after"
       widget="dxTextBox"
       locateInMenu="auto"
@@ -34,23 +34,23 @@
         width: 180
       }"
     >
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="never">
+    </dxi-toolbar-item>
+    <dxi-toolbar-item location="after" locateInMenu="never">
       <div *dxTemplate>
         <theme-switcher></theme-switcher>
       </div>
-    </dxi-item>
+    </dxi-toolbar-item>
 
-    <dxi-item location="after">
+    <dxi-toolbar-item location="after">
       <div *dxTemplate>
         <div class="messages">
           <dx-button icon="belloutline" stylingMode="text"> </dx-button>
           <div class="dx-badge"> 4 </div>
         </div>
       </div>
-    </dxi-item>
+    </dxi-toolbar-item>
 
-    <dxi-item location="after" locateInMenu="auto" menuItemTemplate="menuItem">
+    <dxi-toolbar-item location="after" locateInMenu="auto" menuItemTemplate="menuItem">
       <div *dxTemplate>
         <user-panel
           [user]="user"
@@ -58,7 +58,7 @@
           menuMode="context"
         ></user-panel>
       </div>
-    </dxi-item>
+    </dxi-toolbar-item>
     <div *dxTemplate="let data of 'menuItem'">
       <user-panel
         [user]="user"

@@ -5,7 +5,7 @@
     [disabled]="loading()"
     [showColonAfterLabel]="true"
   >
-    <dxi-item
+    <dxi-form-item
       dataField="email"
       editorType="dxTextBox"
       [editorOptions]="{
@@ -13,30 +13,30 @@
         mode: 'email'
       }"
     >
-      <dxi-validation-rule
+      <dxi-form-validation-rule
         type="required"
         message="Email is required"
-      ></dxi-validation-rule>
-      <dxi-validation-rule
+      ></dxi-form-validation-rule>
+      <dxi-form-validation-rule
         type="email"
         message="Email is invalid"
-      ></dxi-validation-rule>
-      <dxo-label text="Email"></dxo-label>
-    </dxi-item>
+      ></dxi-form-validation-rule>
+      <dxo-form-label text="Email"></dxo-form-label>
+    </dxi-form-item>
 
-    <dxi-item
+    <dxi-form-item
       dataField="password"
       editorType="dxTextBox"
       [editorOptions]="passwordEditorOptions"
     >
-      <dxi-validation-rule
+      <dxi-form-validation-rule
         type="required"
         message="Password is required"
-      ></dxi-validation-rule>
-      <dxo-label text="Password"></dxo-label>
-    </dxi-item>
+      ></dxi-form-validation-rule>
+      <dxo-form-label text="Password"></dxo-form-label>
+    </dxi-form-item>
 
-    <dxi-item
+    <dxi-form-item
       dataField="rememberMe"
       editorType="dxCheckBox"
       [editorOptions]="{
@@ -44,19 +44,19 @@
         elementAttr: { class: 'form-text' }
       }"
     >
-      <dxo-label [visible]="false"></dxo-label>
-    </dxi-item>
+      <dxo-form-label [visible]="false"></dxo-form-label>
+    </dxi-form-item>
 
-    <dxi-item itemType="button">
-      <dxo-button-options
+    <dxi-form-item itemType="button">
+      <dxo-form-button-options
         width="100%"
         type="default"
         cssClass="btn-sign-in"
         [useSubmitBehavior]="true"
         [template]="'signInTemplate'"
       >
-      </dxo-button-options>
-    </dxi-item>
+      </dxo-form-button-options>
+    </dxi-form-item>
 
     <ng-container *dxTemplate="let item of 'signInTemplate'">
       <span class="dx-button-text">

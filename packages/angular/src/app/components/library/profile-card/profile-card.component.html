@@ -15,7 +15,7 @@
       (onFieldDataChanged)="onFieldChange()"
     >
       @for (item of items; track item.dataField) {
-        <dxi-item
+        <dxi-form-item
           [dataField]="item.dataField"
           [editorType]="item.editorType"
           [editorOptions]="
@@ -27,12 +27,12 @@
           [colSpan]="item.colSpan"
         >
           @if (item.label) {
-            <dxo-label [text]="item.label"> </dxo-label>
+            <dxo-form-label [text]="item.label"> </dxo-form-label>
           }
           @for (rule of item.validators ?? []; track rule.type) {
-            <dxi-validation-rule
+            <dxi-form-validation-rule
               [type]="rule.type"
-            ></dxi-validation-rule>
+            ></dxi-form-validation-rule>
           }
           @switch (item.dataField) {
             @case ('status') {
@@ -56,7 +56,7 @@
               ></pictured-item-select-box>
             }
           }
-        </dxi-item>
+        </dxi-form-item>
       }
     </dx-form>
   </div>

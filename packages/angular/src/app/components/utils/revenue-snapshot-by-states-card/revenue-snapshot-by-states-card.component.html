@@ -8,21 +8,21 @@
     [diameter]="0.8"
     [innerRadius]="0.6"
   >
-    <dxi-series argumentField="stateName" valueField="total">
-      <dxo-label
+    <dxi-pie-chart-series argumentField="stateName" valueField="total">
+      <dxo-pie-chart-label
         backgroundColor="none"
         [radialOffset]="-20"
         [visible]="true"
         [customizeText]="customizeSaleText"
       >
-        <dxo-font color="#757575" [size]="15"></dxo-font>
-      </dxo-label>
-    </dxi-series>
+        <dxo-pie-chart-font color="#757575" [size]="15"></dxo-pie-chart-font>
+      </dxo-pie-chart-label>
+    </dxi-pie-chart-series>
 
-    <dxo-legend>
-      <dxo-margin [top]="70"></dxo-margin>
-    </dxo-legend>
+    <dxo-pie-chart-legend>
+      <dxo-pie-chart-margin [top]="70"></dxo-pie-chart-margin>
+    </dxo-pie-chart-legend>
 
-    <dxo-size [height]="270"> </dxo-size>
+    <dxo-pie-chart-size [height]="270"> </dxo-pie-chart-size>
   </dx-pie-chart>
 </card-analytics>

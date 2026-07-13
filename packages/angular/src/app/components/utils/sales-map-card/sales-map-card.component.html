@@ -1,7 +1,7 @@
 <card-analytics titleText="Revenue by States" contentClass="sales-by-state-map">
   <dx-vector-map id="vector-map" [bounds]="[-118, 50, -80, 25]">
-    <dxi-layer [dataSource]="usaMap" [hoverEnabled]="false"></dxi-layer>
-    <dxi-layer
+    <dxi-vector-map-layer [dataSource]="usaMap" [hoverEnabled]="false"></dxi-vector-map-layer>
+    <dxi-vector-map-layer
       [dataSource]="data"
       [minSize]="20"
       [maxSize]="40"
@@ -10,17 +10,17 @@
       name="bubbles"
       elementType="bubble"
       dataField="value"
-    ></dxi-layer>
-    <dxo-tooltip
+    ></dxi-vector-map-layer>
+    <dxo-vector-map-tooltip
       [enabled]="true"
       [customizeTooltip]="customizeTooltip"
-    ></dxo-tooltip>
-    <dxi-legend
+    ></dxo-vector-map-tooltip>
+    <dxi-vector-map-legend
       markerShape="circle"
       [customizeText]="customizeLegendText"
       [customizeItems]="customizeItems"
     >
-      <dxo-source layer="bubbles" grouping="size"></dxo-source>
-    </dxi-legend>
+      <dxo-vector-map-source layer="bubbles" grouping="size"></dxo-vector-map-source>
+    </dxi-vector-map-legend>
   </dx-vector-map>
 </card-analytics>

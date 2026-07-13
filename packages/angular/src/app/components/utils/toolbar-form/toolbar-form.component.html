@@ -1,8 +1,8 @@
 <dx-toolbar>
-  <dxi-item location="before"
+  <dxi-toolbar-item location="before"
     ><span [class]="titleClass">Details</span>
-  </dxi-item>
-  <dxi-item location="after" locateInMenu="after" [visible]="!isEditing">
+  </dxi-toolbar-item>
+  <dxi-toolbar-item location="after" locateInMenu="auto" [visible]="!isEditing">
     <dx-button
       text="Edit"
       icon="edit"
@@ -10,21 +10,21 @@
       type="default"
       (onClick)="handleEditClick()"
     ></dx-button>
-  </dxi-item>
-  <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
+  </dxi-toolbar-item>
+  <dxi-toolbar-item location="after" locateInMenu="auto" [visible]="isEditing">
     <dx-button
       text="Save"
       stylingMode="contained"
       type="default"
       (onClick)="handleSaveButtonClick($event)"
     ></dx-button>
-  </dxi-item>
-  <dxi-item location="after" locateInMenu="after" [visible]="isEditing">
+  </dxi-toolbar-item>
+  <dxi-toolbar-item location="after" locateInMenu="auto" [visible]="isEditing">
     <dx-button
       text="Cancel"
       (onClick)="handleCancelEditClick()"
       stylingMode="outlined"
       type="normal"
     ></dx-button>
-  </dxi-item>
+  </dxi-toolbar-item>
 </dx-toolbar>

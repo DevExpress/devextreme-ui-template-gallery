@@ -5,21 +5,21 @@
       [(value)]="visualRange"
       (onValueChanged)="onRangeChanged($event)"
     >
-      <dxo-scale
+      <dxo-range-selector-scale
         minorTickInterval="day"
         tickInterval="month"
         valueType="datetime"
       >
-        <dxo-minor-tick [visible]="false"></dxo-minor-tick>
-        <dxo-marker [visible]="false"></dxo-marker>
-        <dxo-label format="MMM yyyy"></dxo-label>
-      </dxo-scale>
-      <dxo-size [height]="90"></dxo-size>
+        <dxo-range-selector-minor-tick [visible]="false"></dxo-range-selector-minor-tick>
+        <dxo-range-selector-marker [visible]="false"></dxo-range-selector-marker>
+        <dxo-range-selector-label format="MMM yyyy"></dxo-range-selector-label>
+      </dxo-range-selector-scale>
+      <dxo-range-selector-size [height]="90"></dxo-range-selector-size>
 
-      <dxo-chart>
-        <dxi-series type="line" argumentField="date" valueField="total">
-        </dxi-series>
-      </dxo-chart>
+      <dxo-range-selector-chart>
+        <dxi-range-selector-series type="line" argumentField="date" valueField="total">
+        </dxi-range-selector-series>
+      </dxo-range-selector-chart>
     </dx-range-selector>
   } @else {
   <dx-load-indicator class="centered"></dx-load-indicator>

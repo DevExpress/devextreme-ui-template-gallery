@@ -1,34 +1,34 @@
 <dx-scroll-view class="view-wrapper-scroll">
   <div class="view-wrapper">
     <dx-toolbar class="toolbar-details theme-dependent">
-      <dxi-item location="before">
+      <dxi-toolbar-item location="before">
         <dx-button
           icon="arrowleft"
           stylingMode="text"
           (onClick)="navigateBack()"
         >
         </dx-button>
-      </dxi-item>
-      <dxi-item location="before" [text]="contactName()"></dxi-item>
-      <dxi-item location="after" locateInMenu="auto">
+      </dxi-toolbar-item>
+      <dxi-toolbar-item location="before" [text]="contactName()"></dxi-toolbar-item>
+      <dxi-toolbar-item location="after" locateInMenu="auto">
         <dx-button
           text="Terminate"
           type="default"
           stylingMode="contained"
         ></dx-button>
-      </dxi-item>
-      <dxi-item location="after">
+      </dxi-toolbar-item>
+      <dxi-toolbar-item location="after">
         <dx-drop-down-button
           text="Actions"
           stylingMode="text"
           [items]="['Assign to Me', 'Archive']"
           [dropDownOptions]="{ width: 'auto' }"
         ></dx-drop-down-button>
-      </dxi-item>
-      <dxi-item location="after" locateInMenu="auto">
+      </dxi-toolbar-item>
+      <dxi-toolbar-item location="after" locateInMenu="auto">
         <div class="separator"></div>
-      </dxi-item>
-      <dxi-item
+      </dxi-toolbar-item>
+      <dxi-toolbar-item
         location="after"
         locateInMenu="auto"
         widget="dxButton"
@@ -38,8 +38,8 @@
           icon: 'copy',
           stylingMode: 'text'
         }"
-      ></dxi-item>
-      <dxi-item
+      ></dxi-toolbar-item>
+      <dxi-toolbar-item
         location="after"
         locateInMenu="auto"
         widget="dxButton"
@@ -50,7 +50,7 @@
           onClick: refresh,
           stylingMode: 'text'
         }"
-      ></dxi-item>
+      ></dxi-toolbar-item>
     </dx-toolbar>
 
     <div class="panels theme-dependent">
