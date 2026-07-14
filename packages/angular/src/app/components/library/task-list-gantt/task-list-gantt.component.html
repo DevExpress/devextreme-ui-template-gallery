@@ -4,42 +4,42 @@
   (onTaskClick)="navigateToDetails()"
   [height]="700"
 >
-  <dxo-tasks
+  <dxo-gantt-tasks
     [dataSource]="dataSource"
     keyExpr="taskId"
     startExpr="startDate"
     endExpr="dueDate"
     titleExpr="text"
   >
-  </dxo-tasks>
+  </dxo-gantt-tasks>
 
-  <dxi-column dataField="text" caption="Subject" [width]="300"></dxi-column>
-  <dxi-column
+  <dxi-gantt-column dataField="text" caption="Subject" [width]="300"></dxi-gantt-column>
+  <dxi-gantt-column
     dataField="startDate"
     caption="Start Date"
     dataType="date"
     sortOrder="asc"
-  ></dxi-column>
-  <dxi-column
+  ></dxi-gantt-column>
+  <dxi-gantt-column
     dataField="dueDate"
     caption="Due Date"
     dataType="date"
-  ></dxi-column>
+  ></dxi-gantt-column>
 
-  <dxo-toolbar>
-    <dxi-item name="undo" [options]="{ icon: 'revert' }"></dxi-item>
-    <dxi-item name="redo" [options]="{ icon: 'redo' }"></dxi-item>
-    <dxi-item name="separator"></dxi-item>
-    <dxi-item name="collapseAll" [options]="{ icon: 'arrowdown' }"></dxi-item>
-    <dxi-item name="expandAll" [options]="{ icon: 'arrowup' }"></dxi-item>
-    <dxi-item name="separator"></dxi-item>
-    <dxi-item name="addTask" [options]="{ icon: 'add' }"></dxi-item>
-    <dxi-item name="deleteTask" [options]="{ icon: 'trash' }"></dxi-item>
-    <dxi-item name="separator"></dxi-item>
-    <dxi-item name="zoomIn" [options]="{ icon: 'zoominoutline' }"></dxi-item>
-    <dxi-item name="zoomOut" [options]="{ icon: 'zoomoutoutline' }"></dxi-item>
-  </dxo-toolbar>
+  <dxo-gantt-toolbar>
+    <dxi-gantt-item name="undo" [options]="{ icon: 'revert' }"></dxi-gantt-item>
+    <dxi-gantt-item name="redo" [options]="{ icon: 'redo' }"></dxi-gantt-item>
+    <dxi-gantt-item name="separator"></dxi-gantt-item>
+    <dxi-gantt-item name="collapseAll" [options]="{ icon: 'arrowdown' }"></dxi-gantt-item>
+    <dxi-gantt-item name="expandAll" [options]="{ icon: 'arrowup' }"></dxi-gantt-item>
+    <dxi-gantt-item name="separator"></dxi-gantt-item>
+    <dxi-gantt-item name="addTask" [options]="{ icon: 'add' }"></dxi-gantt-item>
+    <dxi-gantt-item name="deleteTask" [options]="{ icon: 'trash' }"></dxi-gantt-item>
+    <dxi-gantt-item name="separator"></dxi-gantt-item>
+    <dxi-gantt-item name="zoomIn" [options]="{ icon: 'zoominoutline' }"></dxi-gantt-item>
+    <dxi-gantt-item name="zoomOut" [options]="{ icon: 'zoomoutoutline' }"></dxi-gantt-item>
+  </dxo-gantt-toolbar>
 
-  <dxo-validation [autoUpdateParentTasks]="true"></dxo-validation>
-  <dxo-editing [enabled]="true"></dxo-editing>
+  <dxo-gantt-validation [autoUpdateParentTasks]="true"></dxo-gantt-validation>
+  <dxo-gantt-editing [enabled]="true"></dxo-gantt-editing>
 </dx-gantt>

@@ -5,30 +5,30 @@
       [dataSource]="currentTasks"
       [columnAutoWidth]="true"
     >
-      <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
+      <dxo-data-grid-selection mode="multiple" showCheckBoxesMode="always"></dxo-data-grid-selection>
 
-      <dxo-row-dragging
+      <dxo-data-grid-row-dragging
         [allowReordering]="true"
-        [onReorder]="onReorder"
+        [onReorder]="$any(onReorder)"
         [showDragIcons]="true"
-      ></dxo-row-dragging>
+      ></dxo-data-grid-row-dragging>
 
-      <dxi-column
+      <dxi-data-grid-column
         dataField="text"
         caption="Subject"
         [hidingPriority]="3"
-      ></dxi-column>
-      <dxi-column
+      ></dxi-data-grid-column>
+      <dxi-data-grid-column
         dataField="date"
         dataType="date"
         caption="Due Date"
         [hidingPriority]="1"
-      ></dxi-column>
-      <dxi-column
+      ></dxi-data-grid-column>
+      <dxi-data-grid-column
         caption="Assigned To"
         dataField="manager"
         [hidingPriority]="0"
-      ></dxi-column>
+      ></dxi-data-grid-column>
     </dx-data-grid>
   }
 

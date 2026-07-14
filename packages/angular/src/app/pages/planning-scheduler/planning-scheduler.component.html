@@ -42,16 +42,16 @@
         (onAppointmentTooltipShowing)="onAppointmentTooltipShowing($event)"
         (onCellClick)="onCellClick($event)"
       >
-        <dxi-resource
+        <dxi-scheduler-resource
           fieldExpr="calendarId"
           label="Calendar"
           [dataSource]="resourcesList"
         >
-        </dxi-resource>
-        <dxi-view type="day"></dxi-view>
-        <dxi-view type="workWeek"></dxi-view>
-        <dxi-view type="month"></dxi-view>
-        <dxi-view type="agenda"></dxi-view>
+        </dxi-scheduler-resource>
+        <dxi-scheduler-view type="day"></dxi-scheduler-view>
+        <dxi-scheduler-view type="workWeek"></dxi-scheduler-view>
+        <dxi-scheduler-view type="month"></dxi-scheduler-view>
+        <dxi-scheduler-view type="agenda"></dxi-scheduler-view>
       </dx-scheduler>
       @if (selectedAppointment) {
         <dx-tooltip

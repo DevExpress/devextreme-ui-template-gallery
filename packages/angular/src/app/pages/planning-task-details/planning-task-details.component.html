@@ -1,27 +1,27 @@
 <dx-scroll-view class="view-wrapper-scroll">
   <div class="view-wrapper">
     <dx-toolbar class="toolbar-details theme-dependent">
-      <dxi-item location="before">
+      <dxi-toolbar-item location="before">
         <dx-button
           icon="arrowleft"
           stylingMode="text"
           (onClick)="navigateBack()"
         >
         </dx-button>
-      </dxi-item>
-      <dxi-item location="before" [text]="taskName()"></dxi-item>
-      <dxi-item location="after" locateInMenu="auto">
+      </dxi-toolbar-item>
+      <dxi-toolbar-item location="before" [text]="taskName()"></dxi-toolbar-item>
+      <dxi-toolbar-item location="after" locateInMenu="auto">
         <dx-drop-down-button
           text="Actions"
           stylingMode="text"
           [dropDownOptions]="{ width: 'auto' }"
         >
-          <dxi-item text="Duplicate"></dxi-item>
-          <dxi-item text="Close"></dxi-item>
-          <dxi-item text="Delete"></dxi-item>
+          <dxi-drop-down-button-item text="Duplicate"></dxi-drop-down-button-item>
+          <dxi-drop-down-button-item text="Close"></dxi-drop-down-button-item>
+          <dxi-drop-down-button-item text="Delete"></dxi-drop-down-button-item>
         </dx-drop-down-button>
-      </dxi-item>
-      <dxi-item
+      </dxi-toolbar-item>
+      <dxi-toolbar-item
         location="after"
         locateInMenu="auto"
         widget="dxButton"
@@ -31,8 +31,8 @@
           icon: 'attach',
           stylingMode: 'text'
         }"
-      ></dxi-item>
-      <dxi-item
+      ></dxi-toolbar-item>
+      <dxi-toolbar-item
         location="after"
         locateInMenu="auto"
         widget="dxButton"
@@ -43,7 +43,7 @@
           onClick: refresh,
           stylingMode: 'text'
         }"
-      ></dxi-item>
+      ></dxi-toolbar-item>
     </dx-toolbar>
 
     <div class="panels">
@@ -64,25 +64,25 @@
             [deferRendering]="false"
           >
             @if (task(); as currentTask) {
-              <dxi-item title="Activities">
+              <dxi-tab-panel-item title="Activities">
                 <card-activities
                   [isLoading]="isLoading()"
                   [activities]="currentTask.activities"
                   [showBy]="true"
                 ></card-activities>
-              </dxi-item>
-              <dxi-item title="Notes">
+              </dxi-tab-panel-item>
+              <dxi-tab-panel-item title="Notes">
                 <card-notes
                   [items]="currentTask.notes"
                   [user]="currentTask.owner"
                 ></card-notes>
-              </dxi-item>
-              <dxi-item title="Messages">
+              </dxi-tab-panel-item>
+              <dxi-tab-panel-item title="Messages">
                 <card-messages
                   [items]="currentTask.messages"
                   [user]="currentTask.owner"
                 ></card-messages>
-              </dxi-item>
+              </dxi-tab-panel-item>
             }
           </dx-tab-panel>
         </div>

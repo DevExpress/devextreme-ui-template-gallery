@@ -4,27 +4,27 @@
     [focusStateEnabled]="false"
     [showNavButtons]="true"
   >
-    <dxi-item title="Tasks">
+    <dxi-tab-panel-item title="Tasks">
       <card-tasks [tasks]="tasks" [isLoading]="isLoading"></card-tasks>
-    </dxi-item>
-    <dxi-item title="Activities">
+    </dxi-tab-panel-item>
+    <dxi-tab-panel-item title="Activities">
       <card-activities
         [activities]="activities"
         [showBy]="true"
         [isLoading]="isLoading"
       ></card-activities>
-    </dxi-item>
-    <dxi-item title="Opportunities">
+    </dxi-tab-panel-item>
+    <dxi-tab-panel-item title="Opportunities">
       <card-opportunities
         [openedOpportunities]="activeOpportunities"
         [closedOpportunities]="closedOpportunities"
       ></card-opportunities>
-    </dxi-item>
-    <dxi-item title="Notes">
+    </dxi-tab-panel-item>
+    <dxi-tab-panel-item title="Notes">
       <card-notes [user]="contactName" [items]="notes"></card-notes>
-    </dxi-item>
-    <dxi-item title="Messages">
+    </dxi-tab-panel-item>
+    <dxi-tab-panel-item title="Messages">
       <card-messages [user]="contactName" [items]="messages"></card-messages>
-    </dxi-item>
+    </dxi-tab-panel-item>
   </dx-tab-panel>
 </div>

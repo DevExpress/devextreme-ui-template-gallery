@@ -1,9 +1,9 @@
 <div class="view-wrapper">
   <dx-toolbar class="theme-dependent" [class.scrolled]="isContentScrolled()">
-    <dxi-item location="before">
+    <dxi-toolbar-item location="before">
       <div class="header-text">User Profile</div>
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="never">
+    </dxi-toolbar-item>
+    <dxi-toolbar-item location="after" locateInMenu="never">
       <dx-button
         text="Cancel"
         stylingMode="outlined"
@@ -12,8 +12,8 @@
         (onClick)="cancel()"
       >
       </dx-button>
-    </dxi-item>
-    <dxi-item location="after" locateInMenu="never">
+    </dxi-toolbar-item>
+    <dxi-toolbar-item location="after" locateInMenu="never">
       <dx-button
         [disabled]="!isDataChanged()"
         text="Save"
@@ -23,7 +23,7 @@
         (onClick)="save()"
       >
       </dx-button>
-    </dxi-item>
+    </dxi-toolbar-item>
   </dx-toolbar>
 
   <dx-load-panel

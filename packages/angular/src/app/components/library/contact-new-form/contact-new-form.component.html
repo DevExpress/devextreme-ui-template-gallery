@@ -1,26 +1,26 @@
 <dx-form class="plain-styled-form" [screenByWidth]="getSizeQualifier">
-  <dxi-item itemType="group">
-    <dxo-col-count-by-screen
+  <dxi-form-item itemType="group">
+    <dxo-form-col-count-by-screen
       [xs]="1"
       [sm]="1"
       [md]="1"
       [lg]="1"
-    ></dxo-col-count-by-screen>
-    <dxi-item class="uploader">
+    ></dxo-form-col-count-by-screen>
+    <dxi-form-item class="uploader">
       <div *dxTemplate>
         <form-photo-uploader></form-photo-uploader>
       </div>
-    </dxi-item>
-  </dxi-item>
+    </dxi-form-item>
+  </dxi-form-item>
 
-  <dxi-item itemType="group">
-    <dxo-col-count-by-screen
+  <dxi-form-item itemType="group">
+    <dxo-form-col-count-by-screen
       [xs]="1"
       [sm]="2"
       [md]="2"
       [lg]="2"
-    ></dxo-col-count-by-screen>
-    <dxi-item>
+    ></dxo-form-col-count-by-screen>
+    <dxi-form-item>
       <div *dxTemplate>
         <form-textbox
           label="First Name"
@@ -29,8 +29,8 @@
         >
         </form-textbox>
       </div>
-    </dxi-item>
-    <dxi-item>
+    </dxi-form-item>
+    <dxi-form-item>
       <div *dxTemplate>
         <form-textbox
           label="Last Name"
@@ -39,8 +39,8 @@
         >
         </form-textbox>
       </div>
-    </dxi-item>
-    <dxi-item>
+    </dxi-form-item>
+    <dxi-form-item>
       <div *dxTemplate>
         <form-textbox
           label="Company"
@@ -49,8 +49,8 @@
         >
         </form-textbox>
       </div>
-    </dxi-item>
-    <dxi-item>
+    </dxi-form-item>
+    <dxi-form-item>
       <div *dxTemplate>
         <form-textbox
           label="Position"
@@ -59,17 +59,17 @@
         >
         </form-textbox>
       </div>
-    </dxi-item>
-  </dxi-item>
+    </dxi-form-item>
+  </dxi-form-item>
 
-  <dxi-item itemType="group" cssClass="contact-fields-group">
-    <dxo-col-count-by-screen
+  <dxi-form-item itemType="group" cssClass="contact-fields-group">
+    <dxo-form-col-count-by-screen
       [xs]="1"
       [sm]="2"
       [md]="2"
       [lg]="2"
-    ></dxo-col-count-by-screen>
-    <dxi-item>
+    ></dxo-form-col-count-by-screen>
+    <dxi-form-item>
       <div *dxTemplate>
         <form-textbox
           label="Assigned to"
@@ -78,8 +78,8 @@
         >
         </form-textbox>
       </div>
-    </dxi-item>
-    <dxi-item>
+    </dxi-form-item>
+    <dxi-form-item>
       <div *dxTemplate>
         <form-textbox
           icon="tel"
@@ -90,8 +90,8 @@
         >
         </form-textbox>
       </div>
-    </dxi-item>
-    <dxi-item>
+    </dxi-form-item>
+    <dxi-form-item>
       <div *dxTemplate>
         <form-textbox
           icon="email"
@@ -101,8 +101,8 @@
           [isEditing]="true"
         ></form-textbox>
       </div>
-    </dxi-item>
-    <dxi-item>
+    </dxi-form-item>
+    <dxi-form-item>
       <div *dxTemplate>
         <form-textbox
           icon="home"
@@ -111,6 +111,6 @@
           [isEditing]="true"
         ></form-textbox>
       </div>
-    </dxi-item>
-  </dxi-item>
+    </dxi-form-item>
+  </dxi-form-item>
 </dx-form>

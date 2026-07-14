@@ -115,7 +115,7 @@ export class CrmContactListComponent {
     }
   };
 
-  customizePhoneCell = ({ value }: { value?: number }) => value ? formatPhone(value) : undefined;
+  customizePhoneCell = ({ value }: { value?: number }) => value ? formatPhone(value) : '';
 
   onExporting(e: DxDataGridTypes.ExportingEvent) {
     if (e.format === 'pdf') {

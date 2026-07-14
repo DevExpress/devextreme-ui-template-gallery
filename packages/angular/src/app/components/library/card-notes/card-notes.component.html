@@ -3,11 +3,11 @@
     <div class="input-content">
       <dx-text-area label="New Note" stylingMode="filled" [(value)]="nodeText">
         <dx-validator>
-          <dxi-validation-rule type="required"></dxi-validation-rule>
+          <dxi-validator-validation-rule type="required"></dxi-validator-validation-rule>
         </dx-validator>
       </dx-text-area>
       <dx-toolbar>
-        <dxi-item
+        <dxi-toolbar-item
           location="after"
           widget="dxButton"
           [options]="{
@@ -17,7 +17,7 @@
             onClick: add
           }"
         >
-        </dxi-item>
+        </dxi-toolbar-item>
       </dx-toolbar>
     </div>
     <div class="messages-content">

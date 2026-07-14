@@ -2,26 +2,26 @@
   <div class="data-wrapper">
     @if (!isLoading() && formData(); as form) {
       <dx-toolbar class="panel-toolbar">
-        <dxi-item location="before">
+        <dxi-toolbar-item location="before">
           <span class="contact-name value">{{ form.name }}</span>
-        </dxi-item>
-        <dxi-item location="before">
+        </dxi-toolbar-item>
+        <dxi-toolbar-item location="before">
           <contact-status [value]="form.status"></contact-status>
-        </dxi-item>
-        <dxi-item location="after" [visible]="isPinEnabled()">
+        </dxi-toolbar-item>
+        <dxi-toolbar-item location="after" [visible]="isPinEnabled()">
           <dx-button
             stylingMode="text"
             [icon]="pinned() ? 'pin' : 'unpin'"
             (onClick)="onPinClick()"
           ></dx-button>
-        </dxi-item>
-        <dxi-item location="after">
+        </dxi-toolbar-item>
+        <dxi-toolbar-item location="after">
           <dx-button
             icon="close"
             stylingMode="text"
             (onClick)="onClosePanel()"
           ></dx-button>
-        </dxi-item>
+        </dxi-toolbar-item>
       </dx-toolbar>
 
       <dx-scroll-view class="panel-scroll">
@@ -32,16 +32,16 @@
               labelMode="floating"
               [class.view-mode]="!isEditing()"
             >
-              <dxi-item itemType="group" [colCount]="2" cssClass="photo-row">
-                <dxo-col-count-by-screen [xs]="2"></dxo-col-count-by-screen>
-                <dxi-item cssClass="photo-box">
+              <dxi-form-item itemType="group" [colCount]="2" cssClass="photo-row">
+                <dxo-form-col-count-by-screen [xs]="2"></dxo-form-col-count-by-screen>
+                <dxi-form-item cssClass="photo-box">
                   <div *dxTemplate>
                     <form-photo [link]="form.image"></form-photo>
                   </div>
-                </dxi-item>
+                </dxi-form-item>
 
-                <dxi-item itemType="group">
-                  <dxi-item cssClass="accent">
+                <dxi-form-item itemType="group">
+                  <dxi-form-item cssClass="accent">
                     <div *dxTemplate>
                       <form-textbox
                         label="Company"
@@ -49,9 +49,9 @@
                         [isEditing]="isEditing()"
                       ></form-textbox>
                     </div>
-                  </dxi-item>
+                  </dxi-form-item>
 
-                  <dxi-item>
+                  <dxi-form-item>
                     <div *dxTemplate>
                       <form-textbox
                         label="Position"
@@ -59,9 +59,9 @@
                         [isEditing]="isEditing()"
                       ></form-textbox>
                     </div>
-                  </dxi-item>
+                  </dxi-form-item>
 
-                  <dxi-item cssClass="accent">
+                  <dxi-form-item cssClass="accent">
                     <div *dxTemplate>
                       <form-textbox
                         label="Assigned to"
@@ -69,12 +69,12 @@
                         [isEditing]="isEditing()"
                       ></form-textbox>
                     </div>
-                  </dxi-item>
-                </dxi-item>
-              </dxi-item>
+                  </dxi-form-item>
+                </dxi-form-item>
+              </dxi-form-item>
 
-              <dxi-item itemType="group" cssClass="contact-fields-group">
-                <dxi-item>
+              <dxi-form-item itemType="group" cssClass="contact-fields-group">
+                <dxi-form-item>
                   <div *dxTemplate>
                     <form-textbox
                       icon="tel"
@@ -84,8 +84,8 @@
                     >
                     </form-textbox>
                   </div>
-                </dxi-item>
-                <dxi-item>
+                </dxi-form-item>
+                <dxi-form-item>
                   <div *dxTemplate>
                     <form-textbox
                       icon="email"
@@ -94,8 +94,8 @@
                       [validators]="[{ type: 'email' }]"
                     ></form-textbox>
                   </div>
-                </dxi-item>
-                <dxi-item>
+                </dxi-form-item>
+                <dxi-form-item>
                   <div *dxTemplate>
                     <form-textbox
                       icon="home"
@@ -105,14 +105,14 @@
                     >
                     </form-textbox>
                   </div>
-                </dxi-item>
-              </dxi-item>
+                </dxi-form-item>
+              </dxi-form-item>
             </dx-form>
           </div>
 
           <div class="data-part data-part-toolbar border">
             <dx-toolbar>
-              <dxi-item location="after" [visible]="!isEditing()">
+              <dxi-toolbar-item location="after" [visible]="!isEditing()">
                 <dx-button
                   text="Edit"
                   icon="edit"
@@ -121,8 +121,8 @@
                   (onClick)="toggleEdit()"
                 >
                 </dx-button>
-              </dxi-item>
-              <dxi-item location="after" [visible]="!isEditing()">
+              </dxi-toolbar-item>
+              <dxi-toolbar-item location="after" [visible]="!isEditing()">
                 <dx-button
                   text="Details"
                   stylingMode="outlined"
@@ -130,10 +130,10 @@
                   (onClick)="navigateToDetails()"
                 >
                 </dx-button>
-              </dxi-item>
-              <dxi-item
+              </dxi-toolbar-item>
+              <dxi-toolbar-item
                 location="after"
-                locateInMenu="after"
+                locateInMenu="never"
                 [visible]="isEditing()"
               >
                 <dx-button
@@ -144,10 +144,10 @@
                   (onClick)="onSaveClick($event)"
                 >
                 </dx-button>
-              </dxi-item>
-              <dxi-item
+              </dxi-toolbar-item>
+              <dxi-toolbar-item
                 location="after"
-                locateInMenu="after"
+                locateInMenu="never"
                 [visible]="isEditing()"
               >
                 <dx-button
@@ -156,8 +156,8 @@
                   type="normal"
                   (onClick)="cancelHandler()"
                 ></dx-button>
-              </dxi-item>
-              <dxi-item
+              </dxi-toolbar-item>
+              <dxi-toolbar-item
                 location="before"
                 widget="dxDropDownButton"
                 [options]="{
@@ -172,7 +172,7 @@
                     'Schedule a Meeting'
                   ]
                 }"
-              ></dxi-item>
+              ></dxi-toolbar-item>
             </dx-toolbar>
           </div>
         </dx-validation-group>
@@ -183,7 +183,7 @@
               <span>{{ t.title }}</span>
             </div>
 
-            <dxi-item title="Opportunities">
+            <dxi-accordion-item title="Opportunities">
               <div *dxTemplate="let i of 'item'">
                 @for (opportunity of form.opportunities; track opportunity.name) {
                   <div class="opportunities">
@@ -196,13 +196,13 @@
                   </div>
                 }
               </div>
-            </dxi-item>
+            </dxi-accordion-item>
 
-            <dxi-item title="Activities">
+            <dxi-accordion-item title="Activities">
               <card-activities
                 [activities]="form.activities"
               ></card-activities>
-            </dxi-item>
+            </dxi-accordion-item>
           </dx-accordion>
         </div>
       </dx-scroll-view>

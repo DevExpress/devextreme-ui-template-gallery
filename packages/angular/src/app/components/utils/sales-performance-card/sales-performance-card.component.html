@@ -11,26 +11,26 @@
   </div>
 
   <dx-chart [dataSource]="salesByDateAndCategory">
-    <dxo-argument-axis [visualRange]="visualRange"> </dxo-argument-axis>
-    <dxo-tooltip
+    <dxo-chart-argument-axis [visualRange]="visualRange"> </dxo-chart-argument-axis>
+    <dxo-chart-tooltip
       [enabled]="true"
       [customizeTooltip]="customiseToolip"
-    ></dxo-tooltip>
-    <dxo-series-template nameField="category"> </dxo-series-template>
+    ></dxo-chart-tooltip>
+    <dxo-chart-series-template nameField="category"> </dxo-chart-series-template>
 
-    <dxo-common-series-settings
+    <dxo-chart-common-series-settings
       argumentField="date"
       valueField="total"
       hoverMode="includePoints"
     >
-      <dxo-point hoverMode="allArgumentPoints"></dxo-point>
-    </dxo-common-series-settings>
+      <dxo-chart-point hoverMode="allArgumentPoints"></dxo-chart-point>
+    </dxo-chart-common-series-settings>
 
-    <dxo-argument-axis argumentType="datetime" [valueMarginsEnabled]="false">
-    </dxo-argument-axis>
+    <dxo-chart-argument-axis argumentType="datetime" [valueMarginsEnabled]="false">
+    </dxo-chart-argument-axis>
 
-    <dxo-legend [visible]="false"></dxo-legend>
+    <dxo-chart-legend [visible]="false"></dxo-chart-legend>
 
-    <dxo-size [height]="270"></dxo-size>
+    <dxo-chart-size [height]="270"></dxo-chart-size>
   </dx-chart>
 </card-analytics>

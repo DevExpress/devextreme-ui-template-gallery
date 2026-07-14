@@ -11,32 +11,32 @@
     (onRowClick)="rowClick($event)"
     (onExporting)="onExporting($event)"
   >
-    <dxo-load-panel [showPane]="false"></dxo-load-panel>
-    <dxo-scrolling mode="virtual"></dxo-scrolling>
-    <dxo-selection
+    <dxo-data-grid-load-panel [showPane]="false"></dxo-data-grid-load-panel>
+    <dxo-data-grid-scrolling mode="virtual"></dxo-data-grid-scrolling>
+    <dxo-data-grid-selection
       selectAllMode="allPages"
       showCheckBoxesMode="always"
       mode="multiple"
-    ></dxo-selection>
-    <dxo-sorting mode="multiple"></dxo-sorting>
-    <dxo-header-filter [visible]="true"></dxo-header-filter>
-    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-    <dxo-search-panel
+    ></dxo-data-grid-selection>
+    <dxo-data-grid-sorting mode="multiple"></dxo-data-grid-sorting>
+    <dxo-data-grid-header-filter [visible]="true"></dxo-data-grid-header-filter>
+    <dxo-data-grid-column-chooser [enabled]="true"></dxo-data-grid-column-chooser>
+    <dxo-data-grid-search-panel
       [visible]="true"
       placeholder="Contact Search"
-    ></dxo-search-panel>
-    <dxo-export
+    ></dxo-data-grid-search-panel>
+    <dxo-data-grid-export
       [enabled]="true"
       [allowExportSelectedData]="true"
       [formats]="['xlsx', 'pdf']"
     >
-    </dxo-export>
+    </dxo-data-grid-export>
 
-    <dxo-toolbar>
-      <dxi-item location="before">
+    <dxo-data-grid-toolbar>
+      <dxi-data-grid-item location="before">
         <div class="grid-header">Contacts</div>
-      </dxi-item>
-      <dxi-item location="before" locateInMenu="auto">
+      </dxi-data-grid-item>
+      <dxi-data-grid-item location="before" locateInMenu="auto">
         <dx-drop-down-button
           stylingMode="text"
           [useSelectMode]="true"
@@ -45,8 +45,8 @@
           [selectedItemKey]="filterStatusList[0]"
           (onSelectionChanged)="filterByStatus($event)"
         ></dx-drop-down-button>
-      </dxi-item>
-      <dxi-item location="after" locateInMenu="auto">
+      </dxi-data-grid-item>
+      <dxi-data-grid-item location="after" locateInMenu="auto">
         <dx-button
           text="Add Contact"
           icon="plus"
@@ -54,8 +54,8 @@
           stylingMode="contained"
           (onClick)="addContact()"
         ></dx-button>
-      </dxi-item>
-      <dxi-item
+      </dxi-data-grid-item>
+      <dxi-data-grid-item
         location="after"
         locateInMenu="auto"
         showText="inMenu"
@@ -66,56 +66,56 @@
           onClick: refresh,
           stylingMode: 'text'
         }"
-      ></dxi-item>
-      <dxi-item location="after" locateInMenu="auto">
+      ></dxi-data-grid-item>
+      <dxi-data-grid-item location="after" locateInMenu="auto">
         <div class="separator"></div>
-      </dxi-item>
-      <dxi-item name="exportButton"></dxi-item>
-      <dxi-item location="after" locateInMenu="auto">
+      </dxi-data-grid-item>
+      <dxi-data-grid-item name="exportButton"></dxi-data-grid-item>
+      <dxi-data-grid-item location="after" locateInMenu="auto">
         <div class="separator"></div>
-      </dxi-item>
-      <dxi-item name="columnChooserButton" locateInMenu="auto"></dxi-item>
-      <dxi-item name="searchPanel" locateInMenu="auto"></dxi-item>
-    </dxo-toolbar>
+      </dxi-data-grid-item>
+      <dxi-data-grid-item name="columnChooserButton" locateInMenu="auto"></dxi-data-grid-item>
+      <dxi-data-grid-item name="searchPanel" locateInMenu="auto"></dxi-data-grid-item>
+    </dxo-data-grid-toolbar>
 
-    <dxi-column
+    <dxi-data-grid-column
       dataField="name"
       caption="Name"
       sortOrder="asc"
       [hidingPriority]="5"
       [minWidth]="150"
       cellTemplate="name"
-    ></dxi-column>
-    <dxi-column
+    ></dxi-data-grid-column>
+    <dxi-data-grid-column
       dataField="company"
       caption="Company"
       [hidingPriority]="5"
       [minWidth]="150"
-    ></dxi-column>
-    <dxi-column
+    ></dxi-data-grid-column>
+    <dxi-data-grid-column
       dataField="status"
       caption="Status"
       cellTemplate="cellStatus"
       editCellTemplate="editCellStatus"
       [hidingPriority]="3"
       [minWidth]="100"
-    ></dxi-column>
-    <dxi-column
+    ></dxi-data-grid-column>
+    <dxi-data-grid-column
       dataField="assignedTo"
       caption="Assigned to"
       [hidingPriority]="4"
-    ></dxi-column>
-    <dxi-column
+    ></dxi-data-grid-column>
+    <dxi-data-grid-column
       dataField="phone"
       caption="Phone"
       [customizeText]="customizePhoneCell"
       [hidingPriority]="2"
-    ></dxi-column>
-    <dxi-column
+    ></dxi-data-grid-column>
+    <dxi-data-grid-column
       dataField="email"
       caption="Email"
       [hidingPriority]="1"
-    ></dxi-column>
+    ></dxi-data-grid-column>
 
     <div *dxTemplate="let cellInfo of 'name'" class="name-template">
       <div>
