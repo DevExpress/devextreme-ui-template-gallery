@@ -10,10 +10,10 @@ import {
 export const FormPhotoUploader = () => {
   const [isDropZoneActive, setDropZoneActive] = useState(false);
 
-  const uploaderZone = useRef();
+  const uploaderZone = useRef<Element | undefined>(undefined);
 
-  const getUploaderRef = useCallback((element) => {
-    uploaderZone.current = element;
+  const getUploaderRef = useCallback((element: Element | null) => {
+    uploaderZone.current = element ?? undefined;
   }, []);
 
   const onDropZoneEvent = useCallback(

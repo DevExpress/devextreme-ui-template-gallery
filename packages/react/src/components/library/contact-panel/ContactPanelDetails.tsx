@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import classNames from 'classnames';
 import { Button, ButtonTypes } from 'devextreme-react/button';
 import { ScrollView } from 'devextreme-react/scroll-view';

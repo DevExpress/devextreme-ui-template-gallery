@@ -22,7 +22,7 @@ export const ContactForm = ({
 }) => {
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState(data);
-  const dataRef = useRef<Contact>();
+  const dataRef = useRef<Contact | undefined>(undefined);
 
   useEffect(() => {
     setFormData(data);

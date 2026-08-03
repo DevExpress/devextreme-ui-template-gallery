@@ -46,18 +46,20 @@ export const SideNavigationMenu = (
   } = useNavigation();
 
   const treeViewRef = useRef<TreeViewRef>(null);
-  const wrapperRef = useRef();
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
   const getWrapperRef = useCallback(
-    (element) => {
+    (element: HTMLDivElement | null) => {
       const prevElement = wrapperRef.current;
       if (prevElement) {
         events.off(prevElement, 'dxclick');
       }
 
       wrapperRef.current = element;
-      events.on(element, 'dxclick', (e: React.PointerEvent) => {
-        openMenu(e);
-      });
+      if (element) {
+        events.on(element, 'dxclick', (e: React.PointerEvent) => {
+          openMenu(e);
+        });
+      }
     },
     [openMenu]
   );

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useContext } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 
 import { LoginOauth } from '../login-oauth/LoginOauth';
 import Button, { ButtonTypes } from 'devextreme-react/button';

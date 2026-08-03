@@ -21,7 +21,7 @@ export const TaskForm = ({
 }) => {
   const [data, setData] = useState(task);
   const [editing, setEditing] = useState(false);
-  const dataRef = useRef<Task>();
+  const dataRef = useRef<Task | undefined>(undefined);
 
   useEffect(() => {
     if (task) {

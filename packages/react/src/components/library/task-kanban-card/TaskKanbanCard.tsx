@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import notify from 'devextreme/ui/notify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import Button from 'devextreme-react/button';
 import { formatDate } from 'devextreme/localization';
