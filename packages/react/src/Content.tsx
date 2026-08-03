@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router';
 import { appInfo } from './app-info';
 import { appRoutes } from './app-routes';
 import { SideNavOuterToolbar as SideNavBarLayout } from './layouts';

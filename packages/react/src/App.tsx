@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HashRouter as Router, useLocation } from 'react-router-dom';
+import { HashRouter as Router, useLocation } from 'react-router';
 
 import LoadPanel from 'devextreme-react/load-panel';
 
