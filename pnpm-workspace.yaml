@@ -16,8 +16,6 @@ overrides:
   "hono@<4.12.34": ">=4.12.34"
   http-proxy-middleware@<3.0.6: ^3.0.6
   "ip-address@<=10.3.0": ">=10.3.1"
-  # less <4.7.0 pulls image-size, which has unpatched DoS advisories
-  # (GHSA-w3rx-r6r6-pgpr, GHSA-5p2g-fcmc-qvqq). 4.7.0+ uses probe-image-size.
   less@<4.7.0: ^4.8.1
   "minimatch@>=3.0.0 <3.1.4": 3.1.4
   "minimatch@>=9.0.0 <9.0.6": ^10.2.3
