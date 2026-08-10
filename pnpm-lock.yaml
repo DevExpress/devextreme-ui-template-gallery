@@ -115,8 +115,8 @@ importers:
         specifier: ~26.1.4
         version: 26.1.4
       devextreme-schematics:
-        specifier: ^1.15.0
-        version: 1.15.0(chokidar@4.0.3)
+        specifier: ^1.16.0
+        version: 1.16.0(chokidar@4.0.3)
       devextreme-themebuilder:
         specifier: ~26.1.4
         version: 26.1.4(bootstrap@5.3.8(@popperjs/core@2.11.8))
@@ -5377,6 +5377,9 @@ packages:
 
   devextreme-schematics@1.15.0:
     resolution: {integrity: sha512-XyWEtSiJ2EsYqPhtoDeFt9wP29Wei3XWwxYBMVUhyHvPwK0x7zzbMDlQEJkDa2wZ7ftyRPKYtoE6dMiKwLOyog==}
+
+  devextreme-schematics@1.16.0:
+    resolution: {integrity: sha512-efGWPnr8+QXfULCM5LkzjIx42R/1PX6lToTIFUvYwTzfFNDB9U4GF9x8so8scE0+gbCX82hHseersNUas4AGqg==}
 
   devextreme-screenshot-comparer@2.0.17:
     resolution: {integrity: sha512-vputWR6tJGlZcVvzMGMQve5DMWdPh+n8M3ctfBqxled08GueeH17vZHZ29N/DJLPSkoeKsy4Tvt3YLe3dGs1gg==}
@@ -15581,6 +15584,17 @@ snapshots:
       react-dom: 19.2.8(react@19.2.8)
 
   devextreme-schematics@1.15.0(chokidar@4.0.3):
+    dependencies:
+      '@angular-devkit/core': 19.2.27(chokidar@4.0.3)
+      '@angular-devkit/schematics': 19.2.27(chokidar@4.0.3)
+      '@schematics/angular': 19.2.27(chokidar@4.0.3)
+      parse5: 7.3.0
+      picomatch: 4.0.4
+      semver: 7.8.5
+    transitivePeerDependencies:
+      - chokidar
+
+  devextreme-schematics@1.16.0(chokidar@4.0.3):
     dependencies:
       '@angular-devkit/core': 19.2.27(chokidar@4.0.3)
       '@angular-devkit/schematics': 19.2.27(chokidar@4.0.3)
