@@ -15,8 +15,10 @@ overrides:
   "glob@>=10.0.0 <10.5.0": ~10.5.0
   "hono@<4.12.34": ">=4.12.34"
   http-proxy-middleware@<3.0.6: ^3.0.6
-  image-size@<=2.0.2: ^2.0.3
   "ip-address@<=10.3.0": ">=10.3.1"
+  # less <4.7.0 pulls image-size, which has unpatched DoS advisories
+  # (GHSA-w3rx-r6r6-pgpr, GHSA-5p2g-fcmc-qvqq). 4.7.0+ uses probe-image-size.
+  less@<4.7.0: ^4.8.1
   "minimatch@>=3.0.0 <3.1.4": 3.1.4
   "minimatch@>=9.0.0 <9.0.6": ^10.2.3
   nanoid@<3.3.16: ^3.3.16
@@ -71,9 +73,3 @@ catalogs:
     "@angular-eslint/template-parser": ^21.4.0
     "typescript": ~6.0.3
     "zone.js": ~0.16.2
-
-minimumReleaseAgeExclude:
-  - dompurify@3.4.13
-  - image-size@2.0.3
-  - nanoid@3.3.16
-  - nanoid@3.3.17
