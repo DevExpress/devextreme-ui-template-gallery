@@ -23,7 +23,7 @@
       />
       <dx-tooltip
         :enabled="true"
-        :customize-tooltip="pointInfo => ({ text: pointInfo['seriesName'] })"
+        :customize-tooltip="pointInfo => ({ text: pointInfo?.seriesName ?? '' })"
       />
       <dx-series-template name-field="category" />
 
