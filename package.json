@@ -56,11 +56,11 @@
     "vue-eslint-parser": "^9.4.3"
   },
   "dependencies": {
-    "devextreme": "~26.1.3",
-    "devextreme-dist": "~26.1.3",
+    "devextreme": "~26.1.4",
+    "devextreme-dist": "~26.1.4",
     "devexpress-gantt": "^4.1.69",
     "devextreme-schematics": "^1.15.0",
-    "devextreme-themebuilder": "~26.1.3",
+    "devextreme-themebuilder": "~26.1.4",
     "eslint-config-devextreme": "1.1.6",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.8"
