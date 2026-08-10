@@ -3,7 +3,7 @@
   contentClass="sales-by-state-and-city grid"
 >
   <dx-data-grid
-    [dataSource]="data"
+    [dataSource]="data ?? []"
     [height]="290"
     [loadPanel]="{ enabled: false }"
   >

@@ -61,7 +61,7 @@
     "devexpress-gantt": "^4.1.69",
     "devextreme-schematics": "^1.16.0",
     "devextreme-themebuilder": "~26.1.4",
-    "eslint-config-devextreme": "1.1.6",
+    "eslint-config-devextreme": "1.1.11",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.8"
   },

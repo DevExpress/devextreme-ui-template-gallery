@@ -1,6 +1,6 @@
 <card-analytics titleText="Revenue Analysis" contentClass="sales-by-state grid">
   <dx-data-grid
-    [dataSource]="data"
+    [dataSource]="data ?? []"
     [height]="290"
     [loadPanel]="{ enabled: false }"
   >
