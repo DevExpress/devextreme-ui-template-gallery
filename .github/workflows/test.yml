@@ -94,7 +94,7 @@ jobs:
       run: pnpm install --frozen-lockfile
 
     - name: Install Internal Packages
-      uses: DevExpress/github-actions/install-internal-package@main
+      uses: DevExpress/github-actions/install-internal-package@install-internal-package
       with:
         install-dist: true
 
