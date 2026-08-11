@@ -32,7 +32,7 @@
     "@vue/eslint-config-airbnb": "^7.0.1",
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/test-utils": "^2.4.11",
-    "devextreme-cli": "1.16.0",
+    "devextreme-cli": "1.17.0",
     "eslint": "^9.39.4",
     "eslint-import-resolver-typescript": "^4.4.5",
     "eslint-plugin-import": "^2.32.0",

@@ -31,7 +31,7 @@
     "@typescript-eslint/parser": "^5.62.0",
     "@typescript-eslint/utils": "^8.61.1",
     "@types/node": "^24.13.2",
-    "devextreme-cli": "latest",
+    "devextreme-cli": "1.17.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.1.0",
