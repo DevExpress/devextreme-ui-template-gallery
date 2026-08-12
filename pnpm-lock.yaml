@@ -76,7 +76,6 @@ overrides:
   '@hono/node-server@<2.0.5': ^2.0.5
   axios@>=1.0.0 <1.18.0: '>=1.18.0'
   brace-expansion@>=5.0.0 <5.0.6: '>=5.0.6'
-  dompurify@<=3.4.12: ^3.4.13
   esbuild@>=0.27.0 <0.28.1: ^0.28.1
   fast-uri@<=3.1.1: ~3.1.2
   fast-uri@>=4.0.0 <4.1.2: '>=4.1.2'
@@ -85,10 +84,9 @@ overrides:
   hono@<4.12.34: '>=4.12.34'
   http-proxy-middleware@<3.0.6: ^3.0.6
   ip-address@<=10.3.0: '>=10.3.1'
-  less@<4.7.0: ^4.8.1
+  less@<4.8.1: ^4.8.1
   minimatch@>=3.0.0 <3.1.4: 3.1.4
   minimatch@>=9.0.0 <9.0.6: ^10.2.3
-  nanoid@<3.3.17: ^3.3.17
   nth-check@<2.0.1: ~2.0.1
   picomatch@>4.0.0: ^4.0.4
   piscina@<5.1.5: ^5.1.5
@@ -149,8 +147,8 @@ importers:
         specifier: ^8.61.1
         version: 8.61.1(eslint@8.57.1)(typescript@5.8.3)
       devextreme-cli:
-        specifier: latest
-        version: 1.16.0
+        specifier: 1.17.0
+        version: 1.17.0
       eslint:
         specifier: ^8.57.1
         version: 8.57.1
@@ -436,8 +434,8 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(less@4.8.1)(sass-embedded@1.100.0)(sass@1.101.0)(terser@5.49.0))
       devextreme-cli:
-        specifier: 1.16.0
-        version: 1.16.0
+        specifier: 1.17.0
+        version: 1.17.0
       eslint-import-resolver-typescript:
         specifier: ^4.4.5
         version: 4.4.5(eslint-plugin-import@2.32.0)(eslint@8.57.1)
@@ -601,8 +599,8 @@ importers:
         specifier: ^2.4.11
         version: 2.4.11(@vue/compiler-dom@3.5.38)(@vue/server-renderer@3.5.38(vue@3.5.38(typescript@5.6.3)))(vue@3.5.38(typescript@5.6.3))
       devextreme-cli:
-        specifier: 1.16.0
-        version: 1.16.0
+        specifier: 1.17.0
+        version: 1.17.0
       eslint:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.7.0)
@@ -5352,8 +5350,8 @@ packages:
       '@angular/forms': '>=20.0.0'
       devextreme: 26.1.4
 
-  devextreme-cli@1.16.0:
-    resolution: {integrity: sha512-4m78pNYGA5f3nea6Yp1TkCtrpzcS4i7m/3tvabZW3bQcMpn5UqNjvd83917f+RPLRKWl1oaY/0ZURFOkt1xx3w==}
+  devextreme-cli@1.17.0:
+    resolution: {integrity: sha512-acPP/bebBdkrhaLm73oFpK/XprQM4Sf4+yogI5moAAsiyiJ1cjxZAcJ/hRAz2QHoU9UPw+twvRYAh6UsFoAN1Q==}
     engines: {node: '>20.19.0', npm: '>9.6.0', yarn: '>1.21'}
     hasBin: true
 
@@ -15514,7 +15512,7 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  devextreme-cli@1.16.0:
+  devextreme-cli@1.17.0:
     dependencies:
       '@yarnpkg/lockfile': 1.1.0
       import-cwd: 3.0.0
