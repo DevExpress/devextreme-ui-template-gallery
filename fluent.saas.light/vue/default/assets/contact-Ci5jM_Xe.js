@@ -1,0 +1,1 @@
+var e=[`Salaried`,`Commission`,`Terminated`],t={firstName:``,lastName:``,position:``,manager:``,company:``,phone:``,email:``,image:``,address:``};export{t as n,e as t};

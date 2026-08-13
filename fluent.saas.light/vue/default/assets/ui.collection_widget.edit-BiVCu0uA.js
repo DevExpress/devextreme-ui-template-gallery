@@ -1,0 +1,1 @@
+import{h as e}from"./scrollable-D6D1Uvcl.js";var t=e;export{t};
