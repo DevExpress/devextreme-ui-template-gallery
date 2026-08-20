@@ -62,7 +62,7 @@
         </dx-splitter>
       } @else {
         <ng-container *ngTemplateOutlet="dashboardContent"></ng-container>
-        @if (!chat.isPinned && !chat.isPopupVisible) {
+        @if (!chat.isPinned() && !chat.isPopupVisible) {
           <chat-floating-button
             (buttonClick)="chat.openPopup()"
           ></chat-floating-button>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { DxChatTypes } from 'devextreme-angular/ui/chat';
 import { DashboardContext, ConversationMessage, getAIResponse, ALERT_TIMEOUT } from './dashboard-ai.service';
 
@@ -25,7 +25,7 @@ export const createInitialMessages = (): Message[] => [];
 export class ChatAssistantService {
   isPopupVisible = false;
 
-  isPinned = false;
+  isPinned = signal(false);
 
   messages: Message[] = createInitialMessages();
 
@@ -92,7 +92,7 @@ export class ChatAssistantService {
   }
 
   openPopup() {
-    this.isPinned = false;
+    this.isPinned.set(false);
     this.isPopupVisible = true;
   }
 
@@ -102,16 +102,16 @@ export class ChatAssistantService {
 
   pinChat() {
     this.isPopupVisible = false;
-    this.isPinned = true;
+    this.isPinned.set(true);
   }
 
   unpinChat() {
-    this.isPinned = false;
+    this.isPinned.set(false);
     this.isPopupVisible = true;
   }
 
   closeChat() {
-    this.isPinned = false;
+    this.isPinned.set(false);
     this.isPopupVisible = false;
   }
 
