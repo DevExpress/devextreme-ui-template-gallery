@@ -83,7 +83,7 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
     ({ isLarge, isXLarge }) => {
       this.isLarge.set(isLarge || isXLarge);
 
-      if (!this.isLarge() && this.chat.isPinned) {
+      if (!this.isLarge() && this.chat.isPinned()) {
         this.chat.unpinChat();
       }
     }
@@ -101,7 +101,7 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
 
   isLoading = signal(true);
 
-  usesSplitterLayout = computed(() => this.chat.isPinned && this.isLarge());
+  usesSplitterLayout = computed(() => this.chat.isPinned() && this.isLarge());
 
   private periodName = analyticsPanelItems[4].text;
 
