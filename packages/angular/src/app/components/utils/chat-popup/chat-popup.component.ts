@@ -5,6 +5,7 @@ import {
   Input,
   OnDestroy,
   Output,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -73,13 +74,13 @@ export class ChatPopupComponent implements OnDestroy {
 
   private screen = inject(ScreenService);
 
-  private isLarge = this.screen.sizes['screen-large'];
+  isLarge = signal(this.screen.sizes['screen-large']);
 
   private screenSubscription: Subscription = this.screen.screenChanged.subscribe(({
     isLarge,
     isXLarge,
   }) => {
-    this.isLarge = isLarge || isXLarge;
+    this.isLarge.set(isLarge || isXLarge);
     this.popupAnimation = this.createPopupAnimation();
   });
 
@@ -116,7 +117,7 @@ export class ChatPopupComponent implements OnDestroy {
   }
 
   private createPopupAnimation(): PopupAnimation {
-    const duration = this.isLarge ? 300 : 0;
+    const duration = this.isLarge() ? 300 : 0;
 
     return {
       show: {

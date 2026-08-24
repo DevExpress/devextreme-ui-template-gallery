@@ -41,6 +41,7 @@ location="after">
         icon="pin"
         styling-mode="text"
         hint="Pin"
+        :visible="screenInfo.isLarge"
         :element-attr="{ class: 'chat-popup__pin-button' }"
         @click="$emit('pin-click')"
       />
