@@ -119,6 +119,7 @@ export const ChatPopup = memo(({
           icon='pin'
           stylingMode='text'
           hint='Pin'
+          visible={isLarge}
           elementAttr={PIN_BUTTON_ATTR}
           onClick={onPinClick}
         />
