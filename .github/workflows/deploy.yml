@@ -136,6 +136,9 @@ jobs:
         name: build-artifacts
         path: devextreme-ui-template-gallery
 
+    - name: Disable Jekyll processing
+      run: touch devextreme-ui-template-gallery/.nojekyll
+
     - name: Deploy in gh-pages
       uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
       with:
