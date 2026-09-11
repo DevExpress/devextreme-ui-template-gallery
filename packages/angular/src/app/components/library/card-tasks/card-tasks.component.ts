@@ -7,7 +7,7 @@ import {
   DxDataGridModule,
   DxLoadPanelModule,
 } from 'devextreme-angular';
-import { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
+import type { DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
 import { Task } from '../../../types/task';
 
 @Component({

@@ -5,6 +5,9 @@ import DataGrid, {
   RowDragging,
   Column,
 } from 'devextreme-react/data-grid';
+import type {
+  DataGridTypes,
+} from 'devextreme-react/data-grid';
 
 import { withLoadPanel } from '../../../utils/withLoadPanel';
 
@@ -16,7 +19,7 @@ const Grid = ({ tasks }: { tasks: Task[] }) => {
   const [gridData, setGridData] = useState(tasks);
 
   const onReorder = useCallback(
-    (e) => {
+    (e: DataGridTypes.RowDraggingReorderEvent) => {
       const visibleRows = e.component.getVisibleRows();
       const toIndex = gridData.indexOf(visibleRows[e.toIndex].data);
       const fromIndex = gridData.indexOf(e.itemData);
