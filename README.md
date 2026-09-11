@@ -37,13 +37,13 @@ To run these UI templates on your machine, clone this repository and run the fol
 
     pnpm install
     cd packages/react
-    pnpm start
+    pnpm dev
 
 ### Vue
 
     pnpm install
     cd packages/vue
-    pnpm run serve
+    pnpm run dev
 
 Open the application on the local server.
 
