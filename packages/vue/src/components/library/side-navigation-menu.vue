@@ -25,7 +25,8 @@ import DxTreeView, { type DxTreeViewTypes } from 'devextreme-vue/tree-view';
 import { sizes } from '@/utils/media-query';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { navigation, type SideNavigationItem } from '@/app-navigation';
+import { navigation } from '@/app-navigation';
+import type { SideNavigationItem } from '@/types';
 import AppFooter from '@/components/library/app-footer.vue';
 
 const route = useRoute();

@@ -4,6 +4,7 @@ export * from './app-info';
 export * from './common';
 export * from './contact';
 export * from './messages';
+export * from './navigation';
 export * from './notes';
 export * from './opportunities';
 export * from './profile';

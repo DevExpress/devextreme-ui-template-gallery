@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 
 import { ScreenService, AppInfoService } from '../../services';
 import { SideNavigationMenuComponent, AppHeaderComponent, AppFooterComponent } from '../../components';
-import { SideNavigationItem } from '../../app-navigation';
+import { SideNavigationItem } from '../../types/navigation';
 
 @Component({
   selector: 'app-side-nav-outer-toolbar',

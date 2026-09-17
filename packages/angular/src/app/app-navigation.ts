@@ -1,12 +1,4 @@
-export type SideNavigationItem = {
-  text: string;
-  path: string;
-  icon?: string;
-  expanded?: boolean;
-  items?: SideNavigationItem[];
-};
-
-export const navigation: SideNavigationItem[] = [
+export const navigation = [
   {
     text: 'CRM',
     icon: 'user',

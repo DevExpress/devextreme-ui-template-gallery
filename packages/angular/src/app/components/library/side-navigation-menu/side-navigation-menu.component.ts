@@ -11,7 +11,8 @@ import {
 } from '@angular/core';
 import { DxTreeViewModule, DxTreeViewComponent, DxTreeViewTypes } from 'devextreme-angular/ui/tree-view';
 import * as events from 'devextreme/events';
-import { navigation, SideNavigationItem } from '../../../app-navigation';
+import { navigation } from '../../../app-navigation';
+import { SideNavigationItem } from '../../../types/navigation';
 
 @Component({
   selector: 'side-navigation-menu',
