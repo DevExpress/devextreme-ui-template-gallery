@@ -3,6 +3,14 @@ import { ButtonTypes } from 'devextreme-react/button';
 import { ListRef } from 'devextreme-react/list';
 import React from 'react';
 
+export type SideNavigationItem = {
+  text: string;
+  path: string;
+  icon?: string;
+  expanded?: boolean;
+  items?: SideNavigationItem[];
+};
+
 export interface AppHeaderProps {
   menuToggleEnabled: boolean;
   title?: string;
@@ -11,10 +19,10 @@ export interface AppHeaderProps {
 }
 
 export interface SideNavigationMenuProps {
-  selectedItemChanged: (e: TreeViewTypes.ItemClickEvent) => void;
+  selectedItemChanged: (e: TreeViewTypes.ItemClickEvent<SideNavigationItem>) => void;
   openMenu: (e: React.PointerEvent) => void;
   compactMode: boolean;
-  onMenuReady: (e: TreeViewTypes.ContentReadyEvent) => void;
+  onMenuReady: (e: TreeViewTypes.ContentReadyEvent<SideNavigationItem>) => void;
 }
 
 export interface UserPanelProps {

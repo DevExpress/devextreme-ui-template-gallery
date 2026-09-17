@@ -1,4 +1,6 @@
-export const navigation = [
+import type { SideNavigationItem } from './types';
+
+export const navigation: SideNavigationItem[] = [
   {
     text: 'CRM',
     icon: 'user',
