@@ -93,6 +93,11 @@ jobs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
 
+    - name: Install Internal Packages
+      uses: DevExpress/github-actions/install-internal-package@install-internal-package
+      with:
+        install-dist: true
+
     - name: Set theme
       run: pnpm run set-theme ${{ matrix.theme.fullName }}
 
@@ -120,7 +125,7 @@ jobs:
         if-no-files-found: ignore
 
   merge-artifacts:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     needs: testcafe
     if: ${{ failure() }}
     strategy:
