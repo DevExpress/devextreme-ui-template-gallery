@@ -29,10 +29,6 @@ export class CardTasksComponent implements OnChanges {
 
   currentTasks: Task[] = [];
 
-  constructor() {
-    this.onReorder = this.onReorder.bind(this);
-  }
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes.tasks) {
       const tasks = changes.tasks.currentValue as Task[] | undefined;
@@ -40,12 +36,14 @@ export class CardTasksComponent implements OnChanges {
     }
   }
 
-  onReorder(e: DxDataGridTypes.RowDraggingReorderEvent) {
+  onReorder = (e: DxDataGridTypes.RowDraggingReorderEvent) => {
     const visibleRows = e.component.getVisibleRows();
     const toIndex = this.currentTasks.indexOf(visibleRows[e.toIndex].data);
     const fromIndex = this.currentTasks.indexOf(e.itemData);
 
     this.currentTasks.splice(fromIndex, 1);
     this.currentTasks.splice(toIndex, 0, e.itemData);
+
+    e.component.refresh();
   }
 }
