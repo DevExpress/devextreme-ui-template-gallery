@@ -11,10 +11,9 @@ import { AppHeader, SideNavigationMenu, AppFooter } from '../../components';
 import { useScreenSize } from '../../utils/media-query';
 import { useMenuPatch } from '../../utils/patches';
 
-import type { SideNavToolbarProps } from '../../types';
+import type { SideNavigationItem, SideNavToolbarProps } from '../../types';
 
 import './side-nav-outer-toolbar.scss';
-import { SideNavigationItem } from '../../components/library/side-navigation-menu/SideNavigationMenu';
 
 enum MenuOpenState {
   Closed = 1,
@@ -94,11 +93,8 @@ export const SideNavOuterToolbar = ({
   }, [isLarge, changeMenuStatus]);
 
   const onNavigationChanged = useCallback(
-    ({
-      itemData: { path },
-      event,
-      node,
-    }: TreeViewTypes.ItemClickEvent & { itemData: SideNavigationItem }) => {
+    ({ itemData, event, node }: TreeViewTypes.ItemClickEvent<SideNavigationItem>) => {
+      const path = itemData?.path;
       if (
         getMenuOpenState(menuStatus) === MenuOpenState.Closed ||
         !path ||
@@ -115,7 +111,7 @@ export const SideNavOuterToolbar = ({
       }
     },
     [navigate, menuStatus, isLarge]
-  ) as (e: TreeViewTypes.ItemClickEvent) => void;
+  );
 
   useEffect(() => {
     changeMenuStatus(() => menuStatus);

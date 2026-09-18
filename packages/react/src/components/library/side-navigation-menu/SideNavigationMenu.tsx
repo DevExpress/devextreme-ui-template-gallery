@@ -7,22 +7,13 @@ import { navigation } from '../../../app-navigation';
 import { useNavigation } from '../../../contexts/navigation';
 import { useScreenSize } from '../../../utils/media-query';
 
-import type { SideNavigationMenuProps } from '../../../types';
+import type { SideNavigationItem, SideNavigationMenuProps } from '../../../types';
 
 import './SideNavigationMenu.scss';
 
 import * as events from 'devextreme/events';
 
-export type SideNavigationItem = {
-  expanded: boolean;
-  path: string;
-  text: string;
-  icon: string;
-  items: Array<{
-    text: string;
-    path: string;
-  }>;
-};
+export type { SideNavigationItem };
 
 export const SideNavigationMenu = (
   props: React.PropsWithChildren<SideNavigationMenuProps>
@@ -45,7 +36,7 @@ export const SideNavigationMenu = (
     navigationData: { currentPath },
   } = useNavigation();
 
-  const treeViewRef = useRef<TreeViewRef>(null);
+  const treeViewRef = useRef<TreeViewRef<SideNavigationItem>>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const getWrapperRef = useCallback(
     (element: HTMLDivElement | null) => {
@@ -87,7 +78,7 @@ export const SideNavigationMenu = (
     >
       {children}
       <div className='menu-container theme-dependent'>
-        <TreeView
+        <TreeView<SideNavigationItem>
           ref={treeViewRef}
           items={items}
           keyExpr='path'

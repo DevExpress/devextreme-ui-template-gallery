@@ -21,18 +21,19 @@
 </template>
 
 <script setup lang="ts">
-import DxTreeView from 'devextreme-vue/tree-view';
+import DxTreeView, { type DxTreeViewTypes } from 'devextreme-vue/tree-view';
 import { sizes } from '@/utils/media-query';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { navigation } from '@/app-navigation';
+import type { SideNavigationItem } from '@/types';
 import AppFooter from '@/components/library/app-footer.vue';
 
 const route = useRoute();
 const router = useRouter();
 
 const isLargeScreen = sizes()['screen-large'];
-const items = navigation.map((item) => {
+const items: SideNavigationItem[] = navigation.map((item) => {
   if (item.path && !(/^\//.test(item.path))) {
      
     item.path = `/${item.path}`;
@@ -52,13 +53,13 @@ function forwardClick(...args: unknown[]) {
   emit('click', args);
 }
 
-function handleItemClick(e) {
-  if (!e.itemData.path || props.compactMode) {
+function handleItemClick(e: DxTreeViewTypes.ItemClickEvent<SideNavigationItem>) {
+  if (!e.itemData?.path || props.compactMode) {
     return;
   }
   router.push(e.itemData.path);
 
-  e.event.stopPropagation();
+  e.event?.stopPropagation();
 }
 
 function updateSelection() {
@@ -88,7 +89,7 @@ watch(
       treeViewRef.value?.instance.collapseAll();
     } else {
       updateSelection();
-      treeViewRef.value.instance.expandItem(route.path);
+      treeViewRef.value?.instance.expandItem(route.path);
     }
   },
 );

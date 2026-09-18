@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 
 import { ScreenService, AppInfoService } from '../../services';
 import { SideNavigationMenuComponent, AppHeaderComponent, AppFooterComponent } from '../../components';
+import { SideNavigationItem } from '../../types/navigation';
 
 @Component({
   selector: 'app-side-nav-outer-toolbar',
@@ -111,8 +112,8 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
     return !this.menuOpened;
   }
 
-  navigationChanged(event: DxTreeViewTypes.ItemClickEvent) {
-    const path = (event.itemData as any).path;
+  navigationChanged(event: DxTreeViewTypes.ItemClickEvent<SideNavigationItem>) {
+    const path = event.itemData?.path;
     const pointerEvent = event.event;
 
     if (path && this.menuOpened) {
