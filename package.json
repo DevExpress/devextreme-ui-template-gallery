@@ -57,8 +57,8 @@
   },
   "dependencies": {
     "devexpress-gantt": "^4.1.69",
-    "devextreme": "file:./tgz/devextreme-26.2.0.tgz",
-    "devextreme-dist": "file:./tgz/devextreme-dist-26.2.0.tgz",
+    "devextreme": "~26.1.4",
+    "devextreme-dist": "~26.1.4",
     "devextreme-schematics": "^1.17.0",
     "devextreme-themebuilder": "~26.1.4",
     "eslint-config-devextreme": "1.1.6",

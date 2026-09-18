@@ -11,6 +11,7 @@ node_modules/
 jspm_packages/
 
 # Output of 'npm pack'
+*.tgz
 *.user
 
 .DS_Store

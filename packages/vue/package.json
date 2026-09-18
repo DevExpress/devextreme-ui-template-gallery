@@ -14,8 +14,7 @@
   },
   "dependencies": {
     "core-js": "^3.50.0",
-    "devextreme": "file:../../tgz/devextreme-26.2.0.tgz",
-    "devextreme-vue": "file:../../tgz/devextreme-vue-26.2.0.tgz",
+    "devextreme-vue": "~26.1.4",
     "dx-template-gallery-data": "workspace:*",
     "exceljs": "^3.10.0",
     "file-saver-es": "^2.0.5",

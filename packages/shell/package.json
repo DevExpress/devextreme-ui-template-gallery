@@ -19,8 +19,7 @@
     "@angular/platform-browser": "catalog:angular",
     "@angular/platform-browser-dynamic": "catalog:angular",
     "@angular/router": "catalog:angular",
-    "devextreme": "file:../../tgz/devextreme-26.2.0.tgz",
-    "devextreme-angular": "file:../../tgz/devextreme-angular-26.2.0.tgz",
+    "devextreme-angular": "catalog:angular",
     "tslib": "^2.8.1",
     "zone.js": "catalog:angular"
   },
