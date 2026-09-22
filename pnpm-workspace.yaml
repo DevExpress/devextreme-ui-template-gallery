@@ -44,7 +44,7 @@ allowBuilds:
 
 catalogs:
   angular:
-    devextreme-angular: ~26.1.4
+    devextreme-angular: ~26.1.5
     "@angular-devkit/build-angular": ^22.1.4
     "@angular-devkit/architect": ^0.2201.2
     "@angular-devkit/schematics": ^22.1.2
