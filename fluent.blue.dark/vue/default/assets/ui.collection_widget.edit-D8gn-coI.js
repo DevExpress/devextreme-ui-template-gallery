@@ -1,0 +1,1 @@
+import{h as e}from"./scrollable-BZ_3av9K.js";var t=e;export{t};

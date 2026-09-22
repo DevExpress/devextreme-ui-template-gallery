@@ -1,0 +1,1 @@
+import{Qn as e,hr as t}from"./button-BfF6j8JU.js";var n=n=>{if(t())return e(n)},r=e=>{let t=e===null?void 0:e;return typeof t==`function`?t():t};export{r as n,n as t};
