@@ -23,6 +23,7 @@ const themeJsFiles = {
 
 const fluentNextTheme = 'fluent-next';
 const fluentNextBaseColor = 'blue';
+const fluentNextCustomColor = 'custom';
 
 const changeThemesMeta = (theme) => {
   const [baseTheme, namePart] = theme.split('.');
@@ -36,9 +37,9 @@ const changeThemesMeta = (theme) => {
   const getBundlePath = isFluentNext
     ? (mode) => `devextreme-dist/css/dx.${fluentNextTheme}.${fluentNextBaseColor}.${mode}${compactSuffix}.css`
     : (mode) => `devextreme/scss/bundles/dx.${baseBundleName}${mode}${compactSuffix}.scss`;
-  const accentPath = isFluentNext && color !== fluentNextBaseColor
-    ? `devextreme-dist/css/accents/${color}.css`
-    : '';
+  const hasAccentFile = isFluentNext
+    && ![fluentNextBaseColor, fluentNextCustomColor].includes(color);
+  const accentPath = hasAccentFile ? `devextreme-dist/css/accents/${color}.css` : '';
   const variablesTheme = isFluentNext
     ? { baseTheme: 'fluent', color: fluentNextBaseColor }
     : { baseTheme, color };

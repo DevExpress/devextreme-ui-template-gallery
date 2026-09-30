@@ -21,6 +21,7 @@
     "fluent-next.rust.light",
     "fluent-next.steel.light",
     "fluent-next.storm.light",
+    "fluent-next.custom.light",
     "fluent-next.blue.light.compact",
     "fluent-next.cool-blue.light.compact",
     "fluent-next.desert.light.compact",
@@ -32,6 +33,7 @@
     "fluent-next.rust.light.compact",
     "fluent-next.steel.light.compact",
     "fluent-next.storm.light.compact",
+    "fluent-next.custom.light.compact",
     "fluent-next.blue.dark",
     "fluent-next.cool-blue.dark",
     "fluent-next.desert.dark",
@@ -43,6 +45,7 @@
     "fluent-next.rust.dark",
     "fluent-next.steel.dark",
     "fluent-next.storm.dark",
+    "fluent-next.custom.dark",
     "fluent-next.blue.dark.compact",
     "fluent-next.cool-blue.dark.compact",
     "fluent-next.desert.dark.compact",
@@ -53,5 +56,6 @@
     "fluent-next.rose.dark.compact",
     "fluent-next.rust.dark.compact",
     "fluent-next.steel.dark.compact",
-    "fluent-next.storm.dark.compact"
+    "fluent-next.storm.dark.compact",
+    "fluent-next.custom.dark.compact"
 ]
