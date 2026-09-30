@@ -21,13 +21,27 @@ const themeJsFiles = {
   react: ['src/theme/theme.tsx'],
 };
 
+const fluentNextTheme = 'fluent-next';
+const fluentNextBaseColor = 'blue';
+
 const changeThemesMeta = (theme) => {
   const [baseTheme, namePart] = theme.split('.');
   const isGeneric = baseTheme === 'generic';
+  const isFluentNext = baseTheme === fluentNextTheme;
   const color = isGeneric ? '' : namePart;
   const isDark = theme.includes('.dark');
   const isCompact = /compact$/.test(theme);
+  const compactSuffix = isCompact ? '.compact' : '';
   const baseBundleName = isGeneric ? '' : `${baseTheme}.${color}.`;
+  const getBundlePath = isFluentNext
+    ? (mode) => `devextreme-dist/css/dx.${fluentNextTheme}.${fluentNextBaseColor}.${mode}${compactSuffix}.css`
+    : (mode) => `devextreme/scss/bundles/dx.${baseBundleName}${mode}${compactSuffix}.scss`;
+  const accentPath = isFluentNext && color !== fluentNextBaseColor
+    ? `devextreme-dist/css/accents/${color}.css`
+    : '';
+  const variablesTheme = isFluentNext
+    ? { baseTheme: 'fluent', color: fluentNextBaseColor }
+    : { baseTheme, color };
 
   packages.forEach((packageName) => {
     const appPath = join(cwd(), 'packages', packageName);
@@ -36,7 +50,7 @@ const changeThemesMeta = (theme) => {
     const appFilesToSetDefaultThemeMode = [].concat(themeJsFiles[packageName]);
 
     cssFilesWithThemeImports.forEach(
-      (file) => setCssThemeImports(join(appPath, file), baseBundleName, isCompact),
+      (file) => setCssThemeImports(join(appPath, file), getBundlePath, accentPath),
     );
 
     appFilesToSetDefaultThemeMode.forEach(
@@ -44,8 +58,12 @@ const changeThemesMeta = (theme) => {
     );
 
     setCssThemeVariables(appVariablesPath, {
-      baseTheme, color, isGeneric, isCompact,
+      ...variablesTheme, isGeneric, isCompact,
     });
+
+    if (isFluentNext) {
+      removeThemeModules(appVariablesPath);
+    }
   });
 };
 
@@ -53,23 +71,41 @@ const theme = argv[2];
 
 console.log(`Set theme ${theme}`);
 
-if (!/(material|fluent)\.\w+\.(dark|light)(\.compact)?$/.test(theme)
+if (!/(material|fluent|fluent-next)\.[\w-]+\.(dark|light)(\.compact)?$/.test(theme)
     && !/generic\.(dark|light)(\.compact)?/.test(theme)
 ) {
   console.error(`Failed to set theme ${theme}!`);
-  console.log('Usage set-theme.js <themename>. Variants: (material|fluent).<color>.(dark|light).(compact)? or generic.(dark|light).(compact)?');
+  console.log('Usage set-theme.js <themename>. Variants: (material|fluent|fluent-next).<color>.(dark|light).(compact)? or generic.(dark|light).(compact)?');
   exit(1);
 }
 
-function setCssThemeImports(fileForChange, baseBundleName, isCompact) {
-  writeFileSync(
-    fileForChange,
-    readFileSync(fileForChange, 'utf8')
-      .replace(
-        /(scss\/bundles\/dx\.)(.+\.){0,2}(dark|light)(\.compact)?(\.scss)?/g,
-        `$1${baseBundleName}$3${isCompact ? '.compact' : ''}$5`,
-      ),
+function setScssAccentImports(content, accentPath) {
+  const contentWithoutAccent = content.replace(/@use 'devextreme-dist\/css\/accents\/[\w-]+\.css' as \*;\n/g, '');
+
+  return accentPath
+    ? contentWithoutAccent.replace(/(@use '[^']*\/dx\.[^']+' as \*;\n)/g, `$1@use '${accentPath}' as *;\n`)
+    : contentWithoutAccent;
+}
+
+function setJsonAccentEntries(content, accentPath) {
+  const contentWithoutAccent = content.replace(/,\s*\{\s*"input": "devextreme-dist\/css\/accents\/[\w-]+\.css",\s*"bundleName": "[\w-]+"\s*\}/g, '');
+
+  return accentPath
+    ? contentWithoutAccent.replace(
+      /([ \t]*)\{(\s*)"input": "devextreme[^"]*\/dx\.[^"]+",(\s*)"bundleName": "([\w-]+)"(\s*)\}/g,
+      (bundleEntry, indent, beforeInput, beforeBundleName, bundleName, beforeEnd) => `${bundleEntry},\n${indent}{${beforeInput}"input": "${accentPath}",${beforeBundleName}"bundleName": "${bundleName}"${beforeEnd}}`,
+    )
+    : contentWithoutAccent;
+}
+
+function setCssThemeImports(fileForChange, getBundlePath, accentPath) {
+  const setAccent = fileForChange.endsWith('.json') ? setJsonAccentEntries : setScssAccentImports;
+  const contentWithBundles = readFileSync(fileForChange, 'utf8').replace(
+    /devextreme(?:-dist)?\/(?:scss\/bundles|css)\/dx\.(?:[\w-]+\.){0,2}(dark|light)(?:\.compact)?\.s?css/g,
+    (bundlePath, mode) => getBundlePath(mode),
   );
+
+  writeFileSync(fileForChange, setAccent(contentWithBundles, accentPath));
 }
 
 function setAppDefaultThemeMode(fileForChange, isDark) {
@@ -103,6 +139,15 @@ function setCssThemeVariables(appVariablesPath, {
   }
 
   writeFileSync(appVariablesPath, newVariablesContent);
+}
+
+function removeThemeModules(appVariablesPath) {
+  writeFileSync(
+    appVariablesPath,
+    readFileSync(appVariablesPath, 'utf8')
+      .replace(/@use 'devextreme\/scss\/widgets\/[^;]+;\n/g, '')
+      .replace('#{$fluent-field-value-horizontal-padding}', 'var(--dx-fieldset-field-value-padding-inline)'),
+  );
 }
 
 changeThemesMeta(theme);
