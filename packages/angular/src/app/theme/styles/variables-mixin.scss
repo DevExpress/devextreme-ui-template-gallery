@@ -23,7 +23,7 @@ $theme-mode: null !default;
     --dark-warning-color: var(--warning-color);
   }
 
-  --typography-bg: var(--base-bg);
+  --typography-bg: var(--dx-typography-bg, var(--base-bg));
 
   @if meta.variable-exists('base-typography-bg') {
     --typography-bg: var(--dx-color-main-bg);
@@ -76,10 +76,9 @@ $theme-mode: null !default;
     --base-text-color-alpha: rgba(0, 0, 0, 0.7);
   }
 
-  --texteditor-edit-color: var(--dx-texteditor-color-text);
+  --texteditor-edit-color: var(--dx-texteditor-color-text, var(--dx-color-text));
   --texteditor-label-color: var(--dx-texteditor-color-label);
   --toolbar-height: var(--dx-toolbar-height);
-  --filled-texteditor-input-horizontal-padding: #{$fluent-field-value-horizontal-padding};
   --list-padding-left: var(--dx-list-item-padding-inline);
   --list-padding-vertical: var(--dx-list-item-padding-block);
   --footer-left-padding: calc(
@@ -87,7 +86,7 @@ $theme-mode: null !default;
   );
   --popup-toolbar-item-spacing: var(--dx-popup-toolbar-item-padding-inline);
   --drop-down-gnrc-button-height: var(--dx-component-height);
-  --theme-padding: var(--dx-button-padding-inline);
+  --theme-padding: var(--dx-button-padding-inline, var(--dx-list-item-padding-inline));
 
   @if meta.variable-exists('base-danger') and
     meta.type-of($base-danger) ==
