@@ -145,9 +145,7 @@ function setCssThemeVariables(appVariablesPath, {
 function removeThemeModules(appVariablesPath) {
   writeFileSync(
     appVariablesPath,
-    readFileSync(appVariablesPath, 'utf8')
-      .replace(/@use 'devextreme\/scss\/widgets\/[^;]+;\n/g, '')
-      .replace('#{$fluent-field-value-horizontal-padding}', 'var(--dx-fieldset-field-value-padding-inline)'),
+    readFileSync(appVariablesPath, 'utf8').replace(/@use 'devextreme\/scss\/widgets\/[^;]+;\n/g, ''),
   );
 }
 
