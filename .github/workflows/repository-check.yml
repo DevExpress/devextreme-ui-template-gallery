@@ -15,3 +15,10 @@ jobs:
   invoke:
     name: Invoke
     uses: DevExpress/github-actions/.github/workflows/repository-check.yml@repository-check
+    with:
+      config: |
+        {
+          ignoredAdvisories: [
+            'GHSA-vfj7-8cjw-p6xm', // braces, no patch available, 2026-10-09
+          ]
+        }
