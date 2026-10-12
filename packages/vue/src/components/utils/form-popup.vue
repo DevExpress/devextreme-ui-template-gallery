@@ -130,7 +130,7 @@ defineExpose({
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--popup-toolbar-item-spacing);
+  gap: var(--dx-popup-toolbar-item-spacing, var(--popup-toolbar-item-spacing));
 
   &.flex-buttons {
     :deep(.dx-button) {
