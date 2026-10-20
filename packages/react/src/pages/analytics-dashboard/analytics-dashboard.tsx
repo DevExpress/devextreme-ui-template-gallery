@@ -5,6 +5,7 @@ import { Item as ToolbarItem } from 'devextreme-react/toolbar';
 import Tabs from 'devextreme-react/tabs';
 import { LoadPanel } from 'devextreme-react/load-panel';
 import ScrollView from 'devextreme-react/scroll-view';
+import { loadMessages } from 'devextreme/localization';
 
 import { useScreenSize } from '../../utils/media-query';
 
@@ -43,6 +44,12 @@ import {
 } from '../../types/analytics';
 
 import './analytics-dashboard.scss';
+
+loadMessages({
+  en: {
+    'dxChat-textareaPlaceholder': 'Ask AI Assistant...',
+  },
+});
 
 const calculateTotal = (data: (SaleOrOpportunityByCategory & Sale)[]) => {
   return data.reduce((acc, item) => acc + (item.value || item.total), 0);
@@ -85,7 +92,17 @@ export const AnalyticsDashboard = () => {
       conversionRate: 16,
       leads: 51,
     };
-  }, [isLoading, periodName, dateRange, salesTotal, opportunitiesTotal, sales, opportunities, salesByCategory, salesByState]);
+  }, [
+    isLoading,
+    periodName,
+    dateRange,
+    salesTotal,
+    opportunitiesTotal,
+    sales,
+    opportunities,
+    salesByCategory,
+    salesByState,
+  ]);
 
   const chat = useChatAssistant(dashboardContext);
 
@@ -197,7 +214,9 @@ export const AnalyticsDashboard = () => {
           ) : (
             <>
               {dashboardContent}
-              {!chat.isPinned && !chat.isPopupVisible && <ChatFloatingButton onClick={chat.openPopup} />}
+              {!chat.isPinned && !chat.isPopupVisible && (
+                <ChatFloatingButton onClick={chat.openPopup} />
+              )}
             </>
           )}
 
