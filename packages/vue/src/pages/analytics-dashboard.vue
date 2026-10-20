@@ -109,6 +109,7 @@ import { ref, computed, watch } from 'vue';
 import { DxScrollView } from 'devextreme-vue/scroll-view';
 import { DxLoadPanel } from 'devextreme-vue/load-panel';
 import { DxSplitter, DxItem as DxSplitterItem } from 'devextreme-vue/splitter';
+import { loadMessages } from 'devextreme/localization';
 
 import {
   getOpportunitiesByCategory,
@@ -140,6 +141,12 @@ import LeadsTicker from '@/components/utils/leads-ticker.vue';
 import ChatCardComponent from '@/components/utils/chat-card-component.vue';
 import ChatFloatingButton from '@/components/utils/chat-floating-button.vue';
 import ChatPopup from '@/components/utils/chat-popup.vue';
+
+loadMessages({
+  en: {
+    'dxChat-textareaPlaceholder': 'Ask AI Assistant...',
+  },
+});
 
 const opportunities = ref<SalesOrOpportunitiesByCategory | null>(null);
 const sales = ref<Sales | null>(null);

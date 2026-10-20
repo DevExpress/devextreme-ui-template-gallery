@@ -18,6 +18,7 @@ import { DxBulletModule } from 'devextreme-angular/ui/bullet';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { DxScrollViewModule } from 'devextreme-angular/ui/scroll-view';
 import { DxSplitterModule } from 'devextreme-angular/ui/splitter';
+import { loadMessages } from 'devextreme/localization';
 
 import { DataService, ScreenService } from 'src/app/services';
 import { ToolbarAnalyticsComponent } from 'src/app/components/utils/toolbar-analytics/toolbar-analytics.component';
@@ -41,6 +42,12 @@ import { DashboardContext } from 'src/app/components/library/chat-assistant/dash
 import { ChatCardComponent } from 'src/app/components/utils/chat-card-component/chat-card-component.component';
 import { ChatFloatingButtonComponent } from 'src/app/components/utils/chat-floating-button/chat-floating-button.component';
 import { ChatPopupComponent } from 'src/app/components/utils/chat-popup/chat-popup.component';
+
+loadMessages({
+  en: {
+    'dxChat-textareaPlaceholder': 'Ask AI Assistant...',
+  },
+});
 
 @Component({
   templateUrl: './analytics-dashboard.component.html',
