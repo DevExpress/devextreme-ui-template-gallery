@@ -21,7 +21,7 @@ $theme-mode: null !default;
   } @else {
     --dark-warning-color: var(--warning-color);
   }
-  --typography-bg: var(--base-bg);
+  --typography-bg: var(--dx-typography-bg, var(--base-bg));
 
   @if meta.variable-exists('base-typography-bg') {
     --typography-bg: var(--dx-color-main-bg);
@@ -63,7 +63,7 @@ $theme-mode: null !default;
   } @else {
     --background-gray-color: rgba(0, 0, 0, 0.04);
   }
-  --texteditor-edit-color: var(--dx-texteditor-color-text);
+  --texteditor-edit-color: var(--dx-texteditor-color-text, var(--dx-color-text));
   --texteditor-label-color: var(--dx-texteditor-color-label);
   @if meta.variable-exists('base-text-color') and $base-text-color != null {
     --base-text-color-alpha: #{rgba(
@@ -84,7 +84,7 @@ $theme-mode: null !default;
   );
   --popup-toolbar-item-spacing: var(--dx-popup-toolbar-item-padding-inline);
   --drop-down-gnrc-button-height: var(--dx-component-height);
-  --theme-padding: var(--dx-button-padding-inline);
+  --theme-padding: var(--dx-button-padding-inline, var(--dx-list-item-padding-inline));
   @if meta.variable-exists('base-danger') and $base-danger != null {
     --tooltip-danger-button-color: #{color.change($base-danger, $alpha: 0.1)};
   } @else {
