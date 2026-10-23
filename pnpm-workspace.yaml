@@ -45,7 +45,7 @@ allowBuilds:
 
 catalogs:
   angular:
-    devextreme-angular: ~26.1.5
+    devextreme-angular: ~26.1.6
     "@angular-devkit/build-angular": ^22.2.0
     "@angular-devkit/architect": ^0.2202.0
     "@angular-devkit/schematics": ^22.2.0
@@ -72,3 +72,9 @@ catalogs:
 
 minimumReleaseAgeExclude:
   - devextreme-cli
+  - devextreme-angular@26.1.6
+  - devextreme-dist@26.1.6
+  - devextreme-react@26.1.6
+  - devextreme-themebuilder@26.1.6
+  - devextreme-vue@26.1.6
+  - devextreme@26.1.6
