@@ -52,6 +52,9 @@ import {
   DxSelection,
   DxRowDragging,
 } from 'devextreme-vue/data-grid';
+import type {
+  DxDataGridTypes,
+} from 'devextreme-vue/data-grid';
 import DxLoadPanel from 'devextreme-vue/load-panel';
 import { Task } from '@/types/task';
 
@@ -78,7 +81,7 @@ const filteredTasks = computed(
   () => tasksRef.value.filter((item) => !!item.status && !!item.priority),
 );
 
-const onReorder = (e) => {
+const onReorder = (e: DxDataGridTypes.RowDraggingReorderEvent) => {
   const visibleRows = e.component.getVisibleRows();
   const toIndex = tasksRef.value.indexOf(visibleRows[e.toIndex].data);
   const fromIndex = tasksRef.value.indexOf(e.itemData);
