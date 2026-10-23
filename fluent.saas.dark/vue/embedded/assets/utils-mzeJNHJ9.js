@@ -1,0 +1,1 @@
+import{rr as e,xr as t}from"./button-xiGUNaGQ.js";var n=n=>{if(t())return e(n)},r=e=>{let t=e===null?void 0:e;return typeof t==`function`?t():t};export{r as n,n as t};

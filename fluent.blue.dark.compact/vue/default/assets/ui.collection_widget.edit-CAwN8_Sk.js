@@ -1,0 +1,1 @@
+import{h as e}from"./scrollable-BCSMIxA1.js";var t=e;export{t};

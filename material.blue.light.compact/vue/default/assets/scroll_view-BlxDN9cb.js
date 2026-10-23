@@ -1,0 +1,1 @@
+import{n as e}from"./list.base-Cvsk7LK5.js";var t=e;export{t};

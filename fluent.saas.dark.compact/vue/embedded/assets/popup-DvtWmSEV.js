@@ -1,0 +1,1 @@
+import{st as e}from"./button-xiGUNaGQ.js";import{a as t}from"./select_box-D6NRheQm.js";import"./toolbar-BeZSQKwB.js";var n=class extends t{_getDefaultOptions(){return Object.assign({},super._getDefaultOptions(),{preventScrollEvents:!1})}_getToolbarName(){return`dxToolbar`}};n.defaultOptions=function(e){t.defaultOptions(e)},e(`dxPopup`,n);var r=n;export{r as t};
