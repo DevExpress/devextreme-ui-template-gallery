@@ -72,3 +72,9 @@ catalogs:
 
 minimumReleaseAgeExclude:
   - devextreme-cli
+  - devextreme-angular@26.1.6
+  - devextreme-dist@26.1.6
+  - devextreme-react@26.1.6
+  - devextreme-themebuilder@26.1.6
+  - devextreme-vue@26.1.6
+  - devextreme@26.1.6
