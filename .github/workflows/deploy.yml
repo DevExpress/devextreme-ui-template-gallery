@@ -47,11 +47,6 @@ jobs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
 
-    - name: Install Internal Packages
-      uses: DevExpress/github-actions/install-internal-package@install-internal-package
-      with:
-        install-dist: true
-
     - name: Set theme
       run: pnpm run set-theme ${{ matrix.theme }}
 
@@ -91,11 +86,6 @@ jobs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
 
-    - name: Install Internal Packages
-      uses: DevExpress/github-actions/install-internal-package@install-internal-package
-      with:
-        install-dist: true
-
     - name: Build Shell
       run: pnpm run build-shell
       working-directory: packages/shell
@@ -110,7 +100,7 @@ jobs:
         path: devextreme-ui-template-gallery/
 
   merge-artifacts:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: [build, build-shell]
 
     steps:
