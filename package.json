@@ -57,10 +57,10 @@
   },
   "dependencies": {
     "devexpress-gantt": "^4.1.70",
-    "devextreme": "26.2.1-alpha-26294-1936",
-    "devextreme-dist": "26.2.1-alpha-26294-1936",
+    "devextreme": "~26.1.5",
+    "devextreme-dist": "~26.1.5",
     "devextreme-schematics": "^1.17.0",
-    "devextreme-themebuilder": "26.2.1-alpha-26294-1936",
+    "devextreme-themebuilder": "~26.1.5",
     "eslint-config-devextreme": "1.1.6",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.8"
