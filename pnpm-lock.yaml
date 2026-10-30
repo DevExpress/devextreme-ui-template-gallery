@@ -94,7 +94,7 @@ overrides:
   postcss-selector-parser@<7.1.6: '>=7.1.6'
   qs@>=6.11.1 <=6.15.1: ^6.15.2
   sass: 1.101.0
-  serialize-javascript@<=7.0.2: 7.0.3
+  serialize-javascript@<=7.0.2: 7.1.4
   socket.io-parser@>=4.0.0 <4.2.7: '>=4.2.7'
   tmp@<0.2.7: ^0.2.7
   uuid@<11.1.1: ^11.1.1
@@ -933,6 +933,7 @@ packages:
   '@angular/platform-browser-dynamic@22.2.3':
     resolution: {integrity: sha512-+WBe2JjaEeK0NpMlBzV7UBkO+ltUBYTDtMfGYkew2xHdIviITnzXX7yUXijB1Y6jxALgz3jEuJa9iLid8s11rg==}
     engines: {node: ^22.22.3 || ^24.15.0 || >=26.0.0}
+    deprecated: '@angular/platform-browser-dynamic is deprecated. Use `@angular/platform-browser` instead.'
     peerDependencies:
       '@angular/common': 22.2.3
       '@angular/compiler': 22.2.3
