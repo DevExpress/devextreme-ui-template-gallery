@@ -6,7 +6,7 @@
   "homepage": "./",
   "dependencies": {
     "classnames": "^2.5.1",
-    "devexpress-gantt": "^4.1.69",
+    "devexpress-gantt": "^4.1.72",
     "devextreme-react": "~26.1.6",
     "dx-template-gallery-data": "workspace:*",
     "exceljs": "^4.4.0",
