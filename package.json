@@ -56,7 +56,7 @@
     "vue-eslint-parser": "^9.4.3"
   },
   "dependencies": {
-    "devexpress-gantt": "^4.1.71",
+    "devexpress-gantt": "^4.1.72",
     "devextreme": "~26.1.6",
     "devextreme-dist": "~26.1.6",
     "devextreme-schematics": "^1.17.0",
