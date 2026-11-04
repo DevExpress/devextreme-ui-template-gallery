@@ -6,7 +6,6 @@
     "start": "ng serve",
     "build-shell": "ng build --base-href=./",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
     "preinstall": "node ./copy-themes.js"
   },
   "private": true,
@@ -27,13 +26,6 @@
     "@angular-devkit/build-angular": "catalog:angular",
     "@angular/cli": "catalog:angular",
     "@angular/compiler-cli": "catalog:angular",
-    "@types/jasmine": "~3.6.11",
-    "jasmine-core": "~3.8.0",
-    "karma": "~6.3.20",
-    "karma-chrome-launcher": "~3.1.1",
-    "karma-coverage": "~2.0.3",
-    "karma-jasmine": "~4.0.2",
-    "karma-jasmine-html-reporter": "^1.7.0",
     "typescript": "catalog:angular"
   }
 }
