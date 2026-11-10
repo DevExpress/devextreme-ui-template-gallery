@@ -1,14 +1,14 @@
 <div
   class="left-side-panel"
-  [class.overlapping]="isSmallScreen"
-  [class.open]="isOpened"
+  [class.overlapping]="isSmallScreen()"
+  [class.open]="isOpened()"
 >
   <div class="side-panel-container">
-    @if (isSmallScreen) {
+    @if (isSmallScreen()) {
       <div class="button-container">
         <dx-button
           class="open-button"
-          [icon]="isOpened ? 'hidepanel' : 'showpanel'"
+          [icon]="isOpened() ? 'hidepanel' : 'showpanel'"
           (onClick)="toggleOpen()"
         >
         </dx-button>

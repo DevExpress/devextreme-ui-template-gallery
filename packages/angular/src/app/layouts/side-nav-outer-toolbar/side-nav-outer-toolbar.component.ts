@@ -5,6 +5,7 @@ import {
   Input,
   ViewChild,
   inject,
+  signal,
 } from '@angular/core';
 import { DxTreeViewTypes } from 'devextreme-angular/ui/tree-view';
 import { DxDrawerModule, DxDrawerTypes } from 'devextreme-angular/ui/drawer';
@@ -42,19 +43,19 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
 
   protected appInfo = inject(AppInfoService);
 
-  selectedRoute = '';
+  selectedRoute = signal('');
 
-  menuOpened!: boolean;
+  menuOpened = signal(false);
 
   temporaryMenuOpened = false;
 
-  menuMode: DxDrawerTypes.OpenedStateMode = 'shrink';
+  menuMode = signal<DxDrawerTypes.OpenedStateMode>('shrink');
 
-  menuRevealMode: DxDrawerTypes.RevealMode = 'expand';
+  menuRevealMode = signal<DxDrawerTypes.RevealMode>('expand');
 
-  minMenuSize = 0;
+  minMenuSize = signal(0);
 
-  shaderEnabled = false;
+  shaderEnabled = signal(false);
 
   private isLargeScreen = false;
 
@@ -65,14 +66,14 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   constructor() {
     this.routerSubscription = this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
-        this.selectedRoute = event.urlAfterRedirects.split('?')[0];
+        this.selectedRoute.set(event.urlAfterRedirects.split('?')[0]);
       }
     });
   }
 
   ngOnInit() {
     this.isLargeScreen = this.screen.sizes['screen-large'];
-    this.menuOpened = this.isLargeScreen;
+    this.menuOpened.set(this.isLargeScreen);
 
     this.screenSubscription = this.screen.changed.subscribe(() => this.updateDrawer());
 
@@ -88,16 +89,16 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
     const isXSmall = this.screen.sizes['screen-x-small'];
     const isLarge = this.screen.sizes['screen-large'];
 
-    this.menuMode = isLarge ? 'shrink' : 'overlap';
-    this.menuRevealMode = isXSmall ? 'slide' : 'expand';
-    this.minMenuSize = isXSmall ? 0 : 48;
-    this.shaderEnabled = !isLarge;
+    this.menuMode.set(isLarge ? 'shrink' : 'overlap');
+    this.menuRevealMode.set(isXSmall ? 'slide' : 'expand');
+    this.minMenuSize.set(isXSmall ? 0 : 48);
+    this.shaderEnabled.set(!isLarge);
 
     if (this.isLargeScreen && !isLarge) {
-      this.menuOpened = false;
+      this.menuOpened.set(false);
       this.temporaryMenuOpened = false;
     } else if (!this.isLargeScreen && isLarge) {
-      this.menuOpened = true;
+      this.menuOpened.set(true);
       this.temporaryMenuOpened = false;
     }
 
@@ -105,18 +106,18 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   }
 
   get hideMenuAfterNavigation() {
-    return this.menuMode === 'overlap' || this.temporaryMenuOpened;
+    return this.menuMode() === 'overlap' || this.temporaryMenuOpened;
   }
 
   get showMenuAfterClick() {
-    return !this.menuOpened;
+    return !this.menuOpened();
   }
 
   navigationChanged(event: DxTreeViewTypes.ItemClickEvent<SideNavigationItem>) {
     const path = event.itemData?.path;
     const pointerEvent = event.event;
 
-    if (path && this.menuOpened) {
+    if (path && this.menuOpened()) {
       if (event.node?.selected) {
         pointerEvent?.preventDefault();
       } else {
@@ -125,7 +126,7 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
 
       if (this.hideMenuAfterNavigation) {
         this.temporaryMenuOpened = false;
-        this.menuOpened = false;
+        this.menuOpened.set(false);
         pointerEvent?.stopPropagation();
       }
     } else {
@@ -136,7 +137,7 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   navigationClick() {
     if (this.showMenuAfterClick) {
       this.temporaryMenuOpened = true;
-      this.menuOpened = true;
+      this.menuOpened.set(true);
     }
   }
 }

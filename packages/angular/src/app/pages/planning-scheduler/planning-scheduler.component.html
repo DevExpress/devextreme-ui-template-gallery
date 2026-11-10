@@ -20,7 +20,7 @@
           ></dx-calendar>
         </div>
         <calendar-list
-          [dataSource]="listDataSource"
+          [dataSource]="listDataSource()"
           (listSelectionChanged)="calendarListChanged($event)"
         ></calendar-list>
       </div>
@@ -32,7 +32,7 @@
         height="inherit"
         [adaptivityEnabled]="!!(screen.screenChanged | async)?.isXSmall"
         [allDayPanelMode]="'allDay'"
-        [dataSource]="tasks"
+        [dataSource]="tasks()"
         [currentView]="currentView"
         [currentDate]="getSchedulerCurrentDate | apply: currentDate"
         [startDayHour]="4"
@@ -45,7 +45,7 @@
         <dxi-scheduler-resource
           fieldExpr="calendarId"
           label="Calendar"
-          [dataSource]="resourcesList"
+          [dataSource]="resourcesList()"
         >
         </dxi-scheduler-resource>
         <dxi-scheduler-view type="day"></dxi-scheduler-view>
@@ -91,7 +91,7 @@
     >
       <agenda
         [items]="agendaItems"
-        [resources]="resourcesList"
+        [resources]="resourcesList()"
         (clickAppointment)="showAppointmentTooltip($event)"
       ></agenda>
     </right-side-panel>

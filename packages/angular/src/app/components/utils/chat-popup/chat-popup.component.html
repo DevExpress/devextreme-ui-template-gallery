@@ -10,7 +10,7 @@
   [container]="popupContainer"
   [position]="popupPosition"
   [wrapperAttr]="popupWrapperAttr"
-  [animation]="popupAnimation"
+  [animation]="popupAnimation()"
   (visibleChange)="onVisibleChange($event)"
 >
   <dxi-popup-toolbar-item toolbar="top" location="before">

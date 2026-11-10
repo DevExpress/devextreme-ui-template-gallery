@@ -46,11 +46,11 @@
           >
             <div class="analytics-dashboard__pane analytics-dashboard__pane--chat">
               <chat-card-component
-                [messages]="chat.messages"
+                [messages]="chat.messages()"
                 [currentUser]="chat.currentUser"
-                [typingUsers]="chat.typingUsers"
-                [alerts]="chat.alerts"
-                [isProcessing]="chat.isProcessing"
+                [typingUsers]="chat.typingUsers()"
+                [alerts]="chat.alerts()"
+                [isProcessing]="chat.isProcessing()"
                 (messageEntered)="chat.onMessageEntered($event)"
                 (promptClick)="chat.onPromptClick($event)"
                 (resetClick)="chat.resetChat()"
@@ -62,7 +62,7 @@
         </dx-splitter>
       } @else {
         <ng-container *ngTemplateOutlet="dashboardContent"></ng-container>
-        @if (!chat.isPinned() && !chat.isPopupVisible) {
+        @if (!chat.isPinned() && !chat.isPopupVisible()) {
           <chat-floating-button
             (buttonClick)="chat.openPopup()"
           ></chat-floating-button>
@@ -70,13 +70,13 @@
       }
 
       <chat-popup
-        [visible]="chat.isPopupVisible"
+        [visible]="chat.isPopupVisible()"
         (visibleChange)="chat.changePopupVisibility($event)"
-        [messages]="chat.messages"
+        [messages]="chat.messages()"
         [currentUser]="chat.currentUser"
-        [typingUsers]="chat.typingUsers"
-        [alerts]="chat.alerts"
-        [isProcessing]="chat.isProcessing"
+        [typingUsers]="chat.typingUsers()"
+        [alerts]="chat.alerts()"
+        [isProcessing]="chat.isProcessing()"
         (messageEntered)="chat.onMessageEntered($event)"
         (promptClick)="chat.onPromptClick($event)"
         (resetClick)="chat.resetChat()"

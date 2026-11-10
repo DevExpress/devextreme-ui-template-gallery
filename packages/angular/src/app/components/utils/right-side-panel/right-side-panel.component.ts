@@ -2,7 +2,7 @@ import {
   Component,
   Output,
   Input,
-  EventEmitter, HostBinding, inject,
+  EventEmitter, HostBinding, inject, signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DxButtonComponent } from 'devextreme-angular';
@@ -27,7 +27,7 @@ export class RightSidePanelComponent {
 
   @Output() openedChange = new EventEmitter<boolean>();
 
-  @HostBinding('class.overlapping') get overlapping() { return !this.isLarge; };
+  @HostBinding('class.overlapping') get overlapping() { return !this.isLarge(); };
 
   @HostBinding('class.closed-state-hidden') get closedStateHidden() { return !this.showOpenButton; };
 
@@ -35,11 +35,11 @@ export class RightSidePanelComponent {
 
   private screen = inject(ScreenService);
 
-  isLarge = this.screen.sizes['screen-large'];
+  isLarge = signal(this.screen.sizes['screen-large']);
 
   constructor() {
     this.screen.screenChanged.subscribe(({isLarge, isXLarge}) => {
-      this.isLarge = isLarge || isXLarge;
+      this.isLarge.set(isLarge || isXLarge);
     });
   }
 

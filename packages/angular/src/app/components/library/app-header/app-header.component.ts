@@ -1,5 +1,5 @@
 import {
-  Component, Input, Output, EventEmitter, OnInit, inject,
+  Component, Input, Output, EventEmitter, OnInit, inject, signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -35,7 +35,7 @@ export class AppHeaderComponent implements OnInit {
 
   private authService = inject(AuthService);
 
-  user: IUser | null = defaultUser;
+  user = signal<IUser | null>(defaultUser);
 
   userMenuItems = [
   {
@@ -47,7 +47,7 @@ export class AppHeaderComponent implements OnInit {
   }];
 
   ngOnInit() {
-    this.authService.getUser().then((e) => this.user = e.data);
+    this.authService.getUser().then((e) => this.user.set(e.data));
   }
 
   toggleMenu = () => {

@@ -53,7 +53,7 @@
     <dxi-toolbar-item location="after" locateInMenu="auto" menuItemTemplate="menuItem">
       <div *dxTemplate>
         <user-panel
-          [user]="user"
+          [user]="user()"
           [menuItems]="userMenuItems"
           menuMode="context"
         ></user-panel>
@@ -61,7 +61,7 @@
     </dxi-toolbar-item>
     <div *dxTemplate="let data of 'menuItem'">
       <user-panel
-        [user]="user"
+        [user]="user()"
         [menuItems]="userMenuItems"
         menuMode="list"
       ></user-panel>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, signal } from '@angular/core';
 import { DxFormModule } from 'devextreme-angular/ui/form';
 import { DxLoadIndicatorModule } from 'devextreme-angular/ui/load-indicator';
 import notify from 'devextreme/ui/notify';
@@ -29,7 +29,7 @@ export class ChangeProfilePasswordFormComponent {
 
   @Output() visibleChange = new EventEmitter<boolean>();
 
-  isSaveDisabled = true;
+  isSaveDisabled = signal(true);
 
   formData: Record<string, any> = {};
 
@@ -44,7 +44,7 @@ export class ChangeProfilePasswordFormComponent {
   async onFieldChanged() {
     const formValues = Object.entries(this.formData);
 
-    this.isSaveDisabled =  await (formValues.length != 3 || !!formValues.find(([_, value]) => !value) || !this.formPopup.isValid());
+    this.isSaveDisabled.set(await (formValues.length != 3 || !!formValues.find(([_, value]) => !value) || !this.formPopup.isValid()));
   }
 
   saveNewPassword(): void {
