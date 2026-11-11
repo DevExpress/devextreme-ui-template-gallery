@@ -94,7 +94,7 @@ overrides:
   postcss-selector-parser@<7.1.6: '>=7.1.6'
   qs@>=6.11.1 <=6.15.1: ^6.15.2
   sass: 1.101.0
-  serialize-javascript@<=7.0.2: 7.0.3
+  serialize-javascript@<=7.0.2: 7.1.4
   socket.io-parser@>=4.0.0 <4.2.7: '>=4.2.7'
   tmp@<0.2.7: ^0.2.7
   uuid@<11.1.1: ^11.1.1
@@ -2213,9 +2213,11 @@ packages:
 
   '@devexpress/bin-v8-flags-filter@1.3.0':
     resolution: {integrity: sha512-LWLNfYGwVJKYpmHUDoODltnlqxdEAl5Qmw7ha1+TSpsABeF94NKSWkQTTV1TB4CM02j2pZyqn36nHgaFl8z7qw==}
+    deprecated: The @devexpress/bin-v8-flags-filter package is deprecated and will no longer receive updates.
 
   '@devexpress/callsite-record@4.1.7':
     resolution: {integrity: sha512-qr3VQYc0KopduFkEY6SxaOIi1Xhm0jIWQfrxxMVboI/p2rjF/Mj/iqaiUxQQP6F3ujpW/7l0mzhf17uwcFZhBA==}
+    deprecated: The @devexpress/callsite-record package is deprecated and will no longer receive updates.
 
   '@devexpress/utils@2.1.2':
     resolution: {integrity: sha512-QC5x5x5pKTqAG+HViELW9JkZ/xxi0Qok+LqMfxZ+m+MGnb9/T/3dUfmaW6x4c6N44TSlSWnoQmSL+teqnT3Dkw==}
