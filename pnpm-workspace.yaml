@@ -69,7 +69,6 @@ catalogs:
     "@angular-eslint/schematics": ^21.4.0
     "@angular-eslint/template-parser": ^21.4.0
     "typescript": ~6.0.3
-    "zone.js": ~0.16.2
 
 minimumReleaseAgeExclude:
   - devextreme-cli

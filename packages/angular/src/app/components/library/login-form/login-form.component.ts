@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, signal } from '@angular/core';
+import { Component, computed, effect, inject, Input, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 import { LoginOauthComponent } from 'src/app/components/library/login-oauth/login-oauth.component';
@@ -44,8 +44,8 @@ export class LoginFormComponent {
     password: 'password',
   });
 
-  btnStylingMode = signal<DxButtonTypes.ButtonStyle>(
-    this.themeService.getCurrentTheme() === 'dark' ? 'outlined' : 'contained',
+  btnStylingMode = computed<DxButtonTypes.ButtonStyle>(
+    () => this.themeService.isDark() ? 'outlined' : 'contained',
   );
 
   passwordMode = 'password';
@@ -58,11 +58,6 @@ export class LoginFormComponent {
     mode: this.passwordMode,
   };
 
-  constructor() {
-    this.themeService.isDark.subscribe((value: boolean) => {
-      this.btnStylingMode.set(value ? 'outlined' : 'contained');
-    });
-  }
 
   async onSubmit(e: Event) {
     e.preventDefault();

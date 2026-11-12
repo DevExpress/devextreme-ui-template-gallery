@@ -81,7 +81,7 @@ export class ChatPopupComponent implements OnDestroy {
     isXLarge,
   }) => {
     this.isLarge.set(isLarge || isXLarge);
-    this.popupAnimation = this.createPopupAnimation();
+    this.popupAnimation.set(this.createPopupAnimation());
   });
 
   popupContainer = POPUP_CONTAINER;
@@ -105,7 +105,7 @@ export class ChatPopupComponent implements OnDestroy {
     offset: '-32 -24',
   };
 
-  popupAnimation: PopupAnimation = this.createPopupAnimation();
+  popupAnimation = signal<PopupAnimation>(this.createPopupAnimation());
 
   ngOnDestroy(): void {
     this.screenSubscription.unsubscribe();

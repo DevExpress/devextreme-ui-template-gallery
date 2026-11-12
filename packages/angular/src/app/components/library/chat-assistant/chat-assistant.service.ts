@@ -23,17 +23,17 @@ export const createInitialMessages = (): Message[] => [];
 
 @Injectable()
 export class ChatAssistantService {
-  isPopupVisible = false;
+  isPopupVisible = signal(false);
 
   isPinned = signal(false);
 
-  messages: Message[] = createInitialMessages();
+  messages = signal<Message[]>(createInitialMessages());
 
-  typingUsers: User[] = [];
+  typingUsers = signal<User[]>([]);
 
-  alerts: Alert[] = [];
+  alerts = signal<Alert[]>([]);
 
-  isProcessing = false;
+  isProcessing = signal(false);
 
   context: DashboardContext | undefined;
 
@@ -49,9 +49,9 @@ export class ChatAssistantService {
       timestamp: new Date(),
     };
 
-    this.messages = [...this.messages, nextUserMessage];
-    this.isProcessing = true;
-    this.typingUsers = [assistantUser];
+    this.messages.update((messages) => [...messages, nextUserMessage]);
+    this.isProcessing.set(true);
+    this.typingUsers.set([assistantUser]);
 
     this.conversationHistory.push({
       role: 'user',
@@ -79,46 +79,46 @@ export class ChatAssistantService {
         timestamp: new Date(),
       };
 
-      this.messages = [...this.messages, assistantMessage];
+      this.messages.update((messages) => [...messages, assistantMessage]);
     } catch {
-      this.alerts = [{ message: 'Request limit reached, try again in a minute.' }];
-      setTimeout(() => { this.alerts = []; }, ALERT_TIMEOUT);
+      this.alerts.set([{ message: 'Request limit reached, try again in a minute.' }]);
+      setTimeout(() => { this.alerts.set([]); }, ALERT_TIMEOUT);
 
       this.conversationHistory.pop();
     } finally {
-      this.typingUsers = [];
-      this.isProcessing = false;
+      this.typingUsers.set([]);
+      this.isProcessing.set(false);
     }
   }
 
   openPopup() {
     this.isPinned.set(false);
-    this.isPopupVisible = true;
+    this.isPopupVisible.set(true);
   }
 
   changePopupVisibility(visible: boolean) {
-    this.isPopupVisible = visible;
+    this.isPopupVisible.set(visible);
   }
 
   pinChat() {
-    this.isPopupVisible = false;
+    this.isPopupVisible.set(false);
     this.isPinned.set(true);
   }
 
   unpinChat() {
     this.isPinned.set(false);
-    this.isPopupVisible = true;
+    this.isPopupVisible.set(true);
   }
 
   closeChat() {
     this.isPinned.set(false);
-    this.isPopupVisible = false;
+    this.isPopupVisible.set(false);
   }
 
   resetChat() {
-    this.messages = createInitialMessages();
+    this.messages.set(createInitialMessages());
     this.conversationHistory = [];
-    this.alerts = [];
+    this.alerts.set([]);
   }
 
   onPromptClick(messageText: string) {

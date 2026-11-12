@@ -22,7 +22,6 @@ import { AppComponent } from './app.component';
     DxToolbarModule,
     DxListModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 

@@ -9,7 +9,7 @@
         [width]="(screen.xSmallScreenChanged | async) ? 220 : 'auto'"
         [showNavButtons]="false"
         [scrollByContent]="true"
-        [selectedIndex]="selectedIndex"
+        [selectedIndex]="selectedIndex()"
         [items]="taskPanelItems"
         (onItemClick)="tabValueChange($event)"
       ></dx-tabs>
@@ -43,7 +43,7 @@
       locateInMenu="auto"
       widget="dxButton"
       showText="inMenu"
-      [disabled]="!displayGrid"
+      [disabled]="!displayGrid()"
       [options]="{
         text: 'Column Chooser',
         icon: 'columnchooser',
@@ -61,7 +61,7 @@
       locateInMenu="auto"
       widget="dxButton"
       showText="inMenu"
-      [disabled]="displayKanban"
+      [disabled]="displayKanban()"
       [options]="{
         text: 'Export to PDF',
         icon: 'exportpdf',
@@ -75,7 +75,7 @@
       locateInMenu="auto"
       widget="dxButton"
       showText="inMenu"
-      [disabled]="!displayGrid"
+      [disabled]="!displayGrid()"
       [options]="{
         text: 'Export to Exel',
         icon: 'exportxlsx',
@@ -88,7 +88,7 @@
       location="after"
       locateInMenu="auto"
       widget="dxTextBox"
-      [disabled]="!displayGrid"
+      [disabled]="!displayGrid()"
       [options]="{
         placeholder: 'Task Search',
         mode: 'search',
@@ -97,7 +97,7 @@
     ></dxi-toolbar-item>
   </dx-toolbar>
   @if (taskCollections$ | async; as taskCollections) {
-    @switch (displayTaskComponent) {
+    @switch (displayTaskComponent()) {
       @case (taskPanelItems[0].text) {
         <div class="grid">
           <task-list-grid

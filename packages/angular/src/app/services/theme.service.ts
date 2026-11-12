@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 
 import { currentTheme as currentVizTheme, refreshTheme } from 'devextreme/viz/themes';
 import { current } from 'devextreme/ui/themes'
@@ -24,7 +23,7 @@ export class ThemeService {
 
   currentTheme: Theme = window.localStorage[this.storageKey] || getNextTheme();
 
-  public isDark = new BehaviorSubject<boolean>(this.currentTheme === 'dark');
+  public isDark = signal<boolean>(this.currentTheme === 'dark');
 
   private getThemeStyleSheets() {
     return   Array.from(document.styleSheets).filter(
@@ -38,7 +37,7 @@ export class ThemeService {
     });
 
     this.currentTheme = theme;
-    this.isDark.next(this.currentTheme === 'dark');
+    this.isDark.set(this.currentTheme === 'dark');
 
     const regexTheme = new RegExp(`\\.(${themes.join('|')})`, 'g');
     currentVizTheme(currentVizTheme().replace(regexTheme, `.${theme}`));

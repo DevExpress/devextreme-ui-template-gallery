@@ -11,7 +11,7 @@
       <dx-button
         class="open-button"
         stylingMode="text"
-        [icon]="isOpened ? (isLarge ? 'panelleft' : 'close') : 'panelright'"
+        [icon]="isOpened ? (isLarge() ? 'panelleft' : 'close') : 'panelright'"
         (onClick)="toggleOpen()"
       >
       </dx-button>

@@ -4,6 +4,7 @@ import {
   inject,
   OnDestroy,
   Output,
+  signal,
 } from '@angular/core';
 import { DxSpeedDialActionModule } from 'devextreme-angular';
 import { Subscription } from 'rxjs';
@@ -25,10 +26,10 @@ export class ChatFloatingButtonComponent implements OnDestroy {
     isLarge,
     isXLarge,
   }) => {
-    this.isLarge = isLarge || isXLarge;
+    this.isLarge.set(isLarge || isXLarge);
   });
 
-  isLarge = this.screen.sizes['screen-large'];
+  isLarge = signal(this.screen.sizes['screen-large']);
 
   ngOnDestroy(): void {
     this.screenSubscription.unsubscribe();

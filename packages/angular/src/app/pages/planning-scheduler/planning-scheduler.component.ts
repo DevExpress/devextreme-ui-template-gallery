@@ -1,5 +1,5 @@
 import {
-  Component, inject, OnInit, ViewChild
+  Component, inject, OnInit, signal, ViewChild
 } from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import { CommonModule } from '@angular/common';
@@ -70,7 +70,7 @@ export class PlanningSchedulerComponent implements OnInit {
 
   protected screen = inject(ScreenService);
 
-  tasks: DataSource<Task> = new DataSource<Task>([]);
+  tasks = signal(new DataSource<Task>([]));
 
   currentDate = new Date();
 
@@ -78,9 +78,9 @@ export class PlanningSchedulerComponent implements OnInit {
 
   isRightPanelOpen = false;
 
-  listDataSource: Record<string, unknown>[] = [];
+  listDataSource = signal<Record<string, unknown>[]>([]);
 
-  resourcesList: Record<string, unknown>[] = [];
+  resourcesList = signal<Record<string, unknown>[]>([]);
 
   selectedAppointment: SelectedAppointment | null = null;
 
@@ -93,8 +93,8 @@ export class PlanningSchedulerComponent implements OnInit {
   constructor() {
     this.service.getDefaultListDS().subscribe(
    (data) => {
-     this.listDataSource = data;
-     this.resourcesList = data.reduce((res: Record<string,any>[], calendarList) => res.concat(calendarList.items), []);
+     this.listDataSource.set(data);
+     this.resourcesList.set(data.reduce((res: Record<string,any>[], calendarList) => res.concat(calendarList.items), []));
       });
 
     this.screen.screenChanged.subscribe(({isXSmall}) => {
@@ -105,7 +105,7 @@ export class PlanningSchedulerComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getSchedulerTasks().subscribe((data) => {
-      this.tasks = new DataSource<Task>(data as Task[]);
+      this.tasks.set(new DataSource<Task>(data as Task[]));
       this.repaintScheduler();
     })
   }
@@ -172,9 +172,9 @@ export class PlanningSchedulerComponent implements OnInit {
     const filters = selectedCalendars
       .flatMap((calendar: { id: number }) => [['calendarId', '=', calendar.id], 'or']).slice(0, -1);
 
-    this.tasks?.filter(filters.length > 0 ? filters : null);
+    this.tasks().filter(filters.length > 0 ? filters : null);
 
-    this.tasks?.load();
+    this.tasks().load();
     this.updateAgenda({ startDate: this.currentDate });
   }
 
@@ -203,11 +203,11 @@ export class PlanningSchedulerComponent implements OnInit {
   }
 
   findAllAppointmentsForDay = (selectedAppointment?: AgendaDateRef) => {
-    if (!this.tasks || !selectedAppointment?.startDate) {
+    if (!selectedAppointment?.startDate) {
       return [];
     }
     const selectedDate = new Date(selectedAppointment.startDate);
-    const appointments = this.tasks.items();
+    const appointments = this.tasks().items();
     if (appointments.length === 0) {
       return [];
     }

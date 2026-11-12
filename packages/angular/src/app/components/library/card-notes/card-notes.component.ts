@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, input, linkedSignal } from '@angular/core';
 import {
   DxTextAreaModule,
   DxToolbarModule,
@@ -27,7 +27,10 @@ import { Notes, Note } from 'src/app/types/notes';
 export class CardNotesComponent {
   @Input() user!: string;
 
-  @Input() items?: Notes;
+  items = input<Notes>();
+
+  // Local copy, reset whenever the parent passes a new array.
+  notes = linkedSignal<Notes>(() => this.items() ?? []);
 
   nodeText = '';
 
@@ -43,7 +46,7 @@ export class CardNotesComponent {
       text: this.nodeText,
     };
 
-    this.items?.push(newNote);
+    this.notes.update((notes) => [...notes, newNote]);
 
     e.validationGroup.reset();
   };
