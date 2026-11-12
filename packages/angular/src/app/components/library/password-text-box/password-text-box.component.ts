@@ -4,6 +4,7 @@ import {
   Input,
   Output,
   ViewChild,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -40,10 +41,10 @@ export class PasswordTextBoxComponent {
 
   @Output() valueChanged = new EventEmitter<string>();
 
-  isPasswordMode = true;
+  isPasswordMode = signal(true);
 
   switchMode = () => {
-    this.isPasswordMode = !this.isPasswordMode;
+    this.isPasswordMode.update((value) => !value);
   }
 
   onValueChange(value: string) {

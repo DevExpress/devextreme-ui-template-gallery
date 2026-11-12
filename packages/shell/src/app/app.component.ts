@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import allThemes from './themes.json';
 
@@ -13,7 +13,7 @@ export class AppComponent {
 
   approaches = ['angular', 'react', 'vue'];
 
-  approach = 'angular';
+  approach = signal('angular');
 
   views = [
     'crm-contact-list',
@@ -22,29 +22,33 @@ export class AppComponent {
     'planning-task-details',
   ];
 
-  view = 'crm-contact-list';
+  view = signal('crm-contact-list');
 
   themes = allThemes;
 
-  theme = 'material.blue.light.compact';
+  theme = signal('material.blue.light.compact');
 
   approachSelectBoxOptions = {
     items: this.approaches,
-    value: this.approach,
+    value: this.approach(),
     width: 200,
-    onValueChanged: (e: any): void => { this.approach = e.value; },
+    onValueChanged: (e: any): void => { this.approach.set(e.value); },
   };
 
   themeSelectBoxOptions = {
     items: this.themes,
-    value: this.theme,
+    value: this.theme(),
     width: 200,
-    onValueChanged: (e: any): void => { this.theme = e.value; },
+    onValueChanged: (e: any): void => { this.theme.set(e.value); },
   };
+
+  frameUrl = computed(() => this.sanitizer.bypassSecurityTrustResourceUrl(
+    `https://devexpress.github.io/devextreme-ui-template-gallery/${this.theme()}/${this.approach()}/embedded/#/${this.view()}`,
+  ));
 
   constructor(public sanitizer: DomSanitizer) {}
 
   viewChanged(e: any): void {
-    this.view = e.addedItems[0];
+    this.view.set(e.addedItems[0]);
   }
 }

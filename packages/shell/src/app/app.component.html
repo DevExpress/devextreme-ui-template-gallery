@@ -24,30 +24,19 @@
     </dx-list>
   </div>
   <div class="content">
-    approach: {{ approach }}<br />
-    theme: {{ theme }}<br />
-    view: {{ view }}<br /><br />
+    approach: {{ approach() }}<br />
+    theme: {{ theme() }}<br />
+    view: {{ view() }}<br /><br />
     <a
       href="https://devexpress.github.io/devextreme-ui-template-gallery/{{
-        theme
-      }}/{{ approach }}/default/#/{{ view }}"
+        theme()
+      }}/{{ approach() }}/default/#/{{ view() }}"
       target="_blank"
     >
       Open standalone app
     </a>
     <div class="frame">
-      <iframe
-        [src]="
-          sanitizer.bypassSecurityTrustResourceUrl(
-            'https://devexpress.github.io/devextreme-ui-template-gallery/' +
-              theme +
-              '/' +
-              approach +
-              '/embedded/#/' +
-              view
-          )
-        "
-      ></iframe>
+      <iframe [src]="frameUrl()"></iframe>
     </div>
   </div>
 </dx-drawer>

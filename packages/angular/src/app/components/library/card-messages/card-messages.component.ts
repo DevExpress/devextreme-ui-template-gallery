@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, input, linkedSignal } from '@angular/core';
 import {
   DxTextAreaModule,
   DxTextBoxModule,
@@ -31,7 +31,10 @@ import { UserAvatarComponent } from 'src/app/components/library/user-avatar/user
 export class CardMessagesComponent {
   @Input() user!: string;
 
-  @Input() items?: Messages;
+  items = input<Messages>();
+
+  // Local copy, reset whenever the parent passes a new array.
+  messages = linkedSignal<Messages>(() => this.items() ?? []);
 
   messageTitle = '';
 
@@ -42,8 +45,8 @@ export class CardMessagesComponent {
   }
 
   getText(data: Message) {
-    const items = this.items;
-    
+    const items = this.messages();
+
     if (!items?.length) {
       return data.text;
     }
@@ -65,7 +68,7 @@ export class CardMessagesComponent {
       date: new Date(),
     };
 
-    this.items?.push(newMessage);
+    this.messages.update((messages) => [...messages, newMessage]);
 
     e.validationGroup.reset();
   };
